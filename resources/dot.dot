@@ -1,0 +1,20 @@
+digraph structs {
+node [shape=record]; rankdir=LR;
+structwKgKKxGH2i3xMRS3WZIKSA [label="Clock_1|{{}| {<running>running | <milliseconds>milliseconds | <countermax>countermax | <beanContext>beanContext | <counter>counter | <timestamp>timestamp}}"]; 
+structwKgKK2gtrUnxMYz7n5OVbQ [label="Sink_4|{{<printout>printout}| {<showClassNames>showClassNames | <showDelays>showDelays | <showTimestamps>showTimestamps | <logdocument>logdocument | <showContext>showContext | <beanContext>beanContext}}"]; 
+subgraph clusterwKgKK2W9kkfxMdF50QvlDwg { color=blue; label=GroupDesktop_5;structwKgKKy9HTbxMdKkwopFUA [label="GaussianRandomBoxMuller_2|{{<triggerGeneration>triggerGeneration}| {<randomValue>randomValue}}"]; 
+structwKgKK36ARNvxMdNH21wXgA [label="counter|{{}| {<indata>indata}}"]; 
+structwKgKKwvtnRxMdX87b7knw [label="filterresult0|{{<putOutdata>putOutdata}| {}}"]; 
+subgraph clusterwKgKK3htZ3vxMgZfRZXYMwg { color=blue; label=GroupDesktop_10;structwKgKKxWv3vnxMgfjA3Pafw [label="ScalarBoxFilter_3|{{<putInputBoxed>putInputBoxed}| {<load>load | <chStrategy>chStrategy | <startAction>startAction | <stopAction>stopAction | <width>width | <filterresult>filterresult | <priority>priority}}"]; 
+structwKgKK1WqTzxMgfyqnyAZA [label="randomValue|{{}| {<indata>indata}}"]; 
+structwKgKK3UOoFPxMgn6FhWAA [label="filterresult0|{{<putOutdata>putOutdata}| {}}"]; 
+structwKgKK1WqTzxMgfyqnyAZA:indata -> structwKgKKxWv3vnxMgfjA3Pafw:putInputBoxed;
+structwKgKKxWv3vnxMgfjA3Pafw:filterresult -> structwKgKK3UOoFPxMgn6FhWAA:putOutdata;
+};
+structwKgKK36ARNvxMdNH21wXgA:indata -> structwKgKKy9HTbxMdKkwopFUA:triggerGeneration;
+structwKgKKy9HTbxMdKkwopFUA:randomValue -> structwKgKK1WqTzxMgfyqnyAZA:indata;
+structwKgKK3UOoFPxMgn6FhWAA:putOutdata -> structwKgKKwvtnRxMdX87b7knw:putOutdata;
+};
+structwKgKKxGH2i3xMRS3WZIKSA:counter -> structwKgKK36ARNvxMdNH21wXgA:indata;
+structwKgKKwvtnRxMdX87b7knw:putOutdata -> structwKgKK2gtrUnxMYz7n5OVbQ:printout;
+}

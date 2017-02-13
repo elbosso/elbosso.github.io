@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_17" class="java.beans.XMLDecoder">
+ <array class="de.netsysit.dataflowframework.ui.WorkspaceDescription" length="1">
+  <void index="0">
+   <object class="de.netsysit.dataflowframework.ui.WorkspaceDescription">
+    <void property="globalVariables">
+     <object class="java.util.LinkedList"/>
+    </void>
+    <void property="id">
+     <string>fwABAX1M+VaNVTJrdkJgTw==</string>
+    </void>
+    <void property="linkDescription">
+     <array class="de.netsysit.dataflowframework.ui.LinkDescription" length="6">
+      <void index="0">
+       <object class="de.netsysit.dataflowframework.ui.LinkDescription">
+        <void property="active">
+         <boolean>true</boolean>
+        </void>
+        <void property="destination">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>multiplyB</string>
+          </void>
+          <void property="typename">
+           <string>de.elbosso.algorithms.terrain.fbm.LandscapeRawDataContainer</string>
+          </void>
+          <void property="widgetId">
+           <int>2</int>
+          </void>
+          <void property="widgetName">
+           <string>WeightedAddition 1</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAXKpuJiNS2lwSZQ6sg==</string>
+          </void>
+         </object>
+        </void>
+        <void property="source">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>lrdc</string>
+          </void>
+          <void property="typename">
+           <string>de.elbosso.algorithms.terrain.fbm.LandscapeRawDataContainer</string>
+          </void>
+          <void property="widgetId">
+           <int>3</int>
+          </void>
+          <void property="widgetName">
+           <string>VoronoiDiagrams 2</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAVUV39qNS3nq3KL/EQ==</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="de.netsysit.dataflowframework.ui.LinkDescription">
+        <void property="active">
+         <boolean>true</boolean>
+        </void>
+        <void property="destination">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>multiplyA</string>
+          </void>
+          <void property="typename">
+           <string>de.elbosso.algorithms.terrain.fbm.LandscapeRawDataContainer</string>
+          </void>
+          <void property="widgetId">
+           <int>2</int>
+          </void>
+          <void property="widgetName">
+           <string>WeightedAddition 1</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAXKpuJiNS2lwSZQ6sg==</string>
+          </void>
+         </object>
+        </void>
+        <void property="source">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>lrdc</string>
+          </void>
+          <void property="typename">
+           <string>de.elbosso.algorithms.terrain.fbm.LandscapeRawDataContainer</string>
+          </void>
+          <void property="widgetId">
+           <int>1</int>
+          </void>
+          <void property="widgetName">
+           <string>TerrainGenerator 0</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAX3rmPWNSwjSco9GOA==</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="de.netsysit.dataflowframework.ui.LinkDescription">
+        <void property="active">
+         <boolean>true</boolean>
+        </void>
+        <void property="destination">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>trigger</string>
+          </void>
+          <void property="typename">
+           <string>de.elbosso.algorithms.terrain.fbm.LandscapeRawDataContainer</string>
+          </void>
+          <void property="widgetId">
+           <int>4</int>
+          </void>
+          <void property="widgetName">
+           <string>TerrainVisualizer 3</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAQ3VRKqNS8X0T2Sntw==</string>
+          </void>
+         </object>
+        </void>
+        <void property="source">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>lrdc</string>
+          </void>
+          <void property="typename">
+           <string>de.elbosso.algorithms.terrain.fbm.LandscapeRawDataContainer</string>
+          </void>
+          <void property="widgetId">
+           <int>2</int>
+          </void>
+          <void property="widgetName">
+           <string>WeightedAddition 1</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAXKpuJiNS2lwSZQ6sg==</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="3">
+       <object class="de.netsysit.dataflowframework.ui.LinkDescription">
+        <void property="active">
+         <boolean>true</boolean>
+        </void>
+        <void property="destination">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>trigger</string>
+          </void>
+          <void property="typename">
+           <string>java.lang.Object</string>
+          </void>
+          <void property="widgetId">
+           <int>1</int>
+          </void>
+          <void property="widgetName">
+           <string>TerrainGenerator 0</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAX3rmPWNSwjSco9GOA==</string>
+          </void>
+         </object>
+        </void>
+        <void property="source">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>running</string>
+          </void>
+          <void property="typename">
+           <string>boolean</string>
+          </void>
+          <void property="widgetId">
+           <int>5</int>
+          </void>
+          <void property="widgetName">
+           <string>Clock 4</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAQ9dY82NS+YnaaaBWg==</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="4">
+       <object class="de.netsysit.dataflowframework.ui.LinkDescription">
+        <void property="active">
+         <boolean>true</boolean>
+        </void>
+        <void property="destination">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>trigger</string>
+          </void>
+          <void property="typename">
+           <string>java.lang.Object</string>
+          </void>
+          <void property="widgetId">
+           <int>3</int>
+          </void>
+          <void property="widgetName">
+           <string>VoronoiDiagrams 2</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAVUV39qNS3nq3KL/EQ==</string>
+          </void>
+         </object>
+        </void>
+        <void property="source">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>running</string>
+          </void>
+          <void property="typename">
+           <string>boolean</string>
+          </void>
+          <void property="widgetId">
+           <int>5</int>
+          </void>
+          <void property="widgetName">
+           <string>Clock 4</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAQ9dY82NS+YnaaaBWg==</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="5">
+       <object class="de.netsysit.dataflowframework.ui.LinkDescription">
+        <void property="active">
+         <boolean>true</boolean>
+        </void>
+        <void property="destination">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>showRenderedImage</string>
+          </void>
+          <void property="typename">
+           <string>java.awt.image.RenderedImage</string>
+          </void>
+          <void property="widgetId">
+           <int>6</int>
+          </void>
+          <void property="widgetName">
+           <string>ImageViewer 5</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAWT78GaNTJJPd4bNvw==</string>
+          </void>
+         </object>
+        </void>
+        <void property="source">
+         <object class="de.netsysit.dataflowframework.logic.ConnectionEndPointDescription">
+          <void property="portName">
+           <string>image</string>
+          </void>
+          <void property="typename">
+           <string>java.awt.image.BufferedImage</string>
+          </void>
+          <void property="widgetId">
+           <int>4</int>
+          </void>
+          <void property="widgetName">
+           <string>TerrainVisualizer 3</string>
+          </void>
+          <void property="widgetUniqueId">
+           <string>fwABAQ3VRKqNS8X0T2Sntw==</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+    <void property="loggingConfigurations">
+     <object class="java.util.LinkedList">
+      <void method="add">
+       <object class="de.netsysit.util.beans.context.service.impl.LoggingConfiguration">
+        <void property="appenderNames">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="loggerName">
+         <string>de.netsysit.dataflowframework.modules.common.Clock</string>
+        </void>
+        <void property="priorityAsString">
+         <string>OFF</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="de.netsysit.util.beans.context.service.impl.LoggingConfiguration">
+        <void property="appenderNames">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="loggerName">
+         <string>de.netsysit.dataflowframework.modules.visualization.ImageViewer</string>
+        </void>
+        <void property="priorityAsString">
+         <string>OFF</string>
+        </void>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="moduleWidgetDescription">
+     <array class="de.netsysit.dataflowframework.ui.ModuleWidgetDescription" length="6">
+      <void index="0">
+       <object class="de.netsysit.dataflowframework.ui.ModuleWidgetDescription">
+        <void property="addedSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="bounds">
+         <object class="java.awt.Rectangle" id="Rectangle0">
+          <void class="java.awt.Rectangle" method="getField">
+           <string>x</string>
+           <void method="set">
+            <object idref="Rectangle0"/>
+            <int>168</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>y</string>
+           <void method="set">
+            <object idref="Rectangle0"/>
+            <int>26</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>width</string>
+           <void method="set">
+            <object idref="Rectangle0"/>
+            <int>157</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>height</string>
+           <void method="set">
+            <object idref="Rectangle0"/>
+            <int>94</int>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="genericSpecs">
+         <object class="java.util.HashMap"/>
+        </void>
+        <void property="hiddenInputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="hiddenOutputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="id">
+         <int>1</int>
+        </void>
+        <void property="module">
+         <object class="de.elbosso.dataflowframework.modules.demo.TerrainGenerator">
+          <void property="config">
+           <void property="fracdim">
+            <float>2.7</float>
+           </void>
+           <void property="meshsize">
+            <int>1024</int>
+           </void>
+           <void property="seed">
+            <long>-6606959212541280141</long>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="moduleWidgetDescriptions">
+         <array class="de.netsysit.ui.moduleworkspace.ModuleWidgetDescription" length="0"/>
+        </void>
+        <void property="title">
+         <string>TerrainGenerator 0</string>
+        </void>
+        <void property="uniqueId">
+         <string>fwABAX3rmPWNSwjSco9GOA==</string>
+        </void>
+        <void property="x">
+         <int>168</int>
+        </void>
+        <void property="y">
+         <int>26</int>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="de.netsysit.dataflowframework.ui.ModuleWidgetDescription">
+        <void property="addedSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="bounds">
+         <object class="java.awt.Rectangle" id="Rectangle1">
+          <void class="java.awt.Rectangle" method="getField">
+           <string>x</string>
+           <void method="set">
+            <object idref="Rectangle1"/>
+            <int>248</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>y</string>
+           <void method="set">
+            <object idref="Rectangle1"/>
+            <int>166</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>width</string>
+           <void method="set">
+            <object idref="Rectangle1"/>
+            <int>166</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>height</string>
+           <void method="set">
+            <object idref="Rectangle1"/>
+            <int>108</int>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="genericSpecs">
+         <object class="java.util.HashMap"/>
+        </void>
+        <void property="hiddenInputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="hiddenOutputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="id">
+         <int>2</int>
+        </void>
+        <void property="module">
+         <object class="de.elbosso.dataflowframework.modules.demo.WeightedAddition">
+          <void property="factorA">
+           <double>10.0</double>
+          </void>
+          <void property="factorB">
+           <double>7.0</double>
+          </void>
+         </object>
+        </void>
+        <void property="moduleWidgetDescriptions">
+         <array class="de.netsysit.ui.moduleworkspace.ModuleWidgetDescription" length="0"/>
+        </void>
+        <void property="title">
+         <string>WeightedAddition 1</string>
+        </void>
+        <void property="uniqueId">
+         <string>fwABAXKpuJiNS2lwSZQ6sg==</string>
+        </void>
+        <void property="x">
+         <int>248</int>
+        </void>
+        <void property="y">
+         <int>166</int>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="de.netsysit.dataflowframework.ui.ModuleWidgetDescription">
+        <void property="addedSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="bounds">
+         <object class="java.awt.Rectangle" id="Rectangle2">
+          <void class="java.awt.Rectangle" method="getField">
+           <string>x</string>
+           <void method="set">
+            <object idref="Rectangle2"/>
+            <int>68</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>y</string>
+           <void method="set">
+            <object idref="Rectangle2"/>
+            <int>296</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>width</string>
+           <void method="set">
+            <object idref="Rectangle2"/>
+            <int>166</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>height</string>
+           <void method="set">
+            <object idref="Rectangle2"/>
+            <int>136</int>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="genericSpecs">
+         <object class="java.util.HashMap"/>
+        </void>
+        <void property="hiddenInputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="hiddenOutputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="id">
+         <int>3</int>
+        </void>
+        <void property="module">
+         <object class="de.elbosso.dataflowframework.modules.demo.VoronoiDiagrams">
+          <void property="numberOfCells">
+           <int>25</int>
+          </void>
+          <void property="seed">
+           <long>1368170132820</long>
+          </void>
+          <void id="Dimension0" property="size">
+           <void class="java.awt.Dimension" method="getField">
+            <string>width</string>
+            <void method="set">
+             <object idref="Dimension0"/>
+             <int>1024</int>
+            </void>
+           </void>
+           <void class="java.awt.Dimension" method="getField">
+            <string>height</string>
+            <void method="set">
+             <object idref="Dimension0"/>
+             <int>1024</int>
+            </void>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="moduleWidgetDescriptions">
+         <array class="de.netsysit.ui.moduleworkspace.ModuleWidgetDescription" length="0"/>
+        </void>
+        <void property="title">
+         <string>VoronoiDiagrams 2</string>
+        </void>
+        <void property="uniqueId">
+         <string>fwABAVUV39qNS3nq3KL/EQ==</string>
+        </void>
+        <void property="x">
+         <int>68</int>
+        </void>
+        <void property="y">
+         <int>296</int>
+        </void>
+       </object>
+      </void>
+      <void index="3">
+       <object class="de.netsysit.dataflowframework.ui.ModuleWidgetDescription">
+        <void property="addedSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="bounds">
+         <object class="java.awt.Rectangle" id="Rectangle3">
+          <void class="java.awt.Rectangle" method="getField">
+           <string>x</string>
+           <void method="set">
+            <object idref="Rectangle3"/>
+            <int>56</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>y</string>
+           <void method="set">
+            <object idref="Rectangle3"/>
+            <int>479</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>width</string>
+           <void method="set">
+            <object idref="Rectangle3"/>
+            <int>187</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>height</string>
+           <void method="set">
+            <object idref="Rectangle3"/>
+            <int>136</int>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="genericSpecs">
+         <object class="java.util.HashMap"/>
+        </void>
+        <void property="hiddenInputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="hiddenOutputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="id">
+         <int>4</int>
+        </void>
+        <void property="module">
+         <object class="de.elbosso.dataflowframework.modules.demo.TerrainVisualizer">
+          <void property="config">
+           <void property="doshading">
+            <boolean>true</boolean>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="moduleWidgetDescriptions">
+         <array class="de.netsysit.ui.moduleworkspace.ModuleWidgetDescription" length="0"/>
+        </void>
+        <void property="title">
+         <string>TerrainVisualizer 3</string>
+        </void>
+        <void property="uniqueId">
+         <string>fwABAQ3VRKqNS8X0T2Sntw==</string>
+        </void>
+        <void property="x">
+         <int>56</int>
+        </void>
+        <void property="y">
+         <int>479</int>
+        </void>
+       </object>
+      </void>
+      <void index="4">
+       <object class="de.netsysit.dataflowframework.ui.ModuleWidgetDescription">
+        <void property="addedSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="bounds">
+         <object class="java.awt.Rectangle" id="Rectangle4">
+          <void class="java.awt.Rectangle" method="getField">
+           <string>x</string>
+           <void method="set">
+            <object idref="Rectangle4"/>
+            <int>5</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>y</string>
+           <void method="set">
+            <object idref="Rectangle4"/>
+            <int>13</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>width</string>
+           <void method="set">
+            <object idref="Rectangle4"/>
+            <int>135</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>height</string>
+           <void method="set">
+            <object idref="Rectangle4"/>
+            <int>108</int>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="genericSpecs">
+         <object class="java.util.HashMap"/>
+        </void>
+        <void property="hiddenInputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="hiddenOutputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="id">
+         <int>5</int>
+        </void>
+        <void property="module">
+         <object class="de.netsysit.dataflowframework.modules.common.Clock"/>
+        </void>
+        <void property="moduleWidgetDescriptions">
+         <array class="de.netsysit.ui.moduleworkspace.ModuleWidgetDescription" length="0"/>
+        </void>
+        <void property="title">
+         <string>Clock 4</string>
+        </void>
+        <void property="uniqueId">
+         <string>fwABAQ9dY82NS+YnaaaBWg==</string>
+        </void>
+        <void property="x">
+         <int>5</int>
+        </void>
+        <void property="y">
+         <int>13</int>
+        </void>
+       </object>
+      </void>
+      <void index="5">
+       <object class="de.netsysit.dataflowframework.ui.ModuleWidgetDescription">
+        <void property="addedSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="bounds">
+         <object class="java.awt.Rectangle" id="Rectangle5">
+          <void class="java.awt.Rectangle" method="getField">
+           <string>x</string>
+           <void method="set">
+            <object idref="Rectangle5"/>
+            <int>287</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>y</string>
+           <void method="set">
+            <object idref="Rectangle5"/>
+            <int>451</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>width</string>
+           <void method="set">
+            <object idref="Rectangle5"/>
+            <int>127</int>
+           </void>
+          </void>
+          <void class="java.awt.Rectangle" method="getField">
+           <string>height</string>
+           <void method="set">
+            <object idref="Rectangle5"/>
+            <int>66</int>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="genericSpecs">
+         <object class="java.util.HashMap"/>
+        </void>
+        <void property="hiddenInputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="hiddenOutputSlots">
+         <object class="java.util.LinkedList"/>
+        </void>
+        <void property="id">
+         <int>6</int>
+        </void>
+        <void property="module">
+         <object class="de.netsysit.dataflowframework.modules.visualization.ImageViewer"/>
+        </void>
+        <void property="moduleWidgetDescriptions">
+         <array class="de.netsysit.ui.moduleworkspace.ModuleWidgetDescription" length="0"/>
+        </void>
+        <void property="title">
+         <string>ImageViewer 5</string>
+        </void>
+        <void property="uniqueId">
+         <string>fwABAWT78GaNTJJPd4bNvw==</string>
+        </void>
+        <void property="x">
+         <int>287</int>
+        </void>
+        <void property="y">
+         <int>451</int>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+   </object>
+  </void>
+ </array>
+</java>

@@ -1,0 +1,25 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Icon=/home/elbosso/work/pixelart/svg/icons/Edit-paste_firefox.svg
+Comment=Open selection in Firefox
+Terminal=true
+Categories=Applications
+Name=Open selection in Firefox
+Exec=sh -c 'firefox -new-tab `python ~/work/scripts/pyclip.py `'
+Encoding=UTF-8
+#Actions=openintab;searchintab;
+Actions=googleselectionintab;mailselection
+#Name[en_US]=open_selection_in_firefox
+
+[Desktop Action googleselectionintab]
+Name=Google selection in Firefox
+Exec=sh -c 'firefox -new-tab "https://www.google.de/?gws_rd=ssl#q=`python ~/work/scripts/pyclip.py `"'
+Icon=/home/elbosso/work/pixelart/svg/icons/Edit-paste_google.svg
+[Desktop Action mailselection]
+Name=Mail selection
+Exec=sh -c 'xdg-email --body "`python ~/work/scripts/pyclip.py `"'
+Icon=/home/elbosso/work/pixelart/svg/icons/Edit-paste_mailer.svg
+

@@ -1,0 +1,77 @@
+\documentclass[DIV=13,11pt,a4paper,twoside,onecolumn]{scrartcl}
+
+\usepackage[colorlinks]{hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{german}
+\usepackage{bibgerm}
+\usepackage{latexsym} 
+
+\usepackage{oldgerm}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+\usepackage{microtype}
+
+\usepackage{fancyheadings}
+\usepackage{lmodern}
+\usepackage{wrapfig}
+\usepackage{ngerman} % hiermit werden deutsche Bezeichnungen genutzt und 
+                     % die W\"orter werden anhand der neue Rechtschreibung 
+		     % automatisch getrennt.  
+\title{Muttizettel
+%%\thanks{Wem auch immer der Dank gelten mag\ldots}
+}
+\author{Jürgen Key  \\
+Organisation\\
+Adresse\\
+PLZ Ort \\
+	}
+
+\date{\today}
+% Hinweis: \title{um was auch immer es geht}, \author{wer es auch immer 
+% geschrieben hat} und  \date{wann auch immer das war} k\"onnen vor 
+% oder nach dem  Kommando \begin{document} stehen 
+% Aber der \maketitle Befehl mu\ss{} nach dem \begin{document} Kommando stehen! 
+%% \renewcommand{\theenumi}{{\Huge \lower0.25em\hbox{$\Box$}} {\small\arabic{enumi}}}
+%% \renewcommand{\theenumi}{\arabic{enumii}.}
+\renewcommand{\labelenumi}{\CheckBox[charsize=12pt] {\small\arabic{enumi}}}
+ \renewcommand{\theenumii}{.\arabic{enumii}}
+\renewcommand{\labelenumii}{\CheckBox[charsize=11pt] {\small\arabic{enumi}$\cdot$\arabic{enumii}}}
+ \renewcommand{\theenumiii}{.\arabic{enumiii}}
+%% \renewcommand{\theenumiii}{{\Huge \lower0.25em\hbox{$\Box$}} {\small\arabic{enumiii}}}
+\renewcommand{\labelenumiii}{\CheckBox[charsize=10pt] {\small\arabic{enumi}$\cdot$\arabic{enumii}$\cdot$\arabic{enumiii}}}
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+Abstract 
+\end{abstract}
+
+\section{Abschnitt A}
+Inhalt
+
+\section{Abschnitt B}
+\begin{Form}%%[action=mailto:info@example.com,encoding=html,method=post]
+\begin{enumerate}
+\item Text.
+\item More text.
+\begin{enumerate}
+\item More text.
+\item \label{BBB}More text.
+\begin{enumerate}
+\item \label{CCC}More text.
+\item More text.
+\end{enumerate}
+\item More text.
+\end{enumerate}
+\item More text.
+\item \label{AAA}More text\ref{BBB}.
+
+
+\end{enumerate}
+\end{Form}
+%%\ref{AAA}, \ref{BBB}, \ref{CCC}
+
+\end{document}

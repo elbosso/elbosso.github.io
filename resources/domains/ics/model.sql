@@ -1,0 +1,97 @@
+CREATE TABLE PUBLIC.FREQUENCIES (
+ frequency VARCHAR(255) NOT NULL,
+ PRIMARY KEY (
+ frequency
+ ),
+ UNIQUE (
+ frequency
+ )
+ );
+ CREATE INDEX IDX_FREQUENCIESfrequency ON PUBLIC.FREQUENCIES (frequency);
+ ;
+CREATE TABLE PUBLIC.CALENDAR (
+ description VARCHAR(255),
+ id INTEGER NOT NULL
+ IDENTITY,
+ name VARCHAR(255),
+ PRIMARY KEY (
+ id
+ ),
+ UNIQUE (
+ id
+ )
+ );
+ CREATE INDEX IDX_CALENDARid ON PUBLIC.CALENDAR (id);
+ ;
+CREATE TABLE PUBLIC.EVENT (
+ allday BOOLEAN,
+ calendar_id INTEGER,
+ description VARCHAR(255),
+ enddate TIMESTAMP,
+ id INTEGER
+ NOT NULL
+ IDENTITY,
+ name VARCHAR(255),
+ startdate TIMESTAMP,
+ PRIMARY KEY (
+ id
+ ),
+ UNIQUE (
+ calendar_id,
+ id
+ ),
+ FOREIGN KEY (calendar_id) REFERENCES calendar (id) ON UPDATE CASCADE ON DELETE CASCADE 
+ );
+ CREATE INDEX IDX_EVENTcalendar_id ON PUBLIC.EVENT (calendar_id);
+ CREATE INDEX IDX_EVENTid ON PUBLIC.EVENT (id);
+ ;
+CREATE TABLE PUBLIC.ALARM (
+ absolute BOOLEAN,
+ after BOOLEAN,
+ counter INTEGER,
+ event_id INTEGER,
+ execution_timestamp TIMESTAMP,
+ frequency VARCHAR(255),
+ id INTEGER
+ NOT NULL
+ IDENTITY,
+ interval INTEGER,
+ message VARCHAR(255),
+ PRIMARY KEY (
+ id
+ ),
+ UNIQUE (
+ event_id,
+ frequency,
+ id
+ ),
+ FOREIGN KEY (event_id) REFERENCES event (id) ON UPDATE CASCADE ON DELETE CASCADE ,
+ FOREIGN KEY (frequency) REFERENCES frequencies (frequency) 
+ );
+ CREATE INDEX IDX_ALARMevent_id ON PUBLIC.ALARM (event_id);
+ CREATE INDEX IDX_ALARMfrequency ON PUBLIC.ALARM (frequency);
+ CREATE INDEX IDX_ALARMid ON PUBLIC.ALARM (id);
+ ;
+CREATE TABLE PUBLIC.RECURRENCE (
+ counter INTEGER,
+ event_id INTEGER,
+ frequency VARCHAR(255),
+ id INTEGER
+ NOT NULL
+ IDENTITY,
+ interval INTEGER,
+ PRIMARY KEY (
+ id
+ ),
+ UNIQUE (
+ event_id,
+ frequency,
+ id
+ ),
+ FOREIGN KEY (event_id) REFERENCES event (id) ON UPDATE CASCADE ON DELETE CASCADE ,
+ FOREIGN KEY (frequency) REFERENCES frequencies (frequency) 
+ );
+ CREATE INDEX IDX_RECURRENCEevent_id ON PUBLIC.RECURRENCE (event_id);
+ CREATE INDEX IDX_RECURRENCEfrequency ON PUBLIC.RECURRENCE (frequency);
+ CREATE INDEX IDX_RECURRENCEid ON PUBLIC.RECURRENCE (id);
+ ;

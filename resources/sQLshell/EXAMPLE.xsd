@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:XMLExport:sQLshell" xmlns:ts="urn:XMLExport:sQLshell" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
+<xs:element name="sQLshell" type="ts:sQLshellType">
+<xs:key name="EXAMPLEIDKey">
+<xs:selector xpath="./ts:EXAMPLE/ts:EXAMPLE_row"/>
+<xs:field xpath="ts:ID"/>
+</xs:key>
+<xs:annotation>
+<xs:appinfo source="sQLshell:INDEXINFO?table=EXAMPLE&amp;name=SYS_PK_109">ID</xs:appinfo>
+</xs:annotation>
+<xs:keyref name="ADDRESS.PERSON_ID" refer="ts:EXAMPLEIDKey">
+<xs:selector xpath="./ts:ADDRESS/ts:ADDRESS_row"/>
+<xs:field xpath="ts:PERSON_ID"/>
+</xs:keyref>
+<xs:key name="ADDRESSIDKey">
+<xs:selector xpath="./ts:ADDRESS/ts:ADDRESS_row"/>
+<xs:field xpath="ts:ID"/>
+</xs:key>
+<xs:annotation>
+<xs:appinfo source="sQLshell:INDEXINFO?table=ADDRESS&amp;name=SYS_PK_144">ID</xs:appinfo>
+</xs:annotation>
+<xs:annotation>
+<xs:appinfo source="sQLshell:INDEXINFO?table=ADDRESS&amp;name=SYS_IDX_145">PERSON_ID</xs:appinfo>
+</xs:annotation>
+</xs:element>
+<xs:complexType name="sQLshellType">
+<xs:sequence>
+<xs:element minOccurs="0" name="EXAMPLE" type="ts:EXAMPLETable"/>
+<xs:element minOccurs="0" name="ADDRESS" type="ts:ADDRESSTable"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="EXAMPLETable">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="EXAMPLE_row" type="ts:EXAMPLErowType"/>
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="string255Type">
+<xs:restriction base="xs:string">
+<xs:maxLength value="255"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:complexType name="EXAMPLErowType">
+<xs:sequence>
+<xs:element maxOccurs="1" minOccurs="0" name="AGE" type="xs:int"/>
+<xs:element maxOccurs="1" minOccurs="0" name="EXPERIENCE" type="xs:int"/>
+<xs:element maxOccurs="1" minOccurs="1" name="ID" type="xs:int"/>
+<xs:element maxOccurs="1" minOccurs="0" name="NAME" type="ts:string255Type"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ADDRESSTable">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="ADDRESS_row" type="ts:ADDRESSrowType"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ADDRESSrowType">
+<xs:sequence>
+<xs:element maxOccurs="1" minOccurs="1" name="ID" type="xs:int"/>
+<xs:element maxOccurs="1" minOccurs="1" name="PERSON_ID" type="xs:int"/>
+<xs:element maxOccurs="1" minOccurs="0" name="STREET" type="ts:string255Type"/>
+<xs:element maxOccurs="1" minOccurs="0" name="TOWN" type="ts:string255Type"/>
+<xs:element maxOccurs="1" minOccurs="1" name="ZIP" type="xs:decimal"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

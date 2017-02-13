@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xs:element name="Affe" type="xs:string"/>
+        <xs:element name="Bulle" type="xs:string"/>
+        <xs:element name="Cat" type="xs:string"/>
+        <xs:element name="ENTER_NAME_OF_ROOT_ELEMENT_HERE">
+                <xs:complexType>
+                        <xs:sequence>
+                                <xs:element ref="Tier" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="Tier" nillable="false">
+                <xs:complexType>
+                <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:sequence minOccurs="1" maxOccurs="1">
+                <xs:element name="Affe" minOccurs="1" maxOccurs="1" />
+                <xs:element name="Bulle" minOccurs="0" maxOccurs="1" />
+                <xs:element name="Cat" minOccurs="0" maxOccurs="1" />
+                </xs:sequence>
+                <xs:sequence  >
+                <xs:element name="Bulle" minOccurs="1" maxOccurs="1" />
+                <xs:element name="Cat" minOccurs="0" maxOccurs="1" />
+                </xs:sequence>
+                <xs:sequence >
+                <xs:element name="Cat" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+                </xs:choice>           
+                </xs:complexType>
+        </xs:element>
+</xs:schema>
+ 
+ 
+
+

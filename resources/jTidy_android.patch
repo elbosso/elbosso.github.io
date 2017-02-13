@@ -1,0 +1,1493 @@
+diff -rupN /tmp/orig/assets/jtidy/jtidy.properties /tmp/ported/assets/jtidy/jtidy.properties
+--- /tmp/orig/assets/jtidy/jtidy.properties	1970-01-01 01:00:00.000000000 +0100
++++ /tmp/ported/assets/jtidy/jtidy.properties	2009-12-01 16:55:06.000000000 +0100
+@@ -0,0 +1,3 @@
++# to be updated with every release
++version = r938
++date = 2009-12-01
+\ No newline at end of file
+diff -rupN /tmp/orig/assets/jtidy/TidyMessages_de.properties /tmp/ported/assets/jtidy/TidyMessages_de.properties
+--- /tmp/orig/assets/jtidy/TidyMessages_de.properties	1970-01-01 01:00:00.000000000 +0100
++++ /tmp/ported/assets/jtidy/TidyMessages_de.properties	2009-08-01 06:48:42.000000000 +0200
+@@ -0,0 +1,113 @@
++anchor_not_unique=
++apos_undefined=
++attr_value_not_lcase=
++backslash_in_uri=
++bad_argument=Warnung: Fehlendes oder missgebildetes Argument "{1}" f\u00fcr Option "{0}"
++bad_attribute_value={0} Attribut "{1}" unbekannter Attribut-Wert "{2}"
++bad_cdata_content='<' + '/' + Buchstabe ist hier nicht erlaubt
++bad_comment_chars=erwarte -- oder >
++bad_tree=Interner Fehler: der Parse-Baum hat seine Integrit\u00e4t verloren.
++bad_xml_comment=XML-Kommentare d\u00fcrfen kein -- enthalten
++badaccess_frames=Seiten, welche Frames nutzen, sind problematisch f\u00fcr Leute,\u000adie entweder blind sind oder einen Browser nutzen, der keine\u000aFrames unterst\u00fctzt. Eine Frames-basierte Seite sollte immer\u000aauch ein alternatives Layout innerhalb eines NOFRAMES-Elementes\u000aenthalten.
++badaccess_missing_image_alt=Das alt-Attribut sollte verwendet werden, um ein kurze Beschreibung\u000aeines Bildes zu geben; l\u00e4ngere Beschreibungen sollten mit dem\u000alongdesc-Attribut angegeben werden, welches eine URL mit der\u000aBeschreibung annimmt. Diese Ma\u00dfnahmen sind notwendig f\u00fcr Leute\u000amit nicht-grafischen Browsern.
++badaccess_missing_image_map=Benutzen Sie client-seitige Image-Maps (usemap) anstatt serverseitigen\u000aImage-Maps (ismap), weil letztere unbenutzbar sind f\u00fcr Leute
++badaccess_missing_link_alt=F\u00fcr Hypertext-Links, welche durch eine clientseitige Image-Map\u000adefiniert sind, sollten Sie das alt-Attribut nutzen, um eine\u000atextuelle Beschreibung f\u00fcr Leute zu geben, die nichtgrafische\u000aBrowser nutzen.
++badaccess_missing_summary=Das summary-Attribut von <table> sollte benutzt werden, um die\u000aTabellenstruktur zu beschreiben. Das ist sehr hilfreich f\u00fcr\u000aLeute mit nicht-visuellen Browsern. Die scope- und\u000aheader-Attribute f\u00fcr Tabellenzellen sind n\u00fctzlich, um anzugeben,\u000awelche header f\u00fcr jede Tabellenzelle gelten, wodurch nicht-\u000avisuelle Browser bef\u00e4higt werden, sinnvollen Kontext f\u00fcr jede\u000aZelle zur Verf\u00fcgung zu stellen.
++badaccess_summary=F\u00fcr weitere Ratschl\u00e4ge, wie Sie Ihre Seite zug\u00e4nglich machen\u000ak\u00f6nnen, siehe "{0}". Vielleicht wollen\u000aSie sich auch die (englische) Seite "http://www.cast.org/bobby/"\u000aansehen, welche einen kostenlosen, web-basierten Dienst zur\u000a\u00dcberpr\u00fcfung von URLs auf Zug\u00e4nglichkeit enth\u00e4lt.
++badchars_summary=Zeichen-Codes f\u00fcr die Microsoft-Windows-Schriftarten im Bereich\u000a128 - 159 werden auf anderen Plattformen nicht unbedingt erkannt.\u000aEs wird empfohlen, statt dessen die benannten Entit\u00e4ten zu benutzen,\u000az.B. &trade; anstatt dem Windows-Zeichen-Code 153 (0x2122 in Unicode).
++badform_summary=Sie sollten eines oder beide <form>- bzw. </form>-Tags verschieben.\u000aHTML-Elemente sollten sauber verschachtelt sein, und <form>-Elemente\u000asind da keine Ausnahme. Zum Beispiel sollte nicht das <form>-Element\u000avor der Tabelle und das </form>-Element in der Tabelle plaziert sein.\u000aAuch kann nicht ein <form> in einem anderem verschachtelt sein.
++badlayout_using_body=Es wird empfohlen, CSS zu benutzen, um Seiten- und\u000aLink-Farben einzustellen.
++badlayout_using_font=Benutzen Sie CSS, um die Schriftart und Eigenschaften\u000awie Gr\u00f6\u00dfe und Farbe einzustellen. Das wird die Gr\u00f6\u00dfe der\u000aHTML-Dateien reduzieren und sie leichter wartbar machen\u000aim Vergleich mit <FONT>-Elementen.
++badlayout_using_layer=Es wird empfohlen, den CSS-Positionierungs-Mechanismus\u000aanstelle des propriet\u00e4ren <LAYER>-Elementes zu verwenden,\u000ada letzteres nicht standardisiert ist und deswegen nur\u000abegrenzt von den Browserherstellern unterst\u00fctzt wird.
++badlayout_using_nobr=Benutzen Sie CSS, um die Zeilenumbr\u00fcche zu kontrollieren.\u000aBenutzen Sie "white-space: nowrap", um Umbr\u00fcche zu\u000averhindern, anstatt <NOBR>...</NOBR> in das Dokument\u000aeinzuf\u00fcgen
++badlayout_using_spacer=Benutzen Sie CSS um Leerr\u00e4ume zu kontrollieren,\u000a(z.B. f\u00fcr Einr\u00fcckungen, R\u00e4nder und Zeilenabst\u00e4nde).\u000aDas propriet\u00e4re <SPACER>-Element hat nur begrenzten\u000aHersteller-Unterst\u00fctzung.
++cant_be_nested={0} kann nicht verschachtelt werden
++coerce_to_endtag=<{0}> ist wahrscheinlich als </{0}> gemeint
++content_after_body=Inhalt erscheint nach dem Ende von <body>.
++discarding_unexpected=entsorge unerwartetes {0}
++doctype_after_tags=<!DOCTYPE> darf nur am Anfang des Dokumentes stehen, nicht nach Elementen
++doctype_given=
++dtype_not_upper_case=SYSTEM, PUBLIC, W3C, DTD, EN m\u00fcssen komplett in Gro\u00dfbuchstaben geschrieben werden.
++duplicate_frameset=wiederholtes <frameset>-Element
++element_not_empty=
++emacs_format={0}:{1,number}:{2,number}:
++encoding_mismatch=
++entity_in_id=
++error=Fehler:
++escaped_illegal_uri=
++expected_equalsign=
++fixed_backslash=
++forced_end_anchor=Warnung: <a> ist wahrscheinlich gemeint als </a>
++general_info=Um mehr \u00fcber Tidy zu erfahren, sehen\u000aSie sich die Seite http://www.w3.org/People/Raggett/tidy/\u000aan. JTidy gibt es hier: http://jtidy.sourceforge.net\u000a\u00dcberzeugen Sie Ihr Unternehmen davon, dem W3C beizutreten,\u000asiehe http://www.w3.org/Consortium\u000aHTML- und CSS-Spezifikationen sind verf\u00fcgbar bei http://www.w3.org.
++hello_message=Tidy (Version {0, date}) parst "{1}"
++help_text=  {0}: datei1 datei2 ...\u000a Werkzeug, um HTML-Dateien zu s\u00e4ubern und auszudrucken.\u000a Siehe http://www.w3.org/People/Raggett/tidy/\u000a \u000a Optionen f\u00fcr tidy (Version {1}):\u000a \u000a Verarbeitungs-Anweisungen\u000a -------------------------\u000a   -i | -indent      Element-Inhalt einr\u00fccken\u000a   -o | -omit        optionale Ende-Tags weglassen\u000a        -wrap nn     Text bei Zeile nn umbrechen (Default: 68)\u000a   -u | -upper       Tags in GROSSBUCHSTABEN (Default: kleinbuchstaben)\u000a   -c | -clean       <font>, <nobr>, <center>-Tags durch CSS ersetzen\u000a   -n | -numeric     numerische anstelle benannter Entit\u00e4ten verwenden\u000a   -e | -errors      nur Fehler anzeigen (nicht den korrigierten Text)\u000a   -q | -quiet       nicht notwendige Ausgaben unterdr\u00fccken\u000a        -xml         die Eingabe ist bereits wohlgeformtes XML\u000a        -asxml       die Ausgabe soll wohlgeformtes XML sein\u000a        -slides      das Dokument an den <h2>-Elementen in "slides"\u000a                     (Einzelseiten) zerst\u00fcckeln: slide1.html, slide2.html, ...\u000a \u000a Zeichen-S\u00e4tze / -Kodierung\u000a    -raw             alle Bytes > 128 in der Ausgabe unver\u00e4ndert lassen\u000a    -ascii           ASCII f\u00fcr die Ausgabe, Latin-1 f\u00fcr die Eingabe verwenden\u000a    -latin1          Latin-1 f\u00fcr Ein- und Ausgabe verwenden\u000a    -iso2022         ISO2022 (v.a. Japanisch) f\u00fcr Ein- und Ausgabe verwenden\u000a    -utf8            UTF8 (Unicode) f\u00fcr Ein- und Ausgabe verwenden\u000a    -mac             Den MacRoman-Zeichensatz verwenden\u000a \u000a Datei-Manipulation\u000a ------------------\u000a    -config <datei>  lese Optionen aus der angegebenen Konfigurations-Datei\u000a    -f <datei>       Fehler zur angegebenen Datei schreiben\u000a   -m | -modify      die Original-Datei \u00e4ndern\u000a \u000a Vermischtes\u000a -----------\u000a   -v | -version     die Programmversion anzeigen\u000a   -h | -help        diese Kommandozeilenhilfe anzeigen\u000a Au\u00dferdem kann f\u00fcr jede Konfigurations-Datei-Option "bla" auch\u000a "--blah" in der Kommandozeile genutzt werden.\u000a Ein- und Ausgabe ist (wenn nicht anders angegeben) die Standard-Ein-\u000a oder Ausgabe.\u000a Einzel-Buchstaben-Optionen au\u00dfer -f k\u00f6nnen miteinander kombiniert\u000a werden, wie z.B.   tidy -f errs.txt -imu foo.html\u000a F\u00fcr weitere Informationen \u00fcber HTML siehe http://www.w3.org/MarkUp
++id_name_mismatch={0} das id- und das name-Attribut haben nicht den gleichen Wert
++illegal_char=Warnung: Ung\u00fcltiges Zeichen mit Code {0,number} wird ersetzt.
++illegal_nesting={0} sollte nicht verschachtelt werden.
++illegal_uri_reference=
++inconsistent_namespace=HTML Namensraum (namespace) passt nicht zum Inhalt
++inconsistent_version=HTML-DocTyp passt nicht zum Inhalt.
++inserting_tag=f\u00fcge implizites <{0}> ein
++invalid_char=
++invalid_ncr=
++invalid_sgml_chars_summary=
++invalid_utf16=
++invalid_utf16_summary=
++invalid_utf8=
++invalid_utf8_summary=
++invaliduri_summary=
++joining_attribute=
++line_column=Zeile {0,number} Spalte {1,number} -
++malformed_comment=zusammenh\u00e4ngende Bindestriche (--) innerhalb eines Kommentars.
++malformed_doctype=erwarte "html PUBLIC" oder "html SYSTEM"
++missing_attr_value={0} dem Attribut "{1}" fehlt ein Wert
++missing_attribute={0} hat kein "{1}"-Attribut
++missing_body=Ich kann keine Slides erstellen, weil das Dokument kein <body>-Element enth\u00e4lt.
++missing_doctype=
++missing_endtag_before=fehlendes </{0}> vor {1}
++missing_endtag_for=fehlendes </{0}>
++missing_imagemap={0} sollte eine Client-seitige Image-Map benutzen  (usemap=... anstatt ismap)
++missing_quotemark=
++missing_semicolon=Warnung: Die Entit\u00e4t "{0}" endet nicht mit ";"
++missing_semicolon_ncr=
++missing_starttag=fehlendes <{0}>
++missing_title_element=f\u00fcge fehlendes <title>-Element ein.
++needs_author_intervention=Dieses Dokument hat Fehler, die korrigiert werden m\u00fcssen,\u000abevor HTML Tidy das Dokument aufr\u00e4umen kann.
++nested_emphasis=verschachtelte Hervorhebung {0}
++nested_quotation=
++newline_in_uri=
++no_warnings=Es wurden keine Warnungen oder Fehler gefunden.
++noframes_content={0} nicht innerhalb eines <noframe>-Elementes
++non_matching_endtag=ersetze unerwartetes unexpected {0} durch </{1}>
++num_warnings=Es wurden  {0,choice,0#keine Warnungen|1#1 Warnungen|1<{0,number,integer} Warnungen}, {1,choice,0#keine Fehler|1#1 Fehler|2#{1,number,integer} Fehler} gefunden!
++obsolete_element=ersetze veraltetes Element {0} durch {1}
++proprietary_attr_value={0} propriet\u00e4rer (nicht-standardisierter) Attribut-Wert "{1}"
++proprietary_attribute={0} propriet\u00e4rer (nicht-standardisierter) Attribut "{1}"
++proprietary_element={0} ist nicht vom W3C abgesegnet
++repeated_attribute=
++replacing_element=ersetze Element {0} durch {1}
++report_version={0}: Der Inhalt des Dokumentes sieht aus wie {1}.
++slides_found=Es wurden {0,number} Slides gefunden.
++suspected_missing_quote=Fehlendes Anf\u00fchrungszeichen (") f\u00fcr Attribut-Wert
++tag_not_allowed_in={0} ist nicht erlaubt in <{1}>-Elementen.
++too_many_elements=zu viele {0}-Elemente
++too_many_elements_in=zu viele {0}-Elemente in <{1}>
++trim_empty_element=entferne leeres {0}
++unescaped_ampersand=Warnung: einzelnes "&" (sollte "&amp;" sein).
++unescaped_element=
++unexpected_end_of_file=Ende der Datei, w\u00e4hrend Attribute geparst werden {0}
++unexpected_endtag=unerwartetes </{0}>
++unexpected_endtag_in=unerwartetes </{0}> in <{1}>
++unexpected_gt={0} fehlendes ''>'' am Ende des Tags
++unexpected_quotemark={0} unerwartetes oder dupliziertes Anf\u00fchrungszeichen (' oder ")
++unknown_attribute=unbekanntes Attribut "{0}"
++unknown_element={0} wird nicht erkannt!
++unknown_entity=Warnung: einzelnes "&" (sollte "&amp;" sein) oder unbekannte Entit\u00e4t "{0}"
++unknown_file={0}: Ich kann die Datei "{1}" nicht \u00f6ffnen.
++unknown_option=
++unrecognized_option=Unbekannte Option -{0}. Benutzen Sie -help, um die Optionen aufzulisten.
++using_br_inplace_of=es wird <br> genutzt statt {0}
++vendor_specific_chars_summary=
++warning=Warnung:
++xml_attribute_value={0} hat das XML-Attribut "{1}"
++xml_id_sintax=
+diff -rupN /tmp/orig/assets/jtidy/TidyMessages_es.properties /tmp/ported/assets/jtidy/TidyMessages_es.properties
+--- /tmp/orig/assets/jtidy/TidyMessages_es.properties	1970-01-01 01:00:00.000000000 +0100
++++ /tmp/ported/assets/jtidy/TidyMessages_es.properties	2009-08-01 06:48:42.000000000 +0200
+@@ -0,0 +1,113 @@
++anchor_not_unique=
++apos_undefined=
++attr_value_not_lcase=
++backslash_in_uri=
++bad_argument=Aviso: erroneo argumento "{1}" para opci\u00f3n: "{0}"
++bad_attribute_value={0} atributo "{1}" tiene valor desconocido "{2}"
++bad_cdata_content=letra '<' + '/' + no permitida aqu\u00ed
++bad_comment_chars=se espera -- o >
++bad_tree=Panic: - arbol ha perdido su integridad
++bad_xml_comment=comentarios XML no pueden contener --
++badaccess_frames=P\u00e1ginas dise\u00f1adas usando marcos ( frames ) presentan problemas para usuarios ciegos o con navegadors que no los soporten. Una p\u00e1gina basada en marcos deberia incluir una composici\u00f3n alternativa dentro de un elemento NOFRAMES.
++badaccess_missing_image_alt=El atributo 'alt' se deberia usar para dar una corta descripci\u00f3n de una imagen; descripciones m\u00e1s largas deberian darse con el atributo 'longdesc' que utiliza una URL asociada con la descripci\u00f3n. Estas medidas son necesarias para gente usando navegadores no graficos.
++badaccess_missing_image_map=Utilice mapas de imagen de cliente en preferencia a mapas de servidor ya que estos son inaccesibles para gente usando navegadores no graficos. Ademas, mapas de cliente son m\u00e1s faciles de configurar y proporcionan realimentaci\u00f3n inmediata a los usuarios.
++badaccess_missing_link_alt=En enlaces de hipertexto que usan un mapa de imagen de cliente\u000ase debe usar el atributo 'alt' para proporcionar una descripci\u00f3n textual\u000adel enlace.
++badaccess_missing_summary=Se deber\u00eda usar el atributo 'summary' de una tabla para describir su estructura. Es de gran ayuda para gente usando navegadores no visuales. Los atributos 'scope' y 'headers' de las celdas de las tablas son utiles para especificar que cabeceras aplican a cada celda, permitiendo a navegadores no visuales el proporcionar un contecto significativo a cada celda.
++badaccess_summary=Para m\u00e1s recomendaciones sobre como hacer las p\u00e1ginas accesibles visite "{0}". Tambien le puede interesar visitar "http://www.cast.org/bobby/", un servicio gratuito para comprobar la accesibilidad de sitios web.
++badchars_summary=C\u00f3digos de caracteres para las fuentes de Microsoft Windows en el rango\u000a128 - 159 podr\u00edan no ser reconocidos en otras plataformas. Se recomienda\u000ausar entidades con nombre, por ejemplo &trade; mejor que el c\u00f3digo de\u000acaracter 153 (0x2122 en Unicode) de Windows.\u000a
++badform_summary=Se deberia mover una o ambas de las etiquetas <form> y </form>.\u000aLos elementos HTML deberian estar adecuadamente anidados y los\u000aelementos 'form' no son excepci\u00f3n. Por ejemplo no se deberia colocar\u000aun <form> en una celda de tabla y el </form> en otra. Si <form> esta\u000aantes de una tabla, </form> deberia estar despues \u00a1Recuerde que los\u000aformularios no se pueden anidar!\u000a
++badlayout_using_body=Se recomienda utilizar CSS para especificar colores de p\u00e1gina y enlaces
++badlayout_using_font=Se recomienda utilizar CSS para especificar fuentes y propiedades\u000acomo tama\u00f1o y color. Esto reducira el tama\u00f1o de los archivos HTML\u000ay hara m\u00e1s facil el mantenimiento que con elementos FONT.\u000a
++badlayout_using_layer=Se recomienda el mecanismo de posicionado con hojas de estilo (CSS) en preferencia al elemento propietario LAYER, debido a su limitado soporte por vendedores.
++badlayout_using_nobr=Se recomienda utilizar CSS para controlar la division de lineas. Use "white-space: nowrap" para inhibir division en lugar de insertar <NOBR>...</NOBR> en el etiquetado.
++badlayout_using_spacer=Se recomienda utilizar CSS para controlar espacios en blanco (por ejemplo para indentation, margenes y separacion de lineas ). El elemento propietario SPACER tiene limitado soporte.
++cant_be_nested={0} no se puede anidar
++coerce_to_endtag=<{0}> deberia ser probablemente </{0}>
++content_after_body=contenido despues del final del 'body'
++discarding_unexpected=descartando inesperado {0}
++doctype_after_tags=<!DOCTYPE> no esta permitido despu\u00e9s de elementos
++doctype_given={0}: Doctype dado es "{1}"
++dtype_not_upper_case=SYSTEM, PUBLIC, W3C, DTD, EN deben ir en may\u00fasculas
++duplicate_frameset=elemento FRAMESET repetido
++element_not_empty=
++emacs_format={0}:{1,number}:{2,number}:
++encoding_mismatch=
++entity_in_id=
++error=Error:
++escaped_illegal_uri=
++expected_equalsign=
++fixed_backslash=
++forced_end_anchor=Aviso:  <a> deberia ser probablemente </a>
++general_info=Para aprender m\u00e1s sobre JTidy visite http://jtidy.sourceforge.net\u000aPor favor, notifique errores en http://sourceforge.net/tracker/?group_id=13153&atid=113153\u000aEspecificaciones de HTML y CSS estan disponibles en http://www.w3.org/
++hello_message=Tidy (versi\u00f3n {0}) Analizando "{1}"
++help_text={0}: file1 file2 ...\u000aAplicaci\u00f3n para limpiar y formatear archivos html\u000aconsulte http://www.w3.org/People/Raggett/tidy/\u000aopciones para tidy disponibles en {1}\u000a\u000aDirectivas de procesado\u000a--------------------\u000a  -indent o -i    indentar contenido de elemento\u000a  -omit   o -o    omitir etiquetas finales opcionales\u000a  -wrap 72        dividir texto en la columna 72 (68 por defecto)\u000a  -upper  o -u    forzar etiquetas en may\u00fasculas (min\u00fasculas por defecto)\u000a  -clean  o -c    remplazar etiquetas FONT, NOBR y CENTER tags por CSS\u000a  -numeric o -n   generar entidades num\u00e9ricas m\u00e1s que nombradas\u000a  -errors o -e    s\u00f3lo mostrar errores\u000a  -quiet o -q     suprimir salida no esencial\u000a  -xml            usar cuando la entrada es xml bien formado\u000a  -asxml          para convertir html a xml bien formado\u000a  -slides         para generar presentaciones a partir de elementos H2\u000a\u000aC\u00f3digos de caracteresn------------------\u000a  -raw            dejar caracteres > 128 igual que a la entrada\u000a  -ascii          usar ASCII para salida, Latin-1 para entrada\u000a  -latin1         usar Latin-1 para entrada y salida\u000a  -iso2022        usar ISO2022 para entrada y salida\u000a  -utf8           usar UTF-8 para entrada y salida\u000a  -mac            usar el c\u00f3digo de caracteres MacRoman de Apple\u000a\u000aFile manipulation\u000a---------------\u000a  -config <file>  configurar opciones a partir del archivo <file>\u000a  -f <file>       escribir errores al archivo <file>\u000a  -modify o -m    para midificar archivos originales\u000a\u000aVarios\u000a------------\u000a  -version o -v  mostrar versi\u00f3n\u000a  -help   o -h   listar opciones de la l\u00ednea de comando\u000aTambi\u00e9n puede usar --blah para cualquier opci\u00f3n de configuraci\u00f3n blah\u000a\u000aInput/Output son stdin/stdout por defecto\u000aOpciones de una s\u00f3la letra, excepto -f, se pueden combinar\u000acomo en:  tidy -f errs.txt -imu foo.html\u000aPara m\u00e1s informaci\u00f3n sobre HTML consultar http://www.w3.org/MarkUp
++id_name_mismatch={0} valor de atributos 'id' y 'name' no coinciden
++illegal_char=Aviso: remplazar c\u00f3digo de caracter ilegal {0,number}
++illegal_nesting={0} no deber\u00eda estar anidado
++illegal_uri_reference=
++inconsistent_namespace=espacio de nombres no corresponde al contenido
++inconsistent_version=html doctype no corresponde al contenido
++inserting_tag=insertando <{0}> implicito
++invalid_char=
++invalid_ncr=
++invalid_sgml_chars_summary=
++invalid_utf16=
++invalid_utf16_summary=
++invalid_utf8=
++invalid_utf8_summary=
++invaliduri_summary=
++joining_attribute=
++line_column=linea {0,number} columna {1,number} -
++malformed_comment=guiones adjacentes dentro de comentario
++malformed_doctype=se espera "html PUBLIC" o "html SYSTEM"
++missing_attr_value={0} atributo "{1}" sin valor
++missing_attribute={0} falta atributo "{1}"
++missing_body=No se puede crear diapositivas, falta elemento BODY.
++missing_doctype=falta <!DOCTYPE> declaraci\u00f3n
++missing_endtag_before=falta </{0}> antes {1}
++missing_endtag_for=falta </{0}>
++missing_imagemap={0} debe usar mapa de imagen del lado del cliente
++missing_quotemark=
++missing_semicolon=Aviso: entidad "{0}" no termina en '';''
++missing_semicolon_ncr=
++missing_starttag=falta <{0}>
++missing_title_element=insertado elemento 'title'
++needs_author_intervention=Este documento tiene errores que se deben solucionar para que Tidy pueda generar una version corregida
++nested_emphasis=enfasis anidado {0}
++nested_quotation=
++newline_in_uri=
++no_warnings=no hay avisos ni errores
++noframes_content={0} no dentro de elemento ''noframes''
++non_matching_endtag=remplazar {0} inesperado por </{1}>
++num_warnings=hallados {0,choice,0#no avisos|1#1 aviso|1<{0,number,integer} avisos}, {1,choice,0#no errors|1#1 error|2#{1,number,integer} errors}!
++obsolete_element=elemento obsoleto {0} por {1}
++proprietary_attr_value={0} valor de atributo "{1}" proprietario
++proprietary_attribute={0} atributo "{1}" proprietario
++proprietary_element={0} no aprobado por W3C
++repeated_attribute=
++replacing_element=remplazar elemento {0} por {1}
++report_version={0}: Contenido de documento parece {1}
++slides_found=Se han hallado {0,number} diapositivas
++suspected_missing_quote=faltan comillas para valor de atributo
++tag_not_allowed_in={0} no permitido en elementos <{1}>
++too_many_elements=demasiados elementos {0}
++too_many_elements_in=demasiados elementos {0} en <{1}>
++trim_empty_element=elemento vacio eliminado {0}
++unescaped_ampersand=Aviso: '&' no escapado que deber\u00eda ser escrito como &amp;
++unescaped_element=
++unexpected_end_of_file=final de archivo mientras se analizan atributos {0}
++unexpected_endtag=</{0}> inesperado
++unexpected_endtag_in=</{0}> inesperado en <{1}>
++unexpected_gt={0} falta ''>'' al final de la etiqueta
++unexpected_quotemark={0} comillas inesperadas o duplicadas
++unknown_attribute=atributo "{0}" desconocido
++unknown_element={0} no se reconoce!
++unknown_entity=Aviso: '&' no escapado o entidad desconocida "{0}"
++unknown_file={0}: no se puede abrir archivo "{1}"
++unknown_option=Aviso: option desconocida: {0}
++unrecognized_option=opcion -{0} desconocida. Use -help para listar opciones
++using_br_inplace_of=usando <br> en lugar de {0}
++vendor_specific_chars_summary=
++warning=Aviso:
++xml_attribute_value={0} tiene atributo XML "{1}"
++xml_id_sintax=
+diff -rupN /tmp/orig/assets/jtidy/TidyMessages.properties /tmp/ported/assets/jtidy/TidyMessages.properties
+--- /tmp/orig/assets/jtidy/TidyMessages.properties	1970-01-01 01:00:00.000000000 +0100
++++ /tmp/ported/assets/jtidy/TidyMessages.properties	2009-12-01 00:58:26.000000000 +0100
+@@ -0,0 +1,115 @@
++anchor_not_unique={0} Anchor "{1}" already defined
++apos_undefined=Named Entity &apos; only defined in XML/XHTML
++attr_value_not_lcase={0} attribute value "{1}" for "{2}" must be lower case for XHTML
++# to be translated
++backslash_in_uri={0} URI reference contains backslash. Typo?
++bad_argument=Warning - missing or malformed argument "{1}" for option "{0}"
++bad_attribute_value={0} attribute "{1}" has invalid value "{2}"
++bad_cdata_content='<' + '/' + letter not allowed here
++bad_comment_chars=expecting -- or >
++bad_tree=Panic - tree has lost its integrity
++bad_xml_comment=XML comments can't contain --
++badaccess_frames=Pages designed using frames presents problems for\u000apeople who are either blind or using a browser that\u000adoesn't support frames. A frames-based page should always\u000ainclude an alternative layout inside a NOFRAMES element.
++badaccess_missing_image_alt=The alt attribute should be used to give a short description\u000aof an image; longer descriptions should be given with the\u000alongdesc attribute which takes a URL linked to the description.\u000aThese measures are needed for people using non-graphical browsers.
++badaccess_missing_image_map=Use client-side image maps in preference to server-side image\u000amaps as the latter are inaccessible to people using non-\u000agraphical browsers. In addition, client-side maps are easier\u000ato set up and provide immediate feedback to users.
++badaccess_missing_link_alt=For hypertext links defined using a client-side image map, you\u000aneed to use the alt attribute to provide a textual description\u000aof the link for people using non-graphical browsers.
++badaccess_missing_summary=The table summary attribute should be used to describe\u000athe table structure. It is very helpful for people using\u000anon-visual browsers. The scope and headers attributes for\u000atable cells are useful for specifying which headers apply\u000ato each table cell, enabling non-visual browsers to provide\u000aa meaningful context for each cell.
++badaccess_summary=For further advice on how to make your pages accessible\u000asee "{0}". You may also want to try\u000a"http://www.cast.org/bobby/" which is a free Web-based\u000aservice for checking URLs for accessibility.
++badchars_summary=Characters codes for the Microsoft Windows fonts in the range\u000a128 - 159 may not be recognized on other platforms. You are\u000ainstead recommended to use named entities, e.g. &trade; rather\u000athan Windows character code 153 (0x2122 in Unicode). Note that\u000aas of February 1998 few browsers support the new entities."
++badform_summary=You may need to move one or both of the <form> and </form>\u000atags. HTML elements should be properly nested and form elements\u000aare no exception. For instance you should not place the <form>\u000ain one table cell and the </form> in another. If the <form> is\u000aplaced before a table, the </form> cannot be placed inside the\u000atable! Note that one form can't be nested inside another!
++badlayout_using_body=You are recommended to use CSS to specify page and link colors
++badlayout_using_font=You are recommended to use CSS to specify the font and\u000aproperties such as its size and color. This will reduce\u000athe size of HTML files and make them easier to maintain\u000acompared with using <FONT> elements.
++badlayout_using_layer=The Cascading Style Sheets (CSS) Positioning mechanism\u000ais recommended in preference to the proprietary <LAYER>\u000aelement due to limited vendor support for LAYER.
++badlayout_using_nobr=You are recommended to use CSS to control line wrapping.\u000aUse "white-space: nowrap" to inhibit wrapping in place\u000aof inserting <NOBR>...</NOBR> into the markup.
++badlayout_using_spacer=You are recommended to use CSS for controlling white\u000aspace (e.g. for indentation, margins and line spacing).\u000aThe proprietary <SPACER> element has limited vendor support.
++cant_be_nested={0} can''t be nested
++coerce_to_endtag=<{0}> is probably intended as </{0}>
++content_after_body=content occurs after end of body
++discarding_unexpected=discarding unexpected {0}
++doctype_after_tags=<!DOCTYPE> isn't allowed after elements
++doctype_given={0}: Doctype given is "{1}"
++dtype_not_upper_case=SYSTEM, PUBLIC, W3C, DTD, EN must be upper case
++duplicate_frameset=repeated FRAMESET element
++element_not_empty={0} element not empty or not closed
++emacs_format={0}:{1,number}:{2,number}:
++encoding_mismatch=specified input encoding ({0}) does not match actual input encoding ({1})
++entity_in_id=no entities allowed in id attribute, discarding "&"
++error=Error: 
++escaped_illegal_uri={0} escaping malformed URI reference
++expected_equalsign={0} unexpected '=', expected attribute name
++fixed_backslash={0} converting backslash in URI to slash
++forced_end_anchor=Warning: <a> is probably intended as </a>
++general_info=To learn more about JTidy see http://jtidy.sourceforge.net\u000aPlease report bugs at http://sourceforge.net/tracker/?group_id=13153&atid=113153\u000aHTML & CSS specifications are available from http://www.w3.org/\u000aLobby your company to join W3C, see http://www.w3.org/Consortium
++hello_message=Tidy (vers {0, date}) Parsing "{1}"
++help_text={0} [option...] [file...]\u000aUtility to clean up and pretty print HTML/XHTML/XML\u000asee http://jtidy.sourceforge.net/\u000a\u000aOptions for JTidy released on {1}\u000aProcessing directives\u000a---------------------\u000a  -indent  or -i    to indent element content\u000a  -omit    or -o    to omit optional end tags\u000a  -wrap <column>    to wrap text at the specified <column> (default is 68)\u000a  -upper   or -u    to force tags to upper case (default is lower case)\u000a  -clean   or -c    to replace FONT, NOBR and CENTER tags by CSS\u000a  -bare    or -b    to strip out smart quotes and em dashes, etc.\u000a  -numeric or -n    to output numeric rather than named entities\u000a  -errors  or -e    to only show errors\u000a  -quiet   or -q    to suppress nonessential output\u000a  -xml              to specify the input is well formed XML\u000a  -asxml            to convert HTML to well formed XHTML\u000a  -asxhtml          to convert HTML to well formed XHTML\u000a  -ashtml           to force XHTML to well formed HTML\u000a  -slides           to burst into slides on H2 elements\u000a\u000aCharacter encodings\u000a-------------------\u000a  -raw              to output values above 127 without conversion to entities\u000a  -ascii            to use US-ASCII for output, ISO-8859-1 for input\u000a  -latin1           to use ISO-8859-1 for both input and output\u000a  -iso2022          to use ISO-2022 for both input and output\u000a  -utf8             to use UTF-8 for both input and output\u000a  -mac              to use MacRoman for input, US-ASCII for output\u000a  -utf16le          to use UTF-16LE for both input and output\u000a  -utf16be          to use UTF-16BE for both input and output\u000a  -utf16            to use UTF-16 for both input and output\u000a  -win1252          to use Windows-1252 for input, US-ASCII for output\u000a  -big5             to use Big5 for both input and output\u000a  -shiftjis         to use Shift_JIS for both input and output\u000a  -language <lang>  to set the two-letter language code <lang> (for future use)\u000a\u000aFile manipulation\u000a-----------------\u000a  -config <file>    to set configuration options from the specified <file>\u000a  -f      <file>    to write errors to the specified <file>\u000a  -modify or -m     to modify the original input files\u000a\u000aMiscellaneous\u000a-------------\u000a  -version  or -v   to show the version of Tidy\u000a  -help, -h or -?   to list the command line options\u000a  -help-config      to list all configuration options\u000a  -show-config      to list the current configuration settings\u000a\u000aYou can also use --blah for any configuration option blah\u000a\u000aInput/Output default to stdin/stdout respectively\u000aSingle letter options apart from -f may be combined\u000aas in:  tidy -f errs.txt -imu foo.html\u000aFor further info on HTML see http://www.w3.org/MarkUp
++id_name_mismatch={0} id and name attribute value mismatch
++illegal_char=Warning: replacing illegal character code {0,number}
++illegal_nesting={0} shouldn''t be nested
++illegal_uri_reference={0} improperly escaped URI reference
++inconsistent_namespace=html namespace doesn't match content
++inconsistent_version=html doctype doesn't match content
++inserting_tag=inserting implicit <{0}>
++invalid_char={0,choice,0#replacing|1#discarding} invalid character code {1}
++invalid_ncr={0,choice,0#replacing|1#discarding} invalid numeric character reference {1}
++invalid_sgml_chars_summary=Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\u000aeven if they were, they would likely be unprintable control characters.\u000aTidy assumed you wanted to refer to a character with the same byte value in the \u000a{0,choice,0#specified|1#Windows-1252|2#MacRoman} encoding and replaced that reference with the Unicode equivalent.
++invalid_utf16={0,choice,0#replacing|1#discarding} invalid UTF-16 surrogate pair (char. code {1})
++invalid_utf16_summary=Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\u000aThe definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\u000amapping of unpaired surrogates. For more information please refer to\u000ahttp://www.unicode.org/unicode and http://www.cl.cam.ac.uk/~mgk25/unicode.html
++invalid_utf8={0,choice,0#replacing|1#discarding} invalid UTF-8 bytes (char. code {1})
++invalid_utf8_summary=Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\u000aThe definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also\u000aallows for the use of five- and six-byte sequences to encode\u000acharacters that are outside the range of the Unicode character set;\u000athose five- and six-byte sequences are illegal for the use of\u000aUTF-8 as a transformation of Unicode characters. ISO/IEC 10646\u000adoes not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\u000a(but it does allow other noncharacters). For more information please refer to\u000ahttp://www.unicode.org/unicode and http://www.cl.cam.ac.uk/~mgk25/unicode.html
++invaliduri_summary=URIs must be properly escaped, they must not contain unescaped\u000acharacters below U+0021 including the space character and not\u000aabove U+007E. Tidy escapes the URI for you as recommended by\u000aHTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents\u000ause another algorithm to escape such URIs and some server-sided\u000ascripts depend on that. If you want to depend on that, you must\u000aescape the URI by your own. For more information please refer to\u000ahttp://www.w3.org/International/O-URL-and-ident.html
++joining_attribute={0} joining values of repeated attribute "{1}"
++line_column=line {0,number} column {1,number} - 
++malformed_comment=adjacent hyphens within comment
++malformed_doctype=expected "html PUBLIC" or "html SYSTEM"
++missing_attr_value={0} attribute "{1}" lacks value
++missing_attribute={0} lacks "{1}" attribute
++missing_body=Can't create slides - document is missing a body element.
++missing_doctype=missing <!DOCTYPE> declaration
++missing_endtag_before=missing </{0}> before {1}
++missing_endtag_for=missing </{0}>
++missing_imagemap={0} should use client-side image map
++missing_quotemark={0} attribute with missing trailing quote mark
++missing_semicolon=Warning: entity "{0}" doesn''t end in '';''
++missing_semicolon_ncr=numeric character reference "{0}" doesn't end in ";"
++missing_starttag=missing <{0}>
++missing_title_element=inserting missing 'title' element
++needs_author_intervention=This document has errors that must be fixed before\u000ausing HTML Tidy to generate a tidied up version.
++nested_emphasis=nested emphasis {0}
++nested_quotation=nested q elements, possible typo
++newline_in_uri={0} discarding newline in URI reference
++no_warnings=no warnings or errors were found
++noframes_content={0} not inside ''noframes'' element
++non_matching_endtag=replacing unexpected {0} by </{1}>
++num_warnings={0,choice,0#no warnings|1#1 warning|1<{0,number,integer} warnings}, {1,choice,0#no errors|1#1 error|2#{1,number,integer} errors} were found!
++obsolete_element=replacing obsolete element {0} by {1}
++proprietary_attr_value={0} proprietary attribute value "{1}"
++proprietary_attribute={0} proprietary attribute "{1}"
++proprietary_element={0} is not approved by W3C
++repeated_attribute={0} dropping value "{1}" for repeated attribute "{2}"
++replacing_element=replacing element {0} by {1}
++report_version={0}: Document content looks like {1}
++slides_found={0,number} Slides found
++suspected_missing_quote=missing quotemark for attribute value
++tag_not_allowed_in={0} isn''t allowed in <{1}> elements
++too_many_elements=too many {0} elements
++too_many_elements_in=too many {0} elements in <{1}>
++trim_empty_element=trimming empty {0}
++unescaped_ampersand=Warning: unescaped & which should be written as &amp;
++unescaped_element=unescaped {0} in pre content
++unexpected_end_of_file=end of file while parsing attributes {0}
++unexpected_endtag=unexpected </{0}>
++unexpected_endtag_in=unexpected </{0}> in <{1}>
++unexpected_gt={0} missing ''>'' for end of tag
++unexpected_quotemark={0} unexpected or duplicate quote mark
++unknown_attribute=unknown attribute "{0}"
++unknown_element={0} is not recognized!
++unknown_entity=Warning: unescaped & or unknown entity "{0}"
++unknown_file={0}: can''t open file "{1}"
++unknown_option=Warning - unknown option: {0}
++unrecognized_option=unrecognized option -{0} use -help to list options
++using_br_inplace_of=using <br> in place of {0}
++vendor_specific_chars_summary=It is unlikely that vendor-specific, system-dependent encodings\u000awork widely enough on the World Wide Web; you should avoid using the \u000a{0,choice,0#specified|1#Windows-1252|2#MacRoman} character encoding, instead you are recommended to\u000ause named entities, e.g. &trade;.
++version_summary=JTidy released on {0}
++warning=Warning: 
++xml_attribute_value={0} has XML attribute "{1}"
++xml_id_sintax=ID "{0}" uses XML ID syntax
+diff -rupN /tmp/orig/java/org/w3c/tidy/ant/JTidyTask.java /tmp/ported/java/org/w3c/tidy/ant/JTidyTask.java
+--- /tmp/orig/java/org/w3c/tidy/ant/JTidyTask.java	2009-08-01 06:48:28.000000000 +0200
++++ /tmp/ported/java/org/w3c/tidy/ant/JTidyTask.java	1970-01-01 01:00:00.000000000 +0100
+@@ -1,493 +0,0 @@
+-/*
+- *  Java HTML Tidy - JTidy
+- *  HTML parser and pretty printer
+- *
+- *  Copyright (c) 1998-2000 World Wide Web Consortium (Massachusetts
+- *  Institute of Technology, Institut National de Recherche en
+- *  Informatique et en Automatique, Keio University). All Rights
+- *  Reserved.
+- *
+- *  Contributing Author(s):
+- *
+- *     Dave Raggett <dsr@w3.org>
+- *     Andy Quick <ac.quick@sympatico.ca> (translation to Java)
+- *     Gary L Peskin <garyp@firstech.com> (Java development)
+- *     Sami Lempinen <sami@lempinen.net> (release management)
+- *     Fabrizio Giustina <fgiust at users.sourceforge.net>
+- *
+- *  The contributing author(s) would like to thank all those who
+- *  helped with testing, bug fixes, and patience.  This wouldn't
+- *  have been possible without all of you.
+- *
+- *  COPYRIGHT NOTICE:
+- * 
+- *  This software and documentation is provided "as is," and
+- *  the copyright holders and contributing author(s) make no
+- *  representations or warranties, express or implied, including
+- *  but not limited to, warranties of merchantability or fitness
+- *  for any particular purpose or that the use of the software or
+- *  documentation will not infringe any third party patents,
+- *  copyrights, trademarks or other rights. 
+- *
+- *  The copyright holders and contributing author(s) will not be
+- *  liable for any direct, indirect, special or consequential damages
+- *  arising out of any use of the software or documentation, even if
+- *  advised of the possibility of such damage.
+- *
+- *  Permission is hereby granted to use, copy, modify, and distribute
+- *  this source code, or portions hereof, documentation and executables,
+- *  for any purpose, without fee, subject to the following restrictions:
+- *
+- *  1. The origin of this source code must not be misrepresented.
+- *  2. Altered versions must be plainly marked as such and must
+- *     not be misrepresented as being the original source.
+- *  3. This Copyright notice may not be removed or altered from any
+- *     source or altered source distribution.
+- * 
+- *  The copyright holders and contributing author(s) specifically
+- *  permit, without fee, and encourage the use of this source code
+- *  as a component for supporting the Hypertext Markup Language in
+- *  commercial products. If you use this source code in a product,
+- *  acknowledgment is not required but would be appreciated.
+- *
+- */
+-package org.w3c.tidy.ant;
+-
+-import java.io.BufferedInputStream;
+-import java.io.BufferedOutputStream;
+-import java.io.ByteArrayOutputStream;
+-import java.io.File;
+-import java.io.FileInputStream;
+-import java.io.FileOutputStream;
+-import java.io.IOException;
+-import java.io.InputStream;
+-import java.io.OutputStream;
+-import java.io.PrintWriter;
+-import java.util.ArrayList;
+-import java.util.Iterator;
+-import java.util.List;
+-import java.util.Properties;
+-
+-import org.apache.tools.ant.BuildException;
+-import org.apache.tools.ant.DirectoryScanner;
+-import org.apache.tools.ant.Project;
+-import org.apache.tools.ant.Task;
+-import org.apache.tools.ant.types.FileSet;
+-import org.apache.tools.ant.types.Parameter;
+-import org.apache.tools.ant.util.FileNameMapper;
+-import org.apache.tools.ant.util.FlatFileNameMapper;
+-import org.apache.tools.ant.util.IdentityMapper;
+-import org.w3c.tidy.Tidy;
+-
+-
+-/**
+- * JTidy ant task.
+- * <h3>Parameters</h3>
+- * <table cellspacing="0" border="1"> <thead>
+- * <tr>
+- * <th>Attribute</th>
+- * <th>Description</th>
+- * <th>Required</th>
+- * </tr>
+- * </thead> <tbody>
+- * <tr>
+- * <td>srcfile</td>
+- * <td>source file</td>
+- * <td>Yes, unless a nested <code>&lt;fileset></code> element is used.</td>
+- * </tr>
+- * <tr>
+- * <td>destfile</td>
+- * <td>destination file for output</td>
+- * <td rowspan="2">With the <code>srcfile</code> attribute, either <code>destfile</code> or <code>destdir</code>
+- * can be used. With nested <code>&lt;fileset></code> elements only <code>destdir</code> is allowed.</td>
+- * </tr>
+- * <tr>
+- * <td>destdir</td>
+- * <td>destination directory for output</td>
+- * </tr>
+- * <tr>
+- * <td>properties</td>
+- * <td>Path to a valid tidy properties file</td>
+- * <td>No</td>
+- * </tr>
+- * <tr>
+- * <td>flatten</td>
+- * <td>Ignore the directory structure of the source files, and copy all files into the directory specified by the
+- * <code>destdir</code> attribute.</td>
+- * <td>No; defaults to false.</td>
+- * </tr>
+- * <tr>
+- * <td>failonerror</td>
+- * <td>boolean to control whether failure to execute should throw a BuildException or just print an error. If set to
+- * <code>true</code> errors in input files which tidy is enable to fix will cause a failure.</td>
+- * <td>No; defaults to false.</td>
+- * </tr>
+- * </tbody> </table>
+- * <h3>Nested elements</h3>
+- * <ul>
+- * <li><strong>Fileset </strong>: if you need to run tidy on more than one file, you can specify nested filesets.</li>
+- * <li><strong>Parameter </strong>: you can specify any tidy configuration option directly using a nested
+- * <code>parameter</code> element.</li>
+- * </ul>
+- * <h3>Setup</h3>
+- * <p>
+- * Adds the following <code>typedef</code> to setup the JTidy task in your build.xml:
+- * </p>
+- * 
+- * <pre>
+- * &lt;taskdef name="tidy" classname="org.w3c.tidy.ant.JTidyTask"/>
+- * </pre>
+- * 
+- * <p>
+- * This will work if JTidy jar is copied to ant lib directory. If you need to reference the jar elsewhere on the
+- * filesystem you can add a nested classpath element:
+- * </p>
+- * 
+- * <pre>
+- * &lt;taskdef name="tidy" classname="org.w3c.tidy.ant.JTidyTask">
+- *   &lt;classpath>
+- *     &lt;pathelement location="${lib.dir}/jtidy.jar"/>
+- *   &lt;/classpath>
+- * &lt;/taskdef>
+- * </pre>
+- * 
+- * <h3>Examples</h3>
+- * 
+- * <pre>
+- * &lt;tidy destdir="out" properties="/path/to/tidy.properties">
+- *   &lt;fileset dir="inputdir" />
+- *   &lt;parameter name="drop-font-tags" value="true" />
+- * &lt/tidy>
+- * </pre>
+- * 
+- * @author Fabrizio Giustina
+- * @version $Revision: 807 $ ($Author: fgiust $)
+- */
+-public class JTidyTask extends Task
+-{
+-
+-    /**
+-     * Filesets.
+-     */
+-    private List filesets = new ArrayList();
+-
+-    /**
+-     * Destination directory for output.
+-     */
+-    private File destdir;
+-
+-    /**
+-     * Destination file for output.
+-     */
+-    private File destfile;
+-
+-    /**
+-     * Source file.
+-     */
+-    private File srcfile;
+-
+-    /**
+-     * Control whether failure to execute should throw a BuildException.
+-     */
+-    private boolean failonerror;
+-
+-    /**
+-     * Don't output directories.
+-     */
+-    private boolean flatten;
+-
+-    /**
+-     * tidy instance.
+-     */
+-    private Tidy tidy;
+-
+-    /**
+-     * Configured properties.
+-     */
+-    private Properties props;
+-
+-    /**
+-     * Properties file.
+-     */
+-    private File properties;
+-
+-    /**
+-     * @param destdir The destdir to set.
+-     */
+-    public void setDestdir(File destdir)
+-    {
+-        this.destdir = destdir;
+-    }
+-
+-    /**
+-     * @param destfile The destfile to set.
+-     */
+-    public void setDestfile(File destfile)
+-    {
+-        this.destfile = destfile;
+-    }
+-
+-    /**
+-     * @param srcfile The srcfile to set.
+-     */
+-    public void setSrcfile(File srcfile)
+-    {
+-        this.srcfile = srcfile;
+-    }
+-
+-    /**
+-     * @param failonerror The failonerror to set.
+-     */
+-    public void setFailonerror(boolean failonerror)
+-    {
+-        this.failonerror = failonerror;
+-    }
+-
+-    /**
+-     * @param flatten The flatten to set.
+-     */
+-    public void setFlatten(boolean flatten)
+-    {
+-        this.flatten = flatten;
+-    }
+-
+-    /**
+-     * @param properties The properties to set.
+-     */
+-    public void setProperties(File properties)
+-    {
+-        this.properties = properties;
+-    }
+-
+-    /**
+-     * Adds a fileset to be processed Fileset
+-     * @param fileSet
+-     */
+-    public void addFileset(FileSet fileSet)
+-    {
+-        filesets.add(fileSet);
+-    }
+-
+-    /**
+-     * Setter method for any property using the ant type Parameter.
+-     * @param prop Ant type Parameter
+-     */
+-    public void addConfiguredParameter(Parameter prop)
+-    {
+-        props.setProperty(prop.getName(), prop.getValue());
+-    }
+-
+-    /**
+-     * Initializes the task.
+-     */
+-    public void init()
+-    {
+-        super.init();
+-
+-        // Setup a Tidy instance
+-        tidy = new Tidy();
+-        props = new Properties();
+-    }
+-
+-    /**
+-     * Validates task parameters.
+-     * @throws BuildException if any invalid parameter is found
+-     */
+-    protected void validateParameters() throws BuildException
+-    {
+-        if (srcfile == null && filesets.size() == 0)
+-        {
+-            throw new BuildException("Specify at least srcfile or a fileset.");
+-        }
+-        if (srcfile != null && filesets.size() > 0)
+-        {
+-            throw new BuildException("You can't specify both srcfile and nested filesets.");
+-        }
+-
+-        if (destfile == null && destdir == null)
+-        {
+-            throw new BuildException("One of destfile or destdir must be set.");
+-        }
+-
+-        if (srcfile == null && destfile != null)
+-        {
+-            throw new BuildException("You only can use destfile with srcfile.");
+-        }
+-
+-        if (srcfile != null && srcfile.isDirectory())
+-        {
+-            throw new BuildException("srcfile can't be a directory.");
+-        }
+-
+-        if (properties != null && properties.isDirectory())
+-        {
+-            throw new BuildException("Invalid properties file specified: " + properties.getPath());
+-        }
+-
+-    }
+-
+-    /**
+-     * Run the task.
+-     * @exception BuildException The exception raised during task execution.
+-     */
+-    public void execute() throws BuildException
+-    {
+-        // validate
+-        validateParameters();
+-
+-        // load configuration
+-        if (this.properties != null)
+-        {
+-            try
+-            {
+-                this.props.load(new FileInputStream(this.properties));
+-            }
+-            catch (IOException e)
+-            {
+-                throw new BuildException("Unable to load properties file " + properties, e);
+-            }
+-        }
+-
+-        // hide output unless set in properties
+-        tidy.setErrout(new PrintWriter(new ByteArrayOutputStream()));
+-
+-        tidy.setConfigurationFromProps(props);
+-
+-        if (this.srcfile != null)
+-        {
+-            // process a single file
+-            executeSingle();
+-        }
+-        else
+-        {
+-            // process filesets
+-            executeSet();
+-        }
+-    }
+-
+-    /**
+-     * A single file has been specified.
+-     */
+-    protected void executeSingle()
+-    {
+-
+-        if (!srcfile.exists())
+-        {
+-            throw new BuildException("Could not find source file " + srcfile.getAbsolutePath() + ".");
+-        }
+-
+-        if (destfile == null)
+-        {
+-            // destdir can't be null, condition is checked in validateParameters()
+-            destfile = new File(destdir, srcfile.getName());
+-        }
+-
+-        processFile(srcfile, destfile);
+-    }
+-
+-    /**
+-     * Run tidy on filesets.
+-     */
+-    protected void executeSet()
+-    {
+-
+-        FileNameMapper mapper = null;
+-        if (flatten)
+-        {
+-            mapper = new FlatFileNameMapper();
+-        }
+-        else
+-        {
+-            mapper = new IdentityMapper();
+-        }
+-
+-        mapper.setTo(this.destdir.getAbsolutePath());
+-
+-        Iterator iterator = filesets.iterator();
+-        while (iterator.hasNext())
+-        {
+-            FileSet fileSet = (FileSet) iterator.next();
+-            DirectoryScanner directoryScanner = fileSet.getDirectoryScanner(getProject());
+-            String[] sourceFiles = directoryScanner.getIncludedFiles();
+-            File inputdir = directoryScanner.getBasedir();
+-
+-            mapper.setFrom(inputdir.getAbsolutePath());
+-
+-            for (int j = 0; j < sourceFiles.length; j++)
+-            {
+-                String[] mapped = mapper.mapFileName(sourceFiles[j]);
+-
+-                processFile(new File(inputdir, sourceFiles[j]), new File(this.destdir, mapped[0]));
+-            }
+-        }
+-    }
+-
+-    /**
+-     * Run tidy on a file.
+-     * @param inputFile input file
+-     * @param outputFile output file
+-     */
+-    protected void processFile(File inputFile, File outputFile)
+-    {
+-
+-        log("Processing " + inputFile.getAbsolutePath(), Project.MSG_DEBUG);
+-
+-        InputStream is;
+-        OutputStream os;
+-        try
+-        {
+-            is = new BufferedInputStream(new FileInputStream(inputFile));
+-        }
+-        catch (IOException e)
+-        {
+-            throw new BuildException("Unable to open file " + inputFile);
+-        }
+-
+-        try
+-        {
+-            outputFile.getParentFile().mkdirs();
+-            outputFile.createNewFile();
+-            os = new BufferedOutputStream(new FileOutputStream(outputFile));
+-        }
+-        catch (IOException e)
+-        {
+-            throw new BuildException("Unable to open destination file " + outputFile, e);
+-        }
+-
+-        tidy.parse(is, os);
+-
+-        try
+-        {
+-            is.close();
+-        }
+-        catch (IOException e1)
+-        {
+-            // ignore
+-        }
+-        try
+-        {
+-            os.flush();
+-            os.close();
+-        }
+-        catch (IOException e1)
+-        {
+-            // ignore
+-        }
+-
+-        // cleanup empty files
+-        if (tidy.getParseErrors() > 0 && !tidy.getForceOutput())
+-        {
+-            outputFile.delete();
+-        }
+-
+-        if (failonerror && tidy.getParseErrors() > 0)
+-        {
+-            throw new BuildException("Tidy was unable to process file "
+-                + inputFile
+-                + ", "
+-                + tidy.getParseErrors()
+-                + " returned.");
+-        }
+-
+-    }
+-}
+\ No newline at end of file
+diff -rupN /tmp/orig/java/org/w3c/tidy/config.txt /tmp/ported/java/org/w3c/tidy/config.txt
+--- /tmp/orig/java/org/w3c/tidy/config.txt	1970-01-01 01:00:00.000000000 +0100
++++ /tmp/ported/java/org/w3c/tidy/config.txt	2009-08-01 06:48:42.000000000 +0200
+@@ -0,0 +1,20 @@
++# sample config file for Java HTML tidy
++
++indent=auto
++indent-spaces=2
++wrap=72
++markup=yes
++clean=yes
++output-xml=no
++input-xml=no
++show-warnings=yes
++numeric-entities=yes
++quote-marks=yes
++quote-nbsp=yes
++quote-ampersand=no
++break-before-br=no
++uppercase-tags=yes
++uppercase-attributes=yes
++smart-indent=no
++output-xhtml=yes
++char-encoding=latin1
+diff -rupN /tmp/orig/java/org/w3c/tidy/ContextManager.java /tmp/ported/java/org/w3c/tidy/ContextManager.java
+--- /tmp/orig/java/org/w3c/tidy/ContextManager.java	1970-01-01 01:00:00.000000000 +0100
++++ /tmp/ported/java/org/w3c/tidy/ContextManager.java	2013-08-27 18:48:55.000000000 +0200
+@@ -0,0 +1,32 @@
++package org.w3c.tidy;
++
++import android.content.Context;
++
++/**
++ * Created by elbosso on 8/27/13.
++ */
++public class ContextManager extends java.lang.Object{
++    private static ContextManager sharedInstance;
++    private Context context;
++
++    private ContextManager()
++    {
++        super();
++    }
++
++    public static ContextManager getSharedInstance()
++    {
++        if(sharedInstance==null)
++            sharedInstance=new ContextManager();
++        return sharedInstance;
++    }
++
++    public void setContext(Context context)
++    {
++        this.context=context;
++    }
++    public Context getContext()
++    {
++        return context;
++    }
++}
+diff -rupN /tmp/orig/java/org/w3c/tidy/Report.java /tmp/ported/java/org/w3c/tidy/Report.java
+--- /tmp/orig/java/org/w3c/tidy/Report.java	2009-10-31 07:15:20.000000000 +0100
++++ /tmp/ported/java/org/w3c/tidy/Report.java	2013-08-30 17:48:19.000000000 +0200
+@@ -53,11 +53,15 @@
+  */
+ package org.w3c.tidy;
+ 
++import android.content.Context;
++import android.content.res.AssetManager;
++
+ import java.io.InputStream;
+ import java.io.PrintWriter;
+ import java.text.MessageFormat;
+ import java.util.MissingResourceException;
+ import java.util.Properties;
++import java.util.PropertyResourceBundle;
+ import java.util.ResourceBundle;
+ 
+ import org.w3c.tidy.TidyMessage.Level;
+@@ -87,7 +91,11 @@ public final class Report
+     private static String readReleaseDate() {
+     	final Properties p = new Properties();
+     	try {
+-			final InputStream s = Report.class.getResourceAsStream("/jtidy.properties");
++
++            AssetManager assetManager = ContextManager.getSharedInstance().getContext().getResources().getAssets();
++             // To get names of all files inside the "Files" folder
++//                   String[] files = assetManager.list("");
++           			final InputStream s = ContextManager.getSharedInstance().getContext().getResources().getAssets().open("jtidy/jtidy.properties");
+ 			p.load(s);
+ 			s.close();
+ 		} catch (Exception e) {
+@@ -640,9 +648,14 @@ public final class Report
+     {
+         try
+         {
+-            res = ResourceBundle.getBundle("org/w3c/tidy/TidyMessages");
++            AssetManager assetManager = ContextManager.getSharedInstance().getContext().getResources().getAssets();
++            // To get names of all files inside the "Files" folder
++//            String[] files = assetManager.list("");
++            final InputStream s = ContextManager.getSharedInstance().getContext().getResources().getAssets().open("jtidy/TidyMessages.properties");
++            res = new PropertyResourceBundle(s);
++            s.close();
+         }
+-        catch (MissingResourceException e)
++        catch (java.lang.Throwable e)
+         {
+             throw new Error(e.toString());
+         }
+diff -rupN /tmp/orig/java/org/w3c/tidy/TidyBeanInfo.java /tmp/ported/java/org/w3c/tidy/TidyBeanInfo.java
+--- /tmp/orig/java/org/w3c/tidy/TidyBeanInfo.java	2009-08-01 06:48:42.000000000 +0200
++++ /tmp/ported/java/org/w3c/tidy/TidyBeanInfo.java	1970-01-01 01:00:00.000000000 +0100
+@@ -1,78 +0,0 @@
+-/*
+- *  Java HTML Tidy - JTidy
+- *  HTML parser and pretty printer
+- *
+- *  Copyright (c) 1998-2000 World Wide Web Consortium (Massachusetts
+- *  Institute of Technology, Institut National de Recherche en
+- *  Informatique et en Automatique, Keio University). All Rights
+- *  Reserved.
+- *
+- *  Contributing Author(s):
+- *
+- *     Dave Raggett <dsr@w3.org>
+- *     Andy Quick <ac.quick@sympatico.ca> (translation to Java)
+- *     Gary L Peskin <garyp@firstech.com> (Java development)
+- *     Sami Lempinen <sami@lempinen.net> (release management)
+- *     Fabrizio Giustina <fgiust at users.sourceforge.net>
+- *
+- *  The contributing author(s) would like to thank all those who
+- *  helped with testing, bug fixes, and patience.  This wouldn't
+- *  have been possible without all of you.
+- *
+- *  COPYRIGHT NOTICE:
+- * 
+- *  This software and documentation is provided "as is," and
+- *  the copyright holders and contributing author(s) make no
+- *  representations or warranties, express or implied, including
+- *  but not limited to, warranties of merchantability or fitness
+- *  for any particular purpose or that the use of the software or
+- *  documentation will not infringe any third party patents,
+- *  copyrights, trademarks or other rights. 
+- *
+- *  The copyright holders and contributing author(s) will not be
+- *  liable for any direct, indirect, special or consequential damages
+- *  arising out of any use of the software or documentation, even if
+- *  advised of the possibility of such damage.
+- *
+- *  Permission is hereby granted to use, copy, modify, and distribute
+- *  this source code, or portions hereof, documentation and executables,
+- *  for any purpose, without fee, subject to the following restrictions:
+- *
+- *  1. The origin of this source code must not be misrepresented.
+- *  2. Altered versions must be plainly marked as such and must
+- *     not be misrepresented as being the original source.
+- *  3. This Copyright notice may not be removed or altered from any
+- *     source or altered source distribution.
+- * 
+- *  The copyright holders and contributing author(s) specifically
+- *  permit, without fee, and encourage the use of this source code
+- *  as a component for supporting the Hypertext Markup Language in
+- *  commercial products. If you use this source code in a product,
+- *  acknowledgment is not required but would be appreciated.
+- *
+- */
+-package org.w3c.tidy;
+-
+-import java.awt.Image;
+-import java.beans.SimpleBeanInfo;
+-
+-
+-/**
+- * BeanInfo for Tidy.
+- * @author Dave Raggett <a href="mailto:dsr@w3.org">dsr@w3.org </a>
+- * @author Andy Quick <a href="mailto:ac.quick@sympatico.ca">ac.quick@sympatico.ca </a> (translation to Java)
+- * @author Fabrizio Giustina
+- * @version $Revision: 400 $ ($Author: fgiust $)
+- */
+-public class TidyBeanInfo extends SimpleBeanInfo
+-{
+-
+-    /**
+-     * @see java.beans.BeanInfo#getIcon(int)
+-     */
+-    public Image getIcon(int kind)
+-    {
+-        return loadImage("tidy.gif");
+-    }
+-
+-}
+\ No newline at end of file
+diff -rupN /tmp/orig/java/org/w3c/tidy/Tidy.java /tmp/ported/java/org/w3c/tidy/Tidy.java
+--- /tmp/orig/java/org/w3c/tidy/Tidy.java	2009-11-21 01:51:42.000000000 +0100
++++ /tmp/ported/java/org/w3c/tidy/Tidy.java	2013-08-27 18:50:57.000000000 +0200
+@@ -53,6 +53,8 @@
+  */
+ package org.w3c.tidy;
+ 
++import android.content.Context;
++
+ import java.io.FileInputStream;
+ import java.io.FileNotFoundException;
+ import java.io.FileOutputStream;
+@@ -130,8 +132,9 @@ public class Tidy implements Serializabl
+     /**
+      * Instantiates a new Tidy instance. It's reccomended that a new instance is used at each parsing.
+      */
+-    public Tidy()
++    public Tidy(Context context)
+     {
++        ContextManager.getSharedInstance().setContext(context);
+         this.report = new Report();
+         configuration = new Configuration(this.report);
+ 
+@@ -723,20 +726,20 @@ public class Tidy implements Serializabl
+      * Command line interface to parser and pretty printer.
+      * @param argv command line parameters
+      */
+-    public static void main(String[] argv)
++/*    public static void main(String[] argv)
+     {
+         Tidy tidy = new Tidy();
+         int returnCode = tidy.mainExec(argv);
+         System.exit(returnCode);
+     }
+-
++*/
+     /**
+      * Main method, but returns the return code as an int instead of calling System.exit(code). Needed for testing main
+      * method without shutting down tests.
+      * @param argv command line parameters
+      * @return return code
+      */
+-    protected int mainExec(String[] argv)
++/*    protected int mainExec(String[] argv)
+     {
+         String file;
+         int argCount = argv.length;
+@@ -957,7 +960,7 @@ public class Tidy implements Serializabl
+         // 0 means all is ok
+         return 0;
+     }
+-
++*/
+     /**
+      * Attach a TidyMessageListener which will be notified for messages and errors.
+      * @param listener TidyMessageListener implementation
+diff -rupN /tmp/orig/resources/jtidy.properties /tmp/ported/resources/jtidy.properties
+--- /tmp/orig/resources/jtidy.properties	2009-12-01 16:55:06.000000000 +0100
++++ /tmp/ported/resources/jtidy.properties	1970-01-01 01:00:00.000000000 +0100
+@@ -1,3 +0,0 @@
+-# to be updated with every release
+-version = r938
+-date = 2009-12-01
+\ No newline at end of file
+diff -rupN /tmp/orig/resources/org/w3c/tidy/config.txt /tmp/ported/resources/org/w3c/tidy/config.txt
+--- /tmp/orig/resources/org/w3c/tidy/config.txt	2009-08-01 06:48:42.000000000 +0200
++++ /tmp/ported/resources/org/w3c/tidy/config.txt	1970-01-01 01:00:00.000000000 +0100
+@@ -1,20 +0,0 @@
+-# sample config file for Java HTML tidy
+-
+-indent=auto
+-indent-spaces=2
+-wrap=72
+-markup=yes
+-clean=yes
+-output-xml=no
+-input-xml=no
+-show-warnings=yes
+-numeric-entities=yes
+-quote-marks=yes
+-quote-nbsp=yes
+-quote-ampersand=no
+-break-before-br=no
+-uppercase-tags=yes
+-uppercase-attributes=yes
+-smart-indent=no
+-output-xhtml=yes
+-char-encoding=latin1
+diff -rupN /tmp/orig/resources/org/w3c/tidy/TidyMessages_de.properties /tmp/ported/resources/org/w3c/tidy/TidyMessages_de.properties
+--- /tmp/orig/resources/org/w3c/tidy/TidyMessages_de.properties	2009-08-01 06:48:42.000000000 +0200
++++ /tmp/ported/resources/org/w3c/tidy/TidyMessages_de.properties	1970-01-01 01:00:00.000000000 +0100
+@@ -1,113 +0,0 @@
+-anchor_not_unique=
+-apos_undefined=
+-attr_value_not_lcase=
+-backslash_in_uri=
+-bad_argument=Warnung: Fehlendes oder missgebildetes Argument "{1}" f\u00fcr Option "{0}"
+-bad_attribute_value={0} Attribut "{1}" unbekannter Attribut-Wert "{2}"
+-bad_cdata_content='<' + '/' + Buchstabe ist hier nicht erlaubt
+-bad_comment_chars=erwarte -- oder >
+-bad_tree=Interner Fehler: der Parse-Baum hat seine Integrit\u00e4t verloren.
+-bad_xml_comment=XML-Kommentare d\u00fcrfen kein -- enthalten
+-badaccess_frames=Seiten, welche Frames nutzen, sind problematisch f\u00fcr Leute,\u000adie entweder blind sind oder einen Browser nutzen, der keine\u000aFrames unterst\u00fctzt. Eine Frames-basierte Seite sollte immer\u000aauch ein alternatives Layout innerhalb eines NOFRAMES-Elementes\u000aenthalten.
+-badaccess_missing_image_alt=Das alt-Attribut sollte verwendet werden, um ein kurze Beschreibung\u000aeines Bildes zu geben; l\u00e4ngere Beschreibungen sollten mit dem\u000alongdesc-Attribut angegeben werden, welches eine URL mit der\u000aBeschreibung annimmt. Diese Ma\u00dfnahmen sind notwendig f\u00fcr Leute\u000amit nicht-grafischen Browsern.
+-badaccess_missing_image_map=Benutzen Sie client-seitige Image-Maps (usemap) anstatt serverseitigen\u000aImage-Maps (ismap), weil letztere unbenutzbar sind f\u00fcr Leute
+-badaccess_missing_link_alt=F\u00fcr Hypertext-Links, welche durch eine clientseitige Image-Map\u000adefiniert sind, sollten Sie das alt-Attribut nutzen, um eine\u000atextuelle Beschreibung f\u00fcr Leute zu geben, die nichtgrafische\u000aBrowser nutzen.
+-badaccess_missing_summary=Das summary-Attribut von <table> sollte benutzt werden, um die\u000aTabellenstruktur zu beschreiben. Das ist sehr hilfreich f\u00fcr\u000aLeute mit nicht-visuellen Browsern. Die scope- und\u000aheader-Attribute f\u00fcr Tabellenzellen sind n\u00fctzlich, um anzugeben,\u000awelche header f\u00fcr jede Tabellenzelle gelten, wodurch nicht-\u000avisuelle Browser bef\u00e4higt werden, sinnvollen Kontext f\u00fcr jede\u000aZelle zur Verf\u00fcgung zu stellen.
+-badaccess_summary=F\u00fcr weitere Ratschl\u00e4ge, wie Sie Ihre Seite zug\u00e4nglich machen\u000ak\u00f6nnen, siehe "{0}". Vielleicht wollen\u000aSie sich auch die (englische) Seite "http://www.cast.org/bobby/"\u000aansehen, welche einen kostenlosen, web-basierten Dienst zur\u000a\u00dcberpr\u00fcfung von URLs auf Zug\u00e4nglichkeit enth\u00e4lt.
+-badchars_summary=Zeichen-Codes f\u00fcr die Microsoft-Windows-Schriftarten im Bereich\u000a128 - 159 werden auf anderen Plattformen nicht unbedingt erkannt.\u000aEs wird empfohlen, statt dessen die benannten Entit\u00e4ten zu benutzen,\u000az.B. &trade; anstatt dem Windows-Zeichen-Code 153 (0x2122 in Unicode).
+-badform_summary=Sie sollten eines oder beide <form>- bzw. </form>-Tags verschieben.\u000aHTML-Elemente sollten sauber verschachtelt sein, und <form>-Elemente\u000asind da keine Ausnahme. Zum Beispiel sollte nicht das <form>-Element\u000avor der Tabelle und das </form>-Element in der Tabelle plaziert sein.\u000aAuch kann nicht ein <form> in einem anderem verschachtelt sein.
+-badlayout_using_body=Es wird empfohlen, CSS zu benutzen, um Seiten- und\u000aLink-Farben einzustellen.
+-badlayout_using_font=Benutzen Sie CSS, um die Schriftart und Eigenschaften\u000awie Gr\u00f6\u00dfe und Farbe einzustellen. Das wird die Gr\u00f6\u00dfe der\u000aHTML-Dateien reduzieren und sie leichter wartbar machen\u000aim Vergleich mit <FONT>-Elementen.
+-badlayout_using_layer=Es wird empfohlen, den CSS-Positionierungs-Mechanismus\u000aanstelle des propriet\u00e4ren <LAYER>-Elementes zu verwenden,\u000ada letzteres nicht standardisiert ist und deswegen nur\u000abegrenzt von den Browserherstellern unterst\u00fctzt wird.
+-badlayout_using_nobr=Benutzen Sie CSS, um die Zeilenumbr\u00fcche zu kontrollieren.\u000aBenutzen Sie "white-space: nowrap", um Umbr\u00fcche zu\u000averhindern, anstatt <NOBR>...</NOBR> in das Dokument\u000aeinzuf\u00fcgen
+-badlayout_using_spacer=Benutzen Sie CSS um Leerr\u00e4ume zu kontrollieren,\u000a(z.B. f\u00fcr Einr\u00fcckungen, R\u00e4nder und Zeilenabst\u00e4nde).\u000aDas propriet\u00e4re <SPACER>-Element hat nur begrenzten\u000aHersteller-Unterst\u00fctzung.
+-cant_be_nested={0} kann nicht verschachtelt werden
+-coerce_to_endtag=<{0}> ist wahrscheinlich als </{0}> gemeint
+-content_after_body=Inhalt erscheint nach dem Ende von <body>.
+-discarding_unexpected=entsorge unerwartetes {0}
+-doctype_after_tags=<!DOCTYPE> darf nur am Anfang des Dokumentes stehen, nicht nach Elementen
+-doctype_given=
+-dtype_not_upper_case=SYSTEM, PUBLIC, W3C, DTD, EN m\u00fcssen komplett in Gro\u00dfbuchstaben geschrieben werden.
+-duplicate_frameset=wiederholtes <frameset>-Element
+-element_not_empty=
+-emacs_format={0}:{1,number}:{2,number}:
+-encoding_mismatch=
+-entity_in_id=
+-error=Fehler:
+-escaped_illegal_uri=
+-expected_equalsign=
+-fixed_backslash=
+-forced_end_anchor=Warnung: <a> ist wahrscheinlich gemeint als </a>
+-general_info=Um mehr \u00fcber Tidy zu erfahren, sehen\u000aSie sich die Seite http://www.w3.org/People/Raggett/tidy/\u000aan. JTidy gibt es hier: http://jtidy.sourceforge.net\u000a\u00dcberzeugen Sie Ihr Unternehmen davon, dem W3C beizutreten,\u000asiehe http://www.w3.org/Consortium\u000aHTML- und CSS-Spezifikationen sind verf\u00fcgbar bei http://www.w3.org.
+-hello_message=Tidy (Version {0, date}) parst "{1}"
+-help_text=  {0}: datei1 datei2 ...\u000a Werkzeug, um HTML-Dateien zu s\u00e4ubern und auszudrucken.\u000a Siehe http://www.w3.org/People/Raggett/tidy/\u000a \u000a Optionen f\u00fcr tidy (Version {1}):\u000a \u000a Verarbeitungs-Anweisungen\u000a -------------------------\u000a   -i | -indent      Element-Inhalt einr\u00fccken\u000a   -o | -omit        optionale Ende-Tags weglassen\u000a        -wrap nn     Text bei Zeile nn umbrechen (Default: 68)\u000a   -u | -upper       Tags in GROSSBUCHSTABEN (Default: kleinbuchstaben)\u000a   -c | -clean       <font>, <nobr>, <center>-Tags durch CSS ersetzen\u000a   -n | -numeric     numerische anstelle benannter Entit\u00e4ten verwenden\u000a   -e | -errors      nur Fehler anzeigen (nicht den korrigierten Text)\u000a   -q | -quiet       nicht notwendige Ausgaben unterdr\u00fccken\u000a        -xml         die Eingabe ist bereits wohlgeformtes XML\u000a        -asxml       die Ausgabe soll wohlgeformtes XML sein\u000a        -slides      das Dokument an den <h2>-Elementen in "slides"\u000a                     (Einzelseiten) zerst\u00fcckeln: slide1.html, slide2.html, ...\u000a \u000a Zeichen-S\u00e4tze / -Kodierung\u000a    -raw             alle Bytes > 128 in der Ausgabe unver\u00e4ndert lassen\u000a    -ascii           ASCII f\u00fcr die Ausgabe, Latin-1 f\u00fcr die Eingabe verwenden\u000a    -latin1          Latin-1 f\u00fcr Ein- und Ausgabe verwenden\u000a    -iso2022         ISO2022 (v.a. Japanisch) f\u00fcr Ein- und Ausgabe verwenden\u000a    -utf8            UTF8 (Unicode) f\u00fcr Ein- und Ausgabe verwenden\u000a    -mac             Den MacRoman-Zeichensatz verwenden\u000a \u000a Datei-Manipulation\u000a ------------------\u000a    -config <datei>  lese Optionen aus der angegebenen Konfigurations-Datei\u000a    -f <datei>       Fehler zur angegebenen Datei schreiben\u000a   -m | -modify      die Original-Datei \u00e4ndern\u000a \u000a Vermischtes\u000a -----------\u000a   -v | -version     die Programmversion anzeigen\u000a   -h | -help        diese Kommandozeilenhilfe anzeigen\u000a Au\u00dferdem kann f\u00fcr jede Konfigurations-Datei-Option "bla" auch\u000a "--blah" in der Kommandozeile genutzt werden.\u000a Ein- und Ausgabe ist (wenn nicht anders angegeben) die Standard-Ein-\u000a oder Ausgabe.\u000a Einzel-Buchstaben-Optionen au\u00dfer -f k\u00f6nnen miteinander kombiniert\u000a werden, wie z.B.   tidy -f errs.txt -imu foo.html\u000a F\u00fcr weitere Informationen \u00fcber HTML siehe http://www.w3.org/MarkUp
+-id_name_mismatch={0} das id- und das name-Attribut haben nicht den gleichen Wert
+-illegal_char=Warnung: Ung\u00fcltiges Zeichen mit Code {0,number} wird ersetzt.
+-illegal_nesting={0} sollte nicht verschachtelt werden.
+-illegal_uri_reference=
+-inconsistent_namespace=HTML Namensraum (namespace) passt nicht zum Inhalt
+-inconsistent_version=HTML-DocTyp passt nicht zum Inhalt.
+-inserting_tag=f\u00fcge implizites <{0}> ein
+-invalid_char=
+-invalid_ncr=
+-invalid_sgml_chars_summary=
+-invalid_utf16=
+-invalid_utf16_summary=
+-invalid_utf8=
+-invalid_utf8_summary=
+-invaliduri_summary=
+-joining_attribute=
+-line_column=Zeile {0,number} Spalte {1,number} -
+-malformed_comment=zusammenh\u00e4ngende Bindestriche (--) innerhalb eines Kommentars.
+-malformed_doctype=erwarte "html PUBLIC" oder "html SYSTEM"
+-missing_attr_value={0} dem Attribut "{1}" fehlt ein Wert
+-missing_attribute={0} hat kein "{1}"-Attribut
+-missing_body=Ich kann keine Slides erstellen, weil das Dokument kein <body>-Element enth\u00e4lt.
+-missing_doctype=
+-missing_endtag_before=fehlendes </{0}> vor {1}
+-missing_endtag_for=fehlendes </{0}>
+-missing_imagemap={0} sollte eine Client-seitige Image-Map benutzen  (usemap=... anstatt ismap)
+-missing_quotemark=
+-missing_semicolon=Warnung: Die Entit\u00e4t "{0}" endet nicht mit ";"
+-missing_semicolon_ncr=
+-missing_starttag=fehlendes <{0}>
+-missing_title_element=f\u00fcge fehlendes <title>-Element ein.
+-needs_author_intervention=Dieses Dokument hat Fehler, die korrigiert werden m\u00fcssen,\u000abevor HTML Tidy das Dokument aufr\u00e4umen kann.
+-nested_emphasis=verschachtelte Hervorhebung {0}
+-nested_quotation=
+-newline_in_uri=
+-no_warnings=Es wurden keine Warnungen oder Fehler gefunden.
+-noframes_content={0} nicht innerhalb eines <noframe>-Elementes
+-non_matching_endtag=ersetze unerwartetes unexpected {0} durch </{1}>
+-num_warnings=Es wurden  {0,choice,0#keine Warnungen|1#1 Warnungen|1<{0,number,integer} Warnungen}, {1,choice,0#keine Fehler|1#1 Fehler|2#{1,number,integer} Fehler} gefunden!
+-obsolete_element=ersetze veraltetes Element {0} durch {1}
+-proprietary_attr_value={0} propriet\u00e4rer (nicht-standardisierter) Attribut-Wert "{1}"
+-proprietary_attribute={0} propriet\u00e4rer (nicht-standardisierter) Attribut "{1}"
+-proprietary_element={0} ist nicht vom W3C abgesegnet
+-repeated_attribute=
+-replacing_element=ersetze Element {0} durch {1}
+-report_version={0}: Der Inhalt des Dokumentes sieht aus wie {1}.
+-slides_found=Es wurden {0,number} Slides gefunden.
+-suspected_missing_quote=Fehlendes Anf\u00fchrungszeichen (") f\u00fcr Attribut-Wert
+-tag_not_allowed_in={0} ist nicht erlaubt in <{1}>-Elementen.
+-too_many_elements=zu viele {0}-Elemente
+-too_many_elements_in=zu viele {0}-Elemente in <{1}>
+-trim_empty_element=entferne leeres {0}
+-unescaped_ampersand=Warnung: einzelnes "&" (sollte "&amp;" sein).
+-unescaped_element=
+-unexpected_end_of_file=Ende der Datei, w\u00e4hrend Attribute geparst werden {0}
+-unexpected_endtag=unerwartetes </{0}>
+-unexpected_endtag_in=unerwartetes </{0}> in <{1}>
+-unexpected_gt={0} fehlendes ''>'' am Ende des Tags
+-unexpected_quotemark={0} unerwartetes oder dupliziertes Anf\u00fchrungszeichen (' oder ")
+-unknown_attribute=unbekanntes Attribut "{0}"
+-unknown_element={0} wird nicht erkannt!
+-unknown_entity=Warnung: einzelnes "&" (sollte "&amp;" sein) oder unbekannte Entit\u00e4t "{0}"
+-unknown_file={0}: Ich kann die Datei "{1}" nicht \u00f6ffnen.
+-unknown_option=
+-unrecognized_option=Unbekannte Option -{0}. Benutzen Sie -help, um die Optionen aufzulisten.
+-using_br_inplace_of=es wird <br> genutzt statt {0}
+-vendor_specific_chars_summary=
+-warning=Warnung:
+-xml_attribute_value={0} hat das XML-Attribut "{1}"
+-xml_id_sintax=
+diff -rupN /tmp/orig/resources/org/w3c/tidy/TidyMessages_es.properties /tmp/ported/resources/org/w3c/tidy/TidyMessages_es.properties
+--- /tmp/orig/resources/org/w3c/tidy/TidyMessages_es.properties	2009-08-01 06:48:42.000000000 +0200
++++ /tmp/ported/resources/org/w3c/tidy/TidyMessages_es.properties	1970-01-01 01:00:00.000000000 +0100
+@@ -1,113 +0,0 @@
+-anchor_not_unique=
+-apos_undefined=
+-attr_value_not_lcase=
+-backslash_in_uri=
+-bad_argument=Aviso: erroneo argumento "{1}" para opci\u00f3n: "{0}"
+-bad_attribute_value={0} atributo "{1}" tiene valor desconocido "{2}"
+-bad_cdata_content=letra '<' + '/' + no permitida aqu\u00ed
+-bad_comment_chars=se espera -- o >
+-bad_tree=Panic: - arbol ha perdido su integridad
+-bad_xml_comment=comentarios XML no pueden contener --
+-badaccess_frames=P\u00e1ginas dise\u00f1adas usando marcos ( frames ) presentan problemas para usuarios ciegos o con navegadors que no los soporten. Una p\u00e1gina basada en marcos deberia incluir una composici\u00f3n alternativa dentro de un elemento NOFRAMES.
+-badaccess_missing_image_alt=El atributo 'alt' se deberia usar para dar una corta descripci\u00f3n de una imagen; descripciones m\u00e1s largas deberian darse con el atributo 'longdesc' que utiliza una URL asociada con la descripci\u00f3n. Estas medidas son necesarias para gente usando navegadores no graficos.
+-badaccess_missing_image_map=Utilice mapas de imagen de cliente en preferencia a mapas de servidor ya que estos son inaccesibles para gente usando navegadores no graficos. Ademas, mapas de cliente son m\u00e1s faciles de configurar y proporcionan realimentaci\u00f3n inmediata a los usuarios.
+-badaccess_missing_link_alt=En enlaces de hipertexto que usan un mapa de imagen de cliente\u000ase debe usar el atributo 'alt' para proporcionar una descripci\u00f3n textual\u000adel enlace.
+-badaccess_missing_summary=Se deber\u00eda usar el atributo 'summary' de una tabla para describir su estructura. Es de gran ayuda para gente usando navegadores no visuales. Los atributos 'scope' y 'headers' de las celdas de las tablas son utiles para especificar que cabeceras aplican a cada celda, permitiendo a navegadores no visuales el proporcionar un contecto significativo a cada celda.
+-badaccess_summary=Para m\u00e1s recomendaciones sobre como hacer las p\u00e1ginas accesibles visite "{0}". Tambien le puede interesar visitar "http://www.cast.org/bobby/", un servicio gratuito para comprobar la accesibilidad de sitios web.
+-badchars_summary=C\u00f3digos de caracteres para las fuentes de Microsoft Windows en el rango\u000a128 - 159 podr\u00edan no ser reconocidos en otras plataformas. Se recomienda\u000ausar entidades con nombre, por ejemplo &trade; mejor que el c\u00f3digo de\u000acaracter 153 (0x2122 en Unicode) de Windows.\u000a
+-badform_summary=Se deberia mover una o ambas de las etiquetas <form> y </form>.\u000aLos elementos HTML deberian estar adecuadamente anidados y los\u000aelementos 'form' no son excepci\u00f3n. Por ejemplo no se deberia colocar\u000aun <form> en una celda de tabla y el </form> en otra. Si <form> esta\u000aantes de una tabla, </form> deberia estar despues \u00a1Recuerde que los\u000aformularios no se pueden anidar!\u000a
+-badlayout_using_body=Se recomienda utilizar CSS para especificar colores de p\u00e1gina y enlaces
+-badlayout_using_font=Se recomienda utilizar CSS para especificar fuentes y propiedades\u000acomo tama\u00f1o y color. Esto reducira el tama\u00f1o de los archivos HTML\u000ay hara m\u00e1s facil el mantenimiento que con elementos FONT.\u000a
+-badlayout_using_layer=Se recomienda el mecanismo de posicionado con hojas de estilo (CSS) en preferencia al elemento propietario LAYER, debido a su limitado soporte por vendedores.
+-badlayout_using_nobr=Se recomienda utilizar CSS para controlar la division de lineas. Use "white-space: nowrap" para inhibir division en lugar de insertar <NOBR>...</NOBR> en el etiquetado.
+-badlayout_using_spacer=Se recomienda utilizar CSS para controlar espacios en blanco (por ejemplo para indentation, margenes y separacion de lineas ). El elemento propietario SPACER tiene limitado soporte.
+-cant_be_nested={0} no se puede anidar
+-coerce_to_endtag=<{0}> deberia ser probablemente </{0}>
+-content_after_body=contenido despues del final del 'body'
+-discarding_unexpected=descartando inesperado {0}
+-doctype_after_tags=<!DOCTYPE> no esta permitido despu\u00e9s de elementos
+-doctype_given={0}: Doctype dado es "{1}"
+-dtype_not_upper_case=SYSTEM, PUBLIC, W3C, DTD, EN deben ir en may\u00fasculas
+-duplicate_frameset=elemento FRAMESET repetido
+-element_not_empty=
+-emacs_format={0}:{1,number}:{2,number}:
+-encoding_mismatch=
+-entity_in_id=
+-error=Error:
+-escaped_illegal_uri=
+-expected_equalsign=
+-fixed_backslash=
+-forced_end_anchor=Aviso:  <a> deberia ser probablemente </a>
+-general_info=Para aprender m\u00e1s sobre JTidy visite http://jtidy.sourceforge.net\u000aPor favor, notifique errores en http://sourceforge.net/tracker/?group_id=13153&atid=113153\u000aEspecificaciones de HTML y CSS estan disponibles en http://www.w3.org/
+-hello_message=Tidy (versi\u00f3n {0}) Analizando "{1}"
+-help_text={0}: file1 file2 ...\u000aAplicaci\u00f3n para limpiar y formatear archivos html\u000aconsulte http://www.w3.org/People/Raggett/tidy/\u000aopciones para tidy disponibles en {1}\u000a\u000aDirectivas de procesado\u000a--------------------\u000a  -indent o -i    indentar contenido de elemento\u000a  -omit   o -o    omitir etiquetas finales opcionales\u000a  -wrap 72        dividir texto en la columna 72 (68 por defecto)\u000a  -upper  o -u    forzar etiquetas en may\u00fasculas (min\u00fasculas por defecto)\u000a  -clean  o -c    remplazar etiquetas FONT, NOBR y CENTER tags por CSS\u000a  -numeric o -n   generar entidades num\u00e9ricas m\u00e1s que nombradas\u000a  -errors o -e    s\u00f3lo mostrar errores\u000a  -quiet o -q     suprimir salida no esencial\u000a  -xml            usar cuando la entrada es xml bien formado\u000a  -asxml          para convertir html a xml bien formado\u000a  -slides         para generar presentaciones a partir de elementos H2\u000a\u000aC\u00f3digos de caracteresn------------------\u000a  -raw            dejar caracteres > 128 igual que a la entrada\u000a  -ascii          usar ASCII para salida, Latin-1 para entrada\u000a  -latin1         usar Latin-1 para entrada y salida\u000a  -iso2022        usar ISO2022 para entrada y salida\u000a  -utf8           usar UTF-8 para entrada y salida\u000a  -mac            usar el c\u00f3digo de caracteres MacRoman de Apple\u000a\u000aFile manipulation\u000a---------------\u000a  -config <file>  configurar opciones a partir del archivo <file>\u000a  -f <file>       escribir errores al archivo <file>\u000a  -modify o -m    para midificar archivos originales\u000a\u000aVarios\u000a------------\u000a  -version o -v  mostrar versi\u00f3n\u000a  -help   o -h   listar opciones de la l\u00ednea de comando\u000aTambi\u00e9n puede usar --blah para cualquier opci\u00f3n de configuraci\u00f3n blah\u000a\u000aInput/Output son stdin/stdout por defecto\u000aOpciones de una s\u00f3la letra, excepto -f, se pueden combinar\u000acomo en:  tidy -f errs.txt -imu foo.html\u000aPara m\u00e1s informaci\u00f3n sobre HTML consultar http://www.w3.org/MarkUp
+-id_name_mismatch={0} valor de atributos 'id' y 'name' no coinciden
+-illegal_char=Aviso: remplazar c\u00f3digo de caracter ilegal {0,number}
+-illegal_nesting={0} no deber\u00eda estar anidado
+-illegal_uri_reference=
+-inconsistent_namespace=espacio de nombres no corresponde al contenido
+-inconsistent_version=html doctype no corresponde al contenido
+-inserting_tag=insertando <{0}> implicito
+-invalid_char=
+-invalid_ncr=
+-invalid_sgml_chars_summary=
+-invalid_utf16=
+-invalid_utf16_summary=
+-invalid_utf8=
+-invalid_utf8_summary=
+-invaliduri_summary=
+-joining_attribute=
+-line_column=linea {0,number} columna {1,number} -
+-malformed_comment=guiones adjacentes dentro de comentario
+-malformed_doctype=se espera "html PUBLIC" o "html SYSTEM"
+-missing_attr_value={0} atributo "{1}" sin valor
+-missing_attribute={0} falta atributo "{1}"
+-missing_body=No se puede crear diapositivas, falta elemento BODY.
+-missing_doctype=falta <!DOCTYPE> declaraci\u00f3n
+-missing_endtag_before=falta </{0}> antes {1}
+-missing_endtag_for=falta </{0}>
+-missing_imagemap={0} debe usar mapa de imagen del lado del cliente
+-missing_quotemark=
+-missing_semicolon=Aviso: entidad "{0}" no termina en '';''
+-missing_semicolon_ncr=
+-missing_starttag=falta <{0}>
+-missing_title_element=insertado elemento 'title'
+-needs_author_intervention=Este documento tiene errores que se deben solucionar para que Tidy pueda generar una version corregida
+-nested_emphasis=enfasis anidado {0}
+-nested_quotation=
+-newline_in_uri=
+-no_warnings=no hay avisos ni errores
+-noframes_content={0} no dentro de elemento ''noframes''
+-non_matching_endtag=remplazar {0} inesperado por </{1}>
+-num_warnings=hallados {0,choice,0#no avisos|1#1 aviso|1<{0,number,integer} avisos}, {1,choice,0#no errors|1#1 error|2#{1,number,integer} errors}!
+-obsolete_element=elemento obsoleto {0} por {1}
+-proprietary_attr_value={0} valor de atributo "{1}" proprietario
+-proprietary_attribute={0} atributo "{1}" proprietario
+-proprietary_element={0} no aprobado por W3C
+-repeated_attribute=
+-replacing_element=remplazar elemento {0} por {1}
+-report_version={0}: Contenido de documento parece {1}
+-slides_found=Se han hallado {0,number} diapositivas
+-suspected_missing_quote=faltan comillas para valor de atributo
+-tag_not_allowed_in={0} no permitido en elementos <{1}>
+-too_many_elements=demasiados elementos {0}
+-too_many_elements_in=demasiados elementos {0} en <{1}>
+-trim_empty_element=elemento vacio eliminado {0}
+-unescaped_ampersand=Aviso: '&' no escapado que deber\u00eda ser escrito como &amp;
+-unescaped_element=
+-unexpected_end_of_file=final de archivo mientras se analizan atributos {0}
+-unexpected_endtag=</{0}> inesperado
+-unexpected_endtag_in=</{0}> inesperado en <{1}>
+-unexpected_gt={0} falta ''>'' al final de la etiqueta
+-unexpected_quotemark={0} comillas inesperadas o duplicadas
+-unknown_attribute=atributo "{0}" desconocido
+-unknown_element={0} no se reconoce!
+-unknown_entity=Aviso: '&' no escapado o entidad desconocida "{0}"
+-unknown_file={0}: no se puede abrir archivo "{1}"
+-unknown_option=Aviso: option desconocida: {0}
+-unrecognized_option=opcion -{0} desconocida. Use -help para listar opciones
+-using_br_inplace_of=usando <br> en lugar de {0}
+-vendor_specific_chars_summary=
+-warning=Aviso:
+-xml_attribute_value={0} tiene atributo XML "{1}"
+-xml_id_sintax=
+diff -rupN /tmp/orig/resources/org/w3c/tidy/TidyMessages.properties /tmp/ported/resources/org/w3c/tidy/TidyMessages.properties
+--- /tmp/orig/resources/org/w3c/tidy/TidyMessages.properties	2009-12-01 00:58:26.000000000 +0100
++++ /tmp/ported/resources/org/w3c/tidy/TidyMessages.properties	1970-01-01 01:00:00.000000000 +0100
+@@ -1,115 +0,0 @@
+-anchor_not_unique={0} Anchor "{1}" already defined
+-apos_undefined=Named Entity &apos; only defined in XML/XHTML
+-attr_value_not_lcase={0} attribute value "{1}" for "{2}" must be lower case for XHTML
+-# to be translated
+-backslash_in_uri={0} URI reference contains backslash. Typo?
+-bad_argument=Warning - missing or malformed argument "{1}" for option "{0}"
+-bad_attribute_value={0} attribute "{1}" has invalid value "{2}"
+-bad_cdata_content='<' + '/' + letter not allowed here
+-bad_comment_chars=expecting -- or >
+-bad_tree=Panic - tree has lost its integrity
+-bad_xml_comment=XML comments can't contain --
+-badaccess_frames=Pages designed using frames presents problems for\u000apeople who are either blind or using a browser that\u000adoesn't support frames. A frames-based page should always\u000ainclude an alternative layout inside a NOFRAMES element.
+-badaccess_missing_image_alt=The alt attribute should be used to give a short description\u000aof an image; longer descriptions should be given with the\u000alongdesc attribute which takes a URL linked to the description.\u000aThese measures are needed for people using non-graphical browsers.
+-badaccess_missing_image_map=Use client-side image maps in preference to server-side image\u000amaps as the latter are inaccessible to people using non-\u000agraphical browsers. In addition, client-side maps are easier\u000ato set up and provide immediate feedback to users.
+-badaccess_missing_link_alt=For hypertext links defined using a client-side image map, you\u000aneed to use the alt attribute to provide a textual description\u000aof the link for people using non-graphical browsers.
+-badaccess_missing_summary=The table summary attribute should be used to describe\u000athe table structure. It is very helpful for people using\u000anon-visual browsers. The scope and headers attributes for\u000atable cells are useful for specifying which headers apply\u000ato each table cell, enabling non-visual browsers to provide\u000aa meaningful context for each cell.
+-badaccess_summary=For further advice on how to make your pages accessible\u000asee "{0}". You may also want to try\u000a"http://www.cast.org/bobby/" which is a free Web-based\u000aservice for checking URLs for accessibility.
+-badchars_summary=Characters codes for the Microsoft Windows fonts in the range\u000a128 - 159 may not be recognized on other platforms. You are\u000ainstead recommended to use named entities, e.g. &trade; rather\u000athan Windows character code 153 (0x2122 in Unicode). Note that\u000aas of February 1998 few browsers support the new entities."
+-badform_summary=You may need to move one or both of the <form> and </form>\u000atags. HTML elements should be properly nested and form elements\u000aare no exception. For instance you should not place the <form>\u000ain one table cell and the </form> in another. If the <form> is\u000aplaced before a table, the </form> cannot be placed inside the\u000atable! Note that one form can't be nested inside another!
+-badlayout_using_body=You are recommended to use CSS to specify page and link colors
+-badlayout_using_font=You are recommended to use CSS to specify the font and\u000aproperties such as its size and color. This will reduce\u000athe size of HTML files and make them easier to maintain\u000acompared with using <FONT> elements.
+-badlayout_using_layer=The Cascading Style Sheets (CSS) Positioning mechanism\u000ais recommended in preference to the proprietary <LAYER>\u000aelement due to limited vendor support for LAYER.
+-badlayout_using_nobr=You are recommended to use CSS to control line wrapping.\u000aUse "white-space: nowrap" to inhibit wrapping in place\u000aof inserting <NOBR>...</NOBR> into the markup.
+-badlayout_using_spacer=You are recommended to use CSS for controlling white\u000aspace (e.g. for indentation, margins and line spacing).\u000aThe proprietary <SPACER> element has limited vendor support.
+-cant_be_nested={0} can''t be nested
+-coerce_to_endtag=<{0}> is probably intended as </{0}>
+-content_after_body=content occurs after end of body
+-discarding_unexpected=discarding unexpected {0}
+-doctype_after_tags=<!DOCTYPE> isn't allowed after elements
+-doctype_given={0}: Doctype given is "{1}"
+-dtype_not_upper_case=SYSTEM, PUBLIC, W3C, DTD, EN must be upper case
+-duplicate_frameset=repeated FRAMESET element
+-element_not_empty={0} element not empty or not closed
+-emacs_format={0}:{1,number}:{2,number}:
+-encoding_mismatch=specified input encoding ({0}) does not match actual input encoding ({1})
+-entity_in_id=no entities allowed in id attribute, discarding "&"
+-error=Error: 
+-escaped_illegal_uri={0} escaping malformed URI reference
+-expected_equalsign={0} unexpected '=', expected attribute name
+-fixed_backslash={0} converting backslash in URI to slash
+-forced_end_anchor=Warning: <a> is probably intended as </a>
+-general_info=To learn more about JTidy see http://jtidy.sourceforge.net\u000aPlease report bugs at http://sourceforge.net/tracker/?group_id=13153&atid=113153\u000aHTML & CSS specifications are available from http://www.w3.org/\u000aLobby your company to join W3C, see http://www.w3.org/Consortium
+-hello_message=Tidy (vers {0, date}) Parsing "{1}"
+-help_text={0} [option...] [file...]\u000aUtility to clean up and pretty print HTML/XHTML/XML\u000asee http://jtidy.sourceforge.net/\u000a\u000aOptions for JTidy released on {1}\u000aProcessing directives\u000a---------------------\u000a  -indent  or -i    to indent element content\u000a  -omit    or -o    to omit optional end tags\u000a  -wrap <column>    to wrap text at the specified <column> (default is 68)\u000a  -upper   or -u    to force tags to upper case (default is lower case)\u000a  -clean   or -c    to replace FONT, NOBR and CENTER tags by CSS\u000a  -bare    or -b    to strip out smart quotes and em dashes, etc.\u000a  -numeric or -n    to output numeric rather than named entities\u000a  -errors  or -e    to only show errors\u000a  -quiet   or -q    to suppress nonessential output\u000a  -xml              to specify the input is well formed XML\u000a  -asxml            to convert HTML to well formed XHTML\u000a  -asxhtml          to convert HTML to well formed XHTML\u000a  -ashtml           to force XHTML to well formed HTML\u000a  -slides           to burst into slides on H2 elements\u000a\u000aCharacter encodings\u000a-------------------\u000a  -raw              to output values above 127 without conversion to entities\u000a  -ascii            to use US-ASCII for output, ISO-8859-1 for input\u000a  -latin1           to use ISO-8859-1 for both input and output\u000a  -iso2022          to use ISO-2022 for both input and output\u000a  -utf8             to use UTF-8 for both input and output\u000a  -mac              to use MacRoman for input, US-ASCII for output\u000a  -utf16le          to use UTF-16LE for both input and output\u000a  -utf16be          to use UTF-16BE for both input and output\u000a  -utf16            to use UTF-16 for both input and output\u000a  -win1252          to use Windows-1252 for input, US-ASCII for output\u000a  -big5             to use Big5 for both input and output\u000a  -shiftjis         to use Shift_JIS for both input and output\u000a  -language <lang>  to set the two-letter language code <lang> (for future use)\u000a\u000aFile manipulation\u000a-----------------\u000a  -config <file>    to set configuration options from the specified <file>\u000a  -f      <file>    to write errors to the specified <file>\u000a  -modify or -m     to modify the original input files\u000a\u000aMiscellaneous\u000a-------------\u000a  -version  or -v   to show the version of Tidy\u000a  -help, -h or -?   to list the command line options\u000a  -help-config      to list all configuration options\u000a  -show-config      to list the current configuration settings\u000a\u000aYou can also use --blah for any configuration option blah\u000a\u000aInput/Output default to stdin/stdout respectively\u000aSingle letter options apart from -f may be combined\u000aas in:  tidy -f errs.txt -imu foo.html\u000aFor further info on HTML see http://www.w3.org/MarkUp
+-id_name_mismatch={0} id and name attribute value mismatch
+-illegal_char=Warning: replacing illegal character code {0,number}
+-illegal_nesting={0} shouldn''t be nested
+-illegal_uri_reference={0} improperly escaped URI reference
+-inconsistent_namespace=html namespace doesn't match content
+-inconsistent_version=html doctype doesn't match content
+-inserting_tag=inserting implicit <{0}>
+-invalid_char={0,choice,0#replacing|1#discarding} invalid character code {1}
+-invalid_ncr={0,choice,0#replacing|1#discarding} invalid numeric character reference {1}
+-invalid_sgml_chars_summary=Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\u000aeven if they were, they would likely be unprintable control characters.\u000aTidy assumed you wanted to refer to a character with the same byte value in the \u000a{0,choice,0#specified|1#Windows-1252|2#MacRoman} encoding and replaced that reference with the Unicode equivalent.
+-invalid_utf16={0,choice,0#replacing|1#discarding} invalid UTF-16 surrogate pair (char. code {1})
+-invalid_utf16_summary=Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\u000aThe definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\u000amapping of unpaired surrogates. For more information please refer to\u000ahttp://www.unicode.org/unicode and http://www.cl.cam.ac.uk/~mgk25/unicode.html
+-invalid_utf8={0,choice,0#replacing|1#discarding} invalid UTF-8 bytes (char. code {1})
+-invalid_utf8_summary=Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\u000aThe definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also\u000aallows for the use of five- and six-byte sequences to encode\u000acharacters that are outside the range of the Unicode character set;\u000athose five- and six-byte sequences are illegal for the use of\u000aUTF-8 as a transformation of Unicode characters. ISO/IEC 10646\u000adoes not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\u000a(but it does allow other noncharacters). For more information please refer to\u000ahttp://www.unicode.org/unicode and http://www.cl.cam.ac.uk/~mgk25/unicode.html
+-invaliduri_summary=URIs must be properly escaped, they must not contain unescaped\u000acharacters below U+0021 including the space character and not\u000aabove U+007E. Tidy escapes the URI for you as recommended by\u000aHTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents\u000ause another algorithm to escape such URIs and some server-sided\u000ascripts depend on that. If you want to depend on that, you must\u000aescape the URI by your own. For more information please refer to\u000ahttp://www.w3.org/International/O-URL-and-ident.html
+-joining_attribute={0} joining values of repeated attribute "{1}"
+-line_column=line {0,number} column {1,number} - 
+-malformed_comment=adjacent hyphens within comment
+-malformed_doctype=expected "html PUBLIC" or "html SYSTEM"
+-missing_attr_value={0} attribute "{1}" lacks value
+-missing_attribute={0} lacks "{1}" attribute
+-missing_body=Can't create slides - document is missing a body element.
+-missing_doctype=missing <!DOCTYPE> declaration
+-missing_endtag_before=missing </{0}> before {1}
+-missing_endtag_for=missing </{0}>
+-missing_imagemap={0} should use client-side image map
+-missing_quotemark={0} attribute with missing trailing quote mark
+-missing_semicolon=Warning: entity "{0}" doesn''t end in '';''
+-missing_semicolon_ncr=numeric character reference "{0}" doesn't end in ";"
+-missing_starttag=missing <{0}>
+-missing_title_element=inserting missing 'title' element
+-needs_author_intervention=This document has errors that must be fixed before\u000ausing HTML Tidy to generate a tidied up version.
+-nested_emphasis=nested emphasis {0}
+-nested_quotation=nested q elements, possible typo
+-newline_in_uri={0} discarding newline in URI reference
+-no_warnings=no warnings or errors were found
+-noframes_content={0} not inside ''noframes'' element
+-non_matching_endtag=replacing unexpected {0} by </{1}>
+-num_warnings={0,choice,0#no warnings|1#1 warning|1<{0,number,integer} warnings}, {1,choice,0#no errors|1#1 error|2#{1,number,integer} errors} were found!
+-obsolete_element=replacing obsolete element {0} by {1}
+-proprietary_attr_value={0} proprietary attribute value "{1}"
+-proprietary_attribute={0} proprietary attribute "{1}"
+-proprietary_element={0} is not approved by W3C
+-repeated_attribute={0} dropping value "{1}" for repeated attribute "{2}"
+-replacing_element=replacing element {0} by {1}
+-report_version={0}: Document content looks like {1}
+-slides_found={0,number} Slides found
+-suspected_missing_quote=missing quotemark for attribute value
+-tag_not_allowed_in={0} isn''t allowed in <{1}> elements
+-too_many_elements=too many {0} elements
+-too_many_elements_in=too many {0} elements in <{1}>
+-trim_empty_element=trimming empty {0}
+-unescaped_ampersand=Warning: unescaped & which should be written as &amp;
+-unescaped_element=unescaped {0} in pre content
+-unexpected_end_of_file=end of file while parsing attributes {0}
+-unexpected_endtag=unexpected </{0}>
+-unexpected_endtag_in=unexpected </{0}> in <{1}>
+-unexpected_gt={0} missing ''>'' for end of tag
+-unexpected_quotemark={0} unexpected or duplicate quote mark
+-unknown_attribute=unknown attribute "{0}"
+-unknown_element={0} is not recognized!
+-unknown_entity=Warning: unescaped & or unknown entity "{0}"
+-unknown_file={0}: can''t open file "{1}"
+-unknown_option=Warning - unknown option: {0}
+-unrecognized_option=unrecognized option -{0} use -help to list options
+-using_br_inplace_of=using <br> in place of {0}
+-vendor_specific_chars_summary=It is unlikely that vendor-specific, system-dependent encodings\u000awork widely enough on the World Wide Web; you should avoid using the \u000a{0,choice,0#specified|1#Windows-1252|2#MacRoman} character encoding, instead you are recommended to\u000ause named entities, e.g. &trade;.
+-version_summary=JTidy released on {0}
+-warning=Warning: 
+-xml_attribute_value={0} has XML attribute "{1}"
+-xml_id_sintax=ID "{0}" uses XML ID syntax
+Binary files /tmp/orig/resources/tidy.gif and /tmp/ported/resources/tidy.gif differ

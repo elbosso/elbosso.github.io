@@ -1,0 +1,614 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
+<head>
+  <title>Binärdaten in Postgres</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+			<meta name="Description" content="Ein potentieller Kunde hat neulich mit einer Frage dafür gesorgt, dass ich mich tiefgreifender mit der 
+Speicherung und dem Management von Binärdaten in Postgres beschäftigt habe." />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
+	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
+	<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body onload="toggle('show');">
+<div id="wrapper">
+	<div id="header">
+<div id="logo">
+  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
+      display="inline">
+    <mrow>
+      <mn>1</mn>
+      <mo>&isin;</mo>
+      <mi>&infin;</mi>
+    </mrow>
+</math>
+</h1-->
+  <p>
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+  </p>
+</div>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+	</div><!-- #header-->
+<div id="all">
+<div id="A">
+<div id="content">
+	<div class="date">31.05.2016 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+				<!--li--> <a href="modell_fuers_bewerbermanagement_relationalen_datenbanken.html#content">Datenbanken</a> <!--/li-->
+			<!--/ul-->
+</div>
+ 	<div class="heading">Binärdaten in Postgres</div>
+			<p>Ein potentieller Kunde hat neulich mit einer Frage dafür gesorgt, dass ich mich tiefgreifender mit der 
+Speicherung und dem Management von Binärdaten in Postgres beschäftigt habe.
+</p> <a name="content"> </a>
+ <p>Ich habe zunächst Tests mit BLOBs durchgeführt (oder auch bytea - im Gegensatz
+zu Large Objects).
+Mittels des 
+<a href="fuellen_datenmodellen_tests_mittels_generatoren.html">Generators für Testdaten</a>
+in der 
+<a href="sQLshell.html">sQLshell</a>
+generierte ich in einer bytea-Spalte Daten. Es entstanden 41 Datensätze, bei denen 
+die Größe der Bilder von 
+45301	
+bis
+818 Byte reichte - insgesamt kamen alle Bilder auf eine Gesamtgröße von
+573902 Byte. Zur Feststellung dieser Werte wurden folgende Statements in der
+<a href="sQLshell.html">sQLshell ausgeführt:</a>
+<pre>
+SELECT *,octet_length(___6284997236799771785___.data) from ___6284997236799771785___;
+SELECT sum(octet_length(___6284997236799771785___.data)) from ___6284997236799771785___;
+</pre>
+Die Größe der Relationen lässt sich mit folgendem Statement ermitteln:<pre>
+SELECT nspname || '.' || relname AS "relation",
+    pg_size_pretty(pg_relation_size(C.oid)) AS "size"
+  FROM pg_class C
+  LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace)
+  WHERE nspname NOT IN ('pg_catalog', 'information_schema')
+  ORDER BY pg_relation_size(C.oid) DESC
+  LIMIT 20;
+</pre>
+Für die Testtabelle kam ich dabei auf 32 KByte - offensichtlich sind darin die Binärdaten nicht enthalten - 
+die Größe inklusive der Binärdaten lässt sich mit folgendem Statement feststellen:
+<pre>
+SELECT
+    table_name,
+    pg_size_pretty(table_size) AS table_size,
+    pg_size_pretty(indexes_size) AS indexes_size,
+    pg_size_pretty(total_size) AS total_size
+FROM (
+    SELECT
+        table_name,
+        pg_table_size(table_name) AS table_size,
+        pg_indexes_size(table_name) AS indexes_size,
+        pg_total_relation_size(table_name) AS total_size
+    FROM (
+        SELECT ('"' || table_schema || '"."' || table_name || '"') AS table_name
+        FROM information_schema.tables
+    ) AS all_tables
+    ORDER BY total_size DESC
+) AS pretty_sizes
+</pre>
+Als Ergebnis ergab sich dabei eine Größe für die Experimentaltabelle von
+696 kB.
+</p><p>
+Anschließend wurde versucht, fast alle Einträge aus der Tabelle zu löschen, um die Auswirkungen 
+auf die Größe der Binärdaten und die Tabellengröße zu beobachten.
+Die octet_length schrumpft wie erwartet auf 42474 Bytes - die 	
+table_size ändert sich jedoch scheinbar nicht: 704 kB.	
+</p><p>
+Als Gegentest habe ich ein Bild mit einer Größe von
+3631620 bytes hinzugefügt - damit änderte sich die
+octet_length auf 3674094 Bytes und die	
+table_size auf 3888 kB. Anschließend wurde diese Zeile wieder gelöscht - dadurch änderten sich die Werte
+wie erwartet: die octet_length schrumpft auf 42474 und die
+table_size auf 768 kB.
+</p><p>
+Anschließend wurde dasselbe Bild wieder hinzugefügt, aber diesmal das Bild in der bestehenden Zeile gegen ein wesentlich kleineres 
+(66KByte) ersetzt. Danach schrumpfte die 
+octet_length wie erwartet auf 109234 - die	
+table_size dagegen erhöht sich sogar noch ein wenig - auf 3960 kB.
+Die database size verringert sich ebenfalls nicht - sie bleibt bei 12MB.
+<pre>
+SELECT pg_size_pretty(pg_database_size('jdbctest'))
+</pre>
+Dieser Wert wird mit dem oben stehenden Statement ermittelt - er sinkt erst nach Löschen der Zeile wieder auf
+8 MB.
+Es scheint also so zu sein, dass der einmal allozierte Speicher für eine Zeile alloziert bleibt,
+bis die Zeile tatsächlich gelöscht wird - interessant...
+</p><p>
+Nach Anregung durch einen Kollegen testete ich noch das Verhalten wenn das größere Bild durch NULL
+ersetzt, die Zeile aber nicht gelöscht wird. Nach NULL setzen wird dann das kleinere Bild in der Datenbank
+gespeichert. Mich hat das Ergebnis überrascht: Wenn man den BLOB erstmal auf NULL setzt
+und anschließend das kleinere Bild in die Zeile schreibt, verringert sich die Größe der Datenbank entsprechend!
+Beziehungsweise verringert sich die Größe bereits nach dem NULL setzen und erhöht sich anschließend wieder,
+wenn ein neues Bild in der betreffenden Zeile gespeichert wird.
+</p><p>
+Wie verhalten sich ähnliche Tests bei Large Objects?
+Eine Übersicht über alle LargeObjects in der Datenbank erhält man mittels
+<pre>
+select DISTINCT lo.loid from pg_largeobject lo;
+</pre>
+Im Test ergab das initial 4 oids (ich hatte bereits ein wenig experimentiert).
+Das folgende Statement zeigt nicht die Anzahl der Large Objects an:
+<pre>
+select count(lo.loid) from pg_largeobject lo;
+</pre>
+Das ergab allerdings eine Anzahl von 291. Wenn man allerdings das Resultat von 
+<pre>
+select lo.loid,length(lo.data) from pg_largeobject lo
+</pre>
+anschaut, sieht man viele Einträge - fast alle haben eine Länge von 2048 Bytes. Und
+das Ergebnis der Ausführung des Statements 
+<pre>
+select sum(length(lo.data)) from pg_largeobject lo; 
+</pre>
+stimmt aber mit dem Ergebnis von
+<pre>
+select count(lo.data) from pg_largeobject lo;
+</pre>
+multipliziert mit 2048 ungefähr überein. Daran sieht man, dass die LOs auf Chunks von 2K Größe aufgeteilt werden.
+Nunmehr wurde das bereits benutzte große Beispielbild als LO in die Datenbank eingefügt.
+</p><p>
+Vor dem Hinzufügen ergab sich als Größe der Datenbank:
+8784 KBytes
+Danach betrug dieser Wert:
+13MB (die neue OID für dieses LO war: 16527)
+Die Größe der Los betrug in Summe length(lo.data): 4223032.
+</p><p>
+Damit waren die Ergebnisse konsistent. (Achtung: diese Werte werden erst nach Commit der Transaktion 
+aktualisiert - LO-Operationen sind nur erlaubt, wenn Autocommit deaktiviert ist!)
+Auch bei LOs scheint zu gelten: Das überschreiben mit dem kleineren Bild verringert die Größen nicht.
+</p><p>
+<pre>
+select sum(length(lo.data)) from pg_largeobject lo; 
+</pre>
+</p> 		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+	  <a href="ende_heimatseite_hier_arcor.html#content">
+		<div class="date">11.11.2016</div>
+<h3>Ende der Heimatseite hier bei Arcor</h3>
+  <div class="abstract">
+				  <p>Diese meine Heimatseite im Zwischennetz wird ab dem 1.2.2017 definitiv in dieser Form 
+nicht weitergeführt. Ich danke allen Lesern und wünsche noch eine gute Zeit.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="arduino_spi_unvertraeglichkeiten.html#content">
+		<div class="date">21.01.2017</div>
+<h3>Arduino SPI Unverträglichkeiten</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Jetzt, wo die dunkle Jahreszeit wieder angebrochen ist (ich schreibe das einen Tag
+nach der Umstellung auf Winterzeit), habe ich meinen Arduino Bastelkasten wieder
+rausgeholt.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="roundinstrument_noch_mal_aufgewaermt.html#content">
+		<div class="date">21.01.2017</div>
+<h3>RoundInstrument noch mal aufgewärmt</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Immer häufiger finde ich etwas bei Gerrit, das mich inspiriert, eigene Versuche zu machen.
+Auch diesmal wurde ich von seiner Rubrik Friday Fun nicht enttäuscht.
+</p></div>   </a>
+</li>
+</ul>
+</div>
+<nav id="C"> 
+<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
+			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+</div>
+	</h2><form method="get" action="http://www.google.com/search">
+
+<div style="padding:4px;width:90%;">
+<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
+ maxlength="255" value="" />
+<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
+<input style="width:0%;" type="checkbox"  name="sitesearch"
+ value="home.arcor.de/jkey" checked hidden="true"/>
+</div>
+
+</form>
+<a href="tag_Android.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Android
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um Googles Betriebssystem</p>
+</div>
+</div>
+</a>
+<a href="tag_Assorted.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Assorted
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Passt in keine der anderen Kategorien...</p>
+</div>
+</div>
+</a>
+<a href="tag_Basteln.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Basteln
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Meistens Papier (Origami...)</p>
+</div>
+</div>
+</a>
+<a href="c_c__.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    C und C++
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Datenbanken.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Datenbanken
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>relationale und andere Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_dWb+.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    dWb+
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Geo.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Geo
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Karten und mehr run um Ortsinformationen</p>
+</div>
+</div>
+</a>
+<a href="tag_GUI.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    GUI
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um graphische Benutzerschnittstellen</p>
+</div>
+</div>
+</a>
+<a href="tag_Hardware.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Hardware
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Elektronik und so Zeuchs...</p>
+</div>
+</div>
+</a>
+<a href="it_security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    IT Security
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Java.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Java
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Hauptsächlich Desktop Themen und Java SE</p>
+</div>
+</div>
+</a>
+<a href="tag_Komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Komponenten
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Software-Komponenten</p>
+</div>
+</div>
+</a>
+<a href="tag_Links.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Links
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Linksammlungen zu verschiedenen Themen</p>
+</div>
+</div>
+</a>
+<a href="tag_Linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Linux
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles zum Thema Gnu Linux</p>
+</div>
+</div>
+</a>
+<a href="tag_Markup.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Markup
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
+</div>
+</div>
+</a>
+<a href="tag_Music.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Music
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Musik, die mir gefällt</p>
+</div>
+</div>
+</a>
+<a href="tag_Python.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Python
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Mein Weg vom blutigen Anfänger aufwärts</p>
+</div>
+</div>
+</a>
+<a href="tag_Rants.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Rants
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Luft ablassen</p>
+</div>
+</div>
+</a>
+<a href="tag_Security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Security
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>IT-Sicherheit</p>
+</div>
+</div>
+</a>
+<a href="tag_sQLshell.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    sQLshell
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="verschiedenes.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Verschiedenes
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Video.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Video
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Artikel mit bunten Filmchen</p>
+</div>
+</div>
+</a>
+<a href="videos.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Videos
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Virtualisierung.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Virtualisierung
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Technologien und Themen rund um virtuelle Rechner</p>
+</div>
+</div>
+</a>
+<a href="windows.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Windows
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Upcoming....html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Upcoming...
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Demnächst in diesem Theater...</p>
+</div>
+</div>
+</a>
+</nav>
+</div>
+	<div id="footer">
+		<span class="me">
+		<strong><a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+
+, Damaschke 11, Rudolstadt, 
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
+			</a></strong>
+	</span></div><!-- #footer -->
+</div>
+</body>
+</html>

@@ -1,0 +1,690 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
+<head>
+  <title>Epigrams on Programming</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+			<meta name="Description" content="Damit die Epigrams on Programming nicht verlorengehen, wenn das Original mal verschwindet." />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
+	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
+	<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body onload="toggle('show');">
+<div id="wrapper">
+	<div id="header">
+<div id="logo">
+  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
+      display="inline">
+    <mrow>
+      <mn>1</mn>
+      <mo>&isin;</mo>
+      <mi>&infin;</mi>
+    </mrow>
+</math>
+</h1-->
+  <p>
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+  </p>
+</div>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+	</div><!-- #header-->
+<div id="all">
+<div id="A">
+<div id="content">
+	<div class="date">27.11.2015 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+				<!--li--> <a href="the_tao_of_programming.html#content">Rants</a> <!--/li-->
+			<!--/ul-->
+</div>
+ 	<div class="heading">Epigrams on Programming</div>
+			<p>Damit die Epigrams on Programming nicht verlorengehen, wenn das Original mal verschwindet...
+</p> <a name="content"> </a>
+ <p>Gefunden habe ich sie
+<a href="http://pu.inf.uni-tuebingen.de/users/klaeren/epigrams.html">hier</a>.
+<H1>Epigrams on Programming</H1>
+<H2>Alan J. Perlis</H2>
+<H3>Yale University</H3>
+<I>This text has been published in SIGPLAN Notices Vol. 17, No. 9,
+September 1982, pages 7 - 13.  I'm offering it here online until ACM stops me.
+</I>
+<P>
+The phenomena surrounding computers are diverse and yield a
+surprisingly rich base for launching metaphors at individual and group
+activities. Conversely, classical human endeavors provide an
+inexhaustible source of metaphor for those of us who are in labor
+within computation.  Such relationships between society and device are
+not new, but the incredible growth of the computer's influence (both
+real and implied) lends this symbiotic dependency a vitality like a
+gangly youth growing out of his clothes within an endless puberty.
+</p><p>
+<p> The epigrams that follow attempt to capture some of the dimensions
+of this traffic in imagery that sharpens, focuses, clarifies, enlarges
+and beclouds our view of this most remarkable of all mans' artifacts,
+the computer.
+<OL>
+<LI> One man's constant is another man's variable.
+</LI><LI> Functions delay binding: data structures induce binding. Moral: Structure data late in the 
+programming process.
+</LI><LI> Syntactic sugar causes cancer of the semi-colons.
+</LI><LI> Every program is a part of some other program and rarely fits.
+</LI><LI> If a program manipulates a large amount of data, it does so in a small number of ways.
+</LI><LI> Symmetry is a complexity reducing concept (co-routines include sub-routines); seek it everywhere.
+</LI><LI> It is easier to write an incorrect program than understand a correct one.
+</LI><LI> A programming language is low level when its programs require attention to the irrelevant.
+</LI><LI> It is better to have 100 functions operate on one data structure than 10 functions on 10 data 
+structures.
+</LI><LI> Get into a rut early: Do the same processes the same way. Accumulate idioms. Standardize. The only difference (!) between Shakespeare and you was the size of his idiom list - not the size of his vocabulary.
+</LI><LI> If  you have a procedure with 10 parameters, you probably missed some. 
+</LI><LI> Recursion is the root of computation since it trades description for time.
+</LI><LI> If two people write exactly the same program, each should be put in micro-code and then they 
+certainly  won't be the same.
+</LI><LI> In the long run every program becomes rococo - then rubble.
+</LI><LI> Everything should be built top-down, except the first time.
+</LI><LI> Every program has (at least) two purposes: the one for which it was written and another for which it wasn't.
+</LI><LI> If a listener nods his head when you're explaining your program, wake him up.
+</LI><LI> A program without a loop and a structured variable isn't worth writing.
+</LI><LI> A language that doesn't affect the way you think about programming, is not worth knowing.
+</LI><LI> Wherever there is modularity there is the potential for misunderstanding: Hiding information 
+implies a need to check communication.
+</LI><LI> Optimization hinders evolution.
+</LI><LI> A good system can't have a weak command language.
+</LI><LI> To understand a program you must become both the machine and the program.
+</LI><LI> Perhaps if  we wrote programs from childhood on, as adults we'd be able to read them.
+</LI><LI> One can only display complex information in the mind. Like seeing, movement or flow 
+or alteration of view is more important than the static picture, no matter how lovely.
+</LI><LI> There will always be things we wish to say in our programs that in all known languages 
+can only be said poorly.
+</LI><LI> Once you understand how to write a program get someone else to write it.
+</LI><LI> Around computers it is difficult to find the correct unit of time to measure progress. Some 
+cathedrals took a century to complete. Can you imagine the grandeur and scope of a program that 
+would take as long?
+</LI><LI> For systems, the analogue of a face-lift is to add to the control graph an edge that creates a cycle, 
+not just an additional node.
+</LI><LI> In programming, everything we do is a special case of something more general - and often we know 
+it too quickly.
+</LI><LI> Simplicity does not precede complexity, but follows it.
+</LI><LI> Programmers are not to be measured by their ingenuity and their logic but by the completeness of 
+their case analysis. 
+</LI><LI> The 11th commandment was "Thou Shalt Compute" or "Thou Shalt Not Compute" - I forget which.
+</LI><LI> The string is a stark data structure and everywhere it is passed there is much duplication of process. 
+It is a perfect vehicle for hiding information.
+</LI><LI> Everyone can be taught to sculpt: Michelangelo would have had to be taught how not to. So it is 
+with the great programmers.
+</LI><LI> The use of a program to prove the 4-color theorem will not change mathematics - it merely 
+demonstrates that the theorem, a challenge for a century, is probably not important to mathematics.
+</LI><LI> The most important computer is the one that rages in our skulls and ever seeks that satisfactory 
+external emulator. The standardization of real computers would be a disaster - and so it probably won't happen. 
+</LI><LI> Structured Programming supports the law of the excluded muddle.
+</LI><LI> Re graphics: A picture is worth 10K words - but only those to describe the picture. Hardly any 
+sets of 10K words can be adequately described with pictures.
+</LI><LI> There are two ways to write error-free programs; only the third one works.
+</LI><LI> Some programming languages manage to absorb change, but withstand progress.
+</LI><LI> You can measure a programmer's perspective by noting his attitude on the continuing vitality of  FORTRAN.
+</LI><LI> In software systems it is often the early bird that makes the worm.
+</LI><LI> Sometimes I think the only universal in the computing field is the fetch-execute-cycle.
+</LI><LI> The goal of computation is the emulation of our synthetic abilities, not the understanding of our 
+analytic ones.
+</LI><LI> Like punning, programming is a play on words.
+</LI><LI> As Will Rogers would have said, "There is no such thing as a free variable."
+</LI><LI> The best book on programming for the layman is "Alice in Wonderland"; but that's because it's 
+the best book on anything for the layman.
+</LI><LI> Giving up on assembly language was the apple in our Garden of Eden: Languages whose use 
+squanders machine cycles are sinful. The LISP machine now permits LISP programmers to abandon 
+bra and fig-leaf.
+</LI><LI> When we understand knowledge-based systems, it will be as before - except our finger-tips will 
+have been singed.
+</LI><LI> Bringing computers into the home won't change either one, but may revitalize the corner saloon.
+</LI><LI> Systems have sub-systems and sub-systems have sub-systems and so on ad infinitum - which is 
+why we're always starting over.
+</LI><LI> So many good ideas are never heard from again once they embark in a voyage on the semantic gulf.
+</LI><LI> Beware of the Turing tar-pit in which everything is possible but nothing of interest is easy.
+</LI><LI> A LISP programmer knows the value of everything, but the cost of nothing.
+</LI><LI> Software is under a constant tension. Being symbolic it is arbitrarily perfectible; but also it is 
+arbitrarily changeable.
+</LI><LI> It is easier to change the specification to fit the program than vice versa.
+</LI><LI> Fools ignore complexity. Pragmatists suffer it. Some can avoid it. Geniuses remove it.
+</LI><LI> In English every word can be verbed. Would that it were so in our programming languages.
+</LI><LI> Dana Scott is the Church of the Lattice-Way Saints.
+</LI><LI> In programming, as in everything else, to be in error is to be reborn.
+</LI><LI> In computing, invariants are ephemeral.
+</LI><LI> When we write programs that "learn", it turns out we do and they don't.
+</LI><LI> Often it is means that justify ends: Goals advance technique and technique survives even when 
+goal structures crumble.
+</LI><LI> Make no mistake about it: Computers process numbers - not symbols. We measure our 
+understanding (and control) by the extent to which we can arithmetize an activity.
+</LI><LI> Making something variable is easy. Controlling duration of constancy is the trick.
+</LI><LI> Think of all the psychic energy expended in seeking a fundamental distinction between "algorithm" 
+and "program".
+</LI><LI> If we believe in data structures, we must believe in independent (hence simultaneous) processing. 
+For why else would we collect items within a structure? Why do we tolerate languages that give us the 
+one without the other?
+</LI><LI> In a 5 year period we get one superb programming language. Only we can't control when the 
+5 year period will begin.
+</LI><LI> Over the centuries the Indians developed sign language for communicating phenomena of interest. Programmers from different tribes (FORTRAN, LISP, ALGOL, SNOBOL, etc.) could use one that 
+doesn't require them to carry a blackboard on their ponies.
+</LI><LI> Documentation is like term insurance: It satisfies because almost no one who subscribes to it 
+depends on its benefits.
+</LI><LI> An adequate bootstrap is a contradiction in terms.
+</LI><LI> It is not a language's weaknesses but its strengths that control the gradient of its change:
+Alas, a language never escapes its embryonic sac.
+</LI><LI> It is possible that software is not like anything else, that it is meant to be discarded: that the whole 
+point is to always see it as soap bubble?
+</LI><LI> Because of its vitality, the computing field is always in desperate need of new cliches: Banality 
+soothes our nerves.
+</LI><LI> It is the user who should parameterize procedures, not their creators.
+</LI><LI> The cybernetic exchange between man, computer and algorithm is like a game of musical chairs: 
+The frantic search for balance always leaves one of the three standing ill at ease.
+</LI><LI> If  your computer speaks English it was probably made in Japan.
+</LI><LI> A year spent in artificial intelligence is enough to make one believe in God.
+</LI><LI> Prolonged contact with the computer turns mathematicians into clerks and vice versa.
+</LI><LI> In computing, turning the obvious into the useful is a living definition of the word "frustration".
+</LI><LI> We are on the verge: Today our program proved Fermat's next-to-last theorem!
+</LI><LI> What is the difference between a Turing machine and the modern computer? It's the same as that
+ between Hillary's ascent of Everest and the establishment of a Hilton hotel on its peak.
+</LI><LI> Motto for a research laboratory: What we work on today, others will first think of tomorrow.
+</LI><LI> Though the Chinese should adore APL, it's FORTRAN they put their money on.
+</LI><LI> We kid ourselves if we think that the ratio of procedure to data in an active data-base system can 
+be made arbitrarily small or even kept small.
+</LI><LI> We have the mini and the micro computer. In what semantic niche would the pico computer fall?
+</LI><LI> It is not the computer's fault that Maxwell's equations are not adequate to design the electric motor.
+</LI><LI> One does not learn computing by using a hand calculator, but one can forget arithmetic.
+</LI><LI> Computation has made the tree flower.
+</LI><LI> The computer reminds one of Lon Chaney - it is the machine of a thousand faces.
+</LI><LI> The computer is the ultimate polluter.  Its feces are indistinguishable from the food it produces.
+</LI><LI> When someone says "I want a programming language in which I need only say what I wish done," 
+give him a lollipop.
+</LI><LI> Interfaces keep things tidy, but don't accelerate growth: Functions do.
+</LI><LI> Don't have good ideas if you aren't willing to be responsible for them.
+</LI><LI> Computers don't introduce order anywhere as much as they expose opportunities.
+</LI><LI> When a professor insists computer science is X but not Y, have compassion for his graduate students.
+</LI><LI> In computing, the mean time to failure keeps getting shorter.
+</LI><LI> In man-machine symbiosis, it is man who must adjust: The machines can't.
+</LI><LI> We will never run out of things to program as long as there is a single program around.
+</LI><LI> Dealing with failure is easy: Work hard to improve. Success is also easy to handle: You've solved 
+the wrong problem. Work hard to improve.
+</LI><LI> One can't proceed from the informal to the formal by formal means.
+</LI><LI> Purely applicative languages are poorly applicable.
+</LI><LI> The proof of a system's value is its existence.
+</LI><LI> You can't communicate complexity, only an awareness of it.
+</LI><LI> It's difficult to extract sense from strings, but they're the only communication coin we can count on.
+</LI><LI> The debate rages on: Is PL/I Bactrian or Dromedary?
+</LI><LI> Whenever two programmers meet to criticize their programs, both are silent.
+</LI><LI> Think of it! With VLSI we can pack 100 ENIACs in 1 sq.cm.
+</LI><LI> Editing is a rewording activity.
+</LI><LI> Why did the Roman Empire collapse? What is the Latin for office automation?
+</LI><LI> Computer Science is embarrassed by the computer.
+</LI><LI> The only constructive theory connecting neuroscience and psychology will arise from the study of software.
+</LI><LI> Within a computer natural language is unnatural.
+</LI><LI> Most people find the concept of programming obvious, but the doing impossible.
+</LI><LI> You think you know  when you learn, are more sure when you can write, even more when you can teach, but certain when you can program.
+</LI><LI> It goes against the grain of modern education to teach children to program. What fun is there in 
+making plans, acquiring discipline in organizing thoughts, devoting attention to detail and learning to
+be self-critical?
+</LI><LI> If you can imagine a society in which the computer-robot is the only menial, you can imagine 
+anything.
+</LI><LI> Programming is an unnatural act. 
+</LI><LI> Adapting old programs to fit new machines usually means adapting new machines to behave like 
+old ones.
+</LI><LI> In seeking the unattainable, simplicity only gets in the way.
+<h2>  If there are epigrams, there must be meta-epigrams.</h2>
+</LI><LI> Epigrams are interfaces across which appreciation and insight flow.
+</LI><LI> Epigrams parameterize auras.
+</LI><LI> Epigrams are macros, since they are executed at read time.
+</LI><LI> Epigrams crystallize incongruities.
+</LI><LI> Epigrams retrieve deep semantics from a data base that is all procedure.
+</LI><LI> Epigrams scorn detail and make a point: They are a superb high-level documentation.
+</LI><LI> Epigrams are more like vitamins than protein.
+</LI><LI> Epigrams have extremely low entropy.
+</LI><LI> The last epigram? Neither eat nor drink them, snuff epigrams.
+</LI>
+</OL>
+</p> 		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+	  <a href="ende_heimatseite_hier_arcor.html#content">
+		<div class="date">11.11.2016</div>
+<h3>Ende der Heimatseite hier bei Arcor</h3>
+  <div class="abstract">
+				  <p>Diese meine Heimatseite im Zwischennetz wird ab dem 1.2.2017 definitiv in dieser Form 
+nicht weitergeführt. Ich danke allen Lesern und wünsche noch eine gute Zeit.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="arduino_spi_unvertraeglichkeiten.html#content">
+		<div class="date">21.01.2017</div>
+<h3>Arduino SPI Unverträglichkeiten</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Jetzt, wo die dunkle Jahreszeit wieder angebrochen ist (ich schreibe das einen Tag
+nach der Umstellung auf Winterzeit), habe ich meinen Arduino Bastelkasten wieder
+rausgeholt.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="roundinstrument_noch_mal_aufgewaermt.html#content">
+		<div class="date">21.01.2017</div>
+<h3>RoundInstrument noch mal aufgewärmt</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Immer häufiger finde ich etwas bei Gerrit, das mich inspiriert, eigene Versuche zu machen.
+Auch diesmal wurde ich von seiner Rubrik Friday Fun nicht enttäuscht.
+</p></div>   </a>
+</li>
+</ul>
+</div>
+<nav id="C"> 
+<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
+			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+</div>
+	</h2><form method="get" action="http://www.google.com/search">
+
+<div style="padding:4px;width:90%;">
+<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
+ maxlength="255" value="" />
+<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
+<input style="width:0%;" type="checkbox"  name="sitesearch"
+ value="home.arcor.de/jkey" checked hidden="true"/>
+</div>
+
+</form>
+<a href="tag_Android.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Android
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um Googles Betriebssystem</p>
+</div>
+</div>
+</a>
+<a href="tag_Assorted.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Assorted
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Passt in keine der anderen Kategorien...</p>
+</div>
+</div>
+</a>
+<a href="tag_Basteln.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Basteln
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Meistens Papier (Origami...)</p>
+</div>
+</div>
+</a>
+<a href="c_c__.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    C und C++
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Datenbanken.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Datenbanken
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>relationale und andere Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_dWb+.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    dWb+
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Geo.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Geo
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Karten und mehr run um Ortsinformationen</p>
+</div>
+</div>
+</a>
+<a href="tag_GUI.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    GUI
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um graphische Benutzerschnittstellen</p>
+</div>
+</div>
+</a>
+<a href="tag_Hardware.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Hardware
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Elektronik und so Zeuchs...</p>
+</div>
+</div>
+</a>
+<a href="it_security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    IT Security
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Java.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Java
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Hauptsächlich Desktop Themen und Java SE</p>
+</div>
+</div>
+</a>
+<a href="tag_Komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Komponenten
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Software-Komponenten</p>
+</div>
+</div>
+</a>
+<a href="tag_Links.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Links
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Linksammlungen zu verschiedenen Themen</p>
+</div>
+</div>
+</a>
+<a href="tag_Linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Linux
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles zum Thema Gnu Linux</p>
+</div>
+</div>
+</a>
+<a href="tag_Markup.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Markup
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
+</div>
+</div>
+</a>
+<a href="tag_Music.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Music
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Musik, die mir gefällt</p>
+</div>
+</div>
+</a>
+<a href="tag_Python.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Python
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Mein Weg vom blutigen Anfänger aufwärts</p>
+</div>
+</div>
+</a>
+<a href="tag_Rants.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Rants
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Luft ablassen</p>
+</div>
+</div>
+</a>
+<a href="tag_Security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Security
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>IT-Sicherheit</p>
+</div>
+</div>
+</a>
+<a href="tag_sQLshell.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    sQLshell
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="verschiedenes.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Verschiedenes
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Video.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Video
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Artikel mit bunten Filmchen</p>
+</div>
+</div>
+</a>
+<a href="videos.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Videos
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Virtualisierung.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Virtualisierung
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Technologien und Themen rund um virtuelle Rechner</p>
+</div>
+</div>
+</a>
+<a href="windows.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Windows
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Upcoming....html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Upcoming...
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Demnächst in diesem Theater...</p>
+</div>
+</div>
+</a>
+</nav>
+</div>
+	<div id="footer">
+		<span class="me">
+		<strong><a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+
+, Damaschke 11, Rudolstadt, 
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
+			</a></strong>
+	</span></div><!-- #footer -->
+</div>
+</body>
+</html>

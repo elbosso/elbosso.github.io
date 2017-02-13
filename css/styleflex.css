@@ -1,0 +1,168 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 31, 2015, 4:55:37 PM
+    Author     : elbosso
+*/
+#wrapper {
+	background:#F6E4CC;
+}
+
+#all {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;  
+  
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+	background:#F6E4CC;
+  
+}
+
+#all > * {
+  flex: 1 100%;
+}
+
+#header {
+ }
+
+#footer {
+}
+
+#A {
+		padding: 5px;
+  text-align: left;
+/*  min-width:480px;
+*/}
+	#A.reader
+	{
+		padding-top: 5px;
+        }
+#B {
+    width:250px;
+    flex:auto ;
+}
+	#B.reader
+	{
+		display:none
+	}
+
+#C {
+    width:250px;
+    flex:auto ;
+}
+	#C.reader
+	{
+		display:none;
+	}
+
+@media all and (min-width: 630px) {
+  #B{ flex: 1 auto; }
+  #C{ flex: 1 auto; }
+}
+
+@media all and (min-width: 1000px) {
+  #A    { flex: 6 0px; }
+  #B { order: 1;     min-width:250px;
+    max-width:250px;
+} 
+  #A    { order: 2;}
+  #C { order: 3;     min-width:250px;
+    max-width:250px;
+}
+/*  #footer  { order: 4; }
+*/}
+
+body {
+	background:#527AB4;
+	font-size:12pt;
+}
+
+
+@media print {
+
+	#B
+
+	{
+
+		display:none;
+	}
+
+	#C
+
+	{
+
+		display:none;
+
+	}
+
+	#A
+
+	{
+
+		width:100%;
+
+	}
+
+	#all {
+
+		border-left: 0px ;
+
+		border-right: 0px ;
+
+		height: 1%;
+
+		position: relative;
+
+	}
+
+	#wrapper {
+
+		width: 100%;
+
+		min-width: 1000px;
+
+	}
+
+	#header {
+
+		display:none;
+
+	}
+
+
+
+}
+.nav-item {
+    border: 1px solid silver;
+    border-radius: 2px;
+    margin-bottom: 1em;
+    padding: 0 0.5em;
+}
+  .nav-item::last-of-type {
+    margin-bottom: 0;
+  }
+
+.nav-item-header > h3 {
+  font-size: 1em;
+  color:#555;
+}
+
+.nav-item > .nav-item-body {
+  overflow-y: hidden;
+  max-height: 0;
+
+  transition-property: all;
+  transition-duration: 320ms;
+  transition-timing-function: cubic-bezier(0.33, 1, 0.5, 1);
+}
+
+  a:hover > .nav-item > .nav-item-body,
+  a:focus > .nav-item > .nav-item-body {
+    max-height: 250px;
+  }

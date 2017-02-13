@@ -1,0 +1,566 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2012-2017.
+
+Juergen Key. Alle Rechte vorbehalten.
+
+Weiterverbreitung und Verwendung in nichtkompilierter oder kompilierter Form, 
+mit oder ohne Veraenderung, sind unter den folgenden Bedingungen zulaessig:
+
+   1. Weiterverbreitete nichtkompilierte Exemplare muessen das obige Copyright, 
+die Liste der Bedingungen und den folgenden Haftungsausschluss im Quelltext 
+enthalten.
+   2. Weiterverbreitete kompilierte Exemplare muessen das obige Copyright, 
+die Liste der Bedingungen und den folgenden Haftungsausschluss in der 
+Dokumentation und/oder anderen Materialien, die mit dem Exemplar verbreitet 
+werden, enthalten.
+   3. Weder der Name des Autors noch die Namen der Beitragsleistenden 
+duerfen zum Kennzeichnen oder Bewerben von Produkten, die von dieser Software 
+abgeleitet wurden, ohne spezielle vorherige schriftliche Genehmigung verwendet 
+werden.
+
+DIESE SOFTWARE WIRD VOM AUTOR UND DEN BEITRAGSLEISTENDEN OHNE 
+JEGLICHE SPEZIELLE ODER IMPLIZIERTE GARANTIEN ZUR VERFUEGUNG GESTELLT, DIE 
+UNTER ANDEREM EINSCHLIESSEN: DIE IMPLIZIERTE GARANTIE DER VERWENDBARKEIT DER 
+SOFTWARE FUER EINEN BESTIMMTEN ZWECK. AUF KEINEN FALL IST DER AUTOR 
+ODER DIE BEITRAGSLEISTENDEN FUER IRGENDWELCHE DIREKTEN, INDIREKTEN, 
+ZUFAELLIGEN, SPEZIELLEN, BEISPIELHAFTEN ODER FOLGENDEN SCHAEDEN (UNTER ANDEREM 
+VERSCHAFFEN VON ERSATZGUETERN ODER -DIENSTLEISTUNGEN; EINSCHRAENKUNG DER 
+NUTZUNGSFAEHIGKEIT; VERLUST VON NUTZUNGSFAEHIGKEIT; DATEN; PROFIT ODER 
+GESCHAEFTSUNTERBRECHUNG), WIE AUCH IMMER VERURSACHT UND UNTER WELCHER 
+VERPFLICHTUNG AUCH IMMER, OB IN VERTRAG, STRIKTER VERPFLICHTUNG ODER 
+UNERLAUBTE HANDLUNG (INKLUSIVE FAHRLAESSIGKEIT) VERANTWORTLICH, AUF WELCHEM 
+WEG SIE AUCH IMMER DURCH DIE BENUTZUNG DIESER SOFTWARE ENTSTANDEN SIND, SOGAR, 
+WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
+-->
+
+<xs:schema version="1.0"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   elementFormDefault="qualified"
+		   xmlns:opendata="urn:XMLExport:OpenData"
+			targetNamespace="urn:XMLExport:OpenData">
+	
+	<xs:complexType name="emptyelement">
+		<xs:complexContent>
+		<xs:restriction base="xs:anyType">
+		</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:simpleType name="nonemptystring">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="stringatt">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+
+	<xs:complexType name="stringitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:stringatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="stringatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:stringitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.lang.String"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="intatt">
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+
+	<xs:complexType name="intitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:intatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="intatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:intitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.lang.Integer"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="decimalatt">
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	
+	<xs:complexType name="decimalitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:decimalatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="decimalatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:decimalitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.math.BigDecimal"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="objectnameatt">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+	<xs:complexType name="objectnameitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:objectnameatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="objectnameatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:objectnameitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="javax.management.ObjectName"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="attributeatt">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+	<xs:complexType name="attributeitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:attributeatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="attributeatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:attributeitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="booleanatt">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+	<xs:complexType name="booleanitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:booleanatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="booleanatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:booleanitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.lang.Boolean"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="characteratt">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="characteritemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:characteratt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="characteratttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:characteritemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.lang.Character"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="byteatt">
+		<xs:restriction base="xs:byte"/>
+	</xs:simpleType>
+	
+	<xs:complexType name="byteitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:byteatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="byteatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:byteitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.lang.Byte"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="shortatt">
+		<xs:restriction base="xs:short"/>
+	</xs:simpleType>
+	
+	<xs:complexType name="shortitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:shortatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="shortatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:shortitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.lang.Short"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="longatt">
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	
+	<xs:complexType name="longitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:longatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="longatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:longitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.lang.Long"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="floatatt">
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	
+	<xs:complexType name="floatitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:floatatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="floatatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:floatitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.lang.Float"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="doubleatt">
+		<xs:restriction base="xs:double"/>
+	</xs:simpleType>
+	
+	<xs:complexType name="doubleitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:doubleatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="doubleatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:doubleitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.lang.Double"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="bigintegeratt">
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value='0'/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="bigintegeritemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:bigintegeratt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="bigintegeratttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:bigintegeritemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.math.BigInteger"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="dateatt">
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+	<xs:complexType name="dateitemtype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:dateatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="dateatttype">
+		<xs:simpleContent>
+			<xs:extension base="opendata:dateitemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.util.Date"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="voidatt">
+		<xs:complexContent>
+			<xs:restriction base="xs:anyType">
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="voiditemtype">
+		<xs:complexContent>
+			<xs:extension base="opendata:voidatt">
+				<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+				<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="voidatttype">
+		<xs:complexContent>
+			<xs:extension base="opendata:voiditemtype">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="java.lang.Void"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="keytype">
+		<xs:complexContent>
+			<xs:extension base="opendata:emptyelement">
+				<xs:attribute name="value" type="opendata:nonemptystring"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="keystype">
+		<xs:sequence>
+			<xs:element name="key" type="opendata:keytype" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="compositetype">
+		<xs:sequence>
+			<xs:element name="keys" type="opendata:keystype" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+		<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="compositeitem">
+		<xs:complexContent>
+			<xs:extension base="opendata:compositetype">
+		<xs:sequence>
+			<xs:element name="Items" type="opendata:ItemsType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="compositeatt">
+		<xs:complexContent>
+			<xs:extension base="opendata:compositeitem">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="javax.management.openmbean.CompositeData"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="tabularitem">
+		<xs:sequence>
+			<xs:element name="CompositeType" type="opendata:compositetype" minOccurs="1" maxOccurs="1">
+					<xs:unique name="tabularcompositetypekeyu">
+						<xs:selector xpath="./keys/key"/>
+						<xs:field xpath="@value"/>
+					</xs:unique>
+			</xs:element>
+			<xs:element name="CompositeData" type="opendata:compositeitem" minOccurs="0" maxOccurs="unbounded">
+					<xs:unique name="tabularcompositeitemkeyu">
+						<xs:selector xpath="./keys/key"/>
+						<xs:field xpath="@value"/>
+					</xs:unique>
+					<xs:keyref name="tabularcompositeitemkeyref" refer="opendata:tabularcompositeitemkey">
+						<xs:selector xpath="./keys/key"/>
+						<xs:field xpath="@value"/>
+					</xs:keyref>
+					<xs:key name="tabularcompositeitemkey">
+						<xs:selector xpath="./Items/Item/key"/>
+						<xs:field xpath="@value"/>
+					</xs:key>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="typename" type="opendata:nonemptystring" use="required"/>
+		<xs:attribute name="description" type="opendata:nonemptystring" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="tabularatt">
+		<xs:complexContent>
+			<xs:extension base="opendata:tabularitem">
+				<xs:attribute name="classname" type="opendata:nonemptystring" fixed="javax.management.openmbean.TabularData"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="AttributeType">
+		<xs:choice minOccurs="1" maxOccurs="1">
+			<xs:element name="Void" type="opendata:voidatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="String" type="opendata:stringatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Int" type="opendata:intatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="BigDecimal" type="opendata:decimalatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="ObjectName" type="opendata:objectnameatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="GenericAttribute" type="opendata:attributeatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Boolean" type="opendata:booleanatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Character" type="opendata:characteratttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Byte" type="opendata:byteatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Short" type="opendata:shortatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Long" type="opendata:longatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Float" type="opendata:floatatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Double" type="opendata:doubleatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="BigInteger" type="opendata:bigintegeratttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Date" type="opendata:dateatttype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="CompositeData" type="opendata:compositeatt" nillable="true" minOccurs="1" maxOccurs="unbounded">
+				<xs:unique name="compositeattkeyu">
+					<xs:selector xpath="./keys/key"/>
+					<xs:field xpath="@value"/>
+				</xs:unique>
+				<xs:keyref name="compositeattkeyref" refer="opendata:compositeattkey">
+					<xs:selector xpath="./keys/key"/>
+					<xs:field xpath="@value"/>
+				</xs:keyref>
+				<xs:key name="compositeattkey">
+					<xs:selector xpath="./Items/Item/key"/>
+					<xs:field xpath="@value"/>
+				</xs:key>
+			</xs:element>
+			<xs:element name="TabularData" type="opendata:tabularatt" nillable="true" minOccurs="1" maxOccurs="unbounded">
+				<xs:keyref name="tabularattkeyref" refer="opendata:tabularattkey">
+					<xs:selector xpath="./CompositeType/keys/key"/>
+					<xs:field xpath="@value"/>
+				</xs:keyref>
+				<xs:key name="tabularattkey">
+					<xs:selector xpath="./CompositeData/Items/Item/key"/>
+					<xs:field xpath="@value"/>
+				</xs:key>
+			</xs:element>
+			<!--xs:element name="" type=""/>
+			<xs:element name="" type=""/-->
+		</xs:choice>
+	</xs:complexType>	
+
+	<xs:complexType name="AttributesType">
+		<xs:sequence>
+			<xs:element name="Attribute" type="opendata:AttributeType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ItemType">
+		<xs:sequence>
+			<xs:element name="key" type="opendata:keytype" minOccurs="1" maxOccurs="1"/>
+			<xs:choice minOccurs="1" maxOccurs="1">
+				<xs:element name="Void" type="opendata:voiditemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="String" type="opendata:stringitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="Int" type="opendata:intitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="BigDecimal" type="opendata:decimalitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="ObjectName" type="opendata:objectnameitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="GenericAttribute" type="opendata:attributeitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="Boolean" type="opendata:booleanitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="Character" type="opendata:characteritemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="Byte" type="opendata:byteitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="Short" type="opendata:shortitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="Long" type="opendata:longitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="Float" type="opendata:floatitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="Double" type="opendata:doubleitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="BigInteger" type="opendata:bigintegeritemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="Date" type="opendata:dateitemtype" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="CompositeData" type="opendata:compositeitem" nillable="true" minOccurs="1" maxOccurs="unbounded">
+					<xs:unique name="compositeitemkeyu">
+						<xs:selector xpath="./keys/key"/>
+						<xs:field xpath="@value"/>
+					</xs:unique>
+					<xs:keyref name="compositeitemkeyref" refer="opendata:compositeitemkey">
+						<xs:selector xpath="./keys/key"/>
+						<xs:field xpath="@value"/>
+					</xs:keyref>
+					<xs:key name="compositeitemkey">
+						<xs:selector xpath="./Items/Item/key"/>
+						<xs:field xpath="@value"/>
+					</xs:key>
+				</xs:element>
+				<xs:element name="TabularData" type="opendata:tabularitem" nillable="true" minOccurs="1" maxOccurs="unbounded">
+					<xs:keyref name="tabularitemkeyref" refer="opendata:tabularitemkey">
+						<xs:selector xpath="./CompositeType/keys/key"/>
+						<xs:field xpath="@value"/>
+					</xs:keyref>
+					<xs:key name="tabularitemkey">
+						<xs:selector xpath="./CompositeData/Items/Item/key"/>
+						<xs:field xpath="@value"/>
+					</xs:key>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>	
+
+	<xs:complexType name="ItemsType">
+		<xs:sequence>
+			<xs:element name="Item" type="opendata:ItemType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="MbeanType">
+		<xs:sequence>
+			<xs:element name="Attributes" type="opendata:AttributesType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="MBean" type="opendata:MbeanType"/>
+
+</xs:schema>

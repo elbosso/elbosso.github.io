@@ -1,0 +1,565 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
+<head>
+  <title>Aspekt-orientierte Programmierung zum Umgehen von Fehlern</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+			<meta name="Description" content="Aspect-orientierte Programmierung oder kurz AOP klingt interessant für jemanden,
+der sich mit dem Programmieren nicht nur praktisch beschäftigt, sondern bei neuen
+Konzepten auch hinter die Theorie schauen möchte." />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
+	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
+	<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body onload="toggle('show');">
+<div id="wrapper">
+	<div id="header">
+<div id="logo">
+  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
+      display="inline">
+    <mrow>
+      <mn>1</mn>
+      <mo>&isin;</mo>
+      <mi>&infin;</mi>
+    </mrow>
+</math>
+</h1-->
+  <p>
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+  </p>
+</div>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+	</div><!-- #header-->
+<div id="all">
+<div id="A">
+<div id="content">
+	<div class="date">07.09.2014 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+				<!--li--> <a href="neue_datengeneratoren.html#content">Java</a> <!--/li-->
+			<!--/ul-->
+</div>
+ 	<div class="heading">Aspekt-orientierte Programmierung zum Umgehen von Fehlern</div>
+			<p>Aspect-orientierte Programmierung oder kurz AOP klingt interessant für jemanden,
+der sich mit dem Programmieren nicht nur praktisch beschäftigt, sondern bei neuen
+Konzepten auch hinter die Theorie schauen möchte.
+</p> <a name="content"> </a>
+ <p><h1>Neue Features und Konzepte in Programmiersprachen</h1>
+Generell bin ich eher skeptisch, wenn wieder mal eine neue Sau mit Buzzword-verdächtigem
+Namen durchs Dorf getrieben wird, ohne zu erklären, warum ihr Schinken
+so viel besser schmecken soll als der der anderen Schweine.
+</p><p>
+Besonders skeptisch bin ich immer dann, wenn Programmiersprachen ein neues
+Feature übergeholfen bekommen. Viele der neuen Features von Java, die in den letzten Jahren
+hinzukamen, betrachte ich als syntactic sugar. Konstrukte, die eine Aufgabe
+übernehmen sollen für die es bereits eine gültige Syntax gibt, haben meiner Ansicht
+nach keine Daseinsberechtigung. Ich sehe das aus der Warte desjenigen, der Code warten soll.
+</p><p>
+Das Verstehen von Code wird schwieriger, wenn es viele verschiedene Möglichkeiten gibt,
+ein und denselben Sachverhalt auszudrücken. Ein Paradebeispiel dafür ist die Iteration über
+Collections oder Arrays - das kann man auch hervorragend mit den bereits vorhandenen
+Schleifenkonstrukten erledigen - wozu noch ein weiteres einführen?
+<h1>AOP</h1>
+Aber kommen wir zu AOP. Die Beispiele, die man immer wieder sieht sind Instrumentierungen 
+um entweder die Ausführung einer Methode zu detektieren, die Ausfüghrungszeit zu messen 
+oder beides zusammen. Das wirkt bei mir nicht so, daß ich mir sagen würde: "Nachdenkenswert -
+das könnte Probleme lösen, die auch ich habe."
+</p><p>
+Neulich hatte ich aber ein Problem, das zugegebenermaßen überaus akademisch ist und
+so auch nur mir passieren kann, das ich aber trotzdem durch AOP lösen konnte. 
+Ich arbeitete bei einem Kunden mit einem von mir selbst entwickelten Werkzeug. 
+Beim Arbeiten trat eine Exception auf, deren Ursache im Stacktrace klar zu erkennen war.
+Es war ein Methodenaufruf, dessen Ergebnis ich bei der zu lösenden Aufgabe nicht benötigte.
+Leider hatte ich den Quelltext nicht dabei und konnte den Fehler daher nicht sofort fixen.
+</p><p>
+Ich überlegte mir daraufhin folgendes: Wenn es möglich wäre, die nicht unbedingt benötigte Methode 
+zu kapseln, einfach einen Default-Rückgabewert zu erzeugen und die Exception zu verschlucken,
+könnte die Anwendung weiterarbeiten. Man würde dazu eine Möglichkeit brauchen,
+den Aspect und die Intrumentierung zur Laufzeit des Programmes ohne Quelltextänderung und 
+Neuübersetzung durchzuführen.
+</p><p>
+Ich habe zwei Alternativen untersucht: Bei 
+<a href="https://eclipse.org/aspectj/">AspectJ</a> 
+habe ich keine Möglichkeit gefunden, 
+die Pointcuts ohne Kompilierer zu definieren. 
+<a href="http://aspectwerkz.codehaus.org/">AspectWerkz</a> bietet diese Möglichkeit.
+Ich setzte ein kleines Testprojekt auf und definierte einen Pointcut um eine der
+Methoden herum. Damit funktionierte das ganze hervorragend. Beim abschließenden Test
+ging jedoch etwas schief: Ich änderte die Methode derart, daß sie unter gewissen
+Umständen eine Exception werfen sollte. Danach konnte ich die Anwendung nur
+noch ohne AOP-Instrumentierung starten: sobald die Instrumentierung wieder aktiviert wurde,
+bewarf mich Java mit einer VerifyError-Exception:
+<pre>
+Exception in thread "main" java.lang.VerifyError: Expecting a stackmap frame at branch target 27 in method de.elbosso.scratch.aop.HelloWorld.aw$original$_AW_$greet$_AW_$de_elbosso_scratch_aop_HelloWorld()Ljava/lang/String; at offset 14
+	at java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.lang.Class.privateGetDeclaredMethods(Class.java:2521)
+	at java.lang.Class.getMethod0(Class.java:2764)
+	at java.lang.Class.getMethod(Class.java:1653)
+	at sun.launcher.LauncherHelper.getMainMethod(LauncherHelper.java:494)
+	at sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:486)
+</pre>
+Die Suche nach der Ursache und einer
+Lösung gestaltete sich nicht trivial. Letztlich stellte sich heraus, daß die Ursache darin begründet
+lag, daß AspectWerkz noch nicht mit dem ByteCode-Format von Java7 zurechtkommt, sobald 
+eine throws-Anweisung in einer der Methoden auftaucht. Die Lösung des Problems war, die
+Klassen für das ByteCode-Format von Java6 zu übersetzen.
+<h1>Beispiel</h1>
+Als Beispiel dafür habe ich hier ein kleines Projekt beigefügt, in dem die Datei
+build_aop.properties entsprechend des Installationsortes von AspectWerkz anzupassen ist.
+<dl>
+<a href="resources/license.txt">
+<dt><img src="images/mime/Oxygen480-mimetypes-signature_48.png"></dt><dd>Lizenz</dd>
+</a>
+<a href="resources/aoparound.zip">
+<dt><img src="images/mime/Oxygen480-mimetypes-application-x-compressed-zip_48.png"></dt><dd>AOP-Projekt</dd>
+</a>
+</dl>
+</p> 		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+	  <a href="ende_heimatseite_hier_arcor.html#content">
+		<div class="date">11.11.2016</div>
+<h3>Ende der Heimatseite hier bei Arcor</h3>
+  <div class="abstract">
+				  <p>Diese meine Heimatseite im Zwischennetz wird ab dem 1.2.2017 definitiv in dieser Form 
+nicht weitergeführt. Ich danke allen Lesern und wünsche noch eine gute Zeit.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="arduino_spi_unvertraeglichkeiten.html#content">
+		<div class="date">21.01.2017</div>
+<h3>Arduino SPI Unverträglichkeiten</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Jetzt, wo die dunkle Jahreszeit wieder angebrochen ist (ich schreibe das einen Tag
+nach der Umstellung auf Winterzeit), habe ich meinen Arduino Bastelkasten wieder
+rausgeholt.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="roundinstrument_noch_mal_aufgewaermt.html#content">
+		<div class="date">21.01.2017</div>
+<h3>RoundInstrument noch mal aufgewärmt</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Immer häufiger finde ich etwas bei Gerrit, das mich inspiriert, eigene Versuche zu machen.
+Auch diesmal wurde ich von seiner Rubrik Friday Fun nicht enttäuscht.
+</p></div>   </a>
+</li>
+</ul>
+</div>
+<nav id="C"> 
+<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
+			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+</div>
+	</h2><form method="get" action="http://www.google.com/search">
+
+<div style="padding:4px;width:90%;">
+<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
+ maxlength="255" value="" />
+<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
+<input style="width:0%;" type="checkbox"  name="sitesearch"
+ value="home.arcor.de/jkey" checked hidden="true"/>
+</div>
+
+</form>
+<a href="tag_Android.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Android
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um Googles Betriebssystem</p>
+</div>
+</div>
+</a>
+<a href="tag_Assorted.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Assorted
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Passt in keine der anderen Kategorien...</p>
+</div>
+</div>
+</a>
+<a href="tag_Basteln.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Basteln
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Meistens Papier (Origami...)</p>
+</div>
+</div>
+</a>
+<a href="c_c__.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    C und C++
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Datenbanken.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Datenbanken
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>relationale und andere Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_dWb+.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    dWb+
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Geo.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Geo
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Karten und mehr run um Ortsinformationen</p>
+</div>
+</div>
+</a>
+<a href="tag_GUI.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    GUI
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um graphische Benutzerschnittstellen</p>
+</div>
+</div>
+</a>
+<a href="tag_Hardware.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Hardware
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Elektronik und so Zeuchs...</p>
+</div>
+</div>
+</a>
+<a href="it_security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    IT Security
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Java.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Java
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Hauptsächlich Desktop Themen und Java SE</p>
+</div>
+</div>
+</a>
+<a href="tag_Komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Komponenten
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Software-Komponenten</p>
+</div>
+</div>
+</a>
+<a href="tag_Links.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Links
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Linksammlungen zu verschiedenen Themen</p>
+</div>
+</div>
+</a>
+<a href="tag_Linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Linux
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles zum Thema Gnu Linux</p>
+</div>
+</div>
+</a>
+<a href="tag_Markup.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Markup
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
+</div>
+</div>
+</a>
+<a href="tag_Music.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Music
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Musik, die mir gefällt</p>
+</div>
+</div>
+</a>
+<a href="tag_Python.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Python
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Mein Weg vom blutigen Anfänger aufwärts</p>
+</div>
+</div>
+</a>
+<a href="tag_Rants.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Rants
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Luft ablassen</p>
+</div>
+</div>
+</a>
+<a href="tag_Security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Security
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>IT-Sicherheit</p>
+</div>
+</div>
+</a>
+<a href="tag_sQLshell.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    sQLshell
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="verschiedenes.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Verschiedenes
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Video.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Video
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Artikel mit bunten Filmchen</p>
+</div>
+</div>
+</a>
+<a href="videos.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Videos
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Virtualisierung.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Virtualisierung
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Technologien und Themen rund um virtuelle Rechner</p>
+</div>
+</div>
+</a>
+<a href="windows.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Windows
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Upcoming....html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Upcoming...
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Demnächst in diesem Theater...</p>
+</div>
+</div>
+</a>
+</nav>
+</div>
+	<div id="footer">
+		<span class="me">
+		<strong><a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+
+, Damaschke 11, Rudolstadt, 
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
+			</a></strong>
+	</span></div><!-- #footer -->
+</div>
+</body>
+</html>

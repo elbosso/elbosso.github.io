@@ -1,0 +1,854 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
+<head>
+  <title>Dokumentation per Knopfdruck</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+			<meta name="Description" content="" />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
+	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
+	<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body onload="toggle('show');">
+<div id="wrapper">
+	<div id="header">
+<div id="logo">
+  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
+      display="inline">
+    <mrow>
+      <mn>1</mn>
+      <mo>&isin;</mo>
+      <mi>&infin;</mi>
+    </mrow>
+</math>
+</h1-->
+  <p>
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+  </p>
+</div>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+	</div><!-- #header-->
+<div id="all">
+<div id="A">
+<div id="content">
+	<div class="date">14.10.2013 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+				<!--li--> <a href="xuggler__ffmpeg_java.html#content">Java</a> <!--/li-->
+					<!--li--> ,<a href="markup___historisch_cool_.html#content">Markup</a> <!--/li-->
+			<!--/ul-->
+</div>
+ 	<div class="heading">Dokumentation per Knopfdruck</div>
+			<p>Wie kann man aus Anwendungen heraus das Erstellen von Anwenderdokumentationen 
+beschleunigen? Menüs und Werkzeugleisten existieren bereits - da wäre es doch schön,
+wenn man in der Anwenderdokumentation nicht dasselbe nochmals mühsam einzeln aufschreiben müsste,
+sondern durch Knopfdruck generieren könnte?
+</p> <a name="content"> </a>
+ <p><h1>Szenario</h1>
+Das Verfassen von Anwenderdokumentationen geschieht oft erst nach Ende der Entwicklung.
+Optimal wäre es, wenn es einen sauberen Satz von Dokumenten gäbe, der die 
+Anforderungen klar spezifiziert und aus dem sich die Anwenderdokumentation
+ohne viel Arbeit ableiten ließe. Manchmal ist das aber nicht der Fall.
+</p><p>
+Dann müsste man sich hinsetzen und jedes Menü und jede Werkzeugleiste langwierig
+dokumentieren. Das macht Arbeit und ist unbeliebt - man schiebt unbeliebte Arbeiten 
+oft und so kommt es, daß die dringend benötigte Anwenderdokumentation sich mehr und mehr verspätet,
+bis sie dann innerhalb von zwei Tagen lieblos und hektisch zusammengedengelt wird, was
+man auch an der dann sicher niedrigeren Qualität bemerkt.
+<h1>Vorschlag zur Lösung</h1>
+Die hier vorgeschlagene Lösung geht davon aus, daß es sich bei der Anwendung um eine Java-Anwendung
+handelt und als Laufzeitumgebung mindestens Version  1.6 eingesetzt wird. 
+</p><p>
+Man ist dann in der Lage, einen Agent zu schreiben, dessen premain-Methode
+vor dem eigentlichen Programmstart ausgeführt wird. Diese Methode verankert einen
+AWT-Listener, der auf jegliche Signale aus der GUI reagiert. In diesem Listener
+wird eine Eventsignatur festgelegt (zum Beispiel: mittlere Maustaste drücken bei
+gleichzeitigem Festhalten von Shift und Ctrl), auf die hin für die Komponente,
+die das Ziel des Events war, spezieller Code ausgeführt wird.
+</p><p>
+Dieser Code könnte beliebigen Inhalt haben. Für den hier beschriebenen Anwendungszweck
+wird die Komponente analysiert: ist es eine Werkzeugleiste oder ein Menü, werden die
+enthaltenen Elemente untersucht und die gewonnenen Daten (Titel, Icons, URLs, Tooltips,...)
+benutzt um Fragmente einer Dokumentation zu erstellen.
+</p><p>
+So ergibt beispielsweise dieses Menü
+  <img src="images/premaindoc/screenshot_002.png" 
+alt="Menü als Grundlage der Erzeugung von Docbook-Fragmenten" 
+class="center">
+dieses Docbook-Fragment:
+<pre>
+	&lt;table colsep="0" frame="none" rowsep="0" rules="none"&gt;
+		&lt;tgroup cols="2"&gt;
+			&lt;colspec colnum="1" colwidth="1*" /&gt;
+			&lt;colspec colnum="2" colwidth="8*" /&gt;
+			&lt;tbody&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/neues%20Dokument_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Erzeugt ein neues Testprotokoll&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/%c3%b6ffnen_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Lädt ein Testprotokoll aus einer XML-Datei&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/text%20in%20datei%20speichern_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Speichert das Testprotokoll unter neuem Namen in eine XML-Datei&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/save_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Speichert das Testprotokoll als XML-Datei&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/import_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Importiert eine Menge vorher exportierter Testfälle und Kategorien&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/export_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Exportiert die ausgewählten Testfälle und Kategorien&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/reporting_vorschau_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Präsentiert eine Vorschau der aktuell bearbeiteten Test-Prozedur&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="images/docgenerator5259967760808336401_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Erzeugt ein PDF-Dokument aus dem Testprotokoll&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+			&lt;/tbody&gt;
+		&lt;/tgroup&gt;
+	&lt;/table&gt;
+</pre>
+Diese Werkzeugleiste 
+  <img src="images/premaindoc/screenshot_003.png" 
+alt="Werkzeugleiste als Grundlage der Erzeugung von Docbook-Fragmenten" 
+class="center">
+dient als Ausgangspunkt für die Erzeugung dieses Docbook-Fragments:
+</p><p>
+<pre>
+	&lt;table colsep="0" frame="none" rowsep="0" rules="none"&gt;
+		&lt;tgroup cols="2"&gt;
+			&lt;colspec colnum="1" colwidth="1*" /&gt;
+			&lt;colspec colnum="2" colwidth="8*" /&gt;
+			&lt;tbody&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/neues%20Dokument_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Creates a new resource bundle&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/%c3%b6ffnen_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Open a resource bundle&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/save_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Saves the resource bundle into a file&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/import_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Analyzes the code in the selected Java source file and identifies possible keys &lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/export_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Moves a selected node in a different resource&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/tabelle_spalte%20einf%c3%bcgen_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Adds a new language to the resource bundle&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/tabelle_zeile%20einf%c3%bcgen_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Adds a new key to the resource bundle&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/icon%20l%c3%b6schen_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Removes an enry from the resource bundle&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="images/docgenerator2220628434219725414_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Looks upwards to the next key that is missing at least one translation &lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="images/docgenerator2446537516857473496_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Searches downwards for the next key that is missing at least one translation &lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/alle%20knoten%20anzeigen_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Expands all nodes and their children&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/alle%20knoten%20ausblenden_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Collapses all Nodes&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/ausgew%c3%a4lte%20knoten%20anzeigen_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Expands all selected nodes and their children&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/ausgew%c3%a4lte%20knoten%20ausblenden_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Collapses all selected Nodes&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+				&lt;row&gt;
+					&lt;entry align="right"&gt;
+						&lt;mediaobject&gt;
+							&lt;imageobject&gt;
+								&lt;imagedata fileref="de/netsysit/ressources/gfx/ca/konfiguration%20speichern_48.png"/&gt;
+							&lt;/imageobject&gt;
+						&lt;/mediaobject&gt;
+					&lt;/entry&gt;
+					&lt;entry valign="middle"&gt;
+						&lt;para&gt;
+							Opens a dialog for changing the configuration settings&lt;/para&gt;
+					&lt;/entry&gt;
+				&lt;/row&gt;
+			&lt;/tbody&gt;
+		&lt;/tgroup&gt;
+	&lt;/table&gt;
+</pre>
+</p> 		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+	  <a href="ende_heimatseite_hier_arcor.html#content">
+		<div class="date">11.11.2016</div>
+<h3>Ende der Heimatseite hier bei Arcor</h3>
+  <div class="abstract">
+				  <p>Diese meine Heimatseite im Zwischennetz wird ab dem 1.2.2017 definitiv in dieser Form 
+nicht weitergeführt. Ich danke allen Lesern und wünsche noch eine gute Zeit.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="arduino_spi_unvertraeglichkeiten.html#content">
+		<div class="date">21.01.2017</div>
+<h3>Arduino SPI Unverträglichkeiten</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Jetzt, wo die dunkle Jahreszeit wieder angebrochen ist (ich schreibe das einen Tag
+nach der Umstellung auf Winterzeit), habe ich meinen Arduino Bastelkasten wieder
+rausgeholt.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="roundinstrument_noch_mal_aufgewaermt.html#content">
+		<div class="date">21.01.2017</div>
+<h3>RoundInstrument noch mal aufgewärmt</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Immer häufiger finde ich etwas bei Gerrit, das mich inspiriert, eigene Versuche zu machen.
+Auch diesmal wurde ich von seiner Rubrik Friday Fun nicht enttäuscht.
+</p></div>   </a>
+</li>
+</ul>
+</div>
+<nav id="C"> 
+<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
+			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+</div>
+	</h2><form method="get" action="http://www.google.com/search">
+
+<div style="padding:4px;width:90%;">
+<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
+ maxlength="255" value="" />
+<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
+<input style="width:0%;" type="checkbox"  name="sitesearch"
+ value="home.arcor.de/jkey" checked hidden="true"/>
+</div>
+
+</form>
+<a href="tag_Android.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Android
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um Googles Betriebssystem</p>
+</div>
+</div>
+</a>
+<a href="tag_Assorted.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Assorted
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Passt in keine der anderen Kategorien...</p>
+</div>
+</div>
+</a>
+<a href="tag_Basteln.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Basteln
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Meistens Papier (Origami...)</p>
+</div>
+</div>
+</a>
+<a href="c_c__.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    C und C++
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Datenbanken.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Datenbanken
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>relationale und andere Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_dWb+.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    dWb+
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Geo.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Geo
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Karten und mehr run um Ortsinformationen</p>
+</div>
+</div>
+</a>
+<a href="tag_GUI.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    GUI
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um graphische Benutzerschnittstellen</p>
+</div>
+</div>
+</a>
+<a href="tag_Hardware.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Hardware
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Elektronik und so Zeuchs...</p>
+</div>
+</div>
+</a>
+<a href="it_security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    IT Security
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Java.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Java
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Hauptsächlich Desktop Themen und Java SE</p>
+</div>
+</div>
+</a>
+<a href="tag_Komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Komponenten
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Software-Komponenten</p>
+</div>
+</div>
+</a>
+<a href="tag_Links.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Links
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Linksammlungen zu verschiedenen Themen</p>
+</div>
+</div>
+</a>
+<a href="tag_Linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Linux
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles zum Thema Gnu Linux</p>
+</div>
+</div>
+</a>
+<a href="tag_Markup.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Markup
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
+</div>
+</div>
+</a>
+<a href="tag_Music.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Music
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Musik, die mir gefällt</p>
+</div>
+</div>
+</a>
+<a href="tag_Python.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Python
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Mein Weg vom blutigen Anfänger aufwärts</p>
+</div>
+</div>
+</a>
+<a href="tag_Rants.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Rants
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Luft ablassen</p>
+</div>
+</div>
+</a>
+<a href="tag_Security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Security
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>IT-Sicherheit</p>
+</div>
+</div>
+</a>
+<a href="tag_sQLshell.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    sQLshell
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="verschiedenes.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Verschiedenes
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Video.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Video
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Artikel mit bunten Filmchen</p>
+</div>
+</div>
+</a>
+<a href="videos.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Videos
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Virtualisierung.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Virtualisierung
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Technologien und Themen rund um virtuelle Rechner</p>
+</div>
+</div>
+</a>
+<a href="windows.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Windows
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Upcoming....html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Upcoming...
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Demnächst in diesem Theater...</p>
+</div>
+</div>
+</a>
+</nav>
+</div>
+	<div id="footer">
+		<span class="me">
+		<strong><a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+
+, Damaschke 11, Rudolstadt, 
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
+			</a></strong>
+	</span></div><!-- #footer -->
+</div>
+</body>
+</html>

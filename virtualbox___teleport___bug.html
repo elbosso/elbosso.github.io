@@ -1,0 +1,569 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
+<head>
+  <title>VirtualBox + Teleport = Bug</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+			<meta name="Description" content="Ich stelle hier die ernüchternden Ergebnisse meiner Tests mit dem 
+Teleport-Feature der Virtualisierungslösung
+VirtualBox von Oracle vor." />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
+	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
+	<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body onload="toggle('show');">
+<div id="wrapper">
+	<div id="header">
+<div id="logo">
+  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
+      display="inline">
+    <mrow>
+      <mn>1</mn>
+      <mo>&isin;</mo>
+      <mi>&infin;</mi>
+    </mrow>
+</math>
+</h1-->
+  <p>
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+  </p>
+</div>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+	</div><!-- #header-->
+<div id="all">
+<div id="A">
+<div id="content">
+	<div class="date">26.04.2013 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+			<!--/ul-->
+</div>
+ 	<div class="heading">VirtualBox + Teleport = Bug</div>
+			<p>Ich stelle hier die ernüchternden Ergebnisse meiner Tests mit dem 
+Teleport-Feature der Virtualisierungslösung
+VirtualBox von Oracle vor. Diese Tests hinterließen einen zwiespältigen Eindruck, da
+das Feature einen seit langem ausstehenden Bug hat, der scheinbar nie gefixt werden wird.
+</p> <a name="content"> </a>
+ <p>Ich benutze seit langem die Virtualisierungslösung 
+<a href="https://www.virtualbox.org/">VirtualBox</a> von Oracle - sowohl
+für die Arbeit als auch privat. Während der Einsätze schöpfe ich aber nicht alle Features
+der Software aus: Die Features, die ich benötige, funktionieren hervorragend.
+Manchmal jedoch packt es mich - dann will ich Neues ausprobieren; Features nur
+um sagen zu können: "Ja, das habe ich auch schon getan!" Einer dieser Anfälle hat dafür
+gesorgt, sich mit dem Feature Teleport zu beschäftigen.
+<h1>Teleport</h1>
+Teleport heißt bei VirtualBox das Feature, das ich unter der Bezeichnung "Live-Migration"
+kennengelernt habe: Dabei geht es darum, einen virtuellen Rechner auf dem physischen Rechner 
+<strong>A</strong> auf den physischen Rechner  <strong>B</strong> zu verschieben.
+"Live" bedeutet dabei, daß Anwender, die Dienste der virtuellen Maschine in Anspruch
+nehmen, von dieser Migration nichts bemerken: die virtuelle Maschine arbeitet einfach weiter.
+  <img src="images/vm_live_migration.png" 
+	   alt="Prozeß der Live-Migration" 
+	class="center">
+Oft wird dieses Feature, das nicht nur VirtualBox bietet, mittels des Szenarios erklärt, ohne
+Unterbrechung wichtiger Dienste Wartungen an der physischen Hardware vornehmen zu können.
+Im oben beschriebenen Beispiel wäre es also möglich, nach erfolgreicher Migration Rechner 
+<strong>A</strong> herunterzufahren, um verschlissene Komponenten zu ersetzen.
+<h1>Setup</h1>
+Als Vorbereitung dieses Tests muß man dafür sorgen, daß der Massenspeicher, der an die zu
+migrierende virtuelle Maschine angebunden ist, nicht an die beiden physischen Rechner
+<strong>A</strong> und <strong>B</strong> gebunden ist. Das habe ich über die Einrichtung
+eines iSCSI-Servers auf einer Ubuntu 12.04 Installation gelöst. Dabei ist zu beachten,
+daß die Benutzung mit VirtualBox sofort schief geht. Das ist allerdings noch relativ einfach 
+zu lösen: Dazu mussten die Werte <strong>MaxRecvDataSegmentLength</strong> 
+und <strong>MaxXmitDataSegmentLength</strong> in der Datei /etc/iet/ietd.conf angepasst werden:
+<pre>
+	MaxRecvDataSegmentLength 65536		# Max data per PDU to receive
+	MaxXmitDataSegmentLength 65536		# Max data per PDU to transmit
+</pre>
+</p><p>
+Die virtuelle Maschine, die ich zum Testen benutzte, war ein Ubuntu 12.04 Server.
+Die physischen Rechner <strong>A</strong> und <strong>B</strong> wurden von
+zwei Desktop-Rechnern mit Intel-Prozessoren und Windows7 und Ubuntu 12.04 als Betriebssystemen
+übernommen.
+<h1>Testergebnisse</h1>
+Das Ergebnis des ersten Tests war ernüchternd: bereits kurz nach Initiierung der Migration
+brach der Prozeß mit einer kryptischen Fehlermeldung ab. Nach Sicherstellen, daß auf den Rechnern
+<strong>A</strong> und <strong>B</strong> exakt die gleiche Version  von VirtualBox
+installiert war, war der erste Gedanke: "Ich wollte zu viel:
+gleich von Windows-Host auf Linux-Host migrieren..." Also versuchte ich mein Glück 
+mit der in der VirtualBox-Dokumentation angeregten Variante der Migration "auf sich selbst":
+Ich verschob die virtuelle Maschine von Rechner <strong>A</strong> auf Rechner <strong>A</strong>.
+Das Ergebnis war ernüchternd: Die Fehlermeldung blieb exakt identisch.
+</p><p>
+Zeit, Tante Google zu fragen. 
+<a href="https://forums.virtualbox.org/viewtopic.php?f=7&t=50467">Einige Suchergebnisse</a>
+schilderten exakt dasselbe
+Verhalten, das auch ich gesehen hatte. Allerdings konnte und wollte ich den 
+<a href="https://www.virtualbox.org/ticket/9455">vorgeschlagenen Lösungen</a>
+nicht glauben: "Installiere eine veraltete Version!" Nach einigen frustrierenden Versuchen,
+diesem Problem anders auf die Spur zu kommen war ich kaputtgespielt: ich ging stufenweise
+in den Versionen zurück und installierte Schritt für Schritt ältere Versionen  von VirtualBox.
+</p><p>
+Siehe da: Wer beschreibt meine Überraschung, als sich herausstellt, daß das Internet Recht hatte:
+Die letzte Version, mit der Teleport funktioniert, ist <strong>4.0</strong> - zum Vergleich:
+aktuell ist Version <strong>4.2</strong> 
+<h1>Fazit</h1>
+Die Ergebnisse der Tests waren zwiespältig: Wenn das Feature funktioniert, funktioniert es wie beworben:
+die Zeitspanne zur Migration ist subjektiv nicht meßbar, die virtuelle Maschine läuft
+ohne Unterbrechung weiter.
+</p><p>
+Allerdings wirft es - nach meiner Meinung - ein mehr als schlechtes Licht auf die 
+Praktiken von Oracle, ein so lange bestehendes Problem nicht anzupacken: Es existiert nicht
+einmal eine Information, wann das Problem angegangen werden soll.
+</p><p>
+Wer also das Feature Teleport in VirtualBox nur mal ausprobieren möchte, sollte 
+sich das gut überlegen: Er muß dazu unter Umständen die funktionierende Version 
+der Anwendung gegen eine veraltete (die letzte VirtualBox-Version 4.0 war die
+4.0.18 - veröffentlicht am 18.12.2012) austauschen. Für den Produktiveinsatz muß man überlegen, ob man 
+auf eine veraltete Software setzt, oder lieber die Mitbewerber (VMWare, Xen oder 
+ähnliche) in die Entscheidung einbezieht.
+</p> 		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+	  <a href="ende_heimatseite_hier_arcor.html#content">
+		<div class="date">11.11.2016</div>
+<h3>Ende der Heimatseite hier bei Arcor</h3>
+  <div class="abstract">
+				  <p>Diese meine Heimatseite im Zwischennetz wird ab dem 1.2.2017 definitiv in dieser Form 
+nicht weitergeführt. Ich danke allen Lesern und wünsche noch eine gute Zeit.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="arduino_spi_unvertraeglichkeiten.html#content">
+		<div class="date">21.01.2017</div>
+<h3>Arduino SPI Unverträglichkeiten</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Jetzt, wo die dunkle Jahreszeit wieder angebrochen ist (ich schreibe das einen Tag
+nach der Umstellung auf Winterzeit), habe ich meinen Arduino Bastelkasten wieder
+rausgeholt.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="roundinstrument_noch_mal_aufgewaermt.html#content">
+		<div class="date">21.01.2017</div>
+<h3>RoundInstrument noch mal aufgewärmt</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Immer häufiger finde ich etwas bei Gerrit, das mich inspiriert, eigene Versuche zu machen.
+Auch diesmal wurde ich von seiner Rubrik Friday Fun nicht enttäuscht.
+</p></div>   </a>
+</li>
+</ul>
+</div>
+<nav id="C"> 
+<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
+			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+</div>
+	</h2><form method="get" action="http://www.google.com/search">
+
+<div style="padding:4px;width:90%;">
+<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
+ maxlength="255" value="" />
+<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
+<input style="width:0%;" type="checkbox"  name="sitesearch"
+ value="home.arcor.de/jkey" checked hidden="true"/>
+</div>
+
+</form>
+<a href="tag_Android.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Android
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um Googles Betriebssystem</p>
+</div>
+</div>
+</a>
+<a href="tag_Assorted.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Assorted
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Passt in keine der anderen Kategorien...</p>
+</div>
+</div>
+</a>
+<a href="tag_Basteln.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Basteln
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Meistens Papier (Origami...)</p>
+</div>
+</div>
+</a>
+<a href="c_c__.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    C und C++
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Datenbanken.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Datenbanken
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>relationale und andere Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_dWb+.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    dWb+
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Geo.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Geo
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Karten und mehr run um Ortsinformationen</p>
+</div>
+</div>
+</a>
+<a href="tag_GUI.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    GUI
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um graphische Benutzerschnittstellen</p>
+</div>
+</div>
+</a>
+<a href="tag_Hardware.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Hardware
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Elektronik und so Zeuchs...</p>
+</div>
+</div>
+</a>
+<a href="it_security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    IT Security
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Java.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Java
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Hauptsächlich Desktop Themen und Java SE</p>
+</div>
+</div>
+</a>
+<a href="tag_Komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Komponenten
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Software-Komponenten</p>
+</div>
+</div>
+</a>
+<a href="tag_Links.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Links
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Linksammlungen zu verschiedenen Themen</p>
+</div>
+</div>
+</a>
+<a href="tag_Linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Linux
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles zum Thema Gnu Linux</p>
+</div>
+</div>
+</a>
+<a href="tag_Markup.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Markup
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
+</div>
+</div>
+</a>
+<a href="tag_Music.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Music
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Musik, die mir gefällt</p>
+</div>
+</div>
+</a>
+<a href="tag_Python.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Python
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Mein Weg vom blutigen Anfänger aufwärts</p>
+</div>
+</div>
+</a>
+<a href="tag_Rants.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Rants
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Luft ablassen</p>
+</div>
+</div>
+</a>
+<a href="tag_Security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Security
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>IT-Sicherheit</p>
+</div>
+</div>
+</a>
+<a href="tag_sQLshell.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    sQLshell
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="verschiedenes.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Verschiedenes
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Video.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Video
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Artikel mit bunten Filmchen</p>
+</div>
+</div>
+</a>
+<a href="videos.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Videos
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Virtualisierung.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Virtualisierung
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Technologien und Themen rund um virtuelle Rechner</p>
+</div>
+</div>
+</a>
+<a href="windows.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Windows
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Upcoming....html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Upcoming...
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Demnächst in diesem Theater...</p>
+</div>
+</div>
+</a>
+</nav>
+</div>
+	<div id="footer">
+		<span class="me">
+		<strong><a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+
+, Damaschke 11, Rudolstadt, 
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
+			</a></strong>
+	</span></div><!-- #footer -->
+</div>
+</body>
+</html>

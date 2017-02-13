@@ -1,0 +1,568 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
+<head>
+  <title>Automatische Erstellung von Modulverbindungen - pro & contra</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+			<meta name="Description" content="Einige Gedanken zur Idee, Module automatisch miteinander zu verbinden." />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
+	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
+	<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body onload="toggle('show');">
+<div id="wrapper">
+	<div id="header">
+<div id="logo">
+  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
+      display="inline">
+    <mrow>
+      <mn>1</mn>
+      <mo>&isin;</mo>
+      <mi>&infin;</mi>
+    </mrow>
+</math>
+</h1-->
+  <p>
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+  </p>
+</div>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+	</div><!-- #header-->
+<div id="all">
+<div id="A">
+<div id="content">
+	<div class="date">05.12.2015 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+				<!--li--> <a href="websocket_server_dwb_.html#content">dWb+</a> <!--/li-->
+					<!--li--> ,<a href="websocket_server_dwb_.html#content">Video</a> <!--/li-->
+			<!--/ul-->
+</div>
+ 	<div class="heading">Automatische Erstellung von Modulverbindungen - pro & contra</div>
+			<p>Einige Gedanken zur Idee, Module automatisch miteinander zu verbinden...
+</p> <a name="content"> </a>
+ <p><h1>Motivation</h1>
+  <img src="images/medium/dWb_logo.png" 
+	   alt="Dataflow Workbench dWb+" 
+	class="imgright">
+Entstanden ist die Idee, über das Konzept der automatischen Erstellung von Verbindungen
+zwischen Modulen nachzudenken, während der Arneit am Projekt WebbleTag: Webbles etablieren Kommunikation untereinander,
+wenn sie "aufeinander" abgelegt werden. Dazu ist aber jede Menge Boilerplate-Code notwendig - da
+jedes Modul oder jede Komponente mit allem klarkommen muss, was es empfängt.
+</p><p>
+Dennoch - die Idee, Komponenten, die offensichtlich "zusammenpassen", automatisch miteinander zu verbinden, klingt logisch...
+<h1>Interaktionsmetapher</h1>
+Wie startet man aber die automatische verbindung? Bei
+<a href="dWb.html">dWb+</a>
+werden Module dann aktiviert, wenn sie auf dem Arbeitstisch landen. Das kann durch verschiedene
+Events geschehen. Wenn man dies als Startpunkt der automatischen Erstellung der Verbindungen nehmen würde,
+wäre das kontraproduktiv: Man stelle sich einen Arbeitstisch mit 20 Komponenten vor,
+dem eine
+weitere hinzugefügt wird: Ergebnis wäre dann die Suche dieses einen nach möglichen Verbindungspartnern
+unter allen 20 bereits hinzugefügten. Abgesehen davon, dass das zu Performanceeinbußen
+führen würde, würden wahrscheinlich auch einige Verbindungen entstehen, die man eigentlich gar nicht wollte...
+</p><p>
+Also erstellen wir automatische Verbindungen nur zwischen zwei auszuwählenden Modulen? Aber wie 
+soll die Interqaktionsmetapher aussehen, die diesen Prozess startet? Drag'n'Drop ist aus meiner Sicht zu ungenau.
+Ich habe mir daher eine andere Möglichkeit einfallen lassen: Die Außenkanten der Module sind jetzt magnetisch - sie ecken sozusagen aneinander an.
+</p><p>
+Wenn ein Modul mit seinen Outputslots an die Inputslots eines anderen aneckt, ist dies das Signal, automatisch 
+Verbindungen zwischen zueinander "passenden" Slots zu erstellen.
+<h1>Was sind "passende" Slots?</h1>
+Das ist hierbei die einzige wirkliche Gretchenfrage: wie bestimmt das System, dass zwei Slots zusammen passen und 
+erstellt darauf basierend dann eine neue Verbindung? Nur vom Typ der Slots kann man es nicht abhängig machen:
+nur identische Typen als passend zu betrachten, würde der Philosophie von dWb+ zuwiderlaufen:
+Slots können von Hand verbunden werden, wenn sie in einer Vererbungshierarchie stehen: Der Outputslot
+vom Typ int kann zum Beispiel mit einem Eingang vom Typ Number verbunden werden.
+</p><p>
+Setzt man dies als Kriterium an, stellt man aber schnell fest, dass dadurch fast jeder Outputslot mit
+jedem Inputslot verbunden wird - daher funktioniert das nicht.
+</p><p>
+Es ist auch keine Lösung, den automatischen Verbindungsaufbau dadurch einzuschränken, dass 
+er nur dann erfolgt, wenn weder Aus- noch Eingang bisher mit einem anderen Modul verbunden sind.
+Das kann man sich am Beispiel eines Taktgeber-Moduls veranschaulichen: dort ist es ja so,
+dass wahrscheinlich gerade mehrere Module von seinem Taktausgang gesteuert werden sollen.
+</p><p>
+Man könnte dazu die Informationen im PropertyDescriptor nehmen, die im Attribut preferred steckt.
+Das würde aber nur auf Properties - mit anderen Worten Ausgänge - wirken und nicht auf Eingänge. Darüber hinaus 
+kennzeichnet dieses Attribut laut Dokumentation die Properties, die an prominenter Position
+in der GUI platziert werden sollen - also wahrscheinlich nichts mit dem Erstellen von Verbindungen zu tun haben...
+</p><p>
+Man könnte den Ein- und Ausgängen selbst definierte Flags zuordnen, die einen Ein- oder Ausgang
+zweifelsfrei als solchen markieren, der die automatische Erzeugung von Verbindungen erlauben soll.
+In diesem Fall funktioniert diese Erstellung aber mit keinem Modul, das von Entwicklern geschaffen wurde,
+bevor das Feature "automatische Verbindungserstellung aktiviert wurde. Wenn ein Anwender nun 
+verschiedene Module auf den Arbeitstisch zieht  und versucht, diese per Automatik zu verbinden, dabei aber solcche
+erwischt, die dieses Flag nicht aufweisen, wird er nach dem dritten vergeblichen Versuch denken "Feature funktioniert
+nicht - mach ichs eben per Hand".
+</p><p>
+Ein möglicher Ausweg wäre die visuelle Markierung von Modulen, die die Automatik unterstützen - etwa durch Embleme...
+</p><p>
+Ein Seiteneffekt der Untersuchungen rund um das Thema war die Erweiterung der Interaktionsmöglichkeiten mit
+Verbindungen: ein Klick mit der linken Maustaste auf eine Verbindung schaltet sie zwischen den Stati aktiv und inaktiv um.
+Klickt man bei gehaltener Feststelltaste auf eine Verbindung, wird diese sofort entfernt.
+</p><p>
+Praktisch wurden von den hier vorgestellten Ideen zwei erprobt: die Erstellung von Verbindungen lediglich
+basierend auf der Kompatibilität ihrer Datentypen und die Markierung von "geeigneten" Slots per
+BeanInfo-Attributen. Die letztere wird hier in einem kurzen Video veranschaulicht:
+Das Modul Clock hat einen Ausgang, das Modul  GaussianRandomBoxMuller je einen Aus- und Eingang 
+und das Modul Sink einen Eingang, die als 
+mögliche Kandidaten für die automartische Erstellung von Verbindungen gekennzeichnet wurden - zu erkennen
+jeweils an den Dekorationen rechts oben.
+</p><p>
+<video width="420" controls class="center" poster="resources/dWb_autoconnect.jpg" preload>
+  <source type="video/webm" src="resources/dWb_autoconnect.webm">
+  <source type="video/mp4" src="resources/dWb_autoconnect.mp4">
+  Dieser Browser unterstützt HTML5-Videos nicht.
+</video>
+</p> 		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+	  <a href="ende_heimatseite_hier_arcor.html#content">
+		<div class="date">11.11.2016</div>
+<h3>Ende der Heimatseite hier bei Arcor</h3>
+  <div class="abstract">
+				  <p>Diese meine Heimatseite im Zwischennetz wird ab dem 1.2.2017 definitiv in dieser Form 
+nicht weitergeführt. Ich danke allen Lesern und wünsche noch eine gute Zeit.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="arduino_spi_unvertraeglichkeiten.html#content">
+		<div class="date">21.01.2017</div>
+<h3>Arduino SPI Unverträglichkeiten</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Jetzt, wo die dunkle Jahreszeit wieder angebrochen ist (ich schreibe das einen Tag
+nach der Umstellung auf Winterzeit), habe ich meinen Arduino Bastelkasten wieder
+rausgeholt.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="roundinstrument_noch_mal_aufgewaermt.html#content">
+		<div class="date">21.01.2017</div>
+<h3>RoundInstrument noch mal aufgewärmt</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Immer häufiger finde ich etwas bei Gerrit, das mich inspiriert, eigene Versuche zu machen.
+Auch diesmal wurde ich von seiner Rubrik Friday Fun nicht enttäuscht.
+</p></div>   </a>
+</li>
+</ul>
+</div>
+<nav id="C"> 
+<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
+			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+</div>
+	</h2><form method="get" action="http://www.google.com/search">
+
+<div style="padding:4px;width:90%;">
+<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
+ maxlength="255" value="" />
+<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
+<input style="width:0%;" type="checkbox"  name="sitesearch"
+ value="home.arcor.de/jkey" checked hidden="true"/>
+</div>
+
+</form>
+<a href="tag_Android.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Android
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um Googles Betriebssystem</p>
+</div>
+</div>
+</a>
+<a href="tag_Assorted.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Assorted
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Passt in keine der anderen Kategorien...</p>
+</div>
+</div>
+</a>
+<a href="tag_Basteln.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Basteln
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Meistens Papier (Origami...)</p>
+</div>
+</div>
+</a>
+<a href="c_c__.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    C und C++
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Datenbanken.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Datenbanken
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>relationale und andere Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_dWb+.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+dWb+
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Geo.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Geo
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Karten und mehr run um Ortsinformationen</p>
+</div>
+</div>
+</a>
+<a href="tag_GUI.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    GUI
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um graphische Benutzerschnittstellen</p>
+</div>
+</div>
+</a>
+<a href="tag_Hardware.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Hardware
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Elektronik und so Zeuchs...</p>
+</div>
+</div>
+</a>
+<a href="it_security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    IT Security
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Java.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Java
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Hauptsächlich Desktop Themen und Java SE</p>
+</div>
+</div>
+</a>
+<a href="tag_Komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Komponenten
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Software-Komponenten</p>
+</div>
+</div>
+</a>
+<a href="tag_Links.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Links
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Linksammlungen zu verschiedenen Themen</p>
+</div>
+</div>
+</a>
+<a href="tag_Linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Linux
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles zum Thema Gnu Linux</p>
+</div>
+</div>
+</a>
+<a href="tag_Markup.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Markup
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
+</div>
+</div>
+</a>
+<a href="tag_Music.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Music
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Musik, die mir gefällt</p>
+</div>
+</div>
+</a>
+<a href="tag_Python.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Python
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Mein Weg vom blutigen Anfänger aufwärts</p>
+</div>
+</div>
+</a>
+<a href="tag_Rants.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Rants
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Luft ablassen</p>
+</div>
+</div>
+</a>
+<a href="tag_Security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Security
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>IT-Sicherheit</p>
+</div>
+</div>
+</a>
+<a href="tag_sQLshell.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    sQLshell
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="verschiedenes.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Verschiedenes
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Video.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Video
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Artikel mit bunten Filmchen</p>
+</div>
+</div>
+</a>
+<a href="videos.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Videos
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Virtualisierung.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Virtualisierung
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Technologien und Themen rund um virtuelle Rechner</p>
+</div>
+</div>
+</a>
+<a href="windows.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Windows
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Upcoming....html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Upcoming...
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Demnächst in diesem Theater...</p>
+</div>
+</div>
+</a>
+</nav>
+</div>
+	<div id="footer">
+		<span class="me">
+		<strong><a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+
+, Damaschke 11, Rudolstadt, 
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
+			</a></strong>
+	</span></div><!-- #footer -->
+</div>
+</body>
+</html>
