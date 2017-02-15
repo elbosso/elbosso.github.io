@@ -2,13 +2,45 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>Videos</title>
+  <title>dWb+ Arduino-Demonstrator "v2.0"</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
+			<meta name="Description" content="Ich habe bereits vor geraumer Zeit eine kleine Schaltung aufgebaut,
+die auf einem Arduino ProtoShield analoge wie digitale Ein-
+und Ausgänge zusammenfasst." />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
 	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
 	<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
@@ -30,7 +62,7 @@ document.write(link)
 //-->
 </script>
 </head>
-<body>
+<body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
 <div id="logo">
@@ -57,40 +89,148 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 <div id="all">
 <div id="A">
 <div id="content">
-	<div class="heading">Videos</div>
-	<ul class="double"> 
-<li class="anriss spanrow">
-					<span class="tags">
-
-					<div class="popup">
-
-<div><a class="taglink" href="tag_Java.html">Java</a></div>
-<div><a class="taglink" href="tag_dWb+.html">dWb+</a></div>
-<div><a class="taglink" href="tag_Komponenten.html">Komponenten</a></div>
-<div><a class="taglink" href="tag_sQLshell.html">sQLshell</a></div>
-<div><a class="taglink" href="videos.html">Videos</a></div>
-
+	<div class="date">15.02.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+			<!--/ul-->
 </div>
-
-	<img src="images/tag_48.png" class="imgtag">
-
-				</span>
-	  <a class="anriss" href="verbindungen_moduleworkspace_editierbar.html#content">
-	<div class="date">18.04.2016</div>
-			<h3 class="head">
-				Verbindungen im ModuleWorkspace editierbar</h3>
+ 	<div class="heading">dWb+ Arduino-Demonstrator "v2.0"</div>
+			<p>Ich habe bereits vor geraumer Zeit eine kleine Schaltung aufgebaut,
+die auf einem Arduino ProtoShield analoge wie digitale Ein-
+und Ausgänge zusammenfasst. Diese wurde nun erweitert.
+</p> <a name="content"> </a>
+ <p>  <img src="images/medium/dWb_logo.png" 
+	   alt="Dataflow Workbench dWb+" 
+	class="imgright">
+Bereits vor einigen Jahren packte ich auf ein ProtoShield was nur ging:
+Als digitale Eingänge gab es da zwei Drucktaster und einen Fototransistor. Digitale
+Ausgänge stellten vier LEDs dar. Analoge Ausgänge gab es mehrere - einer wurde direkt
+durch eine LED in der Schaltung abgebildet. Analoge Eingänge gabe es direkt auf der Platine
+als Potentiometer ausgeführt und weiterhin zwei Adapter, an die sich zum Beispiel 
+Foto- oder Thermowiderstände anschließen ließen.
+</p><p>
+Die Schaltung wurde über die serielle Schnittstelle gesteuert - ich implementierte
+ein Protokoll über das es möglich ist, den Zustand der Eingänge abzufragen und
+den Zustand der Ausgänge zu steuern. Zusätzlich gibt es in diesem Protokoll die Möglichkeit,
+für zwei der digitalen Eingänge die Interrupts freizuschalten und jeweils einen
+der analogen Ausgänge in einen Auto-Update-Modus zu schalten.
+Beispiele für dieses Protokoll - bzw. die Kommandos sind hier zu sehen:
+<pre>
+ * ?3S00 - fototransistor abfragen
+ * ?3S01 - schalter nahe fototransistor abfragen
+ * ?3S02 - aktuell nicht beschaltet  (Digital-Pin 3)
+ * ?3S03 - Schalter boardrand abfragen
+ *
+ * ?4L00x - rote LED schalten
+ * ?4L01x - orange LED schalten
+ * ?4L02x - gelb LED schalten
+ * ?4L03x - grüne LED schalten
+ *
+ * ?3A00 - Analogwert auslesen für Sensor Nähe grüne LED
+ * ?3A01 - Analogwert auslesen für Potentiometer
+ * ?3A02 - Analogwert auslesen für Sensor Mitte Platine
+ * ?3A03 - Analogwert auslesen für nicht beschaltet  (Analog-Pin 3)
+ *
+ * ?7a+00300 - analog sampling automatisch anschalten für Sensor Nähe grüne LED mit 300 ms Abstand (Zeit zw 000 und 999)
+ * ?7a+01300 - analog sampling automatisch anschalten für Potentiometer mit 300 ms Abstand (Zeit zw 000 und 999)
+ * ?7a+02300 - analog sampling automatisch anschalten für Sensor Mitte Platine mit 300 ms Abstand (Zeit zw 000 und 999)
+ * ?7a+03300 - analog sampling automatisch anschalten für nicht beschaltet (Analog-Pin 3) mit 300 ms Abstand (Zeit zw 000 und 999)
+ * ?4a-00 - analog sampling abschalten für Sensor Nähe grüne LED
+ * ?4a-01 - analog sampling abschalten für Potentiometer 
+ * ?4a-02 - analog sampling abschalten für Sensor Mitte Platine 
+ * ?4a-03 - analog sampling abschalten für nicht beschaltet (Analog-Pin 3) 
+ *
+ * ?6P00xxx - PWM-Steuerung nicht beschaltet (Digital-Pin 10)
+ * ?6P01xxx - PWM-Steuerung nicht beschaltet (Digital-Pin 9)
+ * ?6P02xxx - PWM-Steuerung nicht beschaltet (Digital-Pin 6)
+ * ?6P03xxx - PWM-Steuerung grüne 5mm LED (000-255)
+ *
+ * ?3t+0 - Interrupt für Schalter boardrand aktivieren
+ * ?3t+1 - Interrupt für aktuell nicht beschaltet aktivieren (Digital-Pin 3)
+ *
+ * ?3t-0 - Interrupt für Schalter boardrand deaktivieren
+ * ?3t-1 - Interrupt für aktuell nicht beschaltet deaktivieren (Digital-Pin 3)
+</pre>
+Das Fragezeichen signalisiert den Beginn eines Kommandos, die Zahl dahinter die Länge
+der noch folgenden zu diesem Kommando gehörenden Zeichen.
+</p><p>
+Neu hinzugekommen ist, dass ich die Möglichkeit vorgesehen habe, ein per I2C angeschlossenes
+LCD-Display zur Textausgabe zu nutzen:
+<pre>
+ * ?11C0123456789 - obere Zeile I2C-LCD  (C*0*) mit Text füllen (max 16 Zeichen)
+ * ?18C11234567890123456 - untere Zeile I2C-LCD (C*1*) mit Text füllen (max 16 Zeichen)
+</pre>
+Die erste Stelle hinter dem Buchstaben C sagt aus, ob die Ausgabe auf der oberen oder unteren Zeile
+erfolgen soll (ich gehe hier von einem 16x2 LCD aus).
+</p><p>
+Weiterhin habe ich die Möglichkeit hinzugefügt, 2 numerische Werte über eine 
+BarGraph-Anzeige zu visualisieren (Erlaubte Werte zwischen einschließlich 0 und 1023):
+<pre>
+ * ?6B00600 - Bargraph in der oberen Zeile I2C-LCD (B*0*) auf rund 2/3 stellen (erlaubte Werte: 0-1023)
+ * ?6B10300 - Bargraph in der unteren Zeile I2C-LCD (B*1*) auf rund 1/3 stellen (erlaubte Werte: 0-1023)
+</pre>
+Auch hier gibt die Zahl hinter dem B an, ob die obere oder die untere Zeile zur
+Darstellung benutzt werden soll. Das Ergebnis könnte dann zum Beispiel so aussehen:
+  <img src="https://i.ytimg.com/vi/NmYImKqmNo0/hqdefault.jpg" width="400px" 
+alt="Bargraph auf 16x2 LCD" 
+class="center">
+<span class="imgdesc">
+Bargraph auf 16x2 LCD
+</span>
+Bargraph und Text können gemischt werden, wenn jedes der beiden in unterschiedlichen Zeilen dargestellt wird.
+</p><p>
+Schlussendlich habe ich auch das entsprechende Modul für
+<a href="dWb.html">dWb+</a>
+überarbeitet - es bekam zwei neue Eingänge spendiert, die es ermöglichen, die 
+BarGraph-Darstellung beider Zeilen zu nutzen.
+</p><p>
+Man muss dieses Modul natürlich nicht nutzen: Mit den diversen Modulen, die 
+Eingabedaten in Strings wandeln (und zurück) kann man mit einem generischen Schnittstellenmodul 
+zur Kommunikation über die serielle Schnittstelle mit dieser Schaltung unterhaltsame und lehrreiche
+Einarbeitung in
+<a href="dWb.html">dWb+</a>
+gestalten.
+</p> 		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+	  <a href="arduino_xbee_serverueberwachung.html#content">
+		<div class="date">15.02.2017</div>
+<h3>Arduino und XBee für Serverüberwachung</h3>
   <div class="abstract">
-			<p>Die ModuleWorkspace-Komponente - unter anderem verwendet in der 
-sQLshell
-und im Rapid-Prototyping-Werkzeug
-dWb+
-- wurde um die Möglichkeit erweitert, das Layout von Verbindungen zwischen Modulen
-feiner bestimmen zu können.
-</p></div> 	  </a>
-
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Nach meinen diversen Berichten über den Stand der 
+Komponenten zur Serverüberwachung
+schrieb ich neulich über Versuche, 
+Arduinos und XBees einzubinden
+- das 
+Projekt wurde erfolgreich abgeschlossen!
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="arduino_spi_unvertraeglichkeiten.html#content">
+		<div class="date">21.01.2017</div>
+<h3>Arduino SPI Unverträglichkeiten</h3>
+  <div class="abstract">
+				  <p>Jetzt, wo die dunkle Jahreszeit wieder angebrochen ist (ich schreibe das einen Tag
+nach der Umstellung auf Winterzeit), habe ich meinen Arduino Bastelkasten wieder
+rausgeholt.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="roundinstrument_noch_mal_aufgewaermt.html#content">
+		<div class="date">21.01.2017</div>
+<h3>RoundInstrument noch mal aufgewärmt</h3>
+  <div class="abstract">
+				  <p>Immer häufiger finde ich etwas bei Gerrit, das mich inspiriert, eigene Versuche zu machen.
+Auch diesmal wurde ich von seiner Rubrik Friday Fun nicht enttäuscht.
+</p></div>   </a>
 </li>
 </ul>
-</div>
 </div>
 <nav id="C"> 
 <h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
@@ -109,7 +249,7 @@ feiner bestimmen zu können.
  maxlength="255" value="" />
 <input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
 <input style="width:0%;" type="checkbox"  name="sitesearch"
- value="home.arcor.de/jkey" checked hidden="true"/>
+ value="elbosso.github.io" checked hidden="true"/>
 </div>
 
 </form>
@@ -218,6 +358,19 @@ feiner bestimmen zu können.
 <div class="nav-item-body">
   <p>Elektronik und so Zeuchs...</p>
 </div>
+</div>
+</a>
+<a href="hardware_dwb_.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Hardware dWb+
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
 </div>
 </a>
 <a href="it_security.html">
@@ -374,17 +527,6 @@ feiner bestimmen zu können.
 </div>
 </div>
 </a>
-<a href="videos.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-    Videos
-</h3>
-</header>
-<div class="nav-item-body">
-  </div>
-</div>
-</a>
 <a href="tag_Virtualisierung.html">
 <div class="nav-item accordion">
 <header class="nav-item-header">
@@ -420,9 +562,6 @@ feiner bestimmen zu können.
 </div>
 </div>
 </a>
-<!--
--->
-
 </nav>
 </div>
 	<div id="footer">
@@ -443,8 +582,7 @@ abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZ
 		</script>
 		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
 			</a></strong>
-	</span>
-</div><!-- #footer -->
+	</span></div><!-- #footer -->
 </div>
 </body>
 </html>
