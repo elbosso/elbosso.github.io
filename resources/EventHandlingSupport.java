@@ -6,6 +6,8 @@
 
 package de.elbosso.util.beans;
 
+import de.elbosso.util.lang.annotations.Event;
+
 /**
  *
  * @author elbosso
@@ -56,6 +58,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	 * @param  name  The name of the property for which a particular listener wishes to be informed about changes.
 	 * @param  l     The listener interested in changes in the named property.
 	 */
+	@Event
 	public void addPropertyChangeListener( java.beans.PropertyChangeListener l)
     {
 		pcs.addPropertyChangeListener(l);
@@ -68,6 +71,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	 * @param  name  The name of the property for which a particular listener is no longer interested
 	 * @param  l     The listener to be deregistered.
 	 */
+	@Event
 	public void removePropertyChangeListener(java.beans.PropertyChangeListener l)
     {
 		pcs.removePropertyChangeListener( l);

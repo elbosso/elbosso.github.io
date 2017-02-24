@@ -34,85 +34,139 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.elbosso.dataflowframework.modules.filter.rules.util.validator.rules;
 
-public class RectangleInsideRuleModule extends de.netsysit.dataflowframework.modules.BeanContextChildModuleBase
+public class RectangleInsideRuleModule extends de.netsysit.dataflowframework.modules.ThreadingBeanContextChildModuleBase
 {
 	static
 	{
-		de.netsysit.util.beans.InterfaceFactory.setSuperclassAssociationForEventDispatchThread(RectangleInsideRuleModule.class, de.netsysit.dataflowframework.modules.BeanContextChildModuleBase.class);
+		de.netsysit.util.beans.InterfaceFactory.setSuperclassAssociationForEventDispatchThread(RectangleInsideRuleModule.class, de.netsysit.dataflowframework.modules.ThreadingBeanContextChildModuleBase.class);
 	}
 	private java.awt.geom.Point2D failedPoint2D;
 	private java.awt.geom.Point2D passedPoint2D;
+	private java.awt.geom.Point2D lastInputPoint2D;
 	private java.awt.Shape failedShape;
 	private java.awt.Shape passedShape;
+	private java.awt.Shape lastInputShape;
 	private de.elbosso.util.validator.rules.RectangleInsideRule rule;
 	private de.elbosso.util.validator.rules.MeasurementRule measure;
 	private de.elbosso.util.validator.rules.MeasurementWrapper wrapper;
 
 	public RectangleInsideRuleModule()
 	{
-		super();
+		super(RectangleInsideRuleModule.class.getName());
 		this.rule=new de.elbosso.util.validator.rules.RectangleInsideRule();
 		wrapper=new de.elbosso.util.validator.rules.MeasurementWrapper(rule);
 		measure=new de.elbosso.util.validator.rules.MeasurementRule(null);
 	}
+    @Override
+    protected de.netsysit.util.threads.CubbyHole createCubbyHole()
+    {
+        return new de.netsysit.util.threads.SimpleNonBlockingCubbyHole();
+    }
 //datatypes.size: 2
-	public java.awt.geom.Point2D getFailedPoint2D()
+	public synchronized java.awt.geom.Point2D getFailedPoint2D()
 	{
 		return failedPoint2D;
 	}
-	public java.awt.geom.Point2D getPassedPoint2D()
+    private synchronized void setFailedPoint2D(java.awt.geom.Point2D failedPoint2D)
+    {
+        this.failedPoint2D=failedPoint2D;
+    }
+	public synchronized java.awt.geom.Point2D getPassedPoint2D()
 	{
 		return passedPoint2D;
 	}
-	
+    private synchronized void setPassedPoint2D(java.awt.geom.Point2D passedPoint2D)
+    {
+        this.passedPoint2D=passedPoint2D;
+    }
+
+    private synchronized java.awt.geom.Point2D getLastInputPoint2D()
+    {
+        return lastInputPoint2D;
+    }
+    private synchronized void setLastInputPoint2D(java.awt.geom.Point2D lastInputPoint2D)
+    {
+        this.lastInputPoint2D = lastInputPoint2D;
+    }
 	public void inputPoint2D(java.awt.geom.Point2D data)
 	{
-		boolean valid=wrapper.validate(data).isEmpty();
-		if(measure.isTransparent()==false)
-		{
-			valid=measure.validate(wrapper).isEmpty();
-		}
-		if(valid==false)
-		{
-			java.awt.geom.Point2D old=getFailedPoint2D();
-			failedPoint2D=data;
-			send("failedPoint2D", old, getFailedPoint2D());
-		}
-		else
-		{
-			java.awt.geom.Point2D old=getPassedPoint2D();
-			passedPoint2D=data;
-			send("passedPoint2D", old, getPassedPoint2D());
-		}
-	}
-	public java.awt.Shape getFailedShape()
+        setLastInputPoint2D(data);
+        processData(java.awt.geom.Point2D.class);
+    }
+	public synchronized java.awt.Shape getFailedShape()
 	{
 		return failedShape;
 	}
-	public java.awt.Shape getPassedShape()
+    private synchronized void setFailedShape(java.awt.Shape failedShape)
+    {
+        this.failedShape=failedShape;
+    }
+	public synchronized java.awt.Shape getPassedShape()
 	{
 		return passedShape;
 	}
-	
+    private synchronized void setPassedShape(java.awt.Shape passedShape)
+    {
+        this.passedShape=passedShape;
+    }
+
+    private synchronized java.awt.Shape getLastInputShape()
+    {
+        return lastInputShape;
+    }
+    private synchronized void setLastInputShape(java.awt.Shape lastInputShape)
+    {
+        this.lastInputShape = lastInputShape;
+    }
 	public void inputShape(java.awt.Shape data)
 	{
-		boolean valid=wrapper.validate(data).isEmpty();
-		if(measure.isTransparent()==false)
-		{
-			valid=measure.validate(wrapper).isEmpty();
-		}
-		if(valid==false)
-		{
-			java.awt.Shape old=getFailedShape();
-			failedShape=data;
-			send("failedShape", old, getFailedShape());
-		}
-		else
-		{
-			java.awt.Shape old=getPassedShape();
-			passedShape=data;
-			send("passedShape", old, getPassedShape());
-		}
+        setLastInputShape(data);
+        processData(java.awt.Shape.class);
+    }
+    protected void doWork(Object ref) throws InterruptedException
+    {
+        if(((java.lang.Class)ref).isAssignableFrom(java.awt.geom.Point2D.class))
+        {
+            java.awt.geom.Point2D data=getLastInputPoint2D();
+            boolean valid=wrapper.validate(data).isEmpty();
+            if(measure.isTransparent()==false)
+            {
+                valid=measure.validate(wrapper).isEmpty();
+            }
+            if(valid==false)
+            {
+                java.awt.geom.Point2D old=getFailedPoint2D();
+                setFailedPoint2D(data);
+                send("failedPoint2D", old, getFailedPoint2D());
+            }
+            else
+            {
+                java.awt.geom.Point2D old=getPassedPoint2D();
+                setPassedPoint2D(data);
+                send("passedPoint2D", old, getPassedPoint2D());
+            }
+        }
+        if(((java.lang.Class)ref).isAssignableFrom(java.awt.Shape.class))
+        {
+            java.awt.Shape data=getLastInputShape();
+            boolean valid=wrapper.validate(data).isEmpty();
+            if(measure.isTransparent()==false)
+            {
+                valid=measure.validate(wrapper).isEmpty();
+            }
+            if(valid==false)
+            {
+                java.awt.Shape old=getFailedShape();
+                setFailedShape(data);
+                send("failedShape", old, getFailedShape());
+            }
+            else
+            {
+                java.awt.Shape old=getPassedShape();
+                setPassedShape(data);
+                send("passedShape", old, getPassedShape());
+            }
+        }
 	}
 	public de.elbosso.util.validator.rules.RectangleInsideRule getRule()
 	{

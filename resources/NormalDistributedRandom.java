@@ -6,14 +6,14 @@
 
 package de.elbosso.util.generator.generalpurpose;
 
-import java.util.Random;
+import de.elbosso.util.lang.annotations.GeneratorModule;
 
 /**
  *
  * @author elbosso
  */
 @de.elbosso.db.processors.GeneratorScript
-@de.elbosso.dataflowframework.processors.GeneratorModule(datatype=java.lang.Number.class)
+@GeneratorModule(datatype=java.lang.Number.class)
 public class NormalDistributedRandom extends de.elbosso.util.beans.EventHandlingSupport implements de.netsysit.util.generator.Sequence<java.lang.Number>
 {
 	private java.util.Random random;

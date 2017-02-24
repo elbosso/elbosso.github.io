@@ -116,6 +116,133 @@ display('news.html')
 		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
 		</div>
 		<div>
+			<h3>A little MapTile update</h3>
+		</div>
+		<div class="collectiontext">
+			<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">After playing around with the MapTileSkin in the TilesFX project I thought it might make sense to add the ability to also visualize points of interest and a track...and so I've added those features :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I've also added the ability to set the color of the current location marker and the color of the track (it's only one track supported at the moment).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To realize this behavior the Location class now also contains a color property.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the colors I also decided to offer a defined set of colors which are the ones that you can find in </span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>Tile.TileColor</b></span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">GRAY</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">RED</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">GREEN</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">BLUE</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">ORANGE</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">YELLOW_ORANGE</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">YELLOW</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">MAGENTA</span></li></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">These colors will be used wherever possible within TilesFX to create a homogene look over all tiles.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To give you an idea how this new stuff is looking, here are some screenshots...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-x0GkXIOd_lM/WLAWGKvxMyI/AAAAAAAAEAU/2Nh5nNHBY_Af28HTBrhejyz0mJ7ivb7fgCLcB/s1600/Title%2B2017-02-24%2B12-14-10.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://4.bp.blogspot.com/-x0GkXIOd_lM/WLAWGKvxMyI/AAAAAAAAEAU/2Nh5nNHBY_Af28HTBrhejyz0mJ7ivb7fgCLcB/s640/Title%2B2017-02-24%2B12-14-10.png" width="578" /></a></div><div class="separator" style="clear: both; text-align: center;"><span style="font-family: Trebuchet MS, sans-serif;">Map provider: Hydda</span></div><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-3bi_ABbUU_U/WLAWGNixBPI/AAAAAAAAEAQ/KHteWfsOovQ07FpguC8_epC2cD-DPE61wCLcB/s1600/Title%2B2017-02-24%2B12-14-26.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://3.bp.blogspot.com/-3bi_ABbUU_U/WLAWGNixBPI/AAAAAAAAEAQ/KHteWfsOovQ07FpguC8_epC2cD-DPE61wCLcB/s640/Title%2B2017-02-24%2B12-14-26.png" width="578" /></a></div><div class="separator" style="clear: both; text-align: center;"><span style="font-family: &quot;Trebuchet MS&quot;, sans-serif;">Map provider: OpenStreetMap HOT</span></div><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-_VU6fZTVhyY/WLAWGN3CheI/AAAAAAAAEAY/FXU3ahU-dwUK_-00RimcYHLOHd2BAHapgCLcB/s1600/Title%2B2017-02-24%2B12-14-39.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://2.bp.blogspot.com/-_VU6fZTVhyY/WLAWGN3CheI/AAAAAAAAEAY/FXU3ahU-dwUK_-00RimcYHLOHd2BAHapgCLcB/s640/Title%2B2017-02-24%2B12-14-39.png" width="578" /></a></div><div class="separator" style="clear: both; text-align: center;"><span style="font-family: &quot;Trebuchet MS&quot;, sans-serif;">Map provider: OpenStreetMap BlackWhite</span></div><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-8N60E9w8eas/WLAWG3CwR6I/AAAAAAAAEAc/nFRDALMCJlYqp1H-vSgXQJeJsJfcgQXvwCLcB/s1600/Title%2B2017-02-24%2B12-14-59.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://2.bp.blogspot.com/-8N60E9w8eas/WLAWG3CwR6I/AAAAAAAAEAc/nFRDALMCJlYqp1H-vSgXQJeJsJfcgQXvwCLcB/s640/Title%2B2017-02-24%2B12-14-59.png" width="578" /></a></div><div class="separator" style="clear: both; text-align: center;"><span style="font-family: &quot;Trebuchet MS&quot;, sans-serif;">Map provider: World Imagery</span></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">On the screenshot above you can see the current location icon (the bigger blue one), the start icon (green one at the end of the magenta track), the stop icon (the red one at the end of the magenta track) and some poi icons (the yellow, the red and the magenta one).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the example above I've simply exported a track recorded by my Garmin watch to GPX format and imported the GPX file, converted the track points to a list of Locations and pass it to the Tile...done :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you are interested in the code I've used to convert the GPX file to my Location objects you can find a little gist that I've created on github which shows how it works. You simply have to provide a gpx file with the name track.gpx and put it besides the java file.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Here is the <a href="https://gist.github.com/HanSolo/ddfa38f3620a8714cecc8b652276084e" target="_blank">link to the gist</a>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Another feature that I've added is the ability to change the zoom level of the MapTileSkin via the current location. Therefor I've added a zoomLevel property to the Location class and if you change it e.g. by calling</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>tile.getCurrentLocation().setZoomLevel(0)</b></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">the map tile will zoom out completely. The range of zoom levels is going from 0-17.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I hope this features might be useful to create for example a fitness dashboard etc.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">At the moment I've not added a live tracking feature which would create a track on the fly every time the current location changes but this would be easy to add if it's needed.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As always feedback is more than welcome, so please don't hesitate to contact me and let me know about ideas/improvements/feature requests etc.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The above mentioned features are part of the current release of TilesFX which is 1.3.5 and which can be found here</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The source code at&nbsp;<a href="https://github.com/HanSolo/tilesfx" target="_blank">Github</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The binary at&nbsp;<a href="https://bintray.com/hansolo/tilesfx" target="_blank">Bintray</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The dependency at&nbsp;<a href="https://search.maven.org/#search%7Cga%7C1%7Ctilesfx" target="_blank">Maven Central</a>&nbsp;(it's published but might take some time to show up)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">That's it for today, so keep coding...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span>
+
+		 -->
+					</div>
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/2017/02/a-little-maptile-update.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>Adding Metadata to the Arista vEOS Vagrant Box</h3>
+		</div>
+		<div class="collectiontext">
+						This post addresses a (mostly) cosmetic issue with the current way that Arista distributes its Vagrant box for vEOS. I say “mostly cosmetic” because while the Vagrant box for vEOS is perfectly functional if you use it via Arista’s instructions, adding metadata as I explain here provides a small bit of additional flexibility should you need multiple versions of the vEOS box on your system.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/3EGC4x0E3q0/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.frauenotiert.de/" target="_blank">Frau E. notiert..</a>
+		</div>
+		<div>
+			<h3>Der Villenkauf-Bonus-Mini-Cooper</h3>
+		</div>
+		<div class="collectiontext">
+			<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
+SyndContentImpl.value=Einen hab ich noch. Aus Blankenese. Denn jetzt, wo ich woanders wohne, weiß ich ganz sicher: es ist kein Hamburger Phänomen, sondern eines aus den Elbvororten.<br /><br />Ich stelle also hiermit die steile These auf:<br />Wenn man nach Blankenese zieht - oder in die umliegenden Luxusvororte - dann bekommt man zum Kauf seiner Villa einen Mini Cooper dazu. Anders kann ich mir das zumindest nicht erklären ;-)<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-ryqRSJ-kvHU/WJtDEHkUrXI/AAAAAAAADNo/2pNRFGcgOCorENhsDLtTezvfH1mqcj0lwCLcB/s1600/mini_cooper_blankenese_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="https://3.bp.blogspot.com/-ryqRSJ-kvHU/WJtDEHkUrXI/AAAAAAAADNo/2pNRFGcgOCorENhsDLtTezvfH1mqcj0lwCLcB/s1600/mini_cooper_blankenese_.jpg" /></a></div><div class="separator" style="clear: both; text-align: left;"><br /></div><div class="separator" style="clear: both; text-align: left;">Mindestens jedes vierte Auto, das mir in Blankenese entgegen kam, war ein Mini Cooper. Nun bin ich kein sonderlicher Fan von diesem Auto. Es erinnert mich immer an eine Mischung aus einem überfahrenen Kartoffelkäfer und einer Butterdose. Vielleicht fiel mir die Invasion deshalb so auf. Ist ja wie mit dem tropfenden Wasserhahn. Und dabei gibt es in der BMW Group so wunderschöne Autos!</div><div class="separator" style="clear: both; text-align: left;"><br /></div><div class="separator" style="clear: both; text-align: left;">Also noch ein Grund, Blankenese nicht zu vermissen und mich im Winterhuder Wohnglück zu aalen. :-)</div><br /><br />
+
+		 -->
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.frauenotiert.de/2017/02/der-villenkauf-bonus-mini-cooper.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>Launching an Open Source Book Project</h3>
+		</div>
+		<div class="collectiontext">
+						In my list of planned 2017 projects, I mentioned that one thing I’d like to do this year is launch an open source book project. Well, I’m excited to announce The Open vSwitch Cookbook, an Apache 2.0-licensed book project aimed at providing “how to” recipes for Open vSwitch (OVS).
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/dKcnqbyvFEo/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
+		</div>
+		<div>
+			<h3>A little Radial Chart for some weekend fun...</h3>
+		</div>
+		<div class="collectiontext">
+			<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Before I went to Singapore last week I saw some interesting radial bar graphs on the web and thought this might be a fun control to have in JavaFX.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Because in Singapore was no time for coding I've decided to do that later...which means today :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So first let me show you what I'm talking about, the following picture should give you an idea...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://cdn.ilovefreesoftware.com/wp-content/uploads/2016/04/create-radial-bar-chart-for-table-data.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="566" src="https://cdn.ilovefreesoftware.com/wp-content/uploads/2016/04/create-radial-bar-chart-for-table-data.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">I like that idea to wrap a bar graph in a circle to save some space and so I've created that control in JavaFX which now looks like follows:</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-wo_qhS62184/WKfmS0-CURI/AAAAAAAAD_E/QUI96AeBtUkCCNW6znDlYj5G-oezhkW2QCLcB/s1600/radialchart.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="632" src="https://2.bp.blogspot.com/-wo_qhS62184/WKfmS0-CURI/AAAAAAAAD_E/QUI96AeBtUkCCNW6znDlYj5G-oezhkW2QCLcB/s640/radialchart.png" width="640" /></a></div><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">If you will take a look at the control you will figure out that it's not perfect but it should be a starting point for you :)</span><br /><span style="font-family: trebuchet ms, sans-serif;">Because it tooks me only 1.5h to create that control I thought it might also be nice to have it as a skin in TilesFX and so I've also created a RadialChartTileSkin which looks as follows...</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-LayZ9hDIJVc/WKfnBY-gasI/AAAAAAAAD_M/41PKzKhvFngeCIdBKP5RUL29vMoR0H5uACLcB/s1600/Title%2B2017-02-18%2B07-05-39.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://3.bp.blogspot.com/-LayZ9hDIJVc/WKfnBY-gasI/AAAAAAAAD_M/41PKzKhvFngeCIdBKP5RUL29vMoR0H5uACLcB/s640/Title%2B2017-02-18%2B07-05-39.png" width="608" /></a></div><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">So this was a quite productive morning so far :)</span><br /><span style="font-family: trebuchet ms, sans-serif;">The new skin for TilesFX can be found in the current release of TilesFX which is 1.3.4 and the RadialChart control is on github as usual.</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;"><a href="https://github.com/HanSolo/radialchart" target="_blank">Sourcecode</a></span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">So enjoy your weekend and keep coding...</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span>
+
+		 -->
+					</div>
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/2017/02/a-little-radial-chart-for-some-weekend.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>Technology Short Take #78</h3>
+		</div>
+		<div class="collectiontext">
+						Welcome to Technology Short Take #78! Here’s another collection of links and articles from around the Internet discussing various data center-focused technologies.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/I-aJmkIeFro/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>Fixing Double Sublime Text Icons on Fedora 25</h3>
+		</div>
+		<div class="collectiontext">
+						In my previous post on how to install Sublime Text 3 (ST3) on Fedora 25, I mentioned that I have observed instances where launching ST3 via the subl command creates an additional icon in the Dash. While searching for a solution to an issue with LibreOffice icons, I found a fix for this problem.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/TK59VI8XojA/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>Correlating OVS and Guest Domain Interfaces</h3>
+		</div>
+		<div class="collectiontext">
+						I’ve written a fair amount about Open vSwitch (OVS), including some articles on using it with KVM and Libvirt. One thing I haven’t discussed in such environments, though, is the potential challenge of mapping network interfaces in a guest domain to the corresponding OVS interface (for the purposes of troubleshooting, for example). There is no single command that will provide a guest-to-OVS interface map (as far as I know), but this information is easily gathered using a couple commands.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ykHHLjD3YAQ/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
+		</div>
+		<div>
 			<h3>TilesFX with new sizing strategy</h3>
 		</div>
 		<div class="collectiontext">
@@ -2885,100 +3012,6 @@ Thanks to Leah Hanson, Jason Owen, and Lindsey Kuper for comments/corrections
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Ic2unkFI7zY/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>Technology Short Take #77</h3>
-		</div>
-		<div class="collectiontext">
-						Welcome to Technology Short Take #77. I’ve got a new collection of links and articles from around the Web on various data center-focused technologies.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/x-NEyeTKOKY/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.frauenotiert.de/" target="_blank">Frau E. notiert..</a>
-		</div>
-		<div>
-			<h3>Miss Crusoe in Blankenese</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-Z_kr7i37L5I/WJM_Fe6xO_I/AAAAAAAADNI/NzfDqvRE8SIx856NcJk38vu6KOqrRkFVgCLcB/s1600/treppe_1_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://2.bp.blogspot.com/-Z_kr7i37L5I/WJM_Fe6xO_I/AAAAAAAADNI/NzfDqvRE8SIx856NcJk38vu6KOqrRkFVgCLcB/s640/treppe_1_.jpg" width="480" /></a></div><br /><br />"Du bist die erste Frau, die aus dem Treppenviertel weg will", sagte ein Bekannter kürzlich. Das klang ein wenig vorwurfsvoll. Überhaupt schauen mich alle an, als wäre ich meschugge, wenn ich von meinem Alcatraz-Erleben in Blankenese erzähle. <br /><a name='more'></a>Selber haben sie aber noch nie hier gewohnt. Und sind auch nicht so chronisch unfit wie ich. Letztendlich läuft es im Leben doch immer auf diesen Satz hinaus: "Walk a mile in my shoes".&nbsp;Und so ist es auch mit mir und dem Treppenviertel. <br /><br /><br /><iframe allowfullscreen="" frameborder="0" height="345" src="https://www.youtube.com/embed/f1KvsIsgFRE" width="620"></iframe><br /><br /><br />Spätestens, wenn ich mir wieder drei Tage nonstop von morgens bis abends die Nebelwand vor meinem Fenster angeschaut habe, möchte ich Menschen sehen. Belebte Straßen. Cafes. Mich bei dm trösten mit einer Bio-Lebensmittel-Orgie. In Buchhandlungen Bücher kaufen, die ich eh nicht zuende lese, weil ich vor lauter Kopfschmerzmitteln&nbsp;immer die Hälfte vergesse.<br /><br />Raus komme ich aber nur unter allergrößten Mühen. Also nur an besonders guten Tagen. Denn das Treppenviertel hat einen fulminanten Haken. Wie der Name schon sagt: Treppen.<br /><br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-Xwjh54RDWYo/WJM_Gc4levI/AAAAAAAADNU/sSmgZN0P_kIc3TOEralh2cmOzTb9GRmtgCEw/s1600/treppenviertel2_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://4.bp.blogspot.com/-Xwjh54RDWYo/WJM_Gc4levI/AAAAAAAADNU/sSmgZN0P_kIc3TOEralh2cmOzTb9GRmtgCEw/s640/treppenviertel2_.jpg" width="480" /></a></div>Auf Treppen kann man schlecht parken. Ergo fehlt es hier an vielen, vielen Parkplätzen. <br /><br />Hier kann man super wohnen, wenn man topfit ist und in der Lage, mal eben 2km mit&nbsp;ein paar Hundert Stufen&nbsp;bis zur S-Bahn zu joggen. Oder sich Personal leisten kann. Viel Personal. Das alles einkauft und durch die Gassen schleppt. Am Besten verdingt man&nbsp;auch einen  Chauffeur. Der einen vor der Tür abliefert und dann zusieht, wo er in diesem Leben einen Parkplatz aufspürt.<br /><br />Ein Chauffeur mit Smart wäre optimal. Anders  kommt man hier kaum durch die Gassen, ohne rechts und links alles  abzurasieren. Bäume, Zäune, Autospiegel. Die tiefen Furchen in den  Wänden zeugen von verzeifelten Versuchen, zu fahren oder zu parken.<br /><br />Parkplätze gibt es hier so gut wie keine. Was erklärt, daß hier kürzlich  einer für 200.000€ den Besitzer gewechselt haben soll. Für 200.000€  würde ich dann wohl doch lieber in Stockholm ein Wohnklo beziehen.<br /><br />Ich habe noch nie so viele Schilder über absolutes Halterverbot auf einem Haufen gesehen. Selbst jetzt nach über sechs Wochen muß ich immer wieder nachschauen, ob die kleine Parklücke nicht vielleicht doch ein No Go ist. Natürlich parken viele hier auch im absoluten Halteverbot.  Man kann es sich leisten. Oder ist grenzverzweifelt. So wie ich manches mal.<br /><br />Positiv betrachtet: Ich hab schon viel gelernt hier. Meinen Polo in Parklücken zu manövrieren, in die man normalerweise nur einen Smart bekäme. Wenn man ihn seitwärts hinein schiebt.<br />Oder auf Millimeter durch Gassen rasen. Um hier durchzukommen, muß man die rechten Reifen nämlich auf dem schmalen Bürgersteig rollen lassen.<br /><br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-HuxJjgTh0cU/WJM_FVis5zI/AAAAAAAADNM/ObrLO8ESXawkHbiy0_JiUAMW7_amCorsgCLcB/s1600/buergersteig_breite_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://3.bp.blogspot.com/-HuxJjgTh0cU/WJM_FVis5zI/AAAAAAAADNM/ObrLO8ESXawkHbiy0_JiUAMW7_amCorsgCLcB/s640/buergersteig_breite_.jpg" width="480" /></a></div>Genau so knapp, daß man nicht runterplumpst bei der nächsten Schräge und andererseits nicht anderer Leute Vorgartenzäune, Stelen, Stromkästen oder Baumstämme abrasiert.<br />Wenn man dies geschickt macht, dann bleiben die Autos auf der linken Seite heil.<br />Wenden?! In 45 Zügen unter Zuhilfenahme fremder Hauseingänge  und Abrasieren von Vorgartendesign kann das&nbsp;funktionieren. Besser, man fährt komplett bis zum Ende durch und hofft, daß dort nicht gerade jemand sein Auto auslädt.<br /><br /><br />Der nächste freie Parkplatz ist meist zehn Minuten Fußmarsch entfernt. Zehn Minuten Fußmarsch sind meinen Beinen aber oft zehn Minuten zu viel. Und bis ich in S-Bahn-Nähe gefahren bin (7 Minuten), einen Parkplatz gefunden habe (nochmal 5-10  Minuten) und zur S-Bahn reinmarschiert bin (nochmal 4-7 Minuten),  könnte ich direkt wieder umdrehen und mich erst mal Zuhause ausruhen. Und dann geht die eigentliche Reise in die City ja erst los. Bis zum Hauptbahnhof braucht die S-Bahn eine knappe halbe Stunde. Und dort gedenkt man in der Regel nicht zu campieren, sondern steigt nur um.<br /><br />Alternativ gibt es die Möglichkeit, zur Haltestelle der "Bergziege" zu  latschen. Bergziege heißt der Bus Nr. 48, der hier eine Rundtour durchs  Treppenviertel macht. Da&nbsp;hockt man dann&nbsp;auf einer naßkalten Mauer. Im Dunkeln. Neben  einem Park, durch den der Nebel wabert. Ohne  Regenschutz. Ohne Beleuchtung. Das ist nämlich eine minimalistische  Haltestelle. Besteht aus einem Schild. Alles andere würde vermutlich das  Design der Umgebung stören.<br /><br />Wenn man da so rumsteht, von horizontal  peitschendem Regen umtost und sich Szenarien aus Aktenzeichen XY  ausmalt, schwant die Idee, daß mit dem Bus zur S-Bahn-Station Blankenese  zu fahren, auch nicht so der Burner ist.<br /><br />Auf dem Rückweg mit diesem Bus hatte ich mal die grandiose Idee, dem Vorschlag von  Google Maps zu folgen und auszusteigen, wo es näher ist zu meiner  Wohnung. Anfängerfehler. Luftlinie mag Google Maps da durchaus recht gehabt haben. Hier  zählt aber nicht Luftlinie. Hier zählen Stufen. Da stand ich dann im  Dunkeln.<br /><br />Erst fand ich die richtige Treppe nicht, weil man exakt richtig  zwischen zwei Häusern in den vermeintlichen Hinterhof gehen muß, um  "seinen" Aufgang zu erwischen. Und dann stieg ich. Mit Tüten. Ich stieg.  Und pausierte. Und stieg. Und pausierte.<br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-YQV_o61mrW0/WJM_GFtYMEI/AAAAAAAADNQ/Zn9vNf0-QRsVycyqjaGtWolIHvQyjdMoQCEw/s1600/treppenviertel_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://4.bp.blogspot.com/-YQV_o61mrW0/WJM_GFtYMEI/AAAAAAAADNQ/Zn9vNf0-QRsVycyqjaGtWolIHvQyjdMoQCEw/s640/treppenviertel_.jpg" width="480" /></a></div><br /><br />200 Stufen später war ich dann  oben. Müßig zu erwähnen, daß ich dort nur einmal ausgestiegen bin.<br /><br />Heißt im Umkehrschluß: ich bin hier fest getackert. Miss Crusoe. Zähle Containerschiffe. Und träume davon, Hamburg kennenzulernen. Wenn ich dann mal komplett zuviel bekomme, fahre ich endlose Strecken mit dem Auto. Die Elbchaussee und ich sind schon ganz  dicke. Bald kenne ich jede Stuckverzierung der großartigen Villen dort.  Und ich bilde mir ein, daß der Schriftzug des Louis C. Jacob schon  begrüßend zuckt, wenn mein Polo und ich dort vorbeibrausen.<br /><br />Natürlich könnte ich mir Lebensmittel auch liefern lassen. Alles schon  geprüft. Nur sind viele Produkte, die ich brauche, nicht im  Online-Sortiment. Außerdem stehe ich auf junges Gemüse. Das suche ich  mir dann doch lieber selber aus.<br /><br />Rein logistisch ist das Treppenviertel also schon mal nichts für jemanden wie mich. Das vermutete ich zu 70% vorher. Die restlichen 30%  bemerkt man ja leider erst in der täglichen Praxis, wenn man all das, was man sich vorher in der Theorie&nbsp;als grandiosen Workaround ausdachte, nach und nach abhaken muß.<br /><br />Schade, daß ich diese wunderhübsche und mit viel Liebe und Geschmack eingerichtete Wohnung nicht auf einen Karren spannen und Richtung S-Bahn Blankenese verschieben kann. Das würde die Lage erheblich entschärfen.<br /><br />Dann könnte ich auch  einfach mal spontan aus dem Haus ein halbes Stündchen durch die Gassen von Downtown Blankenese&nbsp;schlendern und  Menschen sehen. Die sieht man hier nämlich auch nicht. Oder nur beim  Parken. Die, die man sieht, sehen alle sehr sympathisch aus. Angenehm  bodenständig. Ich hatte ja vorher so meine Befürchtungen. Sah mich  zwischen oberlippengespritzten megablondierten Louis  Vuitton-Taschen-Trägerinnen. Ich hab zu lange in Düsseldorf gelebt.<br /><br />Hier: nix dergleichen. Zumindest nicht im  Treppenviertel. Alle, die ich bisher gesehen habe, waren dezent  gekleidet, grüßten freundlich und wirkten angenehm unsophisticated.  Vielleicht fahren die oberlippengespritzten megablondierten Louis Vuitton-Taschen-Schleudern direkt mit dem Porsche aus der eigenen  Garage los. Kann natürlich auch sein.<br /><br />Jedes Mal, wenn ich in Altona meine Sachen erledige, könnte ich dort den Boden küssen. Menschen! Es gibt etwas anzuschauen. Es pulsiert. Es lebt. <br />Zum Spazierengehen und mit meiner Freundin Tee zu trinken, komme ich sicher gerne wieder einmal hier hin. Dauerhaft Niederlassen würde ich mich hier in meiner gesundheitlichen Verfassung schlichtweg nicht können. Denn auch ein wunderhübscher und luxuriöser Ar. der Welt ist für mich am Ende nur ein Ar. der Welt. Und das ist irgendwie beruhigend.<br /><br /><br />
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://www.frauenotiert.de/2017/02/miss-crusoe-in-blankenese.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>The Linux Migration: Final Linux Distro Selection</h3>
-		</div>
-		<div class="collectiontext">
-						In my Linux migration initial progress report, I provided an early assessment of the Linux distribution that I thought I would use moving forward. At that time, I had selected Ubuntu. Since that time, though, I’ve pivoted a bit and selected a different Linux distribution as the operating system (OS) for my primary laptop moving forward. In this post, I’d like to describe why I selected Fedora.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/4ZtPtvDEZKk/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>Looking Ahead: My 2017 Projects</h3>
-		</div>
-		<div class="collectiontext">
-						For the last few years, I’ve been sharing my list of projects for each year (here’s the list for 2012, the list for 2013, 2015’s list, and last year’s list—I didn’t do a list for 2014). Toward the end of each year, I also publish a “report card” assessing my performance against that year’s list (here’s the 2016 assessment). In this post, I’m going to share my list of planned projects for 2017.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/HjnYQeQEBOU/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>Review: Dell Latitude E7370</h3>
-		</div>
-		<div class="collectiontext">
-						As part of my Linux migration (see my initial progress report), late this past week I started setting up my first non-Apple laptop since 2003. In this post, I’d like to share my thoughts on my new laptop, a Dell Latitude E7370.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/YSklss8YNio/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.neuesvonfraumeyer.de/" target="_blank">Neues von Frau Meyer</a>
-		</div>
-		<div>
-			<h3>Von Payback-Punkten und Passwörtern</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-size: large;"></span><br /><div class="MsoNormal" style="line-height: 130%; margin: 0cm 0cm 0pt;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Die Welt wird immer bekloppter.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Um das zu begreifen, muss man keine Nachrichten schauen und über das große Ganze sinnieren, da guckt man einfach mal in seinen eigenen persönlichen Alltag.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Voilà:</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">„Haben Sie Ihre Payback-Karte dabei?"</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Ich wühle in meinem Portemonnaie und irgendwo zwischen EC- und Visa-Karte, dem Weight-Watchers-Mitgliedsausweis, der Friseur-Bonuskarte, dem Gildepass für die Düsseldorfer Programmkinos, dem Abholzettel für die Reinigung und dem Ticket für die Rheinbahn finde&nbsp;ich die blaue Karte, mit der ich Punkte sammeln kann und halte sie der Frau an der Kasse hin.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Ich habe 45 Minuten Mittagspause und habe mich ausgerechnet an der Kasse mit der langsamsten Kassiererin angestellt, weil ich nicht aufgebe, ihr eine Chance zu geben. Freundlich ist sie ja. Und als ich endlich am Zug bin und die Waren über den Scanner gezogen werden, fragt mich die Kassiererin: „Möchten Sie&nbsp;Ihre Payback-Punkte direkt &nbsp;einlösen?"</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">„Ach nö", sage ich. "Ich sammle lieber noch ein bisschen."</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">„Wenn Sie die Payback-Punkte heute einlösen, erhalten Sie&nbsp;Samstag zwischen 10:00 und 10:35&nbsp;Uhr fünf&nbsp;Prozent Rabatt auf unser Weihnachtsgebäck mit Haltbarkeitsdatum bis Ende des Jahres."</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><span style="font-family: Verdana, sans-serif;">Legen Sie mich nicht auf diese Aussage fest, jedenfalls sagt sie etwas ähnlich Kompliziertes, während ich meine Waren einpacke, damit das hier mal voran geht. Die Suche nach der Payback-Karte hat mich wertvolle fünf Minuten gekostet, die Schlange hinter mir ist <em><span style="font-family: &quot;arial&quot; , &quot;sans-serif&quot;;">not amused.</span></em></span></span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><em></em><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">„Nein, danke schön."</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">„Aber wenn Sie einen Großeinkauf für Weihnachten machen, das lohnt sich doch!"</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Herrje. Kein Wunder, dass das so lange dauert, wenn ich mittags einkaufe, nun müssen die Frauen und Männer an der Kasse einem mitten im Zahlvorgang noch irgendwelche Deals unterjubeln und fragen, ob man Punkte sammelt für die WMF-Kochtöpfe. Ich habe keine Zeit, darüber nachzudenken, welche Vorteile diese Aktionen haben. Und Lust sowieso nicht.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><br /><span style="font-family: Verdana, sans-serif;">Ich will bei McPaper </span></span></span><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">an der Kasse&nbsp;auch keinen Glitzerstift oder No-Name-Klebestifte oder Klebebänder, die zwar preiswerter sind als die Markenprodukte, mich aber später zu Hause in den Wahnsinn treiben, weil sie nicht ordentlich kleben. Ich will das alles nicht. Weil es mich und meine Mitmenschen Zeit und somit Nerven kostet. Immerhin bekomme ich auch hier ein höfliches „Nein, danke" hin. Darauf bin ich ein bisschen stolz.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Nach der Mittagspause geht es weiter mit dem Wahnsinn.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><span style="font-family: Verdana, sans-serif;">Die PCs arbeiten sehr langsam oder gar nicht. Leider kommt es so oft vor, dass die Kunden dies mit „Ach, schon wieder?" oder „Liegt das an mir, jedes Mal, wenn ich bei Ihnen bin, haben Sie technische Probleme?" kommentieren. Server runter- und hochfahren ist in Fleisch und Blut übergegangen wie Atmen. Der Zugang zum Server geht nur mit einem persönlichen Passwort, das wir aus Sicherheitsgründen sehr häufig ändern müssen.<o:p></o:p></span></span></span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Das&nbsp;mit den Passwörtern ist schwierig.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><span style="font-family: Verdana, sans-serif;">Es begann mit Lieblingsreisezielen, stimmungserhellenden Nomen wie <i style="mso-bidi-font-style: normal;">Sonnenschein</i>, <i style="mso-bidi-font-style: normal;">Urlaub</i>, <i style="mso-bidi-font-style: normal;">Strand</i> oder eigenen Spitznamen oder denen des Partners.<o:p></o:p></span></span></span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Das reichte aber nicht aus, um sicher zu sein. </span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="font-size: medium;"><em><span style="color: #333333; line-height: 130%;"></span></em></span></div><div style="text-align: left;"><span style="font-size: medium;"><em><span style="color: #333333; font-family: Verdana, sans-serif; line-height: 130%;">Bitte nutzen Sie eine Buchstaben-Zahlen-Kombi mit mindestens 8 Zeichen, mindestens einem Großbuchstaben und einem Sonderzeichen.</span></em></span><br /><span style="font-size: medium;"><em><span style="color: #333333; font-family: &quot;arial&quot;;"></span></em><span style="color: #333333; line-height: 130%;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Also benutzen wir den Vornamen der Mutter, plus der&nbsp;Schuhgröße des Bruders,&nbsp;plus einem Fragezeichen. </span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Oder den Ort in der Bretagne, der uns im Sommer so gut gefallen hat, plus dem Alter des ältesten Kindes der Kollegin, plus einem Ausrufezeichen.</span></span></div><div style="text-align: left;"><span style="color: #333333; font-family: &quot;arial&quot;; font-size: medium;"></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Oder den Namen des Ortes, in dem man aufgewachsen ist, plus das Todesjahr von Steve McQueen, plus Dollarzeichen.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Oder das Kennzeichen des Wagens, den man von 1991 bis 1994 gefahren hat, plus die letzten&nbsp;sechs Stellen der Sozialversicherungsnummer.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Je abstruser, desto sicherer, desto besser.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><span style="font-family: Verdana, sans-serif;">Nun ist das Ende der Kreativitätsfahnenstange allmählich erreicht. Denn:<br /><em><span style="font-family: &quot;arial&quot; , &quot;sans-serif&quot;;">Bitte nutzen Sie keines der letzten 10 genutzten Passwörter. Geben Sie das Passwort erneut ein.</span></em></span></span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><em></em><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Es gibt Tage, da komme ich vor lauter Haareraufen nicht zum Tippen.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><span style="font-family: Verdana, sans-serif;">Wir brauchen Passwörter für den Server, das Midoffice-System, in dem wir die Vorgänge verwalten, und eines für die Zeiterfassung. Mal abgesehen von Passwörtern für das Extranet und das Bestellwesen.<o:p></o:p></span></span></span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><span style="font-family: Verdana, sans-serif;">Ohne den Zugang zum Server läuft gar nichts, logisch.<o:p></o:p></span></span></span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Fluchen, jammern, mit dem Kopf auf die Schreibtischplatte hauen, bringt nichts, wie wir nach mehreren Selbstversuchen feststellen konnten.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><span style="font-family: Verdana, sans-serif;">Manchmal hat man den Server hochfahren können, kommt aber nicht ins Verwaltungssystem, hat dann keinen Zugriff auf die Kundendaten.<o:p></o:p></span></span></span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"> </span>&nbsp;</span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Die Kollegin, deren PC reibungslos läuft, wird gleichermaßen gehasst und bewundert. Gern wird mal ein „also, meiner läuft" in die Runde geflötet und ein „schön für dich" zurückgeknurrt.<br />Eigentlich haben wir Kolleginnen uns aber sehr lieb.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Deshalb helfen wir uns, wenn gar nichts mehr geht.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Neulich sagt Kollegin 1 zu Kollegin 2: „Ich komme hier nicht weiter. Kannst du mir mal dein Passwort sagen?"</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Kollegin 2, die gerade eine Kundin bedient, wird ein bisschen rot und windet sich.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><span style="font-family: Verdana, sans-serif;">„Bitte, ich kann sonst nicht weiterarbeiten, du kannst dir doch sofort ein neues holen!"<o:p></o:p></span></span></span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;">(Passwörter an die Kollegin weitergeben ist bei Todesstrafe verboten: der Datenschutz!)</span></span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">„Das geht jetzt nicht", zischt Kollegin 2 durch die geschlossenen Zähne Kollegin 1 zu.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">„Ich komme beim HelpDesk nicht durch, nun hilf du mir doch bitte."</span></span></div><div style="text-align: left;"><span style="color: #333333; font-family: &quot;arial&quot;; font-size: medium;"></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Kollegin 2 schreibt etwas auf einen Notizzettel und reicht ihn der verzweifelten Kollegin 1. Kollegin 1&nbsp;grinst und zeigt mir den Zettel.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Darauf steht: AmArsch3!</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Kein <i style="mso-bidi-font-style: normal;">Sonnenschein15?</i>, kein <i style="mso-bidi-font-style: normal;">Hasimaus75%</i>.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">AmArsch3! </span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><span style="font-family: Verdana, sans-serif;">Ein rüder Ton hat Einzug in&nbsp;unsere Passwörterwelt&nbsp;gehalten.<o:p></o:p></span></span></span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Mich wundert das nicht.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><span style="font-family: Verdana, sans-serif;">In <i style="mso-bidi-font-style: normal;">AmArsch3!</i> steckt der ganze Frust der Userin. Die Systeme laufen nicht und dann sollst du dir dauernd leicht zu merkende, aber trotzdem unverwechselbare Log-ins ausdenken.<o:p></o:p></span></span></span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"> </span>&nbsp;</span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Als die Kundin das Büro verlässt, sagt Kollegin 2: „Ich konnte dir doch nicht das Passwort zurufen!" Kollegin 3 sagt: „Meines kann ich dir auch nicht laut sagen."</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Kollegin 2 ändert ihr Passwort sofort.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; line-height: 130%;"><span style="font-family: Verdana, sans-serif; font-size: medium;">Ich möchte nicht wissen, wie das neue heißt. Darf ich auch gar nicht.</span></span><br /><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"><o:p></o:p></span></span><span style="font-family: Verdana, sans-serif;">&nbsp;</span></div><div style="text-align: left;"><span style="font-family: Verdana, sans-serif; font-size: medium;"> </span><span style="color: #333333; line-height: 130%;"><span style="font-size: medium;"></span></span></div><div style="text-align: left;"><span style="color: #333333; font-family: &quot;arial&quot; , &quot;sans-serif&quot;; line-height: 130%;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">Aber feststellen, dass die Welt immer bekloppter wird, das darf ich.</span><!--[if !supportLineBreakNewLine]--></span><!--[endif]--></span><span style="font-family: &quot;arial&quot; , &quot;sans-serif&quot;; line-height: 130%;"><o:p></o:p></span></div>
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://www.neuesvonfraumeyer.de/2017/01/vonpayback-punkten-und-passwortern-die.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -2986,38 +3019,39 @@ SyndContentImpl.value=<span style="font-size: large;"></span><br /><div class="M
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-	  <a href="arduino_xbee_serverueberwachung.html">
-		<div class="date">15.02.2017</div>
-<h3>Arduino und XBee für Serverüberwachung</h3>
+	  <a href="dbms_software.html">
+		<div class="date">24.02.2017</div>
+<h3>DBMS in Software</h3>
   <div class="abstract">
 			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Nach meinen diversen Berichten über den Stand der 
-Komponenten zur Serverüberwachung
-schrieb ich neulich über Versuche, 
-Arduinos und XBees einzubinden
-- das 
-Projekt wurde erfolgreich abgeschlossen!
+		  <p>Im Job haben wir an einer Ausschreibung teilgenommen, die eine Java-Anwendung
+fordert, in der die Anwender neue Objekte definieren können sollen. Normalerweise 
+würde das bedeuten, neue Tabellen in einer relationalen Datenbank anzulegen - leider
+würde das aber auch die Nutzung eines OR-Mappers, bzw. von Container
+Managed Persistence ausschließen.
 </p></div>   </a>
 </li>
 <li class="anriss">
-	  <a href="dwb__arduino_demonstrator__v2_0_.html">
-		<div class="date">15.02.2017</div>
-<h3>dWb+ Arduino-Demonstrator "v2.0"</h3>
+	  <a href="i2c_adressen_herausfinden.html">
+		<div class="date">24.02.2017</div>
+<h3>I2C-Adressen herausfinden</h3>
   <div class="abstract">
 			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Ich habe bereits vor geraumer Zeit eine kleine Schaltung aufgebaut,
-die auf einem Arduino ProtoShield analoge wie digitale Ein-
-und Ausgänge zusammenfasst. Diese wurde nun erweitert.
+		  <p>Wer manchmal vergisst, auf welche Adresse Geräte am I2C-Bus hören,
+der könnte vielleicht durch die hier vorgestellte Methode 
+Zeit sparen...
 </p></div>   </a>
 </li>
 <li class="anriss">
-	  <a href="arduino_spi_unvertraeglichkeiten.html">
-		<div class="date">21.01.2017</div>
-<h3>Arduino SPI Unverträglichkeiten</h3>
+	  <a href="widgets_auf_modulen_dwb_.html">
+		<div class="date">24.02.2017</div>
+<h3>Widgets auf Modulen in dWb+</h3>
   <div class="abstract">
-				  <p>Jetzt, wo die dunkle Jahreszeit wieder angebrochen ist (ich schreibe das einen Tag
-nach der Umstellung auf Winterzeit), habe ich meinen Arduino Bastelkasten wieder
-rausgeholt.
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Ich habe mich lange dagegen gesträubt, aber nun über den Jahreswechsel endlich nachgegeben - es besteht
+nun die Möglichkeit, Widgets direkt auf Module in
+dWb+
+zu packen
 </p></div>   </a>
 </li>
 </ul>
@@ -3052,18 +3086,6 @@ rausgeholt.
 </header>
 <div class="nav-item-body">
   <p>Alles rund um Googles Betriebssystem</p>
-</div>
-</div>
-</a>
-<a href="tag_Assorted.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-    Assorted
-</h3>
-</header>
-<div class="nav-item-body">
-  <p>Passt in keine der anderen Kategorien...</p>
 </div>
 </div>
 </a>
@@ -3148,28 +3170,6 @@ rausgeholt.
 <div class="nav-item-body">
   <p>Elektronik und so Zeuchs...</p>
 </div>
-</div>
-</a>
-<a href="hardware_dwb_.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-    Hardware dWb+
-</h3>
-</header>
-<div class="nav-item-body">
-  </div>
-</div>
-</a>
-<a href="it_security.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-    IT Security
-</h3>
-</header>
-<div class="nav-item-body">
-  </div>
 </div>
 </a>
 <a href="tag_Java.html">
@@ -3292,7 +3292,7 @@ rausgeholt.
 </div>
 </div>
 </a>
-<a href="verschiedenes.html">
+<a href="tag_Verschiedenes.html">
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
@@ -3300,7 +3300,8 @@ rausgeholt.
 </h3>
 </header>
 <div class="nav-item-body">
-  </div>
+  <p>Passt in keine der anderen Kategorien...</p>
+</div>
 </div>
 </a>
 <a href="tag_Video.html">

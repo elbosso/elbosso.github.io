@@ -34,10 +34,11 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.elbosso.util.validator.rules;
 
+import de.elbosso.util.lang.annotations.ValidatorModule;
 import de.netsysit.util.validator.rules.*;
 import java.awt.geom.Rectangle2D;
 
-@de.elbosso.dataflowframework.processors.ValidatorModule(datatypes={java.awt.geom.Point2D.class,java.awt.Shape.class})
+@ValidatorModule(datatypes={java.awt.geom.Point2D.class,java.awt.Shape.class}, cubbyholetype = de.netsysit.util.threads.SimpleNonBlockingCubbyHole.class)
 public class RectangleInsideRule extends AbstractRule
 {
 	private java.awt.geom.Rectangle2D rect;

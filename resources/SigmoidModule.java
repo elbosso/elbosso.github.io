@@ -34,38 +34,62 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.elbosso.dataflowframework.modules.convert.algorithms.functions;
 
-public class SigmoidModule extends de.netsysit.dataflowframework.modules.BeanContextChildModuleBase
+public class SigmoidModule extends de.netsysit.dataflowframework.modules.ThreadingBeanContextChildModuleBase
 {
 	static
 	{
-		de.netsysit.util.beans.InterfaceFactory.setSuperclassAssociationForEventDispatchThread(SigmoidModule.class, de.netsysit.dataflowframework.modules.BeanContextChildModuleBase.class);
+		de.netsysit.util.beans.InterfaceFactory.setSuperclassAssociationForEventDispatchThread(SigmoidModule.class, de.netsysit.dataflowframework.modules.ThreadingBeanContextChildModuleBase.class);
 	}
 	private double[] output;
 	private de.elbosso.algorithms.functions.Sigmoid function;
 	private de.elbosso.util.validator.rules.MeasurementRule measure;
 	private de.elbosso.util.validator.rules.MeasurementWrapper wrapper;
+	private java.lang.Number[] lastInput;
 
 	public SigmoidModule()
 	{
-		super();
+		super(SigmoidModule.class.getName());
 		this.function=new de.elbosso.algorithms.functions.Sigmoid();
 	}
+    @Override
+    protected de.netsysit.util.threads.CubbyHole createCubbyHole()
+    {
+        return new de.netsysit.util.threads.SimpleNonBlockingCubbyHole();
+    }
 
 	@de.elbosso.dataflowframework.ui.annotations.AutoConnectAllowed
-	public double[] getOutput()
+	public synchronized double[] getOutput()
 	{
 		return output;
 	}
-
+    private synchronized void setOutput(double[] output)
+    {
+        this.output=output;
+    }
+    private synchronized java.lang.Number[] getLastInput()
+    {
+        return (lastInput!=null?java.util.Arrays.copyOf(lastInput,lastInput.length):null);
+    }
+    private synchronized void setLastInput(java.lang.Number[] lastInput)
+    {
+        this.lastInput = lastInput;
+    }
 	@de.elbosso.dataflowframework.ui.annotations.AutoConnectAllowed
 	public void input(java.lang.Number[] data)
 	{
-		if(data!=null)
+        setLastInput(data);
+        processData(data);
+    }
+    protected void doWork(Object ref) throws InterruptedException
+    {
+        java.lang.Number[] in=getLastInput();
+		if(in!=null)
 		{
 			double[] old=getOutput();
-			output=new double[data.length];
-			for(int i=0;i<data.length;++i)
-				output[i]=function.compute(data[i].doubleValue());
+			output=new double[in.length];
+			for(int i=0;i<in.length;++i)
+				output[i]=function.compute(in[i].doubleValue());
+			setOutput(output);
 			send("output", old, getOutput());
 		}
 	}

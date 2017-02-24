@@ -2,13 +2,44 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>Hardware dWb+</title>
+  <title>DBMS in Software</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
+			<meta name="Description" content="Im Job haben wir an einer Ausschreibung teilgenommen, die eine Java-Anwendung
+fordert, in der die Anwender neue Objekte definieren können sollen." />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
 	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
 	<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
@@ -30,7 +61,7 @@ document.write(link)
 //-->
 </script>
 </head>
-<body>
+<body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
 <div id="logo">
@@ -57,34 +88,141 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 <div id="all">
 <div id="A">
 <div id="content">
-	<div class="heading">Hardware dWb+</div>
-	<ul class="double"> 
-<li class="anriss spanrow">
-					<span class="tags">
-
-					<div class="popup">
-
-<div><a class="taglink" href="hardware_dwb_.html">Hardware dWb+</a></div>
-
+	<div class="date">24.02.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+				<!--li--> <a href="widgets_auf_modulen_dwb_.html#content">Java</a> <!--/li-->
+					<!--li--> ,<a href="widgets_auf_modulen_dwb_.html#content">Komponenten</a> <!--/li-->
+					<!--li--> ,<a href="oracle_jdbc_treiber_eigenarten.html#content">Datenbanken</a> <!--/li-->
+			<!--/ul-->
 </div>
-
-	<img src="images/tag_48.png" class="imgtag">
-
-				</span>
-	  <a class="anriss" href="dwb__arduino_demonstrator__v2_0_.html#content">
-	<div class="date">15.02.2017</div>
-			<h3 class="head">
-				dWb+ Arduino-Demonstrator "v2.0"</h3>
+ 	<div class="heading">DBMS in Software</div>
+			<p>Im Job haben wir an einer Ausschreibung teilgenommen, die eine Java-Anwendung
+fordert, in der die Anwender neue Objekte definieren können sollen. Normalerweise 
+würde das bedeuten, neue Tabellen in einer relationalen Datenbank anzulegen - leider
+würde das aber auch die Nutzung eines OR-Mappers, bzw. von Container
+Managed Persistence ausschließen.
+</p> <a name="content"> </a>
+ <p>Das erinnerte mich an eine unkonventionelles Datenmodell, das ich vor vielen Jahren mal bei einem Kunden
+sah: Er hatte eine Anwendung, in der eine relationale Datenbank für die Persistenz
+verantwortlich war. In dieser waren aber nur wenige Tabellen modelliert. 
+In diesen Tabellen wurden die Tabellen des eigentlichen fachlichen Modells beschrieben.
+Damit konnte man durch simples Einfügen von Zeilen in den richtigen Tabellen
+Spalten zu fachlichen Tabellen hinzufügen, ohne das physische Datenmodell ändern zu müssen.
+Das bezeichne ich im folgenden als DBMS in Software.
+</p><p>
+Noch ein kleiner Exkurs: Wir haben natürlich darüber nachgedacht, Graph-Datenbanken 
+in unsere Überlegungen einzubeziehen. Wir untersuchen auch einige andere Lösungsmöglichkeiten.
+Dieser Artikel dient wirklich lediglich dazu, meine Einsichten bei der praktischen Erprobung
+aufzuschreiben.
+</p><p>
+Zunächst einige Begriffsklärungen: Im folgenden werde ich mit physisches Datenmodell die tatsächlichen
+Tabellen im DBMS bezeichnen. Virtuelles Datenmodell umfasst die in diesen Tabellen
+definierten fachlichen Tabellen.
+</p><p>
+Ich probierte die nachfolgend dokumentierten Schritte in einer PostgreSQL-Datenbank der Version
+9 aus. Zunächst benötigte ich eine Tabelle im physischen Datenmodell, die Informationen 
+zu den Tabellen im virtuellen Datenmodell zu halten. Bei mir sah diese Tabelle wie folgt aus:
+<pre>
+CREATE TABLE public.tablespec (
+ id serial NOT NULL,
+ name VARCHAR(255) , PRIMARY KEY (id));
+</pre>
+Daran schloss sich die Erzeugung der Tabelle im physischen Datenmodell an, die die Spezifikationen
+der  einzelnen Spalten des virtuellen Datenmodells speichern sollte:
+<pre>
+CREATE TABLE public.columnspec (
+ id serial NOT NULL,
+ name VARCHAR(255) ,
+ tablespecref INTEGER REFERENCES tablespec (id) ,
+ PRIMARY KEY (id));
+</pre>
+Schließlich fehlte noch die Tabelle, die die Daten aufnimmt, die in den Tabellen des virtuellen Datenmodells
+gespeichert werden sollten. Diese Tabelle ist wie folgt organisiert: jeder Spaltenwert in einer virtuellen
+Tabelle wird in einer Zeile dieser Tabelle gespeichert. Diese physische Tabelle enthält für jeden der im
+virtuellen Datenmodell unterstützten datentypen eine Spalte. Im Beispiel sind das zwei:
+Integer und String.
+<pre>
+CREATE TABLE public.rowcontents (
+ id serial NOT NULL,
+ logicalrow INTEGER NOT NULL,
+ colspecref INTEGER REFERENCES columnspec (id) ,
+ stringval VARCHAR(255) ,
+ intval INTEGER , PRIMARY KEY (id));
+</pre> 
+Die Spalte logicalrow spielt hierbei die Rolle der Rownumber in traditionellen 
+Datenbanksystemen und legt zusammen mit colspecref fest, welche der Datensätze in dieser Tabelle zur gleichen
+Zeile im virtuellen Datenmodell gehören:
+<pre>
+CREATE UNIQUE INDEX tablefirstrows_idx ON rowcontents (colspecref, logicalrow);
+</pre>
+Interessanterweise lässt sich ein UNIQUE-Constraint im virtuellen Datenmodell sehr einfach 
+über folgendes Statement realisieren:
+<pre>
+CREATE UNIQUE INDEX my_partial_ix ON rowcontents (intval) WHERE (colspecref = 6);
+</pre>
+Wie kann man dieses virtuelle Datenmodell mittels traditioneller Werkzeuge nutzen?
+Ein Select-Statement, das den Inhalt der virtuellen Zeilen einer virtuellen Tabelle
+abfragt, lässt sich wie folgt realisieren:
+<pre>
+select A.intval,B.stringval from (select
+logicalrow,intval from rowcontents where colspecref=2) AS A
+left join (select logicalrow,stringval from rowcontents where
+colspecref=1);
+</pre>
+Solche Abfragen können als Grundlage der Definition von normalen Datenbank-Views 
+dienen. Damit kann man auf die Inhalte der virtuellen Tabellen mit Standard-Reporting-Werkzeugen zugreifen.
+</p><p>
+Zwei letzte Gedanke dazu: Mit etwas Aufwand ließe sich ein JDBC-Treiber zur Arbeit mit einer solchen Datenbank 
+schreiben. Eine relativ einfache Möglichkeit, in Code auf Entities (Zeilen in den virtuellen Tabellen)
+zuzugreifen besteht darin, eine Facade zu erstellen, die etwa die Möglichkeiten der
+<a href="zugriff_auf_maps_ohne_cast_java.html">typsicheren Collections</a>
+nutzt und Zugriffsmethoden zu nutzen wie im JDBC-Trebermodell, in dem die Spalten
+über Stringparameter bestimmt werden.
+</p> 		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+	  <a href="i2c_adressen_herausfinden.html#content">
+		<div class="date">24.02.2017</div>
+<h3>I2C-Adressen herausfinden</h3>
   <div class="abstract">
 			<img class="initial" title="Neu" src="images/page_new_48.png">
-	<p>Ich habe bereits vor geraumer Zeit eine kleine Schaltung aufgebaut,
-die auf einem Arduino ProtoShield analoge wie digitale Ein-
-und Ausgänge zusammenfasst. Diese wurde nun erweitert.
-</p></div> 	  </a>
-
+		  <p>Wer manchmal vergisst, auf welche Adresse Geräte am I2C-Bus hören,
+der könnte vielleicht durch die hier vorgestellte Methode 
+Zeit sparen...
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="widgets_auf_modulen_dwb_.html#content">
+		<div class="date">24.02.2017</div>
+<h3>Widgets auf Modulen in dWb+</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Ich habe mich lange dagegen gesträubt, aber nun über den Jahreswechsel endlich nachgegeben - es besteht
+nun die Möglichkeit, Widgets direkt auf Module in
+dWb+
+zu packen
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="arduino_xbee_serverueberwachung.html#content">
+		<div class="date">15.02.2017</div>
+<h3>Arduino und XBee für Serverüberwachung</h3>
+  <div class="abstract">
+				  <p>Nach meinen diversen Berichten über den Stand der 
+Komponenten zur Serverüberwachung
+schrieb ich neulich über Versuche, 
+Arduinos und XBees einzubinden
+- das 
+Projekt wurde erfolgreich abgeschlossen!
+</p></div>   </a>
 </li>
 </ul>
-</div>
 </div>
 <nav id="C"> 
 <h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
@@ -119,18 +257,6 @@ und Ausgänge zusammenfasst. Diese wurde nun erweitert.
 </div>
 </div>
 </a>
-<a href="tag_Assorted.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-    Assorted
-</h3>
-</header>
-<div class="nav-item-body">
-  <p>Passt in keine der anderen Kategorien...</p>
-</div>
-</div>
-</a>
 <a href="tag_Basteln.html">
 <div class="nav-item accordion">
 <header class="nav-item-header">
@@ -158,7 +284,9 @@ und Ausgänge zusammenfasst. Diese wurde nun erweitert.
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-    Datenbanken
+    <strong>
+Datenbanken
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -214,33 +342,13 @@ und Ausgänge zusammenfasst. Diese wurde nun erweitert.
 </div>
 </div>
 </a>
-<a href="hardware_dwb_.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-    Hardware dWb+
-</h3>
-</header>
-<div class="nav-item-body">
-  </div>
-</div>
-</a>
-<a href="it_security.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-    IT Security
-</h3>
-</header>
-<div class="nav-item-body">
-  </div>
-</div>
-</a>
 <a href="tag_Java.html">
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-    Java
+    <strong>
+Java
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -252,7 +360,9 @@ und Ausgänge zusammenfasst. Diese wurde nun erweitert.
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-    Komponenten
+    <strong>
+Komponenten
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -356,7 +466,7 @@ und Ausgänge zusammenfasst. Diese wurde nun erweitert.
 </div>
 </div>
 </a>
-<a href="verschiedenes.html">
+<a href="tag_Verschiedenes.html">
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
@@ -364,7 +474,8 @@ und Ausgänge zusammenfasst. Diese wurde nun erweitert.
 </h3>
 </header>
 <div class="nav-item-body">
-  </div>
+  <p>Passt in keine der anderen Kategorien...</p>
+</div>
 </div>
 </a>
 <a href="tag_Video.html">
@@ -414,9 +525,6 @@ und Ausgänge zusammenfasst. Diese wurde nun erweitert.
 </div>
 </div>
 </a>
-<!--
--->
-
 </nav>
 </div>
 	<div id="footer">
@@ -437,8 +545,7 @@ abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZ
 		</script>
 		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
 			</a></strong>
-	</span>
-</div><!-- #footer -->
+	</span></div><!-- #footer -->
 </div>
 </body>
 </html>

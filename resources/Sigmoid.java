@@ -6,12 +6,13 @@
 package de.elbosso.algorithms.functions;
 
 import de.elbosso.util.lang.OneDFunction;
+import de.elbosso.util.lang.annotations.OneDFunctionModule;
 
 /**
  *
  * @author elbosso
  */
-@de.elbosso.dataflowframework.processors.OneDFunctionModule
+@OneDFunctionModule(cubbyholetype = de.netsysit.util.threads.SimpleNonBlockingCubbyHole.class)
 public class Sigmoid extends OneDFunction
 {
 	static

@@ -2,13 +2,43 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>IT Security</title>
+  <title>Widgets auf Modulen in dWb+</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
+			<meta name="Description" content="" />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
 	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
 	<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
@@ -30,7 +60,7 @@ document.write(link)
 //-->
 </script>
 </head>
-<body>
+<body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
 <div id="logo">
@@ -57,34 +87,92 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 <div id="all">
 <div id="A">
 <div id="content">
-	<div class="heading">IT Security</div>
-	<ul class="double"> 
-<li class="anriss spanrow">
-					<span class="tags">
-
-					<div class="popup">
-
-<div><a class="taglink" href="tag_Linux.html">Linux</a></div>
-<div><a class="taglink" href="it_security.html">IT Security</a></div>
-
+	<div class="date">24.02.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+				<!--li--> <a href="roundinstrument_noch_mal_aufgewaermt.html#content">Java</a> <!--/li-->
+					<!--li--> ,<a href="dwb__arduino_demonstrator__v2_0_.html#content">dWb+</a> <!--/li-->
+					<!--li--> ,<a href="roundinstrument_noch_mal_aufgewaermt.html#content">Komponenten</a> <!--/li-->
+			<!--/ul-->
 </div>
-
-	<img src="images/tag_48.png" class="imgtag">
-
-				</span>
-	  <a class="anriss" href="vier_augen_prinzip_login_pam.html#content">
-	<div class="date">16.01.2016</div>
-			<h3 class="head">
-				Vier-Augen-Prinzip bei Login mit PAM</h3>
+ 	<div class="heading">Widgets auf Modulen in dWb+</div>
+			<p>Ich habe mich lange dagegen gesträubt, aber nun über den Jahreswechsel endlich nachgegeben - es besteht
+nun die Möglichkeit, Widgets direkt auf Module in
+<a href="dWb.html">dWb+</a>
+zu packen
+</p> <a name="content"> </a>
+ <p>  <img src="images/medium/dWb_logo.png" 
+	   alt="Dataflow Workbench dWb+" 
+	class="imgright">
+Es gab viele Gründe, sich dagegen zu sträuben - angefangen davon, dass dadurch Module sehr viel mehr Platz einnehmen können, als sie müssten
+bis hin dazu, dass diese Widgets natürlich im Stand-alone-Modus der Anwendung nicht mehr sichtbar und benutzbar sind.
+</p><p>
+Während meiner Versuche, mich endgültig durch das interessante Thema
+<a href="rechnerarchitektur_bildung_links.html">74181</a>
+einzuarbeiten habe ich nachgegeben: Nachdem ich den hervorragenden Simulator
+<a href="https://tams-www.informatik.uni-hamburg.de/applets/hades/webdemos/index.html">hier</a>
+gefunden hatte, habe ich ein erstes Modul mit einem Widget ausgerüstet: Dieses Modul visualisiert
+den Status von 8 binären Werten. Diese werden jetzt als Binärzahl aufgefasst und entsprechend
+als Hexadezimalzahl direkt auf dem Modul dargestellt.
+</p><p>
+<img src="images/modulewidgetparkhaus.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Visualisierung für bis zu acht Binärsignale bei der Arbeit
+</span>
+</p><p>
+Dieses Feature ist noch lange nicht production-ready und zur Zeit in einer stringenten Erprobungsphase.
+Es wird so langenicht freigegeben, bis ich eine Idee habe, wie ich das Dilemma mit dem Stand-alone-Modus lösen kann.
+Bisher erschöpfen sich die Ideen dahingehend darin, den Entwicklern ans Herz zu legen, das Feature sparsam zu benutzen,
+es nur zur Informationsanzeige zu verwenden, nur Informationen anzuzeigen, die auch über die Modulausgänge und/oder das Parameterfenster
+zugreifbar sind und die Widgets möglichst klein zu halten. Eine weitere - ebenfalls unausgegorene Idee ist, Module mit Widgets
+zu kennzeichnen und die Widgets selbst erst auf ausdrücklichen Wunsch des Anwenders einzublenden.
+</p> 		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+	  <a href="dbms_software.html#content">
+		<div class="date">24.02.2017</div>
+<h3>DBMS in Software</h3>
   <div class="abstract">
-			<p>Zwang zur Anwesenheit mehrerer Personen zur Anmeldung 
-als Systemuser - beispielsweise zur Verwaltung einer
-CA.
-</p></div> 	  </a>
-
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Im Job haben wir an einer Ausschreibung teilgenommen, die eine Java-Anwendung
+fordert, in der die Anwender neue Objekte definieren können sollen. Normalerweise 
+würde das bedeuten, neue Tabellen in einer relationalen Datenbank anzulegen - leider
+würde das aber auch die Nutzung eines OR-Mappers, bzw. von Container
+Managed Persistence ausschließen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="i2c_adressen_herausfinden.html#content">
+		<div class="date">24.02.2017</div>
+<h3>I2C-Adressen herausfinden</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Wer manchmal vergisst, auf welche Adresse Geräte am I2C-Bus hören,
+der könnte vielleicht durch die hier vorgestellte Methode 
+Zeit sparen...
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="arduino_xbee_serverueberwachung.html#content">
+		<div class="date">15.02.2017</div>
+<h3>Arduino und XBee für Serverüberwachung</h3>
+  <div class="abstract">
+				  <p>Nach meinen diversen Berichten über den Stand der 
+Komponenten zur Serverüberwachung
+schrieb ich neulich über Versuche, 
+Arduinos und XBees einzubinden
+- das 
+Projekt wurde erfolgreich abgeschlossen!
+</p></div>   </a>
 </li>
 </ul>
-</div>
 </div>
 <nav id="C"> 
 <h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
@@ -116,18 +204,6 @@ CA.
 </header>
 <div class="nav-item-body">
   <p>Alles rund um Googles Betriebssystem</p>
-</div>
-</div>
-</a>
-<a href="tag_Assorted.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-    Assorted
-</h3>
-</header>
-<div class="nav-item-body">
-  <p>Passt in keine der anderen Kategorien...</p>
 </div>
 </div>
 </a>
@@ -170,7 +246,9 @@ CA.
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-    dWb+
+    <strong>
+dWb+
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -214,33 +292,13 @@ CA.
 </div>
 </div>
 </a>
-<a href="hardware_dwb_.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-    Hardware dWb+
-</h3>
-</header>
-<div class="nav-item-body">
-  </div>
-</div>
-</a>
-<a href="it_security.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-    IT Security
-</h3>
-</header>
-<div class="nav-item-body">
-  </div>
-</div>
-</a>
 <a href="tag_Java.html">
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-    Java
+    <strong>
+Java
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -252,7 +310,9 @@ CA.
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-    Komponenten
+    <strong>
+Komponenten
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -356,7 +416,7 @@ CA.
 </div>
 </div>
 </a>
-<a href="verschiedenes.html">
+<a href="tag_Verschiedenes.html">
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
@@ -364,7 +424,8 @@ CA.
 </h3>
 </header>
 <div class="nav-item-body">
-  </div>
+  <p>Passt in keine der anderen Kategorien...</p>
+</div>
 </div>
 </a>
 <a href="tag_Video.html">
@@ -414,9 +475,6 @@ CA.
 </div>
 </div>
 </a>
-<!--
--->
-
 </nav>
 </div>
 	<div id="footer">
@@ -437,8 +495,7 @@ abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZ
 		</script>
 		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
 			</a></strong>
-	</span>
-</div><!-- #footer -->
+	</span></div><!-- #footer -->
 </div>
 </body>
 </html>
