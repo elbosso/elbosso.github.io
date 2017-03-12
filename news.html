@@ -113,6 +113,159 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/" target="_blank">Scratch Where It's Itching</a>
+		</div>
+		<div>
+			<h3>Format Date with java time</h3>
+		</div>
+		<div class="collectiontext">
+						An advantage of the DateTimeFormatter class from the java time package over the old DateFormat is that it is thread-safe. But if the only thing I have is a Date, how can I proceed?<p>
+The DateTimeFormatter's format method takes a TemporalAccessor as a parameter. Date has a toInstant() method that converts the Date to an Instant object that implements the TemporalAccessor interface. All that sounds pretty easy:
+<pre>
+  Date date = new Date();
+  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME;
+  System.out.println(df.format(date.toInstant()));
+</pre><p>
+Unfortunately, that does not work. You en up with the following error:
+<pre>
+Exception in thread "main" java.time.temporal.UnsupportedTemporalTypeException: Unsupported field: Year
+	at java.time.Instant.getLong(Unknown Source)
+	at java.time.format.DateTimePrintContext$1.getLong(Unknown Source)
+	at java.time.format.DateTimePrintContext.getValue(Unknown Source)
+	at java.time.format.DateTimeFormatterBuilder$NumberPrinterParser.format(Unknown Source)
+</pre><p>
+As it turns out, the only formatter that can be used with an Instant is DateTimeFormatter.ISO_INSTANT. And the output would be in UTC time zone and look like this: '2011-12-03T10:15:30Z'.<p>
+In fact, this is all very logical. The only information missing from a Date to know the correct time and date to print is the time zone. The old DateFormat class assumed you would want to use the current time zone. For java time, you have to explicitly sate it:
+<pre>
+  Date date = new Date();
+  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME;
+  System.out.println(df.format(date.toInstant().atZone(ZoneId.systemDefault())));
+</pre><p>
+Or you can also provide the time zone to the formatter:
+<pre>
+  Date date = new Date();
+  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME
+    .withZone(ZoneId.systemDefault());
+  System.out.println(df.format(date.toInstant()));
+</pre><p>
+The toZone() method of Instant creates a ZonedDateTime object, from which you can easily convert to LocalDate, LocalTime or LocalDateTime. To convert back to a Date is always a matter of providing the missing information.<p>
+For instance, from a Localtime, you provide a date and a time zone:
+<pre>
+  LocalTime now = LocalTime.now();
+  Date date = Date.from(now.atDate(LocalDate.now()).atZone(ZoneId.systemDefault()).toInstant());
+</pre><p>
+From a LocalDate, you need a time and a time zone:
+<pre>
+  LocalDate now = LocalDate.now();
+  Date date = Date.from(now.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+</pre><p>
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/entry/format_date_with_java_time" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/" target="_blank">Scratch Where It's Itching</a>
+		</div>
+		<div>
+			<h3>Format Date with java time</h3>
+		</div>
+		<div class="collectiontext">
+						An advantage of the DateTimeFormatter class from the java time package over the old DateFormat is that it is thread-safe. But if the only thing I have is a Date, how can I proceed?<p>
+The DateTimeFormatter's format method takes a TemporalAccessor as a parameter. Date has a toInstant() method that converts the Date to an Instant object that implements the TemporalAccessor interface. All that sounds pretty easy:
+<pre>
+  Date date = new Date();
+  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME;
+  System.out.println(df.format(date.toInstant()));
+</pre><p>
+Unfortunately, that does not work. You en up with the following error:
+<pre>
+Exception in thread "main" java.time.temporal.UnsupportedTemporalTypeException: Unsupported field: Year
+	at java.time.Instant.getLong(Unknown Source)
+	at java.time.format.DateTimePrintContext$1.getLong(Unknown Source)
+	at java.time.format.DateTimePrintContext.getValue(Unknown Source)
+	at java.time.format.DateTimeFormatterBuilder$NumberPrinterParser.format(Unknown Source)
+</pre><p>
+As it turns out, the only formatter that can be used with an Instant is DateTimeFormatter.ISO_INSTANT. And the output would be in UTC time zone and look like this: '2011-12-03T10:15:30Z'.<p>
+In fact, this is all very logical. The only information missing from a Date to know the correct time and date to print is the time zone. The old DateFormat class assumed you would want to use the current time zone. For java time, you have to explicitly sate it:
+<pre>
+  Date date = new Date();
+  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME;
+  System.out.println(df.format(date.toInstant().atZone(ZoneId.systemDefault())));
+</pre><p>
+Or you can also provide the time zone to the formatter:
+<pre>
+  Date date = new Date();
+  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME
+    .withZone(ZoneId.systemDefault());
+  System.out.println(df.format(date.toInstant()));
+</pre><p>
+The toZone() method of Instant creates a ZonedDateTime object, from which you can easily convert to LocalDate, LocalTime or LocalDateTime. To convert back to a Date is always a matter of providing the missing information.<p>
+For instance, from a Localtime, you provide a date and a time zone:
+<pre>
+  LocalTime now = LocalTime.now();
+  Date date = Date.from(now.atDate(LocalDate.now()).atZone(ZoneId.systemDefault()).toInstant());
+</pre><p>
+From a LocalDate, you need a time and a time zone:
+<pre>
+  LocalDate now = LocalDate.now();
+  Date date = Date.from(now.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+</pre><p>
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/entry/format_date_with_java_time" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>The Linux Migration: Other Users’ Stories, Part 3</h3>
+		</div>
+		<div class="collectiontext">
+						Over the last few weeks, I’ve been sharing various users’ stories about their own personal migration to Linux. If you’ve not read them already, I encourage you to check out part 1 and part 2 of this multi-part series to get a feel for why folks are deciding to switch to Linux, the challenges they faced, and the benefits they’ve seen (so far). Obviously, Linux isn’t the right fit for everyone, but at least by sharing these stories you’ll get a better feel whether it’s a right fit for you.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/5jOWK7fGlmg/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.neuesvonfraumeyer.de/" target="_blank">Neues von Frau Meyer</a>
+		</div>
+		<div>
+			<h3>So. Jetzt aber.</h3>
+		</div>
+		<div class="collectiontext">
+			<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Frohes neues Jahr</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><br /></span></span><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ja, so mancher von Ihnen wird einen Blick auf den Kalender werfen, den Kopf schütteln und denken, dass das der Frau Meyer aber früh einfällt mit den guten Wünschen zum neuen Jahr. Was so neu nicht mehr ist. Es ist zwei Monate, eine Woche und einen Tag alt. Dennoch ist es mir ein Anliegen, Ihnen allen ein frohes neues Jahr zu wünschen. Und Gesundheit, die vor allem.</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Wie so oft bin ich spät dran.</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ich habe es noch nicht einmal geschafft, das volle Glas, in dem ich im letzten Jahr Zettel sammelte, auf denen ich besonders schöne Momente notiert hatte, zu leeren und Platz für neue schöne Momente zu machen. Neben traurigen Ereignissen, die Teile meiner Familie und die Familie einer lieben Kollegin erschütterten (Krebs ist ein heimtückisches Arschloch. Punkt.), gibt es immer wieder Augenblicke der Freude. Und auch hier macht Kleinvieh manchmal Mist.&nbsp;</span></span><br /><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ein besonders gelungener Abend mit Freunden.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ein Spaziergang in der Sonne.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Eine lustige Email deines Bruders.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ein Lied, das du schon ewig nicht mehr gehört hast und das dich direkt in eine Zeitmaschine setzt und ins Jahr 1987 bringt.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Eine Diskussion über Dinos mit einem Fünfjährigen.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Eine Whatsapp von einer Freundin, für die sich ein lang gehegter Wunsch erfüllt.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Eishockey mit Martina (auch wenn wir gegen die Haie verloren haben)</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Dies alles sind nur ein paar Beispiele für Dinge, die auf <span style="font-family: &quot;verdana&quot; , sans-serif;">einen</span> Zettel und ins Glas mit den schönen Momenten gehören.&nbsp;</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Und Jürgen Marcus mag ein wenig übertreiben, wenn er singt, dass eine neue Liebe wie ein neues Leben ist (nanananananaaa). Sie tut auf jeden Fall verdammt gut. (Karl aus Füssen, wenn du diesen Blogpost liest: Frau Meyer ist vom Markt und wird dich auch im nächsten Sommer nicht auf deiner Alm besuchen). &nbsp;</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Manche Dinge ändern sich, manche nicht</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Auch in 2017 sitzen Menschen in öffentlichen Verkehrsmitteln am liebsten am Gang, gern und besonders während der Rush Hour. "Wie, ich soll meinen Rucksack/Einkaufstüte/Laptop vom Nachbarsitz nehmen, damit Mitreisende Platz nehmen können?" *augenrollundschnauf*</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Alle paar Monate begegnet mir in der U79 dieser Wichtigtuer. In 2017 hatte ich wieder das Vergnügen, dem 1,63 m-Mann im Anzug, dessen fast kahlrasierter Schädel ein wuchtiges Headset schmückt, in der Bahn zu treffen. Er bellt Drohungen in seinen Kopfhörer.&nbsp;</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">"Wenn man mir da nicht entgegenkommt, kündige ich den Vertrag."&nbsp;</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">"Noch so eine Aktion und die werden mich mal richtig kennenlernen."</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">"So geht das nicht, Herr XY, sooo nicht</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ich vermute, am anderen Ende der Leitung ist gar keiner. Der Mann, der während seiner Ansagen den Blick umherschweifen lässt und schaut, dass ihm auch ja alle zuhören, ist als Kind nicht gestillt worden oder kriegt dauernd einen vom Chef drüber. Er braucht Aufmerksamkeit. &nbsp; </span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ohne Weiteres könnte er als Trumps Bodyguard oder eiskalter Bond-Gegenspieler durchgehen (dass er Sport macht, sieht man), zöge er nicht einen Trolley mit fettem KMPG-Aufkleber hinter sich her. Für die nächste Begegnung mit dem KMPG-Männeken habe ich ein <span style="background: white none repeat scroll 0% 0%; color: magenta;"><b><a href="https://www.youtube.com/watch?v=8wx24AeqHRA" target="_blank">launiges Lied</a></b> </span>auf mein Smartphone downgeloaded, das ich laut neben ihm abspielen werde. Hoffe, er versteht die Messag</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Glücklicherweise gäbe es im aktuellen Jahr schon einige mit schönen Ereignissen zu beschriftende Zettel (muss nur das Glas leeren, siehe oben). Einen besonders großen würde ich dem Blog-Marathon anlässlich eines Neujahrstreffens des Netzwerks <i>stilsicher</i>(das ab sofort <i>Kreativ am Fluss </i>heißt) am 10. Februar in&nbsp;<a href="http://karlottas-kaffee.de/" target="_blank"><b><span style="background: white none repeat scroll 0% 0%; color: purple;">Karlottas Café</span></b> </a>in Bad Honnef widmen. Mann, war das toll! Eine wunderschöne Location, vier sehr unterschiedliche Bloggerinnen, ein interessiertes und begeisterungsfähiges Publikum, alles organisiert und initiiert von Ursula Kollritsch und unterstützt von Netzwerkgründerin Stephanie Jana. Autorinnenherz, was willste mehr?&nbsp;</span></span><br /><br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="https://2.bp.blogspot.com/-VflsJ56LCNI/WMAbT0kmuzI/AAAAAAAABrE/tN69_A7iWvs8OoqDj_4gzHYIrUX5D9UTQCPcB/s1600/Lesung%2B1.jpg" style="margin-left: auto; margin-right: auto;"><img border="0" height="400" src="https://2.bp.blogspot.com/-VflsJ56LCNI/WMAbT0kmuzI/AAAAAAAABrE/tN69_A7iWvs8OoqDj_4gzHYIrUX5D9UTQCPcB/s400/Lesung%2B1.jpg" width="300" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;"><span style="font-family: &quot;verdana&quot; , sans-serif;">Foto: Ursula Kollritsch www.sommer-frisch.de</span></td></tr></tbody></table><br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="https://2.bp.blogspot.com/-Gac1FiiITsU/WMAbVgUc9OI/AAAAAAAABrE/WmR0i8krbnIdiv3n7iWAvFmgV3sbw1hagCPcB/s1600/Lesung%2B2.jpg" style="margin-left: auto; margin-right: auto;"><img border="0" height="400" src="https://2.bp.blogspot.com/-Gac1FiiITsU/WMAbVgUc9OI/AAAAAAAABrE/WmR0i8krbnIdiv3n7iWAvFmgV3sbw1hagCPcB/s400/Lesung%2B2.jpg" width="300" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;"><span style="font-family: &quot;verdana&quot; , sans-serif;">Foto: Simone Blaschke www.blaschke-pr.de</span></td></tr></tbody></table><br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="https://4.bp.blogspot.com/-fjV_ujRfws0/WMAbYO_2eYI/AAAAAAAABrE/-oMZQByP8ekx7X2b9HBu16Zal1DiIEuUQCPcB/s1600/Bloggerinnen.jpg" style="margin-left: auto; margin-right: auto;"><img border="0" height="282" src="https://4.bp.blogspot.com/-fjV_ujRfws0/WMAbYO_2eYI/AAAAAAAABrE/-oMZQByP8ekx7X2b9HBu16Zal1DiIEuUQCPcB/s400/Bloggerinnen.jpg" width="400" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;"><span style="font-family: &quot;verdana&quot; , sans-serif;">&nbsp; &nbsp; &nbsp;  Karin Wilhelm, Michèle Lichte, Britta Meyer, Sabine Anne&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Lück&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Foto: Simone Blaschke</span></td></tr></tbody></table><span style="font-family: &quot;verdana&quot; , sans-serif;"><br /></span>  <br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Entsprechend positiv fiel der&nbsp;<b><span style="color: purple;"><span style="background: fuchsia none repeat scroll 0% 0%;"><a href="http://www.general-anzeiger-bonn.de/region/siebengebirge/bad-honnef/Bloggerinnen-stellen-%E2%80%9ENotizen-%C3%BCbers-Leben%E2%80%9C-vor-article3473403.html" target="_blank"><span style="background: white none repeat scroll 0% 0%;">Artikel</span></a></span></span></b><span style="background: white none repeat scroll 0% 0%;"> d</span>es <i>Bonner Generalanzeiger</i> aus.&nbsp;</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ich habe wieder gemerkt, wie wichtig der Austausch, neudeutsch Networking, ist. Das "Wie machst du das?", "Was ist dir wichtig?", "Wie kriegste das hin?" statt im stillen Kämmerlein vor sich hinzupuzzeln (und ich habe ja leider nicht viel gepuzzelt in den letzten Monaten, für diese 'Blogkade' gibt es diverse Gründe). Meine Begeisterung nach unserer Lesung hat mich veranlasst, mich zwecks weiterem Networking zum&nbsp;<b><span style="color: magenta;"><a href="http://literaturcampnrw.de/literaturcamp-nrwbonn/" target="_blank">Literaturcamp NRW in Bonn</a></span></b> am 08. April anzumelden. Das gibt wieder einen Zettel für das <i>Schöne Momente - </i>Glas, da bin ich sicher!</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><br />Das Jahr ist noch (ziemlich) jung, die Vorsätze überschaubar:</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Regelmäßiger schreiben und wahnsinnige Autorenkarriere ankurbeln</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Netzwerken mit anderen Bloggern und Autoren</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Mehr<span style="font-family: &quot;verdana&quot; , sans-serif;"> Bewegung (der Rücken, die Schulter!)</span></span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Horizont erweitern &nbsp;</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Lachen</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Mutig sein&nbsp;</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Und die Blogs meiner Kolleginnen verfolgen:</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><b><a href="http://kwerdenkerin.de/" rel="nofollow" target="_blank">kwerdenkerin</a></b>&nbsp; (Karin Wilhelm)</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><b><a href="http://lichtemomente.eu/" rel="nofollow" target="_blank">Lichte Momente</a></b>&nbsp; (Michèle Lichte)</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><b><a href="http://www.tage-im-garten.de/" rel="nofollow" target="_blank">Tage im Garten</a></b>&nbsp; (Sabine Anne Lück)</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><br />Bis bald,&nbsp;</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><br /></span></span><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ihre Frau Meyer</span></span><br /><br />
+
+		 -->
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.neuesvonfraumeyer.de/2017/03/so-jetzt-aber_46.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>The Linux Migration: Creating Presentations</h3>
+		</div>
+		<div class="collectiontext">
+						Long-time readers of my site know that I’m a fan of Markdown, and I use it extensively. (This blog, in fact, is written entirely in Markdown and converted to HTML using Jekyll on GitHub Pages.) Since migrating to Linux as my primary desktop OS, I’ve also made the transition to doing almost all my presentations in Markdown as well. Here are the details on how I’m using Markdown for creating presentations on Linux.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ZXrgudlQoIE/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
 		</div>
 		<div>
@@ -252,67 +405,6 @@ SyndContentImpl.value=Einen hab ich noch. Aus Blankenese. Denn jetzt, wo ich woa
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/dKcnqbyvFEo/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>A little Radial Chart for some weekend fun...</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Before I went to Singapore last week I saw some interesting radial bar graphs on the web and thought this might be a fun control to have in JavaFX.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Because in Singapore was no time for coding I've decided to do that later...which means today :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So first let me show you what I'm talking about, the following picture should give you an idea...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://cdn.ilovefreesoftware.com/wp-content/uploads/2016/04/create-radial-bar-chart-for-table-data.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="566" src="https://cdn.ilovefreesoftware.com/wp-content/uploads/2016/04/create-radial-bar-chart-for-table-data.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">I like that idea to wrap a bar graph in a circle to save some space and so I've created that control in JavaFX which now looks like follows:</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-wo_qhS62184/WKfmS0-CURI/AAAAAAAAD_E/QUI96AeBtUkCCNW6znDlYj5G-oezhkW2QCLcB/s1600/radialchart.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="632" src="https://2.bp.blogspot.com/-wo_qhS62184/WKfmS0-CURI/AAAAAAAAD_E/QUI96AeBtUkCCNW6znDlYj5G-oezhkW2QCLcB/s640/radialchart.png" width="640" /></a></div><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">If you will take a look at the control you will figure out that it's not perfect but it should be a starting point for you :)</span><br /><span style="font-family: trebuchet ms, sans-serif;">Because it tooks me only 1.5h to create that control I thought it might also be nice to have it as a skin in TilesFX and so I've also created a RadialChartTileSkin which looks as follows...</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-LayZ9hDIJVc/WKfnBY-gasI/AAAAAAAAD_M/41PKzKhvFngeCIdBKP5RUL29vMoR0H5uACLcB/s1600/Title%2B2017-02-18%2B07-05-39.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://3.bp.blogspot.com/-LayZ9hDIJVc/WKfnBY-gasI/AAAAAAAAD_M/41PKzKhvFngeCIdBKP5RUL29vMoR0H5uACLcB/s640/Title%2B2017-02-18%2B07-05-39.png" width="608" /></a></div><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">So this was a quite productive morning so far :)</span><br /><span style="font-family: trebuchet ms, sans-serif;">The new skin for TilesFX can be found in the current release of TilesFX which is 1.3.4 and the RadialChart control is on github as usual.</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;"><a href="https://github.com/HanSolo/radialchart" target="_blank">Sourcecode</a></span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">So enjoy your weekend and keep coding...</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span>
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2017/02/a-little-radial-chart-for-some-weekend.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>Technology Short Take #78</h3>
-		</div>
-		<div class="collectiontext">
-						Welcome to Technology Short Take #78! Here’s another collection of links and articles from around the Internet discussing various data center-focused technologies.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/I-aJmkIeFro/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>Fixing Double Sublime Text Icons on Fedora 25</h3>
-		</div>
-		<div class="collectiontext">
-						In my previous post on how to install Sublime Text 3 (ST3) on Fedora 25, I mentioned that I have observed instances where launching ST3 via the subl command creates an additional icon in the Dash. While searching for a solution to an issue with LibreOffice icons, I found a fix for this problem.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/TK59VI8XojA/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>Correlating OVS and Guest Domain Interfaces</h3>
-		</div>
-		<div class="collectiontext">
-						I’ve written a fair amount about Open vSwitch (OVS), including some articles on using it with KVM and Libvirt. One thing I haven’t discussed in such environments, though, is the potential challenge of mapping network interfaces in a guest domain to the corresponding OVS interface (for the purposes of troubleshooting, for example). There is no single command that will provide a guest-to-OVS interface map (as far as I know), but this information is easily gathered using a couple commands.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ykHHLjD3YAQ/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -320,35 +412,40 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+	  <a href="growing_cell_structures___grenzen.html">
+		<div class="date">12.03.2017</div>
+<h3>Growing Cell Structures - Grenzen</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Nachdem ich mich über den Jahreswechsel wieder einmal
+verstärkt
+mit meinem Projekt des Lernens verschiedener Programmiersprachen mittels
+komplexerer Beispiele gewidmet habe, gewann ich dabei - für mich - neue Einsichten:
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="autolayout_moduleworkspace.html">
+		<div class="date">12.03.2017</div>
+<h3>AutoLayout für ModuleWorkspace</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Ich wollte schon lange einmal den überfälligen Schritt tun und
+die ModuleWorkspace-Komponente,
+auf der unter anderem die 
+sQLshell
+und
+dWb+
+beruhen um eine Möglichkeit erweitern, die Module und Tabellen automatisch
+bestmöglich anzuordnen.
+</p></div>   </a>
+</li>
+<li class="anriss">
 	  <a href="erste_julia_implementierung.html">
 		<div class="date">07.03.2017</div>
 <h3>Erste Julia-Implementierung</h3>
   <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Nach längerer Pause meines Projektes zum Lernen neuer Sprachen wurde über den Jahreswechsel ausgegraben und ich fand
+				  <p>Nach längerer Pause meines Projektes zum Lernen neuer Sprachen wurde über den Jahreswechsel ausgegraben und ich fand
 endlich mal die Zeit, meine ersten Versuche mit Julia zu unternehmen
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="breadboard_arduino.html">
-		<div class="date">07.03.2017</div>
-<h3>Breadboard Arduino</h3>
-  <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Ich habe endlich (es wird abends recht bald dunkel) das schon lange angepeilte 
-Vorhaben durchgezogen - meinen eigenen Arduino auf einem Breadboard aufzubauen
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="dbms_software.html">
-		<div class="date">24.02.2017</div>
-<h3>DBMS in Software</h3>
-  <div class="abstract">
-				  <p>Im Job haben wir an einer Ausschreibung teilgenommen, die eine Java-Anwendung
-fordert, in der die Anwender neue Objekte definieren können sollen. Normalerweise 
-würde das bedeuten, neue Tabellen in einer relationalen Datenbank anzulegen - leider
-würde das aber auch die Nutzung eines OR-Mappers, bzw. von Container
-Managed Persistence ausschließen.
 </p></div>   </a>
 </li>
 </ul>
