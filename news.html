@@ -339,72 +339,6 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 		<a href="http://harmoniccode.blogspot.com/2017/02/donuts-for-everyone.html" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>A little MapTile update</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">After playing around with the MapTileSkin in the TilesFX project I thought it might make sense to add the ability to also visualize points of interest and a track...and so I've added those features :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I've also added the ability to set the color of the current location marker and the color of the track (it's only one track supported at the moment).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To realize this behavior the Location class now also contains a color property.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the colors I also decided to offer a defined set of colors which are the ones that you can find in </span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>Tile.TileColor</b></span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">GRAY</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">RED</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">GREEN</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">BLUE</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">ORANGE</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">YELLOW_ORANGE</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">YELLOW</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">MAGENTA</span></li></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">These colors will be used wherever possible within TilesFX to create a homogene look over all tiles.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To give you an idea how this new stuff is looking, here are some screenshots...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-x0GkXIOd_lM/WLAWGKvxMyI/AAAAAAAAEAU/2Nh5nNHBY_Af28HTBrhejyz0mJ7ivb7fgCLcB/s1600/Title%2B2017-02-24%2B12-14-10.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://4.bp.blogspot.com/-x0GkXIOd_lM/WLAWGKvxMyI/AAAAAAAAEAU/2Nh5nNHBY_Af28HTBrhejyz0mJ7ivb7fgCLcB/s640/Title%2B2017-02-24%2B12-14-10.png" width="578" /></a></div><div class="separator" style="clear: both; text-align: center;"><span style="font-family: Trebuchet MS, sans-serif;">Map provider: Hydda</span></div><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-3bi_ABbUU_U/WLAWGNixBPI/AAAAAAAAEAQ/KHteWfsOovQ07FpguC8_epC2cD-DPE61wCLcB/s1600/Title%2B2017-02-24%2B12-14-26.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://3.bp.blogspot.com/-3bi_ABbUU_U/WLAWGNixBPI/AAAAAAAAEAQ/KHteWfsOovQ07FpguC8_epC2cD-DPE61wCLcB/s640/Title%2B2017-02-24%2B12-14-26.png" width="578" /></a></div><div class="separator" style="clear: both; text-align: center;"><span style="font-family: &quot;Trebuchet MS&quot;, sans-serif;">Map provider: OpenStreetMap HOT</span></div><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-_VU6fZTVhyY/WLAWGN3CheI/AAAAAAAAEAY/FXU3ahU-dwUK_-00RimcYHLOHd2BAHapgCLcB/s1600/Title%2B2017-02-24%2B12-14-39.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://2.bp.blogspot.com/-_VU6fZTVhyY/WLAWGN3CheI/AAAAAAAAEAY/FXU3ahU-dwUK_-00RimcYHLOHd2BAHapgCLcB/s640/Title%2B2017-02-24%2B12-14-39.png" width="578" /></a></div><div class="separator" style="clear: both; text-align: center;"><span style="font-family: &quot;Trebuchet MS&quot;, sans-serif;">Map provider: OpenStreetMap BlackWhite</span></div><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-8N60E9w8eas/WLAWG3CwR6I/AAAAAAAAEAc/nFRDALMCJlYqp1H-vSgXQJeJsJfcgQXvwCLcB/s1600/Title%2B2017-02-24%2B12-14-59.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://2.bp.blogspot.com/-8N60E9w8eas/WLAWG3CwR6I/AAAAAAAAEAc/nFRDALMCJlYqp1H-vSgXQJeJsJfcgQXvwCLcB/s640/Title%2B2017-02-24%2B12-14-59.png" width="578" /></a></div><div class="separator" style="clear: both; text-align: center;"><span style="font-family: &quot;Trebuchet MS&quot;, sans-serif;">Map provider: World Imagery</span></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">On the screenshot above you can see the current location icon (the bigger blue one), the start icon (green one at the end of the magenta track), the stop icon (the red one at the end of the magenta track) and some poi icons (the yellow, the red and the magenta one).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the example above I've simply exported a track recorded by my Garmin watch to GPX format and imported the GPX file, converted the track points to a list of Locations and pass it to the Tile...done :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you are interested in the code I've used to convert the GPX file to my Location objects you can find a little gist that I've created on github which shows how it works. You simply have to provide a gpx file with the name track.gpx and put it besides the java file.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Here is the <a href="https://gist.github.com/HanSolo/ddfa38f3620a8714cecc8b652276084e" target="_blank">link to the gist</a>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Another feature that I've added is the ability to change the zoom level of the MapTileSkin via the current location. Therefor I've added a zoomLevel property to the Location class and if you change it e.g. by calling</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>tile.getCurrentLocation().setZoomLevel(0)</b></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">the map tile will zoom out completely. The range of zoom levels is going from 0-17.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I hope this features might be useful to create for example a fitness dashboard etc.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">At the moment I've not added a live tracking feature which would create a track on the fly every time the current location changes but this would be easy to add if it's needed.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As always feedback is more than welcome, so please don't hesitate to contact me and let me know about ideas/improvements/feature requests etc.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The above mentioned features are part of the current release of TilesFX which is 1.3.5 and which can be found here</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The source code at&nbsp;<a href="https://github.com/HanSolo/tilesfx" target="_blank">Github</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The binary at&nbsp;<a href="https://bintray.com/hansolo/tilesfx" target="_blank">Bintray</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The dependency at&nbsp;<a href="https://search.maven.org/#search%7Cga%7C1%7Ctilesfx" target="_blank">Maven Central</a>&nbsp;(it's published but might take some time to show up)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">That's it for today, so keep coding...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span>
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2017/02/a-little-maptile-update.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>Adding Metadata to the Arista vEOS Vagrant Box</h3>
-		</div>
-		<div class="collectiontext">
-						This post addresses a (mostly) cosmetic issue with the current way that Arista distributes its Vagrant box for vEOS. I say “mostly cosmetic” because while the Vagrant box for vEOS is perfectly functional if you use it via Arista’s instructions, adding metadata as I explain here provides a small bit of additional flexibility should you need multiple versions of the vEOS box on your system.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/3EGC4x0E3q0/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.frauenotiert.de/" target="_blank">Frau E. notiert..</a>
-		</div>
-		<div>
-			<h3>Der Villenkauf-Bonus-Mini-Cooper</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=Einen hab ich noch. Aus Blankenese. Denn jetzt, wo ich woanders wohne, weiß ich ganz sicher: es ist kein Hamburger Phänomen, sondern eines aus den Elbvororten.<br /><br />Ich stelle also hiermit die steile These auf:<br />Wenn man nach Blankenese zieht - oder in die umliegenden Luxusvororte - dann bekommt man zum Kauf seiner Villa einen Mini Cooper dazu. Anders kann ich mir das zumindest nicht erklären ;-)<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-ryqRSJ-kvHU/WJtDEHkUrXI/AAAAAAAADNo/2pNRFGcgOCorENhsDLtTezvfH1mqcj0lwCLcB/s1600/mini_cooper_blankenese_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="https://3.bp.blogspot.com/-ryqRSJ-kvHU/WJtDEHkUrXI/AAAAAAAADNo/2pNRFGcgOCorENhsDLtTezvfH1mqcj0lwCLcB/s1600/mini_cooper_blankenese_.jpg" /></a></div><div class="separator" style="clear: both; text-align: left;"><br /></div><div class="separator" style="clear: both; text-align: left;">Mindestens jedes vierte Auto, das mir in Blankenese entgegen kam, war ein Mini Cooper. Nun bin ich kein sonderlicher Fan von diesem Auto. Es erinnert mich immer an eine Mischung aus einem überfahrenen Kartoffelkäfer und einer Butterdose. Vielleicht fiel mir die Invasion deshalb so auf. Ist ja wie mit dem tropfenden Wasserhahn. Und dabei gibt es in der BMW Group so wunderschöne Autos!</div><div class="separator" style="clear: both; text-align: left;"><br /></div><div class="separator" style="clear: both; text-align: left;">Also noch ein Grund, Blankenese nicht zu vermissen und mich im Winterhuder Wohnglück zu aalen. :-)</div><br /><br />
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://www.frauenotiert.de/2017/02/der-villenkauf-bonus-mini-cooper.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>Launching an Open Source Book Project</h3>
-		</div>
-		<div class="collectiontext">
-						In my list of planned 2017 projects, I mentioned that one thing I’d like to do this year is launch an open source book project. Well, I’m excited to announce The Open vSwitch Cookbook, an Apache 2.0-licensed book project aimed at providing “how to” recipes for Open vSwitch (OVS).
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/dKcnqbyvFEo/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -412,40 +346,37 @@ SyndContentImpl.value=Einen hab ich noch. Aus Blankenese. Denn jetzt, wo ich woa
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+	  <a href="home_server_ubuntu___linkliste.html">
+		<div class="date">18.03.2017</div>
+<h3>Home Server mit Ubuntu - Linkliste</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Ein paar Links, die mir geholfen haben, mein letztjähriges Weihnachtsprojekt umzusetzen...
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="verbesserungen_moduleworkspace_i.html">
+		<div class="date">18.03.2017</div>
+<h3>Verbesserungen ModuleWorkspace I</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>In der Zeit über Weihnachten haben sich einige Verbesserungen in
+der ModuleWorkspace-Komponente - unter anderem verwendet in der
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+ergeben, die die allgemeine Benutzbarkeit verbessern:
+</p></div>   </a>
+</li>
+<li class="anriss">
 	  <a href="growing_cell_structures___grenzen.html">
 		<div class="date">12.03.2017</div>
 <h3>Growing Cell Structures - Grenzen</h3>
   <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Nachdem ich mich über den Jahreswechsel wieder einmal
+				  <p>Nachdem ich mich über den Jahreswechsel wieder einmal
 verstärkt
 mit meinem Projekt des Lernens verschiedener Programmiersprachen mittels
 komplexerer Beispiele gewidmet habe, gewann ich dabei - für mich - neue Einsichten:
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="autolayout_moduleworkspace.html">
-		<div class="date">12.03.2017</div>
-<h3>AutoLayout für ModuleWorkspace</h3>
-  <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Ich wollte schon lange einmal den überfälligen Schritt tun und
-die ModuleWorkspace-Komponente,
-auf der unter anderem die 
-sQLshell
-und
-dWb+
-beruhen um eine Möglichkeit erweitern, die Module und Tabellen automatisch
-bestmöglich anzuordnen.
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="erste_julia_implementierung.html">
-		<div class="date">07.03.2017</div>
-<h3>Erste Julia-Implementierung</h3>
-  <div class="abstract">
-				  <p>Nach längerer Pause meines Projektes zum Lernen neuer Sprachen wurde über den Jahreswechsel ausgegraben und ich fand
-endlich mal die Zeit, meine ersten Versuche mit Julia zu unternehmen
 </p></div>   </a>
 </li>
 </ul>
