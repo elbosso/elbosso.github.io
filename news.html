@@ -113,6 +113,86 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
+		</div>
+		<div>
+			<h3>Friday Fun XLIV - The Matrix</h3>
+		</div>
+		<div class="collectiontext">
+			<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Last weekend I was thinking about a dot matrix display and remembered that this was always something I would like to do in JavaFX. Well after spending nearly 2 weeks in Singapore working on infrastructure documentation etc. I really needed some coding and because of the jetlag I had enough time during the early mornings to create a little control.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To give you an idea what I'm talking about here is a little screenshot of the control...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-G22k_K9_-PY/WNARqOVy0RI/AAAAAAAAECY/JkmSQOQxDTIr4wHf46140bGPbSn6MlbxgCLcB/s1600/DotMatrix.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="120" src="https://3.bp.blogspot.com/-G22k_K9_-PY/WNARqOVy0RI/AAAAAAAAECY/JkmSQOQxDTIr4wHf46140bGPbSn6MlbxgCLcB/s640/DotMatrix.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So as you can see this is not a really fancy control but more something simple and there is a reason for that. I remember that I've once started to create some kind of matrix control for JavaFX but that was in the early JavaFX 2 days and we had no Canvas node which was the reason why I've used nodes for each dot in the old version. But with this amount of dots the whole thing became really slow and because of that I simply never tried again.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">But when I thought about it over the weekend the Canvas node came to my mind again and so I've started a new approach with the dot matrix control.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So this version runs completely in one Canvas node and is based on an integer array to make it fast. The main idea behind the dot matrix display was to create some kind of animated stock ticker.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">This idea lead to 3 requirements</span><br /><br /><ol><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">the matrix size has to be configurable</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">it must be fast enough for animation</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">it must be possible to set colors for each dot</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">it should be possible to show text</span></li></ol><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So let's take a short look at each requirement.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>1.</b> To make the matrix size configurable it is in principle only needed to define the number of dots per column and row you would like to see in the dot matrix. But there is one drawback here, if the control should be resizable you will also need to define the preferred size of the control to be able to resize it with the right aspect ratio.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Therefor you will find a constructor that not only takes the number of columns and rows but also the preferredWidth and preferredHeight. In addition you could also add a color for the dot on and dot off state.&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So to create a DotMatrix with a size of 128x16 dots and a dot on color of red and a dot off color of dark gray you have to write the following code...</span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono&quot;;">DotMatrix m = <span style="color: #0004ff;">new </span>DotMatrix(128, 16, 264, 33, Color.<span style="font-style: italic;">RED</span>, Color.<span style="font-style: italic;">DARKGRAY</span>);</pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">or if you prefer using the DotMatrixBuilder it will look like follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono&quot;;">DotMatrix m = DotMatrixBuilder.create()<br />                              .<span style="color: #ff7500;">prefSize</span>(264, 33)<br />                              .<span style="color: #ff7500;">colsAndRows</span>(128, 16)<br />                              .<span style="color: #ff7500;">dotOnColor</span>(Color.<span style="font-style: italic;">RED</span>)<br />                              .<span style="color: #ff7500;">dotOffColor</span>(Color.<span style="font-style: italic;">DARKGRAY</span>)<br />                              .<span style="color: #ff7500;">build</span>();</pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>2.</b> To make the dot matrix fast enough for animation I've tried to avoid as much overhead as possible. With overhead I mean things like&nbsp;</span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">many nodes on the scene graph</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">crazy graphics (e.g. each dot has light reflection etc.)</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">complex drawing method</span></li></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To avoid as many nodes on the scene graph as possible the best solution is to make use of the Canvas node. This represents only one node on the scenegraph, can contain complex graphics and the redraw is more or less under your control (immediate mode rendering).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And in addition the Canvas node is really fast :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">A picture explains more than 1000 words...so here is a screenshot of a former matrix that I did in Enzo...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-fnKjRnNWJno/WNChQU59e9I/AAAAAAAAECo/8cYM1ONcTmUxkS3GA7ScS04NI9mNx2N5ACLcB/s1600/Enzo%2BMatrixSegment%2B2017-03-21%2B04-41-56.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="https://1.bp.blogspot.com/-fnKjRnNWJno/WNChQU59e9I/AAAAAAAAECo/8cYM1ONcTmUxkS3GA7ScS04NI9mNx2N5ACLcB/s1600/Enzo%2BMatrixSegment%2B2017-03-21%2B04-41-56.png" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I think you now understand what I mean with crazy graphics...I mean it looks nice but for a bigger display this is simply overkill. For this control I used nodes for each dot...or better each LED.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Because when animating the control I have to call the drawing method a lot and therefor this drawing method has to be as short and simple as possible. So let's take a look at the drawing method in the DotMatrix control...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono&quot;;"><span style="color: #0004ff;">private void </span>drawMatrix() {<br />    ctx.<span style="color: #ff7500;">clearRect</span>(0, 0, width, height);<br />    <span style="color: #0004ff;">for </span>(<span style="color: #0004ff;">int </span>y = 0; y &lt; rows; y++) {<br />        <span style="color: #0004ff;">for </span>(<span style="color: #0004ff;">int </span>x = 0; x &lt; cols; x++) {<br />            ctx.<span style="color: #ff7500;">setFill</span>(convertToColor(matrix[x][y]));<br />            ctx.<span style="color: #ff7500;">fillOval</span>(x * dotSize + spacer, y * dotSize + spacer, </pre><pre style="background-color: white; font-family: &quot;Droid Sans Mono&quot;;">                         dotSizeMinusDoubleSpacer, dotSizeMinusDoubleSpacer);<span style="color: green; font-style: italic;"><br /></span><span style="color: green; font-style: italic;">        </span>}<br />    }<br />}</pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">That's all, I clear the canvas, then simply iterate over the rows and columns, set the fill for the current dot and draw a circle at the current position defined by x and y.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Keeping things simple makes the drawing fast enough to do some animation.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>3.</b> To make it possible to set the color for each dot you need a 2d data structure which defines the position and stores the color. You can think of all possible combinations of Lists, Maps and custom Objects to realize that but if you would like to keep it simple you could simply stick with a simple 2-dimensional integer array. This will contain the x and y coordinates of each dot and you could use a 1 to enable the dot or a 0 to disable the dot.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">This works and is simple and fast BUT how to enable custom colors for each dot???</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For this it would be great to represent a color as an integer value but&nbsp;</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">if you take a look at the javafx.scene.paint.Color class you will find all sorts of methods but unfortunately no method that returns the color as an integer value. Lucky me I remembered that the java.awt.Color class had such a method and so it was easy to take a look at the source code of OpenJDK (it's so nice to be able to have the source code of Java available).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To convert a color into an integer you simply can make use of some bit-shifting and the code to convert a color into an integer looks as follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono&quot;;"><span style="color: #0004ff;">public int </span>convertToInt(<span style="color: #0004ff;">final float </span>R, <span style="color: #0004ff;">final float </span>G, <span style="color: #0004ff;">final float </span>B, <span style="color: #0004ff;">final float </span>A) {<br />    <span style="color: #0004ff;">int </span>red   = Math.round(255 * R);<br />    <span style="color: #0004ff;">int </span>green = Math.round(255 * G);<br />    <span style="color: #0004ff;">int </span>blue  = Math.round(255 * B);<br />    <span style="color: #0004ff;">int </span>alpha = Math.round(255 * A);<br />    <span style="color: #0004ff;">return </span>(alpha &lt;&lt; 24) | (red &lt;&lt; 16) | (green &lt;&lt; 8) | blue;<br />}</pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now with this in place it was easy to store the color value as integer in the 2-dimensional array of the matrix. Oh and of course it would also be nice to have a method to convert an integer back to a Color, so here it is...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono&quot;;"><span style="color: #0004ff;">public static </span>Color convertToColor(<span style="color: #0004ff;">final int </span>COLOR_VALUE) {<br />    <span style="color: #0004ff;">return </span>Color.rgb((COLOR_VALUE &amp; <span style="font-style: italic;">RED_MASK</span>) &gt;&gt; 16, </pre><pre style="background-color: white; font-family: &quot;Droid Sans Mono&quot;;">                     (COLOR_VALUE &amp; <span style="font-style: italic;">GREEN_MASK</span>) &gt;&gt; 8, </pre><pre style="background-color: white; font-family: &quot;Droid Sans Mono&quot;;">                     (COLOR_VALUE &amp; <span style="font-style: italic;">BLUE_MASK</span>), </pre><pre style="background-color: white; font-family: &quot;Droid Sans Mono&quot;;"><span style="font-style: italic;">                     ALPHA_FACTOR </span>* ((COLOR_VALUE &amp; <span style="font-style: italic;">ALPHA_MASK</span>) &gt;&gt;&gt; 24));<br />}</pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In JavaFX the opacity is defined by a double compared to an int in the AWT color which is the reason for the ALPHA_FACTOR multiplication here.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So now we can define for each dot in the matrix the location and the color by simply using a 2-dimensional integer array which is good for the performance.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Means most of the work in the drawing method is done by converting an integer back to a Color. But because all of the operations used for the conversion are mainly bit-shifting and object creation this is not a problem.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>4.</b> To be able to show text on the DotMatrix I needed to create some mapping of characters to dots. So my idea was to keep the DotMatrix close to a real hardware DotMatrix where you can define the xy position of the dot and a color. Means in the DotMatrix control switching on a dot is done by calling the method</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono&quot;;"><span style="color: #0004ff;">public void </span>setPixel(<span style="color: #0004ff;">final int </span>X, <span style="color: #0004ff;">final int </span>Y, <span style="color: #0004ff;">final int </span>COLOR_VALUE) {<br />    <span style="color: #0004ff;">if </span>(X &gt;= cols || X &lt; 0) <span style="color: #0004ff;">return</span>;<br />    <span style="color: #0004ff;">if </span>(Y &gt;= rows || Y &lt; 0) <span style="color: #0004ff;">return</span>;<br />    matrix[X][Y] = COLOR_VALUE;<br />}</pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As you can see I don't call the drawMatrix() method automatically which means I leave that up to you. So first one can set all the pixels needed and then you can call the drawMatrix() method. With this approach you can avoid a redraw after set a pixel.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">This is a big advantage when doing some kind of dot matrix ticker where text is moving from right to left. In this case you can first set a vertical line of pixels before you really draw them.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">But if you would like to automatically redraw after a pixel was set you will also find a method called setPixelWithRedraw() which does exactly this.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now back to the character mapping, here I've decided to create an 8x8 font for the ASCII characters between 32 - 126. <strike>And if you only need numbers I've also created an 8x8 font that only contains the numbers from 0 - 9</strike>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Again the goal was to keep it as simple as possible which was the reason to define each character by an integer array. So for example the digit 0 looks like this...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono&quot;;">{<br />    0b00<span style="color: red;">111</span>000,<br />    0b0<span style="color: red;">1</span>000<span style="color: red;">1</span>00,<br />    0b0<span style="color: red;">1</span>000<span style="color: red;">1</span>00,<br />    0b0<span style="color: red;">1</span>000<span style="color: red;">1</span>00,<br />    0b0<span style="color: red;">1</span>000<span style="color: red;">1</span>00,<br />    0b0<span style="color: red;">1</span>000<span style="color: red;">1</span>00,<br />    0b0<span style="color: red;">1</span>000<span style="color: red;">1</span>00,<br />    0b00<span style="color: red;">111</span>000<br />}</pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As you can see I used the binary literals which is nice to represent a matrix of dots.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now the only thing I had to do was to read out each bit of each row and do some math related to the dot position.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">These calculations can be found in the setCharAt() and setDigitAt() methods in the DotMatrix control.&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">A demo of how to use the DotMatrix control for a running text display can be found in the Demo class in the source code.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I will definitely add this control also to TilesFX because it could be handy as a stock ticker on a dashboard.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So that's it for today, I hope this control will be useful for someone except me :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;"><b>UPDATE:</b></span><br /><span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;">I've removed the plain digits and added another MatrixFont which is 8x11 pixels. So now you can choose between&nbsp;</span><br /><br /><ul><li><span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;">MatrixFont8x8</span></li><li><span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;">MatrixFont8x11</span></li></ul><br /><span style="color: #cc0000; font-family: &quot;trebuchet ms&quot; , sans-serif;">In addition I've also added the possibility to set the dot shape to either DotShape.ROUND which is default or to DotShape.SQUARE.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Here is a little video which shows the control in action...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/vlIMYHATDOE" width="560"></iframe><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Please find the source code as usual at <a href="https://github.com/HanSolo/dotmatrix" target="_blank">github</a>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Enjoy the upcoming weekend and keep coding...&nbsp;</span><br /><br />
+
+		 -->
+					</div>
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/2017/03/friday-fun-xliv-matrix.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>Technology Short Take #80</h3>
+		</div>
+		<div class="collectiontext">
+						Welcome to Technology Short Take #80! This post is a week late (I try to publish these every other Friday), so my apologies for the delay. However, hopefully I’ve managed to gather together some articles with useful information for you. Enjoy!
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/_RVYpACyLAA/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>The Linux Migration: Other Users’ Stories, Part 4</h3>
+		</div>
+		<div class="collectiontext">
+						This post is part of a series of posts sharing other users’ stories about their migration to Linux as their primary desktop OS. As I mentioned in part 1 of the series, there seemed to be quite a bit of pent-up interest in using Linux as your primary desktop OS. I thought it might be helpful to readers to hear not just about my migration, but also about others’ migrations. You may also find it interesting/helpful to read part 2 and part 3 of this series for more migration stories.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/J-2bB6cvmP4/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.frauenotiert.de/" target="_blank">Frau E. notiert..</a>
+		</div>
+		<div>
+			<h3>Der Handwerker. Und ich.</h3>
+		</div>
+		<div class="collectiontext">
+			<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
+SyndContentImpl.value=<br />Der Handwerker montiert das Waschbecken im Bad neu an. Liebevoll verfugt er die Silikonumrandung.<br />Das Silikon muß 24 Stunden aushärten, erklärt er. Sie dürfen bis morgen nicht am Becken rütteln.<br />Ich sage brav ja und und überlege, wann ich das letzte Mal im Leben an einem Waschbecken gerüttelt habe. Mit 5 vielleicht?<br /><br />Hören Sie, legt er nach, Sie dürfen sich da auch nicht drauf setzen.<br />Ich schaue auf ihn und das Minibad, in dem sogar das WC aus Platzmangel schräg montiert ist u<span class="text_exposed_show">nd frage mich, welcher Zwerg es schaffen würde, sich hier aufs Waschbecken zu setzen. <br />Und ob ich aussehe wie jemand, der Sex auf Toiletten hat.</span><br /><span class="text_exposed_show"><br />Offenbar wirke ich durch meine Überlegungen nur bedingt aufnahmefähig.<br />Er nimmt das Waschbecken mit der frischen Fuge in beide Hände und rüttelt kräftig daran.<br />Das, sagt er, dürfen Sie in den nächsten 24 Stunden nicht machen.<br />Is klar.</span><br /><br /><br /><br />
+
+		 -->
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.frauenotiert.de/2017/03/der-handwerker-und-ich.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>The Linux Migration: Corporate Collaboration, Part 1</h3>
+		</div>
+		<div class="collectiontext">
+						One major aspect of my migration to Linux as my primary desktop OS is how well it integrates with corporate communication and collaboration systems. Based on the feedback I’ve gotten from others on Twitter, this is a major concern for a lot of folks out there. In fact, a number of folks have indicated that this is the only thing keeping them from migrating to Linux. There are a number of different aspects to “corporate communication and collaboration,” so I’m breaking this down into multiple posts (each post will discuss one particular aspect). In this post, I’ll discuss integration with corporate e-mail.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/8wW-qPvjAnU/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="http://www.jroller.com/ethdsy/" target="_blank">Scratch Where It's Itching</a>
 		</div>
 		<div>
@@ -278,67 +358,6 @@ SyndContentImpl.value=<span style="font-family: &quot;verdana&quot; , sans-serif
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/G8Gw-w8ZYpA/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>Technology Short Take #79</h3>
-		</div>
-		<div class="collectiontext">
-						Welcome to Technology Short Take #79! There’s lots of interesting links for you this time around.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/0sA2e5AqW2g/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>Customizing Docker Engine on CentOS Atomic Host</h3>
-		</div>
-		<div class="collectiontext">
-						I’ve been spending some time recently with CentOS Atomic Host, the container-optimized version of CentOS (part of Project Atomic). By default, the Docker Engine on CentOS Atomic Host listens only to a local UNIX socket, and is not accessible over the network. While CentOS has its own particular way of configuring the Docker Engine, I wanted to see if I could—in a very “systemd-like” fashion—make Docker Engine on CentOS listen on a network socket as well as a local UNIX socket. So, I set out with an instance of CentOS Atomic Host and the Docker systemd docs to see what I could do.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/PlcqI55Dv2s/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>The Linux Migration: Other Users’ Stories, Part 1</h3>
-		</div>
-		<div class="collectiontext">
-						Shortly after I announced my intention to migrate to Linux as my primary desktop OS, a number of other folks contacted me and said they had made the same choice or they had been encouraged by my decision to also try it themselves. It seems that there is a fair amount of pent-up interest—at least in the IT community—to embrace Linux as a primary desktop OS. Given the level of interest, I thought it might be helpful for readers to hear from others who are also switching to Linux as their primary desktop OS, and so this post kicks off a series of posts where I’ll share other users’ stories about their Linux migration.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/9MwgcW0gA_g/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>Donuts for everyone...</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Last weekend I was looking for visualizations that could be useful in TilesFX and I stumbled upon some charts called either doughnut, ring our donut charts. Nothing really special but not available in the standard JavaFX charts. So here is an example of what I'm talking about...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://conceptdraw.com/a940c3/p1/preview/640/pict--donut-chart-ring-chart---template.png--diagram-flowchart-example.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="464" src="https://conceptdraw.com/a940c3/p1/preview/640/pict--donut-chart-ring-chart---template.png--diagram-flowchart-example.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So we have a visualization of values in percentage so the sum of all values is always 100%. And the nice thing about using this donut like visualization is that we can use the inner part of the donut for additional information (e.g. like the value of the sum etc.).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Because on a dashboard you would really like to focus on the important parts (means you don't want to show a donut chart with 20 sections but maybe with 3 or 4) I can keep the whole thing really simple.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Because of the space constraints the legend will only appear if the width of the chart is larger than 1.2 x the height.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the visualization I've decided to show the value inside of each segment, the percentage close to each segment on the inside of the ring and the sum of all values in the center of the donut chart. So the result looks like this...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-8mk3vfnqG9s/WLPJu5tthZI/AAAAAAAAEBA/h8y6XTc0_u0OcLt0kS1BdY3MwwzcV-kzgCLcB/s1600/Donut%2BChart%2B2017-02-27%2B07-39-33.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://3.bp.blogspot.com/-8mk3vfnqG9s/WLPJu5tthZI/AAAAAAAAEBA/h8y6XTc0_u0OcLt0kS1BdY3MwwzcV-kzgCLcB/s640/Donut%2BChart%2B2017-02-27%2B07-39-33.png" width="616" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Like in the last chart that I've added (<a href="https://harmoniccode.blogspot.de/2017/02/a-little-radial-chart-for-some-weekend.html" target="_blank">the RadialChart</a>) I've again made use of the JavaFX Canvas node which is perfect for graphics like this. Also animating this chart is really easy because of the good performance of the Canvas node.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The source of this little DonutChart can be found on <a href="https://github.com/HanSolo/donutchart" target="_blank">github</a> as always, so feel free to fork it :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And like with the RadialChart I've decided to add the DonutChart as a separate skin to the TilesFX library. Means since release 1.3.6 of TilesFX you are able to make use of it.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Here are also some screenshots of the DonutChart in TilesFX...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-bPBQSKVh-qM/WLPK0AAUpfI/AAAAAAAAEBI/NYPA9G3SjUMENp-0zb_jXPlP57n6YY77QCLcB/s1600/Title%2B2017-02-27%2B07-26-34.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://4.bp.blogspot.com/-bPBQSKVh-qM/WLPK0AAUpfI/AAAAAAAAEBI/NYPA9G3SjUMENp-0zb_jXPlP57n6YY77QCLcB/s640/Title%2B2017-02-27%2B07-26-34.png" width="608" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-M7XfIU0tx-w/WLUrOyNZLVI/AAAAAAAAEBw/FSNcFKowFNgJWl5r37UK2VS9LtF2BqdAQCLcB/s1600/Title%2B2017-02-28%2B08-46-00.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="562" src="https://3.bp.blogspot.com/-M7XfIU0tx-w/WLUrOyNZLVI/AAAAAAAAEBw/FSNcFKowFNgJWl5r37UK2VS9LtF2BqdAQCLcB/s640/Title%2B2017-02-28%2B08-46-00.png" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-x0D4e8Y7XBE/WLUrOyjr0II/AAAAAAAAEB0/ixpbjZiViHEQ05JSi5RT31ySNlYCab-GwCEw/s1600/Title%2B2017-02-28%2B08-46-12.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="448" src="https://3.bp.blogspot.com/-x0D4e8Y7XBE/WLUrOyjr0II/AAAAAAAAEB0/ixpbjZiViHEQ05JSi5RT31ySNlYCab-GwCEw/s640/Title%2B2017-02-28%2B08-46-12.png" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I hope this will be useful for some of you, that's it for today...so keep coding... :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span>
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2017/02/donuts-for-everyone.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -346,12 +365,27 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-	  <a href="home_server_ubuntu___linkliste.html">
-		<div class="date">18.03.2017</div>
-<h3>Home Server mit Ubuntu - Linkliste</h3>
+	  <a href="dungeon_generator.html">
+		<div class="date">26.03.2017</div>
+<h3>Dungeon-Generator</h3>
   <div class="abstract">
 			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Ein paar Links, die mir geholfen haben, mein letztjähriges Weihnachtsprojekt umzusetzen...
+		  <p>Ich beschäftige mich immer mal wieder mit ausgewählten Problemen im Zusammenhang mit
+Spielen
+oder der Generierung von Testdaten. In diesem Zusammenhang habe ich einen kleinen Dungeon-Generator erstellt.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="neue_interaktionsmetapher_dwb_.html">
+		<div class="date">26.03.2017</div>
+<h3>Neue Interaktionsmetapher in dWb+</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Da ich - wie ich neulich in einer Kommunikation mit einem geschätzten Kollegen zum erstenmal
+explizit realisierte -
+dWb+
+schon länger pflege als es die Herstellerfirma anderer Produkte überhaupt gibt, bin ich dennoch nicht
+zu stolz, neue Ideen einfließen zu lassen...
 </p></div>   </a>
 </li>
 <li class="anriss">
@@ -359,24 +393,12 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 		<div class="date">18.03.2017</div>
 <h3>Verbesserungen ModuleWorkspace I</h3>
   <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>In der Zeit über Weihnachten haben sich einige Verbesserungen in
+				  <p>In der Zeit über Weihnachten haben sich einige Verbesserungen in
 der ModuleWorkspace-Komponente - unter anderem verwendet in der
 sQLshell
 und im Rapid-Prototyping-Werkzeug
 dWb+
 ergeben, die die allgemeine Benutzbarkeit verbessern:
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="growing_cell_structures___grenzen.html">
-		<div class="date">12.03.2017</div>
-<h3>Growing Cell Structures - Grenzen</h3>
-  <div class="abstract">
-				  <p>Nachdem ich mich über den Jahreswechsel wieder einmal
-verstärkt
-mit meinem Projekt des Lernens verschiedener Programmiersprachen mittels
-komplexerer Beispiele gewidmet habe, gewann ich dabei - für mich - neue Einsichten:
 </p></div>   </a>
 </li>
 </ul>
