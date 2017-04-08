@@ -7,12 +7,13 @@
 package de.elbosso.util.generator.generalpurpose;
 
 import de.elbosso.util.lang.annotations.GeneratorModule;
+import de.elbosso.util.lang.annotations.GeneratorScript;
 
 /**
  *
  * @author elbosso
  */
-@de.elbosso.db.processors.GeneratorScript
+@GeneratorScript
 @GeneratorModule(datatype=java.lang.Number.class)
 public class NormalDistributedRandom extends de.elbosso.util.beans.EventHandlingSupport implements de.netsysit.util.generator.Sequence<java.lang.Number>
 {

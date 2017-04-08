@@ -116,6 +116,133 @@ display('news.html')
 		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
 		</div>
 		<div>
+			<h3>Friday Fun XLVI - Image Matrix</h3>
+		</div>
+		<div class="collectiontext">
+			<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Last weekend when sitting in my hotel room in Singapore I had the idea to test the performance of my <a href="https://harmoniccode.blogspot.sg/2017/03/friday-fun-xliv-matrix.html" target="_blank">DotMatrix control</a> again. So I thought what about pixelating an image and visualize it using the control.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well to be honest it was just too easy to do...so here is the result...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-rKtC1iJPaIM/WOB2lnLvu7I/AAAAAAAAEMI/q3y5gGKGXVEWvnp50ZolQKnoj6Vc5oUPACLcB/s1600/MatrixImage.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="262" src="https://4.bp.blogspot.com/-rKtC1iJPaIM/WOB2lnLvu7I/AAAAAAAAEMI/q3y5gGKGXVEWvnp50ZolQKnoj6Vc5oUPACLcB/s640/MatrixImage.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">On the left side you see the original picture and on the right side the related pixelated matrix image.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So I thought why not adding some text and figured out that when I draw the text on the DotMatrix control I usually set all "transparent" pixels to the dotOffColor which doesn't look good in this example.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Therefor I've added another method to the DotMatrix control which only draws the pixels in a character that are "on". The method is called</span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">setCharAtWithBackground()</span></li></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So with this it was easy to add some text on top of the pixelated image without destroying the existing background pixels.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now that this was done I decided it might be nice to be able to simply shift the DotMatrix in each direction. Long story short I've implemented for additional methods which are</span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">shiftLeft()</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">shiftRight()</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">shiftUp()</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">shiftDown()</span></li></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">When calling one of this methods the whole DotMatrix will be shifted by one dot in the choosen direction and redraws itself.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now I could really test the capability of the DotMatrix by calling for example the shiftLeft method in an AnimationTimer with an update rate of 10ms. So the result was nice as you can see in the following video...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/1TEa5sQH-uI" width="560"></iframe></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">You could also combine the calls like first calling shiftLeft() and after that shiftUp(). It's not perfect because both times the drawMatrix() method will be called but even with this little drawback the DotMatrix is fast enough to create a smooth scrolling effect.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Please keep in mind that you should not go crazy with the no of dots in the DotMatrix control. You will definitely see a decrease in performance if you go to a high number of columns and rows. In the video I use 100x85 dots for the DotMatrix which I think is good enough to use it also for images.</span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So I don't have any use case for the DotMatrix control at the moment but maybe one of you has and therefor you can find the source code as always over at <a href="https://github.com/HanSolo/matriximage" target="_blank">github</a>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">You will also find 2 other demos in the source code (Main2 and Main3). In Main2 I show you how to create one DotMatrix out of two images and in Main3 I show you how to use two images and draw them alternating on the DotMatrix...so have fun playing around with it :)</span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well that's it for today...like always I wish you a nice weekend and never forget...keep coding... ;)</span><br /><br />
+
+		 -->
+					</div>
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/2017/04/friday-fun-xlvi-image-matrix.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>Technology Short Take #81</h3>
+		</div>
+		<div class="collectiontext">
+						Welcome to Technology Short Take #81! I have another collection of links, articles, and thoughts about key data center technologies, and hopefully I’ve managed to include something here that will prove useful or thought-provoking. Enjoy!
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ufvFut0K8FE/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.frauenotiert.de/" target="_blank">Frau E. notiert..</a>
+		</div>
+		<div>
+			<h3>7 Gründe, Hamburg zu lieben</h3>
+		</div>
+		<div class="collectiontext">
+			<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
+SyndContentImpl.value=<div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-bL7Kfj2ImeE/WOOX6mLWPlI/AAAAAAAADOc/SEurhVEgMgcdWWoCTVRn8Z3r2iptMHF6ACLcB/s1600/hamburg_eppendorf_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://4.bp.blogspot.com/-bL7Kfj2ImeE/WOOX6mLWPlI/AAAAAAAADOc/SEurhVEgMgcdWWoCTVRn8Z3r2iptMHF6ACLcB/s640/hamburg_eppendorf_.jpg" width="480" /></a></div><br /><br />Wie die "älteren" Leser unter Euch wissen, <a href="http://www.frauenotiert.de/2016/12/wieviel-schmerz-ist-heimat-wert.html" target="_blank">war der Umzug nach Hamburg ein gesundheitlicher, lange strategisch ausgetüftelter Kompromiß</a> zwischen meinen beiden Herzensheimaten: Mein Ästhetikherz gehört Stockholm und mein Heimatherz Nordrhein-Westfalen. Hamburg war mir nahezu unbekannt.<br /><br />In den ersten Wochen war es wirklich hart: Ich fühlte mich angesichts der Größe dieser Stadt wie ein gerupftes Huhn, das man in einen tosenden Ozean geworfen hat. Wie sollte ich dieses riesige Geflecht aus zigspurigen Straßen und unendlich vielen Stadtteilen jemals verstehen? Für jemanden mit dem Orientierungssinn eines Bürostuhls schier unvorstellbar.<br /><a name='more'></a><br />Inzwischen lache ich über das gerupfte Huhn aus den ersten zwei Monaten. Und habe Hamburg total ins Herz geschlossen. Und das, obwohl ich durch das Thema Wohnungssuche bisher keine Zeit hatte, einmal wie eine Touristin gemütlich durch Hamburgs schönste Ecken zu schlendern.<br /><br />Dennoch: Ich bin sehr glücklich, hier zu sein!<br />Warum?<br /><br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-BTheTB03OSM/WOOX7I_AKdI/AAAAAAAADOg/-mSAfmXa3PU9yMpqg1uEZE3_luJdXo0sQCEw/s1600/hamburg_alster_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://4.bp.blogspot.com/-BTheTB03OSM/WOOX7I_AKdI/AAAAAAAADOg/-mSAfmXa3PU9yMpqg1uEZE3_luJdXo0sQCEw/s640/hamburg_alster_.jpg" width="480" /></a></div><br /><br /><h3>Das großartige Klima</h3><br />Die Luft, die Luft, die Luft. Erwähnte ich die Luft?<br /><br />Seitdem ich in Hamburg lebe, habe ich wieder "ganz normal" chronische Migräne und clusterartige Schmerzen. Aber nicht mehr nonstop. Nicht rund um die Uhr, ohne jemals auch nur eine klitzekleine Sekunde befreit zu sein von dieser metallenen Dornenkrone, die sich in Düsseldorf elf lange Jahre lang in meinen Kopf gefräst hat. Jede. Einzelne. Sekunde.<br />Diese Schmerzlücken sind wunderbar! Für diese Schmerzlücken gebe ich alles, mache ich alles, ertrage ich alles.<br /><br />Und ich kann atmen. Einfach so. Ohne bei jedem Atemzug das Gefühl zu haben, nur die Hälfte von dem in meinen Körper zu bekommen, was er dringend benötigt. Ich schnappe nicht mehr ständig nach Luft wie ein gestrandeter Fisch. Bei knapp 20.000 Atemzügen, die wir täglich machen, ein toller Gewinn!<br /><br />"Normale" Hamburger schütteln nun sicherlich den Kopf: Ist sie denn irre? Sie mag die dreckige Luft unserer Großstadt? Mir ist schon bewußt, daß die Luft hier bei weitem nicht so rein ist, wie beispielsweise an der Ostseeküste. Mich plagt aber vor allem das Klima und nicht die Dreckspartikel. Wer im Ruhrgebiet geboren und aufgewachsen ist, lächelt müde über ein paar Tonnen Schiffsruß hier und dort.<br /><br /><br /><br /><h3>Die sympathischen Menschen</h3><br />Oh je, oh je, willst Du Dir was wirklich antun?, wurde ich vor meinem Umzug ständig gefragt<br />Warum?<br />Na, die Hamburger sind doch so verschlossen. Das macht bestimmt voll depri.<br /><br />So können nur Leute reden, die noch nie versucht haben, in Stockholm Anschluß zu gebürtigen Schweden zu bekommen. Im Vergleich dazu sind die Hamburger Brasilianer. <br /><br />Ich bin bisher nur netten und offenen Menschen begegnet. Kein einziges Mal dachte ich: Jesses, das dauert aber hier mit den Antworten. Bereits jetzt habe ich viele supernette Kontakte und fühle mich verdammt gut aufgehoben.<br /><br />Und daß man nicht nonstop ungefragt in Bus und Bahn vollgetextet wird, wie im Rheinland, ist oft auch höchst entspannend. <br /><br /><br /><br /><h3>In Hamburg kommt jeder mal vorbei</h3><br />Als ich wegen der Mietpreise zwischen Bremen und Hamburg schwankte, wies mich eine Freundin auf einen wesentlichen Grund für Hamburg hin: meine vielen in Deutschland und der Welt verstreuten Freunde. In Hamburg kommt jeder mal vorbei. Sei es beruflich oder auf der Durchfahrt oder weil die Stadt selbst eine Reise wert ist. Und es ungemein praktisch ist, jemanden dort zu kennen, bei dem man kostenlos wohnen kann.<br /><br />Und sie hatte recht!<br />Selten hatte ich in kurzer Zeit so viel Besuch wie in den bisher 3,5 Monaten hier in Hamburg. Mein Gästebett ist regelmäßig ausgebucht und ich freue mich wie ein Keks, Freunde von nah und fern zu sehen. <br /><br /><br /><br /><h3>Diese Stadt wird mir nie langweilig werden</h3><br />Geist und Körper sind bei mir in einem ständigen Konflikt: was dem Körper guttut, läßt den Geist leiden. Und umgekehrt. Wenn es nach meinem Kopf ginge, würde ich mal in New York leben, mal in London, mal sonstwo auf der Welt. Vielleicht wäre ich Reisebloggerin.<br /><br />Wenn es nach meinem kranken Körper ginge, würde ich in der Pampa Mecklenburg Vorpommerns ein völlig reizfreies, gesundes Holzhäuschen beziehen und es nie wieder verlassen, bis ich das Zeitliche segne. Das Zeitliche würde ich dort aber bereits nach fünf Tagen segnen. Denn ich brauche Lebendigkeit im allernächsten Umfeld. Weiter komme ich ja meist nicht.<br /><br />Hamburg ist so groß und vielseitig, daß es in meinem Energiezustand Jahre dauern wird, bis ich alles einmal erforscht habe. Und das ist gut so. Wenn ich hinten fertig bin, kann ich vorne wieder anfangen. Denn diese schöne Stadt verändert sich ständig. Wunderbare Aussichten.<br /><br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-vF7sGszuy0o/WOOX9fVOYTI/AAAAAAAADOk/vYQoUBXkf3ku0GtzTQbIV4d8jihv3KoMQCEw/s1600/hamburg_hoheluftbruecke_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://3.bp.blogspot.com/-vF7sGszuy0o/WOOX9fVOYTI/AAAAAAAADOk/vYQoUBXkf3ku0GtzTQbIV4d8jihv3KoMQCEw/s640/hamburg_hoheluftbruecke_.jpg" width="480" /></a></div><br /><br /><h3>Jugendstil</h3><br />Mein größter optischer Fetisch neben schönen Männerschultern und <a href="http://www.frauenotiert.de/2016/01/auto-erotik-felgen-farben-co.html" target="_blank">Autofelgen</a> ist Jugendstil-Architektur. Ich könnte mich auf ein Höckerchen setzen und einfach nur schauen. Stundenlang. Ganze Städtereisen habe ich früher einzig in den Jugendstil-Stadtteilen der jeweiligen Metropolen verbracht.<br /><br />Hamburg ist Jugendstil satt. Ich habe noch nie so viele schöne Gebäude auf einmal gesehen. Mein Bedürfnis nach Ästhetik wird hier rund um die Uhr aufs Beste befriedigt. Bei schönem Wetter sogar doppelt: dann joggen die schönen Männerschultern durch Jugendstil-Alleen. Ich hätte es schlimmer antreffen können.<br /><br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-_NqKizD6ER4/WOOX5ocUoxI/AAAAAAAADOY/wrwPwEsUuyYYVb9Ps33RP87ljuLXhTeLQCEw/s1600/hamburg_clas_ohlson_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://3.bp.blogspot.com/-_NqKizD6ER4/WOOX5ocUoxI/AAAAAAAADOY/wrwPwEsUuyYYVb9Ps33RP87ljuLXhTeLQCEw/s640/hamburg_clas_ohlson_.jpg" width="480" /></a></div><br /><br /><h3>Mein geliebter Clas Ohlson</h3><br />Auf diesem Planeten kenne ich nur einen einzigen Laden, in dem ich freiwillig und gerne einkaufe. Mein Freund <a href="http://www.clasohlson.com/" target="_blank">Clas Ohlson</a>. Clas bietet exakt die Produkte, die mich interessieren: technische Gadgets, Elektronik, Heimwerker-Artikel und viele praktische Dinge, die den leidigen Haushalt erleichtern. Das alles auch noch zu einem guten Preis und in schlichtem skandinavischen Design.<br /><br />Ja, mein Herz gehört Clas. Ich habe es in Stockholm noch nie geschafft, ohne mindestens einen Neuerwerb, das Land zu verlassen. Wie groß war die Begeisterung, als ich Filialen in Hamburg entdeckte! Für mich ein klarer Pluspunkt mehr auf meiner I love Hamburg-Liste. <br /><br /><br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-AE_djWJrrRc/WOOYBH1cjNI/AAAAAAAADOo/IZK5ILj08Ms6_ZMf0gNstpyWqFXRjgoIQCEw/s1600/hamburg_uhlenhorst_.jpg" imageanchor="1"><img border="0" height="640" src="https://1.bp.blogspot.com/-AE_djWJrrRc/WOOYBH1cjNI/AAAAAAAADOo/IZK5ILj08Ms6_ZMf0gNstpyWqFXRjgoIQCEw/s640/hamburg_uhlenhorst_.jpg" width="480" /></a></div><br /><br /><h3>Wasser</h3><br />Es gibt doch nichts Schöneres, als am Wasser zu sitzen. Wasser gibt es hier viel. Meistens von oben. Oft auch von der Seite. Aber vieles davon plätschert auch kontemplativ vor sich hin in kleinen Kanälen und Armen der Alster. Hübsche Uferplätze laden zum Sitzen und Genießen ein. Darauf freue ich mich schon!<br /><br />Vorher aber habe ich ein fulminantes Problem zu lösen. Wie Tausende anderer auch, eine passende Wohnung zu finden. Denn meine aktuelle Zwischenmiete läuft bald aus. Mit meinen krankheitsbedingten special needs ist die Suche ganz besonders kompliziert. <br /><br /><b>Du möchtest mich unterstützen? Großartig!</b> <a href="http://www.frauenotiert.de/p/blog-page_20.html" target="_blank">Bitte teile meine Suchseite hinter diesem Link</a>.<br /><br />Vielen lieben Dank!&nbsp; Vielleicht kann ich dann schon bald über die nächsten Gründe, Hamburg zu lieben, bloggen.<br /><br /><br />
+
+		 -->
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.frauenotiert.de/2017/04/7-grunde-hamburg-zu-lieben.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>The Linux Migration: Corporate Collaboration, Part 3</h3>
+		</div>
+		<div class="collectiontext">
+						In discussing support for corporate communication and collaboration systems as part of my Linux migration, I’ve so far covered e-mail in part 1 and calendaring in part 2. In this post, I’m going to discuss the last few remaining aspects of corporate collaboration: instant messaging/chat, meetings and teleconferences, and document sharing.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/mtHcZzGf-tU/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
+		</div>
+		<div>
+			<h3>Friday Fun XLV - StockTicker</h3>
+		</div>
+		<div class="collectiontext">
+			<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">On my way back from Singapore last time I've created a little Demo that shows the new StockTileSkin of my TilesFX library.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In principle the StockTileSkin is very similar to the SparkLineTileSkin with the difference that it always shows the increase/decrease of the reference value in percentage and as a number.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So in the demo I get the current stock quote of Oracle and IBM once a minute from the NYSE. Because I'm not really into the broker and banking business I have no idea if that makes sense, so forgive me if this idea is totally stupid :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To understand how this Skin works it needs some more explanation...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">First of all you have to define the so called averaging period, this number represents the number of values that you would like to show in the line graph.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In this example I've decided to poll the stock quote every minute and set the averaging period to 120 which means the graph will show the last 2 hours when filled up</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If no value is present the min and max values will be taken from Tile.getMinValue() and Tile.getMaxValue(). You also have to make sure that these values are in a usable range because values in Tile will be clamped to the min- and maxValue (I might change this for this specific skin in the future).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For a real good demo I should preload the line chart with the data of the previous day but I did not had the time to extend the demo to this.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Means if you start the demo and the NYSE is closed at that time you won't see any change in the value at all. But if you start it during the trading hours of the NYSE you might see some changes over time (but keep in mind that I only poll once a 1 minute).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you did not set the reference value, the first value of the data list will be taken to calculate the increase of decrease of the current value.&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you would like to stick your manual set reference value you might want to set autoReferenceValue property to false.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The reference value will be visualized using a dashed line color with the tresholdColor.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In addition to the StockTileSkin I thought it might be nice to make use of my <a href="https://harmoniccode.blogspot.sg/2017/03/friday-fun-xliv-matrix.html" target="_blank">DotMatrix control</a> and create and add a scrolling ticker too.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To give you an idea what I'm talking about, here is a screenshot of the demo...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/--KzP8qMhWA4/WNVPpDDhPyI/AAAAAAAAEDE/0QvLBJq_AEkgIPx1yW77SnGTEDmm25WkQCEw/s1600/StockTicker.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="https://1.bp.blogspot.com/--KzP8qMhWA4/WNVPpDDhPyI/AAAAAAAAEDE/0QvLBJq_AEkgIPx1yW77SnGTEDmm25WkQCEw/s640/StockTicker.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The service that I use to get the stock quotes can be found at <a href="http://dev.markitondemand.com/" target="_blank">http://dev.markitondemand.com</a>&nbsp;and is nice for testing some things. The problem is that first of all the data is not available for all companies so it took me some time to figure out two quotes that are updated regularly which made me end up with Oracle and IBM :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you would like to add another company stock symbol you can simply add it to the list of symbols in the Main.class. For example let's add Microsoft to the list</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><pre style="font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="color: #0004ff;">public class </span>Main <span style="color: #0004ff;">extends </span>Application {<br />    <span style="color: #0004ff;">private static final </span>List&lt;String&gt; <span style="font-style: italic;">SYMBOLS</span>;<br />    <span style="color: #0004ff;">static </span>{<br />        <span style="font-style: italic;">SYMBOLS </span>= <span style="color: #0004ff;">new </span>ArrayList&lt;&gt;();<br />        <span style="font-style: italic;">SYMBOLS</span>.<span style="color: #ff7500;">add</span>(<span style="color: magenta;">"IBM"</span>);<br />        <span style="font-style: italic;">SYMBOLS</span>.<span style="color: #ff7500;">add</span>(<span style="color: magenta;">"ORCL"</span>);<br />        <span style="font-style: italic;">SYMBOLS</span>.<span style="color: #ff7500;">add</span>(<span style="color: magenta;">"MSFT"</span>); <span style="color: #38761d;">// Simply add it to the list</span><br />    }</pre></pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Be aware that I did not spend much time in layouting mulitple stock items...means I've tried it with 2 and 3 stock symbols...it might look bad with 4 but you will figure out how to make it better ;)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I hope that the StockTileSkin is somehow useful and if you have suggestions on how to improve it...please let me know :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you are interested in the source code of this demo you can find it as always on <a href="https://github.com/HanSolo/tilesfxstockdemo" target="_blank">github</a>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And at last here is a little video that shows the StockTicker Demo in action after it ran for some time.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/UYJ6duowgp0" width="560"></iframe></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">That's it for today...cheers from Singapore and...keep coding... :)</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span>
+
+		 -->
+					</div>
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/2017/03/friday-fun-xlv-stockticker.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>Easily Finding the Latest CoreOS AMI ID</h3>
+		</div>
+		<div class="collectiontext">
+						It seems as if finding the right Amazon Machine Image (AMI) ID for the workload you’d like to deploy can sometimes be a bit of a challenge. Each combination of region and AMI produces a unique ID, so you have to look up the AMI for the particular region where you’re going to deploy the workload. This in and of itself wouldn’t be so bad, but then you have to wade through multiple versions of the same AMI in each region. Fortunately, if you’re using CoreOS Container Linux on AWS, there’s an easy way to find the right AMI ID. Here’s how it works.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/C25-u2Zqn5A/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>Canceling the OVS Cookbook Project</h3>
+		</div>
+		<div class="collectiontext">
+						In my list of proposed 2017 projects, I mentioned that I wanted to launch an open source book project. In late February, I launched The Open vSwitch Cookbook, an unofficial—as in not formally affiliated with the Open vSwitch (OVS) project—effort to gather together OVS “recipes” into an open source book. Today, I’m shutting down that project, and here’s why.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/qi_lp64tv0c/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>The Linux Migration: Corporate Collaboration, Part 2</h3>
+		</div>
+		<div class="collectiontext">
+						This post is part 2 in a series of posts describing how I’ve integrated my Fedora Linux laptop into my employer’s corporate communication and collaboration systems. Part 1 tackled e-mail; this post tackles the topic of calendaring and scheduling. Unlike e-mail, which was solved relatively easily, this issue is one that I don’t consider fully solved.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/2acw4AtHzEs/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
+		</div>
+		<div>
 			<h3>Friday Fun XLIV - The Matrix</h3>
 		</div>
 		<div class="collectiontext">
@@ -191,173 +318,6 @@ SyndContentImpl.value=<br />Der Handwerker montiert das Waschbecken im Bad neu a
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/8wW-qPvjAnU/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.jroller.com/ethdsy/" target="_blank">Scratch Where It's Itching</a>
-		</div>
-		<div>
-			<h3>Format Date with java time</h3>
-		</div>
-		<div class="collectiontext">
-						An advantage of the DateTimeFormatter class from the java time package over the old DateFormat is that it is thread-safe. But if the only thing I have is a Date, how can I proceed?<p>
-The DateTimeFormatter's format method takes a TemporalAccessor as a parameter. Date has a toInstant() method that converts the Date to an Instant object that implements the TemporalAccessor interface. All that sounds pretty easy:
-<pre>
-  Date date = new Date();
-  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME;
-  System.out.println(df.format(date.toInstant()));
-</pre><p>
-Unfortunately, that does not work. You en up with the following error:
-<pre>
-Exception in thread "main" java.time.temporal.UnsupportedTemporalTypeException: Unsupported field: Year
-	at java.time.Instant.getLong(Unknown Source)
-	at java.time.format.DateTimePrintContext$1.getLong(Unknown Source)
-	at java.time.format.DateTimePrintContext.getValue(Unknown Source)
-	at java.time.format.DateTimeFormatterBuilder$NumberPrinterParser.format(Unknown Source)
-</pre><p>
-As it turns out, the only formatter that can be used with an Instant is DateTimeFormatter.ISO_INSTANT. And the output would be in UTC time zone and look like this: '2011-12-03T10:15:30Z'.<p>
-In fact, this is all very logical. The only information missing from a Date to know the correct time and date to print is the time zone. The old DateFormat class assumed you would want to use the current time zone. For java time, you have to explicitly sate it:
-<pre>
-  Date date = new Date();
-  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME;
-  System.out.println(df.format(date.toInstant().atZone(ZoneId.systemDefault())));
-</pre><p>
-Or you can also provide the time zone to the formatter:
-<pre>
-  Date date = new Date();
-  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME
-    .withZone(ZoneId.systemDefault());
-  System.out.println(df.format(date.toInstant()));
-</pre><p>
-The toZone() method of Instant creates a ZonedDateTime object, from which you can easily convert to LocalDate, LocalTime or LocalDateTime. To convert back to a Date is always a matter of providing the missing information.<p>
-For instance, from a Localtime, you provide a date and a time zone:
-<pre>
-  LocalTime now = LocalTime.now();
-  Date date = Date.from(now.atDate(LocalDate.now()).atZone(ZoneId.systemDefault()).toInstant());
-</pre><p>
-From a LocalDate, you need a time and a time zone:
-<pre>
-  LocalDate now = LocalDate.now();
-  Date date = Date.from(now.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-</pre><p>
-					</div>
-		<div class="collectionhref">
-		<a href="http://www.jroller.com/ethdsy/entry/format_date_with_java_time" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.jroller.com/ethdsy/" target="_blank">Scratch Where It's Itching</a>
-		</div>
-		<div>
-			<h3>Format Date with java time</h3>
-		</div>
-		<div class="collectiontext">
-						An advantage of the DateTimeFormatter class from the java time package over the old DateFormat is that it is thread-safe. But if the only thing I have is a Date, how can I proceed?<p>
-The DateTimeFormatter's format method takes a TemporalAccessor as a parameter. Date has a toInstant() method that converts the Date to an Instant object that implements the TemporalAccessor interface. All that sounds pretty easy:
-<pre>
-  Date date = new Date();
-  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME;
-  System.out.println(df.format(date.toInstant()));
-</pre><p>
-Unfortunately, that does not work. You en up with the following error:
-<pre>
-Exception in thread "main" java.time.temporal.UnsupportedTemporalTypeException: Unsupported field: Year
-	at java.time.Instant.getLong(Unknown Source)
-	at java.time.format.DateTimePrintContext$1.getLong(Unknown Source)
-	at java.time.format.DateTimePrintContext.getValue(Unknown Source)
-	at java.time.format.DateTimeFormatterBuilder$NumberPrinterParser.format(Unknown Source)
-</pre><p>
-As it turns out, the only formatter that can be used with an Instant is DateTimeFormatter.ISO_INSTANT. And the output would be in UTC time zone and look like this: '2011-12-03T10:15:30Z'.<p>
-In fact, this is all very logical. The only information missing from a Date to know the correct time and date to print is the time zone. The old DateFormat class assumed you would want to use the current time zone. For java time, you have to explicitly sate it:
-<pre>
-  Date date = new Date();
-  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME;
-  System.out.println(df.format(date.toInstant().atZone(ZoneId.systemDefault())));
-</pre><p>
-Or you can also provide the time zone to the formatter:
-<pre>
-  Date date = new Date();
-  DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME
-    .withZone(ZoneId.systemDefault());
-  System.out.println(df.format(date.toInstant()));
-</pre><p>
-The toZone() method of Instant creates a ZonedDateTime object, from which you can easily convert to LocalDate, LocalTime or LocalDateTime. To convert back to a Date is always a matter of providing the missing information.<p>
-For instance, from a Localtime, you provide a date and a time zone:
-<pre>
-  LocalTime now = LocalTime.now();
-  Date date = Date.from(now.atDate(LocalDate.now()).atZone(ZoneId.systemDefault()).toInstant());
-</pre><p>
-From a LocalDate, you need a time and a time zone:
-<pre>
-  LocalDate now = LocalDate.now();
-  Date date = Date.from(now.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-</pre><p>
-					</div>
-		<div class="collectionhref">
-		<a href="http://www.jroller.com/ethdsy/entry/format_date_with_java_time" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>The Linux Migration: Other Users’ Stories, Part 3</h3>
-		</div>
-		<div class="collectiontext">
-						Over the last few weeks, I’ve been sharing various users’ stories about their own personal migration to Linux. If you’ve not read them already, I encourage you to check out part 1 and part 2 of this multi-part series to get a feel for why folks are deciding to switch to Linux, the challenges they faced, and the benefits they’ve seen (so far). Obviously, Linux isn’t the right fit for everyone, but at least by sharing these stories you’ll get a better feel whether it’s a right fit for you.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/5jOWK7fGlmg/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.neuesvonfraumeyer.de/" target="_blank">Neues von Frau Meyer</a>
-		</div>
-		<div>
-			<h3>So. Jetzt aber.</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Frohes neues Jahr</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><br /></span></span><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ja, so mancher von Ihnen wird einen Blick auf den Kalender werfen, den Kopf schütteln und denken, dass das der Frau Meyer aber früh einfällt mit den guten Wünschen zum neuen Jahr. Was so neu nicht mehr ist. Es ist zwei Monate, eine Woche und einen Tag alt. Dennoch ist es mir ein Anliegen, Ihnen allen ein frohes neues Jahr zu wünschen. Und Gesundheit, die vor allem.</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Wie so oft bin ich spät dran.</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ich habe es noch nicht einmal geschafft, das volle Glas, in dem ich im letzten Jahr Zettel sammelte, auf denen ich besonders schöne Momente notiert hatte, zu leeren und Platz für neue schöne Momente zu machen. Neben traurigen Ereignissen, die Teile meiner Familie und die Familie einer lieben Kollegin erschütterten (Krebs ist ein heimtückisches Arschloch. Punkt.), gibt es immer wieder Augenblicke der Freude. Und auch hier macht Kleinvieh manchmal Mist.&nbsp;</span></span><br /><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ein besonders gelungener Abend mit Freunden.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ein Spaziergang in der Sonne.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Eine lustige Email deines Bruders.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ein Lied, das du schon ewig nicht mehr gehört hast und das dich direkt in eine Zeitmaschine setzt und ins Jahr 1987 bringt.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Eine Diskussion über Dinos mit einem Fünfjährigen.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Eine Whatsapp von einer Freundin, für die sich ein lang gehegter Wunsch erfüllt.</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Eishockey mit Martina (auch wenn wir gegen die Haie verloren haben)</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Dies alles sind nur ein paar Beispiele für Dinge, die auf <span style="font-family: &quot;verdana&quot; , sans-serif;">einen</span> Zettel und ins Glas mit den schönen Momenten gehören.&nbsp;</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Und Jürgen Marcus mag ein wenig übertreiben, wenn er singt, dass eine neue Liebe wie ein neues Leben ist (nanananananaaa). Sie tut auf jeden Fall verdammt gut. (Karl aus Füssen, wenn du diesen Blogpost liest: Frau Meyer ist vom Markt und wird dich auch im nächsten Sommer nicht auf deiner Alm besuchen). &nbsp;</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Manche Dinge ändern sich, manche nicht</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Auch in 2017 sitzen Menschen in öffentlichen Verkehrsmitteln am liebsten am Gang, gern und besonders während der Rush Hour. "Wie, ich soll meinen Rucksack/Einkaufstüte/Laptop vom Nachbarsitz nehmen, damit Mitreisende Platz nehmen können?" *augenrollundschnauf*</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Alle paar Monate begegnet mir in der U79 dieser Wichtigtuer. In 2017 hatte ich wieder das Vergnügen, dem 1,63 m-Mann im Anzug, dessen fast kahlrasierter Schädel ein wuchtiges Headset schmückt, in der Bahn zu treffen. Er bellt Drohungen in seinen Kopfhörer.&nbsp;</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">"Wenn man mir da nicht entgegenkommt, kündige ich den Vertrag."&nbsp;</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">"Noch so eine Aktion und die werden mich mal richtig kennenlernen."</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">"So geht das nicht, Herr XY, sooo nicht</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ich vermute, am anderen Ende der Leitung ist gar keiner. Der Mann, der während seiner Ansagen den Blick umherschweifen lässt und schaut, dass ihm auch ja alle zuhören, ist als Kind nicht gestillt worden oder kriegt dauernd einen vom Chef drüber. Er braucht Aufmerksamkeit. &nbsp; </span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ohne Weiteres könnte er als Trumps Bodyguard oder eiskalter Bond-Gegenspieler durchgehen (dass er Sport macht, sieht man), zöge er nicht einen Trolley mit fettem KMPG-Aufkleber hinter sich her. Für die nächste Begegnung mit dem KMPG-Männeken habe ich ein <span style="background: white none repeat scroll 0% 0%; color: magenta;"><b><a href="https://www.youtube.com/watch?v=8wx24AeqHRA" target="_blank">launiges Lied</a></b> </span>auf mein Smartphone downgeloaded, das ich laut neben ihm abspielen werde. Hoffe, er versteht die Messag</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Glücklicherweise gäbe es im aktuellen Jahr schon einige mit schönen Ereignissen zu beschriftende Zettel (muss nur das Glas leeren, siehe oben). Einen besonders großen würde ich dem Blog-Marathon anlässlich eines Neujahrstreffens des Netzwerks <i>stilsicher</i>(das ab sofort <i>Kreativ am Fluss </i>heißt) am 10. Februar in&nbsp;<a href="http://karlottas-kaffee.de/" target="_blank"><b><span style="background: white none repeat scroll 0% 0%; color: purple;">Karlottas Café</span></b> </a>in Bad Honnef widmen. Mann, war das toll! Eine wunderschöne Location, vier sehr unterschiedliche Bloggerinnen, ein interessiertes und begeisterungsfähiges Publikum, alles organisiert und initiiert von Ursula Kollritsch und unterstützt von Netzwerkgründerin Stephanie Jana. Autorinnenherz, was willste mehr?&nbsp;</span></span><br /><br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="https://2.bp.blogspot.com/-VflsJ56LCNI/WMAbT0kmuzI/AAAAAAAABrE/tN69_A7iWvs8OoqDj_4gzHYIrUX5D9UTQCPcB/s1600/Lesung%2B1.jpg" style="margin-left: auto; margin-right: auto;"><img border="0" height="400" src="https://2.bp.blogspot.com/-VflsJ56LCNI/WMAbT0kmuzI/AAAAAAAABrE/tN69_A7iWvs8OoqDj_4gzHYIrUX5D9UTQCPcB/s400/Lesung%2B1.jpg" width="300" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;"><span style="font-family: &quot;verdana&quot; , sans-serif;">Foto: Ursula Kollritsch www.sommer-frisch.de</span></td></tr></tbody></table><br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="https://2.bp.blogspot.com/-Gac1FiiITsU/WMAbVgUc9OI/AAAAAAAABrE/WmR0i8krbnIdiv3n7iWAvFmgV3sbw1hagCPcB/s1600/Lesung%2B2.jpg" style="margin-left: auto; margin-right: auto;"><img border="0" height="400" src="https://2.bp.blogspot.com/-Gac1FiiITsU/WMAbVgUc9OI/AAAAAAAABrE/WmR0i8krbnIdiv3n7iWAvFmgV3sbw1hagCPcB/s400/Lesung%2B2.jpg" width="300" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;"><span style="font-family: &quot;verdana&quot; , sans-serif;">Foto: Simone Blaschke www.blaschke-pr.de</span></td></tr></tbody></table><br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="https://4.bp.blogspot.com/-fjV_ujRfws0/WMAbYO_2eYI/AAAAAAAABrE/-oMZQByP8ekx7X2b9HBu16Zal1DiIEuUQCPcB/s1600/Bloggerinnen.jpg" style="margin-left: auto; margin-right: auto;"><img border="0" height="282" src="https://4.bp.blogspot.com/-fjV_ujRfws0/WMAbYO_2eYI/AAAAAAAABrE/-oMZQByP8ekx7X2b9HBu16Zal1DiIEuUQCPcB/s400/Bloggerinnen.jpg" width="400" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;"><span style="font-family: &quot;verdana&quot; , sans-serif;">&nbsp; &nbsp; &nbsp;  Karin Wilhelm, Michèle Lichte, Britta Meyer, Sabine Anne&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Lück&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Foto: Simone Blaschke</span></td></tr></tbody></table><span style="font-family: &quot;verdana&quot; , sans-serif;"><br /></span>  <br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Entsprechend positiv fiel der&nbsp;<b><span style="color: purple;"><span style="background: fuchsia none repeat scroll 0% 0%;"><a href="http://www.general-anzeiger-bonn.de/region/siebengebirge/bad-honnef/Bloggerinnen-stellen-%E2%80%9ENotizen-%C3%BCbers-Leben%E2%80%9C-vor-article3473403.html" target="_blank"><span style="background: white none repeat scroll 0% 0%;">Artikel</span></a></span></span></b><span style="background: white none repeat scroll 0% 0%;"> d</span>es <i>Bonner Generalanzeiger</i> aus.&nbsp;</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ich habe wieder gemerkt, wie wichtig der Austausch, neudeutsch Networking, ist. Das "Wie machst du das?", "Was ist dir wichtig?", "Wie kriegste das hin?" statt im stillen Kämmerlein vor sich hinzupuzzeln (und ich habe ja leider nicht viel gepuzzelt in den letzten Monaten, für diese 'Blogkade' gibt es diverse Gründe). Meine Begeisterung nach unserer Lesung hat mich veranlasst, mich zwecks weiterem Networking zum&nbsp;<b><span style="color: magenta;"><a href="http://literaturcampnrw.de/literaturcamp-nrwbonn/" target="_blank">Literaturcamp NRW in Bonn</a></span></b> am 08. April anzumelden. Das gibt wieder einen Zettel für das <i>Schöne Momente - </i>Glas, da bin ich sicher!</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><br />Das Jahr ist noch (ziemlich) jung, die Vorsätze überschaubar:</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Regelmäßiger schreiben und wahnsinnige Autorenkarriere ankurbeln</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Netzwerken mit anderen Bloggern und Autoren</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Mehr<span style="font-family: &quot;verdana&quot; , sans-serif;"> Bewegung (der Rücken, die Schulter!)</span></span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Horizont erweitern &nbsp;</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Lachen</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Mutig sein&nbsp;</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Und die Blogs meiner Kolleginnen verfolgen:</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><b><a href="http://kwerdenkerin.de/" rel="nofollow" target="_blank">kwerdenkerin</a></b>&nbsp; (Karin Wilhelm)</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><b><a href="http://lichtemomente.eu/" rel="nofollow" target="_blank">Lichte Momente</a></b>&nbsp; (Michèle Lichte)</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><b><a href="http://www.tage-im-garten.de/" rel="nofollow" target="_blank">Tage im Garten</a></b>&nbsp; (Sabine Anne Lück)</span></span><br /><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><br />Bis bald,&nbsp;</span></span><br /><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;"><br /></span></span><span style="font-family: &quot;verdana&quot; , sans-serif;"><span style="font-size: small;">Ihre Frau Meyer</span></span><br /><br />
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://www.neuesvonfraumeyer.de/2017/03/so-jetzt-aber_46.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>The Linux Migration: Creating Presentations</h3>
-		</div>
-		<div class="collectiontext">
-						Long-time readers of my site know that I’m a fan of Markdown, and I use it extensively. (This blog, in fact, is written entirely in Markdown and converted to HTML using Jekyll on GitHub Pages.) Since migrating to Linux as my primary desktop OS, I’ve also made the transition to doing almost all my presentations in Markdown as well. Here are the details on how I’m using Markdown for creating presentations on Linux.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ZXrgudlQoIE/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>The Linux Migration: Other Users’ Stories, Part 2</h3>
-		</div>
-		<div class="collectiontext">
-						This post is part of a series of posts sharing the stories of other users who have decided to migrate to Linux as their primary desktop OS. Each person’s migration (and their accompanying story) is unique; some people have embraced Linux only on their home computer; others are using it at work as well. I believe that sharing this information will help readers who may be considering a migration of their own, and who have questions about whether this is right for them and their particular needs.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/G8Gw-w8ZYpA/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -365,40 +325,31 @@ SyndContentImpl.value=<span style="font-family: &quot;verdana&quot; , sans-serif
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+	  <a href="projekte_2017___i.html">
+		<div class="date">08.04.2017</div>
+<h3>Projekte 2017 - I</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Hier einige Projekte, mit denen ich mich dieses Jahr zur Weiterbildung und aus Spaß beschäftigen will:
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="22_sarcastic_zen_phrases.html">
+		<div class="date">08.04.2017</div>
+<h3>22 Sarcastic Zen Phrases</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Eine schöne Variation auf Motivational Quotes oder Zen-Sinnsprüche
+</p></div>   </a>
+</li>
+<li class="anriss">
 	  <a href="dungeon_generator.html">
 		<div class="date">26.03.2017</div>
 <h3>Dungeon-Generator</h3>
   <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Ich beschäftige mich immer mal wieder mit ausgewählten Problemen im Zusammenhang mit
+				  <p>Ich beschäftige mich immer mal wieder mit ausgewählten Problemen im Zusammenhang mit
 Spielen
 oder der Generierung von Testdaten. In diesem Zusammenhang habe ich einen kleinen Dungeon-Generator erstellt.
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="neue_interaktionsmetapher_dwb_.html">
-		<div class="date">26.03.2017</div>
-<h3>Neue Interaktionsmetapher in dWb+</h3>
-  <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Da ich - wie ich neulich in einer Kommunikation mit einem geschätzten Kollegen zum erstenmal
-explizit realisierte -
-dWb+
-schon länger pflege als es die Herstellerfirma anderer Produkte überhaupt gibt, bin ich dennoch nicht
-zu stolz, neue Ideen einfließen zu lassen...
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="verbesserungen_moduleworkspace_i.html">
-		<div class="date">18.03.2017</div>
-<h3>Verbesserungen ModuleWorkspace I</h3>
-  <div class="abstract">
-				  <p>In der Zeit über Weihnachten haben sich einige Verbesserungen in
-der ModuleWorkspace-Komponente - unter anderem verwendet in der
-sQLshell
-und im Rapid-Prototyping-Werkzeug
-dWb+
-ergeben, die die allgemeine Benutzbarkeit verbessern:
 </p></div>   </a>
 </li>
 </ul>

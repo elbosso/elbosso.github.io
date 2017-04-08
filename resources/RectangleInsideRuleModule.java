@@ -34,6 +34,7 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.elbosso.dataflowframework.modules.filter.rules.util.validator.rules;
 
+@javax.annotation.Generated(value="de.elbosso.dataflowframework.processors.ValidatorProcessor", date="2017-04-07T09:51:14.139Z")
 public class RectangleInsideRuleModule extends de.netsysit.dataflowframework.modules.ThreadingBeanContextChildModuleBase
 {
 	static
@@ -128,43 +129,57 @@ public class RectangleInsideRuleModule extends de.netsysit.dataflowframework.mod
         if(((java.lang.Class)ref).isAssignableFrom(java.awt.geom.Point2D.class))
         {
             java.awt.geom.Point2D data=getLastInputPoint2D();
-            boolean valid=wrapper.validate(data).isEmpty();
-            if(measure.isTransparent()==false)
+            try
             {
-                valid=measure.validate(wrapper).isEmpty();
+                boolean valid=wrapper.validate(data).isEmpty();
+                if(measure.isTransparent()==false)
+                {
+                    valid=measure.validate(wrapper).isEmpty();
+                }
+                if(valid==false)
+                {
+                    java.awt.geom.Point2D old=getFailedPoint2D();
+                    setFailedPoint2D(data);
+                    send("failedPoint2D", old, getFailedPoint2D());
+                }
+                else
+                {
+                    java.awt.geom.Point2D old=getPassedPoint2D();
+                    setPassedPoint2D(data);
+                    send("passedPoint2D", old, getPassedPoint2D());
+                }
             }
-            if(valid==false)
+            catch(java.lang.Throwable t)
             {
-                java.awt.geom.Point2D old=getFailedPoint2D();
-                setFailedPoint2D(data);
-                send("failedPoint2D", old, getFailedPoint2D());
-            }
-            else
-            {
-                java.awt.geom.Point2D old=getPassedPoint2D();
-                setPassedPoint2D(data);
-                send("passedPoint2D", old, getPassedPoint2D());
+                error(null,t.getMessage());
             }
         }
         if(((java.lang.Class)ref).isAssignableFrom(java.awt.Shape.class))
         {
             java.awt.Shape data=getLastInputShape();
-            boolean valid=wrapper.validate(data).isEmpty();
-            if(measure.isTransparent()==false)
+            try
             {
-                valid=measure.validate(wrapper).isEmpty();
+                boolean valid=wrapper.validate(data).isEmpty();
+                if(measure.isTransparent()==false)
+                {
+                    valid=measure.validate(wrapper).isEmpty();
+                }
+                if(valid==false)
+                {
+                    java.awt.Shape old=getFailedShape();
+                    setFailedShape(data);
+                    send("failedShape", old, getFailedShape());
+                }
+                else
+                {
+                    java.awt.Shape old=getPassedShape();
+                    setPassedShape(data);
+                    send("passedShape", old, getPassedShape());
+                }
             }
-            if(valid==false)
+            catch(java.lang.Throwable t)
             {
-                java.awt.Shape old=getFailedShape();
-                setFailedShape(data);
-                send("failedShape", old, getFailedShape());
-            }
-            else
-            {
-                java.awt.Shape old=getPassedShape();
-                setPassedShape(data);
-                send("passedShape", old, getPassedShape());
+                error(null,t.getMessage());
             }
         }
 	}

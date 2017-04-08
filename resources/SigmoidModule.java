@@ -34,6 +34,7 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.elbosso.dataflowframework.modules.convert.algorithms.functions;
 
+@javax.annotation.Generated(value="de.elbosso.dataflowframework.processors.OneDFunctionProcessor", date="2017-04-07T09:51:15.929Z")
 public class SigmoidModule extends de.netsysit.dataflowframework.modules.ThreadingBeanContextChildModuleBase
 {
 	static
@@ -86,11 +87,18 @@ public class SigmoidModule extends de.netsysit.dataflowframework.modules.Threadi
 		if(in!=null)
 		{
 			double[] old=getOutput();
-			output=new double[in.length];
-			for(int i=0;i<in.length;++i)
-				output[i]=function.compute(in[i].doubleValue());
-			setOutput(output);
-			send("output", old, getOutput());
+			try
+			{
+                output=new double[in.length];
+                for(int i=0;i<in.length;++i)
+                    output[i]=function.compute(in[i].doubleValue());
+                setOutput(output);
+                send("output", old, getOutput());
+            }
+            catch(java.lang.Throwable t)
+            {
+                error(null,t.getMessage());
+            }
 		}
 	}
 	public de.elbosso.algorithms.functions.Sigmoid getFunction()

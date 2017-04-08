@@ -54,12 +54,12 @@ public class ActivityToggle<T> extends java.lang.Object implements de.netsysit.u
 		this.pcs = new java.beans.PropertyChangeSupport(this);
 	}
 
-	public boolean isActive()
+	public synchronized boolean isActive()
 	{
 		return active;
 	}
 
-	public void setActive(boolean active)
+	public synchronized void setActive(boolean active)
 	{
 		boolean old=isActive();
 		this.active = active;

@@ -67,29 +67,32 @@ public class ResourceLoader extends java.lang.Object
 	public static void setSize(IconSize size)
 	{
 		ResourceLoader.size = size;
-		java.awt.Dimension screensize=java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-//		System.out.println(screensize+" "+ResourceLoader.size);
-		if((screensize.width<1281)||(screensize.height<1025))
+		if(java.awt.GraphicsEnvironment.isHeadless()==false)
 		{
-			switch(ResourceLoader.size)
+			java.awt.Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+			//		System.out.println(screensize+" "+ResourceLoader.size);
+			if ((screensize.width < 1281) || (screensize.height < 1025))
 			{
-				case large:
+				switch (ResourceLoader.size)
 				{
-					ResourceLoader.size=IconSize.medium;
-					break;
-				}
-				case medium:
-				{
-					ResourceLoader.size=IconSize.small;
-					break;
-				}
-				default:
-				{
-							
+					case large:
+					{
+						ResourceLoader.size = IconSize.medium;
+						break;
+					}
+					case medium:
+					{
+						ResourceLoader.size = IconSize.small;
+						break;
+					}
+					default:
+					{
+
+					}
 				}
 			}
+			//		System.out.println(screensize+" $ "+ResourceLoader.size);
 		}
-//		System.out.println(screensize+" $ "+ResourceLoader.size);
 	}
 
 	public static synchronized void configure(java.io.File conf) throws java.io.IOException
