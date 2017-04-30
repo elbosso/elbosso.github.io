@@ -113,6 +113,48 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>Big News About the Full Stack Journey Podcast</h3>
+		</div>
+		<div class="collectiontext">
+						If you’ve been following the Full Stack Journey podcast, you know that the podcast has been silent for a few months. Some of that was due to some adverse situations in life (it happens to all of us from time to time), but some of it was due to the coordination of a major transition in the podcast. And that’s the big news I’m here to share—read on for the full details!
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ofKJAXsN93s/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>Revisiting CentOS Atomic Host</h3>
+		</div>
+		<div class="collectiontext">
+						A couple years ago, I wrote an article about how I was choosing CoreOS over Project Atomic based on some initial testing with CentOS Atomic Host builds. As it turns out—and as I pointed out in the “Update” section of that article—the Atomic Host builds I was using were pre-release builds, and therefore it wasn’t really appropriate to form an assessment based on pre-release builds. Now that both CentOS Atomic Host and CoreOS Container Linux have both grown and matured, I thought I’d revisit the topic and see how—if at all—things have changed.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/MEOmD31WEIs/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://evanmiller.org/" target="_blank">Evan Miller's News</a>
+		</div>
+		<div>
+			<h3>Adventure Games and Eigenvalues</h3>
+		</div>
+		<div class="collectiontext">
+						Identifying and quantifying dead ends, the bane of all adventure game players: <a href="http://www.evanmiller.org/adventure-games-and-eigenvalues.html">Adventure Games and Eigenvalues</a>
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.evanmiller.org/adventure-games-and-eigenvalues.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="http://www.neuesvonfraumeyer.de/" target="_blank">Neues von Frau Meyer</a>
 		</div>
 		<div>
@@ -233,72 +275,6 @@ SyndContentImpl.value=<!--[if gte mso 9]><xml> <o:OfficeDocumentSettings>  <o:Al
 		<a href="http://www.familytidings.com/blog/?p=1488" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>Friday Fun XLVI - Image Matrix</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Last weekend when sitting in my hotel room in Singapore I had the idea to test the performance of my <a href="https://harmoniccode.blogspot.sg/2017/03/friday-fun-xliv-matrix.html" target="_blank">DotMatrix control</a> again. So I thought what about pixelating an image and visualize it using the control.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well to be honest it was just too easy to do...so here is the result...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-rKtC1iJPaIM/WOB2lnLvu7I/AAAAAAAAEMI/q3y5gGKGXVEWvnp50ZolQKnoj6Vc5oUPACLcB/s1600/MatrixImage.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="262" src="https://4.bp.blogspot.com/-rKtC1iJPaIM/WOB2lnLvu7I/AAAAAAAAEMI/q3y5gGKGXVEWvnp50ZolQKnoj6Vc5oUPACLcB/s640/MatrixImage.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">On the left side you see the original picture and on the right side the related pixelated matrix image.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So I thought why not adding some text and figured out that when I draw the text on the DotMatrix control I usually set all "transparent" pixels to the dotOffColor which doesn't look good in this example.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Therefor I've added another method to the DotMatrix control which only draws the pixels in a character that are "on". The method is called</span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">setCharAtWithBackground()</span></li></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So with this it was easy to add some text on top of the pixelated image without destroying the existing background pixels.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now that this was done I decided it might be nice to be able to simply shift the DotMatrix in each direction. Long story short I've implemented for additional methods which are</span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">shiftLeft()</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">shiftRight()</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">shiftUp()</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">shiftDown()</span></li></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">When calling one of this methods the whole DotMatrix will be shifted by one dot in the choosen direction and redraws itself.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now I could really test the capability of the DotMatrix by calling for example the shiftLeft method in an AnimationTimer with an update rate of 10ms. So the result was nice as you can see in the following video...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/1TEa5sQH-uI" width="560"></iframe></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">You could also combine the calls like first calling shiftLeft() and after that shiftUp(). It's not perfect because both times the drawMatrix() method will be called but even with this little drawback the DotMatrix is fast enough to create a smooth scrolling effect.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Please keep in mind that you should not go crazy with the no of dots in the DotMatrix control. You will definitely see a decrease in performance if you go to a high number of columns and rows. In the video I use 100x85 dots for the DotMatrix which I think is good enough to use it also for images.</span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So I don't have any use case for the DotMatrix control at the moment but maybe one of you has and therefor you can find the source code as always over at <a href="https://github.com/HanSolo/matriximage" target="_blank">github</a>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">You will also find 2 other demos in the source code (Main2 and Main3). In Main2 I show you how to create one DotMatrix out of two images and in Main3 I show you how to use two images and draw them alternating on the DotMatrix...so have fun playing around with it :)</span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well that's it for today...like always I wish you a nice weekend and never forget...keep coding... ;)</span><br /><br />
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2017/04/friday-fun-xlvi-image-matrix.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>Technology Short Take #81</h3>
-		</div>
-		<div class="collectiontext">
-						Welcome to Technology Short Take #81! I have another collection of links, articles, and thoughts about key data center technologies, and hopefully I’ve managed to include something here that will prove useful or thought-provoking. Enjoy!
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ufvFut0K8FE/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.frauenotiert.de/" target="_blank">Frau E. notiert..</a>
-		</div>
-		<div>
-			<h3>7 Gründe, Hamburg zu lieben</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-bL7Kfj2ImeE/WOOX6mLWPlI/AAAAAAAADOc/SEurhVEgMgcdWWoCTVRn8Z3r2iptMHF6ACLcB/s1600/hamburg_eppendorf_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://4.bp.blogspot.com/-bL7Kfj2ImeE/WOOX6mLWPlI/AAAAAAAADOc/SEurhVEgMgcdWWoCTVRn8Z3r2iptMHF6ACLcB/s640/hamburg_eppendorf_.jpg" width="480" /></a></div><br /><br />Wie die "älteren" Leser unter Euch wissen, <a href="http://www.frauenotiert.de/2016/12/wieviel-schmerz-ist-heimat-wert.html" target="_blank">war der Umzug nach Hamburg ein gesundheitlicher, lange strategisch ausgetüftelter Kompromiß</a> zwischen meinen beiden Herzensheimaten: Mein Ästhetikherz gehört Stockholm und mein Heimatherz Nordrhein-Westfalen. Hamburg war mir nahezu unbekannt.<br /><br />In den ersten Wochen war es wirklich hart: Ich fühlte mich angesichts der Größe dieser Stadt wie ein gerupftes Huhn, das man in einen tosenden Ozean geworfen hat. Wie sollte ich dieses riesige Geflecht aus zigspurigen Straßen und unendlich vielen Stadtteilen jemals verstehen? Für jemanden mit dem Orientierungssinn eines Bürostuhls schier unvorstellbar.<br /><a name='more'></a><br />Inzwischen lache ich über das gerupfte Huhn aus den ersten zwei Monaten. Und habe Hamburg total ins Herz geschlossen. Und das, obwohl ich durch das Thema Wohnungssuche bisher keine Zeit hatte, einmal wie eine Touristin gemütlich durch Hamburgs schönste Ecken zu schlendern.<br /><br />Dennoch: Ich bin sehr glücklich, hier zu sein!<br />Warum?<br /><br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-BTheTB03OSM/WOOX7I_AKdI/AAAAAAAADOg/-mSAfmXa3PU9yMpqg1uEZE3_luJdXo0sQCEw/s1600/hamburg_alster_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://4.bp.blogspot.com/-BTheTB03OSM/WOOX7I_AKdI/AAAAAAAADOg/-mSAfmXa3PU9yMpqg1uEZE3_luJdXo0sQCEw/s640/hamburg_alster_.jpg" width="480" /></a></div><br /><br /><h3>Das großartige Klima</h3><br />Die Luft, die Luft, die Luft. Erwähnte ich die Luft?<br /><br />Seitdem ich in Hamburg lebe, habe ich wieder "ganz normal" chronische Migräne und clusterartige Schmerzen. Aber nicht mehr nonstop. Nicht rund um die Uhr, ohne jemals auch nur eine klitzekleine Sekunde befreit zu sein von dieser metallenen Dornenkrone, die sich in Düsseldorf elf lange Jahre lang in meinen Kopf gefräst hat. Jede. Einzelne. Sekunde.<br />Diese Schmerzlücken sind wunderbar! Für diese Schmerzlücken gebe ich alles, mache ich alles, ertrage ich alles.<br /><br />Und ich kann atmen. Einfach so. Ohne bei jedem Atemzug das Gefühl zu haben, nur die Hälfte von dem in meinen Körper zu bekommen, was er dringend benötigt. Ich schnappe nicht mehr ständig nach Luft wie ein gestrandeter Fisch. Bei knapp 20.000 Atemzügen, die wir täglich machen, ein toller Gewinn!<br /><br />"Normale" Hamburger schütteln nun sicherlich den Kopf: Ist sie denn irre? Sie mag die dreckige Luft unserer Großstadt? Mir ist schon bewußt, daß die Luft hier bei weitem nicht so rein ist, wie beispielsweise an der Ostseeküste. Mich plagt aber vor allem das Klima und nicht die Dreckspartikel. Wer im Ruhrgebiet geboren und aufgewachsen ist, lächelt müde über ein paar Tonnen Schiffsruß hier und dort.<br /><br /><br /><br /><h3>Die sympathischen Menschen</h3><br />Oh je, oh je, willst Du Dir was wirklich antun?, wurde ich vor meinem Umzug ständig gefragt<br />Warum?<br />Na, die Hamburger sind doch so verschlossen. Das macht bestimmt voll depri.<br /><br />So können nur Leute reden, die noch nie versucht haben, in Stockholm Anschluß zu gebürtigen Schweden zu bekommen. Im Vergleich dazu sind die Hamburger Brasilianer. <br /><br />Ich bin bisher nur netten und offenen Menschen begegnet. Kein einziges Mal dachte ich: Jesses, das dauert aber hier mit den Antworten. Bereits jetzt habe ich viele supernette Kontakte und fühle mich verdammt gut aufgehoben.<br /><br />Und daß man nicht nonstop ungefragt in Bus und Bahn vollgetextet wird, wie im Rheinland, ist oft auch höchst entspannend. <br /><br /><br /><br /><h3>In Hamburg kommt jeder mal vorbei</h3><br />Als ich wegen der Mietpreise zwischen Bremen und Hamburg schwankte, wies mich eine Freundin auf einen wesentlichen Grund für Hamburg hin: meine vielen in Deutschland und der Welt verstreuten Freunde. In Hamburg kommt jeder mal vorbei. Sei es beruflich oder auf der Durchfahrt oder weil die Stadt selbst eine Reise wert ist. Und es ungemein praktisch ist, jemanden dort zu kennen, bei dem man kostenlos wohnen kann.<br /><br />Und sie hatte recht!<br />Selten hatte ich in kurzer Zeit so viel Besuch wie in den bisher 3,5 Monaten hier in Hamburg. Mein Gästebett ist regelmäßig ausgebucht und ich freue mich wie ein Keks, Freunde von nah und fern zu sehen. <br /><br /><br /><br /><h3>Diese Stadt wird mir nie langweilig werden</h3><br />Geist und Körper sind bei mir in einem ständigen Konflikt: was dem Körper guttut, läßt den Geist leiden. Und umgekehrt. Wenn es nach meinem Kopf ginge, würde ich mal in New York leben, mal in London, mal sonstwo auf der Welt. Vielleicht wäre ich Reisebloggerin.<br /><br />Wenn es nach meinem kranken Körper ginge, würde ich in der Pampa Mecklenburg Vorpommerns ein völlig reizfreies, gesundes Holzhäuschen beziehen und es nie wieder verlassen, bis ich das Zeitliche segne. Das Zeitliche würde ich dort aber bereits nach fünf Tagen segnen. Denn ich brauche Lebendigkeit im allernächsten Umfeld. Weiter komme ich ja meist nicht.<br /><br />Hamburg ist so groß und vielseitig, daß es in meinem Energiezustand Jahre dauern wird, bis ich alles einmal erforscht habe. Und das ist gut so. Wenn ich hinten fertig bin, kann ich vorne wieder anfangen. Denn diese schöne Stadt verändert sich ständig. Wunderbare Aussichten.<br /><br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-vF7sGszuy0o/WOOX9fVOYTI/AAAAAAAADOk/vYQoUBXkf3ku0GtzTQbIV4d8jihv3KoMQCEw/s1600/hamburg_hoheluftbruecke_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://3.bp.blogspot.com/-vF7sGszuy0o/WOOX9fVOYTI/AAAAAAAADOk/vYQoUBXkf3ku0GtzTQbIV4d8jihv3KoMQCEw/s640/hamburg_hoheluftbruecke_.jpg" width="480" /></a></div><br /><br /><h3>Jugendstil</h3><br />Mein größter optischer Fetisch neben schönen Männerschultern und <a href="http://www.frauenotiert.de/2016/01/auto-erotik-felgen-farben-co.html" target="_blank">Autofelgen</a> ist Jugendstil-Architektur. Ich könnte mich auf ein Höckerchen setzen und einfach nur schauen. Stundenlang. Ganze Städtereisen habe ich früher einzig in den Jugendstil-Stadtteilen der jeweiligen Metropolen verbracht.<br /><br />Hamburg ist Jugendstil satt. Ich habe noch nie so viele schöne Gebäude auf einmal gesehen. Mein Bedürfnis nach Ästhetik wird hier rund um die Uhr aufs Beste befriedigt. Bei schönem Wetter sogar doppelt: dann joggen die schönen Männerschultern durch Jugendstil-Alleen. Ich hätte es schlimmer antreffen können.<br /><br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-_NqKizD6ER4/WOOX5ocUoxI/AAAAAAAADOY/wrwPwEsUuyYYVb9Ps33RP87ljuLXhTeLQCEw/s1600/hamburg_clas_ohlson_.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://3.bp.blogspot.com/-_NqKizD6ER4/WOOX5ocUoxI/AAAAAAAADOY/wrwPwEsUuyYYVb9Ps33RP87ljuLXhTeLQCEw/s640/hamburg_clas_ohlson_.jpg" width="480" /></a></div><br /><br /><h3>Mein geliebter Clas Ohlson</h3><br />Auf diesem Planeten kenne ich nur einen einzigen Laden, in dem ich freiwillig und gerne einkaufe. Mein Freund <a href="http://www.clasohlson.com/" target="_blank">Clas Ohlson</a>. Clas bietet exakt die Produkte, die mich interessieren: technische Gadgets, Elektronik, Heimwerker-Artikel und viele praktische Dinge, die den leidigen Haushalt erleichtern. Das alles auch noch zu einem guten Preis und in schlichtem skandinavischen Design.<br /><br />Ja, mein Herz gehört Clas. Ich habe es in Stockholm noch nie geschafft, ohne mindestens einen Neuerwerb, das Land zu verlassen. Wie groß war die Begeisterung, als ich Filialen in Hamburg entdeckte! Für mich ein klarer Pluspunkt mehr auf meiner I love Hamburg-Liste. <br /><br /><br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-AE_djWJrrRc/WOOYBH1cjNI/AAAAAAAADOo/IZK5ILj08Ms6_ZMf0gNstpyWqFXRjgoIQCEw/s1600/hamburg_uhlenhorst_.jpg" imageanchor="1"><img border="0" height="640" src="https://1.bp.blogspot.com/-AE_djWJrrRc/WOOYBH1cjNI/AAAAAAAADOo/IZK5ILj08Ms6_ZMf0gNstpyWqFXRjgoIQCEw/s640/hamburg_uhlenhorst_.jpg" width="480" /></a></div><br /><br /><h3>Wasser</h3><br />Es gibt doch nichts Schöneres, als am Wasser zu sitzen. Wasser gibt es hier viel. Meistens von oben. Oft auch von der Seite. Aber vieles davon plätschert auch kontemplativ vor sich hin in kleinen Kanälen und Armen der Alster. Hübsche Uferplätze laden zum Sitzen und Genießen ein. Darauf freue ich mich schon!<br /><br />Vorher aber habe ich ein fulminantes Problem zu lösen. Wie Tausende anderer auch, eine passende Wohnung zu finden. Denn meine aktuelle Zwischenmiete läuft bald aus. Mit meinen krankheitsbedingten special needs ist die Suche ganz besonders kompliziert. <br /><br /><b>Du möchtest mich unterstützen? Großartig!</b> <a href="http://www.frauenotiert.de/p/blog-page_20.html" target="_blank">Bitte teile meine Suchseite hinter diesem Link</a>.<br /><br />Vielen lieben Dank!&nbsp; Vielleicht kann ich dann schon bald über die nächsten Gründe, Hamburg zu lieben, bloggen.<br /><br /><br />
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://www.frauenotiert.de/2017/04/7-grunde-hamburg-zu-lieben.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
-		</div>
-		<div>
-			<h3>The Linux Migration: Corporate Collaboration, Part 3</h3>
-		</div>
-		<div class="collectiontext">
-						In discussing support for corporate communication and collaboration systems as part of my Linux migration, I’ve so far covered e-mail in part 1 and calendaring in part 2. In this post, I’m going to discuss the last few remaining aspects of corporate collaboration: instant messaging/chat, meetings and teleconferences, and document sharing.
-					</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/mtHcZzGf-tU/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -306,16 +282,22 @@ SyndContentImpl.value=<div class="separator" style="clear: both; text-align: cen
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-	  <a href="dokumentation_netzwerklabor_dwb_.html">
-		<div class="date">22.04.2017</div>
-<h3>Dokumentation Netzwerklabor mit dWb+</h3>
+	  <a href="fruehjahr_2017_meinem_garten.html">
+		<div class="date">30.04.2017</div>
+<h3>Frühjahr 2017 in meinem Garten</h3>
   <div class="abstract">
 			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Der Aufbau des
-Netzwerklabors,
-wie er in vorhergehenden Artikeln geschildert wurde, ist nicht statisch:
-Hin und wieder müssen Maschinen entfernt und hinzugefügt oder
-in andere Netzwerksegmente verschoben werden. Dazu benötigt man ein Mittel zur Dokumentation
+		  <p>Dieses Frühjahr tat sich schon einiges in meinem Garten - hier mal die ersten Übersichten...
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="ads_b_empfaenger_selber_gemacht.html">
+		<div class="date">30.04.2017</div>
+<h3>ADS-B-Empfänger selber gemacht</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Als ich davon las, wollte ich es sofort selber ausprobieren: Software Defined Radio (SDR) macht es möglich,
+einen ADS-B-Empfänger für die Real-Time-Auswertung von Flugzeug-Statusdaten praktisch für lau selber zusammenzubauen.
 </p></div>   </a>
 </li>
 <li class="anriss">
@@ -323,19 +305,9 @@ in andere Netzwerksegmente verschoben werden. Dazu benötigt man ein Mittel zur 
 		<div class="date">22.04.2017</div>
 <h3>Erzeugung von BeanInfo mit Annotations</h3>
   <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Nachdem ich nun prüfe ob sich der Umstieg von Netbeans hin zu IntelliJ lohnt, habe
+				  <p>Nachdem ich nun prüfe ob sich der Umstieg von Netbeans hin zu IntelliJ lohnt, habe
 ich etwas gefunden, das ich sehr vermisse - einen BeanInfo-Generator,wie er in Netbeans
 standardmäßig an Bord war. Aber wie es im Amiga-Magazin so schön hieß: "Fehlt Dir was? - Programmiers Dir doch!"
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="material_design_anyone_.html">
-		<div class="date">13.04.2017</div>
-<h3>Material Design anyone?</h3>
-  <div class="abstract">
-				  <p>Ich konnte dem material Design ja noch nichts abgewinnen - hier jedoch einige Ressourcen, die bei
-der Umsetzung eigener Projekte helfen könnten?
 </p></div>   </a>
 </li>
 </ul>
@@ -417,6 +389,18 @@ der Umsetzung eigener Projekte helfen könnten?
 </header>
 <div class="nav-item-body">
   <p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Garten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Garten
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Das grÃ¼ne Hobby</p>
 </div>
 </div>
 </a>
