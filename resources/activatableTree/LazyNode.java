@@ -38,15 +38,19 @@ package de.netsysit.model.tree;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.swing.*;
+import javax.swing.tree.DefaultTreeModel;
 
-public abstract class LazyNode extends java.lang.Object implements
-javax.swing.tree.MutableTreeNode
+
+public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 {
 	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(LazyNode.class);
 	private java.lang.String client;
 	protected Object[] children;
 	private javax.swing.tree.TreeNode parent;
 	private java.lang.Class stopClass;
+	private javax.swing.tree.DefaultTreeModel treeModel;
+//	private javax.swing.JTree tree;
 
 	private LazyNode()
 	{
@@ -57,8 +61,29 @@ javax.swing.tree.MutableTreeNode
 		super();
 		client=name;
 		this.parent=parent;
+//		this.tree=tree;
 		if(parent instanceof LazyNode)
-			this.stopClass=((LazyNode)parent).getStopClass();
+		{
+			LazyNode lazyParent=(LazyNode)parent;
+			this.stopClass=lazyParent.getStopClass();
+//			this.tree=lazyParent.getTree();
+			this.treeModel=lazyParent.getTreeModel();
+		}
+	}
+	protected javax.swing.tree.DefaultTreeModel produceTreeModel()
+	{
+		return new javax.swing.tree.DefaultTreeModel(this);
+	}
+	public javax.swing.tree.DefaultTreeModel getTreeModel()
+	{
+		if(getParent()==null)
+		{
+			if(treeModel==null)
+			{
+				treeModel=produceTreeModel();
+			}
+		}
+		return treeModel;
 	}
 
 	public Class getStopClass()
@@ -136,7 +161,37 @@ javax.swing.tree.MutableTreeNode
 		{
 			try
 			{
-				findChildren();
+				if(treeModel==null)
+				{
+					children = findChildren();
+				}
+				else
+				{
+					children=new Object[0];
+					java.lang.Runnable rble=new java.lang.Runnable()
+					{
+						public void run()
+						{
+							try
+							{
+								children = findChildren();
+								if(children!=null)
+								{
+									for(Object child:children)
+									{
+//										LazyNode.this.add((javax.swing.tree.MutableTreeNode)child);
+										treeModel.insertNodeInto((javax.swing.tree.MutableTreeNode)child,LazyNode.this,LazyNode.this.getChildCount());
+									}
+								}
+							}
+							catch(java.lang.Throwable t)
+							{
+
+							}
+						}
+					};
+					new java.lang.Thread(rble).start();
+				}
 			}
 			catch (java.lang.Exception exp)
 			{
@@ -146,7 +201,7 @@ javax.swing.tree.MutableTreeNode
 		}
 		return children;
 	}
-	protected abstract void findChildren() throws java.lang.Exception;
+	protected abstract Object[] findChildren() throws java.lang.Exception;
 	public void setParent(javax.swing.tree.MutableTreeNode newParent)
 	{
 		
@@ -166,12 +221,12 @@ javax.swing.tree.MutableTreeNode
 	public void insert(javax.swing.tree.MutableTreeNode node, int index)
 	{
 	}
-	public java.lang.String getPath()
+	public java.lang.String getPathAsString()
 	{
 		java.lang.String rv="";
 		javax.swing.tree.TreeNode parent=getParent();
 		if((parent!=null)&&(LazyNode.class.isAssignableFrom(parent.getClass())))
-			rv+=((LazyNode)parent).getPath();
+			rv+=((LazyNode)parent).getPathAsString();
 		rv+="/"+toString();
 		return rv;
 	}
