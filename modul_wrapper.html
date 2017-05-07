@@ -109,14 +109,16 @@ dieses unterstützen könnte.
  <p>  <img src="images/medium/dWb_logo.png" 
 	   alt="Dataflow Workbench dWb+" 
 	class="imgright">
-Mehrere Möglichkeiten wurden analysiert: Es stellte sich heraus, dass es zwar durch eine simple Erweiterung möglich wäre,
+Mehrere Möglichkeiten wurden analysiert: Es stellte sich heraus, dass es zwar durch eine simple
+Erweiterung möglich wäre,
 die Zustandsübergänge zu modellieren: Dazu wäre lediglich eine Erweiterung der Skripte an Verbindungen vonnöten:
 Würde es möglich sein, durch das Ergebnis der Auswertung des Skripts die Propagierung des zu übertragenden
 Datums zu verhindern, könnte man so Token implementieren, die von Modul zu Modul wandern und markieren, in welchem Zustand
 das Gesamtsystem sich aktuell befindet: Das Modul, das das Token besitzt repräsentiert diesen Zustand. Gekoppelt mit
 der Tatsache, dass alle Module und Skripte Zugriff auf den globalen Variablen-Manager haben, lassen sich die Auswertungen
-des Skripts sogar über die Zustände verschiedener Module hinweg realisieren. Leider ist es aber so, dass die Module nicht bemerken
-könnten, dass sie den Token gerade eingebüßt haben - sobals eine der Verbindungen, bzw. deren Skripts, das Token passieren lassen und
+des Skripts sogar über die Zustände verschiedener Module hinweg realisieren. Leider ist es aber so, dass die
+Module nicht bemerken
+könnten, dass sie den Token gerade eingebüßt haben - sobald eine der Verbindungen, bzw. deren Skripts, das Token passieren lassen und
 das System dadurch in einen anderen Zustand übergeht, darf das Modul, das den Token vorher innehatte ja keine aktiven Signale mehr senden.
 Diese Rückkopplung ist aber in der aktuellen Situation nicht gegeben.
 </p><p>
