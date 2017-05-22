@@ -1,0 +1,608 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
+<head>
+  <title>Rekursive Abfragen in der sQLshell</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+			<meta name="Description" content="Nachdem auch in Rahmen meiner Arbeit neulich wieder ein rekursives Datenmodell sein hässliches Haupt erhob,musst
+ich mich damit beschäftigen." />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
+	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
+	<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body onload="toggle('show');">
+<div id="wrapper">
+	<div id="header">
+<div id="logo">
+  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
+      display="inline">
+    <mrow>
+      <mn>1</mn>
+      <mo>&isin;</mo>
+      <mi>&infin;</mi>
+    </mrow>
+</math>
+</h1-->
+  <p>
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+  </p>
+</div>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+	</div><!-- #header-->
+<div id="all">
+<div id="A">
+<div id="content">
+	<div class="date">22.05.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+				<!--li--> <a href="oracle_jdbc_treiber_eigenarten.html#content">sQLshell</a> <!--/li-->
+					<!--li--> ,<a href="dbms_software.html#content">Datenbanken</a> <!--/li-->
+			<!--/ul-->
+</div>
+ 	<div class="heading">Rekursive Abfragen in der sQLshell</div>
+			<p>Nachdem auch in Rahmen meiner Arbeit neulich wieder ein rekursives Datenmodell sein hässliches Haupt erhob,musst
+ich mich damit beschäftigen. Ich fand heraus, dass es für verschiedene DBMS spezielle SQL-Konstrukte gibt, die es erlauben,
+solche rekursiven Strukturen in einer Query abzufragen. Danach dachte ich nach und stellte fest, dass eines der Features der
+<a href="sQLshell.html">sQLshell</a>
+bereits sehr einfaches Arbeiten mit solchen Strukturen ermöglicht:
+</p> <a name="content"> </a>
+ <p>  <img src="images/medium/sQLshell_logo.png" 
+	   alt="sQLshell Plugins Logo" 
+	class="imgright">
+<h1>Das Problem</h1>
+Manchmal hat man auch in relationalen Datenbanken rekursive Beziehungen - also Strukturen, die eine Hierarchie
+prinzipiell unbeschränkter Tiefe abbilden können. Ein Beispiel dafür findet man
+<a href="https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_61/sqlp/rbafyrecursivequeries.htm">hier</a> -
+ein Datenmodell, das Informationen zu Flügen zwischen zwei Flughäfen enthält, dem man aber mittels rekursiver
+Abfragen zum Beispiel alle möglichen Verbindungen zwischen zwei Städten entlocken könnte - einschließlich
+sämtlicher Zwischenstationen.
+</p><p>
+Ein weiteres immer wieder gern genommenes Beispiel ist die Beziehung zwischen Angestellten und ihren Chefs:
+Eine Definition für einen solchen Tatbestand könnte die folgende DDL-Anweisung zur Erstellung einer Tabelle widerspiegeln
+(Ich habe hier ein
+<a href="https://technet.microsoft.com/de-de/library/ms186243(v=sql.105).aspx">Beispiel</a>
+ein wenig verallgemeinert):
+<pre>
+CREATE TABLE MyEmployees
+(
+EmployeeID integer,
+FirstName varchar (30),
+LastName varchar (40),
+Title varchar (50),
+DeptID integer,
+ManagerID int,
+PRIMARY KEY (EmployeeID));
+ALTER TABLE JDBCTESTUSER.MYEMPLOYEES ADD  FOREIGN KEY (MANAGERID) REFERENCES MYEMPLOYEES (EMPLOYEEID);
+</pre>
+Zum Testen fügen wir noch einige Datensätze in diese Tabelle ein:
+<pre>
+INSERT INTO MyEmployees VALUES (1, 'Ke', 'Sánchez', 'Chief Executive Officer',16,NULL);
+INSERT INTO MyEmployees VALUES (273, 'Bria', 'Welcker', 'Vice President of Sales',3,1);
+INSERT INTO MyEmployees VALUES (274, 'Stephe', 'Jiang', 'North American Sales Manager',3,273);
+INSERT INTO MyEmployees VALUES (275, 'Michael', 'Blythe', 'Sales Representative',3,274);
+INSERT INTO MyEmployees VALUES (276, 'Linda', 'Mitchell', 'Sales Representative',3,274);
+INSERT INTO MyEmployees VALUES (285, 'Syed', 'Abbas', 'Pacific Sales Manager',3,273);
+INSERT INTO MyEmployees VALUES (286, 'Lyn', 'Tsoflias', 'Sales Representative',3,285);
+INSERT INTO MyEmployees VALUES (16,  'David','Bradley', 'Marketing Manager', 4, 273);
+INSERT INTO MyEmployees VALUES (23,  'Mary', 'Gibso', 'Marketing Specialist', 4, 16);
+</pre>
+Damit ergibt sich dann der Inhalt der Tabelle (mit zwei verborgenen Spalten) in der sQLshell wie folgt:
+  <img src="images/sQLshell/recursive_queries_conten_view.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Inhaltsansicht der Beispieltabelle
+</span>
+<h1>Das SQL-Konstrukt</h1>
+Das SQL-Konstrukt, das bei solchen Problemstellungen hilft nennt sich Common Table Expression -
+<a href="https://stackoverflow.com/questions/25754366/recursive-query-challenge-simple-parent-child-example">Erläuterungen</a> dazu sind im
+<a href="https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_61/sqlp/rbafyrecursivequeries.htm">Netz</a> reichlich zu
+<a href="https://technet.microsoft.com/de-de/library/ms186243(v=sql.105).aspx">finden.</a>
+</p><p>
+Allerdings existieren auch Datenbanksysteme, die diese SQL-Erweiterung nicht anbieten - dann muss man die
+ Informationen mühevoll zusammenlesen. Das geht zum einen mit geschachtelten und per UNION verbundenen
+ Abfragen. Dann muss man allerdings selber die korrekte maximale Tiefe der Hierarchie ausloten.
+</p><p>
+ Eine andere Möglichkeit ist es, geeignete Werkzeuge zum Einsatz zu bringen, die dabei unterstützen...
+<h1>Die Lösung in der sQLshell</h1>
+Zum einen ist es natürlich möglich, eine Abfrage zu konstruieren, die die Beziehung der betroffenen Spalten als Join modelliert.
+ Das ist - wie in der folgenden Abbildung zu sehen - auch mit dem Visuellen Abfrageeditor möglich.
+  <img src="images/sQLshell/recursive_queries_vc.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Erstellung einer rekursiven Abfrage mittels des
+<a href="sQLshell.html">visuellen Abfrageeditors</a>
+</span>
+</p><p>
+Die daraus generierte Abfrage lautet wie folgt:
+<pre>
+SELECT MYEMPLOYEES1.FIRSTNAME AS MYEMPLOYEES_1_FIRSTNAME,
+  MYEMPLOYEES1.LASTNAME AS MYEMPLOYEES_1_LASTNAME,
+  MYEMPLOYEES2.FIRSTNAME AS MYEMPLOYEES_2_FIRSTNAME,
+  MYEMPLOYEES2.LASTNAME AS MYEMPLOYEES_2_LASTNAME
+FROM JDBCTESTUSER.MYEMPLOYEES AS MYEMPLOYEES1
+ LEFT JOIN JDBCTESTUSER.MYEMPLOYEES AS MYEMPLOYEES2
+ON MYEMPLOYEES1.MANAGERID=MYEMPLOYEES2.EMPLOYEEID;
+</pre>
+Das Ergebnis dieser Abfrage ist im folgenden Screenshot dargestellt - links sieht man Vor- und Nachname des jeweiligen Angestellten und
+rechts den seines Managers:
+  <img src="images/sQLshell/recursive_queries_vc_result.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Ergebnis der mittels des visuellen Abfrageeditors erstellten rekursiven Abfrage
+</span>
+</p><p>
+Einfacher und gänzlich ohne die Konstruktion dedizierter Abfragen - visuell oder anderweitig - kommt man mit der sQLshell aus,
+wenn die rekursive Beziehung mittels Fremdschlüsseln im Datenmodell abgebildet wurde - in diesem Fall existieren in dem Dialog, der
+für die Anpassung der Zeileninhalte benutzt wird zwei Knöpfe, mit denen man sich zu den referenzierten Datensätzen durchklicken kann.
+In der folgenden Serie von Abbildungen ist die Recherche nach dem Manager des jeweiligen Angestellten abgebildet - die nächst höhere
+Ebene der Hierarchie wird jeweils durch Druck auf den hervorgehobenen Knopf erreicht.
+  <img src="images/sQLshell/recursive_queries_1.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Hierarchie - Ebene 0
+</span>
+  <img src="images/sQLshell/recursive_queries_2.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Hierarchie - Ebene 1
+</span>
+  <img src="images/sQLshell/recursive_queries_3.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Hierarchie - Ebene 2
+</span>
+Drückt man hier den in der folgenden Abbildung hervorgehobenen Knopf, kehrt man die Richtung der Recherche um - in
+unserem Beispiel findet man dann alle Mitarbeiter, die organisatorisch direkt unterhalb des jeweiligen Managers angesiedelt sind:
+  <img src="images/sQLshell/recursive_queries_5.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Suche nach allen direkten Untergebenen eines Managers
+</span>
+  <img src="images/sQLshell/recursive_queries_6.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Ergebnisansicht mit allen direkten Untergebenen
+</span>
+</p> 		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+	  <a href="mercator_projektion_generierte_planeten.html#content">
+		<div class="date">22.05.2017</div>
+<h3>Mercator-Projektion für generierte Planeten</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Nachdem ich neulich endlich auch die dreidimensionale Generierung von Spielwelten
+erfolgreich ausprobiert
+hatte, entwickelten sich notgedrungen neue Ideen für weitere Forschungen - eine davon
+möchte ich hier vorstellen:
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="overlay_fs_linksammlung.html#content">
+		<div class="date">14.05.2017</div>
+<h3>Overlay-FS Linksammlung</h3>
+  <div class="abstract">
+				  <p>Da ich mich ja sehr für Virtualisierung mittels Linux-Containern interessiere habe ich
+einen genaueren Blick auf overlayfs geworfen und eine weitere interessante Anwendungsmöglichkeit dafür gefunden:
+Rechner gegen Angriffe absichern!
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="planetengenerator_vs__landschaftsgenerator.html#content">
+		<div class="date">14.05.2017</div>
+<h3>Planetengenerator vs. Landschaftsgenerator</h3>
+  <div class="abstract">
+				  <p>Ich hatte hier schon verschiedentlich über meine Versuche der
+algorithmischen Generierung von Landschaften
+- unter anderem
+als Grundlage für Spiele - berichtet. Bisher war ich mit den Ergebnissen nie so recht zufrieden, denn
+wir wissen doch alle, dass Welten normalerweise keine Scheiben sind. Daher wollte ich schon lange meine Ideen zur
+Generierung ion die dritte Dimension ausdehnen...
+</p></div>   </a>
+</li>
+</ul>
+</div>
+<nav id="C"> 
+<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
+			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+</div>
+	</h2><form method="get" action="http://www.google.com/search">
+
+<div style="padding:4px;width:90%;">
+<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
+ maxlength="255" value="" />
+<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
+<input style="width:0%;" type="checkbox"  name="sitesearch"
+ value="elbosso.github.io" checked hidden="true"/>
+</div>
+
+</form>
+<a href="tag_Android.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Android
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um Googles Betriebssystem</p>
+</div>
+</div>
+</a>
+<a href="tag_Basteln.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Basteln
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Meistens Papier (Origami...)</p>
+</div>
+</div>
+</a>
+<a href="c_c__.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    C und C++
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Datenbanken.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Datenbanken
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>relationale und andere Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_dWb+.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    dWb+
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Garten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Garten
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Das grÃ¼ne Hobby</p>
+</div>
+</div>
+</a>
+<a href="tag_Geo.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Geo
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Karten und mehr run um Ortsinformationen</p>
+</div>
+</div>
+</a>
+<a href="tag_GUI.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    GUI
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um graphische Benutzerschnittstellen</p>
+</div>
+</div>
+</a>
+<a href="tag_Hardware.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Hardware
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Elektronik und so Zeuchs...</p>
+</div>
+</div>
+</a>
+<a href="tag_Java.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Java
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Hauptsächlich Desktop Themen und Java SE</p>
+</div>
+</div>
+</a>
+<a href="tag_Komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Komponenten
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Software-Komponenten</p>
+</div>
+</div>
+</a>
+<a href="tag_Links.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Links
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Linksammlungen zu verschiedenen Themen</p>
+</div>
+</div>
+</a>
+<a href="tag_Linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Linux
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles zum Thema Gnu Linux</p>
+</div>
+</div>
+</a>
+<a href="tag_Markup.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Markup
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
+</div>
+</div>
+</a>
+<a href="tag_Music.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Music
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Musik, die mir gefällt</p>
+</div>
+</div>
+</a>
+<a href="tag_Python.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Python
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Mein Weg vom blutigen Anfänger aufwärts</p>
+</div>
+</div>
+</a>
+<a href="tag_Rants.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Rants
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Luft ablassen</p>
+</div>
+</div>
+</a>
+<a href="tag_Security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Security
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>IT-Sicherheit</p>
+</div>
+</div>
+</a>
+<a href="tag_sQLshell.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+sQLshell
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_Verschiedenes.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Verschiedenes
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Passt in keine der anderen Kategorien...</p>
+</div>
+</div>
+</a>
+<a href="tag_Video.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Video
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Artikel mit bunten Filmchen</p>
+</div>
+</div>
+</a>
+<a href="tag_Virtualisierung.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Virtualisierung
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Technologien und Themen rund um virtuelle Rechner</p>
+</div>
+</div>
+</a>
+<a href="windows.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Windows
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Upcoming....html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Upcoming...
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Demnächst in diesem Theater...</p>
+</div>
+</div>
+</a>
+</nav>
+</div>
+	<div id="footer">
+		<span class="me">
+		<strong><a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+
+, Damaschke 11, Rudolstadt, 
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
+			</a></strong>
+	</span></div><!-- #footer -->
+</div>
+</body>
+</html>
