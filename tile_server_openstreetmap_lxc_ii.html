@@ -1,0 +1,643 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
+<head>
+  <title>Tile-Server für Openstreetmap in LXC II</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+			<meta name="Description" content="Ich beschrieb vor einiger Zeit den Antrieb dafür,
+einen eigenen Tile-Server zu betreiben." />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
+	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/lightbox.js"></script>
+<link href="css/lightbox.css" rel="stylesheet" />
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
+	<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body onload="toggle('show');">
+<div id="wrapper">
+	<div id="header">
+<div id="logo">
+  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
+      display="inline">
+    <mrow>
+      <mn>1</mn>
+      <mo>&isin;</mo>
+      <mi>&infin;</mi>
+    </mrow>
+</math>
+</h1-->
+  <p>
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+  </p>
+</div>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+	</div><!-- #header-->
+<div id="all">
+<div id="A">
+<div id="content">
+	<div class="date">09.06.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+				<!--li--> <a href="performanceoptimierung_mercatorprojektion.html#content">Geo</a> <!--/li-->
+					<!--li--> ,<a href="tvheadend_viderekorder.html#content">Linux</a> <!--/li-->
+					<!--li--> ,<a href="overlay_fs_linksammlung.html#content">Virtualisierung</a> <!--/li-->
+			<!--/ul-->
+</div>
+ 	<div class="heading">Tile-Server für Openstreetmap in LXC II</div>
+			<p>Ich beschrieb vor einiger Zeit den Antrieb dafür,
+<a href="tile_server_openstreetmap.html">einen eigenen Tile-Server zu betreiben.</a>
+ Damals war als System Ubuntu 12.04 in LXC-Containern auf einem Ubuntu 13.04-Wirt zum Einsatz gekommen.
+ Ich habe das System renoviert und auf Ubuntu 16.04 (Container und Wirt) angehoben
+</p> <a name="content"> </a>
+ <p>Das Setup ist nicht sehr aufwändig - bevor jemand was sagt: ich weiß, dass es
+<a href="docker_update__fuer_mich_.html">Docker</a>
+gibt - es gibt auch schon unzählige Docker-Container, die OpenStreetMap-Karten als Tile-Server
+bereitstellen. Esging mir darum, MEIN System zu erneuern und MEIN Wissen zu vertiefen. Das klappt bei mir
+nur selten, wenn ich vorgekautes schlucke...
+</p><p>
+Die hier aufgelisteten Kommandos stellen am Ende einen Tile-Server für Thüringen mit demjeweils aktuellsten OpenStreetMap-Kartenmaterial her.
+Zeilen, die mit # oder // beginnen sind natürlich kommentare, Zeilen, die mit -- beginnen, sind in der Datei, die
+in der unmittelbar vorausgehenden Zeile referenziert wird, entsprechend einzutragen.
+</p><p>
+Bevors ans Eingemachte geht - noch ein Screenshot vom Resultat in
+<a href="ebmap4d.html">EBMap4D:</a>
+</p><p>
+<pre>
+//https://ircama.github.io/osm-carto-tutorials/tile-server-ubuntu/
+CONTAINERNAME=osm
+lxc-create -n $CONTAINERNAME -t download -- --arch amd64 --dist ubuntu --release xenial
+lxc-start -n $CONTAINERNAME
+lxc-attach -n $CONTAINERNAME -- apt-get update
+lxc-attach -n $CONTAINERNAME -- apt-get -y upgrade
+lxc-attach -n $CONTAINERNAME -- apt-get -y install joe screen conky-cli openssh-server curl unzip gdal-bin tar wget bzip2 build-essential clang git autoconf libtool libxml2-dev libbz2-dev libgeos-dev libgeos++-dev libproj-dev gdal-bin libgdal-dev g++ libmapnik-dev mapnik-utils python-mapnik libxml2-dev libfreetype6-dev libjpeg-dev libpng-dev libproj-dev libtiff-dev libcairo2 libcairo2-dev python-cairo python-cairo-dev libgdal-dev build-essential python-dev libbz2-dev libicu-dev libboost-all-dev apache2 apache2-dev python-yaml python-pip mapnik-utils fonts-noto-cjk fonts-noto-hinted fonts-noto-unhinted fonts-hanazono ttf-unifont fontconfig fonts-dejavu-core nodejs-legacy npm postgresql postgis pgadmin3 postgresql-contrib osm2pgsql
+lxc-attach -n $CONTAINERNAME -- useradd -m tileserver
+lxc-attach -n $CONTAINERNAME -- passwd tileserver
+lxc-attach -n $CONTAINERNAME -- usermod -aG sudo tileserver
+ssh tileserver@$CONTAINERNAME
+export LANGUAGE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+test -d ~/src || mkdir  ~/src ; cd ~/src
+git clone https://github.com/openstreetmap/mod_tile.git
+git clone https://github.com/gravitystorm/openstreetmap-carto.git
+git clone https://github.com/googlei18n/noto-emoji.git
+mapnik-config -v
+python -c "import mapnik;print mapnik.__file__"
+curl localhost| grep 'It works!'
+cd mod_tile
+./autogen.sh &amp;&amp; ./configure &amp;&amp; make &amp;&amp; sudo make install &amp;&amp; sudo make install-mod_tile &amp;&amp; sudo ldconfig
+cd ~/src/
+sudo cp noto-emoji/fonts/NotoColorEmoji.ttf noto-emoji/fonts/NotoEmoji-Regular.ttf /usr/share/fonts/truetype/noto
+sudo fc-cache -fv
+fc-list
+fc-list | grep Emoji
+cd openstreetmap-carto
+scripts/get-shapefiles.py
+sudo npm install -g carto@0.18.0
+cd ~/src/openstreetmap-carto
+carto -a "3.0.0" project.mml > style.xml
+ls -l style.xml
+export PGHOST=localhost
+export PGPORT=5432
+export PGUSER=postgres
+export PGPASSWORD=postgres_007%
+sudo -u postgres psql postgres
+\password postgres
+\q
+export PGPASSWORD=postgres_007%
+HOSTNAME=localhost # set it to the actual ip address or host name
+sudo mkdir /mnt/db # Suppose this is the tablespace location
+sudo chown postgres:postgres /mnt/db
+psql -U postgres -h $HOSTNAME -c "CREATE TABLESPACE gists LOCATION '/mnt/db'"
+psql -U postgres -h $HOSTNAME -c "CREATE DATABASE gis TABLESPACE gists"
+psql -U postgres -h $HOSTNAME -c "\connect gis"
+psql -U postgres -h $HOSTNAME -d gis -c "CREATE EXTENSION postgis"
+psql -U postgres -h $HOSTNAME -d gis -c "CREATE EXTENSION hstore"
+sudo su -
+sudo -i -u postgres
+createuser tileserver
+psql
+grant all privileges on database gis to tileserver;
+\q
+exit
+exit
+sudo joe /etc/postgresql/9.5/main/pg_hba.conf
+--host    all             all             &lt;your IP set>/&lt;your netmask>             md5
+sudo joe /etc/postgresql/9.5/main/postgresql.conf
+--listen_addresses = 'localhost'
+sudo /etc/init.d/postgresql restart
+sudo joe /etc/postgresql/9.5/main/postgresql.conf
+--shared_buffers = 2GB
+--work_mem = 128MB
+--maintenance_work_mem = 1GB
+--wal_level = minimal
+--synchronous_commit = off
+--min_wal_size = 1GB
+--max_wal_size = 2GB
+--checkpoint_timeout = 15min
+--checkpoint_completion_target = 0.9
+--default_statistics_target = 1000
+--autovacuum = off
+--fsync = off
+sudo /etc/init.d/postgresql stop
+sudo /etc/init.d/postgresql start
+cd ~/
+wget -c http://download.geofabrik.de/europe/germany/thueringen-latest.osm.pbf
+HOSTNAME=localhost
+cd ~/src/openstreetmap-carto/
+osm2pgsql -s -C 2048 -c -G --number-processes 4 --hstore --style openstreetmap-carto.style --tag-transform-script openstreetmap-carto.lua -d gis -H $HOSTNAME -U postgres ~/thueringen-latest.osm.pbf
+HOSTNAME=localhost
+cd ~/src/openstreetmap-carto
+scripts/indexes.py | psql -U postgres -h $HOSTNAME -d gis
+sudo joe /usr/local/etc/renderd.conf
+--XML=/home/tileserver/src/openstreetmap-carto/style.xml
+--HOST=localhost
+--plugins_dir=/usr/lib/mapnik/3.0/input/
+sudo cp ~/src/mod_tile/debian/renderd.init /etc/init.d/renderd
+sudo chmod a+x /etc/init.d/renderd
+sudo joe /etc/init.d/renderd
+--DAEMON=/usr/local/bin/$NAME
+--DAEMON_ARGS="-c /usr/local/etc/renderd.conf"
+--RUNASUSER=tileserver
+sudo mkdir -p /var/lib/mod_tile
+sudo chown tileserver:tileserver /var/lib/mod_tile
+sudo systemctl daemon-reload
+sudo systemctl start renderd
+sudo systemctl enable renderd
+sudo joe  /etc/apache2/mods-available/mod_tile.load
+--LoadModule tile_module /usr/lib/apache2/modules/mod_tile.so
+sudo ln -s /etc/apache2/mods-available/mod_tile.load /etc/apache2/mods-enabled/
+sudo joe /etc/apache2/sites-enabled/000-default.conf
+--# Load all the tilesets defined in the configuration file into this virtual host
+--LoadTileConfigFile /usr/local/etc/renderd.conf
+--# Socket where we connect to the rendering daemon
+--ModTileRenderdSocketName /var/run/renderd/renderd.sock
+--# Timeout before giving up for a tile to be rendered
+--ModTileRequestTimeout 3
+--# Timeout before giving up for a tile to be rendered that is otherwise missing
+--ModTileMissingRequestTimeout 60
+sudo systemctl restart apache2
+wget --spider http://localhost/osm_tiles/0/0/0.png
+cd ~/
+wget -c http://download.geofabrik.de/europe/germany/hessen-latest.osm.pbf
+HOSTNAME=localhost
+cd ~/src/openstreetmap-carto/
+export PGPASSWORD=postgres_007%
+osm2pgsql -s -C 2048 -c -G --number-processes 4 --hstore --style openstreetmap-carto.style --tag-transform-script openstreetmap-carto.lua -d gis -H $HOSTNAME -U postgres ~/hessen-latest.osm.pbf
+HOSTNAME=localhost
+cd ~/src/openstreetmap-carto
+scripts/indexes.py | psql -U postgres -h $HOSTNAME -d gis
+sudo rm -rf /var/lib/mod_tile/default
+cd ~/
+wget -c http://download.geofabrik.de/europe/germany/sachsen-anhalt-latest.osm.pbf
+cd ~/src/openstreetmap-carto/
+export PGPASSWORD=postgres_007%
+osm2pgsql -s -C 2048 -a -G --number-processes 4 --hstore --style openstreetmap-carto.style --tag-transform-script openstreetmap-carto.lua -d gis -H $HOSTNAME -U postgres ~/sachsen-anhalt-latest.osm.pbf
+</pre>
+</p>  <ul class="single"> 
+<li class="anriss">
+	<a href="images/lxcosmserver16.06ebmap4d.png" rel="lightbox[screenshots]" 
+		title="Screenshot aus EBMap4D vom Ergebnis"
+	   class="img">
+		<div class="screenshotthumb center">
+			<img class="center" src="images/lxcosmserver16.06ebmap4d_t.png">
+			<div class="thumbnailcaption">Ergebnis</div>
+		</div>
+	</a>
+</li>
+</ul>
+		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+	  <a href="tvheadend_viderekorder.html#content">
+		<div class="date">02.06.2017</div>
+<h3>tvheadend als Viderekorder</h3>
+  <div class="abstract">
+				  <p>Nach meinem
+letzten Artikel
+zum Thema Mitschnitt von Fernsehinhalten ist ein wenig Zeit ins Land gegangen.
+Währenddessen haben sich auch die Hardwarevoraussetzungen bei mir geändert.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="performanceoptimierung_mercatorprojektion.html#content">
+		<div class="date">02.06.2017</div>
+<h3>Performanceoptimierung Mercatorprojektion</h3>
+  <div class="abstract">
+				  <p>Nachdem ich neulich die dreidimensionale Generierung von Spielwelten
+durch eine Mercatorprojektion
+auch in der zweiten Dimension abgebildet hatte,
+machte ich mir einige Gedanken zur Performance der Generierung...
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="mercator_projektion_generierte_planeten.html#content">
+		<div class="date">22.05.2017</div>
+<h3>Mercator-Projektion für generierte Planeten</h3>
+  <div class="abstract">
+				  <p>Nachdem ich neulich endlich auch die dreidimensionale Generierung von Spielwelten
+erfolgreich ausprobiert
+hatte, entwickelten sich notgedrungen neue Ideen für weitere Forschungen - eine davon
+möchte ich hier vorstellen:
+</p></div>   </a>
+</li>
+</ul>
+</div>
+<nav id="C"> 
+<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
+			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+</div>
+	</h2><form method="get" action="http://www.google.com/search">
+
+<div style="padding:4px;width:90%;">
+<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
+ maxlength="255" value="" />
+<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
+<input style="width:0%;" type="checkbox"  name="sitesearch"
+ value="elbosso.github.io" checked hidden="true"/>
+</div>
+
+</form>
+<a href="tag_Android.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Android
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um Googles Betriebssystem</p>
+</div>
+</div>
+</a>
+<a href="tag_Basteln.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Basteln
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Meistens Papier (Origami...)</p>
+</div>
+</div>
+</a>
+<a href="c_c__.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    C und C++
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Datenbanken.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Datenbanken
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>relationale und andere Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_dWb+.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    dWb+
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Garten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Garten
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Das grÃ¼ne Hobby</p>
+</div>
+</div>
+</a>
+<a href="tag_Geo.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Geo
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Karten und mehr run um Ortsinformationen</p>
+</div>
+</div>
+</a>
+<a href="tag_GUI.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    GUI
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles rund um graphische Benutzerschnittstellen</p>
+</div>
+</div>
+</a>
+<a href="tag_Hardware.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Hardware
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Elektronik und so Zeuchs...</p>
+</div>
+</div>
+</a>
+<a href="tag_Java.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Java
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Hauptsächlich Desktop Themen und Java SE</p>
+</div>
+</div>
+</a>
+<a href="tag_Komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Komponenten
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Software-Komponenten</p>
+</div>
+</div>
+</a>
+<a href="tag_Links.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Links
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Linksammlungen zu verschiedenen Themen</p>
+</div>
+</div>
+</a>
+<a href="tag_Linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Linux
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Alles zum Thema Gnu Linux</p>
+</div>
+</div>
+</a>
+<a href="tag_Markup.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Markup
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
+</div>
+</div>
+</a>
+<a href="tag_Music.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Music
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Musik, die mir gefällt</p>
+</div>
+</div>
+</a>
+<a href="tag_Python.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Python
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Mein Weg vom blutigen Anfänger aufwärts</p>
+</div>
+</div>
+</a>
+<a href="tag_Rants.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Rants
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Luft ablassen</p>
+</div>
+</div>
+</a>
+<a href="tag_Security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Security
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>IT-Sicherheit</p>
+</div>
+</div>
+</a>
+<a href="tag_sQLshell.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    sQLshell
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_Verschiedenes.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Verschiedenes
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Passt in keine der anderen Kategorien...</p>
+</div>
+</div>
+</a>
+<a href="tag_Video.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Video
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Artikel mit bunten Filmchen</p>
+</div>
+</div>
+</a>
+<a href="tag_Virtualisierung.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    <strong>
+Virtualisierung
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Technologien und Themen rund um virtuelle Rechner</p>
+</div>
+</div>
+</a>
+<a href="windows.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Windows
+</h3>
+</header>
+<div class="nav-item-body">
+  </div>
+</div>
+</a>
+<a href="tag_Upcoming....html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+    Upcoming...
+</h3>
+</header>
+<div class="nav-item-body">
+  <p>Demnächst in diesem Theater...</p>
+</div>
+</div>
+</a>
+</nav>
+</div>
+	<div id="footer">
+		<span class="me">
+		<strong><a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+
+, Damaschke 11, Rudolstadt, 
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
+			</a></strong>
+	</span></div><!-- #footer -->
+</div>
+</body>
+</html>
