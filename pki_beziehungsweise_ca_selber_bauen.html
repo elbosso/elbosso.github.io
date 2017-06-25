@@ -124,12 +124,18 @@ welches Passwort benötigt wird, da lediglich die Serial Numbers angezeigt werde
 All dies führte dazu, dass die Administration - diejenigen also, die damit täglich zu tun haben - anfragte,
 ob man dieses Setup nicht dahingehend ändern könnte, dass zum Betrieb weniger Expertenwissen notwendig wäre.
 </p><p>
-Ich überlegte mir dazu folgendes: Wenn man die Komplexität der Interaktion mit OpenSSL vor dem Anwender verbergen
+Ich überlegte mir dazu folgendes: Wenn man die Komplexität der Interaktion mit
+<a href="https://www.openssl.org/docs/manpages.html">OpenSSL</a>
+vor dem Anwender verbergen
 könnte und gleichzeitig die wichtigen Informationen visuell strukturiert und aufbereitet darbieten könnte, wäre bereits viel gewonnnen.
 Wir überlegten zwar auch, die PKI evtl mit verfügbaren klicki-bunti-Angeboten umzusetzen, jedoch würde sich dies schwierig gestalten: 
 Das Layout der PKI entspricht der Advanced PKI aus dem Tutorial.
 </p><p>
-Nach reiflicher Überlegung kam die Idee, expect und dialog zu kombinieren: Dialog ist ein Paket, mit dem sich Dialoge/Formulare aus Skripten heraus formulieren 
+Nach reiflicher Überlegung kam die Idee,
+<a href="http://www.tcl.tk/man/expect5.31/expect.1.html">expect</a>
+und
+<a href="https://linux.die.net/man/1/dialog">dialog</a>
+zu kombinieren: Dialog ist ein Paket, mit dem sich Dialoge/Formulare aus Skripten heraus formulieren
 lassen und expect kann benutzt werden, Terminal-Anwendungen eine interaktive Shell vorzugaukeln. Man kann also mittels eines dialog-Formulars
 alle wichtigen Daten einsammeln und diese dann per expect an die OpenSSL-Anwendung verfüttern.
 </p><p>
@@ -146,12 +152,22 @@ Argument nicht aufrechterhalten - expect benötigt TCL...
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+	  <a href="hillshading_server_openstreetmap_lxc_ii.html#content">
+		<div class="date">25.06.2017</div>
+<h3>Hillshading-Server für Openstreetmap in LXC II</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Nachdem ich bereits den
+OpenStreetMap-Tile-Server
+aktualisiert habe, folgte nun der für die Höhen- (Relief-) Informationen.
+</p></div>   </a>
+</li>
+<li class="anriss">
 	  <a href="iota_wie_eine_blase_funktioniert.html#content">
 		<div class="date">17.06.2017</div>
 <h3>IOTA oder wie eine Blase funktioniert</h3>
   <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Ich wurde gefragt, ob ich Einschätzungen zu Crypto-Currencies machen könnte. Speziell wurde ich nach Ethereum gefragt - einer,
+				  <p>Ich wurde gefragt, ob ich Einschätzungen zu Crypto-Currencies machen könnte. Speziell wurde ich nach Ethereum gefragt - einer,
 von der ich bereits gehört und für die ich mich bereits kurzzeitig milde interessiert hatte - und IOTA, die
 mir
 völlig unbekannt war. Ich begann mit einer Analyse der mir unbekannten und wurde überrascht.
@@ -166,17 +182,6 @@ völlig unbekannt war. Ich begann mit einer Analyse der mir unbekannten und wurd
 einen eigenen Tile-Server zu betreiben.
  Damals war als System Ubuntu 12.04 in LXC-Containern auf einem Ubuntu 13.04-Wirt zum Einsatz gekommen.
  Ich habe das System renoviert und auf Ubuntu 16.04 (Container und Wirt) angehoben
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="tvheadend_viderekorder.html#content">
-		<div class="date">02.06.2017</div>
-<h3>tvheadend als Viderekorder</h3>
-  <div class="abstract">
-				  <p>Nach meinem
-letzten Artikel
-zum Thema Mitschnitt von Fernsehinhalten ist ein wenig Zeit ins Land gegangen.
-Währenddessen haben sich auch die Hardwarevoraussetzungen bei mir geändert.
 </p></div>   </a>
 </li>
 </ul>
