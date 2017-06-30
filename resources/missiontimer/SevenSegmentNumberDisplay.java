@@ -251,6 +251,15 @@ public class SevenSegmentNumberDisplay extends NumberDisplay
 		value=-1;
 		repaint();
 	}
+	public void setColor(java.awt.Color c)
+	{
+		sevenSegment.setColor(c);
+		BACKGROUND_IMAGE = createBackground(dim.width,dim.height);
+	}
+	public java.awt.Color getColor()
+	{
+		return sevenSegment.getColor();
+	}
 
 	public static void main(java.lang.String[] args) throws InterruptedException
 	{

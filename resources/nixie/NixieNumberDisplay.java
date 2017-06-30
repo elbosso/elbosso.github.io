@@ -43,6 +43,10 @@ public class NixieNumberDisplay extends NumberDisplay
 @java.beans.ConstructorProperties({"len","factor"})
 	public NixieNumberDisplay(int len,float factor)
 	{
+		this(NixieTube.NIXIE_ORANGE,len,factor);
+	}
+	public NixieNumberDisplay(java.awt.Color c,int len,float factor)
+	{
 		super(len);
 		this.factor=factor;
 		gridbag=new java.awt.GridBagLayout();
@@ -67,7 +71,7 @@ public class NixieNumberDisplay extends NumberDisplay
 		nixieNumbers=new NixieNumber[len];
 		for(int i=0;i<len;++i)
 		{
-			nixieNumbers[i]=new NixieNumber(factor);
+			nixieNumbers[i]=new NixieNumber(c,factor);
 			gridbag.addLayoutComponent(nixieNumbers[i], constraints);
 			add(nixieNumbers[i]);
 			constraints.gridx=constraints.gridx+1;
@@ -139,5 +143,17 @@ public class NixieNumberDisplay extends NumberDisplay
 		{
 			nixieNumbers[i].setNumber(-1);
 		}
+	}
+	public void setColor(java.awt.Color c)
+	{
+		for(NixieTube nixieTube:nixieNumbers)
+		{
+			if(nixieTube!=null)
+				nixieTube.setColor(c);
+		}
+	}
+	public java.awt.Color getColor()
+	{
+		return ((nixieNumbers!=null)&&(nixieNumbers[0]!=null))?nixieNumbers[0].getColor():null;
 	}
 }

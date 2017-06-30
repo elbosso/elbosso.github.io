@@ -41,91 +41,113 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
  */
 public class SevenSegment extends java.lang.Object 
 {
-	final static java.awt.Color COLOR_ON = new java.awt.Color(0xEEFFEE);
-	final static java.awt.Color FRAME_COLOR_ON = new java.awt.Color(50, 200, 100, 128);
-	final static java.awt.Color COLOR_OFF = new java.awt.Color(0x4E5571);
-	final static java.awt.Color FRAME_COLOR_OFF = new java.awt.Color(61, 57, 142, 128);
-	final static java.awt.BasicStroke FRAME_STROKE = new java.awt.BasicStroke(1.0f, java.awt.BasicStroke.CAP_ROUND, java.awt.BasicStroke.JOIN_ROUND);
-    protected final java.awt.image.BufferedImage[] DIGIT_ARRAY;
-    protected final java.awt.image.BufferedImage[] SMALL_DIGIT_ARRAY;
-    protected final java.awt.image.BufferedImage[] DOTTED_DIGIT_ARRAY;
-    protected final java.awt.image.BufferedImage[] SMALL_DOTTED_DIGIT_ARRAY;
+	private final static java.awt.Color SEVENSEGMENT_COLOR=new java.awt.Color(0xEEFFEE);
+	private java.awt.Color COLOR_ON ;
+	private java.awt.Color FRAME_COLOR_ON = new java.awt.Color(50, 200, 100, 128);
+	private static java.awt.Color COLOR_OFF = new java.awt.Color(0x4E5571);
+	private static java.awt.Color FRAME_COLOR_OFF = new java.awt.Color(61, 57, 142, 128);
+	private static java.awt.BasicStroke FRAME_STROKE = new java.awt.BasicStroke(1.0f, java.awt.BasicStroke.CAP_ROUND, java.awt.BasicStroke.JOIN_ROUND);
+    protected java.awt.image.BufferedImage[] DIGIT_ARRAY;
+    protected java.awt.image.BufferedImage[] SMALL_DIGIT_ARRAY;
+    protected java.awt.image.BufferedImage[] DOTTED_DIGIT_ARRAY;
+    protected java.awt.image.BufferedImage[] SMALL_DOTTED_DIGIT_ARRAY;
+    private double factor;
 
 	public SevenSegment(double factor)
 	{
+		this(SEVENSEGMENT_COLOR,factor);
+	}
+	protected SevenSegment(java.awt.Color c,double factor)
+	{
 		super();
-		DIGIT_ARRAY= new java.awt.image.BufferedImage[]
+		this.factor=factor;
+		setColor(c);
+	}
+	public void setColor(java.awt.Color c)
+	{
+		if(c==null)
+			c=SEVENSEGMENT_COLOR;
+		if(COLOR_ON!=c)
 		{
-			createDigit(0,factor,false),
-			createDigit(1,factor,false),
-			createDigit(2,factor,false),
-			createDigit(3,factor,false),
-			createDigit(4,factor,false),
-			createDigit(5,factor,false),
-			createDigit(6,factor,false),
-			createDigit(7,factor,false),
-			createDigit(8,factor,false),
-			createDigit(9,factor,false),
-			createDigit(10,factor,false),
-			createDigit(11,factor,false),
-			createDigit(12,factor,false),
-			createDigit(13,factor,false),
-			createDigit(14,factor,false),
-		};
-		DOTTED_DIGIT_ARRAY= new java.awt.image.BufferedImage[]
-		{
-			createDigit(0,factor,true),
-			createDigit(1,factor,true),
-			createDigit(2,factor,true),
-			createDigit(3,factor,true),
-			createDigit(4,factor,true),
-			createDigit(5,factor,true),
-			createDigit(6,factor,true),
-			createDigit(7,factor,true),
-			createDigit(8,factor,true),
-			createDigit(9,factor,true),
-			createDigit(10,factor,true),
-			createDigit(11,factor,true),
-			createDigit(12,factor,true),
-			createDigit(13,factor,true),
-			createDigit(14,factor,true),
-		};
-		SMALL_DIGIT_ARRAY= new java.awt.image.BufferedImage[]
-		{
-			createDigit(0,factor/1.4,false),
-			createDigit(1,factor/1.4,false),
-			createDigit(2,factor/1.4,false),
-			createDigit(3,factor/1.4,false),
-			createDigit(4,factor/1.4,false),
-			createDigit(5,factor/1.4,false),
-			createDigit(6,factor/1.4,false),
-			createDigit(7,factor/1.4,false),
-			createDigit(8,factor/1.4,false),
-			createDigit(9,factor/1.4,false),
-			createDigit(10,factor/1.4,false),
-			createDigit(11,factor/1.4,false),
-			createDigit(12,factor/1.4,false),
-			createDigit(13,factor/1.4,false),
-			createDigit(14,factor/1.4,false),
-		};
-		SMALL_DOTTED_DIGIT_ARRAY= new java.awt.image.BufferedImage[]
-		{
-			createDigit(0,factor/1.4,true),
-			createDigit(1,factor/1.4,true),
-			createDigit(2,factor/1.4,true),
-			createDigit(3,factor/1.4,true),
-			createDigit(4,factor/1.4,true),
-			createDigit(5,factor/1.4,true),
-			createDigit(6,factor/1.4,true),
-			createDigit(7,factor/1.4,true),
-			createDigit(8,factor/1.4,true),
-			createDigit(9,factor/1.4,true),
-			createDigit(10,factor/1.4,true),
-			createDigit(11,factor/1.4,true),
-			createDigit(12,factor/1.4,true),
-			createDigit(13,factor/1.4,true),
-			createDigit(14,factor/1.4,true),
-		};
+			this.COLOR_ON = c;
+			this.FRAME_COLOR_ON=COLOR_ON.darker();
+			DIGIT_ARRAY = new java.awt.image.BufferedImage[]
+					{
+							createDigit(0, factor, false),
+							createDigit(1, factor, false),
+							createDigit(2, factor, false),
+							createDigit(3, factor, false),
+							createDigit(4, factor, false),
+							createDigit(5, factor, false),
+							createDigit(6, factor, false),
+							createDigit(7, factor, false),
+							createDigit(8, factor, false),
+							createDigit(9, factor, false),
+							createDigit(10, factor, false),
+							createDigit(11, factor, false),
+							createDigit(12, factor, false),
+							createDigit(13, factor, false),
+							createDigit(14, factor, false),
+					};
+			DOTTED_DIGIT_ARRAY = new java.awt.image.BufferedImage[]
+					{
+							createDigit(0, factor, true),
+							createDigit(1, factor, true),
+							createDigit(2, factor, true),
+							createDigit(3, factor, true),
+							createDigit(4, factor, true),
+							createDigit(5, factor, true),
+							createDigit(6, factor, true),
+							createDigit(7, factor, true),
+							createDigit(8, factor, true),
+							createDigit(9, factor, true),
+							createDigit(10, factor, true),
+							createDigit(11, factor, true),
+							createDigit(12, factor, true),
+							createDigit(13, factor, true),
+							createDigit(14, factor, true),
+					};
+			SMALL_DIGIT_ARRAY = new java.awt.image.BufferedImage[]
+					{
+							createDigit(0, factor / 1.4, false),
+							createDigit(1, factor / 1.4, false),
+							createDigit(2, factor / 1.4, false),
+							createDigit(3, factor / 1.4, false),
+							createDigit(4, factor / 1.4, false),
+							createDigit(5, factor / 1.4, false),
+							createDigit(6, factor / 1.4, false),
+							createDigit(7, factor / 1.4, false),
+							createDigit(8, factor / 1.4, false),
+							createDigit(9, factor / 1.4, false),
+							createDigit(10, factor / 1.4, false),
+							createDigit(11, factor / 1.4, false),
+							createDigit(12, factor / 1.4, false),
+							createDigit(13, factor / 1.4, false),
+							createDigit(14, factor / 1.4, false),
+					};
+			SMALL_DOTTED_DIGIT_ARRAY = new java.awt.image.BufferedImage[]
+					{
+							createDigit(0, factor / 1.4, true),
+							createDigit(1, factor / 1.4, true),
+							createDigit(2, factor / 1.4, true),
+							createDigit(3, factor / 1.4, true),
+							createDigit(4, factor / 1.4, true),
+							createDigit(5, factor / 1.4, true),
+							createDigit(6, factor / 1.4, true),
+							createDigit(7, factor / 1.4, true),
+							createDigit(8, factor / 1.4, true),
+							createDigit(9, factor / 1.4, true),
+							createDigit(10, factor / 1.4, true),
+							createDigit(11, factor / 1.4, true),
+							createDigit(12, factor / 1.4, true),
+							createDigit(13, factor / 1.4, true),
+							createDigit(14, factor / 1.4, true),
+					};
+		}
+	}
+	public java.awt.Color getColor()
+	{
+		return COLOR_ON;
 	}
 
 	Image get(int index)

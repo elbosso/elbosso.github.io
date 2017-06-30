@@ -37,65 +37,65 @@ UNERLAUBTE HANDLUNG (INKLUSIVE FAHRLAESSIGKEIT) VERANTWORTLICH, AUF WELCHEM
 WEG SIE AUCH IMMER DURCH DIE BENUTZUNG DIESER SOFTWARE ENTSTANDEN SIND, SOGAR, 
 WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
  */
-public class NixieSymbol extends javax.swing.JComponent
+public class NixieSymbol extends NixieTube
 {
     private int symbol;        
     private java.awt.image.BufferedImage[] symbolStack = new java.awt.image.BufferedImage[11];
-    private final java.awt.geom.Point2D GLOW_START = new java.awt.geom.Point2D.Float(0, 47);
-    private final java.awt.geom.Point2D GLOW_STOP = new java.awt.geom.Point2D.Float(0, 133);
-    private final float[] GLOW_FRACTIONS =
-    {
-        0.0f,
-        0.5f,
-        1.0f
-    };
-    private final java.awt.Color[] GLOW_COLORS =
-    {
-        new java.awt.Color(0.647f, 0.3137f, 0.0588f, 0.2f),
-        new java.awt.Color(0.9882f, 0.5921f, 0.0f, 0.3f),
-        new java.awt.Color(0.647f, 0.3137f, 0.0588f, 0.2f)
-    };
-    
-    private final java.awt.LinearGradientPaint GLOW_GRADIENT = new java.awt.LinearGradientPaint(GLOW_START, GLOW_STOP, GLOW_FRACTIONS, GLOW_COLORS);
+
     private final java.awt.geom.Rectangle2D GLOW_BOX ;
 
-    private static final java.awt.Color[] COLOR_ARRAY =
-    {        
-        new java.awt.Color(1.0f, 0.6f, 0, 0.90f),
-        new java.awt.Color(1.0f, 0.4f, 0, 0.80f),
-        new java.awt.Color(1.0f, 0.4f, 0, 0.4f),
-        new java.awt.Color(1.0f, 0.4f, 0, 0.15f),
-        new java.awt.Color(1.0f, 0.4f, 0, 0.10f),
-        new java.awt.Color(1.0f, 0.4f, 0, 0.05f)
-    };
 
     private final java.awt.image.BufferedImage[] INACTIVE_SYMBOL_ARRAY;
 
-    private final java.awt.image.BufferedImage[] ACTIVE_SYMBOL_ARRAY;
+    private java.awt.image.BufferedImage[] ACTIVE_SYMBOL_ARRAY;
 	
 	private double factor;
 
-    public NixieSymbol()
+	public NixieSymbol()
     {
-		this(1.0f);
-	}
-    public NixieSymbol(float factor)
+        this(1.0f);
+    }
+	public NixieSymbol(java.awt.Color c)
     {
-        super();
+        this(c,1.0f);
+    }
+	public NixieSymbol(float factor)
+    {
+        this(NIXIE_ORANGE,factor);
+    }
+    public NixieSymbol(java.awt.Color c,float factor)
+    {
+        super(c);
 		this.factor=factor;
         this.symbol = -1;
         this.setPreferredSize(new java.awt.Dimension((int)(86*factor), (int)(146*factor)));
         this.setSize(new java.awt.Dimension((int)(86*factor), (int)(146*factor)));
 		GLOW_BOX = new java.awt.geom.Rectangle2D.Float((int)(13*factor), (int)(47*factor), (int)(60*factor), (int)(86*factor));
 		ACTIVE_SYMBOL_ARRAY = new java.awt.image.BufferedImage[11];
-		for(int i=0;i<2;++i)
-	        ACTIVE_SYMBOL_ARRAY[i]=createSymbol(i, true);
+		recreateActiveSymbols();
 		INACTIVE_SYMBOL_ARRAY =new java.awt.image.BufferedImage[11];
  		for(int i=0;i<2;++i)
 			INACTIVE_SYMBOL_ARRAY[i]=createSymbol(i, false);
         init();
     }
-    
+    protected void recreateActiveSymbols()
+    {
+        if(ACTIVE_SYMBOL_ARRAY!=null)
+ 		{
+			java.awt.image.BufferedImage[] cached=getCached(getColor());
+			if(cached==null)
+			{
+			    ACTIVE_SYMBOL_ARRAY = new java.awt.image.BufferedImage[11];
+                for(int i=0;i<2;++i)
+                    ACTIVE_SYMBOL_ARRAY[i]=createSymbol(i, true);
+				cache(ACTIVE_SYMBOL_ARRAY);
+			}
+			else
+			{
+				ACTIVE_SYMBOL_ARRAY=cached;
+			}
+		}
+    }
     private void init()
     {
         setOpaque(false);

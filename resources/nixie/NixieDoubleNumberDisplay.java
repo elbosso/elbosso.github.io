@@ -1,4 +1,7 @@
 package de.elbosso.ui.components;
+
+import java.awt.*;
+
 /*
 Copyright (c) 2013-2017.
 
@@ -46,6 +49,10 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 @java.beans.ConstructorProperties({"len","fraclen","factor"})
 	public NixieDoubleNumberDisplay(int len,int fraclen,float factor)
 	{
+		this(NixieTube.NIXIE_ORANGE,len,fraclen,factor);
+	}
+	public NixieDoubleNumberDisplay(java.awt.Color c,int len,int fraclen,float factor)
+	{
 		super(len);
 		this.factor=factor;
 		if(fraclen<1)
@@ -71,24 +78,24 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		if(factor<0.1)
 			throw new java.lang.IllegalArgumentException("factor must not be smaller than 0.1!");
 		nixieNumbers=new NixieNumber[len+fraclen+1];
-		sign=new NixieSymbol(factor);
+		sign=new NixieSymbol(c,factor);
 		gridbag.addLayoutComponent(sign, constraints);
 		add(sign);
 		constraints.gridx=constraints.gridx+1;
 		for(int i=0;i<len;++i)
 		{
-			nixieNumbers[i]=new NixieNumber(factor);
+			nixieNumbers[i]=new NixieNumber(c,factor);
 			gridbag.addLayoutComponent(nixieNumbers[i], constraints);
 			add(nixieNumbers[i]);
 			constraints.gridx=constraints.gridx+1;
 		}
-		decimalPoint=new NixieSymbol(factor);
+		decimalPoint=new NixieSymbol(c,factor);
 		gridbag.addLayoutComponent(decimalPoint, constraints);
 		add(decimalPoint);
 		constraints.gridx=constraints.gridx+1;
 		for(int i=len+1;i<len+fraclen+1;++i)
 		{
-			nixieNumbers[i]=new NixieNumber(factor);
+			nixieNumbers[i]=new NixieNumber(c,factor);
 			gridbag.addLayoutComponent(nixieNumbers[i], constraints);
 			add(nixieNumbers[i]);
 			constraints.gridx=constraints.gridx+1;
@@ -166,20 +173,43 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 	{
 		java.util.Random rand=new java.util.Random(System.currentTimeMillis());
 		javax.swing.JFrame f=new javax.swing.JFrame();
-		NixieDoubleNumberDisplay nixieNumberDisplay=new NixieDoubleNumberDisplay(5,3, .62f);
+		de.netsysit.util.generator.Sequence<java.awt.Color> seq=new de.elbosso.util.generator.generalpurpose.RandomColor();
+		javax.swing.JPanel p=new javax.swing.JPanel(new java.awt.GridLayout(0,1));
+		for(int i=0;i<7;++i)
+		{
+			NixieDoubleNumberDisplay nixieNumberDisplay=new NixieDoubleNumberDisplay(seq.next(),5,3, .62f);
+			nixieNumberDisplay.setBackground(java.awt.Color.DARK_GRAY);
+			nixieNumberDisplay.setOpaque(true);
+			nixieNumberDisplay.setLeadingZeroes(false);
+			p.add(nixieNumberDisplay);
+			double v=rand.nextDouble()*24000-12000;
+			nixieNumberDisplay.setValue(v);
+		}
+		NixieDoubleNumberDisplay nixieNumberDisplay=new NixieDoubleNumberDisplay(Color.WHITE,5,3, .62f);
 		nixieNumberDisplay.setBackground(java.awt.Color.DARK_GRAY);
 		nixieNumberDisplay.setOpaque(true);
 		nixieNumberDisplay.setLeadingZeroes(false);
-		f.getContentPane().add(nixieNumberDisplay);
+		de.netsysit.util.lang.MiniMax miniMax=new de.netsysit.util.lang.MiniMax(-Double.MAX_VALUE,0);
+		nixieNumberDisplay.register(Color.WHITE,miniMax);
+		miniMax=new de.netsysit.util.lang.MiniMax(0,6000);
+		nixieNumberDisplay.register(Color.GREEN,miniMax);
+		miniMax=new de.netsysit.util.lang.MiniMax(6000,10000);
+		nixieNumberDisplay.register(Color.YELLOW,miniMax);
+		miniMax=new de.netsysit.util.lang.MiniMax(10000, Double.MAX_VALUE);
+		nixieNumberDisplay.register(Color.RED,miniMax);
+		p.add(nixieNumberDisplay);
+		f.setContentPane(p);
 		nixieNumberDisplay.setValue(0);
 		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
 		f.pack();
+		f.setLocation(0,0);
 		f.setVisible(true);
 		int i=0;
 		while(true)
 		{
 			try{
-			nixieNumberDisplay.setValue(rand.nextInt(24000)-12000);//nextDouble()*120000);
+				double v=rand.nextDouble()*24000-12000;
+			nixieNumberDisplay.setValue(v);
 			}catch(java.lang.IllegalArgumentException exp){exp.printStackTrace();}
 			java.lang.Thread.currentThread().sleep(300l);
 		}			
@@ -195,4 +225,18 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		sign.setSymbol(-1);
 	}
 
+	public void setColor(java.awt.Color c)
+	{
+		for(NixieTube nixieTube:nixieNumbers)
+		{
+			if(nixieTube!=null)
+				nixieTube.setColor(c);
+		}
+		sign.setColor(c);
+		decimalPoint.setColor(c);
+	}
+	public java.awt.Color getColor()
+	{
+		return ((nixieNumbers!=null)&&(nixieNumbers[0]!=null))?nixieNumbers[0].getColor():null;
+	}
 }

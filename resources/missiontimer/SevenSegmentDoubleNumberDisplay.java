@@ -38,6 +38,8 @@ WEG SIE AUCH IMMER DURCH DIE BENUTZUNG DIESER SOFTWARE ENTSTANDEN SIND, SOGAR,
 WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
  */
 
+import java.awt.*;
+
 public class SevenSegmentDoubleNumberDisplay extends NumberDisplay
 {    
     private java.awt.image.BufferedImage BACKGROUND_IMAGE;
@@ -285,6 +287,16 @@ public class SevenSegmentDoubleNumberDisplay extends NumberDisplay
 		repaint();
 	}
 
+	public void setColor(java.awt.Color c)
+	{
+		sevenSegment.setColor(c);
+		BACKGROUND_IMAGE = createBackground(dim.width,dim.height);
+	}
+	public java.awt.Color getColor()
+	{
+		return sevenSegment.getColor();
+	}
+
 	public static void main(java.lang.String[] args) throws InterruptedException
 	{
 		java.util.Random rand=new java.util.Random(System.currentTimeMillis());
@@ -292,19 +304,30 @@ public class SevenSegmentDoubleNumberDisplay extends NumberDisplay
 		SevenSegmentDoubleNumberDisplay nixieNumberDisplay=new SevenSegmentDoubleNumberDisplay(5,3, .7f);
 		nixieNumberDisplay.setBackground(java.awt.Color.DARK_GRAY);
 		nixieNumberDisplay.setOpaque(true);
-		nixieNumberDisplay.setLeadingZeroes(true);
+		nixieNumberDisplay.setLeadingZeroes(false);
 		f.getContentPane().add(nixieNumberDisplay);
 		nixieNumberDisplay.setValue(-1230);
+		nixieNumberDisplay.setColor(Color.PINK);
+		de.netsysit.util.lang.MiniMax miniMax=new de.netsysit.util.lang.MiniMax(-Double.MAX_VALUE,0);
+		nixieNumberDisplay.register(Color.WHITE,miniMax);
+		miniMax=new de.netsysit.util.lang.MiniMax(0,6000);
+		nixieNumberDisplay.register(Color.GREEN,miniMax);
+		miniMax=new de.netsysit.util.lang.MiniMax(6000,10000);
+		nixieNumberDisplay.register(Color.YELLOW,miniMax);
+		miniMax=new de.netsysit.util.lang.MiniMax(10000, Double.MAX_VALUE);
+		nixieNumberDisplay.register(Color.RED,miniMax);
+
 		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
 		f.pack();
+		f.setLocation(0,0);
 		f.setVisible(true);
 		int i=0;
-//		while(true)
-//		{
-//			try{
-//			nixieNumberDisplay.setValue(rand.nextDouble()*120000-60000);
-//			}catch(java.lang.IllegalArgumentException exp){}
-//			java.lang.Thread.currentThread().sleep(4000l);
-//		}			
+		while(true)
+		{
+			try{
+			nixieNumberDisplay.setValue(rand.nextDouble()*24000-12000);
+			}catch(java.lang.IllegalArgumentException exp){}
+			java.lang.Thread.currentThread().sleep(400l);
+		}
 	}
 }
