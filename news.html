@@ -113,6 +113,110 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/" target="_blank">Scratch Where It's Itching</a>
+		</div>
+		<div>
+			<h3>TreeMap misuse</h3>
+		</div>
+		<div class="collectiontext">
+						TreeMap is a very practical class when you want your Map to keep its keys ordered. Unless you don't know how it works. <p>
+I noticed this code recently in one of our projects:
+<pre>
+  <font color='#7f0055'><strong>private</strong></font> Map&lt;Double, Limit&gt; limits = <font color='#7f0055'><strong>new</strong></font> TreeMap&lt;&gt;();
+</pre><p>
+Nothing special about the declaration. Just a standard TreeMap ordering on its Double key. There were other similar declarations next to this one where the maps were used correctly. So I guess our developer felt he could reuse the same pattern. Except that his map was not ordered quite the way he needed it to. So when retrieving values, he would do that:
+<pre>
+  List&lt;Entry&lt;Double, Limit&gt;&gt; limitList = <font color='#7f0055'><strong>new</strong></font> ArrayList&lt;&gt;(limits.entrySet());
+  Collections.sort(limitList, LIMIT_DESC_COMPARATOR);
+  generateExecs(limitList);
+</pre><p>
+At first, I thought that the comparator would do something clever by combining key and value comparison.
+<pre>
+  <font color='#7f0055'><strong>private static final</strong></font> Comparator&lt;Entry&lt;Double, Limit&gt;&gt; LIMIT_DESC_COMPARATOR = <font color='#7f0055'><strong>new</strong></font> Comparator&lt;&gt;(){
+    @Override
+    <font color='#7f0055'><strong>public int</strong></font> compare(Entry&lt;Double, Limit&gt; o1, Entry&lt;Double, Limit&gt; o2) {
+      <font color='#7f0055'><strong>if</strong></font> (o1.getKey() == 0)
+        <font color='#7f0055'><strong>return</strong></font> -1;
+      <font color='#7f0055'><strong>if</strong></font> (o2.getKey() == 0)
+        <font color='#7f0055'><strong>return</strong></font> 1;
+      <font color='#7f0055'><strong>return</strong></font> o2.getKey().compareTo(o1.getKey());
+    }
+  }
+</pre><p>
+No luck with that. It uses only the key. And do you see that method generateExecs, where you pass a list of entries? Guess what, it uses only the values. All of this strange code comes from one problem: the developer did not know that you could pass a comparator directly into the TreeMap constructor for immediate ordering in the correct order.
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/entry/treemap_misuse" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/" target="_blank">Scratch Where It's Itching</a>
+		</div>
+		<div>
+			<h3>TreeMap misuse</h3>
+		</div>
+		<div class="collectiontext">
+						TreeMap is a very practical class when you want your Map to keep its keys ordered. Unless you don't know how it works. <p>
+I noticed this code recently in one of our projects:
+<pre>
+  <font color='#7f0055'><strong>private</strong></font> Map&lt;Double, Limit&gt; limits = <font color='#7f0055'><strong>new</strong></font> TreeMap&lt;&gt;();
+</pre><p>
+Nothing special about the declaration. Just a standard TreeMap ordering on its Double key. There were other similar declarations next to this one where the maps were used correctly. So I guess our developer felt he could reuse the same pattern. Except that his map was not ordered quite the way he needed it to. So when retrieving values, he would do that:
+<pre>
+  List&lt;Entry&lt;Double, Limit&gt;&gt; limitList = <font color='#7f0055'><strong>new</strong></font> ArrayList&lt;&gt;(limits.entrySet());
+  Collections.sort(limitList, LIMIT_DESC_COMPARATOR);
+  generateExecs(limitList);
+</pre><p>
+At first, I thought that the comparator would do something clever by combining key and value comparison.
+<pre>
+  <font color='#7f0055'><strong>private static final</strong></font> Comparator&lt;Entry&lt;Double, Limit&gt;&gt; LIMIT_DESC_COMPARATOR = <font color='#7f0055'><strong>new</strong></font> Comparator&lt;&gt;(){
+    @Override
+    <font color='#7f0055'><strong>public int</strong></font> compare(Entry&lt;Double, Limit&gt; o1, Entry&lt;Double, Limit&gt; o2) {
+      <font color='#7f0055'><strong>if</strong></font> (o1.getKey() == 0)
+        <font color='#7f0055'><strong>return</strong></font> -1;
+      <font color='#7f0055'><strong>if</strong></font> (o2.getKey() == 0)
+        <font color='#7f0055'><strong>return</strong></font> 1;
+      <font color='#7f0055'><strong>return</strong></font> o2.getKey().compareTo(o1.getKey());
+    }
+  }
+</pre><p>
+No luck with that. It uses only the key. And do you see that method generateExecs, where you pass a list of entries? Guess what, it uses only the values. All of this strange code comes from one problem: the developer did not know that you could pass a comparator directly into the TreeMap constructor for immediate ordering in the correct order.
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/entry/treemap_misuse" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.familytidings.com/blog" target="_blank">Half a Page of Scribbled Linux</a>
+		</div>
+		<div>
+			<h3>Nexus 5 Lineage Incremental Update Procedure</h3>
+		</div>
+		<div class="collectiontext">
+						This procedure is for installing nightly or weekly updates to Lineage, not moving from CyanogenMod to Lineage. Back up Tasker to internal storage (menu &#62; data &#62; backup) Perform a Titanium backup to save new user+system apps and newer versions system data Restore SwiftKey as keyboard in Settings &#62; Languages &#38; Inputs &#62; Current Keyboard [&#8230;]
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.familytidings.com/blog/?p=1500" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.familytidings.com/blog" target="_blank">Half a Page of Scribbled Linux</a>
+		</div>
+		<div>
+			<h3>Nexus 5 Lineage Full Update Procedure</h3>
+		</div>
+		<div class="collectiontext">
+						This procedure is for major updates such as moving to Lineage from CyanogenMod. Back up Tasker to internal storage (menu &#62; data &#62; backup) Perform a Titanium backup to save new user+system apps and newer versions system data Optional: Delete old back up from phone if space needed. Back up current ROM with ROM Manager [&#8230;]
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.familytidings.com/blog/?p=1498" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="http://www.frauenotiert.de/" target="_blank">Frau E. notiert..</a>
 		</div>
 		<div>
@@ -144,58 +248,6 @@ SyndContentImpl.value=<table align="center" cellpadding="0" cellspacing="0" clas
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/F3KlOLx2Pbk/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>TilesFX 1.4.4</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Just on time before my next visit to Singapore I was able to release a new version of TilesFX. Last weekend I finally found some time to add some more features to TilesFX which I had on my list for some time.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">First of all I've added a skin that simply shows a smoothed area chart called SmoothAreaChartTileSkin. As parameters you just have to add a list of ChartData objects.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The skin looks as follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-6gnZBXvMR2E/WT60iu_ZWSI/AAAAAAAAElc/dIXHnepko2cZPxkNUVA44zRc2Ka2P9fowCLcB/s1600/Title%2B2017-06-11%2B08-59-45.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="442" data-original-width="420" height="320" src="https://2.bp.blogspot.com/-6gnZBXvMR2E/WT60iu_ZWSI/AAAAAAAAElc/dIXHnepko2cZPxkNUVA44zRc2Ka2P9fowCLcB/s320/Title%2B2017-06-11%2B08-59-45.png" width="304" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">This might sometime be useful for some dashboards if you would like to keep it simple :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The next one that I've added is a RadarChartTileSkin which has two different Modes (Mode.POLYGON and Mode.SECTOR). Also the RadarChart takes a list of ChartData objects as parameter in Tile. The two different modes will look as follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-meCh4kZV6Lo/WT61H0AsO0I/AAAAAAAAElg/OyqgDELta3EqyPlYmgUMgSbKNtl_zh57gCLcB/s1600/Title%2B2017-06-11%2B07-18-21.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="442" data-original-width="830" height="340" src="https://1.bp.blogspot.com/-meCh4kZV6Lo/WT61H0AsO0I/AAAAAAAAElg/OyqgDELta3EqyPlYmgUMgSbKNtl_zh57gCLcB/s640/Title%2B2017-06-11%2B07-18-21.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As you can see both variants can be useful. In the example above I've used the RadarChart to visualize the temperature on every hour of the day which gives a nice temperature overview for measurements.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the RadarChartTile I have implemented a limit of 128 ChartData elements which will be supported. The reason for this is that if you have more than 128 elements in a RadarChart you can't identify any value on the chart any more.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The third new skin I've added is a CountryTileSkin. In principle this tile simply shows the selected country as a SVGPath and a value with a unit.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">This might come in handy if you would like to compare the data of a few countries on a dashboard with a little eye candy.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The CountryTileSkin looks like this...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-Ky-dKCIj91c/WT62bWufPiI/AAAAAAAAElo/kpESpCzxU_gMqdxwEz6e-Rt0CPGURHl6ACLcB/s1600/Title%2B2017-06-12%2B17-41-00.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="442" data-original-width="420" height="320" src="https://4.bp.blogspot.com/-Ky-dKCIj91c/WT62bWufPiI/AAAAAAAAElo/kpESpCzxU_gMqdxwEz6e-Rt0CPGURHl6ACLcB/s320/Title%2B2017-06-12%2B17-41-00.png" width="304" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Nothing really special but like I said...sometimes it could be handy :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Because if I only show a single country I need SVG paths with a higher resolution which is the reason why I've added the hires.properties file that contains the SVG paths for nearly all countries that you can also find in Java Locale.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The problem with this high resolution SVG paths is that they are big...the properties file alone is 1.3 MB which is the reason why the library is now 1.3 MB big.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the WorldTileSkin I've only used lo resolution SVG paths where the file is only 125kb big but they don't look nice when used as a single country.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well that's it for today, as always you can find the source code and binaries here:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Source Code: <a href="https://github.com/HanSolo/tilesfx" target="_blank">github</a></span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Binaries &nbsp; &nbsp; &nbsp;: <a href="https://bintray.com/hansolo/tilesfx" target="_blank">bintray</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you would like to know how to use the different skins in TilesFX you might want to check out the code from github and take a look at the Demo.java Class that is part of the TilesFX library. If you run this Demo.java Class you will get this...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-be5qe1q7Kzw/WT64ongyhvI/AAAAAAAAElw/m81PJR07AmUSBoF6MWmEtUw2RD9zfuenQCLcB/s1600/TilesFX.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="647" data-original-width="1240" height="332" src="https://2.bp.blogspot.com/-be5qe1q7Kzw/WT64ongyhvI/AAAAAAAAElw/m81PJR07AmUSBoF6MWmEtUw2RD9zfuenQCLcB/s640/TilesFX.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In this demo I make use of nearly all skins that are available in TilesFX at the moment.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you have any idea for tiles you need for you dashboard, please let me know and don't forget...keep coding... ;)</span><br /><br />
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2017/06/tilesfx-144.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://danluu.com/" target="_blank">Dan Luu</a>
-		</div>
-		<div>
-			<h3>Is the keyboard faster than the mouse?</h3>
-		</div>
-		<div class="collectiontext">
-						Which is faster, keyboard or mouse? A large number of programmers believe that the keyboard is faster for all (programming-related) tasks. However, there are a few widely cited webpages that claim that “studies” show that using the mouse is faster than using the keyboard for everything and that people who think that using the keyboard is faster are just deluding themselves. This might sound extreme, but, just for example, one page says that the author has “never seen [the keyboard] outperform the mouse”.
-					</div>
-		<div class="collectionhref">
-		<a href="https://danluu.com/keyboard-v-mouse/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>Java Geek Bike Ride + BBQ</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Over the years it became some kind of tradition that the Java User Group Münster organizes a little community event...the Java BBQ at my place in the summer. But this year I thought we need to improve that a bit. Instead of only having the BBQ, I thought we first should do some exercise before we start the BBQ :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And for that reason we will do a little Java Geek Bike ride this year followed by the traditional Java BBQ.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So here is my plan for our ride...it's around 25km which should be ok because we are not on a hurry..</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-d7hQPxDZFI0/WTkjlqhnZKI/AAAAAAAAElA/ecPxO1zA110uPjbKfr-HG1Pf9BZ6Ar89wCLcB/s1600/Coordinates%2B2017-06-08%2B12-10-32.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="618" data-original-width="1000" height="394" src="https://3.bp.blogspot.com/-d7hQPxDZFI0/WTkjlqhnZKI/AAAAAAAAElA/ecPxO1zA110uPjbKfr-HG1Pf9BZ6Ar89wCLcB/s640/Coordinates%2B2017-06-08%2B12-10-32.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Because we'll do the bike ride everyone who would like to attend should bring a bike :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And no worries...it won't be a race but a relaxed ride with enough time to have some "Fahrbier" ;)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you have no chance to bring a bike with you, I could offer one more bike, otherwise feel free to only join the BBQ part. I could also offer a place to sleep for at least 2 person so just let me know if you need a place to stay, otherwise there are some B&amp;B close by which might work for you.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As always feel free to present things you would like to talk about, e.g. last year one of our attendees presented some interesting stuff which ended in a session at the JavaLand conference... :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The date for the Java Geek Bike Ride&nbsp;+ BBQ will be the&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif; font-size: x-large;"><b>Saturday the 29th of July</b></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I would suggest that we will start not too late which means maybe around 12pm.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As always I will take care about the drinks and you only have to bring some stuff for the BBQ.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Everyone should bring the kind of meat/sausages etc. she/he would like to eat and it would be awesome if some of you might be able to also bring some salad and bread for the BBQ.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you are interested but don't know if you are "allowed" to come...just ping me...everybody is welcome as always.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">You can find the place here:</span><br /><br /><iframe allowfullscreen="" frameborder="0" height="450" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2461.2110755988097!2d7.632187026608246!3d51.911859988423366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b9a4fcd30c74e1%3A0x36b1e231b9bacfda!2sWestfalenstra%C3%9Fe+93%2C+48165+M%C3%BCnster!5e0!3m2!1sen!2sde!4v1496917988398" style="border: 0;" width="600"></iframe><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Looking forward to spend a great day with you guys...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Keep coding...</span>
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2017/06/java-geek-bike-ride-bbq.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -203,36 +255,33 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+	  <a href="neue_datengeneratoren_ii.html">
+		<div class="date">08.07.2017</div>
+<h3>Neue Datengeneratoren II</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Einige neue Generatoren wurden für das
+Framework zur Erzeugung von Testdaten geschaffen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="android_smartphones_smartcards.html">
+		<div class="date">08.07.2017</div>
+<h3>Android Smartphones als Smartcards</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Eine Liste mit Links zum Thema Android Smartphones als Smartcards
+</p></div>   </a>
+</li>
+<li class="anriss">
 	  <a href="autostereoskopie_generierten_planeten.html">
 		<div class="date">30.06.2017</div>
 <h3>Autostereoskopie mit generierten Planeten</h3>
   <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Nun, da es langsam wieder wärmer wird, fließen die Gedanken leichter und dringen dabei auch in Bereiche vor, die sie sonst - wenn es draußen kälter und die Gedanken dadurch dickflüssiger sind - nicht vordringen.
+				  <p>Nun, da es langsam wieder wärmer wird, fließen die Gedanken leichter und dringen dabei auch in Bereiche vor, die sie sonst - wenn es draußen kälter und die Gedanken dadurch dickflüssiger sind - nicht vordringen.
 Mir ist das neulich mit meinem
 Planetengenerator,
 VR und autostereoskopischen Bildern so gegangen...
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="hillshading_server_openstreetmap_lxc_ii.html">
-		<div class="date">25.06.2017</div>
-<h3>Hillshading-Server für Openstreetmap in LXC II</h3>
-  <div class="abstract">
-				  <p>Nachdem ich bereits den
-OpenStreetMap-Tile-Server
-aktualisiert habe, folgte nun der für die Höhen- (Relief-) Informationen.
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="iota_wie_eine_blase_funktioniert.html">
-		<div class="date">17.06.2017</div>
-<h3>IOTA oder wie eine Blase funktioniert</h3>
-  <div class="abstract">
-				  <p>Ich wurde gefragt, ob ich Einschätzungen zu Crypto-Currencies machen könnte. Speziell wurde ich nach Ethereum gefragt - einer,
-von der ich bereits gehört und für die ich mich bereits kurzzeitig milde interessiert hatte - und IOTA, die
-mir
-völlig unbekannt war. Ich begann mit einer Analyse der mir unbekannten und wurde überrascht.
 </p></div>   </a>
 </li>
 </ul>
