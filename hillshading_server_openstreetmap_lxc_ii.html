@@ -92,17 +92,23 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 <div id="all">
 <div id="A">
 <div id="content">
-	<div class="date">25.06.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+	<div class="date">23.07.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
 <span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
 <div class="previousArticlesInCategories">
 	<!--ul-->
 	vorhergehende Artikel in:
-				<!--li--> <a href="tile_server_openstreetmap_lxc_ii.html#content">Geo</a> <!--/li-->
-					<!--li--> ,<a href="tile_server_openstreetmap_lxc_ii.html#content">Linux</a> <!--/li-->
-					<!--li--> ,<a href="tile_server_openstreetmap_lxc_ii.html#content">Virtualisierung</a> <!--/li-->
+				<!--li--> <a href="autostereoskopie_generierten_planeten.html#content">Geo</a> <!--/li-->
+					<!--li--> ,<a href="expect_dialog_ca_opensource.html#content">Linux</a> <!--/li-->
+					<!--li--> ,<a href="overlay_fs_linksammlung.html#content">Virtualisierung</a> <!--/li-->
 			<!--/ul-->
 </div>
  	<div class="heading">Hillshading-Server für Openstreetmap in LXC II</div>
+		<div class="update" id="updates">
+		<h1>Updates</h1>
+		<ul>
+						<li><a href="#55">23. Juli 2017</a></li>
+					</ul>
+	</div>
 			<p>Nachdem ich bereits den
 <a href="tile_server_openstreetmap_lxc_ii.html">OpenStreetMap-Tile-Server</a>
 aktualisiert habe, folgte nun der für die Höhen- (Relief-) Informationen.
@@ -123,6 +129,7 @@ in der unmittelbar vorausgehenden Zeile referenziert wird, entsprechend einzutra
 </p><p>
 <pre>
 CONTAINERNAME=hillshading
+PROCESSORCOUNT=$(cat /proc/cpuinfo | grep processor | wc -l) # used to speed up make
 lxc-create -n $CONTAINERNAME -t download -- --arch amd64 --dist ubuntu --release xenial
 lxc-start -n $CONTAINERNAME
 lxc-attach -n $CONTAINERNAME -- apt-get update
@@ -143,7 +150,7 @@ mapnik-config -v
 python -c "import mapnik;print mapnik.__file__"
 curl localhost| grep 'It works!'
 cd mod_tile
-./autogen.sh &amp;&amp; ./configure &amp;&amp; make &amp;&amp; sudo make install &amp;&amp; sudo make install-mod_tile &amp;&amp; sudo ldconfig
+./autogen.sh &amp;&amp; ./configure &amp;&amp; make -j$PROCESSORCOUNT &amp;&amp; sudo make install &amp;&amp; sudo make install-mod_tile &amp;&amp; sudo ldconfig
 cd ~/src/
 sudo cp noto-emoji/fonts/NotoColorEmoji.ttf noto-emoji/fonts/NotoEmoji-Regular.ttf /usr/share/fonts/truetype/noto
 sudo fc-cache -fv
@@ -257,6 +264,10 @@ hillshadingLayer,
   &lt;/body>
 &lt;/html>
 </pre>
+</p><p>
+
+<h1><a name="55">Aktualisierung vom 23. Juli 2017</a></h1><div class="update">Das Skript wurde angepasst, um Vorteile aus der Anwesenheit mehrerer Cores zu ziehen
+</div>
 </p> <ul class="double"> 
 <li class="anriss">
 	<a href="images/lxchillshadeserver16.06ebmap4d.png" rel="lightbox[screenshots]" 
@@ -285,41 +296,40 @@ hillshadingLayer,
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+		<a href="tile_server_openstreetmap_lxc_ii.html#56">
+		<div class="date">23.07.2017</div>
+<h3>Tile-Server für Openstreetmap in LXC II</h3>
+  <div class="abstract">
+				<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+	  <p>Ich beschrieb vor einiger Zeit den Antrieb dafür,
+einen eigenen Tile-Server zu betreiben.
+ Damals war als System Ubuntu 12.04 in LXC-Containern auf einem Ubuntu 13.04-Wirt zum Einsatz gekommen.
+ Ich habe das System renoviert und auf Ubuntu 16.04 (Container und Wirt) angehoben
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="nixie_roehren_frei_waehlbarer_farbe.html#content">
+		<div class="date">23.07.2017</div>
+<h3>Nixie-Röhren mit frei wählbarer Farbe</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Ich habe meine alte
+Komponente zur "retro"-Anzeige von Zahlenwerten
+überholt und ihr
+die Möglichkeit gegeben, verschiedene Farben darzustellen - damit könnte man zum Beispiel
+auf das Überschreiten von Schwellwerten reagieren...
+</p></div>   </a>
+</li>
+<li class="anriss">
 	  <a href="expect_dialog_ca_opensource.html#content">
 		<div class="date">15.07.2017</div>
 <h3>Expect-Dialog-CA OpenSource</h3>
   <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Nachdem ich bereits Ideen zur Umsetung einer
+				  <p>Nachdem ich bereits Ideen zur Umsetung einer
 zugänglicheren GUI für eine PKI bzw. CA in einer Terminalumgebung
 formuliert habe, habe ich diese Ideen jetzt umgesetzt und sie in ein Github-Repository zur Veröffentlichung hochgeladen.
 Der Code ist ausdrücklich nicht production-ready. Der aktuelle Stand demonstriert, welcher Komfort bei der Verwaltung einer CA  mit vergleichsweise einfachen Mitteln
 in einer Terminalumgebung möglich ist.
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="android_smartcard__nfc_.html#content">
-		<div class="date">15.07.2017</div>
-<h3>Android als Smartcard (NFC)</h3>
-  <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Nachdem ich bereits in der
-Vergangenheit
-verschiedene
-Experimente
-mit der NFC-Technologie
-gemacht habe,
-wollte ich endlich mein großes Ziel erreichen: Ein
-Smartphone als NFC-Smartcard
-zu nutzen...
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="android_smartphones_smartcards.html#content">
-		<div class="date">08.07.2017</div>
-<h3>Android Smartphones als Smartcards</h3>
-  <div class="abstract">
-				  <p>Eine Liste mit Links zum Thema Android Smartphones als Smartcards
 </p></div>   </a>
 </li>
 </ul>
