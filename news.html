@@ -113,6 +113,86 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/" target="_blank">Scratch Where It's Itching</a>
+		</div>
+		<div>
+			<h3>Star Trek Anti-Pattern</h3>
+		</div>
+		<div class="collectiontext">
+						In previous installments, we tried to limit the number of Threads to the <a href="http://jroller.com/ethdsy/entry/zebra_pattern">minimum</a>, even to <a href="http://jroller.com/ethdsy/entry/one_ring_paatern">one</a>. But what happens if you go the opposite way? <p>
+<img src="http://jroller.com/ethdsy/resource/startrek.jpg" align="left">Often, we try to parallelize some process, but do not want to pay too much attention to the number of Threads. We can try to spawn a new Thread each time we need one:<p>
+<pre>
+  Executor myExecutor = Executors.newCachedThreadPool();
+</pre><p>
+Often, things will work correctly at first. But as soon as the amount of data increases, you’ll get the following error:<p>
+<pre>
+  OutOfMemoryError: unable to create new native thread
+</pre><p>
+You probably know this story: support team has a problem on the tool, so they have a look at the logs. They see this message, so they call you to ask what is the parameter to increase your application’s memory. You tell them about Xmx, but 5 minutes later, they call you again to ask how to run the application in 64 bits. That’s when you get suspicious, and ask for the logs.<p>
+In fact, this message is quite misleading for the unawares. You have to know that Java reserves some memory for storing Thread stacks, and that is the memory spaces that got scarce. One way to solve it is by decreasing the Xss, the size of a Thread stack in memory, but the best way is still to avoid going to infinity and beyond, that is to avoid the Star Trek Anti-Pattern.<p>
+So how many threads should I have? We’ll talk about it in the Medusa Pattern.<p>
+
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/entry/star_trek_anti_pattern" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/" target="_blank">Scratch Where It's Itching</a>
+		</div>
+		<div>
+			<h3>Star Trek Anti-Pattern</h3>
+		</div>
+		<div class="collectiontext">
+						In previous installments, we tried to limit the number of Threads to the <a href="http://jroller.com/ethdsy/entry/zebra_pattern">minimum</a>, even to <a href="http://jroller.com/ethdsy/entry/one_ring_paatern">one</a>. But what happens if you go the opposite way? <p>
+<img src="http://jroller.com/ethdsy/resource/startrek.jpg" align="left">Often, we try to parallelize some process, but do not want to pay too much attention to the number of Threads. We can try to spawn a new Thread each time we need one:<p>
+<pre>
+  Executor myExecutor = Executors.newCachedThreadPool();
+</pre><p>
+Often, things will work correctly at first. But as soon as the amount of data increases, you’ll get the following error:<p>
+<pre>
+  OutOfMemoryError: unable to create new native thread
+</pre><p>
+You probably know this story: support team has a problem on the tool, so they have a look at the logs. They see this message, so they call you to ask what is the parameter to increase your application’s memory. You tell them about Xmx, but 5 minutes later, they call you again to ask how to run the application in 64 bits. That’s when you get suspicious, and ask for the logs.<p>
+In fact, this message is quite misleading for the unawares. You have to know that Java reserves some memory for storing Thread stacks, and that is the memory spaces that got scarce. One way to solve it is by decreasing the Xss, the size of a Thread stack in memory, but the best way is still to avoid going to infinity and beyond, that is to avoid the Star Trek Anti-Pattern.<p>
+So how many threads should I have? We’ll talk about it in the Medusa Pattern.<p>
+
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.jroller.com/ethdsy/entry/star_trek_anti_pattern" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://blog.scottlowe.org/" target="_blank">Scott’s Weblog</a>
+		</div>
+		<div>
+			<h3>VMworld 2017 Prayer Time</h3>
+		</div>
+		<div class="collectiontext">
+						At VMworld 2017 in Las Vegas, I’m organizing—as I have in previous years—a gathering of Christians for a brief time of prayer while at the conference. If you’re interested in joining us, here are the details.
+					</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/jw9yE5O2h8o/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://evanmiller.org/" target="_blank">Evan Miller's News</a>
+		</div>
+		<div>
+			<h3>Why I’m Learning Perl 6</h3>
+		</div>
+		<div class="collectiontext">
+						The Perl 6 virtual machine is a promising piece of technology: <a href="http://www.evanmiller.org/why-im-learning-perl-6.html">Why I’m Learning Perl 6</a>
+					</div>
+		<div class="collectionhref">
+		<a href="http://www.evanmiller.org/why-im-learning-perl-6.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="http://www.neuesvonfraumeyer.de/" target="_blank">Neues von Frau Meyer</a>
 		</div>
 		<div>
@@ -122,7 +202,7 @@ display('news.html')
 			<!--				SyndContentImpl.mode=null
 SyndContentImpl.type=html
 SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<div class="separator" style="clear: both; text-align: center;"><br /></div><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Endlich wieder im Allgäu.</span><br /><br /><span style="font-family: &quot;arial&quot;;">Das Gewusel am Gleis 3 des Oberstdorfer Bahnhof konnte meine Freude nicht trüben.</span><br /><span style="font-family: &quot;arial&quot;;">Schon hier genoss ich die frische Luft, mit der sich meine Lungen füllten.</span><br /><span style="font-family: &quot;arial&quot;;">Jauchzet, ihr <a href="http://www.spektrum.de/lexikon/biologie/alveole/2576" rel="nofollow" target="_blank"><span style="color: magenta;">Alveolen</span></a>, frohlocket, ihr <a href="http://www.spektrum.de/lexikon/biologie-kompakt/erythrocyten/3851" rel="nofollow" target="_blank"><span style="color: magenta;">Erythrocyten</span></a>!</span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Letztes Jahr war ich als Single&nbsp;allein im Allgäu unterwegs. </span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Wandern, Wellness, radeln, alles sehr erholsam, aber alles auch ein bisschen...na, allein eben. </span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Der Karl hatte in Füssen versucht, mit mir&nbsp;<a href="http://www.neuesvonfraumeyer.de/2016/08/allein-fast-allein-vom-kloster-in-die.html" rel="nofollow" target="_blank"><span style="color: magenta;">anzubändeln</span></a>. Ohne Erfolg.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">In diesem Sommer hatte ich eine Begleitung dabei.</span><br /><span style="font-family: &quot;arial&quot;;">Sogar eine männliche.</span><br /><span style="font-family: &quot;arial&quot;;">Sogar eine, die genauso gerne wandert und frische Luft atmet&nbsp;wie ich.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-1gvdoh4Jeus/WXC2bnhZ8sI/AAAAAAAABwo/c6cfTGh6Qh8rfY5y6XT-2Mq9TEpzcTurACPcBGAYYCw/s1600/Wandern%2Bmit%2BDirk.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="465" data-original-width="693" height="214" src="https://3.bp.blogspot.com/-1gvdoh4Jeus/WXC2bnhZ8sI/AAAAAAAABwo/c6cfTGh6Qh8rfY5y6XT-2Mq9TEpzcTurACPcBGAYYCw/s320/Wandern%2Bmit%2BDirk.png" width="320" /></a></div><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Niemals würde ich völlig unvorbereitet einen Aktivurlaub antreten. Eine Woche mit fünf möglichen Wandertagen musste gut durchdacht sein. Mein Bruder schenkte mir zum Geburtstag den <a href="https://www.rother.de/rother%20wanderbuch-leichte%20wanderungen%20allg%E4u-3088.htm" rel="nofollow" target="_blank"><span style="color: magenta;">Rother Wanderführer Leichte Wanderungen - Genusstouren im Allgäu, Kleinwalsertal und Tannheimer Tal</span></a>. Darin blätterte ich und schaute, welche Routen abwechslungsreich und mit meiner Kondition wanderbar erschienen. Bezüglich der Kondition meines mitgereisten Naturburschen und ehemaligen Pfadfinders machte ich mir keine Sorgen.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Sorgen machte ich mir nur ein wenig um das Wetter. Die ersten beiden Tage regnete es.</span><br /><span style="font-family: &quot;arial&quot;;">Aber&nbsp;da wir&nbsp;ohnehin nass wurden, gingen wir auch gleich die Breitachklamm hoch, wo der Fluss toste und die Wasserfälle niederprasselten.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-kE9suGoI_GM/WXIadsXbuMI/AAAAAAAABxo/EyWI0zQmSyoU8_2L_Lq-4UOMOs8vd1EpgCLcBGAs/s1600/Breitachklamm%2B3.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="540" data-original-width="960" height="225" src="https://3.bp.blogspot.com/-kE9suGoI_GM/WXIadsXbuMI/AAAAAAAABxo/EyWI0zQmSyoU8_2L_Lq-4UOMOs8vd1EpgCLcBGAs/s400/Breitachklamm%2B3.jpg" width="400" /></a></div><div class="separator" style="clear: both; text-align: center;">&nbsp;</div><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-3eLDLa0Zois/WXIam1r454I/AAAAAAAABxs/ZaMjXI1DRcMAOwLM7-d0VkN84I2D4crEACLcBGAs/s1600/Oberstdorf%2B10.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="800" data-original-width="450" height="400" src="https://3.bp.blogspot.com/-3eLDLa0Zois/WXIam1r454I/AAAAAAAABxs/ZaMjXI1DRcMAOwLM7-d0VkN84I2D4crEACLcBGAs/s400/Oberstdorf%2B10.jpg" width="225" /></a></div><div class="separator" style="clear: both; text-align: center;">&nbsp;</div><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-ZAeOqaJVR3E/WXIaXsQXbuI/AAAAAAAABxg/IOV2_luoU8okA0KBaN5xMuQTf6WTLkP7wCEwYBhgL/s1600/Breitachklamm%2B1.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="540" data-original-width="960" height="225" src="https://4.bp.blogspot.com/-ZAeOqaJVR3E/WXIaXsQXbuI/AAAAAAAABxg/IOV2_luoU8okA0KBaN5xMuQTf6WTLkP7wCEwYBhgL/s400/Breitachklamm%2B1.jpg" width="400" /></a></div><div class="separator" style="clear: both; text-align: center;">&nbsp;</div><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-icJ7Z4r35JY/WXIaaC_9sNI/AAAAAAAABxk/otvowUX91U8qAJtitHRFJ3ntqtTNGan6QCEwYBhgL/s1600/Breitachklamm%2B2.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="540" data-original-width="960" height="225" src="https://2.bp.blogspot.com/-icJ7Z4r35JY/WXIaaC_9sNI/AAAAAAAABxk/otvowUX91U8qAJtitHRFJ3ntqtTNGan6QCEwYBhgL/s400/Breitachklamm%2B2.jpg" width="400" /></a></div><div class="separator" style="clear: both; text-align: center;">&nbsp;</div><div class="separator" style="clear: both; text-align: center;">&nbsp;</div><span style="font-family: &quot;arial&quot;;">Zwei Tage später scheint die Sonne.</span><br /><br /><span style="font-family: &quot;arial&quot;;">"Entschuldigung, geht es hier zum Engeratsgundsee?" fragt mein Freund eine agile&nbsp;Seniorin, deren faltige Bräune auf viele Outdoor-Aktivitäten hindeutet und die mit ihren Wanderstöcken an uns vorbeiziehen will. </span><br /><span style="font-family: &quot;arial&quot;;">Ich habe meine Stöcke heute Morgen vergessen. Ob die mir auf diesem Wanderweg geholfen hätten, ist fraglich. Es geht seit Stunden über&nbsp;Geröll und&nbsp;Schneefelder, was ich anfangs gern als sportliche Herausforderung annahm.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-GOKtuq5moAs/WXC3WgVt6sI/AAAAAAAABxY/AXxJGxA8Rjwrtf90wkpBdVSJ2mpQj3l_ACPcBGAYYCw/s1600/Oberstdorf%2B5.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="450" data-original-width="800" height="225" src="https://4.bp.blogspot.com/-GOKtuq5moAs/WXC3WgVt6sI/AAAAAAAABxY/AXxJGxA8Rjwrtf90wkpBdVSJ2mpQj3l_ACPcBGAYYCw/s400/Oberstdorf%2B5.jpg" width="400" /></a></div><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">"Das geht in die Richtung", sagt die Wanderin im Vorbeigehen, "dauert&nbsp;ungefähr zwei Stunden. Wenn´s ihr noch die Bahn ins Tal erwischen wollt, müsst´s ihr aber langsam zurück."</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Waaaaas? Ich möchte weinen. </span><br /><br /><span style="font-family: &quot;arial&quot;;">Wegen der Seen sind wir eigentlich hier oben, ein Panoramaweg wurde vom Wanderbuch und dem Internet versprochen, traumhafte Ausblicke (stimmt!) auf vierhundert Gipfel (wir haben es nicht nachgezählt, aber es waren sehr viele), leicht zu meistern (naja...). Ich bin mir gar nicht sicher, ob dieser Weg Nr. 6 ab Nebelhornstation Höfatsblick überhaupt der Weg ist, den ich ausgewählt hatte. Wenn er es ist, muss ich meine Interpretation von "auch für ungeübte Wanderer mit einer gewissen Trittsicherheit und Höhentauglichkeit" überdenken. </span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Wenn er es nicht ist, habe ich mich total vertan. In beiden Fällen kann ich meinen Wander- und Lebensgefährten nicht verantwortlich machen. Blöd.</span><br /><span style="font-family: &quot;arial&quot;;">Nachdem wir uns verlaufen haben und der Nebelhorngipfel fast schon zum Greifen nah ist, kehren wir um und orientieren uns neu. <em>Hochplateau Koblat</em> steht auf einem Schild. Da konnte der Koblatsee doch nicht weit sein. Weg Nr. 6 setzt alpine Erfahrung und Ausrüstung voraus, dies steht widerum auf einem Schild einer Liftstation.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-duo8lmjcjzI/WXIpDz03kDI/AAAAAAAABx8/7nT29RxVbwwTHx97Iq3J8l001NxscqhHACLcBGAs/s1600/Hochplateau.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="540" data-original-width="960" height="225" src="https://4.bp.blogspot.com/-duo8lmjcjzI/WXIpDz03kDI/AAAAAAAABx8/7nT29RxVbwwTHx97Iq3J8l001NxscqhHACLcBGAs/s400/Hochplateau.jpg" width="400" /></a></div><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-fRHp2KqU6YM/WXC3NmbvNzI/AAAAAAAABxY/Xxe6QuQOa4oprHspVC1HbmHlE-dqnOmMwCPcBGAYYCw/s1600/Oberstdorf%2B3.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="450" data-original-width="800" height="225" src="https://2.bp.blogspot.com/-fRHp2KqU6YM/WXC3NmbvNzI/AAAAAAAABxY/Xxe6QuQOa4oprHspVC1HbmHlE-dqnOmMwCPcBGAYYCw/s400/Oberstdorf%2B3.jpg" width="400" /></a></div><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-IA764kf4uME/WXC3e8xbNiI/AAAAAAAABxY/fMG4OsNu1QYgnKOSm-2gVwRA6UXXM9GBgCPcBGAYYCw/s1600/Oberstdorf%2B7.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="450" data-original-width="800" height="225" src="https://1.bp.blogspot.com/-IA764kf4uME/WXC3e8xbNiI/AAAAAAAABxY/fMG4OsNu1QYgnKOSm-2gVwRA6UXXM9GBgCPcBGAYYCw/s400/Oberstdorf%2B7.jpg" width="400" /></a><span style="font-family: &quot;arial&quot;;"></span></div><div class="separator" style="clear: both; text-align: center;"><span style="font-family: &quot;arial&quot;;"></span>&nbsp;</div><div class="separator" style="clear: both; text-align: justify;"><span style="font-family: &quot;arial&quot;;">Unsere bisherigen Wanderungen durch die Elfringhäuser Schweiz, den Grafenberger Wald und das Münsterland&nbsp;waren offenbar nicht alpin genug. Wanderschuhe und Rucksack sind wohl&nbsp;keine ausreichende alpine Ausrüstung. Es fehlen die Stöcke und Handschuhe, die unsere Hände beim Hochziehen an oder Abstützen auf den Felsen&nbsp;schützen könnten. </span></div><div class="separator" style="clear: both; text-align: justify;"><span style="font-family: &quot;arial&quot;;">Und mir fehlte definitiv ein wenig Kondition. Die kann man nirgendwo kaufen.</span></div><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Meine Panik, die letzte Bahn ins Tal nicht zu erreichen,&nbsp;lässt mich kurz erstarren, dann treibt sie mich zur Eile an.&nbsp;Wir gehen, nein, steigen denselben Weg zurück. Der traumhafte Ausblick auf die vierhundert Gipfel&nbsp;ist mir inzwischen egal. Der Gipfel&nbsp;ist diese Wanderung!</span><span style="font-family: &quot;arial&quot;;"> Schweiß läuft aus allen meinen&nbsp;Poren. Das Herz schlägt schneller. Die Sonne verschwindet hinter den Wolken. Ich&nbsp;fluche ziemlich laut, was meinen Weggefährten veranlasst, mich zwischendurch zu beschwichtigen. "Mach dir keinen Kopf, da sind noch einige Leute hinter uns, die wollen doch sicher auch zur Bahn."</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Der Vater mit seiner Tochter zum Beispiel.</span><br /><span style="font-family: &quot;arial&quot;;">Das junge Pärchen.</span><br /><span style="font-family: &quot;arial&quot;;">Die circa achtzigjährige Dame, die ein bisschen schwer atmet, um dann&nbsp;in einen&nbsp;munteren gemsenartigen Aufstieg zu wechseln.</span><br /><span style="font-family: &quot;arial&quot;;">Alle überholen uns behände.</span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Ich schnaufe mit hochrotem Kopf. Und schäme mich, dass ich schnaufe. Was&nbsp;ist denn&nbsp;los mit mir? Der Sherpa an meiner Seite lächelt immer noch und&nbsp;ist die Ruhe selbst, während ich mich schon von einem Heli abtransportiert zu drohen glaube. Wie immer, wenn meine Kräfte nachlassen, werde ich pampig. "Jaaaa, alle noch hinter uns. Vor allem die Omma, die gerade noch hinter uns&nbsp;lief und jetzt der rote Punkt da oben auf dem Kamm ist. Warum ist die so fit? Ist wahrscheinlich früher diesen Weg zur Schule gegangen. Barfuß." </span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Ich grummele den Rest des Weges vor mich hin, bis irgendwann die Station Höfatsblick in der Ferne zu sehen ist. Dort geht dann auch der Weg mit der Gondel ins Tal. </span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Nachdem wir eine Stunde in der Warteschlange anstehen.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Im Tal gibt es Weißbier, Schupfnudeln und Kraut zur Belohnung.</span><br /><span style="font-family: &quot;arial&quot;;">Neue Knie gibt es leider nicht im Angebot&nbsp;in der <em>Alten Sennküche</em>.<em>&nbsp;</em></span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Meine Laune bessert&nbsp;sich dennoch schnell. </span><span style="font-family: &quot;arial&quot;;">Dieser Weg da oben unter dem Nebelhorn war kein leichter und hat mich&nbsp;an meine Grenzen gebracht.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Ich glaub´, ´ne Gemse werd´ ich nie.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Aber ich gebe ein prima Murmeltier ab.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-Nx_KIsE1dOc/WXC3baR9ggI/AAAAAAAABxY/7ZbrMFC8t70f4SDBhY6TAGOuq8b8KqIVgCPcBGAYYCw/s1600/Oberstdorf%2B6.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="450" data-original-width="800" height="225" src="https://4.bp.blogspot.com/-Nx_KIsE1dOc/WXC3baR9ggI/AAAAAAAABxY/7ZbrMFC8t70f4SDBhY6TAGOuq8b8KqIVgCPcBGAYYCw/s400/Oberstdorf%2B6.jpg" width="400" /></a></div><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Fotos ©&nbsp;Britta Meyer</span><br /><br /><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;">&nbsp;</div>
+SyndContentImpl.value=<div class="separator" style="clear: both; text-align: center;"><br /></div><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Endlich wieder im Allgäu.</span><br /><br /><span style="font-family: &quot;arial&quot;;">Das Gewusel am Gleis 3 des Oberstdorfer Bahnhof konnte meine Freude nicht trüben.</span><br /><span style="font-family: &quot;arial&quot;;">Schon hier genoss ich die frische Luft, mit der sich meine Lungen füllten.</span><br /><span style="font-family: &quot;arial&quot;;">Jauchzet, ihr <a href="http://www.spektrum.de/lexikon/biologie/alveole/2576" rel="nofollow" target="_blank"><span style="color: magenta;">Alveolen</span></a>, frohlocket, ihr <a href="http://www.spektrum.de/lexikon/biologie-kompakt/erythrocyten/3851" rel="nofollow" target="_blank"><span style="color: magenta;">Erythrocyten</span></a>!</span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Letztes Jahr war ich als Single&nbsp;allein im Allgäu unterwegs. </span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Wandern, Wellness, radeln, alles sehr erholsam, aber alles auch ein bisschen...na, allein eben. </span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Der Karl hatte in Füssen versucht, mit mir&nbsp;<a href="http://www.neuesvonfraumeyer.de/2016/08/allein-fast-allein-vom-kloster-in-die.html" rel="nofollow" target="_blank"><span style="color: magenta;">anzubändeln</span></a>. Ohne Erfolg.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">In diesem Sommer hatte ich eine Begleitung dabei.</span><br /><span style="font-family: &quot;arial&quot;;">Sogar eine männliche.</span><br /><span style="font-family: &quot;arial&quot;;">Sogar eine, die genauso gerne wandert und frische Luft atmet&nbsp;wie ich.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-1gvdoh4Jeus/WXC2bnhZ8sI/AAAAAAAABwo/c6cfTGh6Qh8rfY5y6XT-2Mq9TEpzcTurACPcBGAYYCw/s1600/Wandern%2Bmit%2BDirk.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="465" data-original-width="693" height="214" src="https://3.bp.blogspot.com/-1gvdoh4Jeus/WXC2bnhZ8sI/AAAAAAAABwo/c6cfTGh6Qh8rfY5y6XT-2Mq9TEpzcTurACPcBGAYYCw/s320/Wandern%2Bmit%2BDirk.png" width="320" /></a></div><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Niemals würde ich völlig unvorbereitet einen Aktivurlaub antreten. Eine Woche mit fünf möglichen Wandertagen musste gut durchdacht sein. Mein Bruder schenkte mir zum Geburtstag den <a href="https://www.rother.de/rother%20wanderbuch-leichte%20wanderungen%20allg%E4u-3088.htm" rel="nofollow" target="_blank"><span style="color: magenta;">Rother Wanderführer Leichte Wanderungen - Genusstouren im Allgäu, Kleinwalsertal und Tannheimer Tal</span></a>. Darin blätterte ich und schaute, welche Routen abwechslungsreich und mit meiner Kondition wanderbar erschienen. Bezüglich der Kondition meines mitgereisten Naturburschen und ehemaligen Pfadfinders machte ich mir keine Sorgen.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Sorgen machte ich mir nur ein wenig um das Wetter. Die ersten beiden Tage regnete es.</span><br /><span style="font-family: &quot;arial&quot;;">Aber&nbsp;da wir&nbsp;ohnehin nass wurden, gingen wir auch gleich die Breitachklamm hoch, wo der Fluss toste und die Wasserfälle niederprasselten.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-kE9suGoI_GM/WXIadsXbuMI/AAAAAAAABxo/EyWI0zQmSyoU8_2L_Lq-4UOMOs8vd1EpgCLcBGAs/s1600/Breitachklamm%2B3.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="540" data-original-width="960" height="225" src="https://3.bp.blogspot.com/-kE9suGoI_GM/WXIadsXbuMI/AAAAAAAABxo/EyWI0zQmSyoU8_2L_Lq-4UOMOs8vd1EpgCLcBGAs/s400/Breitachklamm%2B3.jpg" width="400" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-3eLDLa0Zois/WXIam1r454I/AAAAAAAABxs/ZaMjXI1DRcMAOwLM7-d0VkN84I2D4crEACLcBGAs/s1600/Oberstdorf%2B10.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="800" data-original-width="450" height="400" src="https://3.bp.blogspot.com/-3eLDLa0Zois/WXIam1r454I/AAAAAAAABxs/ZaMjXI1DRcMAOwLM7-d0VkN84I2D4crEACLcBGAs/s400/Oberstdorf%2B10.jpg" width="225" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-ZAeOqaJVR3E/WXIaXsQXbuI/AAAAAAAABxg/IOV2_luoU8okA0KBaN5xMuQTf6WTLkP7wCEwYBhgL/s1600/Breitachklamm%2B1.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="540" data-original-width="960" height="225" src="https://4.bp.blogspot.com/-ZAeOqaJVR3E/WXIaXsQXbuI/AAAAAAAABxg/IOV2_luoU8okA0KBaN5xMuQTf6WTLkP7wCEwYBhgL/s400/Breitachklamm%2B1.jpg" width="400" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-icJ7Z4r35JY/WXIaaC_9sNI/AAAAAAAABxk/otvowUX91U8qAJtitHRFJ3ntqtTNGan6QCEwYBhgL/s1600/Breitachklamm%2B2.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="540" data-original-width="960" height="225" src="https://2.bp.blogspot.com/-icJ7Z4r35JY/WXIaaC_9sNI/AAAAAAAABxk/otvowUX91U8qAJtitHRFJ3ntqtTNGan6QCEwYBhgL/s400/Breitachklamm%2B2.jpg" width="400" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><span style="font-family: &quot;arial&quot;;">Zwei Tage später scheint die Sonne.</span><br /><br /><span style="font-family: &quot;arial&quot;;">"Entschuldigung, geht es hier zum Engeratsgundsee?" fragt mein Freund eine agile&nbsp;Seniorin, deren faltige Bräune auf viele Outdoor-Aktivitäten hindeutet und die mit ihren Wanderstöcken an uns vorbeiziehen will. </span><br /><span style="font-family: &quot;arial&quot;;">Ich habe meine Stöcke heute Morgen vergessen. Ob die mir auf diesem Wanderweg geholfen hätten, ist fraglich. Es geht seit Stunden über&nbsp;Geröll und&nbsp;Schneefelder, was ich anfangs gern als sportliche Herausforderung annahm.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-GOKtuq5moAs/WXC3WgVt6sI/AAAAAAAABxY/AXxJGxA8Rjwrtf90wkpBdVSJ2mpQj3l_ACPcBGAYYCw/s1600/Oberstdorf%2B5.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="450" data-original-width="800" height="225" src="https://4.bp.blogspot.com/-GOKtuq5moAs/WXC3WgVt6sI/AAAAAAAABxY/AXxJGxA8Rjwrtf90wkpBdVSJ2mpQj3l_ACPcBGAYYCw/s400/Oberstdorf%2B5.jpg" width="400" /></a></div><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">"Das geht in die Richtung", sagt die Wanderin im Vorbeigehen, "dauert&nbsp;ungefähr zwei Stunden. Wenn´s ihr noch die Bahn ins Tal erwischen wollt, müsst´s ihr aber langsam zurück."</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Waaaaas? Ich möchte weinen. </span><br /><br /><span style="font-family: &quot;arial&quot;;">Wegen der Seen sind wir eigentlich hier oben, ein Panoramaweg wurde vom Wanderbuch und dem Internet versprochen, traumhafte Ausblicke (stimmt!) auf vierhundert Gipfel (wir haben es nicht nachgezählt, aber es waren sehr viele), leicht zu meistern (naja...). Ich bin mir gar nicht sicher, ob dieser Weg Nr. 6 ab Nebelhornstation Höfatsblick überhaupt der Weg ist, den ich ausgewählt hatte. Wenn er es ist, muss ich meine Interpretation von "auch für ungeübte Wanderer mit einer gewissen Trittsicherheit und Höhentauglichkeit" überdenken. </span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Wenn er es nicht ist, habe ich mich total vertan. In beiden Fällen kann ich meinen Wander- und Lebensgefährten nicht verantwortlich machen. Blöd.</span><br /><span style="font-family: &quot;arial&quot;;">Nachdem wir uns verlaufen haben und der Nebelhorngipfel fast schon zum Greifen nah ist, kehren wir um und orientieren uns neu. <em>Hochplateau Koblat</em> steht auf einem Schild. Da konnte der Koblatsee doch nicht weit sein. Weg Nr. 6 setzt alpine Erfahrung und Ausrüstung voraus, dies steht widerum auf einem Schild einer Liftstation.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-duo8lmjcjzI/WXIpDz03kDI/AAAAAAAABx8/7nT29RxVbwwTHx97Iq3J8l001NxscqhHACLcBGAs/s1600/Hochplateau.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="540" data-original-width="960" height="225" src="https://4.bp.blogspot.com/-duo8lmjcjzI/WXIpDz03kDI/AAAAAAAABx8/7nT29RxVbwwTHx97Iq3J8l001NxscqhHACLcBGAs/s400/Hochplateau.jpg" width="400" /></a></div><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-fRHp2KqU6YM/WXC3NmbvNzI/AAAAAAAABxY/Xxe6QuQOa4oprHspVC1HbmHlE-dqnOmMwCPcBGAYYCw/s1600/Oberstdorf%2B3.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="450" data-original-width="800" height="225" src="https://2.bp.blogspot.com/-fRHp2KqU6YM/WXC3NmbvNzI/AAAAAAAABxY/Xxe6QuQOa4oprHspVC1HbmHlE-dqnOmMwCPcBGAYYCw/s400/Oberstdorf%2B3.jpg" width="400" /></a></div><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-IA764kf4uME/WXC3e8xbNiI/AAAAAAAABxY/fMG4OsNu1QYgnKOSm-2gVwRA6UXXM9GBgCPcBGAYYCw/s1600/Oberstdorf%2B7.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="450" data-original-width="800" height="225" src="https://1.bp.blogspot.com/-IA764kf4uME/WXC3e8xbNiI/AAAAAAAABxY/fMG4OsNu1QYgnKOSm-2gVwRA6UXXM9GBgCPcBGAYYCw/s400/Oberstdorf%2B7.jpg" width="400" /></a><span style="font-family: &quot;arial&quot;;"></span></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: justify;"><span style="font-family: &quot;arial&quot;;">Unsere bisherigen Wanderungen durch die Elfringhäuser Schweiz, den Grafenberger Wald und das Münsterland&nbsp;waren offenbar nicht alpin genug. Wanderschuhe und Rucksack sind wohl&nbsp;keine ausreichende alpine Ausrüstung. Es fehlen die Stöcke und Handschuhe, die unsere Hände beim Hochziehen an oder Abstützen auf den Felsen&nbsp;schützen könnten. </span></div><div class="separator" style="clear: both; text-align: justify;"><span style="font-family: &quot;arial&quot;;">Und mir fehlte definitiv ein wenig Kondition. Die kann man nirgendwo kaufen.</span></div><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Meine Panik, die letzte Bahn ins Tal nicht zu erreichen,&nbsp;lässt mich kurz erstarren, dann treibt sie mich zur Eile an.&nbsp;Wir gehen, nein, steigen denselben Weg zurück. Der traumhafte Ausblick auf die vierhundert Gipfel&nbsp;ist mir inzwischen egal. Der Gipfel&nbsp;ist diese Wanderung!</span><span style="font-family: &quot;arial&quot;;"> Schweiß läuft aus allen meinen&nbsp;Poren. Das Herz schlägt schneller. Die Sonne verschwindet hinter den Wolken. Ich&nbsp;fluche ziemlich laut, was meinen Weggefährten veranlasst, mich zwischendurch zu beschwichtigen. "Mach dir keinen Kopf, da sind noch einige Leute hinter uns, die wollen doch sicher auch zur Bahn."</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Der Vater mit seiner Tochter zum Beispiel.</span><br /><span style="font-family: &quot;arial&quot;;">Das junge Pärchen.</span><br /><span style="font-family: &quot;arial&quot;;">Die circa achtzigjährige Dame, die ein bisschen schwer atmet, um dann&nbsp;in einen&nbsp;munteren gemsenartigen Aufstieg zu wechseln.</span><br /><span style="font-family: &quot;arial&quot;;">Alle überholen uns behände.</span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Ich schnaufe mit hochrotem Kopf. Und schäme mich, dass ich schnaufe. Was&nbsp;ist denn&nbsp;los mit mir? Der Sherpa an meiner Seite lächelt immer noch und&nbsp;ist die Ruhe selbst, während ich mich schon von einem Heli abtransportiert zu drohen glaube. Wie immer, wenn meine Kräfte nachlassen, werde ich pampig. "Jaaaa, alle noch hinter uns. Vor allem die Omma, die gerade noch hinter uns&nbsp;lief und jetzt der rote Punkt da oben auf dem Kamm ist. Warum ist die so fit? Ist wahrscheinlich früher diesen Weg zur Schule gegangen. Barfuß." </span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Ich grummele den Rest des Weges vor mich hin, bis irgendwann die Station Höfatsblick in der Ferne zu sehen ist. Dort geht dann auch der Weg mit der Gondel ins Tal. </span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Nachdem wir eine Stunde in der Warteschlange anstehen.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Im Tal gibt es Weißbier, Schupfnudeln und Kraut zur Belohnung.</span><br /><span style="font-family: &quot;arial&quot;;">Neue Knie gibt es leider nicht im Angebot&nbsp;in der <em>Alten Sennküche</em>.<em>&nbsp;</em></span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Meine Laune bessert&nbsp;sich dennoch schnell. </span><span style="font-family: &quot;arial&quot;;">Dieser Weg da oben unter dem Nebelhorn war kein leichter und hat mich&nbsp;an meine Grenzen gebracht, war jedoch - im Nachhinein betrachtet - eine meiner schönsten Urlaubserlebnisse überhaupt.&nbsp;</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Ich glaub´, ´ne Gemse werd´ ich nie.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Aber ich gebe ein prima Murmeltier ab.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-Nx_KIsE1dOc/WXC3baR9ggI/AAAAAAAABxY/7ZbrMFC8t70f4SDBhY6TAGOuq8b8KqIVgCPcBGAYYCw/s1600/Oberstdorf%2B6.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="450" data-original-width="800" height="225" src="https://4.bp.blogspot.com/-Nx_KIsE1dOc/WXC3baR9ggI/AAAAAAAABxY/7ZbrMFC8t70f4SDBhY6TAGOuq8b8KqIVgCPcBGAYYCw/s400/Oberstdorf%2B6.jpg" width="400" /></a></div><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Fotos ©&nbsp;Britta Meyer</span><br /><br /><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div><br /><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: center;"><br /></div>
 
 		 -->
 					</div>
@@ -146,7 +226,7 @@ SyndContentImpl.value=<div class="separator" style="clear: both; text-align: cen
 	</li>
 	<li class="anriss">
 		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		<a href="http://blog.scottlowe.org/" target="_blank">Scott’s Weblog</a>
 		</div>
 		<div>
 			<h3>Ten Years of Spousetivities</h3>
@@ -155,7 +235,7 @@ SyndContentImpl.value=<div class="separator" style="clear: both; text-align: cen
 						A long time ago in a galaxy far, far away (OK, so it was 2008 and it was here in this galaxy—on this very planet, in fact), I posted an article about bringing your spouse to VMworld. That one post sparked a fire that, kindled by my wife’s passion and creativity, culminates this year in ten years of Spousetivities! Yes, Spousetivities is back at VMworld (both US and Europe) this year, and Crystal has some pretty nice events planned for this year’s participants.
 					</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/-hsTV3pqH-c/" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/zcA8C_0KzyA/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 	<li class="anriss">
@@ -179,7 +259,7 @@ SyndContentImpl.value=<br /><div class="separator" style="clear: both; text-alig
 	</li>
 	<li class="anriss">
 		<div class="collectionhref">
-		<a href="http://blog.scottlowe.org//" target="_blank">Scott’s Weblog</a>
+		<a href="http://blog.scottlowe.org/" target="_blank">Scott’s Weblog</a>
 		</div>
 		<div>
 			<h3>The Linux Migration: July 2017 Progress Report</h3>
@@ -188,83 +268,7 @@ SyndContentImpl.value=<br /><div class="separator" style="clear: both; text-alig
 						I’m now roughly six months into using Linux as my primary laptop OS, and it’s been a few months since my last progress report. If you’re just now picking up this thread, I encourage you to go back and read my initial progress report, see which Linux distribution I selected, or check how I chose to handle corporate collaboration (see here, here, and here). In this post, I’ll share where things currently stand.
 					</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Q9Yuyr7gr74/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.jroller.com/ethdsy/" target="_blank">Scratch Where It's Itching</a>
-		</div>
-		<div>
-			<h3>TreeMap misuse</h3>
-		</div>
-		<div class="collectiontext">
-						TreeMap is a very practical class when you want your Map to keep its keys ordered. Unless you don't know how it works. <p>
-I noticed this code recently in one of our projects:
-<pre>
-  <font color='#7f0055'><strong>private</strong></font> Map&lt;Double, Limit&gt; limits = <font color='#7f0055'><strong>new</strong></font> TreeMap&lt;&gt;();
-</pre><p>
-Nothing special about the declaration. Just a standard TreeMap ordering on its Double key. There were other similar declarations next to this one where the maps were used correctly. So I guess our developer felt he could reuse the same pattern. Except that his map was not ordered quite the way he needed it to. So when retrieving values, he would do that:
-<pre>
-  List&lt;Entry&lt;Double, Limit&gt;&gt; limitList = <font color='#7f0055'><strong>new</strong></font> ArrayList&lt;&gt;(limits.entrySet());
-  Collections.sort(limitList, LIMIT_DESC_COMPARATOR);
-  generateExecs(limitList);
-</pre><p>
-At first, I thought that the comparator would do something clever by combining key and value comparison.
-<pre>
-  <font color='#7f0055'><strong>private static final</strong></font> Comparator&lt;Entry&lt;Double, Limit&gt;&gt; LIMIT_DESC_COMPARATOR = <font color='#7f0055'><strong>new</strong></font> Comparator&lt;&gt;(){
-    @Override
-    <font color='#7f0055'><strong>public int</strong></font> compare(Entry&lt;Double, Limit&gt; o1, Entry&lt;Double, Limit&gt; o2) {
-      <font color='#7f0055'><strong>if</strong></font> (o1.getKey() == 0)
-        <font color='#7f0055'><strong>return</strong></font> -1;
-      <font color='#7f0055'><strong>if</strong></font> (o2.getKey() == 0)
-        <font color='#7f0055'><strong>return</strong></font> 1;
-      <font color='#7f0055'><strong>return</strong></font> o2.getKey().compareTo(o1.getKey());
-    }
-  }
-</pre><p>
-No luck with that. It uses only the key. And do you see that method generateExecs, where you pass a list of entries? Guess what, it uses only the values. All of this strange code comes from one problem: the developer did not know that you could pass a comparator directly into the TreeMap constructor for immediate ordering in the correct order.
-					</div>
-		<div class="collectionhref">
-		<a href="http://www.jroller.com/ethdsy/entry/treemap_misuse" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.jroller.com/ethdsy/" target="_blank">Scratch Where It's Itching</a>
-		</div>
-		<div>
-			<h3>TreeMap misuse</h3>
-		</div>
-		<div class="collectiontext">
-						TreeMap is a very practical class when you want your Map to keep its keys ordered. Unless you don't know how it works. <p>
-I noticed this code recently in one of our projects:
-<pre>
-  <font color='#7f0055'><strong>private</strong></font> Map&lt;Double, Limit&gt; limits = <font color='#7f0055'><strong>new</strong></font> TreeMap&lt;&gt;();
-</pre><p>
-Nothing special about the declaration. Just a standard TreeMap ordering on its Double key. There were other similar declarations next to this one where the maps were used correctly. So I guess our developer felt he could reuse the same pattern. Except that his map was not ordered quite the way he needed it to. So when retrieving values, he would do that:
-<pre>
-  List&lt;Entry&lt;Double, Limit&gt;&gt; limitList = <font color='#7f0055'><strong>new</strong></font> ArrayList&lt;&gt;(limits.entrySet());
-  Collections.sort(limitList, LIMIT_DESC_COMPARATOR);
-  generateExecs(limitList);
-</pre><p>
-At first, I thought that the comparator would do something clever by combining key and value comparison.
-<pre>
-  <font color='#7f0055'><strong>private static final</strong></font> Comparator&lt;Entry&lt;Double, Limit&gt;&gt; LIMIT_DESC_COMPARATOR = <font color='#7f0055'><strong>new</strong></font> Comparator&lt;&gt;(){
-    @Override
-    <font color='#7f0055'><strong>public int</strong></font> compare(Entry&lt;Double, Limit&gt; o1, Entry&lt;Double, Limit&gt; o2) {
-      <font color='#7f0055'><strong>if</strong></font> (o1.getKey() == 0)
-        <font color='#7f0055'><strong>return</strong></font> -1;
-      <font color='#7f0055'><strong>if</strong></font> (o2.getKey() == 0)
-        <font color='#7f0055'><strong>return</strong></font> 1;
-      <font color='#7f0055'><strong>return</strong></font> o2.getKey().compareTo(o1.getKey());
-    }
-  }
-</pre><p>
-No luck with that. It uses only the key. And do you see that method generateExecs, where you pass a list of entries? Guess what, it uses only the values. All of this strange code comes from one problem: the developer did not know that you could pass a comparator directly into the TreeMap constructor for immediate ordering in the correct order.
-					</div>
-		<div class="collectionhref">
-		<a href="http://www.jroller.com/ethdsy/entry/treemap_misuse" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/lmWb3PBw7mM/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 </ul>
@@ -274,39 +278,36 @@ No luck with that. It uses only the key. And do you see that method generateExec
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-		<a href="hillshading_server_openstreetmap_lxc_ii.html#55">
-		<div class="date">23.07.2017</div>
-<h3>Hillshading-Server für Openstreetmap in LXC II</h3>
-  <div class="abstract">
-				<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-	  <p>Nachdem ich bereits den
-OpenStreetMap-Tile-Server
-aktualisiert habe, folgte nun der für die Höhen- (Relief-) Informationen.
-</p></div>   </a>
-</li>
-<li class="anriss">
-		<a href="tile_server_openstreetmap_lxc_ii.html#56">
-		<div class="date">23.07.2017</div>
-<h3>Tile-Server für Openstreetmap in LXC II</h3>
-  <div class="abstract">
-				<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-	  <p>Ich beschrieb vor einiger Zeit den Antrieb dafür,
-einen eigenen Tile-Server zu betreiben.
- Damals war als System Ubuntu 12.04 in LXC-Containern auf einem Ubuntu 13.04-Wirt zum Einsatz gekommen.
- Ich habe das System renoviert und auf Ubuntu 16.04 (Container und Wirt) angehoben
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="nixie_roehren_frei_waehlbarer_farbe.html">
-		<div class="date">23.07.2017</div>
-<h3>Nixie-Röhren mit frei wählbarer Farbe</h3>
+	  <a href="monte_carlo_dungeon.html">
+		<div class="date">30.07.2017</div>
+<h3>Monte Carlo im Dungeon</h3>
   <div class="abstract">
 			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Ich habe meine alte
-Komponente zur "retro"-Anzeige von Zahlenwerten
-überholt und ihr
-die Möglichkeit gegeben, verschiedene Farben darzustellen - damit könnte man zum Beispiel
-auf das Überschreiten von Schwellwerten reagieren...
+		  <p>Der von mir neulich vorgestellte
+Dungeon-Generator
+war nur ein Schritt auf dem Weg: Ich wollte meine Studentenzeit aufleben lassen und einen
+Simulator bauen, in dem ich Monte-Carlo-Lokalisierung ausprobieren konnte...
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="biometrie_willenserklaerung.html">
+		<div class="date">30.07.2017</div>
+<h3>Biometrie und Willenserklärung</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Ich freue mich ja immer wieder, wenn ich von neuen Ideen der Biometrie höre. Meistens haben die Leute,
+die so etwas verzapfen eine genauso enge technische Brille auf, wie ich bei anderen Themen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+		<a href="schnellere_mathematik_bit_schieben.html#55">
+		<div class="date">30.07.2017</div>
+<h3>Schnellere Mathematik durch Bit-Schieben</h3>
+  <div class="abstract">
+				<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+	  <p>Da ich meine Kollegen und Freunde bei jeder passenden und unpassenden Gelegenheit mit den absonderlichen 
+Experimenten nerve, die ich in meiner Jugend mit Computern und Programmieren veranstaltet habe,
+nuzte ich die Gelegenheit, die sich mir durch einen dazu gefundenen Link bietet...
 </p></div>   </a>
 </li>
 </ul>
