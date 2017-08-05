@@ -36,11 +36,6 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 
 package de.netsysit.model.tree;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import javax.swing.*;
-import javax.swing.tree.DefaultTreeModel;
-
 
 public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 {
@@ -70,19 +65,29 @@ public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 			this.treeModel=lazyParent.getTreeModel();
 		}
 	}
-	protected javax.swing.tree.DefaultTreeModel produceTreeModel()
+	public javax.swing.tree.DefaultTreeModel produceTreeModel()
 	{
-		return new javax.swing.tree.DefaultTreeModel(this);
+		javax.swing.tree.DefaultTreeModel rv=treeModel;
+		if(rv==null)
+		{
+			if (getParent() == null)
+			{
+				treeModel = new javax.swing.tree.DefaultTreeModel(this);
+				rv = treeModel;
+			}
+			else
+			{
+				if (LazyNode.class.isAssignableFrom(getParent().getClass()))
+				{
+					treeModel = ((LazyNode) getParent()).produceTreeModel();
+					rv=treeModel;
+				}
+			}
+		}
+		return rv;
 	}
 	public javax.swing.tree.DefaultTreeModel getTreeModel()
 	{
-		if(getParent()==null)
-		{
-			if(treeModel==null)
-			{
-				treeModel=produceTreeModel();
-			}
-		}
 		return treeModel;
 	}
 
