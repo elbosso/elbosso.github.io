@@ -37,6 +37,9 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 package de.netsysit.model.tree;
 
 
+import java.util.Arrays;
+import java.util.Vector;
+
 public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 {
 	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(LazyNode.class);
@@ -46,6 +49,7 @@ public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 	private java.lang.Class stopClass;
 	private javax.swing.tree.DefaultTreeModel treeModel;
 //	private javax.swing.JTree tree;
+	private java.lang.Runnable rble;
 
 	private LazyNode()
 	{
@@ -65,7 +69,7 @@ public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 			this.treeModel=lazyParent.getTreeModel();
 		}
 	}
-	public javax.swing.tree.DefaultTreeModel produceTreeModel()
+	protected javax.swing.tree.DefaultTreeModel produceTreeModel()
 	{
 		javax.swing.tree.DefaultTreeModel rv=treeModel;
 		if(rv==null)
@@ -146,11 +150,27 @@ public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 	{
 		return this.getClass()!=stopClass;
 	}
+
 	//Implementation of interface javax.swing.tree.TreeNode
 	public boolean isLeaf()
 	{
-		return (getAllowsChildren()==false)||getChildCount()<1;
+		boolean rv=getAllowsChildren()==false;
+		if(rv==false)
+		{
+			Boolean b = hasAtLeastOneChild();
+			if (b == null)
+				rv = getChildCount() < 1;
+			else
+				rv=b.booleanValue()==false;
+		}
+		return rv;
 	}
+
+	protected Boolean hasAtLeastOneChild()
+	{
+		return null;
+	}
+
 	//Implementation of interface javax.swing.tree.TreeNode
 	public java.util.Enumeration children()
 	{
@@ -172,30 +192,32 @@ public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 				}
 				else
 				{
-					children=new Object[0];
-					java.lang.Runnable rble=new java.lang.Runnable()
+//					children=new Object[0];
+					if(rble==null)
 					{
-						public void run()
+						rble = new java.lang.Runnable()
 						{
-							try
+							public void run()
 							{
-								children = findChildren();
-								if(children!=null)
+								try
 								{
-									for(Object child:children)
+									Object[] childs = findChildren();
+									if (childs != null)
 									{
-//										LazyNode.this.add((javax.swing.tree.MutableTreeNode)child);
-										treeModel.insertNodeInto((javax.swing.tree.MutableTreeNode)child,LazyNode.this,LazyNode.this.getChildCount());
+										for (Object child : childs)
+										{
+											//										LazyNode.this.add((javax.swing.tree.MutableTreeNode)child);
+											treeModel.insertNodeInto((javax.swing.tree.MutableTreeNode) child, LazyNode.this, LazyNode.this.getChildCount());
+										}
 									}
+								} catch (java.lang.Throwable t)
+								{
+t.printStackTrace();
 								}
 							}
-							catch(java.lang.Throwable t)
-							{
-
-							}
-						}
-					};
-					new java.lang.Thread(rble).start();
+						};
+						new java.lang.Thread(rble).start();
+					}
 				}
 			}
 			catch (java.lang.Exception exp)
@@ -223,7 +245,7 @@ public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 	public void remove(int index)
 	{
 	}
-	public void insert(javax.swing.tree.MutableTreeNode node, int index)
+	public void insert(javax.swing.tree.MutableTreeNode newChild, int index)
 	{
 	}
 	public java.lang.String getPathAsString()
