@@ -113,6 +113,506 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="https://danluu.com/atom/index.xml" target="_blank">Dan Luu</a>
+		</div>
+		<div>
+			<h3>A history of branch prediction from 1500000 BC to 1995</h3>
+		</div>
+		<div class="collectiontext">
+						
+
+<p><em>This is a pseudo-transcript for a talk on branch prediction given at localhost, a new talk series organized by <a href="https://www.recurse.com/scout/click?t=b504af89e87b77920c9b60b2a1f6d5e8">RC</a>. This talk was given at Two Sigma Ventures on 8/22/2017.</em></p>
+
+<p>How many of you use branches in your code? Could you please raise your hand if you use if statements or pattern matching?</p>
+
+<p><code>Most of the audience raises their hands</code></p>
+
+<p>I won’t ask you to raise your hands for this next part, but my guess is that if I asked, how many of you feel like you have a good understanding of what your CPU does when it executes a branch and what the performance implications are, and how many of you feel like you could understand a modern paper on branch prediction, fewer people would raise their hands.</p>
+
+<p>The purpose of this talk is to explain how and why CPUs do “branch prediction” and then explain enough about classic branch prediction algorithms that you could read a modern paper on branch prediction and basically know what’s going on.</p>
+
+<p>Before we talk about branch prediction, let’s talk about why CPUs do branch prediction. To do that, we’ll need to know a bit about how CPUs work.</p>
+
+<p>For the purposes of this talk, you can think of your computer as a CPU plus some memory. The instructions live in memory and the CPU executes a sequence of instructions from memory, where instructions are things like “add two numbers”, “move a chunk of data from memory to the processor”. Normally, after executing one instruction, the CPU will execute the instruction that’s at the next sequential address. However, there are instructions called “branches” that let you change the address next instruction comes from.</p>
+
+<p>Here’s an abstract diagram of a CPU executing some instructions. The x-axis is time and the y-axis distinguishes different instructions.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/1-pipeline.png" alt="Instructions executing sequentially" height="130" width="1262"></p>
+
+<p>Here, we execute instruction <code>A</code>, followed by instruction <code>B</code>, followed by instruction <code>C</code>, followed by instruction <code>D</code>.</p>
+
+<p>One way you might design a CPU is to have the CPU do all of the work for one instruction, then move on to the next instruction, do all of the work for the next instruction, and so on. There’s nothing wrong with this; a lot of older CPUs did this, and some modern very low-cost CPUs still do this. But if you want to make a faster CPU, you might make a CPU that works like an assembly line. That is, you break the CPU up into two parts, so that half the CPU can do the “front half” of the work for an instruction while half the CPU works on the “back half” of the work for an instruction, like an assembly line. This is typically called a pipelined CPU.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/2-pipeline.png" alt="Instructions with overlapping execution" height="275" width="1263"></p>
+
+<p>If you do this, the execution might look something like the above. After the first half of instruction A is complete, the CPU can work on the second half of instruction A while the first half of instruction B runs. And when the second half of A finishes, the CPU can start on both the second half of B and the first half of C. In this diagram, you can see that the pipelined CPU can execute twice as many instructions per unit time as the unpipelined CPU above.</p>
+
+<p>There’s no reason that a CPU can only be broken up into two parts. We could break the CPU into three parts, and get a 3x speedup, or four parts and get a 4x speedup. This isn’t strictly true, and we generally get less than a 3x speedup for a three-stage pipeline or 4x speedup for a 4-stage pipeline because there’s overhead in breaking the CPU up into more parts and having a deeper pipeline.</p>
+
+<p>One source of overhead is how branches are handled. One of the first things the CPU has to do for an instruction is to get the instruction; to do that, it has to know where the instruction is. For example, consider the following code:</p>
+
+<pre><code>if (x == 0) {
+  // Do stuff
+} else {
+  // Do other stuff (things)
+}
+  // Whatever happens later
+</code></pre>
+
+<p>This might turn into assembly that looks something like</p>
+
+<pre><code>branch_if_not_equal x, 0, else_label
+// Do stuff
+goto end_label
+else_label:
+// Do things
+end_label:
+// whatever happens later
+</code></pre>
+
+<p>In this example, we compare <code>x</code> to 0. <code>if_not_equal</code>, then we branch to <code>else_label</code> and execute the code in the else block. If that comparison fails (i.e., if <code>x</code> is 0), we fall through, execute the code in the <code>if</code> block, and then jump to <code>end_label</code> in order to avoid executing the code in <code>else</code> block.</p>
+
+<p>The particular sequence of instructions that’s problematic for pipelining is</p>
+
+<pre><code>branch_if_not_equal x, 0, else_label
+???
+</code></pre>
+
+<p>The CPU doesn’t know if this is going to be</p>
+
+<pre><code>branch_if_not_equal x, 0, else_label
+// Do stuff
+</code></pre>
+
+<p>or</p>
+
+<pre><code>branch_if_not_equal x, 0, else_label
+// Do things
+</code></pre>
+
+<p>until the branch has finished (or nearly finished) executing. Since one of the first things the CPU needs to do for an instruction is to get the instruction from memory, and we don’t know which instruction <code>???</code> is going to be, we can’t even start on <code>???</code> until the previous instruction is nearly finished.</p>
+
+<p>Earlier, when we said that we’d get a 3x speedup for a 3-stage pipeline or a 20x speedup for a 20-stage pipeline, that assumed that you could start a new instruction every cycle, but in this case the two instructions are nearly serialized.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/3-branch-stall.png" alt="non-overlapping execution due to branch stall" height="72" width="640"></p>
+
+<p>One way around this problem is to use branch prediction. When a branch shows up, the CPU will guess if the branch was taken or not taken.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/4-branch-speculation.png" alt="speculating about a branch result" height="69" width="326"></p>
+
+<p>In this case, the CPU predicts that the branch won’t be taken and starts executing the first half of <code>stuff</code> while it’s executing the second half of the branch. If the prediction is correct, the CPU will execute the second half of <code>stuff</code> and can start another instruction while it’s executing the second half of <code>stuff</code>, like we saw in the first pipeline diagram.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/5-branch-correct-prediction.png" alt="overlapped execution after a correct prediction" height="72" width="482"></p>
+
+<p>If the prediction is wrong, when the branch finishes executing, the CPU will throw away the result from <code>stuff.1</code> and start executing the correct instructions instead of the wrong instructions. Since we would’ve stalled the processor and not executed any instructions if we didn’t have branch prediction, we’re no worse off than we would’ve been had we not made a prediction (at least at the level of detail we’re looking at).</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/6-branch-misprediction.png" alt="aborted prediction" height="101" width="640"></p>
+
+<p>What’s the performance impact of doing this? To make an estimate, we’ll need a performance model and a workload. For the purposes of this talk, our cartoon model of a CPU will be a pipelined CPU where non-branches take an average of one instruction per clock, unpredicted or mispredicted branches take 20 cycles, and correctly predicted branches take one cycle.</p>
+
+<p>If we look at the most commonly used benchmark of “workstation” integer workloads, SPECint, the composition is maybe 20% branches, and 80% other operations. Without branch prediction, we then expect the “average” instruction to take <code>branch_pct * 1 + non_branch_pct * 20 = 0.8 * 1 + 0.2 * 20 = 0.8 + 4 = 4.8 cycles</code>. With perfect, 100% accurate, branch prediction, we’d expect the average instruction to take 0.8 * 1 + 0.2 * 1 = 1 cycle, a 4.8x speedup! Another way to look at it is that if we have a pipeline with a 20-cycle branch misprediction penalty, we have nearly a 5x overhead from our ideal pipelining speedup just from branches alone.</p>
+
+<p>Let’s see what we can do about this. We’ll start with the most naive things someone might do and work our way up to something better.</p>
+
+<h3 id="predict-taken">Predict taken</h3>
+
+<p>Instead of predicting randomly, we could look at all branches in the execution of all programs. If we do this, we’ll see that taken and not not-taken branches aren’t exactly balanced &ndash; there are substantially more taken branches than not-taken branches. One reason for this is that loop branches are often taken.</p>
+
+<p>If we predict that every branch is taken, we might get 70% accuracy, which means we’ll pay the the misprediction cost for 30% of branches, making the cost of of an average instruction <code>(0.8 + 0.7 * 0.2) * 1 + 0.3 * 0.2 * 20  = 0.94 + 1.2. = 2.14</code>. If we compare always predicting taken to no prediction and perfect prediction, always predicting taken gets a large fraction of the benefit of perfect prediction despite being a very simple algorithm.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/7-always-taken-cpi.png" alt="2.14 cycles per instruction" height="156" width="1147"></p>
+
+<h3 id="backwards-taken-forwards-not-taken-btfnt">Backwards taken forwards not taken (BTFNT)</h3>
+
+<p>Predicting branches as taken works well for loops, but not so great for all branches. If we look at whether or not branches are taken based on whether or not the branch is forward (skips over code) or backwards (goes back to previous code), we can see that backwards branches are taken more often than forward branches, so we could try a predictor which predicts that backward branches are taken and forward branches aren’t taken (BTFNT). If we implement this scheme  in hardware, compiler writers will conspire with us to arrange code such that branches the compiler thinks will be taken will be backwards branches and branches the compiler thinks won’t be taken will be forward branches.</p>
+
+<p>If we do this, we might get something like 80% prediction accuracy, making our cost function  <code>(0.8 + 0.8 * 0.2) * 1 + 0.2 * 0.2 * 20  = 0.96 + 0.8 = 1.76</code> cycles per instruction.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/8-btfnt-cpi.png" alt="1.76 cycles per instruction" height="157" width="1147"></p>
+
+<h4 id="used-by">Used by</h4>
+
+<ul>
+<li>PPC 601(1993): also uses compiler generated branch hints</li>
+<li>PPC 603</li>
+</ul>
+
+<h3 id="one-bit">One-bit</h3>
+
+<p>So far, we’ve look at schemes that don’t store any state, i.e., schemes where the prediction ignores the program’s execution history. These are called <em>static</em> branch prediction schemes in the literature. These schemes have the advantage of being simple but they have the disadvantage of being bad at predicting branches whose behavior change over time. If you want an example of a branch whose behavior changes over time, you might imagine some code like</p>
+
+<pre><code>if (flag) {
+  // things
+  }
+</code></pre>
+
+<p>Over the course of the program, we might have one phase of the program where the flag is set and the branch is taken and another phase of the program where flag isn’t set and the branch isn’t taken. There’s no way for a static scheme to make good predictions for a branch like that, so let’s consider <em>dynamic</em> branch prediction schemes, where the prediction can change based on the program history.</p>
+
+<p>One of the simplest things we might do is to make a prediction based on the last result of the branch, i.e., we predict taken if the branch was taken last time and we predict not taken if the branch wasn’t taken last time.</p>
+
+<p>Since having one bit for every possible branch is too many bits to feasibly store, we’ll keep a table of some number of branches we’ve seen and their last results. For this talk, let’s store <code>not taken</code> as <code>0</code> and <code>taken</code> as <code>1</code>.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/9-1bit.png" alt="prediction table with 1-bit entries indexed by low bits of branch address" height="420" width="1358"></p>
+
+<p>In this case, just to make things fit on a diagram, we have a 64-entry table, which mean that we can index into the table with 6 bits, so we index into the table with the low 6 bits of the branch address. After we execute a branch, we update the entry in the prediction table (highlighted below) and the next time the branch is executed again, we index into the same entry and use the updated value for the prediction.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/10-1bit-update.png" alt="indexed entry changes on update" height="420" width="1358"></p>
+
+<p>It’s possible that we’ll observe aliasing and two branches in two different locations will map to the same location. This isn’t ideal, but there’s a tradeoff between table speed &amp; cost vs. size that effectively limits the size of the table.</p>
+
+<p>If we use a one-bit scheme, we might get 85% accuracy, a cost of <code>(0.8 + 0.85 * 0.2) * 1 + 0.15 * 0.2 * 20  = 0.97 + 0.6 = 1.57</code> cycles per instruction.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/11-1bit-cpi.png" alt="1.57 cycles per instruction" height="201" width="1147"></p>
+
+<h4 id="used-by-1">Used by</h4>
+
+<ul>
+<li>DEC EV4 (1992)</li>
+<li>MIPS R8000 (1994)</li>
+</ul>
+
+<h3 id="two-bit-https-courses-cs-washington-edu-courses-cse590g-04sp-smith-1981-a-study-of-branch-prediction-strategies-pdf"><a href="https://courses.cs.washington.edu/courses/cse590g/04sp/Smith-1981-A-Study-of-Branch-Prediction-Strategies.pdf">Two-bit</a></h3>
+
+<p>A one-bit scheme works fine for patterns like <code>TTTTTTTT…</code> or <code>NNNNNNN…</code> but will have a misprediction for a stream of branches that’s mostly taken but has one branch that’s not taken, <code>...TTTNTTT...</code> This can be fixed by adding second bit for each address and implementing a saturating counter. Let’s arbitrarily say that we count down when a branch is not taken and count up when it’s taken. If we look at the binary values, we’ll then end up with:</p>
+
+<pre><code>00: predict Not
+01: predict Not
+10: predict Taken
+11: predict Taken
+</code></pre>
+
+<p>The “saturating” part of saturating counter means that if we count down from <code>00</code>, instead of underflowing, we stay at <code>00</code>, and similar for counting up from <code>11</code> staying at <code>11</code>. This scheme is identical to the one-bit scheme, except that each entry in the prediction table is two bits instead of one bit.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/12-2bit.png" alt="same as 1-bit, except that the table has 2 bits" height="481" width="1371"></p>
+
+<p>Compared to a one-bit scheme, a two-bit scheme can have half as many entries at the same size/cost (if we only consider the cost of storage and ignore the cost of the logic for the saturating counter), but even so, for most reasonable table sizes a two-bit scheme provides better accuracy.</p>
+
+<p>Despite being simple, this works quite well, and we might expect to see something like 90% accuracy for a two bit predictor, which gives us a cost of 1.38 cycles per instruction.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/13-2bit-cpi.png" alt="1.38 cycles per instruction" height="234" width="1147"></p>
+
+<p>One natural thing to do would be to generalize the scheme to an n-bit saturating counter, but it turns out that adding more bits has a relatively small effect on accuracy. We haven’t really discussed the cost of the branch predictor, but going from 2 bits to 3 bits per branch increases the table size by 1.5x for little gain, which makes it not worth the cost in most cases. The simplest and most common things that we won’t predict well with a two-bit scheme are patterns like <code>NTNTNTNTNT...</code> or <code>NNTNNTNNT…</code>, but going to n-bits won’t let us predict those patterns well either!</p>
+
+<h4 id="used-by-2">Used by</h4>
+
+<ul>
+<li>LLNL S-1 (1977)</li>
+<li>CDC Cyber? (early 80s)</li>
+<li>Burroughs B4900 (1982): state stored in instruction stream; hardware would over-write instruction to update branch state</li>
+<li>Intel Pentium (1993)</li>
+<li>PPC 604 (1994)</li>
+<li>DEC EV45 (1993)</li>
+<li>DEC EV5 (1995)</li>
+<li>PA 8000 (1996): actually implemented as a 3-bit shift register with majority vote</li>
+</ul>
+
+<h3 id="two-level-adaptive-global-http-www-seas-upenn-edu-cis501-papers-two-level-branch-pred-pdf-1991"><a href="http://www.seas.upenn.edu/~cis501/papers/two-level-branch-pred.pdf">Two-level adaptive, global</a> (1991)</h3>
+
+<p>If we think about code like</p>
+
+<pre><code>for (int i = 0; i &lt; 3; ++i) {
+  // code here.
+  }
+</code></pre>
+
+<p>That code will produce a pattern of branches like <code>TTTNTTTNTTTN...</code>.</p>
+
+<p>If we know the last three executions of the branch, we should be able to predict the next execution of the branch:</p>
+
+<pre><code>TTT:N
+TTN:T
+TNT:T
+NTT:T
+</code></pre>
+
+<p>The previous schemes we’ve considered use the branch address to index into a table that tells us if the branch is, according to recent history, more likely to be taken or not taken. That tells us which direction the branch is biased towards, but it can’t tell us that we’re in the middle of a repetitive pattern. To fix that, we’ll store the history of the most recent branches as well as a table of predictions.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/14-global.png" alt="Use global branch history and branch address to index into prediction table" height="481" width="1371"></p>
+
+<p>In this example, we concatenate 4 bits of branch history together with 2 bits of branch address to index into the prediction table. As before, the prediction comes from a 2-bit saturating counter. We don’t want to only use the branch history to index into our prediction table since, if we did that, any two branches with the same history would alias to the same table entry. In a real predictor, we’d probably have a larger table and use more bits of branch address, but in order to fit the table on a slide, we have an index that’s only 6 bits long.</p>
+
+<p>Below, we’ll see what gets updated when we execute a branch.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/15-global-update.png" alt="Update changes index because index uses bits from branch history" height="481" width="1371"></p>
+
+<p>The bolded parts are the parts that were updated. In this diagram, we shift new bits of branch history in from right to left, updating the branch history. Because the branch history is updated, the low bits of the index into the prediction table are updated, so the next time we take the same branch again, we’ll use a different entry in the table to make the prediction, unlike in previous schemes where the index is fixed by the branch address. The old entry’s value is updated so that the next time we take the same branch again with the same branch history, we’ll have the updated prediction.</p>
+
+<p>Since the history in this scheme is global, this will correctly predict patterns like <code>NTNTNTNT…</code> in inner loops, but may not always correct make predictions for higher-level branches because the history is global and will be contaminated with information from other branches. However, the tradeoff here is that keeping a global history is cheaper than keeping a table of local histories. Additionally, using a global history lets us correctly predict correlated branches. For example, we might have something like:</p>
+
+<pre><code>if x &gt; 0:
+  x -= 1
+if y &gt; 0:
+  y -= 1
+if x * y &gt; 0:
+  foo()
+</code></pre>
+
+<p>If either the first branch or the next branch isn’t taken, then the third branch definitely will not be taken.</p>
+
+<p>With this scheme, we might get 93% accuracy, giving us 1.27 cycles per instruction.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/16-global-cpi.png" alt="1.27 cycles per instruction" height="290" width="1147"></p>
+
+<h4 id="used-by-3">Used by</h4>
+
+<ul>
+<li>Pentium MMX (1996): 4-bit global branch history</li>
+</ul>
+
+<h3 id="two-level-adaptive-local-http-www-cse-iitd-ac-in-srsarangi-col-718-2017-papers-branchpred-alternative-impl-pdf-1992"><a href="http://www.cse.iitd.ac.in/~srsarangi/col_718_2017/papers/branchpred/alternative-impl.pdf">Two-level adaptive, local</a> [1992]</h3>
+
+<p>As mentioned above, an issue with the global history scheme is that the branch history for local branches that could be predicted cleanly gets contaminated by other branches.</p>
+
+<p>One way to get good local predictions is to keep separate branch histories for separate branches.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/17-local.png" alt="keep a table of per-branch histories instead of a global history" height="505" width="1369"></p>
+
+<p>Instead of keeping a single global history, we keep a table of local histories, index by the branch address. This scheme is identical to the global scheme we just looked at, except that we keep multiple branch histories. One way to think about this is that having global history is a special case of local history, where the number of histories we keep track of is <code>1</code>.</p>
+
+<p>With this scheme, we might get something like 94% accuracy, which gives us a cost of 1.23 cycles per instruction.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/18-local-cpi.png" alt="1.23 cycles per instruction" height="362" width="1147"></p>
+
+<h4 id="used-by-4">Used by</h4>
+
+<ul>
+<li>Pentium Pro (1996): <a href="http://www.ece.uah.edu/~milenka/docs/milenkovic_WDDD02.pdf">4 bit local branch history, low bits of PC used for index</a>. Note that is under some dispute and Agner Fog claims that the PPro and follow-on processors use 4-bit global history</li>
+<li>Pentium II (1997): same as PPro</li>
+<li>Pentium III (1999): same as PPro</li>
+</ul>
+
+<h3 id="gshare">gshare</h3>
+
+<p>One tradeoff a global two-level scheme has to make is that, for a prediction table of a fixed size, bits must be dedicated to either the branch history or the branch address. We’d like to give more bits to the branch history because that allows correlations across greater “distance” as well as tracking more complicated patterns and we’d like to give more bits to the branch address to avoid interference between unrelated branches.</p>
+
+<p>We can try to get the best of both worlds by hashing both the branch history and the branch address instead of concatenating them. One of the simplest reasonable things one might do, and the first proposed mechanism was to <a href="https://en.wikipedia.org/wiki/XOR_gate"><code>xor</code></a> them together. This two-level adaptive scheme, where we <code>xor</code>the bits together is called <code>gshare</code>.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/19-gshare.png" alt="hash branch address and branch history instead of appending" height="488" width="1371"></p>
+
+<p>With this scheme, we might see something like 94% accuracy. That’s the accuracy we got from the local scheme we just looked at, but gshare avoids having to keep a large table of local histories; getting the same accuracy while having to track less state is a significant improvement.</p>
+
+<h4 id="used-by-5">Used by</h4>
+
+<ul>
+<li>MIPS R12000 (1998): <a href="https://courses.cs.washington.edu/courses/csep548/06au/lectures/branchPred.pdf">2K entries, 11 bits of PC, 8 bits of history</a></li>
+<li>UltraSPARC-3 (2001):  <a href="https://courses.cs.washington.edu/courses/csep548/06au/lectures/branchPred.pdf">16K entries, 14 bits of PC, 12 bits of history</a></li>
+</ul>
+
+<h3 id="agree-http-meseec-ce-rit-edu-eecc722-fall2006-papers-branch-prediction-5-agree-isca24-pdf-1997"><a href="http://meseec.ce.rit.edu/eecc722-fall2006/papers/branch-prediction/5/agree_isca24.pdf">agree</a> (1997)</h3>
+
+<p>One reason for branch mispredictions is interference between different branches that alias to the same location. There are many ways to reduce interference between branches that alias to the same predictor table entry. In fact, the reason this talk only runs into schemes invented in the 90s is because a wide variety of interference-reducing schemes were proposed and there are too many to cover in half an hour.</p>
+
+<p>We’ll look at one scheme which might give you an idea of what an interference-reducing scheme could look like, the “agree” predictor. When two branch-history pairs collide, the predictions either match or they don’t. If they match, we’ll call that neutral interference and if they don’t, we’ll call that negative interference. The idea is that most branches tend to be strongly biased (that is, if we use two-bit entries in the predictor table, we expect that, without interference, most entries will be <code>00</code> or <code>11</code> most of the time, not <code>01</code> or <code>10</code>). For each branch in the program, we’ll store one bit, which we call the “bias”. The table of predictions will, instead of storing the absolute branch predictions, store whether or not the prediction matches or does not match the bias.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/20-agree.png" alt="predict whether or not a branch agrees with its bias as opposed to whether or not it's taken" height="782" width="1371"></p>
+
+<p>If we look at how this works, the predictor is identical to a gshare predictor, except that we make the changes mentioned above &ndash; the prediction is agree/disagree instead of taken/not-taken and we have a bias bit that’s indexed by the branch address, which gives us something to agree or disagree with. In the original paper, they propose using the first thing you see as the bias and other people have proposed using profile-guided optimization (basically running the program and feeding the data back to the compiler) to determine the bias.</p>
+
+<p>Note that, when we execute a branch and then later come back around to the same branch, we’ll use the same bias bit because the bias is indexed by the branch address, but we’ll use a different predictor table entry because that’s indexed by both the branch address and the branch history.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/21-agree-update.png" alt="updating uses the same bias but a different meta-prediction table entry" height="782" width="1371"></p>
+
+<p>If it seems weird that this would do anything, let’s look at a concrete example. Say we have two branches, branch A which is taken with 90% probability and branch B which is taken with 10% probability. If those two branches alias and we assume the probabilities that each branch is taken are independent, the probability that they disagree and negatively interfere is <code>P(A taken) * P(B not taken) + P(A not taken) + P(B taken) = (0.9 * 0.9) + (0.1 * 0.1) = 0.82</code>.</p>
+
+<p>If we use the agree scheme, we can re-do the calculation above, but the probability that the two branches disagree and negatively interfere is <code>P(A agree) * P(B disagree) + P(A disagree) * P(B agree) = P(A taken) * P(B taken) + P(A not taken) * P(B taken) = (0.9 * 0.1) + (0.1 * 0.9) = 0.18</code>. Another way to look at it is, to have destructive interference, one of the branches must disagree with its bias. By definition, if we’ve correctly determined the bias, this cannot be likely to happen.</p>
+
+<p>With this scheme, we might get something like 95% accuracy, giving us 1.19 cycles per instruction.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/22-agree-cpi.png" alt="1.19 cycles per instruction" height="432" width="1147"></p>
+
+<h4 id="used-by-6">Used by</h4>
+
+<ul>
+<li>PA-RISC 8700 (2001)</li>
+</ul>
+
+<h3 id="hybrid-http-www-hpl-hp-com-techreports-compaq-dec-wrl-tn-36-pdf-1993"><a href="http://www.hpl.hp.com/techreports/Compaq-DEC/WRL-TN-36.pdf">Hybrid</a> (1993)</h3>
+
+<p>As we’ve seen, local predictors can predict some kinds of branches well (e.g., inner loops) and global predictors can predict some kinds of branches well (e.g., some correlated branches). One way to try to get the best of both worlds is to have both predictors, then have a meta predictor that predicts if the local or the global predictor should be used. A simple way to do this is to have the meta-predictor use the same scheme as the two-bit predictor above, except that instead of predicting <code>taken</code> or <code>not taken</code> it predicts <code>local predictor</code> or <code>global predictor</code></p>
+
+<p><img src="https://danluu.com/images/branch-prediction/23-hybrid.png" alt="predict which of two predictors is correct instead of predicting if the branch is taken" height="752" width="1358"></p>
+
+<p>Just as there are many possible interference-reducing schemes, of which the <code>agree</code> predictor, above is one, there are many possible hybrid schemes. We could use any two predictors, not just a local and global predictor, and we could even use more than two predictors.</p>
+
+<p>If we use a local and global predictor, we might get something like 96% accuracy, giving us 1.15 cycles per instruction.</p>
+
+<p><img src="https://danluu.com/images/branch-prediction/24-hybrid-cpi.png" alt="1.15 cycles per instruction" height="496" width="1147"></p>
+
+<h4 id="used-by-7">Used by</h4>
+
+<ul>
+<li>DEC EV6 (1998): combination of local (1k entries, 10 history bits, 3 bit counter) &amp; global (4k entries, 12 history bits, 2 bit counter) predictors</li>
+<li>IBM POWER4 (2001): local (16k entries) &amp; gshare (16k entries, 11 history bits, xor with branch address, 16k selector table)</li>
+<li>IBM POWER5 (2004): combination of bimodal (not covered) and two-level adaptive</li>
+<li>IBM POWER7(2010)</li>
+</ul>
+
+<h3 id="not-covered">Not covered</h3>
+
+<p>There are a lot of things we didn’t cover in this talk! As you might expect, the set of material that we didn’t cover is much larger than what we did cover. I’ll briefly describe a few things we didn’t cover, with references, so you can look them up if you’re interested in learning more.</p>
+
+<p>One major thing we didn’t talk about is <a href="https://en.wikipedia.org/wiki/Branch_target_predictor">how to predict the branch target</a>. Note that this needs to be done even for some unconditional branches (that is, branches that don’t need directional prediction because they’re always taken), since <a href="http://www.engr.uconn.edu/~zshi/course/cse5302/ref/bray91btb_tr.pdf">(some) unconditional branches have unknown branch targets</a>.</p>
+
+<p>Branch target prediction is expensive enough that some early CPUs had a branch prediction policy of “always predict not taken” because a branch target isn’t necessary when you predict the branch won’t be taken! Always predicting not taken has poor accuracy, but it’s still better than making no prediction at all.</p>
+
+<p>Among the interference reducing predictors we didn’t discuss are <a href="https://people.eecs.berkeley.edu/~kubitron/courses/cs152-S04/handouts/papers/p4-lee.pdf">bi-mode</a>, <a href="http://meseec.ce.rit.edu/eecc722-fall2002/papers/branch-prediction/7/michaud97trading.pdf">gskew</a>, and <a href="http://web.eecs.umich.edu/~tnm/papers/yags.pdf">YAGS</a>. Very briefly, bi-mode is somewhat like agree in that it tries to seperate out branches based on direction, but the mechanism used in bi-mode is that we keep multiple predictor tables and a third predictor based on the branch address is used to predict which predictor table gets use for the particular combination of branch and branch history. Bi-mode appears to be more successful than agree in that it&rsquo;s seen wider use. With gksew, we keep at least three predictor tables and use a different hash to index into each table. The idea is that, even if two branches alias, those two branches will only alias in one of the tables, so we can use a vote and the result from the other two tables will override the potentially bad result from the aliasing table. I don&rsquo;t know how to describe YAGS very briefly :-).</p>
+
+<p>Because we didn&rsquo;t take about speed (as in latency), a prediction strategy we didn&rsquo;t talk about is to have a small/fast predictor that can be overridden by a slower and more accurate predictor when the slower predictor computes its result.</p>
+
+<p>Some modern CPUs have completely different branch predictors; AMD Zen (2017) and AMD Bulldozer (2011) chips appear to use <a href="https://www.cs.utexas.edu/~lin/papers/hpca01.pdf">perceptron based branch predictors</a>. Perceptrons are single-layer neural nets.</p>
+
+<p><a href="https://hal.inria.fr/hal-01100647/document">It’s been argued that</a> Intel Haswell (2013) uses a variant of a <a href="http://www.irisa.fr/caps/people/seznec/JILP-COTTAGE.pdf">TAGE predictor</a>. TAGE stands for TAgged GEometric history length predictor. If we look at the predictors we’ve covered and look at actual executions of programs to see which branches we’re not predicting correctly, one major class of branches are branches that need a lot of history &ndash; a significant number of branches need tens or hundreds of bits of history and some even need more than a thousand bits of branch history. If we have a single predictor or even a hybrid predictor that combines a few different predictors, it’s counterproductive to keep a thousand bts of history because that will make predictions worse for the branches which need a relatively small amount of history (especially relative to the cost), which is most branches. One of the ideas in the TAGE predictor is that, by keeping a geometric series of history lengths, each branch can use the appropriate history. That explains the GE. The TA part is that branches are tagged, which is a mechanism we don’t discuss that the predictor uses to track which branches should use which set of history.</p>
+
+<p>Modern CPUs often have specialized predictors, e.g., a loop predictor can accurately predict loop branches in cases where a generalized branch predictor couldn’t reasonably store enough history to make perfect predictions for every iteration of the loop.</p>
+
+<p>We didn’t talk at all about the tradeoff between using up more space and getting better predictions. Not only does changing the size of the table change the performance of a predictor, it also changes which predictors are better relative to each other.</p>
+
+<p>We also didn’t talk at all about how different workloads affect different branch predictors. Predictor performance varies not only based on table size but also based on which particular program is run.</p>
+
+<p>We’ve also talked about branch misprediction cost as if it’s a fixed thing, <a href="http://users.elis.ugent.be/~leeckhou/papers/ispass06-eyerman.pdf">but it is not</a>, and for that matter, the cost of non-branch instructions also varies widely between different workloads.</p>
+
+<p>I tried to avoid introducing non-self-explanatory terminology when possible, so if you read the literature, terminology will be somewhat different.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>We’ve looked at a variety of classic branch predictors and very briefly discussed a couple of newer predictors. Some of the classic predictors we discussed are still used in CPUs today, and if this were an hour long talk instead of a half-hour long talk, we could have discussed state-of-the-art predictors. I think that a lot of people have an idea that CPUs are mysterious and hard to understand, but I think that CPUs are actually easier to understand than software. I might be biased because I used to work on CPUs, but I think that this is not a result of my bias but something fundamental.</p>
+
+<p>If you think about the complexity of software, the main limiting factor on complexity is your imagination. If you can imagine something in enough detail that you can write it down, you can make it. Of course there are cases where that’s not the limiting factor and there’s something more practical (e.g., the performance of large scale applications), but I think that most of us spend most of our time writing software where the limiting factor is the ability to create and manage complexity.</p>
+
+<p>Hardware is quite different from this in that there are forces that push back against complexity. Every chunk of hardware you implement costs money, so you want to implement as little hardware as possible. Additionally, performance matters for most hardware (whether that’s absolute performance or performance per dollar or per watt or per other cost), and adding complexity makes hardware slower, which limits performance. Today, you can buy an off-the-shelf CPU for $300 which can be overclocked to 5 GHz. At 5 GHz, one unit of work is one-fifth of one nanosecond. For reference, light travels roughly one foot in one nanosecond. Another limiting factor is that people get pretty upset when CPUs don’t work perfectly all of the time. Although <a href="https://danluu.com/cpu-bugs/">CPUs do have bugs</a>, the rate of bugs is much lower than in almost all software, i.e., the standard to which they’re verified/tested is much higher. Adding complexity makes things harder to test and verify. Because CPUs are held to a higher correctness standard than <a href="https://danluu.com/everything-is-broken/">most software</a>, adding complexity creates a much higher test/verification burden on CPUs, which makes adding a similar amount of complexity much more expensive in hardware than in software, even ignoring the other factors we discussed.</p>
+
+<p>A side effect of these factors that push back against chip complexity is that, for any particular “high-level” general purpose CPU feature, it is generally conceptually simple enough that it can be described in a half-hour or hour-long talk. CPUs are simpler than many programmers think! BTW, I say “high-level” to rule out things like how transistors and circuit design, which can require a fair amount of low-level (physics or solid-state) background to understand.</p>
+
+<h3 id="cpu-internals-series">CPU internals series</h3>
+
+<ul>
+<li><a href="//danluu.com/new-cpu-features/">New CPU features since the 80s</a></li>
+<li><a href="//danluu.com/integer-overflow/">The cost of branches and integer overflow checking in real code</a></li>
+<li><a href="https://danluu.com/cpu-bugs/">CPU bugs</a></li>
+<li><a href="//danluu.com/branch-prediction/">A brief history of branch prediction</a></li>
+<li><a href="//danluu.com/hardware-unforgiving/">Why CPU development is hard</a></li>
+<li><a href="//danluu.com/why-hardware-development-is-hard/">Verilog sucks, part 1</a></li>
+<li><a href="//danluu.com/pl-troll/">Verilog sucks, part 2</a></li>
+</ul>
+
+<p><em>Thanks to Leah Hanson, Hari Angepat, and Nick Bergson-Shilcock for reviewing practice versions of the talk. Apologies for the somewhat slapdash state of this post &ndash; I wrote it quickly so that people who attended the talk could refer to the “transcript ” soon afterwards and look up references, but this means that there are probably more than the usual number of errors and that the organization isn’t as nice as it would be for a normal blog post. In particular, things that were explained using a series of animations in the talk are not explained in the same level of detail and on skimming this, I notice that there’s less explanation of what sorts of branches each predictor doesn’t handle well, and hence less motivation for each predictor. I may try to go back and add more motivation, but I’m unlikely to restructure the post completely and generate a new set of graphics that better convey concepts when there are a couple of still graphics next to text. Thanks to Julien Vivenot, Ralph Corderoy, Vaibhav Sagar, and Uri Shaked for catching typos in this hastily written post.</em></p>
+
+					</div>
+		<div class="collectionhref">
+		<a href="https://danluu.com/branch-prediction/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/" target="_blank">Felix Dürrwald</a>
+		</div>
+		<div>
+			<h3>Welcome to Ghost</h3>
+		</div>
+		<div class="collectiontext">
+						<div class="kg-card-markdown"><p>Hey! Welcome to Ghost, it's great to have you :)</p>
+<p>We know that first impressions are important, so we've populated your new site with some initial <strong>Getting Started</strong> posts that will help you get familiar with everything in no time. This is the first one!</p>
+<h3 id="thereareafewthingsthatyoushouldknowupfront">There are a few things that</h3></div>
+					</div>
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/welcome/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/" target="_blank">Felix Dürrwald</a>
+		</div>
+		<div>
+			<h3>Using the Ghost editor</h3>
+		</div>
+		<div class="collectiontext">
+						<div class="kg-card-markdown"><p>Ghost uses a language called <strong>Markdown</strong> to format text.</p>
+<p>When you go to edit a post and see special characters and colours intertwined between the words, those are Markdown shortcuts which tell Ghost what to do with the words in your document. The biggest benefit of Markdown is that you</p></div>
+					</div>
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/the-editor/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/" target="_blank">Felix Dürrwald</a>
+		</div>
+		<div>
+			<h3>Organising your content with tags</h3>
+		</div>
+		<div class="collectiontext">
+						<div class="kg-card-markdown"><p>Ghost has a single, powerful organisational taxonomy, called tags.</p>
+<p>It doesn't matter whether you want to call them categories, tags, boxes, or anything else. You can think of Ghost tags a lot like Gmail labels. By tagging posts with one or more keyword, you can organise articles into buckets of</p></div>
+					</div>
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/using-tags/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/" target="_blank">Felix Dürrwald</a>
+		</div>
+		<div>
+			<h3>Managing Ghost users</h3>
+		</div>
+		<div class="collectiontext">
+						<div class="kg-card-markdown"><p>Ghost has a number of different user roles for your team</p>
+<h3 id="authors">Authors</h3>
+<p>The base user level in Ghost is an author. Authors can write posts, edit their own posts, and publish their own posts. Authors are <strong>trusted</strong> users. If you don't trust users to be allowed to publish their own</p></div>
+					</div>
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/managing-users/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/" target="_blank">Felix Dürrwald</a>
+		</div>
+		<div>
+			<h3>Making your site private</h3>
+		</div>
+		<div class="collectiontext">
+						<div class="kg-card-markdown"><p>Sometimes you might want to put your site behind closed doors</p>
+<p>If you've got a publication that you don't want the world to see yet because it's not ready to launch, you can hide your Ghost site behind a simple shared pass-phrase.</p>
+<p>You can toggle this preference on at the</p></div>
+					</div>
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/private-sites/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/" target="_blank">Felix Dürrwald</a>
+		</div>
+		<div>
+			<h3>Advanced Markdown tips</h3>
+		</div>
+		<div class="collectiontext">
+						<div class="kg-card-markdown"><p>There are lots of powerful things you can do with the Ghost editor</p>
+<p>If you've gotten pretty comfortable with <a href="https://felixduerrwald.de/the-editor/">all the basics</a> of writing in Ghost, then you may enjoy some more advanced tips about the types of things you can do with Markdown!</p>
+<p>As with the last post about</p></div>
+					</div>
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/advanced-markdown/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/" target="_blank">Felix Dürrwald</a>
+		</div>
+		<div>
+			<h3>Setting up your own Ghost theme</h3>
+		</div>
+		<div class="collectiontext">
+						<div class="kg-card-markdown"><p>Creating a totally custom design for your publication</p>
+<p>Ghost comes with a beautiful default theme called Casper, which is designed to be a clean, readable publication layout and can be easily adapted for most purposes. However, Ghost can also be completely themed to suit your needs. Rather than just giving</p></div>
+					</div>
+		<div class="collectionhref">
+		<a href="https://felixduerrwald.de/themes/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="http://www.frauenotiert.de/" target="_blank">Frau E. notiert..</a>
 		</div>
 		<div>
@@ -165,55 +665,161 @@ SyndContentImpl.value=<br /><span style="color: magenta; font-family: &quot;aria
 	</li>
 	<li class="anriss">
 		<div class="collectionhref">
-		<a href="https://danluu.com/" target="_blank">Dan Luu</a>
+		<a href="https://danluu.com/atom/index.xml" target="_blank">Dan Luu</a>
 		</div>
 		<div>
 			<h3>Why does Sattolo's algorithm produce a permutation with exactly one cycle?</h3>
 		</div>
 		<div class="collectiontext">
-						I recently had a problem where part of the solution was to do a series of pointer accesses that would walk around a chunk of memory in pseudo-random order. Sattolo&rsquo;s algorithm provides a solution to this because it produces a permutation of a list with exactly one cycle, which guarantees that we will reach every element of the list even though we&rsquo;re traversing it in random order.
-However, the explanations of why the algorithm worked that I could find online either used some kind of mathematical machinery (stirling numbers, assuming familiarity with cycle notation, etc.
+						
+
+<p>I recently had a problem where part of the solution was to do a series of pointer accesses that would walk around a chunk of memory in pseudo-random order. Sattolo&rsquo;s algorithm provides a solution to this because it produces a permutation of a list with exactly one cycle, which guarantees that we will reach every element of the list even though we&rsquo;re traversing it in random order.</p>
+
+<p>However, the explanations of why the algorithm worked that I could find online either used some kind of mathematical machinery (stirling numbers, assuming familiarity with cycle notation, etc.), or used logic that was hard for me to follow. I find that this is common for explanations of concepts that could, but don&rsquo;t have to, use a lot of mathematical machinery. I don&rsquo;t think there&rsquo;s anything wrong with using existing mathematical methods per se &ndash; it&rsquo;s a nice mental shortcut if you&rsquo;re familiar with the concepts, but I think it&rsquo;s unfortunate that it&rsquo;s hard to find a relatively simple explanation that doesn&rsquo;t require any background. When I was looking for a simple explanation, I also found a lot of people who were using Sattolo&rsquo;s algorithm in places where it wasn&rsquo;t appropriate and also people who didn&rsquo;t know that Sattolo&rsquo;s algorithm is what they were looking for, so here&rsquo;s an attempt at an explanation of why the algorithm works that doesn&rsquo;t assume an undergraduate combinatorics background.</p>
+
+<p>Before we look at Sattolo&rsquo;s algorithm, let&rsquo;s look at Fisher-Yates, which is an <a href="https://en.wikipedia.org/wiki/In-place_algorithm">in-place</a> algorithm that produces a random permutation of an array/vector, where every possible permutation occurs with uniform probability.</p>
+
+<p>We&rsquo;ll look at the code for Fisher-Yates and then how to prove that the algorithm produces the intended result.</p>
+
+<pre><code>def shuffle(a):
+    n = len(a)
+    for i in range(n - 1):  # i from 0 to n-2, inclusive.
+        j = random.randrange(i, n)  # j from i to n-1, inclusive.
+        a[i], a[j] = a[j], a[i]  # swap a[i] and a[j].
+</code></pre>
+
+<p><code>shuffle</code> takes an array and produces a permutation of the array, i.e., it shuffles the array. We can think of this loop as placing each element of the array, <code>a</code>, in turn, from <code>a[0]</code> to <code>a[n-2]</code>. On some iteration, <code>i</code>, we choose one of <code>n-i</code> elements to swap with and swap element <code>i</code> with some random element. The last element in the array, <code>a[n-1]</code>, is skipped because it would always be swapped with itself. One way to see that this produces every possible permutation with uniform probability is to write down the probability that each element will end up in any particular location<sup class="footnote-ref" id="fnref:P"><a rel="footnote" href="#fn:P">1</a></sup>. Another way to do it is to observe two facts about this algorithm:</p>
+
+<ol>
+<li>Every output that Fisher-Yates produces is produced with uniform probability</li>
+<li>Fisher-Yates produces as many outputs as there are permutations (and each output is a permutation)</li>
+</ol>
+
+<p>(1) For each random choice we make in the algorithm, if we make a different choice, we get a different output. For example, if we look at the resultant <code>a[0]</code>, the only way to place the element that was originally in <code>a[k]</code> (for some <code>k</code>) in the resultant <code>a[0]</code> is to swap <code>a[0]</code> with <code>a[k]</code> in iteration <code>0</code>. If we choose a different element to swap with, we&rsquo;ll end up with a different resultant <code>a[0]</code>. Once we place <code>a[0]</code> and look at the resultant <code>a[1]</code>, the same thing is true of <code>a[1]</code> and so on for each <code>a[i]</code>. Additionally, each choice reduces the range by the same amount &ndash; there&rsquo;s a kind of symmetry, in that although we place <code>a[0]</code> first, we could have placed any other element first; every choice has the same effect. This is vaguely analogous to the reason that you can pick an integer uniformly at random by picking digits uniformly at random, one at a time.</p>
+
+<p>(2) How many different outputs does Fisher-Yates produce? On the first iteration, we fix one of <code>n</code> possible choices for <code>a[0]</code>, then given that choice, we fix one of <code>n-1</code> choices for <code>a[1]</code>, then one of <code>n-2</code> for <code>a[2]</code>, and so on, so there are <code>n * (n-1) * (n-2) * ... 2 * 1 = n!</code> possible different outputs.</p>
+
+<p>This is exactly the same number of possible permutations of <code>n</code> elements, by pretty much the same reasoning. If we want to count the number of possible permutations of <code>n</code> elements, we first pick one of <code>n</code> possible elements for the first position, <code>n-1</code> for the second position, and so on resulting in <code>n!</code> possible permutations.</p>
+
+<p>Since Fisher-Yates only produces unique permutations and there are exactly as many outputs as there are permutations, Fisher-Yates produces every possible permutation. Since Fisher-Yates produces each output with uniform probability, it produces all possible permutations with uniform probability.</p>
+
+<p>Now, let&rsquo;s look at Sattolo&rsquo;s algorithm, which is almost identical to Fisher-Yates and also produces a shuffled version of the input, but produces something quite different:</p>
+
+<pre><code>def sattolo(a):
+    n = len(a)
+    for i in range(n - 1):
+        j = random.randrange(i+1, n)  # i+1 instead of i
+        a[i], a[j] = a[j], a[i]
+</code></pre>
+
+<p>Instead of picking an element at random to swap with, like we did in Fisher-Yates, we pick an element at random that is not the element being placed, i.e., we do not allow an element to be swapped with itself. One side effect of this is that no element ends up where it originally started.</p>
+
+<p>Before we talk about why this produces the intended result, let&rsquo;s make sure we&rsquo;re on the same page regarding terminology. One way to look at an array is to view it as a description of a graph where the index indicates the node and the value indicates where the edge points to. For example, if we have the list <code>0 2 3 1</code>, this can be thought of as a directed graph from its indices to its value, which is a graph with the following edges:</p>
+
+<pre><code>0 -&gt; 0
+1 -&gt; 2
+2 -&gt; 3
+3 -&gt; 1
+</code></pre>
+
+<p>Node 0 points to itself (because the value at index 0 is 0), node 1 points to node 2 (because the value at index 1 is 2), and so on. If we traverse this graph, we see that there are two cycles. <code>0 -&gt; 0 -&gt; 0 ...</code> and <code>1 -&gt; 2 -&gt; 3 -&gt; 1...</code>.</p>
+
+<p>Let&rsquo;s say we swap the element in position 0 with some other element. It could be any element, but let&rsquo;s say that we swap it with the element in position 2. Then we&rsquo;ll have the list <code>3 2 0 1</code>, which can be thought of as the following graph:</p>
+
+<pre><code>0 -&gt; 3
+1 -&gt; 2
+2 -&gt; 0
+3 -&gt; 1
+</code></pre>
+
+<p>If we traverse this graph, we see the cycle <code>0 -&gt; 3 -&gt; 1 -&gt; 2 -&gt; 0...</code>. This is an example of a permutation with exactly one cycle.</p>
+
+<p>If we swap two elements that belong to different cycles, we&rsquo;ll merge the two cycles into a single cycle. One way to see this is when we swap two elements in the list, we&rsquo;re essentially picking up the arrow-heads pointing to each element and swapping where they point (rather than the arrow-tails, which stay put). Tracing the result of this is like tracing a figure-8. Just for example, say if we swap <code>0</code> with an arbitrary element of the other cycle, let&rsquo;s say element 2, we&rsquo;ll end up with <code>3 2 0 1</code>, whose only cycle is <code>0 -&gt; 3 -&gt; 1 -&gt; 2 -&gt; 0...</code>. Note that this operation is reversible &ndash; if we do the same swap again, we end up with two cycles again. In general, if we swap two elements from the same cycle, we break the cycle into two separate cycles.</p>
+
+<p>If we feed a list consisting of <code>0 1 2 ... n-1</code> to sattolo&rsquo;s algorithm we&rsquo;ll get a permutation with exactly one cycle. Furthermore, we have the same probability of generating any permutation that has exactly one cycle. Let&rsquo;s look at why Sattolo&rsquo;s generates exactly one cycle. Afterwards, we&rsquo;ll figure out why it produces all possible cycles with uniform probability.</p>
+
+<p>For Sattolo&rsquo;s algorithm, let&rsquo;s say we start with the list <code>0 1 2 3 ... n-1</code>, i.e., a list with <code>n</code> cycles of length <code>1</code>. On each iteration, we do one swap. If we swap elements from two separate cycles, we&rsquo;ll merge the two cycles, reducing the number of cycles by 1. We&rsquo;ll then do <code>n-1</code> iterations, reducing the number of cycles from <code>n</code> to <code>n - (n-1) = 1</code>.</p>
+
+<p>Now let&rsquo;s see why it&rsquo;s safe to assume we always swap elements from different cycles. In each iteration of the algorithm, we swap some element with index &gt; <code>i</code> with the element at index <code>i</code> and then increment <code>i</code>. Since <code>i</code> gets incremented, the element that gets placed into index <code>i</code> can never be swapped again, i.e., each swap puts one of the two elements that was swapped into its final position, i.e., for each swap, we take two elements that were potentially swappable and render one of them unswappable.</p>
+
+<p>When we start, we have <code>n</code> cycles of length <code>1</code>, each with <code>1</code> element that&rsquo;s swappable. When we swap the initial element with some random element, we&rsquo;ll take one of the swappable elements and render it unswappable, creating a cycle of length <code>2</code> with <code>1</code> swappable element and leaving us with <code>n-2</code> other cycles, each with <code>1</code> swappable element.</p>
+
+<p>The key invariant that&rsquo;s maintained is that each cycle has exactly <code>1</code> swappable element. The invariant holds in the beginning when we have <code>n</code> cycles of length <code>1</code>. And as long as this is true, every time we merge two cycles of any length, we&rsquo;ll take the swappable element from one cycle and swap it with the swappable element from the other cycle, rendering one of the two elements unswappable and creating a longer cycle that still only has one swappable element, maintaining the invariant.</p>
+
+<p>Since we cannot swap two elements from the same cycle, we merge two cycles with every swap, reducing the number of cycles by 1 with each iteration until we&rsquo;ve run <code>n-1</code> iterations and have exactly one cycle remaining.</p>
+
+<p>To see that we generate each cycle with equal probability, note that there&rsquo;s only one way to produce each output, i.e., changing any particular random choice results in a different output. In the first iteration, we randomly choose one of <code>n-1</code> placements, then <code>n-2</code>, then <code>n-3</code>, and so on, so for any particular cycle, we produce it with probability <code>(n-1) * (n-2) * (n-3) ... * 2 * 1 = (n-1)!</code>. If we can show that there are <code>(n-1)!</code> permutations with exactly one cycle, then we&rsquo;ll know that we generate every permutation with exactly one cycle with uniform probability.</p>
+
+<p>Let&rsquo;s say we have an arbitrary list of length <code>n</code> that has exactly one cycle and we add a single element, there are <code>n</code> ways to extend that to become a cycle of length <code>n+1</code> because there are <code>n</code> places we could add in the new element and keep the cycle, which means that the number of cycles of length <code>n+1</code>, <code>cycles(n+1)</code>, is <code>n * cycles(n)</code>.</p>
+
+<p>For example, say we have a cycle that produces the path <code>0 -&gt; 1 -&gt; 2 -&gt; 0 ...</code> and we want to add a new element, <code>3</code>. We can substitute <code>-&gt; 3 -&gt;</code> for any <code>-&gt;</code> and get a cycle of length 4 instead of length 3.</p>
+
+<p>In the base case, there&rsquo;s one cycle of length 2, the permutation <code>1 0</code> (the other permutation of length two, <code>0 1</code>, has two cycles of length one instead of having a cycle of length 2), so we know that <code>cycles(2) = 1</code>. If we apply <a href="https://en.wikipedia.org/wiki/Recurrence_relation">the recurrence above</a>, we get that <code>cycles(n) = (n-1)!</code>, which is exactly the number of different permutations that Sattolo&rsquo;s algorithm generates, which means that we generate all possible permutations with one cycle. Since we know that we generate each cycle with uniform probability, we now know that we generate all possible one-cycle permutations with uniform probability.</p>
+
+<p>An alternate way to see that there are <code>(n-1)!</code> permutations with exactly one cycle, is that we rotate each cycle around so that <code>0</code> is at the start and write it down as <code>0 -&gt; i -&gt; j -&gt; k -&gt; ...</code>. The number of these is the same as the number of permutations of elements to the right of the <code>0 -&gt;</code>, which is <code>(n-1)!</code>.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>We&rsquo;ve looked at two algorithms that are identical, except for a two character change. These algorithms produce quite different results &ndash; one algorithm produces a random permutation and the other produces a random permutation with exactly one cycle. I think these algorithms are neat because they&rsquo;re so simple, just a double for loop with a swap.</p>
+
+<p>In practice, you probably don&rsquo;t &ldquo;need&rdquo; to know how these algorithms work because the standard library for most modern languages will have some way of producing a random shuffle. And if you have a function that will give you a shuffle, you can produce a permutation with exactly one cycle if you don&rsquo;t mind a non-in-place algorithm that takes an extra pass. I&rsquo;ll leave that as an exercise for the reader, but if you want a hint, one way to do it parallels the &ldquo;alternate&rdquo; way to see that there are `(n-1)! permutations with exactly one cycle.</p>
+
+<p>Although I said that you probably don&rsquo;t need to know this stuff, you do actually need to know it if you&rsquo;re going to implement a custom shuffling algorithm! That may sound obvious, but there&rsquo;s a long history of people implementing incorrect shuffling algorithms. This was common in games and on <a href="http://www.datamation.com/entdev/article.php/616221/How-We-Learned-to-Cheat-at-Online-Poker-A-Study-in-Software-Security.htm">online gambling sites in the 90s and even the early 2000s</a> and you still see the occasional mis-implemented shuffle, e.g., when <a href="http://www.robweir.com/blog/2010/02/microsoft-random-browser-ballot.html">Microsoft implemented a bogus shuffle and failed to properly randomize a browser choice poll</a>. At the time, the top Google hit for <code>javascript random array sort</code> was <a href="https://web.archive.org/web/20100102004604/http://www.javascriptkit.com/javatutors/arraysort.shtml">the incorrect algorithm that Microsoft ended up using</a>. That site has been fixed, but you can still find incorrect tutorials floating around online.</p>
+
+<h4 id="appendix-generating-a-random-derangement">Appendix: generating a random derangement</h4>
+
+<p>A permutation where no element ends up in its original position is called a derangement. Sattolo&rsquo;s algorithm generates derangements, but it only generates derangements with exactly one cycle, and there are derangements with more than one cycle (e.g., <code>3 2 1 0</code>), so can&rsquo;t possibly generate random derangements with uniform probability.</p>
+
+<p>One way to generate random derangements is to generate random shuffles using Fisher-Yates and then retry until we get a derangement:</p>
+
+<pre><code>def derangement(n):
+    assert n != 1, &quot;can't have a derangement of length 1&quot;
+    a = list(range(n))
+    while not is_derangement(a):
+        shuffle(a)
+    return a
+</code></pre>
+
+<p>This algorithm is simple, and is overwhelmingly likely to eventually return a derangement (for n != 1), but it&rsquo;s not immediately obvious how long we should expect this to run before it returns a result. Maybe we&rsquo;ll get a derangement on the first try and run <code>shuffle</code> once, or maybe it will take 100 tries and we&rsquo;ll have to do 100 shuffles before getting a derangement.</p>
+
+<p>To figure this out, we&rsquo;ll want to know the probability that a random permutation (shuffle) is a derangement. To get that, we&rsquo;ll want to know, given a list of of length <code>n</code>, how many permutations there are and how many derangements there are.</p>
+
+<p>Since we&rsquo;re deep in the appendix, I&rsquo;ll assume that you know <a href="https://en.wikipedia.org/wiki/Permutation">the number of permutations of a n elements is <code>n!</code></a> what <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">binomial coefficients</a> are, and are comfortable with <a href="https://en.wikipedia.org/wiki/Taylor_series">Taylor series</a>.</p>
+
+<p>To count the number of derangements, we can start with the number of permutations, <code>n!</code>, and subtract off permutations where an element remains in its starting position, <code>(n choose 1) * (n - 1)!</code>. That isn&rsquo;t quite right because this double subtracts permutations where two elements remain in the starting position, so we&rsquo;ll have to add back <code>(n choose 2) * (n - 2)!</code>. That isn&rsquo;t quite right because we&rsquo;ve overcorrected elements with three permutations, so we&rsquo;ll have to add those back, <a href="https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle">and so on and so forth</a>, resulting in <code>∑ (−1)ᵏ (n choose k)(n−k)!</code>. If we expand this out and divide by <code>n!</code> and cancel things out, we get <code>∑ (−1)ᵏ (1 / k!)</code>. If we look at the limit as the number of elements goes to infinity, this looks just like <a href="https://en.wikipedia.org/wiki/Taylor_series">the Taylor series</a> for <code>e^x</code> where <code>x = -1</code>, i.e., <code>1/e</code>, i.e., in the limit, we expect that the fraction of permutations that are derangements is <code>1/e</code>, i.e., we expect to have to do <code>e</code> times as many swaps to generate a derangement as we do to generate a random permutation. Like many alternating series, this series converges quickly. It gets within 7 significant figures of <code>e</code> when <code>k = 10</code>!</p>
+
+<p>One silly thing about our algorithm is that, if we place the first element in the first location, we already know that we don&rsquo;t have a derangement, but we continue placing elements until we&rsquo;ve created an entire permutation. If we reject illegal placements, we can do even better than a factor of <code>e</code> overhead. It&rsquo;s also possible to come up with <a href="http://mathforum.org/library/drmath/view/61957.html">a non-rejection based algorithm</a>, but I really enjoy the naive rejection based algorithm because I find it delightful when <a href="https://www.cs.princeton.edu/courses/archive/fall13/cos521/lecnotes/lec2final.pdf">basic randomized algorithms that consist of &ldquo;keep trying again&rdquo; work well</a>.</p>
+
+<h4 id="appendix-wikipedia-s-explanation-of-sattolo-s-algorithm">Appendix: wikipedia&rsquo;s explanation of Sattolo&rsquo;s algorithm</h4>
+
+<p>I wrote this explanation because I found <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">the explanation in Wikipedia</a> relatively hard to follow, but if you find the explanation above difficult to understand, maybe you&rsquo;ll prefer wikipedia&rsquo;s version:</p>
+
+<blockquote>
+<p>The fact that Sattolo&rsquo;s algorithm always produces a cycle of length n can be shown by induction. Assume by induction that after the initial iteration of the loop, the remaining iterations permute the first n - 1 elements according to a cycle of length n - 1 (those remaining iterations are just Sattolo&rsquo;s algorithm applied to those first n - 1 elements). This means that tracing the initial element to its new position p, then the element originally at position p to its new position, and so forth, one only gets back to the initial position after having visited all other positions. Suppose the initial iteration swapped the final element with the one at (non-final) position k, and that the subsequent permutation of first n - 1 elements then moved it to position l; we compare the permutation π of all n elements with that remaining permutation σ of the first n - 1 elements. Tracing successive positions as just mentioned, there is no difference between σ and π until arriving at position k. But then, under π the element originally at position k is moved to the final position rather than to position l, and the element originally at the final position is moved to position l. From there on, the sequence of positions for π again follows the sequence for σ, and all positions will have been visited before getting back to the initial position, as required.</p>
+
+<p>As for the equal probability of the permutations, it suffices to observe that the modified algorithm involves (n-1)! distinct possible sequences of random numbers produced, each of which clearly produces a different permutation, and each of which occurs&ndash;assuming the random number source is unbiased&ndash;with equal probability. The (n-1)! different permutations so produced precisely exhaust the set of cycles of length n: each such cycle has a unique cycle notation with the value n in the final position, which allows for (n-1)! permutations of the remaining values to fill the other positions of the cycle notation</p>
+</blockquote>
+
+<p><em>Thanks to Mathieu Guay-Paquet, Leah Hanson, Rudi Chen, Kamal Marhubi,  Michael Robert Arntzenius, Heath Borders, Shreevatsa R, and David Turner for comments/corrections/discussion.</em></p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:P"><p><code>a[0]</code> is placed on the first iteration of the loop. Assuming <code>randrange</code> generates integers with uniform probability in the appropriate range, the original <code>a[0]</code> has <code>1/n</code> probability of being swapped with any element (including itself), so the resultant <code>a[0]</code> has a 1/n chance of being any element from the original <code>a</code>, which is what we want.</p>
+
+<p><code>a[1]</code> is placed on the second iteration of the loop. At this point, <code>a[0]</code> is some element from the array before it was mutated. Let&rsquo;s call the unmutated array <code>original</code>. <code>a[0]</code> is <code>original[k]</code>, for some <code>k</code>. For any particular value of <code>k</code>, it contains <code>original[k]</code> with probability <code>1/n</code>. We then swap <code>a[1]</code> with some element from the range <code>[1, n-1]</code>.</p>
+
+<p>If we want to figure out the probability that <code>a[1]</code> is some particular element from <code>original</code>, we might think of this as follows: <code>a[0]</code> is <code>original[k_0]</code> for some <code>k_0</code>. <code>a[1]</code> then becomes <code>original[k_1]</code> for some <code>k_1</code> where <code>k_1 != k_0</code>. Since <code>k_0</code> was chosen uniformly at random, if we integrate over all <code>k_0</code>, <code>k_1</code> is also uniformly random.</p>
+
+<p>Another way to look at this is that it&rsquo;s arbitrary that we place <code>a[0]</code> and choose <code>k_0</code> before we place <code>a[1]</code> and choose <code>k_1</code>. We could just have easily placed <code>a[1]</code> and chosen <code>k_1</code> first so, over all possible choices, the choice of <code>k_0</code> cannot bias the choice of <code>k_1</code>.</p>
+ <a class="footnote-return" href="#fnref:P"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
 					</div>
 		<div class="collectionhref">
 		<a href="https://danluu.com/sattolo/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.frauenotiert.de/" target="_blank">Frau E. notiert..</a>
-		</div>
-		<div>
-			<h3>Chronisch krank? Ein Fulltime-Job! Beispiel: Arzttermine ergattern</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-onSuy0_c2hs/WYOOY3qzAkI/AAAAAAAADQ0/JbjOb58eItQVClR0cEehKdL70tukjyI5wCLcBGAs/s1600/terminkalender.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="1515" data-original-width="1515" height="400" src="https://2.bp.blogspot.com/-onSuy0_c2hs/WYOOY3qzAkI/AAAAAAAADQ0/JbjOb58eItQVClR0cEehKdL70tukjyI5wCLcBGAs/s400/terminkalender.jpg" width="400" /></a></div><br /><br />Hier kommt ein Stimmchen aus dem Off. Ihr denkt vermutlich: Ach, die Frau E., die sitzt schön an der Alster und erholt sich von dem einjährigen Streß. Und lernt schön in Ruhe Hamburg kennen. Ganz ehrlich: nach insgesamt über sieben Monaten kenne ich von Hamburg nicht gravierend viel mehr, als vor meinem Hinzug. Und das war nicht viel. Warum?<br /><br />Die ersten Monate ging jedes Energie-Körnchen für die <a href="http://www.frauenotiert.de/2017/05/14-indizien-da-deine-wohnungssuche-dich.html" target="_blank">Wohnungssuche</a> drauf. Das hat mich kartographisch geschult. Mal nett rumsitzen und erleben, wo ich jetzt eigentlich wohne, konnte ich nicht. <br /><br />Nach dem <a href="http://www.frauenotiert.de/2017/06/home-sweet-home-der-finale-umzug-in.html" target="_blank">finalen Umzug</a> vergingen locker drei Wochen mit Auspacken und Räumen. Nicht, daß ich so viel besäße. Ich habe ja <a href="http://www.frauenotiert.de/2016/06/besitz-bindet-wie-bereits-mein-halber.html" target="_blank">aussortiert wie eine Wilde</a> letztes Jahr. Aber wenn man jeden Handschlag in einer neuen Wohnung alleine machen muß und vom Umzug so fertig ist, daß man nahezu nonstop krank auf Bett und Sofa dämmert, dauert das eben etwas. <br /><br />Also wieder keine Zeit, meine neue Heimat zu erleben. Soll sehr schöne Ecken geben. Berichten mir zumindest meine Gäste von ihren Exkursionen. <br /><br />Ich kenne vor allem viele Straßen, viele Ampeln, viele andere Autos. Und Haltestellen von Bus und Bahn kenne ich auch bereits einige. Nach dem groben Sortieren der neuen Bleibe, hätte ich endlich die schönen Ecken kennenlernen können. Doch das Einzige, das ich jetzt ganz genau kenne, ist einer der Hauptgründe, warum ich so viele Jahre gezögert habe, mein gewohntes Umfeld zu verlassen, obwohl das Klima dort mich unfaßbar schlimm gequält hat. <br /><br />Ärzte.<br /><br />Nicht, daß die Ärzte in Düsseldorf per se besser wären als anderswo. Aber ich hatte nach diversen Try-and-Error-Aktionen gute gefunden. Ärzte, die bereit sind, auch komplexe Fälle wie mich zu behandeln. Ärzte, die einen nicht entnervt aufgeben, weil keine Besserung zu erwarten ist. Ich hatte ein System, das fluppte. Und ich ahnte, es würde mich extrem viel Anstrengung und Nerven kosten, von Null zu beginnen.<br /><br /><h3>Daß Facharzttermine in Hamburg zu ergattern, noch schwieriger würde, als eine Wohnung zu finden, ahnte ich zum Glück nicht.&nbsp;</h3><br />Und daß ich nach einem Jahr, in dem ich mich nonstop engagieren mußte, schon wieder nicht in meine Sofakissen plumpsen kann, um endlich zu verschnaufen, ahnte ich zum Glück ebenfalls nicht<br /><br />Bei Wohnungen erhält man wenigstens mal einen Termin. Bei Ärzten nicht mal, wenn man jemanden kennt, der einen kennt, dessen Hund mit dem Arzthund in die gleiche Huta geht. <br /><br />Bevor ich mir 44 Bewertungen bei jameda durchlese, von denen vermutlich diverse Ärzte 42 selber geschrieben haben, vertraue ich doch lieber Menschen, die sich schon mal in die Händer derer begeben haben. Meistens gibt es Tipps. Von fünf Tipps fallen 4 gleich wieder weg: einer praktiziert nicht mehr und drei sind locker 1,5 Stunden Gurkerei entfernt. Hamburg ist ja so klein denn nicht. Das wären 1,5h hin, 2h vor Ort, 1,5 zurück. Bei einer Energiespanne von maximal zwei Stunden. Finde den Fehler. <br /><br />Einer bleibt. Und hört sich super an Nur kurz einen Termin ausmachen und fertig. <br /><br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Sie rufen außerhalb unserer Sprechzeiten an. Diese sind...<br />ICH WEISS WIE DIESE SIND!<br /><br />Timer stellen.<br />Inzwischen Facharzt 2 recherchieren. <br /><br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />..<br /><br />Patzige Stimme einer hörbar jungen Sprechstundenhilfe leiert den Arztnamen runter. Wie kann man so jung und schon so patzig sein? <br />Ich sage mein Sprüchlein auf.<br /><br />Sind Sie schon Patientin?<br />Nein.<br />Herr-Frau-Dr-Dingens nimmt keine neuen Patienten auf.<br />Nie mehr?<br />Doch.<br />Und?<br />Und was?<br />Ab wann wieder?<br />Frühestens 2018.<br /><h3><br /></h3><h3>2018 bin ich entweder tot oder hab das Problem alleine gelöst </h3><br />Jetzt doch zu Jameda. Wenigstens gibt es dort eine Kartensuche. Die denken mit. <br />Nach der Lektüre von Bewertungen folgt die Analyse: Welche sind orthographisch durchgehend so korrekt, daß sie vermutlich von derselben Person geschrieben wurden. Wer jemals Facebook-Kommentarleisten durchlas weiß: Orthographie ist irgendwann in den 1970ern ausgestorben. Still und leise. <br /><br />Dann noch die Ärzte streichen, die Oberkoryphäen sind. Wer Oberkoryphäe ist, verbringt seine Zeit meist mehr mit Honeurs, Tagungen und Privatpatienten. Und das bin ich ja dummerweise nicht. Mein Hirntumor bequemte sich unbequem zu werden, als ich in meiner Promotion an der Universität steckte. Hätte er ruhig mal noch ein paar Jahre warten können.<br /><br />Anruf bei Facharzt 3.<br />Ich komme sofort durch. Allerdings nur bis in die Warteschleifenansage. Diese wiederholt sich alle 20 Sekunden.<br />Nachdem ich läppische 25 mal dem Text gelauscht habe, geht eine Dame dran. <br /><br />Sind Sie schon Patientin?<br />(Ich traue mich kaum, was zu sagen. Vorsichtig hauche ich: ) Nein, leider noch nicht. <br />Pause.<br /><br />Privat oder Kasse?<br />Kasse. (aka A..karte).<br />Im Hintergrund schlagen Terminkalenderseiten um. <br />Raschel, raschel, raschel, raschel, raschel.<br />Da hätte ich am 21. November wieder was frei. <br />November?!<br />Ja.<br />Wir haben Juni.<br />Ja.<br />Ich habe aber fiese Schmerzen und kann seit Tagen nur noch humpeln. <br />21. November.<br />Und wenn ich vorher einspringe, wenn jemand absagt?<br />21. November. <br /><br />21. November. Na, da hätten wir ja schon mal einen Termin.<br />Löst zwar nicht im Geringsten mein aktuelles Problem, aber wer weiß, welche orthopädischen Beschwerden ich am 21. November so habe. <br /><br />Ich bin erschöpft und möchte mich hinlegen. Geht aber nicht. Der Timer zum Sprechstundenbeginn piept. Ich werfe eine Migränetablette ein und greife zum heißgelaufenen Smartphone.<br /><br /><h3>Zurück auf Los zu Facharzt 1</h3><br />Sie rufen außerhalb unserer Sprechzeiten an. Diese sind bla bla und 15-18 Uhr. <br />Ich schaue auf die Uhr. Wir haben 15.15 Uhr.<br />Um 15.20 rufe ich wieder an.<br />Sie rufen außerhalb unserer Sprechzeiten an. Diese sind bla bla und 15-18 Uhr. <br />Um 15.30 rufe ich wieder an.<br />Sie rufen außerhalb unserer Sprechzeiten an. Diese sind bla bla und 15-18 Uhr.<br /><br />Um 15.35 ist besetzt. <br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />Besetzt.<br />Anruf.<br />..<br /><br />Da. Ein Freizeichen. Ein Freizeichen. Ooooh, ein Freizeichen. <br />Praxis Dr. Ding und Dong und Klang.<br />Sprüchlein aufsagen.<br /><br />Dr. Ding nimmt zur Zeit keine neuen Patienten an. Ich könnte Ihnen in vier Wochen einen Termin bei Dr. Klang anbieten. <br />Na, super, Dr. Klang habe ich nicht recherchiert. <br /><br /><h3>Wenn man einen Arzt in einer Gemeinschaftspraxis angeboten bekommt wie geschnitten Brot, ist es oft der junge Hase frisch von der Uni&nbsp;</h3><br />Und die übermotivierten Hasen frisch von der Uni haben meiner Erfahrung nach in der Regel nicht die geringste Vorstellung davon, daß der menschliche Körper nicht 1:1 so funktionert wie man es in den Thieme-Büchern so liest. Die meisten sagen zu allem, das man als Symptom berichtet <a href="http://www.frauenotiert.de/2013/12/worst-comment-das-kann-nicht-sein.html" target="_blank">"Das kann nicht sein."</a> <br /><br />Wenn man irgendwann mal einen Arzt tot im Sprechzimmer findet, nachdem ich einen Termin hatte, dürften seine letzten Worte bekannt sein.<br /><br />Während die Dame redet, klicke ich schnell die Webseite der Praxis auf. Und siehe da: Der schmucke Hase ist höchstens 30. Wenn denn überhaupt. Behandeln dürfte der mich gerne mal. Nur nicht als Arzt.<br /><br />Seine Vita liest sich auch zu stromlinienförmig für meine unstromlinienförmige Anamnese. Experimente dieser Art kann ich mir zeitlich und nervlich nicht erlauben. Ich verstehe ja, daß alle direkt von der Uni erst lernen müssen. Habe ich ja selber in meinem Berufsbereich auch gemußt. Und ich ahne, wie sehr ich meine Kollegen damit gequält habe. Wenn ich aber jetzt einen Monat auf diesen Arzt warte und dann bewahrheiten sich meine Befürchtungen, stehe ich wieder bei Null. Und das kann ich als Dienst an der ärztlichen Alltagserfahrung nicht leisten.<br /><br />Ziemlich zerknirscht lehne ich ab und falle aufs Bett. Migräne kurieren. Erschöpfung kurieren. Frust kurieren.<br />Wieder ist ein kompletter Tag mit Krankheitsadministration vergangen. Genauso wie gestern. Und vorgestern. Und vorvorgestern.<br /><br />Ich habe mich seit Wochen weit über meine Kräfte ausgepowert, um Gesundheitsthemen zu administrieren und bei Ärzten unterzukommen. Alles andere mußte liegenbleiben. Zum ersten Mal im Leben erhalte ich Mahnungen. Und was ist das Ergebnis? Ein Termin Mitte November. Und zwei bereits absolvierte Termine mit ohne Ergebnis.<br /><br />Ach ja doch eines: ich soll bitte vor der Weiterbehandlung folgende zwei bis drei Fachärzte aufsuchen und dieses und jenes untersuchen lassen. Und dann zurückkommen. So kann man Patienten hervorragend für mindestens ein halbes Jahr loswerden.<br /><br />Und dann fällt mir plötzlich etwas ein: Es gab doch mal eine Gesetzesänderung, nach der man innerhalb von vier Wochen einen Facharzttermin bekommen soll. Das muß ich gleich mal recherchieren.<br />Und was dabei wieder alles so passiert ist, das erzähle ich Euch beim nächsten Mal.&nbsp;<br /><br />P.S. Diesen Text tippte ich, während ich in einer Arzttelefonwarteschleife hing. Komplett. Mit Fotobearbeitung. Das hat einen Amoklauf verhindert. <br /><br /><br />
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://www.frauenotiert.de/2017/08/chronisch-krank-ein-fulltime-job.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.neuesvonfraumeyer.de/" target="_blank">Neues von Frau Meyer</a>
-		</div>
-		<div>
-			<h3>Erst hatten sie kein Glück, und dann kam auch noch Pech dazu</h3>
-		</div>
-		<div class="collectiontext">
-			<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.sun.syndication.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">M. ist nicht nur eine sehr, sehr gute und treue Freundin von mir, sie ist auch eine super Patentante.</span>﻿﻿﻿<br /><br /><span style="font-family: &quot;arial&quot;;">Sie verbringt&nbsp;oft Zeit mit ihrem jungendlichen Neffen. </span><br /><span style="font-family: &quot;arial&quot;;">Ninja Warrior gucken, Billiard oder LaserTag spielen, anschließend Burger essen, das machen die Tante und Neffe gern zusammen. Und Sportevents gucken oder sogar besuchen, das mögen beide ganz besonders.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Der Junge ist FC Bayern-Fan, aber ansonsten völlig in Ordnung. ;-)</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Morgen ist Supercup. </span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Da spielen die Rot-Weißen gegen die Schwarz-Gelben von der Borussia im Signal Iduna Park in Dortmund. Supertante M. hatte für dieses Event&nbsp;Ende Juni Tickets geordert und Anfang Juli bezahlt. Dann gingen die Tickets auf den Postweg. </span><br /><span style="font-family: &quot;arial&quot;;">Dieser Postweg stellte sich als Holzweg heraus, denn die Tickets sind nicht in M.s Briefkasten gelandet. Bis heute nicht. Und morgen findet um 20 Uhr 30 der Supercup statt.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Vom Ticketanbieter erhielt meine Freundin M. eine Email, die ihr auch den letzten Restfunken Hoffnung nahm, morgen mit ihrem sportbegeisterten Patenkind im Stadion zu sitzen.</span><br /><br /><span style="color: black; font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><em>Sehr geehrte(r) Frau ...,</em></span><br /><span style="color: black; font-family: &quot;arial&quot;;"><em></em></span><br /><span style="font-family: &quot;arial&quot;;"><em><span style="color: black;">wir wissen, dass Sie Ihre Tickets für das Spiel noch nicht erhalten haben.<br />            Leider ist eine Sendung mit mehreren Tickets bei DHL verloren gegangen.<br />            Wir sind natürlich in Kontakt mit DHL, aber die Sendung ist nicht mehr auffindbar.<br />            Auch der BVB kann oder will leider nicht helfen. Kurz gesagt: Uns sind leider die Hände gebunden.<br />            Wir können uns nur entschuldigen!<br /><br />Teilen Sie uns bitte Ihre Kontoverbindung mit und wir erstatten den Betrag sofort und stornieren den Auftrag.<br /><br />            Sollten die Tickets wider Erwarten noch auftauchen werden wir Sie natürlich informieren, aber zum jetzigen Zeitpunkt gehen wir leider nicht davon aus.</span></em></span><br /><em><span style="font-family: &quot;arial&quot;;"></span></em><br /><em><span style="font-family: &quot;arial&quot;;">Mit freundlichen blablabla</span></em><br /><span style="color: red; font-family: &quot;arial&quot;;"></span><br /><span style="color: black; font-family: &quot;arial&quot;;">Ich lese das an mich weitergeleitete Schreiben vom Ticketanbieter und gerate sofort in einen Zustand&nbsp;regelrechter Co-Wut. Die Sportfans haben sich wahnsinnig auf den morgigen Tag gefreut, und da ist es auch kein Trost, wenn das Geld erstattet wird. </span><br /><span style="color: black; font-family: &quot;arial&quot;;">Wäre ja auch noch schöner, wenn nicht.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="color: black; font-family: &quot;arial&quot;;">Irgendwie fühlt sich wieder keiner so recht verantwortlich, so scheint es.</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Die Frage ist: Wo sind die Tickets?</span><br /><span style="font-family: &quot;arial&quot;;">Hat&nbsp;sich die&nbsp;jemand aus der Post gefischt und freut sich?</span><br /><span style="font-family: &quot;arial&quot;;">War eine Aushilfe mit dem Liefern der Post überfordert und hat die Umschläge bei sich im Keller gebunkert? </span><br /><span style="font-family: &quot;arial&quot;;">Manchmal liest man so etwas...</span><br /><span style="font-family: &quot;arial&quot;;">Sind die Tickets überhaupt verschickt worden?</span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;">Alles Spekulation.</span><br /><br /><span style="font-family: &quot;arial&quot;;">Fakt ist: <br /><span style="font-family: &quot;arial&quot;;">Supercup ohne Supertante und Superneffen = <span style="color: red;">SUPERGAU</span></span><br /><span style="color: red;"></span><br /><span style="color: black;">Ich denke, Freundin M. und ihr Neffe gucken das Spiel mit der ganzen Familie im Zweiten. </span></span><br /><span style="font-family: &quot;arial&quot;;">Vielleicht grillt Superoma vorher ein paar Würstchen.<br />Dazu wünsche ich&nbsp;viel Spaß.</span><br /><span style="font-family: &quot;arial&quot;;">Trotz allem.<br /> <br /><br />&nbsp;</span><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;"></span><br /><span style="font-family: &quot;arial&quot;;"></span><br />
-
-		 -->
-					</div>
-		<div class="collectionhref">
-		<a href="http://www.neuesvonfraumeyer.de/2017/08/erst-hatten-sie-kein-gluck-und-dann-kam.html" target="_blank">Öffnen</a>
 		</div>
 	</li>
 </ul>
@@ -223,12 +829,22 @@ SyndContentImpl.value=<span style="font-family: &quot;arial&quot; , &quot;helvet
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+	  <a href="aop_identifiziert_exception_ausloesende_instanz.html">
+		<div class="date">27.08.2017</div>
+<h3>AOP identifiziert Exception-auslösende Instanz</h3>
+  <div class="abstract">
+			<img class="initial" title="Neu" src="images/page_new_48.png">
+		  <p>Nachdem ich vor einiger Zeit bereits einen Artikel zu den
+Möglichkeiten der aspekt-orientierten Programmierung
+veröffentlicht habe, hier nun ein weiterer UseCase.
+</p></div>   </a>
+</li>
+<li class="anriss">
 	  <a href="implementierung_rfc_1751.html">
 		<div class="date">20.08.2017</div>
 <h3>Implementierung RFC 1751</h3>
   <div class="abstract">
-			<img class="initial" title="Neu" src="images/page_new_48.png">
-		  <p>Vor einiger Zeit erhielt ich während der Arbeit für einen Kunden - das genaue Wie und Woher würde hier zu
+				  <p>Vor einiger Zeit erhielt ich während der Arbeit für einen Kunden - das genaue Wie und Woher würde hier zu
 weit führen - eine Idee: Letztlich musste ein Fingerprint kontrolliert werden. Dazu wurde mir aber kein
 Hexdump eines Schlüssels präsentiert sondern eine Folge englischer Worte.
 </p></div>   </a>
@@ -239,14 +855,6 @@ Hexdump eines Schlüssels präsentiert sondern eine Folge englischer Worte.
 <h3>The Unlicense</h3>
   <div class="abstract">
 				  <p>Hier eine Lizenz für echte Public-Domain-Projekte
-</p></div>   </a>
-</li>
-<li class="anriss">
-	  <a href="etwas_leichtes_zwischendurch_i.html">
-		<div class="date">14.08.2017</div>
-<h3>Etwas leichtes für zwischendurch I</h3>
-  <div class="abstract">
-				  <p>Manchmal braucht man Erholung zwischen all der Arbeit und dem Ernst des Lebens - Hier einige Links, die dabei helfen können...
 </p></div>   </a>
 </li>
 </ul>

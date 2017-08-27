@@ -2,13 +2,45 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>Upcoming...</title>
+  <title>AOP identifiziert Exception-auslösende Instanz</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
+			<meta name="Description" content="Nachdem ich vor einiger Zeit bereits einen Artikel zu den
+Möglichkeiten der aspekt-orientierten Programmierung
+veröffentlicht habe, hier nun ein weiterer UseCase." />
+	  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
 	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
 	<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
@@ -30,7 +62,7 @@ document.write(link)
 //-->
 </script>
 </head>
-<body>
+<body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
 <div id="logo">
@@ -57,27 +89,96 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 <div id="all">
 <div id="A">
 <div id="content">
-	<div class="heading">Upcoming...</div>
-		<p>Demnächst in diesem Theater...</p>
-	<ul class="double"> 
+	<div class="date">27.08.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+				<!--li--> <a href="implementierung_rfc_1751.html#content">Java</a> <!--/li-->
+			<!--/ul-->
+</div>
+ 	<div class="heading">AOP identifiziert Exception-auslösende Instanz</div>
+			<p>Nachdem ich vor einiger Zeit bereits einen Artikel zu den
+<a href="aspekt_orientierte_programmierung_umgehen_fehlern.html">Möglichkeiten der aspekt-orientierten Programmierung</a>
+veröffentlicht habe, hier nun ein weiterer UseCase.
+</p> <a name="content"> </a>
+ <p>Wir haben auf Arbeit mehrere Projekte - unter anderem eines, das eine Service-orientierte Struktur aufweist und
+in der mehrere Instanzen derselben Service-Klasse unterschiedlih konfiguriert nebeneinander arbeiten.
+</p><p>
+Neulich wurde ein Bug gemeldet, der sich - neben der fehlerhaften Funktionalität - in einem Stacktrace im Log äußerte.
+Dieser Stacktrace schien zunächst logisch unmöglich zu sein - bis die Idee aufkam, dass dieser eventuell von einer anderen als der
+Instanz stammen könnte, die das Fehlverhalten aufwies.
+</p><p>
+Letztlich erwies sich diese Vermutung als korrekt - brachte mich aber zu der Überlegung: "Wäre es nicht hervorragend,
+wenn man im Stacktrace die Instanz identifizieren könnte, an der die jeweilige Methode aufgerufen wurde?"
+Das würde dann ungefähr so aussehen - statt:
+<pre>
+java.lang.RuntimeException: huhu
+	at de.elbosso.scratch.aop.HelloWorld.greet(HelloWorld.java)
+	at de.elbosso.scratch.aop.Worker.greet(Worker.java:10)
+	at de.elbosso.scratch.aop.HelloWorld.main(HelloWorld.java:23)
+</pre>
+würde der Stacktrace so aussehen:
+<pre>
+java.lang.RuntimeException: huhu
+	at de.elbosso.scratch.aop.HelloWorld.greet(HelloWorld.java) - de.elbosso.scratch.aop.HelloWorld@53b32d7
+	at de.elbosso.scratch.aop.Worker.greet(Worker.java:10) - de.elbosso.scratch.aop.Worker@27efef64
+	at de.elbosso.scratch.aop.HelloWorld.main(HelloWorld.java:23) - de.elbosso.scratch.aop.HelloWorld@53b32d7
+</pre>
+</p><p>
+So einleuchtend die Vorteile eines auf diese Art und Weise erweiterten Stacktrace scheinen mögen - mit
+Java ist es unmöglich, so ein Verhalten zu erreichen. Allerdings kann man durch AOP etwas ähnliches durchaus realisieren:
+In meinem
+<a href="aspekt_orientierte_programmierung_umgehen_fehlern.html">früheren Artikel</a>
+bezüglich AOP zeigte ich, wie man Java-Code "hot-fixen" kann, indem man
+die Implementierung einer Methode unterdrückt und statt ihrer anderen Code zur Ausführung bringt. Auf diese Weise
+ist es auch möglich, Exceptions zu unterdrücken: Wird in einer instrumentierten Methode eine Exception ausgelöst,
+wird sie durch die Instrumentierung einfach verschluckt und statt dessen ein Default-Ergebnis an den Aufrufer zurückgegeben.
+Das funktioniert mit Exceptionen, die in der instrumentierten Methode geworfen werden, wie auch mit solchen, die ihren Ursprung
+in in der
+instrumentierten Methode aufgerufenen Methoden haben.
+</p><p>
+Ändert man die Instrumentierung aus dem
+<a href="aspekt_orientierte_programmierung_umgehen_fehlern.html">früheren Artikel</a>
+zu diesem Thema ein wenig ab, kann man die Instanz zusammen mit dem Stacktrace ins Log schreiben: der
+<a href="https://github.com/codehaus/aspectwerkz/blob/master/aspectwerkz2/src/main/org/codehaus/aspectwerkz/joinpoint/JoinPoint.java">JoinPoint</a>
+verfügt über Methoden zum Zugriff auf die Instanz, an der die instrumentierte
+ Methode gerade aufgerufen wurde.
+</p><p>
+Damit ist es dann möglich, den Stacktrace zusammen mit Informationen zur aktuellen Instanz ins Logfile zu schreiben.
+Das ergibt dann zwar noch nicht den oben angegebenen Idealfall, aber wenigstens muss man dazu keine Codeänderungen vornehmen...
+</p> 		</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
 <li class="anriss">
-				<h3 class="head">
-				Änderungen im Datumsformat von Java</h3>
+	  <a href="implementierung_rfc_1751.html#content">
+		<div class="date">20.08.2017</div>
+<h3>Implementierung RFC 1751</h3>
   <div class="abstract">
-			<p>Zwischen Java7 und Java8 haben sich einige Dinge geändert - viele davon wurden beschrieben und diskutiert.
-Ich bin heute an einer völlig unerwarteten Stelle von einer solchen Änderung angespuckt worden, die mich zunächst mal sprachlos machte:
-</p></div> 	
+				  <p>Vor einiger Zeit erhielt ich während der Arbeit für einen Kunden - das genaue Wie und Woher würde hier zu
+weit führen - eine Idee: Letztlich musste ein Fingerprint kontrolliert werden. Dazu wurde mir aber kein
+Hexdump eines Schlüssels präsentiert sondern eine Folge englischer Worte.
+</p></div>   </a>
 </li>
 <li class="anriss">
-				<h3 class="head">
-				Nahtlos wiederholbare Rausch-Kacheln</h3>
+	  <a href="the_unlicense.html#content">
+		<div class="date">14.08.2017</div>
+<h3>The Unlicense</h3>
   <div class="abstract">
-			<p>Und wieder einmal habe ich mich in die Untiefen der Erzeugung von Daten begeben, die man mit
-einiger Toleranz als au der Ferne aufgenommene geographische Features bezeichnen könnte
-</p></div> 	
+				  <p>Hier eine Lizenz für echte Public-Domain-Projekte
+</p></div>   </a>
+</li>
+<li class="anriss">
+	  <a href="etwas_leichtes_zwischendurch_i.html#content">
+		<div class="date">14.08.2017</div>
+<h3>Etwas leichtes für zwischendurch I</h3>
+  <div class="abstract">
+				  <p>Manchmal braucht man Erholung zwischen all der Arbeit und dem Ernst des Lebens - Hier einige Links, die dabei helfen können...
+</p></div>   </a>
 </li>
 </ul>
-</div>
 </div>
 <nav id="C"> 
 <h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
@@ -211,7 +312,9 @@ einiger Toleranz als au der Ferne aufgenommene geographische Features bezeichnen
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-    Java
+    <strong>
+Java
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -378,9 +481,7 @@ einiger Toleranz als au der Ferne aufgenommene geographische Features bezeichnen
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-    <strong>
-Upcoming...
-</strong>
+    Upcoming...
 </h3>
 </header>
 <div class="nav-item-body">
@@ -388,9 +489,6 @@ Upcoming...
 </div>
 </div>
 </a>
-<!--
--->
-
 </nav>
 </div>
 	<div id="footer">
@@ -411,8 +509,7 @@ abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZ
 		</script>
 		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
 			</a></strong>
-	</span>
-</div><!-- #footer -->
+	</span></div><!-- #footer -->
 </div>
 </body>
 </html>
