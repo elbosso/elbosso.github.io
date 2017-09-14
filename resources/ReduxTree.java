@@ -64,8 +64,8 @@ public class ReduxTree
 		holders=new java.util.HashMap();
 		for (String key : container.keySet())
 		{
-//			System.out.println(container.keySet());
-//			System.out.println(key);
+
+
 			Object data=container.get(key);
 			java.lang.Class cls=data.getClass();
 			this.container.put(key, data);
@@ -111,7 +111,7 @@ public class ReduxTree
 			model=new javax.swing.tree.DefaultTreeModel(root);
 			for (String key : container.keySet())
 			{
-//				System.out.println(key);
+
 				Object data=container.get(key);
 				java.lang.Class cls=data.getClass();
 				String[] path=key.split("/");

@@ -51,7 +51,7 @@ if(pgconn!=null)
  lobjmgr = pgconn.getLargeObjectAPI();
 oid=lobjmgr.createLO();
  org.postgresql.largeobject.LargeObject lobj=lobjmgr.open(oid);
-System.out.println(oid);
+print(oid);
 java.io.OutputStream os=lobj.getOutputStream();
 javax.swing.JFileChooser fc=new javax.swing.JFileChooser();
 fc.setCurrentDirectory(new java.io.File("/home/elbosso/Pictures/daily"));

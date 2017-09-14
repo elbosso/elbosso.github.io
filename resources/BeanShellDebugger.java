@@ -46,11 +46,11 @@ doFunc()
 	b=a*2;
 //Next line causes Breakpoint - Callstack allows accessing Variables a, b, and c
 	huhu(b);
-	System.out.println(this.variables);
+	de.elbosso.util.Utilities.sopln(this.variables);
 }
 c=5;
 doFunc();
-System.out.println("huhu");
+de.elbosso.util.Utilities.sopln("huhu");
 c=null;
 //Next line causes NullPointerException - because the Script does not handle it, it causes
 //a Breakpoint - Callstack allows accessing Variables exp and c - exp being the Exception being raised

@@ -138,7 +138,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 				hourdragging = false;
 				minutedragging = false;
 				seconddragging = false;
-//				System.out.println((int)getHourValue()+" "+(int)getMinuteValue()+" "+(int)getSecondValue());
+
 				repaint();
 			}
 
@@ -187,7 +187,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 		int height = e.getComponent().getHeight();
 		int computex = x - width / 2;
 		int computey = y - height / 2;
-//				System.out.println(computex+" "+computey);
+
 		double sinangle = 0.0;
 		if (computey != 0)
 		{
@@ -216,7 +216,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 			sinangle += java.lang.Math.PI * 2;
 		}
 		sinangle = (java.lang.Math.PI * 2) - sinangle;
-//				System.out.println(sinangle+" "+(sinangle/(java.lang.Math.PI*2.0)));
+
 		if (dragstartet)
 		{
 			oldfracture = sinangle / (java.lang.Math.PI * 2.0);
@@ -226,22 +226,22 @@ public class ThreeDialWatch extends javax.swing.JComponent
 //			{
 //				dragoffset += 2 * java.lang.Math.PI;
 //			}
-//					System.out.println(dragoffset+" "+(java.lang.Math.PI*0.05));
+
 			java.awt.geom.Ellipse2D elli = new java.awt.geom.Ellipse2D.Double(centerx + offcenterx - smalldim / 4, centery + offcentery - smalldim / 4, smalldim / 2, smalldim / 2);
-//					System.out.println(elli.contains(e.getPoint()));
+
 //					if(java.lang.Math.abs(dragoffset)<java.lang.Math.PI*0.05)
 			if (elli.contains(e.getPoint()))
 			{
 				seconddragging = true;
 			dragoffset = secondactualdialvalue - java.lang.Math.PI * 0.5 - sinangle;
-//				System.out.println("hi");
+
 			}
 			else
 			{
 				offcenterx = (int) (java.lang.Math.sin(minuteactualdialvalue+getOffset()) * 0.8 * (double) (dim / 2 - smalldim / 2));
 				offcentery = (int) (java.lang.Math.cos(minuteactualdialvalue+getOffset()) * 0.8 * (double) (dim / 2 - smalldim / 2));
 				elli = new java.awt.geom.Ellipse2D.Double(centerx + offcenterx - smalldim / 4, centery + offcentery - smalldim / 4, smalldim / 2, smalldim / 2);
-//					System.out.println(elli.contains(e.getPoint()));
+
 //					if(java.lang.Math.abs(dragoffset)<java.lang.Math.PI*0.05)
 				if (elli.contains(e.getPoint()))
 				{
@@ -253,7 +253,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 					offcenterx = (int) (java.lang.Math.sin(houractualdialvalue+getOffset()) * 0.5 * (double) (dim / 2 - smalldim / 2));
 					offcentery = (int) (java.lang.Math.cos(houractualdialvalue+getOffset()) * 0.5 * (double) (dim / 2 - smalldim / 2));
 					elli = new java.awt.geom.Ellipse2D.Double(centerx + offcenterx - smalldim / 4, centery + offcentery - smalldim / 4, smalldim / 2, smalldim / 2);
-//					System.out.println(elli.contains(e.getPoint()));
+
 //					if(java.lang.Math.abs(dragoffset)<java.lang.Math.PI*0.05)
 					if (elli.contains(e.getPoint()))
 					{
@@ -293,7 +293,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 //		gfx2D.fillRect(0, (int)(getSize().getHeight()*actualfillvalue), getSize().width,  getSize().height);
 		int offcenterx = (int) (java.lang.Math.sin(houractualdialvalue+getOffset()) * 0.5 * (double) (dim / 2 - smalldim / 2));
 		int offcentery = (int) (java.lang.Math.cos(houractualdialvalue+getOffset()) * 0.5 * (double) (dim / 2 - smalldim / 2));
-//		System.out.println(offcenterx + " " + offcentery + " " + dim + " " + smalldim + " " + houractualdialvalue);
+
 		java.awt.Stroke str = gfx2D.getStroke();
 		gfx2D.setStroke(WIDESTROKE);
 		gfx2D.setColor(DARKALPHA);
@@ -327,7 +327,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 		gfx.setColor(latch);
 		offcenterx = (int) (java.lang.Math.sin(minuteactualdialvalue+getOffset()) * 0.8 * (double) (dim / 2 - smalldim / 2));
 		offcentery = (int) (java.lang.Math.cos(minuteactualdialvalue+getOffset()) * 0.8 * (double) (dim / 2 - smalldim / 2));
-//		System.out.println(minutevalue+" "+offcenterx + " " + offcentery + " " + dim + " " + smalldim + " " + minuteactualdialvalue);
+
 		str = gfx2D.getStroke();
 		gfx2D.setStroke(WIDESTROKE);
 		gfx2D.setColor(DARKALPHA);
@@ -361,7 +361,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 		gfx.setColor(latch);
 		offcenterx = (int) (java.lang.Math.sin(secondactualdialvalue+getOffset()) * (double) (dim / 2 - smalldim / 2));
 		offcentery = (int) (java.lang.Math.cos(secondactualdialvalue+getOffset()) * (double) (dim / 2 - smalldim / 2));
-//		System.out.println(offcenterx + " " + offcentery + " " + dim + " " + smalldim + " " + secondactualdialvalue);
+
 		str = gfx2D.getStroke();
 		gfx2D.setStroke(WIDESTROKE);
 		gfx2D.setColor(DARKALPHA);
@@ -400,7 +400,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 		houractualdialvalue = (invertRotation ? -2 : 2) * java.lang.Math.PI * ((hourvalue - hourminiMax.getMin()) % houroneround) / houroneround;
 		minuteactualdialvalue = (invertRotation ? -2 : 2) * java.lang.Math.PI * ((minutevalue - minuteminiMax.getMin()) % minuteoneround) / minuteoneround;
 		secondactualdialvalue = (invertRotation ? -2 : 2) * java.lang.Math.PI * ((secondvalue - secondminiMax.getMin()) % secondoneround) / secondoneround;
-//		System.out.println(minutevalue);
+
 	}
 
 	public boolean isInvertRotation()
@@ -475,20 +475,20 @@ public class ThreeDialWatch extends javax.swing.JComponent
 	{
 		boolean rv = false;
 		double vv = getHourValue();
-//		System.out.println(vv+" "+oneround+" "+vv%oneround+" "+frac+" "+(vv-(vv%oneround)+oneround*frac));
+
 		double oneround=houroneround;
 		if(minutedragging)
 			oneround=minuteoneround;
 		else if(seconddragging)
 			oneround=secondoneround;
 		double newv = vv - (vv % oneround) + oneround * frac;
-//			System.out.println(min+" - "+newv+" - "+max);
+
 		double df = invertRotation ? oldfracture - frac : frac - oldfracture;
 //		if((newv<=max)&&(newv>=min))
 		{
 			if (oldfracture > -1)
 			{
-//				System.out.println(frac-oldfracture);
+
 //				if((frac!=0.0)&&(oldfracture!=0.0))
 				if (invertRotation)
 				{
@@ -496,7 +496,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 					{
 						newv -= oneround;
 						df = 1.0 - df;
-//						System.out.println("+");
+
 					}
 					else
 					{
@@ -504,7 +504,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 						{
 							newv += oneround;
 							df += 1.0;
-//						System.out.println("- ");
+
 						}
 					}
 				}
@@ -514,7 +514,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 					{
 						newv -= oneround;
 						df = 1.0 - df;
-//						System.out.println("+");
+
 					}
 					else
 					{
@@ -522,20 +522,20 @@ public class ThreeDialWatch extends javax.swing.JComponent
 						{
 							newv += oneround;
 							df += 1.0;
-//						System.out.println("- ");
+
 						}
 					}
 				}
 			}
-//			System.out.println(min+" "+newv+" "+max+" "+oldfracture+" "+frac+" "+df);
+
 
 			oldfracture = frac;
 //			if((((getValue()==max)&&(df<0.0))||((getValue()==min)&&(df>0.0)))||((getValue()<max)&&(getValue()>min)))
 //				setValue(newv);
 //			double v=getValue();
-//			System.out.println(v+" # "+(((1.0-actualfillvalue)*(max-min))+min+(actualdialvalue/(2*java.lang.Math.PI))*oneround)+" "+actualdialvalue+" "+((value-min)%oneround)+" "+oneround+" ");
+
 //			double aactualdialvalue+=df*2*java.lang.Math.PI;
-//			System.out.println(getValue()+" "+java.lang.Math.log10(oneround)+" "+df+" "+(actualdialvalue/(2*java.lang.Math.PI)));
+
 			if(hourdragging)
 			{
 			double v = hourvalue + df * houroneround;
@@ -552,13 +552,13 @@ public class ThreeDialWatch extends javax.swing.JComponent
 						setHourValue(hourminiMax.getMax());
 					else if(v < hourminiMax.getMin())
 						setHourValue(hourminiMax.getMin());
-//					System.out.println(getHourValue()+" "+hourvalue);
+
 					hourdragging = false;
 				}
 			}
 //			else
 //			{
-////					System.out.println(getHourValue()+" # "+hourvalue);
+
 //				hourdragging = false;
 //			}
 ////			actualfillvalue=latvh;
@@ -579,10 +579,10 @@ public class ThreeDialWatch extends javax.swing.JComponent
 						setMinuteValue(minuteminiMax.getMax());
 					else if(v < minuteminiMax.getMin())
 						setMinuteValue(minuteminiMax.getMin());
-//					System.out.println(getMinuteValue()	+"  "+minutevalue);
+
 					minutedragging = false;
 				}
-//					System.out.println(getMinuteValue()	+" + "+minutevalue);
+
 			}
 //			else
 //			{
@@ -590,7 +590,7 @@ public class ThreeDialWatch extends javax.swing.JComponent
 //						setMinuteValue(minuteminiMax.getMax());
 //					else if(v < minuteminiMax.getMin())
 //						setMinuteValue(minuteminiMax.getMin());
-//					System.out.println(getMinuteValue()+" # "+minutevalue);
+
 //				minutedragging = false;
 //			}
 ////			actualfillvalue=latvh;

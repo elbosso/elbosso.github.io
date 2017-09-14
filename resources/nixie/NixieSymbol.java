@@ -372,7 +372,7 @@ public class NixieSymbol extends NixieTube
 
     private java.awt.image.BufferedImage createSymbol(int number, boolean active)
     {
-//		System.out.println(factor);
+
         java.awt.GraphicsConfiguration gfxConf = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
         final java.awt.image.BufferedImage IMAGE = gfxConf.createCompatibleImage((int)(62*factor), (int)(97*factor), java.awt.Transparency.TRANSLUCENT);
 
@@ -417,7 +417,7 @@ public class NixieSymbol extends NixieTube
 				alpha=0.2f;
                  g2.setStroke(new java.awt.BasicStroke((float)factor, java.awt.BasicStroke.CAP_ROUND, java.awt.BasicStroke.JOIN_MITER));
 			}
-//			System.out.println(alpha);
+
             g2.setColor(new java.awt.Color(0.2f, 0.2f, 0.2f, alpha));
             g2.draw(numberPath);
         }
@@ -432,7 +432,7 @@ public class NixieSymbol extends NixieTube
 				alpha=0.6f;
                  g2.setStroke(new java.awt.BasicStroke((float)factor, java.awt.BasicStroke.CAP_ROUND, java.awt.BasicStroke.JOIN_MITER));
 			}
-//			System.out.println(alpha);
+
             g2.setColor(new java.awt.Color(0.2f, 0.2f, 0.2f, alpha));
             g2.draw(numberPath);
         }

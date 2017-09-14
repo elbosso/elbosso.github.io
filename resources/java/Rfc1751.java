@@ -293,8 +293,8 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 		{
 			java.util.BitSet smallPart = bits.get(i, i + 2);
 			long[] la = smallPart.toLongArray();
-//			System.out.println(bits.get(0)+" "+bits.get(1)+" "+smallPart.get(0)+" "+smallPart.get(1));
-//			System.out.println(bits.length()+" "+i+" "+(i+2)+" "+smallPart.length()+" "+la.length+" "+la);
+
+
 			p += la.length > 0 ? la[0] : 0;
 		}
 		for (int i = 0; i < bytes.length; ++i)
@@ -303,9 +303,9 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 		}
 		bits = java.util.BitSet.valueOf(bytes);
 		java.util.BitSet parity = java.util.BitSet.valueOf(new long[]{p});
-//		System.out.println(bits.size()+" "+parity.get(1));
+
 		bits.set(64, parity.get(1));
-//		System.out.println(65+" "+parity.get(0));
+
 		bits.set(65, parity.get(0));
 		for (int i = 0; i < 6; ++i)
 		{
@@ -317,13 +317,13 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 			}
 			long[] la = reversed.toLongArray();
 			int index = (int) (la.length > 0 ? la[0] : 0);
-//			System.out.println(bits);
-//			System.out.println(java.lang.Integer.toBinaryString(index)+" "+index + " " + java.lang.Integer.toHexString(index) + " " + dictionary[index]);
+
+
 			/*for (int i = 0; i < dictionary.length; ++i)
 			{
 				if (dictionary[i].equals("USE"))
 				{
-					System.out.println(i + " " + java.lang.Integer.toHexString(i));
+					de.elbosso.util.Utilities.sopln(i + " " + java.lang.Integer.toHexString(i));
 					break;
 				}
 			}*/
@@ -339,24 +339,24 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 		int n = 12345;
 		java.util.BitSet bs = java.util.BitSet.valueOf(new long[]{n});
 		long l = bs.toLongArray()[0];
-//		System.out.println(n+" "+l);
+
 		java.lang.String raw = "CCAC2AED591056BE";
 		byte[] bytes = de.elbosso.util.Utilities.fromHex(raw);
 		java.lang.String s = translate(bytes);
 		raw = "4F90FD441C534766";
 		bytes = de.elbosso.util.Utilities.fromHex(raw);
 		s += translate(bytes);
-		System.out.println(s);
+		de.elbosso.util.Utilities.sopln(s);
 		raw = "EFF81F9BFBC65350";
 		bytes = de.elbosso.util.Utilities.fromHex(raw);
 		s = translate(bytes);
 		raw = "920CDD7416DE8009";
 		bytes = de.elbosso.util.Utilities.fromHex(raw);
 		s += translate(bytes);
-		System.out.println(s);
+		de.elbosso.util.Utilities.sopln(s);
 		raw = "EB33F77EE73D4053";
 		bytes = de.elbosso.util.Utilities.fromHex(raw);
 		s = translate(bytes);
-		System.out.println(s);
+		de.elbosso.util.Utilities.sopln(s);
 	}
 }

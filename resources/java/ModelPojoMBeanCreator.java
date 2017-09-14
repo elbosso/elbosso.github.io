@@ -80,7 +80,7 @@ public class ModelPojoMBeanCreator extends java.lang.Object
 //					&& method.getParameterTypes().length == 0
 //					&& method.getReturnType() != void.class)
 //			{
-//				System.out.println(method);
+
 //				getters.add(method);
 //			}
 //			if (method.getName().startsWith("set")
@@ -157,7 +157,7 @@ public class ModelPojoMBeanCreator extends java.lang.Object
 	{
 		java.lang.reflect.Method getter=getters.get(0);//pd.getReadMethod();
 			java.lang.reflect.Method setter=pd.getWriteMethod();
-//			System.out.println(setters.values().iterator().next());
+
 //		String attrName;
 //		if (getter != null)
 //		{

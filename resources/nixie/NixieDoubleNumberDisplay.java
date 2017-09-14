@@ -109,7 +109,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 	public void setValue(double value)
 	{
 		super.setValue(value);
-//		System.out.println(value);
+
 		setFractionalPart(value);
 		setDecPoint();
 		setIntPart(value);
@@ -136,7 +136,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		for(int i=0;i<len;++i)
 		{
 			int stelle=i-(len-stellen);
-//			System.out.println(stelle);
+
 			if(stelle<0)
 				nixieNumbers[i].setNumber(isLeadingZeroes()?0:-1);
 			else
@@ -153,7 +153,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		double v=java.lang.Math.abs(value);
 		double frac=v-(long)value;
 		long fracl=(long)(frac*java.lang.Math.pow(10, fraclen));
-//		System.out.println(fracl);
+
 		int stellen=(int)(java.lang.Math.log10(fracl))+1;
 		if(stellen<0)
 			stellen=1;
@@ -161,7 +161,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		for(int i=len+1;i<len+fraclen+1;++i)
 		{
 			int stelle=i-len-1-(fraclen-stellen);
-//			System.out.println(stelle);
+
 			if(stelle<0)
 				nixieNumbers[i].setNumber(0);
 			else

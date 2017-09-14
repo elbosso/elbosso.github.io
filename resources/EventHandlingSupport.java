@@ -36,7 +36,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void addPropertyChangeListener(String name, java.beans.PropertyChangeListener l)
     {
 //		if(name.equals("inAndOuts"))
-//		System.out.println(l);
+
 		pcs.addPropertyChangeListener(name, l);
 	}
 

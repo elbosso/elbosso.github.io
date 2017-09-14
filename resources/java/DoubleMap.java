@@ -39,14 +39,14 @@ public class DoubleMap
 	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(DoubleMap.class);
 	public static void main(java.lang.String[] args)
 	{
-		System.out.println("huhu");
+		de.elbosso.util.Utilities.sopln("huhu");
 		de.elbosso.util.Utilities.configureBasicStdoutLogging(org.apache.log4j.Level.TRACE);
 		double machEps = 1.0;
 
 		do
 		{
 			machEps /= 2.0;
-			System.out.println(machEps);
+			de.elbosso.util.Utilities.sopln(machEps);
 		}
 		while ((double) (1.0 + (machEps / 2.0)) != 1.0);
 		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("machine Epsilon (double)= "+machEps);
@@ -65,7 +65,7 @@ public class DoubleMap
 			machEpsBD = machEpsBD.divide(java.math.BigDecimal.ONE.add(java.math.BigDecimal.ONE));
 //			if(loop%1000==0)
 //			{
-//				System.out.println(loop+" "+machEpsBD.scale()+" "+sw.measure());
+
 //				sw.toNull();
 //			}
 //			++loop;

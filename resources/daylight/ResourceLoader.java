@@ -70,7 +70,7 @@ public class ResourceLoader extends java.lang.Object
 		if(java.awt.GraphicsEnvironment.isHeadless()==false)
 		{
 			java.awt.Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-			//		System.out.println(screensize+" "+ResourceLoader.size);
+
 			if ((screensize.width < 1281) || (screensize.height < 1025))
 			{
 				switch (ResourceLoader.size)
@@ -91,7 +91,7 @@ public class ResourceLoader extends java.lang.Object
 					}
 				}
 			}
-			//		System.out.println(screensize+" $ "+ResourceLoader.size);
+
 		}
 	}
 
@@ -149,15 +149,15 @@ public class ResourceLoader extends java.lang.Object
 	{
 		java.net.URL rv=null;
 //		if(arg.contains("Previous"))
-//			System.out.println(arg+" "+props.containsKey(arg));
+
 			try
 			{
 				if(props.containsKey(arg))
 				{
-//					System.out.println("huhu");
+
 					java.lang.String replacement=props.getProperty(arg,arg);
 //		if(arg.contains("Previous"))
-//					System.out.println(replacement);
+
 					java.util.regex.Pattern pat=java.util.regex.Pattern.compile("(.*?)_(\\d*?).png");
 					java.util.regex.Matcher m=pat.matcher(replacement);
 					if(m.matches())
@@ -171,7 +171,7 @@ public class ResourceLoader extends java.lang.Object
 					}
 //					else
 //		if(arg.contains("Previous"))
-//						System.out.println(replacement);
+
 					rv=ResourceLoader.class.getClassLoader().getResource(replacement);
 	//				rv.openConnection();
 					if(rv==null)
@@ -191,7 +191,7 @@ public class ResourceLoader extends java.lang.Object
 							arg=prefix+"_"+size.getSmallerPixelSize()+".png";
 					}
 //					else
-//						System.out.println(arg);
+
 					if(arg.startsWith("!"))
 						arg=arg.substring(1);
 					rv=ResourceLoader.class.getClassLoader().getResource(arg);
@@ -205,13 +205,13 @@ public class ResourceLoader extends java.lang.Object
 				rv=ResourceLoader.class.getClassLoader().getResource(arg);
 			}
 //			if(rv==null)
-//		System.out.println(arg+" "+rv);
+
 		return rv;
 	}
 	public static synchronized java.net.URL getResourceUnaltered(java.lang.String arg)
 	{
 		java.net.URL rv=null;
-//		System.out.println(arg+" "+props.containsKey(arg));
+
 		try
 		{
 			if(props.containsKey(arg))
@@ -234,7 +234,7 @@ public class ResourceLoader extends java.lang.Object
 //			t.printStackTrace();
 			rv=ResourceLoader.class.getClassLoader().getResource(arg);
 		}
-//		System.out.println(arg+" "+rv);
+
 		return rv;
 	}
 

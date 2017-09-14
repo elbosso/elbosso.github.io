@@ -92,13 +92,13 @@ public class ActivatableTreeCellEditor extends de.netsysit.model.tree.AbstractCe
 					{
 						de.elbosso.model.tree.ActivityToggleNode treeNode = (de.elbosso.model.tree.ActivityToggleNode) node;
 //					Object userObject = treeNode.getUserObject();
-//		  System.out.println(userObject+" "+(treeNode.isLeaf())+" "+(userObject instanceof de.elbosso.util.lang.ActivityToggle));
+
 						returnValue = ((treeNode.isLeaf())&&(super.isCellEditable(event)));
 					}
 				}
 			}
 		}
-//	System.out.println(returnValue);
+
 		return returnValue;
 	}
 
@@ -113,7 +113,7 @@ public class ActivatableTreeCellEditor extends de.netsysit.model.tree.AbstractCe
 			((javax.swing.JCheckBox) editor).addActionListener(manager);
 
 		}
-//	System.out.println(editor);
+
 		return editor;
 	}
 	private class Manager extends java.lang.Object implements

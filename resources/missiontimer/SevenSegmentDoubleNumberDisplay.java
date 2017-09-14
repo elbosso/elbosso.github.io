@@ -136,7 +136,7 @@ public class SevenSegmentDoubleNumberDisplay extends NumberDisplay
 				g2.drawImage(sevenSegment.get(10),off , yoff, this);
 			off+=(int)(46*factor);
 		}
-//System.out.println(value);
+
 		g2.dispose();
 	}
     protected int paintIntPart(java.awt.Graphics2D g2)
@@ -152,7 +152,7 @@ public class SevenSegmentDoubleNumberDisplay extends NumberDisplay
 		for(int i=1;i<len;++i)
 		{
 			int stelle=i-(len-stellen);
-//			System.out.println(stelle);
+
 			if(stelle<0)
 			{
 //				if(minusstelle<0)
@@ -171,18 +171,18 @@ public class SevenSegmentDoubleNumberDisplay extends NumberDisplay
 		double v=java.lang.Math.abs(value);
 		double frac=v-(long)value;
 		long fracl=(long)(frac*java.lang.Math.pow(10, fraclen));
-//		System.out.println(fracl);
+
 		int stellen=(int)(java.lang.Math.log10(fracl))+1;
 		if(stellen<0)
 			stellen=1;
 		java.lang.String number=Long.toString((long)fracl);
 		int off=(getSize().width-dim.width)/2+(int)(38*factor)+len*(int)(46*factor);
 		int yoff=(getSize().height-dim.height)/2+(int)(dim.height-80*factor);
-//		System.out.println(len+" "+(len.fraclen));
+
 		for(int i=len;i<len+fraclen;++i)
 		{
 			int stelle=i-len-(fraclen-stellen);
-//			System.out.println(stelle);
+
 			if(stelle<0)
 				g2.drawImage(sevenSegment.get(0),off , yoff, this);
 			else

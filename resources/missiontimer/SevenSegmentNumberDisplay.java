@@ -113,7 +113,7 @@ public class SevenSegmentNumberDisplay extends NumberDisplay
 		for(int i=1;i<len;++i)
 		{
 			int stelle=i-(len-stellen);
-//			System.out.println(stelle);
+
 			if(stelle<0)
 			{
 				if(minusstelle<0)
@@ -153,7 +153,7 @@ public class SevenSegmentNumberDisplay extends NumberDisplay
 				g2.drawImage(sevenSegment.get(10),off , yoff, this);
 			off+=(int)(46*factor);
 		}
-//System.out.println(value);
+
 		g2.dispose();
     }
 

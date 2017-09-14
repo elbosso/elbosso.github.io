@@ -50,7 +50,7 @@ if(pgconn!=null)
 {
  lobjmgr = pgconn.getLargeObjectAPI();
  org.postgresql.largeobject.LargeObject lobj=lobjmgr.open(16527l);
-System.out.println(lobj);
+print(lobj);
 java.io.InputStream is=lobj.getInputStream();
 javax.swing.JFileChooser fc=new javax.swing.JFileChooser();
 fc.setCurrentDirectory(new java.io.File("/tmp/"));

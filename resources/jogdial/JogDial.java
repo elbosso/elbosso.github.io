@@ -223,8 +223,8 @@ public class JogDial extends javax.swing.JComponent implements
 				{
 					if(inside)
 					{
-//						System.out.println(inside+" "+dragstarted);
-//						System.out.println(e.getPoint().y+" "+getBounds().height/2);
+
+
 						if(e.getPoint().y>getBounds().height/2)
 						{
 							double intermediate=getValue()-JogDial.this.oneround;
@@ -285,7 +285,7 @@ public class JogDial extends javax.swing.JComponent implements
 				int height=e.getComponent().getHeight();
 				int computex=x-width/2;
 				int computey=y-height/2;
-//				System.out.println(computex+" "+computey);
+
 				double sinangle=0.0;
 				if(computey!=0)
 					sinangle=java.lang.Math.asin(((double)java.lang.Math.abs(computey))/(java.lang.Math.sqrt(computex*computex+computey*computey)));
@@ -304,7 +304,7 @@ public class JogDial extends javax.swing.JComponent implements
 				if(sinangle<0)
 					sinangle+=java.lang.Math.PI*2;
 				sinangle=(java.lang.Math.PI*2)-sinangle;
-//				System.out.println(sinangle+" "+(sinangle/(java.lang.Math.PI*2.0)));
+
 				if(draginitiated)
 				{
 					oldfracture=sinangle/(java.lang.Math.PI*2.0);
@@ -312,9 +312,9 @@ public class JogDial extends javax.swing.JComponent implements
 					dragoffset=actualdialvalue-java.lang.Math.PI*0.5-sinangle;
 					while(dragoffset<0.0)
 						dragoffset+=2*java.lang.Math.PI;
-//					System.out.println(dragoffset+" "+(java.lang.Math.PI*0.05));
+
 					java.awt.geom.Ellipse2D elli=new java.awt.geom.Ellipse2D.Double(centerx+offcenterx-smalldim/2,centery+offcentery-smalldim/2,smalldim,smalldim);
-//					System.out.println(elli.contains(e.getPoint()));
+
 //					if(java.lang.Math.abs(dragoffset)<java.lang.Math.PI*0.05)
 					if(elli.contains(e.getPoint()))
 						dragging=true;
@@ -404,7 +404,7 @@ public class JogDial extends javax.swing.JComponent implements
 	{
 		actualdialvalue=(invertRotation?-2:2)*java.lang.Math.PI*((value-miniMax.getMin())%oneround)/oneround;
 		actualfillvalue=1.0-((value-miniMax.getMin())/(miniMax.getSpan()));
-//		System.out.println(actualfillvalue);
+
 	}
 
 	public boolean isInvertRotation()
@@ -460,15 +460,15 @@ public class JogDial extends javax.swing.JComponent implements
 	{
 		boolean rv=false;
 		double vv=getValue();
-//		System.out.println(vv+" "+oneround+" "+vv%oneround+" "+frac+" "+(vv-(vv%oneround)+oneround*frac));
+
 		double newv=vv-(vv%oneround)+oneround*frac;
-//			System.out.println(min+" - "+newv+" - "+max);
+
 		double df=invertRotation?oldfracture-frac:frac-oldfracture;
 //		if((newv<=max)&&(newv>=min))
 		{
 			if(oldfracture>-1)
 			{
-//				System.out.println(frac-oldfracture);
+
 //				if((frac!=0.0)&&(oldfracture!=0.0))
 				if(invertRotation)
 				{
@@ -476,13 +476,13 @@ public class JogDial extends javax.swing.JComponent implements
 					{
 						newv-=oneround;
 						df=1.0-df;
-//						System.out.println("+");
+
 					}
 					else if(frac-oldfracture>0.7)
 					{
 						newv+=oneround;
 						df+=1.0;
-//						System.out.println("- ");
+
 					}
 				}
 				else
@@ -491,38 +491,38 @@ public class JogDial extends javax.swing.JComponent implements
 					{
 						newv-=oneround;
 						df=1.0-df;
-//						System.out.println("+");
+
 					}
 					else if(frac-oldfracture<-0.7)
 					{
 						newv+=oneround;
 						df+=1.0;
-//						System.out.println("- ");
+
 					}
 				}
 			}
-//			System.out.println(min+" "+newv+" "+max+" "+oldfracture+" "+frac+" "+df);
+
 
 			oldfracture=frac;
 //			if((((getValue()==max)&&(df<0.0))||((getValue()==min)&&(df>0.0)))||((getValue()<max)&&(getValue()>min)))
 //				setValue(newv);
 //			double v=getValue();
-//			System.out.println(v+" # "+(((1.0-actualfillvalue)*(max-min))+min+(actualdialvalue/(2*java.lang.Math.PI))*oneround)+" "+actualdialvalue+" "+((value-min)%oneround)+" "+oneround+" ");
+
 //			double aactualdialvalue+=df*2*java.lang.Math.PI;
-//			System.out.println(getValue()+" "+java.lang.Math.log10(oneround)+" "+df+" "+(actualdialvalue/(2*java.lang.Math.PI)));
+
 			double v=value+df*oneround;
 			if((((getValue()+java.lang.Math.log10(oneround)/100.0>miniMax.getMax())&&(df<0.0))||((getValue()-java.lang.Math.log10(oneround)/100.0<miniMax.getMin())&&(df>0.0)))||((getValue()+java.lang.Math.log10(oneround)/100.0<miniMax.getMax())&&(getValue()-java.lang.Math.log10(oneround)/100.0>miniMax.getMin())))
 			{
 			if((v<=miniMax.getMax())&&(v>=miniMax.getMin()))
 			{
-//			System.out.println(v+" - "+value+" "+actualdialvalue+" "+((value-min)%oneround)+" "+oneround+" ");
+
 //		actualdialvalue=2*java.lang.Math.PI*((value-min)%oneround)/oneround;
 //			double latvh=actualfillvalue;
 				double oldvalue=value;
 				value=v;
 		actualfillvalue=1.0-((value-miniMax.getMin())/(miniMax.getSpan()));
-//		System.out.println("# "+actualfillvalue);
-//			System.out.println(v+" - "+value+" "+actualfillvalue+" "+actualdialvalue);
+
+
 		pcs.firePropertyChange("value", oldvalue, value);
 
 			rv=true;

@@ -107,7 +107,7 @@ public class NixieNumberDisplay extends NumberDisplay
 		for(int i=0;i<len;++i)
 		{
 			int stelle=i-(len-stellen);
-//			System.out.println(stelle);
+
 			if(stelle<0)
 				nixieNumbers[i].setNumber(isLeadingZeroes()?0:-1);
 			else

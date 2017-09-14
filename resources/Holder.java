@@ -56,7 +56,7 @@ public class Holder<T> extends de.elbosso.util.beans.EventHandlingSupport
 	public synchronized void setData(T data)
 	{
 		T old=getData();
-//		System.out.println(name);
+
 		facade.update(name,data);
 		send(name, old, getData());
 	}
