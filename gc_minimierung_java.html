@@ -87,7 +87,7 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 <div id="all">
 <div id="A">
 <div id="content">
-<div class="date">02.11.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<div class="date">05.11.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
 <span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
 <div class="previousArticlesInCategories">
 	<!--ul-->
@@ -96,6 +96,12 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 	<!--/ul-->
 </div>
  	<div class="heading">GC-Minimierung in Java</div>
+	<div class="update" id="updates">
+		<h1>Updates</h1>
+		<ul>
+			<li><a href="#59">5. November 2017</a></li>
+		</ul>
+	</div>
 	<p>Auf meinen Fahrten von und zur Arbeit schweife ich hin und wieder gedanklich ein wenig ab.
 Hier das Ergebnis meiner jüngsten Gedankenexpedition...
 </p> <a name="content"> </a>
@@ -176,11 +182,44 @@ Third-Party-Bibliotheken zusammen, die alle nicht auf diese Art und Weise
 versuchen, den Garbage Collector zu entlasten.</li>
 </ul>
 Alles in allem also ein interessantes Gedankenexperiment aber auch nicht mehr.
+</p><p>
+<h1><a name="59">Aktualisierung vom 5. November 2017</a></h1><div class="update">Und doch kommt hier noch ein Nachsatz: Als ich neulich wieder einmal ein Loblied auf die funktionale Programmierung
+lesen musste (etwas, das mir durch Vorlesung und Seminar in meinem Studium gründlich verleidet wurde), blieb
+mein Auge an der Formulierung der Tatsache hängen, dass ein Grundbestandteil des funktionalen Paradigmas die grundsätzliche
+Unveränderlichkeit sämtlicher Objekte ist - Mit anderen Worten: Es werden nie Objekte geändert, sondern maximal neu erzeugt.
+</p><p>
+Als jemand, der da nicht so genau drinsteckt, würde mich interessieren, ob es bei den funktionalen Sprachen, die es für die
+JVM gibt, einen speziellen Garbage-Collector-Modus gibt. Ich kann mich nämlich noch sehr genau erinnern was passiert ist,
+als ich eine
+<a href="fbmlandscapes___java3d.html">eigene Softwarelösung zur Visualisierung dreidimensionaler Daten</a>
+schaffen wollte: Bei jeder mathematischen Operation mit 3D-Vektoren wurde ein neues
+                 Objekt erzeugt, das das Ergebnis enthielt. Bei der 3D-Visualisierung sind
+                 unheimlich viele solcher mathematischen Operationen durchzuführen.
+                 Die JVM überwacht das Verhältnis der
+                 Zeit, die im Garbage Collector verbracht wird zu der Zeit, die die Laufzeitumgebung mit der Abarbeitung
+                 des eigentlichen Programmes zubringt. Wird dieses zu ungünstig , wird das Programm mit einer Exception
+                 beendet.
+</p><p>
+Daher würde mich wirklich interessieren, ob funktionale JVM-Sprachen dieses Problem gelöst haben oder aber nur ganz spezielle
+Algorithmen damit umgesetzt werden können - eben solche, die nicht zu viel tun (und damit die Erzeugung neuer Objekte minimieren).
+Das ist schon fast ein Anreiz, mich doch noch einmal mit funktionaler Programmierung uz befassen...
+</div>
 </p> </div>
 </div>
 <div id="B"> 
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
+<li class="anriss">
+  <a href="meine_favoriten_aus_dem_33c3.html#content">
+<div class="date">05.11.2017</div>
+<h3>Meine Favoriten aus dem 33C3</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Wie jedes Jahr freue ich mich auch dieses Jahr wieder auf den Jahreswechsel - aus diversen Gründen, die auch anderen vertraut sind und aus
+einem eher nerdigen: der Chaos Communication Congress wartet wieder mit jeder Menge interessanten Vorträgen auf. Aus diesem Grund hier
+eine Liste mit meinen Favoriten aus dem vergangenen Jahr:
+</p></div>   </a>
+</li>
 <li class="anriss">
   <a href="panasonic_fernbedienung___geplante_obsoleszenz_.html#content">
 <div class="date">08.10.2017</div>
@@ -200,15 +239,6 @@ Visualisierungsalgorithmen aus meiner Jugend
 und
 alternativen Visualisierungen für generierte Landschaften
 experimentiert habe, habe ich nunmehr beides gleichzeitig getan und den guten alten Voxel-Algorithmus wieder entstaubt.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="nahtlos_wiederholbare_rausch_kacheln.html#content">
-<div class="date">01.10.2017</div>
-<h3>Nahtlos wiederholbare Rausch-Kacheln</h3>
-<div class="abstract">
-<p>Und wieder einmal habe ich mich in die Untiefen der Erzeugung von Daten begeben, die man mit
-einiger Toleranz als au der Ferne aufgenommene geographische Features bezeichnen könnte
 </p></div>   </a>
 </li>
 </ul>
