@@ -2,17 +2,15 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>Origami Würfel</title>
+  <title>Tag-basierte Dateisysteme</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-		<meta name="Description" content="Hier meine Erfolge beim Basteln eines Origami-Würfels." />
+		<meta name="Description" content="Es existiert keine zufriedenstellende Möglichkeit, Dateien über Schlüsselworte recherchierbar zu machen - zumindestens
+in den von mir so bezeichneten Betriebssystemfamilien Linux und Windows." />
   <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
 	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
-<script src="js/jquery-1.7.2.min.js"></script>
-<script src="js/lightbox.js"></script>
-<link href="css/lightbox.css" rel="stylesheet" />
 <!--script type="text/javascript">
 function toggle(el)
 {
@@ -90,70 +88,161 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 <div id="all">
 <div id="A">
 <div id="content">
-<div class="date">14.02.2016 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<div class="date">22.11.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
 <span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
 <div class="previousArticlesInCategories">
 	<!--ul-->
 	vorhergehende Artikel in:
-	<!--li--> <a href="handtuchtiere.html#content">Basteln</a> <!--/li-->
+	<!--li--> <a href="trac_reorganisation.html#content">Linux</a> <!--/li-->
 	<!--/ul-->
 </div>
- 	<div class="heading">Origami Würfel</div>
-	<p>Hier meine Erfolge beim Basteln eines Origami-Würfels. Ursprünglich war ich auf der Suche nach
-einer Anleitung für den tamatebako, fand dann aber heraus, dass man dazu schneiden muss,
-was ich bei meinen grobmotorischen Origami-Versuchen ja strikt ablehne.
+ 	<div class="heading">Tag-basierte Dateisysteme</div>
+	<p>Es existiert keine zufriedenstellende Möglichkeit, Dateien über Schlüsselworte recherchierbar zu machen - zumindestens
+in den von mir so bezeichneten Betriebssystemfamilien Linux und Windows. Ich habe mir eine mögliche alternative Vorgehensweise
+unter Linux angesehen.
 </p> <a name="content"> </a>
- <p>Daher habe ich mich mit dieser
-<a href="https://www.youtube.com/watch?v=BzOV_zrNaBg">Anleitung</a> vertraut gemacht (alternativ
-<a href="https://www.youtube.com/watch?v=Vaumo4j52-A">hier</a>) - und ja - es funktioniert!
-</p>  <ul class="triple"> 
-<li class="anriss">
-	<a href="images/basteln/cube_1.png" rel="lightbox[screenshots]" 
-		title="Einzelnes Segment"
-	   class="img">
-		<div class="screenshotthumb center">
-			<img class="center" src="images/basteln/cube_1_t.png">
-			<div class="thumbnailcaption">Einzelnes Segment</div>
-		</div>
-	</a>
-</li>
-<li class="anriss">
-	<a href="images/basteln/cube_3.png" rel="lightbox[screenshots]" 
-		title="6 Segmente werden benötigt"
-	   class="img">
-		<div class="screenshotthumb center">
-			<img class="center" src="images/basteln/cube_3_t.png">
-			<div class="thumbnailcaption">6 Segmente werden benötigt</div>
-		</div>
-	</a>
-</li>
-<li class="anriss">
-	<a href="images/basteln/cube_2.png" rel="lightbox[screenshots]" 
-		title="Der fertige Würfel"
-	   class="img">
-		<div class="screenshotthumb center">
-			<img class="center" src="images/basteln/cube_2_t.png">
-			<div class="thumbnailcaption">Der fertige Würfel</div>
-		</div>
-	</a>
-</li>
-</ul>
-</div>
+ <p><h1>Motivation</h1>
+Ich habe zur Zeit Urlaub und verbringe einen Großteil der mir zur Verfügung stehenden Zeit im Garten oder führe
+kleinere Reparaturen im Haus aus. Die übrige Zeit bilde ich mich weiter oder lese zum Vergnügen.
+</p><p>
+In diese Zeit fiel mein Fund einer
+<a href="https://medium.com/@ageitgey/machine-learning-is-fun-part-3-deep-learning-and-convolutional-neural-networks-f40359318721">mehrteiligen Artikelreihe</a>
+zum Thema Machine Learning: Dort wird in Teil 3 beschrieben, wie Bildklassifikation heutzutage funktioniert.
+es gibt
+<a href="http://www.akiwi.eu/">diverse</a>
+frei verfügbare
+<a href="https://imagga.com/solutions/categorization-api.html">Dienste,</a>
+die eine API bereitstellen, um Bilder klassifizieren zu lassen. Egal, ob man diese Dienste benutzt, oder einen eigenen Dienst aufsetzt,
+der eine solche Kategorisierung durchführt - Es stellt sich die Frage, was man mit den Ergebnissen tun soll. Denn wenn es nicht so
+ist, dass man die Kategorisierung für ein Bild live durchführen will, sondern alle Bilder in einem Batch-Durchlauf
+mit Kategorien versieht - wohin mit den Ergebnissen: man will sie so speichern, dass man transparent und schnell darauf zugreifen
+und im Idealfall auch darin recherchieren kann.
+</p><p>
+Hier würden sich Tags anbieten, die einfach an die geweiligen Bilddateien "geklebt" werden könnten. Diese würden sich auch
+sehr leicht ergänzen und modifizieren lassen.
+</p><p>
+Vor allem möchte man auf die Informationen der Tags oder Kategorien aus verschiedenen Anwendungen heraus zugreifen können.
+Es ist einfach unhandlich, zur Recherche auf eine dedizierte Anwendung zurückgreifen zu müssen, die dann die Dateinamen
+der Kandidaten ausspuckt. Diese wiederum muss man in einem Bildbetrachter laden um über die visuelle Inspektion das passendste
+auszuwählen, welches dann wiederum in die Zielanwendung geladen wird. Ein Workflow, der einen solchen Namen eigentlich nicht verdient...
+<h1>Dedizierte Anwendungen</h1>
+Es gibt nur wenige dedizierte Anwendungen, die dieses Dilemma lösen. Manche werden auch nicht mehr weiter gepflegt -
+ein Beispiel dafür ist der Dateimanager
+<a href="https://projects.gnome.org/nautilus/screenshots.html">Nautilus,</a>
+der in früheren Versionen zumindest die Möglichkeit bot, Tags
+an Dateien zu verwalten.
+</p><p>
+Das Bildverwaltungsprogramm
+<a href="https://wiki.gnome.org/Apps/gthumb">GThumb</a>
+bietet Möglichkeiten, Tags zu Bilddateien zu verwalten, allerdings ist mir keine
+Möglichkeit bekannt, auf diese Tags außerhalb der Anwendung zuzugreifen.
+</p><p>
+<a href="https://www.tagspaces.org/">TagSpaces</a>
+sieht vielversprechend aus (unterstützt auf allen großen Plattformen!), bis man die Dateien mit einem anderen Dateimanager betrachtet oder in der Texteingabe
+ein Verzeichnislisting durchführt: Dann erkennt man nämlich, dass die Tags in den Dateinamen hineingeschrieben werden. Das
+ermöglicht zwar eine einfache Suche nach Tags - einfach ein entsprechendes Dateinamensmuster angeben! - aber erstens existieren
+auf manchen Plattformen in manchen Dateisystemen Längenbeschränkungen für Datei- oder Pfadnamen und zweitens werden Dateinamen
+auf diese Art und Weise sehr schnell unübersichtlich.
+<h1>Dateisysteme</h1>
+An dieser Stelle stieß ich auf virtuelle Dateisysteme, die sich dieses Problems annehmen wollen:
+<a href="https://github.com/oniony/TMSU/wiki">TMSU</a>
+stellt ein solches nur für die Recherche zur Verfügung, während das Hinzufügen von Tags über ein spezielles Werkzeug erfolgt.
+</p><p>
+<a href="http://www.tagsistant.net/">Tagsistant</a>
+geht noch einen Schritt weiter - hier geschieht auch das Hinzufügen von Tags über das virtuelle Dateisystem. Laut
+dem
+<a href="https://github.com/StrumentiResistenti/Tagsistant">Github-Repository</a>
+hat sich an dem Projekt seit 2014 nichts mehr getan - ich habe es trotzdem versucht und schildere hier mal meine Erkenntnisse:
+<h1>Tagsistent in-depth</h1>
+<h2>Installation unter Ubuntu Version 16.04</h2>
+Das war etwas komplexer als ich angenommen hatte - ich habe dazu das Git-Repository benutzt und musste nach
+dem Pull zunächst ein wenig Kosmetik betreiben: im Repository liegen einige symbolische Links, deren Ziele auf meinem
+System nicht vorhanden waren - unter anderem, weil sie sich auf spezifische Versionen diverser Werkzeuge beziehen, die
+in Ubuntu 16.04 nicht mehr verfügbar sind (Beispiel: automake 1.14)
+</p><p>
+Weiterhin musste ich einige weitere Softwarepakete installieren (meines Tests fanden mit sqlite3 als Backend statt - andere
+Datenbanken, beispielsweise MySQL habe ich noch nicht untersucht).
+</p><p>
+<pre>
+git clone https://github.com/StrumentiResistenti/Tagsistant.git tagsistant
+cd tagsistant/
+ln -s /usr/share/automake-1.15 /usr/share/automake-1.14
+ln -s /usr/share/libtool/build-aux/ /usr/share/libtool/config
+apt-get install libdbi1
+apt-get install libdbi-dev
+apt-get install libextractor-dev
+apt-get install libdbd-sqlite3
+./autogen.sh
+./configure
+make -j 5
+make install
+</pre>
+</p><p>
+<h2>Taggen</h2>
+Das ist so einfach, wie eine Datei in ein
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=6">Verzeichnis zu kopieren:</a>
+Jeder Tag existiert im Verzeichnis
+namens
+store als Unterverzeichnis - kopiert man eine Datei in eines dieser Verzeichnisse, erhält sie den entsprechenden Tag.
+Kopiert man die Datei in mehrere dieser Unterverzeichnisse, erhält sie alle diese Tags.
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=21">Löscht man eine Datei</a> aus einem
+dieser Verzeichnisse, hat sie das Tag entsprechend nicht mehr. Auch Umbewegen zwischen zwei Verzeichnissen unterhalb
+von store ist möglich - damit entfernt man ein Tag und ersetzt es durch ein anderes. Allerdings ist hier ein wenig
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=19">Obacht</a> geboten!
+</p><p>
+Neue Tags werden
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=4">angelegt,</a>
+indem man ein entsprechendes verzeichnis unterhalb des Unterverzeichnisses namens tags anlegt.
+</p><p>
+Tags werden gelöscht, indem man das entsprechende
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=21">Verzeichnis unterhalb von tags<a>
+löscht.
+</p><p>
+Will man Tagsistent nur fürs Taggen benutzen und die Dateien an einem anderen Ort traditionell in einer Verzeichnisstruktur
+organisieren, ist auch das möglich: Statt des Kopierens ins virtuelle Dateisystem kann man Dateien auch Tags zuordnen, indem man
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=10">symbolische Links</a>
+erstellt.
+<h2>Achtung!</h2>
+Hat man Dateien, die den gleichen Namen haben, aber in anderen Pfaden untergebracht sind, kann man auf folgendes Problem stoßen:
+Nachdem man die erste Datei in eines der Tags-Verzeichnisse kopiert hat, kann man die zweite nicht mit demselben Tag versehen -
+in dem Tag-Verzeichnis existiert ja bereits eine mit diesem Namen.
+</p><p>
+In diesem Fall muss man sich also etwas überlegen...
+<h2>Benutzen der Lösung als Tags, nicht als Archiv</h2>
+Wie im vorhergehenden Absatz angedeutet, kann man das virtuelle Dateisystem unter anderem dafür benutzen, die Dateien auch zu archivieren -
+damit existieren sie nur innerhalb des virtuellen Dateisystems. Man kann es aber auch nur zun Taggen benutzen - die Dateien
+existieren an einem anderen Ort und das virtuelle Dateisystem enthält nur Verweise: symbolische Links.
+</p><p>
+Dies ist die von mir präferierte Variante - allerdings müssen folgende Herausforderungen gemeistert werden:
+<h3>Namenskollisionen vermeiden</h3>
+Das kann dadurch erreicht werden, dass als Name des symbolischen Links nicht der Name der Ursprungsdatei benutzt wird,
+sondern ein kryptographischer Hash über den gesamten Dateinamen - einschließlich des vollständigen Pfades -
+der Ursprungsdatei (natürlich ergänzt um die korrekte Dateinamensendung).
+<h3>Ermitteln aller Tags einer Datei</h3>
+Dies ist wichtig, um später gezielt weitere Tags hinzufügen zu können. Man muss also in der Lage sein,
+für eine beliebige Datei im Archiv zu ermitteln, welche Tags bereits dafür existieren. Unter der Vorasusetzung,
+dass die Namen der symbolischen Links im virtuellen Dateisystem wie im vorhergehenden Abschnitt beschrieben
+erzeugt werden, kann man für eine Datei über die Berechung des Namens des Verweises mit den
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=14">Mitteln von Tagsistant</a>
+auf die Liste der dieser Datei zugeordneten Tags zugreifen.
+<h3>Ermitteln der archivierten Datei</h3>
+Das ist trivial - dazu muss man nur das Ziel des Verweises ermitteln. Das funktioniert mit puren Bordmitteln - unabhängig von
+Tagsistant.
+<h2>Perks</h2>
+Darüber hinaus existieren weitere Highlights, wie etwa
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=5">eine komfortable Abfragesprache</a>
+über Pfade des virtuellen Dateisystems,
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=16">sogenannte Machine Tags</a>
+zur hierarchischen Organisation von Tags,
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=5">Relationen</a>
+zur Abbildung von Beziehungen zwischen Tags und die Möglichkeit
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=20">oft benutzte Abfragen als Aliases zu speichern,</a>
+um nur einige zu nennen.
+</p> </div>
 </div>
 <div id="B"> 
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
-<li class="anriss">
-  <a href="tag_basierte_dateisysteme.html#content">
-<div class="date">22.11.2017</div>
-<h3>Tag-basierte Dateisysteme</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Es existiert keine zufriedenstellende Möglichkeit, Dateien über Schlüsselworte recherchierbar zu machen - zumindestens
-in den von mir so bezeichneten Betriebssystemfamilien Linux und Windows. Ich habe mir eine mögliche alternative Vorgehensweise
-unter Linux angesehen.
-</p></div>   </a>
-</li>
 <li class="anriss">
 	<a href="zugriff_auf_maps_ohne_cast_java.html#35">
 <div class="date">22.11.2017</div>
@@ -171,6 +260,14 @@ in einer Collection zugreifen möchte, ohne zu casten? Hier die Vorstellung eine
 <h3>Links zu Docker, Container, Cloud</h3>
 <div class="abstract">
 <p>Hier eine unsortierte Liste mit Artikeln zu den Themen Docker, Container und Cloud
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="richmond_is_a_hard_road_to_travel_thile_and_dawes.html#content">
+<div class="date">12.11.2017</div>
+<h3>Richmond is a hard road to travel Thile and Dawes</h3>
+<div class="abstract">
+<p>Und wieder ein wenig Bluegrass - diesmal mit Chris Thiles und Michael Dawes
 </p></div>   </a>
 </li>
 </ul>
@@ -212,9 +309,7 @@ Android
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-<strong>
 Basteln
-</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -345,7 +440,9 @@ Links
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Linux
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
