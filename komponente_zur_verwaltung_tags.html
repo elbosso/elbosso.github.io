@@ -1,0 +1,548 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
+<head>
+  <title>Komponente zur Verwaltung von Tags</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta name="Description" content="Ich habe eine Komponente erstellt, die die GUI für die Verwaltung von Tags darstellen könnte." />
+  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
+	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
+	<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body onload="toggle('show');">
+<div id="wrapper">
+	<div id="header">
+<div id="logo">
+  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
+      display="inline">
+    <mrow>
+      <mn>1</mn>
+      <mo>&isin;</mo>
+      <mi>&infin;</mi>
+    </mrow>
+</math>
+</h1-->
+  <p>
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+  </p>
+</div>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+	</div><!-- #header-->
+<div id="all">
+<div id="A">
+<div id="content">
+<div class="date">26.11.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+	<!--li--> <a href="zugriff_auf_maps_ohne_cast_java.html#content">Java</a> <!--/li-->
+	<!--li--> ,<a href="visualisierung_hoehenfeldern_mittels_voxeln.html#content">Komponenten</a> <!--/li-->
+	<!--li--> ,<a href="visualisierung_hoehenfeldern_mittels_voxeln.html#content">GUI</a> <!--/li-->
+	<!--/ul-->
+</div>
+ 	<div class="heading">Komponente zur Verwaltung von Tags</div>
+	<p>Ich habe eine Komponente erstellt, die die GUI für die Verwaltung von Tags darstellen könnte. Damit wäre etwa
+eine Möglichkeit geschaffen, eine komfortable Anwendung zur Verwaltung
+<a href="tag_basierte_dateisysteme.html">Tag-basierter Dateisysteme</a>
+zu erstellen
+</p> <a name="content"> </a>
+ <p>Ich ging hier zunächst von einer formalen Annahme über Tags aus: Jedes Tag besteht aus drei Teilen: der erste beschreibt das Konzpt,
+der zweite Eigenschaften eines Konzepts und der dritte Ausprägungen einer Eigenschaft. Um im TagManager verwaltet werden zu können,
+werden diese als Strings definiert die aus den drei beschriebenen Teilen bestehen, wobei die Teile durch Punkte getrennt sind.
+Der erste Teil wird speziell interpretiert: Zur Abkürzung können Konzepte, die die gleichen Eigenschaften aufweisen, zusammengefasst werden.
+Dann werden die Konzepte mittels senkrechter Striche getrennt. Ein Beispiel für eine Menge von Tags oder Kategorien zur Verwaltung mittels
+des TagManager könnte wie folgt aussehen:
+<pre>
+LinkedList&lt;String> c=new LinkedList();
+c.add("image.timeofday.morning");
+c.add("image.timeofday.evening");
+c.add("image.timeofday.dusk");
+c.add("image.timeofday.dawn");
+c.add("image.timeofday.day");
+c.add("image.timeofday.night");
+c.add("image.location.outdoors");
+c.add("image.location.indoors");
+c.add("image.orientation.landscape|portrait");
+c.add("car|motorcycle|truck.color.black");
+c.add("car|motorcycle|truck.color.blue");
+c.add("car|motorcycle|truck.color.green");
+c.add("car|motorcycle|truck.color.red");
+c.add("car|motorcycle|truck.color.yellow");
+c.add("car|motorcycle|truck.color.white");
+c.add("car.style.convertible");
+c.add("car.style.limousine");
+c.add("car.style.van");
+c.add("car.seats.2");
+c.add("car.seats.4");
+c.add("car.seats.5");
+c.add("car.seats.7");
+c.add("car|motorcycle.tuneup.standard");
+c.add("car|motorcycle.tuneup.custom");
+</pre>
+Der TagManager erstellt daraus Buttons, die angeklickt werden können, um zum Beispiel einem Bild die entsprechenden Tags oder Kategorien zuzuweisen.
+Dabei werden die Buttons nach Konzepten gruppiert. Die Eigenschaften werden nicht explizit angegeben - sie sind nur über die Tooltips
+einzusehen:
+<img src="images/tagmanagerbuttons.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Tag-Buttons
+</span>
+Ebenfalls Teil des TagManger ist ein Texteingabefeld, das eine Autovervollständigung anbietet. Die Eingabe geschieht wie oben beschrieben:
+Konzept.Eigenschaft.Ausprägung. Während der Anwender im Texteingabefeld schreibt werden automatisch die Knöpfe in
+der oben beschriebenen Komponente angepasst: alle, die nicht mehr auf den bereits eingegebenen Text passen, werden visuell ein
+wenig zurückhaltender dargestellt. Enthält das Texteingabefeld etwa bereits car.s, ergibt sich folgendes Bild
+<img src="images/tagmanagertextfieldfilter.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Tag-Buttons gefiltert
+</span>
+Wann immer ein Tag-Button gedrückt wird oder der Anwender im Texteingabefeld Enter betätigt, wird der Tag selektiert. Geschieht das durch
+Enter im Texteingabefeld und existierte der Tag bisher noch nicht, wird ein neuer Button hinzugefügt (im Beispiel wurde im Textfeld
+car.seats.8 eingegeben und der Tag-Button "blue" in car betätigt).
+<img src="images/tagmanagerselectedtagbuttons.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Selektierte Tag-Buttons
+</span>
+Gleichzeitig werden alle selektierten Tags - diesmal mit vollständigem Text und ohne Gruppierung als Liste angezeigt:
+<img src="images/tagmanagerselectedtagslist.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Selektierte Tags
+</span>
+Tags kann man wieder entfernen, indem man entweder auf einen der Tag-Buttons drückt oder auf den entsprechenden Knopf in dieser Liste.
+</p> </div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+  <a href="tag_basierte_dateisysteme.html#content">
+<div class="date">22.11.2017</div>
+<h3>Tag-basierte Dateisysteme</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Es existiert keine zufriedenstellende Möglichkeit, Dateien über Schlüsselworte recherchierbar zu machen - zumindestens
+in den von mir so bezeichneten Betriebssystemfamilien Linux und Windows. Ich habe mir eine mögliche alternative Vorgehensweise
+unter Linux angesehen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+	<a href="zugriff_auf_maps_ohne_cast_java.html#35">
+<div class="date">22.11.2017</div>
+<h3>Zugriff auf Maps ohne Cast in Java</h3>
+<div class="abstract">
+	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+<p>Collections im Zusammenspiel mit Generics erlauben es, ohne Cast auf Elemente gleichen Typs 
+typsicher zuzugreifen - was aber wenn man typsicher auf Elemente unterschiedlicher Typen
+in einer Collection zugreifen möchte, ohne zu casten? Hier die Vorstellung einer möglichen Antwort
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="links_docker__container__cloud.html#content">
+<div class="date">12.11.2017</div>
+<h3>Links zu Docker, Container, Cloud</h3>
+<div class="abstract">
+<p>Hier eine unsortierte Liste mit Artikeln zu den Themen Docker, Container und Cloud
+</p></div>   </a>
+</li>
+</ul>
+</div>
+<nav id="C"> 
+<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
+			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+</div>
+	</h2><form method="get" action="http://www.google.com/search">
+
+<div style="padding:4px;width:90%;">
+<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
+ maxlength="255" value="" />
+<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
+<input style="width:0%;" type="checkbox"  name="sitesearch"
+ value="elbosso.github.io" checked hidden="true"/>
+</div>
+
+</form>
+<a href="tag_Android.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Android
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Alles rund um Googles Betriebssystem</p>
+</div>
+</div>
+</a>
+<a href="tag_Basteln.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Basteln
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Meistens Papier (Origami...)</p>
+</div>
+</div>
+</a>
+<a href="c_c__.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+C und C++
+</h3>
+</header>
+<div class="nav-item-body">
+</div>
+</div>
+</a>
+<a href="tag_Datenbanken.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Datenbanken
+</h3>
+</header>
+<div class="nav-item-body">
+<p>relationale und andere Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_dWb+.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+dWb+
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Garten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Garten
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Das grÃ¼ne Hobby</p>
+</div>
+</div>
+</a>
+<a href="tag_Geo.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Geo
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Karten und mehr run um Ortsinformationen</p>
+</div>
+</div>
+</a>
+<a href="tag_GUI.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+<strong>
+GUI
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Alles rund um graphische Benutzerschnittstellen</p>
+</div>
+</div>
+</a>
+<a href="tag_Hardware.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Hardware
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Elektronik und so Zeuchs...</p>
+</div>
+</div>
+</a>
+<a href="tag_Java.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+<strong>
+Java
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Hauptsächlich Desktop Themen und Java SE</p>
+</div>
+</div>
+</a>
+<a href="tag_Komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+<strong>
+Komponenten
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Software-Komponenten</p>
+</div>
+</div>
+</a>
+<a href="tag_Links.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Links
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Linksammlungen zu verschiedenen Themen</p>
+</div>
+</div>
+</a>
+<a href="tag_Linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Linux
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Alles zum Thema Gnu Linux</p>
+</div>
+</div>
+</a>
+<a href="tag_Markup.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Markup
+</h3>
+</header>
+<div class="nav-item-body">
+<p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
+</div>
+</div>
+</a>
+<a href="tag_Music.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Music
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Musik, die mir gefällt</p>
+</div>
+</div>
+</a>
+<a href="tag_Python.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Python
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Mein Weg vom blutigen Anfänger aufwärts</p>
+</div>
+</div>
+</a>
+<a href="tag_Rants.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Rants
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Luft ablassen</p>
+</div>
+</div>
+</a>
+<a href="tag_Security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Security
+</h3>
+</header>
+<div class="nav-item-body">
+<p>IT-Sicherheit</p>
+</div>
+</div>
+</a>
+<a href="tag_sQLshell.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+sQLshell
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_Verschiedenes.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Verschiedenes
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Passt in keine der anderen Kategorien...</p>
+</div>
+</div>
+</a>
+<a href="tag_Video.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Video
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Artikel mit bunten Filmchen</p>
+</div>
+</div>
+</a>
+<a href="tag_Virtualisierung.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Virtualisierung
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Technologien und Themen rund um virtuelle Rechner</p>
+</div>
+</div>
+</a>
+<a href="windows.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Windows
+</h3>
+</header>
+<div class="nav-item-body">
+</div>
+</div>
+</a>
+<a href="tag_Upcoming....html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Upcoming...
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Demnächst in diesem Theater...</p>
+</div>
+</div>
+</a>
+</nav>
+</div>
+	<div id="footer">
+		<span class="me">
+		<strong><a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+
+, Damaschke 11, Rudolstadt, 
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
+			</a></strong>
+	</span></div><!-- #footer -->
+</div>
+</body>
+</html>

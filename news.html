@@ -116,6 +116,133 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>Installing MultiMarkdown 6 on Fedora 27</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Long-time readers are probably aware that I&rsquo;m a big fan of <a href="https://daringfireball.net/projects/markdown/">Markdown</a>. Specifically, I prefer the MultiMarkdown variant that adds some additional extensions beyond &ldquo;standard&rdquo; Markdown. As such, I&rsquo;ve long used Fletcher Penny&rsquo;s MultiMarkdown processor (the latest version, version 6, is <a href="https://github.com/fletcher/MultiMarkdown-6/">available on GitHub</a>). While Fletcher offers binary builds for Windows and macOS, the Linux binary has to be compiled from source. In this post, I&rsquo;ll provide the steps I followed to compile a MultiMarkdown binary for <a href="https://getfedora.org">Fedora</a> 27.</p>
+
+<p>The <a href="https://github.com/fletcher/MultiMarkdown-6/wiki/How-to-Compile">&ldquo;How to Compile&rdquo; page on the MMD-6 Wiki</a> is quite sparse, so a fair amount of trial-and-error was needed. To keep my main Fedora installation as clean as possible, I used <a href="https://www.vagrantup.com/">Vagrant</a> with the Libvirt provider to create a &ldquo;build VM&rdquo; based on the &ldquo;fedora/27-cloud-base&rdquo; box.</p>
+
+<p>Once the VM was running, I installed the necessary packages to compile the source code. It turns out only the following packages were necessary:</p>
+
+<pre><code>sudo dnf install gcc make cmake gcc-c++
+</code></pre>
+
+<p>Then I downloaded the source code for MMD-6:</p>
+
+<pre><code>curl -LO https://github.com/fletcher/MultiMarkdown-6/archive/6.2.3.tar.gz
+</code></pre>
+
+<p>Unpacking the archive with <code>tar</code> created a <code>MultiMarkdown-6-6.2.3</code> directory. Changing into that directory, then the instructions from the Wiki page worked as expected:</p>
+
+<pre><code>make
+cd build
+make
+</code></pre>
+
+<p>I did <em>not</em> run <code>make test</code>, though perhaps I should have to ensure the build worked as expected. In any case, once the second <code>make</code> command was done, I was left with a <code>multimarkdown</code> binary that I copied out to my Fedora 27 host system via <code>scp</code>. Done!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/jznH5gCHmeI" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/jznH5gCHmeI/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Using Docker Machine with KVM and Libvirt</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Docker Machine is, in my opinion, a useful and underrated tool. I&rsquo;ve written before about using Docker Machine with various services/providers; for example, see <a href="https://blog.scottlowe.org/2016/03/22/using-docker-machine-with-aws/">this article on using Docker Machine with AWS</a>, or <a href="https://blog.scottlowe.org/2015/09/24/using-docker-machine-with-openstack/">this article on using Docker Machine with OpenStack</a>. Docker Machine also supports local hypervisors, such as <a href="http://www.vmware.com/products/fusion.html">VMware Fusion</a> or <a href="https://www.virtualbox.org/">VirtualBox</a>. In this post, I&rsquo;ll show you how to use Docker Machine with KVM and Libvirt on a Linux host (I&rsquo;m using <a href="https://getfedora.org/">Fedora</a> 27 as an example).</p>
+
+<p>Docker Machine ships with a bunch of different providers, but the KVM/Libvirt provider must be obtained separately (you can find it <a href="https://github.com/dhiltgen/docker-machine-kvm">here on GitHub</a>). Download a binary release (make sure it is named <code>docker-machine-driver-kvm</code>), mark it as executable, and place it somewhere in your PATH. Fedora 27 comes with KVM and the Libvirt daemon installed by default (in order to support the Boxes GUI virtualization app), but I found it helpful to also install the client-side tools:</p>
+
+<pre><code>sudo dnf install libvirt-client
+</code></pre>
+
+<p>This will make the <code>virsh</code> tool available, which is useful for viewing Libvirt-related resources. Once you have both the KVM/Libvirt driver and the Libvirt client tools installed, you can launch a VM:</p>
+
+<pre><code>docker-machine create -d kvm --kvm-network &quot;docker-machines&quot; machine1
+</code></pre>
+
+<p>It appears that, by default, the KVM/Libvirt provider uses a network named &ldquo;docker-machines&rdquo;, hence the need for the <code>--kvm-network</code> flag. (If you omit this flag, the provider will look for the &ldquo;default&rdquo; network, which may or may not exist on your system. It didn&rsquo;t exist on my Fedora laptop. This is where having <code>virsh</code> available is really handy.)</p>
+
+<p>(Note that if your user account isn&rsquo;t a member of the &ldquo;libvirt&rdquo; group, you&rsquo;ll get prompted for authentication for most every <code>docker-machine</code> command, even just listing machines.)</p>
+
+<p>There are a few other flags that might be useful as well when creating a Docker-equipped VM with Docker Machine and the KVM/Libvirt driver:</p>
+
+<ul>
+<li>Use the <code>--kvm-cpu-count</code> parameter to specify the number of virtual CPUs.</li>
+<li>Use the <code>--kvm-memory</code> parameter to control the amount of RAM allocated to the VM.</li>
+<li>Customize the name of the user used to log into the system (the default is &ldquo;docker&rdquo;) by using the <code>--kvm-ssh-user</code> parameter.</li>
+</ul>
+
+<p>You can view all the parameters by running <code>docker-machine create -d kvm --help</code>.</p>
+
+<p>Once the VM is up and running, you can use all the standard Docker Machine commands to work with this VM, just like with any other provider:</p>
+
+<ul>
+<li>Use <code>docker-machine ssh &lt;name&gt;</code> to connect to the VM via SSH.</li>
+<li>Use <code>docker-machine env &lt;name&gt;</code> to show the information needed to connect to the Docker Engine on the VM. (Use <code>eval $(docker-machine env &lt;name&gt;)</code> to load that information into the shell environment.)</li>
+<li>Use <code>docker-machine stop &lt;name&gt;</code> to stop the VM, and <code>docker-machine rm &lt;name&gt;</code> to remove/delete the VM.</li>
+</ul>
+
+<p>You might be wondering if there&rsquo;s any value in using Docker Machine to run a VM on Linux when you can just run Docker directly on the Linux host. I haven&rsquo;t fully tested the idea yet, but my initial thought is that it would enable users to run various different versions of the Docker Engine (using the <code>--engine-install-url</code> option, as I outlined <a href="https://blog.scottlowe.org/2015/08/04/using-vagrant-docker-machine-together/">here</a>). If you have other ideas where this sort of arrangement might have value, I&rsquo;d love to hear them; <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/ztgksn7Tuo8" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ztgksn7Tuo8/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
+		</div>
+		<div>
+			<h3>Friday Fun LII - Circular Plots</h3>
+		</div>
+		<div class="collectiontext">
+<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Slowly getting into the charting business ;)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">After Thomas Nield (<a href="https://twitter.com/thomasnield9727" target="_blank">@thomasnield9272</a>) pointed me to so called Circular Plots I've couldn't hold back. If you know these charts you might understand why I was so keen on creating such a chart.&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So to give you an example here is an image of such a chart...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://s3-eu-west-1.amazonaws.com/pfigshare-u-previews/1580724/preview.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="769" data-original-width="800" height="614" src="https://s3-eu-west-1.amazonaws.com/pfigshare-u-previews/1580724/preview.jpg" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To be honest when I first saw the plot I was fascinated even without knowing how to read it and without knowing what this chart is good for. But after I took a look at more and more of those charts I got an idea on how to use them.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So I'm not a data scientist which is the reason why I've implemented it in a way that seemed logical for me.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The biggest problem was to find some data that I could use for the visualization. So in the end I've decided to take the public available data from the current parliamentary election in Germany.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To give you an idea what my chart is visualizing I think I need to explain it a bit. Each section on the chart shows one party with it's name, color and the voting result related to the number of eligible voters (61.5 Million).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Because there was a new party this year it was interesting to see where did the voters came from, so my chart visualizes the migration from all parties to other parties. The bigger the arrow the more voters migrated from the party to another.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So here is my chart...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-v1zk0upmYqI/WhMCvlrlGUI/AAAAAAAAEt0/xK_8GEnPa2EQaElFwZ1z8ldki7g5z2urwCLcBGAs/s1600/CircularPlot.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="1574" data-original-width="1600" height="628" src="https://4.bp.blogspot.com/-v1zk0upmYqI/WhMCvlrlGUI/AAAAAAAAEt0/xK_8GEnPa2EQaElFwZ1z8ldki7g5z2urwCLcBGAs/s640/CircularPlot.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So in the chart one can see that most of the AfD voters came from the Union party, the so called Non-Voters ("Nichwaehler") and others.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I've also created another chart that shows fictive data about travellers that travel between some asian countries. As always I do not have any use case for this chart and cannot guarantee that it is useful for real data analysis but at least it works for me and was fun to create. So here is the other chart...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-WrdxEyptbm4/WhMDwXANJpI/AAAAAAAAEuA/yn-WhykvTaYNAn5T8VA6JHlW35lz3PIxwCLcBGAs/s1600/CircularPlot.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="1530" data-original-width="1600" height="612" src="https://2.bp.blogspot.com/-WrdxEyptbm4/WhMDwXANJpI/AAAAAAAAEuA/yn-WhykvTaYNAn5T8VA6JHlW35lz3PIxwCLcBGAs/s640/CircularPlot.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">At the moment there is not interactivity in this chart but if I will find some time I will definitely add it.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As always you can find the code on <a href="https://github.com/HanSolo/circularplot" target="_blank">github</a>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">That's it for today...enjoy the upcoming weekend and...keep coding ;)</span><br /><div class="separator" style="clear: both; text-align: center;"><br /></div>
+
+ -->
+		</div>
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/2017/11/friday-fun-lii-circular-plots.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Happy Thanksgiving 2017</h3>
+		</div>
+		<div class="collectiontext">
+			<p>In the US, today (Thursday, November 23) is Thanksgiving. I&rsquo;d like to take a moment to reflect on the meaning of Thanksgiving.</p>
+
+<p>Thanksgiving means different things to different people:</p>
+
+<ul>
+<li>To folks outside the US, it often just a day with drastically reduced email volume and no interruptions from US-based coworkers. (Enjoy!)</li>
+<li>To folks in the US, it&rsquo;s a holiday filled with food (turkey, anyone?). There may also be family gatherings, football (American football, of course), and possibly some shopping. (There will most certainly be shopping tomorrow.)</li>
+<li>To many people, it&rsquo;s also a time to be thankful or grateful for the good things in their lives.</li>
+<li>To Christians, like myself, it&rsquo;s often a time to reflect on the blessings that God placed in your life. I know that I am quite blessed&mdash;blessed with a great family, an amazing wife, and the opportunity to work in a fast-paced industry (among many <em>many</em> other blessings).</li>
+</ul>
+
+<p>Whatever Thanksgiving means to you, I hope that you enjoy the holiday. Happy Thanksgiving!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/YlII8ueQh9I" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/YlII8ueQh9I/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>Installing Older Docker Client Binaries on Fedora</h3>
 		</div>
 		<div class="collectiontext">
@@ -232,13 +359,176 @@ Categories=Development;Utilities;
 	</li>
 	<li class="anriss">
 		<div class="collectionhref">
-		<a href="https://danluu.com/" target="_blank">Dan Luu</a>
+		<a href="https://danluu.com/atom/index.xml" target="_blank">Dan Luu</a>
 		</div>
 		<div>
 			<h3>Is there data on the quality of management decisions?</h3>
 		</div>
 		<div class="collectiontext">
-			A statement I commonly hear in tech-utopian circles is that some seeming inefficiency can’t actually be inefficient because the market is efficient and inefficiencies will quickly be eliminated. A contentious example of this is the claim that companies can’t be discriminating because the market is too competitive to tolerate discrimination. A less contentious example is that when you see a big company doing something that seems bizarrely inefficient, maybe it’s not inefficient and you just lack the information necessary to understand why the decision was efficient.
+			
+
+<p>A statement I commonly hear in tech-utopian circles is that some seeming inefficiency can’t actually be inefficient because the market is efficient and inefficiencies will quickly be eliminated. A contentious example of this is <a href="//danluu.com/tech-discrimination/">the claim that companies can’t be discriminating because the market is too competitive to tolerate discrimination</a>. A less contentious example is that when you see a big company doing something that seems bizarrely inefficient, maybe it’s not inefficient and you just lack the information necessary to understand why the decision was efficient.</p>
+
+<p>Unfortunately, arguments like this are difficult to settle because, even in retrospect, it’s usually not possible to get enough information to determine the precise “value” of a decision. Even in cases where the decision led to an unambiguous success or failure, there are so many factors that led to the result that it’s difficult to figure out precisely why something happened.</p>
+
+<p>One nice thing about sports is that they often have detailed play-by-play data and well-defined win criteria which lets us tell, on average, what the expected value of a decision is. In this post, we’ll look at the cost of bad decision making in one sport and then briefly discuss why decision quality in sports might be the same or better as decision quality in other fields.</p>
+
+<p>Just to have a concrete example, we’re going to look at baseball, but you could do the same kind of analysis for football, hockey, basketball, etc., and my understanding is that you’d get a roughly similar result in all of those cases.</p>
+
+<p>We’re going to model baseball as a state machine, both because that makes it easy to understand the expected value of particular decisions and because this lets us talk about the value of decisions without having to go over most of the rules of baseball.</p>
+
+<p>We can treat each baseball game as an independent event. In each game, two teams play against each other and the team that scores more runs (points) wins. Each game is split into 9 “innings” and in each inning each team will get one set of chances on offense. In each inning, each team will play until it gets 3 “outs”. Any given play may or may not result in an out.</p>
+
+<p>One chunk of state in our state machine is the number of outs and the inning. The other chunks of state we’re going to track are who’s “on base” and which player is “at bat”. Each teams defines some order of batters for their active players and after each player bats once this repeats in a loop until the team collects 3 outs and the inning is over. The state of who is at bat is saved between innings. Just for example, you might see batters 1-5 bat in the first inning, 6-9 and then 1 again in the second inning, 2- … etc.</p>
+
+<p>When a player is at bat, the player may advance to a base and players who are on base may also advance, depending on what happens. When a player advances 4 bases (that is, through 1B, 2B, 3B, to what would be 4B except that it isn’t called that) a run is scored and the player is removed from the base. As mentioned above, various events may cause a player to be out, in which case they also stop being on base.</p>
+
+<p>An example state from our state machine is:</p>
+
+<pre><code>{1B, 3B; 2 outs}
+</code></pre>
+
+<p>This says that there’s a player on 1B, a player on 3B, there are two outs. Note that this is independent of the score, who’s actually playing, and the inning.</p>
+
+<p>Another state is:</p>
+
+<pre><code>{--; 0 outs}
+</code></pre>
+
+<p>With a model like this, if we want to determine the expected value of the above state, we just need to look up the total number of runs across all innings played in a season divided by the number of innings to find the expected number of runs from the state above (ignoring the 9th inning because a quirk of baseball rules distorts statistics from the 9th inning). If we do this, we find that, from the above state, a team will score .555 runs in expectation.</p>
+
+<p>We can then compute the expected number of runs for all of the other states:</p>
+
+<p><style>table {border-collapse:collapse;margin:0px auto;}table,th,td {border: 1px solid black;}td {text-align:center;}</style>
+<table><tr>
+<th></th><th>0</th><th>1</th><th>2</th></tr>
+<tr><th>bases</th><th colspan="3">outs</th></tr>
+<tr>
+<th>&ndash;</th><td bgcolor=#f7f7f7>.555</td><td bgcolor=#d6604d>.297</td><td bgcolor=#67001f><font color=white>.117</font></td></tr>
+<tr>
+<th>1B</th><td bgcolor=#d1e5f0>.953</td><td bgcolor=#f7f7f7>.573</td><td bgcolor=#b2182b>.251</td></tr>
+<tr>
+<th>2B</th><td bgcolor=#d1e5f0>1.189</td><td bgcolor=#f7f7f7>.725</td><td bgcolor=#d6604d>.344</td></tr>
+<tr>
+<th>3B</th><td bgcolor=#92c5de>1.482</td><td bgcolor=#d1e5f0>.983</td><td bgcolor=#f4a582>.387</td></tr>
+<tr>
+<th>1B,2B</th><td bgcolor=#92c5de>1.573</td><td bgcolor=#d1e5f0>.971</td><td bgcolor=#f4a582>.466</td></tr>
+<tr>
+<th>1B,3B</th><td bgcolor=#4393c3>1.904</td><td bgcolor=#d1e5f0>1.243</td><td bgcolor=#fddbc7>.538</td></tr>
+<tr>
+<th>2B,3B</th><td bgcolor=#2166ac>2.052</td><td bgcolor=#92c5de>1.467</td><td bgcolor=#f7f7f7>.634</td></tr>
+<tr>
+<th>1B,2B,3B</th><td bgcolor=#053061><font color=white>2.417</font></td><td bgcolor=#92c5de>1.650</td><td bgcolor=#f7f7f7>.815</td></tr></table></p>
+
+<p>In this table, each entry is the expected number of runs from the remainder of the inning from some particular state. Each column shows the number of outs and each row shows the state of the bases. The color coding scheme is: the starting state (<code>.555</code> runs) has a white background. States with higher run expectation are more blue and states with lower run expectation are more red.</p>
+
+<p>This table and the other stats in this post come from <a href="https://www.amazon.com/gp/product/1494260174/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=abroaview-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=1494260174&amp;linkId=1d8e432457b958c87f46820d5aa51539">The Book by Tango et al.</a>, which mostly discussed baseball between 1999 and 2002.</p>
+
+<p>The state we’re tracking for an inning here is who’s on base and the number of outs. Innings start with nobody on base and no outs.</p>
+
+<p>As above, we see that we start the inning with <code>.555</code> runs in expectation. If a play puts someone on 1B without getting an out,  we now have <code>.953</code> runs in expectation, i.e., putting someone on first without an out is worth <code>.953 - .555 = .398</code> runs.</p>
+
+<p>This immediately gives us the value of some decisions, e.g., trying to “steal” <code>2B</code> with no outs and someone on first. If we look at cases where the batter’s state doesn’t change, a successful steal moves us to the <code>{2B, 0 outs}</code> state, i.e., it gives us <code>1.189 - .953 = .236</code> runs. A failed steal moves us to the <code>{--, 1 out}</code> state, i.e., it gives us <code>.953 - .297 = -.656</code> runs. To break even, we need to succeed <code>.656 / .236 = 2.78x</code> more often than we fail, i.e., we need a <code>.735</code> success rate to break even. If we want to compute the average value of a stolen base, we can compute the weighted sum over all states, but for now, let’s just say that it’s possible to do so and that you need something like a <code>.735</code> success rate for stolen bases to make sense.</p>
+
+<p>We can then look at the stolen base success rate of teams to see that, in any given season, maybe 5-10 teams are doing better than breakeven, leaving 20-25 teams at breakeven or below (mostly below). If we look at a bad but not historically bad stolen-base team of that era, they might have a .6 success rate. It wouldn’t be unusual for a team from that era to make between 100 and 200 attempts. Just so we can compute an approximation, if we assume they were all attempts from the {1B, 0 outs} state, the average run value per attempt would be .4 * (-.656) + .6 * .236 = -0.12 runs per attempt. Another first-order approximation is that a delta of 10 runs is worth 1 win, so at 100 attempts we have -1.2 wins and at 200 attempts we have -2.4 wins.</p>
+
+<p>If we run the math across actual states instead of using the first order approximation, we see that the average stolen base is worth -.467 runs and the average successful steal is worth .175 runs. In that case, a steal attempt with a .6 success rate is worth .4 * (-.467) + .6 * .175 =  -0.082 runs. With this new approximation, our estimate for the approximate cost in wins of stealing “as normal” vs. having a “no stealing” rule for a team that steals badly and often is .82 to 1.64 wins per season. Note that this underestimates the cost of stealing since getting into position to steal increases the odds of a successful “pickoff”, which we haven’t accounted for. From our state-machine standpoint, a pickoff is almost equivalent to a failed steal, but the analysis necessary to compute the difference in pickoff probability is beyond the scope of this post.</p>
+
+<p>We can also do this for other plays coaches can cause (or prevent). For the “intentional walk”, we see that an intentional walk appears to be worth .102 runs for the opposing team. In 2002, a team that issued “a lot” of intentional walks might have issued 50, resulting in 50 * .102 runs for the opposing team, giving a loss of roughly 5 runs or .5 wins.</p>
+
+<p>If we optimistically assume a “sac bunt” never fails, the cost of a sac bunt is .027 runs per attempt. If we look at the league where pitchers don’t bat, a team that was heavy on sac bunts might’ve done 49 sac bunts (we do this to avoid “pitcher” bunts, which add complexity to the approximation), costing a total of 49 * .027 = 1.32 runs or .132 wins.</p>
+
+<p>Another decision that’s made by a coach is setting the batting order. Players bat (take a turn) in order, 1-9, mod 9. That is, when the 10th “player” is up, we actually go back around and the 1st player bats. At some point the game ends, so not everyone on the team ends up with the same number of “at bats”.</p>
+
+<p>There’s a just-so story that justifies putting the fastest player first, someone with a high “batting average” second, someone pretty good third, your best batter fourth, etc. This story, or something like it, has been standard for over 100 years.</p>
+
+<p>I’m not going to walk through the math for computing a better batting order because I don’t think there’s a short, easy to describe, approximation. It turns out that if we compute the difference between an “optimal” order and a “typical” order justified by the story in the previous paragraph, using an optimal order appears to be worth between 1 and 2 wins per season.</p>
+
+<p>These approximations all leave out important information. In three out of the four cases, we assumed an average player at all times and didn’t look at who was at bat. The information above actually takes this into account to some extent, but not fully. How exactly this differs from a better approximation is a long story and probably too much detail for a post that’s using baseball to talk about decisions outside of baseball, so let’s just say that we have pretty decent but not amazing approximation that says that a coach who makes bad decisions following conventional wisdom that are in the normal range of bad decisions during a baseball season might be able cost their team something like 1 + 1.2 + .5 + .132 = 2.83 wins on these three decisions alone vs. a decision rule that says “never do these actions that, on average, have negative value”. If we compare to a better decision rule such as “do these actions when they have positive value and not when they have negative value” or a manager that generally makes good decisions, let’s conservatively estimate that’s maybe worth 3 wins.</p>
+
+<p>We’ve looked at four decisions (sac bunt, steal, intentional walk, and batting order). But there are a lot of other decisions! Let’s arbitrarily say that if we look at all decisions and not just these four decisions, having a better heuristic for all decisions might be worth 4 or 5 wins per season.</p>
+
+<p>What does 4 or 5 wins per season really mean? One way to look at it is that baseball teams play 162 games, so an “average” team wins 81 games. If we look at the seasons covered, the number of wins that teams that made the playoffs had was {103, 94, 103, 99, 101, 97, 98, 95, 95, 91, 116, 102, 88, 93, 93, 92, 95, 97, 95, 94, 87, 91, 91, 95, 103, 100, 97, 97, 98, 95, 97, 94}. Because of the structure of the system, we can’t name a single number for a season and say that N wins are necessary to make the playoffs and that teams with fewer than N wins won’t make the playoffs, but we can say that 95 wins gives a team decent odds of making the playoffs. 95 - 81 = 14. 5 wins is more than a third of the difference between an average team and a team that makes the playoffs. This a huge deal both in terms of prestige and also direct economic value.</p>
+
+<p>If we want to look at it at the margin instead of on average, the smallest delta in wins between teams that made the playoffs and teams that didn’t in each league was {1, 7, 8, 1, 6, 2, 6, 3}. For teams that are on the edge, a delta of 5 wins wouldn’t always be the difference between a successful season (making playoffs) and an unsuccessful season (not making playoffs), but there are teams within a 5 win delta of making the playoffs in most seasons. If we were actually running a baseball team, we’d want to use a much more fine-grained model, but as a first approximation we can say that in-game decisions are a significant factor in team performance and that, using some kind of computation, we can determine the expected cost of non-optimal decisions.</p>
+
+<p>Another way to look at what 5 wins is worth is to look at what it costs to get a player who’s not a pitcher that’s 5 wins above average (WAA) (we look at non-pitchers because non-pitchers tend to play in every game and pitchers tend to play in parts of some games, making a comparison between pitchers and non-pitchers more complicated). Of the 8 non-pitcher positions (we look at non-pitcher positions because it makes comparisons simpler), there are 30 teams, so we have 240 team-positions pairs. In 2002, of these 240 team-position pairs, <a href="https://www.baseball-reference.com/leagues/team_compare.cgi?request=1&amp;year=2002&amp;lg=MLB&amp;stat=WAA">there are two that were &gt;= 5 WAA</a>, Texas-SS (Alex Rodriguez, paid $22m) and SF-LF (Barry Bonds, paid $15m). If we look at the other seasons in the range of dates we’re looking at, there are either 2 or 3 team-position pairs where a team is able to get &gt;= 5 WAA in a season These aren’t stable across seasons because player performance is volatile, so it’s not as easy as finding someone great and paying them $15m. For example, in 2002, there were 7 non-pitchers paid $14m or more and only two of them we worth 5 WAA or more. For reference, the average total team payroll (teams have 26 players per) in 2002 was $67m, with a minimum of $34m and a max of $126m. At the time a $1m salary for a manager would’ve been considered generous, making a 5 WAA manager an incredible deal.</p>
+
+<p>5 WAA assumes typical decision making lining up with events in a bad, but not worst-case way. A more typical case might be that a manager costs a team 3 wins. In that case, in 2002, there were 25 team-position pairs out of 240 where a single player could make up for the loss caused from management by conventional wisdom. Players who provide that much value and who aren’t locked up in artificially cheap deals with particular teams due to the mechanics of player transfers are still much more expensive than managers.</p>
+
+<p>If we look at how teams have adopted data analysis in order to improve both in-game decision making and team-composition decisions, it’s been a slow, multi-decade, process. <a href="https://www.amazon.com/gp/product/0393324818/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=abroaview-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=0393324818&amp;linkId=391fa6566a95327d7f06f533fb3e2daf">Moneyball</a> describes part of the shift from using intuition and observation to select players to incorporating statistics into the process. Stats nerds were talking about how you could do this at least since <a href="https://en.wikipedia.org/wiki/Sabermetrics">1971</a> and no team really took it seriously until the 90s and the ideas didn’t really become mainstream until the mid 2000s, after a bestseller had been published.</p>
+
+<p>If we examine how much teams have improved at the in-game decisions we looked at here, the process has been even slower. It’s still true today that statistics-driven decisions aren’t mainstream. Things are getting better, and if we look at the aggregate cost of the non-optimal decisions mentioned here, the aggregate cost has been getting lower over the past couple decades as intuition-driven decisions slowly converge to more closely match what stats nerds have been saying for decades. For example, if we look at the total number of sac bunts recorded across all teams from 1999 until now, we see:</p>
+
+<div style="overflow-x:auto;">
+<table><tr>
+<th>1999</th><th>2000</th><th>2001</th><th>2002</th><th>2003</th><th>2004</th><th>2005</th><th>2006</th><th>2007</th><th>2008</th><th>2009</th><th>2010</th><th>2011</th><th>2012</th><th>2013</th><th>2014</th><th>2015</th><th>2016</th><th>2017</th></tr>
+<tr>
+<td bgcolor=#e31a1c>1604</td><td bgcolor=#e31a1c>1628</td><td bgcolor=#e31a1c>1607</td><td bgcolor=#bd0026>1633</td><td bgcolor=#e31a1c>1626</td><td bgcolor=#800026><font color=white>1731</font></td><td bgcolor=#e31a1c>1620</td><td bgcolor=#bd0026>1651</td><td bgcolor=#e31a1c>1540</td><td bgcolor=#fc4e2a>1526</td><td bgcolor=#bd0026>1635</td><td bgcolor=#e31a1c>1544</td><td bgcolor=#bd0026>1667</td><td bgcolor=#fc4e2a>1479</td><td bgcolor=#fd8d3c>1383</td><td bgcolor=#fd8d3c>1343</td><td bgcolor=#fed976>1200</td><td bgcolor=#ffffcc>1025</td><td bgcolor=#ffffcc>925</td></tr></table></div>
+
+<p>Despite decades of statistical evidence that sac bunts are overused, we didn’t really see a decline across all teams until 2012 or so. Why this is varies on a team-by-team and case-by-case basis, but the fundamental story that’s been repeated over and over again both for statistically-driven team composition and statistically driven in-game decisions is that the people who have the power to make decisions often stick to conventional wisdom instead of using “radical” statistically-driven ideas. There are a number of reasons as to why this happens. One high-level reason is that the change we’re talking about was a cultural change and cultural change is slow. It doesn’t surprise people when it takes a generation for scientific consensus to shift and why should be baseball be any different?</p>
+
+<p>One specific lower-level reason “obviously” non-optimal decisions can persist for so long is that there’s a lot of noise in team results. You sometimes see a manager make some radical decisions (not necessarily statistics-driven), followed by some poor results, causing management to fire the manager. There’s so much volatility that you can’t really judge players or managers based on small samples, but this doesn’t stop people from doing so. The combination of volatility and skepticism of radical ideas heavily disincentivizes going against conventional wisdom.</p>
+
+<p>Among the many consequences of this noise is the fact that the winner of the &ldquo;world series&rdquo; (the baseball championship) is heavily determined by randomness. Whether or not a team makes the playoffs is determined over 162 games, which isn&rsquo;t enough to remove all randomness, but is enough that the result isn&rsquo;t mostly determined by randomness. This isn&rsquo;t true of the playoffs, which are too short for the outcome to be primarily determined by the difference in the quality of teams. Once a team wins the world series, people come up with all kinds of just-so stories to justify why the team should&rsquo;ve won, but if we look across all games, we can see that the stories are just stories. This is, perhaps, not so different to listening to people tell you why their startup was successful.</p>
+
+<p>There are metrics we can use that are better predictors of future wins and losses (i.e., are less volatile than wins and losses), but, until recently, convincing people that those metrics were meaningful was also a radical idea.</p>
+
+<p>If we think about the general case, what’s happening is that decisions have probabilistic payoffs. There’s very high variance in actual outcomes (wins and losses), so it’s possible to make good decisions and not see the direct effect of them for a long time. Even if there are metrics that give us a better idea of what the “true” value of a decision is, if you’re operating in an environment where your management doesn’t believe in those metrics, you’re going to have a hard time keeping your job (or getting a job in the first place) if you want to do something radical whose value is only demonstrated by some obscure-sounding metric unless they take a chance on you for a year or two. There have been some major phase changes in what metrics are accepted, but they’ve taken decades.</p>
+
+<p>If we look at business or engineering decisions, the situation is much messier. If we look at product or infrastructure success as a “win”, there seems to be much more noise in whether or not a team gets a “win”. Moreover, unlike in baseball, the sort of play-by-play or even game data that would let someone analyze “wins” and “losses” to determine the underlying cause isn’t recorded, so it’s impossible to determine the true value of decisions. And even if the data were available, there are so many more factors that determine whether or not something is a “win” that it’s not clear if we’d be able to determine the expected value of decisions even if we had the data.</p>
+
+<p>We’ve seen that in a field where one can sit down and determine the expected value of decisions, it can take decades for this kind of analysis to influence some important decisions. If we look at fields where it’s more difficult to determine the true value of decisions, how long should we expect it to take for “good” decision making to surface? It seems like it would be a while, perhaps forever, unless there’s something about the structure of baseball and other sports that makes it particularly difficult to remove a poor decision maker and insert a better decision maker.</p>
+
+<p>One might argue that baseball is different because there are a fixed number of teams and it’s quite unusual for a new team to enter the market, but if you look at things like public clouds, operating systems, search engines, car manufacturers, etc., the situation doesn’t look that different. If anything, it appears to be much cheaper to take over a baseball team and replace management (you sometimes see baseball teams sell for roughly a billion dollars) and there are more baseball teams than there are competitive products in the markets we just discussed, at least in the U.S. One might also argue that, if you look at the structure of baseball teams, it’s clear that positions are typically not handed out based on decision-making merit and that <a href="https://thezvi.wordpress.com/2017/10/29/leaders-of-men/">other factors tend to dominate</a>, but this doesn’t seem obviously more true in baseball than in engineering fields.</p>
+
+<p>This isn’t to say that we expect obviously bad decisions everywhere. You might get that idea if you hung out on baseball stats nerd forums before <a href="https://www.amazon.com/gp/product/0393324818/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=abroaview-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=0393324818&amp;linkId=3ec395b394d2f8caaa30df2b2fc15d5d">Moneyball</a> was published (and for quite some time after), but if you looked at formula 1 (F1) around the same time, you’d see teams employing PhDs who are experts in economics and game theory to make sure they were making reasonable decisions. This doesn’t mean that F1 teams always make perfect decisions, but they at least avoided making decisions that interested amateurs could identify as inefficient for decades. There are some fields where competition is cutthroat and you have to do rigorous analysis to survive and there are some fields where competition is more sedate. In living memory, <a href="https://repositories.lib.utexas.edu/bitstream/handle/2152/17760/bournen.pdf?%852">there was a time when training for sports was considered ungentlemanly</a> and someone who trained with anything resembling modern training techniques would’ve had a huge advantage. Over the past decade or so, we’re seeing the same kind of shift but for statistical techniques in baseball instead of training in various sports.</p>
+
+<p>If we want to look at the quality of decision making, it&rsquo;s too simplistic to say that we expect a firm to make good decisions because they&rsquo;re exposed to markets and there&rsquo;s economic value in making good decisions and people within the firm will probably be rewarded greatly if they make good decisions. You can&rsquo;t even tell if this is happening by asking people if they&rsquo;re making rigorous, data-driven, decisions. If you&rsquo;d ask people in baseball they were using data in their decisions, they would&rsquo;ve said yes throughout the 70s and 80s. Baseball has long been known as a sport where people track all kinds of numbers and then use those numbers. It&rsquo;s just that people didn&rsquo;t backtest their predictions, let alone backtest their predictions with holdouts.</p>
+
+<p>The <a href="https://www.uky.edu/~eushe2/Pajares/Kuhn.html">paradigm shift</a> of using data effectively to drive decisions has been hitting different fields at different rates over the past few decades, both inside and outside of sports. Why this change happened in F1 before it happened in baseball is due to a combination of the difference in incentive structure in F1 teams vs. baseball teams and the difference in <a href="//danluu.com/wat/">institutional culture</a>. We may take a look at this in a future post, but this turns out to be a fairly complicated issue that requires a lot more background. We’ll try to explore the necessary background in future posts.</p>
+
+<h3 id="appendix-non-idealities-in-our-baseball-analysis">Appendix: non-idealities in our baseball analysis</h3>
+
+<p>In order to make this a short blog post and not a book, there are a lot of simplifications the approximation we discussed. One major simplification is the idea that all runs are equivalent. This is close enough to true that this is a decent approximation. But there are situations where the approximation isn’t very good, such as when it’s the 9th inning and the game is tied. In that case, a decision that increases the probability of scoring 1 run but decreases the probability of scoring multiple runs is actually the right choice.</p>
+
+<p>This is often given as a justification for a relatively late-game sac bunt. But if we look at the probably of a successful sac bunt, we see that it goes down in later innings. We didn’t talk about how the defense is set up, but defenses can set up in ways that reduce the probability of a successful sac bunt but increase the probability of success of non-bunts and vice versa. Before the last inning, this actually makes sac bunt worse late in the game and not better! If we take all of that into account in the last inning of a tie game, the probability that a sac bunt is a good idea then depends on something else we haven’t discussed, the batter at the plate.</p>
+
+<p>In our simplified model, we computed the expected value in runs across all batters. But at any given time, a particular player is batting. A successful sac bunt advances runners and increases the number of outs by one. The alternative is to let the batter “swing away”, which will result in some random outcome. The better the batter, the higher the probability of an outcome that’s better than the outcome of a sac bunt. To determine the optimal decision, we not only need to know how good the current batter is but how good the subsequent batters are. One common justification for the sac bunt is that pitchers are terrible hitters and they’re not bad at sac bunting because they have so much practice doing it (because they’re terrible hitters), but it turns out that pitchers are also below average sac bunters and that the argument that we should expect pitchers to sac because they’re bad hitters doesn’t hold up if we look at the data in detail.</p>
+
+<p>Another reason to sac bunt (or bunt in general) is that the tendency to sometimes do this induces changes in defense which make non-bunt plays work better.</p>
+
+<p>A full computation should also take into account the number of balls and strikes a current batter has, which is a piece of state we haven’t discussed at all as well as the speed of the batter and the players on base as well as the particular stadium the game is being played in and the opposing pitcher as well as the quality of their defense. All of this can be done, even on a laptop &ndash; this is all “small data” as far as computers are concerned, but walking through the analysis even for one particular decision would be substantially longer than everything in this post combined including this disclaimer. It’s perhaps a little surprising that taking all of these non-idealities into account doesn’t overturn the general result, but it turns out that it doesn’t (it finds that there are many situations in which sac bunts have positive expected value, but that sac bunts were still heavily overused for decades).</p>
+
+<p>There’s a similar situation for intentional walks, where the non-idealities in our analysis appear to support issuing intentional walks. In particular, the two main conventional justifications for an intentional walk are</p>
+
+<ol>
+<li>By walking the current batter, we can set up a “force” or a “double play” (increase the probability of getting one out or two outs in one play). If the game is tied in the last inning, putting another player on base has little downside and has the upside of increasing the probability of allowing zero runs and continuing the tie.</li>
+<li>By walking the current batter, we can get to the next, worse batter.</li>
+</ol>
+
+<p>An example situation where people apply the justification in (1) is in the <code>{1B, 3B; 2 out}</code> state. The team that’s on defense will lose if the player at <code>3B</code> advances one base. The reasoning goes, walking a player and changing the state to <code>{1B, 2B, 3B; 2 out}</code> won’t increase the probability that the player at <code>3B</code> will score and end the game if the current batter “puts the ball into play”, and putting another player on base increases the probability that the defense will be able to get an out.</p>
+
+<p>The hole in this reasoning is that the batter won’t necessarily put the ball into play. After the state is <code>{1B, 2B, 3B; 2 out}</code>, the pitcher may issue an unintentional walk, causing each runner to advance and losing the game. It turns out that being in this state doesn’t affect the the probability of an unintentional walk very much. The pitcher tries very hard to avoid a walk but, at the same time, the batter tries very hard to induce a walk!</p>
+
+<p>On (2), the two situations where the justification tend to be applied are when the current player at bat is good or great, or the current player is batting just before the pitcher. Let’s look at these two separately.</p>
+
+<p>Barry Bonds’s seasons from 2001, 2002, and 2004 were some of the statistically best seasons of all time and are as extreme a case as one can find in modern baseball. If we run our same analysis and account for the quality of the players batting after Bonds, we find that it’s sometimes the correct decision for the opposing team to intentionally walk Bonds, but it was still the case that most situations do not warrant an intentional walk and that Bonds was often intentionally walked in a situation that didn’t warrant an intentional walk. In the case of a batter who is not having one of the statistically best seasons on record in modern baseball, intentional walks are even less good.</p>
+
+<p>In the case of the pitcher batting, doing the same kind of analysis as above also reveals that there are situations where an intentional walk are appropriate (not-late game, {1B, 2B; 2 out}, when the pitcher is not a significantly above average batter for a pitcher) but that. Even though it’s not always the wrong decision to issue an intentional walk, the intentional walk is still grossly overused.</p>
+
+<p>One might argue the fact that our simple analysis has all of these non-idealities that could have invalidated the analysis is a sign that decision making in baseball wasn’t so bad after all, but I don’t think that holds. An first-order approximation that someone could do in an hour or two finds that decision making seems quite bad, on average. If a team was interested in looking at data, that ought to lead them into doing a more detailed analysis that takes into account the conventional-wisdom based critiques of the obvious one-hour analysis. It appears that this wasn’t done, at least not for decades.</p>
+
+<h3 id="appendix-possession">Appendix: possession</h3>
+
+<p>Something I find interesting is that statistical analysis in football, baseball, and basketball has found that teams have overwhelmingly undervalued possessions for decades. Baseball doesn&rsquo;t have the concept of possession per se, but if you look at being on offense as &ldquo;having posession&rdquo; and getting 3 outs as &ldquo;losing posession&rdquo;, it&rsquo;s quite similar.</p>
+
+<p>In football, we see that <a href="https://eml.berkeley.edu/~dromer/papers/JPE_April06.pdf">maintaining posession</a> is such a big deal that it is usually an error to punt on 4th down, but this hasn&rsquo;t stopped teams from punting by default basically forever. And in basketball, players who shoot a lot with a low shooting percentage were (and arguably still are) overrated.</p>
+
+<p>I don&rsquo;t think this is fundamental &ndash; that possessions are as valuable as they are comes out of the rules of each game. It&rsquo;s arbitrary. I still find it interesting, though.</p>
+
+<p><i>Thanks to Leah Hanson, David Turner, Milosz Dan, Andrew Nichols, Justin Blank, @hoverbikes, Kate Murphy, and an anonymous commenter for comments/corrections/discussion.</i></p>
+
 		</div>
 		<div class="collectionhref">
 		<a href="https://danluu.com/bad-decisions/" target="_blank">Öffnen</a>
@@ -309,13 +599,114 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 	</li>
 	<li class="anriss">
 		<div class="collectionhref">
-		<a href="https://danluu.com/" target="_blank">Dan Luu</a>
+		<a href="https://danluu.com/atom/index.xml" target="_blank">Dan Luu</a>
 		</div>
 		<div>
-			<h3>How out of date are android devices?</h3>
+			<h3>There are over a billion outdated Android devices in use</h3>
 		</div>
 		<div class="collectiontext">
-			It&rsquo;s common knowledge that Android device tend to be more out of date than iOS devices, but what does this actually mean? Let’s look at android marketshare data to see how old devices in the wild are. The x axis of the plot below is date, and the y axis is Android marketshare. The share of all devices sums to 100% (with some artifacts because the public data Google provides is low precision).
+			
+
+<p>It&rsquo;s common knowledge that Android device tend to be more out of date than iOS devices, but what does this actually mean? Let’s look at android marketshare data to see how old devices in the wild are. The x axis of the plot below is date, and the y axis is Android marketshare. The share of all devices sums to 100% (with some artifacts because the public data Google provides is low precision).</p>
+
+<p>Color indicates age:</p>
+
+<ul>
+<li>blue: current (API major version)</li>
+<li>yellow: 6 months</li>
+<li>orange: 1 year</li>
+<li>dark red: 2 years</li>
+<li>bright red/white: 3 years</li>
+<li>light grey: 4 years</li>
+<li>grey: 5 years</li>
+<li>black: 6 years or more</li>
+</ul>
+
+<p>If we look at the graph, we see a number of reverse-S shaped contours; between each pair of contours, devices get older as we go from left to right. Each contour corresponds to the release of a new android version and the associated devices running that android version. As time passes, devices on that version get older. When a device is upgraded, they’re effectively removed from one contour into a new contour and the color changes to a less outdated color.</p>
+
+<p><img src="https://danluu.com/images/android-updates/android-age.svg" width="1152" height="1152" alt="Markshare of outdated android devices is increasing"></p>
+
+<p>There are three major ways in which this graph understates the number of outdated devices:</p>
+
+<p>First, we’re using API version data for this and don’t have access to the marketshare of point releases and minor updates, so we assume that all devices on the same API version are up to date until the moment a new API version is released, but many (and perhaps most) devices won’t receive updates within an API version.</p>
+
+<p>Second, this graph shows marketshare, but the number of Android devices has dramatically increased over time. For example, if we look at the 80%-ile most outdated devices (i.e., draw a line 20% up from the bottom), it the 80%-ile device today is a few months more outdated than it was in 2014. The huge growth of Android means that there are many many more outdated devices now than there were in 2014.</p>
+
+<p>Third, this data comes from scraping Google Play Store marketshare info. That data shows marketshare of devices that have visited in the Play Store in the last 7 days. In general, it seems reasonable to believe that devices that visit the play store are more up to date than devices that don’t, so we should expect an unknown amount of bias in this data that causes the graph to show that devices are newer than they actually are. This seems plausible both for devices that are used as conventional mobile devices as well as for mobile devices that have replaced things liked traditonally embedded devices, PoS boxes, etc.</p>
+
+<p>If we&rsquo;re looking at this from a security standpoint, some devices will receive updates without updating their major version, skewing the date to look more outdated than it used it. However, when researchers have used more fine-grained data to see which devices are taking updates, <a href="https://www.cl.cam.ac.uk/~drt24/dissertation.pdf">they found that this was not a large effect</a>.</p>
+
+<p>One thing we can see from that graph is that, as time goes on, the world accumulates a larger fraction of old devices over time. This makes sense and we could have figured this out without looking at the data. After all, back at the beginning of 2010, Android phones couldn’t be much more than a year old, and now it’s possible to have Android devices that are nearly a decade old.</p>
+
+<p>Something that wouldn’t have been obvious without looking at the data is that the uptake of new versions seems to be slowing down &ndash; we can see this by looking at the last few contour lines at the top right of the graph, corresponding to the most recent Android releases. These lines have a shallower slope than the contour lines for previous releases. Unfortunately, with this data alone, we can’t tell why the slope is shallower. Some possible reasons might be:</p>
+
+<ul>
+<li>Android growth is slowing down</li>
+<li>Android device turnover (device upgrade rate) is slowing down</li>
+<li>Fewer devices are receiving updates</li>
+</ul>
+
+<p>Without more data, it’s impossible to tell how much each of these is contributing to the problem. BTW, <a href="https://twitter.com/danluu/">let me know</a> if you know of a reasonable source for the active number of Android devices going back to 2010! I’d love to produce a companion graph of the total number of outdated devices.</p>
+
+<p>But even with the data we have, we can take a guess at how many outdated devices are in use. In May 2017, Google announced that there are over two billion active Android devices. If we look at the latest stats (the far right edge), we can see that nearly half of these devices are two years out of date. At this point, we should expect that there are more than one billion devices that are two years out of date! Given Android&rsquo;s update model, we should expect approximately 0% of those devices to ever get updated to a modern version of Android.</p>
+
+<h4 id="percentiles">Percentiles</h4>
+
+<p>Since there’s a lot going on in the graph, we might be able to see something if we look at some subparts of the graph. If we look at a single horizontal line across the graph, that corresponds to the device age at a certain percentile:</p>
+
+<p><img src="https://danluu.com/images/android-updates/android-percentile-age.svg" width="1152" height="1152" alt="Over time, the Nth percentile out of date device is getting more out of date"></p>
+
+<p>In this graph, the date is on the x axis and the age in months is on the y axis. Each line corresponds to a different percentile (higher percentile is older), which corresponds to a horizontal slice of the top graph at that percentile.</p>
+
+<p>Each individual line seems to have two large phases (with some other stuff, too). There’s one phase where devices for that percentile get older as quickly as time is passing, followed by a phase where, on average, devices only get slightly older. In the second phase, devices sometimes get younger as new releases push younger versions into a certain percentile, but this doesn’t happen often enough to counteract the general aging of devices. Taken as a whole, this graph indicates that, if current trends continue, we should expect to see proportionally more old Android devices as time goes on, which is exactly what we’d expect from the first, busier, graph.</p>
+
+<h4 id="dates">Dates</h4>
+
+<p>Another way to look at the graph is to look at a vertical slice instead of a horizontal slice. In that case, each slice corresponds to looking at the ages of devices at one particular date:</p>
+
+<p><img src="https://danluu.com/images/android-updates/android-age-over-time.svg" width="1152" height="1152"></p>
+
+<p>In this plot, the x axis indicates the age percentile and  the y axis indicates the raw age in months. Each line is one particular date, with older dates being lighter / yellower and newer dates being darker / greener.</p>
+
+<p>As with the other views of the same data, we can see that Android devices appear to be getting more out of date as time goes on. This graph would be too busy to read if we plotted data for all of the dates that are available, but we can see it as an animation:</p>
+
+<p><img src="https://danluu.com/images/android-updates/android-age.gif" width="480" height="480"></p>
+
+<h4 id="ios">iOS</h4>
+
+<p>For reference, iOS 11 was released two months ago and it now has just under 50% iOS marketshare despite November’s numbers coming before the release of the iPhone X (this is compared to &lt; 1% marketshare for the latest Android version, which was released in August). It’s overwhelmingly likely that, by the start of next year, iOS 11 will have more than 50% marketshare and there’s an outside chance that it will have 75% marketshare, i.e., it’s likely that the corresponding plot for iOS would have the 50%-ile (red) line in the second plot at age = 0 and it’s not implausible that the 75%-ile (orange) line would sometimes dip down to 0. As is the case with Android, there are some older devices that stubbornly refuse to update; iOS 9.3, released a bit over two years ago, sits at just a bit above 5% marketshare. This means that, in the iOS version of the plot, it’s plausible that we’d see the corresponding 99%-ile (green) line in the second plot at a bit over two years (half of what we see for the Android plot).</p>
+
+<h4 id="windows-xp">Windows XP</h4>
+
+<p>People sometimes compare Android to Windows XP because there are a large number of both in the wild and in both cases, most devices will not get security updates. However, this is tremendously unfair to Windows XP, which was released on 10/2001 and got security updates until 4/2014, twelve and a half years later. Additionally, Microsoft has released at least one security update after the official support period (there was an update in 5/2017 in response to the WannaCry ransomware). It&rsquo;s unfortunate that Microsoft decided to end support for XP while there are still so many XP boxes in the wild, but supporting an old OS for over twelve years and then issuing an emergency security patch after more fifteen years puts Microsoft into a completely different league than Google and Apple when it comes to device support.</p>
+
+<p>Another difference between Android and Windows is that Android&rsquo;s scale is unprecedented in the desktop world. The were roughly 200 million PCs sold in 2017. Samsung alone has been selling that many mobile devices per year since 2008. Of course, those weren&rsquo;t Android devices in 2008, but Android&rsquo;s dominance in the non-iOS mobile space means that, overall, those have mostly been Android devices. Today, <a href="https://twitter.com/danluu/status/864194210752344064">we still see nearly 50 year old PDP-11 devices in use</a>. There are few enough PDPs around that running into one is a cute, quaint, surprise (0.6 million PDP-11s were sold). Desktops boxes age out of service more quickly than PDPs and mobile devices age out of service even more quickly, but the sheer difference in number of devices caused by the ubiquity of modern computing devices means that we&rsquo;re going to see many more XP-era PCs in use 50 years after the release of XP and it&rsquo;s plausible we&rsquo;ll see even more mobile devices around 50 years from now. Many of these ancient PDP, VAX, DOS, etc. boxes are basically safe because they&rsquo;re run in non-networked configurations, but it looks like the same thing is not going to be true for many of these old XP and Android boxes that are going to stay in service for decades.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>We’ve seen that Android devices appear to be getting more out of date over time. This makes it difficult for developers to target “new” Android API features, where new means anything introduced in the past few years. It also means that there are <em>a lot</em> of Android devices out there that are behind in terms of security. This is true both in absolute terms and also relative to iOS.</p>
+
+<p>Until recently, Android was directly tied to the hardware it ran on, making it very painful to keep old devices up to date because that requiring a custom Android build with phone-specific (or at least SoC-specific work). <a href="https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html">Google claims that this problem is fixed in the latest Android version (8.0, Oreo)</a>. People who remember Google&rsquo;s <a href="https://www.google.com/search?client=ubuntu&amp;hs=xVc&amp;channel=fs&amp;ei=laMJWombGJSvjwSmu5TQCA&amp;q=android+update+alliance&amp;oq=android+update+alliance&amp;gs_l=psy-ab.3..35i39k1l2.41466.41684.0.42014.2.2.0.0.0.0.111.193.1j1.2.0....0...1.1.64.psy-ab..0.2.192...0i22i30k1.0.SNY-JCWhD9M">&ldquo;Android update alliance&rdquo; annoucement in 2011</a> may be a bit skeptical of the more recent annoucement. In 2011, Google and U.S. carries announced that they&rsquo;d keep devices up to date for 18 months, <a href="https://www.pcmag.com/article2/0,2817,2397729,00.asp">which mostly didn&rsquo;t happen</a>. However, even if the current annoucement isn&rsquo;t smoke and mirrors and the latest version of Android solves the update probem, we&rsquo;ve seen that it takes years for Android releases to get adopted and we&rsquo;ve also seen that the last few Android releases have significantly slower uptake than previous releases. Additionally, even though this is supposed to make updates easier, it looks like Android is still likely to stay behind iOS in terms of updates for a while. Google has promised that its latest phone (Pixel 2, 10/2017) will get updates for three years. That seems like a step in the right direction, but as we’ve seen from the graphs above, extending support by a year isn’t nearly enough to keep most Android devices up to date. But if you have an iPhone, the latest version of iOS (released 9/2017) works on devices back to the iPhone 5S (released 9/2013).</p>
+
+<p>If we look at the newest Android release (8.0, 8/2017), it looks like you’re quite lucky if you have a two year old device that will get the latest update. The oldest “Google” phone supported is the Nexus 6P (9/2015), giving it just under two years of support.</p>
+
+<p>If you look back at devices that were released around when the iPhone5S, the situation looks even worse. Back then, I got a free Moto X for working at Google; the Moto X was about as close to an official Google phone as you could get at the time (this was back when Google owned Moto). The Moto X was released on 8/2013 (a month before the iPhone 5S) and the latest version of Android it supports is 5.1, which was released on 2/2015, a little more than a year and a half later. For an Android phone of its era, the Moto X was supported for an unusually long time. It&rsquo;s actuall a good sign that things look worse as look further back in time, but at the rate things are improving, it will be years before there&rsquo;s a decently supported Android device released and then years beyond those years before that Android version is in widespread use. It&rsquo;s possible that <a href="https://lwn.net/Articles/718267/">Fuchsia</a> will fix this, but Fuchsia is also many years away from widespread use.</p>
+
+<p>In a future post, we&rsquo;ll look at Android <a href="//danluu.com/keyboard-latency/">response latency</a> is also quite interesting. It’s much more variable between phones than iOS response latency is between different models of iPhone.</p>
+
+<p><i>
+The main thing I’m missing from my analysis of phone latency is older phones. If you have an old phone <a href="https://gist.github.com/danluu/6eebceecbdf1788c1e60da611dd3c2fd">I haven’t tested</a> and want to donate it for testing, you can mail it to:</p>
+
+<p>Dan Luu<br>
+Recurse Center<br>
+455 Broadway, 2nd Floor<br>
+New York, NY 10013</p>
+
+<p>Thanks to Leah Hanson, Kate Murphy, Daniel Thomas, Marek Majkowski, @zofrex, @Aissn, Chris Palmer, and an anonymous person for comments/corrections/related discussion.</p>
+
+<p>Also, thanks to Victorien Villard for making the data these graphs were based on available!
+</i></p>
+
 		</div>
 		<div class="collectionhref">
 		<a href="https://danluu.com/android-updates/" target="_blank">Öffnen</a>
@@ -412,14 +803,111 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 	</li>
 	<li class="anriss">
 		<div class="collectionhref">
-		<a href="https://danluu.com/" target="_blank">Dan Luu</a>
+		<a href="https://danluu.com/atom/index.xml" target="_blank">Dan Luu</a>
 		</div>
 		<div>
 			<h3>UI backwards compatibility</h3>
 		</div>
 		<div class="collectiontext">
-			About once a month, an app that I regularly use will change its UI in a way that breaks muscle memory, basically tricking the user into doing things they don’t want.
-Zulip In recent memory, Zulip (a slack competitor) changed its newline behavior so that ctrl + enter sends a message instead of inserting a new line. After this change, I sent a number of half-baked messages and it seemed like some other people did too.
+			
+
+<p>About once a month, an app that I regularly use will change its UI in a way that breaks muscle memory, basically tricking the user into doing things they don’t want.</p>
+
+<h3 id="zulip">Zulip</h3>
+
+<p>In recent memory, Zulip (a slack competitor) changed its newline behavior so that <code>ctrl + enter</code> sends a message instead of inserting a new line. After this change, I sent a number of half-baked messages and it seemed like some other people did too.</p>
+
+<p>Around the time they made that change, they made another change such that a series of clicks that would cause you to send a private message to someone would instead cause you to send a private message to the alphabetically first person who was online. Most people didn’t notice that this was a change, but when I mentioned that this had happened to me a few times in the past couple weeks, multiple people immediately said that the exact same thing happened to them. Some people also mentioned that the behavior of navigation shortcut keys was changed in a way that could cause people to broadcast a message instead of sending a private message. In both cases, some people blamed themselves and didn’t know why they’d just started making mistakes that caused them to send messages to the wrong place.</p>
+
+<h3 id="doors">Doors</h3>
+
+<p>A while back, I was at Black Seed Bagel, which has a door that <a href="https://www.google.com/search?tbm=isch&amp;source=hp&amp;biw=1739&amp;bih=1689&amp;ei=ADIFWq7SLcTPmwH8g6y4Dg&amp;q=black+seed+bagel&amp;oq=black+se&amp;gs_l=img.3.0.35i39k1l2j0l8.761.2250.0.3272.9.9.0.0.0.0.165.806.4j4.8.0....0...1.1.64.img..1.8.805.0...0.cicb-SDN7SU#imgrc=zwf_w60g8r1uWM:">looks 75% like a “push” door from both sides</a> when it’s actually a push door from the outside and a pull door from the inside. An additional clue that makes it seem even more like a &ldquo;push&rdquo; door from the inside is that most businesses have outward opening doors (this is required for exit doors in the U.S. when the room occupancy is above 50 and many businesses in smaller spaces voluntarily follow the same convetion). During the course of an hour long conversation, I saw a lot of people go in and out and my guess is that ten people failed on their first attempt to use the door while exiting. When people were travelling in pairs or groups, the person in front would often say something like “I’m dumb. We just used this door a minute ago”. But the people were not, in fact, acting dumb. If anything is dumb, it’s designing doors such that are users have to memorize which doors act like “normal” doors and which doors have their cues reversed.</p>
+
+<p>If you’re interested in the physical world, <a href="https://www.amazon.com/gp/product/0465050654/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=abroaview-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=0465050654&amp;linkId=671c3ae6f7143212c71afe93c7c66951">The Design of Everyday Things</a>, gives many real-world examples where users are subtly nudged into doing the wrong thing. It also discusses general principles in a way that allows you to see the general idea and apply and avoid the same issues when designing software.</p>
+
+<h3 id="facebook">Facebook</h3>
+
+<p>Last week, FB changed its interface so that my normal sequence of clicks to hide a story saves the story instead of hiding it. Saving is pretty much the opposite of hiding! It’s the opposite both from the perspective of the user and also as a ranking signal to the feed ranker. The really “great” thing about a change like this is that it A/B tests incredibly well if you measure new feature “engagement” by number of clicks because many users will accidentally save a story when they meant to hide it. Earlier this year, twitter did something similar by swapping the location of “moments” and “notifications”.</p>
+
+<p>Even if the people making the change didn’t create the tricky interface in order to juice their engagement numbers, this kind of change is still problematic because it poisons analytics data. While it’s technically possible to build a model to separate out accidental clicks vs. purposeful clicks, that’s quite rare (I don’t know of any A/B tests where people have done that) and even in cases where it’s clear that users are going to accidentally trigger an action, I still see devs and PMs justify a feature because of how great it looks on naive statistics like <a href="https://en.wikipedia.org/wiki/Daily_active_users">DAU</a>/MAU.</p>
+
+<h3 id="api-backwards-compatibility">API backwards compatibility</h3>
+
+<p>When it comes to software APIs, there’s a school of thought that says that you should never break backwards compatibility for some classes of widely used software. A well-known example is <a href="http://lkml.iu.edu/hypermail/linux/kernel/1710.3/02487.html">Linus Torvalds</a>:</p>
+
+<blockquote>
+<p>People should basically always feel like they can update their kernel and simply not have to worry about it.</p>
+
+<p>I refuse to introduce &ldquo;you can only update the kernel if you also update that other program&rdquo; kind of limitations. If the kernel used to work for you, the rule is that it continues to work for you.
+…
+I have seen, and can point to, lots of projects that go &ldquo;We need to break that use case in order to make progress&rdquo; or &ldquo;you relied on undocumented behavior, it sucks to be you&rdquo; or &ldquo;there&rsquo;s a better way to do what you want to do, and you have to change to that new better way&rdquo;, and I simply don&rsquo;t think that&rsquo;s acceptable outside of very early alpha releases that have experimental users that know what they signed up for. The kernel hasn&rsquo;t been in that situation for the last two decades.
+&hellip;
+We do API breakage <em>inside</em> the kernel all the time. We will fix internal problems by saying &ldquo;you now need to do XYZ&rdquo;, but then it&rsquo;s about internal kernel API&rsquo;s, and the people who do that then also obviously have to fix up all the in-kernel users of that API. Nobody can say &ldquo;I now broke the API you used, and now <em>you</em> need to fix it up&rdquo;. Whoever broke something gets to fix it too.
+&hellip;
+And we simply do not break user space.</p>
+</blockquote>
+
+<p><a href="https://blogs.msdn.microsoft.com/oldnewthing/20031223-00/?p=41373">Raymond Chen quoting Colen</a>:</p>
+
+<blockquote>
+<p>Look at the scenario from the customer’s standpoint. You bought programs X, Y and Z. You then upgraded to Windows XP. Your computer now crashes randomly, and program Z doesn’t work at all. You’re going to tell your friends, &ldquo;Don’t upgrade to Windows XP. It crashes randomly, and it’s not compatible with program Z.&rdquo; Are you going to debug your system to determine that program X is causing the crashes, and that program Z doesn’t work because it is using undocumented window messages? Of course not. You’re going to return the Windows XP box for a refund. (You bought programs X, Y, and Z some months ago. The 30-day return policy no longer applies to them. The only thing you can return is Windows XP.)</p>
+</blockquote>
+
+<p>While this school of thought is a minority, it’s a vocal minority with a lot of influence. It’s much rarer to hear this kind of case made for UI backwards compatibility. You might argue that this is fine &ndash; people are forced to upgrade nowadays, so it doesn’t matter if stuff breaks. But even if users can’t escape, it’s still a bad user experience.</p>
+
+<p>The counterargument to this school of thought is that maintaining compatibility creates technical debt. It’s true! Just for example, Linux is full of slightly to moderately wonky APIs due to the “do not break user space” dictum. One example is <a href="http://man7.org/linux/man-pages/man2/recvmmsg.2.html"><code>int recvmmsg(int sockfd, struct mmsghdr *msgvec, unsigned int vlen, unsigned int flags, struct timespec *timeout);
+</code></a>. You might expect the timeout to fire if you don’t receive a packet, but the manpage reads:</p>
+
+<blockquote>
+<p>The <em>timeout</em> argument points to a <em>struct timespec</em> (see clock_gettime(2)) defining a timeout (seconds plus nanoseconds) for the receive operation (<em>but see BUGS!</em>).</p>
+</blockquote>
+
+<p>The BUGS section reads:</p>
+
+<blockquote>
+<p>The <em>timeout</em> argument does not work as intended.  The timeout is checked only after the receipt of each datagram, so that if up to <em>vlen-1</em> datagrams are received before the timeout expires, but then no further datagrams are received, the call will block forever.</p>
+</blockquote>
+
+<p>This is arguably not even the worst mis-feature of <code>recvmmsg</code>, <a href="http://www.openwall.com/lists/musl/2014/06/07/5">which returns an <code>ssize_t</code> into a field of size <code>int</code></a>.</p>
+
+<p>If you have a policy like “we simply do not break user space”, this sort of technical debt sticks around forever. But it seems to me that it’s not a coincidence that the most widely used desktop, laptop, and server operating systems in the world bend over backwards to maintain backwards compatibility.</p>
+
+<p>The case for UI backwards compatability is arguably stronger than the case for API backwards compatability because breaking API changes can be mechanically fixed and, <a href="//danluu.com/monorepo/">with the proper environment</a>, all callers can be fixed at the same time as the API changes. There&rsquo;s no equivalent way to reach into people&rsquo;s brains and change user habits, so a breaking UI change inevitably results in pain for some users.</p>
+
+<p>The case for the case for UI backwards compatibility is arguably weaker than the case for API backwards compatibility because API backwards compatibility has a lower cost &ndash; if some API is problematic, you can make a new API and then document the old API as something that shouldn’t be used (you’ll see lots of these if you look at Linux syscalls). This doesn’t really work with GUIs since UI elements compete with each other for a small amount of screen real-estate. An argument that I think is underrated is that changing UIs isn’t as great as most companies seem to think &ndash; very dated looking UIs that haven’t been refreshed to keep up with trends can be successful (e.g., plentyoffish and craigslist). Companies can even become wildly successful without any significant UI updates, let alone UI redesigns &ndash; a large fraction of linkedin’s rocketship growth happened in a period where the UI was basically frozen. I’m told that freezing the UI wasn’t a deliberate design decision; instead, it was a side effect of severe technical debt, and that the UI was unfrozen the moment a re-write allowed people to confidently change the UI. Linkedin has managed to <a href="https://darkpatterns.org/">add a lot of dark patterns</a> since they unfroze their front-end, but the previous UI seemed to work just fine in terms of growth.</p>
+
+<p>Despite the success of a number of UIs which aren’t always updated to track the latest trends, at most companies, it’s basically impossible to make the case that UIs shouldn’t be arbitrarily changed without adding functionality, let alone make the case that UIs shouldn’t push out old functionality with new functionality.</p>
+
+<h3 id="ui-deprecation">UI deprecation</h3>
+
+<p>A case that might be easier to make is that shortcuts and shortcut-like UI elements can be deprecated before removal, similar to the way evolving APIs will add deprecation warnings before making breaking changes. Instead of regularly changing UIs so that users’ muscle memory is used against them and causes users to do the opposite of what they want, UIs can be changed so that doing the previously trained set of actions causes nothing to happen. For example, FB could have moved “hide post” down and inserted a no-op item in the old location, and then after people had gotten used to not clicking in the old “hide post” location for “hide post”, they could have then put “save post” in the old location for “hide post”.</p>
+
+<p>Zulip could’ve done something similar and caused the series of actions that used to let you send a private message to the person you want cause no message to be sent instead of sending a private message to the alphabetically first person on the <code>online</code> list.</p>
+
+<p>These solutions aren’t ideal because the user still has to retrain their muscle memory on the new thing, but it’s still a lot better than the current situation, where many UIs regularly introduce arbitrary-seeming changes that sow confusion and chaos.</p>
+
+<p>In some cases (e.g., the no-op menu item), this presents a pretty strange interface to new users. Users don’t expect to see a menu item that does nothing with an arrow that says to click elsewhere on the menu instead. This can be fixed by only rolling out deprecation “warnings” to users who regularly use the old shortcut or shortcut-like path. If there are multiple changes being deprecated, this results in a combinatorial explosion of possibilities, but if you&rsquo;re regularly deprecating multiple independent items, that&rsquo;s pretty extreme and users are probably going to be confused regardless of how it&rsquo;s handled. Given <a href="https://twitter.com/danluu/status/891508449414197248">the amount of effort made to avoid user hostile changes</a> and the dominance of the “move fast and break things” mindset, the case for adding this kind of complexity just to avoid giving users a bad experience probably won’t hold at most companies, but this at least seems plausible in principle.</p>
+
+<p>Breaking existing user workflows arguably doesn’t matter for an app like FB, which is relatively sticky as a result of its dominance in its area, but most applications are more like Zulip than FB. Back when Zulip and Slack were both young, Zulip messages couldn’t be edited or deleted. This was on purpose &ndash; messages were immutable and everyone I know who suggested allowing edits was shot down because mutable messages didn’t fit into the immutable model. Back then, if there was a UI change or bug that caused users to accidentally send a public message instead of a private message, that was basically permanent. I saw people accidentally send public messages often enough that I got into the habit of moving private message conversations to another medium. That didn’t bother me too much since I’m used to <a href="https://danluu.com/everything-is-broken/">quirky software</a>, but I know people who tried Zulip back then and, to this day, still refuse to use Zulip due to UI issues they hit back then. That’s a bit of an extreme case, but the general idea that users will tend to avoid apps that repeatedly cause them pain isn’t much of a stretch.</p>
+
+<p>In studies on user retention, it appears to be the case that an additional 500ms of page-load latency negative impacts retention. If that&rsquo;s the case, it seems like switching the UI around so that the user has to spend 5s undoing and action or broadcasts a private message publicly in a way that can&rsquo;t be undone should have a noticable impact on retention, although I don&rsquo;t know of any public studies that look at this.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>If I worked on UI, I might have some suggestions or a call to action. But as an outsider, I’m wary of making actual suggestions &ndash; programmers seem especially prone to coming into an area they’re not familiar with and telling experts how they should solve their problems. While this occasionally works, the most likely outcome is that the outsider either re-invents something that’s been known for decades or completely misses the most important parts of the problem.</p>
+
+<p>It sure would be nice if shortcuts didn’t break so often that I spend as much time consciously stopping myself from using shortcuts as I do actually using the app. But there are probably reasons this is difficult to test/enforce. The huge number of platforms that need to be tested for robust UI testing make testing hard even without adding this extra kind of test. And, even when we’re talking about functional correctness problems, “move fast and break things” is much trendier than “try to break relatively few things”. Since UI “correctness” often has even lower priority than functional correctness, it’s not clear how someone could successfully make a case for spending more effort on it.</p>
+
+<p>On the other hand, despite all these disclaimers, Google sometimes does the exact things described in this post. Chrome recently removed <code>backspace</code> to go backwards; if you hit <code>backspace</code>, you get a note telling you to use <code>alt+left</code> instead. And when maps moved some items around a while back, they put in no-op placeholders that pointed people to the new location.</p>
+
+<p><i>
+Thanks to Leah Hanson, Allie Jones, Randall Koutnik, Kevin Lynagh, David Turner, Christian Ternus, Ted Unangst, Michael Bryc, Tony Finch, Stephen Tigner, Steven McCarthy, Julia Evans, and an anonymous person who has a moral objection to public acknowledgements for comments/corrections/discussion.</p>
+
+<p>If you&rsquo;re curious why &ldquo;anon&rdquo; is against acknowledgements, it&rsquo;s because they first saw these in Paul Graham&rsquo;s writing, whose acknowledgements are sort of a who&rsquo;s who of SV. anon&rsquo;s belief is that these sorts of list serve as a kind of signalling. I won&rsquo;t claim that&rsquo;s wrong, but I get a lot of help with my writing both from people reading drafts and also from the occasional helpful public internet comment and I think it&rsquo;s important to make it clear that this isn&rsquo;t a one-person effort to combat <a href="https://www.bunniestudios.com/blog/?p=5046">what Bunnie Huang calls &ldquo;the idol effect&rdquo;</a>.</p>
+
+<p>In a future post, we&rsquo;ll look at empirical work on how line length affects readability. I&rsquo;ve read every study I could find, but I might be missing some. If know of a good study you think I should include, <a href="https://twitter.com/danluu/">please let me know</a>.
+</i></p>
+
 		</div>
 		<div class="collectionhref">
 		<a href="https://danluu.com/ui-compatibility/" target="_blank">Öffnen</a>
@@ -828,212 +1316,24 @@ docker push slowe/flask-web-svc:0.3
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/t1GyXZMgomk/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>IPv6 Primer for Deployments</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is a liveblog of the OpenStack Summit Sydney session titled &ldquo;IPv6 Primer for Deployments&rdquo;, led by Trent Lloyd from Canonical. IPv6 is a topic with which I know I need to get more familiar, so attending this session seemed like a reasonable approach.</p>
-
-<p>Lloyd starts with some history. IPv6 was released in 1980, and uses 32-bit address (with a total address space of around 4 billion). IPv4, as most people know, is still used for the majority of Internet traffic. IPv6 was released in 1998, and uses 128-bit addresses (for a theoretical total address space of 3.4 x 10 to the 38th power). IPv5 was an experimental protocol, which is why the IETF used IPv6 as the version number for the next production version of the IP protocol.</p>
-
-<p>Lloyd shows a graph showing the depletion of IPv4 address space, to help attendees better understand the situation with IPv4 address allocation. The next graph Lloyd shows illustrates IPv6 adoption, which&mdash;according to Google&mdash;is now running around 20% or so. (Lloyd shared that he naively estimated IPv4 would be deprecated in 2010.) In Australia it&rsquo;s still pretty difficult to get IPv6 support, according to Lloyd.</p>
-
-<p>Next, Lloyd reviews decimal and binary number conversion as a precursor to better understand how both IPv4 and IPv6 numbers are represented for human consumption, and how subnetting is handled by masking out some number of bits. Whereas IPv4 uses dotted decimal format, IPv6 uses hexadecimal numbering. Lloyd reminds attendees that MAC addresses also use hexadecimal, though only with 48 bits (instead of 128 bits with IPv6).</p>
-
-<p>Bringing up an IPv6 address, Lloyd shares a few tricks to make the address easier to handle. For example, you can remove leading zeroes. You can also use a double colon (<code>::</code>) to remove consecutive series of all zeroes (this can only be done once per address). Using a colon in the address (for example, <code>2001:db8::8a2e:0:4</code>) means we have to enclose the address in square brackets before appending a colon and a port number.</p>
-
-<p>Subnetting in IPv6 is handled a bit differently, naturally, given the expanded address space. Large ISPs would generally get a /32 prefix (resulting in 65,536 /48 prefixes). Large organizations would generally get a /48 prefix (resulting in 65,536 /64 prefixes, or 256 /56 prefixes). A /56 prefix is for a typical end-user site, which gives an end-user 256 /64 prefixes. And a /64 prefix is considered a single local network.</p>
-
-<p>IPv6 also has some special addresses. The first special address is a link local address (similar to the &ldquo;169.254&rdquo; subnet in IPv4). This link local address is derived from the MAC hardware address (using EUI-64, which pads out the 48-bit MAC address to 64 bits and flips a bit to note that it was automatically generated). The link local address is always kept, even if the interface is assigned a global address. The RFC1918 equivalent of link local in IPv6 is called ULA (Unique Local Addressing) is fd00::/8 followed by a randomly-generated section (gives about a trillion unique combinations, making address space collisions far less likely).</p>
-
-<p>The next topic that Lloyd addresses is Neighbour Discovery (ND), the IPv6 equivalent of ARP in IPv4. ND uses the link local address as the source, and a multicast address as the target. Address configuration&mdash;specifically, automatic address configuration&mdash;is handled via one of two methods. The first is SLAAC, which combines EUI-64 and the link prefix with a Router Advertisement (RA) to assign addresses. Early versions of SLAAC didn&rsquo;t support providing DNS server addresses, but this has been addressed in more recent versions of SLAAC. Users can also use DHCPv6, which operates much in the same way as DHCPv4. DHCPv6 has the option of including additional information that isn&rsquo;t supported when using RAs. RAs can point hosts to use DHCPv6. There&rsquo;s also a method of getting the address via SLAAC but configuration via DHCPv6. Finally, there&rsquo;s also something called DHCPv6-PD (Prefix Designation), which allows networks to request a prefix from an ISP to then handle themselves.</p>
-
-<p>Lloyd talked briefly about MTU, but I missed the information. NAT isn&rsquo;t generally used with IPv6, although preliminary support for it is found in very recent Linux kernels. Another consideration Lloyd mentions is single stack vs. dual stack (only IPv6 or both IPv6+IPv4); most initial deployments will use dual stack.</p>
-
-<p>At this point, Lloyd shifts his focus to talk specifically about IPv6 in OpenStack. Generally speaking, OpenStack has relatively strong IPv6 support throughout. The exception to this is Open vSwitch, which currently can&rsquo;t do GRE tunneling using IPv6 in the underlay. The fix for this is to replace GRE with VXLAN or Geneve, both of which can use IPv6 in the underlay. Lloyd also reminds attendees that they&rsquo;ll need to check with vendors to verify IPv6 support in their plugins or commercial solutions.</p>
-
-<p>With regards to IPv6 in tenant networks, tenants should use globally unique addresses. This is done via Neutron&rsquo;s address scopes. Then, out of that address scope, set up a subnet pool (this allows Neutron to hand out a smaller section of the overall address scope). Then, individual tenants can just create a subnet; that subnet can be pulled from a default subnet pool.</p>
-
-<p>When creating a Neutron subnet, you can specify SLAAC or DHCPv6 for address configuration.</p>
-
-<p>IPv6 support is weaker when it comes to DVR (Distributed Virtual Router) or L3 HA. IPv6 does work with DVR, but the traffic isn&rsquo;t fully distributed; there&rsquo;s no IPv6 support in L3 HA.</p>
-
-<p>When it comes to integrating Neutron IPv6 networks with external IPv6 networks, you can do static routing, use BGP, or you can use DHCPv6-PD (Neutron can act as a DHCPv6-PD client).</p>
-
-<p>Lloyd next discusses some concerns around cloud-init and VM metadata. I didn&rsquo;t catch all the considerations, but it sounded like the workaround was using config-drive to address the considerations.</p>
-
-<p>Reverse DNS is also a consideration around IPv6 and OpenStack. This is not generally a problem, though it may be a problem if you&rsquo;re sending email messages directly from instances (reverse DNS will typically be necessary in that instance).</p>
-
-<p>At this point, Lloyd opens the session up to questions from the audience.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/jjixPa_6Kww" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/jjixPa_6Kww/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Battle Scars from OpenStack Deployments</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is the first liveblog from day 2 of the OpenStack Summit in Sydney, Australia. The title of the session is &ldquo;Battle Scars from OpenStack Deployments.&rdquo; The speakers are Anupriya Ramraj, Rick Mathot, and Farhad Sayeed (two vendors and an end-user, respectively, if my information is correct). I&rsquo;m hoping for some useful, practical, real-world information out of this session.</p>
-
-<p>Ramraj starts the session, introducing the speakers and setting some context for the presentation. Ramraj and Mathot are with DXC, a managed services provider. Ramraj starts with a quick review of some of the tough battles in OpenStack deployments:</p>
-
-<ul>
-<li>Months to deploy OpenStack at scale</li>
-<li>Chaos during incidents due to lack of OpenStack skills and knowledge</li>
-<li>Customers spend lengthy periods with support for troubleshooting basic issues</li>
-<li>Applications do not get onboarded to OpenStack</li>
-<li>Marooned on earlier version of OpenStack</li>
-<li>OpenStack skills are hard to recruit and retain</li>
-</ul>
-
-<p>Ramraj recommends using an OpenStack distribution versus &ldquo;pure&rdquo; upstream OpenStack, and recommends using new-ish hardware as opposed to older hardware. Given the last bullet, this complicates rolling out OpenStack and resolving OpenStack issues. A lack of DevOps skills and a lack of understanding around OpenStack APIs can impede the process of porting applications to OpenStack, which in turn makes it harder to justify the cloud project.</p>
-
-<p>Ramraj then spends a few minutes talking about how and why a managed services provider might be able to help address some of the challenges around an OpenStack deployment. Ramraj and the other presenters do not, unfortunately, provide any suggestions for resolving the challenges described above other than recommending the use of a managed services provider, making this session far less useful than it might otherwise have been.</p>
-
-<p>Ramraj closes out her portion of the session with a quote from Sun Tzu&rsquo;s <em>Art of War</em>: &ldquo;Every battle is won before it is fought.&rdquo;</p>
-
-<p>At this point, Ramraj brings up Farhad Sayeed to tell the story of deploying OpenStack at American Airlines. Sayeed spends a couple of minutes talking about the goals American Airlines hoped to achieve with an OpenStack-based private cloud deployment. Then Sayeed describes a couple &ldquo;road bumps&rdquo; they experienced:</p>
-
-<ul>
-<li>Had to work closely with the networking group</li>
-<li>Tested a number of different distributions</li>
-</ul>
-
-<p>I&rsquo;m not clear how either of these are actual problems; rather, they seem like perfectly natural parts of deploying something like OpenStack (which affects lots of different aspects of IT).</p>
-
-<p>Next Sayeed describes some of their target workloads; American Airlines is pushing a &ldquo;PaaS&rdquo;-first strategy leveraging Cloud Foundry. For IaaS, American is supporting RHEL and currently testing Ubuntu. American Airlines is still in a very exploratory stage with containers.</p>
-
-<p>Looking back, Sayeed shares a few lessons learned:</p>
-
-<ul>
-<li>Need a collaborative culture</li>
-<li>Lots of training and retooling required</li>
-<li>Less is more (less customization makes it easier)</li>
-<li>Use a good service provider</li>
-</ul>
-
-<p>I can absolutely agree with the first three lessons learned shared by Sayeed; the fourth <em>might</em> be the right approach for some organizations, but not necessarily all organizations.</p>
-
-<p>Sayeed closes out his portion of the session by encouraging attendees to embrace automation and orchestration, and hands it over to Rick Mathot (also of DXC). Mathot spends a few minutes talking about managing the &ldquo;toughest&rdquo; battle: managing client expectations. Mathot talks about topics like focusing on business value (asking &ldquo;is it useful?&rdquo; and be able to quantify business value), lead from the front (but keep an eye on the rearview mirror), and make sure what you&rsquo;re doing is relevant.</p>
-
-<p>At this point, Mathot wraps up the content and opens the session up for questions from the audience.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/VOdw3EaZuvI" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/VOdw3EaZuvI/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Kubernetes on OpenStack: The Technical Details</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is a liveblog of the OpenStack Summit session titled &ldquo;Kubernetes on OpenStack: The Technical Details&rdquo;. The speaker is Angus Lees from Bitnami. This is listed as an Advanced session, so I&rsquo;m hoping we&rsquo;ll get into some real depth in the session.</p>
-
-<p>Lees starts out with a quick review of Bitnami, and briefly clarifies that this is <em>not</em> a talk about OpenStack on Kubernetes (i.e., using Kubernetes to host the OpenStack control plane); instead, this is about Kubernetes on OpenStack (OpenStack as IaaS, Kubernetes to do container orchestration on said IaaS).</p>
-
-<p>Lees jumps quickly into the content, providing a &ldquo;compare-and-contrast&rdquo; of Kubernetes versus OpenStack. One of the key points is that Kubernetes is more application-focused, whereas OpenStack is more machine-focused. Kubernetes&rsquo; multi-tenancy story is shaky/immature, and the nature of containers means there is a larger attack surface (VMs provide a smaller attack surface than containers). Lees also points out that Kubernetes is implemented mostly in Golang (versus Python for OpenStack), although I&rsquo;m not really sure why this matters (unless you are planning to contribute to one of these projects).</p>
-
-<p>Lees next provides an overview of the Kubernetes architecture (Kubernetes master node containing API server talking to controller manager and scheduler; kubelet, cAdvisor, and kube-proxy on the worker nodes; etcd as a distributed key-value store for storing state in the Kubernetes master; pods running on worker nodes and having one or more containers in each pod).</p>
-
-<p>Next, Lees shows another Kubernetes diagram, but this time the diagram illustrates the &ldquo;connection points&rdquo; between Kubernetes and the underlying cloud (OpenStack, in this particular case).</p>
-
-<p>Lees spends some time reviewing the basics of Kubernetes networking, reviewing the core constructs leveraged by Kubernetes. In the process of reviewing Kubernetes networking, Lees points out that there are <em>lots</em> of solutions for pod-to-pod (east-west) traffic flows. Traffic flows for internet-to-pod (north-south) are handled a bit differently; Kubernetes assumes each pod has outbound connectivity to the Internet. For inbound connectivity, this is where Kubernetes Services come into play; you could have a Service of type NodePort (unique port forwarded by kube-proxy on every node in the Kubernetes cluster) or a Service of type LoadBalancer (which uses a cloud load balancer with nodes &amp; NodePorts as registered backends).</p>
-
-<p>Having now covered the Kubernetes concepts, Lees shifts his focus to concentrate on the &ldquo;connection points&rdquo; between Kubernetes and OpenStack (the underlying cloud provider in this particular case). These connection points are provided by the OpenStack cloud provider in Kubernetes (enabled via the <code>--cloud-provider</code> and <code>--cloud-config</code> flags). Lees shares the story of how his experimentation with OpenStack and Kubernetes in 2014 led to implementing the OpenStack provider for Kubernetes in 2014.</p>
-
-<p>The first connection point Lees discusses in detail regards instances (compute). This requires the Nova Compute v2 API. One challenge in the Kubernetes provider is that the instance ID isn&rsquo;t necessarily unique and isn&rsquo;t resolvable via DNS (generically). To help address this, the Kubernetes provider requires the node name to be the same as the OpenStack instance name (which is not the same as the hostname or the instance ID). This is due, in part, to how the Kubernetes provider determines IP addresses for the node. (Side note: Kubernetes isn&rsquo;t yet very IPv6-friendly, so Lees recommends avoiding putting IPv6 addresses on Kubernetes nodes.)</p>
-
-<p>The next connection point is zones, where Kubernetes looks up the region and availability zone. This information is copied into a label (Lees doesn&rsquo;t say but I assume these labels are assigned to the nodes).</p>
-
-<p>Load balancing is the next connection point that Lees reviews. This integration is based on Service objects specified of &ldquo;type=LoadBalancer&rdquo; (as described earlier). LBaaS v1 and v2 are supported, but Kubernetes 1.9 removes LBaas v1 support. Lees points out that this portion of code is quite complex.</p>
-
-<p>Next up, Lees talks about the &ldquo;routes&rdquo; portion of the provider. This requires the Neutron &ldquo;extraroute&rdquo; extension, and implements &ldquo;kubenet&rdquo; networking using Neutron routers. This adds routes to the Neutron router for each node&rsquo;s pod subnet, and adds entries into the node&rsquo;s allowed-address pairs. (It&rsquo;s worth noting that kubenet is deprecated in favor of CNI.)</p>
-
-<p>The Cinder volume plugin isn&rsquo;t technically part of the Kubernetes provider, but use the Kubernetes provider to gather information and support OpenStack integration. The plugin doesn&rsquo;t yet support Cinder v3; for v1 and v2 implementations, it attaches/detaches volumes from a VM as required for scheduled pods. This plugin does support dynamic provisioning (creating/deleting volumes on the fly).</p>
-
-<p>The last connection point that Lees discusses is the Keystone password authentication plugin that sets up an authenticator to work against Keystone. Lees points out that this is pretty much a terrible idea, and recommends not using this approach. Lees is also careful to point out that this integration point does <em>not</em> bring multi-tenancy to Kubernetes.</p>
-
-<p>OK, so what does all this mean? Lees shifts focus now to try to pull all this information together. First, Lees recommends using Magnum if it&rsquo;s available in your OpenStack cloud. If Magnum isn&rsquo;t available, Lees says that the OpenStack Heat <code>kube-up</code> script is unmaintained and probably should be avoided.</p>
-
-<p>Next, Lees provides some recommendations for deployment:</p>
-
-<ul>
-<li>A dedicated Kubernetes cluster for each (hostile) tenant (don&rsquo;t mix tenants in a single Kubernetes cluster)</li>
-<li>Use three controller VMs (ideally spread across availability zones; minimum of three in order to form a majority for etcd)</li>
-<li>Spread worker VMs across availability zones, and put them all into one Neutron private network</li>
-<li>Use fewer, larger VMs for worker nodes (instead of many smaller VMs)</li>
-<li>Set up an LBaaS load balancer to handle the API access (since there are multiple master VMs)&mdash;this is necessary for the worker nodes to come up properly</li>
-<li>Set up a separate LBaaS and a floating IP network for service access</li>
-<li>Try to avoid Flannel or Weave when running on Neutron; instead, shoot for Kubenet (deprecated), Calico, or Flannel (Host-GW)</li>
-<li>Lees seems less enthusiastic about Calico as opposed to Flannel with the host gateway backend</li>
-</ul>
-
-<p>Lees provides a sample <code>cloud.conf</code> configuration (used to configure the OpenStack provider for Kubernetes), and mentions the Cinder API support and how to work around it (this won&rsquo;t be necessary in a year).</p>
-
-<p>Looking ahead to future work, Lees talks about efforts to make things more automatic with smart defaults. Development efforts are also working to move stuff out of <code>cloud.conf</code> into per-object annotations. Within the Kubernetes community, a lot of work is happening around moving cloud providers out of the core Kubernetes code base, and obviously the OpenStack provider would be affected by this effort.</p>
-
-<p>Lees points out some ways to provide feedback and contact the team that is working on the OpenStack provider for Kubernetes. He then wraps up the session.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/q0OBpZZqbUg" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/q0OBpZZqbUg/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.neuesvonfraumeyer.de/" target="_blank">Neues von Frau Meyer</a>
-		</div>
-		<div>
-			<h3>Odenwald</h3>
-		</div>
-		<div class="collectiontext">
-<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
-SyndContentImpl.value=<style type="text/css">p { margin-bottom: 0.25cm; line-height: 120%; }</style>  <br /><span style="font-size: large;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Meine Freundin J., ihr Mann J. und ihr Sohn J. nutzen das lange Luther-sei-Dank-Wochenende für einen Kurzurlaub mit dem Wohnmobil.<br /><br />„Wo geht es denn hin?“ frage ich.<br />„Ach“, sagt Freundin J., „wir fahren in den Odenwald.“ Und zwar sagt sie das mit einem abwinkenden Tonfall, so als sei eine Fahrt in den Odenwald ein bisschen peinlich.<br />„Wieso? Ist doch bestimmt schön.“<br />„Ja, Odenwald halt.“<br /><br /> Ich kann dazu nicht viel sagen, ich kenne den Odenwald nicht. Nur vom Hörensagen, und eigentlich nur aus dem <i>Blauen Bock</i>. <br /><br />Man hat ja so seine Assoziationen zu Regionen. <br /><br />Immer, wenn ich Harz höre, denke ich Brocken.</span></span><br /><span style="font-size: large;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Wenn jemand den Spessart erwähnt, denke ich Wirtshaus.<br />Die Pfalz erinnert mich an guten Weißwein. <br />Bei Schwarzwald denke ich an einen Spaziergang um den düsteren Mummelsee mit meinem ersten Freund.</span></span><br /><span style="font-size: large;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Bei Westerwald an ein Eukalyptusbonbon.<br />Bei Franken an Lothar Matthäus. <br /><br />Und bei Odenwald denke ich eben an <i>Zum Blauen Bock</i>.<br /><br />In der, besonders in den 60er und 70er Jahren äußerst beliebten TV-Sendung besang Moderator Heinz Schenk Playback im Vorspann die Gastgeberstadtstadt der Unterhaltungsshow. Es gab quasi ein Regionsvideo von Herrn Schenk, gedreht an verschiedenen Schauplätzen rund um Sulzbach, Neckarsteinach oder Bad König im besagten Odenwald. In vielen der - nach eigenem Bekunden – über eintausendsiebenhundert selbstkomponierten Lieder war man entweder zu Gast, wurde willkommen geheißen oder gab sich ein Stelldichein. Meist trug der Komponist und Moderator Schenk verschiedene historische Kostüme und Kopfbedeckungen und/oder Pagenkopfperücken und textete Wissenswertes über die Umgebung zu einer ewig gleichen Marsch-Melodie. Da durfte sich im Falle des <a href="https://www.youtube.com/watch?v=xlTQkfA6Ixk">Odenwald-Songs</a> auch schon mal König auf König reimen.<br /><br />In der TV-Schankwirtschaft <i>Zum Blauen Bock</i> waren neben Heinz Schenk die Frau Widdin (Wirtin) alias Lia Wöhr und der Oberkellner Herr Nonsens Gastgeber und Scherze-Sparringspartner. Musikalische Sketche mit Prominenten wie Ruth-Maria Kubitschek und Günther Schramm sowie Auftritte von Operetten- und Opernstars sorgten für hohe Einschaltquoten. In der nachgestellten Äppelwoi-Kneipe bekamen die TV-Zuschauer nicht nur ordentlich was auf die Ohren, die teilnehmenden Gäste bekamen auch einen Bembel geschenkt. Als Dankeschön und zur Erinnerung. <br /><br /> Jetzt fragen sich Menschen, die nach 1975 geboren sind, nicht ganz zu Unrecht: Wie konnte man sich als Kind für ein solches TV-Format begeistern, in dem Erwachsene zu "Im weißen Rössl am Wolfgangsee" schunkelten?<br /><br />Nun, um ehrlich zu sein: Ich war gar nicht begeistert, ich empfand die Live-Sendung vom Hessischen Rundfunk sogar als ziemlich langweilig. Es gab Sänger und Sängerinnen, die waren gefühlt jedes Mal im <i>Blauen Bock</i> zu Gast. Willy Schneider, Anneliese Rothenberger, Erika Köth und Rudolf Prack schienen in der Pappkulisse des <i>Blauen Bock</i> zu wohnen und hatten in ihren Partykellern bestimmt keinen Platz mehr für Bembel.&nbsp;</span></span><br /><br /><span style="font-size: large;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Operetten waren schon damals nicht meine bevorzugte Musikrichtung, aber wir zogen uns die "Christel von der Post" und stimmungsvolle Trinklieder über den Rhein rein. Es gab einen Mangel an Alternativen.<br /><br />Wir hatten ja tv-technisch nüscht, nur drei Programme, alle öffentlich-rechtlich. Mit Ansagerinnen, aber ohne doofe Werbeunterbrechungen. Klementine, Frau Sommer und Herr Kaiser von der Hamburg-Mannheimer warben vor oder nach der jeweiligen Sendung.</span></span><br /><br /><span style="font-size: large;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Heute musst du einen Festplattenrecorder haben, damit du ja nichts verpasst, während du auf vierzig Sendern rumzappst oder eine DVD guckst. Damals hieß das Prinzip: Hauptsache, die Glotze flimmert.&nbsp;</span></span><br /><span style="font-size: large;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Egal, ob der <i>Internationale Frühschoppen</i> (Journalisten weltbekannter Zeitungen qualmten sich gegenseitig voll und tranken Wein aus dem Römer, während sie das Weltgeschehen diskutierten), <i>Der große Preis</i>, <i>Die Sendung mit der Maus </i>oder <i>Erkennen Sie die Melodie? (</i>ein Opern- und Operetten-Quiz mit Ernst Stankowski) ausgestrahlt wurden: Wirklich dümmer wurden wir nicht durch das Fernsehen.<br /><br />Ich war zum Beispiel noch nie im Odenwald, weiß aber, dass Michelstadt und Bad König im Odenwald liegen, nur weil Herr Schenk diese Orte in einer Blauer Bock-Ausstrahlung Playback besungen hat. <br /><br />Vielleicht sollte ich doch einmal dorthin fahren.<br />J.s Mann J. hat mir per Whatsapp ein Foto geschickt.<br /><br /> <a href="https://1.bp.blogspot.com/-KD5aneIGlXk/Wf4CJnfvRwI/AAAAAAAAB5E/muhFWZOhwlYEhbNqbb6iZbVhNcEZFawTwCLcBGAs/s1600/Michelstadt%2B2..jpeg"><img border="0" height="224" src="https://1.bp.blogspot.com/-KD5aneIGlXk/Wf4CJnfvRwI/AAAAAAAAB5E/muhFWZOhwlYEhbNqbb6iZbVhNcEZFawTwCLcBGAs/s400/Michelstadt%2B2..jpeg" width="400" /> </a><br /><br /> Sieht doch ganz hübsch aus. <br /><br /> </span></span>
-
- -->
-		</div>
-		<div class="collectionhref">
-		<a href="http://www.neuesvonfraumeyer.de/2017/11/odenwald.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>Friday Fun XLIX SunburstChart</h3>
-		</div>
-		<div class="collectiontext">
-<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha again,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Last weekend I was looking for dashboards on the web and stumbled upon some nice charts that I found really interesting.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">These charts are called RadialTreeMaps or SunburstCharts and one that I've found (guess it is from Excel) looks as follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://support.content.office.net/en-us/media/eb234cf8-1004-49bc-bfee-a50602ac492a.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="252" data-original-width="253" src="https://support.content.office.net/en-us/media/eb234cf8-1004-49bc-bfee-a50602ac492a.png" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">It really represents a forward directed tree structure in a radial layout where the root node itself is not really visible. First of all I thought that might be easy because it looks like a multi-donut chart and in principle this is correct but the difference is the tree structure of this chart.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So it took some early morning hours to figure out how to get it right. So the first thing that I needed was a tree structure that is able to hold the data of this chart.&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Therefor I created one which works good enough for my chart and is build from one class.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The </span><span style="font-family: Courier New, Courier, monospace;">TreeNode</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> class that I use to build the tree structure will also fire TreeNodeEvents of Type </span><span style="font-family: Courier New, Courier, monospace;">EventType.PARENT_CHANGED</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> and </span><span style="font-family: Courier New, Courier, monospace;">EventType.CHILDREN_CHANGED</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> so that you can register a listener to those events and react on changes of the tree.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Update:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I've changed the behavior in the way that all tree nodes fire their event via the root node of the tree. Means you just have to hook up a listener to the root of the tree to get informations.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The final idea behind this chart is to add it to TilesFX so I will use the same </span><span style="font-family: Courier New, Courier, monospace;">ChartData</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> class in the tree structure.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><strike>I've decided to make use of the JavaFX canvas node again to keep the number of nodes on the scene graph low. This comes with the drawback that it is not trivial to implement mouse event handling for the segments. So in this version I don't support any mouse event handling. But I think I will also create a node based version...maybe during the next weekend :)</strike></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To create a graph like this you first have to setup the underlying tree. With my </span><span style="font-family: Courier New, Courier, monospace;">TreeNode</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> class this will look like follows:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="font-size: x-small;">TreeNode tree   = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"ROOT"</span>));<br />TreeNode first  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"1st"</span>, 8.3, <span style="font-style: italic;">PETROL_0</span>), tree);<br />TreeNode second = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"2nd"</span>, 2.2, <span style="font-style: italic;">PINK_0</span>), tree);<br />TreeNode third  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"3rd"</span>, 1.4, <span style="font-style: italic;">YELLOW_0</span>), tree);<br />TreeNode fourth = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"4th"</span>, 1.2, <span style="font-style: italic;">GREEN_0</span>), tree);<br /><br />TreeNode jan    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Jan"</span>, 3.5, <span style="font-style: italic;">PETROL_1</span>), first);<br />TreeNode feb    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Feb"</span>, 3.1, <span style="font-style: italic;">PETROL_1</span>), first);<br />TreeNode mar    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Mar"</span>, 1.7, <span style="font-style: italic;">PETROL_1</span>), first);<br />TreeNode apr    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Apr"</span>, 1.1, <span style="font-style: italic;">PINK_1</span>), second);<br />TreeNode may    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"May"</span>, 0.8, <span style="font-style: italic;">PINK_1</span>), second);<br />TreeNode jun    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Jun"</span>, 0.3, <span style="font-style: italic;">PINK_1</span>), second);<br />TreeNode jul    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Jul"</span>, 0.7, <span style="font-style: italic;">YELLOW_1</span>), third);<br />TreeNode aug    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Aug"</span>, 0.6, <span style="font-style: italic;">YELLOW_1</span>), third);<br />TreeNode sep    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Sep"</span>, 0.1, <span style="font-style: italic;">YELLOW_1</span>), third);<br />TreeNode oct    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Oct"</span>, 0.5, <span style="font-style: italic;">GREEN_1</span>), fourth);<br />TreeNode nov    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Nov"</span>, 0.4, <span style="font-style: italic;">GREEN_1</span>), fourth);<br />TreeNode dec    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Dec"</span>, 0.3, <span style="font-style: italic;">GREEN_1</span>), fourth);<br /><br />TreeNode week1  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Week 1"</span>, 1.2, <span style="font-style: italic;">PETROL_2</span>), feb);<br />TreeNode week2  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Week 2"</span>, 0.8, <span style="font-style: italic;">PETROL_2</span>), feb);<br />TreeNode week3  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Week 3"</span>, 0.6, <span style="font-style: italic;">PETROL_2</span>), feb);<br />TreeNode week4  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Week 4"</span>, 0.5, <span style="font-style: italic;">PETROL_2</span>), feb);</span></pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">With this we have setup the tree and now we only have to create the control itself. To make it easier I've created a </span><span style="font-family: Courier New, Courier, monospace;">SunburstChartBuilder</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">. So the code to create a sunburst chart like the one on the image above will look like follows:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="font-size: x-small;">SunburstChart sunburstChart = <br />    SunburstChartBuilder.create()<br />                        .<span style="color: #ff7500;">prefSize</span>(400, 400)<br />                        .<span style="color: #ff7500;">tree</span>(tree)<br />                        .<span style="color: #ff7500;">textOrientation</span>(TextOrientation.<span style="font-style: italic;">TANGENT</span>)<br />                        .<span style="color: #ff7500;">useColorFromParent</span>(<span style="color: #0004ff;">false</span>)<br />                        .<span style="color: #ff7500;">visibleData</span>(VisibleData.<span style="font-style: italic;">NAME</span>)<br />                        .<span style="color: #ff7500;">backgroundColor</span>(Color.<span style="font-style: italic;">WHITE</span>)<br />                        .<span style="color: #ff7500;">textColor</span>(Color.<span style="font-style: italic;">WHITE</span>)<br />                        .<span style="color: #ff7500;">decimals</span>(1)</span></pre><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="font-size: x-small;">                        .<span style="color: #ff7500;">interactive</span>(false)<br />                        .<span style="color: #ff7500;">build</span>();</span></pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now you just have to add this node to your scene graph and you should see something like this...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-ADJ09mqKzhc/WfdujZ5uDMI/AAAAAAAAErI/1Xi1fWi5tDUv5jZdpONyLm2U6A0_VTYFwCLcBGAs/s1600/JavaFX%2BSunburst%2BChart%2B2017-10-30%2B19-24-25.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="582" data-original-width="579" height="640" src="https://3.bp.blogspot.com/-ADJ09mqKzhc/WfdujZ5uDMI/AAAAAAAAErI/1Xi1fWi5tDUv5jZdpONyLm2U6A0_VTYFwCLcBGAs/s640/JavaFX%2BSunburst%2BChart%2B2017-10-30%2B19-24-25.png" width="636" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Not too bad :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As you can see the control comes with the following properties</span><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">backgroundColor</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">textColor</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">visibleData (NONE, VALUE, <b>NAME</b>, NAME_VALUE)</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">textOrientation (HORIZONTAL, <b>TANGENT</b>, ORTHOGONAL)</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">decimals (<b>0</b> - 5)</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">useColorFromParent (true, <b>false</b>)</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">interactive (true, <b>false</b>)</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">autoTextColor (<b>true</b>, false)</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">brightTextColor&nbsp;</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">darkTextColor</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">useChartDataTextColor (true, <b>false</b>)</span></li></ul><div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">One can define a text color in the </span><span style="font-family: Courier New, Courier, monospace;">ChartData</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> objects and if you would like to use the color defined in there you should set </span><span style="font-family: Courier New, Courier, monospace;">useChartDataTextColor</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> to true.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">You also have the ability to only define the fill color in the </span><span style="font-family: Courier New, Courier, monospace;">ChartData</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> objects and let the chart automatically adjust the text color dependent on the segment fill color.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Therefor you can define a </span><span style="font-family: Courier New, Courier, monospace;">brightTextColor</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> that will be used for dark segment fills and a </span><span style="font-family: Courier New, Courier, monospace;">darkTextColor</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> that will be used for bright segment fills. The default bright text color is </span><span style="font-family: Courier New, Courier, monospace;">Color.WHITE</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> and the default dark text color is </span><span style="font-family: Courier New, Courier, monospace;">Color.BLACK</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The </span><span style="font-family: Courier New, Courier, monospace;">useColorFromParent</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> property can be used to set the color of all children of one group to the same color as the group root. Means the color of each </span><span style="font-family: Courier New, Courier, monospace;">ChartData</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> object will be ignored except the one of the group root node.</span></div><div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So if I switch it on for the example above the result will look like this...</span></div><div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span></div><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-cfhvIju2gsU/WfdvkdfxxPI/AAAAAAAAErQ/W_FMMnyfbPMQwMW8GPw8kFlW4CV617dkgCLcBGAs/s1600/JavaFX%2BSunburst%2BChart%2B2017-10-30%2B19-29-21.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="594" data-original-width="594" height="640" src="https://4.bp.blogspot.com/-cfhvIju2gsU/WfdvkdfxxPI/AAAAAAAAErQ/W_FMMnyfbPMQwMW8GPw8kFlW4CV617dkgCLcBGAs/s640/JavaFX%2BSunburst%2BChart%2B2017-10-30%2B19-29-21.png" width="640" /></a></div><div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As you can see now all children of each group have the same color as the root node of this group. If you use this feature you just have to define the colors for the four root nodes (1st, 2nd, 3rd, 4th).</span></div><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Means the code of the tree for the above chart would look like follows:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="font-size: x-small;">TreeNode tree   = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"ROOT"</span>));<br />TreeNode first  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"1st"</span>, 8.3, <span style="font-style: italic;">PETROL_0</span>), tree);<br />TreeNode second = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"2nd"</span>, 2.2, <span style="font-style: italic;">PINK_0</span>), tree);<br />TreeNode third  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"3rd"</span>, 1.4, <span style="font-style: italic;">YELLOW_0</span>), tree);<br />TreeNode fourth = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"4th"</span>, 1.2, <span style="font-style: italic;">GREEN_0</span>), tree);<br /><br />TreeNode jan    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Jan"</span>, 3.5), first);<br />TreeNode feb    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Feb"</span>, 3.1), first);<br />TreeNode mar    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Mar"</span>, 1.7), first);<br />TreeNode apr    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Apr"</span>, 1.1), second);<br />TreeNode may    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"May"</span>, 0.8), second);<br />TreeNode jun    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Jun"</span>, 0.3), second);<br />TreeNode jul    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Jul"</span>, 0.7), third);<br />TreeNode aug    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Aug"</span>, 0.6), third);<br />TreeNode sep    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Sep"</span>, 0.1), third);<br />TreeNode oct    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Oct"</span>, 0.5), fourth);<br />TreeNode nov    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Nov"</span>, 0.4), fourth);<br />TreeNode dec    = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Dec"</span>, 0.3), fourth);<br /><br />TreeNode week1  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Week 1"</span>, 1.2), feb);<br />TreeNode week2  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Week 2"</span>, 0.8), feb);<br />TreeNode week3  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Week 3"</span>, 0.6), feb);<br />TreeNode week4  = <span style="color: #0004ff;">new </span>TreeNode(<span style="color: #0004ff;">new </span>ChartData(<span style="color: magenta;">"Week 4"</span>, 0.5), feb);</span></pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Here you see that we defined the colors only for the four root nodes of the chart.</span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Update:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">After I spend another early morning now the control also supports interactivity. I've added an </span><span style="font-family: Courier New, Courier, monospace;">interactive</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> property to the control which default value is false. In this case the chart is drawn by using the JavaFX canvas node only (for all charts this leads to 3 nodes on the scene graph).&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you switch </span><span style="font-family: Trebuchet MS, sans-serif;">interactivity</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> on the chart will be drawn using JavaFX Path elements. In this case the number of nodes on the scene graph will depend on the number of segments in the chart (for the the chart above it leads to 31 nodes).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The control contains a demo that you can start on the console with</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>gradle demo</b></span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">This will start the following application:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-2-5zE3I79Qg/WfgxiYLgHbI/AAAAAAAAErg/oXd-O72FSxI9K4-bmazCmoFaRH9Rtn9AQCLcBGAs/s1600/JavaFX%2BSunburst%2BChart%2B2017-10-31%2B09-14-09.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="459" data-original-width="820" height="358" src="https://4.bp.blogspot.com/-2-5zE3I79Qg/WfgxiYLgHbI/AAAAAAAAErg/oXd-O72FSxI9K4-bmazCmoFaRH9Rtn9AQCLcBGAs/s640/JavaFX%2BSunburst%2BChart%2B2017-10-31%2B09-14-09.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The chart on the left side is the Canvas based chart where you don't have any interaction at all. The chart on the right side is the interactive chart that makes use of Path elements.&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Here you have a tooltip when you hover over a segment and if you click a segment it will fire a TreeNodeEvent of type </span><span style="font-family: Courier New, Courier, monospace;">EventType.NODE_SELECTED</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">. With this feature you could hook up a listener to the root node of your tree structure and get notified when someone clicks on a segment.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So in principle this control contains two approaches, one that saves nodes on the scene graph with the cost of no interaction and the other which comes with interaction but with the cost of more nodes on the scene graph...it's your choice :)</span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As always you can find the code on <a href="https://github.com/HanSolo/SunburstChart" target="_blank">github</a>&nbsp;</span><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;">and you would like to start the demo that is part of the source code you simply have to pull the source code from github and start the demo on the console with</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: Courier New, Courier, monospace;">gradle demo</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">That's it for today, s</span><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;">o enjoy the upcoming weekend and do not forget...keep coding... ;)</span><br /><br />
-
- -->
-		</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2017/11/friday-fun-xlix-sunburstchart.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
 <div id="B"> 
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
+<li class="anriss">
+  <a href="komponente_zur_verwaltung_tags.html">
+<div class="date">26.11.2017</div>
+<h3>Komponente zur Verwaltung von Tags</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich habe eine Komponente erstellt, die die GUI für die Verwaltung von Tags darstellen könnte. Damit wäre etwa
+eine Möglichkeit geschaffen, eine komfortable Anwendung zur Verwaltung
+Tag-basierter Dateisysteme
+zu erstellen
+</p></div>   </a>
+</li>
 <li class="anriss">
   <a href="tag_basierte_dateisysteme.html">
 <div class="date">22.11.2017</div>
@@ -1054,14 +1354,6 @@ unter Linux angesehen.
 <p>Collections im Zusammenspiel mit Generics erlauben es, ohne Cast auf Elemente gleichen Typs 
 typsicher zuzugreifen - was aber wenn man typsicher auf Elemente unterschiedlicher Typen
 in einer Collection zugreifen möchte, ohne zu casten? Hier die Vorstellung einer möglichen Antwort
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="links_docker__container__cloud.html">
-<div class="date">12.11.2017</div>
-<h3>Links zu Docker, Container, Cloud</h3>
-<div class="abstract">
-<p>Hier eine unsortierte Liste mit Artikeln zu den Themen Docker, Container und Cloud
 </p></div>   </a>
 </li>
 </ul>

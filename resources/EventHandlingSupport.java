@@ -14,7 +14,7 @@ import de.elbosso.util.lang.annotations.Event;
  */
 public class EventHandlingSupport extends java.lang.Object implements de.netsysit.util.beans.PropertyChangeSender
 {
-	private java.beans.PropertyChangeSupport pcs;
+	private final java.beans.PropertyChangeSupport pcs;
 
 
 	/**
@@ -55,7 +55,6 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	/**
 	 *  This method registers listeners for PropertyChangeEvents.
 	 *
-	 * @param  name  The name of the property for which a particular listener wishes to be informed about changes.
 	 * @param  l     The listener interested in changes in the named property.
 	 */
 	@Event
@@ -68,7 +67,6 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	/**
 	 *  This method deregisters listeners from PropertyChangeEvents.
 	 *
-	 * @param  name  The name of the property for which a particular listener is no longer interested
 	 * @param  l     The listener to be deregistered.
 	 */
 	@Event
@@ -201,7 +199,6 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 
 	public void send(java.beans.PropertyChangeEvent evt)
 	{
-		if(pcs.getPropertyChangeListeners().length>0)
-			pcs.firePropertyChange(evt);
+		pcs.firePropertyChange(evt);
 	}
 }
