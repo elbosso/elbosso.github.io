@@ -113,6 +113,344 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
+		</div>
+		<div>
+			<h3>Friday Fun LIII - Sankey Plots</h3>
+		</div>
+		<div class="collectiontext">
+<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha everyone,</span><br /><div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span></div><div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Creating charts is really fun...again Thomas Nield(<a href="https://twitter.com/thomasnield9727" target="_blank">@thomasnield9272</a>) pointed me to a nice chart which is called Sankey chart and again I could not withstand to try my best to implement it in JavaFX.</span></div><div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To give you an idea on what I'm talking about here is an example of such a Sankey plot...</span></div><div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span></div><div class="separator" style="clear: both; text-align: center;"><a href="https://www.agileea.com/images/models/AgileEA.com-SankeyDiagram.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="405" data-original-width="800" height="324" src="https://www.agileea.com/images/models/AgileEA.com-SankeyDiagram.PNG" width="640" /></a></div><div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span></div><div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Compared to last weeks Circular plots these plots can be multilevel and after searching the web for some hours I figured out that you can find all sorts of Sankey plots which might look completely different...here another example...</span></div><div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"><a href="http://www.sankey-diagrams.com/wp-content/gallery/e_sankey_003/sdmaker_image10.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://www.sankey-diagrams.com/wp-content/gallery/e_sankey_003/sdmaker_image10.jpg" data-original-height="414" data-original-width="800" height="330" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span></div><div class="separator" style="clear: both; text-align: center;"></div><div><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;">That doesn't make it easier to implement such a chart and so I've started reading about the history of that chart. In the end it turned out that the main purpose of this kind of chart is the visualization of flows where the width of the arrows/lines is shown proportionally to the flow quantity.</span><br /><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;">So I had to make a decision which style I should follow and I've decided to go with the first visualization of the above pictures.</span><br /><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;">Lucky me there is also a version of the Sankey plots in the <a href="https://developers.google.com/chart/interactive/docs/gallery/sankey" target="_blank">Google charts</a> which I took as a template.</span><br /><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;">Here is a screenshot of what I've come with...</span><br /><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-tCIoj0xtGZc/Wh-HrfjGE-I/AAAAAAAAEuc/GO_3bGpRbE8VhRcgZzwxrkO09eU6v2L7wCLcBGAs/s1600/Sankey%2BPlot%2B2017-11-30%2B05-22-38.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="509" data-original-width="832" height="390" src="https://2.bp.blogspot.com/-tCIoj0xtGZc/Wh-HrfjGE-I/AAAAAAAAEuc/GO_3bGpRbE8VhRcgZzwxrkO09eU6v2L7wCLcBGAs/s640/Sankey%2BPlot%2B2017-11-30%2B05-22-38.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;">This is the more colorful version of the chart but it is also possible to create other versions as you can see here...</span><br /><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-KVgMJZZbNhY/Wh-IRO8ke-I/AAAAAAAAEuk/y4QAldvcoRYKettcx14Kvb68zUQhYMtnQCLcBGAs/s1600/Sankey%2BPlot%2B2017-11-30%2B05-25-24.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="532" data-original-width="903" height="376" src="https://1.bp.blogspot.com/-KVgMJZZbNhY/Wh-IRO8ke-I/AAAAAAAAEuk/y4QAldvcoRYKettcx14Kvb68zUQhYMtnQCLcBGAs/s640/Sankey%2BPlot%2B2017-11-30%2B05-25-24.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;">In this version I've used different parameters for the width of the items and here also the direction of the flow is indicated by arrows (but I only support one direction anyway).</span><br /><span style="font-family: &quot;trebuchet ms&quot;, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">To get nice results you have to keep in mind that in my implementation you have to think about how to order the items in the chart when adding it to the control.</span><br /><span style="font-family: trebuchet ms, sans-serif;">Meaning to say I do not have some hyper smart algorithm that do some fancy automatic sorting of items but you have to use your own brain and think about the chart before you create it. For the example above I've added the items exactly in the order as they appear on the chart which would look like follows...</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="font-size: x-small;"><span style="color: green; font-style: italic;">// Setup chart items</span>PlotItem brazil      = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"Brazil"</span>, Colors.<span style="font-style: italic;">LIGHT_BLUE</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem mexico      = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"Mexico"</span>, Colors.<span style="font-style: italic;">ORANGE</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem usa         = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"USA"</span>, Colors.<span style="font-style: italic;">ORANGE</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem canada      = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"Canada"</span>, Colors.<span style="font-style: italic;">LIGHT_RED</span>.<span style="color: #ff7500;">get</span>());<br /><br />PlotItem germany     = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"Germany"</span>, Color.web(<span style="color: magenta;">"#FF48C6"</span>));<br /><br />PlotItem portugal    = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"Portugal"</span>, Colors.<span style="font-style: italic;">LIGHT_BLUE</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem spain       = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"Spain"</span>, Colors.<span style="font-style: italic;">LIGHT_GREEN</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem england     = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"England"</span>, Colors.<span style="font-style: italic;">LIGHT_RED</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem france      = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"France"</span>, Colors.<span style="font-style: italic;">LIGHT_GREEN</span>.<span style="color: #ff7500;">get</span>());<br /><br />PlotItem southAfrica = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"South Africa"</span>, Colors.<span style="font-style: italic;">YELLOW</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem angola      = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"Angola"</span>, Colors.<span style="font-style: italic;">PURPLE</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem morocco     = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"Morocco"</span>, Colors.<span style="font-style: italic;">YELLOW</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem senegal     = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"Senegal"</span>, Colors.<span style="font-style: italic;">PURPLE</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem mali        = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"Mali"</span>, Colors.<span style="font-style: italic;">BLUE</span>.<span style="color: #ff7500;">get</span>());<br /><br />PlotItem china       = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"China"</span>, Colors.<span style="font-style: italic;">BLUE</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem japan       = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"Japan"</span>, Colors.<span style="font-style: italic;">GREEN</span>.<span style="color: #ff7500;">get</span>());<br />PlotItem india       = <span style="color: #0004ff;">new </span>PlotItem(<span style="color: magenta;">"India"</span>, Colors.<span style="font-style: italic;">GREEN</span>.<span style="color: #ff7500;">get</span>());</span></pre><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">After that is done you have to define the connections between the items by defining only the outgoing streams for each item. Because that's a lot for the chart above I will only show you the ones for the first column which will look as follows...</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="font-size: x-small;"><span style="color: green; font-style: italic;">// Setup flows</span>brazil.<span style="color: #ff7500;">addToOutgoing</span>(portugal, 5);<br />brazil.<span style="color: #ff7500;">addToOutgoing</span>(france, 1);<br />brazil.<span style="color: #ff7500;">addToOutgoing</span>(spain, 1);<br />brazil.<span style="color: #ff7500;">addToOutgoing</span>(england, 1);<br />canada.<span style="color: #ff7500;">addToOutgoing</span>(portugal, 1);<br />canada.<span style="color: #ff7500;">addToOutgoing</span>(france, 5);<br />canada.<span style="color: #ff7500;">addToOutgoing</span>(england, 1);<br />mexico.<span style="color: #ff7500;">addToOutgoing</span>(portugal, 1);<br />mexico.<span style="color: #ff7500;">addToOutgoing</span>(france, 1);<br />mexico.<span style="color: #ff7500;">addToOutgoing</span>(spain, 5);<br />mexico.<span style="color: #ff7500;">addToOutgoing</span>(england, 1);<br />usa.<span style="color: #ff7500;">addToOutgoing</span>(portugal, 1);<br />usa.<span style="color: #ff7500;">addToOutgoing</span>(france, 1);<br />usa.<span style="color: #ff7500;">addToOutgoing</span>(spain, 1);<br />usa.<span style="color: #ff7500;">addToOutgoing</span>(england, 5);</span></pre><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">As mentioned you define the streams that goes from each item to other items with their values.</span><br /><span style="font-family: trebuchet ms, sans-serif;">After that is done you can setup the chart using the SankeyPlotBuilder as follows...</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="font-size: x-small;">SankeyPlot sankeyPlot = SankeyPlotBuilder.create()<br />                                         .<span style="color: #ff7500;">prefSize</span>(600, 400)<br />                                         .<span style="color: #ff7500;">items</span>(brazil, mexico, usa, canada,germany,<br />                                                portugal, spain, england, france,<br />                                                southAfrica, angola, morocco, </span></pre><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="font-size: x-small;">                                                senegal, mali, china, japan, india)<br />                                         .<span style="color: #ff7500;">build</span>();</span></pre><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">And that's all it takes to create such a chart. Because the chart is again based on the JavaFX Canvas node there is no interactivity at the moment but I'm already working on a little project that will make it possible to have interactivity in the future...so stay tuned :)</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">Of course the code is available on <a href="https://github.com/HanSolo/sankeyplot" target="_blank">github</a> as always.</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">That's it for today...so keep coding...</span><br /><br /></div>
+
+ -->
+		</div>
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/2017/12/friday-fun-liii-sankey-plots.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>AWS re:Invent 2017 Keynote with Andy Jassy</h3>
+		</div>
+		<div class="collectiontext">
+			<p>This is a liveblog of the re:Invent 2017 keynote with Andy Jassy, taking place on Wednesday at the Venetian. As fully expected given the long queues and massive crowds, even arriving an hour early to the keynote isn&rsquo;t soon enough; there&rsquo;s already a huge crowd gathered to make it into the venue. Fortunately, I did make it in and scored a reasonable seat from which to write this liveblog.</p>
+
+<p>The pre-keynote time is filled with catchy dance music arranged by a live DJ (same live DJ as last year, if I&rsquo;m not mistaken). There&rsquo;s already been quite a few announcements made this year even before today&rsquo;s keynote: Amazon Sumerian (AR/VR service), new regions and availability zones (AZs), and new bare metal instances, just to name a few of the big ones. There&rsquo;s been a great deal of speculation regarding what will be announced in today&rsquo;s keynote, but there&rsquo;s no doubt there will be a ton of announcements around service enhancements and new services. Rumors are flying about a managed Kubernetes offering; we shall see.</p>
+
+<p>Promptly at 8am, the keynote starts with a brief video, and Andy Jassy, CEO of AWS, takes the stage. Jassy welcomes attendees to the sixth annual conference, and confirms that the attendance at the event is over 43,000 people&mdash;wow!</p>
+
+<p>Jassy starts with a quick update on the AWS business:</p>
+
+<ul>
+<li>$18B revenue run rate</li>
+<li>42% growth rate (if I captured that correctly)</li>
+<li>Millions of customers with a pretty varied customer base (lots of technology startups, enterprise customers from pretty much every vertical, and public sector users)</li>
+<li>Thousands of system integrators who&rsquo;ve built their business on AWS consulting</li>
+</ul>
+
+<p>Jassy reviews the latest &ldquo;Magic Quadrant,&rdquo; showing AWS with a strong lead over all other competitors, and shows a study that gives AWS 44% of the public cloud marketshare (more than all other competitors combined).</p>
+
+<p>Moving out of the business update, Jassy begins to lay the framework for the rest of the keynote. He compares people building technology solutions (&ldquo;builders&rdquo;) to musicians, who want the freedom to choose the technology building blocks (the &ldquo;instruments&rdquo;) to create the solution (the &ldquo;song&rdquo;). According to Jassy, AWS radically changes what&rsquo;s possible for builders by giving them unprecedented choice and flexibility. To help with the keynote, a band is going to play five different songs, each of which captures some aspect of how AWS enables builders to build incredibly new and powerful solutions.</p>
+
+<p>The first song is &ldquo;Everything is Everything,&rdquo; by Lauryn Hill. Jassy explains that &ldquo;everything is everything&rdquo; applies to technology because the choice of platform/provider is incredibly important, and builders shouldn&rsquo;t have to settle for less than everything. AWS has more than any other provider, says Jassy, meaning they have the &ldquo;everything&rdquo; that builders need/want, leading him into a lengthy rant (in a good way) outlining the breadth of AWS&rsquo; services (including, notably, a mention of VMware Cloud on AWS).</p>
+
+<p>Jassy mentions that the pace of innovation is also continuing to expand, with an expected 1,300+ service announcements over the course of 2017.</p>
+
+<p>At this point, Jassy brings out Mark Okerstrom, President and CEO of Expedia. Okerstrom talks about the technology challenges that a company operating at Expedia&rsquo;s scale (600M+ site visits monthly, greater than 750 million searches per day) experiences. Expedia has committed to move 80% of mission critical applications to AWS within the next 2-3 years. Why? Resiliency, optimization, and performance, says Okerstrom. Okerstrom wraps up his portion with a quote by Mark Twain (on how travel is fatal to bigotry), and Jassy returns to the stage.</p>
+
+<p>Jassy turns his attention to AWS&rsquo; compute offerings. Jassy outlines the range of compute instance types (such as the new M5, H1, and I3m [bare metal] instances), and then moves to talk about containers. He positions ECS (Elastic Container Service) as something that AWS built &ldquo;back when there was no predominant orchestration system,&rdquo; and outlines some of the advantages that ECS offers (deep integration with other AWS services, better scale, and service integrations at the container level).</p>
+
+<p>All that being said, Jassy recognizes that Kubernetes has emerged as a leading container orchestration platform, and that customers who want to run Kubernetes on AWS have some complexities to manage. Jassy recognizes Amazon Elastic Container Service for Kubernetes (EKS), a managed Kubernetes service running on top of AWS. EKS has a number of features that Jassy outlines:</p>
+
+<ul>
+<li>Hybrid cloud compatible</li>
+<li>Highly available (masters deployed across multiple AZs, for example)</li>
+<li>Automated upgrades and patches</li>
+</ul>
+
+<p>This gives AWS two different managed container offerings: ECS and EKS. However, Jassy says that containers want more&mdash;they want to run containers without having to manage servers and clusters. This leads to an announcement of AWS Fargate, which allows customers to run containers without managing servers, clusters, or instances. Just package your application into a container, upload it to Fargate, and AWS takes care of the rest (says Jassy). Fargate will support ECS immediately, and will support EKS in 2018. (Although at this point it&rsquo;s unclear exactly what &ldquo;supporting&rdquo; ECS or EKS means.)</p>
+
+<p>Next, Jassy moves on to discussing serverless (Functions as a Service, or FaaS). AWS Lambda has already gathered hundreds of thousands of customers. Jassy points out that FaaS really needs to be more than just code execution; you also need event-driven services (like Lambda and Step Functions), lots of event sources (all the various triggers from AWS services), and the ability to execute functions at the edge as well as in the cloud (like Lambda@Edge and Greengrass).</p>
+
+<p>This brings Jassy back to the &ldquo;everything is everything&rdquo; mantra, and how the broad range of compute offerings that AWS supplies satisfies customers&rsquo; demands for &ldquo;everything is everything.&rdquo;</p>
+
+<p>Changing direction slightly, Jassy talks about what &ldquo;freedom&rdquo; means to him and to AWS. This leads him back to the house band, who plays &ldquo;Freedom&rdquo; by George Michael.</p>
+
+<p>The &ldquo;freedom&rdquo; discussion leads Jassy to a discussion about databases, and a number of not-very-subtle attacks against Oracle. Customers want open database engines, and this demand is what led AWS to create Amazon Aurora. Aurora is MySQL- and PostgreSQL-compatible but offers the scale and performance that users demand from commercial databases. Jassy states that Aurora is the fastest-growing service in the history of AWS.</p>
+
+<p>Aurora offers the ability to scale out for reads, but customers wanted scale-out write support. Jassy announces a preview of Aurora Multi-Master, which supports multiple instances of Aurora for both read/write support across multiple AZs (with multi-region support coming in 2018). The preview for single region/multi-master is open today.</p>
+
+<p>Next, Jassy announces Aurora Serverless&mdash;on-demand, auto-scaling Amazon Aurora. This service eliminates the need to provision instances, automatically scales up/down, and starts up and shuts down automatically.</p>
+
+<p>However, relational databases are the only solution out there; sometimes a different type of solution is needed. Sometimes a key-value datastore is a better solution, leading Jassy to talk about DynamoDB and ElastiCache (which currently supports Redis and Memcached). To expand the functionality and utility of DynamoDB, Jassy announces DynamoDB Global Tables. DynamoDB Global Tables is the first fully-managed, multi-master, multi-region database. DynamoDB Global Tables enables low-latency reads and writes to locally available tables. It&rsquo;s generally available today.</p>
+
+<p>Jassy next announces DynamoDB Backup and Restore, to simplify the process of backing up and restoring data from/to DynamoDB databases. This new offering will enable customers to back up hundreds of terabytes of data with no performance interruption or performance impact. This offering is generally available today, with point-in-time restore coming in 2018.</p>
+
+<p>To better enable using data across multiple databases, Jassy announces the launch of Amazon Neptune, a fully-managed graph database. Neptune supports multiple graph models, is fast and scalable, enables greater reliability with multiple replicas across AZs, and is easy to use with support for multiple graph query languages.</p>
+
+<p>This leads to the third song, &ldquo;Congregation&rdquo; by the Foo Fighters. Jassy calls out the apparent contradiction in the song about having blind faith but not false hope, and compares that to the conviction that builders have when building out great ideas even when they&rsquo;re not sure it will work. Getting feedback from customers is one way to help with this, and Jassy says that analytics are the answer here. Naturally, AWS has great analytics, so Jassy talks about the various solutions that AWS has to offer.</p>
+
+<p>In the realm of data lakes, Jassy calls out S3 as the most popular choice for data lakes today, and takes a few minutes to talk about the advantages of S3 (he again refers to the Gartner Magic Quadrant to show S3 in a strong leadership position). S3&rsquo;s position is further strengthened by ties to things like Amazon Athena, Amazon EMR, Amazon Redshift, Amazon Elasticsearch Service, Amazon Kinesis, Amazon QuickSight, and AWS Glue.</p>
+
+<p>At this point, Jassy brings out Roy Joseph, Managing Director at Goldman Sachs, to talk about how Goldman uses analytics on AWS. Joseph stresses Goldman&rsquo;s position as a source of innovation; 25% of Goldman&rsquo;s employees are engineers who have written 1.5B lines of code across more than 7K applications. In order to compete effectively, Joseph says that Goldman Sachs needs strong engineering, risk management, and distribution. Three examples shared by Joseph include Marcus (consumer retail loans), Marquee (access to risk and pricing platform), and Symphony (secure messaging and collaboration; originally internal-only but now seeing growth as an inter-bank platform). So why public cloud? According to Joseph, a greater demand for risk management drives a need for more calculations, which in turn means more compute capacity&mdash;and the public cloud was the best way to satisfy that need. That being said, Joseph outlined some concerns that Goldman had to overcome: extending an internally-built management framework and ensuring data privacy. To help ensure data privacy, Goldman worked with AWS to create a &ldquo;BYOK&rdquo; (Bring Your Own Key) solution for key management.</p>
+
+<p>Jassy returns to the stage to continue the discussion around analytics. To help customers perform analytics on the correct subset of data that might be stored in S3, Jassy announces S3 Select, the ability to use standard SQL statements to &ldquo;filter&rdquo; out or select the correct subset of S3 data. Jassy shares some TPC-DS benchmarks on a Presto queries (8 seconds without S3 Select, 1.8 seconds [4.5x faster] with S3 Select).</p>
+
+<p>Jassy next announces Glacier Select, which allows you to run queries directly against data stored in Amazon Glacier. This is generally available today.</p>
+
+<p>Shifting focus slightly, Jassy takes the conversation toward machine learning, and asks the house band to play another song. This time it&rsquo;s &ldquo;Let it Rain&rdquo; by Eric Clapton, and Jassy says the lyrics of the song reflect the desire of builders for machine learning to be easier to use and embrace than it is right now.</p>
+
+<p>Jassy says that Amazon has been doing machine learning for 20 years, and points to things like Amazon&rsquo;s personalized recommendations, or Alexa&rsquo;s natural language understanding, or the pick paths Amazon uses for the robots in the warehouse. This makes AWS well-positioned to make machine learning easier to use and consume.</p>
+
+<p>According to Jassy, there are three layers to machine learning.</p>
+
+<p>The bottom layer is for expert ML practitioners who deeply understand learning models and frameworks, and Jassy re-iterates AWS&rsquo; support for all the various major frameworks and interfaces customers want to use.</p>
+
+<p>The middle layer is for everyday developers who aren&rsquo;t experts in ML, but it&rsquo;s still too complicated for most users. To help with the challenges in this layer, Jassy introduces Amazon SageMaker (leverages open source Jupyter project). SageMaker provides built-in, high performance algorithms, but doesn&rsquo;t prevent users from bringing their own algorithms and frameworks. SageMaker also greatly simplifies training and tuning, and helps automate the deployment/operation of machine learning in production.</p>
+
+<p>To further help get machine learning into the hands of developers, Jassy announces DeepLens, the world&rsquo;s first HD video camera with built-in machine learning support. Jassy brings out Dr. Matt Wood to talk more about DeepLens and SageMaker. After talking for a few minutes, Wood does a demo of DeepLens performing album identification and facial expression recognition.</p>
+
+<p>The top layer, according to Jassy, is a set of application services that leverage machine learning. Examples here are Lex, Polly, and Rekognition. Jassy announces Rekognition Video, which is real-time batch video analysis (like what Rekognition does for photos). To help get video/audio data into AWS, Jassy announces Amazon Kinesis Video Streams. Rekognition Video is deeply integrated with Kinesis Video Streams.</p>
+
+<p>On the language side (as opposed to video), Jassy announces Amazon Transcribe to convert speech into accurate, gramatically correct text (initially available with English and Spanish). In the near future, Transcribe will support multiple speakers and custom dictionaries.</p>
+
+<p>Jassy also announces Amazon Translate, which does real-time language translation as well as batch translation. It will support automatic language detection in the near future.</p>
+
+<p>Next, Jassy announces Amazon Comprehend, a fully-managed natural language processing service. It analyzes information in text and identifies things like entities (people, places, things), key phrases, sentiment, and the language of the content. Comprehend can not only identify information in a single document, but can also be used to perform topic modeling across large numbers of documents.</p>
+
+<p>To talk a bit about how the NFL is using Amazon and machine learning, Jassy brings out Michelle McKenna-Doyle, SVP and CIO of the NFL. McKenna-Doyle shares some details on Next Gen Stats (NGS), which spans AWS services like Lambda, CloudFront, DynamoDB, EC2, S3, EMR, and the Amazon API Gateway (among others). NGS generates 3TB of data for every week of NFL games. McKenna-Doyle also talks briefly about future plans for incorporating machine learning and artificial intelligence into the NFL&rsquo;s NGS plans (to do things like formation detection, route detection, and key event identification).</p>
+
+<p>As McKenna-Doyle leaves the stage, the house band kicks up again with another song (remember there are five songs, as outlined by Jassy). This one is &ldquo;The Waiting&rdquo; by Tom Petty, and Jassy connects the lyrics to IoT and edge devices.</p>
+
+<p>In order to get out of the keynote in a timely fashion, I&rsquo;m wrapping up the liveblog here (sorry for the abbreviated coverage).</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/Oo7EQyQFEwA" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Oo7EQyQFEwA/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Liveblog: Deep Dive on Amazon Elastic File System</h3>
+		</div>
+		<div class="collectiontext">
+			<p>This is a liveblog of the AWS re:Invent 2017 session titled &ldquo;Deep Dive on Amazon Elastic File System (EFS).&rdquo; The presenters are Edward Naim and Darryl Osborne, both with AWS. This is my last session of day 2 of re:Invent; thus far, most of my time has been spent in hands-on workshops with only a few breakout sessions today. EFS is a topic I&rsquo;ve watched, but haven&rsquo;t had time to really dig into, so I&rsquo;m looking forward to this session.</p>
+
+<p>Naim kicks off the session with looking at the four phases users go through when they are choosing/adopting a storage solution:</p>
+
+<ol>
+<li>Choosing the right storage solution</li>
+<li>Testing and optimizing</li>
+<li>Ingest (loading data)</li>
+<li>Running it (operating it in production)</li>
+</ol>
+
+<p>Starting with Phase 1, Naim outlines the three main things that people think about. The first item is storage type. The second is features and performance, and the third item is economics (how much does it cost). Diving into each of these items in a bit more detail, Naim talks about file storage, block storage, and object storage, and the characteristics of each of these approaches. Having covered these approaches, Naim returns to file storage (naturally) and talks about why file storage is popular:</p>
+
+<ul>
+<li>Works natively with operating systems</li>
+<li>Provides shared access while providing consistency guarantees and locking functionality</li>
+<li>Provides a hierarchical namespace</li>
+</ul>
+
+<p>Generally speaker, file storage hits the &ldquo;sweet spot&rdquo; between latency and throughput compared to block and object storage.</p>
+
+<p>According to Naim, the key features of EFS are:</p>
+
+<ul>
+<li>Simple (easy to use, operate, consume)</li>
+<li>Elastic (no problem growing to accommodate capacity)</li>
+<li>Scalable (consistent low latencies, thousands of concurrent connnections)</li>
+<li>Highly available and durable (all file system objects stored in multiple AZs)</li>
+</ul>
+
+<p>Next, Naim shows the typical &ldquo;customer logo&rdquo; slide to show how widely adopted EFS is by the AWs customer base and some of the use cases seen. Although the presenter said he wasn&rsquo;t going to go through all the logos, he spends more than a few minutes going through almost all of them.</p>
+
+<p>With regards to security, EFS offers a number of security-related features. Network access to EFS is controlled via security groups and NACLs. File and directory access is controlled via POSIX permissions; administrative access is managed via IAM. Encryption is also supported, with key storage in KMS.</p>
+
+<p>Naim next goes through some pricing comparisons showing how EFS is much cheaper than DIY storage solutions using EC2 instances and EBS volumes.</p>
+
+<p>EFS completes the &ldquo;trifecta&rdquo; of storage solutions that AWS offers, which cover the whole range of storage types (EFS for file, EBS for block, S3 for object).</p>
+
+<p>A new feature announced last week is EFS File Sync, which is designed to get data from on-premises file systems into EFS, and is designed to operate up to 5x faster than traditional Linux copy tool. Naim indicates that Osborne will discuss this in more detail later in the session.</p>
+
+<p>Next Naim discusses some architectural aspects of EFS, and how NFS clients on EC2 instances across various AZs might access EFS. EFS is POSIX-compliant and supports NFS v4.0 and v4.1. Of course, Naim points out that you should <em>always</em> test to verify that everything works as expected.</p>
+
+<p>Now Osborne steps up to talk specifically about performance. When creating an EFS instance, you can select either &ldquo;general purpose&rdquo; (the default) or &ldquo;max I/O&rdquo; (designed for very large scale-out workloads, at the cost of slightly higher latencies). GP may have lower latencies, but has a ceiling of 7K operations/second. For GP file systems, AWS does expose a CloudWatch metric that allows users to see where they fall within the 7K ops/sec limit.</p>
+
+<p>Osborne next compares EFS and EBS PIOPS (not sure what this stands for). Again, there are trade-offs (there are always trade-offs with technology decisions). As with any file system, throughput is a function of I/O size, meaning that larger I/O size will create more throughput. To really take advantage of EFS, Osborne indicates that parallelism is the key.</p>
+
+<p>Changing gears slightly, Osborne reviews the mount options for using EFS with Linux instances on EC2. Linux kernel 4.0 or higher is recommended, as is NFS v4.1. More details are available in the documentation, according to Osborne.</p>
+
+<p>Overall throughput is gated/tied to file system capacity; sustained throughput is 50 MBps per TB of storage, with bursts up to 100 MBps.</p>
+
+<p>Osborne shifts focus now to talk about ingest, i.e., getting data into EFS. He reviews a couple different options (connecting on-premises servers to EFS via Direct Connect or using a third-party VPN solution). Both of these options can, according to Osborne, be used not only for migration but also for bursting or backup/disaster recovery. In order to optimize data copy/ingest, parallelism is again the key. Osborne reviews a few standard Linux copy tools (like <code>rsync</code>, <code>cp</code>, <code>fpsync</code>, or <code>mcp</code>). According to Osborne, <code>rysnc</code> offers relatively poor performance. <code>fpsync</code> is essentially multi-threaded <code>rsync</code>; <code>mcp</code> is a drop-in replacement for <code>cp</code> developed by NASA; both of these tools offer better performance than their single-threaded counterparts. The best performance comes from combining tools with GNU Parallel.</p>
+
+<p>This dicussion of ingest performance and tools brings Osborne back to the topic of EFS File Sync, which is a multi-threaded tool that uses parallelism to maximize throughput, and offers encrypted transfers to EFS for security. EFS File Sync can be used to transfer from on-premises to EFS, between EFS instances in different regions, or from DIY shared storage solutions to EFS.</p>
+
+<p>Next, Osborne shows a recorded video of using EFS File Sync to copy data between two different EFS instances. The demo shows copying roughly 20GB of data in about 4 minutes.</p>
+
+<p>Naturally, you can move objects from Amazon S3 into EFS; this would involve using an EC2 instance that accesses S3 (perhaps via the AWS CLI) and an NFS mount backed by EFS. Osborne recommends maximizing parallelism to get the best possible ingest performance. GNU Parallel comes up here again.</p>
+
+<p>Naim steps up to take over to talk about operations. EFS exposes a number of CloudWatch metrics, and all EFS API calls can be logged to CloudTrail.</p>
+
+<p>Osborne comes back up to talk about some reference architectures using EFS. The first example is a highly-available WordPress architecture, followed by similar architectures for Drupal and Magento. Another example architecture is an EFS backup solution implemented via a CloudFormation template.</p>
+
+<p>Wrapping up the session, Naim reviews some additional resources available via the Amazon web site, and announces a new series of storage-focused training classes that provide more in-depth training on S3, EFS, and EBS. At this point, Naim closes out the session.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/cLReeaLwnow" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/cLReeaLwnow/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Liveblog: IPv6 in the Cloud - Protocol and Service Overview</h3>
+		</div>
+		<div class="collectiontext">
+			<p>This is a liveblog of an AWS re:Invent 2017 breakout session titled &ldquo;IPv6 in the Cloud: Protocol and Service Overview.&rdquo; The presenter&rsquo;s name is Alan Halachmi, who is a Senior Manager of Solutions Architecture at AWS. As with so many of the other breakout sessions and workshops here at re:Invent this year, the queues to get into the session are long and it&rsquo;s expected that the session will be completely full.</p>
+
+<p>Halachmi starts the session promptly at 11:30am (the scheduled start time) by reviewing the current state of IP4 exhaustion, then quickly moves to a &ldquo;state of the state&rdquo; regarding IPv6 adoption on the Internet. Global IPv6 adoption is currently around 22%, and is expected to hit 25% by the end of the year. Mobile and Internet of Things (IoT) are driving most of the growth, according to Halachmi. T-Mobile, for example, now has 89% of their infrastructure running on IPv6.</p>
+
+<p>Transitioning again rather quickly, Halachmi moves into an overview of the IPv6 protocol itself. IPv4 uses a 32-bit address space; IPv6 uses a 128-bit address space (29 orders of magnitude larger than IPv4). IPv4 uses dotted decimal with CIDR (Classless Interdomain Routing) notation; IPv6 uses colon-separated hextet notation with CIDR. To help keep IPv6 addresses more human-readable, we can omit leading zeroes. You can also use the double-colon notation to represent any contiguous group of zeroes.</p>
+
+<p>IPv6 also doesn&rsquo;t use broadcast addresses, instead using multicast (focusing on the ff00::/8 range). IPv6 also has some special unicast addresses:</p>
+
+<ul>
+<li>The unspecified address (all zeroes) indicates the absence of an address; this is primarily used in Duplicate Address Detection (DAD)</li>
+<li>The loopback address is used to communicate with itself (the IPv6 address is ::1, equivalent to IPv4 127.0.0.1)</li>
+<li>The link local address (LLA), which is scoped to a specific link (they&rsquo;re only usable on the local link; equivalent to IPv4 169.254.0.0/16 range). In IPv4, the link local address is typically ephemeral; in IPv6, it&rsquo;s required. The typical LLA prefix is Fe80::/64, and the Interface Identifier (IID) is generated either a) manually; b) systematically using modified EUI-64; or c) derived randomly. DAD is used in almost all cases.</li>
+<li>The unique local address (ULA) can be roughly compared to RFC 1918 in the IPv4 world. However, the ULA is designed to be globally unique, and comes out of the <code>fc00::/7</code> range. Halachmi is not a fan of the ULA, and doesn&rsquo;t go into any additional detail.</li>
+<li>The Global Unicast Address (GUA), is a globally-unique address that allows IPv6-equipped workloads to communicate end-to-end without any network address translation (NAT). GUAs have both a prefix (64-bit) and an IID (also 64 bits; EUI-64 has fallen out of favor for generating the IID portion of the GUA). There are several ways to assign GUAs: manually, systematically (via Router Advertisements [RAs] and SLAAC [Stateless Address Autoconfiguration]), dynamically via DHCPv6 (materially different than DHCPv4), or randomly. DAD is almost always used to prevent duplicate addresses.</li>
+</ul>
+
+<p>EUI-64 takes a MAC (Media Access Control) address, which is 48-bits long, and converts it to a 64-bit address. First, invert the 7th most significant bit; then insert <code>ff:fe</code> into the middle of the address (after the first 24 bits and before the second 24 bits).</p>
+
+<p>So how do IPv6 nodes communicate across the network? Halachmi quickly reviews IPv4 and ARP, then moves into the equivalent in IPv6. IPv6 doesn&rsquo;t use ARP; it uses solicited-mode multicast, using ff02::1:ff00:0/104 and adding the least significant 24 bits from the target IPv6 node address. At layer 2, this translates into an Ethernet address in the 33:33:00:00:00:00 range (again using some of the least significant bits from the target node&rsquo;s IPv6 address).</p>
+
+<p>Halachmi now moves on to discussing how to access resources on an IPv6 network. The first example is using either dual-stack configurations (both IPv4 and IPv6 addresses on a node) and relying on DNS A (IPv4) or DNS AAAA (IPv6) address resolution.</p>
+
+<p>A few other notable differences about IPv6:</p>
+
+<ul>
+<li>End-to-end philosophy (no NAT, privacy is not equal to security, public IP is not equal to reachability)</li>
+<li>Intermediate nodes may not fragment packets (path MTU discovery using ICMPv6)</li>
+<li>Maximum payload per packet jumps to about 4GB</li>
+<li>Options extensibility with extension header chaining</li>
+</ul>
+
+<p>Having now covered the IPv6 protocol, Halachmi moves on to discussing IPv6 at AWS. The first IPv6-enabled service at AWS was the IoT service. The IoT data plane is IPv4 and IPv6; the control plane is IPv4 only. S3 is also IPv6- and IPv4-enabled; just add <code>.dualstack</code> in the fully-qualified domain name (same goes for S3 Transfer Acceleration). CloudFront supports IPv6; just enable it in the distribution. (Halachmi does point out a couple considerations regarding the use of cookies to limit access, and points attendees to the documentation for CloudFront.)</p>
+
+<p>Continuing, Halachmi points out that CloudFront will support IPv6 from clients, but talks IPv4 to the origin. This can help with transitions from IPv4 to IPv6.</p>
+
+<p>WAF also supports IPv6 (has supported it since launch). Route 53 supports quad-A records (for returning an IPv6 address), and for the last year or so has also supported DNS queries over IPv6.</p>
+
+<p>Coming to VPCs, Halachmi points out that VPC does support IPv6, and takes some time to drill down into a few details/tenets of the implementation. These tenets include end-to-end connectivity to deliver on the IPv6 promise, offering a dual-stack solution, and a couple others I couldn&rsquo;t capture. IPv6 in VPCs doesn&rsquo;t support ULAs. GUAs come from a fixed /56 block, and subnets are of a fixed /64 size. IPv6 in VPCs don&rsquo;t support privacy/temporary addresses.</p>
+
+<p>What about assignment of addresses? Halachmi points out that you <em>can</em> do manual/static assignment, but it isn&rsquo;t recommended. SLAAC was investigated, but this didn&rsquo;t work well for the AWS VPC use case. Instead, AWS uses DHCPv6 (the actual implementation is stateless and derived from the topology database).</p>
+
+<p>Regarding security considerations, IPv6 is not on by default and must be enabled per interface. Even if the OS in an instance is IPv6-enabled and ends up with a LLA, the VPC won&rsquo;t pass IPv6 traffic until you assign a GUA (i.e., link-local connectivity doesn&rsquo;t work without a GUA). Route tables are not auto-updated except the GUA CIDR. AWS won&rsquo;t modify security groups or NACLs to allow IPv6 traffic unless the security group/NACL is unmodified/left at default settings.</p>
+
+<p>To provide a semantically-similar NAT mechanism for IPv6, AWS introduced the EIGW (Egress-only Internet Gateway).</p>
+
+<p>Direct Connect also supports IPv6, as do Virtual Private Gateways. Direct Connect Gateway supports IPv6 as well.</p>
+
+<p>Amazon WorkSpaces supports IPv6-based communications, as does AppStream 2.0. The AWS Application Load Balancer (ALB) supports IPv6, but this must be enabled at the time of creation. ALB can also be helpful in IPv4-to-IPv6 transitions, like CloudFront.</p>
+
+<p>Halachmi points out that there is still lots of work to do, and welcomes feedback from customers on how AWS should prioritize the implementation of IPv6 across their APIs and services.</p>
+
+<p>At this point, Halachmi ends the session and opens up for questions.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/EOCt5IpWUsU" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/EOCt5IpWUsU/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>A Sample Makefile for Creating Blog Articles</h3>
+		</div>
+		<div class="collectiontext">
+			<p>In October of this year, I published a blog post talking about <a href="https://blog.scottlowe.org/2017/10/23/sample-makefile-publishing-blog-articles/">a sample <code>Makefile</code> for publishing blog articles</a>. That post focused on the use of <code>make</code> and a <code>Makefile</code> for automating the process of a publishing a blog post. This post is a companion to that post, and focuses on the use of a <code>Makefile</code> for automating the creation of blog posts.</p>
+
+<p>Since early 2015, this site has been running as a static site with the content created using Markdown. In its first iteration as a static site, the HTML was generated using <a href="https://jekyllrb.com/">Jekyll</a> and hosted on <a href="https://pages.github.com/">GitHub Pages</a>. In the current iteration, the HTML is generated using <a href="http://gohugo.io/">Hugo</a>, hosted on <a href="https://aws.amazon.com/s3/">Amazon S3</a>, and served via <a href="https://aws.amazon.com/cloudfront/">Amazon CloudFront</a>. In both cases, the use of Markdown as the content format also required specific front-matter to instruct the static site generator how to create the HTML. For Hugo, the front-matter looks something like this (I use YAML, but other formats are supported):</p>
+
+<pre><code class="language-yaml">---
+author: slowe
+categories: Explanation
+date: 2017-11-27T12:00:00Z
+tags:
+- Writing
+- Blogging
+- Productivity
+title: Sample Blog Post title
+url: /2017/11/27/sample-blog-post-title/
+---
+</code></pre>
+
+<p>There are obviously a lot of different ways to automate the creation of this front-matter (text expansion utilities, text editor snippets, macros, etc.). I chose to tackle this using a <code>Makefile</code> so that I had some level of independence from the specific editor or operating system I was using (<code>make</code> is easily accessible on both macOS and Linux). After some trial and error, I finally arrived at this <code>Makefile</code>:</p>
+
+<pre><code>POST_TEMPLATE := ~/Templates/blog-post-template.md
+editor ?= /usr/local/bin/subl -n
+name ?= new-blog-post
+offset ?= +0d
+DDATE := $(shell date -v $(offset) +%Y-%m-%d)
+SDATE := $(shell date -v $(offset) +%Y/%m/%d)
+
+new:
+    @cat $(POST_TEMPLATE) | \
+    sed &quot;s/YYYY-MM-DD/$(DDATE)/g&quot; | \
+    sed &quot;s|YYYY/MM/DD|$(SDATE)|g&quot; | \
+    sed &quot;s|/title|/$(name)/|g&quot; &gt;&gt; $(DDATE)-$(name).md
+    @$(editor) $(DDATE)-$(name).md
+</code></pre>
+
+<p>I&rsquo;m no expert with <code>make</code>, so there may be ways to optimize this (feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> with suggestions). This <code>Makefile</code> leverages two user-supplied values (default values are supplied in case the user doesn&rsquo;t provide these values on the command line):</p>
+
+<ul>
+<li>The first is <code>name</code>, which is used for both the filename and in the &ldquo;url&rdquo; value in the front-matter</li>
+<li>The second is <code>offset</code>, which is an offset (typically in days, like &ldquo;+1d&rdquo;) from the current date (more on this in a moment)</li>
+</ul>
+
+<p>With these two values, what the &ldquo;new&rdquo; target in this <code>Makefile</code> does is this:</p>
+
+<ol>
+<li>Sends the content of the <code>$(POST_TEMPLATE)</code> variable to STDOUT.</li>
+<li>STDOUT is piped into the the first <code>sed</code> command, which replaces the templated &ldquo;YYYY-MM-DD&rdquo; value for the &ldquo;date&rdquo; YAML front-matter with the current date, adjusted by the user-supplied <code>offset</code> variable (which is set to &ldquo;+0d&rdquo; if the user doesn&rsquo;t supply a value). This date value is taken from the <code>DDATE</code> variable defined at the top of the file.</li>
+<li>The output of the first <code>sed</code> command is piped into the second <code>sed</code> command, which performs the same date manipulation, but this time on the templated value of the &ldquo;url&rdquo; YAML front-matter entry. (The value is taken from the <code>SDATE</code> variable defined at the top of the file.)</li>
+<li>The output of the second <code>sed</code> command is piped into the third <code>sed</code> command, which replaces the final section of the templated &ldquo;url&rdquo; front-matter with the value of the <code>name</code> variable passed in by the user (or the default value, if the user doesn&rsquo;t supply a value).</li>
+<li>The final content is redirected into a file whose filename is constructed from the date (taken from the <code>DDATE</code> variable) and the value of <code>name</code>.</li>
+</ol>
+
+<p>Using this <code>Makefile</code> is pretty straightforward:</p>
+
+<ul>
+<li>If I type <code>make</code> or <code>make new</code> (no additional values), then it will take the current date and the default value of &ldquo;new-blog-post&rdquo;. For example, if I typed this today (Monday, 27 November), I&rsquo;d get a filename of <code>2017-11-27-new-blog-post.md</code>, and the YAML front-matter would have the appropriate values inserted. (In case you weren&rsquo;t aware, typing just <code>make</code> works because &ldquo;new&rdquo; is the first target.)</li>
+<li>If I type <code>make new name=specific-name-for-post</code>, then the resulting file generated with have the current date in the content and the filename, but the rest of the filename and the &ldquo;url&rdquo; YAML front-matter will use the value of <code>name</code> as provided on the command line. If I typed this today, I&rsquo;d get a filename of <code>2017-11-27-specific-name-for-post.md</code>.</li>
+<li>If I type <code>make new name=another-specific-name offset=+1d</code>, then the generated filename will use the value of <code>name</code> (as will the &ldquo;url&rdquo; YAML front-matter entry), but the date will be one day in the future&mdash;as specified by the value of <code>offset</code>. If I typed this today, the file generated would be named <code>2017-11-28-another-specific-name.md</code>.</li>
+</ul>
+
+<p>In all these examples, the file is immediately opened in <a href="http://www.sublimetext.com/">Sublime Text</a>, as instructed by the default value of <code>editor</code>. If I wanted to change that, I can just type <code>make new name=a-third-specific-name editor=atom</code> and it would open in <a href="https://atom.io/">Atom</a> instead. This provides some additional flexibility if needed.</p>
+
+<p>I&rsquo;ll continue to refine this <code>Makefile</code> as I learn more, and readers are encouraged to <a href="https://twitter.com/scott_lowe">hit me on Twitter</a> with suggestions for improvement. I hope this information proves useful to other bloggers using static site generators.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/mBIyD4Qvro8" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/mBIyD4Qvro8/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
@@ -422,7 +760,7 @@ Categories=Development;Utilities;
 
 <p>In this table, each entry is the expected number of runs from the remainder of the inning from some particular state. Each column shows the number of outs and each row shows the state of the bases. The color coding scheme is: the starting state (<code>.555</code> runs) has a white background. States with higher run expectation are more blue and states with lower run expectation are more red.</p>
 
-<p>This table and the other stats in this post come from <a href="https://www.amazon.com/gp/product/1494260174/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=abroaview-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=1494260174&amp;linkId=1d8e432457b958c87f46820d5aa51539">The Book by Tango et al.</a>, which mostly discussed baseball between 1999 and 2002.</p>
+<p>This table and the other stats in this post come from <a href="https://www.amazon.com/gp/product/1494260174/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=abroaview-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=1494260174&amp;linkId=1d8e432457b958c87f46820d5aa51539">The Book by Tango et al.</a>, which mostly discussed baseball between 1999 and 2002. See the appendix if you&rsquo;re curious about how things change if we use a more detailed model.</p>
 
 <p>The state we’re tracking for an inning here is who’s on base and the number of outs. Innings start with nobody on base and no outs.</p>
 
@@ -492,7 +830,7 @@ Categories=Development;Utilities;
 
 <p>In order to make this a short blog post and not a book, there are a lot of simplifications the approximation we discussed. One major simplification is the idea that all runs are equivalent. This is close enough to true that this is a decent approximation. But there are situations where the approximation isn’t very good, such as when it’s the 9th inning and the game is tied. In that case, a decision that increases the probability of scoring 1 run but decreases the probability of scoring multiple runs is actually the right choice.</p>
 
-<p>This is often given as a justification for a relatively late-game sac bunt. But if we look at the probably of a successful sac bunt, we see that it goes down in later innings. We didn’t talk about how the defense is set up, but defenses can set up in ways that reduce the probability of a successful sac bunt but increase the probability of success of non-bunts and vice versa. Before the last inning, this actually makes sac bunt worse late in the game and not better! If we take all of that into account in the last inning of a tie game, the probability that a sac bunt is a good idea then depends on something else we haven’t discussed, the batter at the plate.</p>
+<p>This is often given as a justification for a relatively late-game sac bunt. But if we look at the probability of a successful sac bunt, we see that it goes down in later innings. We didn’t talk about how the defense is set up, but defenses can set up in ways that reduce the probability of a successful sac bunt but increase the probability of success of non-bunts and vice versa. Before the last inning, this actually makes sac bunt worse late in the game and not better! If we take all of that into account in the last inning of a tie game, the probability that a sac bunt is a good idea then depends on something else we haven’t discussed, the batter at the plate.</p>
 
 <p>In our simplified model, we computed the expected value in runs across all batters. But at any given time, a particular player is batting. A successful sac bunt advances runners and increases the number of outs by one. The alternative is to let the batter “swing away”, which will result in some random outcome. The better the batter, the higher the probability of an outcome that’s better than the outcome of a sac bunt. To determine the optimal decision, we not only need to know how good the current batter is but how good the subsequent batters are. One common justification for the sac bunt is that pitchers are terrible hitters and they’re not bad at sac bunting because they have so much practice doing it (because they’re terrible hitters), but it turns out that pitchers are also below average sac bunters and that the argument that we should expect pitchers to sac because they’re bad hitters doesn’t hold up if we look at the data in detail.</p>
 
@@ -515,9 +853,11 @@ Categories=Development;Utilities;
 
 <p>Barry Bonds’s seasons from 2001, 2002, and 2004 were some of the statistically best seasons of all time and are as extreme a case as one can find in modern baseball. If we run our same analysis and account for the quality of the players batting after Bonds, we find that it’s sometimes the correct decision for the opposing team to intentionally walk Bonds, but it was still the case that most situations do not warrant an intentional walk and that Bonds was often intentionally walked in a situation that didn’t warrant an intentional walk. In the case of a batter who is not having one of the statistically best seasons on record in modern baseball, intentional walks are even less good.</p>
 
-<p>In the case of the pitcher batting, doing the same kind of analysis as above also reveals that there are situations where an intentional walk are appropriate (not-late game, {1B, 2B; 2 out}, when the pitcher is not a significantly above average batter for a pitcher) but that. Even though it’s not always the wrong decision to issue an intentional walk, the intentional walk is still grossly overused.</p>
+<p>In the case of the pitcher batting, doing the same kind of analysis as above also reveals that there are situations where an intentional walk are appropriate (not-late game, {1B, 2B; 2 out}, when the pitcher is not a significantly above average batter for a pitcher). Even though it’s not always the wrong decision to issue an intentional walk, the intentional walk is still grossly overused.</p>
 
 <p>One might argue the fact that our simple analysis has all of these non-idealities that could have invalidated the analysis is a sign that decision making in baseball wasn’t so bad after all, but I don’t think that holds. An first-order approximation that someone could do in an hour or two finds that decision making seems quite bad, on average. If a team was interested in looking at data, that ought to lead them into doing a more detailed analysis that takes into account the conventional-wisdom based critiques of the obvious one-hour analysis. It appears that this wasn’t done, at least not for decades.</p>
+
+<p>The problem is that before people started running the data, all we had to go by were stories. Someone would say &ldquo;with 2 outs, you should walk the batter before the pitcher to get to the pitcher [in some situations] to get to the pitcher and get the guaranteed out&rdquo;. Someone else might respond &ldquo;we obviously shouldn&rsquo;t do that late game because the pitcher will get subbed out for a pinch hitter and early game, we shouldn&rsquo;t do it because even if it works and we get the easy out, it sets the other team up to lead off the next inning with their #1 hitter instead of an easy out&rdquo;. Which of these stories is the right story turns out to be an empirical question. The thing that I find most unfortunate is that, after started people running the numbers and the argument became one of stories vs. data, people persisted in sticking with the story-based argument for decades. We see the same thing in business and engineering, but it&rsquo;s arguably more excusable there because decisions in those areas tend to be harder to quantify. Even if you can reduce something to a simple engineering equation, someone can always argue that the engineering decision isn&rsquo;t what really matters and this other business concern that&rsquo;s hard to quantify is the most important thing.</p>
 
 <h3 id="appendix-possession">Appendix: possession</h3>
 
@@ -527,7 +867,7 @@ Categories=Development;Utilities;
 
 <p>I don&rsquo;t think this is fundamental &ndash; that possessions are as valuable as they are comes out of the rules of each game. It&rsquo;s arbitrary. I still find it interesting, though.</p>
 
-<p><i>Thanks to Leah Hanson, David Turner, Milosz Dan, Andrew Nichols, Justin Blank, @hoverbikes, Kate Murphy, and an anonymous commenter for comments/corrections/discussion.</i></p>
+<p><i>Thanks to Leah Hanson, David Turner, Milosz Dan, Andrew Nichols, Justin Blank, @hoverbikes, Kate Murphy, Ben Kuhn, and an anonymous commenter for comments/corrections/discussion.</i></p>
 
 		</div>
 		<div class="collectionhref">
@@ -602,7 +942,7 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 		<a href="https://danluu.com/atom/index.xml" target="_blank">Dan Luu</a>
 		</div>
 		<div>
-			<h3>There are over a billion outdated Android devices in use</h3>
+			<h3>How out of date are Android devices?</h3>
 		</div>
 		<div class="collectiontext">
 			
@@ -712,610 +1052,6 @@ New York, NY 10013</p>
 		<a href="https://danluu.com/android-updates/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 90</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take 90! This post is a bit shorter than most, as I&rsquo;ve been on the road quite a bit recently. Nevertheless, there&rsquo;s hopefully something here you&rsquo;ll find useful.</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>VMware recently released an updated to PowerCLI (version 6.5.3), and with it comes a set of cmdlets that provide low-level access to the NSX-T REST API. Romain Decker <a href="http://cloudmaniac.net/powercli-nsx-t-module/">provides a walkthrough</a>. Have fun automating!</li>
-<li>Looking for some &ldquo;MPLS 101&rdquo;-type material? Jon Langemak <a href="http://www.dasblinkenlichten.com/mpls-101-the-basics/">has you covered</a>.</li>
-<li>I really enjoyed David Gee&rsquo;s series on the network automation engineer persona (<a href="http://ipengineer.net/2017/10/network-automation-engineer-persona-part-one/">part 1</a>, <a href="http://ipengineer.net/2017/10/network-automation-engineer-persona-part-two/">part 2</a>, <a href="http://ipengineer.net/2017/10/network-automation-engineer-persona-part-three/">part 3</a>, and <a href="http://ipengineer.net/2017/10/network-automation-engineer-persona-part-four/">part 4</a>). David really unpacks the changes that are happening in the networking space and describes the key skills the &ldquo;next-generation network engineer&rdquo; will have. Good stuff!</li>
-<li>This post by Patrick Ogenstad on <a href="https://networklore.com/extending-ansible-action-plugins/">Ansible action plugins for Cisco IOS</a> is just outside my comfort zone with regards to Python knowledge and skill, but it&rsquo;s only by pushing the boundaries that we learn, right?</li>
-<li>Romain Decker discusses <a href="http://cloudmaniac.net/nsx-t-things-to-know/">the ten things you should know before starting with NSX-T</a>.</li>
-<li>Mark Betz digs into <a href="https://medium.com/google-cloud/understanding-kubernetes-networking-pods-7117dd28727">some Kubernetes networking concepts</a> in detail.</li>
-</ul>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>Tony Reeves shares a procedure for <a href="http://www.digitalvspace.com/2017/10/setting-up-vsan-encryption-in-66.html">setting up encryption in vSAN 6.6</a>.</li>
-<li>Major Hayden <a href="https://major.io/2017/06/27/old-role-new-name-ansible-hardening/">talks about ansible-hardening</a>, a new role that grew out of an OpenStack-related security role. However, as Major points out in his article, the role works anywhere, OpenStack cloud or not.</li>
-<li>Here&rsquo;s a quick note <a href="http://www.bardev.com/2017/10/22/aws-security-group-stop-traffic-flow/">about AWS security groups and traffic flows</a>. Definitely worth reading.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>Google is rolling out Kubernetes 1.8 to Google Container Engine; <a href="https://cloudplatform.googleblog.com/2017/09/google-container-engine-kubernetes-18.html">this blog post</a> talks about some of the new features and functionality.</li>
-<li>Lior Kamrat has a multi-part series on an architecture that blends Mesosphere DC/OS, Azure, Docker, and VMware vSphere. Check out the beginning of the series <a href="https://azure.microsoft.com/en-us/blog/mesosphere-dcos-azure-docker-vmware-and-everything-between-architecture-and-ci-cd-flow/">here</a>.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>Kevin Lynch of the Squarespace Engineering team has <a href="https://engineering.squarespace.com/blog/2017/understanding-linux-container-scheduling">a great write-up on Linux container scheduling</a>; this post provides some in-depth information on the various components and considerations involved.</li>
-<li>After a recent complaint by yours truly on Twitter regarding notifications on Windows 10, I was directed to <a href="https://blogs.technet.microsoft.com/platforms_lync_cloud/2017/05/05/disabling-windows-10-action-center-notifications/">this article</a>. I haven&rsquo;t tested it yet, but it does look promising.</li>
-<li>VMware <a href="https://blogs.vmware.com/cloudnative/2017/11/01/version-2-0-project-photon-os/">recently released version 2.0 of Photon OS</a>. Unfortunately, Photon OS 2.0 has some issues running on VMware platforms, so visit William Lam&rsquo;s site for <a href="https://www.virtuallyghetto.com/2017/11/workarounds-for-deploying-photonos-2-0-on-vsphere-fusion-workstation.html">the workarounds</a>.</li>
-<li>This article by Christian Posta <a href="http://blog.christianposta.com/microservices/when-not-to-do-microservices/">on when not to do microservices</a> is, in my opinion, a well-balanced view on when microservices offer versus when they don&rsquo;t.</li>
-<li>Larry Smith Jr. shows <a href="https://everythingshouldbevirtual.com/automation/ansible-parsing-csv-list-hosts-ip-hostnames-mac/">how to take data in CSV and convert it to YAML</a> for consumption by Ansible.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>I&rsquo;m clearly behind the times in some of my reading, as <a href="https://jmetz.com/2016/07/storage-forces/">this great article</a> by J Metz was just brought to my attention recently. J does a good job of laying out the various competing forces that drive product/technology evolution and selection in the storage space, though one might argue these same forces are at work in other areas besides just storage.</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>Frank Denneman&rsquo;s enormously useful and very successful <em>vSphere 6.5 Host Resources Deep Dive</em> book is now available as a free e-book, courtesy of Rubrik. <a href="http://frankdenneman.nl/2017/11/07/free-vsphere-6-5-host-resources-deep-dive-ebook/">Check out Frank&rsquo;s blog for more details.</a></li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>You&rsquo;ve heard me talk about Spousetivities many times; here are <a href="http://nigelhickey.com/vmworld-2017-spouses-perspective/">some thoughts from a Spousetivities participant</a>.</li>
-</ul>
-
-<p>Thanks for reading! Feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> if you have feedback or would like to share a link I should include in a future Technology Short Take.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/ZbpFZQ20-d4" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ZbpFZQ20-d4/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>Friday Fun L - Smooth Charts</h3>
-		</div>
-		<div class="collectiontext">
-<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you ever worked with JavaFX charts you might know the need for smoothed line- and areacharts.&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you search the web you will probably stumble upon an implementation over at&nbsp;<a href="http://fxexperience.com/2012/01/curve-fitting-and-styling-areachart/" target="_blank">fxexperience.com</a>. I've used this version from Jasper for some time and it worked for me in 80% of all cases.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">But sometimes you need more features or dynamic behavior and for TilesFX I've created a new version of such a chart which comes with the following features</span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">line or area chart</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">smoothed or not smoothed</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">supports mouse interaction (click on the chart and get the y-value)</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">supports snap to ticks (click on the chart and the next point will be selected)</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">convenience methods</span></li><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set visibility of symbols&nbsp;</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set series fill</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set series stroke</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set symbol background</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set legend background</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set legend text fill</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set legend symbol background</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set symbol size</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">get symbols (List&lt;StackPane&gt;)</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">get fillPath</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">get strokePath</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">get chart plot background</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">get horizontal/vertical gridlines</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set chart plot background fill/background</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set x-axis and y-axis tick label fill</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set x-axis and y-axis tick mark fill</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">set x-axis and y-axis border fill</span></li></ul></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I'm not sure if these features will be useful for all of you but even if not I thought it might be worth sharing it with you. In principle most of those features I could have set using CSS but if I need to set it via code I always have to check the css styles etc. So for this reason I've added all those convenience methods :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To smooth the chart I use a so called <a href="https://en.wikipedia.org/wiki/Centripetal_Catmull%E2%80%93Rom_spline" target="_blank">Catmull-Rom spline</a> which has the advantage that it is tightly follows the control points of the chart.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The chart also comes with a property to change the number of points between the control points. Means if you just need a rough smoothing you could try a value of 2 or if you need a fine smoothing you might want to try 32 (the limit is 64 in my implementation). The default value is 16 and this gives nice results, so usually you don't need to change it. This factor depends on the size of the chart. For smaller charts even 8 gives nice results.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So here is a screenshot of the all four chart variants...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-oLp_mNPrnRs/WgUlTPTfv1I/AAAAAAAAEs4/r0TO3cG8GEc0ONiCpOhtxTVNmGWoYu87ACLcBGAs/s1600/Smooth%2BCharts%2B2017-11-10%2B05-03-51.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="834" data-original-width="1030" height="518" src="https://1.bp.blogspot.com/-oLp_mNPrnRs/WgUlTPTfv1I/AAAAAAAAEs4/r0TO3cG8GEc0ONiCpOhtxTVNmGWoYu87ACLcBGAs/s640/Smooth%2BCharts%2B2017-11-10%2B05-03-51.png" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The code for this charts can be found in the Demo.java file that comes with the chart. Because in TilesFX I needed a smoothed chart which I can tweak from code without using CSS I've added a couple of convenience methods. If you use this chart as a replacement for a standard JavaFX AreaChart all the CSS stuff should also work. But if you (like me) need to tweak some things dynamically the convenience methods come in quite handy.</span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Here is a little video that show the mouse interactivity in action...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><iframe allowfullscreen="" frameborder="0" gesture="media" height="315" src="https://www.youtube.com/embed/f-QsjigWQjc" width="560"></iframe></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If the interactive property is set to true the the chart will fire a JavaFX event of type SmoothedChartEvent.DATA_SELECTED</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The event contains a double property that contains the y value of the selected point. To get those events you have to add an EventHandler to the chart object as follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="font-size: x-small;">SmoothedChart&lt;String, Number&gt; areaChartSmoothed = <span style="color: #0004ff;">new </span>SmoothedChart&lt;&gt;(xAxis4, yAxis4);<br />areaChartSmoothed.<span style="color: #ff7500;">getData</span>().<span style="color: #ff7500;">addAll</span>(series4);<br />areaChartSmoothed.<span style="color: #ff7500;">setSmoothed</span>(<span style="color: #0004ff;">true</span>);<br />areaChartSmoothed.<span style="color: #ff7500;">setChartType</span>(<span style="color: #0004ff;">ChartType.AREA</span>);<br />areaChartSmoothed.<span style="color: #ff7500;">setInteractive</span>(<span style="color: #0004ff;">true</span>);<br />areaChartSmoothed.<span style="color: #ff7500;">setSubDivisions</span>(8);<br />areaChartSmoothed.<span style="color: #ff7500;">setSnapToTicks</span>(<span style="color: #0004ff;">false</span>);<br />areaChartSmoothed.<span style="color: #ff7500;">setLegendVisible</span>(<span style="color: #0004ff;">false</span>);<br /><br />areaChartSmoothed.<span style="color: #ff7500;">addEventHandler</span>(SmoothedChartEvent.<span style="font-style: italic;">DATA_SELECTED</span>, <br />                                  e -&gt; System.<span style="font-style: italic;">out</span>.<span style="color: #ff7500;">println</span>(e.<span style="color: #ff7500;">getValue</span>()));</span></pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif; font-size: x-small;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The tooltip shows different information dependent on the mode</span><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">snapToTicks = true&nbsp; -&gt; The name and the value of the selected Data object</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">snapToTicks = false -&gt; The y-value of the selected point</span></li></ul><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">It might be possible that you need more or different functionality so</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">...feel free to fork the code on </span><a href="https://github.com/HanSolo/smoothcharts" style="font-family: &quot;trebuchet ms&quot;, sans-serif;" target="_blank">github</a><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> as always :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Just be aware that this class won't work in Java 9 in the current state because it makes use of the following internal api</span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">com.sun.javafx.charts.Legend</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">com.sun.javafx.charts.Legend.LegendItem</span></li></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">These classes will be used in the following methods:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="background-color: white; font-family: &quot;droid sans mono awesome&quot;; font-size: x-small;">setLegendBackground()&nbsp;</span><br /><span style="background-color: white; font-family: &quot;droid sans mono awesome&quot;; font-size: x-small;">setLegendTextFill()&nbsp;</span><br /><span style="background-color: white; font-family: &quot;droid sans mono awesome&quot;; font-size: x-small;">setLegendSymbolFill()</span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So you could either remove those methods and it will run on JDK 9 or you have to fiddle around with some JVM command line parameters like</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">--add-exports javafx.controls/com.sun.javafx.charts=ALL_UNNAMED</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To be honest I did not try that yet but it might work, otherwise just let me know and I will correct this blogpost :)</span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well that's it for today...so keep coding... :)</span><br /><br />
-
- -->
-		</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2017/11/smooth-charts.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://danluu.com/atom/index.xml" target="_blank">Dan Luu</a>
-		</div>
-		<div>
-			<h3>UI backwards compatibility</h3>
-		</div>
-		<div class="collectiontext">
-			
-
-<p>About once a month, an app that I regularly use will change its UI in a way that breaks muscle memory, basically tricking the user into doing things they don’t want.</p>
-
-<h3 id="zulip">Zulip</h3>
-
-<p>In recent memory, Zulip (a slack competitor) changed its newline behavior so that <code>ctrl + enter</code> sends a message instead of inserting a new line. After this change, I sent a number of half-baked messages and it seemed like some other people did too.</p>
-
-<p>Around the time they made that change, they made another change such that a series of clicks that would cause you to send a private message to someone would instead cause you to send a private message to the alphabetically first person who was online. Most people didn’t notice that this was a change, but when I mentioned that this had happened to me a few times in the past couple weeks, multiple people immediately said that the exact same thing happened to them. Some people also mentioned that the behavior of navigation shortcut keys was changed in a way that could cause people to broadcast a message instead of sending a private message. In both cases, some people blamed themselves and didn’t know why they’d just started making mistakes that caused them to send messages to the wrong place.</p>
-
-<h3 id="doors">Doors</h3>
-
-<p>A while back, I was at Black Seed Bagel, which has a door that <a href="https://www.google.com/search?tbm=isch&amp;source=hp&amp;biw=1739&amp;bih=1689&amp;ei=ADIFWq7SLcTPmwH8g6y4Dg&amp;q=black+seed+bagel&amp;oq=black+se&amp;gs_l=img.3.0.35i39k1l2j0l8.761.2250.0.3272.9.9.0.0.0.0.165.806.4j4.8.0....0...1.1.64.img..1.8.805.0...0.cicb-SDN7SU#imgrc=zwf_w60g8r1uWM:">looks 75% like a “push” door from both sides</a> when it’s actually a push door from the outside and a pull door from the inside. An additional clue that makes it seem even more like a &ldquo;push&rdquo; door from the inside is that most businesses have outward opening doors (this is required for exit doors in the U.S. when the room occupancy is above 50 and many businesses in smaller spaces voluntarily follow the same convetion). During the course of an hour long conversation, I saw a lot of people go in and out and my guess is that ten people failed on their first attempt to use the door while exiting. When people were travelling in pairs or groups, the person in front would often say something like “I’m dumb. We just used this door a minute ago”. But the people were not, in fact, acting dumb. If anything is dumb, it’s designing doors such that are users have to memorize which doors act like “normal” doors and which doors have their cues reversed.</p>
-
-<p>If you’re interested in the physical world, <a href="https://www.amazon.com/gp/product/0465050654/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=abroaview-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=0465050654&amp;linkId=671c3ae6f7143212c71afe93c7c66951">The Design of Everyday Things</a>, gives many real-world examples where users are subtly nudged into doing the wrong thing. It also discusses general principles in a way that allows you to see the general idea and apply and avoid the same issues when designing software.</p>
-
-<h3 id="facebook">Facebook</h3>
-
-<p>Last week, FB changed its interface so that my normal sequence of clicks to hide a story saves the story instead of hiding it. Saving is pretty much the opposite of hiding! It’s the opposite both from the perspective of the user and also as a ranking signal to the feed ranker. The really “great” thing about a change like this is that it A/B tests incredibly well if you measure new feature “engagement” by number of clicks because many users will accidentally save a story when they meant to hide it. Earlier this year, twitter did something similar by swapping the location of “moments” and “notifications”.</p>
-
-<p>Even if the people making the change didn’t create the tricky interface in order to juice their engagement numbers, this kind of change is still problematic because it poisons analytics data. While it’s technically possible to build a model to separate out accidental clicks vs. purposeful clicks, that’s quite rare (I don’t know of any A/B tests where people have done that) and even in cases where it’s clear that users are going to accidentally trigger an action, I still see devs and PMs justify a feature because of how great it looks on naive statistics like <a href="https://en.wikipedia.org/wiki/Daily_active_users">DAU</a>/MAU.</p>
-
-<h3 id="api-backwards-compatibility">API backwards compatibility</h3>
-
-<p>When it comes to software APIs, there’s a school of thought that says that you should never break backwards compatibility for some classes of widely used software. A well-known example is <a href="http://lkml.iu.edu/hypermail/linux/kernel/1710.3/02487.html">Linus Torvalds</a>:</p>
-
-<blockquote>
-<p>People should basically always feel like they can update their kernel and simply not have to worry about it.</p>
-
-<p>I refuse to introduce &ldquo;you can only update the kernel if you also update that other program&rdquo; kind of limitations. If the kernel used to work for you, the rule is that it continues to work for you.
-…
-I have seen, and can point to, lots of projects that go &ldquo;We need to break that use case in order to make progress&rdquo; or &ldquo;you relied on undocumented behavior, it sucks to be you&rdquo; or &ldquo;there&rsquo;s a better way to do what you want to do, and you have to change to that new better way&rdquo;, and I simply don&rsquo;t think that&rsquo;s acceptable outside of very early alpha releases that have experimental users that know what they signed up for. The kernel hasn&rsquo;t been in that situation for the last two decades.
-&hellip;
-We do API breakage <em>inside</em> the kernel all the time. We will fix internal problems by saying &ldquo;you now need to do XYZ&rdquo;, but then it&rsquo;s about internal kernel API&rsquo;s, and the people who do that then also obviously have to fix up all the in-kernel users of that API. Nobody can say &ldquo;I now broke the API you used, and now <em>you</em> need to fix it up&rdquo;. Whoever broke something gets to fix it too.
-&hellip;
-And we simply do not break user space.</p>
-</blockquote>
-
-<p><a href="https://blogs.msdn.microsoft.com/oldnewthing/20031223-00/?p=41373">Raymond Chen quoting Colen</a>:</p>
-
-<blockquote>
-<p>Look at the scenario from the customer’s standpoint. You bought programs X, Y and Z. You then upgraded to Windows XP. Your computer now crashes randomly, and program Z doesn’t work at all. You’re going to tell your friends, &ldquo;Don’t upgrade to Windows XP. It crashes randomly, and it’s not compatible with program Z.&rdquo; Are you going to debug your system to determine that program X is causing the crashes, and that program Z doesn’t work because it is using undocumented window messages? Of course not. You’re going to return the Windows XP box for a refund. (You bought programs X, Y, and Z some months ago. The 30-day return policy no longer applies to them. The only thing you can return is Windows XP.)</p>
-</blockquote>
-
-<p>While this school of thought is a minority, it’s a vocal minority with a lot of influence. It’s much rarer to hear this kind of case made for UI backwards compatibility. You might argue that this is fine &ndash; people are forced to upgrade nowadays, so it doesn’t matter if stuff breaks. But even if users can’t escape, it’s still a bad user experience.</p>
-
-<p>The counterargument to this school of thought is that maintaining compatibility creates technical debt. It’s true! Just for example, Linux is full of slightly to moderately wonky APIs due to the “do not break user space” dictum. One example is <a href="http://man7.org/linux/man-pages/man2/recvmmsg.2.html"><code>int recvmmsg(int sockfd, struct mmsghdr *msgvec, unsigned int vlen, unsigned int flags, struct timespec *timeout);
-</code></a>. You might expect the timeout to fire if you don’t receive a packet, but the manpage reads:</p>
-
-<blockquote>
-<p>The <em>timeout</em> argument points to a <em>struct timespec</em> (see clock_gettime(2)) defining a timeout (seconds plus nanoseconds) for the receive operation (<em>but see BUGS!</em>).</p>
-</blockquote>
-
-<p>The BUGS section reads:</p>
-
-<blockquote>
-<p>The <em>timeout</em> argument does not work as intended.  The timeout is checked only after the receipt of each datagram, so that if up to <em>vlen-1</em> datagrams are received before the timeout expires, but then no further datagrams are received, the call will block forever.</p>
-</blockquote>
-
-<p>This is arguably not even the worst mis-feature of <code>recvmmsg</code>, <a href="http://www.openwall.com/lists/musl/2014/06/07/5">which returns an <code>ssize_t</code> into a field of size <code>int</code></a>.</p>
-
-<p>If you have a policy like “we simply do not break user space”, this sort of technical debt sticks around forever. But it seems to me that it’s not a coincidence that the most widely used desktop, laptop, and server operating systems in the world bend over backwards to maintain backwards compatibility.</p>
-
-<p>The case for UI backwards compatability is arguably stronger than the case for API backwards compatability because breaking API changes can be mechanically fixed and, <a href="//danluu.com/monorepo/">with the proper environment</a>, all callers can be fixed at the same time as the API changes. There&rsquo;s no equivalent way to reach into people&rsquo;s brains and change user habits, so a breaking UI change inevitably results in pain for some users.</p>
-
-<p>The case for the case for UI backwards compatibility is arguably weaker than the case for API backwards compatibility because API backwards compatibility has a lower cost &ndash; if some API is problematic, you can make a new API and then document the old API as something that shouldn’t be used (you’ll see lots of these if you look at Linux syscalls). This doesn’t really work with GUIs since UI elements compete with each other for a small amount of screen real-estate. An argument that I think is underrated is that changing UIs isn’t as great as most companies seem to think &ndash; very dated looking UIs that haven’t been refreshed to keep up with trends can be successful (e.g., plentyoffish and craigslist). Companies can even become wildly successful without any significant UI updates, let alone UI redesigns &ndash; a large fraction of linkedin’s rocketship growth happened in a period where the UI was basically frozen. I’m told that freezing the UI wasn’t a deliberate design decision; instead, it was a side effect of severe technical debt, and that the UI was unfrozen the moment a re-write allowed people to confidently change the UI. Linkedin has managed to <a href="https://darkpatterns.org/">add a lot of dark patterns</a> since they unfroze their front-end, but the previous UI seemed to work just fine in terms of growth.</p>
-
-<p>Despite the success of a number of UIs which aren’t always updated to track the latest trends, at most companies, it’s basically impossible to make the case that UIs shouldn’t be arbitrarily changed without adding functionality, let alone make the case that UIs shouldn’t push out old functionality with new functionality.</p>
-
-<h3 id="ui-deprecation">UI deprecation</h3>
-
-<p>A case that might be easier to make is that shortcuts and shortcut-like UI elements can be deprecated before removal, similar to the way evolving APIs will add deprecation warnings before making breaking changes. Instead of regularly changing UIs so that users’ muscle memory is used against them and causes users to do the opposite of what they want, UIs can be changed so that doing the previously trained set of actions causes nothing to happen. For example, FB could have moved “hide post” down and inserted a no-op item in the old location, and then after people had gotten used to not clicking in the old “hide post” location for “hide post”, they could have then put “save post” in the old location for “hide post”.</p>
-
-<p>Zulip could’ve done something similar and caused the series of actions that used to let you send a private message to the person you want cause no message to be sent instead of sending a private message to the alphabetically first person on the <code>online</code> list.</p>
-
-<p>These solutions aren’t ideal because the user still has to retrain their muscle memory on the new thing, but it’s still a lot better than the current situation, where many UIs regularly introduce arbitrary-seeming changes that sow confusion and chaos.</p>
-
-<p>In some cases (e.g., the no-op menu item), this presents a pretty strange interface to new users. Users don’t expect to see a menu item that does nothing with an arrow that says to click elsewhere on the menu instead. This can be fixed by only rolling out deprecation “warnings” to users who regularly use the old shortcut or shortcut-like path. If there are multiple changes being deprecated, this results in a combinatorial explosion of possibilities, but if you&rsquo;re regularly deprecating multiple independent items, that&rsquo;s pretty extreme and users are probably going to be confused regardless of how it&rsquo;s handled. Given <a href="https://twitter.com/danluu/status/891508449414197248">the amount of effort made to avoid user hostile changes</a> and the dominance of the “move fast and break things” mindset, the case for adding this kind of complexity just to avoid giving users a bad experience probably won’t hold at most companies, but this at least seems plausible in principle.</p>
-
-<p>Breaking existing user workflows arguably doesn’t matter for an app like FB, which is relatively sticky as a result of its dominance in its area, but most applications are more like Zulip than FB. Back when Zulip and Slack were both young, Zulip messages couldn’t be edited or deleted. This was on purpose &ndash; messages were immutable and everyone I know who suggested allowing edits was shot down because mutable messages didn’t fit into the immutable model. Back then, if there was a UI change or bug that caused users to accidentally send a public message instead of a private message, that was basically permanent. I saw people accidentally send public messages often enough that I got into the habit of moving private message conversations to another medium. That didn’t bother me too much since I’m used to <a href="https://danluu.com/everything-is-broken/">quirky software</a>, but I know people who tried Zulip back then and, to this day, still refuse to use Zulip due to UI issues they hit back then. That’s a bit of an extreme case, but the general idea that users will tend to avoid apps that repeatedly cause them pain isn’t much of a stretch.</p>
-
-<p>In studies on user retention, it appears to be the case that an additional 500ms of page-load latency negative impacts retention. If that&rsquo;s the case, it seems like switching the UI around so that the user has to spend 5s undoing and action or broadcasts a private message publicly in a way that can&rsquo;t be undone should have a noticable impact on retention, although I don&rsquo;t know of any public studies that look at this.</p>
-
-<h3 id="conclusion">Conclusion</h3>
-
-<p>If I worked on UI, I might have some suggestions or a call to action. But as an outsider, I’m wary of making actual suggestions &ndash; programmers seem especially prone to coming into an area they’re not familiar with and telling experts how they should solve their problems. While this occasionally works, the most likely outcome is that the outsider either re-invents something that’s been known for decades or completely misses the most important parts of the problem.</p>
-
-<p>It sure would be nice if shortcuts didn’t break so often that I spend as much time consciously stopping myself from using shortcuts as I do actually using the app. But there are probably reasons this is difficult to test/enforce. The huge number of platforms that need to be tested for robust UI testing make testing hard even without adding this extra kind of test. And, even when we’re talking about functional correctness problems, “move fast and break things” is much trendier than “try to break relatively few things”. Since UI “correctness” often has even lower priority than functional correctness, it’s not clear how someone could successfully make a case for spending more effort on it.</p>
-
-<p>On the other hand, despite all these disclaimers, Google sometimes does the exact things described in this post. Chrome recently removed <code>backspace</code> to go backwards; if you hit <code>backspace</code>, you get a note telling you to use <code>alt+left</code> instead. And when maps moved some items around a while back, they put in no-op placeholders that pointed people to the new location.</p>
-
-<p><i>
-Thanks to Leah Hanson, Allie Jones, Randall Koutnik, Kevin Lynagh, David Turner, Christian Ternus, Ted Unangst, Michael Bryc, Tony Finch, Stephen Tigner, Steven McCarthy, Julia Evans, and an anonymous person who has a moral objection to public acknowledgements for comments/corrections/discussion.</p>
-
-<p>If you&rsquo;re curious why &ldquo;anon&rdquo; is against acknowledgements, it&rsquo;s because they first saw these in Paul Graham&rsquo;s writing, whose acknowledgements are sort of a who&rsquo;s who of SV. anon&rsquo;s belief is that these sorts of list serve as a kind of signalling. I won&rsquo;t claim that&rsquo;s wrong, but I get a lot of help with my writing both from people reading drafts and also from the occasional helpful public internet comment and I think it&rsquo;s important to make it clear that this isn&rsquo;t a one-person effort to combat <a href="https://www.bunniestudios.com/blog/?p=5046">what Bunnie Huang calls &ldquo;the idol effect&rdquo;</a>.</p>
-
-<p>In a future post, we&rsquo;ll look at empirical work on how line length affects readability. I&rsquo;ve read every study I could find, but I might be missing some. If know of a good study you think I should include, <a href="https://twitter.com/danluu/">please let me know</a>.
-</i></p>
-
-		</div>
-		<div class="collectionhref">
-		<a href="https://danluu.com/ui-compatibility/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>How to Tag Docker Images with Git Commit Information</h3>
-		</div>
-		<div class="collectiontext">
-			<p>I&rsquo;ve recently been working on a very simple Flask application that can be used as a demo application in containerized environments (here&rsquo;s <a href="https://github.com/lowescott/flask-web-svc">the GitHub repo</a>). It&rsquo;s nothing special, but it&rsquo;s been useful for me as a learning exercise&mdash;both from a Docker image creation perspective as well as getting some additional Python knowledge. Along the way, I wanted to be able to track versions of the Docker image (and the <code>Dockerfile</code> used to create those images), and link those versions back to specific Git commits in the source repository. In this article, I&rsquo;ll share a way I&rsquo;ve found to tag Docker images with Git commit information.</p>
-
-<p>Before I proceed any further, I&rsquo;ll provide the disclaimer that this information isn&rsquo;t unique; I&rsquo;m building on the work of others. Other articles sharing similar information include <a href="http://container-solutions.com/tagging-docker-images-the-right-way/">this one</a>; no doubt there are countless more I haven&rsquo;t yet seen. I&rsquo;m presenting this information here simply to show one way (not the only way) of including Git commit information with a Docker image.</p>
-
-<p>Getting the necessary information from Git is actually far easier than one might think. This variation of the <code>git log</code> command will print only the full hash of the last commit to the repository:</p>
-
-<pre><code>git log -1 --format=%H
-</code></pre>
-
-<p>If you prefer the shortened commit hash (which is what I use currently), then just change the <code>%H</code> to <code>%h</code>, like this:</p>
-
-<pre><code>git log -1 --format=%h
-</code></pre>
-
-<p>Getting the information <em>out</em> of Git is only half the puzzle, though; the other half is getting it <em>into</em> the Docker image. The answer lies in some changes to the <code>Dockerfile</code> and the use of an additional command-line flag when building the image.</p>
-
-<p>First, you&rsquo;ll need to add lines like this to your <code>Dockerfile</code>:</p>
-
-<pre><code>ARG GIT_COMMIT=unspecified
-LABEL git_commit=$GIT_COMMIT
-</code></pre>
-
-<p>The first line defines a build-time argument, and the use of <code>=unspecified</code> means that if the built-time argument is omitted or not supplied, it will default to the value of &ldquo;unspecified&rdquo;. The second line takes the information from the argument and adds it as a label on the image.</p>
-
-<p>With the <code>Dockerfile</code> prepared to leverage Git commit information, all that&rsquo;s necessary is to build the image with the <code>--build-arg</code> flag, like this (here I&rsquo;m showing the command I&rsquo;d use to build the &ldquo;flask-web-svc&rdquo; image for the Flask application I&rsquo;ve been building):</p>
-
-<pre><code>docker build -t flask-local-build --build-arg GIT_COMMIT=$(git log -1 --format=%h) .
-</code></pre>
-
-<p>Here I&rsquo;m using Bash command substitution to take the output of <code>git log -1 --format=%h</code> and supply it to <code>docker build</code> as the GIT_COMMIT argument (i.e., what the <code>Dockerfile</code> is expecting). This command assumes that you&rsquo;re building the Docker image from the latest Git commit; if this isn&rsquo;t the case, then you&rsquo;ll need to modify your command. As I mentioned earlier, if you omit the <code>--build-arg</code> parameter, then the label will be assigned with the default value of &ldquo;unspecified&rdquo;.</p>
-
-<p>When you build the image this way, you can then see the Git commit attached to the image as a label using this command:</p>
-
-<pre><code>docker inspect flask-local-build | jq '.[].ContainerConfig.Labels'
-</code></pre>
-
-<p>Note I&rsquo;m using the incredibly-useful <code>jq</code> tool here. (If you&rsquo;re not familiar with <code>jq</code>, check out <a href="https://blog.scottlowe.org/2015/11/11/handy-cli-tool-json/">my introductory post</a>.)</p>
-
-<p>Assuming that the build was successful and the container operates as expected/desired, then you can tag the image and push it to a registry:</p>
-
-<pre><code>docker tag flask-local-build slowe/flask-web-svc:0.3
-docker push slowe/flask-web-svc:0.3
-</code></pre>
-
-<p>I also create a GitHub release corresponding to the Git commit used to build an image, so I can easily correlate a particular version of the Docker image with the appropriate commit in the repository. This makes it easier to quickly jump to the <code>Dockerfile</code> for each version of the Docker image. So, for example, when I release version 0.3 of the Docker image (which I recently did), I also have <a href="https://github.com/lowescott/flask-web-svc/releases/tag/v0.3">a matching v0.3 release in GitHub</a> that points to the specific Git commit from which version 0.3 of the Docker image is built. This allows me&mdash;and anyone else consuming my Docker image&mdash;to have full traceability from a particular version of a Docker image all the way back to the specific Git commit from which that Docker image was built.</p>
-
-<p>I imagine there are probably better/more efficient ways of doing what I&rsquo;ve done here; feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> to help me improve. Thanks for reading!</p>
-
-<p><strong>UPDATE:</strong> Michael Gasch also pointed out that <code>git rev-parse HEAD</code> will return the full (long) commit hash from the last commit, so this is another way to get the information from Git. Given the nature of Git, no doubt there are countless more!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/Av8tSn386hc" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Av8tSn386hc/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Deep Dive into Container Images in Kolla</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is a liveblog of my last session at the Sydney OpenStack Summit. The session title is &ldquo;OpenStack images that fit your imagination: deep dive into container images in Kolla.&rdquo; The presenters are Vikram Hosakote and Rich Wellum, from Cisco and Lenovo, respectively.</p>
-
-<p>Hosakote starts with an overview of Kolla. Kolla is a project to deploy OpenStack services into Docker containers. There are two ways to use Kolla: using Ansible (referred to as Kolla-Ansible) or using Kubernetes (referred to as Kolla-Kubernetes). Hosakote mentions that Kolla-Kubernetes also uses Helm and Helm charts; this makes me question the relationship between Kolla-Kubernetes and OpenStack-Helm.</p>
-
-<p>Why Kolla? Some of the benefits of Kolla, as outlined by Hosakote, include:</p>
-
-<ul>
-<li>Fast(er) deployment (Hosakote has deployed in as few as 9 minutes)</li>
-<li>Easy maintenance, reconfiguration, patching, and upgrades</li>
-<li>Containerized services are found in container registry</li>
-<li>One tool to do multiple things</li>
-</ul>
-
-<p>Hosakote briefly mentions his preference for Kolla over other tools, including Juju, DevStack, PackStack, Fuel, OpenStack-Ansible, TripleO, OpenStack-Puppet, and OpenStack-Chef.</p>
-
-<p>Other benefits of using containers for OpenStack:</p>
-
-<ul>
-<li>Reproduce golden state easily</li>
-<li>No more &ldquo;Works in DevStack&rdquo; but doesn&rsquo;t work in production</li>
-<li>Production-ready images (this seems specific to Kolla, not just containers for OpenStack control plane)</li>
-<li>Easy to override the configuration files</li>
-<li>Dev mode (enables faster dev/test cycles)</li>
-<li>Portable, tested, replicated images in well-known registries (again, this is specific to Kolla, not just using containers for the OpenStack control plane)</li>
-</ul>
-
-<p>Next, Hosakote goes over the Kolla architecture. The &ldquo;deploy node&rdquo; runs Ansible, Docker, the Docker Python libraries, and Jinja. All the <code>Dockerfiles</code>, Ansible playbooks, Jinja templates, Helm charts, etc., are pulled from GitHub. By default, Kolla uses the Docker Hub for container images, but it can also use a custom registry. The deploy node deploys Docker containers with OpenStack services onto target nodes.</p>
-
-<p>When Kubernetes is in play (via Kolla-Kubernetes), the architecture is similar but with the addition of Kubernetes-specific components (such as the <code>kubelet</code> on worker nodes).</p>
-
-<p>Hosakote takes care to point out that Kolla can be used for a variety of &ldquo;advanced&rdquo; configurations, like:</p>
-
-<ul>
-<li>Jumbo frames</li>
-<li>SR-IOV (PCI passthrough)</li>
-<li>Ceph storage</li>
-<li>EFK (ElasticSearch, Fluentd, Kibana)</li>
-<li>Prometheus (cloud-native monitoring and alerting)</li>
-<li>Numerous other customizations and configuration overrides</li>
-</ul>
-
-<p>Next, Hosakote briefly reviews how to use Kolla (Kolla-Ansible, specifically). He went through the content so quickly that I wasn&rsquo;t able to catch all the details.</p>
-
-<p>Now, Wellum takes over the presentation to discuss Kolla-Kubernetes. Wellum mentions a few resources for using Kolla-Kubernetes, but immediately transitions into a discussion of why you may want to build your own custom Kolla images (as opposed to using the &ldquo;official&rdquo; Kolla images available on Docker Hub). Some of these reasons include:</p>
-
-<ul>
-<li>You run a &ldquo;custom&rdquo; or &ldquo;proprietary&rdquo; version of OpenStack</li>
-<li>You are an OpenStack contributor and would like to test in production-quality environments</li>
-<li>Your company develops drivers unique to hardware (this allows you to easily stand up OpenStack so you can spend more of your time focusing on hardware support/integration)</li>
-</ul>
-
-<p>This leads Wellum into an example of how you might use Kolla to build custom images for a couple of OpenStack services, but use &ldquo;vanilla&rdquo; upstream code for the rest of the OpenStack services. Wellum again mentions the use of Helm, but does not provide any information on interaction between Kolla-Kubernetes and OpenStack-Helm.</p>
-
-<p>Next, Wellum shows a recorded demo that shows everything he just discussed about the example of building custom images for a couple of OpenStack services. The presenters run into some permissions issues with Google Docs, but after a few minutes manage to finally resolve those so they can show the demo. The demo, unfortunately, is limited in size and has poor color contrast that makes it difficult to see from the back of the room.</p>
-
-<p>After watching the demo for a while, I wrapped up the liveblog as the session was running over its time limit.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/0uL6wDNyuzA" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/0uL6wDNyuzA/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Carrier-Grade SDN-Based OpenStack Networking Solution</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This session was titled &ldquo;Carrier-Grade SDN Based OpenStack Networking Solution,&rdquo; led by Daniel Park and Sangho Shin. Both Park and Shin are from SK Telecom (SKT), and (based on the description) this session is a follow-up to a session from the Boston summit where SK Telecom talked about an SDN-based networking solution they&rsquo;d developed and released for use in their own 5G-based network.</p>
-
-<p>Shin starts the session with some presenter introductions, and sets the stage for the presentation. Shin first provides some background on SKT, and discusses the steps that SKT has been taking to prepare their network for 5G infrastructure/services. This involves more extensive use of virtual network functions (VNFs) and software-defined infrastructure based on open software and open hardware. Shin reinforces that the SKT project (which is apparently called COSMOS?) exclusively leverages open source software.</p>
-
-<p>Diving into a bit more detail, Shin talks about SONA Fabric (which is used to control the leaf/spine fabric used as the network underlay), SONA (which handles virtual network management), and TACO (which is an SKT-specific version of OpenStack). The network monitoring solution is called TINA, and this feeds into an integrated monitoring system known as 3DV.</p>
-
-<p>TACO (stands for SKT All Container OpenStack) is containerized OpenStack, leveraging Kubernetes and OpenStack-Helm. The container images come from Kolla and Docker is the container engine in use. TACO is built entirely from the upstream source code, which feeds into a CI/CD pipeline that generates working images, packaging, configuration, etc.</p>
-
-<p>Park now takes over to discuss ONOS. ONOS is led by the ONF and is a &ldquo;carrier-grade&rdquo; network operating system; the first version was released in 2015. SKT now uses a test version of ONOS. Key features of ONOS are scalability, performance, high availability, a modular architecture that supports pluggable southbound interfaces, and a set of northbound abstractions for greater interoperability.</p>
-
-<p>SONA (which stands for Simplified Network Overlay Architecture) is the SKT-specific solution designed on top of ONOS for SKT. All of SONA, according to Park, has been upstreamed into the ONOS repository. With regard to OpenStack, SONA comprises three different ONOS applications:</p>
-
-<ul>
-<li>OpenStackNode (initializes nodes)</li>
-<li>OpenStackNetworking (programs switching/routing rules via OpenFlow to OVS, both on compute nodes and gateway nodes)</li>
-<li>OpenStackNetworking UI (user interface)</li>
-</ul>
-
-<p>On the data plane side, SONA uses OVS and a vRouter. No details are provided on this vRouter construct, other than it was developed by SKT for SONA.</p>
-
-<p>Key features of SONA include:</p>
-
-<ul>
-<li>Implemented as an ML2 plugin for Neutron</li>
-<li>Uses VXLAN-based overlays</li>
-<li>No agents and no network node</li>
-<li>Virtual router scalability</li>
-<li>Optimized East-West routing (no virtual router needed)</li>
-<li>Provides a UI-based flow tracer</li>
-</ul>
-
-<p>The text on the slide talks about no need for network nodes, but Park repeatedly mentions gateway nodes and the ability to scale gateway capacity; I&rsquo;m guessing that gateway nodes are a replacement for network nodes. Gateways are responsible for handling North-South traffic flows.</p>
-
-<p>Park talks for a minute about the inspiration for the flow tracing UI, which comes out of trying to troubleshoot traffic flows using OVS-related CLI commands and <code>grep</code>.</p>
-
-<p>Next, Park shows a brief video demo of the flow tracing user interface.</p>
-
-<p>Following the demo, Park outlines a few use cases for SONA, all of which involve integration between OpenStack networking and physical networking for the purpose of supporting physical network slicing, vEPC (virtual Evolved Packet Core), and VNF deployments.</p>
-
-<p>SONA Fabric is a pure OpenFlow-based leaf/spine fabric solution, supporting ECMP, failure detection, auto-recovery, and physical/virtual network integration. SONA Fabric has a more limited hardware support list, due to pure OpenFlow architecture. I find it interesting that SKT says their solution is completely based on &ldquo;open hardware,&rdquo; yet Cisco and Arista are mentioned as being supported by SONA Fabric. (Perhaps there is a disconnect/difference between the SONA Fabric support and what SKT specifically is using.)</p>
-
-<p>Next, Park shows a video demo of TINA (SKT Integrated Network Analyzer), which provides 3-D visualization of network status and network performance information. It&rsquo;s quite impressive, to be honest.</p>
-
-<p>At this point, Shin takes over to talk about what&rsquo;s missing for true carrier grade solution? The primary concern is the data plane, where performance for VNFs still can&rsquo;t match PNFs. The solution is to more fully embrace data plane acceleration using technologies like DPDK, NIC offloading, and Xeon+FPGA acceleration. Shin mentions that SKT is working to conduct a commercial proof-of-concept with TACO, SONA, and some data plane acceleration solutions early next year, and hopes to share some results next year.</p>
-
-<p>At this point, the presenters wrap up the session.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/EPeNBNVM7tY" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/EPeNBNVM7tY/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Can OpenStack Beat AWS in Price</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is a liveblog of the session titled &ldquo;Can OpenStack Beat AWS in Price: The Trilogy&rdquo;. The presenters are Rico Lin, Bruno Lago, and Jean-Daniel Bonnetot. The &ldquo;trilogy&rdquo; refers to the third iteration of this presentation; each time the comparison has been done in a different geographical region (first in Europe, then in North America, and finally here in Asia-Pacific).</p>
-
-<p>Lago starts the presentation with an explanation of the session, and each of the presenters introduce themselves, their companies, and their backgrounds. In this particular case, the presenters are representing Catalyst (runs Catalyst Cloud in New Zealand), OVH, and EasyStack&mdash;all three are OpenStack-powered public cloud offerings.</p>
-
-<p>Lago explains that they&rsquo;ll cover three common OpenStack scenarios:</p>
-
-<ul>
-<li>Private cloud</li>
-<li>Managed private cloud</li>
-<li>OpenStack-powered public cloud</li>
-</ul>
-
-<p>Lin takes point to talk a bit about price differences in different geographical regions. Focusing on AWS, Lin points out that AWS services are about 8% higher in Europe than in North America. Moving to APAC, AWS services are about 29% higher than in North America. With this 29% price increase, I can see where OpenStack might be much more competitive in APAC than in North America (and this, in turn, may explain why OpenStack seems much more popular in APAC than in other regions).</p>
-
-<p>Lago takes over now to set some assumptions for the comparisons. He provides an overview of the total cost of ownership (TCO) model used; the presenters are also making available a Google Docs spreadsheet that implements the TCO model and their assumptions. This includes things like hardware costs, power costs, number of full-time employees (FTEs) used to support OpenStack, etc. All this information is used to derive the per-vCPU cost is when running workloads on OpenStack; this enables (hopefully) fair comparisons with AWS.</p>
-
-<p>This leads Lago to share a slide that compares various EC2 m4 instances to comparable OpenStack instances; in all cases, the OpenStack instance was far less expensive than EC2 (again, this comparison is based on a number of assumptions, such as a quite large cloud).</p>
-
-<p>Bonnetot now takes the lead to talk about the OpenStack public cloud use case (comparing AWS against an OpenStack-powered public cloud). The comparison here was done using the AWS Simple Monthly Calculator and then compared against matching (as close as possible) OVH public cloud resources. Bonnetot recognizes that these comparisons can&rsquo;t be perfect due to differences between providers, and that every effort was made to try to equalize differences between providers and their offerings. Lin also takes a few minutes to talk about how they tried to account for differences in services and guarantees between providers.</p>
-
-<p>Coming finally to the comparison&mdash;based on a pretty standard three-tier application architecture&mdash;Lin shows that AWS runs about $11K a year, OVH comes in at about $9K a year, and private OpenStack cloud comes in just over $3K a year. Lin drives into a few additional details, noting that additional &ldquo;sysadmin&rdquo; time is added to OVH and OpenStack amounts to account for the lack of managed services that are present on AWS. In APAC, the AWS price runs up to almost $15K (representing that 29% premium for AWS services in APAC regions).</p>
-
-<p>A second comparison&mdash;based on a back-end for a mobile application&mdash;the AWS price is around $27K, compared to $18K for OVH and $4K for an OpenStack private cloud. Lin calls out the cost of the bandwidth when using a public cloud provider in AWS, but I don&rsquo;t recall any of the presenters mentioned that they accounted for network costs and network services in their models. This may represent a gap in the comparison that unfairly skews the benefits in favor of private clouds. Additional details provided by Lin show that the APAC price for AWS is again about 30% higher (up to $36K).</p>
-
-<p>Bonnetot steps forward to cover a third comparison, this time an example for a deep learning use case. This example discusses the use of GPU-equipped instances. In this example, AWS costs $167K annually, compared to $126K annually for OVH (no OpenStack private cloud comparison was given here, I assume because of the hardware needs).</p>
-
-<p>The last use case is an archival use case. In this case, the presenters discuss archiving 60TB of data in an object storage service (S3 versus Swift). In this case, OVH comes out first (around $1700), AWS second (just shy of $3K), and an OpenStack private cloud comes in last (just over $3K). Lago theorizes that the model may be due to some incorrect assumptions around hardware platforms and hardware configurations, and invites attendees to collaborate with them in fine-tuning the assumptions behind the model. In this last model, AWS again comes in at about 22% more expensive in APAC than in the US.</p>
-
-<p>In conclusion, Lago steps up to remind attendees that it&rsquo;s not only about cost; it&rsquo;s also about risk. At sufficient scale, a private cloud can be far more cost effective than a public cloud, but the risk of using a private cloud is higher (more staff required, more training, getting the company to use the cloud, etc.). Managed private cloud increases cost, but can reduce risk. Public cloud offers a far lower risk, but also typically has a much higher cost.</p>
-
-<p>The presenters wrap up by providing a URL to the TCO spreadsheet (<a href="http://bit.ly/2dFGvfQ">http://bit.ly/2dFGvfQ</a>) and again invite attendees to collaborate with them on fine-tuning the assumptions and the TCO model.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/LqNakMgkpRQ" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/LqNakMgkpRQ/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Lessons Learnt from Running a Container-Native Cloud</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is a liveblog of the session titled &ldquo;Lessons Learnt from Running a Container-Native Cloud,&rdquo; led by Xu Wang. Wang is the CTO and co-founder of Hyper.sh, a company that has been working on leveraging hypervisor isolation for containers. This session claims to discuss some lessons learned from running a cloud leveraging this sort of technology.</p>
-
-<p>Wang starts with a brief overview of Hyper.sh. The information for this session comes from running a Hypernetes (Hyper.sh plus Kubernetes)-based cloud for a year.</p>
-
-<p>So, what is a &ldquo;container-native&rdquo; cloud? Wang provides some criteria:</p>
-
-<ul>
-<li>A container is a first-class citizen in the cloud. This means container-level APIs and the ability to launch containers without a VM.</li>
-<li>The cloud offers container-centric resources (floating IPs, security groups, etc.).</li>
-<li>The cloud offers container-based services (load balancing, scheduled jobs, functions, etc.).</li>
-<li>Billing is handled on a per-container level (not on a VM level).</li>
-</ul>
-
-<p>To be honest, I don&rsquo;t see how <em>any</em> cloud other than Hyper.sh&rsquo;s own offering could meet these criteria; none of the major public cloud providers (Microsoft Azure, AWS, GCP) currently satisfy Wang&rsquo;s requirements. A &ldquo;standard&rdquo; OpenStack installation doesn&rsquo;t meet these requirements. This makes the session more like a subtle but unmistakable plug for Hyper.sh, rather than a more genuine desire to share information learned on running containers on OpenStack at large scale. This impression is reinforced by a few slides in which Wang extolls the benefits of a container-native cloud as opposed to more &ldquo;traditional&rdquo; approaches, followed by a few more slides plugging Hyper.sh directly.</p>
-
-<p>The next couple of slides also focus exclusively on Hyper.sh, and it appears that the majority of this session will be an advertisement for Hyper.sh (instead of focusing on helping the OpenStack community understand how OpenStack components and architecture may be affected by the extensive use of containers within an OpenStack deployment). At this point, I wrap up my liveblog.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/ukRbDoi_iTk" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ukRbDoi_iTk/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Make Your Application Serverless</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is a liveblog from the last day of the OpenStack Summit in Sydney, Australia. The title of the session is &ldquo;Make Your Application Serverless,&rdquo; and discusses Qinling, a project for serverless (Functions-as-a-Service, or FaaS) architectures/applications on OpenStack. The presenters for the session are Lingxian Kong and Feilong Wang from Catalyst Cloud.</p>
-
-<p>Kong provides a brief background on himself and his co-presenter (Wang), and explains that Catalyst Cloud is an OpenStack-based public cloud based in New Zealand. Both presenters are active technical contributors to OpenStack projects.</p>
-
-<p>Kong quickly transitions into the core content of the presentation, which focuses on serverless computing and Qinling, a project for implementing serverless architectures on OpenStack. Kong points out that serverless computing doesn&rsquo;t mean there are no servers, only that the servers (typically VMs) are hidden from view. Functions-as-a-Service, or FaaS, is a better term that Kong prefers. He next provides an example of how a FaaS architecture may benefit applications, and contrasts solutions like AutoScaling Groups (or the equivalent in OpenStack) with FaaS.</p>
-
-<p>Some key characteristics of serverless, as summarized by Kong:</p>
-
-<ul>
-<li>No need to think about servers</li>
-<li>Run your code, not the whole application</li>
-<li>Highly available and horizontally scalable</li>
-<li>Stateless/ephemeral</li>
-<li>Lightweight/single-purpose functions</li>
-<li>Event-driven style</li>
-<li>Pay only for what you use</li>
-</ul>
-
-<p>Some use cases for serverless/FaaS:</p>
-
-<ul>
-<li>Scheduled (<code>cron</code>) jobs</li>
-<li>Microservices-based applications</li>
-<li>Data processing tasks</li>
-<li>IoT</li>
-<li>Mobile backends</li>
-<li>Chatbots</li>
-<li>Side tasks like sending a follow-up email in response to an order, etc.</li>
-</ul>
-
-<p>Some existing serverless/FaaS solutions include AWS Lambda or Azure Functions; in the open source space, there are projects like Apache OpenWhisk, Fission, or Kubeless. Most of these solutions/projects are leveraging container technologies.</p>
-
-<p>This leads Kong to introduce Qinling, which is an OpenStack project intended to provide FaaS. Qinling came out of some of Kong&rsquo;s work in Mistral, and the name has no special meaning other than it is from Kong&rsquo;s home province in China.</p>
-
-<p>Qinling uses Kubernetes on the backend to orchestrate containers that will, in turn, be used to execute functions. Architecturally, Qinling has only two components: the <code>qinling-api</code> service and the <code>qinling-engine</code> service. Some of the features present in Qinling include:</p>
-
-<ul>
-<li>RESTful API (API objects include runtimes, functions, executions, and jobs)</li>
-<li>Integrates with other OpenStack services</li>
-<li>Supports code/Docker images/Swift object as a function</li>
-<li>Sync/Async/Periodic execution</li>
-<li>Scale up/scale down</li>
-<li>Supports OpenStack CLI</li>
-</ul>
-
-<p>Qinling can also consume/integrate with Aodh, Zaqar, and Swift (as mentioned above).</p>
-
-<p>Kong now moves into a pair of demos. The first demo models a common Lambda use case surrounding an action executing after an object is uploaded to S3. In this demo, a Qinling function consumes an alarm from Aodh generated from an object being uploaded to Swift. The demo works, but is a bit slow; Kong explains that this is due to <em>cold start</em> considerations (first-time invocation takes longer than subsequent invocations).</p>
-
-<p>Kong now hands it over to Wang to show the second demo. The second demo shows how to use Zaqar with Qinling. (Zaqar, for those who aren&rsquo;t aware, is multi-tenant &ldquo;messaging-as-a-service&rdquo; for OpenStack, similar in nature to Amazon SQS.) This example shows how you might accomplish communications between various functions. Although it takes a few minutes, the demo is successful in sending an SMS to the presenters&rsquo; phones in response to a service being down in an OpenStack cloud.</p>
-
-<p>Some additional resources on Qinling are shared by the presenters:</p>
-
-<ul>
-<li><a href="https://github.com/openstack/qinling">https://github.com/openstack/qinling</a></li>
-<li><a href="http://qinling.readthedocs.io">http://qinling.readthedocs.io</a></li>
-<li>IRC channel is #openstack-qinling</li>
-</ul>
-
-<p>At this point, the presenters end the session.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/k1My6cQwW2c" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/k1My6cQwW2c/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>How to Deploy 800 Servers in 8 Hours</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is a liveblog of the session titled &ldquo;How to deploy 800 nodes in 8 hours automatically&rdquo;, presented by Tao Chen with T2Cloud (Tencent).</p>
-
-<p>Chen takes a few minutes, as is customary, to provide an overview of his employer, T2cloud, before getting into the core of the session&rsquo;s content. Chen explains that the drive to deploy such a large number of servers was driven in large part by a surge in travel due to the Spring Festival travel rush, an annual event that creates high traffic load for about 40 days.</p>
-
-<p>The &ldquo;800 servers&rdquo; count included 3 controller nodes, 117 storage nodes, and 601 compute nodes, along with some additional bare metal nodes supporting Big Data workloads. All these nodes needed to be deployed in 8 hours or less in order to allow enough time for T2cloud&rsquo;s customer, China Railway Corporation, to test and deploy applications to handle the Spring Festival travel rush.</p>
-
-<p>To help with the deployment, T2cloud developed a &ldquo;DevOps&rdquo; platform consisting of six subsystems: CMDB, OS installation, OpenStack deployment, task management, automation testing, and health check/monitoring. Chen doesn&rsquo;t go into great deal about any of these subsystems, but the slide he shows does give away some information:</p>
-
-<ul>
-<li>The OS installation subsystem appeared to leverage IPMI and Cobbler.</li>
-<li>The OpenStack deployment subsystem used Ansible (it&rsquo;s not clear if it was using OpenStack-Ansible or just Ansible with custom playbooks).</li>
-</ul>
-
-<p>Going into a bit more detail, Chen explains that the OS installation process uses PXE plus Kickstart, all glued together using Cobbler. For the 800-node deployment, T2cloud used a total of 3 Cobbler servers, running about 20 servers concurrently in each group. Each server took about 10 minutes to deploy. Chen mentions that they used Cobbler snippet to dynamically locate the target disk when deploying the operating system; this is a feature I hadn&rsquo;t heard of before, and sounds very useful (especially in large-scale environments). Chen also explains how to use Cobbler to revert to the &ldquo;old style&rdquo; of interface naming (i.e., <code>eth0</code> instead of <code>enoXXXXXX</code> or similar).</p>
-
-<p>Coming to the OpenStack deployment portion, Chen discusses the benefits that led T2cloud to choose Ansible for deployment. T2cloud used Ansible both for <em>ad hoc</em> commands as well as with playbooks. Chen reviews some of the key components they needed in order to use playbooks: inventory, roles, modules, group variables, and host variables. (These are all pretty standard Ansible constructs.) Chen does not mention anything about the modules that T2cloud used, other than to say they are idempotent and explain what that means.</p>
-
-<p>Chen does review some performance optimizations for Ansible:</p>
-
-<ul>
-<li>Disable the <code>gather_facts</code> function</li>
-<li>Enable pipelining</li>
-<li>Increase the number of forks running</li>
-<li>Upgrade SSH (as necessary) and use ControlPersist</li>
-</ul>
-
-<p>Next, Chen reviews some issues and their respective solutions discovered during this deployment:</p>
-
-<ul>
-<li>The Neutron agents were down, even though the services were running; this was later determined to be an insuficient number of file descriptors for the system because RabbitMQ was using too many descriptors</li>
-<li>The Cinder services failed to start, due to an maximum connection limit on the backend MySQL database(s)</li>
-<li>There were a number of other limits or maximum connections that also had to be increased; Chen shows a slide listing quite a few of them</li>
-</ul>
-
-<p>This brings Chen to a discussion of the health and monitoring system, which was used before the deployment, during the deployment, and after the deployment (for different purposes in each phase, of course).</p>
-
-<p>In closing, Chen provides some suggestions/recommendations to attendees:</p>
-
-<ul>
-<li>Do more tests to find bottlenecks.</li>
-<li>Always do health checks.</li>
-</ul>
-
-<p>At this point, Chen ends the session and opens up for questions from the audience.</p>
-
-<p>Some things I would&rsquo;ve liked to hear from Chen:</p>
-
-<ul>
-<li>How did they get inventory from Cobbler to Ansible? Was it manual, or was there an automated process?</li>
-<li>Which Ansible modules did they use? If they built their own, why?</li>
-<li>What tools were used in the health check/monitoring system?</li>
-</ul>
-
-<p>Without more detailed information, the session was good but not as helpful as it could have been.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/t1GyXZMgomk" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/t1GyXZMgomk/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -1323,37 +1059,35 @@ docker push slowe/flask-web-svc:0.3
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="i_m_with_her_tour_radio_promo.html">
+<div class="date">02.12.2017</div>
+<h3>I'm with her tour radio promo</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Und nochmal Bluegrass: Sara Watkins, Sarah Jarosz and Aiofe O'Donovan from BBC radio Scotland Jan 29th 2015
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="aktualisierung_smack_v4_2_1.html">
+<div class="date">02.12.2017</div>
+<h3>Aktualisierung Smack v4.2.1</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich habe eine der von mir benutzten Softwarekomponenten aktualisiert: die Jabber-Bibliothek Smack. Damit ist auch eine neue Version
+von
+dWb+
+verfügbar.
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="komponente_zur_verwaltung_tags.html">
 <div class="date">26.11.2017</div>
 <h3>Komponente zur Verwaltung von Tags</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Ich habe eine Komponente erstellt, die die GUI für die Verwaltung von Tags darstellen könnte. Damit wäre etwa
 eine Möglichkeit geschaffen, eine komfortable Anwendung zur Verwaltung
 Tag-basierter Dateisysteme
 zu erstellen
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="tag_basierte_dateisysteme.html">
-<div class="date">22.11.2017</div>
-<h3>Tag-basierte Dateisysteme</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Es existiert keine zufriedenstellende Möglichkeit, Dateien über Schlüsselworte recherchierbar zu machen - zumindestens
-in den von mir so bezeichneten Betriebssystemfamilien Linux und Windows. Ich habe mir eine mögliche alternative Vorgehensweise
-unter Linux angesehen.
-</p></div>   </a>
-</li>
-<li class="anriss">
-	<a href="zugriff_auf_maps_ohne_cast_java.html#35">
-<div class="date">22.11.2017</div>
-<h3>Zugriff auf Maps ohne Cast in Java</h3>
-<div class="abstract">
-	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-<p>Collections im Zusammenspiel mit Generics erlauben es, ohne Cast auf Elemente gleichen Typs 
-typsicher zuzugreifen - was aber wenn man typsicher auf Elemente unterschiedlicher Typen
-in einer Collection zugreifen möchte, ohne zu casten? Hier die Vorstellung einer möglichen Antwort
 </p></div>   </a>
 </li>
 </ul>
