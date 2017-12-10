@@ -113,6 +113,222 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Technology Short Take 91</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Welcome to Technology Short Take 91! It&rsquo;s been a bit longer than usual since the last Tech Short Take (partly due to the US Thanksgiving holiday, partly due to vacation time, and partly due to business travel), so apologies for that. Still, there&rsquo;s a great collection of links and articles here for you, so dig in and enjoy.</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>Amanpreet Singh has a two-part series on Kubernetes networking (<a href="https://medium.com/@ApsOps/an-illustrated-guide-to-kubernetes-networking-part-1-d1ede3322727">part 1</a>, <a href="https://medium.com/@ApsOps/an-illustrated-guide-to-kubernetes-networking-part-2-13fdc6c4e24c">part 2</a>).</li>
+<li>Anthony Spiteri has <a href="https://anthonyspiteri.net/nsx-bytes-whats-new-in-nsx-t-2-1/">a brief look at NSX-T 2.1</a>, which recently launched with support for Pivotal Container Service (PKS) and Pivotal Cloud Foundry, further extending the reach of NSX into new areas.</li>
+<li>Jon Benedict has <a href="http://captainkvm.com/2017/12/introduction-ovn-red-hat-virtualization/">a brief article</a> on OVN and its integration into Red Hat Virtualization; if you&rsquo;re unfamiliar with OVN, it might be worth having a look.</li>
+<li>sFlow is a networking technology that I find quite interesting, but I never seem to have the time to really dig into it. For example, I was recently browsing the sFlow blog and came across two really neat articles. The first was on <a href="http://blog.sflow.com/2017/11/restful-control-of-cumulus-linux-acls.html">RESTful control of Cumulus Linux ACLs</a> (this one isn&rsquo;t actually sFlow-related); the second was on <a href="http://blog.sflow.com/2017/09/real-time-visibility-and-control-of.html">combining sFlow telemetry and RESTful APIs</a> for visibility and control in campus networks.</li>
+<li>David Gee&rsquo;s &ldquo;network automation engineer persona&rdquo; content continues; this time he tackles <a href="http://ipengineer.net/2017/11/network-automation-engineer-persona-proof-of-concepts/">some thoughts around proof-of-concepts (PoCs)</a>.</li>
+</ul>
+
+<h2 id="servers-hardware">Servers/Hardware</h2>
+
+<ul>
+<li>Frank Denneman (with an admittedly vSphere-focused lens) takes a look at the Intel Xeon Scalable Family in a two-part (so far) series. <a href="http://frankdenneman.nl/2017/09/26/vsphere-focused-guide-intel-xeon-scalable-family/">Part 1</a> covers the CPUs themselves; <a href="http://frankdenneman.nl/2017/10/03/vsphere-focused-guide-intel-xeon-scalable-family-memory-subsystem/">part 2</a> discusses the memory subsystem. Both articles are worth reviewing if hardware selection is an important aspect of your role.</li>
+<li>Kevin Houston provides some details on <a href="http://bladesmadesimple.com/2017/10/blade-server-options-for-vmware-vsan-readynode/">blade server options for VMware vSAN Ready Nodes</a>.</li>
+</ul>
+
+<h2 id="security">Security</h2>
+
+<ul>
+<li>The security of Kubernetes is coming under greater scrutiny, as would be expected as adoption (and attention) increases. Josselin Costanzi discusses <a href="https://medium.com/devopslinks/security-problems-of-kops-default-deployments-2819c157bc90">the security problems with Kubernetes as deployed via <code>kops</code></a>.</li>
+<li>In a somewhat backwards manner, I first stumbled upon <a href="https://webtransparency.cs.princeton.edu/no_boundaries/session_replay_sites.html">this list of sites that have third-party &ldquo;session replay&rdquo; scripts</a> that could potentially exfiltrate sensitive customer data. The list was quite surprising, to be honest; there were some sites on the list that I didn&rsquo;t expect to see. It was only after reviewing this list that I decided it would probably be a good idea to read <a href="https://freedom-to-tinker.com/2017/11/15/no-boundaries-exfiltration-of-personal-data-by-session-replay-scripts/">the associated blog post that explains the list</a>. Let&rsquo;s just say this: after reading it, I went back to reconfigure my ad-blocking and tracker-blocking plugins.</li>
+</ul>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li>The Cloud-Native Computing Foundation (CNCF) and the Kubernetes community introduced the Certified Kubernetes Conformance Program, and the first announcements of certification have started rolling in. First, <a href="https://cloudplatform.googleblog.com/2017/11/introducing-Certified-Kubernetes-and-Google-Kubernetes-Engine.html">here&rsquo;s Google&rsquo;s announcement</a> of renaming Google Container Engine to Google Kubernetes Engine (making the GKE acronym much more applicable) as a result of its certification. Next, here&rsquo;s <a href="https://blogs.vmware.com/cloudnative/2017/11/13/vmware-pivotal-container-service-achieves-kubernetes-certification/">an announcement on the certification of PKS</a> (Pivotal Container Service).</li>
+<li>Henrik Schmidt <a href="https://thenewstack.io/kube-node-let-k8s-cluster-auto-manage-nodes/">writes about the <code>kube-node</code> project</a>, an effort to allow Kubernetes to manage worker nodes in a cluster.</li>
+<li>Helm is a great way to deploy applications onto (into?) a Kubernetes cluster, but there are some ways you can improve Helm&rsquo;s security. Check out this article from Matt Butcher on <a href="http://technosophos.com/2017/11/20/securing-helm.html">securing Helm</a>.</li>
+<li><a href="http://kubernetes-on-aws.readthedocs.io/en/latest/admin-guide/kubernetes-in-production.html">This site</a> is a good collection of &ldquo;lessons learned from the trenches&rdquo; on running Kubernetes on AWS in production.</li>
+<li>I have to be honest: <a href="https://cloudlearning.pro/2017/11/28/going-all-in-openstack-on-kubernetes-with-rook-part-1/">this blog post</a> on using OpenStack Helm to install OpenStack on Kubernetes with Rook sounds like a massive science experiment. That&rsquo;s a lot of moving pieces!</li>
+<li>User &ldquo;sysadmin1138&rdquo; (I couldn&rsquo;t find a mapping to a real name, perhaps that&rsquo;s intentional) has a great write-up on her/his <a href="http://sysadmin1138.net/mt/blog/2017/11/terraforming-in-prod.shtml">experience with Terraform in production</a>. There&rsquo;s some great information here for those of you thinking of (or currently) using Terraform to manage production workloads/configurations.</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>Michael Crosby <a href="https://blog.mobyproject.org/containerd-namespaces-for-docker-kubernetes-and-beyond-d6c43f565084">outlines</a> support for multi-client support in containerD.</li>
+<li>Speaking of containerD, it just <a href="https://github.com/containerd/containerd/releases">recently hit 1.0</a>.</li>
+<li>This is <a href="https://blog.alexellis.io/docker-stacks-attachable-networks/">a slightly older post</a> by Alex Ellis on attachable networks, which (as I understand it) enable interoperability between declarative workloads (deployed via <code>docker stack deploy</code>) and imperative workloads (launched via <code>docker run</code>).</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<ul>
+<li>VMware&rsquo;s Cloud-Native group <a href="https://blogs.vmware.com/cloudnative/2017/12/06/updates-project-hatchway-kubecon-2017/">discussed some recent updates to Project Hatchway</a>, an effort to bring expanded support for persistent storage into cloud-native platforms such as Kubernetes. It&rsquo;s nice to see that CSI support is also in the mix.</li>
+<li>J Metz has an outstanding &ldquo;deep in the weeds&rdquo; discussion on <a href="https://jmetz.com/2017/09/storage-how-does-flash-memory-avoid-data-loss/">how flash memory avoids data loss</a>. Good stuff.</li>
+</ul>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<ul>
+<li>The &ldquo;blurring&rdquo; between VMs/hypervisors and containers/container daemons continues; for one example, see <a href="https://blog.docker.com/2017/11/docker-for-windows-17-11/">this recent article</a> by Docker discussing Linux containers on Windows (LCOW).</li>
+<li>Alan Renouf <a href="http://www.virtu-al.net/2017/11/29/using-powercli-manage-vmware-cloud-aws/">discusses the ability to manage</a> VMware Cloud on AWS (VMC) using the latest release of PowerCLI (version 6.5.4).</li>
+<li>William Lam (with some help from Anthony Burke) outlines <a href="https://www.virtuallyghetto.com/2017/11/moving-esxi-hosts-with-lacplag-between-vcenter-servers.html">how to move ESXi hosts with LACP/LAG between vCenter Servers</a>.</li>
+<li>John Slack describes <a href="https://blogs.technet.microsoft.com/virtualization/2017/07/18/copying-files-into-a-hyper-v-vm-with-vagrant/">how to copy files into a Hyper-V VM using Vagrant</a> by using a feature of the Hyper-V provider known as the guest service interface.</li>
+</ul>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<ul>
+<li>Pat Bowden <a href="http://onlinelearningsuccess.org/learning-styles/">discusses</a> the idea of learning styles, and how combining learning styles (or multiple senses) can typically contribute to more successful learning.</li>
+<li>I also found some useful tidbits on learning over at <a href="http://theartoflearningproject.org/">The Art of Learning project website</a>.</li>
+</ul>
+
+<p>That&rsquo;s all for now (but I think that should be enough to keep you busy for a little while, at least!). I&rsquo;ll have another Tech Short Take in 2 weeks, though given the holiday season is nigh upon us it might be a bit light on content. Until then!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/QX1s1gdfruo" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/QX1s1gdfruo/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Installing the Azure CLI on Fedora 27</h3>
+		</div>
+		<div class="collectiontext">
+			<p>This post is a follow-up to a post from earlier this year on <a href="https://blog.scottlowe.org/2017/08/13/manually-installing-azure-cli-fedora-25/">manually installing the Azure CLI on Fedora 25</a>. I encourage you to refer back to that post for a bit of background. I&rsquo;m writing this post because the procedure for manually installing the Azure CLI on <a href="https://getfedora.org/">Fedora</a> 27 is slightly different than the procedure for Fedora 25.</p>
+
+<p>Here are the steps to install the Azure CLI into a Python virtual environment on Fedora 27. Even though they are <em>almost</em> identical to the Fedora 25 instructions (one additional package is required), I&rsquo;m including all the information here for the sake of completeness.</p>
+
+<ol>
+<li><p>Make sure that the &ldquo;gcc&rdquo;, &ldquo;libffi-devel&rdquo;, &ldquo;python-devel&rdquo;, &ldquo;openssl-devel&rdquo;, &ldquo;python-pip&rdquo;, and &ldquo;redhat-rpm-config&rdquo; packages are installed (you can use <code>dnf</code> to take care of this). Some of these packages may already be installed; during my testing with a Fedora 27 Cloud Base Vagrant image, these needed to be installed. (The change from Fedora 25 is the addition of the &ldquo;redhat-rpm-config&rdquo; package.)</p></li>
+
+<li><p>Install virtualenv either with <code>pip install virtualenv</code> or <code>dnf install python2-virtualenv</code>. I used <code>dnf</code>, but I don&rsquo;t think the method you use here will have any material effects.</p></li>
+
+<li><p>Create a new Python virtual environment with <code>virtualenv azure-cli</code> (feel free to use a different name).</p></li>
+
+<li><p>Activate the new virtual environment (typically accomplished by sourcing the <code>azure-cli/bin/activate</code> script; substitute the name you used when creating the virtual environment if you didn&rsquo;t name it <code>azure-cli</code>).</p></li>
+
+<li><p>Install the Azure CLI with <code>pip install azure-cli</code>. Once this command completes, you should be ready to roll.</p></li>
+</ol>
+
+<p>That&rsquo;s it!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/jseUNKlp9OI" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/jseUNKlp9OI/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Using Vagrant with Libvirt on Fedora 27</h3>
+		</div>
+		<div class="collectiontext">
+			<p>In this post, I&rsquo;m going to show you how to use <a href="https://www.vagrantup.com/">Vagrant</a> with <a href="http://libvirt.org/">Libvirt</a> via the <a href="https://github.com/vagrant-libvirt/vagrant-libvirt">vagrant-libvirt provider</a> when running on <a href="https://getfedora.org/">Fedora</a> 27. Both Vagrant and Libvirt are topics I&rsquo;ve covered more than a few times here on this site, but this is the first time I&rsquo;ve discussed combining the two projects.</p>
+
+<p>If you&rsquo;re unfamiliar with Vagrant, I recommend you start first with <a href="https://blog.scottlowe.org/2014/09/12/a-quick-introduction-to-vagrant/">my quick introduction to Vagrant</a>, after which you can <a href="https://blog.scottlowe.org/tags/vagrant/">browse all the &ldquo;Vagrant&rdquo;-tagged articles on my site</a> for a bit more information. If you&rsquo;re unfamiliar with Libvirt, you can browse <a href="https://blog.scottlowe.org/tags/libvirt/">all my &ldquo;Libvirt&rdquo;-tagged articles</a>; I don&rsquo;t have an introductory post for Libvirt.</p>
+
+<h2 id="background">Background</h2>
+
+<p>I first experimented with the Libvirt provider for Vagrant quite some time ago, but at that time I was using the Libvirt provider to communicate with a remote Libvirt daemon (the use case was using Vagrant to create and destroy KVM guest domains via Libvirt on a remote Linux host). I found this setup to be problematic and error-prone, and discarded it after only a short while.</p>
+
+<p>Recently, I revisited using the Libvirt provider for Vagrant on my Fedora laptop (which I rebuilt with Fedora 27). As I mentioned in <a href="https://blog.scottlowe.org/2017/02/07/installing-virtualbox-51-fedora-25/">this post</a>, installing <a href="https://www.virtualbox.org/">VirtualBox</a> on Fedora isn&rsquo;t exactly straightforward. Further, what I <em>didn&rsquo;t</em> mention in that post is that the VirtualBox kernel modules aren&rsquo;t signed; this means you must turn off Secure Boot in order to run VirtualBox on Fedora. I was loathe to turn off Secure Boot, so I thought I&rsquo;d try the Vagrant+Libvirt combination again&mdash;this time using Libvirt to talk to the <em>local</em> Libvirt daemon (which is installed by default on Fedora in order to support the GNOME Boxes application, a GUI virtual machine tool). Hence, this blog post.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Obviously, you&rsquo;ll need Vagrant installed; I chose to install Vagrant from the Fedora repositories using <code>dnf install vagrant</code>. At the time of this writing, that installed version 1.9.8 of Vagrant. You&rsquo;ll also need the Libvirt plugin, which is  available via <code>dnf</code>:</p>
+
+<pre><code>dnf install vagrant-libvirt vagrant-libvirt-doc
+</code></pre>
+
+<p>At the time of writing, this installed version 0.40.0 of the Libvirt plugin, which is the latest version. You could also install the plugin via <code>vagrant plugin install vagrant-libvirt</code>, though I didn&rsquo;t test this approach. (In theory, it should work fine.)</p>
+
+<p>As with most other providers (the AWS and OpenStack providers being the exceptions), you&rsquo;ll also need one or more Vagrant boxes formatted for the Libvirt provider. I found a number of Libvirt-formatted boxes on <a href="https://app.vagrantup.com/boxes/search">Vagrant Cloud</a>, easily installable via <code>vagrant box add</code>. For the purposes of this post, I&rsquo;ll use the &ldquo;fedora/27-cloud-base&rdquo; Vagrant box with the Libvirt provider.</p>
+
+<p>Finally, because Vagrant is orchestrating Libvirt on the back-end, I also found it helpful to have the Libvirt client tools (like <code>virsh</code>) installed. This lets you see what Vagrant is doing behind the scenes, which can be helpful at times. Just run <code>dnf install libvirt-client</code>.</p>
+
+<h2 id="using-libvirt-with-vagrant">Using Libvirt with Vagrant</h2>
+
+<p>Once all the necessary prerequisites are satisfied, you&rsquo;re ready to start managing Libvirt guest domains (VMs) with Vagrant. For a really quick start:</p>
+
+<ol>
+<li><code>cd</code> into a directory of your choice</li>
+<li>Run <code>vagrant init fedora/27-cloud-base</code> to create a sample <code>Vagrantfile</code></li>
+<li>Boot the VM with <code>vagrant up</code></li>
+</ol>
+
+<p>For more fine-grained control over the VM and its settings, you&rsquo;ll want to customize the <code>Vagrantfile</code> with some additional settings. Here&rsquo;s a sample <code>Vagrantfile</code> that shows a few (there are many!) of the ways you could customize the VM Vagrant creates:</p>
+
+<pre><code class="language-ruby">Vagrant.configure(&quot;2&quot;) do |config|
+  # Define the Vagrant box to use
+  config.vm.box = &quot;fedora/27-cloud-base&quot;
+
+  # Disable automatic box update checking
+  config.vm.box_check_update = false
+
+  # Set the VM hostname
+  config.vm.hostname = &quot;fedora27&quot;
+
+  # Attach to an additional private network
+  config.vm.network &quot;private_network&quot;, ip: &quot;192.168.100.101&quot;
+
+  # Modify some provider settings
+  config.vm.provider &quot;libvirt&quot; do |lv|
+    lv.memory = &quot;1024&quot;
+  end # config.vm.provider
+end # Vagrant.configure
+</code></pre>
+
+<p>For a more complete reference, see <a href="https://github.com/vagrant-libvirt/vagrant-libvirt">the GitHub repository for the vagrant-libvirt provider</a>. Note, however, that I did run into a few oddities, particularly around networking. For example, I wasn&rsquo;t able to create a new private Libvirt network using the <code>libvirt__network_address</code> setting; it always reverted to the default network address. However, using the syntax shown above, I <em>was</em> able to create a new private Libvirt network with the desired network address. I was also able to manually create a new Libvirt network (using <code>virsh net-create</code>) and then attach the VM to that network using the <code>libvirt__network_name</code> setting in the <code>Vagrantfile</code>. Some experimentation may be necessary to get precisely the results you&rsquo;re seeking.</p>
+
+<p>Once you&rsquo;ve instantiated the VM using <code>vagrant up</code>, then the standard Vagrant workflow applies:</p>
+
+<ul>
+<li>Use <code>vagrant ssh &lt;name&gt;</code> to log into the VM via SSH.</li>
+<li>Use <code>vagrant provision</code> to apply any provisioning instructions, such as running a shell script, copying files into the VM, or applying an Ansible playbook.</li>
+<li>Use <code>vagrant destroy</code> to terminate and delete the VM.</li>
+</ul>
+
+<p>There is one potential &ldquo;gotcha&rdquo; of which to be aware: when you use <code>vagrant box remove</code> to remove a Vagrant box <em>and</em> you&rsquo;ve created at least one VM from that box, then there is an additional step required to fully remove the box. When you run <code>vagrant up</code> with a particular box for the very first time, the Libvirt provider uploads the box into a Libvirt storage pool (the pool named &ldquo;default&rdquo;, by default). Running <code>vagrant box remove</code> only removes the files from the <code>~/.vagrant.d</code> directory, and does <strong>not</strong> remove any files from the Libvirt storage pool.</p>
+
+<p>To remove the files from the Libvirt storage pool, run <code>virsh pool-edit default</code> to get the filesystem path where the storage pool is found (if no changes have been made, the &ldquo;default&rdquo; pool should be located at <code>/var/lib/libvirt/images</code>). Navigate to that directory and remove the appropriate files in order to complete the removal of a particular box (or a specific version of a box).</p>
+
+<p>So far&mdash;though my testing has been fairly limited&mdash;I&rsquo;m reasonably pleased with the Libvirt provider when running against a local Libvirt daemon. The performance is good, and I haven&rsquo;t had to &ldquo;jump through hoops&rdquo; to make the virtualization provider work (as I did with VirtualBox on Fedora).</p>
+
+<p>If you have any questions or feedback, <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/maX2xSjR2uU" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/maX2xSjR2uU/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
+		</div>
+		<div>
+			<h3>William Playfair inspired charts...</h3>
+		</div>
+		<div class="collectiontext">
+<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: Trebuchet MS, sans-serif;">Aloha,</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">Today I just would like to share a little blogpost about a chart that I've implemented last Friday evening. The chart design is inspired by <a href="https://en.wikipedia.org/wiki/William_Playfair" target="_blank">William Playfair</a> who invented this kind of chart to visualize economic data like import and export of theUS in relation to other countries.</span><br /><span style="font-family: Trebuchet MS, sans-serif;">One of his charts looks like follows...</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"><a href="https://upload.wikimedia.org/wikipedia/commons/5/52/Playfair_TimeSeries-2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="591" data-original-width="800" height="472" src="https://upload.wikimedia.org/wikipedia/commons/5/52/Playfair_TimeSeries-2.png" width="640" /></a></div><span style="font-family: Trebuchet MS, sans-serif;">The idea is pretty simple, take two line charts and fill the area between the two charts with a color. The color depends on which line is on top. With this technique one can visualize for example gain and loss of processes etc.</span><br /><span style="font-family: Trebuchet MS, sans-serif;">Like mentioned the idea is simple but the realization is not as trivial as it looks. The problem here is that you have two separate line charts that you have to combine to not only one polygon but to multiple polygons.</span><br /><span style="font-family: Trebuchet MS, sans-serif;">So every time the two lines cross each other one has to fill the area before the intersection point with one color and the area after the intersection point with the other color.</span><br /><span style="font-family: Trebuchet MS, sans-serif;">After thinking about the chart for a bit I've got an idea on how to realize that behavior and here is one result...</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-Dv07Tntmdlc/WiHqUp7iSUI/AAAAAAAAEvI/pqUFftPKQXEjOnwvvWU346sbF9CG7sTyQCLcBGAs/s1600/Playfair%2BChart%2BTest%2B2017-12-02%2B00-48-13.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="559" data-original-width="926" height="386" src="https://1.bp.blogspot.com/-Dv07Tntmdlc/WiHqUp7iSUI/AAAAAAAAEvI/pqUFftPKQXEjOnwvvWU346sbF9CG7sTyQCLcBGAs/s640/Playfair%2BChart%2BTest%2B2017-12-02%2B00-48-13.png" width="640" /></a></div><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">As always I do not really have a use case for that chart but I can imagine that it might be useful for someone out there :)</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">So if you would like to play around with it, feel free to check out the code at <a href="https://github.com/HanSolo/charts" target="_blank">github</a>.</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">I hope to find some time within the next days to add some interactivity to the chart...so stay tuned :)</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">Well...I guess that's it for today...so keep coding... :)</span><br /><br />
+
+ -->
+		</div>
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/2017/12/william-playfair-inspired-charts.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
 		</div>
 		<div>
@@ -867,7 +1083,19 @@ Categories=Development;Utilities;
 
 <p>I don&rsquo;t think this is fundamental &ndash; that possessions are as valuable as they are comes out of the rules of each game. It&rsquo;s arbitrary. I still find it interesting, though.</p>
 
-<p><i>Thanks to Leah Hanson, David Turner, Milosz Dan, Andrew Nichols, Justin Blank, @hoverbikes, Kate Murphy, Ben Kuhn, and an anonymous commenter for comments/corrections/discussion.</i></p>
+<h3 id="appendix-other-analysis-of-management-decisions">Appendix: other analysis of management decisions</h3>
+
+<p><a href="https://people.stanford.edu/nbloom/sites/default/files/dmm.pdf">Bloom et al., Does management matter? Evidence from India</a> looks at the impact of management interventions and the effect on productivity.</p>
+
+<p><a href="https://people.stanford.edu/nbloom/research">Other work by Bloom</a>.</p>
+
+<p><a href="http://web.stanford.edu/~gentzkow/research/uniform-pricing.pdf">DellaVigna et al., Uniform pricing in US retail chains</a> allegedly finds a significant amount of money left on the table by retail chains (seven percent of profits) and explores why that might happen and what the impacts are.</p>
+
+<p>The upside of work like this vs. sports work is that it attempts to quanity the impact of things outside of a contrived game. The downside is that the studies are on things that are quite messy and it&rsquo;s hard to tell what the study actually means. Just for example, if you look at studies on innovation, economists often use patents as a proxy for innovation and then come to some conclusion based on some variable vs. number of patents. But if you&rsquo;re familiar with engineering patents, you&rsquo;ll know that number of patents is an incredibly poor proxy for innovation. In the hardware world, IBM is known for cranking out a very large number of useless patents (both in the sense of useless for innovation and also in the narrow sense of being useless as a counter-attack in patent lawsuits) and there are some companies that get much more mileage out of filing many fewer patents.</p>
+
+<p>AFAICT, our options here are to know a lot about decisions in a context that&rsquo;s arguably completely irrelevant, or to have ambiguous information and probably know very little about a context that seems relevant to the real world. I&rsquo;d love to hear about more studies in either camp (or even better, studies that don&rsquo;t have either problem).</p>
+
+<p><i>Thanks to Leah Hanson, David Turner, Milosz Dan, Andrew Nichols, Justin Blank, @hoverbikes, Kate Murphy, Ben Kuhn, Patrick Collison, and an anonymous commenter for comments/corrections/discussion.</i></p>
 
 		</div>
 		<div class="collectionhref">
@@ -893,165 +1121,6 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 		<a href="http://harmoniccode.blogspot.com/2017/11/just-some-conversion-tool.html" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>Friday Fun LI - Horizon Charts</h3>
-		</div>
-		<div class="collectiontext">
-<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Another Friday and again time for some fun... :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Last week someone pointed me to so called horizon charts which are a really nice way to visualize data in a compact way.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To give you an idea what they look like here is an example...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://docs.splunk.com/images/4/48/Mod_viz_horizon_chart.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="374" data-original-width="612" height="390" src="https://docs.splunk.com/images/4/48/Mod_viz_horizon_chart.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The idea behind it is to reduce the amount of space and preserve the information by splitting a graph in the vertical direction in so called bands.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The following image will show how it works (it was taken from <a href="http://complexdatavisualized.com/time-series-visualizations-an-overview/" target="_blank">here</a>)...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://homes.cs.washington.edu/~jheer//files/zoo/horizon.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="350" data-original-width="515" height="434" src="https://homes.cs.washington.edu/~jheer//files/zoo/horizon.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As you can see in the image above first you flip the negative values to the positive side by inverting them (2nd graph).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now you split the vertical axis in bands and place all of them on the 0 value of the y-axis. The image above shows an example for 1 band, 2 bands, 3 bands and 4 bands.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For every band you change the color (usually from a lighter to a darker color). So you get some kind of a heat map where darker colors visualize higher values.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So my JavaFX implementation looks like follows for some random data...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-KykGegV6L8E/Wggi49KOkJI/AAAAAAAAEtU/itR-NoYF6o4VIl8IdvBvZYd1RZzHDDLPQCLcBGAs/s1600/Horizon%2BChart%2B2017-11-12%2B08-01-52.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="292" data-original-width="911" height="204" src="https://3.bp.blogspot.com/-KykGegV6L8E/Wggi49KOkJI/AAAAAAAAEtU/itR-NoYF6o4VIl8IdvBvZYd1RZzHDDLPQCLcBGAs/s640/Horizon%2BChart%2B2017-11-12%2B08-01-52.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the implementation of this chart I used the JavaFX Canvas node again which should also work with lots of data because it will only use 1 node on the scene graph. So the HorizonChart will take 2 nodes on the scene graph, one for the Region and one for the Canvas.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">At the moment you can split the graph in up to 5 bands which seems to be enough for most of the visualizations I've found.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To get nice colors for the chart I've also added some convenience methods in the Helper class to create color variations for a given color.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For example let's assume you would like to visualize positive values with shades of blue and negative values with shades of red and you will use 4 bands.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To create the colors simply use the following code...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="font-size: x-small;">List&lt;Color&gt; positiveColors = Helper.createColorVariationsAsList(Color.<span style="font-style: italic;">BLUE</span>, 4);<br />List&lt;Color&gt; negativeColors = Helper.createColorVariationsAsList(Color.<span style="font-style: italic;">RED</span>, 4);</span></pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now you can set these colors on the chart instance as follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;"><span style="font-size: x-small;">HorizonChart chart = <span style="color: #0004ff;">new </span>HorizonChart(4, series);<br />chart.<span style="color: #ff7500;">setPositiveColors</span>(positiveColors);<br />chart.<span style="color: #ff7500;">setNegativeColors</span>(negativeColors);</span></pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The HorizonChart doesn't come with any axis or bounds which should make it easy to implement it in your own more feature rich chart. Meaning to say the chart will always take the whole space you defined for it using the setPrefSize() method.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So you decide the size of the chart and the chart will scale it's content always to the defined area.</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br />When using not so many data points you might want to smooth the chart which is possible by using the setSmoothed() method of the chart or by setting the smoothed value in the constructor (usually you don't need smoothing in this kind of chart because it is normally used to visualize big datasets).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The HorizonChart will listen to changes in the Series of Data objects and will redraw itself when changes occur.</span><br /><span style="font-family: trebuchet ms, sans-serif;">If you just change the value in the existing Data objects the chart won't notice but you have to explicitly call the charts redraw() method.</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">The Series will also fire SeriesEvents&nbsp; which will be used to either redraw the chart or select data in the chart. In the provided Demo class you will see that I simply fire one SeriesEvent of SeriesEventType.REDRAW to redraw all charts because they are all using the same Series. Otherwise I would have to call the redraw() method of each chart after I've changed the data.</span><br /><span style="font-family: trebuchet ms, sans-serif;"><br /></span><span style="font-family: trebuchet ms, sans-serif;">The HorizonChart also supports mouse interaction where you can click somewhere in the chart and it will show the current Data object values in a tooltip. In addition a SeriesEvent of type SeriesEventType.SELECT_DATA will be fired. By adding a SeriesEventListener to the Series you can get the selected data information from the SeriesEvent which contains the Data object of the selected point (just take a look at the provided Demo which prints the data of the selected point to the console).</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">The toString() methods of the Point, Data and Series class will return a JSON String which might come in handy sometimes.</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">Another thing that could be useful is the ability to decide if the reference value should be 0 or the first y-value in the Series items.</span><br /><span style="font-family: Trebuchet MS, sans-serif;">If you would like to visualize stock data you usually start with a given stock value. In this case you would like to use the first y-value of the data list as reference value and all following data should be visualized as negative value if it is below the reference and as positive value if it is above the reference value. In this case just call setReferenceZero(false) method.</span><br /><span style="font-family: Trebuchet MS, sans-serif;">But if you would like to visualize data that is alternating around zero (like the cos values in the provided Demo) you simply leave the reference value to 0 (which is the default value).</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">I think that's more or less everything I have to offer today...so I hope some of you can use it...I for myself have again no use for it :)</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">Oh and if you need something special or have an idea for a special graph/chart/control...just let me know.</span><br /><span style="font-family: Trebuchet MS, sans-serif;">&nbsp;</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And as always you can find the source code over at <a href="https://github.com/HanSolo/horizon" target="_blank">github</a></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Enjoy your weekend and...keep coding... :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span>
-
- -->
-		</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2017/11/friday-fun-li-horizon-charts.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Making AWS re:Invent More Family-Friendly</h3>
-		</div>
-		<div class="collectiontext">
-			<p><a href="https://reinvent.awsevents.com/">AWS re:Invent</a> is just around the corner, and <a href="http://spousetivities.com/">Spousetivities</a> will be there to help bring a new level of family friendliness to the event. If you&rsquo;re thinking of bringing a spouse, partner, or significant other with you to Las Vegas, I&rsquo;d encourage you to strongly consider getting him or her involved in Spousetivities.</p>
-
-<p>Want a sneak peek at what&rsquo;s planned? Have a look:</p>
-
-<ul>
-<li>Monday&rsquo;s activity is a full-day trip to Death Valley, including a stop at Bad Water Basin (significant because it is 280 feet below sea level, making it the lowest place in the Western Hemisphere!). Lunch is included, of course.</li>
-<li>On Tuesday, Spousetivities participants will get to visit a number of locations on the Las Vegas Strip, including Siegfried and Roy&rsquo;s Secret Garden, the Wildlife Habitat at the Flamingo, and the Shark Reef at Mandalay Bay. Transportion is provided for longer connections, but there will be some walking involved&mdash;wear comfortable shoes!</li>
-<li>Wednesday includes a visit to Red Rock Canyon and Hoover Dam. There will some opportunities for short sightseeing walks in Red Rock Canyon (plus the 13-mile scenic drive), and the Hoover Dam tour includes access to the generator room (a very cool sight).</li>
-<li>Wrapping up the week on Thursday is a helicopter tour with views of the Hoover Dam, Lake Mead, Fortification Hill, the Colorado River, and&mdash;of course&mdash;the Grand Canyon! This includes a landing on the floor of the Grand Canyon for a snack and beverages. This is an amazing experience. (I&rsquo;ve personally taken this tour and it is <em>fabulous.</em>)</li>
-</ul>
-
-<p><a href="https://spousetivities.ticketleap.com/aws-reinvent-2017/">Registration is open right now</a>, so sign up before it&rsquo;s too late. Prices for these activities is reduced from standard retail rates thanks to sponsorship from <a href="https://www.vmware.com/products/nsx.html">VMware NSX</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/2shYZOkKj2U" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/2shYZOkKj2U/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://danluu.com/atom/index.xml" target="_blank">Dan Luu</a>
-		</div>
-		<div>
-			<h3>How out of date are Android devices?</h3>
-		</div>
-		<div class="collectiontext">
-			
-
-<p>It&rsquo;s common knowledge that Android device tend to be more out of date than iOS devices, but what does this actually mean? Let’s look at android marketshare data to see how old devices in the wild are. The x axis of the plot below is date, and the y axis is Android marketshare. The share of all devices sums to 100% (with some artifacts because the public data Google provides is low precision).</p>
-
-<p>Color indicates age:</p>
-
-<ul>
-<li>blue: current (API major version)</li>
-<li>yellow: 6 months</li>
-<li>orange: 1 year</li>
-<li>dark red: 2 years</li>
-<li>bright red/white: 3 years</li>
-<li>light grey: 4 years</li>
-<li>grey: 5 years</li>
-<li>black: 6 years or more</li>
-</ul>
-
-<p>If we look at the graph, we see a number of reverse-S shaped contours; between each pair of contours, devices get older as we go from left to right. Each contour corresponds to the release of a new android version and the associated devices running that android version. As time passes, devices on that version get older. When a device is upgraded, they’re effectively removed from one contour into a new contour and the color changes to a less outdated color.</p>
-
-<p><img src="https://danluu.com/images/android-updates/android-age.svg" width="1152" height="1152" alt="Markshare of outdated android devices is increasing"></p>
-
-<p>There are three major ways in which this graph understates the number of outdated devices:</p>
-
-<p>First, we’re using API version data for this and don’t have access to the marketshare of point releases and minor updates, so we assume that all devices on the same API version are up to date until the moment a new API version is released, but many (and perhaps most) devices won’t receive updates within an API version.</p>
-
-<p>Second, this graph shows marketshare, but the number of Android devices has dramatically increased over time. For example, if we look at the 80%-ile most outdated devices (i.e., draw a line 20% up from the bottom), it the 80%-ile device today is a few months more outdated than it was in 2014. The huge growth of Android means that there are many many more outdated devices now than there were in 2014.</p>
-
-<p>Third, this data comes from scraping Google Play Store marketshare info. That data shows marketshare of devices that have visited in the Play Store in the last 7 days. In general, it seems reasonable to believe that devices that visit the play store are more up to date than devices that don’t, so we should expect an unknown amount of bias in this data that causes the graph to show that devices are newer than they actually are. This seems plausible both for devices that are used as conventional mobile devices as well as for mobile devices that have replaced things liked traditonally embedded devices, PoS boxes, etc.</p>
-
-<p>If we&rsquo;re looking at this from a security standpoint, some devices will receive updates without updating their major version, skewing the date to look more outdated than it used it. However, when researchers have used more fine-grained data to see which devices are taking updates, <a href="https://www.cl.cam.ac.uk/~drt24/dissertation.pdf">they found that this was not a large effect</a>.</p>
-
-<p>One thing we can see from that graph is that, as time goes on, the world accumulates a larger fraction of old devices over time. This makes sense and we could have figured this out without looking at the data. After all, back at the beginning of 2010, Android phones couldn’t be much more than a year old, and now it’s possible to have Android devices that are nearly a decade old.</p>
-
-<p>Something that wouldn’t have been obvious without looking at the data is that the uptake of new versions seems to be slowing down &ndash; we can see this by looking at the last few contour lines at the top right of the graph, corresponding to the most recent Android releases. These lines have a shallower slope than the contour lines for previous releases. Unfortunately, with this data alone, we can’t tell why the slope is shallower. Some possible reasons might be:</p>
-
-<ul>
-<li>Android growth is slowing down</li>
-<li>Android device turnover (device upgrade rate) is slowing down</li>
-<li>Fewer devices are receiving updates</li>
-</ul>
-
-<p>Without more data, it’s impossible to tell how much each of these is contributing to the problem. BTW, <a href="https://twitter.com/danluu/">let me know</a> if you know of a reasonable source for the active number of Android devices going back to 2010! I’d love to produce a companion graph of the total number of outdated devices.</p>
-
-<p>But even with the data we have, we can take a guess at how many outdated devices are in use. In May 2017, Google announced that there are over two billion active Android devices. If we look at the latest stats (the far right edge), we can see that nearly half of these devices are two years out of date. At this point, we should expect that there are more than one billion devices that are two years out of date! Given Android&rsquo;s update model, we should expect approximately 0% of those devices to ever get updated to a modern version of Android.</p>
-
-<h4 id="percentiles">Percentiles</h4>
-
-<p>Since there’s a lot going on in the graph, we might be able to see something if we look at some subparts of the graph. If we look at a single horizontal line across the graph, that corresponds to the device age at a certain percentile:</p>
-
-<p><img src="https://danluu.com/images/android-updates/android-percentile-age.svg" width="1152" height="1152" alt="Over time, the Nth percentile out of date device is getting more out of date"></p>
-
-<p>In this graph, the date is on the x axis and the age in months is on the y axis. Each line corresponds to a different percentile (higher percentile is older), which corresponds to a horizontal slice of the top graph at that percentile.</p>
-
-<p>Each individual line seems to have two large phases (with some other stuff, too). There’s one phase where devices for that percentile get older as quickly as time is passing, followed by a phase where, on average, devices only get slightly older. In the second phase, devices sometimes get younger as new releases push younger versions into a certain percentile, but this doesn’t happen often enough to counteract the general aging of devices. Taken as a whole, this graph indicates that, if current trends continue, we should expect to see proportionally more old Android devices as time goes on, which is exactly what we’d expect from the first, busier, graph.</p>
-
-<h4 id="dates">Dates</h4>
-
-<p>Another way to look at the graph is to look at a vertical slice instead of a horizontal slice. In that case, each slice corresponds to looking at the ages of devices at one particular date:</p>
-
-<p><img src="https://danluu.com/images/android-updates/android-age-over-time.svg" width="1152" height="1152"></p>
-
-<p>In this plot, the x axis indicates the age percentile and  the y axis indicates the raw age in months. Each line is one particular date, with older dates being lighter / yellower and newer dates being darker / greener.</p>
-
-<p>As with the other views of the same data, we can see that Android devices appear to be getting more out of date as time goes on. This graph would be too busy to read if we plotted data for all of the dates that are available, but we can see it as an animation:</p>
-
-<p><img src="https://danluu.com/images/android-updates/android-age.gif" width="480" height="480"></p>
-
-<h4 id="ios">iOS</h4>
-
-<p>For reference, iOS 11 was released two months ago and it now has just under 50% iOS marketshare despite November’s numbers coming before the release of the iPhone X (this is compared to &lt; 1% marketshare for the latest Android version, which was released in August). It’s overwhelmingly likely that, by the start of next year, iOS 11 will have more than 50% marketshare and there’s an outside chance that it will have 75% marketshare, i.e., it’s likely that the corresponding plot for iOS would have the 50%-ile (red) line in the second plot at age = 0 and it’s not implausible that the 75%-ile (orange) line would sometimes dip down to 0. As is the case with Android, there are some older devices that stubbornly refuse to update; iOS 9.3, released a bit over two years ago, sits at just a bit above 5% marketshare. This means that, in the iOS version of the plot, it’s plausible that we’d see the corresponding 99%-ile (green) line in the second plot at a bit over two years (half of what we see for the Android plot).</p>
-
-<h4 id="windows-xp">Windows XP</h4>
-
-<p>People sometimes compare Android to Windows XP because there are a large number of both in the wild and in both cases, most devices will not get security updates. However, this is tremendously unfair to Windows XP, which was released on 10/2001 and got security updates until 4/2014, twelve and a half years later. Additionally, Microsoft has released at least one security update after the official support period (there was an update in 5/2017 in response to the WannaCry ransomware). It&rsquo;s unfortunate that Microsoft decided to end support for XP while there are still so many XP boxes in the wild, but supporting an old OS for over twelve years and then issuing an emergency security patch after more fifteen years puts Microsoft into a completely different league than Google and Apple when it comes to device support.</p>
-
-<p>Another difference between Android and Windows is that Android&rsquo;s scale is unprecedented in the desktop world. The were roughly 200 million PCs sold in 2017. Samsung alone has been selling that many mobile devices per year since 2008. Of course, those weren&rsquo;t Android devices in 2008, but Android&rsquo;s dominance in the non-iOS mobile space means that, overall, those have mostly been Android devices. Today, <a href="https://twitter.com/danluu/status/864194210752344064">we still see nearly 50 year old PDP-11 devices in use</a>. There are few enough PDPs around that running into one is a cute, quaint, surprise (0.6 million PDP-11s were sold). Desktops boxes age out of service more quickly than PDPs and mobile devices age out of service even more quickly, but the sheer difference in number of devices caused by the ubiquity of modern computing devices means that we&rsquo;re going to see many more XP-era PCs in use 50 years after the release of XP and it&rsquo;s plausible we&rsquo;ll see even more mobile devices around 50 years from now. Many of these ancient PDP, VAX, DOS, etc. boxes are basically safe because they&rsquo;re run in non-networked configurations, but it looks like the same thing is not going to be true for many of these old XP and Android boxes that are going to stay in service for decades.</p>
-
-<h3 id="conclusion">Conclusion</h3>
-
-<p>We’ve seen that Android devices appear to be getting more out of date over time. This makes it difficult for developers to target “new” Android API features, where new means anything introduced in the past few years. It also means that there are <em>a lot</em> of Android devices out there that are behind in terms of security. This is true both in absolute terms and also relative to iOS.</p>
-
-<p>Until recently, Android was directly tied to the hardware it ran on, making it very painful to keep old devices up to date because that requiring a custom Android build with phone-specific (or at least SoC-specific work). <a href="https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html">Google claims that this problem is fixed in the latest Android version (8.0, Oreo)</a>. People who remember Google&rsquo;s <a href="https://www.google.com/search?client=ubuntu&amp;hs=xVc&amp;channel=fs&amp;ei=laMJWombGJSvjwSmu5TQCA&amp;q=android+update+alliance&amp;oq=android+update+alliance&amp;gs_l=psy-ab.3..35i39k1l2.41466.41684.0.42014.2.2.0.0.0.0.111.193.1j1.2.0....0...1.1.64.psy-ab..0.2.192...0i22i30k1.0.SNY-JCWhD9M">&ldquo;Android update alliance&rdquo; annoucement in 2011</a> may be a bit skeptical of the more recent annoucement. In 2011, Google and U.S. carries announced that they&rsquo;d keep devices up to date for 18 months, <a href="https://www.pcmag.com/article2/0,2817,2397729,00.asp">which mostly didn&rsquo;t happen</a>. However, even if the current annoucement isn&rsquo;t smoke and mirrors and the latest version of Android solves the update probem, we&rsquo;ve seen that it takes years for Android releases to get adopted and we&rsquo;ve also seen that the last few Android releases have significantly slower uptake than previous releases. Additionally, even though this is supposed to make updates easier, it looks like Android is still likely to stay behind iOS in terms of updates for a while. Google has promised that its latest phone (Pixel 2, 10/2017) will get updates for three years. That seems like a step in the right direction, but as we’ve seen from the graphs above, extending support by a year isn’t nearly enough to keep most Android devices up to date. But if you have an iPhone, the latest version of iOS (released 9/2017) works on devices back to the iPhone 5S (released 9/2013).</p>
-
-<p>If we look at the newest Android release (8.0, 8/2017), it looks like you’re quite lucky if you have a two year old device that will get the latest update. The oldest “Google” phone supported is the Nexus 6P (9/2015), giving it just under two years of support.</p>
-
-<p>If you look back at devices that were released around when the iPhone5S, the situation looks even worse. Back then, I got a free Moto X for working at Google; the Moto X was about as close to an official Google phone as you could get at the time (this was back when Google owned Moto). The Moto X was released on 8/2013 (a month before the iPhone 5S) and the latest version of Android it supports is 5.1, which was released on 2/2015, a little more than a year and a half later. For an Android phone of its era, the Moto X was supported for an unusually long time. It&rsquo;s actuall a good sign that things look worse as look further back in time, but at the rate things are improving, it will be years before there&rsquo;s a decently supported Android device released and then years beyond those years before that Android version is in widespread use. It&rsquo;s possible that <a href="https://lwn.net/Articles/718267/">Fuchsia</a> will fix this, but Fuchsia is also many years away from widespread use.</p>
-
-<p>In a future post, we&rsquo;ll look at Android <a href="//danluu.com/keyboard-latency/">response latency</a> is also quite interesting. It’s much more variable between phones than iOS response latency is between different models of iPhone.</p>
-
-<p><i>
-The main thing I’m missing from my analysis of phone latency is older phones. If you have an old phone <a href="https://gist.github.com/danluu/6eebceecbdf1788c1e60da611dd3c2fd">I haven’t tested</a> and want to donate it for testing, you can mail it to:</p>
-
-<p>Dan Luu<br>
-Recurse Center<br>
-455 Broadway, 2nd Floor<br>
-New York, NY 10013</p>
-
-<p>Thanks to Leah Hanson, Kate Murphy, Daniel Thomas, Marek Majkowski, @zofrex, @Aissn, Chris Palmer, and an anonymous person for comments/corrections/related discussion.</p>
-
-<p>Also, thanks to Victorien Villard for making the data these graphs were based on available!
-</i></p>
-
-		</div>
-		<div class="collectionhref">
-		<a href="https://danluu.com/android-updates/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -1059,35 +1128,34 @@ New York, NY 10013</p>
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="aktualisierung_velocity.html">
+<div class="date">10.12.2017</div>
+<h3>Aktualisierung Velocity</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich habe eine der von mir benutzten Softwarekomponenten aktualisiert: die Template-Engine Velocity.
+Damit sind auch neue Versionen von
+sQLshell
+und
+dWb+
+verfügbar
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="xpath_lab_komponente.html">
+<div class="date">10.12.2017</div>
+<h3>XPath-Lab-Komponente</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich habe als Fingerübung eine Komponente erstellt, mit der man XPath-Ausdrücke am lebenden Objekt studieren kann...
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="i_m_with_her_tour_radio_promo.html">
 <div class="date">02.12.2017</div>
 <h3>I'm with her tour radio promo</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Und nochmal Bluegrass: Sara Watkins, Sarah Jarosz and Aiofe O'Donovan from BBC radio Scotland Jan 29th 2015
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="aktualisierung_smack_v4_2_1.html">
-<div class="date">02.12.2017</div>
-<h3>Aktualisierung Smack v4.2.1</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ich habe eine der von mir benutzten Softwarekomponenten aktualisiert: die Jabber-Bibliothek Smack. Damit ist auch eine neue Version
-von
-dWb+
-verfügbar.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="komponente_zur_verwaltung_tags.html">
-<div class="date">26.11.2017</div>
-<h3>Komponente zur Verwaltung von Tags</h3>
-<div class="abstract">
-<p>Ich habe eine Komponente erstellt, die die GUI für die Verwaltung von Tags darstellen könnte. Damit wäre etwa
-eine Möglichkeit geschaffen, eine komfortable Anwendung zur Verwaltung
-Tag-basierter Dateisysteme
-zu erstellen
 </p></div>   </a>
 </li>
 </ul>
