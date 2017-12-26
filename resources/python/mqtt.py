@@ -1,4 +1,4 @@
-"""Copyright (c) 2012-2017.
+"""Copyright (c) 2012-2018.
 
 Juergen Key. Alle Rechte vorbehalten.
 

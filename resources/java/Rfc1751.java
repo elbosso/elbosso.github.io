@@ -247,7 +247,7 @@ public class Rfc1751
 					"YEAR", "YELL", "YOGA", "YOKE"
 			};
 /*
-Copyright (c) 2012-2017.
+Copyright (c) 2012-2018.
 
 Juergen Key. Alle Rechte vorbehalten.
 
