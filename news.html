@@ -114,6 +114,25 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
+		</div>
+		<div>
+			<h3>Friday Fun LV - Florence Nightingale inspired Coxcomb Chart</h3>
+		</div>
+		<div class="collectiontext">
+<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the last Friday in 2017 I have another friday fun component for you. It's a variation of a donut chart where the segment width varies with the value. To give you an idea what this chart looks like here is a little picture that I've found on the web...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-wZVyllckXeI/WkM1mfvjhVI/AAAAAAAAEww/h28cWlH1_jwki3V8ho-6t7Vf5m6-fqLlwCLcBGAs/s1600/Coxcomb.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="838" data-original-width="1117" height="480" src="https://4.bp.blogspot.com/-wZVyllckXeI/WkM1mfvjhVI/AAAAAAAAEww/h28cWlH1_jwki3V8ho-6t7Vf5m6-fqLlwCLcBGAs/s640/Coxcomb.png" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In principle this chart is not really fancy but the one thing that caught my attention are the shadows that are only visible on the lower elements, meaning to say they are not besides the segment. In JavaFX we have effects like drop shadows directly build in but they won't work here because if you would use a simple drop shadow on each segment you would get something like follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-MHZwQ-8sNiw/WkM25mTrUUI/AAAAAAAAEw8/8uvx0rwSVI4B6ihZvXkWY-V84M6qIxbpgCLcBGAs/s1600/Coxcomb%2BChart%2B2017-12-27%2B06-59-45.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="571" data-original-width="551" height="640" src="https://1.bp.blogspot.com/-MHZwQ-8sNiw/WkM25mTrUUI/AAAAAAAAEw8/8uvx0rwSVI4B6ihZvXkWY-V84M6qIxbpgCLcBGAs/s640/Coxcomb%2BChart%2B2017-12-27%2B06-59-45.png" width="616" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So we now have the drop shadows but not only on the lower segments but all around each segment which is not the same. One trick could be to use clipping for which you have to clip each segment with a path.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well to be honest I was to lazy and decided to go another way. In principle you could imitate a drop shadow by using a linear gradient. This works but is not easy to achieve. So what I did was to add another segment at the end of each segment which I stroke with a linear gradient that goes from gray to transparent. To give it a little bit more realistic look I've also added a gaussian blur. So my result looks as follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-hsnlqm2mQU0/WkM45tMzcoI/AAAAAAAAExI/yV4m6K5WDh0d6k9yx2nMpVaagI164ot5QCLcBGAs/s1600/CoxcombChart_Descending.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="674" data-original-width="703" height="612" src="https://1.bp.blogspot.com/-hsnlqm2mQU0/WkM45tMzcoI/AAAAAAAAExI/yV4m6K5WDh0d6k9yx2nMpVaagI164ot5QCLcBGAs/s640/CoxcombChart_Descending.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To be honest I'm not really satisfied with the result because the shadow still looks not realistic enough but hey...for an early morning hack it's good enough ;)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">UPDATE:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well what I should I say...this shadow problem nagged me last night so I reworked my implementation and now I make use of the inbuild DropShadow effect in combination with clipping. On the following picture you can see the LinearGradient based approach (left) compared to the DropShadow approach (right)...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-8Up9iY50mF8/WkSFy9OtukI/AAAAAAAAExo/PUutYle0VKsO_ybmo8rgbj0ChTh9Nlm3wCLcBGAs/s1600/CoxcombChart_Clipping.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="678" data-original-width="1363" height="316" src="https://2.bp.blogspot.com/-8Up9iY50mF8/WkSFy9OtukI/AAAAAAAAExo/PUutYle0VKsO_ybmo8rgbj0ChTh9Nlm3wCLcBGAs/s640/CoxcombChart_Clipping.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To make the effect more visible I've set the drop shadow color to opaque black on the right side and now the shadows look more natural...at least to me ;)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the new approach I've added an additional path at the end of each segment and adjusted the shadow offset in x- and y-direction for each segment.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">This worked nicely except the fact that the shadow also showed up outside of the segment.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well a picture is better than thousand words, so on the following picture I've used plain red for the drop shadow color and here you can see what I'm talking about...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-lPm4L1b1QPQ/WkSH4rs718I/AAAAAAAAEx0/k3-85hMh8K8v7YyKweDJkR6-vZj_DfkLQCLcBGAs/s1600/Coxcomb%2BChart%2B2017-12-28%2B06-57-15.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="119" data-original-width="190" height="250" src="https://1.bp.blogspot.com/-lPm4L1b1QPQ/WkSH4rs718I/AAAAAAAAEx0/k3-85hMh8K8v7YyKweDJkR6-vZj_DfkLQCLcBGAs/s400/Coxcomb%2BChart%2B2017-12-28%2B06-57-15.png" width="400" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To avoid this problem I simply clip each segment with a circle that has the same radius and by using this little clipping trick the result looks like follows (with black as shadow color again)...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-cq0A1K3VAWk/WkSIR1rWf4I/AAAAAAAAEx4/msTh8eZ5TB0PdOWuf3H_QdTTJ7Ax5nnXACLcBGAs/s1600/Coxcomb%2BChart%2B2017-12-28%2B06-57-36.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="119" data-original-width="198" height="240" src="https://3.bp.blogspot.com/-cq0A1K3VAWk/WkSIR1rWf4I/AAAAAAAAEx4/msTh8eZ5TB0PdOWuf3H_QdTTJ7Ax5nnXACLcBGAs/s400/Coxcomb%2BChart%2B2017-12-28%2B06-57-36.png" width="400" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And now it looks exactly as I would like to see it :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To use the clipping in JavaFX Canvas (or HTML5 Canvas) you have to define a path that will be used for the clipping and call clip() before you draw the elements that you would like to clip. The next thing you need to keep in mind is that once the clipping path is set it will affect all operations defined <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/canvas/GraphicsContext.html#clip--" target="_blank">here</a>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In my case the problem is that the radius of the segments will increase so the clipping path also has to "grow". The canvas has a nice feature which makes it possible to save and restore it's state. Meaning to say before I set the clipping path I save the canvas by calling the save() method on the GraphicsContext and after I've finished the segment I reset the canvas to the saved state by calling the restore() method on the GraphicsContext. The nice thing is that you can save/restore the canvas as often as you like...but you have to keep track of it.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As a little advice let me tell you that if you use save/restore more than once it makes sense to either add some comments to each save/restore statement so that you know for which operation you save/restore or you also simply intend your code after each save statement to visualize the saved code blocks.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">But now back to the chart...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For my implementation of the coxcomb chart the values of each segment are not related to the segment radius and therefor it only makes sense if you sort the items in the list.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For this reason I've added two convenience methods to sort the chart either ascending or descending where ascending would look like this...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-E9TcvergQgI/WkM456hdI-I/AAAAAAAAExQ/rJGU20qgF_U3Zgie45LbjPKHJvR3pWVgwCEwYBhgL/s1600/CoxcombChart_Ascending.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="674" data-original-width="607" height="640" src="https://1.bp.blogspot.com/-E9TcvergQgI/WkM456hdI-I/AAAAAAAAExQ/rJGU20qgF_U3Zgie45LbjPKHJvR3pWVgwCEwYBhgL/s640/CoxcombChart_Ascending.png" width="576" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well I like the descending version more but this is personal taste.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I did not add a legend to the chart because I think this could be a separate control to be more flexible. I've created a simple item class that has properties for value, name and color.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To create the chart above you simply need the following code...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;">Item[] items = {<br />    <span style="color: #0004ff;">new </span>Item(27, Color.web(<span style="color: magenta;">"#96AA3B"</span>)),<br />    <span style="color: #0004ff;">new </span>Item(24, Color.web(<span style="color: magenta;">"#29A783"</span>)),<br />    <span style="color: #0004ff;">new </span>Item(16, Color.web(<span style="color: magenta;">"#098AA9"</span>)),<br />    <span style="color: #0004ff;">new </span>Item(15, Color.web(<span style="color: magenta;">"#62386F"</span>)),<br />    <span style="color: #0004ff;">new </span>Item(13, Color.web(<span style="color: magenta;">"#89447B"</span>)),<br />    <span style="color: #0004ff;">new </span>Item(5, Color.web(<span style="color: magenta;">"#EF5780"</span>))<br />};<br />CoxcombChart chart = <span style="color: #0004ff;">new </span>CoxcombChart(items);</pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I'm always impressed how easy it is to create stuff like this in JavaFX, creating the control and writing this blog post tooks me only 2.5h which is one of the reasons why I love coding in JavaFX, the time from the first idea to some running code is really short and with this the productivity is really high and the code for&nbsp;the control is just around <strike>280</strike>&nbsp;330 (I've added 2 properties with their getters and setters) lines incl. import statements, license etc. Long story short...I ❤️ it :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Oh and if you are interested in the code you can find it as always on <a href="https://github.com/HanSolo/coxcombchart" target="_blank">github</a>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">This chart is very specific and does not work for everything but it could be quite useful for some special use cases and to be honest it simply looks nice :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So I guess that's it for 2017, now I wish all of you a happy new year and...keep coding...</span><br /><br />
+
+ -->
+		</div>
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/2017/12/friday-fun-lv-florence-nightingale.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="https://danluu.com/atom/index.xml" target="_blank">Dan Luu</a>
 		</div>
 		<div>
@@ -122,56 +141,56 @@ display('news.html')
 		<div class="collectiontext">
 			
 
-<p>I have this nagging feeling that the computers I use today feel slower than the computers I used as a kid. I don’t trust this kind of feeling because human perception has been shown to be unreliable in empirical studies, so I carried around a high-speed camera and measured the response latency of devices I’ve run into in the past few months. Here are the results:</p>
+<p>I&rsquo;ve had this nagging feeling that the computers I use today feel slower than the computers I used as a kid. As a rule, I don’t trust this kind of feeling because human perception has been shown to be unreliable in empirical studies, so I carried around a high-speed camera and measured the response latency of devices I’ve run into in the past few months. Here are the results:</p>
 
 <p><style>table {border-collapse:collapse;margin:0px auto;}table,th,td {border: 1px solid black;}td {text-align:center;}td.l {text-align:left;}</style>
 <table>
 <tr>
 <th>computer</th><th>latency<br>(ms)</th><th>year</th><th>clock</th><th># T</th></tr>
 <tr>
-<td class="l">apple 2e</td><td bgcolor=#ffffcc>30</td><td bgcolor=#54278f><font color=white>1983</font></td><td bgcolor=#08306b><font color=white>1 MHz</font></td><td bgcolor=#08306b><font color=white>3.5k</font></td></tr>
+<td class="l"><a href="https://en.wikipedia.org/wiki/Apple_IIe">apple 2e</a></td><td bgcolor=#ffffcc>30</td><td bgcolor=#54278f><font color=white>1983</font></td><td bgcolor=#08306b><font color=white>1 MHz</font></td><td bgcolor=#08306b><font color=white>3.5k</font></td></tr>
 <tr>
-<td class="l">ti 99/4a</td><td bgcolor=#ffffcc>40</td><td bgcolor=#3f007d><font color=white>1981</font></td><td bgcolor=#08519c><font color=white>3 MHz</font></td><td bgcolor=#08306b><font color=white>8k</font></td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B004GYBZBE/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B004GYBZBE&linkId=123a7b9e283914f633fbdc9b001f255b">ti 99/4a</a></td><td bgcolor=#ffffcc>40</td><td bgcolor=#3f007d><font color=white>1981</font></td><td bgcolor=#08519c><font color=white>3 MHz</font></td><td bgcolor=#08306b><font color=white>8k</font></td></tr>
 <tr>
-<td class="l">custom haswell-e <i>165Hz</i></td><td bgcolor=#ffeda0>50</td><td bgcolor=#efedf5>2014</td><td bgcolor=#deebf7>3.5 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01FJLAITC/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01FJLAITC&linkId=8ffc49fdd6c38da2429e5f3ab5527314">custom haswell-e <i>165Hz</i></a></td><td bgcolor=#ffeda0>50</td><td bgcolor=#efedf5>2014</td><td bgcolor=#deebf7>3.5 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
 <tr>
-<td class="l">commodore pet 4016</td><td bgcolor=#ffeda0>60</td><td bgcolor=#3f007d><font color=white>1977</font></td><td bgcolor=#08306b><font color=white>1 MHz</font></td><td bgcolor=#08306b><font color=white>3.5k</font></td></tr>
+<td class="l"><a href="https://en.wikipedia.org/wiki/Commodore_PET">commodore pet 4016</a></td><td bgcolor=#ffeda0>60</td><td bgcolor=#3f007d><font color=white>1977</font></td><td bgcolor=#08306b><font color=white>1 MHz</font></td><td bgcolor=#08306b><font color=white>3.5k</font></td></tr>
 <tr>
-<td class="l">sgi indy</td><td bgcolor=#ffeda0>60</td><td bgcolor=#807dba>1993</td><td bgcolor=#6baed6>.1 GHz</td><td bgcolor=#4292c6>1.2M</td></tr>
+<td class="l"><a href="https://en.wikipedia.org/wiki/SGI_Indy">sgi indy</a></td><td bgcolor=#ffeda0>60</td><td bgcolor=#807dba>1993</td><td bgcolor=#6baed6>.1 GHz</td><td bgcolor=#4292c6>1.2M</td></tr>
 <tr>
-<td class="l">custom haswell-e <i>120Hz</i></td><td bgcolor=#ffeda0>60</td><td bgcolor=#efedf5>2014</td><td bgcolor=#deebf7>3.5 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01FJLAITC/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01FJLAITC&linkId=8ffc49fdd6c38da2429e5f3ab5527314">custom haswell-e <i>120Hz</i></a></td><td bgcolor=#ffeda0>60</td><td bgcolor=#efedf5>2014</td><td bgcolor=#deebf7>3.5 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
 <tr>
-<td class="l">thinkpad 13 <b>chromeos</b></td><td bgcolor=#fed976>70</td><td bgcolor=#fcfbfd>2017</td><td bgcolor=#deebf7>2.3 GHz</td><td bgcolor=#deebf7>1G</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01LWNVFIM/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01LWNVFIM&linkId=d4f3e06001021e2bfc95eb2c8c3a9805">thinkpad 13 <b>chromeos</b></a></td><td bgcolor=#fed976>70</td><td bgcolor=#fcfbfd>2017</td><td bgcolor=#deebf7>2.3 GHz</td><td bgcolor=#deebf7>1G</td></tr>
 <tr>
-<td class="l">imac g4 <b>os 9</b></td><td bgcolor=#fed976>70</td><td bgcolor=#bcbddc>2002</td><td bgcolor=#c6dbef>.8 GHz</td><td bgcolor=#6baed6>11M</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B007O35FI8/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B007O35FI8&linkId=dc8b3670da16e98e718b157661037e4b">imac g4 <b>os 9</b></a></td><td bgcolor=#fed976>70</td><td bgcolor=#bcbddc>2002</td><td bgcolor=#c6dbef>.8 GHz</td><td bgcolor=#6baed6>11M</td></tr>
 <tr>
-<td class="l">custom haswell-e <i>60Hz</i></td><td bgcolor=#fed976>80</td><td bgcolor=#efedf5>2014</td><td bgcolor=#deebf7>3.5 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01FJLAITC/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01FJLAITC&linkId=8ffc49fdd6c38da2429e5f3ab5527314">custom haswell-e <i>60Hz</i></a></td><td bgcolor=#fed976>80</td><td bgcolor=#efedf5>2014</td><td bgcolor=#deebf7>3.5 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
 <tr>
-<td class="l">mac color classic</td><td bgcolor=#feb24c>90</td><td bgcolor=#807dba>1993</td><td bgcolor=#2171b5><font color=white>16 MHz</font></td><td bgcolor=#2171b5><font color=white>273k</font></td></tr>
+<td class="l"><a href="https://en.wikipedia.org/wiki/Macintosh_Color_Classic">mac color classic</a></td><td bgcolor=#feb24c>90</td><td bgcolor=#807dba>1993</td><td bgcolor=#2171b5><font color=white>16 MHz</font></td><td bgcolor=#2171b5><font color=white>273k</font></td></tr>
 <tr>
-<td class="l">powerspec g405 <b>linux</b> <i>60Hz</i></td><td bgcolor=#feb24c>90</td><td bgcolor=#fcfbfd>2017</td><td bgcolor=#f7fbff>4.2 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
+<td class="l"><a href="http://www.powerspec.com/systems/system_specs.phtml?selection=G405">powerspec g405 <b>linux</b> <i>60Hz</i></a></td><td bgcolor=#feb24c>90</td><td bgcolor=#fcfbfd>2017</td><td bgcolor=#f7fbff>4.2 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
 <tr>
-<td class="l">macbook pro 2014</td><td bgcolor=#feb24c>100</td><td bgcolor=#efedf5>2014</td><td bgcolor=#deebf7>2.6 GHz</td><td bgcolor=#deebf7>700M</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B0096VDM8G/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B0096VDM8G&linkId=d134e4e812fd9e68ddb6191e03f78a72">macbook pro 2014</a></td><td bgcolor=#feb24c>100</td><td bgcolor=#efedf5>2014</td><td bgcolor=#deebf7>2.6 GHz</td><td bgcolor=#deebf7>700M</td></tr>
 <tr>
-<td class="l">thinkpad 13 <b>linux chroot</b></td><td bgcolor=#feb24c>100</td><td bgcolor=#fcfbfd>2017</td><td bgcolor=#deebf7>2.3 GHz</td><td bgcolor=#deebf7>1G</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01LWNVFIM/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01LWNVFIM&linkId=d4f3e06001021e2bfc95eb2c8c3a9805">thinkpad 13 <b>linux chroot</b></a></td><td bgcolor=#feb24c>100</td><td bgcolor=#fcfbfd>2017</td><td bgcolor=#deebf7>2.3 GHz</td><td bgcolor=#deebf7>1G</td></tr>
 <tr>
-<td class="l">lenovo x1 carbon 4g <b>linux</b></td><td bgcolor=#fd8d3c>110</td><td bgcolor=#efedf5>2016</td><td bgcolor=#deebf7>2.6 GHz</td><td bgcolor=#deebf7>1G</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B072BDGLBC/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B072BDGLBC&linkId=b316192e2edacb439be22ef01a6bb779">lenovo x1 carbon 4g <b>linux</b></a></td><td bgcolor=#fd8d3c>110</td><td bgcolor=#efedf5>2016</td><td bgcolor=#deebf7>2.6 GHz</td><td bgcolor=#deebf7>1G</td></tr>
 <tr>
-<td class="l">imac g4 <b>os x</b></td><td bgcolor=#fd8d3c>120</td><td bgcolor=#bcbddc>2002</td><td bgcolor=#c6dbef>.8 GHz</td><td bgcolor=#6baed6>11M</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B007O35FI8/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B007O35FI8&linkId=dc8b3670da16e98e718b157661037e4b">imac g4 <b>os x</b></a></td><td bgcolor=#fd8d3c>120</td><td bgcolor=#bcbddc>2002</td><td bgcolor=#c6dbef>.8 GHz</td><td bgcolor=#6baed6>11M</td></tr>
 <tr>
-<td class="l">custom haswell-e <i>24Hz</i></td><td bgcolor=#fc4e2a>140</td><td bgcolor=#efedf5>2014</td><td bgcolor=#deebf7>3.5 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01FJLAITC/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01FJLAITC&linkId=8ffc49fdd6c38da2429e5f3ab5527314">custom haswell-e <i>24Hz</i></a></td><td bgcolor=#fc4e2a>140</td><td bgcolor=#efedf5>2014</td><td bgcolor=#deebf7>3.5 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
 <tr>
-<td class="l">lenovo x1 carbon 4g <b>win</b></td><td bgcolor=#e31a1c>150</td><td bgcolor=#efedf5>2016</td><td bgcolor=#deebf7>2.6 GHz</td><td bgcolor=#deebf7>1G</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B072BDGLBC/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B072BDGLBC&linkId=b316192e2edacb439be22ef01a6bb779">lenovo x1 carbon 4g <b>win</b></a></td><td bgcolor=#e31a1c>150</td><td bgcolor=#efedf5>2016</td><td bgcolor=#deebf7>2.6 GHz</td><td bgcolor=#deebf7>1G</td></tr>
 <tr>
-<td class="l">next cube</td><td bgcolor=#e31a1c>150</td><td bgcolor=#6a51a3><font color=white>1988</font></td><td bgcolor=#4292c6>25 MHz</td><td bgcolor=#4292c6>1.2M</td></tr>
+<td class="l"><a href="https://en.wikipedia.org/wiki/NeXTcube">next cube</a></td><td bgcolor=#e31a1c>150</td><td bgcolor=#6a51a3><font color=white>1988</font></td><td bgcolor=#4292c6>25 MHz</td><td bgcolor=#4292c6>1.2M</td></tr>
 <tr>
-<td class="l">powerspec g405 <b>linux</b></td><td bgcolor=#bd0026>170</td><td bgcolor=#fcfbfd>2017</td><td bgcolor=#f7fbff>4.2 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
+<td class="l"><a href="http://www.powerspec.com/systems/system_specs.phtml?selection=G405">powerspec g405 <b>linux</b></a></td><td bgcolor=#bd0026>170</td><td bgcolor=#fcfbfd>2017</td><td bgcolor=#f7fbff>4.2 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
 <tr>
 <td class="l" bgcolor="silver">packet around the world</td><td bgcolor=silver>190</td><td bgcolor=silver></td><td bgcolor=silver></td><td bgcolor=silver></td></tr>
 <tr>
-<td class="l">powerspec g405 <b>win</b></td><td bgcolor=black><font color=white>200</font></td><td bgcolor=#fcfbfd>2017</td><td bgcolor=#f7fbff>4.2 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
+<td class="l"><a href="http://www.powerspec.com/systems/system_specs.phtml?selection=G405">powerspec g405 <b>win</b></a></td><td bgcolor=black><font color=white>200</font></td><td bgcolor=#fcfbfd>2017</td><td bgcolor=#f7fbff>4.2 GHz</td><td bgcolor=#f7fbff>2G</td></tr>
 <tr>
-<td class="l">symbolics 3620</td><td bgcolor=black><font color=white>300</font></td><td bgcolor=#54278f><font color=white>1986</font></td><td bgcolor=#08519c><font color=white>5 MHz</font></td><td bgcolor=#2171b5><font color=white>390k</font></td></tr>
+<td class="l"><a href="https://en.wikipedia.org/wiki/Symbolics">symbolics 3620</a></td><td bgcolor=black><font color=white>300</font></td><td bgcolor=#54278f><font color=white>1986</font></td><td bgcolor=#08519c><font color=white>5 MHz</font></td><td bgcolor=#2171b5><font color=white>390k</font></td></tr>
 </table></p>
 
 <p>These are tests of the latency between a keypress and the display of a character in a terminal (see appendix for more details). The results are sorted from quickest to slowest. In the latency column, the background goes from  green to yellow to red to black as devices get slower and the background gets darker as devices get slower. No devices are green. When multiple OSes were tested on the same machine, the os is <b>in bold</b>. When multiple refresh rates were tested on the same machine, the refresh rate is <i>in italics</i>.</p>
@@ -190,71 +209,75 @@ display('news.html')
 <tr>
 <th>device</th><th>latency<br>(ms)</th><th>year</th></tr>
 <tr>
-<td class="l">ipad pro 10.5" pencil</td><td bgcolor=#ffffcc>30</td><td bgcolor=#fcfbfd>2017</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B072V4HK9F/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B072V4HK9F&linkId=5679f47f9a699d00e721eff9592bed11">ipad pro 10.5" pencil</a></td><td bgcolor=#ffffcc>30</td><td bgcolor=#fcfbfd>2017</td></tr>
 <tr>
-<td class="l">ipad pro 10.5"</td><td bgcolor=#fed976>70</td><td bgcolor=#fcfbfd>2017</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B072V4HK9F/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B072V4HK9F&linkId=5679f47f9a699d00e721eff9592bed11">ipad pro 10.5"</a></td><td bgcolor=#fed976>70</td><td bgcolor=#fcfbfd>2017</td></tr>
 <tr>
-<td class="l">iphone 4s</td><td bgcolor=#fed976>70</td><td bgcolor=#dadaeb>2011</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B006FMDVDK/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B006FMDVDK&linkId=9ad1ee1c78ed24a00d7aeaa7acba466b">iphone 4s</a></td><td bgcolor=#fed976>70</td><td bgcolor=#dadaeb>2011</td></tr>
 <tr>
-<td class="l">iphone 6s</td><td bgcolor=#fed976>70</td><td bgcolor=#efedf5>2015</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B00YD547Q6/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00YD547Q6&linkId=8760bcadabac2a1a34059f5695523d18">iphone 6s</a></td><td bgcolor=#fed976>70</td><td bgcolor=#efedf5>2015</td></tr>
 <tr>
-<td class="l">iphone 3gs</td><td bgcolor=#fed976>70</td><td bgcolor=#dadaeb>2009</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B008VUNRZQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B008VUNRZQ&linkId=f9f973947891d7eb01a251146c8a17ed">iphone 3gs</a></td><td bgcolor=#fed976>70</td><td bgcolor=#dadaeb>2009</td></tr>
 <tr>
-<td class="l">iphone x</td><td bgcolor=#fed976>80</td><td bgcolor=#fcfbfd>2017</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B075QN8NDJ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B075QN8NDJ&linkId=17f3a63a6d672e453c1bb28c26f1e680">iphone x</a></td><td bgcolor=#fed976>80</td><td bgcolor=#fcfbfd>2017</td></tr>
 <tr>
-<td class="l">iphone 7</td><td bgcolor=#fed976>80</td><td bgcolor=#fcfbfd>2017</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B075QJSQLT/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B075QJSQLT&linkId=0e9df41aaed6dc80988793dcbc08a175">iphone 8</a></td><td bgcolor=#fed976>80</td><td bgcolor=#fcfbfd>2017</td></tr>
 <tr>
-<td class="l">iphone 6</td><td bgcolor=#fed976>80</td><td bgcolor=#efedf5>2014</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B0743HK992/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B0743HK992&linkId=ad1f03111643f0e52f245f120f8efb2b">iphone 7</a></td><td bgcolor=#fed976>80</td><td bgcolor=#efedf5>2016</td></tr>
 <tr>
-<td class="l">gameboy color</td><td bgcolor=#fed976>80</td><td bgcolor=#9e9ac8>1998</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B00YD545CC/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00YD545CC&linkId=cc899d2e45b87f032042af8eb666cef1">iphone 6</a></td><td bgcolor=#fed976>80</td><td bgcolor=#efedf5>2014</td></tr>
 <tr>
-<td class="l">iphone 5</td><td bgcolor=#feb24c>90</td><td bgcolor=#efedf5>2012</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B077629NJ2/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B077629NJ2&linkId=cadd23b2ef84a2b9c6abe268754e6cb4">gameboy color</a></td><td bgcolor=#fed976>80</td><td bgcolor=#9e9ac8>1998</td></tr>
 <tr>
-<td class="l">blackberry q10</td><td bgcolor=#feb24c>100</td><td bgcolor=#efedf5>2013</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B00WZR5URO/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00WZR5URO&linkId=f781b3a6200f81f6a0137a69ab1b4c0f">iphone 5</a></td><td bgcolor=#feb24c>90</td><td bgcolor=#efedf5>2012</td></tr>
 <tr>
-<td class="l">huawei honor 8</td><td bgcolor=#fd8d3c>110</td><td bgcolor=#efedf5>2016</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B00CES5B96/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00CES5B96&linkId=fab4357d277c9716f691d15431aace90">blackberry q10</a></td><td bgcolor=#feb24c>100</td><td bgcolor=#efedf5>2013</td></tr>
 <tr>
-<td class="l">google pixel 2 xl</td><td bgcolor=#fd8d3c>110</td><td bgcolor=#fcfbfd>2017</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01IVV7W8M/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01IVV7W8M&linkId=be83bfddcd1ff8029f548810b405a281">huawei honor 8</a></td><td bgcolor=#fd8d3c>110</td><td bgcolor=#efedf5>2016</td></tr>
 <tr>
-<td class="l">galaxy s7</td><td bgcolor=#fd8d3c>120</td><td bgcolor=#efedf5>2016</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B0766TPHSH/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B0766TPHSH&linkId=774b61b9fe3692df21821844dfedc18b">google pixel 2 xl</a></td><td bgcolor=#fd8d3c>110</td><td bgcolor=#fcfbfd>2017</td></tr>
 <tr>
-<td class="l">galaxy note 3</td><td bgcolor=#fd8d3c>120</td><td bgcolor=#efedf5>2016</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01F48QLFA/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01F48QLFA&linkId=00e8a7505d84e546c50e3d8761944d05">galaxy s7</a></td><td bgcolor=#fd8d3c>120</td><td bgcolor=#efedf5>2016</td></tr>
 <tr>
-<td class="l">nexus 5x</td><td bgcolor=#fd8d3c>120</td><td bgcolor=#efedf5>2015</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B00TJ4FFHQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00TJ4FFHQ&linkId=f74214ac520214bcb199ce2710ed470f">galaxy note 3</a></td><td bgcolor=#fd8d3c>120</td><td bgcolor=#efedf5>2016</td></tr>
 <tr>
-<td class="l">oneplus 3t</td><td bgcolor=#fc4e2a>130</td><td bgcolor=#efedf5>2016</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B00EP2CLII/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00EP2CLII&linkId=f3ad24ebb82fb4b8282ae94deede1319">moto x</a></td><td bgcolor=#fd8d3c>120</td><td bgcolor=#efedf5>2013</td></tr>
 <tr>
-<td class="l">blackberry key one</td><td bgcolor=#fc4e2a>130</td><td bgcolor=#fcfbfd>2017</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B076KTGJPG/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B076KTGJPG&linkId=9164d7895c51ee31fd8db00c3d1597e7">nexus 5x</a></td><td bgcolor=#fd8d3c>120</td><td bgcolor=#efedf5>2015</td></tr>
 <tr>
-<td class="l">moto e (2g)</td><td bgcolor=#fc4e2a>140</td><td bgcolor=#efedf5>2015</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01MXR13TZ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01MXR13TZ&linkId=924c9f9d8f2413c64f0f295d505f09da">oneplus 3t</a></td><td bgcolor=#fc4e2a>130</td><td bgcolor=#efedf5>2016</td></tr>
 <tr>
-<td class="l">moto g4 play</td><td bgcolor=#fc4e2a>140</td><td bgcolor=#fcfbfd>2017</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B075QBLBN8/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B075QBLBN8&linkId=439fabf5b71beb2b4820618432366e72">blackberry key one</a></td><td bgcolor=#fc4e2a>130</td><td bgcolor=#fcfbfd>2017</td></tr>
 <tr>
-<td class="l">moto g4 plus</td><td bgcolor=#fc4e2a>140</td><td bgcolor=#efedf5>2016</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B016QP7SKC/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B016QP7SKC&linkId=207d8847bf6e6740694ea85cc97a8363">moto e (2g)</a></td><td bgcolor=#fc4e2a>140</td><td bgcolor=#efedf5>2015</td></tr>
 <tr>
-<td class="l">google pixel</td><td bgcolor=#fc4e2a>140</td><td bgcolor=#efedf5>2016</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B071YC3G5V/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B071YC3G5V&linkId=d5c16509db8a503bfd0e9fa4480bd92f">moto g4 play</a></td><td bgcolor=#fc4e2a>140</td><td bgcolor=#fcfbfd>2017</td></tr>
 <tr>
-<td class="l">samsung galaxy avant</td><td bgcolor=#e31a1c>150</td><td bgcolor=#efedf5>2014</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01DZJFYLC/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01DZJFYLC&linkId=d173832b8e78e184d0ec5f801c582403">moto g4 plus</a></td><td bgcolor=#fc4e2a>140</td><td bgcolor=#efedf5>2016</td></tr>
 <tr>
-<td class="l">asus zenfone3 max</td><td bgcolor=#e31a1c>150</td><td bgcolor=#efedf5>2016</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B0731KJVGG/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B0731KJVGG&linkId=a52d46d36b6136641937b82c5f99fa1d">google pixel</a></td><td bgcolor=#fc4e2a>140</td><td bgcolor=#efedf5>2016</td></tr>
 <tr>
-<td class="l">sony xperia z5 compact</td><td bgcolor=#e31a1c>150</td><td bgcolor=#efedf5>2015</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B00N3FSWG8/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00N3FSWG8&linkId=a4df2be4f14002eed6fdbd267b8dca91">samsung galaxy avant</a></td><td bgcolor=#e31a1c>150</td><td bgcolor=#efedf5>2014</td></tr>
 <tr>
-<td class="l">htc one m4</td><td bgcolor=#e31a1c>160</td><td bgcolor=#efedf5>2013</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01LZ8516T/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01LZ8516T&linkId=16070e26fe5b1eee184b3fcfa6a7f373">asus zenfone3 max</a></td><td bgcolor=#e31a1c>150</td><td bgcolor=#efedf5>2016</td></tr>
 <tr>
-<td class="l">galaxy s4 mini</td><td bgcolor=#bd0026>170</td><td bgcolor=#efedf5>2013</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B01LACBMV2/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01LACBMV2&linkId=6a38fa7701b76f17fc1ba183e2bac551">sony xperia z5 compact</a></td><td bgcolor=#e31a1c>150</td><td bgcolor=#efedf5>2015</td></tr>
 <tr>
-<td class="l">lg k4</td><td bgcolor=#800026><font color=white>180</font></td><td bgcolor=#efedf5>2016</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B00F618DXE/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00F618DXE&linkId=481f35c95f57b730ab417f680ff1cdf3">htc one m4</a></td><td bgcolor=#e31a1c>160</td><td bgcolor=#efedf5>2013</td></tr>
+<tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B00UZ7QJ6W/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00UZ7QJ6W&linkId=a37479092aca4085fc7bee582232fbfe">galaxy s4 mini</a></td><td bgcolor=#bd0026>170</td><td bgcolor=#efedf5>2013</td></tr>
+<tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B072K1BY62/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B072K1BY62&linkId=7a9dc6d3a3400a24cba9141b09d85f32">lg k4</a></td><td bgcolor=#800026><font color=white>180</font></td><td bgcolor=#efedf5>2016</td></tr>
 <tr>
 <td class="l" bgcolor="silver">packet</td><td bgcolor=silver>190</td><td bgcolor=silver></td></tr>
 <tr>
-<td class="l">htc rezound</td><td bgcolor=black><font color=white>240</font></td><td bgcolor=#dadaeb>2011</td></tr>
+<td class="l"><a href="https://www.amazon.com/gp/product/B0073YBGCC/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=abroaview-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B0073YBGCC&linkId=75785e57c1c5a2318dcd95a6178af60c">htc rezound</a></td><td bgcolor=black><font color=white>240</font></td><td bgcolor=#dadaeb>2011</td></tr>
 <tr>
-<td class="l">palm pilot 1000</td><td bgcolor=black><font color=white>490</font></td><td bgcolor=#807dba>1996</td></tr>
+<td class="l"><a href="https://en.wikipedia.org/wiki/Pilot_1000">palm pilot 1000</a></td><td bgcolor=black><font color=white>490</font></td><td bgcolor=#807dba>1996</td></tr>
 <tr>
-<td class="l">kindle paperwhite 3</td><td bgcolor=black><font color=white>630</font></td><td bgcolor=#efedf5>2015</td></tr>
+<td class="l"><a href="https://en.wikipedia.org/wiki/Amazon_Kindle">kindle paperwhite 3</a></td><td bgcolor=black><font color=white>630</font></td><td bgcolor=#efedf5>2015</td></tr>
 <tr>
-<td class="l">kindle 4</td><td bgcolor=black><font color=white>860</font></td><td bgcolor=#dadaeb>2011</td></tr>
+<td class="l"><a href="https://en.wikipedia.org/wiki/Amazon_Kindle">kindle 4</a></td><td bgcolor=black><font color=white>860</font></td><td bgcolor=#dadaeb>2011</td></tr>
 </table>
 
 <p>As above, the results are sorted by latency and color-coded from green to yellow to red to black as devices get slower. Also as above, the year gets purple-er (and darker) as the device gets older.</p>
@@ -361,10 +384,9 @@ display('news.html')
 
 <h3 id="appendix-why-measure-latency">Appendix: why measure latency?</h3>
 
-<p>Latency matters! For very simple tasks, <a href="https://pdfs.semanticscholar.org/386a/15fd85c1
-62b8e4ebb6023acdce9df2bd43ee.pdf">people can perceive latencies down to <code>2 ms</code> or less</a>. Moreover, increasing latency is not only noticeable to users, <a href="http://www.tactuallabs.com/papers/howMuc
-hFasterIsFastEnoughCHI15.pdf">it causes users to execute simple tasks less accurately</a>. If you want a visual demonstration of what latency looks like and you don’t have a super-fast old computer lying around, <a href="https://www.youtube.com/watch?v=vOvQCPLkPt4">check out this MSR demo on touchscreen la<br />
-tency</a>.</p>
+<p>Latency matters! For very simple tasks, <a href="https://pdfs.semanticscholar.org/386a/15fd85c162b8e4ebb6023acdce9df2bd43ee.pdf">people can perceive latencies down to <code>2 ms</code> or less</a>. Moreover, increasing latency is not only noticeable to users, <a href="http://www.tactuallabs.com/papers/howMuchFasterIsFastEnoughCHI15.pdf">it causes users to execute simple tasks less accurately</a>. If you want a visual demonstration of what latency looks like and you don’t have a super-fast old computer lying around, <a href="https://www.youtube.com/watch?v=vOvQCPLkPt4">check out this MSR demo on touchscreen latency</a>.</p>
+
+<p>The most commonly cited document on response time is the nielsen group article on response times, which claims that latncies below <code>100ms</code> feel equivalent and perceived as instantaneous. One easy way to see that this is false is to go into your terminal and try <code>sleep 0; echo &quot;pong&quot;</code> vs. <code>sleep 0.1; echo &quot;test&quot;</code> (or for that matter, try playing an old game that doesn&rsquo;t have latency compensation, like quake 1, with <code>100 ms</code> ping, or even <code>30 ms</code> ping, or try typing in a terminal with <code>30 ms</code> ping). For more info on this and other latency fallacies, <a href="//danluu.com/keyboard-latency/#appendix-counter-arguments-to-common-arguments-that-latency-doesn-t-matter">see this document on common misconceptions about latency</a>.</p>
 
 <p><a href="https://stackoverflow.com/a/39187441/334816">Throughput</a> also matters, but this is widely understood and measured. If you go to pretty much any mainstream review or benchmarking site, you can find a wide variety of throughput measurements, so there’s less value in writing up additional throughput measurements.</p>
 
@@ -376,15 +398,25 @@ tency</a>.</p>
 
 <p>For reference, the ergodox uses a <code>16 MHz</code> microcontroller with ~80k transistors and the <code>apple 2e</code> CPU is a <code>1 MHz</code> chip with 3.5k transistors.</p>
 
+<h3 id="appendix-why-should-android-phones-have-higher-latency-than-old-apple-phones">Appendix: why should android phones have higher latency than old apple phones?</h3>
+
+<p>As we&rsquo;ve seen, raw processing power doesn&rsquo;t help much with many of the causes of latency in the pipeline, like handoffs between different processes, so phones that an android phone with a 10x more powerful processor than an ancient iphone isn&rsquo;t guaranteed to be quicker to respond, even if it can render javascript heavy pages faster.</p>
+
+<p>If you talk to people who work on non-Apple mobile CPUs, you&rsquo;ll find that they run benchmarks like dhrystone (a synthetic benchmark that was irrelevant even when it was created, in 1984) and SPEC2006 (an updated version of a workstation benchmark that was relevant in the 90s and perhaps even as late as the early 2000s if you care about workstation workloads, which are completely different from mobile workloads). This problem where the vendor who makes the component has <a href="//danluu.com/percentile-latency/">an intermediate target</a> that&rsquo;s only weakly correlated to the actual user experience. I&rsquo;ve heard that there are people working on the pixel phones who care about end-to-end latency, but it&rsquo;s difficult to get good latency when you have to use components that are optimized for things like dhrystone and SPEC2006.</p>
+
+<p>If you talk to people at Apple, you&rsquo;ll find that they&rsquo;re quite cagey, but that they&rsquo;ve been targeting the end-to-end user experience for quite a long time and they they can do &ldquo;full stack&rdquo; optimizations that are difficult for android vendors to pull of. They&rsquo;re not literally impossible, but making a change to a chip that has to be threaded up through the OS is something you&rsquo;re very unlikely to see unless google is doing the optimization, and google hasn&rsquo;t really been serious about the end-to-end experience until recently.</p>
+
+<p>Having relatively poor performance in aspects that aren&rsquo;t measured is a common theme and one we saw when we looked at <a href="//danluu.com/term-latency/">terminal latency</a>. Prior to examining temrinal latency, public benchmarks were all throughput oriented and the terminals that priortized performance worked on increasing throughput, even though increasing terminal throughput isn&rsquo;t really useful. After those terminal latency benchmarks, some terminal authors looked into their latency and found places they could trim down buffering and remove latency. You get what you measure.</p>
+
 <h3 id="appendix-experimental-setup">Appendix: experimental setup</h3>
 
-<p>Most measurements were taken with a 240fps camera (<code>4.167 ms</code> resolution). Devices with response times below <code>40 ms</code> were re-measured with a 1000fps camera (<code>1 ms</code> resolution). Results in the tables are the results of multiple runs and are rounded to the nearest <code>10 ms</code> to avoid the impression of false precision. For desktop results, results are measured from when the key started moving until the screen finished updating. Note that this is different from most key-to-screen-update measurements you can find online, which typically use a setup that effectively removes much or all of the keyboard latency, which, as an end-to-end measurement, is only realistic if you have a psychic link to your computer (this isn&rsquo;t to say the measurements aren&rsquo;t useful &ndash; if, as a programmer, you want a reproducible benchmark, it&rsquo;s nice to reduce measurement noise from sources that are beyond your control, but that&rsquo;s not relevant to end users). People often advocate measuring from one of: {the key bottoming out, the switch firing}. Other than for measurement convenience, there appears to be no reason to do any of these, but people often claim that&rsquo;s when the user expects the keyboard to &ldquo;really&rdquo; work. But these are independent of when the switch actually fires. Both the distance between the key bottoming out and activiation as well as the distance between feeling feedback and activation are arbitrary and can be tuned. When people claim that users believe that&rsquo;s when the keyboard is &ldquo;really&rdquo; firing, this is a generally a claim that the user has an incorrect belief about how their keyboard works. While that&rsquo;s possible, I see no reason to encode one particular incorrect belief about how keyboards work into the measurements when people vehemently advocate for different incorrect beliefs. See <a href="//danluu.com/keyboard-latency/">this post on keyboard latency measurements for more info on keyboard fallacies</a>.</p>
+<p>Most measurements were taken with the 240fps camera (<code>4.167 ms</code> resolution) in <a href="https://www.amazon.com/gp/product/B071W3DDM7/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=abroaview-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=B071W3DDM7&amp;linkId=fde44f1346bdf4bc60896580c2f3dffa">the iPhone SE</a>. Devices with response times below <code>40 ms</code> were re-measured with a 1000fps camera (<code>1 ms</code> resolution), the <a href="https://www.amazon.com/gp/product/B01M62I8Q7/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=abroaview-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=B01M62I8Q7&amp;linkId=d5f90ebe0b220a8c6e550761f663fb19">Sony RX100 V</a> in PAL mode. Results in the tables are the results of multiple runs and are rounded to the nearest <code>10 ms</code> to avoid the impression of false precision. For desktop results, results are measured from when the key started moving until the screen finished updating. Note that this is different from most key-to-screen-update measurements you can find online, which typically use a setup that effectively removes much or all of the keyboard latency, which, as an end-to-end measurement, is only realistic if you have a psychic link to your computer (this isn&rsquo;t to say the measurements aren&rsquo;t useful &ndash; if, as a programmer, you want a reproducible benchmark, it&rsquo;s nice to reduce measurement noise from sources that are beyond your control, but that&rsquo;s not relevant to end users). People often advocate measuring from one of: {the key bottoming out, the tactile feel of the switch}. Other than for measurement convenience, there appears to be no reason to do any of these, but people often claim that&rsquo;s when the user expects the keyboard to &ldquo;really&rdquo; work. But these are independent of when the switch actually fires. Both the distance between the key bottoming out and activiation as well as the distance between feeling feedback and activation are arbitrary and can be tuned. See <a href="//danluu.com/keyboard-latency/">this post on keyboard latency measurements for more info on keyboard fallacies</a>.</p>
 
 <p>Another significant difference is that measurements were done with settings as close to the default OS settings as possible since approximately 0% of users will futz around with display settings to reduce buffering, disable the compositor, etc. Waiting until the screen has finished updating is also different from most end-to-end measurements do &ndash; most consider the update &ldquo;done&rdquo; when any movement has been detected on the screen. Waiting until the screen is finished changing is analogous to webpagetest&rsquo;s &ldquo;visually complete&rdquo; time.</p>
 
 <p>Computer results were taken using the “default” terminal for the system (e.g., powershell on windows, lxterminal on lubuntu), <a href="//danluu.com/term-latency/">which could easily cause <code>20 ms</code> to <code>30 ms</code> difference between a fast terminal and a slow terminal</a>. Between measuring time in a terminal and measuring the full end-to-end time, measurements in this article should be slower than measurements in other, similar, articles (which tend to measure time to first change in games).</p>
 
-<p>The <code>powerspec g405</code> baseline result is using integrated graphics (the machine doesn’t come with a graphics card) and the <code>60 Hz</code> result is with a cheap video card.</p>
+<p>The <code>powerspec g405</code> baseline result is using integrated graphics (the machine doesn’t come with a graphics card) and the <code>60 Hz</code> result is with a cheap video card. The baseline was result was at <code>30 Hz</code> because the integrated graphics only supports <code>hdmi</code> output and the display it was attached to only runs at <code>30 Hz</code> over <code>hdmi</code>.</p>
 
 <p>Mobile results were done by using the default browser, browsing to <a href="https://danluu.com">https://danluu.com</a>, and measuring the latency from finger movement until the screen first updates to indicate that scrolling has occurred. In the cases where this didn’t make sense, (kindles, gameboy color, etc.), some action that makes sense for the platform was taken (changing pages on the kindle, pressing the joypad on the gameboy color in a game, etc.). Unlike with the desktop/laptop measurements, this end-time for the measurement was on the first visual change to avoid including many frames of scrolling. To make the measurement easy, the measurement was taken with a finger on the touchscreen and the timer was started when the finger started moving (to avoid having to determine when the finger first contacted the screen).</p>
 
@@ -398,6 +430,8 @@ tency</a>.</p>
 
 <p>All Linux results were done with a <a href="https://lwn.net/SubscriberLink/741878/eb6c9d3913d7cb2b/">pre-KPTI</a> kernel. It&rsquo;s possible that KPTI will impact user perceivable latency.</p>
 
+<p>If you want a reference to compare the kindle against, a moderately quick page turn in a physical book appears to be about <code>200 ms</code>.</p>
+
 <p><i>This is a work in progress. I expect to get benchmarks from a lot more old computers the next time I visit Seattle. If you know of old computers I can test in the NYC area (that have their original displays or something like them), let me know! If you have a device you’d like to donate for testing, feel free to mail it to</i></p>
 
 <p>Dan Luu<br>
@@ -405,7 +439,7 @@ Recurse Center<br>
 455 Broadway, 2nd Floor<br>
 New York, NY 10013</p>
 
-<p><i>Thanks to <a href="https://www.recurse.com/scout/click?t=b504af89e87b77920c9b60b2a1f6d5e8">RC</a>, David Albert, Bert Muthalaly, Christian Ternus, Kate Murphy, Ikhwan Lee, Peter Bhat Harkins, Leah Hanson, Alicia Thilani Singham Goodwin, Amy Huang, Dan Bentley, Jacquin Mininger, Rob, Raph Levien, Max McCrea, Peter Town, Jon Cinque, Anonymous, and Jonathan Dahan for donating devices to test and thanks to Leah Hanson, Andy Matuschak, Milosz Danczak, @amos, @emitter_coupled, Josh Jordan, and David Albert for comments/corrections/discussion.</i></p>
+<p><i>Thanks to <a href="https://www.recurse.com/scout/click?t=b504af89e87b77920c9b60b2a1f6d5e8">RC</a>, David Albert, Bert Muthalaly, Christian Ternus, Kate Murphy, Ikhwan Lee, Peter Bhat Harkins, Leah Hanson, Alicia Thilani Singham Goodwin, Amy Huang, Dan Bentley, Jacquin Mininger, Rob, Susan Steinman, Raph Levien, Max McCrea, Peter Town, Jon Cinque, Anonymous, and Jonathan Dahan for donating devices to test and thanks to Leah Hanson, Andy Matuschak, Milosz Danczak, amos (@fasterthanlime), @emitter_coupled, Josh Jordan, mrob, and David Albert for comments/corrections/discussion.</i></p>
 
 		</div>
 		<div class="collectionhref">
@@ -563,340 +597,6 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/9XBQ2NUK9iA/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Using Vagrant with Azure</h3>
-		</div>
-		<div class="collectiontext">
-			<p>In this post, I&rsquo;ll describe how to use <a href="https://www.vagrantup.com">Vagrant</a> with <a href="https://azure.microsoft.com/">Azure</a>. You can consider this article an extension of some of my earlier Vagrant articles; namely, the posts on <a href="https://blog.scottlowe.org/2016/09/15/using-vagrant-with-aws/">using Vagrant with AWS</a> and <a href="https://blog.scottlowe.org/2015/09/28/using-vagrant-with-openstack/">using Vagrant with OpenStack</a>. The theme across all these posts is examining how one might use Vagrant to simplify/streamline the consumption of resources from a provider using the familiar Vagrant workflow.</p>
-
-<p>If you aren&rsquo;t already familiar with Vagrant, I&rsquo;d highly recommend first taking a look at my <a href="https://blog.scottlowe.org/2014/09/12/a-quick-introduction-to-vagrant/">introduction to Vagrant</a>, which provides an overview of the tool and how it&rsquo;s used.</p>
-
-<h2 id="prerequisites">Prerequisites</h2>
-
-<p>Naturally, you&rsquo;ll need to first ensure that you have Vagrant installed. This is really well-documented already, so I won&rsquo;t go over it here. Next, you&rsquo;ll need to install the Azure provider for Vagrant, which you can handle using this command:</p>
-
-<pre><code>vagrant plugin install vagrant-azure
-</code></pre>
-
-<p>You&rsquo;ll also (generally) want to have the Azure CLI installed. (You&rsquo;ll need it for a one-time configuration task I&rsquo;ll mention shortly.) I&rsquo;ve published a couple posts on installing the Azure CLI; see <a href="https://blog.scottlowe.org/2017/08/13/manually-installing-azure-cli-fedora-25/">here</a> or <a href="https://blog.scottlowe.org/2017/12/07/installing-azure-cli-fedora-27/">here</a>.</p>
-
-<p>Once you&rsquo;ve installed the <code>vagrant-azure</code> plugin and the Azure CLI, you&rsquo;ll next need to install a box that Vagrant can use. Here, the use of Vagrant with Azure is different than the use of Vagrant with a provider like <a href="https://www.virtualbox.org">VirtualBox</a> or <a href="http://www.vmware.com/products/fusion.html">VMware Fusion</a>/<a href="http://www.vmware.com/products/workstation.html">VMware Workstation</a>. Like when using Vagrant with AWS, when you&rsquo;re using Vagrant with Azure the box is a &ldquo;dummy box&rdquo; that doesn&rsquo;t really do anything; instead, you&rsquo;re relying on Azure VM images. You can install a &ldquo;dummy box&rdquo; for Azure with this command:</p>
-
-<pre><code>vagrant box add azure-dummy https://github.com/azure/vagrant-azure/raw/v2.0/dummy.box --provider azure
-</code></pre>
-
-<p>You&rsquo;ll then reference this &ldquo;dummy box&rdquo; in your <code>Vagrantfile</code>, as I&rsquo;ll illustrate shortly.</p>
-
-<p>The last and final step is to create an Azure Active Directory (AD) service principal for Vagrant to use when connecting to Azure. This command will create a service principal for you to use with Vagrant:</p>
-
-<pre><code>az ad sp create-for-rbac
-</code></pre>
-
-<p>Make note of the values returned in the command&rsquo;s JSON response; you&rsquo;ll need them later. You&rsquo;ll also want to know your Azure subscription ID, which you can obtain by running <code>az account list --query '[?isDefault].id' -o tsv</code>.</p>
-
-<p>Now that you&rsquo;ve installed Vagrant, installed the <code>vagrant-azure</code> plugin, downloaded the dummy Azure box, and have created the Azure AD service principal, you&rsquo;re ready to start spawning some Azure VMs with Vagrant.</p>
-
-<h2 id="launching-azure-vms-via-vagrant">Launching Azure VMs via Vagrant</h2>
-
-<p>When I use Vagrant, I prefer to keep the Vagrant configuration (stored in the file named <code>Vagrantfile</code>) as clean as possible, and separate details into a separate data file (typically using YAML). I outlined this approach <a href="https://blog.scottlowe.org/2014/10/22/multi-machine-vagrant-with-yaml/">here</a> and <a href="https://blog.scottlowe.org/2016/01/14/improved-way-yaml-vagrant/">here</a>. For the purposes of this post, however, I&rsquo;ll just embed the details directly into the Vagrant configuration to make it easier to understand. I have examples of using a YAML data file with Vagrant and Azure in the &ldquo;Additional Resources&rdquo; section below.</p>
-
-<p>Here&rsquo;s a snippet of a <code>Vagrantfile</code> you could use to spin up Azure VMs using Vagrant:</p>
-
-<pre><code class="language-ruby"># Require the Azure provider plugin
-require 'vagrant-azure'
-
-# Create and configure the Azure VMs
-Vagrant.configure('2') do |config|
-
-  # Use dummy Azure box
-  config.vm.box = 'azure-dummy'
-
-  # Specify SSH key
-  config.ssh.private_key_path = '~/.ssh/id_rsa'
-
-  # Configure the Azure provider
-  config.vm.provider 'azure' do |az, override|
-    # Pull Azure AD service principal information from environment variables
-    az.tenant_id = ENV['AZURE_TENANT_ID']
-    az.client_id = ENV['AZURE_CLIENT_ID']
-    az.client_secret = ENV['AZURE_CLIENT_SECRET']
-    az.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
-
-    # Specify VM parameters
-    az.vm_name = 'aztest'
-    az.vm_size = 'Standard_B1s'
-    az.vm_image_urn = 'Canonical:UbuntuServer:16.04-LTS:latest'
-    az.resource_group_name = 'vagrant'
-  end # config.vm.provider 'azure'
-end # Vagrant.configure
-</code></pre>
-
-<p>Naturally, this is a very generic configuration, so you&rsquo;d need to supply the specific details you want use. In particular, you&rsquo;d need to supply the following details:</p>
-
-<ul>
-<li>The SSH keypair you want to use (via the <code>config.ssh.private_key_path</code> setting)</li>
-<li>The Azure VM size you&rsquo;d like to use (via the <code>az.vm_size</code> setting)</li>
-<li>The Azure VM image you want to use (via the <code>az.vm_image_urn</code> setting)</li>
-<li>The name of the Azure resource group you&rsquo;d like to use (via the <code>az.resource_group_name</code> setting; this group should <em>not</em> already exist)</li>
-</ul>
-
-<p>Also, you&rsquo;ll note that the <code>Vagrantfile</code> assumes you&rsquo;ve set some environment variables that will allow Vagrant to communicate with Azure. These values are taken from the JSON output of creating the Azure AD service principal:</p>
-
-<ul>
-<li>The <code>AZURE_TENANT_ID</code> maps to the &ldquo;tenant&rdquo; key of the JSON output</li>
-<li>The <code>AZURE_CLIENT_ID</code> maps to the &ldquo;appID&rdquo; key of the JSON output</li>
-<li>The <code>AZURE_CLIENT_SECRET</code> maps to the &ldquo;password&rdquo; key of the JSON output</li>
-<li>The <code>AZURE_SUBSCRIPTION_ID</code> is your Azure subscription ID, as shown when running <code>az account show</code></li>
-</ul>
-
-<p>Set these environment variables (you can use the <code>export</code> command) before running <code>vagrant up</code>, or you&rsquo;ll get an error.</p>
-
-<p>With the right configuration details in place, simply run <code>vagrant up</code> from the same directory where the Vagrant configuration (in <code>Vagrantfile</code>) is stored. Vagrant will communicate with Azure (using the values in the corresponding environment variables) and create/launch the Azure VMs per the details provided.</p>
-
-<p>Once the instances are up, the &ldquo;standard&rdquo; Vagrant workflow applies:</p>
-
-<ul>
-<li>Use <code>vagrant ssh &lt;name&gt;</code> to log into one of the VMs.</li>
-<li>Use <code>vagrant provision</code> to apply any provisioning instructions (i.e., to copy files across or run a configuration management tool).</li>
-<li>Use <code>vagrant destroy</code> to kill/terminate the VMs.</li>
-</ul>
-
-<p>One nice aspect of using Vagrant with Azure in this way is that you get the same workflow and commands to work with Azure VMs as you do with AWS instances, VirtualBox VMs, or VMware Fusion/Workstation VMs.</p>
-
-<h2 id="why-use-vagrant-with-azure">Why Use Vagrant with Azure?</h2>
-
-<p>As I stated in my post on using Vagrant with AWS, using Vagrant with Azure in this fashion is a great fit for the creation/destruction of temporary environments used for testing, software development, etc. However, in situations where you are creating more &ldquo;permanent&rdquo; infrastructure&mdash;such as deploying production applications onto Azure&mdash;then I would say that Vagrant is <em>not</em> the right fit. In those cases, using a tool like <a href="https://www.terraform.io/">Terraform</a> (see <a href="https://blog.scottlowe.org/2015/11/25/intro-to-terraform/">my introductory post</a>) would be a better fit.</p>
-
-<h2 id="additional-resources">Additional Resources</h2>
-
-<p>To help make using Vagrant with Azure easier, I&rsquo;ve created a couple learning environments that are part of <a href="https://github.com/lowescott/learning-tools">my GitHub &ldquo;learning-tools&rdquo; repository</a>. Specifically, see the <code>vagrant/azure</code> directory for a sample Vagrant configuration that uses an external YAML data file for instance details.</p>
-
-<p>Additionally, see the documentation for <a href="https://github.com/Azure/vagrant-azure">the <code>vagrant-azure</code> plugin on GitHub</a> for more information.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/3RF_FlnZjco" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/3RF_FlnZjco/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 91</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take 91! It&rsquo;s been a bit longer than usual since the last Tech Short Take (partly due to the US Thanksgiving holiday, partly due to vacation time, and partly due to business travel), so apologies for that. Still, there&rsquo;s a great collection of links and articles here for you, so dig in and enjoy.</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Amanpreet Singh has a two-part series on Kubernetes networking (<a href="https://medium.com/@ApsOps/an-illustrated-guide-to-kubernetes-networking-part-1-d1ede3322727">part 1</a>, <a href="https://medium.com/@ApsOps/an-illustrated-guide-to-kubernetes-networking-part-2-13fdc6c4e24c">part 2</a>).</li>
-<li>Anthony Spiteri has <a href="https://anthonyspiteri.net/nsx-bytes-whats-new-in-nsx-t-2-1/">a brief look at NSX-T 2.1</a>, which recently launched with support for Pivotal Container Service (PKS) and Pivotal Cloud Foundry, further extending the reach of NSX into new areas.</li>
-<li>Jon Benedict has <a href="http://captainkvm.com/2017/12/introduction-ovn-red-hat-virtualization/">a brief article</a> on OVN and its integration into Red Hat Virtualization; if you&rsquo;re unfamiliar with OVN, it might be worth having a look.</li>
-<li>sFlow is a networking technology that I find quite interesting, but I never seem to have the time to really dig into it. For example, I was recently browsing the sFlow blog and came across two really neat articles. The first was on <a href="http://blog.sflow.com/2017/11/restful-control-of-cumulus-linux-acls.html">RESTful control of Cumulus Linux ACLs</a> (this one isn&rsquo;t actually sFlow-related); the second was on <a href="http://blog.sflow.com/2017/09/real-time-visibility-and-control-of.html">combining sFlow telemetry and RESTful APIs</a> for visibility and control in campus networks.</li>
-<li>David Gee&rsquo;s &ldquo;network automation engineer persona&rdquo; content continues; this time he tackles <a href="http://ipengineer.net/2017/11/network-automation-engineer-persona-proof-of-concepts/">some thoughts around proof-of-concepts (PoCs)</a>.</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<ul>
-<li>Frank Denneman (with an admittedly vSphere-focused lens) takes a look at the Intel Xeon Scalable Family in a two-part (so far) series. <a href="http://frankdenneman.nl/2017/09/26/vsphere-focused-guide-intel-xeon-scalable-family/">Part 1</a> covers the CPUs themselves; <a href="http://frankdenneman.nl/2017/10/03/vsphere-focused-guide-intel-xeon-scalable-family-memory-subsystem/">part 2</a> discusses the memory subsystem. Both articles are worth reviewing if hardware selection is an important aspect of your role.</li>
-<li>Kevin Houston provides some details on <a href="http://bladesmadesimple.com/2017/10/blade-server-options-for-vmware-vsan-readynode/">blade server options for VMware vSAN Ready Nodes</a>.</li>
-</ul>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>The security of Kubernetes is coming under greater scrutiny, as would be expected as adoption (and attention) increases. Josselin Costanzi discusses <a href="https://medium.com/devopslinks/security-problems-of-kops-default-deployments-2819c157bc90">the security problems with Kubernetes as deployed via <code>kops</code></a>.</li>
-<li>In a somewhat backwards manner, I first stumbled upon <a href="https://webtransparency.cs.princeton.edu/no_boundaries/session_replay_sites.html">this list of sites that have third-party &ldquo;session replay&rdquo; scripts</a> that could potentially exfiltrate sensitive customer data. The list was quite surprising, to be honest; there were some sites on the list that I didn&rsquo;t expect to see. It was only after reviewing this list that I decided it would probably be a good idea to read <a href="https://freedom-to-tinker.com/2017/11/15/no-boundaries-exfiltration-of-personal-data-by-session-replay-scripts/">the associated blog post that explains the list</a>. Let&rsquo;s just say this: after reading it, I went back to reconfigure my ad-blocking and tracker-blocking plugins.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>The Cloud-Native Computing Foundation (CNCF) and the Kubernetes community introduced the Certified Kubernetes Conformance Program, and the first announcements of certification have started rolling in. First, <a href="https://cloudplatform.googleblog.com/2017/11/introducing-Certified-Kubernetes-and-Google-Kubernetes-Engine.html">here&rsquo;s Google&rsquo;s announcement</a> of renaming Google Container Engine to Google Kubernetes Engine (making the GKE acronym much more applicable) as a result of its certification. Next, here&rsquo;s <a href="https://blogs.vmware.com/cloudnative/2017/11/13/vmware-pivotal-container-service-achieves-kubernetes-certification/">an announcement on the certification of PKS</a> (Pivotal Container Service).</li>
-<li>Henrik Schmidt <a href="https://thenewstack.io/kube-node-let-k8s-cluster-auto-manage-nodes/">writes about the <code>kube-node</code> project</a>, an effort to allow Kubernetes to manage worker nodes in a cluster.</li>
-<li>Helm is a great way to deploy applications onto (into?) a Kubernetes cluster, but there are some ways you can improve Helm&rsquo;s security. Check out this article from Matt Butcher on <a href="http://technosophos.com/2017/11/20/securing-helm.html">securing Helm</a>.</li>
-<li><a href="http://kubernetes-on-aws.readthedocs.io/en/latest/admin-guide/kubernetes-in-production.html">This site</a> is a good collection of &ldquo;lessons learned from the trenches&rdquo; on running Kubernetes on AWS in production.</li>
-<li>I have to be honest: <a href="https://cloudlearning.pro/2017/11/28/going-all-in-openstack-on-kubernetes-with-rook-part-1/">this blog post</a> on using OpenStack Helm to install OpenStack on Kubernetes with Rook sounds like a massive science experiment. That&rsquo;s a lot of moving pieces!</li>
-<li>User &ldquo;sysadmin1138&rdquo; (I couldn&rsquo;t find a mapping to a real name, perhaps that&rsquo;s intentional) has a great write-up on her/his <a href="http://sysadmin1138.net/mt/blog/2017/11/terraforming-in-prod.shtml">experience with Terraform in production</a>. There&rsquo;s some great information here for those of you thinking of (or currently) using Terraform to manage production workloads/configurations.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>Michael Crosby <a href="https://blog.mobyproject.org/containerd-namespaces-for-docker-kubernetes-and-beyond-d6c43f565084">outlines</a> support for multi-client support in containerD.</li>
-<li>Speaking of containerD, it just <a href="https://github.com/containerd/containerd/releases">recently hit 1.0</a>.</li>
-<li>This is <a href="https://blog.alexellis.io/docker-stacks-attachable-networks/">a slightly older post</a> by Alex Ellis on attachable networks, which (as I understand it) enable interoperability between declarative workloads (deployed via <code>docker stack deploy</code>) and imperative workloads (launched via <code>docker run</code>).</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>VMware&rsquo;s Cloud-Native group <a href="https://blogs.vmware.com/cloudnative/2017/12/06/updates-project-hatchway-kubecon-2017/">discussed some recent updates to Project Hatchway</a>, an effort to bring expanded support for persistent storage into cloud-native platforms such as Kubernetes. It&rsquo;s nice to see that CSI support is also in the mix.</li>
-<li>J Metz has an outstanding &ldquo;deep in the weeds&rdquo; discussion on <a href="https://jmetz.com/2017/09/storage-how-does-flash-memory-avoid-data-loss/">how flash memory avoids data loss</a>. Good stuff.</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>The &ldquo;blurring&rdquo; between VMs/hypervisors and containers/container daemons continues; for one example, see <a href="https://blog.docker.com/2017/11/docker-for-windows-17-11/">this recent article</a> by Docker discussing Linux containers on Windows (LCOW).</li>
-<li>Alan Renouf <a href="http://www.virtu-al.net/2017/11/29/using-powercli-manage-vmware-cloud-aws/">discusses the ability to manage</a> VMware Cloud on AWS (VMC) using the latest release of PowerCLI (version 6.5.4).</li>
-<li>William Lam (with some help from Anthony Burke) outlines <a href="https://www.virtuallyghetto.com/2017/11/moving-esxi-hosts-with-lacplag-between-vcenter-servers.html">how to move ESXi hosts with LACP/LAG between vCenter Servers</a>.</li>
-<li>John Slack describes <a href="https://blogs.technet.microsoft.com/virtualization/2017/07/18/copying-files-into-a-hyper-v-vm-with-vagrant/">how to copy files into a Hyper-V VM using Vagrant</a> by using a feature of the Hyper-V provider known as the guest service interface.</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>Pat Bowden <a href="http://onlinelearningsuccess.org/learning-styles/">discusses</a> the idea of learning styles, and how combining learning styles (or multiple senses) can typically contribute to more successful learning.</li>
-<li>I also found some useful tidbits on learning over at <a href="http://theartoflearningproject.org/">The Art of Learning project website</a>.</li>
-</ul>
-
-<p>That&rsquo;s all for now (but I think that should be enough to keep you busy for a little while, at least!). I&rsquo;ll have another Tech Short Take in 2 weeks, though given the holiday season is nigh upon us it might be a bit light on content. Until then!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/QX1s1gdfruo" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/QX1s1gdfruo/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Installing the Azure CLI on Fedora 27</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This post is a follow-up to a post from earlier this year on <a href="https://blog.scottlowe.org/2017/08/13/manually-installing-azure-cli-fedora-25/">manually installing the Azure CLI on Fedora 25</a>. I encourage you to refer back to that post for a bit of background. I&rsquo;m writing this post because the procedure for manually installing the Azure CLI on <a href="https://getfedora.org/">Fedora</a> 27 is slightly different than the procedure for Fedora 25.</p>
-
-<p>Here are the steps to install the Azure CLI into a Python virtual environment on Fedora 27. Even though they are <em>almost</em> identical to the Fedora 25 instructions (one additional package is required), I&rsquo;m including all the information here for the sake of completeness.</p>
-
-<ol>
-<li><p>Make sure that the &ldquo;gcc&rdquo;, &ldquo;libffi-devel&rdquo;, &ldquo;python-devel&rdquo;, &ldquo;openssl-devel&rdquo;, &ldquo;python-pip&rdquo;, and &ldquo;redhat-rpm-config&rdquo; packages are installed (you can use <code>dnf</code> to take care of this). Some of these packages may already be installed; during my testing with a Fedora 27 Cloud Base Vagrant image, these needed to be installed. (The change from Fedora 25 is the addition of the &ldquo;redhat-rpm-config&rdquo; package.)</p></li>
-
-<li><p>Install virtualenv either with <code>pip install virtualenv</code> or <code>dnf install python2-virtualenv</code>. I used <code>dnf</code>, but I don&rsquo;t think the method you use here will have any material effects.</p></li>
-
-<li><p>Create a new Python virtual environment with <code>virtualenv azure-cli</code> (feel free to use a different name).</p></li>
-
-<li><p>Activate the new virtual environment (typically accomplished by sourcing the <code>azure-cli/bin/activate</code> script; substitute the name you used when creating the virtual environment if you didn&rsquo;t name it <code>azure-cli</code>).</p></li>
-
-<li><p>Install the Azure CLI with <code>pip install azure-cli</code>. Once this command completes, you should be ready to roll.</p></li>
-</ol>
-
-<p>That&rsquo;s it!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/jseUNKlp9OI" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/jseUNKlp9OI/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Using Vagrant with Libvirt on Fedora 27</h3>
-		</div>
-		<div class="collectiontext">
-			<p>In this post, I&rsquo;m going to show you how to use <a href="https://www.vagrantup.com/">Vagrant</a> with <a href="http://libvirt.org/">Libvirt</a> via the <a href="https://github.com/vagrant-libvirt/vagrant-libvirt">vagrant-libvirt provider</a> when running on <a href="https://getfedora.org/">Fedora</a> 27. Both Vagrant and Libvirt are topics I&rsquo;ve covered more than a few times here on this site, but this is the first time I&rsquo;ve discussed combining the two projects.</p>
-
-<p>If you&rsquo;re unfamiliar with Vagrant, I recommend you start first with <a href="https://blog.scottlowe.org/2014/09/12/a-quick-introduction-to-vagrant/">my quick introduction to Vagrant</a>, after which you can <a href="https://blog.scottlowe.org/tags/vagrant/">browse all the &ldquo;Vagrant&rdquo;-tagged articles on my site</a> for a bit more information. If you&rsquo;re unfamiliar with Libvirt, you can browse <a href="https://blog.scottlowe.org/tags/libvirt/">all my &ldquo;Libvirt&rdquo;-tagged articles</a>; I don&rsquo;t have an introductory post for Libvirt.</p>
-
-<h2 id="background">Background</h2>
-
-<p>I first experimented with the Libvirt provider for Vagrant quite some time ago, but at that time I was using the Libvirt provider to communicate with a remote Libvirt daemon (the use case was using Vagrant to create and destroy KVM guest domains via Libvirt on a remote Linux host). I found this setup to be problematic and error-prone, and discarded it after only a short while.</p>
-
-<p>Recently, I revisited using the Libvirt provider for Vagrant on my Fedora laptop (which I rebuilt with Fedora 27). As I mentioned in <a href="https://blog.scottlowe.org/2017/02/07/installing-virtualbox-51-fedora-25/">this post</a>, installing <a href="https://www.virtualbox.org/">VirtualBox</a> on Fedora isn&rsquo;t exactly straightforward. Further, what I <em>didn&rsquo;t</em> mention in that post is that the VirtualBox kernel modules aren&rsquo;t signed; this means you must turn off Secure Boot in order to run VirtualBox on Fedora. I was loathe to turn off Secure Boot, so I thought I&rsquo;d try the Vagrant+Libvirt combination again&mdash;this time using Libvirt to talk to the <em>local</em> Libvirt daemon (which is installed by default on Fedora in order to support the GNOME Boxes application, a GUI virtual machine tool). Hence, this blog post.</p>
-
-<h2 id="prerequisites">Prerequisites</h2>
-
-<p>Obviously, you&rsquo;ll need Vagrant installed; I chose to install Vagrant from the Fedora repositories using <code>dnf install vagrant</code>. At the time of this writing, that installed version 1.9.8 of Vagrant. You&rsquo;ll also need the Libvirt plugin, which is  available via <code>dnf</code>:</p>
-
-<pre><code>dnf install vagrant-libvirt vagrant-libvirt-doc
-</code></pre>
-
-<p>At the time of writing, this installed version 0.40.0 of the Libvirt plugin, which is the latest version. You could also install the plugin via <code>vagrant plugin install vagrant-libvirt</code>, though I didn&rsquo;t test this approach. (In theory, it should work fine.)</p>
-
-<p>As with most other providers (the AWS and OpenStack providers being the exceptions), you&rsquo;ll also need one or more Vagrant boxes formatted for the Libvirt provider. I found a number of Libvirt-formatted boxes on <a href="https://app.vagrantup.com/boxes/search">Vagrant Cloud</a>, easily installable via <code>vagrant box add</code>. For the purposes of this post, I&rsquo;ll use the &ldquo;fedora/27-cloud-base&rdquo; Vagrant box with the Libvirt provider.</p>
-
-<p>Finally, because Vagrant is orchestrating Libvirt on the back-end, I also found it helpful to have the Libvirt client tools (like <code>virsh</code>) installed. This lets you see what Vagrant is doing behind the scenes, which can be helpful at times. Just run <code>dnf install libvirt-client</code>.</p>
-
-<h2 id="using-libvirt-with-vagrant">Using Libvirt with Vagrant</h2>
-
-<p>Once all the necessary prerequisites are satisfied, you&rsquo;re ready to start managing Libvirt guest domains (VMs) with Vagrant. For a really quick start:</p>
-
-<ol>
-<li><code>cd</code> into a directory of your choice</li>
-<li>Run <code>vagrant init fedora/27-cloud-base</code> to create a sample <code>Vagrantfile</code></li>
-<li>Boot the VM with <code>vagrant up</code></li>
-</ol>
-
-<p>For more fine-grained control over the VM and its settings, you&rsquo;ll want to customize the <code>Vagrantfile</code> with some additional settings. Here&rsquo;s a sample <code>Vagrantfile</code> that shows a few (there are many!) of the ways you could customize the VM Vagrant creates:</p>
-
-<pre><code class="language-ruby">Vagrant.configure(&quot;2&quot;) do |config|
-  # Define the Vagrant box to use
-  config.vm.box = &quot;fedora/27-cloud-base&quot;
-
-  # Disable automatic box update checking
-  config.vm.box_check_update = false
-
-  # Set the VM hostname
-  config.vm.hostname = &quot;fedora27&quot;
-
-  # Attach to an additional private network
-  config.vm.network &quot;private_network&quot;, ip: &quot;192.168.100.101&quot;
-
-  # Modify some provider settings
-  config.vm.provider &quot;libvirt&quot; do |lv|
-    lv.memory = &quot;1024&quot;
-  end # config.vm.provider
-end # Vagrant.configure
-</code></pre>
-
-<p>For a more complete reference, see <a href="https://github.com/vagrant-libvirt/vagrant-libvirt">the GitHub repository for the vagrant-libvirt provider</a>. Note, however, that I did run into a few oddities, particularly around networking. For example, I wasn&rsquo;t able to create a new private Libvirt network using the <code>libvirt__network_address</code> setting; it always reverted to the default network address. However, using the syntax shown above, I <em>was</em> able to create a new private Libvirt network with the desired network address. I was also able to manually create a new Libvirt network (using <code>virsh net-create</code>) and then attach the VM to that network using the <code>libvirt__network_name</code> setting in the <code>Vagrantfile</code>. Some experimentation may be necessary to get precisely the results you&rsquo;re seeking.</p>
-
-<p>Once you&rsquo;ve instantiated the VM using <code>vagrant up</code>, then the standard Vagrant workflow applies:</p>
-
-<ul>
-<li>Use <code>vagrant ssh &lt;name&gt;</code> to log into the VM via SSH.</li>
-<li>Use <code>vagrant provision</code> to apply any provisioning instructions, such as running a shell script, copying files into the VM, or applying an Ansible playbook.</li>
-<li>Use <code>vagrant destroy</code> to terminate and delete the VM.</li>
-</ul>
-
-<p>There is one potential &ldquo;gotcha&rdquo; of which to be aware: when you use <code>vagrant box remove</code> to remove a Vagrant box <em>and</em> you&rsquo;ve created at least one VM from that box, then there is an additional step required to fully remove the box. When you run <code>vagrant up</code> with a particular box for the very first time, the Libvirt provider uploads the box into a Libvirt storage pool (the pool named &ldquo;default&rdquo;, by default). Running <code>vagrant box remove</code> only removes the files from the <code>~/.vagrant.d</code> directory, and does <strong>not</strong> remove any files from the Libvirt storage pool.</p>
-
-<p>To remove the files from the Libvirt storage pool, run <code>virsh pool-edit default</code> to get the filesystem path where the storage pool is found (if no changes have been made, the &ldquo;default&rdquo; pool should be located at <code>/var/lib/libvirt/images</code>). Navigate to that directory and remove the appropriate files in order to complete the removal of a particular box (or a specific version of a box).</p>
-
-<p>So far&mdash;though my testing has been fairly limited&mdash;I&rsquo;m reasonably pleased with the Libvirt provider when running against a local Libvirt daemon. The performance is good, and I haven&rsquo;t had to &ldquo;jump through hoops&rdquo; to make the virtualization provider work (as I did with VirtualBox on Fedora).</p>
-
-<p>If you have any questions or feedback, <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/maX2xSjR2uU" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/maX2xSjR2uU/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>William Playfair inspired charts...</h3>
-		</div>
-		<div class="collectiontext">
-<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: Trebuchet MS, sans-serif;">Aloha,</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">Today I just would like to share a little blogpost about a chart that I've implemented last Friday evening. The chart design is inspired by <a href="https://en.wikipedia.org/wiki/William_Playfair" target="_blank">William Playfair</a> who invented this kind of chart to visualize economic data like import and export of theUS in relation to other countries.</span><br /><span style="font-family: Trebuchet MS, sans-serif;">One of his charts looks like follows...</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"><a href="https://upload.wikimedia.org/wikipedia/commons/5/52/Playfair_TimeSeries-2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="591" data-original-width="800" height="472" src="https://upload.wikimedia.org/wikipedia/commons/5/52/Playfair_TimeSeries-2.png" width="640" /></a></div><span style="font-family: Trebuchet MS, sans-serif;">The idea is pretty simple, take two line charts and fill the area between the two charts with a color. The color depends on which line is on top. With this technique one can visualize for example gain and loss of processes etc.</span><br /><span style="font-family: Trebuchet MS, sans-serif;">Like mentioned the idea is simple but the realization is not as trivial as it looks. The problem here is that you have two separate line charts that you have to combine to not only one polygon but to multiple polygons.</span><br /><span style="font-family: Trebuchet MS, sans-serif;">So every time the two lines cross each other one has to fill the area before the intersection point with one color and the area after the intersection point with the other color.</span><br /><span style="font-family: Trebuchet MS, sans-serif;">After thinking about the chart for a bit I've got an idea on how to realize that behavior and here is one result...</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-Dv07Tntmdlc/WiHqUp7iSUI/AAAAAAAAEvI/pqUFftPKQXEjOnwvvWU346sbF9CG7sTyQCLcBGAs/s1600/Playfair%2BChart%2BTest%2B2017-12-02%2B00-48-13.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="559" data-original-width="926" height="386" src="https://1.bp.blogspot.com/-Dv07Tntmdlc/WiHqUp7iSUI/AAAAAAAAEvI/pqUFftPKQXEjOnwvvWU346sbF9CG7sTyQCLcBGAs/s640/Playfair%2BChart%2BTest%2B2017-12-02%2B00-48-13.png" width="640" /></a></div><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">As always I do not really have a use case for that chart but I can imagine that it might be useful for someone out there :)</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">So if you would like to play around with it, feel free to check out the code at <a href="https://github.com/HanSolo/charts" target="_blank">github</a>.</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">I hope to find some time within the next days to add some interactivity to the chart...so stay tuned :)</span><br /><span style="font-family: Trebuchet MS, sans-serif;"><br /></span><span style="font-family: Trebuchet MS, sans-serif;">Well...I guess that's it for today...so keep coding... :)</span><br /><br />
-
- -->
-		</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2017/12/william-playfair-inspired-charts.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -904,31 +604,34 @@ SyndContentImpl.value=<span style="font-family: Trebuchet MS, sans-serif;">Aloha
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-  <a href="expect_dialog_ca_version_1_0.html">
-<div class="date">26.12.2017</div>
-<h3>Expect-Dialog-CA Version 1.0</h3>
+  <a href="migration_trac_svn__gitlab.html">
+<div class="date">02.01.2018</div>
+<h3>Migration Trac/SVN->GitLab</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>CA-Management-Lösung in Version 1.0 fertiggestellt und auf Github verfügbar
+<p>Ich habe erfolgreich mein Build-Ökosystem migriert: von Trac/SVN hin zu Gitlab
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="xslt_lab.html">
-<div class="date">26.12.2017</div>
-<h3>XSLT-Lab</h3>
+  <a href="mein_eigener_webbrowser.html">
+<div class="date">02.01.2018</div>
+<h3>Mein eigener Webbrowser</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ich habe als Fingerübung eine Komponente erstellt, mit der man XSLT-Transformationen am lebenden Objekt studieren kann...
+<p>Nach dem letzten großen Bock, den die Mozilla Foundation geschossen hat, begann ich mich nach Alternativen umzusehen...
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="topologische_sortierung.html">
-<div class="date">26.12.2017</div>
-<h3>Topologische Sortierung</h3>
+  <a href="expect_dialog_ca_roadmap.html">
+<div class="date">02.01.2018</div>
+<h3>Expect-Dialog-CA Roadmap</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ich fand einen sehr interessanten Artikel, der sich mit der effizienten Auslastung aller Kerne eines Prozessors bei der Abarbeitung
-voneinander abhängiger Tasks beschäftigt. Daraus wuchs der Wunsch, dies Idee zu implementieren und dann damit zu experimentieren.
+<p>Nachdem ich
+Version 1.0
+meiner Lösung zur Verwaltung von PKI im Terminal online gestellt habe, geht die Entwicklung natürlich weiter:
+Nunmehr werden spezielle Deliverables entsprechend des jeweiligen Verwendungszweckes des ausgestellten Zertifikates
+erzeugt.
 </p></div>   </a>
 </li>
 </ul>
