@@ -1,6 +1,12 @@
 package de.netsysit.util;
 //$Id$
 
+import javax.accessibility.AccessibleContext;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.beans.Transient;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,26 +21,184 @@ public class ResourceLoader extends java.lang.Object
 	
 	public enum IconSize
 	{
-		small(32),medium(48),large(64);
+		small(new int[]{32,36}),medium(new int[]{48}),large(new int[]{64});
 		
-		private final int pixelSize;
-		private final int smallersize;
+		private final int[] pixelSize;
+		private final int[] smallersize;
 
-		private IconSize(int pixelSize)
+		private IconSize(int[] pixelSize)
 		{
 			this.pixelSize=pixelSize;
-			smallersize=pixelSize==48?32:pixelSize*3/4;
+			smallersize=new int[pixelSize.length];
+			for(int i=0;i<pixelSize.length;++i)
+			{
+				smallersize[i]=pixelSize[i]==48?32:pixelSize[i]*3/4;
+			}
 		}
-		public int getPixelSize()
+		public int[] getPixelSize()
 		{
 			return pixelSize;
 		}
-		public int getSmallerPixelSize()
+		public int[] getSmallerPixelSize()
 		{
 			return smallersize;
 		}
 	}
-	
+
+	public static javax.swing.ImageIcon getIcon(java.lang.String resourceName)
+	{
+		javax.swing.ImageIcon rv=null;
+		if(props.getProperty(resourceName,resourceName).indexOf('&')>-1)
+		{
+			try
+			{
+				java.lang.String[] parts = props.getProperty(resourceName,resourceName).split("&");
+				if ((parts != null) && (parts.length == 2))
+				{
+					rv=new ImageIcon(de.netsysit.ui.image.DecoratedImageProducer.produceImage(de.netsysit.util.ResourceLoader.getImgResource(parts[0]), de.netsysit.util.ResourceLoader.getImgResource(parts[1])));
+				}
+				else
+				{
+					rv=new ImageIcon(getImgResource(resourceName));
+				}
+			}
+			catch(java.lang.Throwable t)
+			{
+				rv=new ImageIcon(getImgResource(resourceName));
+			}
+		}
+		else
+		{
+			rv=new ImageIcon(getImgResource(resourceName));
+		}
+		return rv;
+	}
+	private static class ImageIcon extends javax.swing.ImageIcon
+	{
+		private javax.swing.ImageIcon proxy;
+
+		public ImageIcon(URL location)
+		{
+			super();
+			proxy=new javax.swing.ImageIcon();
+			java.awt.Image img = null;
+			try
+			{
+				img = javax.imageio.ImageIO.read(location);
+			}
+			catch(java.io.IOException ioexp)
+			{
+				img = java.awt.Toolkit.getDefaultToolkit().createImage(location);
+			}
+			int w = img.getWidth(proxy.getImageObserver());
+			int h = img.getHeight(proxy.getImageObserver());
+			if(h<36)
+			{
+				java.awt.image.BufferedImage timg = new java.awt.image.BufferedImage(36, 36, BufferedImage.TYPE_INT_ARGB);
+				java.awt.Graphics gfx = timg.getGraphics();
+				gfx.drawImage(img, (36 - w) / 2, (36 - w) / 2, proxy.getImageObserver());
+				gfx.dispose();
+				proxy.setImage(timg);
+			}
+			else
+			{
+				proxy.setImage(img);
+			}
+		}
+
+		public ImageIcon(BufferedImage img)
+		{
+			proxy=new javax.swing.ImageIcon();
+			int w = img.getWidth(proxy.getImageObserver());
+			int h = img.getHeight(proxy.getImageObserver());
+			if(h<36)
+			{
+				java.awt.image.BufferedImage timg = new java.awt.image.BufferedImage(36, 36, BufferedImage.TYPE_INT_ARGB);
+				java.awt.Graphics gfx = timg.getGraphics();
+				gfx.drawImage(img, (36 - w) / 2, (36 - w) / 2, proxy.getImageObserver());
+				gfx.dispose();
+				proxy.setImage(timg);
+			}
+			else
+			{
+				proxy.setImage(img);
+			}
+		}
+
+		@Override
+		public int getImageLoadStatus()
+		{
+			return proxy.getImageLoadStatus();
+		}
+
+		@Override
+		@Transient
+		public Image getImage()
+		{
+			return proxy.getImage();
+		}
+
+		@Override
+		public void setImage(Image image)
+		{
+			proxy.setImage(image);
+		}
+
+		@Override
+		public String getDescription()
+		{
+			return proxy.getDescription();
+		}
+
+		@Override
+		public void setDescription(String description)
+		{
+			proxy.setDescription(description);
+		}
+
+		@Override
+		public void paintIcon(Component c, Graphics g, int x, int y)
+		{
+			proxy.paintIcon(c, g, x, y);
+		}
+
+		@Override
+		public int getIconWidth()
+		{
+			return proxy.getIconWidth();
+		}
+
+		@Override
+		public int getIconHeight()
+		{
+			return proxy.getIconHeight();
+		}
+
+		@Override
+		public void setImageObserver(ImageObserver observer)
+		{
+			proxy.setImageObserver(observer);
+		}
+
+		@Override
+		@Transient
+		public ImageObserver getImageObserver()
+		{
+			return proxy.getImageObserver();
+		}
+
+		@Override
+		public String toString()
+		{
+			return proxy.toString();
+		}
+
+		@Override
+		public AccessibleContext getAccessibleContext()
+		{
+			return proxy.getAccessibleContext();
+		}
+	}
 	static
 	{
 		setSize(IconSize.medium);
@@ -50,7 +214,11 @@ public class ResourceLoader extends java.lang.Object
 		{
 			try{
 				javax.swing.Icon ic=javax.swing.UIManager.getIcon("OptionPane.errorIcon");
-				java.awt.image.BufferedImage bi=de.elbosso.ui.image.Utilities.iconToImage(ic);
+				java.awt.image.BufferedImage bi=null;
+				if(ic!=null)
+					bi=de.elbosso.ui.image.Utilities.iconToImage(ic);
+				else
+					bi=new java.awt.image.BufferedImage(getSize().getPixelSize()[0],getSize().getPixelSize()[0], BufferedImage.TYPE_INT_ARGB);
 				java.io.File f=java.io.File.createTempFile("fallbackicon", "png");
 				f.deleteOnExit();
 				javax.imageio.ImageIO.write(bi, "png", f);
@@ -95,6 +263,10 @@ public class ResourceLoader extends java.lang.Object
 		}
 	}
 
+	public static synchronized void configure(java.util.Properties presets) throws java.io.IOException
+	{
+		configure(null,presets);
+	}
 	public static synchronized void configure(java.io.File conf) throws java.io.IOException
 	{
 		configure(conf,null);
@@ -105,7 +277,7 @@ public class ResourceLoader extends java.lang.Object
 		{
 			props.putAll(presets);
 		}
-		if((conf.exists())&&(conf.isDirectory()==false))
+		if((conf!=null)&&((conf.exists())&&(conf.isDirectory()==false)))
 		{
 			java.io.InputStream is=new java.io.FileInputStream(conf);
 			java.util.Properties p=new java.util.Properties();
@@ -113,7 +285,6 @@ public class ResourceLoader extends java.lang.Object
 			props.putAll(p);
 			is.close();
 			f=conf;
-//			p.list(System.err);
 		}
 	}
 	public static synchronized void writeConfiguration(java.io.File conf) throws java.io.IOException
@@ -148,64 +319,89 @@ public class ResourceLoader extends java.lang.Object
 	public static synchronized java.net.URL getResource(java.lang.String arg)
 	{
 		java.net.URL rv=null;
-//		if(arg.contains("Previous"))
-
-			try
+		try
+		{
+			if(props.containsKey(arg))
 			{
-				if(props.containsKey(arg))
+				int[] ps=null;
+				java.lang.String replacement=props.getProperty(arg,arg);
+				java.lang.String prefix=null;
+				java.lang.String suffix=null;
+				java.util.regex.Pattern pat=java.util.regex.Pattern.compile("(.*?)_(\\d*?)([^\\d]*?)\\.png");
+				java.util.regex.Matcher m=pat.matcher(replacement);
+				if(m.matches())
 				{
-
-					java.lang.String replacement=props.getProperty(arg,arg);
-//		if(arg.contains("Previous"))
-
-					java.util.regex.Pattern pat=java.util.regex.Pattern.compile("(.*?)_(\\d*?).png");
-					java.util.regex.Matcher m=pat.matcher(replacement);
-					if(m.matches())
+					prefix=m.group(1);
+					suffix=m.group(3);
+					int osize=java.lang.Integer.parseInt(m.group(2));
+					if(osize==48)
+						ps=size.getPixelSize();
+					else
+						ps=size.getSmallerPixelSize();
+				}
+				if(ps!=null)
+				{
+					for (int size : ps)
 					{
-						java.lang.String prefix=m.group(1);
-						int osize=java.lang.Integer.parseInt(m.group(2));
-						if(osize==48)
-							replacement=prefix+"_"+size.getPixelSize()+".png";
-						else //if(replacement.contains("32."))
-							replacement=prefix+"_"+size.getSmallerPixelSize()+".png";
+						replacement = prefix + "_" + size + suffix+".png";
+						rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+						if(rv!=null)
+							break;
 					}
-//					else
-//		if(arg.contains("Previous"))
-
-					rv=ResourceLoader.class.getClassLoader().getResource(replacement);
-	//				rv.openConnection();
-					if(rv==null)
-						rv=ResourceLoader.class.getClassLoader().getResource(arg);
 				}
 				else
 				{
-					java.util.regex.Pattern pat=java.util.regex.Pattern.compile("(.*?)_(\\d*?).png");
-					java.util.regex.Matcher m=pat.matcher(arg);
-					if(m.matches())
-					{
-						java.lang.String prefix=m.group(1);
-						int osize=java.lang.Integer.parseInt(m.group(2));
-						if(osize==48)
-							arg=prefix+"_"+size.getPixelSize()+".png";
-						else //if(replacement.contains("32."))
-							arg=prefix+"_"+size.getSmallerPixelSize()+".png";
-					}
-//					else
-
-					if(arg.startsWith("!"))
-						arg=arg.substring(1);
-					rv=ResourceLoader.class.getClassLoader().getResource(arg);
-					if(rv!=null)
-						props.setProperty(arg, arg);
+					rv = ResourceLoader.class.getClassLoader().getResource(replacement);
 				}
+				if (rv == null)
+					rv = ResourceLoader.class.getClassLoader().getResource(arg);
 			}
-			catch(java.lang.Throwable t)
+			else
 			{
-//				t.printStackTrace();
-				rv=ResourceLoader.class.getClassLoader().getResource(arg);
-			}
-//			if(rv==null)
+				int[] ps=null;
+				java.lang.String prefix=null;
+				java.lang.String suffix=null;
+				java.lang.String replacement=arg;
+				java.util.regex.Pattern pat=java.util.regex.Pattern.compile("(.*?)_(\\d*?)([^\\d]*?)\\.png");
+				java.util.regex.Matcher m=pat.matcher(arg);
+				if(m.matches())
+				{
+					prefix=m.group(1);
+					suffix=m.group(3);
+					int osize=java.lang.Integer.parseInt(m.group(2));
+					if(osize==48)
+						ps=size.getPixelSize();
+					else
+						ps=size.getSmallerPixelSize();
+				}
+				if(ps!=null)
+				{
+					for (int size : ps)
+					{
+						replacement = prefix + "_" + size + suffix+".png";
+						if (replacement.startsWith("!"))
+							replacement = replacement.substring(1);
+						rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+						if(rv!=null)
+							break;
 
+					}
+				}
+				else
+				{
+					if (replacement.startsWith("!"))
+						replacement = replacement.substring(1);
+					rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+				}
+				if(rv!=null)
+					props.setProperty(arg, replacement);
+			}
+		}
+		catch(java.lang.Throwable t)
+		{
+//				t.printStackTrace();
+			rv=ResourceLoader.class.getClassLoader().getResource(arg);
+		}
 		return rv;
 	}
 	public static synchronized java.net.URL getResourceUnaltered(java.lang.String arg)
