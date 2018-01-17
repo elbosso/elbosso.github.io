@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 public class ResourceLoader extends java.lang.Object
 {
 	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(ResourceLoader.class);
+	private final static java.util.regex.Pattern pat1=java.util.regex.Pattern.compile("(.*?)_(\\d*?)([^\\d]*?)\\.png");
+	private final static java.util.regex.Pattern pat2=java.util.regex.Pattern.compile("(.*?)_(\\d*?)([^\\d]*?)\\.png");
 	private static java.util.Properties props=new java.util.Properties();
 	private static java.io.File f;
 	private static IconSize size;
@@ -327,8 +329,7 @@ public class ResourceLoader extends java.lang.Object
 				java.lang.String replacement=props.getProperty(arg,arg);
 				java.lang.String prefix=null;
 				java.lang.String suffix=null;
-				java.util.regex.Pattern pat=java.util.regex.Pattern.compile("(.*?)_(\\d*?)([^\\d]*?)\\.png");
-				java.util.regex.Matcher m=pat.matcher(replacement);
+				java.util.regex.Matcher m=pat1.matcher(replacement);
 				if(m.matches())
 				{
 					prefix=m.group(1);
@@ -362,8 +363,7 @@ public class ResourceLoader extends java.lang.Object
 				java.lang.String prefix=null;
 				java.lang.String suffix=null;
 				java.lang.String replacement=arg;
-				java.util.regex.Pattern pat=java.util.regex.Pattern.compile("(.*?)_(\\d*?)([^\\d]*?)\\.png");
-				java.util.regex.Matcher m=pat.matcher(arg);
+				java.util.regex.Matcher m=pat2.matcher(arg);
 				if(m.matches())
 				{
 					prefix=m.group(1);
