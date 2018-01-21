@@ -114,6 +114,141 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Technology Short Take 93</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Welcome to Technology Short Take 93! Today I have another collection of data center technology links, articles, thoughts, and rants. Here&rsquo;s hoping you find something useful!</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>Matt Klein <a href="https://blog.envoyproxy.io/service-mesh-data-plane-vs-control-plane-2774e720f7fc">breaks down service mesh components</a>, using terms networking professionals know well, like &ldquo;data plane&rdquo; and &ldquo;control plane.&rdquo; Those familiar with networking concepts will identify well with the ideas in this article, I think.</li>
+<li>This is pretty cool: <a href="https://www.codensx.com/single-post/2018/01/05/Autopology---WYSIWYG-Designer-for-NSX">a WYSIWYG topology designer for VMware NSX</a>. Neat!</li>
+<li>Daniel Hertzberg provides <a href="https://eos.arista.com/arista-salt-integration/">an overview of Salt integration in Arista EOS</a>.</li>
+<li>Barry Peddycord shares <a href="https://cumulusnetworks.com/blog/cumulus-linux-ansible-now-easier-ever/">an update on Ansible support for the Cumulus Linux NCLU</a>.</li>
+</ul>
+
+<h2 id="servers-hardware">Servers/Hardware</h2>
+
+<p>Nothing this time around. Feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> if you have links you think I should include next time!</p>
+
+<h2 id="security">Security</h2>
+
+<ul>
+<li>Detectify has <a href="https://labs.detectify.com/2017/07/13/a-deep-dive-into-aws-s3-access-controls-taking-full-control-over-your-assets/">a nice, in-depth write-up on AWS S3 access controls</a>. Given the recent plethora of data breaches that have been attributed to misconfigured S3 buckets, now might be a good time to read this post.</li>
+</ul>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li>The VMware Cloud-Native Apps group has <a href="https://blogs.vmware.com/cloudnative/2017/12/18/kubernetes-1-9-expanded-ecosystem-workloads-api-storage-visibility/">a breakdown of some of the new features/functionality</a> found in the 1.9 release of Kubernetes.</li>
+<li>Via Maish Saidel-Keesing, I saw <a href="https://abhishek-tiwari.com/10-open-source-tools-for-highly-effective-kubernetes-sre-and-ops-teams/">this post</a> about 10 open source Kubernetes tools for highly effective SRE and Ops teams.</li>
+<li>Richard Boswell has a series going on VMware Integrated OpenStack (VIO) and resource schedulers that is (so far) pretty good. Check out <a href="http://www.revolutionlabs.net/2017/10/30/vio_resource_schedulers_part1.html">part 1</a> and <a href="http://www.revolutionlabs.net/2018/01/17/vio_resource_schedulers_part2.html">part 2</a>.</li>
+<li>Daniel Sanche has <a href="https://medium.com/google-cloud/kubernetes-101-pods-nodes-containers-and-clusters-c1509e409e16">a &ldquo;Kubernetes 101&rdquo; post</a> that might be worth reviewing if you&rsquo;re (somewhat) new to Kubernetes.</li>
+<li>And while we&rsquo;re on the topic of getting started with Kubernetes, you might find <a href="https://chrisshort.net/kubernetes-getting-started/">Chris Short&rsquo;s post on that topic</a> helpful as well.</li>
+<li>Robin Vasan (via The New Stack) <a href="https://thenewstack.io/creative-software-destruction-new-presentation-layer/">talks a bit</a> about how various forces are shaping the software industry. There are a number of useful observations and takeaways from this article; one that jumps to mind is Vasan&rsquo;s recommendation that &ldquo;architects should actively consider finding abstractions that give them portability&rdquo; when it comes to selecting/utilization cloud services. (I could insert a rant here about lock-in, but I&rsquo;ll abstain&hellip;)</li>
+<li>Kynan Rilee has a nice post on <a href="https://medium.com/kokster/scheduling-in-kubernetes-part-1-node-affinity-b77c97556424">node affinity in Kubernetes scheduling</a>.</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>PowerShell Core 6.0 is <a href="https://blogs.msdn.microsoft.com/powershell/2018/01/10/powershell-core-6-0-generally-available-ga-and-supported/">now GA and supported by Microsoft</a>.</li>
+<li>Consul is a distributed key-value store that I&rsquo;ve discussed a few times here on the site. One issue that has been difficult to address is boostrapping Consul in a cloud environment; <a href="https://www.hashicorp.com/blog/consul-auto-join-with-cloud-metadata">this slightly older article</a> addresses how new functionality (as of v0.7.1) can use cloud metadata to handle boostrapping a Consul cluster&mdash;and help address scaling that cluster up or down. And while I&rsquo;m on the topic of Consul, you may also find <a href="https://www.hashicorp.com/blog/smart-networking-with-consul-and-service-meshes">this article on using Consul with a service mesh</a> to be somewhat helpful as well (although this one isn&rsquo;t as in-depth as the previous article).</li>
+<li>Ariya Hidayat shows <a href="https://ariya.io/2017/03/debian-on-windows-via-wsl">how to run Debian under WSL</a> (Windows Subsystem for Linux).</li>
+<li><a href="https://github.com/GoogleCloudPlatform/container-diff">This is a tool</a> I&rsquo;d like to take for a spin as soon as I get a chance.</li>
+<li>I&rsquo;m glad to see someone tackle the &ldquo;microservices are the answer&rdquo; mindset that seems to be going around these days. Check out <a href="http://www.dwmkerr.com/the-death-of-microservice-madness-in-2018/">Dave Kerr&rsquo;s post</a>. (He also includes links to more in-depth reading on related topics.)</li>
+<li>Mark Peek <a href="https://blogs.vmware.com/opensource/2018/01/12/dispatch-project-open-source-serverless-framework/">talks about Dispatch</a>, the open source serverless framework VMware recently released.</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<ul>
+<li>Klaus Aschenbrenner shares <a href="https://www.sqlpassion.at/archive/2018/01/15/how-i-designed-my-vmware-vsan-based-home-lab/">how he designed his VMware vSAN-based home lab</a>.</li>
+</ul>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<ul>
+<li>William Lam <a href="https://www.virtuallyghetto.com/2018/01/cross-vcenter-clone-with-vsphere-6-0.html">talks a bit about cross-vCenter cloning</a> with vSphere 6.0 (or higher). He points out that this also works to/from VMware Cloud on AWS.</li>
+<li>Brandon Lee discusses <a href="https://www.virtualizationhowto.com/2018/01/roll-back-vmware-meltdown-and-spectre-microcode-patch/">rolling back the VMware Meltdown and Spectre patches</a>.</li>
+<li>I like Vagrant, but it&rsquo;s nice to see <a href="https://blog.kchung.co/mech-vagrant-with-vmware-integration-for-free/">a bit of competition in this space</a>.</li>
+<li>Karim Boumedhel <a href="https://blog.openshift.com/a-first-look-at-kubevirt/">takes a look at KubeVirt</a>, which aims to bring management of VMs into Kubernetes. This is an interesting project that I&rsquo;ve been tracking for a while now.</li>
+<li>Although <a href="https://blogs.vmware.com/networkvirtualization/2017/12/vmware-sddc-nsx-expands-aws.html/">this blog post</a> name-drops NSX and is published on VMware&rsquo;s Network Virtualization blog, it&rsquo;s really more about VMware Cloud on AWS (which is OK, that&rsquo;s an interesting topics to lots of folks these days).</li>
+</ul>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<ul>
+<li>I really appreciated Jérôme Petazzoni&rsquo;s frank look at <a href="http://jpetazzo.github.io/2017/12/24/productivity-depression-kanban-emoji/">how he reclaimed his productivity</a> in the face of various challenges. There are some good tips here.</li>
+<li>I found this article on <a href="http://www.fast.ai/2018/01/08/startups/">five trends to avoid when founding a startup</a> (no, I&rsquo;m not planning to found a startup!) interesting reading. The article helps me see companies in a different light and judge/evaluate them by different criteria, which (IMHO) is generally pretty helpful.</li>
+</ul>
+
+<p>OK, that&rsquo;s all I have this time around. Check back in a couple weeks for the next Technology Short Take!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/_UfcOIe7NZM" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/_UfcOIe7NZM/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Experimenting with Azure</h3>
+		</div>
+		<div class="collectiontext">
+			<p>I&rsquo;ve been experimenting with <a href="https://azure.microsoft.com/en-us/">Microsoft Azure</a> recently, and I thought it might be useful to share a quick post on using some of my favorite tools with Azure. I&rsquo;ve found it useful to try to leverage existing tools whenever I can, and so as I&rsquo;ve been experimenting with Azure I&rsquo;ve been leveraging familiar tools like <a href="https://www.docker.com/products/docker-machine">Docker Machine</a> and <a href="https://www.vagrantup.com/">Vagrant</a>.</p>
+
+<p>The information here isn&rsquo;t revolutionary or unique, but hopefully it will still be useful to others, even if only as a &ldquo;quick reference&rdquo;-type of post.</p>
+
+<h2 id="launching-an-instance-on-azure-using-docker-machine">Launching an Instance on Azure Using Docker Machine</h2>
+
+<p>To launch an instance on Azure and provision it with Docker using <code>docker-machine</code>:</p>
+
+<pre><code>docker-machine create -d azure \
+--azure-subscription-id $(az account show --query &quot;id&quot; -o tsv) \
+--azure-ssh-user azureuser \
+--azure-size &quot;Standard_B1ms&quot; azure-test
+</code></pre>
+
+<p>The first time you run this you&rsquo;ll probably need to allow Docker Machine access to your Azure subscription (you&rsquo;ll get prompted to log in via a browser and allow access). This will create a service principal that is visible via <code>az ad sp list</code>. Note that you may be prompted for authentication for future uses, although it will re-use the existing service principal once it is created.</p>
+
+<h2 id="launching-an-instance-using-the-azure-provider-for-vagrant">Launching an Instance Using the Azure Provider for Vagrant</h2>
+
+<p>See <a href="https://github.com/Azure/vagrant-azure">this page</a> for complete details on using the Azure provider for Vagrant. Basically, it boils down to these four steps:</p>
+
+<ol>
+<li>Install the Azure provider using <code>vagrant plugin install vagrant-azure</code>.</li>
+<li>Add a &ldquo;dummy&rdquo; box (similar to how you use Vagrant with AWS; see this post).</li>
+<li>Set up an Azure service principal for Vagrant to use to connect to Azure.</li>
+<li>Run <code>vagrant up</code> and you&rsquo;re off to the races.</li>
+</ol>
+
+<p>A more detailed post on <a href="https://blog.scottlowe.org/2017/12/11/using-vagrant-with-azure/">using Vagrant with Azure is available here</a>; it provides a bit more information on the above steps.</p>
+
+<h2 id="launching-an-instance-using-the-azure-cli">Launching an Instance using the Azure CLI</h2>
+
+<p>OK, maybe the Azure CLI isn&rsquo;t exactly an &ldquo;existing tool,&rdquo; but given my affinity for CLI-based tools I think it&rsquo;s probably reasonable to include it here. To launch an instance using the Azure CLI, it would look something like this:</p>
+
+<pre><code>az vm create -n vm-name -g group-name --image UbuntuLTS --size Standard_B1ms --no-wait
+</code></pre>
+
+<p>Of course, this assumes a pre-existing resource group. More details are available <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli">here</a>.</p>
+
+<p>If you need to install the Azure CLI, see <a href="https://blog.scottlowe.org/2017/08/13/manually-installing-azure-cli-fedora-25/">here</a> or <a href="https://blog.scottlowe.org/2017/12/07/installing-azure-cli-fedora-27/">here</a> for some additional information.</p>
+
+<p>Happy experimenting!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/L8VPRaRG8-8" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/L8VPRaRG8-8/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
 		</div>
 		<div>
@@ -319,25 +454,6 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/XN_6RpQy_8Y/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>Friday Fun LV - Florence Nightingale inspired Coxcomb Chart</h3>
-		</div>
-		<div class="collectiontext">
-<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the last Friday in 2017 I have another friday fun component for you. It's a variation of a donut chart where the segment width varies with the value. To give you an idea what this chart looks like here is a little picture that I've found on the web...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-wZVyllckXeI/WkM1mfvjhVI/AAAAAAAAEww/h28cWlH1_jwki3V8ho-6t7Vf5m6-fqLlwCLcBGAs/s1600/Coxcomb.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="838" data-original-width="1117" height="480" src="https://4.bp.blogspot.com/-wZVyllckXeI/WkM1mfvjhVI/AAAAAAAAEww/h28cWlH1_jwki3V8ho-6t7Vf5m6-fqLlwCLcBGAs/s640/Coxcomb.png" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In principle this chart is not really fancy but the one thing that caught my attention are the shadows that are only visible on the lower elements, meaning to say they are not besides the segment. In JavaFX we have effects like drop shadows directly build in but they won't work here because if you would use a simple drop shadow on each segment you would get something like follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-MHZwQ-8sNiw/WkM25mTrUUI/AAAAAAAAEw8/8uvx0rwSVI4B6ihZvXkWY-V84M6qIxbpgCLcBGAs/s1600/Coxcomb%2BChart%2B2017-12-27%2B06-59-45.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="571" data-original-width="551" height="640" src="https://1.bp.blogspot.com/-MHZwQ-8sNiw/WkM25mTrUUI/AAAAAAAAEw8/8uvx0rwSVI4B6ihZvXkWY-V84M6qIxbpgCLcBGAs/s640/Coxcomb%2BChart%2B2017-12-27%2B06-59-45.png" width="616" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So we now have the drop shadows but not only on the lower segments but all around each segment which is not the same. One trick could be to use clipping for which you have to clip each segment with a path.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well to be honest I was to lazy and decided to go another way. In principle you could imitate a drop shadow by using a linear gradient. This works but is not easy to achieve. So what I did was to add another segment at the end of each segment which I stroke with a linear gradient that goes from gray to transparent. To give it a little bit more realistic look I've also added a gaussian blur. So my result looks as follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-hsnlqm2mQU0/WkM45tMzcoI/AAAAAAAAExI/yV4m6K5WDh0d6k9yx2nMpVaagI164ot5QCLcBGAs/s1600/CoxcombChart_Descending.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="674" data-original-width="703" height="612" src="https://1.bp.blogspot.com/-hsnlqm2mQU0/WkM45tMzcoI/AAAAAAAAExI/yV4m6K5WDh0d6k9yx2nMpVaagI164ot5QCLcBGAs/s640/CoxcombChart_Descending.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To be honest I'm not really satisfied with the result because the shadow still looks not realistic enough but hey...for an early morning hack it's good enough ;)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">UPDATE:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well what I should I say...this shadow problem nagged me last night so I reworked my implementation and now I make use of the inbuild DropShadow effect in combination with clipping. On the following picture you can see the LinearGradient based approach (left) compared to the DropShadow approach (right)...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-8Up9iY50mF8/WkSFy9OtukI/AAAAAAAAExo/PUutYle0VKsO_ybmo8rgbj0ChTh9Nlm3wCLcBGAs/s1600/CoxcombChart_Clipping.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="678" data-original-width="1363" height="316" src="https://2.bp.blogspot.com/-8Up9iY50mF8/WkSFy9OtukI/AAAAAAAAExo/PUutYle0VKsO_ybmo8rgbj0ChTh9Nlm3wCLcBGAs/s640/CoxcombChart_Clipping.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To make the effect more visible I've set the drop shadow color to opaque black on the right side and now the shadows look more natural...at least to me ;)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For the new approach I've added an additional path at the end of each segment and adjusted the shadow offset in x- and y-direction for each segment.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">This worked nicely except the fact that the shadow also showed up outside of the segment.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well a picture is better than thousand words, so on the following picture I've used plain red for the drop shadow color and here you can see what I'm talking about...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-lPm4L1b1QPQ/WkSH4rs718I/AAAAAAAAEx0/k3-85hMh8K8v7YyKweDJkR6-vZj_DfkLQCLcBGAs/s1600/Coxcomb%2BChart%2B2017-12-28%2B06-57-15.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="119" data-original-width="190" height="250" src="https://1.bp.blogspot.com/-lPm4L1b1QPQ/WkSH4rs718I/AAAAAAAAEx0/k3-85hMh8K8v7YyKweDJkR6-vZj_DfkLQCLcBGAs/s400/Coxcomb%2BChart%2B2017-12-28%2B06-57-15.png" width="400" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To avoid this problem I simply clip each segment with a circle that has the same radius and by using this little clipping trick the result looks like follows (with black as shadow color again)...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://3.bp.blogspot.com/-cq0A1K3VAWk/WkSIR1rWf4I/AAAAAAAAEx4/msTh8eZ5TB0PdOWuf3H_QdTTJ7Ax5nnXACLcBGAs/s1600/Coxcomb%2BChart%2B2017-12-28%2B06-57-36.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="119" data-original-width="198" height="240" src="https://3.bp.blogspot.com/-cq0A1K3VAWk/WkSIR1rWf4I/AAAAAAAAEx4/msTh8eZ5TB0PdOWuf3H_QdTTJ7Ax5nnXACLcBGAs/s400/Coxcomb%2BChart%2B2017-12-28%2B06-57-36.png" width="400" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And now it looks exactly as I would like to see it :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To use the clipping in JavaFX Canvas (or HTML5 Canvas) you have to define a path that will be used for the clipping and call clip() before you draw the elements that you would like to clip. The next thing you need to keep in mind is that once the clipping path is set it will affect all operations defined <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/canvas/GraphicsContext.html#clip--" target="_blank">here</a>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In my case the problem is that the radius of the segments will increase so the clipping path also has to "grow". The canvas has a nice feature which makes it possible to save and restore it's state. Meaning to say before I set the clipping path I save the canvas by calling the save() method on the GraphicsContext and after I've finished the segment I reset the canvas to the saved state by calling the restore() method on the GraphicsContext. The nice thing is that you can save/restore the canvas as often as you like...but you have to keep track of it.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As a little advice let me tell you that if you use save/restore more than once it makes sense to either add some comments to each save/restore statement so that you know for which operation you save/restore or you also simply intend your code after each save statement to visualize the saved code blocks.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">But now back to the chart...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For my implementation of the coxcomb chart the values of each segment are not related to the segment radius and therefor it only makes sense if you sort the items in the list.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">For this reason I've added two convenience methods to sort the chart either ascending or descending where ascending would look like this...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-E9TcvergQgI/WkM456hdI-I/AAAAAAAAExQ/rJGU20qgF_U3Zgie45LbjPKHJvR3pWVgwCEwYBhgL/s1600/CoxcombChart_Ascending.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="674" data-original-width="607" height="640" src="https://1.bp.blogspot.com/-E9TcvergQgI/WkM456hdI-I/AAAAAAAAExQ/rJGU20qgF_U3Zgie45LbjPKHJvR3pWVgwCEwYBhgL/s640/CoxcombChart_Ascending.png" width="576" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well I like the descending version more but this is personal taste.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I did not add a legend to the chart because I think this could be a separate control to be more flexible. I've created a simple item class that has properties for value, name and color.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To create the chart above you simply need the following code...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><pre style="background-color: white; font-family: &quot;Droid Sans Mono Awesome&quot;;">Item[] items = {<br />    <span style="color: #0004ff;">new </span>Item(27, Color.web(<span style="color: magenta;">"#96AA3B"</span>)),<br />    <span style="color: #0004ff;">new </span>Item(24, Color.web(<span style="color: magenta;">"#29A783"</span>)),<br />    <span style="color: #0004ff;">new </span>Item(16, Color.web(<span style="color: magenta;">"#098AA9"</span>)),<br />    <span style="color: #0004ff;">new </span>Item(15, Color.web(<span style="color: magenta;">"#62386F"</span>)),<br />    <span style="color: #0004ff;">new </span>Item(13, Color.web(<span style="color: magenta;">"#89447B"</span>)),<br />    <span style="color: #0004ff;">new </span>Item(5, Color.web(<span style="color: magenta;">"#EF5780"</span>))<br />};<br />CoxcombChart chart = <span style="color: #0004ff;">new </span>CoxcombChart(items);</pre><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I'm always impressed how easy it is to create stuff like this in JavaFX, creating the control and writing this blog post tooks me only 2.5h which is one of the reasons why I love coding in JavaFX, the time from the first idea to some running code is really short and with this the productivity is really high and the code for&nbsp;the control is just around <strike>280</strike>&nbsp;330 (I've added 2 properties with their getters and setters) lines incl. import statements, license etc. Long story short...I ❤️ it :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Oh and if you are interested in the code you can find it as always on <a href="https://github.com/HanSolo/coxcombchart" target="_blank">github</a>.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">This chart is very specific and does not work for everything but it could be quite useful for some special use cases and to be honest it simply looks nice :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So I guess that's it for 2017, now I wish all of you a happy new year and...keep coding...</span><br /><br />
-
- -->
-		</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2017/12/friday-fun-lv-florence-nightingale.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -345,34 +461,35 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="gitlab___mozilla____9760_.html">
+<div class="date">21.01.2018</div>
+<h3>GitLab & Mozilla: &#9760;</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Eigentlich lebe ich schon ziemlich lange mit Mozilla bzw. Firefox als Browser und war damit immer recht zufrieden -
+unter nicht nur einem Betriebssystem. Jetzt häufen sich allerdings die kleinen Dinge, die  mich darüber nachdenken lassen,
+Alternativen zu erkunden...
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="github_repository_beaninfo_generator.html">
+<div class="date">21.01.2018</div>
+<h3>GitHub Repository für BeanInfo Generator</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Wie bereits in einem
+früher veröffentlichten Artikel
+angekündigt wurden die Dateien zur Erzeugung vollständiger BeanInfos in einem
+GitHub-Repository veröffentlicht.
+</p></div>   </a>
+</li>
+<li class="anriss">
 	<a href="neuseeland_tips.html#54">
 <div class="date">16.01.2018</div>
 <h3>Neuseeland-Tips</h3>
 <div class="abstract">
 	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
 <p>Hier einige Tips, falls man mal in Neuseeland sein und absolut nicht wissen sollte, was man den lieben langen Tag tun könnte.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="generatoren_properties.html">
-<div class="date">14.01.2018</div>
-<h3>Generatoren als Properties</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem ich vor einiger Zeit eine tiefere Integration meines
-Generator-Frameworks für Testdaten
-in die Java-Landschaft erfogreich vollzogen habe, wollte ich nun einen Schritt weiter gehen.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="kochbuch_beispiele_auf_github.html">
-<div class="date">14.01.2018</div>
-<h3>Kochbuch-Beispiele auf GitHub</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Die Codebeispiele aus dem Kochbuch für
-dWb+
-wurden gesammelt als Projekt auf GitHub veröffentlicht
 </p></div>   </a>
 </li>
 </ul>
