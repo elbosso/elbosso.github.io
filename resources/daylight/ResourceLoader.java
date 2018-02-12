@@ -323,39 +323,56 @@ public class ResourceLoader extends java.lang.Object
 		java.net.URL rv=null;
 		try
 		{
+			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("requested image resource "+arg);
 			if(props.containsKey(arg))
 			{
 				int[] ps=null;
 				java.lang.String replacement=props.getProperty(arg,arg);
-				java.lang.String prefix=null;
-				java.lang.String suffix=null;
-				java.util.regex.Matcher m=pat1.matcher(replacement);
-				if(m.matches())
+				if(replacement.startsWith("#"))
 				{
-					prefix=m.group(1);
-					suffix=m.group(3);
-					int osize=java.lang.Integer.parseInt(m.group(2));
-					if(osize==48)
-						ps=size.getPixelSize();
-					else
-						ps=size.getSmallerPixelSize();
-				}
-				if(ps!=null)
-				{
-					for (int size : ps)
-					{
-						replacement = prefix + "_" + size + suffix+".png";
-						rv = ResourceLoader.class.getClassLoader().getResource(replacement);
-						if(rv!=null)
-							break;
-					}
+					if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("found url in props " + replacement);
+					rv=new java.net.URL(replacement.substring(1));
 				}
 				else
 				{
-					rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+					if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("replacement in props " + replacement);
+					java.lang.String prefix = null;
+					java.lang.String suffix = null;
+					java.util.regex.Matcher m = pat1.matcher(replacement);
+					if (m.matches())
+					{
+						prefix = m.group(1);
+						suffix = m.group(3);
+						int osize = java.lang.Integer.parseInt(m.group(2));
+						if (osize == 48)
+							ps = size.getPixelSize();
+						else
+							ps = size.getSmallerPixelSize();
+						if (CLASS_LOGGER.isTraceEnabled())
+							CLASS_LOGGER.trace("prefix#suffix#osize#ps " + prefix + "#" + suffix + "#" + osize + "#" + ps.length);
+					}
+					if (ps != null)
+					{
+						for (int size : ps)
+						{
+							java.lang.String constructedReplacement = prefix + "_" + size + suffix + ".png";
+							if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + constructedReplacement);
+							rv = ResourceLoader.class.getClassLoader().getResource(constructedReplacement);
+							if (rv != null)
+								break;
+						}
+					}
+					if (rv == null)
+					{
+						if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + replacement);
+						rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+					}
+					if (rv == null)
+					{
+						if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + arg);
+						rv = ResourceLoader.class.getClassLoader().getResource(arg);
+					}
 				}
-				if (rv == null)
-					rv = ResourceLoader.class.getClassLoader().getResource(arg);
 			}
 			else
 			{
@@ -363,38 +380,46 @@ public class ResourceLoader extends java.lang.Object
 				java.lang.String prefix=null;
 				java.lang.String suffix=null;
 				java.lang.String replacement=arg;
-				java.util.regex.Matcher m=pat2.matcher(arg);
-				if(m.matches())
+				if(replacement.startsWith("#"))
 				{
-					prefix=m.group(1);
-					suffix=m.group(3);
-					int osize=java.lang.Integer.parseInt(m.group(2));
-					if(osize==48)
-						ps=size.getPixelSize();
-					else
-						ps=size.getSmallerPixelSize();
-				}
-				if(ps!=null)
-				{
-					for (int size : ps)
-					{
-						replacement = prefix + "_" + size + suffix+".png";
-						if (replacement.startsWith("!"))
-							replacement = replacement.substring(1);
-						rv = ResourceLoader.class.getClassLoader().getResource(replacement);
-						if(rv!=null)
-							break;
-
-					}
+					if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("found url in props " + replacement);
+					rv=new java.net.URL(replacement.substring(1));
 				}
 				else
 				{
-					if (replacement.startsWith("!"))
-						replacement = replacement.substring(1);
-					rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+					java.util.regex.Matcher m = pat2.matcher(arg);
+					if (m.matches())
+					{
+						prefix = m.group(1);
+						suffix = m.group(3);
+						int osize = java.lang.Integer.parseInt(m.group(2));
+						if (osize == 48)
+							ps = size.getPixelSize();
+						else
+							ps = size.getSmallerPixelSize();
+					}
+					if (ps != null)
+					{
+						for (int size : ps)
+						{
+							replacement = prefix + "_" + size + suffix + ".png";
+							if (replacement.startsWith("!"))
+								replacement = replacement.substring(1);
+							rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+							if (rv != null)
+								break;
+
+						}
+					}
+					else
+					{
+						if (replacement.startsWith("!"))
+							replacement = replacement.substring(1);
+						rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+					}
+					if (rv != null)
+						props.setProperty(arg, replacement);
 				}
-				if(rv!=null)
-					props.setProperty(arg, replacement);
 			}
 		}
 		catch(java.lang.Throwable t)

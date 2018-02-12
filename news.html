@@ -117,80 +117,91 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
-			<h3>Technology Short Take 93</h3>
+			<h3>Some Tools to Help Learn Kubernetes</h3>
 		</div>
 		<div class="collectiontext">
-			<p>Welcome to Technology Short Take 93! Today I have another collection of data center technology links, articles, thoughts, and rants. Here&rsquo;s hoping you find something useful!</p>
+			<p><a href="https://kubernetes.io/">Kubernetes</a> is emerging as the clear leader in the container orchestration space. This makes it an important technology to know and understand. However, like other distributed systems, learning something like Kubernetes can be challenging due to the effort involved in getting Kubernetes up and running. It&rsquo;s not about learning to set up Kubernetes (although that comes in time); at first, it&rsquo;s about understanding what Kubernetes does and how to use Kubernetes. In this post, I&rsquo;ll share some tools to help learn what Kubernetes does and how to use Kubernetes.</p>
 
-<h2 id="networking">Networking</h2>
+<p>Note that this post is <strong>not</strong> intended to be a comprehensive list of learning resources for Kubernetes. Also, this post is <strong>not</strong> focused on providing resources to help you learn to deploy Kubernetes. Instead, I&rsquo;m focusing here on tools and services that let you get Kubernetes up and running quickly and easily so that you can focus on <em>using</em> Kubernetes (deploying applications and workloads onto Kubernetes). I&rsquo;m sure there are many more tools/options than what I have listed here; these are just some that I have used and feel might be useful for others.</p>
 
-<ul>
-<li>Matt Klein <a href="https://blog.envoyproxy.io/service-mesh-data-plane-vs-control-plane-2774e720f7fc">breaks down service mesh components</a>, using terms networking professionals know well, like &ldquo;data plane&rdquo; and &ldquo;control plane.&rdquo; Those familiar with networking concepts will identify well with the ideas in this article, I think.</li>
-<li>This is pretty cool: <a href="https://www.codensx.com/single-post/2018/01/05/Autopology---WYSIWYG-Designer-for-NSX">a WYSIWYG topology designer for VMware NSX</a>. Neat!</li>
-<li>Daniel Hertzberg provides <a href="https://eos.arista.com/arista-salt-integration/">an overview of Salt integration in Arista EOS</a>.</li>
-<li>Barry Peddycord shares <a href="https://cumulusnetworks.com/blog/cumulus-linux-ansible-now-easier-ever/">an update on Ansible support for the Cumulus Linux NCLU</a>.</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<p>Nothing this time around. Feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> if you have links you think I should include next time!</p>
-
-<h2 id="security">Security</h2>
+<p>I&rsquo;ll briefly cover the following tools and services:</p>
 
 <ul>
-<li>Detectify has <a href="https://labs.detectify.com/2017/07/13/a-deep-dive-into-aws-s3-access-controls-taking-full-control-over-your-assets/">a nice, in-depth write-up on AWS S3 access controls</a>. Given the recent plethora of data breaches that have been attributed to misconfigured S3 buckets, now might be a good time to read this post.</li>
+<li>Minikube</li>
+<li>Kops</li>
+<li>Kube-aws</li>
+<li>Azure Container Service (ACS/AKS)</li>
 </ul>
 
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+<p>You&rsquo;ll note I&rsquo;m focused on command-line tools here, since I&rsquo;m a CLI junkie. Let&rsquo;s start with Minikube.</p>
 
-<ul>
-<li>The VMware Cloud-Native Apps group has <a href="https://blogs.vmware.com/cloudnative/2017/12/18/kubernetes-1-9-expanded-ecosystem-workloads-api-storage-visibility/">a breakdown of some of the new features/functionality</a> found in the 1.9 release of Kubernetes.</li>
-<li>Via Maish Saidel-Keesing, I saw <a href="https://abhishek-tiwari.com/10-open-source-tools-for-highly-effective-kubernetes-sre-and-ops-teams/">this post</a> about 10 open source Kubernetes tools for highly effective SRE and Ops teams.</li>
-<li>Richard Boswell has a series going on VMware Integrated OpenStack (VIO) and resource schedulers that is (so far) pretty good. Check out <a href="http://www.revolutionlabs.net/2017/10/30/vio_resource_schedulers_part1.html">part 1</a> and <a href="http://www.revolutionlabs.net/2018/01/17/vio_resource_schedulers_part2.html">part 2</a>.</li>
-<li>Daniel Sanche has <a href="https://medium.com/google-cloud/kubernetes-101-pods-nodes-containers-and-clusters-c1509e409e16">a &ldquo;Kubernetes 101&rdquo; post</a> that might be worth reviewing if you&rsquo;re (somewhat) new to Kubernetes.</li>
-<li>And while we&rsquo;re on the topic of getting started with Kubernetes, you might find <a href="https://chrisshort.net/kubernetes-getting-started/">Chris Short&rsquo;s post on that topic</a> helpful as well.</li>
-<li>Robin Vasan (via The New Stack) <a href="https://thenewstack.io/creative-software-destruction-new-presentation-layer/">talks a bit</a> about how various forces are shaping the software industry. There are a number of useful observations and takeaways from this article; one that jumps to mind is Vasan&rsquo;s recommendation that &ldquo;architects should actively consider finding abstractions that give them portability&rdquo; when it comes to selecting/utilization cloud services. (I could insert a rant here about lock-in, but I&rsquo;ll abstain&hellip;)</li>
-<li>Kynan Rilee has a nice post on <a href="https://medium.com/kokster/scheduling-in-kubernetes-part-1-node-affinity-b77c97556424">node affinity in Kubernetes scheduling</a>.</li>
-</ul>
+<h2 id="using-minikube">Using Minikube</h2>
 
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+<p><a href="https://github.com/kubernetes/minikube">Minikube</a> is a tool to run a single-node Kubernetes cluster locally on your system, using one of a number of supported hypervisors (<a href="https://www.virtualbox.org/">VirtualBox</a>, <a href="https://www.vmware.com/products/fusion.html">VMware Fusion</a>, Hyper-V, xhyve, or KVM). Because it deploys a single-node Kubernetes cluster, you&rsquo;re limited in the types of things that you can do with the resulting Kubernetes cluster; however, it does offer the ability to work locally while most of the other tools require connectivity to a cloud provider (not unexpectedly, given the nature of what Kubernetes is and what it&rsquo;s designed to do). Of course, the trade-off for working locally is that your Kubernetes cluster won&rsquo;t be able to take advantage of cloud provider functionality, like services defined as type <code>LoadBalancer</code>.</p>
 
-<ul>
-<li>PowerShell Core 6.0 is <a href="https://blogs.msdn.microsoft.com/powershell/2018/01/10/powershell-core-6-0-generally-available-ga-and-supported/">now GA and supported by Microsoft</a>.</li>
-<li>Consul is a distributed key-value store that I&rsquo;ve discussed a few times here on the site. One issue that has been difficult to address is boostrapping Consul in a cloud environment; <a href="https://www.hashicorp.com/blog/consul-auto-join-with-cloud-metadata">this slightly older article</a> addresses how new functionality (as of v0.7.1) can use cloud metadata to handle boostrapping a Consul cluster&mdash;and help address scaling that cluster up or down. And while I&rsquo;m on the topic of Consul, you may also find <a href="https://www.hashicorp.com/blog/smart-networking-with-consul-and-service-meshes">this article on using Consul with a service mesh</a> to be somewhat helpful as well (although this one isn&rsquo;t as in-depth as the previous article).</li>
-<li>Ariya Hidayat shows <a href="https://ariya.io/2017/03/debian-on-windows-via-wsl">how to run Debian under WSL</a> (Windows Subsystem for Linux).</li>
-<li><a href="https://github.com/GoogleCloudPlatform/container-diff">This is a tool</a> I&rsquo;d like to take for a spin as soon as I get a chance.</li>
-<li>I&rsquo;m glad to see someone tackle the &ldquo;microservices are the answer&rdquo; mindset that seems to be going around these days. Check out <a href="http://www.dwmkerr.com/the-death-of-microservice-madness-in-2018/">Dave Kerr&rsquo;s post</a>. (He also includes links to more in-depth reading on related topics.)</li>
-<li>Mark Peek <a href="https://blogs.vmware.com/opensource/2018/01/12/dispatch-project-open-source-serverless-framework/">talks about Dispatch</a>, the open source serverless framework VMware recently released.</li>
-</ul>
+<p>(As an aside, since Minikube leverages <code>libmachine</code>&mdash;from Docker Machine&mdash;on the back-end, using both Minikube and Docker Machine with KVM on the same system has some interesting side effects. You&rsquo;ve been warned.)</p>
 
-<h2 id="storage">Storage</h2>
+<p>Despite the limitations, I think there&rsquo;s probably still some value in using Minikube for certain situations.</p>
 
-<ul>
-<li>Klaus Aschenbrenner shares <a href="https://www.sqlpassion.at/archive/2018/01/15/how-i-designed-my-vmware-vsan-based-home-lab/">how he designed his VMware vSAN-based home lab</a>.</li>
-</ul>
+<h2 id="using-kops-kubernetes-operations">Using Kops (Kubernetes Operations)</h2>
 
-<h2 id="virtualization">Virtualization</h2>
+<p>The <a href="https://github.com/kubernetes/kops"><code>kops</code> tool</a> can be used to (relatively) quickly and easily stand up Kubernetes clusters on <a href="https://aws.amazon.com/">AWS</a> (support for other platforms is in the works). Typically, <code>kops</code> requires a DNS domain hosted in AWS Route 53 (although there are workarounds), and it does require an S3 bucket in which to store cluster/configuration state (no workaround for this). <code>kops</code> also allows you to create some pretty advanced configurations, such as HA deployments spread across multiple availability zones (AZs) and using SSH bastion hosts. I also like that you can use <code>kops</code> to generate <a href="https://www.terraform.io/">Terraform</a> configurations for setting up Kubernetes clusters.</p>
 
-<ul>
-<li>William Lam <a href="https://www.virtuallyghetto.com/2018/01/cross-vcenter-clone-with-vsphere-6-0.html">talks a bit about cross-vCenter cloning</a> with vSphere 6.0 (or higher). He points out that this also works to/from VMware Cloud on AWS.</li>
-<li>Brandon Lee discusses <a href="https://www.virtualizationhowto.com/2018/01/roll-back-vmware-meltdown-and-spectre-microcode-patch/">rolling back the VMware Meltdown and Spectre patches</a>.</li>
-<li>I like Vagrant, but it&rsquo;s nice to see <a href="https://blog.kchung.co/mech-vagrant-with-vmware-integration-for-free/">a bit of competition in this space</a>.</li>
-<li>Karim Boumedhel <a href="https://blog.openshift.com/a-first-look-at-kubevirt/">takes a look at KubeVirt</a>, which aims to bring management of VMs into Kubernetes. This is an interesting project that I&rsquo;ve been tracking for a while now.</li>
-<li>Although <a href="https://blogs.vmware.com/networkvirtualization/2017/12/vmware-sddc-nsx-expands-aws.html/">this blog post</a> name-drops NSX and is published on VMware&rsquo;s Network Virtualization blog, it&rsquo;s really more about VMware Cloud on AWS (which is OK, that&rsquo;s an interesting topics to lots of folks these days).</li>
-</ul>
+<p>However, you can also use it to set up quick and simple Kubernetes clusters for learning purposes. Here&rsquo;s an example command-line that could be used to turn up a small Kubernetes cluster using <code>kops</code>:</p>
 
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
+<pre><code>kops create cluster \
+--node-count 3 \
+--zones us-west-2a \
+--dns-zone route53domain.com \
+--node-size t2.large \
+--networking flannel \
+--ssh-public-key /path/to/public/key.pub \
+clustername.route53domain.com
+</code></pre>
 
-<ul>
-<li>I really appreciated Jérôme Petazzoni&rsquo;s frank look at <a href="http://jpetazzo.github.io/2017/12/24/productivity-depression-kanban-emoji/">how he reclaimed his productivity</a> in the face of various challenges. There are some good tips here.</li>
-<li>I found this article on <a href="http://www.fast.ai/2018/01/08/startups/">five trends to avoid when founding a startup</a> (no, I&rsquo;m not planning to found a startup!) interesting reading. The article helps me see companies in a different light and judge/evaluate them by different criteria, which (IMHO) is generally pretty helpful.</li>
-</ul>
+<p>I won&rsquo;t go into all the details on using <code>kops</code> (though I might do another post on <code>kops</code> at some point in the future). Instead, I&rsquo;ll refer you to <a href="https://github.com/kubernetes/kops/blob/master/docs/aws.md">the AWS guide in the <code>kops</code> repository</a> for more information and details on using <code>kops</code>. There are also a number of blog posts about there; <a href="https://ryaneschinger.com/blog/kubernetes-aws-vpc-kops-terraform/">here&rsquo;s one example</a>, and <a href="https://aws.amazon.com/blogs/opensource/running-bleeding-edge-kubernetes-on-aws-with-kops/">here&rsquo;s one</a> from AWS themselves.</p>
 
-<p>OK, that&rsquo;s all I have this time around. Check back in a couple weeks for the next Technology Short Take!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/_UfcOIe7NZM" height="1" width="1" alt=""/>
+<h2 id="using-kube-aws">Using kube-aws</h2>
+
+<p>As the name implies, <a href="https://github.com/kubernetes-incubator/kube-aws"><code>kube-aws</code></a> is a command-line tool for deploying a Kubernetes cluster on AWS. Like <code>kops</code>, <code>kube-aws</code> needs a Route 53 domain and an S3 bucket for storing state/configuration information. <code>kube-aws</code> also requires a KMS key. On the back-end, <code>kube-aws</code> is leveraging CloudFormation to spin up the Kubernetes cluster.</p>
+
+<p>As with the other tools, I won&rsquo;t go into great detail on how to use <code>kube-aws</code>; instead, I&rsquo;ll direct you to <a href="https://kubernetes-incubator.github.io/kube-aws/">the documentation</a> (which seems really good).</p>
+
+<h2 id="using-azure-container-service-acs-aks">Using Azure Container Service (ACS/AKS)</h2>
+
+<p>Using the <a href="https://docs.microsoft.com/en-us/cli/azure/overview?view=azure-cli-latest">Azure CLI</a>, it&rsquo;s pretty easy to spin up a Kubernetes cluster. In fact, there are a couple of different ways to go about it.</p>
+
+<p>You can use ACS (Azure Container Service) and specify Kubernetes as the orchestrator type (ACS supports other types of orchestrators as well):</p>
+
+<pre><code>az acs create --orchestrator-type=kubernetes \
+--resource-group=my-grp --name=my-clus \
+--ssh-key-value=/path/to/public/key
+</code></pre>
+
+<p>After a 5-7 minutes, the command should complete and you&rsquo;ll be ready to roll with a Kubernetes cluster running in Azure. Use the <code>az acs kubernetes get-credentials</code> to configure <code>kubectl</code> to talk to the new cluster.</p>
+
+<p>You can also use AKS (Azure Container Service, a newer offering that&mdash;as I understand it&mdash;supersedes/replaces ACS) to turn up a Kubernetes cluster (AKS only supports Kubernetes):</p>
+
+<pre><code>az aks create --resource-group=my-grp --name=my-clus \
+--ssh-key-value /path/to/public/key
+</code></pre>
+
+<p>As with <code>az acs create</code>, after a few minutes you&rsquo;ll have a shiny new Kubernetes cluster up and running. From there, you can use <code>az aks upgrade</code> to potentially upgrade your cluster, or <code>az aks get-credentials</code> to pull down a configuration that allows <code>kubectl</code> to interact with your new cluster.</p>
+
+<p>(Note that there was an issue with some versions of the Azure CLI prior to 2.0.25 that caused <code>az aks get-credentials</code> to fail. Upgrading to 2.0.25 or later seems to address the problem. If you need to upgrade the Azure CLI and you installed via <code>pip</code>, I recommend using the <code>--force-reinstall</code> flag to make sure the upgrade completes successfully.)</p>
+
+<p>Sebastien Goasguen also has <a href="https://medium.com/bitnami-perspectives/az-aci-aks-acs-in-5-minutes-top-chrono-65c9952dfeb8">a brief write-up of ACS/AKS</a> (he also covers Azure Container Instances, ACI).</p>
+
+<h2 id="why-no-mention-of-google-kubernetes-engine-gke">Why no mention of Google Kubernetes Engine (GKE)?</h2>
+
+<p>As a hosted/managed solution, GKE would fall into the same category as ACS/AKS. However, I didn&rsquo;t include GKE here for the simple reason that I was focusing on CLI-based tools, and (in my opinion) Google makes it <em>way</em> too difficult to get the <code>gcloud</code> tool installed on your system. (Seriously&mdash;if you&rsquo;re going to write it in Python, why not just use <code>pip</code>?) There is a Docker container available, but at nearly 1GB in size (last time I checked) I don&rsquo;t feel that&rsquo;s a very attractive option either.</p>
+
+<p>If you don&rsquo;t mind jumping through hoops to get <code>gcloud</code> installed (or if you&rsquo;d prefer to use a GUI), then I&rsquo;m sure GKE is a perfectly acceptable option.</p>
+
+<p>There you have it&hellip;a few options for quickly and easily getting Kubernetes up and running (and you don&rsquo;t need a massive home lab, either). Enjoy!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/yiwsUSIOC9I" height="1" width="1" alt=""/>
 		</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/_UfcOIe7NZM/" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/yiwsUSIOC9I/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 	<li class="anriss">
@@ -198,72 +209,243 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
-			<h3>Experimenting with Azure</h3>
+			<h3>Technology Short Take 94</h3>
 		</div>
 		<div class="collectiontext">
-			<p>I&rsquo;ve been experimenting with <a href="https://azure.microsoft.com/en-us/">Microsoft Azure</a> recently, and I thought it might be useful to share a quick post on using some of my favorite tools with Azure. I&rsquo;ve found it useful to try to leverage existing tools whenever I can, and so as I&rsquo;ve been experimenting with Azure I&rsquo;ve been leveraging familiar tools like <a href="https://www.docker.com/products/docker-machine">Docker Machine</a> and <a href="https://www.vagrantup.com/">Vagrant</a>.</p>
+			<p>Welcome to Technology Short Take 94! Ready for another round of links, articles, and thoughts on data center technologies? (Who knows, maybe I&rsquo;ll throw a rant or two in there.) OK, enough rambling&hellip;here&rsquo;s the good stuff!</p>
 
-<p>The information here isn&rsquo;t revolutionary or unique, but hopefully it will still be useful to others, even if only as a &ldquo;quick reference&rdquo;-type of post.</p>
+<h2 id="networking">Networking</h2>
 
-<h2 id="launching-an-instance-on-azure-using-docker-machine">Launching an Instance on Azure Using Docker Machine</h2>
+<ul>
+<li>Amit Aneja has a two-part series (so far) explaining the routing architecture in NSX-T (which brings multi-hypervisor and multi-cloud support to the NSX platform). This is some good content and reminds me of the the old NVP/NSX content I generated back in the day. Ah, good times&hellip;anyway, check out Amit&rsquo;s stuff <a href="https://blogs.vmware.com/networkvirtualization/2017/09/nsx-t-routing-where-you-need-it.html/">here</a> and <a href="https://blogs.vmware.com/networkvirtualization/2018/01/nsx-t-routing-part-2.html/">here</a>.</li>
+<li>Sam McGeown has <a href="https://www.definit.co.uk/2018/01/nsx-6-x-network-communications-diagram/">a nice diagram</a> of the communications channels between the various VMware NSX components.</li>
+<li>Roie Ben Haim has a post providing <a href="http://www.routetocloud.com/2017/10/introduction-to-nsx-and-kubernetes/">an introduction to NSX and Kubernetes</a>.</li>
+<li>Matt Oswalt <a href="https://keepingitclassless.net/2018/02/intentional-infrastructure/">tackles</a> the idea of &ldquo;intent-driven&rdquo; or &ldquo;intent-based&rdquo; networking&mdash;all the rage right now&mdash;and outlines how something like this <em>must</em> interact with domains outside of networking in order to be effective. I particularly liked his (mini-)rant about how network automation can&rsquo;t be only about making the network engineer&rsquo;s life easier. Oh, snap!</li>
+<li>I&rsquo;m not really sure if this belongs in networking or not (how does one classify OS kernel-level work on networking and security?), but we&rsquo;ll stick it here anyway: check out <a href="https://www.cilium.io/blog/2018/2/6/cilium-troubleshooting-cluster-health-monitor">this blog post</a> on <code>cilium-health</code>, a tool for troubleshooting cluster connectivity.</li>
+<li>Here&rsquo;s an interesting post on how Simon Metzger <a href="http://blog.simonmetzger.de/2018/02/salt-napalm-k8s-network-automation/">pulled together Salt, NAPALM, and Kubernetes</a> for a proof-of-concept on using Salt (via NAPALM) to manage network devices.</li>
+<li>It&rsquo;s good to see my friend Brent Salisbury blogging again, this time writing about <a href="http://networkstatic.net/measuring-network-bandwidth-using-iperf-and-docker/">measuring bandwith using <code>iperf</code> and Docker</a>.</li>
+</ul>
 
-<p>To launch an instance on Azure and provision it with Docker using <code>docker-machine</code>:</p>
+<h2 id="servers-hardware">Servers/Hardware</h2>
+
+<p>Nothing this time around (sorry!). I&rsquo;ll stay alert for content that I might be able to include in the next Tech Short Take.</p>
+
+<h2 id="security">Security</h2>
+
+<ul>
+<li>If you&rsquo;re using CloudFormation to manage your AWS security groups in an infrastructure-as-code approach, you owe it to yourself to check out <a href="https://jlordiales.me/2018/01/30/cf-gotchas-sg/">this article</a> by Jose Luis Ordiales.</li>
+<li>Security is a many-faceted area, and one facet is appropriately protecting credentials. <a href="https://vxsan.com/ansible-vault-passwords-done-easy-with-lastpass/">This article</a> by Sjors Robroek shows one approach to appropriately protecting credentials when using automation tools.</li>
+</ul>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li>I guess we can talk automation in this section, right? Yasen Simeonov <a href="https://blogs.vmware.com/networkvirtualization/2018/01/nsx-t-openapi-sdks.html/">talks about</a> the work that went into the NSX-T APIs (JSON-based, hooray!) and how to use the Python SDK for NSX-T. The content is a bit high-level, but given the medium (a blog post) it&rsquo;s hard to get super-deep. It serves as a decent introduction, at least.</li>
+<li>In the last Tech Short Take, I shared an article by Kynan Riley on node affinity. This time around, he&rsquo;s <a href="https://medium.com/kokster/scheduling-in-kubernetes-part-2-pod-affinity-c2b217312ae1">talking about pod affinity</a>.</li>
+<li>I&rsquo;m a 1Password user (just wish they&rsquo;d release a &ldquo;real&rdquo; Linux client and bring back support for local vaults to all platforms), so seeing <a href="https://blog.agilebits.com/2018/01/25/terraforming-1password/">this article</a> on how Agile Bits (the company behind 1Password) is using Terraform with AWS was pretty cool.</li>
+<li>Kim Bottu walks readers through <a href="http://vmusketeers.com/2018/02/01/rebuilding-your-lab-in-ravello-is-easy-and-takes-no-time/">using Ravello to rebuild a (home) lab</a> in about 20 minutes.</li>
+<li>Christopher Berner has a detailed post on <a href="https://blog.openai.com/scaling-kubernetes-to-2500-nodes/">the lessons learned by scaling Kubernetes to 2,500 nodes</a>.</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>Michael Wittig <a href="https://cloudonaut.io/migrating-to-amazon-linux-2/">shares some details</a> on migrating to Amazon Linux 2.</li>
+<li>Over the last couple of weeks I came across two articles related to creating Docker images. The first comes from Shubham Sharma, which provides <a href="https://medium.com/@gabber12/tips-for-writing-dockerfile-b3e569c3134d">some tips on writing a Dockerfile</a>. The second comes from Matthew Setter, who shares <a href="https://blog.codacy.com/five-ways-to-slim-your-docker-images-5f4bd68d29f1">five ways to slim your Docker images</a>. Both articles contain good, albeit somewhat basic, information. Folks who are newer to building Docker images should find these articles useful.</li>
+<li>Apparently there are <a href="https://hackernoon.com/7-ways-to-do-containers-on-aws-532f812196f1">more than just a couple different ways to run containers on AWS</a>.</li>
+<li>Atomic Host will now include <code>firewalld</code>; more information is available from Dusty Mabe <a href="https://www.projectatomic.io/blog/2018/02/firewalld-in-atomic-host/">here</a>.</li>
+<li>The Windows Server team managed to shrink the size of the Windows Server Core container image by about 60%; get more details <a href="https://blogs.technet.microsoft.com/virtualization/2018/01/22/a-smaller-windows-server-core-container-with-better-application-compatibility/">here</a>.</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<ul>
+<li>Nick Korte <a href="http://blog.thenetworknerd.com/2018/01/28/journey-to-vsan-a-technical-adventure/">shares some &ldquo;lessons learned&rdquo;</a> as his team explored VMware vSAN as a storage solution.</li>
+<li>Steve Tilkens has <a href="http://www.tilkens.com/2018/01/storage-review/">a review of some different storage options</a> he&rsquo;s explored in his VMware-based home lab.</li>
+<li>Tom Twyman has a few recommendations on <a href="https://fr0gger03.wordpress.com/2018/02/04/increasing-vsan-resynch-rebuild-performance/">increasing vSAN resynch/rebuild performance</a>.</li>
+</ul>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<ul>
+<li>Ray Heffer has <a href="https://www.rayheffer.com/vmware-visio-stencils-powerpoint-icons-2018/">an updated set of Visio stencils and PowerPoint icons</a>, as well as some links to other sets.</li>
+<li>Ed Haletky has <a href="https://www.astroarch.com/2018/01/vsphere-upgrade-saga-linux-vmware-software-manager-vsm/">an updated Linux version of the VMware Software Manager</a>.</li>
+<li>Alan Renouf <a href="http://www.virtu-al.net/2018/01/08/new-year-new-look-vcheck/">blogged about a new look for vCheck</a> (now leveraging the Clarity UI framework).</li>
+</ul>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<ul>
+<li>OK, so this isn&rsquo;t really a &ldquo;soft skill&rdquo; <em>per se</em>, but it may prove useful nevertheless (and it didn&rsquo;t fit anywhere else). Nick Janetakis writes about <a href="https://nickjanetakis.com/blog/access-documentation-from-your-code-editor-with-dash-or-zeal">accessing documentation directly from your code editor</a> using either Dash (macOS) or Zeal (open source, multiple platforms). I&rsquo;ve been a Dash user for a while and I can attest to how handy it can be.</li>
+</ul>
+
+<p>And that&rsquo;s another Tech Short Take in the bag. I hope you found something useful here! As always, feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> if you have any feedback (or even if you just want to chat).</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/wc9kOdeypas" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/wc9kOdeypas/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
+		</div>
+		<div>
+			<h3>Friday Fun LIX - Parallel Coordinates Chart</h3>
+		</div>
+		<div class="collectiontext">
+<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha from Singapore one more time,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Today I have a chart for you which was a bit tricky to implement. It's a so called <a href="https://en.wikipedia.org/wiki/Parallel_coordinates" target="_blank">parallel coordinates chart</a> and to be honest it doesn't look really fancy at a glance but it is really neat.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you have no idea what it looks like here is a little image that show one...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://upload.wikimedia.org/wikipedia/commons/5/5c/Parallel_coordinates-sample.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="282" data-original-width="560" height="321" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Parallel_coordinates-sample.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">First it looks like some kind of simple line chart but it's not. With this chart one can compare objects in a nice way. So let's assume you would like to compare cars and you would not only to compare one property of the cars like horsepower but a set of properties (e.g. cylinder, horsepower, acceleration, weight, consumption, etc.) and the whole comparison should be in one chart.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In this case the parallel coordinates chart ist perfect. Here is a little screenshot of my implementation that uses this example...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-_jIT5FaTaVo/WnMGz91fJjI/AAAAAAAAE7Q/ITmknCoK814Gr_EXSuXkSO4M0ds7jmkGACLcBGAs/s1600/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-23-17.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="404" data-original-width="761" height="338" src="https://2.bp.blogspot.com/-_jIT5FaTaVo/WnMGz91fJjI/AAAAAAAAE7Q/ITmknCoK814Gr_EXSuXkSO4M0ds7jmkGACLcBGAs/s640/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-23-17.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In this chart each line represents one car (e.g. the blue line represents my Smart Roadster Coupé and the purple line represents the Bugatti Veyron...a fair comparison right ;) ).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now the interesting part about that chart is that it makes it easy to find similarities between cars or that you can figure out trends easily.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">There are tons of possibilities on how to extend this chart but because I do not have the time for that I've just added two things that I've found very nice:</span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Dragging axes</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Filter specific lines</span></li></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So you can imagine that the order of the categories has a big impact on the expressiveness of the chart and therefor it is possible to drag a category by dragging the header of a category to another position...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-ktlCmA-bXOU/WnMIbvF5LiI/AAAAAAAAE7c/n0JeHz3XGb0pDx4Zy6WDd57I1ptc1-GjgCLcBGAs/s1600/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-29-48.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="539" data-original-width="884" height="390" src="https://1.bp.blogspot.com/-ktlCmA-bXOU/WnMIbvF5LiI/AAAAAAAAE7c/n0JeHz3XGb0pDx4Zy6WDd57I1ptc1-GjgCLcBGAs/s640/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-29-48.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Here I've simply moved some categories around to show the effect of the different category order.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The filtering of specific lines (cars in this example) works similar. Here you simply click close to one axis and drag down and you will see that a little rectangle will be drawn that selects the lines in the range of the rectangle.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you release the mouse button it will show you something similar like follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-oXnkyjQm7z8/WnMI55VVb2I/AAAAAAAAE7g/tWyPqvTd-HAsZ99jpJ-yidYOQKIHrpJLQCLcBGAs/s1600/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-30-14.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="539" data-original-width="884" height="390" src="https://4.bp.blogspot.com/-oXnkyjQm7z8/WnMI55VVb2I/AAAAAAAAE7g/tWyPqvTd-HAsZ99jpJ-yidYOQKIHrpJLQCLcBGAs/s640/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-30-14.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As soon as you select some lines all other "unselected" lines will be drawn in light gray (configurable) and the selected lines will be drawn in blue (configurable). In addition the names of the selected lines will be shown on the left side.&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Once you click again somewhere the selection will be removed again.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In principle that's it and I hope it might be useful for someone. As always I have no usage for it at all :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The chart is part of my JavaFX charts library where the current version is 1.0.5 and that you can found here:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Source at <a href="https://github.com/HanSolo/charts" target="_blank">github</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Binaries at <a href="https://bintray.com/hansolo/charts" target="_blank">bintray</a> or <a href="https://search.maven.org/#search%7Cga%7C1%7Cfc%3Aeu.hansolo.fx.charts" target="_blank">Maven Central</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And if you would like to see it in action, here is a short screen video that I've recorded...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><iframe allow="autoplay; encrypted-media" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/qaQ2Dh_0pgU" width="560"></iframe></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">That's it for today, so enjoy Carnival and don't forget...keep coding... ;)</span><br /><br />
+
+ -->
+		</div>
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/2018/02/friday-fun-lix-parallel-coordinates.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Running OVS on Fedora Atomic Host</h3>
+		</div>
+		<div class="collectiontext">
+			<p>In this post, I&rsquo;d like to share the results of some testing I&rsquo;ve been doing to run <a href="http://openvswitch.org/">Open vSwitch</a> (OVS) in containers on a container-optimized Linux distribution such as <a href="https://www.projectatomic.io/">Atomic Host</a> (Fedora Atomic Host, specifically). I&rsquo;m still relatively early in my exploration of this topic, but I felt like sharing what I&rsquo;ve found so far might be helpful to others, and might help spark conversations within the relevant communities about how this experience might be improved.</p>
+
+<p>The reason for the use of Docker containers in this approach is twofold:</p>
+
+<ol>
+<li>Many of the newer container-optimized Linux distributions&mdash;CoreOS Container Linux (soon to be part of Red Hat in some fashion), Project Atomic, etc.&mdash;eschew &ldquo;traditional&rdquo; package management solutions in favor of containers.</li>
+<li>Part of the reason behind my testing was to help the OVS community better understand what it would look like to run OVS in containers so as to help make OVS a better citizen on container-optimized Linux distributions.</li>
+</ol>
+
+<p>In this post, I&rsquo;ll be using Fedora 27 Atomic Host (via <a href="https://www.vagrantup.com/">Vagrant</a> with <a href="https://virtualbox.org/">VirtualBox</a>). If you use a different version or release of Atomic Host, your results may differ somewhat. For the OVS containers, I&rsquo;m using the excellent <a href="https://hub.docker.com/r/keldaio/ovs/">keldaio/ovs</a> Docker containers.</p>
+
+<p>As it turns out, running OVS on Fedora Atomic Host using the Kelda Docker images is really straightforward. As stated in <a href="https://github.com/kelda/kelda/tree/master/ovs">Kelda&rsquo;s README for the OVS Docker images</a>, you just have to launch a couple of containers. First, you&rsquo;d launch a container for the OVSDB server:</p>
+
+<pre><code>docker run -itd --net=host --name=ovsdb-server keldaio/ovs ovsdb-server
+</code></pre>
+
+<p>Next, you&rsquo;d run a container for the ovs-vswitchd daemon:</p>
+
+<pre><code>docker run -itd --net=host --name=ovs-vswitchd --volumes-from=ovsdb-server --privileged keldaio/ovs ovs-vswitchd
+</code></pre>
+
+<p>That gets the core, essential parts of OVS up and running, but you&rsquo;re not fully functional yet. The final ingredient is to load the OVS kernel module, which is part of the upstream Linux kernel. Normally, starting OVS-related daemons would initiate loading the kernel module, but with OVS encapsulated in Docker containers it won&rsquo;t happen automatically. However, a quick <code>sudo modprobe openvswitch</code> will easily remedy that and get the OVS kernel module loaded.</p>
+
+<p>From this point, running <code>ovs-vsctl</code> to configure OVS involves appending your command to a <code>docker exec</code> command, like this:</p>
+
+<pre><code>docker exec -it ovs-vswitchd ovs-vsctl show
+</code></pre>
+
+<p>This will run <code>ovs-vsctl show</code> in the &ldquo;ovs-vswitchd&rdquo; container, which is where the ovs-vswitchd daemon is running. All the standard <code>ovs-vsctl</code> commands should work here, such as adding a bridge (<code>add-br</code>), adding a port (<code>add-port</code>), deleting a port (<code>del-port</code>), and deleting a bridge (<code>del-br</code>).</p>
+
+<p>This is all pretty cool, but there&rsquo;s a problem. OVS&rsquo; configuration is stored in the OVSDB database, which is itself found in the &ldquo;ovsdb-server&rdquo; container (hence why the vswitchd container needs to mount the same volumes as the &ldquo;ovsdb-server&rdquo; container via <code>--volumes-from</code>). What if the &ldquo;ovsdb-server&rdquo; container goes away? <strong>The OVS configuration goes away, too.</strong> (Don&rsquo;t believe me? Stop, remove, and relaunch the &ldquo;ovsdb-server&rdquo; container using the command line above and see for yourself.)</p>
+
+<p>Obviously, that&rsquo;s not ideal. One possible solution is to use Docker volumes to store the data that OVSDB needs <em>separate</em> from the actual OVSDB server container.</p>
+
+<p>Here&rsquo;s how you&rsquo;d make this work. First, you&rsquo;d create some Docker volumes:</p>
+
+<pre><code>docker volume create var-lib-ovs
+docker volume create var-log-ovs
+docker volume create var-run-ovs
+docker volume create etc-ovs
+</code></pre>
+
+<p>Then, you&rsquo;d amend the command line for launching the &ldquo;ovsdb-server&rdquo; container to look like this instead:</p>
+
+<pre><code>docker run -itd --net=host --name=ovsdb-server -v var-lib-ovs:/var/lib/openvswitch -v var-log-ovs:/var/log/openvswitch -v var-run-ovs:/var/run/openvswitch -v etc-ovs:/etc/openvswitch keldaio/ovs ovsdb-server
+</code></pre>
+
+<p>The command line for launching the ovs-vswitchd container remains unchanged, since it just mounts the same volumes as the OVSDB server container.</p>
+
+<p>With this approach, the OVS configuration is now stored separate from the containers where the OVSDB server and ovs-vswitchd processes run, which means we can easily kill and restart those containers <em>without</em> negatively impacting OVS configuration. This configuration also brings us one step closer to using systemd to manage the OVS containers since we can now persist data across container instances.</p>
+
+<p>I&rsquo;m still exploring this sort of configuration, so I&rsquo;ll share additional information I uncover in future blog posts. In the meantime, if I&rsquo;ve made an error in this post or if there is a suggestion you&rsquo;d like to make to improve the post, feel free to <a href="https://twitter.com/scott_lowe">contact me on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/10bbefukvoM" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/10bbefukvoM/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
+		</div>
+		<div>
+			<h3>Friday Fun LVIII - Some more charts...</h3>
+		</div>
+		<div class="collectiontext">
+<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha from Singapore again,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Today I finally managed to create some little Friday Fun components for you, so today I have two new charts for you that are part of my JavaFX charts library.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The first chart is a ConcentricRingChart that looks as follows:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-vpqY4XgQMPM/WmtC44JzHSI/AAAAAAAAE6s/fbGa9rYnPZ8u7DkvB-MXzS2ch-6ErwS7gCLcBGAs/s1600/ConcentricRingChart%2B2018-01-26%2B23-01-24.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="442" data-original-width="420" src="https://2.bp.blogspot.com/-vpqY4XgQMPM/WmtC44JzHSI/AAAAAAAAE6s/fbGa9rYnPZ8u7DkvB-MXzS2ch-6ErwS7gCLcBGAs/s1600/ConcentricRingChart%2B2018-01-26%2B23-01-24.png" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Nothing really special but fun. You have a set of ChartItems that you pass to the ConcentricRingChart. The values are always normalized so that the current maximum value fills up to 100%. You can choose between different NumberFormats for the value in the bar and if you click with the mouse on a bar a little popup will show you some information on the clicked item.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In addition you can also sort the bars ascending and descending if you like and of course animation is also available. If you would like to see it in action...here you go...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><iframe allow="autoplay; encrypted-media" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/SX5jGJFz2-M" width="560"></iframe></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The other chart that I've created is similar which is the reason why I have two components today. This one is a ComparisonRingChart where you can compare two series of ChartItems. The first series will be shown on the upper part and the second series on the lower part. It looks like this...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-lHl8QaS74KM/WmtD9hfttrI/AAAAAAAAE60/N8wEN0N1Bugop43HtPp_Cdy2sz14OgMmgCLcBGAs/s1600/ComparisonRingChart%2B2018-01-26%2B23-00-54.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="442" data-original-width="420" src="https://1.bp.blogspot.com/-lHl8QaS74KM/WmtD9hfttrI/AAAAAAAAE60/N8wEN0N1Bugop43HtPp_Cdy2sz14OgMmgCLcBGAs/s1600/ComparisonRingChart%2B2018-01-26%2B23-00-54.png" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The upper series goes from left to right where the lower series will be visualized from right to left. Everything else is exactly the same as in the ConcentricRingChart, meaning to say you also have the mouse interaction and the popup.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And again if you are interested in how it looks in action...here you are...</span><br /><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><iframe allow="autoplay; encrypted-media" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/gE1PJoLzMvk" width="560"></iframe></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As already mentioned both components are part of my little JavaFX charts library that you can found here...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Source Code: <a href="https://github.com/HanSolo/charts" target="_blank">github</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Binaries: <a href="https://bintray.com/hansolo/charts" target="_blank">bintray</a>&nbsp;and <a href="https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22charts%22" target="_blank">Maven Central</a></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And that's it for today...cheers from Singapore and keep coding... ;)</span><br /><br />
+
+ -->
+		</div>
+		<div class="collectionhref">
+		<a href="http://harmoniccode.blogspot.com/2018/01/friday-fun-lviii-some-more-charts.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Using Docker Machine with Azure</h3>
+		</div>
+		<div class="collectiontext">
+			<p>I&rsquo;ve written about using <a href="https://www.docker.com/products/docker-machine">Docker Machine</a> with a number of different providers, such as <a href="https://blog.scottlowe.org/2016/03/22/using-docker-machine-with-aws/">with AWS</a>, <a href="https://blog.scottlowe.org/2015/09/24/using-docker-machine-with-openstack/">with OpenStack</a>, and even <a href="https://blog.scottlowe.org/2017/11/24/using-docker-machine-kvm-libvirt/">with a local KVM/Libvirt daemon</a>. In this post, I&rsquo;ll expand that series to show using Docker Machine with Azure. (This is a follow-up to my earlier post on <a href="https://blog.scottlowe.org/2018/01/16/experimenting-with-azure/">experimenting with Azure</a>.)</p>
+
+<p>As with most of the other Docker Machine providers, using Docker Machine with Azure is reasonably straightforward. Run <code>docker-machine create -d azure --help</code> to get an idea of some of the parameters you can use when creating VMs on Azure using Docker Machine. A full list of the various parameters and options for the Azure drive is <a href="https://docs.docker.com/machine/drivers/azure/">also available</a>.</p>
+
+<p>The only <em>required</em> parameter is <code>--azure-subscription-id</code>, which specifies your Azure subscription ID. If you don&rsquo;t know this, or want to obtain it programmatically, you can use this Azure CLI command:</p>
+
+<pre><code>az account show --query &quot;id&quot; -o tsv
+</code></pre>
+
+<p>If you have more than one subscription, you&rsquo;ll probably need to modify this command to filter it down to the specific subscription you want to use.</p>
+
+<p>Additional parameters that you can supply include (but aren&rsquo;t limited to):</p>
+
+<ul>
+<li>Use the <code>--azure-image</code> parameter to specify the VM image you&rsquo;d like to use. By default, the Azure driver uses Ubuntu 16.04.</li>
+<li>By default, the Azure driver launches a Standard_A2 VM. If you&rsquo;d like to use a different size, just supply the <code>--azure-size</code> parameter.</li>
+<li>The <code>--azure-location</code> parameter lets you specify an Azure region other than the default, which is &ldquo;westus&rdquo;.</li>
+<li>You can specify a non-default resource group (the default value is &ldquo;docker-machine&rdquo;) by using the <code>--azure-resource-group</code> parameter.</li>
+<li>The Azure driver defaults to a username of &ldquo;docker-user&rdquo;; use the <code>--azure-ssh-user</code> to specify a different name.</li>
+<li>You can customize networking configurations using the <code>--azure-subnet-prefix</code>, <code>--azure-subnet</code>, and <code>--azure-vnet</code> options. Default values for these options are 192.168.0.0/16, &ldquo;docker-machine&rdquo;, and &ldquo;docker-machine&rdquo;, respectively.</li>
+</ul>
+
+<p>So what would a complete command look like? Using Bash command substitution to supply the Azure subscription ID, a sample command might look like this:</p>
 
 <pre><code>docker-machine create -d azure \
 --azure-subscription-id $(az account show --query &quot;id&quot; -o tsv) \
---azure-ssh-user azureuser \
---azure-size &quot;Standard_B1ms&quot; azure-test
+--azure-location westus2 \
+--azure-ssh-user ubuntu \
+--azure-size &quot;Standard_B1ms&quot; \
+dm-azure-test
 </code></pre>
 
-<p>The first time you run this you&rsquo;ll probably need to allow Docker Machine access to your Azure subscription (you&rsquo;ll get prompted to log in via a browser and allow access). This will create a service principal that is visible via <code>az ad sp list</code>. Note that you may be prompted for authentication for future uses, although it will re-use the existing service principal once it is created.</p>
+<p>This would create an Azure VM named &ldquo;dm-azure-test&rdquo;, based on the (default) Ubuntu 16.04 LTS image, in the &ldquo;westus2&rdquo; Azure region and using a username of &ldquo;ubuntu&rdquo;. Once the VM is running and responding across the network, Docker Machine will provision and configure Docker Engine on the VM.</p>
 
-<h2 id="launching-an-instance-using-the-azure-provider-for-vagrant">Launching an Instance Using the Azure Provider for Vagrant</h2>
+<p>Once the VM is up, all the same <code>docker-machine</code> commands are available:</p>
 
-<p>See <a href="https://github.com/Azure/vagrant-azure">this page</a> for complete details on using the Azure provider for Vagrant. Basically, it boils down to these four steps:</p>
+<ul>
+<li><code>docker-machine ls</code> will list all configured machines (systems managed via Docker Machine); this is across all supported Docker Machine providers</li>
+<li><code>docker-machine ssh &lt;name&gt;</code> to establish an SSH connection to the VM</li>
+<li><code>eval $(docker-machine env &lt;name&gt;)</code> to establish a Docker configuration pointing to the remote VM (this would allow you to use a local Docker client to communicate with the remote Docker Engine instance)</li>
+<li><code>docker-machine stop &lt;name&gt;</code> stops the VM (which can be restarted using <code>docker-machine start &lt;name&gt;</code>, naturally)</li>
+<li><code>docker-machine rm &lt;name&gt;</code> deletes the VM</li>
+</ul>
 
-<ol>
-<li>Install the Azure provider using <code>vagrant plugin install vagrant-azure</code>.</li>
-<li>Add a &ldquo;dummy&rdquo; box (similar to how you use Vagrant with AWS; see this post).</li>
-<li>Set up an Azure service principal for Vagrant to use to connect to Azure.</li>
-<li>Run <code>vagrant up</code> and you&rsquo;re off to the races.</li>
-</ol>
+<p>Clearly, there&rsquo;s more available, but this should be enough to get most folks rolling.</p>
 
-<p>A more detailed post on <a href="https://blog.scottlowe.org/2017/12/11/using-vagrant-with-azure/">using Vagrant with Azure is available here</a>; it provides a bit more information on the above steps.</p>
-
-<h2 id="launching-an-instance-using-the-azure-cli">Launching an Instance using the Azure CLI</h2>
-
-<p>OK, maybe the Azure CLI isn&rsquo;t exactly an &ldquo;existing tool,&rdquo; but given my affinity for CLI-based tools I think it&rsquo;s probably reasonable to include it here. To launch an instance using the Azure CLI, it would look something like this:</p>
-
-<pre><code>az vm create -n vm-name -g group-name --image UbuntuLTS --size Standard_B1ms --no-wait
-</code></pre>
-
-<p>Of course, this assumes a pre-existing resource group. More details are available <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli">here</a>.</p>
-
-<p>If you need to install the Azure CLI, see <a href="https://blog.scottlowe.org/2017/08/13/manually-installing-azure-cli-fedora-25/">here</a> or <a href="https://blog.scottlowe.org/2017/12/07/installing-azure-cli-fedora-27/">here</a> for some additional information.</p>
-
-<p>Happy experimenting!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/L8VPRaRG8-8" height="1" width="1" alt=""/>
+<p>If I&rsquo;ve missed something (or gotten it incorrect), please <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>. I&rsquo;ll happily make corrections where applicable.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/JTrWEYVUK6Q" height="1" width="1" alt=""/>
 		</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/L8VPRaRG8-8/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>Friday Fun LVII - Stream Charts</h3>
-		</div>
-		<div class="collectiontext">
-<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Here we go again...last week I stumbled upon a really nice charts that are inspired by <a href="https://www.amazon.com/gp/search?ie=UTF8&amp;keywords=Edward%20Tufte&amp;tag=gimpnews&amp;index=books&amp;linkCode=ur2&amp;camp=1789&amp;creative=9325" target="_blank">Edward Tufte</a>'s Stream Charts. This is how they look like...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://www.xach.com/moviecharts/2013.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="90" data-original-width="800" height="72" src="https://www.xach.com/moviecharts/2013.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And </span><a href="https://www.xach.com/moviecharts/" style="font-family: &quot;Trebuchet MS&quot;, sans-serif;" target="_blank">here</a><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"> you can find more information about them.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The chart can be used to visualize a series of data with the variation of the data it contains over time. On each date different items of the series are stacked like in a stacked bar chart. The items are sorted by their value from bottom to top, meaning to say the items with the lowest value are always at the bottom and the one with the highest values are always on top.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To be honest I have again no use case for it but I really like the visualization. By choosing the colors wisely one could visualize dominating series over time very well.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Long story short...here is my implementation of such a chart...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-dkgnE3kS9gc/WlUmX9E5hII/AAAAAAAAE0A/8kojm517kcYEtTCidMaLugbMDVL-CoYGACLcBGAs/s1600/Stream%2BChart%2B2018-01-09%2B21-30-02.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="364" data-original-width="755" height="306" src="https://2.bp.blogspot.com/-dkgnE3kS9gc/WlUmX9E5hII/AAAAAAAAE0A/8kojm517kcYEtTCidMaLugbMDVL-CoYGACLcBGAs/s640/Stream%2BChart%2B2018-01-09%2B21-30-02.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As you can see I don't have such good data as in the example above but you get the idea :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To create such a chart I make use of my ChartItem class which has a timestamp property that is needed here to group the chart items for the visualization. The idea is to have a list of ChartItems that may also contain multiple ChartItems from the same day. The StreamChart component has a category property which can be one of the following categories:</span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">DAY</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">WEEK</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">MONTH</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">YEAR</span></li></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">S</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">o let's assume you have a list of ChartItems that contains data from different days and you would like to visualize the chart grouped by days you set the category to DAY.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">With this feature you can define if you would like to group the given list of ChartItems by one of the above categories...hmm...hope that explanation was more or less clear :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">It might be easier to simply take a look at the source code (see links below).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span> <span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In principle this chart is similar to the Sankey Plot but not exactly the same so I've st</span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">arted from there and created a modified version which you can see above. This chart is now part of my own JavaFX charts library which you can find here:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><a href="https://github.com/HanSolo/charts" target="_blank">sources at github</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><a href="https://bintray.com/hansolo/charts" target="_blank">binaries at bintray</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Please find the demo classes for all the charts in the test package.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well that's it for today...so keep coding...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span>
-
- -->
-		</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2018/01/friday-fun-lvii-stream-charts.html" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/JTrWEYVUK6Q/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 	<li class="anriss">
@@ -271,187 +453,78 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
-			<h3>Issue with VMware-Formatted Cumulus VX Vagrant Box</h3>
+			<h3>An Update on Using Docker Machine with Vagrant</h3>
 		</div>
 		<div class="collectiontext">
-			<p>I recently had a need to revisit the use of Cumulus VX (the <a href="https://cumulusnetworks.com">Cumulus Networks</a> virtual appliance running Cumulus Linux) in a <a href="https://www.vagrantup.com/">Vagrant</a> environment, and I wanted to be sure to test what I was doing on multiple virtualization platforms. Via <a href="https://app.vagrantup.com/boxes/search">Vagrant Cloud</a>, Cumulus distributes <a href="https://www.virtualbox.org/">VirtualBox</a> and <a href="https://libvirt.org/">Libvirt</a> versions of Cumulus VX, and there is a slightly older version that also provides a <a href="https://www.vmware.com/products/personal-desktop-virtualization.html">VMware</a>-formatted box. Unfortunately, there&rsquo;s a simple error in the VMware-formatted box that prevents it from working. Here&rsquo;s the fix.</p>
+			<p>As part of a project on which I&rsquo;m working, I&rsquo;ve been spending some time working with <a href="https://docs.docker.com/machine/overview/">Docker Machine</a> and <a href="https://www.vagrantup.com/">Vagrant</a> over the last few days. You may recall that I first wrote about <a href="https://blog.scottlowe.org/2015/08/04/using-vagrant-docker-machine-together/">using these two tools together</a> back in August 2015. As a result of spending some additional time with these tools&mdash;which I chose because I felt like they streamlined some work around this project&mdash;I&rsquo;ve uncovered some additional information that I wanted to share with readers.</p>
 
-<p>The latest version (as of this writing) of Cumulus VX was 3.5.0, and for this version both VirtualBox-formatted and Libvirt-formatted boxes are provided. For a VMware-formatted box, the latest version is 3.2.0, which you can install with this command:</p>
+<p>As a brief recap to <a href="https://blog.scottlowe.org/2015/08/04/using-vagrant-docker-machine-together/">the original article</a>, I showed how you could use Vagrant to quickly and easily spin up a VM, then use Docker Machine&rsquo;s <code>generic</code> driver to add it to Docker Machine, like this:</p>
 
-<pre><code>vagrant box add CumulusCommunity/cumulus-vx --box-version 3.2.0
+<pre><code>docker-machine create -d generic \
+--generic-ssh-user vagrant \
+--generic-ssh-key ~/.vagrant.d/insecure_private_key \
+--generic-ip-address &lt;IP address of VM&gt; \
+&lt;name of VM&gt;
 </code></pre>
 
-<p>When this Vagrant box is installed using the above command, what actually happens is <em>something</em> like this (at a high level):</p>
+<p>This approach works fine <em>if the Vagrant-created VM is reachable without port forwarding</em>. What do I mean? In the past, the VMware provider for Vagrant used functionality in <a href="https://www.vmware.com/products/fusion.html">VMware Fusion</a> or <a href="https://www.vmware.com/products/workstation-pro.html">VMware Workstation</a> to provide an RFC 1918-addressed network that had external access via network address translation (NAT). In Fusion, for example, this was the default &ldquo;Share with my Mac&rdquo; network. Thus, when you created a VM using Vagrant and the VMware provider for Vagrant, the first network interface card (NIC) in the VM would be assigned to this default NAT network and get an RFC 1918-style private IP address (on my Mac Pro, this network uses the 192.168.70.0/24 network range, but I don&rsquo;t know if that&rsquo;s the default for all systems). As a result, when you would run <code>vagrant ssh-config</code> for such a VM, you&rsquo;d get something like this:</p>
 
-<ol>
-<li><p>The <code>*.box</code> file for the specific box, platform, and version is downloaded. This <code>.box</code> file is nothing more than a TAR archive with specific files included (see <a href="https://www.vagrantup.com/docs/boxes/format.html">here</a> for more details).</p></li>
+<pre><code class="language-text">Host coreos-01
+  HostName 192.168.70.132
+  User core
+  Port 22
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/slowe/.vagrant.d/insecure_private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+</code></pre>
 
-<li><p>The <code>*.box</code> file is expanded into the <code>~/.vagrant.d/boxes</code> directory on your system. A directory tree is built that helps Vagrant support multiple versions of the same box along with multiple formats of the same box (for example, having version 3.2.0 of a VMware-formatted box alongside version 3.5.0 of a VirtualBox-formatted box on the same system).</p></li>
-</ol>
+<p>With version 5 of the VMware provider for Vagrant (which is required in order to use the latest versions of Fusion and Workstation), this behavior <em>seems</em> to have changed, although it&rsquo;s not clear if this is intentional or not (there&rsquo;s <a href="https://github.com/hashicorp/vagrant/issues/9151">an open GitHub issue</a> about this change). Sometimes Vagrant will report connection information as shown above, but other times it will report using a forwarded port on the loopback address:</p>
 
-<p>In this case, when you install version 3.2.0 of the VMware-formatted Cumulus VX Vagrant box, you&rsquo;ll end up with a set of files found in <code>~/.vagrant.d/boxes/CumulusCommunity-VAGRANTSLASH-cumulus-vx/3.2.0/vmware_desktop</code>. In this directory, you&rsquo;ll find all the files that would describe a VM to a product like VMware Fusion or VMware Workstation: the VMX file, one or more VMDK files, etc.</p>
+<pre><code class="language-text">Host coreos-01
+  HostName 127.0.0.1
+  User core
+  Port 2222
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/slowe/.vagrant.d/insecure_private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+</code></pre>
 
-<p>What you&rsquo;ll also find for this particular box is something you don&rsquo;t want: a lock file, in the form of a directory named <code>cumulus-linux-3.2.0.vmx.lck</code>. This lock file is normally created by a VMware desktop virtualization product to indicate that the VM is running and therefore the files are locked and can&rsquo;t be accessed. Unfortunately, the presence of this directory means that the Vagrant box <em>will not work.</em></p>
+<p>This occurs, by the way, even when an actual RFC 1918-style private IP address has, in fact, been assigned to the VM and is functioning normally.</p>
 
-<p>If you try to run <code>vagrant up</code> on a Vagrant enviroment with this box, you&rsquo;ll get an error indicating the files are locked, and the <code>vagrant up</code> command will fail.</p>
+<p>This behavior is a big change from the previous behavior, but it does bring it in line with how Vagrant behaves when used with VirtualBox (which uses a forwarded port on the loopback address for connectivity). The Libvirt provider uses an approach similar to previous versions of the VMware provider (an RFC 1918-style private address instead of a forwarded port on the loopback address).</p>
 
-<p>So how does one fix this?</p>
+<p>All of this brings us to the original matter at hand: using Docker Machine and Vagrant together. If you&rsquo;re using a Vagrant provider that does <em>not</em> use a forwarded port on the loopback address, then the command I provided in the original article (and earlier in this article) will work just fine.</p>
 
-<p>Simple: just delete the <code>cumulus-linux-3.2.0.vmx.lck</code> directory and its contents.</p>
+<p>If, on the other hand, you&rsquo;re using a provider that <em>does</em> use a forwarded port on the loopback address, then you&rsquo;ll need to amend the command slightly:</p>
 
-<p>Once you&rsquo;ve deleted that file, then using <code>vagrant up</code> to instantiate a Vagrant environment based on this box will work as expected.</p>
+<pre><code>docker-machine create -d generic \
+--generic-ssh-user vagrant \
+--generic-ssh-key ~/.vagrant.d/insecure_private_key \
+--generic-ssh-port 2222 \
+--generic-ip-address 127.0.0.1 \
+&lt;name of VM&gt;
+</code></pre>
 
-<p>(Side note: If you are planning to use version 3.2.0 of the VMware-formatted Cumulus VX box, there&rsquo;s one additional oddity. When you use <code>vagrant box add</code> as outlined above to download and install the box, you&rsquo;ll be prompted with a set of options for which provider to use. Be sure to use option 4&mdash;the one labeled &ldquo;vmware_desktop&rdquo;&mdash;and not option 5, labeled &ldquo;vmware_fusion&rdquo;. The latter reports an error after downloading the box and the command fails.)</p>
+<p>Naturally, you&rsquo;ll need to replace <code>2222</code> with the SSH port reported by <code>vagrant ssh-config</code>, since it may change when you&rsquo;re running multiple VMs under Vagrant. (You may also need to change the username specified via <code>--generic-ssh-user</code>, since some distributions&mdash;I&rsquo;m looking at you, <a href="https://coreos.com/os/docs/latest/">CoreOS Container Linux</a>&mdash;use a different username.)</p>
 
-<p>Hopefully Cumulus Networks will release an updated version of the Cumulus VX Vagrant box for VMware products that addresses these issues.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/aFjf2YbgmRE" height="1" width="1" alt=""/>
+<p>Additionally, you&rsquo;ll also need to forward port 2376 (the port that Docker uses to communicate across the network) in your <code>Vagrantfile</code> by adding a snippet like this:</p>
+
+<pre><code># Configure port forwarding to support remote access to Docker Engine
+config.vm.network &quot;forwarded_port&quot;, guest: 2376, host: 2376
+</code></pre>
+
+<p>With the forwarded port specified in the <code>Vagrantfile</code> and the updated <code>docker-machine</code> command that includes the correct SSH port, then you&rsquo;ll be able to use Vagrant to provision/manage the VM(s) and use Docker Machine to provision/manage the Docker Engine(s).</p>
+
+<p>If you have questions or corrections, feel free to drop me an email (my address isn&rsquo;t terribly hard to find) or <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/GXCWyFT2DGE" height="1" width="1" alt=""/>
 		</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/aFjf2YbgmRE/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 92</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take 92, the first Technology Short Take of 2018. This one was <em>supposed</em> to be the last Tech Short Take of 2017, but I didn&rsquo;t get it published in time (I decided to spend time with my family instead&mdash;some things are just more important). In any case, hopefully the delay of one additional week hasn&rsquo;t caused any undue stress&mdash;let&rsquo;s jump right in!</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Lindsay Hill walks through <a href="https://lkhill.com/telegraf-influx-grafana-network-stats/">using Telegraf, InfluxDB, and Grafana to monitor network statistics</a>.</li>
-<li>Via Ivan Pepelnjak, I found <a href="https://cumulusnetworks.com/blog/5-ways-design-container-network/">this article</a> by Diane Patton at Cumulus Networks talking about container network designs. The article is a bit heavy on pushing the Host Pack (a Cumulus thing), but otherwise provides a good overview of several different possible container network designs, along with some of the criteria that might lead to each design.</li>
-<li>Erik Hinderer takes a stab (based on his field experience) at <a href="http://virtuallyread.com/how-long-does-it-take-to-upgrade-vmware-nsx/">estimating how long it takes to upgrade VMware NSX</a>. Erik&rsquo;s figures are just estimates, of course; actual values will be determined based on each customer&rsquo;s specific environment.</li>
-<li><a href="https://blog.thousandeyes.com/how-netflix-tracks-ip-addresses-within-aws/">This post</a> is a bit older, but covers a challenge faced by cloud-native darling Netflix&mdash;how does one, exactly, identify which application used which IP address at a given point in time? When you&rsquo;re operating at the scale at which Netflix operates, this is no trivial feat.</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<ul>
-<li>Christian Kellner talks about work done on <a href="https://christian.kellner.me/2017/12/14/introducing-bolt-thunderbolt-3-security-levels-for-gnulinux/">Thunderbolt 3 security levels for GNU/Linux</a>. There is more work ahead, but it&rsquo;s great to see progress being made.</li>
-</ul>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>The CPU architecture flaw involving speculative execution has been garnering a great deal of attention (see <a href="https://www.theregister.co.uk/2018/01/02/intel_cpu_design_flaw/">here</a>, <a href="https://wccftech.com/intel-kernel-memory-leak-bug-speculative-execution-performance-hit/">here</a>, <a href="https://www.engadget.com/2018/01/03/intel-kernel-memory-flaw/">here</a>, and <a href="https://www.engadget.com/2018/01/03/intel-says-security-issue-is-not-specific-to-its-cpus/">here</a>). Also, here&rsquo;s <a href="https://security.googleblog.com/2018/01/todays-cpu-vulnerability-what-you-need.html">Google Project Zero&rsquo;s write-up</a> (along with <a href="https://support.google.com/faqs/answer/7622138">a support FAQ</a> from Google on mitigation). There&rsquo;s lots more coverage, obviously, but this should be enough to get you started.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>Kevin Carter has <a href="https://cloudnull.io/2017/06/nspawning-openstack-ansible/">a detailed write-up</a> on efforts around leveraging <code>systemd-nspawn</code> for deploying OpenStack via OpenStack Ansible. <code>systemd-nspawn</code> is an interesting technology I&rsquo;ve been watching since early this year, and it will be cool (in my opinion) to see a project using it in this fashion.</li>
-<li>The vSphere provider for Terraform (did you know there was one?) recently hit 1.0, and HashiCorp has <a href="https://www.hashicorp.com/blog/a-re-introduction-to-the-terraform-vsphere-provider">a blog post (re-)introducing the provider</a>. I thought I also saw a VMware blog post on the provider as well, but couldn&rsquo;t find any link (guess I was mistaken).</li>
-<li>Oh, and speaking of Terraform: check out <a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-11">this post</a> on the release of Terraform 0.11.</li>
-<li>Tim Nolet reviews some <a href="https://hackernoon.com/azure-container-instances-vs-aws-fargate-3216607f63f4">differences between Azure Container Instances and AWS Fargate</a> (recently announced at AWS re:Invent 2017). Tim&rsquo;s review of each of the offerings is pretty balanced (thanks for that), and I&rsquo;d recommend reading this post to get a better idea of how each of them work.</li>
-<li>Jorge Salamero Sanz (on behalf of Sysdig) provides a similar comparison, this time <a href="https://sysdig.com/blog/ecs-fargate-eks-kubernetes-aws-compared/">looking at ECS, Fargate, and EKS</a>. Jorge&rsquo;s explanation of Fargate as &ldquo;managed ECS/EKS instances&rdquo; is probably the most useful explanation of Fargate I&rsquo;ve seen so far.</li>
-<li>Michael Gasch digs relatively deep to address the question of <a href="https://embano1.github.io/post/sched-reconcile/">how Kubernetes reconciles allocatable resources and requested resources</a> in order to satisfy QoS. Good information here, in my opinion. Thanks Michael!</li>
-<li>Running distributed systems such as etcd, Kubernetes, Linkerd, etc., to support applications means making a conscious decision to embrace a certain level of complexity in exchange for the benefits these systems offer. Read <a href="https://community.monzo.com/t/resolved-current-account-payments-may-fail-major-outage-27-10-2017/26296/95">this post-mortem on an outage</a> to gain a better idea of some of the challenges this additional complexity might present when it comes to troubleshooting.</li>
-<li>Tim Hinrichs <a href="https://blog.openpolicyagent.org/opas-full-stack-policy-language-caeaadb1e077">provides some details on Rego</a>, the policy language behind the <a href="http://www.openpolicyagent.org/">Open Policy Agent project</a>.</li>
-<li>Paul Czarkowski walks you through <a href="http://tech.paulcz.net/blog/getting-started-with-helm/">creating your first Helm chart</a>.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>I came across <a href="http://pythonsweetness.tumblr.com/post/165366346547/mitogen-an-infrastructure-code-baseline-that">this mention of Mitogen</a>, a project whose goal&mdash;as described by the creator&mdash;is to &ldquo;make it childsplay [<em>sic</em>] to run Python code on remote machines&rdquo;.</li>
-<li>From the &ldquo;interesting-but-not-practicallly-useful&rdquo; department, Nick Janetakis shows <a href="https://nickjanetakis.com/blog/run-the-first-edition-of-unix-1972-with-docker">how to use Docker to run a PDP-11 simulator</a>. The magic here, in my opinion, is in the simulator (not in Docker), but it&rsquo;s still an interesting look at how one might use Docker.</li>
-<li>Also from Nick, <a href="https://nickjanetakis.com/blog/docker-swarm-vs-kubernetes-which-one-should-you-learn">here&rsquo;s an attempt</a> to the answer the question, &ldquo;Do I learn Docker Swarm or Kubernetes?&rdquo;</li>
-<li>I debated on adding this link because I wasn&rsquo;t sure how useful it might be to readers, but decided to include it anyway. <a href="https://guacamole.apache.org">Apache Guacamole</a> describes itself as &ldquo;a clientless remote desktop gateway&rdquo; supporting standard protocols like SSH, VNC, and RDP.</li>
-<li>Tamás Török has <a href="http://codingsans.com/blog/microservice-architecture-best-practices">a quite lengthy post on transforming your system into microservices</a>. It&rsquo;s nice to see some of the challenges&mdash;which aren&rsquo;t all technical&mdash;mentioned as well, as sometimes today&rsquo;s tech writers only seem to see microservices through rose-colored glasses.</li>
-<li><a href="https://nerdfonts.com/">This</a> is an awesome collection of patched fonts.</li>
-<li><a href="https://blogs.msdn.microsoft.com/powershell/2017/12/15/using-the-openssh-beta-in-windows-10-fall-creators-update-and-windows-server-1709/">OpenSSH on Windows</a>&mdash;what a time to be alive! It almost makes me want to add a Windows 10 machine to my collection&hellip;</li>
-<li>I enjoyed this <a href="https://medium.com/@odedia/comparing-kubernetes-to-pivotal-cloud-foundry-a-developers-perspective-6d40a911f257">developer-centric comparison of Kubernetes and Pivotal Cloud Foundry</a>.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>Tony Bourke has a two-part series on ZFS and Linux and encryption (<a href="https://datacenteroverlords.com/2017/12/17/zfs-and-linux-and-encryption-part-1/">part 1</a>, <a href="https://datacenteroverlords.com/2017/12/17/zfs-on-linux-with-encryption-part-2/">part 2</a>).</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>Brendan Gregg has <a href="http://www.brendangregg.com/blog/2017-11-29/aws-ec2-virtualization-2017.html">a really good post</a> describing the AWS virtualization journey and Nitro, their new lightweight KVM-based hypervisor.</li>
-<li>Here&rsquo;s <a href="http://prefetch.net/blog/index.php/2017/12/19/managing-vsphere-from-the-linux-command-line/">a look at using <code>govc</code> to manage vSphere from the Linux command line</a>. I haven&rsquo;t messed much with <code>govc</code> (mainly because I don&rsquo;t have a home lab running vSphere), but it looks pretty cool.</li>
-<li>Luc Dekens shares a PowerShell script to <a href="http://www.lucd.info/2017/12/08/vsphere-permission-cleanup/">clean up vSphere permissions</a>.</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>Although targeted at &ldquo;creatives,&rdquo; I think there are some tips and ideas in <a href="http://99u.com/articles/56753/find-friction-forget-logos-fck-buzzwords-fight-assholes-and-42-other-ways-youll-do-the-best-creative-work-of-your-life-this-year">this post</a> that are equally applicable to IT professionals.</li>
-</ul>
-
-<p>That&rsquo;s it for this time around. Look for the next Technology Short Take in a couple of weeks, where I&rsquo;ll have another curated collection of links and articles for you. Until then, enjoy!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/7mpWh5EUU8I" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/7mpWh5EUU8I/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>Friday Fun LVI - Nested Bar Charts</h3>
-		</div>
-		<div class="collectiontext">
-<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha and a happy new year,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Today I just have a short post about some nice little bar chart which I've found last week when looking for new ideas on the web. Here is the image I've stumbled upon...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-zPLwuOo9GDA/WkXd3kU0RVI/AAAAAAAAEyU/XdxdjQXbu9ckPtNcfShkiBCZqM03HH0lQCLcBGAs/s1600/MekkoBarChart12.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="352" data-original-width="545" height="257" src="https://1.bp.blogspot.com/-zPLwuOo9GDA/WkXd3kU0RVI/AAAAAAAAEyU/XdxdjQXbu9ckPtNcfShkiBCZqM03HH0lQCLcBGAs/s400/MekkoBarChart12.png" width="400" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">I saw it and directly understood the idea behind it because it's like a compact view of two bar charts. The big bars in the background show the sum of all inner bars (like in a stacked bar chart) and the inner bars visualize the distribution of that sum into portions. If you want to know how to realize this kind of chart in Excel you should take a look at <a href="https://peltiertech.com/marimekko-replacement-2-by-2-panel/" target="_blank">Jon Peltier's blog</a> where this image was taken from.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">To be honest the thing that got my attention are the colors he used for this chart because they directly reminded me on the <a href="https://www.materialui.co/colors" target="_blank">Material Design colors</a>.&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And because I once implemented these <a href="https://github.com/HanSolo/Colors" target="_blank">colors</a> in JavaFX I gave it a try.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Well I was surprised how easy it was to implement and finished the whole thing within 1.5h and here is a little screenshot of the result...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/--ABQ6AsMHQE/WkXglDXZdZI/AAAAAAAAEyg/KsBFBaOZjIsobxSXuXAkznELPg7Z97wyACLcBGAs/s1600/Nested%2BBar%2BChart%2B2017-12-29%2B07-27-59.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="462" data-original-width="663" height="445" src="https://2.bp.blogspot.com/--ABQ6AsMHQE/WkXglDXZdZI/AAAAAAAAEyg/KsBFBaOZjIsobxSXuXAkznELPg7Z97wyACLcBGAs/s640/Nested%2BBar%2BChart%2B2017-12-29%2B07-27-59.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As you can see this kind of chart works really well with the Material Design colors. So it does not make sense to use it for everything but there might be some use cases where saves a lot of space and still transfers the information.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Because I will add this chart to my <a href="https://github.com/HanSolo/charts" target="_blank">JavaFX charts library</a>&nbsp;anyway I did not spend more time on implementing axis and labels but I only implemented a mouse event handler. Meaning to say if you click on an element the component will fire an event that contains the data of the selected series (the big bar) and if you've clicked on one of the inner bars it will also contain the data of the selected item.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Using this event I've implemented a simple popup that will show the selected data.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">This kind of chart can for example be used to compare sales data of products per quarter or similar things, you will find something ;)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As always the source is available over at <a href="https://github.com/HanSolo/nestedbarchart" target="_blank">github</a> so enjoy playing around with it.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">That's it for today...I wish you a codeful year 2018...keep coding...</span><br /><br />
-
- -->
-		</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2018/01/friday-fun-lvi-nested-bar-charts.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Looking Back: 2017 Project Report Card</h3>
-		</div>
-		<div class="collectiontext">
-			<p>As has become my custom for the past several years, I wanted to take a look  at how well I fared on <a href="https://blog.scottlowe.org/2017/01/31/looking-ahead-2017-projects/">my 2017 project list</a>. Normally I&rsquo;d publish this before the end of 2017, but during this past holiday season I decided to more fully &ldquo;unplug&rdquo; and focus on the truly important things in life (like my family). So, here&rsquo;s a look back at my 2017 projects and a report card on my progress (or lack thereof, in some cases).</p>
-
-<p>For reference, here&rsquo;s the list of projects I set out for myself in 2017:</p>
-
-<ol>
-<li>Finish the network automation book.</li>
-<li>Launch an open source book project.</li>
-<li>Produce some video content.</li>
-<li>Get the Full Stack Journey podcast back on track.</li>
-<li>Complete a &ldquo;wildcard project.&rdquo;</li>
-</ol>
-
-<p>So, how did I do with each of these projects?</p>
-
-<ol>
-<li><p><em>Finish the network automation book:</em> I&rsquo;m happy to report that all the content for <a href="http://shop.oreilly.com/product/0636920042082.do">the network automation book</a> I&rsquo;ve been writing with Jason Edelman and Matt Oswalt is done, and the book is currently in production (and should be available to order from O&rsquo;Reilly very soon). I had hoped to get the content done in time for the book to be available for order before the end of 2017, so I&rsquo;m marking myself down just a bit on this one. Grade: <strong>B</strong></p></li>
-
-<li><p><em>Launch an open source book project:</em> I <a href="https://blog.scottlowe.org/2017/02/21/launching-open-source-book-project/">launched</a> <em>The Open vSwitch Cookbook</em> in late February, and then <a href="https://blog.scottlowe.org/2017/03/28/canceling-ovs-cookbook-project/">canceled the project</a> in late March. Why? Basically, it boils down to my effort detracting from the effort to include <a href="http://docs.openvswitch.org/en/latest/">high-quality documentation with Open vSwitch itself</a>, and I decided it was better to support the efforts of the OVS project than put forth my own (competitive) project. Because I learned something from this project&mdash;how to better align my own efforts with the efforts of open source projects I want to support&mdash;I don&rsquo;t consider this to be a total failure. Grade: <strong>D</strong></p></li>
-
-<li><p><em>Produce some video content:</em> I intended to start producing some video content, such as demos of a project or a video &ldquo;how-to&rdquo; for a certain technology. Unfortunately, I simply didn&rsquo;t make it. Grade: <strong>F</strong></p></li>
-
-<li><p><em>Get the Full Stack Journey podcast back on track:</em> I was aiming for nine episodes in 2017, and I managed to publish six. More importantly, though, was that I was able to join forces with <a href="http://packetpushers.net/">Packet Pushers</a>, giving me a support network to make the podcast even better (in the long run). Grade: <strong>B</strong></p></li>
-
-<li><p><em>Complete a &ldquo;wildcard&rdquo; project:</em> I&rsquo;ve had this on my list for the last few years, as a way of trying to account for unseen changes in the industry that may pull me in a direction different than what I had anticipated. I did lots of interesting things this past year, but the only &ldquo;project&rdquo; that stands out was the migration of this web site from Jekyll on GitHub Pages to Hugo on Amazon S3/CloudFront (more information is <a href="https://blog.scottlowe.org/2017/08/10/information-recent-site-migration/">available here</a>). This migration was <em>very</em> smooth and has&mdash;I think&mdash;resulted in a better site with better performance. It&rsquo;s also pushed me in some new directions, which I think is a good thing. Grade: <strong>A</strong></p></li>
-</ol>
-
-<p>Overall, my progress was reasonable&mdash;not stellar, but not awful. (That&rsquo;s an improvement over last year, at least!) Over the next few weeks, I&rsquo;ll be evaluating the projects I want to tackle in 2018. Once I have that list ready to share, I&rsquo;ll publish it here as I have in the past.</p>
-
-<p>Have some feedback for me? Feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>, or drop me an email (my address is here on the site). Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/XN_6RpQy_8Y" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/XN_6RpQy_8Y/" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/GXCWyFT2DGE/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 </ul>
@@ -461,35 +534,37 @@ SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="dos_batch_admin_rechten.html">
+<div class="date">12.02.2018</div>
+<h3>DOS-Batch mit Admin-Rechten</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Auf Arbeit arbeiten wir für ein legacy Projekt mti Batch-Dateien im Deployment und beim Build-Management -
+ich habe überlegt, dass es bestimmt eine Möglichkeit gibt, die UAC so einzubinden, dass eine Batch-Datei von einem
+unprivilegierten Anwender ausgeführt nach Admin-Rechten fragt
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="beaninfo_runtime_annotations.html">
+<div class="date">12.02.2018</div>
+<h3>BeanInfo durch Runtime-Annotations</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Wie bereits in einem
+früheren Artikel
+ausgeführt wollte ich untersuchen, ob es möglich wäre, BeanInfos per Annotations bereitzustellen,
+die über eine Fassade direkt zur Laufzeit ermittelt werden könnten, ohne explizite BeanInfo-Klassen
+zu benötigen
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="gitlab___mozilla____9760_.html">
 <div class="date">21.01.2018</div>
 <h3>GitLab & Mozilla: &#9760;</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Eigentlich lebe ich schon ziemlich lange mit Mozilla bzw. Firefox als Browser und war damit immer recht zufrieden -
 unter nicht nur einem Betriebssystem. Jetzt häufen sich allerdings die kleinen Dinge, die  mich darüber nachdenken lassen,
 Alternativen zu erkunden...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="github_repository_beaninfo_generator.html">
-<div class="date">21.01.2018</div>
-<h3>GitHub Repository für BeanInfo Generator</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Wie bereits in einem
-früher veröffentlichten Artikel
-angekündigt wurden die Dateien zur Erzeugung vollständiger BeanInfos in einem
-GitHub-Repository veröffentlicht.
-</p></div>   </a>
-</li>
-<li class="anriss">
-	<a href="neuseeland_tips.html#54">
-<div class="date">16.01.2018</div>
-<h3>Neuseeland-Tips</h3>
-<div class="abstract">
-	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-<p>Hier einige Tips, falls man mal in Neuseeland sein und absolut nicht wissen sollte, was man den lieben langen Tag tun könnte.
 </p></div>   </a>
 </li>
 </ul>
