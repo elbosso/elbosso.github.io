@@ -1,0 +1,11 @@
+grant {
+   permission javax.security.auth.AuthPermission "modifyPrincipals";
+   permission javax.security.auth.AuthPermission "createLoginContext";
+   permission javax.security.auth.AuthPermission "doAsPrivileged";
+
+};
+
+grant Principal com.sun.security.auth.UnixPrincipal "elbosso" {
+   permission java.util.PropertyPermission "os.name", "read";
+   permission java.util.PropertyPermission "java.version", "read";
+};
