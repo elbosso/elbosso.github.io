@@ -43,7 +43,7 @@ public class ScalarBoxFilterBeanInfo
 //            properties.get("width").setShortDescription(null);
 //              properties.get("width").setValue(de.netsysit.dataflowframework.ui.Slot.AUTOCONNECTALLOWEDATTRIBUTE, java.lang.Boolean.TRUE);
 //              properties.get("width").setValue("Generic", java.lang.Boolean.TRUE);
-//              properties.get("width").setValue(Slot.MAXCONNECTIONSALLOWED, new java.lang.Integer(2));
+//              properties.get("width").setValue(Slot.MAXCONNECTIONSALLOWED, java.lang.Integer.valueOf(2));
             properties.put("filterresult",new PropertyDescriptor ( "filterresult", de.netsysit.dataflowframework.modules.filter.ScalarBoxFilter.class,  "getFilterresult" ,  null  ));
 //            properties.get("filterresult").setBound(true);
 //            properties.get("filterresult").setConstrained(true);
@@ -55,7 +55,7 @@ public class ScalarBoxFilterBeanInfo
 //            properties.get("filterresult").setShortDescription(null);
               properties.get("filterresult").setValue(de.netsysit.dataflowframework.ui.Slot.AUTOCONNECTALLOWEDATTRIBUTE, java.lang.Boolean.TRUE);
 //              properties.get("filterresult").setValue("Generic", java.lang.Boolean.TRUE);
-//              properties.get("filterresult").setValue(Slot.MAXCONNECTIONSALLOWED, new java.lang.Integer(2));
+//              properties.get("filterresult").setValue(Slot.MAXCONNECTIONSALLOWED, java.lang.Integer.valueOf(2));
 
         }
         catch(IntrospectionException e) {
@@ -120,7 +120,7 @@ public class ScalarBoxFilterBeanInfo
 //          methods.get("putInputBoxed").setValue("VariablePortCount", Boolean.TRUE);
 //          methods.get("putInputBoxed").setValue("VariablePortCountMin", java.lang.Integer.valueOf(2));
 //          methods.get("putInputBoxed").setValue("GenericPortDescription", new de.netsysit.dataflowframework.logic.GenericPortDescription(new java.lang.String[0]));
-//          methods.get("putInputBoxed").setValue(Slot.MAXCONNECTIONSALLOWED, new java.lang.Integer(4));
+//          methods.get("putInputBoxed").setValue(Slot.MAXCONNECTIONSALLOWED, java.lang.Integer.valueOf(4));
         }
         catch( Exception e) {}//GEN-HEADEREND:Methods
 

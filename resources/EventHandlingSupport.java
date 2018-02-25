@@ -87,7 +87,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, boolean oldvalue, boolean newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, new Boolean(oldvalue), new Boolean(newvalue)));
+			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Boolean.valueOf(oldvalue), java.lang.Boolean.valueOf(newvalue)));
 	}
 
 
@@ -102,7 +102,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, byte oldvalue, byte newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, new Byte(oldvalue), new Byte(newvalue)));
+			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Byte.valueOf(oldvalue), java.lang.Byte.valueOf(newvalue)));
 	}
 
 
@@ -117,7 +117,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, short oldvalue, short newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, new Short(oldvalue), new Short(newvalue)));
+			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Short.valueOf(oldvalue), java.lang.Short.valueOf(newvalue)));
 	}
 
 
@@ -132,7 +132,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, int oldvalue, int newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, new Integer(oldvalue), new Integer(newvalue)));
+			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Integer.valueOf(oldvalue), java.lang.Integer.valueOf(newvalue)));
 	}
 
 
@@ -147,7 +147,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, double oldvalue, double newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, new Double(oldvalue), new Double(newvalue)));
+			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Double.valueOf(oldvalue), java.lang.Double.valueOf(newvalue)));
 	}
 
 
@@ -162,7 +162,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, float oldvalue, float newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, new Float(oldvalue), new Float(newvalue)));
+			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Float.valueOf(oldvalue), java.lang.Float.valueOf(newvalue)));
 	}
 
 
@@ -177,7 +177,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, long oldvalue, long newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, new Long(oldvalue), new Long(newvalue)));
+			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Long.valueOf(oldvalue), java.lang.Long.valueOf(newvalue)));
 	}
 
 

@@ -75,7 +75,7 @@ public class NormalDistributedRandom extends de.elbosso.util.beans.EventHandling
 	{
 		double rv=random.nextDouble();
 		rv=func.compute(rv);
-		return new java.lang.Double(rv);
+		return java.lang.Double.valueOf(rv);
 	}
 
 	public void remove()

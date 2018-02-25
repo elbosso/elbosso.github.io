@@ -51,8 +51,8 @@ public class DoubleMap
 		while ((double) (1.0 + (machEps / 2.0)) != 1.0);
 		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("machine Epsilon (double)= "+machEps);
 		machEps /= 2.0;
-		Double a = new Double(1);
-		Double b = new Double(a.doubleValue() + machEps);
+		Double a = java.lang.Double.valueOf(1);
+		Double b = java.lang.Double.valueOf(a.doubleValue() + machEps);
 		java.util.Set<Double> doubles = new java.util.HashSet();
 		doubles.add(a);
 		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(doubles.contains(b));

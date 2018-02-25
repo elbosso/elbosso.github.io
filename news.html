@@ -114,6 +114,85 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Technology Short Take 95</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Welcome to Technology Short Take 95! This Short Take was a bit more challenging than normal to compile, given that I spent the week leading up to its publication visiting customers in Europe. (My travel schedule in Europe is also why it didn&rsquo;t get published until Saturday instead of the typical Friday.) Nevertheless, I have persevered in order to deliver you this list of links and articles. I hope it proves useful!</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>Larry Smith Jr. has <a href="https://everythingshouldbevirtual.com/bringing-devops-to-routing-cisco-xr/">a nice write-up on Cisco XR</a> stemming from a presentation at NFD 17.</li>
+<li>VMware recently released a reference design guide for NSX-T; see <a href="https://blogs.vmware.com/networkvirtualization/2018/02/introducing-vmware-nsx-t-reference-design.html">here</a> for more details.</li>
+<li>The engineering team at Lyft recently discussed a new overlay-free networking approach they&rsquo;ve been working on for Kubernetes: <a href="https://eng.lyft.com/announcing-cni-ipvlan-vpc-k8s-ipvlan-overlay-free-kubernetes-networking-in-aws-95191201476e">IPVLAN-based CNI stack for running within VPCs on AWS</a>. This is pretty cool, but does introduce some potential design considerations for deploying Kubernetes on AWS. (For those that may be unfamiliar: CNI, or Container Network Interface, is the means whereby network mechanisms &ldquo;plug into&rdquo; Kubernetes. IPVLAN is a low-latency means of providing IP connectivity to containers. VPCs, or Virtual Private Clouds, are Amazon&rsquo;s software-defined networking mechanism for workloads running on AWS.)</li>
+<li>Viktor van den Berg writes on <a href="https://www.viktorious.nl/2018/02/13/one-armed-versus-inline-load-balancer-with-vra-and-nsx/">deploying NSX load balancers with vRA</a>.</li>
+<li>Alen Komljen provides <a href="https://akomljen.com/kubernetes-service-mesh/">an introductory overview</a> of service meshes in Kubernetes.</li>
+<li>Matt Klein has a great post on <a href="https://blog.envoyproxy.io/embracing-eventual-consistency-in-soa-networking-32a5ee5d443d">why we need to embrace eventual consistency in (distributed) networking</a>.</li>
+<li>In the event that you need yet-another-introduction to Kubernetes networking, Mark Betz has a three-part series you may find helpful/useful (<a href="https://medium.com/google-cloud/understanding-kubernetes-networking-pods-7117dd28727">part 1</a>, <a href="https://medium.com/google-cloud/understanding-kubernetes-networking-services-f0cb48e4cc82">part 2</a>, and <a href="https://medium.com/google-cloud/understanding-kubernetes-networking-ingress-1bc341c84078">part 3</a>).</li>
+</ul>
+
+<h2 id="servers-hardware">Servers/Hardware</h2>
+
+<p>Nothing this time around, sorry!</p>
+
+<h2 id="security">Security</h2>
+
+<ul>
+<li><a href="https://krausefx.com/blog/mac-privacy-sandboxed-mac-apps-can-take-screenshots">This</a> doesn&rsquo;t make me feel very secure.</li>
+</ul>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li>Dimitri de Swart has a write-up on <a href="https://www.vmguru.com/2018/01/lamp-stacks-made-easy-with-vmware-and-puppet/">LAMP stacks made easy with VMware and Puppet</a>.</li>
+<li>Fabrizio Pandini shares <a href="https://blog.heptio.com/how-to-start-creating-kubernetes-clusters-like-a-pro-kubeadm-phases-heptioprotip-2bdce58b530d">a &ldquo;protip&rdquo; on using <code>kubeadm phases</code> when deploying Kubernetes clusters</a>. I must admit that I haven&rsquo;t yet played with <code>kubeadm</code>; guess that&rsquo;s moving up my list of &ldquo;things to try.&rdquo;</li>
+<li>Sebastien Goasguen <a href="https://medium.com/bitnami-perspectives/imperative-declarative-and-a-few-kubectl-tricks-9d6deabdde">shares a few <code>kubectl</code> tricks</a> in a discussion on imperative configuration versus declarative configuration.</li>
+<li>Here&rsquo;s another thing I really need to take out for a spin: <a href="https://www.terraform.io/docs/providers/kubernetes/index.html">the Kubernetes provider for Terraform</a>.</li>
+<li>Andrés Martínez, a software engineer with Bitnami, shares a write-up on <a href="https://engineering.bitnami.com/articles/serverless-service-mesh-with-kubeless-and-istio.html">a serverless service mesh with kubeless and Istio</a>. (And he provides <a href="https://github.com/andresmgot/kubeless-istio-sample">a GitHub repository</a> with samples from the article.)</li>
+<li>Looks like PKS, the joint Kubernetes effort from VMware and Pivotal, has gone GA (see <a href="https://blogs.vmware.com/cloudnative/2018/02/12/pivotal-container-service-ga/">this VMware blog post</a>) with initial support for vSphere and GCP. I think the omission of AWS support at GA is a mistake, but what do I know?</li>
+<li>Courtesy of Corey Quinn, here&rsquo;s <a href="https://www.simplilearn.com/aws-vs-azure-cloud-certification-article">an awesome AWS versus Azure comparison</a>, comic book style.</li>
+<li>Most folks have probably heard about 12 Factor Applications (see <a href="https://12factor.net/">here</a> if you haven&rsquo;t or if you need a refresher); <a href="https://blog.octo.com/en/the-twelve-factors-kubernetes/">this article</a> talks about 12 basic rules and good practices for using Kubernetes optimally.</li>
+<li>If you&rsquo;re interested in building a local Kubernetes cluster on your laptop&mdash;and there may be various reasons why this would be helpful&mdash;<a href="https://itnext.io/kubernetes-on-ubuntu-on-virtualbox-60e8ce7c85ed">this guide by Mike Gavrilov on Kubernetes on Ubuntu on VirtualBox</a> could have some useful information for you.</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>The Project Atomic blog shares <a href="http://www.projectatomic.io/blog/2018/01/using-image-registries-with-buildah/">how to use OCI image registries with Buildah</a>.</li>
+<li>Speaking of Buildah&hellip;here&rsquo;s a post from Tomáš Tomeček on <a href="https://blog.tomecek.net/post/building-containers-with-buildah-and-ansible/">using Buildah and Ansible to create container images</a>.</li>
+<li>Jesse Hu has shared <a href="https://github.com/jessehu/helm-harbor">a Helm chart for deploying VMware&rsquo;s open source Harbor registry</a>. From what I can see, it looks like Jesse&rsquo;s version is a forked (and updated) version of <a href="https://github.com/paulczar/helm-harbor">a similar Helm chart from Paul Czarkowski</a>.</li>
+<li>Cormac Hogan has <a href="https://cormachogan.com/2018/02/13/first-look-aws-greengrass-vsphere/">a first look at AWS Greengrass on vSphere</a>.</li>
+<li><a href="http://www.vmwareinfo.com/2018/02/journey-to-docker.html">This</a> is a pretty interesting use case for Docker.</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<ul>
+<li>I had a chance to take a (very) quick look at <a href="https://dotmesh.com/">Dotmesh</a>, a new solution that enables snapshots for stateful workloads in Kubernetes and Docker. It seems like an interesting and potentially helpful solution, although I haven&rsquo;t (yet) had the time to actually spend any hands-on time with it.</li>
+</ul>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<ul>
+<li>Alex Ellis provides <a href="https://blog.alexellis.io/kvm-kubernetes-primer/">an overview of KVM</a>, in the context of having another option for deploying your own Kubernetes cluster.</li>
+<li>Alessandro Arrichiello <a href="https://medium.com/@alezzandro/kubernetes-and-virtualization-kubevirt-will-let-you-spawn-virtual-machine-on-your-cluster-e809914cc783">discusses how to set up kubevirt</a>, a project aimed at enabling Kubernetes to manage VMs (via libvirt).</li>
+</ul>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<p>Nothing this time around (which surprises me&mdash;I almost <em>always</em> find material to include in this section).</p>
+
+<p>OK, that&rsquo;s all this time around, but I&rsquo;ve already started gathering material for next time. Look for the next Technology Short Take in about two weeks. Thanks for reading!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/jiRKFGyIzxI" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/jiRKFGyIzxI/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="http://www.neuesvonfraumeyer.de/" target="_blank">Neues von Frau Meyer</a>
 		</div>
 		<div>
@@ -304,90 +383,6 @@ clustername.route53domain.com
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/wc9kOdeypas/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/" target="_blank">Harmonic Code</a>
-		</div>
-		<div>
-			<h3>Friday Fun LIX - Parallel Coordinates Chart</h3>
-		</div>
-		<div class="collectiontext">
-<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
-SyndContentImpl.value=<span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Aloha from Singapore one more time,</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Today I have a chart for you which was a bit tricky to implement. It's a so called <a href="https://en.wikipedia.org/wiki/Parallel_coordinates" target="_blank">parallel coordinates chart</a> and to be honest it doesn't look really fancy at a glance but it is really neat.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you have no idea what it looks like here is a little image that show one...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://upload.wikimedia.org/wikipedia/commons/5/5c/Parallel_coordinates-sample.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="282" data-original-width="560" height="321" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Parallel_coordinates-sample.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">First it looks like some kind of simple line chart but it's not. With this chart one can compare objects in a nice way. So let's assume you would like to compare cars and you would not only to compare one property of the cars like horsepower but a set of properties (e.g. cylinder, horsepower, acceleration, weight, consumption, etc.) and the whole comparison should be in one chart.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In this case the parallel coordinates chart ist perfect. Here is a little screenshot of my implementation that uses this example...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://2.bp.blogspot.com/-_jIT5FaTaVo/WnMGz91fJjI/AAAAAAAAE7Q/ITmknCoK814Gr_EXSuXkSO4M0ds7jmkGACLcBGAs/s1600/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-23-17.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="404" data-original-width="761" height="338" src="https://2.bp.blogspot.com/-_jIT5FaTaVo/WnMGz91fJjI/AAAAAAAAE7Q/ITmknCoK814Gr_EXSuXkSO4M0ds7jmkGACLcBGAs/s640/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-23-17.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In this chart each line represents one car (e.g. the blue line represents my Smart Roadster Coupé and the purple line represents the Bugatti Veyron...a fair comparison right ;) ).</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Now the interesting part about that chart is that it makes it easy to find similarities between cars or that you can figure out trends easily.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">There are tons of possibilities on how to extend this chart but because I do not have the time for that I've just added two things that I've found very nice:</span><br /><br /><ul><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Dragging axes</span></li><li><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Filter specific lines</span></li></ul><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">So you can imagine that the order of the categories has a big impact on the expressiveness of the chart and therefor it is possible to drag a category by dragging the header of a category to another position...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-ktlCmA-bXOU/WnMIbvF5LiI/AAAAAAAAE7c/n0JeHz3XGb0pDx4Zy6WDd57I1ptc1-GjgCLcBGAs/s1600/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-29-48.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="539" data-original-width="884" height="390" src="https://1.bp.blogspot.com/-ktlCmA-bXOU/WnMIbvF5LiI/AAAAAAAAE7c/n0JeHz3XGb0pDx4Zy6WDd57I1ptc1-GjgCLcBGAs/s640/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-29-48.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Here I've simply moved some categories around to show the effect of the different category order.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The filtering of specific lines (cars in this example) works similar. Here you simply click close to one axis and drag down and you will see that a little rectangle will be drawn that selects the lines in the range of the rectangle.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">If you release the mouse button it will show you something similar like follows...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><br /><div class="separator" style="clear: both; text-align: center;"><a href="https://4.bp.blogspot.com/-oXnkyjQm7z8/WnMI55VVb2I/AAAAAAAAE7g/tWyPqvTd-HAsZ99jpJ-yidYOQKIHrpJLQCLcBGAs/s1600/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-30-14.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="539" data-original-width="884" height="390" src="https://4.bp.blogspot.com/-oXnkyjQm7z8/WnMI55VVb2I/AAAAAAAAE7g/tWyPqvTd-HAsZ99jpJ-yidYOQKIHrpJLQCLcBGAs/s640/Parallel%2BCoordinates%2BChart%2B2018-02-01%2B20-30-14.png" width="640" /></a></div><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">As soon as you select some lines all other "unselected" lines will be drawn in light gray (configurable) and the selected lines will be drawn in blue (configurable). In addition the names of the selected lines will be shown on the left side.&nbsp;</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Once you click again somewhere the selection will be removed again.</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">In principle that's it and I hope it might be useful for someone. As always I have no usage for it at all :)</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">The chart is part of my JavaFX charts library where the current version is 1.0.5 and that you can found here:</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Source at <a href="https://github.com/HanSolo/charts" target="_blank">github</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">Binaries at <a href="https://bintray.com/hansolo/charts" target="_blank">bintray</a> or <a href="https://search.maven.org/#search%7Cga%7C1%7Cfc%3Aeu.hansolo.fx.charts" target="_blank">Maven Central</a></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">And if you would like to see it in action, here is a short screen video that I've recorded...</span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><iframe allow="autoplay; encrypted-media" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/qaQ2Dh_0pgU" width="560"></iframe></span><br /><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;"><br /></span><span style="font-family: &quot;trebuchet ms&quot; , sans-serif;">That's it for today, so enjoy Carnival and don't forget...keep coding... ;)</span><br /><br />
-
- -->
-		</div>
-		<div class="collectionhref">
-		<a href="http://harmoniccode.blogspot.com/2018/02/friday-fun-lix-parallel-coordinates.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Running OVS on Fedora Atomic Host</h3>
-		</div>
-		<div class="collectiontext">
-			<p>In this post, I&rsquo;d like to share the results of some testing I&rsquo;ve been doing to run <a href="http://openvswitch.org/">Open vSwitch</a> (OVS) in containers on a container-optimized Linux distribution such as <a href="https://www.projectatomic.io/">Atomic Host</a> (Fedora Atomic Host, specifically). I&rsquo;m still relatively early in my exploration of this topic, but I felt like sharing what I&rsquo;ve found so far might be helpful to others, and might help spark conversations within the relevant communities about how this experience might be improved.</p>
-
-<p>The reason for the use of Docker containers in this approach is twofold:</p>
-
-<ol>
-<li>Many of the newer container-optimized Linux distributions&mdash;CoreOS Container Linux (soon to be part of Red Hat in some fashion), Project Atomic, etc.&mdash;eschew &ldquo;traditional&rdquo; package management solutions in favor of containers.</li>
-<li>Part of the reason behind my testing was to help the OVS community better understand what it would look like to run OVS in containers so as to help make OVS a better citizen on container-optimized Linux distributions.</li>
-</ol>
-
-<p>In this post, I&rsquo;ll be using Fedora 27 Atomic Host (via <a href="https://www.vagrantup.com/">Vagrant</a> with <a href="https://virtualbox.org/">VirtualBox</a>). If you use a different version or release of Atomic Host, your results may differ somewhat. For the OVS containers, I&rsquo;m using the excellent <a href="https://hub.docker.com/r/keldaio/ovs/">keldaio/ovs</a> Docker containers.</p>
-
-<p>As it turns out, running OVS on Fedora Atomic Host using the Kelda Docker images is really straightforward. As stated in <a href="https://github.com/kelda/kelda/tree/master/ovs">Kelda&rsquo;s README for the OVS Docker images</a>, you just have to launch a couple of containers. First, you&rsquo;d launch a container for the OVSDB server:</p>
-
-<pre><code>docker run -itd --net=host --name=ovsdb-server keldaio/ovs ovsdb-server
-</code></pre>
-
-<p>Next, you&rsquo;d run a container for the ovs-vswitchd daemon:</p>
-
-<pre><code>docker run -itd --net=host --name=ovs-vswitchd --volumes-from=ovsdb-server --privileged keldaio/ovs ovs-vswitchd
-</code></pre>
-
-<p>That gets the core, essential parts of OVS up and running, but you&rsquo;re not fully functional yet. The final ingredient is to load the OVS kernel module, which is part of the upstream Linux kernel. Normally, starting OVS-related daemons would initiate loading the kernel module, but with OVS encapsulated in Docker containers it won&rsquo;t happen automatically. However, a quick <code>sudo modprobe openvswitch</code> will easily remedy that and get the OVS kernel module loaded.</p>
-
-<p>From this point, running <code>ovs-vsctl</code> to configure OVS involves appending your command to a <code>docker exec</code> command, like this:</p>
-
-<pre><code>docker exec -it ovs-vswitchd ovs-vsctl show
-</code></pre>
-
-<p>This will run <code>ovs-vsctl show</code> in the &ldquo;ovs-vswitchd&rdquo; container, which is where the ovs-vswitchd daemon is running. All the standard <code>ovs-vsctl</code> commands should work here, such as adding a bridge (<code>add-br</code>), adding a port (<code>add-port</code>), deleting a port (<code>del-port</code>), and deleting a bridge (<code>del-br</code>).</p>
-
-<p>This is all pretty cool, but there&rsquo;s a problem. OVS&rsquo; configuration is stored in the OVSDB database, which is itself found in the &ldquo;ovsdb-server&rdquo; container (hence why the vswitchd container needs to mount the same volumes as the &ldquo;ovsdb-server&rdquo; container via <code>--volumes-from</code>). What if the &ldquo;ovsdb-server&rdquo; container goes away? <strong>The OVS configuration goes away, too.</strong> (Don&rsquo;t believe me? Stop, remove, and relaunch the &ldquo;ovsdb-server&rdquo; container using the command line above and see for yourself.)</p>
-
-<p>Obviously, that&rsquo;s not ideal. One possible solution is to use Docker volumes to store the data that OVSDB needs <em>separate</em> from the actual OVSDB server container.</p>
-
-<p>Here&rsquo;s how you&rsquo;d make this work. First, you&rsquo;d create some Docker volumes:</p>
-
-<pre><code>docker volume create var-lib-ovs
-docker volume create var-log-ovs
-docker volume create var-run-ovs
-docker volume create etc-ovs
-</code></pre>
-
-<p>Then, you&rsquo;d amend the command line for launching the &ldquo;ovsdb-server&rdquo; container to look like this instead:</p>
-
-<pre><code>docker run -itd --net=host --name=ovsdb-server -v var-lib-ovs:/var/lib/openvswitch -v var-log-ovs:/var/log/openvswitch -v var-run-ovs:/var/run/openvswitch -v etc-ovs:/etc/openvswitch keldaio/ovs ovsdb-server
-</code></pre>
-
-<p>The command line for launching the ovs-vswitchd container remains unchanged, since it just mounts the same volumes as the OVSDB server container.</p>
-
-<p>With this approach, the OVS configuration is now stored separate from the containers where the OVSDB server and ovs-vswitchd processes run, which means we can easily kill and restart those containers <em>without</em> negatively impacting OVS configuration. This configuration also brings us one step closer to using systemd to manage the OVS containers since we can now persist data across container instances.</p>
-
-<p>I&rsquo;m still exploring this sort of configuration, so I&rsquo;ll share additional information I uncover in future blog posts. In the meantime, if I&rsquo;ve made an error in this post or if there is a suggestion you&rsquo;d like to make to improve the post, feel free to <a href="https://twitter.com/scott_lowe">contact me on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/10bbefukvoM" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/10bbefukvoM/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -395,11 +390,25 @@ docker volume create etc-ovs
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-  <a href="aenderungen_datumsformat_java___schon_wieder_.html">
-<div class="date">20.02.2018</div>
-<h3>Änderungen im Datumsformat von Java - schon wieder!</h3>
+  <a href="beaninfo_runtime_annotations__gist_.html">
+<div class="date">25.02.2018</div>
+<h3>BeanInfo durch Runtime-Annotations (Gist)</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Wie bereits im
+vorangegangenen Artikel
+zu diesem thema wollte ich die Idee der BeanInfo ohne explizite BeanInfo-Klassen
+eigentlich ruhen lassen - ich habe mich aber aufgerafft,
+zumindest die prototypische Implementierung als Gist zu veröffentlichen.
+zu benötigen
+</p></div>   </a>
+</li>
+<li class="anriss">
+	<a href="aenderungen_datumsformat_java___schon_wieder_.html#66">
+<div class="date">25.02.2018</div>
+<h3>Änderungen im Datumsformat von Java - schon wieder!</h3>
+<div class="abstract">
+	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
 <p>Ich habe bereits über einen
 Bug in Java9 berichtet,
 der mich ziemlich überrascht hat. Wer aber beschreibt meine Überraschung, dass
@@ -409,26 +418,19 @@ wieder Speichel gesammelt hat?
 </p></div>   </a>
 </li>
 <li class="anriss">
-	<a href="java_bug_modulsystem_nutzung_jaas.html#55">
-<div class="date">20.02.2018</div>
-<h3>Java-Bug in Modulsystem bei Nutzung von JAAS</h3>
+  <a href="batik_java9_modulsystem_____9760_.html">
+<div class="date">25.02.2018</div>
+<h3>Batik und Java9 Modulsystem = &#9760;</h3>
 <div class="abstract">
-	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-<p>Ich stand und stehe immer noch der Implementierung des Modulsystems in Java9 ablehnend gegenüber. Neulich war es
-draußen So., dass ich lieber drin blieb und ich erinnerte mich an eine Test-Suite, die ich bei der Umstellung auf Java8
-dazu nutzte, Imkompatibilitäten meiner Anwendungen festzustellen und auszumerzen.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="beaninfo_runtime_annotations.html">
-<div class="date">12.02.2018</div>
-<h3>BeanInfo durch Runtime-Annotations</h3>
-<div class="abstract">
-<p>Wie bereits in einem
-früheren Artikel
-ausgeführt wollte ich untersuchen, ob es möglich wäre, BeanInfos per Annotations bereitzustellen,
-die über eine Fassade direkt zur Laufzeit ermittelt werden könnten, ohne explizite BeanInfo-Klassen
-zu benötigen
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich
+bereits
+über den
+einen
+oder
+anderen
+Bug in Verbindung mit Java 9 berichtet habe, habe ich bereits wieder einen gefunden - und wieder verbunden mit der
+ach so tollen Erfindung des Java-Modulsystems
 </p></div>   </a>
 </li>
 </ul>

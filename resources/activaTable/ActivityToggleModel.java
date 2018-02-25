@@ -81,7 +81,7 @@ public class ActivityToggleModel<T> extends de.netsysit.model.table.EventHandlin
 
 	public Object getValueAt(int row, int column)
 	{
-		return (column==0?container.get(row).getContent():new java.lang.Boolean(container.get(row).isActive()));
+		return (column==0?container.get(row).getContent():java.lang.Boolean.valueOf(container.get(row).isActive()));
 	}
 
 	public void setValueAt(Object o, int row, int column)
