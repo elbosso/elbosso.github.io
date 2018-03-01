@@ -2,13 +2,44 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>Upcoming...</title>
+  <title>QBrowser</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta name="Description" content="Ich habe ein Werkzeug auf GitHub veröffentlicht, das in Queues hineinzuschauen gestattet, um
+die Entwicklung von JMS-Anwendungen zu erleichtern." />
   <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
 	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
 	<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
@@ -30,7 +61,7 @@ document.write(link)
 //-->
 </script>
 </head>
-<body>
+<body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
 <div id="logo">
@@ -52,35 +83,98 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 		<noscript>Der Verfasser</noscript>				
   </p>
 </div>
-<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-			<a href="https://github.com/elbosso">hier</a>.</p>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
+	über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
+	Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
+	daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
+	Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
+	Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+		<a href="https://github.com/elbosso">hier</a>.</p>
 	</div><!-- #header-->
 <div id="all">
 <div id="A">
 <div id="content">
-	<div class="heading">Upcoming...</div>
-	<p>Demnächst in diesem Theater...</p>
-<ul class="double"> 
+<div class="date">01.03.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+	<!--li--> <a href="beaninfo_runtime_annotations__gist_.html#content">Java</a> <!--/li-->
+	<!--/ul-->
+</div>
+ 	<div class="heading">QBrowser</div>
+	<p>Ich habe ein Werkzeug auf GitHub veröffentlicht, das in Queues hineinzuschauen gestattet, um
+die Entwicklung von JMS-Anwendungen zu erleichtern.
+</p> <a name="content"> </a>
+ <p>  <img src="images/medium/QBrowser_logo.png"
+	   alt="QBrowser"
+	class="imgright">
+Die Anwendung existiert in zwei verschiedenen Versionen - eine kann mit ActiveMQ ab Version 5.x und
+ArtemisMQ ab Version 2 umgehen, die andere mit ActiveMQ ab Version 5.x und
+ArtemisMQ ab Version 1. Über die reine Inspektion von bereits in Queues enthaltenen Messages bietet
+die Anwendung Möglichkeiten zur Erzeugung und Einspeisung von TextMessages mittels verschiedener Generatoren.
+</p><p>
+Beide Versionen existieren in getrennten Branches im
+<a href="https://github.com/elbosso/qbrowser">Repository</a>.
+</p><p>
+Die Erstellung wird mittels
+<pre>
+mvn clean compile package assembly:single
+</pre>
+durchgeführt - das entstandene JAR kann einfach gestartet werden - es enthält alle benötigten Klassen
+und sonstigen Ressourcen.
+</p><p>
+Allerdings sollte beachtet werden, dass Java9 benötigt wird - sowohl zum Kompilieren als auch zur Ausführung der
+Applikation!!
+</p> </div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
 <li class="anriss">
-			<h3 class="head">
-				Maven-Archetype für dWb+ Module</h3>
+  <a href="beaninfo_runtime_annotations__gist_.html#content">
+<div class="date">25.02.2018</div>
+<h3>BeanInfo durch Runtime-Annotations (Gist)</h3>
 <div class="abstract">
-<p>Nachdem ich bereits ein GitHub-Repository für die
-Beispiele aus dem Kochbuch für
-dWb+ veröffentlicht habe, folgt nun hier ein Archetype
-zur entwicklung eigener Module
-</p></div> 
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Wie bereits im
+vorangegangenen Artikel
+zu diesem Thema wollte ich die Idee der BeanInfo ohne explizite BeanInfo-Klassen
+eigentlich ruhen lassen - ich habe mich aber aufgerafft,
+zumindest die prototypische Implementierung als Gist zu veröffentlichen.
+</p></div>   </a>
 </li>
 <li class="anriss">
-			<h3 class="head">
-				QBrowser</h3>
+	<a href="aenderungen_datumsformat_java___schon_wieder_.html#66">
+<div class="date">25.02.2018</div>
+<h3>Änderungen im Datumsformat von Java - schon wieder!</h3>
 <div class="abstract">
-<p>Ich habe ein Werkzeug auf GitHub veröffentlicht, das es gestattet, in Queues hineinzuschauen, um
-die Entwicklung von JMS-Anwendungen zu erleichtern.
-</p></div> 
+	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+<p>Ich habe bereits über einen
+Bug in Java9 berichtet,
+der mich ziemlich überrascht hat. Wer aber beschreibt meine Überraschung, dass
+der Bug, der mich beim Umstieg von Java7 auf Java8 bereits
+angespuckt hat,
+wieder Speichel gesammelt hat?
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="batik_java9_modulsystem_____9760_.html#content">
+<div class="date">25.02.2018</div>
+<h3>Batik und Java9 Modulsystem = &#9760;</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich
+bereits
+über den
+einen
+oder
+anderen
+Bug in Verbindung mit Java 9 berichtet habe, habe ich bereits wieder einen gefunden - und wieder verbunden mit der
+ach so tollen Erfindung des Java-Modulsystems
+</p></div>   </a>
 </li>
 </ul>
-</div>
 </div>
 <nav id="C"> 
 <h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
@@ -214,7 +308,9 @@ Hardware
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Java
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -392,9 +488,7 @@ Windows
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-<strong>
 Upcoming...
-</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -402,9 +496,6 @@ Upcoming...
 </div>
 </div>
 </a>
-<!--
--->
-
 </nav>
 </div>
 	<div id="footer">
@@ -425,8 +516,7 @@ abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZ
 		</script>
 		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
 			</a></strong>
-	</span>
-</div><!-- #footer -->
+	</span></div><!-- #footer -->
 </div>
 </body>
 </html>
