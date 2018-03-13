@@ -117,6 +117,60 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>Recent Changes in my "Learning Tools" Repository</h3>
+		</div>
+		<div class="collectiontext">
+			<p>A couple years ago, I created <a href="https://github.com/lowescott/learning-tools">a &ldquo;learning-tools&rdquo; repository on GitHub</a> with the goal of creating environments/tools that would help others learn new technologies. At first, the contents of the repository were almost exclusively leveraging <a href="https://www.vagrantup.com/">Vagrant</a>, but over time I&rsquo;ve extended the environments to also leverage <a href="https://www.ansible.com/">Ansible</a> and to use tools such as <a href="https://www.terraform.io/">Terraform</a>. Over the past month or so, I&rsquo;ve made a few additional (albeit relatively minor) updates that I also wanted to share.</p>
+
+<p>As I said, the updates are relatively minor:</p>
+
+<ul>
+<li>I&rsquo;ve added environments for running generic versions of Fedora Atomic Host (26 and 27), Ubuntu 16.04, and Debian 9.x. These environments are probably of limited value by themselves, but in the future I may use them as the basis for more complex environments based on these operating systems. Of course, others may leverage them as the basis for projects of their own.</li>
+<li>I&rsquo;ve added <a href="https://libvirt.org/">Libvirt</a> support for a number of the Vagrant-based environments, based on <a href="https://blog.scottlowe.org/2017/12/06/using-vagrant-with-libvirt-on-fedora/">my experience with the Vagrant Libvirt provider</a>. This support is limited to areas where I was able to find Libvirt-formatted Vagrant boxes, so you&rsquo;ll find Libvirt support for the environments using CentOS Atomic Host, Fedora Atomic Host, and Debian. The generic Ubuntu 16.04 environment also supports Libvirt, but most other Ubuntu-based environments do not (yet).</li>
+<li>Wherever possible, I&rsquo;ve removed references to Vagrant boxes that I personally built/maintained (like the <code>slowe/ubuntu-trusty-x64</code> Vagrant box). I simply don&rsquo;t have the time/bandwidth to maintain those boxes properly, and feel like users of the repository are best served by me pointing them to boxes that are kept more up-to-date. There are a few exceptions where these boxes are still referenced; just be aware that I&rsquo;m no longer updating those boxes (I recommend you switch to a box that <em>is</em> maintained).</li>
+</ul>
+
+<p>In the coming months, I plan to expand the repository to include more content on <a href="https://kubernetes.io/">Kubernetes</a> and related projects/technologies, so stay tuned for that. Until then, if there&rsquo;s additional stuff you&rsquo;d like to see&mdash;feel free to fork the repository, contribute your changes, and submit a pull request! Alternately, you&rsquo;re welcome to open an issue on the repository with requests for additional technologies (or scenarios/use cases) you&rsquo;d like to see.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/LXh8QEYAurI" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/LXh8QEYAurI/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Looking Ahead: My 2018 Projects</h3>
+		</div>
+		<div class="collectiontext">
+			<p>For the last six years or so, I&rsquo;ve been publishing a list of projects/goals for the upcoming year (followed by a year-end review of how I did with those projects/goals). For example, here are <a href="https://blog.scottlowe.org/2017/01/31/looking-ahead-2017-projects/">my goals for 2017</a>, and here&rsquo;s <a href="https://blog.scottlowe.org/2018/01/03/looking-back-2017-project-report-card/">my year-end review</a> of my progress in 2017. In this post, I&rsquo;m going to share with you my list of projects/goals for 2018.</p>
+
+<p>As I&rsquo;ve done in previous years, I&rsquo;ll list the projects/goals, along with an optional <em>stretch goal</em> (where it makes sense).</p>
+
+<ol>
+<li><p><strong>Become extremely fluent with Kubernetes.</strong> I&rsquo;m focusing all my technical skills on <a href="https://kubernetes.io/">Kubernetes</a> this year, with the goal of becoming extremely fluent with the project in all its aspects. There are some aspects&mdash;like networking, for example&mdash;where some specialization/additional focus will be needed (focusing on particular network architectures/plugins). That means &ldquo;leaving behind&rdquo; other technologies, like <a href="https://www.openstack.org/">OpenStack</a>, in order to more fully focus on Kubernetes. <em>(Stretch goal: Pass the Certified Kubernetes Administrator [CKA] exam.)</em></p></li>
+
+<li><p><strong>Learn to code/develop in Go.</strong> Given that Kubernetes is written in <a href="https://golang.org/">Go</a> and that Go seems to be the language of choice for many new projects, tools, and utilities, I&rsquo;m going to learn to code/develop in Go in 2018. Because I learned in years past that one needs to have a reason to write some code, I&rsquo;ll focus my Go learning efforts around Kubernetes and related projects/tools.</p></li>
+
+<li><p><strong>Make three contributions to open source projects.</strong> I&rsquo;ve had this on my list in previous years; last year I removed it because I had a miserable track record. I&rsquo;m including it here again because I&rsquo;m going to allow myself to count documentation contributions <em>or</em> code contributions against this goal (it&rsquo;s probably going to be the former, if I&rsquo;m honest with myself). To increase the synergy with other goals, I&rsquo;ll focus efforts around Kubernetes and related projects/technologies. I chose three contributions because I can break that down to one per quarter in the remaining three quarters of 2018. <em>(Stretch goal: Make five contributions.)</em></p></li>
+
+<li><p><strong>Read and review three technical books.</strong> This is more formalizing something I&rsquo;m already (sort of) doing. What I mean is that I&rsquo;m already reading technical books; what I&rsquo;m not currently doing is (typically) finishing them or providing a review of them. The idea of adding the review is to serve as a &ldquo;forcing function&rdquo; to be sure that I focus on comprehension and actually finishing the book so that I can provide a review here on the site. As with the previous item, I selected three because I can do one in each of the three remaining quarters of 2018. <em>(Stretch goal: Read and review five technical books.)</em></p></li>
+
+<li><p><strong>Complete a &ldquo;wildcard project.&rdquo;</strong> As I&rsquo;ve explained in previous years, the purpose of including this item is to allow for the unknown future. Having this project gives me freedom to explore as new projects, new technologies, and new ideas emerge over the course of the coming year. If I don&rsquo;t complete a wildcard project, I won&rsquo;t count that against myself.</p></li>
+</ol>
+
+<p>So that&rsquo;s my list of goals/projects for the upcoming year. I&rsquo;ll try to do a better job this year of providing ongoing updates throughout the year on my progress. Feel free to <a href="https://twitter.com/scott_lowe">contact me on Twitter</a> if you have any feedback (positive or negative) or questions.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/-oPFqeean4c" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/-oPFqeean4c/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>Technology Short Take 95</h3>
 		</div>
 		<div class="collectiontext">
@@ -191,198 +245,6 @@ display('news.html')
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/jiRKFGyIzxI/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.neuesvonfraumeyer.de/" target="_blank">Neues von Frau Meyer</a>
-		</div>
-		<div>
-			<h3>Zucchini</h3>
-		</div>
-		<div class="collectiontext">
-<!--				SyndContentImpl.mode=null
-SyndContentImpl.type=html
-SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
-SyndContentImpl.value=<br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Gestern Vormittag fliegt unsere Reisebürotür auf.</span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Der Kassierer des Supermarkts meines Vertrauens geht direkt auf meinen Schreibtisch zu.</span></span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">"Hallo, Frau Meyer, haben Sie gestern Abend eine Zucchini bei uns liegenlassen?"</span></span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Der Mann weiß, wo ich arbeite, denn er hat sich schon einmal nach einer Reise erkundigt. Eine Bahnfahrt an die Ostsee sollte es damals sein. Zu einem Ort, an dem es die besten Fischbrötchen der Welt gibt. Morgens hin, abends zurück, nur um ein, zwei Fischbrötchen zu essen.</span></span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Der Mann weiß auch, wie ich heiße.&nbsp;</span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Er heißt nämlich genauso.&nbsp;</span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Natürlich nur mit Nachnamen.</span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Auch mit ey. Wie es sich gehört.</span></span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Wenn ich mittags oder abends meine Waren auf sein Band lege, begrüßt er mich immer mit "Hallo, Frau Meyer!" Ich antworte dann "Hallo, Herr Meyer!" und bemerke, dass diese Begrüßung zu Verwirrungen der Supermarktkollegen und Kunden, die hinter mir anstehen, führt. Ich frage mich oft, ob die sich wohl fragen, woher wir uns kennen. Ob die glauben, dass wir verwandt sind oder verbandelt und uns necken, indem wir uns siezen. Letzteres wäre mir unangenehm. Ich meine, hallo, für ein Fischbrötchen an einem Tag von Düsseldorf an die Ostsee und zurück!</span></span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Und eigentlich heißt es ja Zucchino. Einzahl.</span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">"Hallo Frau Meyer, haben Sie gestern Abend einen Zucchino bei uns liegenlassen?"</span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Das sagt aber kaum einer. Genauso wie die meisten zwei Cappuccino bestellen oder besser noch: <span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Z</span>wei Cappuccinos.</span></span><br /><span style="font-family: Arial; font-size: large;">"Ich bin gestern Abend mit der Zucchini noch hinter Ihnen hergelaufen, aber ich habe Sie nirgends sehen können."</span><span style="font-family: Arial; font-size: large;"><br /></span><br /><span style="font-family: Arial; font-size: large;">Für meinen Stechschritt bin ich schon häufiger gerügt worden. "Du hast einen Schritt drauf, da kommt man gar nicht hinterher." Ich empfinde Trödeln oft als Zeitvergeudung, dabei täte mir etwas mehr Müßiggang sicher gut. So mental.</span><br /><span style="font-family: Arial; font-size: large;"><span style="font-family: Arial; font-size: large;"><br /></span></span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Der Supermarktkassierer schlägt vor, dass ich in der Mittagszeit zu ihm an die Kasse komme und mir eine Zucchini abhole. <span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Das finde ich extranett von meinem Namensvetter.</span></span></span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"><br /></span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Als ich Herrn Meyer an der Kasse frage, ob er meine Zucchini (ich sag nicht Zucchino, sonst fühlt er sich eventuell veräppelt) irgendwo deponiert hat, meint er: "Ach, nehmen Sie sich einfach eine neue."</span></span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Vor der Zucchinikiste bleibe ich ratlos stehen.</span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Dieses Gemüse ist doppelt so groß wie das, was ich gestern liegengelassen habe. Als hätte über Nacht eine Genmanipulation stattgefunden.</span></span><br /><br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="https://4.bp.blogspot.com/--AK8dLJF4Eg/WoWLnJ6Tl9I/AAAAAAAAB8A/ebjvzSexoOAHcMeVyPfdZQgGEZXAwCkYwCLcBGAs/s1600/Zucchini.jpg" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" data-original-height="465" data-original-width="800" height="186" src="https://4.bp.blogspot.com/--AK8dLJF4Eg/WoWLnJ6Tl9I/AAAAAAAAB8A/ebjvzSexoOAHcMeVyPfdZQgGEZXAwCkYwCLcBGAs/s320/Zucchini.jpg" width="320" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Zutschini - selbst geknipst von Frau Meyer</span></td></tr></tbody></table><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Ich suche den kleinsten Zucchino der riesigen Zucchini heraus und<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"> <span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">verlasse den Supermarkt</span></span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">. <span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">N</span></span>icht ohne schlechtes Gewissen.</span></span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">"Schönen Tag noch, Frau Meyer!" ruft Herr Meyer hinter mir her.<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"> Ich winke zum Abschie<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">d mit meiner Zuc<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">chini, pardon, mit meinem Zucchino.</span></span></span> </span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"><br /></span></span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Zucchino, Zucchini - ist doch egal.</span></span><br /><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Ich freue mich, dass es in großstädtischen Supermärkten einen Kassierer gibt, der weiß, wie die Frau heißt, die die Zucchini vergessen hat, und wo sie arbeitet.</span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"><br /></span></span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">Ich freue mich, dass Düsseldorf ein Dorf ist. </span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"></span></span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"></span></span><br /><div class="separator" style="clear: both; text-align: center;"><span style="font-size: large;"><br /></span></div><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"></span></span><br /><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"></span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"></span></span><br /><div class="separator" style="clear: both; text-align: center;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"><br /></span></span></div><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"></span></span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"></span></span><br /><div class="separator" style="clear: both; text-align: center;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"><br /></span></span></div><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"></span></span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"></span></span><br /><div class="separator" style="clear: both; text-align: center;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"><br /></span></span></div><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"></span></span>
-
- -->
-		</div>
-		<div class="collectionhref">
-		<a href="http://www.neuesvonfraumeyer.de/2018/02/zucchini.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Some Tools to Help Learn Kubernetes</h3>
-		</div>
-		<div class="collectiontext">
-			<p><a href="https://kubernetes.io/">Kubernetes</a> is emerging as the clear leader in the container orchestration space. This makes it an important technology to know and understand. However, like other distributed systems, learning something like Kubernetes can be challenging due to the effort involved in getting Kubernetes up and running. It&rsquo;s not about learning to set up Kubernetes (although that comes in time); at first, it&rsquo;s about understanding what Kubernetes does and how to use Kubernetes. In this post, I&rsquo;ll share some tools to help learn what Kubernetes does and how to use Kubernetes.</p>
-
-<p>Note that this post is <strong>not</strong> intended to be a comprehensive list of learning resources for Kubernetes. Also, this post is <strong>not</strong> focused on providing resources to help you learn to deploy Kubernetes. Instead, I&rsquo;m focusing here on tools and services that let you get Kubernetes up and running quickly and easily so that you can focus on <em>using</em> Kubernetes (deploying applications and workloads onto Kubernetes). I&rsquo;m sure there are many more tools/options than what I have listed here; these are just some that I have used and feel might be useful for others.</p>
-
-<p>I&rsquo;ll briefly cover the following tools and services:</p>
-
-<ul>
-<li>Minikube</li>
-<li>Kops</li>
-<li>Kube-aws</li>
-<li>Azure Container Service (ACS/AKS)</li>
-</ul>
-
-<p>You&rsquo;ll note I&rsquo;m focused on command-line tools here, since I&rsquo;m a CLI junkie. Let&rsquo;s start with Minikube.</p>
-
-<h2 id="using-minikube">Using Minikube</h2>
-
-<p><a href="https://github.com/kubernetes/minikube">Minikube</a> is a tool to run a single-node Kubernetes cluster locally on your system, using one of a number of supported hypervisors (<a href="https://www.virtualbox.org/">VirtualBox</a>, <a href="https://www.vmware.com/products/fusion.html">VMware Fusion</a>, Hyper-V, xhyve, or KVM). Because it deploys a single-node Kubernetes cluster, you&rsquo;re limited in the types of things that you can do with the resulting Kubernetes cluster; however, it does offer the ability to work locally while most of the other tools require connectivity to a cloud provider (not unexpectedly, given the nature of what Kubernetes is and what it&rsquo;s designed to do). Of course, the trade-off for working locally is that your Kubernetes cluster won&rsquo;t be able to take advantage of cloud provider functionality, like services defined as type <code>LoadBalancer</code>.</p>
-
-<p>(As an aside, since Minikube leverages <code>libmachine</code>&mdash;from Docker Machine&mdash;on the back-end, using both Minikube and Docker Machine with KVM on the same system has some interesting side effects. You&rsquo;ve been warned.)</p>
-
-<p>Despite the limitations, I think there&rsquo;s probably still some value in using Minikube for certain situations.</p>
-
-<h2 id="using-kops-kubernetes-operations">Using Kops (Kubernetes Operations)</h2>
-
-<p>The <a href="https://github.com/kubernetes/kops"><code>kops</code> tool</a> can be used to (relatively) quickly and easily stand up Kubernetes clusters on <a href="https://aws.amazon.com/">AWS</a> (support for other platforms is in the works). Typically, <code>kops</code> requires a DNS domain hosted in AWS Route 53 (although there are workarounds), and it does require an S3 bucket in which to store cluster/configuration state (no workaround for this). <code>kops</code> also allows you to create some pretty advanced configurations, such as HA deployments spread across multiple availability zones (AZs) and using SSH bastion hosts. I also like that you can use <code>kops</code> to generate <a href="https://www.terraform.io/">Terraform</a> configurations for setting up Kubernetes clusters.</p>
-
-<p>However, you can also use it to set up quick and simple Kubernetes clusters for learning purposes. Here&rsquo;s an example command-line that could be used to turn up a small Kubernetes cluster using <code>kops</code>:</p>
-
-<pre><code>kops create cluster \
---node-count 3 \
---zones us-west-2a \
---dns-zone route53domain.com \
---node-size t2.large \
---networking flannel \
---ssh-public-key /path/to/public/key.pub \
-clustername.route53domain.com
-</code></pre>
-
-<p>I won&rsquo;t go into all the details on using <code>kops</code> (though I might do another post on <code>kops</code> at some point in the future). Instead, I&rsquo;ll refer you to <a href="https://github.com/kubernetes/kops/blob/master/docs/aws.md">the AWS guide in the <code>kops</code> repository</a> for more information and details on using <code>kops</code>. There are also a number of blog posts about there; <a href="https://ryaneschinger.com/blog/kubernetes-aws-vpc-kops-terraform/">here&rsquo;s one example</a>, and <a href="https://aws.amazon.com/blogs/opensource/running-bleeding-edge-kubernetes-on-aws-with-kops/">here&rsquo;s one</a> from AWS themselves.</p>
-
-<h2 id="using-kube-aws">Using kube-aws</h2>
-
-<p>As the name implies, <a href="https://github.com/kubernetes-incubator/kube-aws"><code>kube-aws</code></a> is a command-line tool for deploying a Kubernetes cluster on AWS. Like <code>kops</code>, <code>kube-aws</code> needs a Route 53 domain and an S3 bucket for storing state/configuration information. <code>kube-aws</code> also requires a KMS key. On the back-end, <code>kube-aws</code> is leveraging CloudFormation to spin up the Kubernetes cluster.</p>
-
-<p>As with the other tools, I won&rsquo;t go into great detail on how to use <code>kube-aws</code>; instead, I&rsquo;ll direct you to <a href="https://kubernetes-incubator.github.io/kube-aws/">the documentation</a> (which seems really good).</p>
-
-<h2 id="using-azure-container-service-acs-aks">Using Azure Container Service (ACS/AKS)</h2>
-
-<p>Using the <a href="https://docs.microsoft.com/en-us/cli/azure/overview?view=azure-cli-latest">Azure CLI</a>, it&rsquo;s pretty easy to spin up a Kubernetes cluster. In fact, there are a couple of different ways to go about it.</p>
-
-<p>You can use ACS (Azure Container Service) and specify Kubernetes as the orchestrator type (ACS supports other types of orchestrators as well):</p>
-
-<pre><code>az acs create --orchestrator-type=kubernetes \
---resource-group=my-grp --name=my-clus \
---ssh-key-value=/path/to/public/key
-</code></pre>
-
-<p>After a 5-7 minutes, the command should complete and you&rsquo;ll be ready to roll with a Kubernetes cluster running in Azure. Use the <code>az acs kubernetes get-credentials</code> to configure <code>kubectl</code> to talk to the new cluster.</p>
-
-<p>You can also use AKS (Azure Container Service, a newer offering that&mdash;as I understand it&mdash;supersedes/replaces ACS) to turn up a Kubernetes cluster (AKS only supports Kubernetes):</p>
-
-<pre><code>az aks create --resource-group=my-grp --name=my-clus \
---ssh-key-value /path/to/public/key
-</code></pre>
-
-<p>As with <code>az acs create</code>, after a few minutes you&rsquo;ll have a shiny new Kubernetes cluster up and running. From there, you can use <code>az aks upgrade</code> to potentially upgrade your cluster, or <code>az aks get-credentials</code> to pull down a configuration that allows <code>kubectl</code> to interact with your new cluster.</p>
-
-<p>(Note that there was an issue with some versions of the Azure CLI prior to 2.0.25 that caused <code>az aks get-credentials</code> to fail. Upgrading to 2.0.25 or later seems to address the problem. If you need to upgrade the Azure CLI and you installed via <code>pip</code>, I recommend using the <code>--force-reinstall</code> flag to make sure the upgrade completes successfully.)</p>
-
-<p>Sebastien Goasguen also has <a href="https://medium.com/bitnami-perspectives/az-aci-aks-acs-in-5-minutes-top-chrono-65c9952dfeb8">a brief write-up of ACS/AKS</a> (he also covers Azure Container Instances, ACI).</p>
-
-<h2 id="why-no-mention-of-google-kubernetes-engine-gke">Why no mention of Google Kubernetes Engine (GKE)?</h2>
-
-<p>As a hosted/managed solution, GKE would fall into the same category as ACS/AKS. However, I didn&rsquo;t include GKE here for the simple reason that I was focusing on CLI-based tools, and (in my opinion) Google makes it <em>way</em> too difficult to get the <code>gcloud</code> tool installed on your system. (Seriously&mdash;if you&rsquo;re going to write it in Python, why not just use <code>pip</code>?) There is a Docker container available, but at nearly 1GB in size (last time I checked) I don&rsquo;t feel that&rsquo;s a very attractive option either.</p>
-
-<p>If you don&rsquo;t mind jumping through hoops to get <code>gcloud</code> installed (or if you&rsquo;d prefer to use a GUI), then I&rsquo;m sure GKE is a perfectly acceptable option.</p>
-
-<p>There you have it&hellip;a few options for quickly and easily getting Kubernetes up and running (and you don&rsquo;t need a massive home lab, either). Enjoy!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/yiwsUSIOC9I" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/yiwsUSIOC9I/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 94</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take 94! Ready for another round of links, articles, and thoughts on data center technologies? (Who knows, maybe I&rsquo;ll throw a rant or two in there.) OK, enough rambling&hellip;here&rsquo;s the good stuff!</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Amit Aneja has a two-part series (so far) explaining the routing architecture in NSX-T (which brings multi-hypervisor and multi-cloud support to the NSX platform). This is some good content and reminds me of the the old NVP/NSX content I generated back in the day. Ah, good times&hellip;anyway, check out Amit&rsquo;s stuff <a href="https://blogs.vmware.com/networkvirtualization/2017/09/nsx-t-routing-where-you-need-it.html/">here</a> and <a href="https://blogs.vmware.com/networkvirtualization/2018/01/nsx-t-routing-part-2.html/">here</a>.</li>
-<li>Sam McGeown has <a href="https://www.definit.co.uk/2018/01/nsx-6-x-network-communications-diagram/">a nice diagram</a> of the communications channels between the various VMware NSX components.</li>
-<li>Roie Ben Haim has a post providing <a href="http://www.routetocloud.com/2017/10/introduction-to-nsx-and-kubernetes/">an introduction to NSX and Kubernetes</a>.</li>
-<li>Matt Oswalt <a href="https://keepingitclassless.net/2018/02/intentional-infrastructure/">tackles</a> the idea of &ldquo;intent-driven&rdquo; or &ldquo;intent-based&rdquo; networking&mdash;all the rage right now&mdash;and outlines how something like this <em>must</em> interact with domains outside of networking in order to be effective. I particularly liked his (mini-)rant about how network automation can&rsquo;t be only about making the network engineer&rsquo;s life easier. Oh, snap!</li>
-<li>I&rsquo;m not really sure if this belongs in networking or not (how does one classify OS kernel-level work on networking and security?), but we&rsquo;ll stick it here anyway: check out <a href="https://www.cilium.io/blog/2018/2/6/cilium-troubleshooting-cluster-health-monitor">this blog post</a> on <code>cilium-health</code>, a tool for troubleshooting cluster connectivity.</li>
-<li>Here&rsquo;s an interesting post on how Simon Metzger <a href="http://blog.simonmetzger.de/2018/02/salt-napalm-k8s-network-automation/">pulled together Salt, NAPALM, and Kubernetes</a> for a proof-of-concept on using Salt (via NAPALM) to manage network devices.</li>
-<li>It&rsquo;s good to see my friend Brent Salisbury blogging again, this time writing about <a href="http://networkstatic.net/measuring-network-bandwidth-using-iperf-and-docker/">measuring bandwith using <code>iperf</code> and Docker</a>.</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<p>Nothing this time around (sorry!). I&rsquo;ll stay alert for content that I might be able to include in the next Tech Short Take.</p>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>If you&rsquo;re using CloudFormation to manage your AWS security groups in an infrastructure-as-code approach, you owe it to yourself to check out <a href="https://jlordiales.me/2018/01/30/cf-gotchas-sg/">this article</a> by Jose Luis Ordiales.</li>
-<li>Security is a many-faceted area, and one facet is appropriately protecting credentials. <a href="https://vxsan.com/ansible-vault-passwords-done-easy-with-lastpass/">This article</a> by Sjors Robroek shows one approach to appropriately protecting credentials when using automation tools.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>I guess we can talk automation in this section, right? Yasen Simeonov <a href="https://blogs.vmware.com/networkvirtualization/2018/01/nsx-t-openapi-sdks.html/">talks about</a> the work that went into the NSX-T APIs (JSON-based, hooray!) and how to use the Python SDK for NSX-T. The content is a bit high-level, but given the medium (a blog post) it&rsquo;s hard to get super-deep. It serves as a decent introduction, at least.</li>
-<li>In the last Tech Short Take, I shared an article by Kynan Riley on node affinity. This time around, he&rsquo;s <a href="https://medium.com/kokster/scheduling-in-kubernetes-part-2-pod-affinity-c2b217312ae1">talking about pod affinity</a>.</li>
-<li>I&rsquo;m a 1Password user (just wish they&rsquo;d release a &ldquo;real&rdquo; Linux client and bring back support for local vaults to all platforms), so seeing <a href="https://blog.agilebits.com/2018/01/25/terraforming-1password/">this article</a> on how Agile Bits (the company behind 1Password) is using Terraform with AWS was pretty cool.</li>
-<li>Kim Bottu walks readers through <a href="http://vmusketeers.com/2018/02/01/rebuilding-your-lab-in-ravello-is-easy-and-takes-no-time/">using Ravello to rebuild a (home) lab</a> in about 20 minutes.</li>
-<li>Christopher Berner has a detailed post on <a href="https://blog.openai.com/scaling-kubernetes-to-2500-nodes/">the lessons learned by scaling Kubernetes to 2,500 nodes</a>.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>Michael Wittig <a href="https://cloudonaut.io/migrating-to-amazon-linux-2/">shares some details</a> on migrating to Amazon Linux 2.</li>
-<li>Over the last couple of weeks I came across two articles related to creating Docker images. The first comes from Shubham Sharma, which provides <a href="https://medium.com/@gabber12/tips-for-writing-dockerfile-b3e569c3134d">some tips on writing a Dockerfile</a>. The second comes from Matthew Setter, who shares <a href="https://blog.codacy.com/five-ways-to-slim-your-docker-images-5f4bd68d29f1">five ways to slim your Docker images</a>. Both articles contain good, albeit somewhat basic, information. Folks who are newer to building Docker images should find these articles useful.</li>
-<li>Apparently there are <a href="https://hackernoon.com/7-ways-to-do-containers-on-aws-532f812196f1">more than just a couple different ways to run containers on AWS</a>.</li>
-<li>Atomic Host will now include <code>firewalld</code>; more information is available from Dusty Mabe <a href="https://www.projectatomic.io/blog/2018/02/firewalld-in-atomic-host/">here</a>.</li>
-<li>The Windows Server team managed to shrink the size of the Windows Server Core container image by about 60%; get more details <a href="https://blogs.technet.microsoft.com/virtualization/2018/01/22/a-smaller-windows-server-core-container-with-better-application-compatibility/">here</a>.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>Nick Korte <a href="http://blog.thenetworknerd.com/2018/01/28/journey-to-vsan-a-technical-adventure/">shares some &ldquo;lessons learned&rdquo;</a> as his team explored VMware vSAN as a storage solution.</li>
-<li>Steve Tilkens has <a href="http://www.tilkens.com/2018/01/storage-review/">a review of some different storage options</a> he&rsquo;s explored in his VMware-based home lab.</li>
-<li>Tom Twyman has a few recommendations on <a href="https://fr0gger03.wordpress.com/2018/02/04/increasing-vsan-resynch-rebuild-performance/">increasing vSAN resynch/rebuild performance</a>.</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>Ray Heffer has <a href="https://www.rayheffer.com/vmware-visio-stencils-powerpoint-icons-2018/">an updated set of Visio stencils and PowerPoint icons</a>, as well as some links to other sets.</li>
-<li>Ed Haletky has <a href="https://www.astroarch.com/2018/01/vsphere-upgrade-saga-linux-vmware-software-manager-vsm/">an updated Linux version of the VMware Software Manager</a>.</li>
-<li>Alan Renouf <a href="http://www.virtu-al.net/2018/01/08/new-year-new-look-vcheck/">blogged about a new look for vCheck</a> (now leveraging the Clarity UI framework).</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>OK, so this isn&rsquo;t really a &ldquo;soft skill&rdquo; <em>per se</em>, but it may prove useful nevertheless (and it didn&rsquo;t fit anywhere else). Nick Janetakis writes about <a href="https://nickjanetakis.com/blog/access-documentation-from-your-code-editor-with-dash-or-zeal">accessing documentation directly from your code editor</a> using either Dash (macOS) or Zeal (open source, multiple platforms). I&rsquo;ve been a Dash user for a while and I can attest to how handy it can be.</li>
-</ul>
-
-<p>And that&rsquo;s another Tech Short Take in the bag. I hope you found something useful here! As always, feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> if you have any feedback (or even if you just want to chat).</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/wc9kOdeypas" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/wc9kOdeypas/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -390,11 +252,21 @@ clustername.route53domain.com
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="code_zur_versionierung_datenbank_schemata.html">
+<div class="date">13.03.2018</div>
+<h3>Code zur Versionierung von Datenbank-Schemata</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Manchmal muss man für eine dezentrale Anwendung ein Datenbank-Schema entwerfen, von dem man weiß. dass es sich während der Entwicklung
+der zugehörigen Applikation ändern wird. Es wäre schön, wenn die Anwendung dazu einen Mechanismus eingebaut
+hätte, der das Datenbank-Schema automatisch auf die neueste Version anpasst.
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="qbrowser.html">
 <div class="date">01.03.2018</div>
 <h3>QBrowser</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Ich habe ein Werkzeug auf GitHub veröffentlicht, das in Queues hineinzuschauen gestattet, um
 die Entwicklung von JMS-Anwendungen zu erleichtern.
 </p></div>   </a>
@@ -404,26 +276,11 @@ die Entwicklung von JMS-Anwendungen zu erleichtern.
 <div class="date">25.02.2018</div>
 <h3>BeanInfo durch Runtime-Annotations (Gist)</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Wie bereits im
 vorangegangenen Artikel
 zu diesem Thema wollte ich die Idee der BeanInfo ohne explizite BeanInfo-Klassen
 eigentlich ruhen lassen - ich habe mich aber aufgerafft,
 zumindest die prototypische Implementierung als Gist zu veröffentlichen.
-</p></div>   </a>
-</li>
-<li class="anriss">
-	<a href="aenderungen_datumsformat_java___schon_wieder_.html#66">
-<div class="date">25.02.2018</div>
-<h3>Änderungen im Datumsformat von Java - schon wieder!</h3>
-<div class="abstract">
-	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-<p>Ich habe bereits über einen
-Bug in Java9 berichtet,
-der mich ziemlich überrascht hat. Wer aber beschreibt meine Überraschung, dass
-der Bug, der mich beim Umstieg von Java7 auf Java8 bereits
-angespuckt hat,
-wieder Speichel gesammelt hat?
 </p></div>   </a>
 </li>
 </ul>
