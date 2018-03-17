@@ -21,8 +21,9 @@
 		</xs:keyref-->
 	</xs:element>
 	<xs:complexType name="FunctionalTestType">
-		<xs:element maxOccurs="1" minOccurs="0" name="TagsDescription" type="TagsDescriptionType"/>
 		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="TagsDescription" type="TagsDescriptionsType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="QaTeamMembers" type="QaTeamMembersType"/>
 			<xs:element maxOccurs="unbounded" minOccurs="0" name="Category" type="CategoryType"/>
 		</xs:sequence>
 		<xs:attribute name="application" type="xs:string" use="required"/>
@@ -68,13 +69,29 @@
 	</xs:complexType>
 	<xs:complexType name="ActionsType">
 		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="1" name="Action" type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="1" name="Action" type="ActionType"/>
 		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActionType">
+		<xs:simpleContent>
+		  <xs:extension base="xs:string">
+			<xs:attribute name="fromMacro" type="xs:boolean" use="optional" default="false">
+			</xs:attribute>
+		  </xs:extension>
+		</xs:simpleContent>
 	</xs:complexType>
 	<xs:complexType name="ExpectedResultsType">
 		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="1" name="ExpectedResult" type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="1" name="ExpectedResult" type="ExpectedResultType"/>
 		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExpectedResultType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="fromMacro" type="xs:boolean" use="optional" default="false">
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
 	</xs:complexType>
 	<xs:complexType name="VariantsType">
 		<xs:sequence>
@@ -86,14 +103,26 @@
 			<xs:element maxOccurs="unbounded" minOccurs="1" name="Tag" type="TagType"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="QaTeamMembersType">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="QaTeamMember" type="QaTeamMemberType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QaTeamMemberType">
+		<xs:sequence>
+			<xs:element name="Signature" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="TagsDescriptionsType">
 		<xs:sequence>
 			<xs:element maxOccurs="unbounded" minOccurs="0" name="TagDescription" type="TagDescriptionType"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="TagDescriptionsType">
-		<xs:element maxOccurs="1" minOccurs="1" name="TagName" type="xs:string"/>
-		<xs:element maxOccurs="1" minOccurs="1" name="Color" type="xs:string"/>
+	<xs:complexType name="TagDescriptionType">
+		<xs:sequence>
+			<xs:element name="TagName" type="xs:string"/>
+			<xs:element name="Color" type="xs:string"/>
+		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TagType">
 		<xs:simpleContent>

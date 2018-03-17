@@ -117,6 +117,83 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>Technology Short Take 96</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Welcome to Technology Short Take 96! Ahead, lying in wait, is a unique collection of links, articles, and thoughts about various data center technologies. Browse if you dare&hellip;OK, so I&rsquo;m being a bit melodramatic. It&rsquo;s still some good stuff here!</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>Via Matt Oswalt and Michael Bushong, I came across <a href="https://forums.juniper.net/t5/The-New-Network/Juniper-Advancing-Disaggregation-Through-P4-Runtime-Integration/ba-p/319195">this article on Juniper&rsquo;s use of P4</a>. Interesting stuff&hellip;P4 definitely has the potential to dramatically reshape networking in new ways, in my humble opinion.</li>
+<li>Maxime Lagresle of XING outlines how they went about troubleshooting <a href="https://tech.xing.com/a-reason-for-unexplained-connection-timeouts-on-kubernetes-docker-abd041cf7e02">an unexplained connection timeout on Kubernetes/Docker</a>.</li>
+<li>Ajay Chenampara <a href="https://blogs.cisco.com/developer/with-poap-youll-never-console-into-your-nexus-switches-again">outlines</a> how POAP (Power On Auto Provisioning), a feature of Cisco NX-OS, works to streamline provisioning new network switches.</li>
+<li>Don Schenck has <a href="https://developers.redhat.com/blog/2018/03/06/introduction-istio-makes-mesh-things/">a high-level overview</a> of Istio and service meshes.</li>
+<li>Daniel Álvarez has a good article describing some <a href="http://dani.foroselectronica.es/ovn-profiling-and-optimizing-ports-creation-434/">OVN profiling and optimizing</a> he recently performed. I believe the patches he mentioned in the post have already been accepted into the OVN codebase.</li>
+</ul>
+
+<h2 id="servers-hardware">Servers/Hardware</h2>
+
+<p>Nothing this time around; sorry! If you have some articles you feel are worthy of inclusion in the next Tech Short Take, send them my way!</p>
+
+<h2 id="security">Security</h2>
+
+<ul>
+<li>Joe Beda talks about <a href="https://blog.heptio.com/on-securing-the-kubernetes-dashboard-16b09b1b7aca">securing the Kubernetes dashboard</a> in the wake of several &ldquo;cryptojacking&rdquo; instances.</li>
+<li>CloudFlare discusses <a href="https://blog.cloudflare.com/memcrashed-major-amplification-attacks-from-port-11211/">recent amplification attacks</a> they&rsquo;re seeing. Perhaps these are tied to the major GitHub DDoS attack that happened recently?</li>
+</ul>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li>Daz Wilkin writes about <a href="https://medium.com/google-cloud/kubernetes-10-domain-ingress-c6c2bbf381bb">using Jsonnet to create a 10-domain Kubernetes ingress</a>, then follows that up with a post on <a href="https://medium.com/@DazWilkin/a-jsonnet-builder-for-container-builder-71a0f6c18db7">using Google Container Builder to create a Jsonnet builder</a>. Neat stuff.</li>
+<li>Ross Kukulinski has a list of the 10 most common reasons Kubernetes Deployments fail, split across two parts (<a href="https://kukulinski.com/10-most-common-reasons-kubernetes-deployments-fail-part-1/">part 1</a> and <a href="https://kukulinski.com/10-most-common-reasons-kubernetes-deployments-fail-part-2/">part 2</a>). By the way, the use of capitalized &ldquo;Deployments&rdquo; is important&mdash;he&rsquo;s talking about the Kubernetes Deployments object, not the generalized idea of deploying Kubernetes.</li>
+<li>You&rsquo;ve heard of blue/green deployments, but have you heard of &ldquo;rainbow deployments&rdquo;? Read <a href="http://brandon.dimcheff.com/2018/02/rainbow-deploys-with-kubernetes/">this post by Brian Dimcheff</a> to learn all about them. (Hint: the first six characters of a Git SHA hash are also a valid hex color.)</li>
+<li>Microsoft Azure Container Service (AKS) <a href="https://azure.microsoft.com/en-us/blog/introducing-burstable-vm-support-in-aks/">now supports burstable VM types</a>. I&rsquo;ve actually found myself using AKS a fair amount over the last couple of weeks.</li>
+<li>Dave Cheney has a great technical write-up on <a href="https://blog.heptio.com/how-to-deploy-web-applications-on-kubernetes-with-heptio-contour-and-lets-encrypt-d58efbad9f56">using Contour with Let&rsquo;s Encrypt to secure web applications running on Kubernetes</a>.</li>
+<li>John Jardin shares <a href="http://bleedingcode.com/thoughts-microsoft-azure-kubernetes/">his thoughts on Kubernetes on Azure</a>.</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>Adrian Hornsby has a series (two parts so far) on designing a multi-region active-active architecture. The focus of this series seems to be more on application architecture than infrastructure architecture, although there are clear overlaps in areas. Part 1 is <a href="https://hackernoon.com/the-quest-for-availability-771fa8a94a7c">here</a>; part 2 is <a href="https://medium.com/@adhorn/why-and-how-do-we-build-a-multi-region-active-active-architecture-6d81acb7d208">here</a>. I highly recommend this series, with one caveat: it does occasionally feel like an AWS infomercial. Granted, Adrian works for AWS, so some of that is to be expected, but the Kool-Aid is a bit strong at times.</li>
+<li>Kevin Carter explains <a href="https://cloudnull.io/2018/02/journaling-remotely/">how to ship journals remotely using <code>systemd-journald</code></a>.</li>
+<li>VMware PowerCLI 10.0 is <a href="https://blogs.vmware.com/PowerCLI/2018/02/powercli-10.html">now available</a>.</li>
+<li>I think I mentioned this before, but here&rsquo;s <a href="http://pythonsweetness.tumblr.com/post/171589071872/quadrupling-ansible-performance-with-mitogen">an update on Mitogen</a>. Some very interesting possibilities ahead!</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<ul>
+<li>Chris Evans <a href="https://blog.architecting.it/scaleio-becomes-software-defined-on-hardware/">discusses</a> a recent re-org that aligns ScaleIO with hardware sales. So much for software-defined storage?</li>
+<li>Erik Smith <a href="http://brasstacksblog.typepad.com/brass-tacks/2017/12/nvme-over-fabrics-discovery-problem.html">explores</a> the Discovery problem with NVMe over Fabrics and how that problem might be resolved.</li>
+</ul>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<ul>
+<li>Ajeet Singh Raina talks about <a href="http://collabnix.com/running-linuxkit-locally-on-oracle-virtualbox-platform-made-easy/">running LinuxKit locally using VirtualBox</a>.</li>
+<li>William Lam shares some information on <a href="https://www.virtuallyghetto.com/2018/03/thunderbolt-to-10gbe-network-adapters-for-esxi.html">Thunderbolt-to-10 GbE adapters for ESXi</a>.</li>
+</ul>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<ul>
+<li>Dislike sending out meeting invitations, or interested in being more effective with your meetings? Check out <a href="https://ddbeck.com/better-meeting-invitations/">Daniel Beck&rsquo;s post on better meeting invitations</a> (which will, in turn, lead to better meetings).</li>
+</ul>
+
+<p>That&rsquo;s all for now! I&rsquo;ll have another Tech Short Take in a couple weeks. Thanks for reading!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/TvYtIOagYhw" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/TvYtIOagYhw/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>Recent Changes in my "Learning Tools" Repository</h3>
 		</div>
 		<div class="collectiontext">
@@ -166,85 +243,6 @@ display('news.html')
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/-oPFqeean4c/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 95</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take 95! This Short Take was a bit more challenging than normal to compile, given that I spent the week leading up to its publication visiting customers in Europe. (My travel schedule in Europe is also why it didn&rsquo;t get published until Saturday instead of the typical Friday.) Nevertheless, I have persevered in order to deliver you this list of links and articles. I hope it proves useful!</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Larry Smith Jr. has <a href="https://everythingshouldbevirtual.com/bringing-devops-to-routing-cisco-xr/">a nice write-up on Cisco XR</a> stemming from a presentation at NFD 17.</li>
-<li>VMware recently released a reference design guide for NSX-T; see <a href="https://blogs.vmware.com/networkvirtualization/2018/02/introducing-vmware-nsx-t-reference-design.html">here</a> for more details.</li>
-<li>The engineering team at Lyft recently discussed a new overlay-free networking approach they&rsquo;ve been working on for Kubernetes: <a href="https://eng.lyft.com/announcing-cni-ipvlan-vpc-k8s-ipvlan-overlay-free-kubernetes-networking-in-aws-95191201476e">IPVLAN-based CNI stack for running within VPCs on AWS</a>. This is pretty cool, but does introduce some potential design considerations for deploying Kubernetes on AWS. (For those that may be unfamiliar: CNI, or Container Network Interface, is the means whereby network mechanisms &ldquo;plug into&rdquo; Kubernetes. IPVLAN is a low-latency means of providing IP connectivity to containers. VPCs, or Virtual Private Clouds, are Amazon&rsquo;s software-defined networking mechanism for workloads running on AWS.)</li>
-<li>Viktor van den Berg writes on <a href="https://www.viktorious.nl/2018/02/13/one-armed-versus-inline-load-balancer-with-vra-and-nsx/">deploying NSX load balancers with vRA</a>.</li>
-<li>Alen Komljen provides <a href="https://akomljen.com/kubernetes-service-mesh/">an introductory overview</a> of service meshes in Kubernetes.</li>
-<li>Matt Klein has a great post on <a href="https://blog.envoyproxy.io/embracing-eventual-consistency-in-soa-networking-32a5ee5d443d">why we need to embrace eventual consistency in (distributed) networking</a>.</li>
-<li>In the event that you need yet-another-introduction to Kubernetes networking, Mark Betz has a three-part series you may find helpful/useful (<a href="https://medium.com/google-cloud/understanding-kubernetes-networking-pods-7117dd28727">part 1</a>, <a href="https://medium.com/google-cloud/understanding-kubernetes-networking-services-f0cb48e4cc82">part 2</a>, and <a href="https://medium.com/google-cloud/understanding-kubernetes-networking-ingress-1bc341c84078">part 3</a>).</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<p>Nothing this time around, sorry!</p>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li><a href="https://krausefx.com/blog/mac-privacy-sandboxed-mac-apps-can-take-screenshots">This</a> doesn&rsquo;t make me feel very secure.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>Dimitri de Swart has a write-up on <a href="https://www.vmguru.com/2018/01/lamp-stacks-made-easy-with-vmware-and-puppet/">LAMP stacks made easy with VMware and Puppet</a>.</li>
-<li>Fabrizio Pandini shares <a href="https://blog.heptio.com/how-to-start-creating-kubernetes-clusters-like-a-pro-kubeadm-phases-heptioprotip-2bdce58b530d">a &ldquo;protip&rdquo; on using <code>kubeadm phases</code> when deploying Kubernetes clusters</a>. I must admit that I haven&rsquo;t yet played with <code>kubeadm</code>; guess that&rsquo;s moving up my list of &ldquo;things to try.&rdquo;</li>
-<li>Sebastien Goasguen <a href="https://medium.com/bitnami-perspectives/imperative-declarative-and-a-few-kubectl-tricks-9d6deabdde">shares a few <code>kubectl</code> tricks</a> in a discussion on imperative configuration versus declarative configuration.</li>
-<li>Here&rsquo;s another thing I really need to take out for a spin: <a href="https://www.terraform.io/docs/providers/kubernetes/index.html">the Kubernetes provider for Terraform</a>.</li>
-<li>Andrés Martínez, a software engineer with Bitnami, shares a write-up on <a href="https://engineering.bitnami.com/articles/serverless-service-mesh-with-kubeless-and-istio.html">a serverless service mesh with kubeless and Istio</a>. (And he provides <a href="https://github.com/andresmgot/kubeless-istio-sample">a GitHub repository</a> with samples from the article.)</li>
-<li>Looks like PKS, the joint Kubernetes effort from VMware and Pivotal, has gone GA (see <a href="https://blogs.vmware.com/cloudnative/2018/02/12/pivotal-container-service-ga/">this VMware blog post</a>) with initial support for vSphere and GCP. I think the omission of AWS support at GA is a mistake, but what do I know?</li>
-<li>Courtesy of Corey Quinn, here&rsquo;s <a href="https://www.simplilearn.com/aws-vs-azure-cloud-certification-article">an awesome AWS versus Azure comparison</a>, comic book style.</li>
-<li>Most folks have probably heard about 12 Factor Applications (see <a href="https://12factor.net/">here</a> if you haven&rsquo;t or if you need a refresher); <a href="https://blog.octo.com/en/the-twelve-factors-kubernetes/">this article</a> talks about 12 basic rules and good practices for using Kubernetes optimally.</li>
-<li>If you&rsquo;re interested in building a local Kubernetes cluster on your laptop&mdash;and there may be various reasons why this would be helpful&mdash;<a href="https://itnext.io/kubernetes-on-ubuntu-on-virtualbox-60e8ce7c85ed">this guide by Mike Gavrilov on Kubernetes on Ubuntu on VirtualBox</a> could have some useful information for you.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>The Project Atomic blog shares <a href="http://www.projectatomic.io/blog/2018/01/using-image-registries-with-buildah/">how to use OCI image registries with Buildah</a>.</li>
-<li>Speaking of Buildah&hellip;here&rsquo;s a post from Tomáš Tomeček on <a href="https://blog.tomecek.net/post/building-containers-with-buildah-and-ansible/">using Buildah and Ansible to create container images</a>.</li>
-<li>Jesse Hu has shared <a href="https://github.com/jessehu/helm-harbor">a Helm chart for deploying VMware&rsquo;s open source Harbor registry</a>. From what I can see, it looks like Jesse&rsquo;s version is a forked (and updated) version of <a href="https://github.com/paulczar/helm-harbor">a similar Helm chart from Paul Czarkowski</a>.</li>
-<li>Cormac Hogan has <a href="https://cormachogan.com/2018/02/13/first-look-aws-greengrass-vsphere/">a first look at AWS Greengrass on vSphere</a>.</li>
-<li><a href="http://www.vmwareinfo.com/2018/02/journey-to-docker.html">This</a> is a pretty interesting use case for Docker.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>I had a chance to take a (very) quick look at <a href="https://dotmesh.com/">Dotmesh</a>, a new solution that enables snapshots for stateful workloads in Kubernetes and Docker. It seems like an interesting and potentially helpful solution, although I haven&rsquo;t (yet) had the time to actually spend any hands-on time with it.</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>Alex Ellis provides <a href="https://blog.alexellis.io/kvm-kubernetes-primer/">an overview of KVM</a>, in the context of having another option for deploying your own Kubernetes cluster.</li>
-<li>Alessandro Arrichiello <a href="https://medium.com/@alezzandro/kubernetes-and-virtualization-kubevirt-will-let-you-spawn-virtual-machine-on-your-cluster-e809914cc783">discusses how to set up kubevirt</a>, a project aimed at enabling Kubernetes to manage VMs (via libvirt).</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<p>Nothing this time around (which surprises me&mdash;I almost <em>always</em> find material to include in this section).</p>
-
-<p>OK, that&rsquo;s all this time around, but I&rsquo;ve already started gathering material for next time. Look for the next Technology Short Take in about two weeks. Thanks for reading!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/jiRKFGyIzxI" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/jiRKFGyIzxI/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -252,35 +250,39 @@ display('news.html')
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="aktualisierung_jfreechart.html">
+<div class="date">17.03.2018</div>
+<h3>Aktualisierung JFreeChart</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich habe eine der von mir benutzten Softwarekomponenten aktualisiert: die Chart-Bibliothek JFreeChart.
+Damit sind auch neue Versionen von
+sQLshell
+und
+dWb+
+verfügbar
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="custom_appender_log4j_1_x.html">
+<div class="date">17.03.2018</div>
+<h3>Custom Appender für Log4J 1.x</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich erfolglos versucht habe, Log4J 2 auf Arbeit in ein Projekt zu integrieren (Die Liste der Abhängigkeiten ist
+endlos und für ein Framework, dessen einziger Zweck das Logging ist, ehrlich gesagt eine Frechheit),
+habe ich neulich wieder einmal mit der Idee herumgespielt, Log4J 1.x komplett zur Laufzeit konfigurierbar zu machen. Als
+Abfallprodukt sind zwei neue Appender entstanden.
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="code_zur_versionierung_datenbank_schemata.html">
 <div class="date">13.03.2018</div>
 <h3>Code zur Versionierung von Datenbank-Schemata</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Manchmal muss man für eine dezentrale Anwendung ein Datenbank-Schema entwerfen, von dem man weiß. dass es sich während der Entwicklung
 der zugehörigen Applikation ändern wird. Es wäre schön, wenn die Anwendung dazu einen Mechanismus eingebaut
 hätte, der das Datenbank-Schema automatisch auf die neueste Version anpasst.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="qbrowser.html">
-<div class="date">01.03.2018</div>
-<h3>QBrowser</h3>
-<div class="abstract">
-<p>Ich habe ein Werkzeug auf GitHub veröffentlicht, das in Queues hineinzuschauen gestattet, um
-die Entwicklung von JMS-Anwendungen zu erleichtern.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="beaninfo_runtime_annotations__gist_.html">
-<div class="date">25.02.2018</div>
-<h3>BeanInfo durch Runtime-Annotations (Gist)</h3>
-<div class="abstract">
-<p>Wie bereits im
-vorangegangenen Artikel
-zu diesem Thema wollte ich die Idee der BeanInfo ohne explizite BeanInfo-Klassen
-eigentlich ruhen lassen - ich habe mich aber aufgerafft,
-zumindest die prototypische Implementierung als Gist zu veröffentlichen.
 </p></div>   </a>
 </li>
 </ul>
