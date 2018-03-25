@@ -1,0 +1,238 @@
+Cell 01 - Address: 34:81:C4:BF:4B:4F
+                    Channel:11
+                    Frequency:2.462 GHz (Channel 11)
+                    Quality=53/70  Signal level=-57 dBm  
+                    Encryption key:on
+Cell 06 - Address: 34:81:C4:BF:4B:51
+                    Channel:36
+                    Frequency:5.18 GHz (Channel 36)
+                    Quality=67/70  Signal level=-43 dBm  
+                    Encryption key:on
+                    ESSID:"judffgsduifg"
+                    Bit Rates:6 Mb/s; 9 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s
+                              36 Mb/s; 48 Mb/s; 54 Mb/s
+ Cell 01 - Address: 34:81:C4:BF:4B:4F
+                    Channel:11
+                    Frequency:2.462 GHz (Channel 11)
+                    Quality=70/70  Signal level=-28 dBm  
+                    Encryption key:on
+                    ESSID:"judffgsduifg"
+ Cell 06 - Address: 34:81:C4:BF:4B:51
+                    Channel:36
+                    Frequency:5.18 GHz (Channel 36)
+                    Quality=70/70  Signal level=-31 dBm  
+                    Encryption key:on
+                    ESSID:"judffgsduifg"
+
+nmcli radio wifi off
+rfkill unblock wlan
+ifconfig wlp2s0 up 10.10.10.1
+route add -net 10.10.10.0 netmask 255.255.255.0 gw 10.10.10.1
+iptables --table nat --append POSTROUTING --out-interface br0 -j MASQUERADE
+iptables --append FORWARD --in-interface wlp2s0 -j ACCEPT
+echo 1 > /proc/sys/net/ipv4/ip_forward
+service dnsmasq restart
+hostapd /etc/hostapd.conf
+
+---------------
+more /var/lib/lxc/wifirouter/config 
+# Template used to create this container: /usr/share/lxc/templates/lxc-ubuntu
+# Parameters passed to the template:
+# Template script checksum (SHA-1): 4d7c613c3c0a0efef4b23917f44888df507e662b
+# For additional config options, please look at lxc.container.conf(5)
+
+# Uncomment the following line to support nesting containers:
+#lxc.include = /usr/share/lxc/config/nesting.conf
+# (Be aware this has security implications)
+
+
+# Common configuration
+lxc.include = /usr/share/lxc/config/ubuntu.common.conf
+
+# Container specific configuration
+lxc.rootfs = /var/lib/lxc/wifirouter/rootfs
+lxc.rootfs.backend = dir
+lxc.utsname = wifirouter
+lxc.arch = amd64
+
+# Network configuration
+lxc.network.type = phys
+lxc.network.link = wlp2s0
+lxc.network.flags = up
+lxc.network.hwaddr = 00:16:3e:24:31:e6
+
+lxc.network.type = veth
+lxc.network.link = br0
+lxc.network.flags = up
+lxc.network.hwaddr = 00:16:3e:24:31:e7
+
+
+--------
+apt-get update && apt-get -y upgrade && apt-get -y autoremove
+apt-get -y install wireless-tools joe iptables dnsmasq hostapd iw wpa-supplicant
+iptables --table nat --append POSTROUTING --out-interface eth0 -j MASQUERADE
+iptables --append FORWARD --in-interface wlp2s0 -j ACCEPT
+iptables --append FORWARD --in-interface wlp2s0_0 -j ACCEPT
+TERM="vt102"
+apt-get -y install iptables-persistent
+apt-get clean
+---
+auto wlp2s0
+iface wlp2s0 inet static
+address 10.10.10.1
+netmask 255.255.255.0
+root@wifirouter:~# more /etc/hostapd.conf 
+interface=wlp2s0
+driver=nl80211
+ssid=klapauzius_ap
+hw_mode=g
+channel=6
+macaddr_acl=0
+auth_algs=1           # 1=wpa, 2=wep, 3=both
+wpa=2                 # WPA2 only
+wpa_key_mgmt=WPA-PSK  
+rsn_pairwise=CCMP
+wpa_passphrase=m4ster63
+ignore_broadcast_ssid=0
+root@wifirouter:~# 
+root@wifirouter:~# more /etc/default/hostapd
+# Defaults for hostapd initscript
+#
+# See /usr/share/doc/hostapd/README.Debian for information about alternative
+# methods of managing hostapd.
+#
+# Uncomment and set DAEMON_CONF to the absolute path of a hostapd configuration
+# file and hostapd will be started during system boot. An example configuration
+# file can be found at /usr/share/doc/hostapd/examples/hostapd.conf.gz
+#
+#DAEMON_CONF=""
+
+# Additional daemon options to be appended to hostapd command:-
+#       -d   show more debug messages (-dd for even more)
+#       -K   include key data in debug messages
+#       -t   include timestamps in some debug messages
+#
+# Note that -B (daemon mode) and -P (pidfile) options are automatically
+# configured by the init.d script and must not be added to DAEMON_OPTS.
+#
+#DAEMON_OPTS=""
+
+RUN_DAEMON="yes"
+DAEMON_CONF="/etc/hostapd.conf"
+DAEMON_OPTS="-dd"
+
+
+root@wifirouter:~# more /etc/dnsmasq.d/wlp2s0
+interface=wlp2s0
+dhcp-range=10.10.10.2,10.10.10.250,255.255.255.0,12h
+dhcp-option=3,10.10.10.1
+dhcp-option=6,10.10.10.1
+server=192.168.10.1
+log-queries
+log-dhcp
+listen-address=127.0.0.1
+# Specify the default route
+dhcp-option=3,10.10.10.1
+# Specify the DNS server address
+dhcp-option=6,10.10.10.1
+# Make all host names resolve to the Raspberry Pi's IP address
+#address=/#/10.10.10.1
+
+more /etc/network/interfaces
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+
+auto wlp2s0
+iface wlp2s0 inet static
+address 10.10.10.1
+netmask 255.255.255.0
+
+allow-hotplug wlp2s0_0
+iface wlp2s0_0 inet static
+ address 172.16.15.1
+ netmask 255.255.255.0
+
+
+
+more /etc/modprobe.d/cfg80211.conf
+options cfg80211 ieee80211_regdom=DE
+
+more /etc/hostapd.conf
+interface=wlp2s0
+bssid=02:16:3e:24:31:30
+driver=nl80211
+ssid=klapauzius_ap5
+hw_mode=a
+country_code=DE
+ieee80211n=1
+ieee80211d=1
+#channel=6
+macaddr_acl=0
+auth_algs=1           # 1=wpa, 2=wep, 3=both
+wpa=2                 # WPA2 only
+wpa_key_mgmt=WPA-PSK  
+rsn_pairwise=CCMP TKIP
+wpa_passphrase=m4ster63
+ignore_broadcast_ssid=0
+
+bss=wlp2s0_0
+ssid=klapauzius_ap
+hw_mode=g
+channel=6
+macaddr_acl=0
+auth_algs=1           # 1=wpa, 2=wep, 3=both
+wpa=2                 # WPA2 only
+wpa_key_mgmt=WPA-PSK  
+rsn_pairwise=CCMP TKIP
+#wpa_passphrase=m4ster67
+ignore_broadcast_ssid=0
+wpa_psk_file=/etc/hostapd-psk
+
+more /etc/iptables/rules.v4          
+# Generated by iptables-save v1.6.0 on Sun Mar 25 12:49:30 2018
+*filter
+:INPUT ACCEPT [1:36]
+:FORWARD ACCEPT [8:602]
+:OUTPUT ACCEPT [12:1208]
+-A FORWARD -i wlp2s0 -j ACCEPT
+-A FORWARD -i wlp2s0_0 -j ACCEPT
+COMMIT
+# Completed on Sun Mar 25 12:49:30 2018
+# Generated by iptables-save v1.6.0 on Sun Mar 25 12:49:30 2018
+*nat
+:PREROUTING ACCEPT [69:6064]
+:INPUT ACCEPT [21:2184]
+:OUTPUT ACCEPT [18:1352]
+:POSTROUTING ACCEPT [2:376]
+-A POSTROUTING -o eth0 -j MASQUERADE
+COMMIT
+# Completed on Sun Mar 25 12:49:30 2018
+# Generated by iptables-save v1.6.0 on Sun Mar 25 12:49:30 2018
+*mangle
+:PREROUTING ACCEPT [1225:755543]
+:INPUT ACCEPT [55:6372]
+:FORWARD ACCEPT [1166:747931]
+
+more /etc/dnsmasq.d/wlp2s0_0
+interface=wlp2s0_0
+dhcp-range=172.16.15.2,172.16.15.250,255.255.255.0,12h
+dhcp-option=3,172.16.15.1
+dhcp-option=6,172.16.15.1
+server=192.168.10.1
+log-queries
+log-dhcp
+listen-address=127.0.0.1
+# Specify the default route
+dhcp-option=3,172.16.15.1
+# Specify the DNS server address
+dhcp-option=6,172.16.15.1
+root@wifirouter:~# 
+
+
