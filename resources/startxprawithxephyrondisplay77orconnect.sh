@@ -50,7 +50,7 @@ else
 #echo "waiting "$?
   done
 echo "trying openbox"
-  DISPLAY=:78 openbox &
+  DISPLAY=:78 xterm &
   DISPLAY=:0 xpra attach :77 &
 fi
 }

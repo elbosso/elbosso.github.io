@@ -20,7 +20,9 @@ public class ResourceLoader extends java.lang.Object
 	private static java.io.File f;
 	private static IconSize size;
 	private static java.net.URL fallBack;
-	
+	private static java.util.Map<java.lang.String, java.net.URL> resourceCache=new java.util.HashMap();
+	private static java.util.Map<java.lang.String, java.net.URL> resourceCacheUnaltered=new java.util.HashMap();
+
 	public enum IconSize
 	{
 		small(new int[]{32,36}),medium(new int[]{48}),large(new int[]{64});
@@ -321,143 +323,168 @@ public class ResourceLoader extends java.lang.Object
 	public static synchronized java.net.URL getResource(java.lang.String arg)
 	{
 		java.net.URL rv=null;
-		try
+		if(resourceCache.containsKey(arg))
 		{
-			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("requested image resource "+arg);
-			if(props.containsKey(arg))
+			rv = resourceCache.get(arg);
+			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("found in cache: "+arg+" - "+rv);
+		}
+		else
+		{
+			try
 			{
-				int[] ps=null;
-				java.lang.String replacement=props.getProperty(arg,arg);
-				if(replacement.startsWith("#"))
+				if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("requested image resource " + arg);
+				if (props.containsKey(arg))
 				{
-					if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("found url in props " + replacement);
-					rv=new java.net.URL(replacement.substring(1));
-				}
-				else
-				{
-					if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("replacement in props " + replacement);
-					java.lang.String prefix = null;
-					java.lang.String suffix = null;
-					java.util.regex.Matcher m = pat1.matcher(replacement);
-					if (m.matches())
+					int[] ps = null;
+					java.lang.String replacement = props.getProperty(arg, arg);
+					if (replacement.startsWith("#"))
 					{
-						prefix = m.group(1);
-						suffix = m.group(3);
-						int osize = java.lang.Integer.parseInt(m.group(2));
-						if (osize == 48)
-							ps = size.getPixelSize();
-						else
-							ps = size.getSmallerPixelSize();
-						if (CLASS_LOGGER.isTraceEnabled())
-							CLASS_LOGGER.trace("prefix#suffix#osize#ps " + prefix + "#" + suffix + "#" + osize + "#" + ps.length);
-					}
-					if (ps != null)
-					{
-						for (int size : ps)
-						{
-							java.lang.String constructedReplacement = prefix + "_" + size + suffix + ".png";
-							if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + constructedReplacement);
-							rv = ResourceLoader.class.getClassLoader().getResource(constructedReplacement);
-							if (rv != null)
-								break;
-						}
-					}
-					if (rv == null)
-					{
-						if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + replacement);
-						rv = ResourceLoader.class.getClassLoader().getResource(replacement);
-					}
-					if (rv == null)
-					{
-						if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + arg);
-						rv = ResourceLoader.class.getClassLoader().getResource(arg);
-					}
-				}
-			}
-			else
-			{
-				int[] ps=null;
-				java.lang.String prefix=null;
-				java.lang.String suffix=null;
-				java.lang.String replacement=arg;
-				if(replacement.startsWith("#"))
-				{
-					if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("found url in props " + replacement);
-					rv=new java.net.URL(replacement.substring(1));
-				}
-				else
-				{
-					java.util.regex.Matcher m = pat2.matcher(arg);
-					if (m.matches())
-					{
-						prefix = m.group(1);
-						suffix = m.group(3);
-						int osize = java.lang.Integer.parseInt(m.group(2));
-						if (osize == 48)
-							ps = size.getPixelSize();
-						else
-							ps = size.getSmallerPixelSize();
-					}
-					if (ps != null)
-					{
-						for (int size : ps)
-						{
-							replacement = prefix + "_" + size + suffix + ".png";
-							if (replacement.startsWith("!"))
-								replacement = replacement.substring(1);
-							rv = ResourceLoader.class.getClassLoader().getResource(replacement);
-							if (rv != null)
-								break;
-
-						}
+						if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("found url in props " + replacement);
+						rv = new java.net.URL(replacement.substring(1));
 					}
 					else
 					{
-						if (replacement.startsWith("!"))
-							replacement = replacement.substring(1);
-						rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+						if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("replacement in props " + replacement);
+						java.lang.String prefix = null;
+						java.lang.String suffix = null;
+						java.util.regex.Matcher m = pat1.matcher(replacement);
+						if (m.matches())
+						{
+							prefix = m.group(1);
+							suffix = m.group(3);
+							int osize = java.lang.Integer.parseInt(m.group(2));
+							if (osize == 48)
+								ps = size.getPixelSize();
+							else
+								ps = size.getSmallerPixelSize();
+							if (CLASS_LOGGER.isTraceEnabled())
+								CLASS_LOGGER.trace("prefix#suffix#osize#ps " + prefix + "#" + suffix + "#" + osize + "#" + ps.length);
+						}
+						if (ps != null)
+						{
+							for (int size : ps)
+							{
+								java.lang.String constructedReplacement = prefix + "_" + size + suffix + ".png";
+								if (CLASS_LOGGER.isTraceEnabled())
+									CLASS_LOGGER.trace("trying " + constructedReplacement);
+								rv = ResourceLoader.class.getClassLoader().getResource(constructedReplacement);
+								if (rv != null)
+									break;
+							}
+						}
+						if (rv == null)
+						{
+							if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + replacement);
+							rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+						}
+						if (rv == null)
+						{
+							if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + arg);
+							rv = ResourceLoader.class.getClassLoader().getResource(arg);
+						}
 					}
-					if (rv != null)
-						props.setProperty(arg, replacement);
 				}
+				else
+				{
+					int[] ps = null;
+					java.lang.String prefix = null;
+					java.lang.String suffix = null;
+					java.lang.String replacement = arg;
+					if (replacement.startsWith("#"))
+					{
+						if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("found url in props " + replacement);
+						rv = new java.net.URL(replacement.substring(1));
+					}
+					else
+					{
+						java.util.regex.Matcher m = pat2.matcher(arg);
+						if (m.matches())
+						{
+							prefix = m.group(1);
+							suffix = m.group(3);
+							int osize = java.lang.Integer.parseInt(m.group(2));
+							if (osize == 48)
+								ps = size.getPixelSize();
+							else
+								ps = size.getSmallerPixelSize();
+						}
+						if (ps != null)
+						{
+							for (int size : ps)
+							{
+								replacement = prefix + "_" + size + suffix + ".png";
+								if (replacement.startsWith("!"))
+									replacement = replacement.substring(1);
+								rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+								if (rv != null)
+									break;
+
+							}
+						}
+						else
+						{
+							if (replacement.startsWith("!"))
+								replacement = replacement.substring(1);
+							rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+						}
+						//if (rv != null)
+						//	props.setProperty(arg, replacement);
+					}
+				}
+			} catch (java.lang.Throwable t)
+			{
+				//				t.printStackTrace();
+				rv = ResourceLoader.class.getClassLoader().getResource(arg);
 			}
-		}
-		catch(java.lang.Throwable t)
-		{
-//				t.printStackTrace();
-			rv=ResourceLoader.class.getClassLoader().getResource(arg);
+			if(rv!=null)
+				resourceCache.put(arg,rv);
 		}
 		return rv;
 	}
 	public static synchronized java.net.URL getResourceUnaltered(java.lang.String arg)
 	{
 		java.net.URL rv=null;
-
-		try
+		if(resourceCacheUnaltered.containsKey(arg))
 		{
-			if(props.containsKey(arg))
-			{
-				java.lang.String replacement=props.getProperty(arg,arg);
-				rv=ResourceLoader.class.getClassLoader().getResource(replacement);
-//				rv.openConnection();
-				if(rv==null)
-					rv=ResourceLoader.class.getClassLoader().getResource(arg);
-			}
-			else
-			{
-				rv=ResourceLoader.class.getClassLoader().getResource(arg);
-				if(rv!=null)
-					props.setProperty(arg, arg);
-			}
+			rv = resourceCacheUnaltered.get(arg);
+			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("found in cache: "+arg+" - "+rv);
 		}
-		catch(java.lang.Throwable t)
+		else
 		{
-//			t.printStackTrace();
-			rv=ResourceLoader.class.getClassLoader().getResource(arg);
+			try
+			{
+				if (props.containsKey(arg))
+				{
+					java.lang.String replacement = props.getProperty(arg, arg);
+					rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+					//				rv.openConnection();
+					if (rv == null)
+						rv = ResourceLoader.class.getClassLoader().getResource(arg);
+				}
+				else
+				{
+					rv = ResourceLoader.class.getClassLoader().getResource(arg);
+					if (rv != null)
+						props.setProperty(arg, arg);
+				}
+			} catch (java.lang.Throwable t)
+			{
+				//			t.printStackTrace();
+				rv = ResourceLoader.class.getClassLoader().getResource(arg);
+			}
+			if(rv!=null)
+				resourceCacheUnaltered.put(arg,rv);
 		}
-
 		return rv;
 	}
-
+	public static void main(java.lang.String[] args)
+	{
+		de.elbosso.util.Utilities.configureBasicStdoutLogging(org.apache.log4j.Level.ALL);
+		de.netsysit.util.ResourceLoader.setSize(IconSize.small);
+		javax.swing.ImageIcon i1=new javax.swing.ImageIcon(de.netsysit.util.ResourceLoader.getImgResource("de/netsysit/ressources/gfx/ca/Makro expandieren_48.png"));
+		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());
+		javax.swing.ImageIcon i2=new javax.swing.ImageIcon(de.netsysit.util.ResourceLoader.getImgResource("de/netsysit/ressources/gfx/ca/Makro expandieren_48.png"));
+		CLASS_LOGGER.trace(i2.getIconWidth()+" "+i2.getIconHeight());
+	}
 }
 

@@ -117,31 +117,60 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
-			<h3>Review: Lenovo ThinkPad X1 Carbon</h3>
+			<h3>Installing GitKraken on Fedora 27</h3>
 		</div>
 		<div class="collectiontext">
-			<p>As part of the transition into my new role at <a href="https://heptio.com/">Heptio</a> (see <a href="https://blog.scottlowe.org/2018/04/02/the-future-is-containerized/">here</a> for more information), I had to select a new corporate laptop. Given that my last attempt at running Linux full-time was thwarted due primarily to work-specific collaboration issues that would no longer apply (see <a href="https://blog.scottlowe.org/2017/10/25/linux-migration-wrap-up/">here</a>), and given that other members of my team (the Field Engineering team) are also running Linux full-time, I thought I&rsquo;d give it another go. Accordingly, I&rsquo;ve started working on a Lenovo ThinkPad X1 Carbon (5th generation). Here are my thoughts on this laptop.</p>
+			<p><a href="https://www.gitkraken.com/">GitKraken</a> is a full-featured graphical Git client with support for multiple platforms. Given that I&rsquo;m trying to live a multi-platform life, it made sense for me to give this a try and see whether it is worth making part of <a href="https://blog.scottlowe.org/2018/04/30/updated-look-at-multi-platform-toolbelt/">my (evolving and updated) multi-platform toolbelt</a>. Along the way, though, I found that GitKraken doesn&rsquo;t provide an RPM package for <a href="https://getfedora.org/">Fedora</a>, and that the installation isn&rsquo;t as straightforward as one might hope. I&rsquo;m documenting the procedure here in the hope of helping others.</p>
 
-<p>This is now my second non-Apple laptop in the last year. My previous non-Apple laptop, a Dell Latitude E7370, was a pretty decent laptop (see <a href="https://blog.scottlowe.org/2017/01/30/review-dell-latitude-e7370/">my review</a>). As good as the E7370 was, though, the X1 Carbon is <em>better</em>.</p>
+<p>First, download the latest release of GitKraken. You can do this via the terminal with this command:</p>
 
-<p>The X1 Carbon features a dual-core i7 7500U CPU, which (subjectively, anyway) outperforms the mobile CPU in the E7370. This makes the X1 Carbon feel quite snappy and responsive. CPU performance was an issue for me with the Dell&mdash;it didn&rsquo;t take much to tax that mobile CPU. I haven&rsquo;t seen that issue so far with the X1 Carbon. Coupled with 16GB of RAM, the X1 Carbon is no slouch. My particular model only came with a 256GB NVMe SSD (the E7370 had a 512GB NVMe SSD), but given that I won&rsquo;t be storing tons of media files or dozens of VMs I don&rsquo;t anticipate that the smaller disk will be an issue.</p>
+<pre><code>curl -LO https://release.gitkraken.com/linux/gitkraken-amd64.tar.gz
+</code></pre>
 
-<p>Like the E7370, the X1 Carbon also leverages Intel HD graphics. This is one area where the Dell may have had an edge on the X1 Carbon; the Dell offered a 3200x1800 touchscreen, whereas the X1 Carbon&mdash;my particular model&mdash;supports 1920x1080, and no touchscreen support. To be fair, I ended up running the Dell at a lower resolution to work around issues pertaining to scaling with external monitors, so the lower resolution of the X1 Carbon isn&rsquo;t really a big deal. I also didn&rsquo;t use the touchscreen functionality, so I don&rsquo;t miss it either. Screen quality and brightness are really good, in my opinion.</p>
+<p>Extract the contents of the GitKraken download into its own directory under <code>/opt</code> using this command (you can use a different directory if you like, but I prefer to install third-party applications like this under <code>/opt</code>):</p>
 
-<p>Like many other laptops, the ThinkPad also uses an Intel wireless card with support for all the major 802.11 standards. Wireless performance thus far has been pretty respectable; I haven&rsquo;t run into any issues or problems.</p>
+<pre><code>sudo tar -C /opt -xvf gitkraken-amd64.tar.gz
+</code></pre>
 
-<p>Battery life has (so far) been <em>very</em> good. I&rsquo;m impressed. I haven&rsquo;t even done any tuning yet, and the battery life easily surpasses the E7370 (which was fairly decent).</p>
+<p>This will extract everything into <code>/opt/gitkraken</code>.</p>
 
-<p>I do feel that I need to call out the keyboard on the X1 Carbon, which is nothing short of fantastic. It is handily far better than the keyboards on the latest MacBook Pros (which have had no end of problems). It&rsquo;s probably the best laptop keyboard I&rsquo;ve used in quite a while.</p>
+<p>Next, you&rsquo;ll create a symbolic link to an existing library to fix an error with GitKraken when running on Fedora (this is documented here):</p>
 
-<p>The quality of the laptop is good. It feels strong and sturdy but is still light and thin, making it easy to carry while traveling (an important aspect for me). I didn&rsquo;t know quite what to expect since this was my first ThinkPad (hard to believe, right?).</p>
+<pre><code>sudo ln -s /usr/lib64/libcurl.so.4 /usr/lib64/libcurl-gnutls.so.4
+</code></pre>
 
-<p>Last, but not least, how is the X1 Carbon with regards to Linux support? With the exception of the fingerprint scanner (which is a known issue), everything works out of the box with <a href="https://getfedora.org/">Fedora</a> 27. Keyboard function keys work without any fiddling or extra configuration required, suspend (by closing the lid) and resume work without any issues, and both the trackpoint and the trackpad work as expected. I&rsquo;d seen some reports that one or the other needed to be disabled, but both have been working for me without any issues.</p>
+<p>Once this is done, you <em>could</em> just run <code>/opt/gitkraken/gitkraken</code> from the Terminal and GitKraken would fire up.</p>
 
-<p>Overall, I&rsquo;m pretty happy with the ThinkPad X1 Carbon, and would recommend it to anyone looking for a lightweight but powerful laptop on which to run Linux.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/zyqAXhV8y1M" height="1" width="1" alt=""/>
+<p>However, you may find it easier to create a desktop launcher for GitKraken. Before you do that, download an icon for the app (there is no icon file distributed in the download). One suggested icon can be found <a href="http://img.informer.com/icons_mac/png/128/422/422255.png">here</a>; just copy that image into <code>/opt/gitkraken</code> and make note of the filename you use (for the purposes of this article, I&rsquo;ll assume it&rsquo;s named <code>icon.png</code>. Yes, I know, I&rsquo;m very creative).</p>
+
+<p>Now create the file <code>/usr/share/applications/gitkraken.desktop</code> and put these contents into the file:</p>
+
+<pre><code class="language-text">[Desktop Entry]
+Name=GitKraken
+Comment=Graphical Git client
+Exec=/opt/gitkraken/gitkraken
+Icon=/opt/gitkraken/icon.png
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Utility;Development;
+</code></pre>
+
+<p>If you named the icon you downloaded something <em>other</em> than <code>icon.png</code>, be sure to adjust the &ldquo;Icon=&rdquo; line in the file accordingly. Save that file and within a few moments you should have a GitKraken desktop launcher ready to roll.</p>
+
+<p>A couple additional notes of which to be aware:</p>
+
+<ul>
+<li>GitKraken requires that you create a GitKraken account or link GitKraken to your GitHub account. This is an annoyance, but fortunately a minor one.</li>
+<li>I noted that GitKraken has some issues connecting to GitHub, GitLab, and other online services with a very generic and non-descriptive error. I haven&rsquo;t yet found a workaround for the issue.</li>
+</ul>
+
+<h2 id="credit">Credit</h2>
+
+<p>The source for the <code>gitkraken.desktop</code>, the suggested icon, and other useful information was taken from <a href="https://gist.github.com/aelkz/17528d2f6a5db73185c7dfbd28e49d18">this GitHub Gist</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/iLYyWuo85Y4" height="1" width="1" alt=""/>
 		</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/zyqAXhV8y1M/" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/iLYyWuo85Y4/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 	<li class="anriss">
@@ -149,34 +178,45 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
-			<h3>The Future is Containerized</h3>
+			<h3>An Updated Look at My Multi-Platform Toolbelt</h3>
 		</div>
 		<div class="collectiontext">
-			<p>Last week I <a href="https://blog.scottlowe.org/2018/03/26/time-to-evolve/">announced my departure from VMware</a>, and my intention to step away from VMware&rsquo;s products and platforms to focus on a new technology area moving forward. Today marks the &ldquo;official&rdquo; start of a journey that&rsquo;s been building for a couple years, a journey that will take me into a future that&rsquo;s containerized. That journey starts in Seattle, Washington.</p>
+			<p>In early 2017 I posted about <a href="https://blog.scottlowe.org/2017/01/03/my-evolving-multi-platform-toolbelt/">my (evolving) multi-platform toolbelt</a>, describing some of the applications, standards, and services that I use across my Linux and macOS systems. In this post, I&rsquo;d like to provide an updated review of that toolbelt.</p>
 
-<p>Why Seattle, Washington? Because that&rsquo;s where <a href="https://www.heptio.com/">Heptio</a> is based, and because today I am joining Heptio as a senior member of the field engineering team to help drive the adoption of <a href="https://kubernetes.io/">Kubernetes</a> across the industry. Only a couple of folks guessed that I was headed to Heptio. If you were one of those folks, you guessed correctly!</p>
+<ul>
+<li><p><em>Visual Studio Code:</em> I switched from <a href="http://www.sublimetext.com/">Sublime Text</a> to <a href="https://code.visualstudio.com/">Visual Studio Code</a> during my latest migration to Fedora 27 on a Lenovo ThinkPad X1 Carbon. Since I&rsquo;m also planning on expanding my coding skills with Golang, I felt that Visual Studio Code would be a better choice than Sublime Text. I&rsquo;m still generating the majority of my content in Markdown (MultiMarkdown is the flavor that I generally use), and I&rsquo;ve found Visual Studio Code to be pretty decent as a Markdown editor.</p></li>
 
-<p>Two questions are probably rolling around in your head right now:</p>
+<li><p><em>IMAP/SMTP:</em> I&rsquo;ve standardized on using IMAP/SMTP for all my e-mail accounts, which gives me quite a bit of flexibility in clients and OSes. It&rsquo;s very likely I&rsquo;ve pretty much standardized on <a href="https://www.mozilla.org/en-US/thunderbird/">Thunderbird</a> (which supports OS X, Linux, and Windows).</p></li>
 
-<ol>
-<li>Why Kubernetes?</li>
-<li>Why Heptio?</li>
-</ol>
+<li><p><em>Unison:</em> This <a href="http://www.cis.upenn.edu/~bcpierce/unison/">cross-platform file synchronization tool</a> helps keep my files in sync across my macOS and Linux systems.</p></li>
 
-<p>Good questions!</p>
+<li><p><em>Dropbox:</em> <a href="https://www.dropbox.com/">Dropbox</a> gives me access to non-confidential files from any of my devices or platforms (macOS, iOS, and Linux).</p></li>
 
-<p>It&rsquo;s clear to me that containers will have a significant impact on how we as IT professionals will develop, deploy, upgrade, and manage applications. It&rsquo;s also clear to me that when it comes to orchestrating containers, Kubernetes is the clear leader. So, if I accept that containers are going to be a significant part of IT moving forward, then it logically follows that Kubernetes is the technology area where I should focus. There&rsquo;s the answer to your first question.</p>
+<li><p><em>jrnl:</em> <a href="http://jrnl.sh/"><code>jrnl</code></a> is a CLI tool is used for journaling, and has built-in support for encryption (a plus for me). The nice thing about <code>jrnl</code> which is itself multi-platform (runs on macOS and Linux) is that it also works with <a href="http://dayoneapp.com/">Day One</a>, a popular journaling tool for macOS. I&rsquo;ve since abandoned Day One (for a variety of reasons) and use only <code>jrnl</code> now on both Linux and macOS.</p></li>
 
-<p>As to the second question: if I&rsquo;m going to focus on Kubernetes, then I want (need?) to work on a team that is passionate about Kubernetes, and that team should have deep expertise in Kubernetes. Because Kubernetes is an open source project, it should be a team that embraces open source, is deeply involved in Kubernetes development, and is committed to the future of Kubernetes. Which team meets all those criteria? In my opinion, Heptio. Founded by two ex-Google employees who helped launch Kubernetes while they were at Google (Craig McLuckie and Joe Beda), the company is actively involved in open source, actively involved in Kubernetes development, actively committed to the future of Kubernetes, and is building a world-class team. I&rsquo;m honored and thrilled to be part of this team! I&rsquo;m excited to be able to dive deep into &ldquo;all things Kubernetes,&rdquo; and equally excited to get to help design and deploy solutions to customer problems using Kubernetes.</p>
+<li><p><em>TaskPaper-formatted text files for task management:</em> I&rsquo;ve adopted the TaskPaper format for using plain text files for task management. Obviously I&rsquo;m not using Sublime Text but Visual Studio Code instead, along with the Todo+ extension.</p></li>
 
-<p>With my destination and new technology focus revealed, <a href="https://blog.scottlowe.org/2018/03/05/looking-ahead-2018-projects/">my list of 2018 projects/goals</a> probably makes a lot more sense. You can probably also guess that the content here on the site will shift (even more) toward Kubernetes, infrastructure as code, public cloud providers, DevOps, and even some programming/development (I&rsquo;m looking forward to leveraging some of the development expertise of my peers to &ldquo;level up&rdquo; my own programming skills, particularly in Go [Golang]). If you&rsquo;re active on Slack, then you&rsquo;ll probably start seeing me around <a href="http://slack.kubernetes.io">the Kubernetes Slack team</a> more frequently. Of course, you&rsquo;re <strong>always</strong> welcome <a href="https://twitter.com/scott_lowe">to hit me up on Twitter</a>.</p>
+<li><p><em>Firefox and Firefox Sync:</em> For web browsing, I&rsquo;m using <a href="https://www.mozilla.org/en-US/firefox/">Mozilla Firefox</a> and Firefox Sync across Linux, OS X, iOS, and Android. I&rsquo;ll occasionally use <a href="https://www.google.com/chrome/index.html">Google Chrome</a> as needed.</p></li>
 
-<p>I mentioned last week that I&rsquo;d miss the VMware community, but I am encouraged by the opportunity to build relationships in the Kubernetes community. There are <em>many</em> great folks within the Kubernetes community (more than a few of them work at Heptio!), and I&rsquo;m really looking forward to making new friends, building new relationships, and giving back to the community in whatever form I am able.</p>
+<li><p><em>1Password X:</em> In the past, I had to look at other password managers (like <a href="https://www.enpass.io/">Enpass</a>) because Agile Bits didn&rsquo;t have any Linux support for <a href="https://1password.com/">1Password</a>. With the introduction of 1Password X (including a Firefox extension!), I&rsquo;m sticking with 1Password as my password manager.</p></li>
 
-<p>Lots of hard work lies ahead of me&mdash;reshaping oneself and one&rsquo;s skill set is never an easy thing to do&mdash;but I&rsquo;m genuinely looking forward to this adventure. I&rsquo;m going to learn a lot, I&rsquo;m going to grow a lot, and I&rsquo;m going to do my best to help others along their paths as well. Let&rsquo;s do this!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/k4aNUOlWhMU" height="1" width="1" alt=""/>
+<li><p><em>Google Calendar:</em> As much as I&rsquo;d prefer not to have to use Google, I&rsquo;ve found that I don&rsquo;t really have much choice in the matter. Linux and GNOME support for CalDAV and CardDAV just isn&rsquo;t there, unfortunately&mdash;GNOME Calendar remains incredibly unstable. So, I&rsquo;m in the process of moving all my calendaring over to Google Calendar and away from CalDAV with <a href="https://fruux.com/">fruux.com</a>. I&rsquo;ll do something similar for my contacts.</p></li>
+
+<li><p><em>Slack:</em> <a href="https://slack.com/">Slack</a> has become a much larger part of my collaborative workflow, and so I&rsquo;m using the &ldquo;native&rdquo; Slack client on both macOS and Linux. (I put native in quotes because it&rsquo;s using Electron and therefore isn&rsquo;t truly native to the platform.)</p></li>
+</ul>
+
+<p>There are still a few areas where there are inconsistencies across platforms (for various reasons). For example, when it comes to local virtualization, I use <a href="https://www.virtualbox.org/">VirtualBox</a> on macOS and Libvirt (KVM) on Linux&mdash;but both of them are fronted by Vagrant, so the differences between the user experience are pretty minimal. (It&rsquo;s worth noting that I have completely moved away from <a href="http://www.vmware.com/products/fusion.html">VMware Fusion</a> on all macOS systems, as the Vagrant user experience is still subpar, in my opinion. See <a href="https://blog.scottlowe.org/2016/09/28/why-now-using-virtualbox-with-vagrant/">this post</a> for more details.)</p>
+
+<p>Similarly, I haven&rsquo;t standardized on a single IRC client across platforms (I&rsquo;m using <a href="https://www.codeux.com/textual/">Textual</a> on macOS and <a href="https://hexchat.github.io/">HexChat</a> on Linux); I&rsquo;m not yet sure there&rsquo;s any real benefit to standardizing on a single IRC client. (Feel free to educate me otherwise if you have experience in this regard.)</p>
+
+<p>Finally, the same is true for graphical Git clients (which I rarely use, to be honest): on Linux I&rsquo;m using <a href="https://www.gitkraken.com/">GitKraken</a>, and on macOS I&rsquo;m using <a href="https://www.git-tower.com/">Tower</a>.</p>
+
+<p>I&rsquo;m no longer using <a href="https://wire.com/">Wire</a>; I just wasn&rsquo;t seeing any real benefit, and the use of tools like OTR with other platforms helps provide a level of secure messaging that is acceptable.</p>
+
+<p>Well, that&rsquo;s it for now. I&rsquo;ll keep this post updated as my toolbelt evolves. In the meantime, if you have any suggestions for tools that I should evaluate, feel free to <a href="https://twitter.com/scott_lowe/">hit me up on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/UzmoJgfsG8w" height="1" width="1" alt=""/>
 		</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/k4aNUOlWhMU/" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/UzmoJgfsG8w/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 	<li class="anriss">
@@ -184,13 +224,13 @@ display('news.html')
 		<a href="http://www.familytidings.com/blog" target="_blank">Half a Page of Scribbled Linux</a>
 		</div>
 		<div>
-			<h3>Dot Files</h3>
+			<h3>Copy+Paste Broken in Google Sheets</h3>
 		</div>
 		<div class="collectiontext">
-			Dot files are unix configuration files that contain your personalized settings for programs like Vim, Emacs, or tmux.  If you use more than one unix machine, keeping these file in sync is much easier if they&#8217;re stored in Git.  These instructions are how I do that. Fork the GitHub repository https://github.com/dotphiles/dotphiles Set up for GitHub [&#8230;]
+			This had nothing to do with Google Sheets itself, but rather an extension I use called Don&#8217;t Fuck with Paste. This extension disables copy and paste blocking.  The extension had a major upgrade a couple months ago that enabled the extension only for sites added to a blacklist.  The blacklist supports regular expressions to match [&#8230;]
 		</div>
 		<div class="collectionhref">
-		<a href="http://www.familytidings.com/blog/?p=1507" target="_blank">Öffnen</a>
+		<a href="http://www.familytidings.com/blog/?p=1511" target="_blank">Öffnen</a>
 		</div>
 	</li>
 	<li class="anriss">
@@ -198,81 +238,160 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
-			<h3>Technology Short Take 97</h3>
+			<h3>Technology Short Take 98</h3>
 		</div>
 		<div class="collectiontext">
-			<p>Welcome to Technology Short Take 97! This Tech Short Take marks the end of an era (sort of); it&rsquo;s the last Tech Short Take published while I&rsquo;m a VMware employee (today is my last day; see <a href="https://blog.scottlowe.org/2018/03/26/time-to-evolve/">here</a> for more details). But enough about me&mdash;let&rsquo;s talk some tech! This Short Take may be a bit longer than some, so buckle up.</p>
+			<p>Welcome to Technology Short Take #98! Now that I&rsquo;m starting to get settled into my new role at Heptio, I&rsquo;ve managed to find some time to pull together another collection of links and articles pertaining to various data center technologies. Feedback is always welcome!</p>
 
 <h2 id="networking">Networking</h2>
 
 <ul>
-<li>Vadim Eisenberg has two articles that describe how to integrate external services into an Istio service mesh. The first article covers <a href="https://istio.io/blog/2018/egress-https.html">integrating external web services</a>; the second article discusses <a href="https://istio.io/blog/2018/egress-tcp.html">consuming external TCP services</a>.</li>
-<li>Matt Oswalt tackles the topic of unit testing (specifically with regard to network automation) with a post on <a href="https://keepingitclassless.net/2018/02/unit-testing-junos-jsnapy/">unit testing JunOS with JSNAPy</a>.</li>
-<li>This is an older post (more than 2 years old), but as far as I can tell the concepts are still quite applicable. Sean Howard talks about <a href="http://nsxperts.com/?p=65">using the NSX Service Compose to create a more elegant ruleset</a> for enforcing security policy.</li>
-<li>Jérôme Petazzoni <a href="https://jpetazzo.github.io/2018/03/13/appswitch-hyperlay-network-stack-future/">test drives AppSwitch</a>, the &ldquo;network stack from the future.&rdquo; I also recently received an invitation to give AppSwitch a look, so stay tuned for my feedback as well.</li>
-<li>Chris Young shares some details on a little side project he did to show <a href="https://kontrolissues.net/2018/03/22/playing-with-arisa-eapi-dynamic-vlan-assignment-ish/">how to use the Arista eAPI to do dynamic VLAN assignment based on MAC address</a>. While this specific use case may not be something worth implementing, the example of how to use eAPI from Python may prove useful for other use cases.</li>
+<li>VMware has released a PowerCLI preview/fling for NSX-T; Kyle Ruddy has a write-up <a href="https://blogs.vmware.com/PowerCLI/2018/04/powercli-nsx-t-fling.html">here</a>. Looks like this preview provides some high-level cmdlets for NSX-T that weren&rsquo;t available before.</li>
+<li>Cilium, the open source project working to bring eBPF-powered networking and security to Kubernetes environments, has <a href="https://cilium.io/blog/2018/04/24/cilium-10">hit the 1.0 release</a>. I will freely admit that I am a fan of what the Cilium folks are doing.</li>
+<li>What&rsquo;s that? Don&rsquo;t know what eBPF is? Or XDP? Not to worry, the nice folks over at Netronome have <a href="https://www.netronome.com/blog/bpf-ebpf-xdp-and-bpfilter-what-are-these-things-and-what-do-they-mean-enterprise/">a post that explains it all</a>.</li>
+<li>People do all kinds of interesting things with Raspberry Pis; here&rsquo;s an article by Scott Helme on <a href="https://scotthelme.co.uk/securing-dns-across-all-of-my-devices-with-pihole-dns-over-https-1-1-1-1/">using a Pi to secure DNS traffic</a>.</li>
 </ul>
 
 <h2 id="servers-hardware">Servers/Hardware</h2>
 
 <ul>
-<li>Thomas Maurer has <a href="https://www.thomasmaurer.ch/2018/03/first-impressions-surface-book-2/">a &ldquo;first impressions&rdquo; post</a> on the Microsoft Surface Book 2. (I must admit I&rsquo;ve been considering adding a Microsoft device to my collection.)</li>
+<li>This is more of a follow-up to one of my own articles than a pointer to someone else&rsquo;s article. After continued use (including on business trips) of my Lenovo ThinkPad X1 Carbon running Fedora 27, I continue to be impressed by the battery life and overall performance and quality of the laptop. Well done, Lenovo!</li>
 </ul>
 
 <h2 id="security">Security</h2>
 
 <ul>
-<li>Nitsan Bin-Nun of Twistlock provides <a href="https://www.twistlock.com/2018/03/21/deep-dive-severe-kubernetes-vulnerability-date-cve-2017-1002101/">a deep dive on two recent (and severe) Kubernetes vulnerabilities</a>. I definitely recommend reviewing this post and taking action to ensure your Kubernetes deployments are not at risk.</li>
-<li>Dan Walsh has a bit of a rant on <a href="https://danwalsh.livejournal.com/78373.html">SELinux and blocking access to the Docker socket</a>.</li>
-<li>And while we&rsquo;re discussing the Docker socket, the inimitable Jessie Frazelle shares some useful details on <a href="https://blog.jessfraz.com/post/building-container-images-securely-on-kubernetes/">building container images securely on Kubernetes</a>.</li>
-<li>And while I&rsquo;m talking about Jessie Frazelle: check out <a href="https://blog.jessfraz.com/post/tor-socks-proxy-and-privoxy-containers/">her guide to running Tor Socks5 and Privoxy containers</a>. (Yes, I know privacy and anonymity aren&rsquo;t the same as security&hellip;work with me here.)</li>
-<li>If you&rsquo;re running an etcd cluster, <em>please</em> make sure to secure access to it. Giovanni Collazo <a href="https://elweb.co/the-security-footgun-in-etcd/">shares some disturbing information</a> about unsecured etcd clusters.</li>
-<li>I&rsquo;ve long said that if you&rsquo;re going to use Docker, you need to exercise caution about blindly throwing some container on the &ldquo;FROM&rdquo; line of your <code>Dockerfile</code>. If you don&rsquo;t know how that image was built, this is no different than downloading a compiled executable from the Internet and running it. (Good luck with that.) In any case, this is something that <a href="https://blogs.vmware.com/opensource/2018/03/13/open-source-tern-makes-containers-compliant/">Tern is intended to help address</a>.</li>
+<li>Michael Ducy <a href="https://sysdig.com/blog/kubernetes-security-logging-fluentd-falco/">describes a setup</a> leveraging Falco and Fluentd (as part of the EFK stack) to do Kubernetes security logging.</li>
+<li>Sysdig has <a href="https://sysdig.com/blog/kubernetes-security-guide/">a Kubernetes security guide</a> available that may be worth reviewing. I haven&rsquo;t dug into it yet (see what I did there?), so I can&rsquo;t validate how accurate/useful the recommendations may be.</li>
+<li><a href="https://disloops.com/cloudfront-hijacking/">This article on CloudFront hijacking</a> is worth a read, in my opinion.</li>
 </ul>
 
 <h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
 
 <ul>
-<li>William Lam has a series of posts on VMware Pivotal Container Service (PKS), which at the time of this writing was up to 4 posts in the series. William provides an overview in <a href="https://www.virtuallyghetto.com/2018/03/getting-started-with-vmware-pivotal-container-service-pks-part-1-overview.html">part 1</a>, discusses client tools in <a href="https://www.virtuallyghetto.com/2018/03/getting-started-with-vmware-pivotal-container-service-pks-part-2-pks-client.html">part 2</a>, reviews NSX-T integration in <a href="https://www.virtuallyghetto.com/2018/03/getting-started-with-vmware-pivotal-container-service-pks-part-3-nsx-t.html">part 3</a>, and actually kicks off the PKS installation with Ops Manager and BOSH in <a href="https://www.virtuallyghetto.com/2018/03/getting-started-with-vmware-pivotal-container-service-pks-part-4-ops-manager-bosh.html">part 4</a>.</li>
-<li>Gerald Venzi shows <a href="https://geraldonit.com/2018/03/26/deploying-a-kubernetes-cluster-with-vagrant-on-virtual-box/">how to use Vagrant and VirtualBox to deploy a local Kubernetes cluster</a>, using some Kubernetes support recently added to an Oracle GitHub repository of Vagrant boxes.</li>
-<li>Thorsten Hans walks through <a href="https://thorsten-hans.com/upgrading-a-kubernetes-cluster-on-aks-using-azure-cli-603c9be7b369">upgrading a Kubernetes cluster on AKS using the Azure CLI</a>. I myself have done this a couple of times&mdash;it&rsquo;s really straightforward.</li>
-<li>Trying to decide between GKE, AKS, and EKS? Tirumarai Selvan has <a href="https://blog.hasura.io/gke-vs-aks-vs-eks-411f080640dc">a comparison</a>.</li>
-<li>Richard Li <a href="https://blog.getambassador.io/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers-6e29f1c44f2d">discusses</a> strategies for ingress in Kubernetes and the tradeoffs associated with each approach.</li>
+<li>There&rsquo;s not much here yet, but it will be interesting to see how <a href="https://furikuri.gitbooks.io/k8s-by-example/content/">this &ldquo;K8s by example&rdquo; GitBook</a>&mdash;which is, as the author admits, just a collection of various command-line snippets&mdash;evolves.</li>
+<li>Liz Rice has a nice write-up on <a href="https://medium.com/@lizrice/kubernetes-in-vagrant-with-kubeadm-21979ded6c63">using Kubernetes in Vagrant with <code>kubeadm</code></a>.</li>
+<li>Gergely Nemeth shares how to leverage <a href="https://github.com/GoogleContainerTools/skaffold">skaffold</a> so you can <a href="https://nemethgergely.com/using-kubernetes-for-local-development/index.html">use Kubernetes for local development</a>. Skaffold is a tool I&rsquo;ve been meaning to try out, so finding Gergely&rsquo;s post was helpful.</li>
+<li>Sandeep Dinesh provides <a href="https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0">a high-level overview</a> of NodePort versus LoadBalancer versus Ingress in a Kubernetes environment.</li>
+<li><a href="https://medium.com/@nodearth/kubernetes-from-a-to-z-intro-ad425051cf59">Here&rsquo;s YAKI</a> (Yet Another Kubernetes Introduction). (Note: I reserve the right to write YAKI of my own at some point.)</li>
+<li>VMware has <a href="https://blogs.vmware.com/cloudnative/2018/04/24/kubernetes-vmware-sig/">launched a SIG</a> for Kubernetes on VMware.</li>
 </ul>
 
 <h2 id="operating-systems-applications">Operating Systems/Applications</h2>
 
 <ul>
-<li>Eben Freeman <a href="https://honeycomb.io/blog/2017/09/istio-envoy-and-honeycomb/">shows how</a> to integrate Istio, Envoy, and Honeycomb for detailed application statistics.</li>
-<li>Antonio Murdaca outlines <a href="http://www.projectatomic.io/blog/2017/06/using-kubeadm-with-cri-o/">how to use <code>kubeadm</code> to bootstrap a Kubernetes cluster with CRI-O</a> (instead of Docker). I haven&rsquo;t tried this myself yet&mdash;I&rsquo;m waiting for CRI-O to get a bit more mature so that I don&rsquo;t have to compile it from source (although this <em>is</em> an older article, so we might be there by now).</li>
-<li>If I ever get my hands on a Windows 10 box (I&rsquo;m seriously considering adding a Windows 10 box to my home office setup), I&rsquo;m going to try <a href="https://www.howtogeek.com/289594/how-to-install-macos-sierra-in-virtualbox-on-windows-10/">this process</a>. Hmmm&hellip;maybe I could install Windows 10 on my quad-proc Mac Pro, then run macOS virtualized on it&hellip;that might be something to try one day (as if I&rsquo;ll ever have time for that!).</li>
-<li>Ansible 2.5 was recently released; check out <a href="https://www.ansible.com/blog/ansible-2.5-traveling-space-and-time">this post</a> detailing some of the new features and functionality.</li>
-<li>Dusty Mabe <a href="https://dustymabe.com/2017/12/17/fedora-btrfssnapper-the-fedora-27-edition/">talks about</a> using BTRFS snapshots to snapshot and rollback entire installations of Fedora, and (rightfully) mentions Atomic Workstation as a (probably) better alternative. Still, the idea is pretty cool.</li>
-<li><a href="https://www.flatcar-linux.org">Flatcar Linux</a> is a &ldquo;friendly fork&rdquo; of Container Linux (of CoreOS).</li>
-<li>Windows Server 2019 is now in preview (see <a href="https://cloudblogs.microsoft.com/windowsserver/2018/03/20/introducing-windows-server-2019-now-available-in-preview/">this blog post</a>), and will include Kubernetes support. Also see <a href="https://venturebeat.com/2018/03/20/windows-server-2019-will-feature-linux-and-kubernetes-support/">this VentureBeat article</a>.</li>
-<li>Nick Joyce walks through a few tips to build more <a href="https://blog.realkinetic.com/building-minimal-docker-containers-for-python-applications-37d0272c52f3">minimal Docker containers for Python applications</a>.</li>
-<li>JJ Asghar provides some direct steps to <a href="http://jjasghar.github.io/blog/2018/03/22/powercli-10+-on-linux/">getting PowerCLI 10+ working on Ubuntu Linux</a>.</li>
+<li>Tom Whiston has started what appears to be a series of blog posts about using Atomic Workstation, which takes the immutable infrastructure approach to Linux on a workstation (desktop or laptop). Part 1 is <a href="https://www.nine.ch/en/engineering-logbook/dockerising-my-workstation-with-atomic-part-1">available here</a>.</li>
+<li>Given how useful I find <code>jq</code> (see <a href="https://blog.scottlowe.org/2015/11/11/handy-cli-tool-json/">this post</a> for more details), I thought <a href="https://github.com/kislyuk/yq">a YAML equivalent</a> would be super-handy. Alas, it just converts to JSON and pipes it to <code>jq</code>.</li>
+<li>Jeff Geerling shows <a href="https://www.jeffgeerling.com/blog/2018/use-ansibles-yaml-callback-plugin-better-cli-experience">how to use Ansible&rsquo;s YAML callback plugin to create a better experience at the command line</a>. I&rsquo;ve heard of callback plugins but wasn&rsquo;t sure how to use them, and Jeff&rsquo;s article was very helpful.</li>
+<li>I found <a href="https://stratechery.com/2018/the-end-of-windows/">this article on the &ldquo;end of Windows&rdquo;</a> to be an interesting read. Your mileage may vary, of course.</li>
 </ul>
 
 <h2 id="storage">Storage</h2>
 
-<p>No links for you this time, but I&rsquo;ll stay alert for something to include next time. If you have links you&rsquo;d like to see included in the next Technology Short Take, send them my way!</p>
+<ul>
+<li>The Kubernetes blog has some <a href="https://kubernetes.io/blog/2018/04/10/container-storage-interface-beta/">more details</a> on the Container Storage Interface (CSI) in Kubernetes 1.10, which has moved from alpha to beta as part of the 1.10 release.</li>
+</ul>
 
 <h2 id="virtualization">Virtualization</h2>
 
-<p>Nothing this time around&mdash;it seems like all the &ldquo;cool kids&rdquo; are talking about cloud, containers, and Kubernetes these days! Don&rsquo;t worry, though, I&rsquo;ll keep my eyes peeled for some content to include here next time around.</p>
+<ul>
+<li>VMware recently GA&rsquo;d vSphere 6.7, and&mdash;as would be expected&mdash;there&rsquo;s lots of blogger coverage. I can&rsquo;t possibly mention all of it here, but here are a few that jumped out at me: Andrea Mauro&rsquo;s <a href="https://vinfrastructure.it/2018/04/vmware-vsphere-6-7-is-ga/">overview</a>; <a href="http://www.wardvissers.nl/2018/04/17/vmware-vsphere-6-7/">this look</a> by Ward Vissers; Magnus Andersson&rsquo;s <a href="http://vcdx56.com/2018/04/vmware-vsphere-6-7-released/">quick review</a>; Simon Sharwood&rsquo;s <a href="https://www.theregister.co.uk/2018/04/17/vsphere_6_7/">thoughts</a> over at El Reg; and David Stamen&rsquo;s <a href="http://davidstamen.com/2018/04/17/upgrading-to-vmware-vsphere-6.7/">post</a>. For more vSphere 6.7 information, Eric Siebert has you covered with his <a href="http://vsphere-land.com/news/vsphere-6-7-link-o-rama.html">vSphere 6.7 link-o-rama</a>.</li>
+</ul>
 
 <h2 id="career-soft-skills">Career/Soft Skills</h2>
 
 <ul>
-<li>Finding yourself procrastinating more than usual recently? There can be a lot of different reasons; <a href="https://zenhabits.net/antidotes/">this post</a> by Leo Babauta explores some reasons and some antidotes for procrastination.</li>
-<li>Guess I should&rsquo;ve read <a href="http://etherealmind.com/will-never-make-serious-money-working-startup/">this post by Greg Ferro</a> on why you will never make serious money working for a startup before I took a job at a startup. (Oops! That&rsquo;s a hint toward Monday&rsquo;s announcement!)</li>
+<li>Reading Noah Abraham&rsquo;s <a href="https://infosiftr.com/2018/04/09/joining-kubernetes-release-team-completely-new-contributor/">experience as a new Kubernetes contributor</a> is helpful for folks like me (who are still getting their coding skills up to speed).</li>
+<li><a href="https://vickylai.com/verbose/delete-old-tweets-ephemeral/">This approach</a> is interesting, to say the least.</li>
 </ul>
 
-<p>It&rsquo;s time to wrap up. Have a great weekend, everyone!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/9yAXH98koas" height="1" width="1" alt=""/>
+<p>OK then, let&rsquo;s call that a wrap! I hope that something I shared was useful, or at least caused you to think about something in a new way. Until next time, enjoy!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/B0pvg8hCpDU" height="1" width="1" alt=""/>
 		</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/9yAXH98koas/" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/B0pvg8hCpDU/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>List of Kubernetes Folks on Twitter</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Earlier this morning, I <a href="https://twitter.com/scott_lowe/status/986602642083229696">asked on Twitter</a> about good individuals to follow on Twitter for <a href="https://kubernetes.io/">Kubernetes</a> information. I received quite a few good responses (thank you!), and I though it might be useful to share the list of the folks that were recommended across all those responses.</p>
+
+<p>The list I&rsquo;ve compiled is clearly incomplete! If you think someone should be added to this list, feel free to <a href="https://twitter.com/scott_lowe/">hit me up on Twitter</a> and let me know. Alternately, feel free to submit a pull request (PR) that adds them to this list. I&rsquo;m not going to &ldquo;vet&rdquo; the list, so I&rsquo;ll add any and all recommendations (unless they are clearly not related to Kubernetes, such as a news anchorman someone recommended to me&mdash;not sure about that one!).</p>
+
+<p>Without further ado, here is the list I compiled from the responses to my tweet, in no particular order (I&rsquo;ve included full name and employer, where that information is available):</p>
+
+<ul>
+<li>Kelsey Hightower (Google) - @kelseyhightower</li>
+<li>Jessie Frazelle (Microsoft) - @jessfraz</li>
+<li>Alex Ellis (VMware) - @alexellisuk</li>
+<li>Michael Hausenblas (Red Hat) - @mhausenblas</li>
+<li>Ahmet Alp Balkan (Google) - @ahmetb</li>
+<li>AdNaN Abdulhussein (Bitnami) - @prydonius</li>
+<li>Tim Hockin (Google) - @thockin</li>
+<li>Joe Beda (Heptio) - @jbeda</li>
+<li>Joseph Jacks (Unknown) - @asynchio</li>
+<li>Stefan Schimanski (Red Hat) - @the_sttts</li>
+<li>Brandon Philips (CoreOS/Red Hat) - @brandonphilips</li>
+<li>Ray Tsang (Google) - @saturnism</li>
+<li>Ilya Dmitrichenko (Weaveworks) - @errordeveloper</li>
+<li>Brendan Burns (Microsoft) - @brendandburns</li>
+<li>Kris Nova (Heptio) - @krisnova</li>
+<li>Paris (Google) - @parisinbmore</li>
+<li>Amy Chen (Heptio) - @theamycode</li>
+<li>Ria Bhatia (Microsoft) - @rbitia</li>
+<li>Celina (Uber) - @shaleenaa</li>
+<li>Chen Goldberg (Google) - @goldbergchen</li>
+<li>Aparna Sinha (Google) - @apbhatnagar</li>
+<li>Michelle Noorali (Microsoft) - @michellenoorali</li>
+<li>Liz Rice (AquaSec) - @lizrice</li>
+<li>Laura Frank (Codeship) - @rhein_wein</li>
+<li>Ara Pulido (Bitnami) - @arapulido</li>
+<li>Rita Zhang (Microsoft) - @ritazzhang</li>
+<li>Angie Maguire (Unknown) - @lalamaguire</li>
+<li>Nikhita Raghunath (Red Hat) - @thenikhita</li>
+<li>Rob Hirschfeld (RackN) - @zehicle</li>
+<li>Brian Gracely (Red Hat) - @bgracely</li>
+<li>Steve Watt (Red Hat) - @wattsteve</li>
+<li>Diane Mueller (Red Hat) - @pythondj</li>
+<li>Clayton Coleman (Red Hat) - @smarterclayton</li>
+<li>Craig McLuckie (Heptio) - @cmcluck</li>
+<li>Benjamin Hindman (Mesosphere) - @benh</li>
+<li>Armon Dadgar (HashiCorp) - @armon</li>
+<li>Stu Miniman (Wikibon) - @stu</li>
+<li>Adrian Cockcroft (AWS) - @adrianco</li>
+<li>Edaena Salinas (Microsoft) - @edaenas</li>
+<li>Matt Klein (Lyft) - @mattklein123</li>
+<li>Ben Sigelman (LightStep) - @el_bhs</li>
+<li>Dan Kohn (CNCF) - @dankohn1</li>
+<li>Nigel Poulton (Pluralsight) - @nigelpoulton</li>
+<li>Justin Garrison (Disney) - @rothgar</li>
+<li>Mark Mandel (Google) - @neurotic</li>
+<li>Michael Gasch (VMware) - @embano1</li>
+<li>Sebastien Goasguen (Bitnami) - @sebgoa</li>
+<li>Victor Farcic (CloudBees) - @vfarcic</li>
+<li>Ben Hall (Katacoda) - @ben_hall</li>
+<li>Ralph Squillace (Microsoft) - @ralph_squillace</li>
+<li>Jaice Singer DuMars (Google?) - @jaydumars</li>
+<li>Jorge Castro (Heptio) - @castrojo</li>
+<li>Niraj Tolia (Kasten) - @nirajtolia</li>
+<li>Brian Grant (Google) - @bgrant0607</li>
+<li>Aaron Crickenberger (Samsung) - @spiffxp</li>
+<li>Ihor Dvoretskyi (Linux Foundation/CNCF) - @idvoretskyi</li>
+</ul>
+
+<p>Some folks were explicitly called out as &ldquo;influencers,&rdquo; but I did not include that designation in the list above. It seems like a slippery slope to determine who is an influencer and who is not, so I&rsquo;d rather just avoid any potential issues.</p>
+
+<p>Here&rsquo;s hoping others find this list useful!</p>
+
+<p><strong>UPDATE:</strong> William Lam, a former coworker of mine at VMware, has taken the time to create a Twitter list to make it easier for folks. That Twitter list is available <a href="https://twitter.com/lamw/lists/k8s-peeps">here</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/Q-9czzx5ByE" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Q-9czzx5ByE/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 </ul>
@@ -282,11 +401,26 @@ display('news.html')
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="icons___woher_nehmen____iii.html">
+<div class="date">06.05.2018</div>
+<h3>Icons - woher nehmen? - III</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Es ist schon einige Zeit seit meinem
+letzten Artikel
+zu diesem Thema vergangen. Da ich in letzter Zeit
+das
+eine
+oder
+andere
+Projekt auf Github veröffentlicht habe, benötigte ich dafür Icons mit entsprechend passenden Lizenzen.
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="java9_umstellung.html">
 <div class="date">16.04.2018</div>
 <h3>Java9 Umstellung</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Die Umstellung auf Java9 in meinen eigenen Projekten ist abgeschlossen
 </p></div>   </a>
 </li>
@@ -299,18 +433,6 @@ display('news.html')
 <p>Eigentlich lebe ich schon ziemlich lange mit Mozilla bzw. Firefox als Browser und war damit immer recht zufrieden -
 unter nicht nur einem Betriebssystem. Jetzt häufen sich allerdings die kleinen Dinge, die  mich darüber nachdenken lassen,
 Alternativen zu erkunden...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="maven_archetype_dwb__module.html">
-<div class="date">16.04.2018</div>
-<h3>Maven-Archetype für dWb+ Module</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem ich bereits ein GitHub-Repository für die
-Beispiele aus dem Kochbuch für
-dWb+ veröffentlicht habe, folgt nun hier ein Archetype
-zur entwicklung eigener Module
 </p></div>   </a>
 </li>
 </ul>
