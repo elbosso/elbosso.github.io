@@ -1,0 +1,619 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
+<head>
+  <title>Linux WiFi Accesspoint die zweite</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta name="Description" content="Wie bereits am Ende des
+vorhergehenden Artikel zu diesem Thema beschrieben,
+standen noch die Themen regelmäßiger Tausch der Secrets, Erzeugung von QR-Codes und WPS aus - hier
+die Auflösung." />
+  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
+	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
+	<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body onload="toggle('show');">
+<div id="wrapper">
+	<div id="header">
+<div id="logo">
+  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
+      display="inline">
+    <mrow>
+      <mn>1</mn>
+      <mo>&isin;</mo>
+      <mi>&infin;</mi>
+    </mrow>
+</math>
+</h1-->
+  <p>
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+  </p>
+</div>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
+	über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
+	Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
+	daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
+	Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
+	Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+		<a href="https://github.com/elbosso">hier</a>.</p>
+	</div><!-- #header-->
+<div id="all">
+<div id="A">
+<div id="content">
+<div class="date">12.05.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+	<!--li--> <a href="linux_wifi_accesspoint.html#content">Linux</a> <!--/li-->
+	<!--li--> ,<a href="linux_wifi_accesspoint.html#content">Virtualisierung</a> <!--/li-->
+	<!--/ul-->
+</div>
+ 	<div class="heading">Linux WiFi Accesspoint die zweite</div>
+	<p>Wie bereits am Ende des
+<a href="linux_wifi_accesspoint.html">vorhergehenden Artikel zu diesem Thema beschrieben,</a>
+standen noch die Themen regelmäßiger Tausch der Secrets, Erzeugung von QR-Codes und WPS aus - hier
+die Auflösung...
+</p> <a name="content"> </a>
+ <p><h1>Allgemeines</h1>
+Für die Umsetzung dieser Anforderungen wurden noch einige weitere Installationspakete benötigt-
+<a href="https://gist.github.com/elbosso/fd4af42e583a9cf0f7aa25d707031143/ad0783ac706817b31f3577d827b5f1b4f22b9d10">der entsprechende Gist wurde aktualisiert.</a>
+<h1>WPS</h1>
+Die Änderung zur Unterstützung von WPS ist tatsächlich trivial - ich habe den
+<a href="https://gist.github.com/elbosso/9b3cffa89e7f3e0e95f5f445c08f5931/34221d72a096c64cb56740dba3ea7b421b19b2d7">Gist mit der Konfiguration von hostapd</a>
+entsprechend abgeändert.
+<h1>Zyklische Änderung des Secrets</h1>
+Dazu wurde ein Bash-Script verfasst, welches als Gist
+<a href="https://gist.github.com/elbosso/c01c3c271838e672461bea6841ba33be">hier</a>
+zu finden ist.
+<h1>QR-Codes</h1>
+Da ich ein großer Verfechter des Terminal bin habe ich die QR-Codes nicht nur als Bild generiert, sondern auch als
+Text - das dazu verwendete Python script findet mal als Gist
+<a href="https://gist.github.com/elbosso/6dcd7e129e23830b935ab08b5d18884d">hier.</a>
+<h1>Enrolment bei Authentifizierung par MAC</h1>
+Ich hatte im
+<a href="linux_wifi_accesspoint.html">vorhergehenden Artikel zu diesem Thema</a>
+beschrieben, wie man den Access Point so konfiguriert, dass jede MAC ihren eigenen Zugangscode bekommt
+Dazu
+<a href="https://gist.github.com/elbosso/359e79620b6535242758f7955637cd66">hier ein kleines Script,</a>
+das den Prozess ein wenig automatisiert: Nach Angabe von SSID und MAC Adresse generiert das Skript zunächst ein
+neues Password - dieses wird wieder passend für Android, Windows und iOS in einen QR-Code gewandelt und
+als Bitmapgraphik und Textdatei abgelegt. Dann wird in der Tabelle nach der MAC gesucht und das Passwort ersetzt,
+falls diese bereits vorhanden ist. anderenfalls wird eine neue Zeile an diese Tabelle angehängt.
+<h1>Hilfreiche Links</h1>
+Hier noch einige Links, die mich in ihrer Gesamtheit zu der beschriebenen Lösung geführt haben:
+</p> <ul class="single"> 
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>How to configure hostapd.conf for wps push button?
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://unix.stackexchange.com/questions/372902/how-to-configure-hostapd-conf-for-wps-push-button" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>5 Ways To Generate Secure Passwords On Linux
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://www.makeuseof.com/tag/5-ways-generate-secure-passwords-linux/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Raspberry WLAN Access Point Tutorial
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://github.com/NicoHood/NicoHood.github.io/wiki/Raspberry-WLAN-Access-Point-Tutorial#generate-new-password--qr-code-every-day" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Prevent pwgen -y generating backticks or quotes? (or otherwise sanitize output)
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://stackoverflow.com/questions/47335507/prevent-pwgen-y-generating-backticks-or-quotes-or-otherwise-sanitize-output" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Command line arguments (sys.argv)
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://www.pythonforbeginners.com/argv/more-fun-with-sys-argv" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Welcome to PyQRCode’s documentation!
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://pythonhosted.org/PyQRCode/index.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>README-WPS
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://android.googlesource.com/platform/external/wpa_supplicant_8/+/499d68402f55bd1b8aa1a0d9c6966c7392704fba/hostapd/README-WPS" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Generating QR Codes in Linux
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://www.linux-magazine.com/Online/Features/Generating-QR-Codes-in-Linux" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>QR-Codes unter Linux erzeugen und lesen
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://www.linux-community.de/Internal/Artikel/Print-Artikel/LinuxUser/2013/06/QR-Codes-unter-Linux-erzeugen-und-lesen" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Wifi Network config (Android)
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://github.com/zxing/zxing/wiki/Barcode-Contents#wifi-network-config-android" target="_blank">Öffnen</a>
+		</div>
+	</li>
+</ul>
+</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+  <a href="tpedit_erstellt_interaktive_formulare.html#content">
+<div class="date">12.05.2018</div>
+<h3>TPEdit erstellt interaktive Formulare</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Die Ausrichtung des
+Editors für Testprozeduren und Checklisten
+verlagert sich mehr und mehr auf die Erstellung interaktiver Formulare zur Vermeidung von Medienbrüchen
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="icons___woher_nehmen____iii.html#content">
+<div class="date">06.05.2018</div>
+<h3>Icons - woher nehmen? - III</h3>
+<div class="abstract">
+<p>Es ist schon einige Zeit seit meinem
+letzten Artikel
+zu diesem Thema vergangen. Da ich in letzter Zeit
+das
+eine
+oder
+andere
+Projekt auf Github veröffentlicht habe, benötigte ich dafür Icons mit entsprechend passenden Lizenzen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="java9_umstellung.html#content">
+<div class="date">16.04.2018</div>
+<h3>Java9 Umstellung</h3>
+<div class="abstract">
+<p>Die Umstellung auf Java9 in meinen eigenen Projekten ist abgeschlossen
+</p></div>   </a>
+</li>
+</ul>
+</div>
+<nav id="C"> 
+<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
+			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+</div>
+	</h2><form method="get" action="http://www.google.com/search">
+
+<div style="padding:4px;width:90%;">
+<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
+ maxlength="255" value="" />
+<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
+<input style="width:0%;" type="checkbox"  name="sitesearch"
+ value="elbosso.github.io" checked hidden="true"/>
+</div>
+
+</form>
+<a href="tag_Android.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Android
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Alles rund um Googles Betriebssystem</p>
+</div>
+</div>
+</a>
+<a href="tag_Basteln.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Basteln
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Meistens Papier (Origami...)</p>
+</div>
+</div>
+</a>
+<a href="c_c__.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+C und C++
+</h3>
+</header>
+<div class="nav-item-body">
+</div>
+</div>
+</a>
+<a href="tag_Datenbanken.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Datenbanken
+</h3>
+</header>
+<div class="nav-item-body">
+<p>relationale und andere Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_dWb+.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+dWb+
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Garten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Garten
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Das grÃ¼ne Hobby</p>
+</div>
+</div>
+</a>
+<a href="tag_Geo.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Geo
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Karten und mehr run um Ortsinformationen</p>
+</div>
+</div>
+</a>
+<a href="tag_GUI.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+GUI
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Alles rund um graphische Benutzerschnittstellen</p>
+</div>
+</div>
+</a>
+<a href="tag_Hardware.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Hardware
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Elektronik und so Zeuchs...</p>
+</div>
+</div>
+</a>
+<a href="tag_Java.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Java
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Hauptsächlich Desktop Themen und Java SE</p>
+</div>
+</div>
+</a>
+<a href="java__komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Java. Komponenten
+</h3>
+</header>
+<div class="nav-item-body">
+</div>
+</div>
+</a>
+<a href="tag_Komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Komponenten
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Software-Komponenten</p>
+</div>
+</div>
+</a>
+<a href="tag_Links.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Links
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Linksammlungen zu verschiedenen Themen</p>
+</div>
+</div>
+</a>
+<a href="tag_Linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+<strong>
+Linux
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Alles zum Thema Gnu Linux</p>
+</div>
+</div>
+</a>
+<a href="tag_Markup.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Markup
+</h3>
+</header>
+<div class="nav-item-body">
+<p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
+</div>
+</div>
+</a>
+<a href="tag_Music.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Music
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Musik, die mir gefällt</p>
+</div>
+</div>
+</a>
+<a href="tag_Python.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Python
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Mein Weg vom blutigen Anfänger aufwärts</p>
+</div>
+</div>
+</a>
+<a href="tag_Rants.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Rants
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Luft ablassen</p>
+</div>
+</div>
+</a>
+<a href="tag_Security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Security
+</h3>
+</header>
+<div class="nav-item-body">
+<p>IT-Sicherheit</p>
+</div>
+</div>
+</a>
+<a href="tag_sQLshell.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+sQLshell
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_Verschiedenes.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Verschiedenes
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Passt in keine der anderen Kategorien...</p>
+</div>
+</div>
+</a>
+<a href="tag_Video.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Video
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Artikel mit bunten Filmchen</p>
+</div>
+</div>
+</a>
+<a href="tag_Virtualisierung.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+<strong>
+Virtualisierung
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Technologien und Themen rund um virtuelle Rechner</p>
+</div>
+</div>
+</a>
+<a href="windows.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Windows
+</h3>
+</header>
+<div class="nav-item-body">
+</div>
+</div>
+</a>
+<a href="tag_Upcoming....html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Upcoming...
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Demnächst in diesem Theater...</p>
+</div>
+</div>
+</a>
+</nav>
+</div>
+	<div id="footer">
+		<span class="me">
+		<strong><a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+
+, Damaschke 11, Rudolstadt, 
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
+			</a></strong>
+	</span></div><!-- #footer -->
+</div>
+</body>
+</html>

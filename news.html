@@ -117,6 +117,82 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>Technology Short Take 99</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Welcome to Technology Short Take 99! What follows below is a collection of various links and articles about (mostly) data center-related technologies. Hopefully something I&rsquo;ve included will be useful. Here goes!</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>David Gee makes the connection between <a href="http://ipengineer.net/2018/04/describing-network-automation-automate-coffee/">coffee and network automation</a>. No, really. It&rsquo;s worth reading.</li>
+<li>Matt Oswalt, one of the co-authors of our recently-released network automation book from O&rsquo;Reilly, recently tackled the topic of <a href="https://keepingitclassless.net/2018/05/up-running-kubernetes-tungsten-fabric/">running Kubernetes with Tungsten Fabric</a> (formerly known as OpenContrail). A network engineer using AWS and CloudFormation? Yep, get used to it folks&mdash;it&rsquo;s where the industry is headed.</li>
+<li>Vince Power <a href="http://blog.wercker.com/how-does-kubernetes-work">provides a high-level overview</a> of some of the key principles underlying Kubernetes networking.</li>
+</ul>
+
+<h2 id="servers-hardware">Servers/Hardware</h2>
+
+<p>Sorry, I don&rsquo;t have anything for you. Feel free to send me links you&rsquo;d like me to consider for inclusion in the next Tech Short Take!</p>
+
+<h2 id="security">Security</h2>
+
+<ul>
+<li>Mike Foley talks about <a href="https://www.yelof.com/2018/05/01/introducing-support-for-virtualization-based-security-and-credential-guard-in-vsphere-6-7/">new support for Virtualization Based Security (VBS) and Credential Guard</a> in vSphere 6.7.</li>
+<li>Chris Short examines <a href="https://www.devsecopsdays.com/articles/numbersdontlie">some of the security-related aspects</a> of the adoption of containers.</li>
+<li>The Kubernetes community reflects on <a href="https://kubernetes.io/blog/2018/04/04/fixing-subpath-volume-vulnerability/">fixing the subpath volume vulnerability in Kubernetes</a>.</li>
+<li>Michael Ducy of Sysdig <a href="https://sysdig.com/blog/active-kubernetes-security-falco-nats-kubeless/">outlines a configuration</a> combining Sysdig Falco, NATS, and Kubeless for &ldquo;active Kubernetes security.&rdquo; While the post is clearly Sysdig-oriented (as would be fully expected), it&rsquo;s also cool to see how powerful the assembly of various open source projects can be.</li>
+</ul>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li>Trond Hindenes shares a bit on how his company is <a href="https://medium.com/@trondhindenes/using-traefik-as-a-kubernetes-ingress-controller-for-both-internal-and-external-traffic-c06e4177314">using Traefik as a Kubernetes ingress controller for both internal and external traffic</a>.</li>
+<li>Typhoon, which describes itself as a &ldquo;free and minimal Kubernetes distribution,&rdquo; has <a href="https://typhoon.psdn.io/announce/#april-26-2018">announced support</a> for Typhoon on Fedora Atomic systems.</li>
+<li>I haven&rsquo;t tried it yet, but <a href="https://databricks.com/blog/2018/03/27/introducing-click-the-command-line-interactive-controller-for-kubernetes.html">Click</a> looks somewhat interesting.</li>
+<li>You may have noticed that Rancher Labs recently announced the GA of version 2.0 of Rancher. Check out <a href="https://rancher.com/blog/2018/2018-05-01-rancher-ga-announcement-sheng-liang/">the announcement blog post</a> for more details.</li>
+<li>Alen Komlien discusses the idea of <a href="https://akomljen.com/meet-a-kubernetes-descheduler/">a Kubernetes descheduler</a>. My take: &ldquo;static&rdquo; scheduling that occurs at the start of a pod&rsquo;s lifecycle is useful (and Kubernetes is doing reasonably well here), but &ldquo;dynamic&rdquo; scheduling that accounts for a greater portion of the pod&rsquo;s lifecycle <em>and</em> the infrastructure underneath it is even more powerful. This is a lesson VMware learned years ago with Distributed Resource Scheduler (DRS).</li>
+<li><a href="https://medium.com/@trstringer/create-kubernetes-controllers-for-core-and-custom-resources-62fc35ad64a3">This is a pretty in-depth article</a> (to me, at least), but it did help me better understand Custom Resource Definitions (CRDs) and the role of controllers in Kubernetes.</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>Robert Paprocki of Kong discusses <a href="https://konghq.com/blog/how-to-design-a-scalable-rate-limiting-algorithm/">how to design a scalable rate limiting algorithm</a>, then proceeds to show how the Kong API gateway could be used to implement such an algorithm.</li>
+<li>As the use of APIs for everything increases, API tools like Postman become ever more useful&mdash;like this example of <a href="http://blog.getpostman.com/2017/12/19/audit-your-aws-infrastructure-with-postman/">using Postman to audit AWS infrastructure</a>.</li>
+<li>Thomas Graf explains <a href="https://cilium.io/blog/2018/04/17/why-is-the-kernel-community-replacing-iptables/">why the Linux kernel community is replacing <code>iptables</code> with BPF</a>. He gives a great overview of BPF along the way, so if you&rsquo;re unfamiliar with BPF this may be a good read.</li>
+<li>This <a href="https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/">practical introduction to container terminology</a> by Scott McCarty has a decidedly &ldquo;Red Hat&rdquo; feel to it, but is otherwise useful for folks who are new to the container space and need some terminology defined for them.</li>
+<li>Brendan Burns uses the term &ldquo;serverless&rdquo; in a slightly different way than it is commonly used; in <a href="https://thenewstack.io/the-future-of-kubernetes-is-serverless/">this article</a>, he seems to use the term to refer primarily to &ldquo;container-as-a-service&rdquo;-type offerings&mdash;like Azure Container Instances (ACI) or AWS Fargate&mdash;instead of the more common link to functions-as-a-service. Along the way, he explains the virtual kubelet project as well, so if you&rsquo;re unfamiliar with that effort this article will help.</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<p>Nothing this time around, but I&rsquo;ll see what I can find to include next time!</p>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<ul>
+<li>Nigel Poulton&rsquo;s quick review of <a href="https://cloudplatform.googleblog.com/2018/05/Open-sourcing-gVisor-a-sandboxed-container-runtime.html">gVisor</a> (see <a href="http://blog.nigelpoulton.com/gvisor-containers/">his thoughts here</a>) confirms my prediction some time ago that the lines between &ldquo;VMs&rdquo; and &ldquo;containers&rdquo; will continue to blur, and that we&rsquo;ll see a spectrum of isolation options emerging. Which isolation option should you use? Well, that will depend on what you&rsquo;re trying to achieve, right? <em>Right?</em></li>
+<li>William Lam <a href="https://www.virtuallyghetto.com/2018/04/native-mac-learning-in-vsphere-6-7-removes-the-need-for-promiscuous-mode-for-nested-esxi.html">discusses the new MAC learning functionality present in vSphere 6.7</a> which addresses some of the overhead of nested ESXi configurations.</li>
+</ul>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<ul>
+<li>Last week while at Interop ITX, I chatted with Keith Townsend regarding my recent career shift. If you&rsquo;ve been wondering about <em>why</em> I made this shift, give <a href="https://www.ctodose.com/blog/2018/5/8/beyond-virtualization-why-scott-lowe-joined-heptio">the video of our chat</a> a look, and then feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>.</li>
+<li>And speaking of career shifts, you might find Massimo&rsquo;s recent introspection of <a href="http://www.it20.info/2018/05/my-first-6-months-at-aws/">his first 6 months at AWS</a> to be informative as well.</li>
+</ul>
+
+<p>OK, that&rsquo;s it for now. As always, feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> if you have questions or suggestions for links I should consider including in future Technology Short Takes. Here&rsquo;s hoping you found something helpful!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/pjtDeubw-WQ" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/pjtDeubw-WQ/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>Installing GitKraken on Fedora 27</h3>
 		</div>
 		<div class="collectiontext">
@@ -311,89 +387,6 @@ Categories=Utility;Development;
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/B0pvg8hCpDU/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>List of Kubernetes Folks on Twitter</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Earlier this morning, I <a href="https://twitter.com/scott_lowe/status/986602642083229696">asked on Twitter</a> about good individuals to follow on Twitter for <a href="https://kubernetes.io/">Kubernetes</a> information. I received quite a few good responses (thank you!), and I though it might be useful to share the list of the folks that were recommended across all those responses.</p>
-
-<p>The list I&rsquo;ve compiled is clearly incomplete! If you think someone should be added to this list, feel free to <a href="https://twitter.com/scott_lowe/">hit me up on Twitter</a> and let me know. Alternately, feel free to submit a pull request (PR) that adds them to this list. I&rsquo;m not going to &ldquo;vet&rdquo; the list, so I&rsquo;ll add any and all recommendations (unless they are clearly not related to Kubernetes, such as a news anchorman someone recommended to me&mdash;not sure about that one!).</p>
-
-<p>Without further ado, here is the list I compiled from the responses to my tweet, in no particular order (I&rsquo;ve included full name and employer, where that information is available):</p>
-
-<ul>
-<li>Kelsey Hightower (Google) - @kelseyhightower</li>
-<li>Jessie Frazelle (Microsoft) - @jessfraz</li>
-<li>Alex Ellis (VMware) - @alexellisuk</li>
-<li>Michael Hausenblas (Red Hat) - @mhausenblas</li>
-<li>Ahmet Alp Balkan (Google) - @ahmetb</li>
-<li>AdNaN Abdulhussein (Bitnami) - @prydonius</li>
-<li>Tim Hockin (Google) - @thockin</li>
-<li>Joe Beda (Heptio) - @jbeda</li>
-<li>Joseph Jacks (Unknown) - @asynchio</li>
-<li>Stefan Schimanski (Red Hat) - @the_sttts</li>
-<li>Brandon Philips (CoreOS/Red Hat) - @brandonphilips</li>
-<li>Ray Tsang (Google) - @saturnism</li>
-<li>Ilya Dmitrichenko (Weaveworks) - @errordeveloper</li>
-<li>Brendan Burns (Microsoft) - @brendandburns</li>
-<li>Kris Nova (Heptio) - @krisnova</li>
-<li>Paris (Google) - @parisinbmore</li>
-<li>Amy Chen (Heptio) - @theamycode</li>
-<li>Ria Bhatia (Microsoft) - @rbitia</li>
-<li>Celina (Uber) - @shaleenaa</li>
-<li>Chen Goldberg (Google) - @goldbergchen</li>
-<li>Aparna Sinha (Google) - @apbhatnagar</li>
-<li>Michelle Noorali (Microsoft) - @michellenoorali</li>
-<li>Liz Rice (AquaSec) - @lizrice</li>
-<li>Laura Frank (Codeship) - @rhein_wein</li>
-<li>Ara Pulido (Bitnami) - @arapulido</li>
-<li>Rita Zhang (Microsoft) - @ritazzhang</li>
-<li>Angie Maguire (Unknown) - @lalamaguire</li>
-<li>Nikhita Raghunath (Red Hat) - @thenikhita</li>
-<li>Rob Hirschfeld (RackN) - @zehicle</li>
-<li>Brian Gracely (Red Hat) - @bgracely</li>
-<li>Steve Watt (Red Hat) - @wattsteve</li>
-<li>Diane Mueller (Red Hat) - @pythondj</li>
-<li>Clayton Coleman (Red Hat) - @smarterclayton</li>
-<li>Craig McLuckie (Heptio) - @cmcluck</li>
-<li>Benjamin Hindman (Mesosphere) - @benh</li>
-<li>Armon Dadgar (HashiCorp) - @armon</li>
-<li>Stu Miniman (Wikibon) - @stu</li>
-<li>Adrian Cockcroft (AWS) - @adrianco</li>
-<li>Edaena Salinas (Microsoft) - @edaenas</li>
-<li>Matt Klein (Lyft) - @mattklein123</li>
-<li>Ben Sigelman (LightStep) - @el_bhs</li>
-<li>Dan Kohn (CNCF) - @dankohn1</li>
-<li>Nigel Poulton (Pluralsight) - @nigelpoulton</li>
-<li>Justin Garrison (Disney) - @rothgar</li>
-<li>Mark Mandel (Google) - @neurotic</li>
-<li>Michael Gasch (VMware) - @embano1</li>
-<li>Sebastien Goasguen (Bitnami) - @sebgoa</li>
-<li>Victor Farcic (CloudBees) - @vfarcic</li>
-<li>Ben Hall (Katacoda) - @ben_hall</li>
-<li>Ralph Squillace (Microsoft) - @ralph_squillace</li>
-<li>Jaice Singer DuMars (Google?) - @jaydumars</li>
-<li>Jorge Castro (Heptio) - @castrojo</li>
-<li>Niraj Tolia (Kasten) - @nirajtolia</li>
-<li>Brian Grant (Google) - @bgrant0607</li>
-<li>Aaron Crickenberger (Samsung) - @spiffxp</li>
-<li>Ihor Dvoretskyi (Linux Foundation/CNCF) - @idvoretskyi</li>
-</ul>
-
-<p>Some folks were explicitly called out as &ldquo;influencers,&rdquo; but I did not include that designation in the list above. It seems like a slippery slope to determine who is an influencer and who is not, so I&rsquo;d rather just avoid any potential issues.</p>
-
-<p>Here&rsquo;s hoping others find this list useful!</p>
-
-<p><strong>UPDATE:</strong> William Lam, a former coworker of mine at VMware, has taken the time to create a Twitter list to make it easier for folks. That Twitter list is available <a href="https://twitter.com/lamw/lists/k8s-peeps">here</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/Q-9czzx5ByE" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Q-9czzx5ByE/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -401,11 +394,33 @@ Categories=Utility;Development;
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="tpedit_erstellt_interaktive_formulare.html">
+<div class="date">12.05.2018</div>
+<h3>TPEdit erstellt interaktive Formulare</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Die Ausrichtung des
+Editors für Testprozeduren und Checklisten
+verlagert sich mehr und mehr auf die Erstellung interaktiver Formulare zur Vermeidung von Medienbrüchen
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="linux_wifi_accesspoint_zweite.html">
+<div class="date">12.05.2018</div>
+<h3>Linux WiFi Accesspoint die zweite</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Wie bereits am Ende des
+vorhergehenden Artikel zu diesem Thema beschrieben,
+standen noch die Themen regelmäßiger Tausch der Secrets, Erzeugung von QR-Codes und WPS aus - hier
+die Auflösung...
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="icons___woher_nehmen____iii.html">
 <div class="date">06.05.2018</div>
 <h3>Icons - woher nehmen? - III</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Es ist schon einige Zeit seit meinem
 letzten Artikel
 zu diesem Thema vergangen. Da ich in letzter Zeit
@@ -414,25 +429,6 @@ eine
 oder
 andere
 Projekt auf Github veröffentlicht habe, benötigte ich dafür Icons mit entsprechend passenden Lizenzen.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="java9_umstellung.html">
-<div class="date">16.04.2018</div>
-<h3>Java9 Umstellung</h3>
-<div class="abstract">
-<p>Die Umstellung auf Java9 in meinen eigenen Projekten ist abgeschlossen
-</p></div>   </a>
-</li>
-<li class="anriss">
-	<a href="gitlab___mozilla____9760_.html#53">
-<div class="date">16.04.2018</div>
-<h3>GitLab & Mozilla: &#9760;</h3>
-<div class="abstract">
-	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-<p>Eigentlich lebe ich schon ziemlich lange mit Mozilla bzw. Firefox als Browser und war damit immer recht zufrieden -
-unter nicht nur einem Betriebssystem. Jetzt häufen sich allerdings die kleinen Dinge, die  mich darüber nachdenken lassen,
-Alternativen zu erkunden...
 </p></div>   </a>
 </li>
 </ul>
