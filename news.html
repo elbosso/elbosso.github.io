@@ -117,274 +117,243 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
-			<h3>Technology Short Take 99</h3>
+			<h3>Book Review: Infrastructure as Code</h3>
 		</div>
 		<div class="collectiontext">
-			<p>Welcome to Technology Short Take 99! What follows below is a collection of various links and articles about (mostly) data center-related technologies. Hopefully something I&rsquo;ve included will be useful. Here goes!</p>
+			<p>As part of <a href="https://blog.scottlowe.org/2018/03/05/looking-ahead-2018-projects/">my 2018 projects</a>, I committed to reading and reviewing more technical books this year. As part of that effort, I recently finished reading <em>Infrastructure as Code</em>, authored by Kief Morris and published in September 2015 by O&rsquo;Reilly (more details <a href="http://shop.oreilly.com/product/0636920039297.do">here</a>). Infrastructure as code is very relevant to my current job function and is an area of great personal interest, and I&rsquo;d been half-heartedly working my way through the book for some time. Now that I&rsquo;ve completed it, here are my thoughts.</p>
+
+<p>Overall, Morris does a great job of crisply defining infrastructure as code (a somewhat vague and amorphous term at times) and outlining the key principles that are involved. Morris also does a really good job of staying high-level as he works through the various aspects of infrastructure as code and discusses some of the considerations, patterns (and anti-patterns), and recommended practices in each aspect.</p>
+
+<p>The book&rsquo;s high-level focus is, however, both its greatest strength as well as its greatest weakness. Because infrastructure as code can be implemented in a variety of ways with a variety of tools, the book must necessarily be high-level and somewhat abstract. As I mentioned, Morris does a really good job with this. In remaining high-level, though, the book loses some of the details and tool-specific recommendations that would be helpful in getting readers started implementing infrastructure as code in their own environments. Although Morris makes brief references to specific tools here and there, there simply isn&rsquo;t room for him to discuss any one tool in any depth.</p>
+
+<p>The result?</p>
+
+<ul>
+<li>For readers who are already familiar with tools like <a href="https://www.terraform.io/">Terraform</a> or <a href="https://www.ansible.com/">Ansible</a> (or similar), Morris&rsquo; review of key concepts, considerations, patterns/anti-patterns, and practices enables them to better understand the big picture and where their tool-specific skills fit into that big picture. In some aspects, Morris is complementing these readers&rsquo; &ldquo;tactical skills&rdquo; with some &ldquo;strategic skills.&rdquo;</li>
+<li>For readers who are <em>not</em> familiar with tools commonly used in infrastructure as code, the concepts are so high-level and abstract that it can be difficult at times to translate them into specific tasks that can be accomplished with a particular tool. The question of &ldquo;OK, how would I do that in CloudFormation?&rdquo; (or Terraform, or Ansible, or any other such tool) isn&rsquo;t a question Morris can answer because the book isn&rsquo;t written at that level.</li>
+</ul>
+
+<p>This is not to say that the book isn&rsquo;t helpful; quite the contrary! Morris&rsquo; identification of key patterns to adopt and key anti-patterns to avoid helps readers understand what (and what not) to do as they progress along their journey with infrastructure as code. This in and of itself is very useful for readers of all skill levels, in my opinion. Additionally, Morris calls out numerous non-technological considerations along the way; this quote (from Chapter 9) was one of my favorites:</p>
+
+<blockquote>
+<p>When you find yourself considering organizational processes to coordinate and schedule changes, stop!</p>
+</blockquote>
+
+<p>Here, Morris is warning against allowing infrastructure definitions to become unwieldy and monolithic, which would increase the likelihood that changes would cause something to break and thus lead people to avoid changes that are necessary. Instead of creating organizational processes to protect against the automation fear spiral (another great concept that Morris introduces early in the book), he recommends refactoring your infrastructure definitions to make them more modular, more flexible, and more resilient to change. This is just one example of content that is enormously useful to all sorts of readers, and this sort of wisdom/experience is sprinkled liberally throughout the book.</p>
+
+<p>Overall, I <em>highly</em> recommend this book. Be aware, though, that this book won&rsquo;t give you the tool-specific knowledge you&rsquo;ll need to implement the concepts that Morris introduces and explains, so you&rsquo;ll want to pair this book with a more hands-on, tool-specific tome. For example, users wanting to implement infrastructure as code using something like Terraform should combine this book with something like <em>Terraform: Up and Running</em>, also by O&rsquo;Reilly (see <a href="http://shop.oreilly.com/product/0636920061939.do">here</a> for details).</p>
+
+<p><em>Disclaimer: I am an O&rsquo;Reilly author, but I did not receive any compensation from O&rsquo;Reilly, any other publisher or distributor, or the authors of the books mentioned in this review. These thoughts are mine alone.</em></p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/l9ydE5zt0TE" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/l9ydE5zt0TE/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Technology Short Take 100</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Wow! This marks 100 posts in the Technology Short Take series! For almost eight years (Technology Short Take #1 <a href="https://blog.scottlowe.org/2010/08/18/technology-short-take-1/">was published</a> in August 2010), I&rsquo;ve been collecting and sharing links and articles from around the web related to major data center technologies. Time really flies when you&rsquo;re having fun! Anyway, here is Technology Short Take 100&hellip;I hope you enjoy!</p>
+
+<p>Also, a quick note that I removed the &ldquo;Servers/Hardware&rdquo; and &ldquo;Storage&rdquo; sections this time around, as I didn&rsquo;t have any useful content to share. I&rsquo;ll continue to evaluate whether I will/should include those sections moving forward (your feedback is welcome; <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>).</p>
 
 <h2 id="networking">Networking</h2>
 
 <ul>
-<li>David Gee makes the connection between <a href="http://ipengineer.net/2018/04/describing-network-automation-automate-coffee/">coffee and network automation</a>. No, really. It&rsquo;s worth reading.</li>
-<li>Matt Oswalt, one of the co-authors of our recently-released network automation book from O&rsquo;Reilly, recently tackled the topic of <a href="https://keepingitclassless.net/2018/05/up-running-kubernetes-tungsten-fabric/">running Kubernetes with Tungsten Fabric</a> (formerly known as OpenContrail). A network engineer using AWS and CloudFormation? Yep, get used to it folks&mdash;it&rsquo;s where the industry is headed.</li>
-<li>Vince Power <a href="http://blog.wercker.com/how-does-kubernetes-work">provides a high-level overview</a> of some of the key principles underlying Kubernetes networking.</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<p>Sorry, I don&rsquo;t have anything for you. Feel free to send me links you&rsquo;d like me to consider for inclusion in the next Tech Short Take!</p>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>Mike Foley talks about <a href="https://www.yelof.com/2018/05/01/introducing-support-for-virtualization-based-security-and-credential-guard-in-vsphere-6-7/">new support for Virtualization Based Security (VBS) and Credential Guard</a> in vSphere 6.7.</li>
-<li>Chris Short examines <a href="https://www.devsecopsdays.com/articles/numbersdontlie">some of the security-related aspects</a> of the adoption of containers.</li>
-<li>The Kubernetes community reflects on <a href="https://kubernetes.io/blog/2018/04/04/fixing-subpath-volume-vulnerability/">fixing the subpath volume vulnerability in Kubernetes</a>.</li>
-<li>Michael Ducy of Sysdig <a href="https://sysdig.com/blog/active-kubernetes-security-falco-nats-kubeless/">outlines a configuration</a> combining Sysdig Falco, NATS, and Kubeless for &ldquo;active Kubernetes security.&rdquo; While the post is clearly Sysdig-oriented (as would be fully expected), it&rsquo;s also cool to see how powerful the assembly of various open source projects can be.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>Trond Hindenes shares a bit on how his company is <a href="https://medium.com/@trondhindenes/using-traefik-as-a-kubernetes-ingress-controller-for-both-internal-and-external-traffic-c06e4177314">using Traefik as a Kubernetes ingress controller for both internal and external traffic</a>.</li>
-<li>Typhoon, which describes itself as a &ldquo;free and minimal Kubernetes distribution,&rdquo; has <a href="https://typhoon.psdn.io/announce/#april-26-2018">announced support</a> for Typhoon on Fedora Atomic systems.</li>
-<li>I haven&rsquo;t tried it yet, but <a href="https://databricks.com/blog/2018/03/27/introducing-click-the-command-line-interactive-controller-for-kubernetes.html">Click</a> looks somewhat interesting.</li>
-<li>You may have noticed that Rancher Labs recently announced the GA of version 2.0 of Rancher. Check out <a href="https://rancher.com/blog/2018/2018-05-01-rancher-ga-announcement-sheng-liang/">the announcement blog post</a> for more details.</li>
-<li>Alen Komlien discusses the idea of <a href="https://akomljen.com/meet-a-kubernetes-descheduler/">a Kubernetes descheduler</a>. My take: &ldquo;static&rdquo; scheduling that occurs at the start of a pod&rsquo;s lifecycle is useful (and Kubernetes is doing reasonably well here), but &ldquo;dynamic&rdquo; scheduling that accounts for a greater portion of the pod&rsquo;s lifecycle <em>and</em> the infrastructure underneath it is even more powerful. This is a lesson VMware learned years ago with Distributed Resource Scheduler (DRS).</li>
-<li><a href="https://medium.com/@trstringer/create-kubernetes-controllers-for-core-and-custom-resources-62fc35ad64a3">This is a pretty in-depth article</a> (to me, at least), but it did help me better understand Custom Resource Definitions (CRDs) and the role of controllers in Kubernetes.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>Robert Paprocki of Kong discusses <a href="https://konghq.com/blog/how-to-design-a-scalable-rate-limiting-algorithm/">how to design a scalable rate limiting algorithm</a>, then proceeds to show how the Kong API gateway could be used to implement such an algorithm.</li>
-<li>As the use of APIs for everything increases, API tools like Postman become ever more useful&mdash;like this example of <a href="http://blog.getpostman.com/2017/12/19/audit-your-aws-infrastructure-with-postman/">using Postman to audit AWS infrastructure</a>.</li>
-<li>Thomas Graf explains <a href="https://cilium.io/blog/2018/04/17/why-is-the-kernel-community-replacing-iptables/">why the Linux kernel community is replacing <code>iptables</code> with BPF</a>. He gives a great overview of BPF along the way, so if you&rsquo;re unfamiliar with BPF this may be a good read.</li>
-<li>This <a href="https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction/">practical introduction to container terminology</a> by Scott McCarty has a decidedly &ldquo;Red Hat&rdquo; feel to it, but is otherwise useful for folks who are new to the container space and need some terminology defined for them.</li>
-<li>Brendan Burns uses the term &ldquo;serverless&rdquo; in a slightly different way than it is commonly used; in <a href="https://thenewstack.io/the-future-of-kubernetes-is-serverless/">this article</a>, he seems to use the term to refer primarily to &ldquo;container-as-a-service&rdquo;-type offerings&mdash;like Azure Container Instances (ACI) or AWS Fargate&mdash;instead of the more common link to functions-as-a-service. Along the way, he explains the virtual kubelet project as well, so if you&rsquo;re unfamiliar with that effort this article will help.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<p>Nothing this time around, but I&rsquo;ll see what I can find to include next time!</p>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>Nigel Poulton&rsquo;s quick review of <a href="https://cloudplatform.googleblog.com/2018/05/Open-sourcing-gVisor-a-sandboxed-container-runtime.html">gVisor</a> (see <a href="http://blog.nigelpoulton.com/gvisor-containers/">his thoughts here</a>) confirms my prediction some time ago that the lines between &ldquo;VMs&rdquo; and &ldquo;containers&rdquo; will continue to blur, and that we&rsquo;ll see a spectrum of isolation options emerging. Which isolation option should you use? Well, that will depend on what you&rsquo;re trying to achieve, right? <em>Right?</em></li>
-<li>William Lam <a href="https://www.virtuallyghetto.com/2018/04/native-mac-learning-in-vsphere-6-7-removes-the-need-for-promiscuous-mode-for-nested-esxi.html">discusses the new MAC learning functionality present in vSphere 6.7</a> which addresses some of the overhead of nested ESXi configurations.</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>Last week while at Interop ITX, I chatted with Keith Townsend regarding my recent career shift. If you&rsquo;ve been wondering about <em>why</em> I made this shift, give <a href="https://www.ctodose.com/blog/2018/5/8/beyond-virtualization-why-scott-lowe-joined-heptio">the video of our chat</a> a look, and then feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>.</li>
-<li>And speaking of career shifts, you might find Massimo&rsquo;s recent introspection of <a href="http://www.it20.info/2018/05/my-first-6-months-at-aws/">his first 6 months at AWS</a> to be informative as well.</li>
-</ul>
-
-<p>OK, that&rsquo;s it for now. As always, feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> if you have questions or suggestions for links I should consider including in future Technology Short Takes. Here&rsquo;s hoping you found something helpful!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/pjtDeubw-WQ" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/pjtDeubw-WQ/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Installing GitKraken on Fedora 27</h3>
-		</div>
-		<div class="collectiontext">
-			<p><a href="https://www.gitkraken.com/">GitKraken</a> is a full-featured graphical Git client with support for multiple platforms. Given that I&rsquo;m trying to live a multi-platform life, it made sense for me to give this a try and see whether it is worth making part of <a href="https://blog.scottlowe.org/2018/04/30/updated-look-at-multi-platform-toolbelt/">my (evolving and updated) multi-platform toolbelt</a>. Along the way, though, I found that GitKraken doesn&rsquo;t provide an RPM package for <a href="https://getfedora.org/">Fedora</a>, and that the installation isn&rsquo;t as straightforward as one might hope. I&rsquo;m documenting the procedure here in the hope of helping others.</p>
-
-<p>First, download the latest release of GitKraken. You can do this via the terminal with this command:</p>
-
-<pre><code>curl -LO https://release.gitkraken.com/linux/gitkraken-amd64.tar.gz
-</code></pre>
-
-<p>Extract the contents of the GitKraken download into its own directory under <code>/opt</code> using this command (you can use a different directory if you like, but I prefer to install third-party applications like this under <code>/opt</code>):</p>
-
-<pre><code>sudo tar -C /opt -xvf gitkraken-amd64.tar.gz
-</code></pre>
-
-<p>This will extract everything into <code>/opt/gitkraken</code>.</p>
-
-<p>Next, you&rsquo;ll create a symbolic link to an existing library to fix an error with GitKraken when running on Fedora (this is documented here):</p>
-
-<pre><code>sudo ln -s /usr/lib64/libcurl.so.4 /usr/lib64/libcurl-gnutls.so.4
-</code></pre>
-
-<p>Once this is done, you <em>could</em> just run <code>/opt/gitkraken/gitkraken</code> from the Terminal and GitKraken would fire up.</p>
-
-<p>However, you may find it easier to create a desktop launcher for GitKraken. Before you do that, download an icon for the app (there is no icon file distributed in the download). One suggested icon can be found <a href="http://img.informer.com/icons_mac/png/128/422/422255.png">here</a>; just copy that image into <code>/opt/gitkraken</code> and make note of the filename you use (for the purposes of this article, I&rsquo;ll assume it&rsquo;s named <code>icon.png</code>. Yes, I know, I&rsquo;m very creative).</p>
-
-<p>Now create the file <code>/usr/share/applications/gitkraken.desktop</code> and put these contents into the file:</p>
-
-<pre><code class="language-text">[Desktop Entry]
-Name=GitKraken
-Comment=Graphical Git client
-Exec=/opt/gitkraken/gitkraken
-Icon=/opt/gitkraken/icon.png
-Terminal=false
-Type=Application
-Encoding=UTF-8
-Categories=Utility;Development;
-</code></pre>
-
-<p>If you named the icon you downloaded something <em>other</em> than <code>icon.png</code>, be sure to adjust the &ldquo;Icon=&rdquo; line in the file accordingly. Save that file and within a few moments you should have a GitKraken desktop launcher ready to roll.</p>
-
-<p>A couple additional notes of which to be aware:</p>
-
-<ul>
-<li>GitKraken requires that you create a GitKraken account or link GitKraken to your GitHub account. This is an annoyance, but fortunately a minor one.</li>
-<li>I noted that GitKraken has some issues connecting to GitHub, GitLab, and other online services with a very generic and non-descriptive error. I haven&rsquo;t yet found a workaround for the issue.</li>
-</ul>
-
-<h2 id="credit">Credit</h2>
-
-<p>The source for the <code>gitkraken.desktop</code>, the suggested icon, and other useful information was taken from <a href="https://gist.github.com/aelkz/17528d2f6a5db73185c7dfbd28e49d18">this GitHub Gist</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/iLYyWuo85Y4" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/iLYyWuo85Y4/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>An Updated Look at My Multi-Platform Toolbelt</h3>
-		</div>
-		<div class="collectiontext">
-			<p>In early 2017 I posted about <a href="https://blog.scottlowe.org/2017/01/03/my-evolving-multi-platform-toolbelt/">my (evolving) multi-platform toolbelt</a>, describing some of the applications, standards, and services that I use across my Linux and macOS systems. In this post, I&rsquo;d like to provide an updated review of that toolbelt.</p>
-
-<ul>
-<li><p><em>Visual Studio Code:</em> I switched from <a href="http://www.sublimetext.com/">Sublime Text</a> to <a href="https://code.visualstudio.com/">Visual Studio Code</a> during my latest migration to Fedora 27 on a Lenovo ThinkPad X1 Carbon. Since I&rsquo;m also planning on expanding my coding skills with Golang, I felt that Visual Studio Code would be a better choice than Sublime Text. I&rsquo;m still generating the majority of my content in Markdown (MultiMarkdown is the flavor that I generally use), and I&rsquo;ve found Visual Studio Code to be pretty decent as a Markdown editor.</p></li>
-
-<li><p><em>IMAP/SMTP:</em> I&rsquo;ve standardized on using IMAP/SMTP for all my e-mail accounts, which gives me quite a bit of flexibility in clients and OSes. It&rsquo;s very likely I&rsquo;ve pretty much standardized on <a href="https://www.mozilla.org/en-US/thunderbird/">Thunderbird</a> (which supports OS X, Linux, and Windows).</p></li>
-
-<li><p><em>Unison:</em> This <a href="http://www.cis.upenn.edu/~bcpierce/unison/">cross-platform file synchronization tool</a> helps keep my files in sync across my macOS and Linux systems.</p></li>
-
-<li><p><em>Dropbox:</em> <a href="https://www.dropbox.com/">Dropbox</a> gives me access to non-confidential files from any of my devices or platforms (macOS, iOS, and Linux).</p></li>
-
-<li><p><em>jrnl:</em> <a href="http://jrnl.sh/"><code>jrnl</code></a> is a CLI tool is used for journaling, and has built-in support for encryption (a plus for me). The nice thing about <code>jrnl</code> which is itself multi-platform (runs on macOS and Linux) is that it also works with <a href="http://dayoneapp.com/">Day One</a>, a popular journaling tool for macOS. I&rsquo;ve since abandoned Day One (for a variety of reasons) and use only <code>jrnl</code> now on both Linux and macOS.</p></li>
-
-<li><p><em>TaskPaper-formatted text files for task management:</em> I&rsquo;ve adopted the TaskPaper format for using plain text files for task management. Obviously I&rsquo;m not using Sublime Text but Visual Studio Code instead, along with the Todo+ extension.</p></li>
-
-<li><p><em>Firefox and Firefox Sync:</em> For web browsing, I&rsquo;m using <a href="https://www.mozilla.org/en-US/firefox/">Mozilla Firefox</a> and Firefox Sync across Linux, OS X, iOS, and Android. I&rsquo;ll occasionally use <a href="https://www.google.com/chrome/index.html">Google Chrome</a> as needed.</p></li>
-
-<li><p><em>1Password X:</em> In the past, I had to look at other password managers (like <a href="https://www.enpass.io/">Enpass</a>) because Agile Bits didn&rsquo;t have any Linux support for <a href="https://1password.com/">1Password</a>. With the introduction of 1Password X (including a Firefox extension!), I&rsquo;m sticking with 1Password as my password manager.</p></li>
-
-<li><p><em>Google Calendar:</em> As much as I&rsquo;d prefer not to have to use Google, I&rsquo;ve found that I don&rsquo;t really have much choice in the matter. Linux and GNOME support for CalDAV and CardDAV just isn&rsquo;t there, unfortunately&mdash;GNOME Calendar remains incredibly unstable. So, I&rsquo;m in the process of moving all my calendaring over to Google Calendar and away from CalDAV with <a href="https://fruux.com/">fruux.com</a>. I&rsquo;ll do something similar for my contacts.</p></li>
-
-<li><p><em>Slack:</em> <a href="https://slack.com/">Slack</a> has become a much larger part of my collaborative workflow, and so I&rsquo;m using the &ldquo;native&rdquo; Slack client on both macOS and Linux. (I put native in quotes because it&rsquo;s using Electron and therefore isn&rsquo;t truly native to the platform.)</p></li>
-</ul>
-
-<p>There are still a few areas where there are inconsistencies across platforms (for various reasons). For example, when it comes to local virtualization, I use <a href="https://www.virtualbox.org/">VirtualBox</a> on macOS and Libvirt (KVM) on Linux&mdash;but both of them are fronted by Vagrant, so the differences between the user experience are pretty minimal. (It&rsquo;s worth noting that I have completely moved away from <a href="http://www.vmware.com/products/fusion.html">VMware Fusion</a> on all macOS systems, as the Vagrant user experience is still subpar, in my opinion. See <a href="https://blog.scottlowe.org/2016/09/28/why-now-using-virtualbox-with-vagrant/">this post</a> for more details.)</p>
-
-<p>Similarly, I haven&rsquo;t standardized on a single IRC client across platforms (I&rsquo;m using <a href="https://www.codeux.com/textual/">Textual</a> on macOS and <a href="https://hexchat.github.io/">HexChat</a> on Linux); I&rsquo;m not yet sure there&rsquo;s any real benefit to standardizing on a single IRC client. (Feel free to educate me otherwise if you have experience in this regard.)</p>
-
-<p>Finally, the same is true for graphical Git clients (which I rarely use, to be honest): on Linux I&rsquo;m using <a href="https://www.gitkraken.com/">GitKraken</a>, and on macOS I&rsquo;m using <a href="https://www.git-tower.com/">Tower</a>.</p>
-
-<p>I&rsquo;m no longer using <a href="https://wire.com/">Wire</a>; I just wasn&rsquo;t seeing any real benefit, and the use of tools like OTR with other platforms helps provide a level of secure messaging that is acceptable.</p>
-
-<p>Well, that&rsquo;s it for now. I&rsquo;ll keep this post updated as my toolbelt evolves. In the meantime, if you have any suggestions for tools that I should evaluate, feel free to <a href="https://twitter.com/scott_lowe/">hit me up on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/UzmoJgfsG8w" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/UzmoJgfsG8w/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.familytidings.com/blog" target="_blank">Half a Page of Scribbled Linux</a>
-		</div>
-		<div>
-			<h3>Copy+Paste Broken in Google Sheets</h3>
-		</div>
-		<div class="collectiontext">
-			This had nothing to do with Google Sheets itself, but rather an extension I use called Don&#8217;t Fuck with Paste. This extension disables copy and paste blocking.  The extension had a major upgrade a couple months ago that enabled the extension only for sites added to a blacklist.  The blacklist supports regular expressions to match [&#8230;]
-		</div>
-		<div class="collectionhref">
-		<a href="http://www.familytidings.com/blog/?p=1511" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 98</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take #98! Now that I&rsquo;m starting to get settled into my new role at Heptio, I&rsquo;ve managed to find some time to pull together another collection of links and articles pertaining to various data center technologies. Feedback is always welcome!</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>VMware has released a PowerCLI preview/fling for NSX-T; Kyle Ruddy has a write-up <a href="https://blogs.vmware.com/PowerCLI/2018/04/powercli-nsx-t-fling.html">here</a>. Looks like this preview provides some high-level cmdlets for NSX-T that weren&rsquo;t available before.</li>
-<li>Cilium, the open source project working to bring eBPF-powered networking and security to Kubernetes environments, has <a href="https://cilium.io/blog/2018/04/24/cilium-10">hit the 1.0 release</a>. I will freely admit that I am a fan of what the Cilium folks are doing.</li>
-<li>What&rsquo;s that? Don&rsquo;t know what eBPF is? Or XDP? Not to worry, the nice folks over at Netronome have <a href="https://www.netronome.com/blog/bpf-ebpf-xdp-and-bpfilter-what-are-these-things-and-what-do-they-mean-enterprise/">a post that explains it all</a>.</li>
-<li>People do all kinds of interesting things with Raspberry Pis; here&rsquo;s an article by Scott Helme on <a href="https://scotthelme.co.uk/securing-dns-across-all-of-my-devices-with-pihole-dns-over-https-1-1-1-1/">using a Pi to secure DNS traffic</a>.</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<ul>
-<li>This is more of a follow-up to one of my own articles than a pointer to someone else&rsquo;s article. After continued use (including on business trips) of my Lenovo ThinkPad X1 Carbon running Fedora 27, I continue to be impressed by the battery life and overall performance and quality of the laptop. Well done, Lenovo!</li>
+<li>Will Robinson walks readers through <a href="http://www.oznetnerd.com/installing-ntc-ansible/">installing NTC Ansible</a>.</li>
+<li><a href="https://blog.benjojo.co.uk/post/bgp-battleships">Battleship over BGP?</a> Interesting (saw this via Rob Markovic on Twitter).</li>
+<li>Ben Piper shares an example of <a href="https://cumulusnetworks.com/blog/automating-cumulus-linux-ansible/">automating Cumulus Linux with Ansible</a>.</li>
 </ul>
 
 <h2 id="security">Security</h2>
 
 <ul>
-<li>Michael Ducy <a href="https://sysdig.com/blog/kubernetes-security-logging-fluentd-falco/">describes a setup</a> leveraging Falco and Fluentd (as part of the EFK stack) to do Kubernetes security logging.</li>
-<li>Sysdig has <a href="https://sysdig.com/blog/kubernetes-security-guide/">a Kubernetes security guide</a> available that may be worth reviewing. I haven&rsquo;t dug into it yet (see what I did there?), so I can&rsquo;t validate how accurate/useful the recommendations may be.</li>
-<li><a href="https://disloops.com/cloudfront-hijacking/">This article on CloudFront hijacking</a> is worth a read, in my opinion.</li>
+<li>Container wizard Jessie Frazelle shares a proposal for <a href="https://blog.jessfraz.com/post/hard-multi-tenancy-in-kubernetes/">hard multi-tenancy in Kubernetes</a>. Along the way, she also provides some additional (useful) information about existing isolation mechanisms.</li>
 </ul>
 
 <h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
 
 <ul>
-<li>There&rsquo;s not much here yet, but it will be interesting to see how <a href="https://furikuri.gitbooks.io/k8s-by-example/content/">this &ldquo;K8s by example&rdquo; GitBook</a>&mdash;which is, as the author admits, just a collection of various command-line snippets&mdash;evolves.</li>
-<li>Liz Rice has a nice write-up on <a href="https://medium.com/@lizrice/kubernetes-in-vagrant-with-kubeadm-21979ded6c63">using Kubernetes in Vagrant with <code>kubeadm</code></a>.</li>
-<li>Gergely Nemeth shares how to leverage <a href="https://github.com/GoogleContainerTools/skaffold">skaffold</a> so you can <a href="https://nemethgergely.com/using-kubernetes-for-local-development/index.html">use Kubernetes for local development</a>. Skaffold is a tool I&rsquo;ve been meaning to try out, so finding Gergely&rsquo;s post was helpful.</li>
-<li>Sandeep Dinesh provides <a href="https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0">a high-level overview</a> of NodePort versus LoadBalancer versus Ingress in a Kubernetes environment.</li>
-<li><a href="https://medium.com/@nodearth/kubernetes-from-a-to-z-intro-ad425051cf59">Here&rsquo;s YAKI</a> (Yet Another Kubernetes Introduction). (Note: I reserve the right to write YAKI of my own at some point.)</li>
-<li>VMware has <a href="https://blogs.vmware.com/cloudnative/2018/04/24/kubernetes-vmware-sig/">launched a SIG</a> for Kubernetes on VMware.</li>
+<li>This article on <a href="https://engineering.opsgenie.com/how-does-proportional-cpu-allocation-work-with-aws-lambda-41cd44da3cac">how proportional CPU allocation works with AWS Lambda</a> shows that there&rsquo;s more to architecting and supporting Lambda for maximum efficiency than a lot of folks realize. (I could be wrong, though. It could be that lots of people recognize that Lambda isn&rsquo;t as simple as it seems.)</li>
+<li>While we are on the topic of AWS Lambda, check out this post by Mayank Lahiri on <a href="https://serverless.com/blog/understanding-and-controlling-aws-lambda-costs/">understanding and controlling AWS Lambda costs</a>. The fact that pricing is based on a composite unit combining both execution time and memory allocation means that billing isn&rsquo;t necessarily as straightforward as it may seem, and this article has some good details. (Note that it is a bit dated, having been written in September 2017.)</li>
+<li>Lest you think pricing for serverless architectures is as simple as &ldquo;how many AWS Lambda invocations I had last month,&rdquo; check out Amiram Shachar&rsquo;s post on <a href="https://medium.com/@amiram_26122/the-hidden-costs-of-serverless-6ced7844780b">the hidden costs of serverless</a>.</li>
+<li>Yan Cui of A Cloud Guru discusses <a href="https://read.acloud.guru/does-coding-language-memory-or-package-size-affect-cold-starts-of-aws-lambda-a15e26d12c76">how language, memory, and package size affect cold starts of AWS Lambda</a>. Key takeaways from Cui&rsquo;s post are that C# and Java have (and I quote) &ldquo;~100 times the cold start time of Python and also suffer from much higher standard deviation&rdquo;. Perhaps you should re-think using Java as your language of choice for Lambda functions!</li>
+<li>Let&rsquo;s continue the AWS Lambda love-fest with a mention of this post by Roman Dodin on <a href="https://netdevops.me/2017/building-aws-lambda-with-python-s3-and-serverless/">building AWS Lambda with Python, S3, and serverless</a>. The nice thing about this post, in my opinion, is that it peels back to show some of what&rsquo;s happening under the hood.</li>
+<li>Further proof that using AWS Lambda involves more than &ldquo;just functions&rdquo; is found in this post by Payam Moghaddam on <a href="https://medium.com/build-acl/aws-lambda-deployment-with-terraform-24d36cc86533">using Terraform to deploy AWS Lambda</a>. What is Terraform deploying, you ask? I could tell you, but I&rsquo;d rather you go read the article for yourself.</li>
+<li>Gal Bashan has a two-part series on AWS Lambda internals (<a href="https://medium.com/epsagon/lambda-internals-exploring-aws-lambda-462f05f74076">part 1</a> and <a href="https://medium.com/epsagon/aws-lambda-internals-part-2-going-deeper-1e12b9d2515f">part 2</a>). Bashan gets a bit geeky, but it&rsquo;s still interesting (and potentially useful) information in my opinion.</li>
+<li>This post by Caleb Lloyd on <a href="https://codefresh.io/Kubernetes-Tutorial/recover-broken-kubernetes-cluster/">recovering a broken Kubernetes cluster</a> has some helpful information.</li>
 </ul>
 
 <h2 id="operating-systems-applications">Operating Systems/Applications</h2>
 
 <ul>
-<li>Tom Whiston has started what appears to be a series of blog posts about using Atomic Workstation, which takes the immutable infrastructure approach to Linux on a workstation (desktop or laptop). Part 1 is <a href="https://www.nine.ch/en/engineering-logbook/dockerising-my-workstation-with-atomic-part-1">available here</a>.</li>
-<li>Given how useful I find <code>jq</code> (see <a href="https://blog.scottlowe.org/2015/11/11/handy-cli-tool-json/">this post</a> for more details), I thought <a href="https://github.com/kislyuk/yq">a YAML equivalent</a> would be super-handy. Alas, it just converts to JSON and pipes it to <code>jq</code>.</li>
-<li>Jeff Geerling shows <a href="https://www.jeffgeerling.com/blog/2018/use-ansibles-yaml-callback-plugin-better-cli-experience">how to use Ansible&rsquo;s YAML callback plugin to create a better experience at the command line</a>. I&rsquo;ve heard of callback plugins but wasn&rsquo;t sure how to use them, and Jeff&rsquo;s article was very helpful.</li>
-<li>I found <a href="https://stratechery.com/2018/the-end-of-windows/">this article on the &ldquo;end of Windows&rdquo;</a> to be an interesting read. Your mileage may vary, of course.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>The Kubernetes blog has some <a href="https://kubernetes.io/blog/2018/04/10/container-storage-interface-beta/">more details</a> on the Container Storage Interface (CSI) in Kubernetes 1.10, which has moved from alpha to beta as part of the 1.10 release.</li>
+<li>Michael Gasch <a href="https://embano1.github.io/post/scratch/">goes poking around in the Docker &ldquo;scratch&rdquo; container</a>.</li>
+<li>This is interesting&mdash;Microsoft has <a href="https://azure.microsoft.com/en-us/blog/introducing-the-azure-terraform-resource-provider/">added support for Terraform providers to Azure Resource Manager (ARM)</a>. This allows ARM to orchestrate the creation of resources <em>through</em> Terraform. Only three Terraform providers are supported right now (Kubernetes, CloudFlare, and Datadog).</li>
+<li>Anyone played with (or is using) <a href="https://jenkins-x.io/">Jenkins X</a> yet?</li>
+<li>Michael Hausenblas has <a href="http://mhausenblas.info/kubectl-in-action/">a nice <code>kubectl</code> in action post</a> that provides a handy reference.</li>
+<li>The Kubernetes-Containerd integration has been made GA, according to <a href="https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/">this blog post</a>. This is on my list of things to try, when I get time.</li>
 </ul>
 
 <h2 id="virtualization">Virtualization</h2>
 
 <ul>
-<li>VMware recently GA&rsquo;d vSphere 6.7, and&mdash;as would be expected&mdash;there&rsquo;s lots of blogger coverage. I can&rsquo;t possibly mention all of it here, but here are a few that jumped out at me: Andrea Mauro&rsquo;s <a href="https://vinfrastructure.it/2018/04/vmware-vsphere-6-7-is-ga/">overview</a>; <a href="http://www.wardvissers.nl/2018/04/17/vmware-vsphere-6-7/">this look</a> by Ward Vissers; Magnus Andersson&rsquo;s <a href="http://vcdx56.com/2018/04/vmware-vsphere-6-7-released/">quick review</a>; Simon Sharwood&rsquo;s <a href="https://www.theregister.co.uk/2018/04/17/vsphere_6_7/">thoughts</a> over at El Reg; and David Stamen&rsquo;s <a href="http://davidstamen.com/2018/04/17/upgrading-to-vmware-vsphere-6.7/">post</a>. For more vSphere 6.7 information, Eric Siebert has you covered with his <a href="http://vsphere-land.com/news/vsphere-6-7-link-o-rama.html">vSphere 6.7 link-o-rama</a>.</li>
+<li>William Lam explores the use of Instant Clone in vSphere 6.7 for <a href="https://www.virtuallyghetto.com/2018/05/leveraging-instant-clone-in-vsphere-6-7-for-extremely-fast-nested-esxi-provisioning.html">very fast nested ESXi provisioning</a>.</li>
+<li>Somewhat tongue-in-cheek, Bob Plankers <a href="https://lonesysadmin.net/2018/05/24/vsphere-67-lab-parable/">addresses the complaints</a> of the folks using old lab hardware to run the latest generation of vSphere.</li>
 </ul>
 
 <h2 id="career-soft-skills">Career/Soft Skills</h2>
 
 <ul>
-<li>Reading Noah Abraham&rsquo;s <a href="https://infosiftr.com/2018/04/09/joining-kubernetes-release-team-completely-new-contributor/">experience as a new Kubernetes contributor</a> is helpful for folks like me (who are still getting their coding skills up to speed).</li>
-<li><a href="https://vickylai.com/verbose/delete-old-tweets-ephemeral/">This approach</a> is interesting, to say the least.</li>
+<li>At first I thought <a href="https://cloudplatform.googleblog.com/2018/05/SRE-vs-DevOps-competing-standards-or-close-friends.html">this article on SRE vs. DevOps</a> was link-bait (click-bait?), but upon reading the article I found it to be quite useful and informative. If you&rsquo;re unclear about the differences between SRE and DevOps, or are looking for more information on SRE, I&rsquo;d recommend reading this post. (I haven&rsquo;t taken a look at the embedded videos yet, so I can&rsquo;t speak to their usefulness.)</li>
 </ul>
 
-<p>OK then, let&rsquo;s call that a wrap! I hope that something I shared was useful, or at least caused you to think about something in a new way. Until next time, enjoy!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/B0pvg8hCpDU" height="1" width="1" alt=""/>
+<p>That&rsquo;s all I have for you this time around (I know, it&rsquo;s a bit shorter than usual). I&rsquo;ll have the next Technology Short Take published in about two weeks, so you have until then to read all the articles I&rsquo;ve included above. Good luck!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/Ufx8x6XuqNk" height="1" width="1" alt=""/>
 		</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/B0pvg8hCpDU/" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Ufx8x6XuqNk/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Quick Post: Parsing AWS Instance Data with JQ</h3>
+		</div>
+		<div class="collectiontext">
+			<p>I recently had a need to get a specific subset of information about some AWS instances. Naturally, I turned to the CLI and some CLI tools to help. In this post, I&rsquo;ll share the command I used to parse the AWS instance data down using <a href="https://stedolan.github.io/jq/">the ever-so-handy <code>jq</code> tool</a>.</p>
+
+<p>What I needed, specifically, was the public IP address and the private IP address for each instance. That information is readily accessible using the <code>aws ec2 describe-instances</code> command, but that command provides a ton more information than I needed. So, I decided to try to use <code>jq</code> to parse the JSON output from the AWS CLI. If you&rsquo;re not familiar with <code>jq</code>, I recommend you take a look at <a href="https://blog.scottlowe.org/2015/11/11/handy-cli-tool-json/">this brief introductory post</a> I wrote back in 2015.</p>
+
+<p>After some trial and error, here&rsquo;s the final command I used:</p>
+
+<pre><code class="language-shell">aws ec2 describe-instances | jq '.Reservations[] | .Instances[] | \
+{Id: .InstanceId, PublicAddress: .PublicIpAddress, \
+PrivateAddress: .PrivateIpAddress}'
+</code></pre>
+
+<p>I&rsquo;ll refer you to <a href="https://stedolan.github.io/jq/manual/v1.5/">the <code>jq</code> manual</a> for details on breaking down how this filter works. I&rsquo;ll also point out that there&rsquo;s nothing terribly groundbreaking or revolutionary about this command; I wanted to share it here just in case it may save someone a bit of time if they find themselves in a similar situation.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/jJAXLwIGg6k" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/jJAXLwIGg6k/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Posts from the Past, May 2018</h3>
+		</div>
+		<div class="collectiontext">
+			<p>This month&mdash;May 2018&mdash;marks <strong>thirteen years</strong> that I&rsquo;ve been generating content here on this site. It&rsquo;s been a phenomenal 13 years, and I&rsquo;ve enjoyed the opportunity to share information with readers around the world. To celebrate, I thought I&rsquo;d do a quick &ldquo;Posts from the Past&rdquo; and highlight some content from previous years. Enjoy!</p>
+
+<h2 id="may-2017">May 2017</h2>
+
+<p>A year ago, I touched on the topic of <a href="https://blog.scottlowe.org/2017/05/08/using-makefile-with-markdown-documents/">using a <code>Makefile</code> with Markdown documents</a> to help streamline the process of generating various output formats.</p>
+
+<p>I also explored the use of <a href="https://blog.scottlowe.org/2017/05/26/bastion-hosts-custom-ssh-configs/">custom SSH configurations with SSH bastion hosts</a> and uncovered a very basic (but important) error I&rsquo;d previously overlooked.</p>
+
+<h2 id="may-2016">May 2016</h2>
+
+<p>Two years ago in May I was <a href="https://blog.scottlowe.org/2016/05/06/using-terraform-etcd2-openstack/">using Terraform to build an etcd v2 cluster on OpenStack</a>.</p>
+
+<h2 id="may-2015">May 2015</h2>
+
+<p>Three years ago, I was doing a lot of work in my home lab, automating the setup of physical hosts. That led to a post on <a href="https://blog.scottlowe.org/2015/05/20/fully-automated-ubuntu-install/">a fully automated Ubuntu install</a>, which was also related to this post on <a href="https://blog.scottlowe.org/2015/05/21/using-apt-proxy/">using an Apt proxy</a> (via <code>apt-cacher-ng</code>).</p>
+
+<h2 id="may-2014">May 2014</h2>
+
+<p>Four years ago, I shared <a href="https://blog.scottlowe.org/2014/05/19/some-useful-markdown-tools-for-os-x/">some useful Markdown tools for OS X</a>. Of those tools, I still use <code>pandoc</code> pretty extensively.</p>
+
+<h2 id="may-2013">May 2013</h2>
+
+<p>Five years ago, I was exploring Open vSwitch (OVS), and wrote some stuff that is still applicable even today. For example, this post on <a href="https://blog.scottlowe.org/2013/05/15/examining-open-vswitch-traffic-patterns/">examining Open vSwitch traffic patterns</a> is, in my opinion, core to understanding how OVS works in various configurations (particularly with tunnels).</p>
+
+<h2 id="may-2011">May 2011</h2>
+
+<p>May 2012 was a slow month, so we&rsquo;ll skip back to May 2011, where I was <a href="https://blog.scottlowe.org/2011/05/12/stretched-clusters-distance-vmotion-and-l2-adjacency/">tackling inaccuracies regarding stretched clusters and long-distance vMotion</a> while also <a href="https://blog.scottlowe.org/2011/05/21/a-quicksilver-primer/">introducing folks to Quicksilver</a> (is this app even still around?).</p>
+
+<h2 id="may-2006">May 2006</h2>
+
+<p>Going <em>way, way back,</em> we come to May 2006&mdash;only a year after this site was launched. Twelve years ago, I was exploring <a href="https://blog.scottlowe.org/2006/05/19/semi-automatic-security-groups/">the automation of Active Directory security groups</a> and <a href="https://blog.scottlowe.org/2006/05/19/semi-automatic-account-maintenance/">the automation of Active Directory account maintenance</a>. I guess I&rsquo;ve been exploring automation for longer than I thought!</p>
+
+<p>Here&rsquo;s hoping you enjoyed this little trip back into the archives. Maybe you found something useful you can still put to use!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/7hzsg-JOFuI" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/7hzsg-JOFuI/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>DockerCon SF 18 and Spousetivities</h3>
+		</div>
+		<div class="collectiontext">
+			<p><a href="https://2018.dockercon.com/">DockerCon SF 18</a> is set to kick off in San Francisco at the Moscone Center from June 12 to June 15. This marks the return of DockerCon to San Francisco after being held in other venues for the last couple of years. Also returning to San Francisco is <a href="http://spousetivities.com/">Spousetivities</a>, which has organized activities for spouses, significant others/domestic partners, friends, and family members traveling with conference attendees!</p>
+
+<p><a href="https://spousetivities.ticketleap.com/spousetivities-dockercon2018/">Registration is open</a> right now, so hurry on over and sign up for one or more activities. What&rsquo;s that&mdash;you&rsquo;re wondering what&rsquo;s been planned? Here&rsquo;s a quick overview:</p>
+
+<ul>
+<li>The activities kick off on Tuesday, June 12, with a walking food tour of North Beach and Little Italy. The tour includes great information about the city and the venues where you&rsquo;ll be sampling some great food and drinks, including coffee, Italian soda, focaccia, and chocolates! Yum! This event will depart from and return to the Park Central Hotel.</li>
+<li>On Wednesday, June 13, Spousetivities has arranged for private transportation to the Sonoma Valley for some wine tastings! You&rsquo;ll visit a couple different wineries and get to enjoy lunch in Sonoma. This event will wrap up back at the InterContinental around 6pm (departs from the same location at 8:30am).</li>
+<li>Finally, on Thursday, June 14, is a tour of the city and a trip to Muir Woods. Participants will leave the InterContinental at 8:30am and get to see <em>all</em> the major highlights of San Francisco before having lunch in Sausalito followed by a trip to Muir Woods. The tour will return to the InterContinental around 5:30pm.</li>
+</ul>
+
+<p>Pricing for all these events has been drastically reduced thanks to support from <a href="https://www.docker.com/">Docker</a> (kudos to them for sponsoring work/life balance!). Thanks to their financial support of Spousetivities, participants save between $125 and $175 per activity compared to retail pricing. Participants can save <em>even more</em> by using the new 3-day discount pass, which provides access to all three days of activities at a phenomenal discount (only $300 for all three days!).</p>
+
+<p>Please make note of the departure locations each day! Tuesday departs from the Park Central Hotel, while Wednesday and Thursday will depart from the InterContinental. Plan accordingly!</p>
+
+<p>It&rsquo;s quite possible that these activities will sell out, so don&rsquo;t wait&mdash;head on over to <a href="https://spousetivities.ticketleap.com/spousetivities-dockercon2018/">the registration page</a> and sign up sooner rather than later.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/zn8XXyEDsWY" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/zn8XXyEDsWY/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Manually Installing Firefox 60 on Fedora 27</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Mozilla recently released version 60 of <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a>, which contains a number of pretty important enhancements (as outlined <a href="https://www.mozilla.org/en-US/firefox/60.0/releasenotes/">here</a>). However, the <a href="https://getfedora.org/">Fedora</a> repositories don&rsquo;t (yet) contain Firefox 60 (at least not for Fedora 27), so you can&rsquo;t just do a <code>dnf update</code> to get the latest release. With that in mind, here are some instructions for manually installing Firefox 60 on Fedora 27.</p>
+
+<p>These instructions assume you have a <code>dnf</code>-installed version of Firefox (typically Firefox 59) already installed on your Fedora system. These steps should allow you to upgrade your Fedora system to Firefox 60:</p>
+
+<ol>
+<li>Download the Firefox 60 archive (typically named <code>firefox-60.0.tar.bz2</code> or similar) onto your Fedora system. You can do this with your already-installed version of Firefox, but be sure to close/quit Firefox before proceeding with the rest of the instructions.</li>
+<li>Make a copy of <code>/usr/share/applications/firefox.desktop</code>; you&rsquo;ll use this later.</li>
+<li>Remove the version of Firefox installed from the Fedora repositories with <code>dnf remove firefox</code>. This will remove the <code>firefox.desktop</code> file you copied in the previous step (which is why you copied it somewhere else).</li>
+
+<li><p>Use <code>bunzip2</code> to decompress the downloaded Firefox 60 archive. This will leave you with a plain <code>.tar</code> file:</p>
+
+<pre><code>bunzip2 firefox-60.0.tar.bz2
+</code></pre></li>
+
+<li><p>Extract the archive into your <code>/opt</code> directory:</p>
+
+<pre><code>sudo tar -C /opt -xvf firefox-60.0.tar
+</code></pre>
+
+<p>This will create a <code>firefox</code> directory underneath the <code>/opt</code> directory. (You can modify this as desired to install Firefox 60 into a different location.)</p></li>
+
+<li><p>Edit the saved copy of <code>firefox.desktop</code> (from step 2) and replace the &ldquo;Exec=&rdquo; lines with the correct path to the new Firefox 60 binary (if you&rsquo;re following these instructions, the correct path will be <code>/opt/firefox/firefox</code>).</p></li>
+
+<li><p>Copy the edited <code>firefox.desktop</code> file (from the previous step) back into <code>/usr/share/applications</code>.</p></li>
+</ol>
+
+<p>And that&rsquo;s it! You should now be good to go with Firefox 60 on your Fedora 27 system. If you run into any problems or have any additional questions, feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/HWmWY3QROew" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/HWmWY3QROew/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 </ul>
@@ -394,14 +363,26 @@ Categories=Utility;Development;
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-  <a href="tpedit_erstellt_interaktive_formulare.html">
-<div class="date">12.05.2018</div>
-<h3>TPEdit erstellt interaktive Formulare</h3>
+  <a href="implizites_eulerverfahren.html">
+<div class="date">04.06.2018</div>
+<h3>Implizites Eulerverfahren</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Die Ausrichtung des
-Editors für Testprozeduren und Checklisten
-verlagert sich mehr und mehr auf die Erstellung interaktiver Formulare zur Vermeidung von Medienbrüchen
+<p>Nachdem ich gerade meinen Osterurlaub verlebe habe ich begonnen, ein Thema anzufassen,
+das mich schon länger beschäftigt - aber für Mathematik brauch ich Ruhe... Ich wollte
+zunächst hinter die Magie der impliziten Verfahren steigen und schauen, ob es eien Möglichkeit
+gibt, diese ebenfalls so generisch zu betrachten, dass man auf einfache Art und Weise
+ein Framework dafür erstellen kann
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="eine_ganz_alte_bibliothek_bildverarbeitung.html">
+<div class="date">04.06.2018</div>
+<h3>Eine ganz alte Bibliothek für Bildverarbeitung</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich übergebe hiermit derm großen Internet in seiner Rolle als Archiv eine Bildverarbeitungsbibliothek, die
+ich vor vielen Monden in meiner Zeit an der Uni verbrochen habe.
 </p></div>   </a>
 </li>
 <li class="anriss">
@@ -409,26 +390,10 @@ verlagert sich mehr und mehr auf die Erstellung interaktiver Formulare zur Verme
 <div class="date">12.05.2018</div>
 <h3>Linux WiFi Accesspoint die zweite</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Wie bereits am Ende des
 vorhergehenden Artikel zu diesem Thema beschrieben,
 standen noch die Themen regelmäßiger Tausch der Secrets, Erzeugung von QR-Codes und WPS aus - hier
 die Auflösung...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="icons___woher_nehmen____iii.html">
-<div class="date">06.05.2018</div>
-<h3>Icons - woher nehmen? - III</h3>
-<div class="abstract">
-<p>Es ist schon einige Zeit seit meinem
-letzten Artikel
-zu diesem Thema vergangen. Da ich in letzter Zeit
-das
-eine
-oder
-andere
-Projekt auf Github veröffentlicht habe, benötigte ich dafür Icons mit entsprechend passenden Lizenzen.
 </p></div>   </a>
 </li>
 </ul>
