@@ -168,7 +168,7 @@ public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 
 	protected Boolean hasAtLeastOneChild()
 	{
-		return null;
+		return Boolean.FALSE;
 	}
 
 	//Implementation of interface javax.swing.tree.TreeNode

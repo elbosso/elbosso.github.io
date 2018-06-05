@@ -62,15 +62,12 @@ public class ReduxTree
 		super();
 		this.container=new java.util.HashMap();
 		holders=new java.util.HashMap();
-		for (String key : container.keySet())
+		for (java.util.Map.Entry<String, Object> entry : container.entrySet())
 		{
-
-
-			Object data=container.get(key);
-			java.lang.Class cls=data.getClass();
-			this.container.put(key, data);
-			Holder h=new Holder(key,this,cls);
-			java.lang.String id=key+cls.getName();
+			java.lang.Class cls=entry.getValue().getClass();
+			this.container.put(entry.getKey(), entry.getValue());
+			Holder h=new Holder(entry.getKey(),this,cls);
+			java.lang.String id=entry.getKey()+cls.getName();
 			holders.put(id,h);
 		}
 	}
@@ -109,19 +106,18 @@ public class ReduxTree
 		{
 			root=new javax.swing.tree.DefaultMutableTreeNode();
 			model=new javax.swing.tree.DefaultTreeModel(root);
-			for (String key : container.keySet())
+			for (java.util.Map.Entry<String, Object> entry : container.entrySet())
 			{
-
-				Object data=container.get(key);
+				java.lang.Object data=entry.getValue();
 				java.lang.Class cls=data.getClass();
-				String[] path=key.split("/");
+				String[] path=entry.getKey().split("/");
 				javax.swing.tree.DefaultMutableTreeNode n=root;
 				for(int i=0;i<path.length;++i)
 				{
 					n=getNodeForName(n, path[i]);
 				}
-				java.lang.String id=key+cls.getName();
-				Holder h=get(key, cls);
+				java.lang.String id=entry.getKey()+cls.getName();
+				Holder h=get(entry.getKey(), cls);
 				javax.swing.tree.DefaultMutableTreeNode vn=new javax.swing.tree.DefaultMutableTreeNode(h);
 				n.add(vn);
 				model.nodesWereInserted(n, new int[]{n.getChildCount()-1});

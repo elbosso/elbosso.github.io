@@ -36,12 +36,17 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 
 package de.elbosso.model.table;
 
+import javax.swing.*;
+
 public class ActivityToggleModel<T> extends de.netsysit.model.table.EventHandlingSupport
 {
 	private final static java.util.ResourceBundle i18n = java.util.ResourceBundle.getBundle("de.netsysit.model.i18n", java.util.Locale.getDefault());
 	private java.util.List <de.elbosso.util.lang.ActivityToggle <T> > container;
 	private java.lang.String leftColumnName;
-	
+	private javax.swing.Action selectAllAction;
+	private javax.swing.Action selectNoneAction;
+	private javax.swing.Action toggleSelectionAction;
+
 	public ActivityToggleModel()
 	{
 		this(i18n.getString("ActivityToggleModel.columnTitle.left"));
@@ -52,6 +57,65 @@ public class ActivityToggleModel<T> extends de.netsysit.model.table.EventHandlin
 		super();
 		this.leftColumnName=leftColumnName;
 		container=new java.util.LinkedList();
+		createActions();
+	}
+
+	private void createActions()
+	{
+		selectAllAction=new javax.swing.AbstractAction(i18n.getString("ActivityToggleModel.selectAllAction.text"),new javax.swing.ImageIcon(de.netsysit.util.ResourceLoader.getImgResource("de/elbosso/ressources/gfx/eb/select all_48.png")))
+		{
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent e)
+			{
+				for(de.elbosso.util.lang.ActivityToggle activityToggle:container)
+				{
+					activityToggle.setActive(true);
+				}
+				fireTableChanged();
+			}
+		};
+		selectAllAction.putValue(Action.SHORT_DESCRIPTION,i18n.getString("ActivityToggleModel.selectAllAction.tooltip"));
+		selectNoneAction=new javax.swing.AbstractAction(i18n.getString("ActivityToggleModel.selectNoneAction.text"),new javax.swing.ImageIcon(de.netsysit.util.ResourceLoader.getImgResource("de/elbosso/ressources/gfx/eb/deselect all_48.png")))
+		{
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent e)
+			{
+				for(de.elbosso.util.lang.ActivityToggle activityToggle:container)
+				{
+					activityToggle.setActive(false);
+				}
+				fireTableChanged();
+			}
+		};
+		selectNoneAction.putValue(Action.SHORT_DESCRIPTION,i18n.getString("ActivityToggleModel.selectNoneAction.tooltip"));
+		toggleSelectionAction=new javax.swing.AbstractAction(i18n.getString("ActivityToggleModel.toggleSelectionAction.text"),new javax.swing.ImageIcon(de.netsysit.util.ResourceLoader.getImgResource("de/netsysit/ressources/gfx/common/ToggleSelectionState24.gif")))
+		{
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent e)
+			{
+				for(de.elbosso.util.lang.ActivityToggle activityToggle:container)
+				{
+					activityToggle.setActive(!activityToggle.isActive());
+				}
+				fireTableChanged();
+			}
+		};
+		toggleSelectionAction.putValue(Action.SHORT_DESCRIPTION,i18n.getString("ActivityToggleModel.toggleSelectionAction.tooltip"));
+	}
+
+	public javax.swing.Action getSelectAllAction()
+	{
+		return selectAllAction;
+	}
+
+	public javax.swing.Action getSelectNoneAction()
+	{
+		return selectNoneAction;
+	}
+
+	public javax.swing.Action getToggleSelectionAction()
+	{
+		return toggleSelectionAction;
 	}
 
 	public int getRowCount()
@@ -96,6 +160,11 @@ public class ActivityToggleModel<T> extends de.netsysit.model.table.EventHandlin
 	public boolean isActive(int row)
 	{
 		return container.get(row).isActive();
+	}
+	public void setActive(int row,boolean active)
+	{
+		container.get(row).setActive(active);
+		fireTableChanged(new javax.swing.event.TableModelEvent(this, row));
 	}
 	public T getContent(int row)
 	{
