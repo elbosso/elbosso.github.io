@@ -117,6 +117,317 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>A Quick Intro to the AWS CLI</h3>
+		</div>
+		<div class="collectiontext">
+			<p>This post provides a (very) basic introduction to the <a href="https://aws.amazon.com/cli/">AWS CLI (command-line interface)</a> tool. It&rsquo;s not intended to be a deep dive, nor is it intended to serve as a comprehensive reference guide (the <a href="http://docs.aws.amazon.com/cli/latest/reference/">AWS CLI docs</a> nicely fill that need). I also assume that you already have a basic understanding of the key AWS concepts and terminology, so I won&rsquo;t bore you with defining an instance, VPC, subnet, or security group.</p>
+
+<p>For the purposes of this introduction, I&rsquo;ll structure it around launching an EC2 instance. As it turns out, there&rsquo;s a fair amount of information you need before you can launch an AWS instance using the AWS CLI. So, let&rsquo;s look at how you would use the AWS CLI to help get the information you need in order to launch an instance using the AWS CLI. (Tool inception!)</p>
+
+<p>To launch an instance, you need five pieces of information:</p>
+
+<ol>
+<li>The ID of an Amazon Machine Image (AMI)</li>
+<li>The type of instance you&rsquo;re going to launch</li>
+<li>The name of the SSH keypair you&rsquo;d like to inject into the instance</li>
+<li>The ID of the security group to which this instance should be added</li>
+<li>The ID of the subnet on which this instance should be placed</li>
+</ol>
+
+<p>Some (most?) of this information is easily located via the AWS console, but I&rsquo;ll use the CLI nevertheless.</p>
+
+<p>Let&rsquo;s start by determining the name of the SSH keypair you&rsquo;d like to inject into the instance (this is assuming you&rsquo;re launching a Linux-based instance). The basic format for AWS CLI commands looks something like <code>aws &lt;service&gt; &lt;command&gt;</code>. In this case, we&rsquo;re dealing with the EC2 service, and we want to get a list of&mdash;or <em>describe</em>&mdash;the SSH keypairs. So the command looks like this:</p>
+
+<pre><code>aws ec2 describe-key-pairs
+</code></pre>
+
+<p>What you&rsquo;ll get back is JSON (see <a href="https://blog.scottlowe.org/2013/11/08/a-non-programmers-introduction-to-json/">this article</a> if you need a quick introduction to JSON) that looks something like this (some of the data has been randomized to protect the innocent):</p>
+
+<pre><code class="language-json">{
+  &quot;KeyPairs&quot;: [
+    {
+      &quot;KeyName&quot;: &quot;key_pair_name&quot;,
+      &quot;KeyFingerprint&quot;: &quot;57:ca:27:99:fe:2a:24:60:8e:7f:b4:de:ad:be:ef:f1&quot;
+    }
+  ]
+}
+</code></pre>
+
+<p>Because it&rsquo;s JSON, you can use handy tools like <code>jq</code> to manipulate and format this data. (If you aren&rsquo;t familiar with <code>jq</code>, see <a href="https://blog.scottlowe.org/2015/11/11/handy-cli-tool-json/">this article</a>.) So, let&rsquo;s say you wanted to extract the keypair name into a variable so you can re-use it later. That command looks something like this:</p>
+
+<pre><code>KEYPAIR=$(aws ec2 describe-key-pairs | jq -r '.KeyPairs[0].KeyName')
+</code></pre>
+
+<p>Subsequently running <code>echo $KEYPAIR</code> would produce the output <code>key_pair_name</code>, showing you that you&rsquo;ve successfully extracted the name of the keypair into the variable named KEYPAIR. This trick&mdash;assigning the output of a command to a variable&mdash;is a trick of the Bash shell called <em>command substitution</em>, and I&rsquo;ll use it extensively in this article to store pieces of information we&rsquo;ll need later.</p>
+
+<p>Next, you&rsquo;ll need to know what type of instance you want to launch. Rodney &ldquo;Rodos&rdquo; Haywood has a great article on <a href="http://rodos.haywood.org/2016/03/which-instances-are-available-in-my.html">determining which instances are available in your region</a>. For now, we&rsquo;ll just assume you want to create a &ldquo;t2.micro&rdquo; instance.</p>
+
+<p>Next, let&rsquo;s track down security group and subnet information. To retrieve security group details, you&rsquo;d use this command:</p>
+
+<pre><code>aws ec2 describe-security-groups
+</code></pre>
+
+<p>This will return a list of security groups and the rules in the security groups, so the output will be lengthy and/or complex. Once again we&rsquo;ll turn to <code>jq</code> to help parse the information down to show us only the group ID of the default security group:</p>
+
+<pre><code>aws ec2 describe-security-groups | jq '.SecurityGroups[] | select (.GroupName == &quot;default&quot;) | .GroupId'
+</code></pre>
+
+<p>This finds the group whose <code>GroupName</code> key has the value &ldquo;default&rdquo; (i.e., the security group named &ldquo;default&rdquo;) and returns the group ID. You could modify the value for which you&rsquo;re searching as needed, of course.</p>
+
+<p>You can use Bash command substitution to place the output of this command into a variable we&rsquo;ll use later:</p>
+
+<pre><code>SG_ID=$(aws ec2 describe-security-groups | jq -r '.SecurityGroups[] | select (.GroupName == &quot;default&quot;) | .GroupId')
+</code></pre>
+
+<p>In reviewing the output of the <code>aws ec2 describe-security-groups</code> command, perhaps you notice the security group doesn&rsquo;t allow SSH access. That will be problematic, as SSH is the nearly-universal means by which you gain access to Linux- and UNIX-based instances. We can fix that pretty easily with the oh-so-intuitively-named <code>aws ec2 authorize-security-group-ingress</code> command:</p>
+
+<pre><code>aws ec2 authorize-security-group-ingress --group-id &lt;value&gt; --protocol &lt;tcp|udp|icmp&gt; --port &lt;value&gt; --cidr &lt;value&gt;
+</code></pre>
+
+<p>To allow SSH access, then, we&rsquo;ll use the <code>$SG_ID</code> value we obtained earlier and plug in the correct values for SSH:</p>
+
+<pre><code>aws ec2 authorize-security-group-ingress --group-id $SG_ID \
+--protocol tcp --port 22 --cidr 0.0.0.0/0
+</code></pre>
+
+<p>And now our soon-to-be-launched instance will be available via SSH! (If you decide you don&rsquo;t want SSH access, just use the <code>aws ec2 revoke-security-group-ingress</code> command, which has the same syntax as the <code>aws ec2 authorize-security-group-ingress</code> command.)</p>
+
+<p>So far, we&rsquo;ve gathered the SSH key pair, the instance type, and the security group ID. Determining the next piece of information we need&mdash;the subnet ID&mdash;is pretty straightforward as well. The basic command is <code>aws ec2 describe-subnets</code>; when it&rsquo;s combined with a <code>jq</code> filter we can get the subnet ID for the subnet in a particular availability zone. Let&rsquo;s say we want the subnet from the &ldquo;us-west-2b&rdquo; availability zone:</p>
+
+<pre><code>aws ec2 describe-subnets | jq '.Subnets[] | select(.AvailabilityZone == &quot;us-west-2b&quot;) | .SubnetId'
+</code></pre>
+
+<p>This uses the same <code>jq</code> syntax we used with the security groups: finds the subnet object whose AvailabilityZone key is equal to &ldquo;us-west-2b&rdquo;, then returns the ID for that subnet.</p>
+
+<p>Naturally, we&rsquo;ll store this value in a variable for use later (adding the <code>-r</code> flag to <code>jq</code> to return the value in plain text, not as JSON):</p>
+
+<pre><code>SUBNET_ID=$(aws ec2 describe-subnets | jq -r '.Subnets[] | select(.AvailabilityZone == &quot;us-west-2b&quot;) | .SubnetId')
+</code></pre>
+
+<p>We&rsquo;re now left with only the AMI (Amazon Machine Image). I&rsquo;ve saved this for last as some might consider it the most complex of the tasks. As you&rsquo;ve likely guessed, the basic command is <code>aws ec2 describe-images</code>. However, you can&rsquo;t just run that command; it will return <em>way</em> too much information. (Go ahead and try it, I&rsquo;ll wait here.)</p>
+
+<p>To limit the amount of information returned by the <code>aws ec2 describe-images</code> command, we need to use some server-side filtering/querying functionality. There&rsquo;s a few different tricks we can use here:</p>
+
+<ul>
+<li><p>First, we can add the <code>--owners</code> flag to limit the command to show AMIs belonging to a specific account. Let&rsquo;s suppose that we&rsquo;re looking for an Ubuntu AMI; in the case, we&rsquo;d use the owner ID of &ldquo;099720109477&rdquo;, so that the command would look like this:</p>
+
+<pre><code>aws ec2 describe-images --owners 099720109477
+</code></pre></li>
+
+<li><p>However, that&rsquo;s not enough, because we still get far too many values returned. To whittle down the list even further, the AWS CLI supports the  &ldquo;&ndash;filters&rdquo; parameter, which allows us to add more constraints to the list. The most useful filter, in my opinion, is filtering on the Name value. This allows you to do &ldquo;wildcard&rdquo; searches for AMIs whose name match a pattern. Here&rsquo;s an example:</p>
+
+<pre><code>aws ec2 describe-images --owners 099720109477 \
+--filters Name=name,Values='*ubuntu-xenial-16.04*'
+</code></pre>
+
+<p>This will still return too much information, but we can tack on additional filters as needed:</p>
+
+<pre><code>aws ec2 describe-images --owners 099720109477 \
+--filters Name=root-device-type,Values=ebs \
+Name=architecture, Values=x86_64 \
+Name=name,Values='*ubuntu-xenial-16.04*' \
+Name=virtualization-type,Values=hvm
+</code></pre>
+
+<p>Here you can see I&rsquo;ve added filters to show only AMIs that use EBS as the root volume type, are hardware-virtualized images, and are 64-bit images. The full list of available filters for the <code>describe-images</code> command is available <a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html">here</a>.</p></li>
+
+<li><p>Our final trick is to add a server-side query to the command. This query uses JMESPath syntax (which I won&rsquo;t cover here because that&rsquo;s enough for a separate post on its own). Here&rsquo;s an example of using a server-side query to show only the most recent AMI that matches the rest of the criteria:</p>
+
+<pre><code>aws ec2 describe-images --owners 099720109477 --filters Name=root-device-type,Values=ebs Name=architecture,Values=x86_64 Name=name,Values='*ubuntu-xenial-16.04*' Name=virtualization-type,Values=hvm --query 'sort_by(Images, &amp;Name)[-1].ImageId'
+</code></pre>
+
+<p>The last and final step would be to store the value this command returns into a variable for use later:</p>
+
+<pre><code>IMAGE_ID=$(aws ec2 describe-images --owners 099720109477 --filters Name=root-device-type,Values=ebs Name=architecture,Values=x86_64 Name=name,Values='*ubuntu-xenial-16.04*' Name=virtualization-type,Values=hvm --query 'sort_by(Images, &amp;Name)[-1].ImageId')
+</code></pre></li>
+</ul>
+
+<p>At this point, we&rsquo;ve gathered all the information we need to launch an AWS instance. The command to use is (drum roll, please) <code>aws ec2 run-instances</code>, and we&rsquo;ll plug in the variables we&rsquo;ve created along the way to supply all the necessary information. Here&rsquo;s what the final command would look like (I&rsquo;ve wrapped it with backslashes for improved readability):</p>
+
+<pre><code>aws ec2 run-instances --image-id $IMAGE_ID \
+--count 1 --instance-type t2.micro \
+--key-name $KEYPAIR \
+--security-group-ids $SG_ID \
+--subnet-id $SUBNET_ID
+</code></pre>
+
+<p>This command will also return some JSON, which will include the instance IDs of the instances we just launched. We&rsquo;ll ignore that output for now for the sake of being able to show a few more ways to use the AWS CLI.</p>
+
+<p>With an instance now running, let&rsquo;s retrieve the details of the instance with another AWS CLI command:</p>
+
+<pre><code>aws ec2 describe-instances
+</code></pre>
+
+<p>This command also returns a pretty fair amount of information, and again we can use <code>jq</code> to filter down the information to show <em>only</em> the details you need. Suppose you need to see the private and public IP addresses assigned to the instance you just launched. With this set of <code>jq</code> filters, that&rsquo;s exactly what you&rsquo;ll see:</p>
+
+<pre><code>aws ec2 describe-instances | jq '.Reservations[].Instances[] | { instance: .InstanceId, publicip: .PublicIpAddress, privateip: .PrivateIpAddress }'
+</code></pre>
+
+<p>Handy! I could run through a dozen more examples, but I think you get the point now.</p>
+
+<p>Let&rsquo;s move on to terminating an instance. In order to terminate an instance&mdash;and you guessed it, the appropriate command is <code>aws ec2 terminate-instances</code> as expected&mdash;we&rsquo;ll need the instance IDs. Turning back to <code>jq</code> again:</p>
+
+<pre><code>aws ec2 describe-instances | jq '.Reservations[].Instances[] | .InstanceId'
+</code></pre>
+
+<p>And once again using command substitution store that into a variable:</p>
+
+<pre><code>INSTANCE_ID=$(aws ec2 describe-instances | jq -r '.Reservations[].Instances[] | .InstanceId')
+</code></pre>
+
+<p>Then we can plug that value into this command to terminate instances:</p>
+
+<pre><code>aws ec2 terminate-instances --instance-ids $INSTANCE_ID
+</code></pre>
+
+<p>Hopefully this quick introduction to basic tasks you can perform with the AWS CLI has been useful. Feel free to <a href="https://twitter.com/scott_lowe">hit me on Twitter</a> if you have questions. If you have suggestions for improving this article, I invite you to open an issue or file a PR <a href="https://github.com/scottslowe/weblog">on the GitHub repository for this site</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/LMcxtEELibw" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/LMcxtEELibw/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Examining X.509 Certificates Embedded in Kubeconfig Files</h3>
+		</div>
+		<div class="collectiontext">
+			<p>While exploring some of the intricacies around the use of X.509v3 certificates in <a href="https://kubernetes.io/">Kubernetes</a>, I found myself wanting to be able to view the details of a certificate embedded in a kubeconfig file. (See <a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/">this page</a> if you&rsquo;re unfamiliar with what a kubeconfig file is.) In this post, I&rsquo;ll share with you the commands I used to accomplish this task.</p>
+
+<p>First, you&rsquo;ll want to extract the certificate data from the kubeconfig file. For the purposes of this post, I&rsquo;ll use a kubeconfig file named <code>config</code> and found in the <code>.kube</code> subdirectory of your home directory. Assuming there&rsquo;s only a single certificate embedded in the file, you can use a simple <code>grep</code> statement to isolate this information:</p>
+
+<pre><code>grep 'client-certificate-data' $HOME/.kube/config
+</code></pre>
+
+<p>Combine that with <code>awk</code> to isolate <em>only</em> the certificate data:</p>
+
+<pre><code>grep 'client-certificate-data' $HOME/.kube/config | awk '{print $2}'
+</code></pre>
+
+<p>This data is Base64-encoded, so we decode it (I&rsquo;ll wrap the command using backslashes for readability now that it has grown a bit longer):</p>
+
+<pre><code>grep 'client-certificate-data' $HOME/.kube/config | \
+awk '{print $2}' | base64 -d
+</code></pre>
+
+<p>You could, at this stage, redirect the output into a file (like <code>certificate.crt</code>) if so desired; the data you have is a valid X.509v3 certificate. It lacks the private key, of course.</p>
+
+<p>However, if you&rsquo;re only interested in viewing the properties of the certificate, as I was, there&rsquo;s no need to redirect the output to a file. Instead, just pipe the output into <code>openssl</code>:</p>
+
+<pre><code>grep 'client-certificate-data' $HOME/.kube/config | \
+awk '{print $2}' | base64 -d | openssl x509 -text
+</code></pre>
+
+<p>The output of this command should be a decoded breakdown of the data in the X.509 certificate. Notable pieces of information in this context are the Subject (this will identify the user being authenticated to Kubernetes with this certificate):</p>
+
+<pre><code class="language-text">Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 8264125584782928183 (0x72b0126f24342937)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=kubernetes
+        Validity
+            Not Before: Jun 13 01:52:46 2018 GMT
+            Not After : Jun 13 01:53:17 2019 GMT
+        Subject: CN=system:kube-controller-manager
+</code></pre>
+
+<p>Also of interest is the X509v3 Extended Key Usage (which indicates the certificate is used for client authentication, i.e., &ldquo;TLS Web Client Authentication&rdquo;):</p>
+
+<pre><code class="language-text">        X509v3 extensions:
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Client Authentication
+</code></pre>
+
+<p>Note that the certificate is <em>not</em> configured for encryption, meaning this certificate doesn&rsquo;t ensure the connection to Kubernetes is encrypted. That function is handled by a different certificate; this one is only used for client authentication.</p>
+
+<p>This is probably nothing new for experienced Kubernetes folks, but I thought it might prove useful to a few people out there. Feel free <a href="https://twitter.com/scott_lowe">to hit me up on Twitter</a> with any corrections, clarifications, or questions. Have fun examining certificate data!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/Z3daC8vNs2o" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Z3daC8vNs2o/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Using Variables in AWS Tags with Terraform</h3>
+		</div>
+		<div class="collectiontext">
+			<p>I&rsquo;ve been working to deepen my <a href="https://www.terraform.io/">Terraform</a> skills recently, and one avenue I&rsquo;ve been using to help in this area is expanding my use of Terraform modules. If you&rsquo;re unfamiliar with the idea of Terraform modules, you can liken them to <a href="https://www.ansible.com/">Ansible</a> roles: a re-usable abstraction/function that is heavily parameterized and can be called/invoked as needed. Recently I wanted to add support for tagging AWS instances in a module I was building, and I found out that you can&rsquo;t use variable interpolation in the normal way for AWS tags. Here&rsquo;s a workaround I found in my research and testing.</p>
+
+<p>Normally, variable interpolation in Terraform would allow one to do something like this (this is taken from the <code>aws_instance</code> resource):</p>
+
+<pre><code class="language-text">tags {
+    Name = &quot;${var.name}-${count.index}&quot;
+    role = &quot;${var.role}&quot;
+}
+</code></pre>
+
+<p>This approach works, creating tags whose keys are &ldquo;Name&rdquo; and &ldquo;role&rdquo; and whose values are the interpolated variables. (I am, in fact, using this exact snippet of code in some of my Terraform modules.) Given that this works, I decided to extend it in a way that would allow the code calling the module to supply both the key as well as the value, thus providing more flexibility in the module. I arrived at this snippet:</p>
+
+<pre><code class="language-text">tags {
+    Name = &quot;${var.name}-${count.index}&quot;
+    role = &quot;${var.role}&quot;
+    &quot;${var.opt_tag_name}&quot; = &quot;${var.opt_tag_value}&quot;
+}
+</code></pre>
+
+<p>The idea here is that the <code>opt_tag_name</code> variable contains a tag key, and the <code>opt_tag_value</code> contains the associated tag value.</p>
+
+<p>Unfortunately, this doesn&rsquo;t work&mdash;instead of interpolating the value for <code>opt_tag_name</code>, the string was applied literally, and the value wasn&rsquo;t interpolated at all (it came through blank). I&rsquo;m not really sure why this is the case, but after some searching I came across <a href="https://github.com/hashicorp/terraform/issues/14516">this GitHub issue</a> that provides a workaround.</p>
+
+<p>The workaround has 2 parts:</p>
+
+<ol>
+<li>A local definition</li>
+<li>Mapping the tags into the <code>aws_instance</code> resource</li>
+</ol>
+
+<p>The local definition looks like this:</p>
+
+<pre><code class="language-text">locals {
+    common_tags = &quot;${map(
+        &quot;${var.opt_tag_name}&quot;, &quot;${var.opt_tag_value}&quot;,
+        &quot;role&quot;, &quot;${var.role}&quot;
+    )}&quot;
+}
+</code></pre>
+
+<p>This sets up a &ldquo;local variable&rdquo; within the module (it&rsquo;s scoped to the module). In this case, it&rsquo;s a map of keys and values. One of the keys is determined by interpolating the <code>opt_tag_name</code> variable, and the value for that key is determined by the variable <code>opt_tag_value</code>. The second key is &ldquo;role&rdquo;, and the value is taken by interpolating the <code>role</code> variable.</p>
+
+<p>The second step references this local definition. In the <code>aws_instance</code> resource itself, you&rsquo;ll reference the local definition along with any additional tags like this:</p>
+
+<pre><code class="language-text">tags = &quot;${merge(
+    local.common_tags,
+    map(
+        &quot;Name&quot;, &quot;${var.name}-${count.index}&quot;
+    )
+)}&quot;
+</code></pre>
+
+<p>This snippet of code sets up a new map that defines the tag with the &ldquo;Name&rdquo; key and the value taken from the variable <code>name</code> and suffixed by a count (derived from the number of instances being created). Then it uses the <code>merge</code> function to create a union of the two maps, which are then used by the AWS provider to set the tags on the AWS instance.</p>
+
+<p>Taken together, this allows me to provide <em>both</em> the tag name and the tag value to the module, which will then pass those along to the AWS instances created by the module. Now I just need to figure out how to make this truly <em>optional</em>, so that the module doesn&rsquo;t try to create a key-name value if no values are passed to the module. I haven&rsquo;t figured that part out (yet).</p>
+
+<h2 id="more-resources">More Resources</h2>
+
+<p><a href="https://www.terraform.io/docs/modules/index.html">Here&rsquo;s</a> the Terraform documentation on modules, though&mdash;to be honest&mdash;I haven&rsquo;t found it to be as helpful as I&rsquo;d like.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/K_DuJAKhlw0" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/K_DuJAKhlw0/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>A Quadruple-Provider Vagrant Environment</h3>
 		</div>
 		<div class="collectiontext">
@@ -383,182 +694,6 @@ end # Vagrant.configure
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/-cFBd3pTPd0/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Book Review: Infrastructure as Code</h3>
-		</div>
-		<div class="collectiontext">
-			<p>As part of <a href="https://blog.scottlowe.org/2018/03/05/looking-ahead-2018-projects/">my 2018 projects</a>, I committed to reading and reviewing more technical books this year. As part of that effort, I recently finished reading <em>Infrastructure as Code</em>, authored by Kief Morris and published in September 2015 by O&rsquo;Reilly (more details <a href="http://shop.oreilly.com/product/0636920039297.do">here</a>). Infrastructure as code is very relevant to my current job function and is an area of great personal interest, and I&rsquo;d been half-heartedly working my way through the book for some time. Now that I&rsquo;ve completed it, here are my thoughts.</p>
-
-<p>Overall, Morris does a great job of crisply defining infrastructure as code (a somewhat vague and amorphous term at times) and outlining the key principles that are involved. Morris also does a really good job of staying high-level as he works through the various aspects of infrastructure as code and discusses some of the considerations, patterns (and anti-patterns), and recommended practices in each aspect.</p>
-
-<p>The book&rsquo;s high-level focus is, however, both its greatest strength as well as its greatest weakness. Because infrastructure as code can be implemented in a variety of ways with a variety of tools, the book must necessarily be high-level and somewhat abstract. As I mentioned, Morris does a really good job with this. In remaining high-level, though, the book loses some of the details and tool-specific recommendations that would be helpful in getting readers started implementing infrastructure as code in their own environments. Although Morris makes brief references to specific tools here and there, there simply isn&rsquo;t room for him to discuss any one tool in any depth.</p>
-
-<p>The result?</p>
-
-<ul>
-<li>For readers who are already familiar with tools like <a href="https://www.terraform.io/">Terraform</a> or <a href="https://www.ansible.com/">Ansible</a> (or similar), Morris&rsquo; review of key concepts, considerations, patterns/anti-patterns, and practices enables them to better understand the big picture and where their tool-specific skills fit into that big picture. In some aspects, Morris is complementing these readers&rsquo; &ldquo;tactical skills&rdquo; with some &ldquo;strategic skills.&rdquo;</li>
-<li>For readers who are <em>not</em> familiar with tools commonly used in infrastructure as code, the concepts are so high-level and abstract that it can be difficult at times to translate them into specific tasks that can be accomplished with a particular tool. The question of &ldquo;OK, how would I do that in CloudFormation?&rdquo; (or Terraform, or Ansible, or any other such tool) isn&rsquo;t a question Morris can answer because the book isn&rsquo;t written at that level.</li>
-</ul>
-
-<p>This is not to say that the book isn&rsquo;t helpful; quite the contrary! Morris&rsquo; identification of key patterns to adopt and key anti-patterns to avoid helps readers understand what (and what not) to do as they progress along their journey with infrastructure as code. This in and of itself is very useful for readers of all skill levels, in my opinion. Additionally, Morris calls out numerous non-technological considerations along the way; this quote (from Chapter 9) was one of my favorites:</p>
-
-<blockquote>
-<p>When you find yourself considering organizational processes to coordinate and schedule changes, stop!</p>
-</blockquote>
-
-<p>Here, Morris is warning against allowing infrastructure definitions to become unwieldy and monolithic, which would increase the likelihood that changes would cause something to break and thus lead people to avoid changes that are necessary. Instead of creating organizational processes to protect against the automation fear spiral (another great concept that Morris introduces early in the book), he recommends refactoring your infrastructure definitions to make them more modular, more flexible, and more resilient to change. This is just one example of content that is enormously useful to all sorts of readers, and this sort of wisdom/experience is sprinkled liberally throughout the book.</p>
-
-<p>Overall, I <em>highly</em> recommend this book. Be aware, though, that this book won&rsquo;t give you the tool-specific knowledge you&rsquo;ll need to implement the concepts that Morris introduces and explains, so you&rsquo;ll want to pair this book with a more hands-on, tool-specific tome. For example, users wanting to implement infrastructure as code using something like Terraform should combine this book with something like <em>Terraform: Up and Running</em>, also by O&rsquo;Reilly (see <a href="http://shop.oreilly.com/product/0636920061939.do">here</a> for details).</p>
-
-<p><em>Disclaimer: I am an O&rsquo;Reilly author, but I did not receive any compensation from O&rsquo;Reilly, any other publisher or distributor, or the authors of the books mentioned in this review. These thoughts are mine alone.</em></p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/l9ydE5zt0TE" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/l9ydE5zt0TE/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 100</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Wow! This marks 100 posts in the Technology Short Take series! For almost eight years (Technology Short Take #1 <a href="https://blog.scottlowe.org/2010/08/18/technology-short-take-1/">was published</a> in August 2010), I&rsquo;ve been collecting and sharing links and articles from around the web related to major data center technologies. Time really flies when you&rsquo;re having fun! Anyway, here is Technology Short Take 100&hellip;I hope you enjoy!</p>
-
-<p>Also, a quick note that I removed the &ldquo;Servers/Hardware&rdquo; and &ldquo;Storage&rdquo; sections this time around, as I didn&rsquo;t have any useful content to share. I&rsquo;ll continue to evaluate whether I will/should include those sections moving forward (your feedback is welcome; <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>).</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Will Robinson walks readers through <a href="http://www.oznetnerd.com/installing-ntc-ansible/">installing NTC Ansible</a>.</li>
-<li><a href="https://blog.benjojo.co.uk/post/bgp-battleships">Battleship over BGP?</a> Interesting (saw this via Rob Markovic on Twitter).</li>
-<li>Ben Piper shares an example of <a href="https://cumulusnetworks.com/blog/automating-cumulus-linux-ansible/">automating Cumulus Linux with Ansible</a>.</li>
-</ul>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>Container wizard Jessie Frazelle shares a proposal for <a href="https://blog.jessfraz.com/post/hard-multi-tenancy-in-kubernetes/">hard multi-tenancy in Kubernetes</a>. Along the way, she also provides some additional (useful) information about existing isolation mechanisms.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>This article on <a href="https://engineering.opsgenie.com/how-does-proportional-cpu-allocation-work-with-aws-lambda-41cd44da3cac">how proportional CPU allocation works with AWS Lambda</a> shows that there&rsquo;s more to architecting and supporting Lambda for maximum efficiency than a lot of folks realize. (I could be wrong, though. It could be that lots of people recognize that Lambda isn&rsquo;t as simple as it seems.)</li>
-<li>While we are on the topic of AWS Lambda, check out this post by Mayank Lahiri on <a href="https://serverless.com/blog/understanding-and-controlling-aws-lambda-costs/">understanding and controlling AWS Lambda costs</a>. The fact that pricing is based on a composite unit combining both execution time and memory allocation means that billing isn&rsquo;t necessarily as straightforward as it may seem, and this article has some good details. (Note that it is a bit dated, having been written in September 2017.)</li>
-<li>Lest you think pricing for serverless architectures is as simple as &ldquo;how many AWS Lambda invocations I had last month,&rdquo; check out Amiram Shachar&rsquo;s post on <a href="https://medium.com/@amiram_26122/the-hidden-costs-of-serverless-6ced7844780b">the hidden costs of serverless</a>.</li>
-<li>Yan Cui of A Cloud Guru discusses <a href="https://read.acloud.guru/does-coding-language-memory-or-package-size-affect-cold-starts-of-aws-lambda-a15e26d12c76">how language, memory, and package size affect cold starts of AWS Lambda</a>. Key takeaways from Cui&rsquo;s post are that C# and Java have (and I quote) &ldquo;~100 times the cold start time of Python and also suffer from much higher standard deviation&rdquo;. Perhaps you should re-think using Java as your language of choice for Lambda functions!</li>
-<li>Let&rsquo;s continue the AWS Lambda love-fest with a mention of this post by Roman Dodin on <a href="https://netdevops.me/2017/building-aws-lambda-with-python-s3-and-serverless/">building AWS Lambda with Python, S3, and serverless</a>. The nice thing about this post, in my opinion, is that it peels back to show some of what&rsquo;s happening under the hood.</li>
-<li>Further proof that using AWS Lambda involves more than &ldquo;just functions&rdquo; is found in this post by Payam Moghaddam on <a href="https://medium.com/build-acl/aws-lambda-deployment-with-terraform-24d36cc86533">using Terraform to deploy AWS Lambda</a>. What is Terraform deploying, you ask? I could tell you, but I&rsquo;d rather you go read the article for yourself.</li>
-<li>Gal Bashan has a two-part series on AWS Lambda internals (<a href="https://medium.com/epsagon/lambda-internals-exploring-aws-lambda-462f05f74076">part 1</a> and <a href="https://medium.com/epsagon/aws-lambda-internals-part-2-going-deeper-1e12b9d2515f">part 2</a>). Bashan gets a bit geeky, but it&rsquo;s still interesting (and potentially useful) information in my opinion.</li>
-<li>This post by Caleb Lloyd on <a href="https://codefresh.io/Kubernetes-Tutorial/recover-broken-kubernetes-cluster/">recovering a broken Kubernetes cluster</a> has some helpful information.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>Michael Gasch <a href="https://embano1.github.io/post/scratch/">goes poking around in the Docker &ldquo;scratch&rdquo; container</a>.</li>
-<li>This is interesting&mdash;Microsoft has <a href="https://azure.microsoft.com/en-us/blog/introducing-the-azure-terraform-resource-provider/">added support for Terraform providers to Azure Resource Manager (ARM)</a>. This allows ARM to orchestrate the creation of resources <em>through</em> Terraform. Only three Terraform providers are supported right now (Kubernetes, CloudFlare, and Datadog).</li>
-<li>Anyone played with (or is using) <a href="https://jenkins-x.io/">Jenkins X</a> yet?</li>
-<li>Michael Hausenblas has <a href="http://mhausenblas.info/kubectl-in-action/">a nice <code>kubectl</code> in action post</a> that provides a handy reference.</li>
-<li>The Kubernetes-Containerd integration has been made GA, according to <a href="https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/">this blog post</a>. This is on my list of things to try, when I get time.</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>William Lam explores the use of Instant Clone in vSphere 6.7 for <a href="https://www.virtuallyghetto.com/2018/05/leveraging-instant-clone-in-vsphere-6-7-for-extremely-fast-nested-esxi-provisioning.html">very fast nested ESXi provisioning</a>.</li>
-<li>Somewhat tongue-in-cheek, Bob Plankers <a href="https://lonesysadmin.net/2018/05/24/vsphere-67-lab-parable/">addresses the complaints</a> of the folks using old lab hardware to run the latest generation of vSphere.</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>At first I thought <a href="https://cloudplatform.googleblog.com/2018/05/SRE-vs-DevOps-competing-standards-or-close-friends.html">this article on SRE vs. DevOps</a> was link-bait (click-bait?), but upon reading the article I found it to be quite useful and informative. If you&rsquo;re unclear about the differences between SRE and DevOps, or are looking for more information on SRE, I&rsquo;d recommend reading this post. (I haven&rsquo;t taken a look at the embedded videos yet, so I can&rsquo;t speak to their usefulness.)</li>
-</ul>
-
-<p>That&rsquo;s all I have for you this time around (I know, it&rsquo;s a bit shorter than usual). I&rsquo;ll have the next Technology Short Take published in about two weeks, so you have until then to read all the articles I&rsquo;ve included above. Good luck!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/Ufx8x6XuqNk" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Ufx8x6XuqNk/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Quick Post: Parsing AWS Instance Data with JQ</h3>
-		</div>
-		<div class="collectiontext">
-			<p>I recently had a need to get a specific subset of information about some AWS instances. Naturally, I turned to the CLI and some CLI tools to help. In this post, I&rsquo;ll share the command I used to parse the AWS instance data down using <a href="https://stedolan.github.io/jq/">the ever-so-handy <code>jq</code> tool</a>.</p>
-
-<p>What I needed, specifically, was the public IP address and the private IP address for each instance. That information is readily accessible using the <code>aws ec2 describe-instances</code> command, but that command provides a ton more information than I needed. So, I decided to try to use <code>jq</code> to parse the JSON output from the AWS CLI. If you&rsquo;re not familiar with <code>jq</code>, I recommend you take a look at <a href="https://blog.scottlowe.org/2015/11/11/handy-cli-tool-json/">this brief introductory post</a> I wrote back in 2015.</p>
-
-<p>After some trial and error, here&rsquo;s the final command I used:</p>
-
-<pre><code class="language-shell">aws ec2 describe-instances | jq '.Reservations[] | .Instances[] | \
-{Id: .InstanceId, PublicAddress: .PublicIpAddress, \
-PrivateAddress: .PrivateIpAddress}'
-</code></pre>
-
-<p>I&rsquo;ll refer you to <a href="https://stedolan.github.io/jq/manual/v1.5/">the <code>jq</code> manual</a> for details on breaking down how this filter works. I&rsquo;ll also point out that there&rsquo;s nothing terribly groundbreaking or revolutionary about this command; I wanted to share it here just in case it may save someone a bit of time if they find themselves in a similar situation.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/jJAXLwIGg6k" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/jJAXLwIGg6k/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Posts from the Past, May 2018</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This month&mdash;May 2018&mdash;marks <strong>thirteen years</strong> that I&rsquo;ve been generating content here on this site. It&rsquo;s been a phenomenal 13 years, and I&rsquo;ve enjoyed the opportunity to share information with readers around the world. To celebrate, I thought I&rsquo;d do a quick &ldquo;Posts from the Past&rdquo; and highlight some content from previous years. Enjoy!</p>
-
-<h2 id="may-2017">May 2017</h2>
-
-<p>A year ago, I touched on the topic of <a href="https://blog.scottlowe.org/2017/05/08/using-makefile-with-markdown-documents/">using a <code>Makefile</code> with Markdown documents</a> to help streamline the process of generating various output formats.</p>
-
-<p>I also explored the use of <a href="https://blog.scottlowe.org/2017/05/26/bastion-hosts-custom-ssh-configs/">custom SSH configurations with SSH bastion hosts</a> and uncovered a very basic (but important) error I&rsquo;d previously overlooked.</p>
-
-<h2 id="may-2016">May 2016</h2>
-
-<p>Two years ago in May I was <a href="https://blog.scottlowe.org/2016/05/06/using-terraform-etcd2-openstack/">using Terraform to build an etcd v2 cluster on OpenStack</a>.</p>
-
-<h2 id="may-2015">May 2015</h2>
-
-<p>Three years ago, I was doing a lot of work in my home lab, automating the setup of physical hosts. That led to a post on <a href="https://blog.scottlowe.org/2015/05/20/fully-automated-ubuntu-install/">a fully automated Ubuntu install</a>, which was also related to this post on <a href="https://blog.scottlowe.org/2015/05/21/using-apt-proxy/">using an Apt proxy</a> (via <code>apt-cacher-ng</code>).</p>
-
-<h2 id="may-2014">May 2014</h2>
-
-<p>Four years ago, I shared <a href="https://blog.scottlowe.org/2014/05/19/some-useful-markdown-tools-for-os-x/">some useful Markdown tools for OS X</a>. Of those tools, I still use <code>pandoc</code> pretty extensively.</p>
-
-<h2 id="may-2013">May 2013</h2>
-
-<p>Five years ago, I was exploring Open vSwitch (OVS), and wrote some stuff that is still applicable even today. For example, this post on <a href="https://blog.scottlowe.org/2013/05/15/examining-open-vswitch-traffic-patterns/">examining Open vSwitch traffic patterns</a> is, in my opinion, core to understanding how OVS works in various configurations (particularly with tunnels).</p>
-
-<h2 id="may-2011">May 2011</h2>
-
-<p>May 2012 was a slow month, so we&rsquo;ll skip back to May 2011, where I was <a href="https://blog.scottlowe.org/2011/05/12/stretched-clusters-distance-vmotion-and-l2-adjacency/">tackling inaccuracies regarding stretched clusters and long-distance vMotion</a> while also <a href="https://blog.scottlowe.org/2011/05/21/a-quicksilver-primer/">introducing folks to Quicksilver</a> (is this app even still around?).</p>
-
-<h2 id="may-2006">May 2006</h2>
-
-<p>Going <em>way, way back,</em> we come to May 2006&mdash;only a year after this site was launched. Twelve years ago, I was exploring <a href="https://blog.scottlowe.org/2006/05/19/semi-automatic-security-groups/">the automation of Active Directory security groups</a> and <a href="https://blog.scottlowe.org/2006/05/19/semi-automatic-account-maintenance/">the automation of Active Directory account maintenance</a>. I guess I&rsquo;ve been exploring automation for longer than I thought!</p>
-
-<p>Here&rsquo;s hoping you enjoyed this little trip back into the archives. Maybe you found something useful you can still put to use!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/7hzsg-JOFuI" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/7hzsg-JOFuI/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -566,39 +701,38 @@ PrivateAddress: .PrivateIpAddress}'
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="raspberry_pi_ads_b_receiver.html">
+<div class="date">24.06.2018</div>
+<h3>Raspberry Pi als ADS-B-Receiver</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich habe bereits vor einiger Zeit darüber berichtet, wie man seinen eigenen
+ADS-B-Receiver
+bauen kann. Nachdem ich mein
+Projekt mit meinem Raspberry Pi
+abgeschlossen hatte, wollte ich ihn auch als Plattform für einen
+ADS-B-Receiver benutzen...
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="modul_wrapper_implementiert.html">
+<div class="date">24.06.2018</div>
+<h3>Modul-Wrapper implementiert</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich vor einiger Zeit die Planung von
+Wrappern für Module
+angekündigt habe, steht die dafür notwendige interne Umbau der Lösung nunmehr vor dem Abschluss...
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="garten_fruehjahr_2018.html">
 <div class="date">09.06.2018</div>
 <h3>Garten im Frühjahr 2018</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Und auch dieses Jahr
 wieder
 eine Übersicht über Dinge, die in meinem Garten wachsen...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="linux_wifi_accesspoint_aus_raspi.html">
-<div class="date">09.06.2018</div>
-<h3>Linux WiFi Accesspoint aus Raspi</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem ich mich nun dazu durchgerungen habe einen Raspi zu erwerben, habe ich auch gleich erste Tests
-damit durchgeführt. Einer der ersten überhaupt sollte die Umsetzung des in
-Artikel
-beschriebenen
-WiFi Access-Points darstellen - das funktionierte allerdings nicht so reibungslos wie erhofft...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="implizites_eulerverfahren.html">
-<div class="date">04.06.2018</div>
-<h3>Implizites Eulerverfahren</h3>
-<div class="abstract">
-<p>Nachdem ich gerade meinen Osterurlaub verlebe habe ich begonnen, ein Thema anzufassen,
-das mich schon länger beschäftigt - aber für Mathematik brauch ich Ruhe... Ich wollte
-zunächst hinter die Magie der impliziten Verfahren steigen und schauen, ob es eien Möglichkeit
-gibt, diese ebenfalls so generisch zu betrachten, dass man auf einfache Art und Weise
-ein Framework dafür erstellen kann
 </p></div>   </a>
 </li>
 </ul>

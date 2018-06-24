@@ -2,13 +2,45 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>Upcoming...</title>
+  <title>Modul-Wrapper implementiert</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta name="Description" content="Nachdem ich vor einiger Zeit die Planung von
+Wrappern für Module
+angekündigt habe, steht die dafür notwendige interne Umbau der Lösung nunmehr vor dem Abschluss." />
   <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
 	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
 	<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
@@ -30,7 +62,7 @@ document.write(link)
 //-->
 </script>
 </head>
-<body>
+<body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
 <div id="logo">
@@ -52,40 +84,142 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 		<noscript>Der Verfasser</noscript>				
   </p>
 </div>
-<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-			<a href="https://github.com/elbosso">hier</a>.</p>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
+	über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
+	Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
+	daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
+	Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
+	Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+		<a href="https://github.com/elbosso">hier</a>.</p>
 	</div><!-- #header-->
 <div id="all">
 <div id="A">
 <div id="content">
-	<div class="heading">Upcoming...</div>
-	<p>Demnächst in diesem Theater...</p>
-<ul class="double"> 
+<div class="date">24.06.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+	<!--li--> <a href="tpedit_erstellt_interaktive_formulare.html#content">Java</a> <!--/li-->
+	<!--li--> ,<a href="maven_archetype_dwb__module.html#content">dWb+</a> <!--/li-->
+	<!--li--> ,<a href="eine_ganz_alte_bibliothek_bildverarbeitung.html#content">Komponenten</a> <!--/li-->
+	<!--/ul-->
+</div>
+ 	<div class="heading">Modul-Wrapper implementiert</div>
+	<p>Nachdem ich vor einiger Zeit die Planung von
+<a href="modul_wrapper.html">Wrappern für Module</a>
+angekündigt habe, steht die dafür notwendige interne Umbau der Lösung nunmehr vor dem Abschluss...
+</p> <a name="content"> </a>
+ <p>  <img src="images/medium/dWb_logo.png" 
+	   alt="Dataflow Workbench dWb+" 
+	class="imgright">
+Die in der
+<a href="modul_wrapper.html">Roadmap</a>
+skizzierte Idee von State Machines wurde ebenso wie die Idee
+<a href="methoden_mehreren_parametern_eingang_dwb_.html">getakteter Module</a>
+(speziell für solche, die
+mittels binärer Logik arbeiten) umgesetzt.
+</p><p>
+Zur Zeit wird an der Konsolidierung und Stabilisierung der API gearbeitet. Außerdem müssen noch diverse Unit-Tests
+für die neue Funktionalität geschrieben werden und die Dokumentation an gewisse aus dem Refactoring
+resultierende Gegebenheiten angepasst werden. Wenn diese Arbeiten abgeschlossen sind, werden wie gewohnt Beispiele
+in der Dokumentation der Anwendung abrufbar sein.
+</p><p>
+Die Umsetzung wurde so vorgenommen, dass der Anwender steuern kann, welche Wrapper zum Einsatz kommen - der Workspace
+ist nicht darauf festgelegt: Tatsächlich finden sich in gespeicherten Workspaces keine Spuren etwaiger verwendeter
+Wrapper. So kann man einen Workspace mit einem Wrapper entwerfen, ihn speichern und nach einem Neustart der Anwendung,
+vor dem die verwendeten Wrapper ausgetauscht wurden, denselben Workspace mit anderen Wrappern benutzen.
+</p><p>
+Es ist sogar möglich, zum gleichen Zeitpunkt mehrere Wrapper aktiv zu haben - in diesem Fall muss jedes Modul, das von einem
+Wrapper umhüllt werden soll, eine Annotation tragen, die aussagt, welches der bevorzugte Wrapper ist. Existiert eine solche nicht,
+wird das betreffende Modul aktuell nicht von einem Wrapper umhüllt.
+</p><p>
+Es existiert darüber hinaus eine weitere in diesem Kontext sehr wichtige Annotation, die gänzlich und immer verhindert, dass
+an einem damit ausgezeichneten Modul jemals Wrapper zum Einsatz kommen.
+</p><p>
+Der Wrapper für die Taktung von Modulen ist wie bereits gesagt besonders nützlich beim Aufbau von
+Workspaces, die boolesche Operationen kombinieren. Der Wrapper funktioniert so, dass mit jeder steigenden Flanke des
+Taktsignals die anliegenden Eingangssignale übernommen und verarbeitet werden. Mit jeder fallenden Flanke des Taktsignals
+werden die Ausgangssignale an nachfolgende Module übergeben.
+</p><p>
+Der folgende Screenshot zeigt die Probleme, die ohne Taktung auftreten können:
+</p><p>
+<img src="images/booleanworkspaceunclocked_.png"
+alt="Screenshot ungetakteter Workspace"
+class="center">
+<span class="imgdesc">
+Momentaufnahme eines ungetakteten Workspace
+</span>
+</p><p>
+Das Zählermodul (1) gibt seine Ausgabe an ein Modul (2) weiter, welches in der gegebenen
+Konfiguration die Folge von Zahlen 0-7 ständig wiederholt. Das Modul (3) dekodiert die Zahl
+und schaltet einen der 8 zur Verfügung stehenden Ausgänge frei. Das nächste Modul (4) sendet
+abhängig von der Aktivierung eines Eingangs die Nummer dieses Eingangs an das Anzeigemodul (5).
+Man sieht (6), dass das Zählermodul im Screenshot bei 7 angekommen ist und das Anzeigemodul dazu
+synchron läuft. Man sieht aber auch (7), dass im Anzeigemodul Werte auftauchen, die dort nicht
+sein sollten: jeder zweite am Modul eingehende Wert beträgt 0.
+</p><p>
+Das kommt daher, dass das Modul 3 bei eingehenden Daten intern zunächst alle Ausgänge auf 0 zurücksetzt und
+anschließend den korrekten Ausgang abhängig von den eingehenden Daten aktiviert. Dadurch werden aber zwei
+Nachrichten gesendet - die über die deaktivierung und die über die Aktivierung. Die Nachricht über die Deaktivierung ist für
+uns aber belanglos.
+</p><p>
+Nun könnte man natürlich dieses Modul entsprechend anpassen - vorher soll aber demonstriert werden, wie sich das
+Verhalten ändert, wenn man einen getakteten Workspace benutzt:
+</p><p>
+<img src="images/booleanworkspaceclocked_.png"
+alt="Screenshot getakteter Workspace"
+class="center">
+<span class="imgdesc">
+Momentaufnahme eines getakteten Workspace
+</span>
+</p><p>
+Man sieht die zwei zusätzlichen Takte an Multiplexer und Demultiplexer (1+2). Man sieht auch, dass die
+falschen Werte im Anzeigemodul verschwunden sind (4). Allerdings eilt die Anzeige (4) jetzt den Werten des Zählermoduls (3) nach -
+um genau zwei Werte, was intuitiv der Tatsache geschuldet ist, dass sich zwei getaktete Module in der Kette befinden:
+Getaktete Module verhalten sich hier wie D-FlipFlops in der realen Welt - sie verzögern den Signallauf.
+</p> </div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
 <li class="anriss">
-			<h3 class="head">
-				ADS-B in Zeitreihendatenbanken</h3>
+  <a href="raspberry_pi_ads_b_receiver.html#content">
+<div class="date">24.06.2018</div>
+<h3>Raspberry Pi als ADS-B-Receiver</h3>
 <div class="abstract">
-<p>Weitere Gedanken zu ADS-B Daten und deren Nutzung
-</p></div> 
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich habe bereits vor einiger Zeit darüber berichtet, wie man seinen eigenen
+ADS-B-Receiver
+bauen kann. Nachdem ich mein
+Projekt mit meinem Raspberry Pi
+abgeschlossen hatte, wollte ich ihn auch als Plattform für einen
+ADS-B-Receiver benutzen...
+</p></div>   </a>
 </li>
 <li class="anriss">
-			<h3 class="head">
-				ImageIO-Codecs auf Github</h3>
+  <a href="garten_fruehjahr_2018.html#content">
+<div class="date">09.06.2018</div>
+<h3>Garten im Frühjahr 2018</h3>
 <div class="abstract">
-<p>Nachdem ich einige Codecs für Bildformate schon länger bei mir rumliegen hatte, habe ich sie aufpoliert und
-auf Github online gestellt
-</p></div> 
+<p>Und auch dieses Jahr
+wieder
+eine Übersicht über Dinge, die in meinem Garten wachsen...
+</p></div>   </a>
 </li>
-<li class="anriss spanrow">
-			<h3 class="head">
-				Partikelsystem mit "innerer" Energie</h3>
+<li class="anriss">
+  <a href="linux_wifi_accesspoint_aus_raspi.html#content">
+<div class="date">09.06.2018</div>
+<h3>Linux WiFi Accesspoint aus Raspi</h3>
 <div class="abstract">
-<p>Nachdem es schon ein wenig länger her ist, dass ich hier ein Video veröffentlicht habe, hat mich
-wieder einmal jemand inspiriert...
-</p></div> 
+<p>Nachdem ich mich nun dazu durchgerungen habe einen Raspi zu erwerben, habe ich auch gleich erste Tests
+damit durchgeführt. Einer der ersten überhaupt sollte die Umsetzung des in
+Artikel
+beschriebenen
+WiFi Access-Points darstellen - das funktionierte allerdings nicht so reibungslos wie erhofft...
+</p></div>   </a>
 </li>
 </ul>
-</div>
 </div>
 <nav id="C"> 
 <h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
@@ -159,7 +293,9 @@ Datenbanken
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 dWb+
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -219,7 +355,9 @@ Hardware
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Java
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -242,7 +380,9 @@ Java. Komponenten
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Komponenten
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -408,9 +548,7 @@ Windows
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-<strong>
 Upcoming...
-</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -418,9 +556,6 @@ Upcoming...
 </div>
 </div>
 </a>
-<!--
--->
-
 </nav>
 </div>
 	<div id="footer">
@@ -441,8 +576,7 @@ abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZ
 		</script>
 		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
 			</a></strong>
-	</span>
-</div><!-- #footer -->
+	</span></div><!-- #footer -->
 </div>
 </body>
 </html>

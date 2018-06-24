@@ -2,11 +2,12 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>Auswahl m aus n in Java per JTable</title>
+  <title>Raspberry Pi als ADS-B-Receiver</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-		<meta name="Description" content="Beim Programmieren hat man öfter mal den Fall, daß der Anwender aus einer
-zur Verfügung gestellten Grundgesamtheit eine Untermenge auswählen soll." />
+		<meta name="Description" content="Ich habe bereits vor einiger Zeit darüber berichtet, wie man seinen eigenen
+ADS-B-Receiver
+bauen kann." />
   <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
@@ -94,87 +95,165 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 <div id="all">
 <div id="A">
 <div id="content">
-<div class="date">08.05.2014 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<div class="date">24.06.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
 <span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
 <div class="previousArticlesInCategories">
 	<!--ul-->
 	vorhergehende Artikel in:
-	<!--li--> <a href="ueberblickskarte_ebgeo4d_dwb_.html#content">Java</a> <!--/li-->
-	<!--li--> ,<a href="ueberblickskarte_ebgeo4d_dwb_.html#content">Komponenten</a> <!--/li-->
+	<!--li--> <a href="visualisierung_hoehenfeldern_mittels_voxeln.html#content">Geo</a> <!--/li-->
+	<!--li--> ,<a href="linux_wifi_accesspoint_aus_raspi.html#content">linux</a> <!--/li-->
 	<!--/ul-->
 </div>
- 	<div class="heading">Auswahl m aus n in Java per JTable</div>
-	<p>Beim Programmieren hat man öfter mal den Fall, daß der Anwender aus einer
-zur Verfügung gestellten Grundgesamtheit eine Untermenge auswählen soll. Hier einige
-Klassen, die dabei helfen könnten:
+ 	<div class="heading">Raspberry Pi als ADS-B-Receiver</div>
+	<p>Ich habe bereits vor einiger Zeit darüber berichtet, wie man seinen eigenen
+<a href="ads_b_empfaenger_selber_gemacht.html">ADS-B-Receiver</a>
+bauen kann. Nachdem ich mein
+<a href="linux_wifi_accesspoint_aus_raspi.html">Projekt mit meinem Raspberry Pi</a>
+abgeschlossen hatte, wollte ich ihn auch als Plattform für einen
+ADS-B-Receiver benutzen...
 </p> <a name="content"> </a>
- <p>Um die geschilderte Aufgabe einfacher zu machen, schuf ich eine generische Klasse ActivityToggle,
-die lediglich einen Container für das eigentliche Objekt darstellt (das auch den 
-Template-Parameter bildet) und dazu noch eine les- und schreibbare boolean Property namens
-active hat. Bei Ändern dieser Property wird ein PropertyChangeEvent gesendet. Die Identität
-von Objekten dieser Klasse wird durch eigentliche Objekt vorgegeben: equals- und hashCode-Methode
-werden an dieses delegiert. Daher ist es nicht erlaubt, eine null-Referenz als Objekt zu setzen.
+ <p>Grundlage war die bereits beim Projekt
+<a href="linux_wifi_accesspoint_aus_raspi.html">WLAN Access Point</a>
+festgelegte Einschränkung, dass das System in einem Container laufen sollte - dazu musste
+das System auf dem Host davon überzeugt werden, das Gerät an den Container durchzureichen.
+Ich schaffte das mittels folgender Zeilen in der Konfigurationsdatei des Containers:
 </p><p>
-Dazu entwickelte ich ein TableModel, das ebenfalls eine generische Klasse darstellt.
-Man kann neue Objekte - deren Typ dem Template-Parameter entspricht - hinzufügen und 
-bereits enthaltene Objekte entfernen. Sind dies keine ActivityToggles, werden sie mit
-einem solchen umhüllt. Das Model stellt einige spezielle Methoden zur Verfügung - so zum Beispiel
-eine, die eine Collection der Objekte liefert, deren active-Property aktuell den Wert
-true aufweist.
+<pre>
+# RTL-SDR device
+lxc.cgroup.devices.allow = c 189:* rwm
+lxc.mount.entry = /dev/bus/usb/001 dev/bus/usb/001 none bind,optional,create=dir
+lxc.mount.entry = /dev/rtl_sdr dev/rtl_sdr none bind,optional,create=file
+</pre>
 </p><p>
-Diese Technik wurde zum Beispiel in der 
-<a href="sQLshell.html">sQLshell</a>
-benutzt, um die 
-<a href="fuellen_datenmodellen_tests_mittels_generatoren.html">Generatoren</a>
-für das Hinzufügen oder Modifizieren von Tabelleninhalten auszuwählen. Daher stammt auch der folgende
-Screenshot, der den angepassten ActivityToggleRenderer demonstriert, der den Status des jeweiligen Objektes
-durch die Darstellung des Namens reflektiert:
-<img src="images/sQLshell/choosegeneratordlg.png" 
-alt="Screenshot" 
-class="center">
-<span class="imgdesc">
-Der Dialog zur Bestimmung, welche Generatoren zur Erzeugung der Inhalte herangezogen
-werden sollen
-</span>
-<dl>
-<a href="resources/license.txt">
-<dt><img src="images/mime/Oxygen480-mimetypes-signature_48.png"></dt><dd>Lizenz</dd>
-</a>
-<a href="resources/activaTable/ActivityToggle.java">
-<dt><img src="images/mime/Oxygen480-mimetypes-text-x-java_48.png"></dt><dd>ActivityToggle</dd>
-</a>
-<a href="resources/activaTable/ActivityToggleModel.java">
-<dt><img src="images/mime/Oxygen480-mimetypes-text-x-java_48.png"></dt><dd>ActivityToggleModel</dd>
-</a>
-<a href="resources/activaTable/ActivityToggleRenderer.java">
-<dt><img src="images/mime/Oxygen480-mimetypes-text-x-java_48.png"></dt><dd>ActivityToggleRenderer</dd>
-</a>
-<a href="resources/activaTable/EventHandlingSupport.java">
-<dt><img src="images/mime/Oxygen480-mimetypes-text-x-java_48.png"></dt><dd>EventHandlingSupport</dd>
-</a>
-<a href="resources/activaTable/PropertyChangeSender.java">
-<dt><img src="images/mime/Oxygen480-mimetypes-text-x-java_48.png"></dt><dd>PropertyChangeSender</dd>
-</a>
-</dl>
-</p> </div>
+Dabei ist speziell die Major/minor number gegebenenfalls anzupassen und auch der Name
+des USB-Buses - das folgende Kommando kann dabei helfen:
+</p><p>
+<pre>
+#auf dem Host!
+ls -lisah /sys/dev/*|grep usb
+</pre>
+</p><p>
+Das vollständige Skript zur Einrichtung des Systems ist in folgendem
+<a href="https://gist.github.com/elbosso/eb9e08fa2bbd235769f18ef68da1440a">Gist</a>
+zu finden.
+</p><p>
+Wichtig hierbei war, dass ich auf dem Host-System die Benutzung des Sticks als
+DVB-Receiver verbieten musste (Linux uns speziell Ubuntu machens dem Nutzer leicht - ich
+bin aber einer der wenigen, der den Haupteinsatzzweck des Sticks nicht benötigt - daher...)
+</p><p>
+<pre>
+#auf dem Host!
+sudo printf 'blacklist dvb_usb_rtl28xxu\nblacklist \
+rtl2832\nblacklist rtl2830' > /etc/modprobe.d/nortl.conf
+</pre>
+</p><p>
+Das Skript installiert einige Dinge, die für die reine Funktionalität als ADS-B-Receiver nicht unbedingt benötigt werden:
+wget und mono-complete werden für die Installation des
+<a href="http://www.virtualradarserver.co.uk/">Virtual Radar Servers</a> benötigt. Der wird - wie gesagt - nicht unbedingt benötigt; Allerdings
+hatte ich nach Installation und Start von
+<a href="https://github.com/MalcolmRobb/dump1090">dump1090</a> den Eindruck, dass das Projekt kaputt wäre, da das Web-Frontend nicht funktionierte - irgendwas mit
+"Google Maps API nicht korrekt eingebunden". Als ich den Virtual Radar Server startete, kam dort im Web-Frontend allerdings dieselbe
+Fehlermeldung - Tatsächlich hat Google wohl irgendwann die Nutzungsbedingungen geändert - jetzt benötigt man eine Registrierung und
+einen Key. Das gilt jedoch nicht, wenn man das Web-Frontend auf localhost aufruft. Daher ist der Status im Moment bei mir so,
+dass ich dump1090 und den Virtual Radar Server installiert habe und beim Zugriff auf eines der beiden Web-Frontends halt
+eine Portweiterleitung über SSL einrichte...
+</p><p>
+Noch zwei Anmerkungen zum Virtuel Radar Server: Unter Ubuntu/Mono4 lässt er sich nicht sofort starten - der Fehler kann behoben werden,
+wenn man den Inhalt dieses
+<a href="https://gist.github.com/elbosso/d98c7dfec1b98fd5b6524b45d4eed748">Gists</a> ins Installationsverzeichnis
+unter dem Namen VirtualRadar.exe.config speichert.
+</p><p>
+Den Port, auf dem der Server sein Web-Frontend anbietet, kann man durch Speichern des Inhaltes dieses
+<a href="https://gist.github.com/elbosso/74e667ce1e55719525e8f5a053250574">Gists</a>
+im Homeverzeichnis unter ~/.local/share/VirtualRadar/InstallerConfiguration.xml
+(und entsprechende Anpassungen) ändern.
+</p><p>
+Wichtige Anmerkungen um jetzt richtig in die BigDataAnalyse der diversen Folterflüge der CIA einsteigen zu können:
+dump1090 leitet die empfangenen Transponder-Messages in einem Textformat auf Port 30003 (default) aus - man muss sich schon selber
+darum kümmern, diese Daten weiter aufzubereiten. Das kann man direkt auf dem Raspi zum Beispiel tun, indem man sie
+einfach als Rohdaten speichert. Dazu kann man sich beispielsweise einem der Beispielprogramme für
+<a href="https://github.com/jojonas/py1090">py1090</a>
+bedienen (Achtung: setzt Python 3 voraus!).
+</p><p>
+Ich habe das Projekt
+<a href="https://github.com/elbosso/py1090">geforkt,</a>
+da ich einige Erweiterungen an FlightCollectionEntry vornehmen wollte und eines der Beispiele
+so nicht funktioniert hat...
+</p><p>
+Natürlich sind auch noch andere Wege denkbar: Der Virtual Radar Server beispielsweise bietet die Angaben zu allen aktuell sichtbaren
+Flugbewegungen als json über das Web-Frontend an.
+</p><p>
+Hier nun noch einige Links, die mir bei der Inbetriebnahme geholfen haben:
+</p> <ul class="single"> 
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>LXC container and attach USB devices
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://forum.turris.cz/t/lxc-container-and-attach-usb-devices/4412" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>ADS-B using dump1090 for the Raspberry Pi
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://www.satsignal.eu/raspberry-pi/dump1090.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Dump1090 Google Maps Not Displaying Publicly
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://discussions.flightaware.com/t/dump1090-google-maps-not-displaying-publicly/18705" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>How To Install Python 3 and Set Up a Local Programming Environment on Ubuntu 16.04
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-ubuntu-16-04" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>This is a Python 3 module that allows handling of ADS-B messages in a pythonic way.
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://github.com/jojonas/py1090" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>This module provides a pythonic way to process ADS-B messages - API
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://py1090.readthedocs.io/en/latest/py1090-module.html#py1090.collection.FlightCollectionEntry" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Using LXC containers to (partially) replace Virtual Machines
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://testpurposes.net/2015/05/05/using-lxc-containers-to-partially-replace-virtual-machines/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+</ul>
+</div>
 </div>
 <div id="B"> 
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
-<li class="anriss">
-  <a href="raspberry_pi_ads_b_receiver.html#content">
-<div class="date">24.06.2018</div>
-<h3>Raspberry Pi als ADS-B-Receiver</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ich habe bereits vor einiger Zeit darüber berichtet, wie man seinen eigenen
-ADS-B-Receiver
-bauen kann. Nachdem ich mein
-Projekt mit meinem Raspberry Pi
-abgeschlossen hatte, wollte ich ihn auch als Plattform für einen
-ADS-B-Receiver benutzen...
-</p></div>   </a>
-</li>
 <li class="anriss">
   <a href="modul_wrapper_implementiert.html#content">
 <div class="date">24.06.2018</div>
@@ -194,6 +273,18 @@ angekündigt habe, steht die dafür notwendige interne Umbau der Lösung nunmehr
 <p>Und auch dieses Jahr
 wieder
 eine Übersicht über Dinge, die in meinem Garten wachsen...
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="linux_wifi_accesspoint_aus_raspi.html#content">
+<div class="date">09.06.2018</div>
+<h3>Linux WiFi Accesspoint aus Raspi</h3>
+<div class="abstract">
+<p>Nachdem ich mich nun dazu durchgerungen habe einen Raspi zu erwerben, habe ich auch gleich erste Tests
+damit durchgeführt. Einer der ersten überhaupt sollte die Umsetzung des in
+Artikel
+beschriebenen
+WiFi Access-Points darstellen - das funktionierte allerdings nicht so reibungslos wie erhofft...
 </p></div>   </a>
 </li>
 </ul>
@@ -294,7 +385,9 @@ Garten
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Geo
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -330,9 +423,7 @@ Hardware
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-<strong>
 Java
-</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -355,9 +446,7 @@ Java. Komponenten
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-<strong>
 Komponenten
-</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -393,7 +482,9 @@ Linux
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 linux
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
