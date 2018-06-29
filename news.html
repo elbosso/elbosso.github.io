@@ -117,6 +117,89 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>More Handy CLI Tools for JSON</h3>
+		</div>
+		<div class="collectiontext">
+			<p>In late 2015 I wrote <a href="https://blog.scottlowe.org/2015/11/11/handy-cli-tool-json/">a post about a command-line tool named <code>jq</code></a>, which is used for parsing JSON data. Since that time I&rsquo;ve referenced <code>jq</code> in a number of different blog posts (like <a href="https://blog.scottlowe.org/2018/05/23/quick-post-parsing-aws-instance-data-with-jq/">this one</a>). However, <code>jq</code> is not the only game in town for parsing JSON data at the command line. In this post, I&rsquo;ll share a couple more handy CLI tools for working with JSON data.</p>
+
+<p>(By the way, if you&rsquo;re new to JSON, check out <a href="https://blog.scottlowe.org/2013/11/08/a-non-programmers-introduction-to-json/">this post</a> for a gentle introduction.)</p>
+
+<h2 id="jmespath-and-jp">JMESPath and <code>jp</code></h2>
+
+<p><a href="http://jmespath.org/">JMESPath</a> is used by both Amazon Web Services (AWS) in their AWS CLI as well as <a href="https://docs.microsoft.com/en-us/cli/azure/query-azure-cli">by Microsoft in the Azure CLI</a>. For examples of JMESPath in action, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/controlling-output.html">the AWS CLI documentation on the <code>--query</code> functionality</a>, which makes use of server-side JMESPath queries to reduce the amount of data returned by an AWS CLI command (as opposed to filtering on the client side).</p>
+
+<p>However, you can also use JMESPath on the client-side through <a href="https://github.com/jmespath/jp">the <code>jp</code> command-line utility</a>. As a client-side parsing tool, <code>jp</code> is similar in behavior to <code>jq</code>, but I find the JMESPath query language to be a bit easier to use than <code>jq</code> in some situations.</p>
+
+<p>Let&rsquo;s assume we are working with the output of the command <code>aws ec2 describe-security-groups</code>, which returns&mdash;as JSON&mdash;a list of security groups and their properties. Naturally, parsing this data down to find only the specific information you need is a prime use case for <code>jp</code>. Perhaps you know that a security group named &ldquo;internal-only&rdquo; exists, but you don&rsquo;t know anything else&mdash;only the name. Using <code>jp</code>, we could get more details on that specific group with this command:</p>
+
+<pre><code>aws ec2 describe-security-groups | jp &quot;SecurityGroups[?GroupName == 'internal-only']&quot;
+</code></pre>
+
+<p>The AWSCLI command will return all the security groups, and <code>jp</code> will filter through the data to return only the properties of the security group whose name (as defined in the &ldquo;GroupName&rdquo; field/property) is equal to &ldquo;internal-only.&rdquo; Compare that syntax to the equivalent <code>jq</code> syntax:</p>
+
+<pre><code>aws ec2 describe-security-groups | jq '.SecurityGroups[] | select (.GroupName == &quot;internal-only&quot;)'
+</code></pre>
+
+<p>That&rsquo;s handy, but what if we needed only a particular property of that security group? No problem, we&rsquo;d just append the property name to the end of the query:</p>
+
+<pre><code>aws ec2 describe-security-groups | jp &quot;SecurityGroups[?GroupName == 'internal-only'].GroupId&quot;
+</code></pre>
+
+<p>This is fundamentally equivalent to this <code>jq</code> command:</p>
+
+<pre><code>aws ec2 describe-security-groups | jq '.SecurityGroups[] | select (.GroupName == &quot;internal-only&quot;).GroupId'
+</code></pre>
+
+<p>However, if you try both <code>jp</code> and <code>jq</code> as described above, you&rsquo;ll note a significant difference in the output. First, here&rsquo;s the output of a <code>jq</code> command like the one above:</p>
+
+<pre><code class="language-text">&quot;sg-7f7efe02&quot;
+</code></pre>
+
+<p>Now compare that to the output of the equivalent <code>jp</code> command:</p>
+
+<pre><code class="language-text">[
+  &quot;sg-7f7efe02&quot;
+]
+</code></pre>
+
+<p>As you can see, <code>jq</code> returns a specific value, whereas <code>jp</code> returns an array of values (with only a single item in the array). In order to get all the way down to a single value with <code>jp</code>, you have to extend the query:</p>
+
+<pre><code>aws ec2 describe-security-groups | jp &quot;SecurityGroups[?GroupName == 'internal-only'].GroupId | [0]&quot;
+</code></pre>
+
+<p>This command will return <em>only</em> the value of the &ldquo;GroupId&rdquo; field. <code>jp</code> does support a <code>-u</code> command-line option that is equivalent to the <code>-r</code> option to <code>jq</code> in order to return unquoted (raw) strings. This is helpful when storing the command output into a variable for use later.</p>
+
+<p>If you need more than a single property, you can build a JSON object from multiple properties by listing them in curly braces at the end of the query, like this:</p>
+
+<pre><code>aws ec2 describe-security-groups | jp &quot;SecurityGroups[?GroupName == 'internal-only'].{ Name: GroupName, ID: GroupId, VPC: VpcId }&quot;
+</code></pre>
+
+<p>This will return a JSON object with the properties listed.</p>
+
+<p>I may explore writing a more in-depth article on <code>jp</code> in the future; if that&rsquo;s something in which you&rsquo;d be interested, please <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> and let me know.</p>
+
+<h2 id="json-incremental-digger-jid">JSON Incremental Digger (<code>jid</code>)</h2>
+
+<p>What if you&rsquo;re not all that well-versed in the JMESPath syntax? Well, there are online simulators and parsers. Another approach would be to use <a href="https://github.com/simeji/jid"><code>jid</code>, the JSON incremental digger</a>. It doesn&rsquo;t necessarily follow the JMESPath syntax, but it does allow you to interactively query some JSON data to find what you&rsquo;re seeking.</p>
+
+<p>To use <code>jid</code>, simply pipe in some JSON data. For example, you could direct the output of the AWS CLI into <code>jid</code>:</p>
+
+<pre><code>aws ec2 describe-instances | jid
+</code></pre>
+
+<p>This puts you into an interactive screen where you can explore and parse the data to find exactly what you need. <code>jid</code> will supply &ldquo;suggested&rdquo; queries at the top of the screen in green; just press Tab to accept the suggestion. Adjust the query at the top until you have the data you need, then press Enter. The specific data you&rsquo;d selected in <code>jid</code> will be output to the shell. This is a super-handy way, in my opinion, of exploring JSON data structures with which you aren&rsquo;t already familiar.</p>
+
+<p>Have any other handy CLI tools for working with JSON? <a href="https://twitter.com/scott_lowe">Hit me on Twitter</a> with other tool suggestions, and I&rsquo;ll update the post with feedback from readers. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/YHsU9cl67eY" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/YHsU9cl67eY/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>A Quick Intro to the AWS CLI</h3>
 		</div>
 		<div class="collectiontext">
@@ -423,277 +506,6 @@ awk '{print $2}' | base64 -d | openssl x509 -text
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/K_DuJAKhlw0/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>A Quadruple-Provider Vagrant Environment</h3>
-		</div>
-		<div class="collectiontext">
-			<p>In October 2016 <a href="https://blog.scottlowe.org/2016/10/05/triple-provider-vagrant-environment/">I wrote about</a> a triple-provider <a href="https://www.vagrantup.com/">Vagrant</a> environment I&rsquo;d created that worked with <a href="https://www.virtualbox.org/">VirtualBox</a>, <a href="https://aws.amazon.com/">AWS</a>, and the VMware provider (tested with <a href="http://www.vmware.com/products/fusion.html">VMware Fusion</a>). Since that time, I&rsquo;ve incorporated Linux (<a href="https://getfedora.org/">Fedora</a>, specifically) into my computing landscape, and I started using the Libvirt provider for Vagrant (see my write-up <a href="https://blog.scottlowe.org/2017/12/06/using-vagrant-with-libvirt-on-fedora/">here</a>). With that in mind, I updated the triple-provider environment to add support for Libvirt and make it a quadruple-provider environment.</p>
-
-<p>To set expectations, I&rsquo;ll start out by saying there isn&rsquo;t a whole lot here that is dramatically different than the triple-provider setup that I shared back in October 2016. Obviously, it supports more providers, and I&rsquo;ve improved the setup so that <em>no</em> changes to the Vagrantfile are needed (everything is parameterized).</p>
-
-<p>With that in mind, let&rsquo;s take a closer look. First, let&rsquo;s look at the <code>Vagrantfile</code> itself:</p>
-
-<pre><code class="language-ruby"># Specify minimum Vagrant version and Vagrant API version
-Vagrant.require_version '&gt;= 1.6.0'
-VAGRANTFILE_API_VERSION = '2'
-
-# Require 'yaml' module
-require 'yaml'
-
-# Read YAML file with VM details (box, CPU, and RAM)
-machines = YAML.load_file(File.join(File.dirname(__FILE__), 'machines.yml'))
-
-# Create and configure the VMs
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-
-  # Always use Vagrant's default insecure key
-  config.ssh.insert_key = false
-
-  # Iterate through entries in YAML file to create VMs
-  machines.each do |machine|
-
-    # Configure the AWS provider
-    config.vm.provider 'aws' do |aws|
-
-      # Specify default AWS key pair
-      aws.keypair_name = machine['aws']['keypair']
-
-      # Specify default region
-      aws.region = machine['aws']['region']
-    end # config.vm.provider 'aws'
-
-    config.vm.define machine['name'] do |srv|
-
-      # Don't check for box updates
-      srv.vm.box_check_update = false
-
-      # Set machine's hostname
-      srv.vm.hostname = machine['name']
-
-      # Use dummy AWS box by default (override per-provider)
-      srv.vm.box = 'aws-dummy'
-
-      # Configure default synced folder (disable by default)
-      if machine['sync_disabled'] != nil
-        srv.vm.synced_folder '.', '/vagrant', disabled: machine['sync_disabled']
-      else
-        srv.vm.synced_folder '.', '/vagrant', disabled: true
-      end #if machine['sync_disabled']
-
-      # Iterate through networks as per settings in machines.yml
-      machine['nics'].each do |net|
-        if net['ip_addr'] == 'dhcp'
-          srv.vm.network net['type'], type: net['ip_addr']
-        else
-          srv.vm.network net['type'], ip: net['ip_addr']
-        end # if net['ip_addr']
-      end # machine['nics'].each
-
-      # Configure CPU &amp; RAM per settings in machines.yml (Fusion)
-      srv.vm.provider 'vmware_fusion' do |vmw, override|
-        vmw.vmx['memsize'] = machine['ram']
-        vmw.vmx['numvcpus'] = machine['vcpu']
-        override.vm.box = machine['box']['vmw']
-        if machine['nested'] == true
-          vmw.vmx['vhv.enable'] = 'TRUE'
-        end #if machine['nested']
-      end # srv.vm.provider 'vmware_fusion'
-
-      # Configure CPU &amp; RAM per settings in machines.yml (VirtualBox)
-      srv.vm.provider 'virtualbox' do |vb, override|
-        vb.memory = machine['ram']
-        vb.cpus = machine['vcpu']
-        override.vm.box = machine['box']['vb']
-        vb.customize ['modifyvm', :id, '--nictype1', 'virtio']
-        vb.customize ['modifyvm', :id, '--nictype2', 'virtio']
-      end # srv.vm.provider 'virtualbox'
-
-      # Configure CPU &amp; RAM per settings in machines.yml (Libvirt)
-      srv.vm.provider 'libvirt' do |lv,override|
-        lv.memory = machine['ram']
-        lv.cpus = machine['vcpu']
-        override.vm.box = machine['box']['lv']
-        if machine['nested'] == true
-          lv.nested = true
-        end # if machine['nested']
-      end # srv.vm.provider 'libvirt'
-
-      # Configure per-machine AWS provider/instance overrides
-      srv.vm.provider 'aws' do |aws, override|
-        override.ssh.private_key_path = machine['aws']['key_path']
-        override.ssh.username = machine['aws']['user']
-        aws.instance_type = machine['aws']['type']
-        aws.ami = machine['box']['aws']
-        aws.security_groups = machine['aws']['security_groups']
-      end # srv.vm.provider 'aws'
-    end # config.vm.define
-  end # machines.each
-end # Vagrant.configure
-</code></pre>
-
-<p>A couple of notes about the above <code>Vagrantfile</code>:</p>
-
-<ul>
-<li>All the data is pulled from an external YAML file named <code>machines.yml</code>; more information on that shortly.</li>
-<li>The &ldquo;magic,&rdquo; if you will, is in the provider overrides. HashiCorp recommends <em>against</em> provider overrides, but in my experience they&rsquo;re a necessity when working with multi-provider setups. Within each provider override block, we set provider-specific details and adjust the box needed (because finding boxes that support multiple platforms is downright impossible in many cases).</li>
-<li>The <code>machine[nics].each do |net|</code> section works for the local virtualization providers (VirtualBox, VMware, and Libvirt), but is silently ignored for AWS. That made making the <code>Vagrantfile</code> much easier, in my opinion. Note that last time I <em>really</em> tested the Libvirt provider there was some weirdness with the network configuration; the configuration shown above works as expected. Other configurations may not.</li>
-</ul>
-
-<p>Now, let&rsquo;s look at the external YAML data file that feeds Vagrant the information it needs:</p>
-
-<pre><code class="language-yaml">- aws:
-    type: &quot;t2.medium&quot;
-    user: &quot;ubuntu&quot;
-    key_path: &quot;~/.ssh/id_rsa&quot;
-    security_groups:
-      - &quot;default&quot;
-      - &quot;test&quot;
-    keypair: &quot;ssh_keypair&quot;
-    region: &quot;us-west-2&quot;
-  box:
-    aws: &quot;ami-db710fa3&quot;
-    lv: &quot;generic/ubuntu1604&quot;
-    vb: &quot;ubuntu/xenial64&quot;
-    vmw: &quot;bento/ubuntu-16.04&quot;
-  name: &quot;xenial-01&quot;
-  nested: false
-  nics:
-    - type: &quot;private_network&quot;
-      ip_addr: &quot;dhcp&quot;
-  ram: &quot;512&quot;
-  sync_disabled: true
-  vcpu: &quot;1&quot;
-</code></pre>
-
-<p>This is pretty straightforward YAML. This configuration does support multiple VMs/instances, with one interesting twist. When working with multiple AWS instances, you only need to specify the AWS keypair and AWS region on the <strong>last</strong> instance defined in the YAML file. You can include it for all instances, if you like, but only the values on the last instance will actually apply. I may toy around with supporting multi-region configurations, but that is kind of far down my priority list. The other AWS-specific values (type, user, and path to private key) need to be specified for all instances in the YAML file.</p>
-
-<p>To use this environment, you only need to edit the external YAML file with the appropriate values and make sure authentication against AWS is working as expected. I recommend installing and configuring the AWS CLI to ensure that authentication against AWS is working as expected. Alternately, you could use something like <a href="https://github.com/99designs/aws-vault"><code>aws-vault</code></a>.</p>
-
-<p>Then it&rsquo;s just a matter of running the appropriate command for your particular environment:</p>
-
-<p><code>vagrant up --provider=aws</code> (to spin up instances on AWS)<br />
-<code>vagrant up --provider=virtualbox</code> (to spin up VirtualBox VMs locally)<br />
-<code>vagrant up --provider=vmware_fusion</code> (to use Fusion to create local VMs)<br />
-<code>vagrant up --provider=libvirt</code> (to create Libvirt guest domains locally)</p>
-
-<p>Using this sort of technique to support multiple providers in a single Vagrant environment provides a clean, consistent workflow regardless of backend provider. Naturally, this could be extended to include other providers using the same basic techniques I&rsquo;ve used here. I&rsquo;ll leave that as an exercise to the readers.</p>
-
-<h2 id="my-use-case">My Use Case</h2>
-
-<p>You might be wondering, &ldquo;Why did you put effort into this?&rdquo; It&rsquo;s pretty simple, really. I&rsquo;m working on a project where I needed to be able to quickly and easily spin up a few instances on AWS. I felt like <a href="https://www.terraform.io/">Terraform</a> was a bit too &ldquo;heavy&rdquo; for this, as all I really needed was the ability to launch an instance or two, interact with the instances, then tear them down. Yes, I <em>could</em> have done this with the AWS CLI, but&hellip;really? I knew that Vagrant worked with AWS, and I already use Vagrant for other purposes. It seemed pretty natural to incorporate the AWS support in Vagrant into my existing environments, and this quadruple-provider environment was the result. Enjoy!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/JjQFIFXqWJs" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/JjQFIFXqWJs/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 101</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take #101! I have (hopefully) crafted an interesting and varied collection of links for you today, spanning all the major areas of modern data center technology. Now you have some reading material for this weekend!</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Kirk Byers <a href="https://pynet.twb-tech.com/blog/automation/netmiko-textfsm.html">discusses the direct TextFSM integration</a> he added to the 2.0 release of Netmiko.</li>
-<li>David Gee <a href="http://ipengineer.net/2018/05/configuring-ssl-grpc-junos/">provides a walkthrough</a> on creating a self-signed root certificate for use with mutual SSL for gRPC on JunOS. (How&rsquo;s that for a mouthful!) If you&rsquo;re a networking pro and didn&rsquo;t understand most of that last sentence, I&rsquo;d content that you&rsquo;ve got some learning to do. The networking industry is changing, don&rsquo;t get left behind!</li>
-<li>Here&rsquo;s another one from David: <a href="http://ipengineer.net/2018/06/juniper-vqfx10k-esxi-6-5/">running Juniper vQFX10K on ESXi 6.5</a>. (Personally, I&rsquo;d love to see the KVM option explained.)</li>
-<li>Kamal Kyrala discusses <a href="https://medium.com/@kyralak/accessing-kubernetes-services-without-ingress-nodeport-or-loadbalancer-de6061b42d72">a method for accessing Kubernetes Services without Ingress, NodePort, or load balancers</a>. Why is this in the networking section? Because it involves IP routing and ECMP!</li>
-<li>On the Ansible web site, Sean Cavanaugh provides <a href="https://www.ansible.com/blog/command-module-deep-dive-for-networks">a deep dive</a> into the <code>command</code> modules for network devices.</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<ul>
-<li>AWS adds local NVMe storage to the M5 instance family; more details <a href="https://aws.amazon.com/blogs/aws/ec2-instance-update-m5-instances-with-local-nvme-storage-m5d/">here</a>. What I found interesting is that the local NVMe storage is also hardware encrypted. AWS also mentions that these M5d instances are powered by (in their words) &ldquo;Custom Intel Xeon Platinum&rdquo; processors, which just goes to confirm the long-known fact that AWS is leveraging custom Intel CPUs in their stuff (as are all the major cloud providers, I&rsquo;m sure).</li>
-</ul>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>Daniel Steinberg <a href="https://daniel.haxx.se/blog/2018/06/03/inside-firefoxs-doh-engine/">takes a look inside Firefox&rsquo;s DOH (DNS over HTTPS) engine</a>, slated to be included in the Firefox 62 release.</li>
-<li>Guy Maliar has a detailed post describing <a href="https://medium.com/@gmaliar/dynamic-secrets-on-kubernetes-pods-using-vault-35d9094d169">dynamic secrets on Kubernetes pods using HashiCorp Vault</a>. Along the way, just for fun, he also throws init containers into the mix as well. Good stuff here.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>Amazon EKS (Elastic Container Service for Kubernetes) <a href="https://aws.amazon.com/blogs/aws/amazon-eks-now-generally-available/">was made generally available this past week</a>. I plan to take a closer look at EKS very soon, and will share some feedback when I am able to do so.</li>
-<li>Jason Plum of GitLab shares <a href="https://about.gitlab.com/2018/04/16/five-things-i-wish-i-knew-about-kubernetes/">five things he wishes he&rsquo;d known about Kubernetes before he started</a>.</li>
-<li>Co-worker Ruben Orduz takes a (potentially controversial) stance and says that <a href="https://medium.com/@walloffire/you-dont-need-a-ha-control-plane-3af9da8e556d">you don&rsquo;t need an HA control plane for Kubernetes</a>. His points are spot-on: making the control plane highly available isn&rsquo;t going to improve the availability or scalability of your applications.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>Speaking of EKS, here&rsquo;s <a href="https://eksctl.io/">a new command-line interface for EKS</a>, courtesy of Weaveworks.</li>
-<li>Along with the GA of EKS, HashiCorp has a release of the Terraform AWS provider that has EKS support. More details are available <a href="https://www.hashicorp.com/blog/hashicorp-announces-terraform-support-aws-kubernetes">here</a>.</li>
-<li>Google recently <a href="https://kubernetes.io/blog/2018/05/29/introducing-kustomize-template-free-configuration-customization-for-kubernetes/">announced <code>kustomize</code></a>, a tool that provides a new approach to customizing Kubernetes object configuration.</li>
-<li>Following after <a href="https://blog.scottlowe.org/2018/05/23/quick-post-parsing-aws-instance-data-with-jq/">a recent post</a> involving parsing AWS instance data with <code>jq</code>, a Twitter follower pointed out <a href="https://github.com/simeji/jid"><code>jid</code> (the JSON incremental digger)</a>. Handy tool!</li>
-<li>I&rsquo;m seeing a fair amount of attention on <code>podman</code>, a tool primarily backed by Red Hat that aims to replace Docker as the client-side tool of choice. The latest was <a href="https://medium.com/cri-o/how-good-is-podman-eecedbbf71f">this post</a>. Anyone else spent any quality time with this tool and have some feedback?</li>
-<li>Nick Janetakis has a collection of quick &ldquo;Docker tips&rdquo; that you may find useful; the latest one shows <a href="https://nickjanetakis.com/blog/docker-tip-58-output-all-of-your-containers-env-variables">how to see all your container&rsquo;s environment variables</a>.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>This is an interesting announcement from a few weeks ago that I missed&mdash;Dell EMC will offer Isilon on Google Cloud Platform. See Chris Evans&rsquo; article <a href="https://blog.architecting.it/dell-emc-isilon-gcp/">here</a>. (I&rsquo;ll leave the analysis and pontificating to Chris, who&rsquo;s much better at it than I am.)</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>Mike Foley <a href="https://www.yelof.com/2018/06/06/prepping-an-esxi-6-7-host-for-secure-boot/">shares his experience</a> in updating his vSphere hosts to support the new Secure Boot functionality in vSphere 6.7. I&rsquo;d stay tuned to Mike&rsquo;s blog; he&rsquo;s indicated that some TPM 2.0-related content is due soon.</li>
-<li>Ed Haletky discusses <a href="https://www.astroarch.com/2018/06/vsphere-upgrade-saga-prepping-for-vsphere-6-7/">some considerations around upgrading to vSphere 6.7</a>.</li>
-<li>VMware rock star Frank Denneman provides <a href="http://frankdenneman.nl/2018/06/07/introduction-elastic-drs/">an introduction to Elastic DRS</a>, a feature of VMware Cloud on AWS.</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>I found this two-part series (<a href="https://unclutterer.com/2018/05/24/understanding-how-you-process-information-to-help-you-get-organized-part-i/">part 1</a>, <a href="https://unclutterer.com/2018/05/25/understanding-how-you-process-information-to-help-you-get-organized-part-2/">part 2</a>) on understanding how to process information to help you get organized to be an interesting (and quick) read. It&rsquo;s been my experience that improving your skills at being organized often reaps benefits in other areas.</li>
-</ul>
-
-<p>OK, that&rsquo;s all this time around. I hope you found something useful in this post. As always, your feedback is welcome; feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/y18YoxBTz6w" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/y18YoxBTz6w/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Exploring Kubernetes with Kubeadm, Part 1: Introduction</h3>
-		</div>
-		<div class="collectiontext">
-			<p>I recently started using <code>kubeadm</code> more extensively than I had in the past to serve as the primary tool by which I stand up Kubernetes clusters. As part of this process, I also discovered the <code>kubeadm alpha phase</code> subcommand, which exposes different sections (phases) of the process that <code>kubeadm init</code> follows when bootstrapping a cluster. In this blog post, I&rsquo;d like to kick off a series of posts that explore how one could use the <code>kubeadm alpha phase</code> command to better understand the different components within Kubernetes, the relationships between components, and some of the configuration items involved.</p>
-
-<p>Before I go any further, I&rsquo;d like to point readers to <a href="https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/">this URL</a> that provides an overview of <code>kubeadm</code> and using it to bootstrap a cluster. If you&rsquo;re new to <code>kubeadm</code>, go read that before continuing on here.</p>
-
-<p>&lt;aside&gt;Quick side note: it&rsquo;s my understanding that at some point the intent is to move <code>kubeadm alpha phase</code> out of alpha, at which point the command might look more like <code>kubeadm phase</code> or similar (that hasn&rsquo;t been fully determined yet as far as I know). If you&rsquo;re reading this at some point in the future, just make note that this was written back in the Kubernetes 1.10 timeframe when this was still an alpha feature.&lt;/aside&gt;</p>
-
-<p>Done? OK, let&rsquo;s proceed. At this point, you should know that <code>kubeadm init</code> is a simple and pretty straightforward way to set up a minimally viable Kubernetes cluster. This is all well and good if that is your goal. If, on the other hand, your goal is to better understand Kubernetes, then this is where I recommend spending some time with the <code>kubeadm alpha phase</code> subcommands. Why? Instead of automating the entire process, these subcommands let you look at the individual steps <em>and</em> the configuration artifacts produced by these individual steps. Want to see how the API server is configured? You can see the static Pod manifest that <code>kubeadm</code> generates. Want to see how certificates are used by Kubernetes to secure communications between the different components? This is visible via the <code>kubeadm alpha phase</code> subcommands. In my opinion, this makes <code>kubeadm alpha phase</code> a valuable learning tool for those seeking to deepen their knowledge of Kubernetes.</p>
-
-<p>Currently, <code>kubeadm</code> is only available for Linux. However, even if you&rsquo;re working on a Linux-based desktop (as I am, for example&mdash;I run <a href="https://getfedora.org/">Fedora</a> 27 as my primary OS), the best place to experiment with <code>kubeadm alpha phase</code> is in a Linux VM. Why? Some of the paths where <code>kubeadm</code> will output files (certificates, Pod manifests, etc.) are hard-coded within <code>kubeadm</code> itself, and you may not have/want to create that directory structure on your Linux desktop. Fortunately, it&rsquo;s easy to spin up a Linux VM using any number of tools (<a href="https://www.vagrantup.com/">Vagrant</a> comes to mind for me), and installing <code>kubeadm</code> is also straightforward (see <a href="https://kubernetes.io/docs/tasks/tools/install-kubeadm/">these instructions</a> for more details).</p>
-
-<p>In future parts of this series, I&rsquo;ll dig into specific sections of the <code>kubeadm alpha phase</code> subcommands and review what the subcommand is doing, what some of the configuration artifacts are, and explore how this fits into Kubernetes as a whole. I&rsquo;ll update this post with links to subsequent posts as the series evolves.</p>
-
-<p>Along the way, if you find <em>anything</em> incorrect&mdash;I&rsquo;m human and will make mistakes&mdash;feel free to <a href="https://twitter.com/scott_lowe/">hit me up on Twitter</a> or submit a pull request fixing the error. This will help make this resource more useful for everyone over time.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/-cFBd3pTPd0" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/-cFBd3pTPd0/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -701,38 +513,38 @@ end # Vagrant.configure
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="gitlab_ci.html">
+<div class="date">29.06.2018</div>
+<h3>Gitlab-CI</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich mein Build-Ökosystem hin zu Gitlab
+migriert
+habe, habe ich nun den nächsten Schritt in Angriff genommen: Continuous Integration oder kurz: CI...
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="tpedit_referenzen.html">
+<div class="date">29.06.2018</div>
+<h3>TPEdit mit Referenzen</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Die Anwendung zur
+Erstellung von Testprozeduren und Checklisten
+wurde erweitert und flexibilisiert...
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="raspberry_pi_ads_b_receiver.html">
 <div class="date">24.06.2018</div>
 <h3>Raspberry Pi als ADS-B-Receiver</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Ich habe bereits vor einiger Zeit darüber berichtet, wie man seinen eigenen
 ADS-B-Receiver
 bauen kann. Nachdem ich mein
 Projekt mit meinem Raspberry Pi
 abgeschlossen hatte, wollte ich ihn auch als Plattform für einen
 ADS-B-Receiver benutzen...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="modul_wrapper_implementiert.html">
-<div class="date">24.06.2018</div>
-<h3>Modul-Wrapper implementiert</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem ich vor einiger Zeit die Planung von
-Wrappern für Module
-angekündigt habe, steht die dafür notwendige interne Umbau der Lösung nunmehr vor dem Abschluss...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="garten_fruehjahr_2018.html">
-<div class="date">09.06.2018</div>
-<h3>Garten im Frühjahr 2018</h3>
-<div class="abstract">
-<p>Und auch dieses Jahr
-wieder
-eine Übersicht über Dinge, die in meinem Garten wachsen...
 </p></div>   </a>
 </li>
 </ul>
@@ -874,17 +686,6 @@ Java
 </header>
 <div class="nav-item-body">
 <p>Hauptsächlich Desktop Themen und Java SE</p>
-</div>
-</div>
-</a>
-<a href="java__komponenten.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Java. Komponenten
-</h3>
-</header>
-<div class="nav-item-body">
 </div>
 </div>
 </a>
