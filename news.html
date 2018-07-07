@@ -369,143 +369,6 @@ Name=virtualization-type,Values=hvm
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/LMcxtEELibw/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Examining X.509 Certificates Embedded in Kubeconfig Files</h3>
-		</div>
-		<div class="collectiontext">
-			<p>While exploring some of the intricacies around the use of X.509v3 certificates in <a href="https://kubernetes.io/">Kubernetes</a>, I found myself wanting to be able to view the details of a certificate embedded in a kubeconfig file. (See <a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/">this page</a> if you&rsquo;re unfamiliar with what a kubeconfig file is.) In this post, I&rsquo;ll share with you the commands I used to accomplish this task.</p>
-
-<p>First, you&rsquo;ll want to extract the certificate data from the kubeconfig file. For the purposes of this post, I&rsquo;ll use a kubeconfig file named <code>config</code> and found in the <code>.kube</code> subdirectory of your home directory. Assuming there&rsquo;s only a single certificate embedded in the file, you can use a simple <code>grep</code> statement to isolate this information:</p>
-
-<pre><code>grep 'client-certificate-data' $HOME/.kube/config
-</code></pre>
-
-<p>Combine that with <code>awk</code> to isolate <em>only</em> the certificate data:</p>
-
-<pre><code>grep 'client-certificate-data' $HOME/.kube/config | awk '{print $2}'
-</code></pre>
-
-<p>This data is Base64-encoded, so we decode it (I&rsquo;ll wrap the command using backslashes for readability now that it has grown a bit longer):</p>
-
-<pre><code>grep 'client-certificate-data' $HOME/.kube/config | \
-awk '{print $2}' | base64 -d
-</code></pre>
-
-<p>You could, at this stage, redirect the output into a file (like <code>certificate.crt</code>) if so desired; the data you have is a valid X.509v3 certificate. It lacks the private key, of course.</p>
-
-<p>However, if you&rsquo;re only interested in viewing the properties of the certificate, as I was, there&rsquo;s no need to redirect the output to a file. Instead, just pipe the output into <code>openssl</code>:</p>
-
-<pre><code>grep 'client-certificate-data' $HOME/.kube/config | \
-awk '{print $2}' | base64 -d | openssl x509 -text
-</code></pre>
-
-<p>The output of this command should be a decoded breakdown of the data in the X.509 certificate. Notable pieces of information in this context are the Subject (this will identify the user being authenticated to Kubernetes with this certificate):</p>
-
-<pre><code class="language-text">Certificate:
-    Data:
-        Version: 3 (0x2)
-        Serial Number: 8264125584782928183 (0x72b0126f24342937)
-    Signature Algorithm: sha256WithRSAEncryption
-        Issuer: CN=kubernetes
-        Validity
-            Not Before: Jun 13 01:52:46 2018 GMT
-            Not After : Jun 13 01:53:17 2019 GMT
-        Subject: CN=system:kube-controller-manager
-</code></pre>
-
-<p>Also of interest is the X509v3 Extended Key Usage (which indicates the certificate is used for client authentication, i.e., &ldquo;TLS Web Client Authentication&rdquo;):</p>
-
-<pre><code class="language-text">        X509v3 extensions:
-            X509v3 Key Usage: critical
-                Digital Signature, Key Encipherment
-            X509v3 Extended Key Usage: 
-                TLS Web Client Authentication
-</code></pre>
-
-<p>Note that the certificate is <em>not</em> configured for encryption, meaning this certificate doesn&rsquo;t ensure the connection to Kubernetes is encrypted. That function is handled by a different certificate; this one is only used for client authentication.</p>
-
-<p>This is probably nothing new for experienced Kubernetes folks, but I thought it might prove useful to a few people out there. Feel free <a href="https://twitter.com/scott_lowe">to hit me up on Twitter</a> with any corrections, clarifications, or questions. Have fun examining certificate data!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/Z3daC8vNs2o" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Z3daC8vNs2o/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Using Variables in AWS Tags with Terraform</h3>
-		</div>
-		<div class="collectiontext">
-			<p>I&rsquo;ve been working to deepen my <a href="https://www.terraform.io/">Terraform</a> skills recently, and one avenue I&rsquo;ve been using to help in this area is expanding my use of Terraform modules. If you&rsquo;re unfamiliar with the idea of Terraform modules, you can liken them to <a href="https://www.ansible.com/">Ansible</a> roles: a re-usable abstraction/function that is heavily parameterized and can be called/invoked as needed. Recently I wanted to add support for tagging AWS instances in a module I was building, and I found out that you can&rsquo;t use variable interpolation in the normal way for AWS tags. Here&rsquo;s a workaround I found in my research and testing.</p>
-
-<p>Normally, variable interpolation in Terraform would allow one to do something like this (this is taken from the <code>aws_instance</code> resource):</p>
-
-<pre><code class="language-text">tags {
-    Name = &quot;${var.name}-${count.index}&quot;
-    role = &quot;${var.role}&quot;
-}
-</code></pre>
-
-<p>This approach works, creating tags whose keys are &ldquo;Name&rdquo; and &ldquo;role&rdquo; and whose values are the interpolated variables. (I am, in fact, using this exact snippet of code in some of my Terraform modules.) Given that this works, I decided to extend it in a way that would allow the code calling the module to supply both the key as well as the value, thus providing more flexibility in the module. I arrived at this snippet:</p>
-
-<pre><code class="language-text">tags {
-    Name = &quot;${var.name}-${count.index}&quot;
-    role = &quot;${var.role}&quot;
-    &quot;${var.opt_tag_name}&quot; = &quot;${var.opt_tag_value}&quot;
-}
-</code></pre>
-
-<p>The idea here is that the <code>opt_tag_name</code> variable contains a tag key, and the <code>opt_tag_value</code> contains the associated tag value.</p>
-
-<p>Unfortunately, this doesn&rsquo;t work&mdash;instead of interpolating the value for <code>opt_tag_name</code>, the string was applied literally, and the value wasn&rsquo;t interpolated at all (it came through blank). I&rsquo;m not really sure why this is the case, but after some searching I came across <a href="https://github.com/hashicorp/terraform/issues/14516">this GitHub issue</a> that provides a workaround.</p>
-
-<p>The workaround has 2 parts:</p>
-
-<ol>
-<li>A local definition</li>
-<li>Mapping the tags into the <code>aws_instance</code> resource</li>
-</ol>
-
-<p>The local definition looks like this:</p>
-
-<pre><code class="language-text">locals {
-    common_tags = &quot;${map(
-        &quot;${var.opt_tag_name}&quot;, &quot;${var.opt_tag_value}&quot;,
-        &quot;role&quot;, &quot;${var.role}&quot;
-    )}&quot;
-}
-</code></pre>
-
-<p>This sets up a &ldquo;local variable&rdquo; within the module (it&rsquo;s scoped to the module). In this case, it&rsquo;s a map of keys and values. One of the keys is determined by interpolating the <code>opt_tag_name</code> variable, and the value for that key is determined by the variable <code>opt_tag_value</code>. The second key is &ldquo;role&rdquo;, and the value is taken by interpolating the <code>role</code> variable.</p>
-
-<p>The second step references this local definition. In the <code>aws_instance</code> resource itself, you&rsquo;ll reference the local definition along with any additional tags like this:</p>
-
-<pre><code class="language-text">tags = &quot;${merge(
-    local.common_tags,
-    map(
-        &quot;Name&quot;, &quot;${var.name}-${count.index}&quot;
-    )
-)}&quot;
-</code></pre>
-
-<p>This snippet of code sets up a new map that defines the tag with the &ldquo;Name&rdquo; key and the value taken from the variable <code>name</code> and suffixed by a count (derived from the number of instances being created). Then it uses the <code>merge</code> function to create a union of the two maps, which are then used by the AWS provider to set the tags on the AWS instance.</p>
-
-<p>Taken together, this allows me to provide <em>both</em> the tag name and the tag value to the module, which will then pass those along to the AWS instances created by the module. Now I just need to figure out how to make this truly <em>optional</em>, so that the module doesn&rsquo;t try to create a key-name value if no values are passed to the module. I haven&rsquo;t figured that part out (yet).</p>
-
-<h2 id="more-resources">More Resources</h2>
-
-<p><a href="https://www.terraform.io/docs/modules/index.html">Here&rsquo;s</a> the Terraform documentation on modules, though&mdash;to be honest&mdash;I haven&rsquo;t found it to be as helpful as I&rsquo;d like.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/K_DuJAKhlw0" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/K_DuJAKhlw0/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -513,38 +376,33 @@ awk '{print $2}' | base64 -d | openssl x509 -text
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="ads_b_zeitreihendatenbanken.html">
+<div class="date">07.07.2018</div>
+<h3>ADS-B in Zeitreihendatenbanken</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Weitere Gedanken zu ADS-B Daten und deren Nutzung
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="royal_institution_youtube_channel.html">
+<div class="date">07.07.2018</div>
+<h3>Royal Institution YouTube Channel</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Auf meinen Streifzügen durch Youtube bin ich auf einenKanal gestoßen, der so ganz anders ist als die ScienceBusters
+und außerdem leider nur auf englisch vorliegt - aber die Vorträge sind meiner Ansicht nach Extraklasse; Bester Beweis:
+hier fesseln mich sogar Psychologen (und wer mich kennt weiß, wie schwer diese Aussage wiegt...)
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="gitlab_ci.html">
 <div class="date">29.06.2018</div>
 <h3>Gitlab-CI</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Nachdem ich mein Build-Ökosystem hin zu Gitlab
 migriert
 habe, habe ich nun den nächsten Schritt in Angriff genommen: Continuous Integration oder kurz: CI...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="tpedit_referenzen.html">
-<div class="date">29.06.2018</div>
-<h3>TPEdit mit Referenzen</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Die Anwendung zur
-Erstellung von Testprozeduren und Checklisten
-wurde erweitert und flexibilisiert...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="raspberry_pi_ads_b_receiver.html">
-<div class="date">24.06.2018</div>
-<h3>Raspberry Pi als ADS-B-Receiver</h3>
-<div class="abstract">
-<p>Ich habe bereits vor einiger Zeit darüber berichtet, wie man seinen eigenen
-ADS-B-Receiver
-bauen kann. Nachdem ich mein
-Projekt mit meinem Raspberry Pi
-abgeschlossen hatte, wollte ich ihn auch als Plattform für einen
-ADS-B-Receiver benutzen...
 </p></div>   </a>
 </li>
 </ul>
