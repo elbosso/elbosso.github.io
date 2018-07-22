@@ -117,82 +117,47 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
-			<h3>More Handy CLI Tools for JSON</h3>
+			<h3>Cloning All Repositories in a GitHub Organization</h3>
 		</div>
 		<div class="collectiontext">
-			<p>In late 2015 I wrote <a href="https://blog.scottlowe.org/2015/11/11/handy-cli-tool-json/">a post about a command-line tool named <code>jq</code></a>, which is used for parsing JSON data. Since that time I&rsquo;ve referenced <code>jq</code> in a number of different blog posts (like <a href="https://blog.scottlowe.org/2018/05/23/quick-post-parsing-aws-instance-data-with-jq/">this one</a>). However, <code>jq</code> is not the only game in town for parsing JSON data at the command line. In this post, I&rsquo;ll share a couple more handy CLI tools for working with JSON data.</p>
+			<p>I&rsquo;ve recently started playing around with <a href="https://ballerina.io/">Ballerina</a>, and upon the suggestion of some folks on Twitter wanted to clone down some of the &ldquo;official&rdquo; Ballerina GitHub repositories to provide code examples and guides that would assist in my learning. Upon attempting to do so, however, I found myself needing to clone down 39 different repositories (all under a single organization), and so I asked on Twitter if there was an easy way to do this. Here&rsquo;s what I found.</p>
 
-<p>(By the way, if you&rsquo;re new to JSON, check out <a href="https://blog.scottlowe.org/2013/11/08/a-non-programmers-introduction-to-json/">this post</a> for a gentle introduction.)</p>
+<p>Fairly quickly after I posted <a href="https://twitter.com/scott_lowe/status/1020075780079083520">my tweet asking about a solution</a>, a follower responded indicating that I should be able to get the list of repositories via the GitHub API. He was, of course, correct:</p>
 
-<h2 id="jmespath-and-jp">JMESPath and <code>jp</code></h2>
-
-<p><a href="http://jmespath.org/">JMESPath</a> is used by both Amazon Web Services (AWS) in their AWS CLI as well as <a href="https://docs.microsoft.com/en-us/cli/azure/query-azure-cli">by Microsoft in the Azure CLI</a>. For examples of JMESPath in action, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/controlling-output.html">the AWS CLI documentation on the <code>--query</code> functionality</a>, which makes use of server-side JMESPath queries to reduce the amount of data returned by an AWS CLI command (as opposed to filtering on the client side).</p>
-
-<p>However, you can also use JMESPath on the client-side through <a href="https://github.com/jmespath/jp">the <code>jp</code> command-line utility</a>. As a client-side parsing tool, <code>jp</code> is similar in behavior to <code>jq</code>, but I find the JMESPath query language to be a bit easier to use than <code>jq</code> in some situations.</p>
-
-<p>Let&rsquo;s assume we are working with the output of the command <code>aws ec2 describe-security-groups</code>, which returns&mdash;as JSON&mdash;a list of security groups and their properties. Naturally, parsing this data down to find only the specific information you need is a prime use case for <code>jp</code>. Perhaps you know that a security group named &ldquo;internal-only&rdquo; exists, but you don&rsquo;t know anything else&mdash;only the name. Using <code>jp</code>, we could get more details on that specific group with this command:</p>
-
-<pre><code>aws ec2 describe-security-groups | jp &quot;SecurityGroups[?GroupName == 'internal-only']&quot;
+<pre><code>curl -s https://api.github.com/orgs/ballerina-guides/repos
 </code></pre>
 
-<p>The AWSCLI command will return all the security groups, and <code>jp</code> will filter through the data to return only the properties of the security group whose name (as defined in the &ldquo;GroupName&rdquo; field/property) is equal to &ldquo;internal-only.&rdquo; Compare that syntax to the equivalent <code>jq</code> syntax:</p>
+<p>This returns a list of the repositories in JSON format. Now, if you&rsquo;ve been paying attention to my site, you know there&rsquo;s <a href="https://blog.scottlowe.org/2015/11/11/handy-cli-tool-json/">a really handy way of parsing JSON data at the CLI</a> (namely, the <code>jq</code> utility). However, to use <code>jq</code>, you need to know the overall <em>structure</em> of the data. What if you don&rsquo;t know the structure?</p>
 
-<pre><code>aws ec2 describe-security-groups | jq '.SecurityGroups[] | select (.GroupName == &quot;internal-only&quot;)'
+<p>No worries, <a href="https://blog.scottlowe.org/2018/06/28/more-handy-cli-tools-json/">this post</a> outlines another tool&mdash;<code>jid</code>&mdash;that allows us to interactively explore the data. So, I ran:</p>
+
+<pre><code>curl -s https://api.github.com/orgs/ballerina-guides/repos | jid
 </code></pre>
 
-<p>That&rsquo;s handy, but what if we needed only a particular property of that security group? No problem, we&rsquo;d just append the property name to the end of the query:</p>
+<p>This let me explore the data being returned by the GitHub API call, and I quickly determined that I needed the <code>clone_url</code> property for each repository. With this information in hand, I can now construct this command:</p>
 
-<pre><code>aws ec2 describe-security-groups | jp &quot;SecurityGroups[?GroupName == 'internal-only'].GroupId&quot;
+<pre><code>curl -s https://api.github.com/orgs/ballerina-guides/repos |
+jq -r '.[].clone_url'
 </code></pre>
 
-<p>This is fundamentally equivalent to this <code>jq</code> command:</p>
+<p>Now I have a list of all the clone URLs for all the repositories, right? Not quite&mdash;the GitHub API paginates results, so a minor adjustment is needed:</p>
 
-<pre><code>aws ec2 describe-security-groups | jq '.SecurityGroups[] | select (.GroupName == &quot;internal-only&quot;).GroupId'
+<pre><code>curl -s https://api.github.com/orgs/ballerina-guides/repos?per_page=200 | jq -r '.[].clone_url'
 </code></pre>
 
-<p>However, if you try both <code>jp</code> and <code>jq</code> as described above, you&rsquo;ll note a significant difference in the output. First, here&rsquo;s the output of a <code>jq</code> command like the one above:</p>
+<p>From here it&rsquo;s a simple matter of piping the results to <code>xargs</code>, like this:</p>
 
-<pre><code class="language-text">&quot;sg-7f7efe02&quot;
+<pre><code>curl -s https://api.github.com/orgs/ballerina-guides/repos?per_page=200 | jq -r '.[].clone_url' | xargs -n 1 git clone
 </code></pre>
 
-<p>Now compare that to the output of the equivalent <code>jp</code> command:</p>
+<p>Boom! Problem solved. As fate would have it, I&rsquo;m not the only one thinking along these lines; here&rsquo;s <a href="https://medium.com/@kevinsimper/how-to-clone-all-repositories-in-a-github-organization-8ccc6c4bd9df">another example</a>. Several others also  suggested solutions involving Ruby; here&rsquo;s <a href="https://gist.github.com/stevemart/06ace005f82691435d0b#clone-all-ghe-repos">one such example</a> (this is written for GitHub Enterprise but should work for &ldquo;ordinary&rdquo; GitHub).</p>
 
-<pre><code class="language-text">[
-  &quot;sg-7f7efe02&quot;
-]
-</code></pre>
+<p>Naturally, further tweaks to the API URL may be necessary; if you needed private repos, for example, then you&rsquo;ll have to add <code>&amp;type=private</code> on the URL. Of course, that also means you&rsquo;ll need to supply authentication details&hellip;but you get the idea.</p>
 
-<p>As you can see, <code>jq</code> returns a specific value, whereas <code>jp</code> returns an array of values (with only a single item in the array). In order to get all the way down to a single value with <code>jp</code>, you have to extend the query:</p>
-
-<pre><code>aws ec2 describe-security-groups | jp &quot;SecurityGroups[?GroupName == 'internal-only'].GroupId | [0]&quot;
-</code></pre>
-
-<p>This command will return <em>only</em> the value of the &ldquo;GroupId&rdquo; field. <code>jp</code> does support a <code>-u</code> command-line option that is equivalent to the <code>-r</code> option to <code>jq</code> in order to return unquoted (raw) strings. This is helpful when storing the command output into a variable for use later.</p>
-
-<p>If you need more than a single property, you can build a JSON object from multiple properties by listing them in curly braces at the end of the query, like this:</p>
-
-<pre><code>aws ec2 describe-security-groups | jp &quot;SecurityGroups[?GroupName == 'internal-only'].{ Name: GroupName, ID: GroupId, VPC: VpcId }&quot;
-</code></pre>
-
-<p>This will return a JSON object with the properties listed.</p>
-
-<p>I may explore writing a more in-depth article on <code>jp</code> in the future; if that&rsquo;s something in which you&rsquo;d be interested, please <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> and let me know.</p>
-
-<h2 id="json-incremental-digger-jid">JSON Incremental Digger (<code>jid</code>)</h2>
-
-<p>What if you&rsquo;re not all that well-versed in the JMESPath syntax? Well, there are online simulators and parsers. Another approach would be to use <a href="https://github.com/simeji/jid"><code>jid</code>, the JSON incremental digger</a>. It doesn&rsquo;t necessarily follow the JMESPath syntax, but it does allow you to interactively query some JSON data to find what you&rsquo;re seeking.</p>
-
-<p>To use <code>jid</code>, simply pipe in some JSON data. For example, you could direct the output of the AWS CLI into <code>jid</code>:</p>
-
-<pre><code>aws ec2 describe-instances | jid
-</code></pre>
-
-<p>This puts you into an interactive screen where you can explore and parse the data to find exactly what you need. <code>jid</code> will supply &ldquo;suggested&rdquo; queries at the top of the screen in green; just press Tab to accept the suggestion. Adjust the query at the top until you have the data you need, then press Enter. The specific data you&rsquo;d selected in <code>jid</code> will be output to the shell. This is a super-handy way, in my opinion, of exploring JSON data structures with which you aren&rsquo;t already familiar.</p>
-
-<p>Have any other handy CLI tools for working with JSON? <a href="https://twitter.com/scott_lowe">Hit me on Twitter</a> with other tool suggestions, and I&rsquo;ll update the post with feedback from readers. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/YHsU9cl67eY" height="1" width="1" alt=""/>
+<p>I hope others find this useful! (And thanks to those who took the time to respond on Twitter, I appreciate it!)</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/Expp_3HEN8E" height="1" width="1" alt=""/>
 		</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/YHsU9cl67eY/" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Expp_3HEN8E/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 	<li class="anriss">
@@ -200,173 +165,183 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
-			<h3>A Quick Intro to the AWS CLI</h3>
+			<h3>Spousevitivities at VMworld 2018</h3>
 		</div>
 		<div class="collectiontext">
-			<p>This post provides a (very) basic introduction to the <a href="https://aws.amazon.com/cli/">AWS CLI (command-line interface)</a> tool. It&rsquo;s not intended to be a deep dive, nor is it intended to serve as a comprehensive reference guide (the <a href="http://docs.aws.amazon.com/cli/latest/reference/">AWS CLI docs</a> nicely fill that need). I also assume that you already have a basic understanding of the key AWS concepts and terminology, so I won&rsquo;t bore you with defining an instance, VPC, subnet, or security group.</p>
+			<p>In case there was any question whether <a href="http://spousetivities.com/">Spousetivities</a> would be present at VMworld 2018, let this settle it for you: Spousetivities <strong>will</strong> be there! In fact, <a href="https://spousetivities.ticketleap.com/spousetivities-lv2018/">registration for Spousetivities at VMworld 2018 is already open</a>. If previous years are any indication, there&rsquo;s a really good possibility these activities will sell out. Better get your tickets sooner rather than later!</p>
 
-<p>For the purposes of this introduction, I&rsquo;ll structure it around launching an EC2 instance. As it turns out, there&rsquo;s a fair amount of information you need before you can launch an AWS instance using the AWS CLI. So, let&rsquo;s look at how you would use the AWS CLI to help get the information you need in order to launch an instance using the AWS CLI. (Tool inception!)</p>
+<p>This year&rsquo;s activities are funded in part by the generous and community-minded support of <a href="https://www.veeam.com/">Veeam</a>, <a href="https://www.actualtechmedia.com/">ActualTech Media</a>, <a href="https://www.datrium.com/">Datrium</a>, and <a href="https://www.vmug.com/">VMUG</a>.</p>
 
-<p>To launch an instance, you need five pieces of information:</p>
+<p>Here&rsquo;s a brief peek at what&rsquo;s planned for VMworld in Las Vegas this August:</p>
 
-<ol>
-<li>The ID of an Amazon Machine Image (AMI)</li>
-<li>The type of instance you&rsquo;re going to launch</li>
-<li>The name of the SSH keypair you&rsquo;d like to inject into the instance</li>
-<li>The ID of the security group to which this instance should be added</li>
-<li>The ID of the subnet on which this instance should be placed</li>
-</ol>
-
-<p>Some (most?) of this information is easily located via the AWS console, but I&rsquo;ll use the CLI nevertheless.</p>
-
-<p>Let&rsquo;s start by determining the name of the SSH keypair you&rsquo;d like to inject into the instance (this is assuming you&rsquo;re launching a Linux-based instance). The basic format for AWS CLI commands looks something like <code>aws &lt;service&gt; &lt;command&gt;</code>. In this case, we&rsquo;re dealing with the EC2 service, and we want to get a list of&mdash;or <em>describe</em>&mdash;the SSH keypairs. So the command looks like this:</p>
-
-<pre><code>aws ec2 describe-key-pairs
-</code></pre>
-
-<p>What you&rsquo;ll get back is JSON (see <a href="https://blog.scottlowe.org/2013/11/08/a-non-programmers-introduction-to-json/">this article</a> if you need a quick introduction to JSON) that looks something like this (some of the data has been randomized to protect the innocent):</p>
-
-<pre><code class="language-json">{
-  &quot;KeyPairs&quot;: [
-    {
-      &quot;KeyName&quot;: &quot;key_pair_name&quot;,
-      &quot;KeyFingerprint&quot;: &quot;57:ca:27:99:fe:2a:24:60:8e:7f:b4:de:ad:be:ef:f1&quot;
-    }
-  ]
-}
-</code></pre>
-
-<p>Because it&rsquo;s JSON, you can use handy tools like <code>jq</code> to manipulate and format this data. (If you aren&rsquo;t familiar with <code>jq</code>, see <a href="https://blog.scottlowe.org/2015/11/11/handy-cli-tool-json/">this article</a>.) So, let&rsquo;s say you wanted to extract the keypair name into a variable so you can re-use it later. That command looks something like this:</p>
-
-<pre><code>KEYPAIR=$(aws ec2 describe-key-pairs | jq -r '.KeyPairs[0].KeyName')
-</code></pre>
-
-<p>Subsequently running <code>echo $KEYPAIR</code> would produce the output <code>key_pair_name</code>, showing you that you&rsquo;ve successfully extracted the name of the keypair into the variable named KEYPAIR. This trick&mdash;assigning the output of a command to a variable&mdash;is a trick of the Bash shell called <em>command substitution</em>, and I&rsquo;ll use it extensively in this article to store pieces of information we&rsquo;ll need later.</p>
-
-<p>Next, you&rsquo;ll need to know what type of instance you want to launch. Rodney &ldquo;Rodos&rdquo; Haywood has a great article on <a href="http://rodos.haywood.org/2016/03/which-instances-are-available-in-my.html">determining which instances are available in your region</a>. For now, we&rsquo;ll just assume you want to create a &ldquo;t2.micro&rdquo; instance.</p>
-
-<p>Next, let&rsquo;s track down security group and subnet information. To retrieve security group details, you&rsquo;d use this command:</p>
-
-<pre><code>aws ec2 describe-security-groups
-</code></pre>
-
-<p>This will return a list of security groups and the rules in the security groups, so the output will be lengthy and/or complex. Once again we&rsquo;ll turn to <code>jq</code> to help parse the information down to show us only the group ID of the default security group:</p>
-
-<pre><code>aws ec2 describe-security-groups | jq '.SecurityGroups[] | select (.GroupName == &quot;default&quot;) | .GroupId'
-</code></pre>
-
-<p>This finds the group whose <code>GroupName</code> key has the value &ldquo;default&rdquo; (i.e., the security group named &ldquo;default&rdquo;) and returns the group ID. You could modify the value for which you&rsquo;re searching as needed, of course.</p>
-
-<p>You can use Bash command substitution to place the output of this command into a variable we&rsquo;ll use later:</p>
-
-<pre><code>SG_ID=$(aws ec2 describe-security-groups | jq -r '.SecurityGroups[] | select (.GroupName == &quot;default&quot;) | .GroupId')
-</code></pre>
-
-<p>In reviewing the output of the <code>aws ec2 describe-security-groups</code> command, perhaps you notice the security group doesn&rsquo;t allow SSH access. That will be problematic, as SSH is the nearly-universal means by which you gain access to Linux- and UNIX-based instances. We can fix that pretty easily with the oh-so-intuitively-named <code>aws ec2 authorize-security-group-ingress</code> command:</p>
-
-<pre><code>aws ec2 authorize-security-group-ingress --group-id &lt;value&gt; --protocol &lt;tcp|udp|icmp&gt; --port &lt;value&gt; --cidr &lt;value&gt;
-</code></pre>
-
-<p>To allow SSH access, then, we&rsquo;ll use the <code>$SG_ID</code> value we obtained earlier and plug in the correct values for SSH:</p>
-
-<pre><code>aws ec2 authorize-security-group-ingress --group-id $SG_ID \
---protocol tcp --port 22 --cidr 0.0.0.0/0
-</code></pre>
-
-<p>And now our soon-to-be-launched instance will be available via SSH! (If you decide you don&rsquo;t want SSH access, just use the <code>aws ec2 revoke-security-group-ingress</code> command, which has the same syntax as the <code>aws ec2 authorize-security-group-ingress</code> command.)</p>
-
-<p>So far, we&rsquo;ve gathered the SSH key pair, the instance type, and the security group ID. Determining the next piece of information we need&mdash;the subnet ID&mdash;is pretty straightforward as well. The basic command is <code>aws ec2 describe-subnets</code>; when it&rsquo;s combined with a <code>jq</code> filter we can get the subnet ID for the subnet in a particular availability zone. Let&rsquo;s say we want the subnet from the &ldquo;us-west-2b&rdquo; availability zone:</p>
-
-<pre><code>aws ec2 describe-subnets | jq '.Subnets[] | select(.AvailabilityZone == &quot;us-west-2b&quot;) | .SubnetId'
-</code></pre>
-
-<p>This uses the same <code>jq</code> syntax we used with the security groups: finds the subnet object whose AvailabilityZone key is equal to &ldquo;us-west-2b&rdquo;, then returns the ID for that subnet.</p>
-
-<p>Naturally, we&rsquo;ll store this value in a variable for use later (adding the <code>-r</code> flag to <code>jq</code> to return the value in plain text, not as JSON):</p>
-
-<pre><code>SUBNET_ID=$(aws ec2 describe-subnets | jq -r '.Subnets[] | select(.AvailabilityZone == &quot;us-west-2b&quot;) | .SubnetId')
-</code></pre>
-
-<p>We&rsquo;re now left with only the AMI (Amazon Machine Image). I&rsquo;ve saved this for last as some might consider it the most complex of the tasks. As you&rsquo;ve likely guessed, the basic command is <code>aws ec2 describe-images</code>. However, you can&rsquo;t just run that command; it will return <em>way</em> too much information. (Go ahead and try it, I&rsquo;ll wait here.)</p>
-
-<p>To limit the amount of information returned by the <code>aws ec2 describe-images</code> command, we need to use some server-side filtering/querying functionality. There&rsquo;s a few different tricks we can use here:</p>
+<p><strong>Monday, August 27</strong></p>
 
 <ul>
-<li><p>First, we can add the <code>--owners</code> flag to limit the command to show AMIs belonging to a specific account. Let&rsquo;s suppose that we&rsquo;re looking for an Ubuntu AMI; in the case, we&rsquo;d use the owner ID of &ldquo;099720109477&rdquo;, so that the command would look like this:</p>
-
-<pre><code>aws ec2 describe-images --owners 099720109477
-</code></pre></li>
-
-<li><p>However, that&rsquo;s not enough, because we still get far too many values returned. To whittle down the list even further, the AWS CLI supports the  &ldquo;&ndash;filters&rdquo; parameter, which allows us to add more constraints to the list. The most useful filter, in my opinion, is filtering on the Name value. This allows you to do &ldquo;wildcard&rdquo; searches for AMIs whose name match a pattern. Here&rsquo;s an example:</p>
-
-<pre><code>aws ec2 describe-images --owners 099720109477 \
---filters Name=name,Values='*ubuntu-xenial-16.04*'
-</code></pre>
-
-<p>This will still return too much information, but we can tack on additional filters as needed:</p>
-
-<pre><code>aws ec2 describe-images --owners 099720109477 \
---filters Name=root-device-type,Values=ebs \
-Name=architecture, Values=x86_64 \
-Name=name,Values='*ubuntu-xenial-16.04*' \
-Name=virtualization-type,Values=hvm
-</code></pre>
-
-<p>Here you can see I&rsquo;ve added filters to show only AMIs that use EBS as the root volume type, are hardware-virtualized images, and are 64-bit images. The full list of available filters for the <code>describe-images</code> command is available <a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html">here</a>.</p></li>
-
-<li><p>Our final trick is to add a server-side query to the command. This query uses JMESPath syntax (which I won&rsquo;t cover here because that&rsquo;s enough for a separate post on its own). Here&rsquo;s an example of using a server-side query to show only the most recent AMI that matches the rest of the criteria:</p>
-
-<pre><code>aws ec2 describe-images --owners 099720109477 --filters Name=root-device-type,Values=ebs Name=architecture,Values=x86_64 Name=name,Values='*ubuntu-xenial-16.04*' Name=virtualization-type,Values=hvm --query 'sort_by(Images, &amp;Name)[-1].ImageId'
-</code></pre>
-
-<p>The last and final step would be to store the value this command returns into a variable for use later:</p>
-
-<pre><code>IMAGE_ID=$(aws ec2 describe-images --owners 099720109477 --filters Name=root-device-type,Values=ebs Name=architecture,Values=x86_64 Name=name,Values='*ubuntu-xenial-16.04*' Name=virtualization-type,Values=hvm --query 'sort_by(Images, &amp;Name)[-1].ImageId')
-</code></pre></li>
+<li>It&rsquo;s a tradition to kick the week off with a Welcome/&ldquo;Getting to Know You&rdquo; breakfast, and this year&mdash;year 11 for Spousetivities at VMworld&mdash;is no different! There will be great food, great company, and the opportunity to win some cool prizes.</li>
+<li>On Monday afternoon you can secure a spot in a private pod on the High Roller, including an open bar. Nice!</li>
+<li>Monday is also the first of three (yes, <em>three</em>) cabana days by the pool. This is the perfect way to relax by the Mandalay Bay pool! Monday&rsquo;s cabana day is sponsored by <a href="https://www.actualtechmedia.com/">ActualTech Media</a>.</li>
 </ul>
 
-<p>At this point, we&rsquo;ve gathered all the information we need to launch an AWS instance. The command to use is (drum roll, please) <code>aws ec2 run-instances</code>, and we&rsquo;ll plug in the variables we&rsquo;ve created along the way to supply all the necessary information. Here&rsquo;s what the final command would look like (I&rsquo;ve wrapped it with backslashes for improved readability):</p>
+<p><strong>Tuesday, August 28</strong></p>
 
-<pre><code>aws ec2 run-instances --image-id $IMAGE_ID \
---count 1 --instance-type t2.micro \
---key-name $KEYPAIR \
---security-group-ids $SG_ID \
---subnet-id $SUBNET_ID
-</code></pre>
+<ul>
+<li>On Tuesday, Spousetivities participants will head to Zion National Park. I went to Zion earlier this year, and let me tell you&mdash;it is <em>absolutely</em> amazing. Don&rsquo;t miss this trip if you enjoy spectacular natural views.</li>
+<li>A cabana day is available for those who would prefer to relax by the pool and catch some sun. Tuesday&rsquo;s cabana day is also brought to you by <a href="https://www.actualtechmedia.com/">ActualTech Media</a>.</li>
+</ul>
 
-<p>This command will also return some JSON, which will include the instance IDs of the instances we just launched. We&rsquo;ll ignore that output for now for the sake of being able to show a few more ways to use the AWS CLI.</p>
+<p><strong>Wednesday, August 29</strong></p>
 
-<p>With an instance now running, let&rsquo;s retrieve the details of the instance with another AWS CLI command:</p>
+<ul>
+<li>The third and final cabana day is available on Wednesday. Haven&rsquo;t had your chance in the sun yet, or can&rsquo;t get enough time by the pool? No worries, you still have another chance! Wednesday&rsquo;s cabana day is sponsored by <a href="https://www.datrium.com/">Datrium</a>.</li>
+<li>For those seeking a different kind of adventure, how about an ATV adventure through the Valley of Fire? This sounds like so much fun, and the Spousetivities price is nearly 50% off the retail price.</li>
+</ul>
 
-<pre><code>aws ec2 describe-instances
-</code></pre>
+<p><strong>Thursday, August 30</strong></p>
 
-<p>This command also returns a pretty fair amount of information, and again we can use <code>jq</code> to filter down the information to show <em>only</em> the details you need. Suppose you need to see the private and public IP addresses assigned to the instance you just launched. With this set of <code>jq</code> filters, that&rsquo;s exactly what you&rsquo;ll see:</p>
+<p>Thursday&rsquo;s sole activity is a walking food tour, available with or without specialty cocktails. Don&rsquo;t worry: if you partied hard at the official event party the previous evening, this event doesn&rsquo;t start until noon, so you have time to recover.</p>
 
-<pre><code>aws ec2 describe-instances | jq '.Reservations[].Instances[] | { instance: .InstanceId, publicip: .PublicIpAddress, privateip: .PrivateIpAddress }'
-</code></pre>
+<p>Head on over to <a href="https://spousetivities.ticketleap.com/spousetivities-lv2018/">the registration page</a> to get more information about any of the activities, or to sign up. Remember that although it&rsquo;s called &ldquo;Spousetivities,&rdquo; anyone is welcome! You don&rsquo;t have to be a spouse to attend.</p>
 
-<p>Handy! I could run through a dozen more examples, but I think you get the point now.</p>
-
-<p>Let&rsquo;s move on to terminating an instance. In order to terminate an instance&mdash;and you guessed it, the appropriate command is <code>aws ec2 terminate-instances</code> as expected&mdash;we&rsquo;ll need the instance IDs. Turning back to <code>jq</code> again:</p>
-
-<pre><code>aws ec2 describe-instances | jq '.Reservations[].Instances[] | .InstanceId'
-</code></pre>
-
-<p>And once again using command substitution store that into a variable:</p>
-
-<pre><code>INSTANCE_ID=$(aws ec2 describe-instances | jq -r '.Reservations[].Instances[] | .InstanceId')
-</code></pre>
-
-<p>Then we can plug that value into this command to terminate instances:</p>
-
-<pre><code>aws ec2 terminate-instances --instance-ids $INSTANCE_ID
-</code></pre>
-
-<p>Hopefully this quick introduction to basic tasks you can perform with the AWS CLI has been useful. Feel free to <a href="https://twitter.com/scott_lowe">hit me on Twitter</a> if you have questions. If you have suggestions for improving this article, I invite you to open an issue or file a PR <a href="https://github.com/scottslowe/weblog">on the GitHub repository for this site</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/LMcxtEELibw" height="1" width="1" alt=""/>
+<p>What are you waiting for? Go sign up now!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/OsfY_08HH4Q" height="1" width="1" alt=""/>
 		</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/LMcxtEELibw/" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/OsfY_08HH4Q/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Additive Loops with Ansible and Jinja2</h3>
+		</div>
+		<div class="collectiontext">
+			<p>I don&rsquo;t know if &ldquo;additive&rdquo; is the right word, but it was the best word I could come up with to describe the sort of configuration I recently needed to address in <a href="https://www.ansible.com/">Ansible</a>. In retrospect, the solution seems pretty straightforward, but I&rsquo;ll include it here just in case it proves useful to someone else. If nothing else, it will at least show some interesting things that can be done with Ansible and Jinja2 templates.</p>
+
+<p>First, allow me to explain the problem I was trying to solve. As you may know, Kubernetes 1.11 was recently released, and along with it a new version of <code>kubeadm</code>, the tool for bootstrapping Kubernetes clusters. As part of the new release, the Kubernetes community released <a href="https://kubernetes.io/docs/setup/independent/high-availability/">a new setup guide for using <code>kubeadm</code> to create a highly available cluster</a>. This setup guide uses new functionality in <code>kubeadm</code> to allow you to create &ldquo;stacked masters&rdquo; (control plane nodes running both the Kubernetes components as well as the etcd key-value store). Because of the way etcd clusters work, and because of the way you create HA control plane members, the process requires that you start with a single etcd node, then add the second node, and finally add the third node. If you start out with all three, then the cluster won&rsquo;t establish quorum and establishing a functional Kubernetes control plane node will fail.</p>
+
+<p>As a result, this means the <code>kubeadm</code> configuration file used on the first Kubernetes control plane node must be written to boot a new single-node cluster. However, the <code>kubeadm</code> configuration file on the second control plane node specifies the first node and <em>adds</em> the second node. Likewise, the <code>kubeadm</code> configuration file for the third control plane node has the first and second nodes and <em>adds</em> the third node (hence my use of &ldquo;additive loops&rdquo; in the blog post title).</p>
+
+<p>So, when I set out to automate this process using Ansible, I knew this wasn&rsquo;t going to be your standard &ldquo;run-of-the-mill&rdquo; inventory loop in a Jinja2 template&mdash;at least, that wasn&rsquo;t <em>all</em> it was going to be.</p>
+
+<p>I arrived at a solution with three templates (one for each of the stacked masters). In the first template, the section for configuring etcd specifies the &ldquo;initial-cluster&rdquo; in the following way:</p>
+
+<pre><code class="language-jinja2">initial-cluster: &quot;{%- for host in groups['masters'] -%}
+{%- if loop.first -%}
+{{ hostvars[host]['ansible_fqdn'] }}=https://{{ hostvars[host]['ansible_' + primary_interface]['ipv4']['address'] }}:2380{%- endif -%}
+{%- endfor -%}&quot;
+</code></pre>
+
+<p>The result, as you can probably determine, is that the first item in the loop&mdash;the first server in that inventory group&mdash;is the only item rendered in the template.</p>
+
+<p>The second server was a bit more challenging, mostly because of a stupid error on my part. After accounting for my stupid error (if you must know, I was using <code>hostvars[inventory_hostname]</code> instead of <code>hostvars[host]</code>), this is where I ended:</p>
+
+<pre><code class="language-jinja2">initial-cluster: &quot;{%- for host in groups['masters'] -%}
+{%- if loop.first -%}
+{{ hostvars[host]['ansible_fqdn'] }}=https://{{ hostvars[host]['ansible_' + primary_interface]['ipv4']['address'] }}:2380,{%- endif -%}
+{%- if (not loop.last and not loop.first) -%}
+{{ hostvars[host]['ansible_fqdn'] }}=https://{{ hostvars[host]['ansible_' + primary_interface]['ipv4']['address'] }}:2380{%- endif %}
+{%- endfor -%}&quot;
+</code></pre>
+
+<p>This adds to the previous template by including the <code>if (not loop.last and not loop.first)</code> conditional, which&mdash;for a group of three&mdash;ends up meaning the second host in the group. Great; now we have a template for the first host which has only the first host, and a template for the second host which has both the first and second hosts listed.</p>
+
+<p>The third and final template is, after all, a standard &ldquo;run-of-the-mill&rdquo; inventory loop:</p>
+
+<pre><code class="language-jinja2">initial-cluster: &quot;{%- for host in groups['masters'] -%}
+{%- if loop.last -%}
+{{ hostvars[host]['ansible_fqdn'] }}=https://{{ hostvars[host]['ansible_' + primary_interface]['ipv4']['address'] }}:2380
+{%- else -%}
+{{ hostvars[host]['ansible_fqdn'] }}=https://{{ hostvars[host]['ansible_' + primary_interface]['ipv4']['address'] }}:2380,
+{%- endif -%}{%- endfor -%}&quot;
+</code></pre>
+
+<p>This one probably requires no explanation; it simply iterates through the inventory group. The only &ldquo;special&rdquo; thing about it is knowing whether it should include a comma after the rendered text or not by testing for <code>loop.last</code>.</p>
+
+<p>I <em>should</em> probably explain, though, the use of the <code>['ansible_' + primary_interface]</code> syntax. I needed a way to get the IP address of an interface on the target system, but the names of interfaces change depending on platform. For example, on one platform the first Ethernet interface may be called &ldquo;eth0&rdquo;; on another, it may be called &ldquo;ens0p0&rdquo; or similar. Using the &ldquo;primary_interface&rdquo; variable allows me to use the same Ansible playbooks across platforms, only needing to adjust the variable when interface names change between platforms. (This was an Ansible trick I picked up from <a href="https://twitter.com/craig_tracey/">my colleague Craig</a>.) Ansible substitutes the value of the variable when pulling the host variable to render the template. If I specify &ldquo;eth0&rdquo; as the value for &ldquo;primary_interface&rdquo;, Ansible will treat that as <code>ansible_eth0</code> and thus pull the IPv4 address for eth0 when rendering the template. Handy! (Thanks Craig!)</p>
+
+<p>As I said, looking back on the solution now it seems simple and straightforward. There&rsquo;s probably a more elegant solution out there somewhere, but for now this will suffice. Oh, and if you&rsquo;re interested in seeing the full template or the Ansible playbook used to render the template, have a look at the <code>ansible/kubeadm-etcd-template</code> directory in <a href="https://github.com/scottslowe/learning-tools/">my GitHub &ldquo;learning-tools&rdquo; repository</a>. Enjoy!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/dEiozlzjHKQ" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/dEiozlzjHKQ/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Technology Short Take 102</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Welcome to Technology Short Take 102! I normally try to get these things published biweekly (every other Friday), but this one has taken quite a bit longer to get published. It&rsquo;s no one&rsquo;s fault but my own! In any event, I hope that you&rsquo;re able to find something useful among the links below.</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>Matt Oswalt, now at Juniper, has been recently trumpeting the idea of reliability as a core reason for automation. Here&rsquo;s <a href="https://forums.juniper.net/t5/Enterprise-Cloud-and/The-Network-Reliability-Engineer-s-Manifesto/ba-p/329020">his latest piece</a>. (For the record, I don&rsquo;t disagree with much of what Matt has to say on this topic.)</li>
+<li>Ajay Chenampara has a post on <a href="https://termlen0.github.io/2018/06/26/observations/">using the Ansible <code>network-engine</code> command parser to parse the output of commands on network devices</a>. It looks like there will be a follow-up to this article as well, so you may want to check back on Ajay&rsquo;s site.</li>
+<li>Bernd Malmqvist <a href="https://techbloc.net/archives/3066">talks</a> about Avi Networks&rsquo; software-defined load balancing solution, including providing an overview of how to use Vagrant to test it yourself.</li>
+<li>Julia Evans provides <a href="https://jvns.ca/blog/2018/06/19/what-i-use-wireshark-for/">a quick overview of Wireshark</a>.</li>
+</ul>
+
+<h2 id="security">Security</h2>
+
+<ul>
+<li>The sort of things that are possible with Falco&mdash;some of which are outlined in <a href="https://sysdig.com/blog/docker-runtime-security/">this admittedly very vendor-specific article</a>&mdash;makes it an intriguing solution (to me, anyway).</li>
+<li>Chris Hein shows <a href="https://aws.amazon.com/blogs/opensource/deploying-heptio-authenticator-kops/">how to use the Heptio Authenticator</a> with <code>kops</code> to link Kubernetes cluster authentication to AWS IAM.</li>
+</ul>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li>Joe Duffy <a href="http://joeduffyblog.com/2018/06/18/hello-pulumi/">takes the wraps off Pulumi</a>, which looks <em>very</em> interesting. This is an area where I&rsquo;d love to spend some time really digging in.</li>
+<li>Interesting article <a href="https://medium.com/@cfatechblog/bare-metal-k8s-clustering-at-chick-fil-a-scale-7b0607bd3541">here</a> on Chick-Fil-A&rsquo;s use of Kubernetes in their restaurants, and the tools/process they follow for establishing those clusters.</li>
+<li>Jeff Geerling&mdash;well-known in the Ansible and Drupal communities&mdash;discusses <a href="https://www.jeffgeerling.com/blog/2018/kubernetes-complexity">the (perceived) complexity of Kubernetes</a>. He spent some time <em>actually</em> working with Kubernetes to solve a problem, and he came away from that time recognizing (in his words) &ldquo;most of the complexity is necessary,&rdquo; and seeing value in using Kubernetes for appropriate use cases. This article is not (in my opinion) a knee-jerk reaction to some of the debate around Kubernetes&rsquo; complexity, but rather a measured and honest evaluation of a tool to solve problems.</li>
+<li>Maish Saidel-Keesing has a two-part (so far?) series on comparing CloudFormation, Terraform, and Ansible (<a href="https://technodrone.blogspot.com/2018/06/comparing-cloudformation-terraform-and.html">part 1</a>, <a href="https://technodrone.blogspot.com/2018/07/comparing-cloudformation-terraform-and.html">part 2</a>). This is worth a read if you&rsquo;re trying to determine which of these tools may be right for your use case.</li>
+<li>Here&rsquo;s a three-part series on Helm (<a href="https://developer.epages.com/blog/tech-stories/kubernetes-deployments-with-helm/">part 1</a>, <a href="https://developer.epages.com/blog/tech-stories/kubernetes-deployments-with-helm-templates/">part 2</a>, and <a href="https://developer.epages.com/blog/tech-stories/kubernetes-deployments-with-helm-secrets/">part 3</a>).</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>This is probably well-known, but I found <a href="https://nickjanetakis.com/blog/docker-tip-55-creating-read-only-containers">this little tidbit</a> about read-only containers handy.</li>
+<li>This article on <a href="https://hackernoon.com/another-reason-why-your-docker-containers-may-be-slow-d37207dec27f">another reason your Docker containers may be slow</a> was an excellent reminder that containerization is not equal to virtualization (that doesn&rsquo;t make it better or worse, just different), and therefore can&rsquo;t be treated the same. Different design and architecture considerations apply in each instance.</li>
+<li>Lightroom is one of only a few applications that I keep around for macOS; <a href="https://opensource.com/alternatives/adobe-lightroom">this article</a> gives me some alternatives.</li>
+<li>Here&rsquo;s an article on <a href="https://opensource.com/article/18/6/getting-started-buildah">getting started with Buildah</a>, part of a suite of tools being built as alternatives to Docker.</li>
+<li>Tom Sweeney also <a href="https://opensource.com/article/18/5/containers-buildah">talks</a> about Buildah and how it can be used to create small container images. My takeaway from this article is that building really small container images requires either a) arcane knowledge of Docker layers and the <code>Dockerfile</code>, or b) arcane knowledge of little-used <code>yum</code> parameters.</li>
+<li>Shahidh Muhammad has <a href="https://blog.hasura.io/draft-vs-gitkube-vs-helm-vs-ksonnet-vs-metaparticle-vs-skaffold-f5aa9561f948">a review/comparison of various tools</a> aimed at helping developers build and deploy their apps on Kubernetes.</li>
+<li>William Lam shares <a href="https://www.virtuallyghetto.com/2018/07/my-list-of-microsoft-visual-code-studio-extensions.html">his list</a> of Visual Studio Code extensions.</li>
+<li>Finally, a reasonably usable <a href="https://github.com/rockymadden/slack-cli">CLI client for Slack</a>&mdash;written in Bash, no less!</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<ul>
+<li>Cormac Hogan walks through <a href="https://cormachogan.com/2018/06/22/minio-s3-object-store-deployed-as-a-set-of-vms-on-vsan/">setting up the Minio object store on top of VMware vSAN</a>.</li>
+</ul>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<ul>
+<li>Mike Foley walks you through <a href="https://opensource.com/alternatives/adobe-lightroom">configuring TPM 2.0 on a vSphere 6.7 host</a>. (This must be the &ldquo;future TPM content&rdquo; that Mike mentioned.)</li>
+<li>Ed Haletky <a href="https://www.astroarch.com/2018/07/vsphere-upgrade-saga-building-virtual-in-virtual-labs/">documents</a> the approach he uses to produce segregated virtual-in-virtual test environments that live within his production environment.</li>
+<li>It seems as if there&rsquo;s quite a bit of complexity in <a href="http://kubevirt.io/2018/Deploying-VMs-on-Kubernetes-GlusterFS-KubeVirt.html">this article</a> on using KubeVirt witih GlusterFS, but I can&rsquo;t tell if that is a byproduct of KubeVirt, GlusterFS, or the combination of the two.</li>
+</ul>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<p>A couple of useful career-related articles popped up on my radar over the last couple of weeks:</p>
+
+<ul>
+<li>First, there&rsquo;s <a href="https://veric.me/2018/06/06/my-trudge-through-it-burnout-and-the-fight-to-keep-it-at-bay/">this article</a> by Eric Lee on IT burnout. If you find yourself experiencing some of the same issues that Eric describes, I&rsquo;d encourage you to take a deeper look and see if changes are necessary.</li>
+<li>Next, Cody De Arkland <a href="https://www.thehumblelab.com/lets-talk-about-imposter-syndrome/">tackles the topic of imposter syndrome</a>. This is an area where I personally have struggled in the past, and I had to learn to humbly accept praise and stop negative self-talk. Talk to someone if you&rsquo;re wrestling with this.</li>
+</ul>
+
+<p>That&rsquo;s all for now. Look for the next Technology Short Take in 2-3 weeks, and feel free <a href="https://twitter.com/scott_lowe">to contact me via Twitter</a> if you have any links or articles you think I should share. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/1g-JJQsUHUI" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/1g-JJQsUHUI/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 </ul>
@@ -376,33 +351,36 @@ Name=virtualization-type,Values=hvm
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-  <a href="ads_b_zeitreihendatenbanken.html">
-<div class="date">07.07.2018</div>
-<h3>ADS-B in Zeitreihendatenbanken</h3>
+  <a href="imageio_codecs_auf_github.html">
+<div class="date">22.07.2018</div>
+<h3>ImageIO-Codecs auf Github</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Weitere Gedanken zu ADS-B Daten und deren Nutzung
+<p>Nachdem ich einige Codecs für Bildformate schon länger bei mir rumliegen hatte, habe ich sie aufpoliert und
+auf Github online gestellt
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="royal_institution_youtube_channel.html">
-<div class="date">07.07.2018</div>
-<h3>Royal Institution YouTube Channel</h3>
+	<a href="hillshading_server_openstreetmap_lxc_ii.html#38">
+<div class="date">10.07.2018</div>
+<h3>Hillshading-Server für Openstreetmap in LXC II</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Auf meinen Streifzügen durch Youtube bin ich auf einenKanal gestoßen, der so ganz anders ist als die ScienceBusters
-und außerdem leider nur auf englisch vorliegt - aber die Vorträge sind meiner Ansicht nach Extraklasse; Bester Beweis:
-hier fesseln mich sogar Psychologen (und wer mich kennt weiß, wie schwer diese Aussage wiegt...)
+	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+<p>Nachdem ich bereits den
+OpenStreetMap-Tile-Server
+aktualisiert habe, folgte nun der für die Höhen- (Relief-) Informationen.
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="gitlab_ci.html">
-<div class="date">29.06.2018</div>
-<h3>Gitlab-CI</h3>
+	<a href="tile_server_openstreetmap_lxc_ii.html#40">
+<div class="date">10.07.2018</div>
+<h3>Tile-Server für Openstreetmap in LXC II</h3>
 <div class="abstract">
-<p>Nachdem ich mein Build-Ökosystem hin zu Gitlab
-migriert
-habe, habe ich nun den nächsten Schritt in Angriff genommen: Continuous Integration oder kurz: CI...
+	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+<p>Ich beschrieb vor einiger Zeit den Antrieb dafür,
+einen eigenen Tile-Server zu betreiben.
+ Damals war als System Ubuntu 12.04 in LXC-Containern auf einem Ubuntu 13.04-Wirt zum Einsatz gekommen.
+ Ich habe das System renoviert und auf Ubuntu 16.04 (Container und Wirt) angehoben
 </p></div>   </a>
 </li>
 </ul>

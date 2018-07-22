@@ -98,14 +98,14 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 <div id="all">
 <div id="A">
 <div id="content">
-<div class="date">23.07.2017 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<div class="date">10.07.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
 <span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
 <div class="previousArticlesInCategories">
 	<!--ul-->
 	vorhergehende Artikel in:
-	<!--li--> <a href="autostereoskopie_generierten_planeten.html#content">Geo</a> <!--/li-->
-	<!--li--> ,<a href="expect_dialog_ca_opensource.html#content">Linux</a> <!--/li-->
-	<!--li--> ,<a href="overlay_fs_linksammlung.html#content">Virtualisierung</a> <!--/li-->
+	<!--li--> <a href="ads_b_zeitreihendatenbanken.html#content">Geo</a> <!--/li-->
+	<!--li--> ,<a href="gitlab_ci.html#content">Linux</a> <!--/li-->
+	<!--li--> ,<a href="linux_wifi_accesspoint_aus_raspi.html#content">Virtualisierung</a> <!--/li-->
 	<!--/ul-->
 </div>
  	<div class="heading">Hillshading-Server für Openstreetmap in LXC II</div>
@@ -113,13 +113,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 		<h1>Updates</h1>
 		<ul>
 			<li><a href="#37">23. Juli 2017</a></li>
+			<li><a href="#38">10. Juli 2018</a></li>
 		</ul>
 	</div>
 	<p>Nachdem ich bereits den
 <a href="tile_server_openstreetmap_lxc_ii.html">OpenStreetMap-Tile-Server</a>
 aktualisiert habe, folgte nun der für die Höhen- (Relief-) Informationen.
 </p> <a name="content"> </a>
- <p>Genau wie der OpenStreetMap-Tile-Server wurde auch der Server für die Höheninformationen
+ <p>Genau wie der
+<a href="tile_server_openstreetmap_lxc_ii.html">OpenStreetMap-Tile-Server</a>
+wurde auch der Server für die Höheninformationen
 auf Ubuntu 16.04 umgestellt - ebenfalls für den eigentlichen Container, wie auch für das Wirtssystem.
 </p><p>
 Im Zusammenhang damit wurde nicht nur die korrekte Funktion mit
@@ -129,151 +132,21 @@ getestet, sondern ebenfalls auch die mit
 Für beide Anwendungen sind unten Screenshots angehängt, die die Ergebnisse zeigen. Ich habe für Testzwecke die Höheninformationen
 nicht flächendeckend importiert, sondern zunächst nur eine Kachel.
 </p><p>
-Die hier aufgelisteten Kommandos stellen am Ende einen Tile-Server für Thüringen mit demjeweils aktuellsten OpenStreetMap-Kartenmaterial her.
-Zeilen, die mit # oder // beginnen sind natürlich kommentare, Zeilen, die mit -- beginnen, sind in der Datei, die
+Ich habe alle Operationen auf dem Weg zum funktionierenden Hillshading-Server in einem
+<a href="https://gist.github.com/elbosso/584a4bc434190e726d59c688b088fb5b">Gist</a> zusammengefasst
+Die hier aufgelisteten Kommandos stellen am Ende einen Tile-Server für Höhen- beziehungsweise Reliefinformationen her.
+Zeilen, die mit # oder // beginnen sind natürlich Kommentare, Zeilen, die mit -- beginnen, sind in der Datei, die
 in der unmittelbar vorausgehenden Zeile referenziert wird, entsprechend einzutragen.
 </p><p>
-<pre>
-CONTAINERNAME=hillshading
-PROCESSORCOUNT=$(cat /proc/cpuinfo | grep processor | wc -l) # used to speed up make
-lxc-create -n $CONTAINERNAME -t download -- --arch amd64 --dist ubuntu --release xenial
-lxc-start -n $CONTAINERNAME
-lxc-attach -n $CONTAINERNAME -- apt-get update
-lxc-attach -n $CONTAINERNAME -- apt-get -y upgrade
-lxc-attach -n $CONTAINERNAME -- apt-get -y install joe screen conky-cli openssh-server curl unzip gdal-bin tar wget bzip2 build-essential clang git autoconf libtool libxml2-dev libbz2-dev libgeos-dev libgeos++-dev libproj-dev gdal-bin libgdal-dev g++ libmapnik-dev mapnik-utils python-mapnik libxml2-dev libfreetype6-dev libjpeg-dev libpng-dev libproj-dev libtiff-dev libcairo2 libcairo2-dev python-cairo python-cairo-dev libgdal-dev build-essential python-dev libbz2-dev libicu-dev libboost-all-dev apache2 apache2-dev python-yaml python-pip mapnik-utils fonts-noto-cjk fonts-noto-hinted fonts-noto-unhinted fonts-hanazono ttf-unifont fontconfig fonts-dejavu-core nodejs-legacy npm
-lxc-attach -n $CONTAINERNAME -- apt-get clean
-lxc-attach -n $CONTAINERNAME -- useradd -m tileserver
-lxc-attach -n $CONTAINERNAME -- passwd tileserver
-lxc-attach -n $CONTAINERNAME -- usermod -aG sudo tileserver
-ssh tileserver@$CONTAINERNAME
-export LANGUAGE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-test -d ~/src || mkdir  ~/src ; cd ~/src
-git clone https://github.com/openstreetmap/mod_tile.git
-git clone https://github.com/gravitystorm/openstreetmap-carto.git
-git clone https://github.com/googlei18n/noto-emoji.git
-mapnik-config -v
-python -c "import mapnik;print mapnik.__file__"
-curl localhost| grep 'It works!'
-cd mod_tile
-./autogen.sh &amp;&amp; ./configure &amp;&amp; make -j$PROCESSORCOUNT &amp;&amp; sudo make install &amp;&amp; sudo make install-mod_tile &amp;&amp; sudo ldconfig
-cd ~/src/
-sudo cp noto-emoji/fonts/NotoColorEmoji.ttf noto-emoji/fonts/NotoEmoji-Regular.ttf /usr/share/fonts/truetype/noto
-sudo fc-cache -fv
-fc-list
-fc-list | grep Emoji
-cd openstreetmap-carto
-scripts/get-shapefiles.py
-sudo npm install -g carto@0.18.0
-cd ~/src/openstreetmap-carto
-carto -a "3.0.0" project.mml > style.xml
-ls -l style.xml
-sudo joe /usr/local/etc/renderd.conf
---XML=/home/tileserver/src/openstreetmap-carto/style.xml
---HOST=localhost
---plugins_dir=/usr/lib/mapnik/3.0/input/
-sudo cp ~/src/mod_tile/debian/renderd.init /etc/init.d/renderd
-sudo chmod a+x /etc/init.d/renderd
-sudo joe /etc/init.d/renderd
---DAEMON=/usr/local/bin/$NAME
---DAEMON_ARGS="-c /usr/local/etc/renderd.conf"
---RUNASUSER=tileserver
-sudo mkdir -p /var/lib/mod_tile
-sudo chown tileserver:tileserver /var/lib/mod_tile
-sudo systemctl daemon-reload
-sudo systemctl start renderd
-sudo systemctl enable renderd
-sudo joe  /etc/apache2/mods-available/mod_tile.load
---LoadModule tile_module /usr/lib/apache2/modules/mod_tile.so
-sudo ln -s /etc/apache2/mods-available/mod_tile.load /etc/apache2/mods-enabled/
-sudo joe /etc/apache2/sites-enabled/000-default.conf
---# Load all the tilesets defined in the configuration file into this virtual host
---LoadTileConfigFile /usr/local/etc/renderd.conf
---# Socket where we connect to the rendering daemon
---ModTileRenderdSocketName /var/run/renderd/renderd.sock
---# Timeout before giving up for a tile to be rendered
---ModTileRequestTimeout 3
---# Timeout before giving up for a tile to be rendered that is otherwise missing
---ModTileMissingRequestTimeout 60
-sudo systemctl restart apache2
-#clean out /home/tileserver/src/openstreetmap-carto/style.xml (essentially: remove all layers and styles)
-sudo service renderd restart
-wget --spider http://localhost/osm_tiles/0/0/0.png
-cd ~/src
-mkdir dem
-cd dem
-wget https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/Eurasia/N49E010.hgt.zip
-wget https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/Eurasia/N49E011.hgt.zip
-wget https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/Eurasia/N49E012.hgt.zip
-wget https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/Eurasia/N50E010.hgt.zip
-wget https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/Eurasia/N50E011.hgt.zip
-wget https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/Eurasia/N50E012.hgt.zip
-wget https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/Eurasia/N51E010.hgt.zip
-wget https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/Eurasia/N51E011.hgt.zip
-wget https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/Eurasia/N51E012.hgt.zip
-wget https://www.grassbook.org/wp-content/uploads/neteler/rs/srtm/srtm_generate_hdr.sh
-/bin/bash srtm_generate_hdr.sh N50E011.hgt.zip
-gdal_translate -of GTiff -co "TILED=YES" -a_srs "+proj=latlong" N50E011.tif N50E011_adapted.tif
-gdalwarp -of GTiff -co "TILED=YES" -srcnodata 32767 -t_srs "+proj=merc +ellps=sphere +R=6378137 +a=6378137 +units=m" -rcs -order 3 -tr 30 30 -multi N50E011_adapted.tif N50E011_warped.tif
-gdaldem hillshade N50E011_warped.tif N50E011_hillshade.tif
-joe shade.ramp
-gdaldem color-relief N50E011_hillshade.tif -alpha shade.ramp N50E011_hillshade_overlay.tif
-joe /home/tileserver/src/openstreetmap-carto/style.xml
-</pre>
-</p><p>
-Und zu guter Letzt noch das zusammenhehackte File für den Test mit OpenLayers 3:
-</p><p>
-<pre>
-&lt;!doctype html>
-&lt;html lang="en">
-  &lt;head>
-    &lt;link rel="stylesheet" href="https://openlayers.org/en/v4.1.1/css/ol.css" type="text/css">
-    &lt;style>
-      .map {
-        height: 400px;
-        width: 100%;
-      }
-    &lt;/style>
-    &lt;script src="https://openlayers.org/en/v4.1.1/build/ol.js" type="text/javascript">&lt;/script>
-    &lt;title>OpenLayers example&lt;/title>
-  &lt;/head>
-  &lt;body>
-    &lt;h2>My Map&lt;/h2>
-    &lt;div id="map" class="map">&lt;/div>
-    &lt;script type="text/javascript">
-var osmLayer = new ol.layer.Tile({
-  source: new ol.source.OSM({
-    crossOrigin: null,
-    url: 'http://osm/osm_tiles/{z}/{x}/{y}.png'
-  })
-});
-var hillshadingLayer = new ol.layer.Tile({
-  source: new ol.source.OSM({
-    crossOrigin: null,
-    url: 'http://hillshading/osm_tiles/{z}/{x}/{y}.png'
-  }),
-opacity: 0.6
-});
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-osmLayer,
-hillshadingLayer,
- 			vector
-        ],
-		view: new ol.View({
-          center: ol.proj.fromLonLat([11.20, 50.58]),
-          zoom: 3
-        })
-      });
-    &lt;/script>
-  &lt;/body>
-&lt;/html>
-</pre>
+Und zu guter Letzt wurde noch ein File für den Test mit OpenLayers 3 zusammengehackt - ebenfalls als
+<a href="https://gist.github.com/elbosso/0db33790a57f79e73a33744c9bedc2e8">Gist.</a>
 </p><p>
 
 <h1><a name="37">Aktualisierung vom 23. Juli 2017</a></h1><div class="update">Das Skript wurde angepasst, um Vorteile aus der Anwesenheit mehrerer Cores zu ziehen
+</div>
+<h1><a name="38">Aktualisierung vom 10. Juli 2018</a></h1><div class="update">Das Listing wurde in einen
+<a href="https://gist.github.com/elbosso/584a4bc434190e726d59c688b088fb5b">Gist</a> ausgelagert - ebenso die
+<a href="https://gist.github.com/elbosso/0db33790a57f79e73a33744c9bedc2e8">Testseite für OpenLayers 3.</a>
 </div>
 </p> <ul class="double"> 
 <li class="anriss">
@@ -303,33 +176,33 @@ hillshadingLayer,
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="imageio_codecs_auf_github.html#content">
+<div class="date">22.07.2018</div>
+<h3>ImageIO-Codecs auf Github</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich einige Codecs für Bildformate schon länger bei mir rumliegen hatte, habe ich sie aufpoliert und
+auf Github online gestellt
+</p></div>   </a>
+</li>
+<li class="anriss">
+	<a href="tile_server_openstreetmap_lxc_ii.html#40">
+<div class="date">10.07.2018</div>
+<h3>Tile-Server für Openstreetmap in LXC II</h3>
+<div class="abstract">
+	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+<p>Ich beschrieb vor einiger Zeit den Antrieb dafür,
+einen eigenen Tile-Server zu betreiben.
+ Damals war als System Ubuntu 12.04 in LXC-Containern auf einem Ubuntu 13.04-Wirt zum Einsatz gekommen.
+ Ich habe das System renoviert und auf Ubuntu 16.04 (Container und Wirt) angehoben
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="ads_b_zeitreihendatenbanken.html#content">
 <div class="date">07.07.2018</div>
 <h3>ADS-B in Zeitreihendatenbanken</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Weitere Gedanken zu ADS-B Daten und deren Nutzung
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="royal_institution_youtube_channel.html#content">
-<div class="date">07.07.2018</div>
-<h3>Royal Institution YouTube Channel</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Auf meinen Streifzügen durch Youtube bin ich auf einenKanal gestoßen, der so ganz anders ist als die ScienceBusters
-und außerdem leider nur auf englisch vorliegt - aber die Vorträge sind meiner Ansicht nach Extraklasse; Bester Beweis:
-hier fesseln mich sogar Psychologen (und wer mich kennt weiß, wie schwer diese Aussage wiegt...)
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="gitlab_ci.html#content">
-<div class="date">29.06.2018</div>
-<h3>Gitlab-CI</h3>
-<div class="abstract">
-<p>Nachdem ich mein Build-Ökosystem hin zu Gitlab
-migriert
-habe, habe ich nun den nächsten Schritt in Angriff genommen: Continuous Integration oder kurz: CI...
 </p></div>   </a>
 </li>
 </ul>
