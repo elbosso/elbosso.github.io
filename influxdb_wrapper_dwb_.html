@@ -2,13 +2,47 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>Upcoming...</title>
+  <title>InfluxDB Wrapper für dWb+</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta name="Description" content="Ich habe hier bereits von ersten
+Umsetzungen
+ der Idee von
+Wrappern für Module
+berichtet." />
   <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
 	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
 	<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
@@ -30,7 +64,7 @@ document.write(link)
 //-->
 </script>
 </head>
-<body>
+<body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
 <div id="logo">
@@ -52,34 +86,87 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 		<noscript>Der Verfasser</noscript>				
   </p>
 </div>
-<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-			<a href="https://github.com/elbosso">hier</a>.</p>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
+	über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
+	Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
+	daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
+	Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
+	Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+		<a href="https://github.com/elbosso">hier</a>.</p>
 	</div><!-- #header-->
 <div id="all">
 <div id="A">
 <div id="content">
-	<div class="heading">Upcoming...</div>
-	<p>Demnächst in diesem Theater...</p>
-<ul class="double"> 
+<div class="date">29.07.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+	<!--li--> <a href="imageio_codecs_auf_github.html#content">Java</a> <!--/li-->
+	<!--li--> ,<a href="modul_wrapper_implementiert.html#content">dWb+</a> <!--/li-->
+	<!--li--> ,<a href="imageio_codecs_auf_github.html#content">Komponenten</a> <!--/li-->
+	<!--/ul-->
+</div>
+ 	<div class="heading">InfluxDB Wrapper für dWb+</div>
+	<p>Ich habe hier bereits von ersten
+<a href="modul_wrapper_implementiert.html">Umsetzungen</a>
+ der Idee von
+<a href="modul_wrapper.html">Wrappern für Module</a>
+berichtet. Weitere Wrapper halfen mir bei der Konsolidierung der API vor Veröffentlichung der Dokumentation
+</p> <a name="content"> </a>
+ <p>  <img src="images/medium/dWb_logo.png" 
+	   alt="Dataflow Workbench dWb+" 
+	class="imgright">
+Ich habe einen weiteren Wrapper geschaffen, der es möglich macht, Workspaces in
+<a href="dWb.html">dWb+</a>
+zu analysieren. Es gab bereits seit längerem eine Möglichkeit, ein spezielles Metamodul auf dem
+Workspace zu positionieren, das alle eingehenden Daten mit ihren Metadaten in eine relationale Datenbank
+schreibt.
+</p><p>
+Dieser Gedanke wurde bei dem neuesten Modul-Wrapper wieder aufgegriffen: Diese Implementierung benutzt eine
+<a href="influxdb_appender_log4j_1_x.html">Zeitreihendatenbank,</a>
+um alle eingehenden und ausgehenden Informationen für ein von dem Wrapper umgebenes Modul
+persistent zu speichern.
+</p><p>
+Diese Daten können anschließend mit geeigneten Mitteln analysiert werden.
+</p><p>
+Eine (spekulative) Möglichkeit zur Nutzung solcher Daten wäre zum Beispiel die Nutzung für Replays in Präsentationen.
+</p> </div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
 <li class="anriss">
-			<h3 class="head">
-				E-Paper Türschild</h3>
+  <a href="partikelsystem__innerer__energie.html#content">
+<div class="date">29.07.2018</div>
+<h3>Partikelsystem mit "innerer" Energie</h3>
 <div class="abstract">
-<p>Ich warte schon seit vielen Jahren auf den Durchbruch von E-Paper - leider bisher vergebens. Trotzdem wollte ich
-nun auch endlich eigene Erfahrungen damit sammeln. Also griff ich die in der c't ventilierte Idee eines
-stromsparenden Informationsdisplays auf, dass seine Inhalte über WLAN aktualisiert.
-</p></div> 
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem es schon ein wenig länger her ist, dass ich hier ein Video veröffentlicht habe, hat mich
+wieder einmal jemand inspiriert...
+</p></div>   </a>
 </li>
 <li class="anriss">
-			<h3 class="head">
-				NTP-Server mit Raspi und EM406a</h3>
+  <a href="imageio_codecs_auf_github.html#content">
+<div class="date">22.07.2018</div>
+<h3>ImageIO-Codecs auf Github</h3>
 <div class="abstract">
-<p>Ich habe herausfinden wollen, ob es mir mit ein paar zu Hause herumliegenden Teilen möglich wäre,
-eine Satellitenuhr zu bauen, die aich dann im Heimnetz als NTP-Server einsetzen könnte.
-</p></div> 
+<p>Nachdem ich einige Codecs für Bildformate schon länger bei mir rumliegen hatte, habe ich sie aufpoliert und
+auf Github online gestellt
+</p></div>   </a>
+</li>
+<li class="anriss">
+	<a href="hillshading_server_openstreetmap_lxc_ii.html#38">
+<div class="date">10.07.2018</div>
+<h3>Hillshading-Server für Openstreetmap in LXC II</h3>
+<div class="abstract">
+	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+<p>Nachdem ich bereits den
+OpenStreetMap-Tile-Server
+aktualisiert habe, folgte nun der für die Höhen- (Relief-) Informationen.
+</p></div>   </a>
 </li>
 </ul>
-</div>
 </div>
 <nav id="C"> 
 <h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
@@ -153,7 +240,9 @@ Datenbanken
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 dWb+
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -213,7 +302,9 @@ Hardware
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Java
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -225,7 +316,9 @@ Java
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Komponenten
+</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -364,6 +457,17 @@ Video
 </div>
 </div>
 </a>
+<a href="videos.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Videos
+</h3>
+</header>
+<div class="nav-item-body">
+</div>
+</div>
+</a>
 <a href="tag_Virtualisierung.html">
 <div class="nav-item accordion">
 <header class="nav-item-header">
@@ -391,9 +495,7 @@ Windows
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-<strong>
 Upcoming...
-</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -401,9 +503,6 @@ Upcoming...
 </div>
 </div>
 </a>
-<!--
--->
-
 </nav>
 </div>
 	<div id="footer">
@@ -424,8 +523,7 @@ abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZ
 		</script>
 		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
 			</a></strong>
-	</span>
-</div><!-- #footer -->
+	</span></div><!-- #footer -->
 </div>
 </body>
 </html>
