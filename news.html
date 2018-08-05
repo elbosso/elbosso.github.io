@@ -288,84 +288,6 @@ jq -r '.[].clone_url'
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/dEiozlzjHKQ/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 102</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take 102! I normally try to get these things published biweekly (every other Friday), but this one has taken quite a bit longer to get published. It&rsquo;s no one&rsquo;s fault but my own! In any event, I hope that you&rsquo;re able to find something useful among the links below.</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Matt Oswalt, now at Juniper, has been recently trumpeting the idea of reliability as a core reason for automation. Here&rsquo;s <a href="https://forums.juniper.net/t5/Enterprise-Cloud-and/The-Network-Reliability-Engineer-s-Manifesto/ba-p/329020">his latest piece</a>. (For the record, I don&rsquo;t disagree with much of what Matt has to say on this topic.)</li>
-<li>Ajay Chenampara has a post on <a href="https://termlen0.github.io/2018/06/26/observations/">using the Ansible <code>network-engine</code> command parser to parse the output of commands on network devices</a>. It looks like there will be a follow-up to this article as well, so you may want to check back on Ajay&rsquo;s site.</li>
-<li>Bernd Malmqvist <a href="https://techbloc.net/archives/3066">talks</a> about Avi Networks&rsquo; software-defined load balancing solution, including providing an overview of how to use Vagrant to test it yourself.</li>
-<li>Julia Evans provides <a href="https://jvns.ca/blog/2018/06/19/what-i-use-wireshark-for/">a quick overview of Wireshark</a>.</li>
-</ul>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>The sort of things that are possible with Falco&mdash;some of which are outlined in <a href="https://sysdig.com/blog/docker-runtime-security/">this admittedly very vendor-specific article</a>&mdash;makes it an intriguing solution (to me, anyway).</li>
-<li>Chris Hein shows <a href="https://aws.amazon.com/blogs/opensource/deploying-heptio-authenticator-kops/">how to use the Heptio Authenticator</a> with <code>kops</code> to link Kubernetes cluster authentication to AWS IAM.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>Joe Duffy <a href="http://joeduffyblog.com/2018/06/18/hello-pulumi/">takes the wraps off Pulumi</a>, which looks <em>very</em> interesting. This is an area where I&rsquo;d love to spend some time really digging in.</li>
-<li>Interesting article <a href="https://medium.com/@cfatechblog/bare-metal-k8s-clustering-at-chick-fil-a-scale-7b0607bd3541">here</a> on Chick-Fil-A&rsquo;s use of Kubernetes in their restaurants, and the tools/process they follow for establishing those clusters.</li>
-<li>Jeff Geerling&mdash;well-known in the Ansible and Drupal communities&mdash;discusses <a href="https://www.jeffgeerling.com/blog/2018/kubernetes-complexity">the (perceived) complexity of Kubernetes</a>. He spent some time <em>actually</em> working with Kubernetes to solve a problem, and he came away from that time recognizing (in his words) &ldquo;most of the complexity is necessary,&rdquo; and seeing value in using Kubernetes for appropriate use cases. This article is not (in my opinion) a knee-jerk reaction to some of the debate around Kubernetes&rsquo; complexity, but rather a measured and honest evaluation of a tool to solve problems.</li>
-<li>Maish Saidel-Keesing has a two-part (so far?) series on comparing CloudFormation, Terraform, and Ansible (<a href="https://technodrone.blogspot.com/2018/06/comparing-cloudformation-terraform-and.html">part 1</a>, <a href="https://technodrone.blogspot.com/2018/07/comparing-cloudformation-terraform-and.html">part 2</a>). This is worth a read if you&rsquo;re trying to determine which of these tools may be right for your use case.</li>
-<li>Here&rsquo;s a three-part series on Helm (<a href="https://developer.epages.com/blog/tech-stories/kubernetes-deployments-with-helm/">part 1</a>, <a href="https://developer.epages.com/blog/tech-stories/kubernetes-deployments-with-helm-templates/">part 2</a>, and <a href="https://developer.epages.com/blog/tech-stories/kubernetes-deployments-with-helm-secrets/">part 3</a>).</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>This is probably well-known, but I found <a href="https://nickjanetakis.com/blog/docker-tip-55-creating-read-only-containers">this little tidbit</a> about read-only containers handy.</li>
-<li>This article on <a href="https://hackernoon.com/another-reason-why-your-docker-containers-may-be-slow-d37207dec27f">another reason your Docker containers may be slow</a> was an excellent reminder that containerization is not equal to virtualization (that doesn&rsquo;t make it better or worse, just different), and therefore can&rsquo;t be treated the same. Different design and architecture considerations apply in each instance.</li>
-<li>Lightroom is one of only a few applications that I keep around for macOS; <a href="https://opensource.com/alternatives/adobe-lightroom">this article</a> gives me some alternatives.</li>
-<li>Here&rsquo;s an article on <a href="https://opensource.com/article/18/6/getting-started-buildah">getting started with Buildah</a>, part of a suite of tools being built as alternatives to Docker.</li>
-<li>Tom Sweeney also <a href="https://opensource.com/article/18/5/containers-buildah">talks</a> about Buildah and how it can be used to create small container images. My takeaway from this article is that building really small container images requires either a) arcane knowledge of Docker layers and the <code>Dockerfile</code>, or b) arcane knowledge of little-used <code>yum</code> parameters.</li>
-<li>Shahidh Muhammad has <a href="https://blog.hasura.io/draft-vs-gitkube-vs-helm-vs-ksonnet-vs-metaparticle-vs-skaffold-f5aa9561f948">a review/comparison of various tools</a> aimed at helping developers build and deploy their apps on Kubernetes.</li>
-<li>William Lam shares <a href="https://www.virtuallyghetto.com/2018/07/my-list-of-microsoft-visual-code-studio-extensions.html">his list</a> of Visual Studio Code extensions.</li>
-<li>Finally, a reasonably usable <a href="https://github.com/rockymadden/slack-cli">CLI client for Slack</a>&mdash;written in Bash, no less!</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>Cormac Hogan walks through <a href="https://cormachogan.com/2018/06/22/minio-s3-object-store-deployed-as-a-set-of-vms-on-vsan/">setting up the Minio object store on top of VMware vSAN</a>.</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>Mike Foley walks you through <a href="https://opensource.com/alternatives/adobe-lightroom">configuring TPM 2.0 on a vSphere 6.7 host</a>. (This must be the &ldquo;future TPM content&rdquo; that Mike mentioned.)</li>
-<li>Ed Haletky <a href="https://www.astroarch.com/2018/07/vsphere-upgrade-saga-building-virtual-in-virtual-labs/">documents</a> the approach he uses to produce segregated virtual-in-virtual test environments that live within his production environment.</li>
-<li>It seems as if there&rsquo;s quite a bit of complexity in <a href="http://kubevirt.io/2018/Deploying-VMs-on-Kubernetes-GlusterFS-KubeVirt.html">this article</a> on using KubeVirt witih GlusterFS, but I can&rsquo;t tell if that is a byproduct of KubeVirt, GlusterFS, or the combination of the two.</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<p>A couple of useful career-related articles popped up on my radar over the last couple of weeks:</p>
-
-<ul>
-<li>First, there&rsquo;s <a href="https://veric.me/2018/06/06/my-trudge-through-it-burnout-and-the-fight-to-keep-it-at-bay/">this article</a> by Eric Lee on IT burnout. If you find yourself experiencing some of the same issues that Eric describes, I&rsquo;d encourage you to take a deeper look and see if changes are necessary.</li>
-<li>Next, Cody De Arkland <a href="https://www.thehumblelab.com/lets-talk-about-imposter-syndrome/">tackles the topic of imposter syndrome</a>. This is an area where I personally have struggled in the past, and I had to learn to humbly accept praise and stop negative self-talk. Talk to someone if you&rsquo;re wrestling with this.</li>
-</ul>
-
-<p>That&rsquo;s all for now. Look for the next Technology Short Take in 2-3 weeks, and feel free <a href="https://twitter.com/scott_lowe">to contact me via Twitter</a> if you have any links or articles you think I should share. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/1g-JJQsUHUI" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/1g-JJQsUHUI/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -373,35 +295,33 @@ jq -r '.[].clone_url'
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="andrew_szydlo.html">
+<div class="date">05.08.2018</div>
+<h3>Andrew Szydlo</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Einige Videos, über die ich über den Kanal der
+Royal Institution
+gestolpert bin und die eindrucksvoll zeigen, wie man Kinder und Heranwachsende für Naturwissenschaften begeistern sollte...
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="lxc___cgroups.html">
+<div class="date">05.08.2018</div>
+<h3>LXC & CGroups</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich mich bisher immer schwer getan habe damit (irgendwie hats nie richtig funktioniert) habe
+ich nun einen verzweifelten letzten Versuch gestartet und siehe da: Jetzt gehts!
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="partikelsystem__innerer__energie.html">
 <div class="date">29.07.2018</div>
 <h3>Partikelsystem mit "innerer" Energie</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Nachdem es schon ein wenig länger her ist, dass ich hier ein Video veröffentlicht habe, hat mich
 wieder einmal jemand inspiriert...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="influxdb_wrapper_dwb_.html">
-<div class="date">29.07.2018</div>
-<h3>InfluxDB Wrapper für dWb+</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ich habe hier bereits von ersten
-Umsetzungen
- der Idee von
-Wrappern für Module
-berichtet. Weitere Wrapper halfen mir bei der Konsolidierung der API vor Veröffentlichung der Dokumentation
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="imageio_codecs_auf_github.html">
-<div class="date">22.07.2018</div>
-<h3>ImageIO-Codecs auf Github</h3>
-<div class="abstract">
-<p>Nachdem ich einige Codecs für Bildformate schon länger bei mir rumliegen hatte, habe ich sie aufpoliert und
-auf Github online gestellt
 </p></div>   </a>
 </li>
 </ul>
