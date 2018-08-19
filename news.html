@@ -114,6 +114,127 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Technology Short Take 103</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Welcome to Technology Short Take 103, where I&rsquo;m back yet again with a collection of links and articles from around the World Wide Web (Ha! Bet you haven&rsquo;t seen that term used in a while!) on various technology areas. Here&rsquo;s hoping I&rsquo;ve managed to include something useful to you!</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>Gerald Dykeman shares some information on <a href="https://gdykeman.github.io/2018/07/15/meraki-security-policy/">using Ansible to automate Cisco Meraki</a>.</li>
+<li>If you&rsquo;re not familiar with VPCs and associated AWS constructs, you should read <a href="https://start.jcolemorrison.com/aws-vpc-core-concepts-analogy-guide/">this article</a>. It&rsquo;s really good.</li>
+<li>I can&rsquo;t say that I&rsquo;ve ever thought about writing a CNI plugin in Bash, but apparently <a href="https://www.altoros.com/blog/kubernetes-networking-writing-your-own-simple-cni-plug-in-with-bash/">it can be done</a>.</li>
+</ul>
+
+<h2 id="servers-hardware">Servers/Hardware</h2>
+
+<p>Nothing this time around, sorry!</p>
+
+<h2 id="security">Security</h2>
+
+<ul>
+<li>Scott McCarty <a href="http://crunchtools.com/what-is-svirt-and-how-does-it-isolate-linux-containers/">explains sVirt and how it&rsquo;s used to isolate Linux containers</a>. You may also find <a href="https://opensource.com/article/18/2/understanding-selinux-labels-container-runtimes">this related article</a> (linked within Scott&rsquo;s post) to be helpful.</li>
+<li>Andrew Martin has <a href="https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/">a write-up with security recommendations for your Kubernetes clusters</a>.</li>
+</ul>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li>Fellow Heptonian Chuck Ha <a href="https://dev.to/chuck_ha/reading-kubernetes-logs-315k">walks through some Kubernetes logs</a> to show how to use them to better understand the relationships between the various components.</li>
+<li>Gabe Monroy <a href="https://azure.microsoft.com/en-us/blog/introducing-dev-spaces-for-aks/">introduces Dev Spaces for AKS</a>, a developer productivity-focused feature that aims to make it easier for developers to build and troubleshoot microservices in a Kubernetes environment.</li>
+<li>Written in a somewhat entertaining format (gotta give them kudos for that), Gravitational has a post on <a href="https://gravitational.com/blog/kubernetes-and-offline-etcd-upgrades/">the intricacies of upgrading etcd beneath Kubernetes</a>.</li>
+<li>Alex Komljen provides an overview of <a href="https://akomljen.com/kubernetes-cluster-autoscaling-on-aws/">using Cluster Autoscaler with a Kubernetes cluster on AWS</a>.</li>
+<li>And in the event you&rsquo;re not really familiar with the various autoscaling aspects of Kubernetes (of which cluster autoscaling is just one), <a href="https://medium.com/@Mohamed.ahmed/kubernetes-autoscaling-101-cluster-autoscaler-horizontal-pod-autoscaler-and-vertical-pod-2a441d9ad231">this article</a> by Mohamed Ahmed provides a 101-level overview.</li>
+<li>The CNCF has a 4-part series taking a deeper look at some of the feature changes in Kubernetes 1.11. Check out these articles talking about <a href="https://kubernetes.io/blog/2018/07/09/ipvs-based-in-cluster-load-balancing-deep-dive/">IPVS-based in-cluster load balancing</a>, <a href="https://kubernetes.io/blog/2018/07/10/coredns-ga-for-kubernetes-cluster-dns/">CoreDNS</a>, <a href="https://kubernetes.io/blog/2018/07/11/dynamic-kubelet-configuration/">dynamic kubelet configuration</a>, and <a href="https://kubernetes.io/blog/2018/07/12/resizing-persistent-volumes-using-kubernetes/">resizing persistent volumes in Kubernetes</a>.</li>
+<li>Nathaniel Avery <a href="http://www.notyourdadsit.com/blog/2018/6/19/azure-tip-use-b-series-servers-for-cost-savings">shares a tip on saving some money</a> by using the right servers on Azure.</li>
+<li>Here&rsquo;s <a href="https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/">how to let Traefik run on worker nodes</a> in a Docker Swarm cluster.</li>
+<li>These users <a href="https://movingfulcrum.com/horrors-of-using-azure-kubernetes-service-in-production/">did not have a good experience with AKS</a>.</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>Kushal Das (briefly) talks about <a href="https://kushaldas.in/posts/using-podman-for-containers.html">using Podman for containers</a>. Looks like Podman is still evolving pretty rapidly, but it may be worth giving a try.</li>
+<li>Nick Janetakis decides he wants to <a href="https://nickjanetakis.com/blog/benchmarking-debian-vs-alpine-as-a-base-docker-image">benchmark Debian versus Alpine as a base Docker image</a> and shares what he found. (The reasons behind his decision are in the article.)</li>
+<li>YACIS (Yet Another Container Isolation Scheme) has arrived: <a href="https://nabla-containers.github.io/">Nabla containers</a>. Like Google GVisor, I suspect this will see limited uptake (at least initially) since it requires a specific base image in order to work.</li>
+<li>I got bitten by <a href="https://dmsimard.com/2016/01/08/selinux-python-virtualenv-chroot-and-ansible-dont-play-nice/">this issue</a> recently when doing some testing using Ansible and Jinja2; fortunately, using <code>-e ansible_python_interpreter=/usr/bin/python</code> on the Ansible command line fixed it for me.</li>
+<li>Prometheus is the second project to &ldquo;graduate&rdquo; within the CNCF; more details are <a href="https://www.cncf.io/announcement/2018/08/09/prometheus-graduates/">here</a>.</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<ul>
+<li>This is from July 2017, but still applicable I think: Detectify has a <a href="https://labs.detectify.com/2017/07/13/a-deep-dive-into-aws-s3-access-controls-taking-full-control-over-your-assets/">deep dive on access controls for Amazon&rsquo;s S3 object storage service</a>, which increasingly has been a source of data breaches.</li>
+</ul>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<p>Sorry, I didn&rsquo;t find anything to include this time. I&rsquo;m sure there&rsquo;s a ton of great content out there, but none of it passed across my &ldquo;desk.&rdquo; (If you were needing a sign of a shift in my focus, this should be it!)</p>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<ul>
+<li>I&rsquo;ll put this here since it kind of applies to lots of different technology areas, even though it is sort of networking-focused: Ben Cotton recently <a href="https://opensource.com/article/18/7/requests-for-comments-to-know">shared 6 RFCs you should read</a>. This is helpful information for folks new to IT, for developers or systems-oriented folks who need a better understanding of some networking fundamentals.</li>
+<li>In recounting <a href="https://medium.com/nuvoloso/how-i-found-my-path-to-the-cloud-539c30ca333a">his journey to the cloud</a>, Stephen Manley shares a tidbit that I think it useful for folks in a similar situation: regardless of how technology changes, there&rsquo;s a piece of your experience that remains valuable, and you can build on that piece to create a bridge into a new area. For Stephen, it was data management. For you, it may be something else. (I love his closing statement!)</li>
+<li>Finally, I found this article from Scott Young on <a href="https://www.scotthyoung.com/blog/2018/07/12/guide-to-focus/">increasing your focus</a> to be helpful. As an &ldquo;information worker,&rdquo; our focus is most definitely one of our most valuable resources.</li>
+</ul>
+
+<p>That&rsquo;s all for now, folks! Have a great weekend!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/UtpG1G8o9sM" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/UtpG1G8o9sM/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.familytidings.com/blog" target="_blank">Half a Page of Scribbled Linux</a>
+		</div>
+		<div>
+			<h3>Dual Application Switchers</h3>
+		</div>
+		<div class="collectiontext">
+			I have a dual monitor set up running Ubuntu 16. The goofy thing was there were two application switchers. One would be displayed on the monitor with the active window and the other would be displayed on the monitor with the cursor. If the cursor was on the same monitor as the active window, one [&#8230;]
+		</div>
+		<div class="collectionhref">
+		<a href="http://www.familytidings.com/blog/?p=1527" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>VMworld 2018 Prayer Time</h3>
+		</div>
+		<div class="collectiontext">
+			<p>For the last several years, I&rsquo;ve organized a brief morning prayer time at VMworld. This year, I won&rsquo;t be at the conference, but I&rsquo;d like to help coordinate a time for believers to meet nevertheless. So, if you&rsquo;re a Christian interested in gathering together with other Christians for a brief time of prayer, here are the details.</p>
+
+<p><strong>What:</strong> A brief time of prayer</p>
+
+<p><strong>Where:</strong> Mandalay Bay Convention Center, level 1 (same level as the food court), at the bottom of the escalators heading upstairs (over near the business center)</p>
+
+<p><strong>When:</strong> Monday 8/27 through Thursday 8/30 at 7:45am (this should give everyone enough time to grab breakfast before the keynotes start at 9am)</p>
+
+<p><strong>Who:</strong> All courteous attendees are welcome, but please note this will be a distinctly Christian-focused and Christ-centric activity (I encourage believers of other faiths/religions to organize equivalent activities)</p>
+
+<p><strong>Why:</strong> To spend a few minutes in prayer over the day, the conference, the attendees, and each other</p>
+
+<p>You don&rsquo;t need to RSVP or anything like that, although you&rsquo;re welcome to if you&rsquo;d like (just <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>). As I mentioned, I won&rsquo;t be at the conference, so I&rsquo;ll ask folks who have attended prayer time in previous years to help take the lead in my absence. (There&rsquo;s a growing chance I&rsquo;ll be in town but not attending the conference; if that works out, I&rsquo;ll be sure to join for prayer in the morning.)</p>
+
+<p>There&rsquo;s no need to bring anything other than an open heart, your faith, and your willingness to display that faith in front of others. The gathering is very casual&mdash;we&rsquo;ll gather together, share a few prayer requests and needs, and then give folks the opportunity to pray as they feel led. If you don&rsquo;t like praying out loud in public, that&rsquo;s cool; we&rsquo;re not going to force anyone. We just want to give believers the opportunity to strengthen one another in the faith.</p>
+
+<p>I hope that plenty of believers at the conference get the opportunity to join for prayer. Reach out to other Christians you may know and tell them about morning prayer at VMworld!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/GiFpSffTQ1w" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/GiFpSffTQ1w/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="http://www.familytidings.com/blog" target="_blank">Half a Page of Scribbled Linux</a>
 		</div>
 		<div>
@@ -126,28 +247,6 @@ display('news.html')
 		<a href="http://www.familytidings.com/blog/?p=1524" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Bolstering my Software Development Skills</h3>
-		</div>
-		<div class="collectiontext">
-			<p>I recently <a href="https://twitter.com/scott_lowe/status/1019743197105229824">tweeted</a> that I was about to undertake a new pet project where I was, in my words, &ldquo;probably going to fall flat on my face&rdquo;. Later, <a href="https://twitter.com/scott_lowe/status/1020776898870181888">I asked on Twitter</a> if I should share some of the learning that will occur (is ocurring) as a result of this new project, and a number of folks indicated that I should. So, with that in mind, I&rsquo;m announcing this project I&rsquo;ve undertaken is a software development project aimed at helping me bolster my software development skills, and that I&rsquo;ll be blogging about it along the way so that others can benefit from my mistakes&hellip;er, learning.</p>
-
-<p>Readers may recall that <a href="https://blog.scottlowe.org/2018/03/05/looking-ahead-2018-projects/">my 2018 project list</a> included a project to learn to write code in <a href="https://golang.org/">Golang</a>. At the time, I indicated I&rsquo;d use <a href="https://kubernetes.io/">Kubernetes</a> and related projects, along with my goal of making more open source contributions, as a vehicle for helping to accomplish that goal. In retrospect, that was quite ambitious, and I&rsquo;ve since come to the realization that there are a number of &ldquo;baby steps&rdquo; that I need to take <em>before</em> I am ready to use a large software project like Kubernetes as a means to help improve my coding skills. In other words, I need to learn to walk (or even crawl!) before I can run.</p>
-
-<p>At the same time, I&rsquo;ve grown increasingly interested in <a href="https://ballerina.io/">Ballerina</a>, the new &ldquo;cloud native programming language&rdquo; that&rsquo;s recently sprung up. Given that it&rsquo;s difficult (perhaps even impossible?) to learn a programming language without some sort of project, I figured: why not build a simple, microservices-based application using multiple languages (specifically, Golang and Ballerina)?</p>
-
-<p>Enter <a href="https://github.com/scottslowe/polyglot">Polyglot</a>, a simple microservices-based application whose only purpose is to serve as a framework for bolstering my software development skills. Polyglot is laughably simple, at least right now: it has two services, both API driven, that will allow users or other services to interact with data from a back-end database. One will be written in Golang, and one will be written in Ballerina. That&rsquo;s it. Will it grow into something more? Probably. Will I realize later on that I did lots of things wrong along the way? Almost certainly. That, however, is kind of the point&mdash;without trying to tackle something like this, I can&rsquo;t grow my knowledge and skills beyond where they are right now. Part of learning is failing and making mistakes, and Polyglot gives me a place where I can fail, make mistakes, and (most importantly) learn from those failures and mistakes.</p>
-
-<p>Along the way, I&rsquo;ll be blogging about what I have learned/am learning as I work on Polyglot. Feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> if you have questions or suggestions, and I welcome comments/PRs on <a href="https://github.com/scottslowe/polyglot">the Polyglot repository</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/G9nw_aQrM-A" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/G9nw_aQrM-A/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -155,34 +254,29 @@ display('news.html')
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="tt_rss__tumblr__eu_dsgvo.html">
+<div class="date">19.08.2018</div>
+<h3>TT-RSS, Tumblr, EU DSGVO</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich ordne diesen Artikel mal mit in den Bereich IT-Sicherheit ein, weil der Grund für sein Verfassen in der EU DSGVO lag.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="ads_b_langzeittest.html">
+<div class="date">19.08.2018</div>
+<h3>ADS-B Langzeittest</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Vorbereitung zum Einstieg in ernsthafte und langfristige Beobachtung von Luftverkehrsmitteln hat begonnen
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="pihole.html">
 <div class="date">12.08.2018</div>
 <h3>PiHole</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Raspberry Pi als Ad- und Malware-Blocker
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="raspi_booten_ueber_usb.html">
-<div class="date">12.08.2018</div>
-<h3>Raspi booten über USB</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem mich ein Kollege auf die Idee brachte, wollte auch ich versuchen, meinen neuen Raspi per USB zu booten.
-Eigentlich war das damals noch eine akademische Aufgabe - als ich ernsthaft begann darüber nachzudenken,
-PiHole
-in meinem Netz zu nutzen, wurde diese Idee dringend.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="andrew_szydlo.html">
-<div class="date">05.08.2018</div>
-<h3>Andrew Szydlo</h3>
-<div class="abstract">
-<p>Einige Videos, über die ich über den Kanal der
-Royal Institution
-gestolpert bin und die eindrucksvoll zeigen, wie man Kinder und Heranwachsende für Naturwissenschaften begeistern sollte...
 </p></div>   </a>
 </li>
 </ul>
