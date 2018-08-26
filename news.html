@@ -117,6 +117,380 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>Populating New Namespaces Using Heptio Ark</h3>
+		</div>
+		<div class="collectiontext">
+			<p><a href="https://github.com/heptio/ark">Heptio Ark</a> is a tool designed to backup and restore <a href="https://kubernetes.io">Kubernetes</a> cluster resources and persistent volumes. As such, it enables users to do a bunch of very useful things like copy cluster resources across cloud providers or replicate environments for development, staging, testing, QA, etc. In this post, I&rsquo;ll share a slightly different use case for Ark: populating resources into new Kubernetes namespaces.</p>
+
+<p>Kubernetes namespaces, if you&rsquo;re not familiar, are a way to scope resource names and provide a way to divide cluster resources between multiple resources via resource quotas (see <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">the Kubernetes documentation on namespaces</a> for more details). As such, when you create a new Kubernetes namespace, it&rsquo;s empty. However, you may have a need or desire to have certain things present in every namespace within a cluster&mdash;for example, perhaps you have a set of ExternalName Services that point to resources outside the cluster to make it easier for applications and developers to integrate with external resources. Maybe you have a ConfigMap that developers can use to configure their applications. It could be that you want a particular secret to be present in all new namespaces so that developers don&rsquo;t need to worry about managing certain credentials. In such cases, someone (or something) would need to re-create those items every time a new namespace gets created. Or&hellip;you could use Ark!</p>
+
+<p>Here are some details on the environment I&rsquo;ll use to walk you through how this works:</p>
+
+<ul>
+<li>Kubernetes 1.11.2 cluster running on AWS</li>
+<li>A namespace called <code>foo</code></li>
+<li>In the <code>foo</code> namespace, three ExternalName Services: <code>extname-1</code> (points to &ldquo;aws.amazon.com&rdquo;), <code>extname-2</code> (points to &ldquo;google.com&rdquo;), and <code>extname-3</code> (points to &ldquo;www.microsoft.com&rdquo;)</li>
+<li>Ark 0.9.3 configured and installed</li>
+</ul>
+
+<p>To verify this, I&rsquo;ll run a container in the <code>foo</code> namespace and test that the ExternalName Services are working as expected:</p>
+
+<pre><code>kubectl -n foo run -it --rm --restart=Never debug \
+--image=quay.io/mauilion/debug /bin/bash
+</code></pre>
+
+<p>This will, after a minute, open a prompt inside a container running in the <code>foo</code> namespace, at which point I can run <code>host extname-1</code> and see these results:</p>
+
+<pre><code>extname-1.foo.svc.cluster.local is an alias for aws.amazon.com.
+aws.amazon.com is an alias for 0.aws-lbr.amazonaws.com.
+0.aws-lbr.amazonaws.com is an alias for aws-us-east-1.amazon.com.
+aws-us-east-1.amazon.com has address 52.46.133.33
+</code></pre>
+
+<p>Repeating this process for <code>extname-2</code> and <code>extname-3</code>, I see similar results&mdash;this tells me that the ExternalName Services are, in fact, created and working as expected, and that the cluster&rsquo;s DNS service is functioning as expected.</p>
+
+<p>Now, let&rsquo;s create a new namespace (named <code>bar</code>, of course) and repeat this process:</p>
+
+<pre><code>kubectl create namespace bar
+kubectl -n bar run -it --rm --restart=Never debug \
+--image=quay.io/mauilion/debug /bin/bash
+</code></pre>
+
+<p>When I run <code>host extname-1</code> in this container in this new namespace, I instead get <code>Host extname-1 not found: 3(NXDOMAIN)</code>&mdash;indicating the ExternalName Services are <em>not</em> in this namespace, as fully expected.</p>
+
+<p>Here&rsquo;s where we bring in Ark. I&rsquo;ll create a backup of the Services in the <code>foo</code> namespace:</p>
+
+<pre><code>ark backup create foo-svc --include-namespaces foo \
+--include-resources services
+</code></pre>
+
+<p>As suggested in the output of this command, I&rsquo;ll run <code>ark backup describe foo-svc</code> to see the status of the backup job:</p>
+
+<pre><code>Name:         foo-svc
+Namespace:    heptio-ark
+Labels:       &lt;none&gt;
+Annotations:  &lt;none&gt;
+
+Phase:  Completed
+
+Namespaces:
+  Included:  foo
+  Excluded:  &lt;none&gt;
+
+Resources:
+  Included:        services
+  Excluded:        &lt;none&gt;
+  Cluster-scoped:  auto
+
+Label selector:  &lt;none&gt;
+
+Snapshot PVs:  auto
+
+TTL:  720h0m0s
+
+Hooks:  &lt;none&gt;
+
+Backup Format Version:  1
+
+Started:    2018-08-21 15:52:31 -0600 MDT
+Completed:  2018-08-21 15:52:32 -0600 MDT
+
+Expiration:  2018-09-20 15:52:31 -0600 MDT
+
+Validation errors:  &lt;none&gt;
+
+Persistent Volumes: &lt;none included&gt;
+</code></pre>
+
+<p>Now comes the neat trick&mdash;I&rsquo;ll restore this backup into the <code>bar</code> namespace, using the <code>--namespace-mappings</code> option to Ark:</p>
+
+<pre><code>ark restore create bar-svc --from-backup foo-svc \
+--namespace-mappings foo:bar
+</code></pre>
+
+<p>Now, I could run <code>ark restore describe bar-svc</code>, but let&rsquo;s just jump directly to see if the services have been restored. Running <code>kubectl -n bar get services</code> shows they&rsquo;re present:</p>
+
+<pre><code>NAME       TYPE          CLUSTER-IP  EXTERNAL-IP        PORT(S)  AGE
+extname-1  ExternalName  &lt;none&gt;      aws.amazon.com     &lt;none&gt;   18m
+extname-2  ExternalName  &lt;none&gt;      httpbin.org        &lt;none&gt;   18m
+extname-3  ExternalName  &lt;none&gt;      www.microsoft.com  &lt;none&gt;   18m
+</code></pre>
+
+<p>Neat! With the <code>--namespace-mappings</code> parameter, users can backup from one namespace and restore into a different namespace, thus giving users the ability to &ldquo;populate&rdquo; new namespaces with a default set of objects that should be present in all new namespaces. Using Ark is, of course, not the <em>only</em> way to do this, and I&rsquo;ll explore some other options in a future post.</p>
+
+<p>This post just barely scratches the surface of what Ark is capable of doing; I highly encourage you to have a look at <a href="https://heptio.github.io/ark/v0.9.0/">the Ark documentation</a> for more details.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/Kbdc7sYUsoc" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Kbdc7sYUsoc/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>A Simple Kubernetes Context Switcher</h3>
+		</div>
+		<div class="collectiontext">
+			<p>I recently needed to find a simple way of switching between <a href="https://kubernetes.io/">Kubernetes</a> contexts. I already use <code>powerline-go</code> (here&rsquo;s <a href="https://github.com/justjanne/powerline-go">the GitHub repo</a>), which allows me to display the Kubernetes context in the prompt so I always know which context is the active (current) context. However, switching between contexts using <code>kubectl config set-context &lt;name&gt;</code> isn&rsquo;t the easiest approach; not to mention it requires merging multiple config files into a single file (which is itself a bit of a task). So, I set out to create a simple Kubernetes context switcher&mdash;and here&rsquo;s the initial results of my efforts.</p>
+
+<p>Before I go any further, I&rsquo;d like to stress 2 important points. First, I&rsquo;m not a programmer, so keep that in mind. Second, this is a <em>simple</em> Kubernetes context switcher&mdash;it&rsquo;s not meant to address any and every possible use case out there, nor do I claim any sort of sophistication in the code.</p>
+
+<p>With those disclaimers out of the way, allow me to introduce <code>kcs</code>: the simple Kubernetes context switcher. <code>kcs</code> is built on the idea that it&rsquo;s easiest to manage Kubernetes contexts in their own files, rather than trying to merge config files. So, it makes the assumption that you&rsquo;ll store your Kubernetes contexts in separate config files. To add a new context, just copy the config file into the <code>~/.kube</code> directory (the directory <code>kubectl</code> uses by default).</p>
+
+<p>Once you have your config files in the <code>~/.kube</code> directory, then using <code>kcs</code> is a piece of cake:</p>
+
+<ul>
+<li>To select a particular context, just use <code>kcs &lt;context-name&gt;</code> (where <code>&lt;context-name&gt;</code> will equal a filename in the <code>~/.kube</code> directory). If you&rsquo;re using a prompt tool that shows the active Kubernetes context, you&rsquo;ll see the newly-selected context in your prompt.</li>
+<li>To list the available contexts, type <code>kcs list</code>. You&rsquo;ll get a space-delimited list of the available contexts (again, where a context is equivalent to a file in <code>~/.kube</code>).</li>
+<li>To specify that you don&rsquo;t want <em>any</em> active context, specify <code>kcs none</code>.</li>
+</ul>
+
+<p>Now, if you haven&rsquo;t figured it out yet, there&rsquo;s a <strong>giant</strong> problem with the admittedly very simplistic approach I&rsquo;ve taken here&mdash;the name of the context <em>inside</em> a config file may not match the name of the file itself, and it&rsquo;s the name of the context that most prompt tools (like powerline-go, for example) will use, not the filename itself. Clearly, this is a problem, and one that I hope to be able to programmatically address at some point, but for now the workaround is to simply edit the config file and make the context name match the filename.</p>
+
+<p><code>kcs</code> is written entirely in Bash, so it should run unmodified on most Linux distributions as well as macOS. (Maybe at some point as my Golang skills develop I&rsquo;ll re-code it in Golang.) If you&rsquo;d like to give <code>kcs</code> a try, feel free to grab it from <a href="https://github.com/scottslowe/scripts/">my GitHub &ldquo;scripts&rdquo; repository</a>. As I mentioned before, I&rsquo;m not a programmer (yet), so feel free to submit pull requests for improvements to <code>kcs</code> that might improve error checking, performance, portability, etc.</p>
+
+<p>In the meantime, I hope this small (and quite simple) utility is helpful to folks.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/_4Q49SjL6qk" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/_4Q49SjL6qk/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Bootstrapping an etcd Cluster with TLS using Kubeadm</h3>
+		</div>
+		<div class="collectiontext">
+			<p>The <a href="https://github.com/coreos/etcd/">etcd distributed key-value store</a> is an integral part of <a href="https://kubernetes.io/">Kubernetes</a>. I first wrote about etcd back in 2014 in <a href="https://blog.scottlowe.org/2014/08/18/coreos-continued-etcd/">this post</a>, but haven&rsquo;t really discussed it in any great detail since then. However, as part of my recent efforts to dive <em>much</em> deeper into Kubernetes, I needed to revisit etcd. In this post, I wanted to share how to boostrap a new etcd cluster with TLS certificates using <code>kubeadm</code>.</p>
+
+<p>Before I go on, I feel compelled to state that this is certainly not the <em>only</em> way to bootstrap an etcd cluster with TLS certificates. I feel I must also state that nothing in what I&rsquo;m about to share is new, novel, revolutionary, or unusual. In fact, a fair amount of it is based on <a href="https://kubernetes.io/docs/setup/independent/setup-ha-etcd-with-kubeadm/">these instructions</a>, although this post will focus on using systemd unit files instead of static pods under Kubernetes. I&rsquo;m simply documenting it here in the hopes of getting the information more broadly disseminated, and to help document my own journey of learning.</p>
+
+<h2 id="preparing-the-systems">Preparing the Systems</h2>
+
+<p>Before you bootstrap the etcd cluster, you&rsquo;ll first need to prepare the nodes for the process. Although I&rsquo;ll list the steps manually below, in practice you&rsquo;ll want to build some automation tooling to help with this process. (My <a href="https://github.com/scottslowe/learning-tools/">&ldquo;learning-tools&rdquo; GitHub repository</a> has <a href="https://github.com/scottslowe/learning-tools/tree/master/etcd/etcdv3-ansible-aws-tf">an example</a> that you could use as a starting point for your own tooling.)</p>
+
+<ol>
+<li><p>You&rsquo;ll need to download an etcd release from GitHub.</p></li>
+
+<li><p>Unpack the release tarball and copy the <code>etcd</code> and <code>etcdctl</code> binaries to somewhere in your path, like <code>/usr/local/bin</code>. (Those two binaries are all you need.)</p></li>
+
+<li><p>Create a data directory for etcd to use, like <code>/var/lib/etcd</code>.</p></li>
+
+<li><p>Download the <code>kubeadm</code> binary and place it somewhere in your path, like <code>/usr/local/bin</code>. I prefer downloading the <code>kubeadm</code> binary as opposed to using package management, as package management also installs some other packages that aren&rsquo;t needed in this case. Use <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-via-curl">this page</a> to see how to download <code>kubeadm</code> (just substitute <code>kubeadm</code> for <code>kubectl</code>). Note that this procedure was tested with <code>kubeadm</code> version 1.11.2; other versions <em>should</em> work fine but I can&rsquo;t guarantee it.</p></li>
+</ol>
+
+<p>You&rsquo;ll need to repeat this process for each system that will participate in the etcd cluster.</p>
+
+<p>Once you&rsquo;ve completed these steps, then you&rsquo;re ready to proceed with boostrapping the etcd cluster with TLS encryption and TLS client authentication.</p>
+
+<h2 id="bootstrapping-the-etcd-cluster">Bootstrapping the etcd Cluster</h2>
+
+<p>With all the binaries in place, you&rsquo;ll start by generating all the certificates that are needed. This is where you&rsquo;ll leverage <code>kubeadm</code>; specifically, the <code>kubeadm alpha phase certs</code> command.</p>
+
+<p>First, create a self-signed CA for etcd:</p>
+
+<pre><code>kubeadm alpha phase certs etcd-ca
+</code></pre>
+
+<p>This will create a CA certificate and key in <code>/etc/kubernetes/pki/etcd</code>. The files will be named <code>ca.crt</code> and <code>ca.key</code>. Copy these files to the same location on the other etcd nodes (you may need to create the directory structure first with <code>mkdir -p</code>).</p>
+
+<p>Before you can continue with the next steps&mdash;generating server and peer certificates&mdash;you&rsquo;ll need to first create a configuration file for <code>kubeadm</code> that provides some additional instructions on how to create those certificates. Specifically, this configuration file will instruct <code>kubeadm</code> on which Subject Alternative Names (SANs) should be included on the certificates.</p>
+
+<p>Here&rsquo;s the configuration file (this is for an EC2 instance in the &ldquo;us-west-2&rdquo; region with the private IP address 192.168.1.100, substitute your correct values here):</p>
+
+<pre><code class="language-yaml">apiVersion: &quot;kubeadm.k8s.io/v1alpha2&quot;
+kind: MasterConfiguration
+etcd:
+  local:
+    serverCertSANs:
+      - &quot;ip-192-168-1-100.us-west-2.compute.internal&quot;
+      - &quot;192.168.1.100&quot;
+    peerCertSANs:
+      - &quot;ip-192-168-1-100.us-west-2.compute.internal&quot;
+</code></pre>
+
+<p>This configuration file syntax is specific to 1.11 (and possibly newer); it won&rsquo;t work for 1.10. Also, play close attention to capitalization and spacing (<code>kubeadm</code> is very particular).</p>
+
+<p>With the <code>kubeadm</code> configuration in place, you can create the etcd server certificate (assuming the configuration file is stored as <code>etcd.yaml</code>):</p>
+
+<pre><code>kubeadm alpha phase certs etcd-server --config etc.yaml
+</code></pre>
+
+<p>This will create a <code>server.crt</code> and <code>server.key</code> in <code>/etc/kubernetes/pki/etcd</code>. Repeat this process on the other etcd nodes&mdash;don&rsquo;t copy certificates across nodes as the hostnames on the certificate won&rsquo;t match up. Make sure you appropriately customize the <code>etcd.yaml</code> configuration file for each host so that the hostnames and IP addresses assigned to the certificates are correct.</p>
+
+<p>Next, create the etcd peer certificates:</p>
+
+<pre><code>kubeadm alpha phase certs etcd-peer --config etcd.yaml
+</code></pre>
+
+<p>This creates two files (<code>peer.crt</code> and <code>peer.key</code>) in the same directory as the previous steps (<code>/etc/kubernetes/pki/etcd</code>). As with the previous step, repeat this command on the other etcd nodes; don&rsquo;t copy certificates around.</p>
+
+<p>You now have the etcd binaries in place and have all the necessary certificates for securing etcd. The next step is to create the systemd unit file that will start etcd. It should look something like this:</p>
+
+<pre><code>[Unit]
+Description=etcd
+Documentation=https://github.com/coreos/etcd
+Conflicts=etcd2.service
+Wants=network-online.target network.target
+After=network-online.target
+
+[Service]
+Type=notify
+Restart=always
+RestartSec=5s
+LimitNOFILE=40000
+TimeoutStartSec=0
+EnvironmentFile=/etc/etcd/etcd.conf
+ExecStart=/usr/local/bin/etcd
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+
+<p>The systemd unit references an environment file to keep the systemd unit file as simple and straightforward as possible. Here&rsquo;s the environment file that would go along with this systemd unit file:</p>
+
+<pre><code>ETCD_NAME=&quot;node1&quot;
+ETCD_DATA_DIR=&quot;/var/lib/etcd&quot;
+ETCD_LISTEN_CLIENT_URLS=&quot;https://0.0.0.0:2379&quot;
+ETCD_LISTEN_PEER_URLS=&quot;https://0.0.0.0:2380&quot;
+ETCD_ADVERTISE_CLIENT_URLS=&quot;https://192.168.1.100:2379&quot;
+ETCD_INITIAL_ADVERTISE_PEER_URLS=&quot;https://192.168.1.100:2380&quot;
+ETCD_INITIAL_CLUSTER=&quot;node1=https://192.168.1.100:2380,\
+node2=https://192.168.1.101:2380,\
+node3=https://192.168.1.102:2380
+ETCD_INITIAL_CLUSTER_STATE=&quot;new&quot;
+ETCD_INITIAL_CLUSTER_TOKEN=&quot;new-cluster&quot;
+ETCD_TRUSTED_CA_FILE=&quot;/etc/kubernetes/pki/etcd/ca.crt&quot;
+ETCD_CERT_FILE=&quot;/etc/kubernetes/pki/etcd/server.crt&quot;
+ETCD_KEY_FILE=&quot;/etc/kubernetes/pki/etcd/server.key&quot;
+ETCD_CLIENT_CERT_AUTH=&quot;true&quot;
+ETCD_PEER_TRUSTED_CA_FILE=&quot;/etc/kubernetes/pki/etcd/ca.crt&quot;
+ETCD_PEER_CERT_FILE=&quot;/etc/kubernetes/pki/etcd/peer.crt&quot;
+ETCD_PEER_KEY_FILE=&quot;/etc/kubernetes/pki/etcd/peer.key&quot;
+ETCD_PEER_CLIENT_CERT_AUTH=&quot;true&quot;
+</code></pre>
+
+<p>Note that you <strong>must</strong> customize this environment file for each system in the cluster! Be sure to set the <code>ETCD_NAME</code>, <code>ETCD_ADVERTISE_CLIENT_URLS</code>, and <code>ETCD_INITIAL_ADVERTISE_PEER_URLS</code> values to the correct values for each system. Also be sure that the names and IP addresses referenced in <code>ETCD_INITIAL_CLUSTER</code> correctly match the names (as specified by <code>ETCD_NAME</code>) and IP addresses of the systems in the cluster.</p>
+
+<p>Because you&rsquo;ve modified systemd&rsquo;s configuration by adding a new unit file, you&rsquo;ll need to run <code>systemctl daemon-reload</code>, and then you can enable and start etcd:</p>
+
+<pre><code>systemctl enable etcd
+systemctl start etcd
+</code></pre>
+
+<p>Use <code>systemctl status etcd</code> and/or <code>journalctl -u etcd</code> to make sure that the cluster formed, a leader was elected, and that etcd is serving client requests.</p>
+
+<p>The final step is just to verify that etcd is working as expected. You can use <code>etcdctl</code> to perform this test:</p>
+
+<pre><code>ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+--cert=/etc/kubernetes/pki/etcd/peer.crt \
+--key=/etc/kubernetes/pki/etcd/peer.key \
+--endpoints=https://192.168.1.100:2379,https://192.168.1.101:2379,\
+https://192.168.1.102:2379
+endpoint health
+</code></pre>
+
+<p>It may be obvious but it&rsquo;s worth pointing out/reminding readers that you&rsquo;ll need to customize the <code>--endpoints=</code> parameter to reflect the correct IP addresses of the systems in your cluster.</p>
+
+<p>This <code>etcdctl</code> command looks complicated, but it&rsquo;s necessary for a couple reasons (see <a href="https://github.com/coreos/etcd/tree/master/etcdctl">here</a> for more details on this command):</p>
+
+<ul>
+<li>This is an etcd version 3 cluster, so you have to explicitly tell <code>etcdctl</code> to use the version 3 API.</li>
+<li>Because client certification authentication is enabled, you can&rsquo;t make a connection to the etcd cluster without a client certificate. Hence, you need to specify all the various certificate-related flags.</li>
+</ul>
+
+<p>Assuming the <code>etcdctl</code> command worked correctly and reported no errors (all cluster endpoints healthy), then you&rsquo;re all set!</p>
+
+<h2 id="additional-resources">Additional Resources</h2>
+
+<p>Virtually everyone who does content creation stands on the shoulders of those who have gone before them, and I&rsquo;m no exception. Refer to these resources for more information or additional perspectives on this topic:</p>
+
+<p><a href="https://coreos.com/etcd/docs/latest/op-guide/security.html">etcd Security Model</a><br />
+<a href="https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/07-bootstrapping-etcd.md">The &ldquo;Bootstrapping the etcd Cluster&rdquo; portion of Kelsey Hightower&rsquo;s Kubernetes the Hard Way repository</a></p>
+
+<p><a href="https://github.com/mauilion/wardroom-nc/">This GitHub repository</a> by my colleague Duffie Cooley also provided some inspiration and guidance for some portions of this process.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/-FNbkfO8zxM" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/-FNbkfO8zxM/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Troubleshooting TLS Certificates</h3>
+		</div>
+		<div class="collectiontext">
+			<p>I was recently working on a blog post involving the use of TLS certificates for encryption and authentication, and was running into errors. I&rsquo;d checked all the &ldquo;usual suspects&rdquo;&mdash;AWS security groups, host-level firewall rules (via <code>iptables</code>), and the application configuration itself&mdash;but still couldn&rsquo;t get it to work. When I did finally find the error, I figured it was probably worth sharing the commands I used in the event others might find it helpful.</p>
+
+<p>The error was manifesting itself in that I was able to successfully connect to the application (with TLS) on the loopback address, but not the IP address assigned to the network adapter. Using <code>ss -lnt</code>, I verified that the application was listening on all IP addresses (not just loopback), and as I mentioned earlier I had also verified that AWS security groups and host-level firewall weren&rsquo;t in play. This lead me to believe that there was something wrong with my TLS configuration.</p>
+
+<p>Since the application&rsquo;s error message was extremely vague (and not even remotely TLS-related), I decided to try using <code>curl</code> to verify that TLS was working correctly. First I ran this command:</p>
+
+<pre><code>curl --cacert /path/to/CA/certificate https://127.0.0.1 -v
+</code></pre>
+
+<p>After some output, <code>curl</code> reported this error:</p>
+
+<pre><code>curl: (35) gnutls_handshake() failed: certificate is bad
+</code></pre>
+
+<p>At first, I took this to mean that something was actually wrong with the certificate, but I quickly realized this was an expected error&mdash;TLS authentication was enabled, and I hadn&rsquo;t given <code>curl</code> the correct parameters. So I tried it again, this time with the correct parameters:</p>
+
+<pre><code>curl --cacert /path/to/CA/certificate \
+--cert /path/to/client/certificate \
+--key /path/to/client/certificate/key \
+https://127.0.0.1 -v
+</code></pre>
+
+<p>This time the connection succeeded, and the output of the <code>curl</code> command showed that TLS encryption and authentication were in place and successful. The next step was to try it against the IP address assigned to the network adapter (where it had been failing):</p>
+
+<pre><code>curl --cacert /path/to/CA/certificate \
+--cert /path/to/client/certificate \
+--key /path/to/client/certificate/key \
+https://10.200.10.1 -v
+</code></pre>
+
+<p>And the output tells me, clearly, what&rsquo;s wrong:</p>
+
+<pre><code>curl: (51) SSL: certificate subject name (ip-10-200-10-1) does not match target host name '10.200.10.1'
+</code></pre>
+
+<p>Ah, now that&rsquo;s much more informative, but unexpected&mdash;was the certificate, in fact, not configured correctly? Fortunately, it was relatively easy to double-check:</p>
+
+<pre><code>openssl x509 -in /path/to/server/certificate -text
+</code></pre>
+
+<p>Clearly noted in the output under the &ldquo;X509v3 Extensions&rdquo; section is the answer:</p>
+
+<pre><code>X509v3 Subject Alternative Name:
+    DNS:ip-10-200-10-1, DNS:localhost, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1
+</code></pre>
+
+<p>Sure enough, the certificate was missing a Subject Alternative Name (SAN) for the network adapter&rsquo;s IP address, and that was enough to cause the application (rightfully so) to fail.</p>
+
+<p>So what are the takeaways? Well, they might be simplistic, but here&rsquo;s what I learned:</p>
+
+<ul>
+<li>Use <code>curl -v</code> to get more verbose information on SSL/TLS connections, especially when the application&rsquo;s error messages aren&rsquo;t very informative.</li>
+<li>Use <code>openssl x509</code> to view certificate details so that you can verify that the certificate is configured correctly and has the right properties (not just SANs but also Extended Key Usage would be another area&mdash;is the certificate actually enabled for client authentication, for example).</li>
+</ul>
+
+<p>These takeaways may be &ldquo;common knowledge&rdquo; for a fair number of folks, but I suspect there&rsquo;s a few readers that will probably find this information handy.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/TAZTi2h0ZOc" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/TAZTi2h0ZOc/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>Technology Short Take 103</h3>
 		</div>
 		<div class="collectiontext">
@@ -254,29 +628,33 @@ display('news.html')
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="e_paper_tuerschild.html">
+<div class="date">26.08.2018</div>
+<h3>E-Paper Türschild</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich warte schon seit vielen Jahren auf den Durchbruch von E-Paper - leider bisher vergebens. Trotzdem wollte ich
+nun auch endlich eigene Erfahrungen damit sammeln. Also griff ich die in der c't ventilierte Idee eines
+stromsparenden Informationsdisplays auf, dass seine Inhalte über WLAN aktualisiert.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="eigene_firmware_sonoff_s20.html">
+<div class="date">26.08.2018</div>
+<h3>Eigene Firmware für Sonoff S20</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich nach meinen diversen Erfahrungen mit dem Arduino auch mal andere Projekte erforschen wollte,
+habe ich mich durch Artikel in zurückliegenden Ausgaben der c't inspirieren lassen und Projekte mit dem ESP8266
+ausprobiert - zuerst der Umbau einer WLAN-fähigen Steckdose...
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="tt_rss__tumblr__eu_dsgvo.html">
 <div class="date">19.08.2018</div>
 <h3>TT-RSS, Tumblr, EU DSGVO</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Ich ordne diesen Artikel mal mit in den Bereich IT-Sicherheit ein, weil der Grund für sein Verfassen in der EU DSGVO lag.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="ads_b_langzeittest.html">
-<div class="date">19.08.2018</div>
-<h3>ADS-B Langzeittest</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Vorbereitung zum Einstieg in ernsthafte und langfristige Beobachtung von Luftverkehrsmitteln hat begonnen
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="pihole.html">
-<div class="date">12.08.2018</div>
-<h3>PiHole</h3>
-<div class="abstract">
-<p>Raspberry Pi als Ad- und Malware-Blocker
 </p></div>   </a>
 </li>
 </ul>
