@@ -117,6 +117,264 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>Technology Short Take 104</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Welcome to Technology Short Take 104! For many of my readers, VMworld 2018 in Las Vegas was &ldquo;front and center&rdquo; for them since the last Tech Short Take. Since I wasn&rsquo;t attending the conference, I won&rsquo;t try to aggregate information from the event; instead, I&rsquo;ll focus on including some nuggets you may have missed amidst all the noise.</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>Michael Kashin takes a look at AppSwitch and <a href="https://networkop.co.uk/post/2018-05-29-appswitch-sdn/">likens it to &ldquo;serverless SDN.&rdquo;</a></li>
+<li>Nick Buraglio <a href="https://www.forwardingplane.net/2018/07/trouble-with-tribbles-errr-nat/">exposes the different kinds of NAT</a>&mdash;helpful if you&rsquo;re new to networking and want to better understand NAT and the nuances involved.</li>
+</ul>
+
+<h2 id="servers-hardware">Servers/Hardware</h2>
+
+<ul>
+<li>Greg Schulz discusses new Power9-based systems announced by IBM; see <a href="https://storageioblog.com/ibm-announces-new-power9-processor-based-e950-e980-server-systems/">his post</a>. Normally I wouldn&rsquo;t be too interested in non-x86 stuff, as it seems like x86 is ascendant. However, given the rise of all the various speculative execution attacks, and given the recent interest in ARM platforms (can&rsquo;t recall if they are affected by the speculative execution attacks), is a revival of non-x86 platforms in the works?</li>
+</ul>
+
+<h2 id="security">Security</h2>
+
+<p>Nothing this time around, but I&rsquo;ll stay alert for items to include next time!</p>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li><a href="https://carolynvanslyck.com/blog/2017/10/my-little-cluster/">This is just awesome.</a></li>
+<li>It&rsquo;s fairly simplistic, but it could be useful nevertheless: the <a href="https://github.com/hjacobs/kube-resource-report">kube-resource-report project</a> offers some insight into the costing behind Kubernetes clusters on AWS.</li>
+<li>One of the interesting announcements to come out of the recent VMworld 2018 conference in Las Vegas is also described in <a href="https://aws.amazon.com/blogs/aws/in-the-works-amazon-rds-on-vmware/">this post on the AWS News Blog</a>: Amazon RDS on VMware. I suppose it&rsquo;s a win-win deal for both VMware and AWS (else why bother?), though the long-term implications of having AWS&rsquo; policy layer on top may come back to bite VMware. Time will tell.</li>
+<li>I wouldn&rsquo;t say <a href="https://technodrone.blogspot.com/2018/07/the-aws-world-shook-and-nobody-noticed.html">noboby noticed</a>, Maish. I called this out when I saw the announcement as well. Combine this with other recent moves (see previous bullet), and it sure seems that AWS is out for the &ldquo;private cloud&rdquo; use case (which isn&rsquo;t really a private cloud, but that&rsquo;s an entirely different discussion).</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>I&rsquo;ve made no secret of the fact that I&rsquo;m a Terraform fan, and I recently uncovered a great series by Ned Bellavance called <a href="https://nedinthecloud.com/tag/fotd/">Function of the Day (FotD)</a>, in which he discusses a Terraform interpolation function each day. This is a really useful learning resource.</li>
+<li>Want to become more of a CLI wizard? Start <a href="https://github.com/jlevy/the-art-of-command-line">here</a>.</li>
+<li>If you&rsquo;re still in need of an introductory article on building your own Docker image, <a href="https://ipnet.xyz/2018/07/how-to-create-your-own-docker-image/">this one</a> may help you out.</li>
+<li>Here&rsquo;s a great tutorial (sent in by a reader, thanks Mike!) on <a href="https://iridakos.com/tutorials/2018/03/01/bash-programmable-completion-tutorial.html">building your own Bash completion script</a>.</li>
+<li>Based partly on <a href="https://remysharp.com/2018/08/23/cli-improved">this article</a>, I&rsquo;ve started using <code>fzf</code> and <code>fd</code> on my Fedora laptop. I must admit that these are both pretty cool tools&mdash;I&rsquo;d recommend giving them a look if you spend a lot of time at a prompt. If you&rsquo;re interested in possibly giving <code>fzf</code> a try, you might have a look <a href="https://monades.roperzh.com/weekly-command-fuzzy-finding-everything-with-fzf/">here</a> and <a href="https://mike.place/2017/fzf-fd/">here</a> as well.</li>
+<li>Microsoft is adding a third Windows container image, in addition to the existing Nano Server and Windows Server Core images. More details and an explanation of why an additional image is needed are in <a href="https://blogs.technet.microsoft.com/virtualization/2018/06/27/insider-preview-windows-container-image/">this blog post</a>.</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<ul>
+<li>An 8TB NVMe drive? Holy moly! Chris Evans has <a href="https://blog.architecting.it/samsung-8tb-nf1-nvme-ssd/">more details</a>.</li>
+</ul>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<ul>
+<li>Curtis (don&rsquo;t have the last name since it&rsquo;s not listed anywhere) has a write-up on <a href="http://serverascode.com/2018/06/26/using-cloud-images.html">using cloud images with KVM</a>.</li>
+<li>I said I wouldn&rsquo;t try to aggregate the news from VMworld, but I couldn&rsquo;t resist throwing in at least one &ldquo;wrap up&rdquo; from the show. Eric Siebert&rsquo;s post-conference thoughts are <a href="http://vsphere-land.com/news/my-thoughts-and-observations-on-vmworld-2018.html">here</a>; he does a pretty good job of capturing the major announcements. I also saw <a href="https://redmonk.com/rstephens/2018/09/06/impressions-from-vmworld/">this recap</a> by Rachel Stevens; she&rsquo;s pretty bullish about the RDS on VMware announcement (as a lot of folks are).</li>
+</ul>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<ul>
+<li>David Gee <a href="http://ipengineer.net/2018/08/automation-learning-approach/">shares his &ldquo;automation learning charter,&rdquo;</a> and the post contains some useful tidbits for those of us who are embracing lifelong learning and growth.</li>
+</ul>
+
+<p>That&rsquo;s all for today; it&rsquo;s a bit shorter than usual but hopefully there are still some useful tidbits in there. Feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> with comments or feedback!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/PDduTBnt2UI" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/PDduTBnt2UI/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Kubernetes with Cilium and Containerd using Kubeadm</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Now, if that isn&rsquo;t a title jam-packed with buzzwords, I don&rsquo;t know what is! In seriousness, though, I wanted to share how to use <code>kubeadm</code> to turn up a <a href="https://kubernetes.io/">Kubernetes</a> cluster using <a href="https://github.com/containerd/containerd">containerd</a> (instead of Docker) and <a href="https://cilium.io/">Cilium</a> as the CNI plugin. I&rsquo;m posting this because I wasn&rsquo;t able to find a reasonable article that combined <em>all</em> the different threads&mdash;some posts talked about using containerd, others talked about using Cilium, and the official Kubernetes docs have examples for using <code>kubeadm</code>. The purpose of this post is to try to pull those threads together.</p>
+
+<p>For structure and context, I&rsquo;ll build upon the official Kubernetes document outlining <a href="https://kubernetes.io/docs/setup/independent/high-availability/">creating highly available clusters with <code>kubeadm</code></a>. You may find it helpful to pull up that article next to this one, as I won&rsquo;t be duplicating that content here. Instead, I&rsquo;ll just reference additions/changes to the process in order to accommodate containerd and Cilium.</p>
+
+<p>Before getting started, make sure that your systems will meet the <a href="https://cilium.readthedocs.io/en/v1.2/install/system_requirements/">minimum requirements for Cilium</a>. For my testing, I used Ubuntu 16.04 with the latest HWE kernel (4.15.0-33-generic). I used a private fork of <a href="https://github.com/heptiolabs/wardroom">Wardroom</a> to build the AWS AMIs with containerd and all the Kubernetes 1.11.2 packages installed, and wrote a custom Ansible script to update the AMIs with the latest HWE kernel. (Side note: I do hope to get my containerd-related changes into Wardroom at some point in the future, so others will be able to leverage Wardroom as well.) Obviously, you can choose to manually build your own images; see the &ldquo;Additional Resources&rdquo; section for a link on how to install containerd. You&rsquo;ll want to do that before trying to turn up the Kubernetes cluster.</p>
+
+<p>Ready? Let&rsquo;s go! I&rsquo;ll organize the content below according to the section headings from the official Kubernetes procedure for <a href="https://kubernetes.io/docs/setup/independent/high-availability/">creating highly available clusters using <code>kubeadm</code></a>.</p>
+
+<h2 id="bootstrap-the-first-stacked-control-plane-node">Bootstrap the First Stacked Control Plane Node</h2>
+
+<p>Up until this point, everything remains the same (no changes are needed to accommodate an alternate container runtime or a specific CNI plugin). Once you get to this point and you&rsquo;re ready to bootstrap the first control plane node, some additional changes are needed. Specifically, you need to add the following content to the <code>kubeadm</code> configuration file:</p>
+
+<pre><code class="language-yaml">nodeRegistration:
+  criSocket: /var/run/containerd/containerd.sock
+</code></pre>
+
+<p>This assumes, naturally, that you&rsquo;re using the default location for the runtime endpoint. Modify as needed.</p>
+
+<p>I also had to do the following on my Ubuntu 16.04 nodes, but I take this as more of an issue with my images (you may not need these commands):</p>
+
+<pre><code>modprobe br_netfilter
+sysctl -w net.ipv4.ip_forward=1
+</code></pre>
+
+<p>With this content added, you&rsquo;re good to go to run <code>kubeadm init --config &lt;config-file-name&gt;</code> to bootstrap the first master. <code>kubectl get nodes</code> will report it as NotReady until you install the CNI, but that&rsquo;s OK. You can proceed with the next steps in the procedure.</p>
+
+<h2 id="add-the-second-stacked-control-plane-node">Add the Second Stacked Control Plane Node</h2>
+
+<p>The only change here is to (again) add this content to the <code>kubeadm</code> config file:</p>
+
+<pre><code class="language-yaml">nodeRegistration:
+  criSocket: /var/run/containerd/containerd.sock
+</code></pre>
+
+<p>You may also need to run the <code>modprobe</code> and <code>sysctl</code> commands outlined in the previous section. I suspect the need to run those commands reflects a problem in my custom AMIs.</p>
+
+<p>Run the rest of the commands in this section as outlined, and your second control plane node should come online.</p>
+
+<h2 id="add-the-third-stacked-control-plane-node">Add the Third Stacked Control Plane Node</h2>
+
+<p>The same change to the <code>kubeadm</code> configuration file is needed here, along with (maybe) the <code>modprobe</code> and <code>sysctl</code> commands.</p>
+
+<p>Once this step is complete, you&rsquo;ll have a three-node control plane up and running, although they&rsquo;ll all report NotReady in <code>kubectl get nodes</code> until you install a networking plugin. Fortunately, you&rsquo;ll tackle that next.</p>
+
+<h2 id="install-a-pod-network">Install a Pod Network</h2>
+
+<p>Now you&rsquo;ll start getting into some Cilium-specific stuff. For the most part, this is pretty straightforward. You can follow the instructions found <a href="https://cilium.readthedocs.io/en/v1.2/kubernetes/install/standard/">here</a>, with a few changes. I recommend downloading the Cilium-CRIO YAML file instead of the one linked in the instructions (you can find it <a href="https://github.com/cilium/cilium/blob/v1.2/examples/kubernetes/1.11/cilium-crio.yaml">here</a>). Then follow the instructions for configuring the ConfigMap for etcd and creating the TLS secrets.</p>
+
+<p>However, before proceeding with deploying Cilium, there are a few additional changes to make to the YAML file (these notes assume you are using v1.2 of the Cilium-CRIO YAML file):</p>
+
+<ul>
+<li>On line 120, change <code>--container-runtime=crio</code> to <code>--container-runtime=containerd</code>.</li>
+<li>Add a line immediately after line 120 with the contents <code>--container-runtime-endpoint=containerd=/var/run/containerd/containerd.sock</code> (follow the formatting/indentation of the previous line). Adjust the location of the runtime endpoint as needed.</li>
+<li>Change line 221 from <code>crio-socket</code> to <code>containerd-socket</code>.</li>
+<li>Change line 222 to <code>/var/run/containerd/containerd.sock</code>.</li>
+<li>Change line 249 from <code>crio-socket</code> to <code>containerd-socket</code>.</li>
+<li>Change line 251 to <code>/var/run/containerd/containerd.sock</code>.</li>
+</ul>
+
+<p>Once you have these changes in place, you can proceed with the instructions in the &ldquo;Deploying&rdquo; section of the <a href="https://cilium.readthedocs.io/en/v1.2/kubernetes/install/standard/">standard install guide</a>.</p>
+
+<p>Assuming that Cilium deploys properly, your control plane nodes should switch from NotReady to Ready in <code>kubectl get nodes</code>, and you should see some Cilium pods scheduled and running when you run <code>kubectl -n kube-system get pods</code>.</p>
+
+<h2 id="install-workers">Install Workers</h2>
+
+<p>Once the control plane nodes are reporting Ready (and perhaps you&rsquo;ve done some troubleshooting with Cilium to ensure that it&rsquo;s working as expected), then you&rsquo;re ready to add worker nodes.</p>
+
+<p>When you run <code>kubeadm init...</code> on the first stacked control plane node, it will spit out a command line you can use to join worker nodes to the Kubernetes cluster. You can use this command, but you must add one small piece. At the end of the command, add <code>--cri-socket /var/run/containerd/containerd.sock</code>. This tells <code>kubeadm</code> that this node is using containerd as the container runtime, and will enable the join operation to succeed.</p>
+
+<h2 id="additional-resources">Additional Resources</h2>
+
+<p>The information is this post was based on a number of other articles along with my direct hands-on experience. Readers may want to review these other documents for additional information:</p>
+
+<ul>
+<li><a href="https://cilium.readthedocs.io/en/v1.2/gettingstarted/cilium_install_crio/">Cilium, Kubernetes, and CRI-O</a>: Although this document is focused on CRI-O, comparing the YAML manifests referenced by this document with the YAML manifests compared in the standard install guide (found <a href="https://cilium.readthedocs.io/en/v1.2/kubernetes/install/standard/">here</a>) helped me understand the differences that would be necessary for containerd.</li>
+<li>The <a href="https://cilium.readthedocs.io/en/v1.2/cmdref/cilium-agent/">command reference for <code>cilium-agent</code></a></li>
+<li>The <a href="https://github.com/containerd/cri/tree/master/contrib/ansible">Ansible+<code>kubeadm</code> instructions in the containerd GitHub repository</a> provided insight on how to install containerd, although the <code>kubeadm</code> instructions aren&rsquo;t complete enough (need to be combined with the official Kubernetes docs as I describe above).</li>
+</ul>
+
+<p>I hope this information is useful. If you have questions (or corrections!), please <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/VV2mELdGRXc" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/VV2mELdGRXc/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Book Review: REST API Design Rulebook</h3>
+		</div>
+		<div class="collectiontext">
+			<p><em>REST API Design Rulebook</em> (written by Mark Masse and published by O&rsquo;Reilly Media; more details <a href="http://shop.oreilly.com/product/0636920021575.do">here</a>) is an older book, published in late 2011. However, having never attempted to design a REST API before, I found lots of useful information inside that really helped shape my understanding of REST APIs and REST API design.</p>
+
+<p>(In case you&rsquo;re wondering why I was reading a book about REST API design, this ties into <a href="https://blog.scottlowe.org/2018/03/05/looking-ahead-2018-projects/">my 2018 project list</a> and <a href="https://blog.scottlowe.org/2018/07/23/bolstering-my-software-development-skills/">the software development project</a> I recently launched.)</p>
+
+<p>Overall, I found the book quite helpful and useful. If I had one complaint about the book, it would be the book&rsquo;s repeated insistence on referring to <a href="https://github.com/wrml/wrml">WRML (Web Resource Modeling Language)</a>, which&mdash;as I understand it&mdash;is a <em>proposed</em> solution by the book&rsquo;s author to some of the challenges around REST API design. I get that the author is sold on the value of WRML, but at times the book felt very much like a WRML commercial.</p>
+
+<p>Aside from that one complaint, the book&rsquo;s organization into a set of &ldquo;rules&rdquo; helped make the material reasonably consumable, and I appreciated the review of key terms at the end of each chapter.</p>
+
+<p>I do still have some questions about REST APIs and REST API design; I suppose that&rsquo;s natural and expected for a newcomer like myself. In particular, the emphasis placed on HATEOAS (Hypermedia As The Engine of Application State) is still a bit unclear to me. Some things make sense&mdash;like including links to actions (provided by the API) that can be performed on an object&mdash;but there were times in the book when it seemed like HATEOAS was being overemphasized. However, I freely admit my perception could be due to my lack of practical experience in this area.</p>
+
+<p>If you&rsquo;re looking to learn more about REST API design, there are most certainly worse places to look for some useful and practical information.</p>
+
+<p><em>Disclaimer: I am an O&rsquo;Reilly author, but I did not receive any compensation from O&rsquo;Reilly, any other publisher or reviewer, or the author of the book mentioned in this review. These thoughts are mine alone.</em></p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/ahZ0Mej1vFo" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ahZ0Mej1vFo/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Better XMind-GNOME Integration</h3>
+		</div>
+		<div class="collectiontext">
+			<p>In December of 2017 I wrote about <a href="https://blog.scottlowe.org/2017/12/15/installing-xmind-8-on-fedora-27/">how to install XMind 8 on Fedora 27</a>, and at the time of that writing I hadn&rsquo;t quite figured out how to define a MIME type for XMind files that would allow users to double-click on an XMind file in Nautilus and open that file in XMind. After doing a bit of additional research and testing, I&rsquo;ve found a solution and would like to share it here.</p>
+
+<p>The solution I&rsquo;ll describe here has been tested on Fedora 28, but it should work on just about any distribution with the GNOME desktop environment.</p>
+
+<p>First, you&rsquo;ll want to define the MIME type by creating an XML file in the <code>~/.local/share/mime/packages</code> directory, as outlined <a href="https://help.gnome.org/admin/system-admin-guide/stable/mime-types-custom-user.html.en">here</a>. I called my file <code>application-vnd-xmind-workbook.xml</code>, but I don&rsquo;t know if the filename actually matters. (I derived the filename from <a href="https://github.com/xmindltd/xmind/wiki/FileTypes">this list of XMind file types</a>.) The contents of the file should look something like this:</p>
+
+<pre><code class="language-xml">&lt;mime-info xmlns=&quot;http://www.freedesktop.org/standards/shared-mime-info&quot;&gt;
+  &lt;mime-type type=&quot;application/vnd.xmind.workbook&quot;&gt;
+    &lt;comment&gt;XMind Workbook&lt;/comment&gt;
+    &lt;glob pattern=&quot;*.xmind&quot;/&gt;
+    &lt;glob pattern=&quot;*.XMIND&quot;/&gt;
+    &lt;glob pattern=&quot;*.XMind&quot;/&gt;
+  &lt;/mime-type&gt;
+&lt;/mime-info&gt;
+</code></pre>
+
+<p>You&rsquo;ll note that multiple glob patterns are included to help deal with case sensitivity issues. The specific values used in the <code>mime-type</code> element is again taken from <a href="https://github.com/xmindltd/xmind/wiki/FileTypes">the XMind wiki</a>.</p>
+
+<p>Next, you&rsquo;ll want to adjust the desktop launcher for XMind. Add the <code>MimeType=application/vnd.xmind.workbook</code> line to the desktop launcher file. I&rsquo;m using a desktop launcher that is user-specific, and found in the <code>~/.local/share/applications</code> directory. It should look something like this when you&rsquo;re done:</p>
+
+<pre><code class="language-text">[Desktop Entry]
+Comment=Create and share mind maps
+Exec=/opt/xmind/XMind_amd64/XMind %F
+Path=/opt/xmind/XMind_amd64
+Name=XMind
+Terminal=false
+Type=Application
+Categories=Office;Productivity
+Icon=/home/username/.local/share/icons/xmind.png
+MimeType=application/vnd.xmind.workbook
+</code></pre>
+
+<p>You&rsquo;ll note that this example points to an icon stored in a user-specific directory; be sure to adjust this as needed to point to the location of the icon you want to use for XMind.</p>
+
+<p>It also appears that the <code>Path=</code> statement in the desktop file is important; it specifies the working directory to run the program in (see <a href="https://developer.gnome.org/desktop-entry-spec/">this reference</a>). I saw at least one reference (here&rsquo;s <a href="https://github.com/xmindltd/xmind/issues/200">one example</a>) of needing to switch to the correct directory in order to get XMind to open files specified on the command line.</p>
+
+<p>Finally, update the MIME and application databases, respectively:</p>
+
+<pre><code>update-mime-database ~/.local/share/mime/packages
+update-desktop-database ~/.local/share/applications
+</code></pre>
+
+<p>You can run the <code>gio</code> commands outlined <a href="https://help.gnome.org/admin/system-admin-guide/stable/mime-types-custom-user.html.en">here</a> (look toward the bottom of the page) to test to make sure that the MIME type and application are correctly defined and linked, if you like.</p>
+
+<p>For a custom icon (otherwise GNOME will use the generic text document icon for XMind files) the process is a bit trickier. I use the <a href="https://github.com/numixproject/numix-icon-theme">Numix icon theme</a>, so I ran the following commands:</p>
+
+<pre><code>cd /usr/share/icons/Numix/48/mimetypes
+sudo ln -s inode-symlink.svg application-vnd.xmind.workbook.svg
+sudo gtk-update-icon-cache /usr/share/icons/Numix
+</code></pre>
+
+<p>After that, the icons for XMind files immediately changed. For readers using a different theme, you&rsquo;ll need to substitute the correct paths and the correct filenames; the trick, of course, is to end up with a filename that matches the new MIME type defined earlier.</p>
+
+<p>With these changes in place, you should now be able to double-click an XMind mind map and have it launch XMind (if not already running) and open the selected file (as one would expect). Enjoy!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/15tFjnAe_ko" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/15tFjnAe_ko/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>Populating New Namespaces Using Heptio Ark</h3>
 		</div>
 		<div class="collectiontext">
@@ -486,127 +744,6 @@ https://10.200.10.1 -v
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/TAZTi2h0ZOc/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 103</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take 103, where I&rsquo;m back yet again with a collection of links and articles from around the World Wide Web (Ha! Bet you haven&rsquo;t seen that term used in a while!) on various technology areas. Here&rsquo;s hoping I&rsquo;ve managed to include something useful to you!</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Gerald Dykeman shares some information on <a href="https://gdykeman.github.io/2018/07/15/meraki-security-policy/">using Ansible to automate Cisco Meraki</a>.</li>
-<li>If you&rsquo;re not familiar with VPCs and associated AWS constructs, you should read <a href="https://start.jcolemorrison.com/aws-vpc-core-concepts-analogy-guide/">this article</a>. It&rsquo;s really good.</li>
-<li>I can&rsquo;t say that I&rsquo;ve ever thought about writing a CNI plugin in Bash, but apparently <a href="https://www.altoros.com/blog/kubernetes-networking-writing-your-own-simple-cni-plug-in-with-bash/">it can be done</a>.</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<p>Nothing this time around, sorry!</p>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>Scott McCarty <a href="http://crunchtools.com/what-is-svirt-and-how-does-it-isolate-linux-containers/">explains sVirt and how it&rsquo;s used to isolate Linux containers</a>. You may also find <a href="https://opensource.com/article/18/2/understanding-selinux-labels-container-runtimes">this related article</a> (linked within Scott&rsquo;s post) to be helpful.</li>
-<li>Andrew Martin has <a href="https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/">a write-up with security recommendations for your Kubernetes clusters</a>.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>Fellow Heptonian Chuck Ha <a href="https://dev.to/chuck_ha/reading-kubernetes-logs-315k">walks through some Kubernetes logs</a> to show how to use them to better understand the relationships between the various components.</li>
-<li>Gabe Monroy <a href="https://azure.microsoft.com/en-us/blog/introducing-dev-spaces-for-aks/">introduces Dev Spaces for AKS</a>, a developer productivity-focused feature that aims to make it easier for developers to build and troubleshoot microservices in a Kubernetes environment.</li>
-<li>Written in a somewhat entertaining format (gotta give them kudos for that), Gravitational has a post on <a href="https://gravitational.com/blog/kubernetes-and-offline-etcd-upgrades/">the intricacies of upgrading etcd beneath Kubernetes</a>.</li>
-<li>Alex Komljen provides an overview of <a href="https://akomljen.com/kubernetes-cluster-autoscaling-on-aws/">using Cluster Autoscaler with a Kubernetes cluster on AWS</a>.</li>
-<li>And in the event you&rsquo;re not really familiar with the various autoscaling aspects of Kubernetes (of which cluster autoscaling is just one), <a href="https://medium.com/@Mohamed.ahmed/kubernetes-autoscaling-101-cluster-autoscaler-horizontal-pod-autoscaler-and-vertical-pod-2a441d9ad231">this article</a> by Mohamed Ahmed provides a 101-level overview.</li>
-<li>The CNCF has a 4-part series taking a deeper look at some of the feature changes in Kubernetes 1.11. Check out these articles talking about <a href="https://kubernetes.io/blog/2018/07/09/ipvs-based-in-cluster-load-balancing-deep-dive/">IPVS-based in-cluster load balancing</a>, <a href="https://kubernetes.io/blog/2018/07/10/coredns-ga-for-kubernetes-cluster-dns/">CoreDNS</a>, <a href="https://kubernetes.io/blog/2018/07/11/dynamic-kubelet-configuration/">dynamic kubelet configuration</a>, and <a href="https://kubernetes.io/blog/2018/07/12/resizing-persistent-volumes-using-kubernetes/">resizing persistent volumes in Kubernetes</a>.</li>
-<li>Nathaniel Avery <a href="http://www.notyourdadsit.com/blog/2018/6/19/azure-tip-use-b-series-servers-for-cost-savings">shares a tip on saving some money</a> by using the right servers on Azure.</li>
-<li>Here&rsquo;s <a href="https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/">how to let Traefik run on worker nodes</a> in a Docker Swarm cluster.</li>
-<li>These users <a href="https://movingfulcrum.com/horrors-of-using-azure-kubernetes-service-in-production/">did not have a good experience with AKS</a>.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>Kushal Das (briefly) talks about <a href="https://kushaldas.in/posts/using-podman-for-containers.html">using Podman for containers</a>. Looks like Podman is still evolving pretty rapidly, but it may be worth giving a try.</li>
-<li>Nick Janetakis decides he wants to <a href="https://nickjanetakis.com/blog/benchmarking-debian-vs-alpine-as-a-base-docker-image">benchmark Debian versus Alpine as a base Docker image</a> and shares what he found. (The reasons behind his decision are in the article.)</li>
-<li>YACIS (Yet Another Container Isolation Scheme) has arrived: <a href="https://nabla-containers.github.io/">Nabla containers</a>. Like Google GVisor, I suspect this will see limited uptake (at least initially) since it requires a specific base image in order to work.</li>
-<li>I got bitten by <a href="https://dmsimard.com/2016/01/08/selinux-python-virtualenv-chroot-and-ansible-dont-play-nice/">this issue</a> recently when doing some testing using Ansible and Jinja2; fortunately, using <code>-e ansible_python_interpreter=/usr/bin/python</code> on the Ansible command line fixed it for me.</li>
-<li>Prometheus is the second project to &ldquo;graduate&rdquo; within the CNCF; more details are <a href="https://www.cncf.io/announcement/2018/08/09/prometheus-graduates/">here</a>.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>This is from July 2017, but still applicable I think: Detectify has a <a href="https://labs.detectify.com/2017/07/13/a-deep-dive-into-aws-s3-access-controls-taking-full-control-over-your-assets/">deep dive on access controls for Amazon&rsquo;s S3 object storage service</a>, which increasingly has been a source of data breaches.</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<p>Sorry, I didn&rsquo;t find anything to include this time. I&rsquo;m sure there&rsquo;s a ton of great content out there, but none of it passed across my &ldquo;desk.&rdquo; (If you were needing a sign of a shift in my focus, this should be it!)</p>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>I&rsquo;ll put this here since it kind of applies to lots of different technology areas, even though it is sort of networking-focused: Ben Cotton recently <a href="https://opensource.com/article/18/7/requests-for-comments-to-know">shared 6 RFCs you should read</a>. This is helpful information for folks new to IT, for developers or systems-oriented folks who need a better understanding of some networking fundamentals.</li>
-<li>In recounting <a href="https://medium.com/nuvoloso/how-i-found-my-path-to-the-cloud-539c30ca333a">his journey to the cloud</a>, Stephen Manley shares a tidbit that I think it useful for folks in a similar situation: regardless of how technology changes, there&rsquo;s a piece of your experience that remains valuable, and you can build on that piece to create a bridge into a new area. For Stephen, it was data management. For you, it may be something else. (I love his closing statement!)</li>
-<li>Finally, I found this article from Scott Young on <a href="https://www.scotthyoung.com/blog/2018/07/12/guide-to-focus/">increasing your focus</a> to be helpful. As an &ldquo;information worker,&rdquo; our focus is most definitely one of our most valuable resources.</li>
-</ul>
-
-<p>That&rsquo;s all for now, folks! Have a great weekend!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/UtpG1G8o9sM" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/UtpG1G8o9sM/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.familytidings.com/blog" target="_blank">Half a Page of Scribbled Linux</a>
-		</div>
-		<div>
-			<h3>Dual Application Switchers</h3>
-		</div>
-		<div class="collectiontext">
-			I have a dual monitor set up running Ubuntu 16. The goofy thing was there were two application switchers. One would be displayed on the monitor with the active window and the other would be displayed on the monitor with the cursor. If the cursor was on the same monitor as the active window, one [&#8230;]
-		</div>
-		<div class="collectionhref">
-		<a href="http://www.familytidings.com/blog/?p=1527" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>VMworld 2018 Prayer Time</h3>
-		</div>
-		<div class="collectiontext">
-			<p>For the last several years, I&rsquo;ve organized a brief morning prayer time at VMworld. This year, I won&rsquo;t be at the conference, but I&rsquo;d like to help coordinate a time for believers to meet nevertheless. So, if you&rsquo;re a Christian interested in gathering together with other Christians for a brief time of prayer, here are the details.</p>
-
-<p><strong>What:</strong> A brief time of prayer</p>
-
-<p><strong>Where:</strong> Mandalay Bay Convention Center, level 1 (same level as the food court), at the bottom of the escalators heading upstairs (over near the business center)</p>
-
-<p><strong>When:</strong> Monday 8/27 through Thursday 8/30 at 7:45am (this should give everyone enough time to grab breakfast before the keynotes start at 9am)</p>
-
-<p><strong>Who:</strong> All courteous attendees are welcome, but please note this will be a distinctly Christian-focused and Christ-centric activity (I encourage believers of other faiths/religions to organize equivalent activities)</p>
-
-<p><strong>Why:</strong> To spend a few minutes in prayer over the day, the conference, the attendees, and each other</p>
-
-<p>You don&rsquo;t need to RSVP or anything like that, although you&rsquo;re welcome to if you&rsquo;d like (just <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>). As I mentioned, I won&rsquo;t be at the conference, so I&rsquo;ll ask folks who have attended prayer time in previous years to help take the lead in my absence. (There&rsquo;s a growing chance I&rsquo;ll be in town but not attending the conference; if that works out, I&rsquo;ll be sure to join for prayer in the morning.)</p>
-
-<p>There&rsquo;s no need to bring anything other than an open heart, your faith, and your willingness to display that faith in front of others. The gathering is very casual&mdash;we&rsquo;ll gather together, share a few prayer requests and needs, and then give folks the opportunity to pray as they feel led. If you don&rsquo;t like praying out loud in public, that&rsquo;s cool; we&rsquo;re not going to force anyone. We just want to give believers the opportunity to strengthen one another in the faith.</p>
-
-<p>I hope that plenty of believers at the conference get the opportunity to join for prayer. Reach out to other Christians you may know and tell them about morning prayer at VMworld!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/GiFpSffTQ1w" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/GiFpSffTQ1w/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -614,36 +751,34 @@ https://10.200.10.1 -v
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="blackhat_2018_keynote.html">
+<div class="date">08.09.2018</div>
+<h3>Blackhat 2018 Keynote</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich folge gehorsam den Meldungen auf heise.de - neulich war ich gleichzeitig abgestoßen und fasziniert...
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="e_paper_tuerschild_esp8266.html">
+<div class="date">08.09.2018</div>
+<h3>E-Paper Türschild mit ESP8266</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nach meinen ersten Versuchen, das
+E-Paper-Display
+mit einem Raspi anzusteuern habe ich nunmehr den Schritt gewagt und - durch die ersten Erfolge mit der
+WLAN-Steckdose
+unvorsichtig geworden - erste Versuche mit der Ansteuerung durch einen ESP gemacht.
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="ntp_server_raspi_em406a.html">
 <div class="date">01.09.2018</div>
 <h3>NTP-Server mit Raspi und EM406a</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Ich habe herausfinden wollen, ob es mir mit ein paar zu Hause herumliegenden Teilen möglich wäre,
 eine Satellitenuhr zu bauen, die ich dann im Heimnetz als NTP-Server einsetzen könnte.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="mehrere_tile_layer_aus_einem_server.html">
-<div class="date">01.09.2018</div>
-<h3>Mehrere Tile-Layer aus einem Server</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ich habe bereits über die Einrichtung von LXC-Containern als
-TileServer für OpenStreetMap
-und
-Server für Hillshading-Tiles
-berichtet. Nunmehr wurde dieses Konzept ein wenig veredelt
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="eigene_firmware_sonoff_s20.html">
-<div class="date">26.08.2018</div>
-<h3>Eigene Firmware für Sonoff S20</h3>
-<div class="abstract">
-<p>Nachdem ich nach meinen diversen Erfahrungen mit dem Arduino auch mal andere Projekte erforschen wollte,
-habe ich mich durch Artikel in zurückliegenden Ausgaben der c't inspirieren lassen und Projekte mit dem ESP8266
-ausprobiert - zuerst der Umbau einer WLAN-fähigen Steckdose...
 </p></div>   </a>
 </li>
 </ul>
