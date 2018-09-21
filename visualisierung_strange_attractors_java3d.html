@@ -1,0 +1,717 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
+<head>
+  <title>Visualisierung von Strange Attractors mit Java3D</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta name="Description" content="Ich wollte mich schon lange mal wieder mit Chaos und Systemen mit Strange Attractors
+befassen." />
+  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
+	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/lightbox.js"></script>
+<link href="css/lightbox.css" rel="stylesheet" />
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
+	<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body onload="toggle('show');">
+<div id="wrapper">
+	<div id="header">
+<div id="logo">
+  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
+      display="inline">
+    <mrow>
+      <mn>1</mn>
+      <mo>&isin;</mo>
+      <mi>&infin;</mi>
+    </mrow>
+</math>
+</h1-->
+  <p>
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+  </p>
+</div>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
+	über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
+	Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
+	daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
+	Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
+	Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+		<a href="https://github.com/elbosso">hier</a>.</p>
+	</div><!-- #header-->
+<div id="all">
+<div id="A">
+<div id="content">
+<div class="date">21.09.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+	<!--li--> <a href="partikelsystem__innerer__energie.html#content">Java</a> <!--/li-->
+	<!--/ul-->
+</div>
+ 	<div class="heading">Visualisierung von Strange Attractors mit Java3D</div>
+	<p>Ich wollte mich schon lange mal wieder mit Chaos und Systemen mit Strange Attractors
+befassen. Schließlich habe ich ja
+<a href="implizites_eulerverfahren.html">die entsprechende Infrastruktur</a>
+bereits als Framework für die numerische Behandlung von Differentialgleichungssystemen
+verfügbar.
+</p> <a name="content"> </a>
+ <p>Nachdem ich nun in Netz auf
+<a href="http://www.chaoscope.org/doc/rendering.htm">Chaoscope</a>
+gestoßen bin, habe ich dieses Projekt in Angriff genommen. Ich benutzte zum Test die
+üblichen Verdächtigen:
+den <a href="https://en.wikipedia.org/wiki/Lorenz_system">Lorenz Attractor</a>,
+den <a href="https://en.wikipedia.org/wiki/R%C3%B6ssler_attractor">Rössler Atractor</a>
+und die <a href="http://sprott.physics.wisc.edu/simplest.htm">Sprott-Systeme</a>.
+</p><p>
+Zunächst stellte ich für jedes der Systeme eine geeignete Anfangsbedingung fest, die in
+den jeweiligen Strange Attractor münden würde. Dazu benutzte ich das gute alte Gnuplot: zunächst nur als Darstellung des
+Verlaufs des jeweiligen Orbits, später dann eingefärbt, um den zeitlichen Verlauf der Orbits genauer
+einschätzen zu können.
+</p><p>
+Als ich so weit gekommen war, wollte ich Java3D zur Visualisierung einsetzen. Das gelang recht schnell; damit war ich in der Lage,
+die verschiedenen von
+<a href="http://www.chaoscope.org/doc/rendering.htm">Chaoscope</a>
+bekannten Visualisierungen abzubilden:
+<ul>
+<li>Farbgradient über die Zeit</li>
+<li>Grauwertgradient über die Geschwindigkeit</li>
+<li>Grauwertgradient über die Krümmung</li>
+</ul>
+</p><p>
+Verschiedene Ergebnisse der Visualisierungen sind in der untenstehenden Galerie am Beispiel des Sprott System M zu sehen.
+</p><p>
+Schließlich folgen noch einige weiterführende Links zum Thema Chaos und Strange Attractors:
+</p> <ul class="single"> 
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Lorenz System
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://en.wikipedia.org/wiki/Lorenz_system" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Rössler attractor
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://en.wikipedia.org/wiki/R%C3%B6ssler_attractor" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Lorenz 96 model
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://en.wikipedia.org/wiki/Lorenz_96_model" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Simple Chaotic Flow GIF Animations
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://sprott.physics.wisc.edu/simplest.htm" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Sprott Systems Circuits
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://www.glensstuff.com/sprottsystems/sprottsystems.htm" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>A New Three-Scroll Unified Chaotic System Coined
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://www.internonlinearscience.org/upload/papers/20110618025420887.pdf" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Chaos and Time-Series Analysis
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://sprott.physics.wisc.edu/chaostsa/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>A New Chaotic System with Multiple Attractors: Dynamic Analysis, Circuit Realization and S-Box Design
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://pdfs.semanticscholar.org/b2a3/c8facae60d0723e0add17343a0d91af54b9c.pdf" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>When Darwin meets Lorenz: Evolving new chaotic attractors through genetic programming
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://arxiv.org/pdf/1409.7842.pdf" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>On a dynamical system with multiple chaotic attractors
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://danca.rist.ro/doc/PAPER.pdf" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Strange Attractors: Creating Patterns in Chaos
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://sprott.physics.wisc.edu/fractals/booktext/SABOOK.PDF" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Chaoscope
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="http://www.chaoscope.org/doc/rendering.htm" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Draw Lorenz attractor from Point3f array in Java 3D
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://stackoverflow.com/questions/10583443/draw-lorenz-attractor-from-point3f-array-in-java-3d/10605149" target="_blank">Öffnen</a>
+		</div>
+	</li>
+</ul>
+ <ul class="triple"> 
+<li class="anriss">
+	<a href="images/sprott_m.png" rel="lightbox[screenshots]" 
+		title="Gnuplot einfarbig"
+	   class="img">
+		<div class="screenshotthumb center">
+			<img class="center" src="images/sprott_m_t.png">
+			<div class="thumbnailcaption">Gnuplot einfarbig</div>
+		</div>
+	</a>
+</li>
+<li class="anriss">
+	<a href="images/sprott_m_color.png" rel="lightbox[screenshots]" 
+		title="Gnuplot eingefärbt"
+	   class="img">
+		<div class="screenshotthumb center">
+			<img class="center" src="images/sprott_m_color_t.png">
+			<div class="thumbnailcaption">Gnuplot eingefärbt</div>
+		</div>
+	</a>
+</li>
+<li class="anriss">
+	<a href="images/sprott_m_gradient.png" rel="lightbox[screenshots]" 
+		title="Java3D Farbgradient über die Zeit"
+	   class="img">
+		<div class="screenshotthumb center">
+			<img class="center" src="images/sprott_m_gradient_t.png">
+			<div class="thumbnailcaption">Java3D Farbgradient über die Zeit</div>
+		</div>
+	</a>
+</li>
+<li class="anriss">
+	<a href="images/sprott_m_angle.png" rel="lightbox[screenshots]" 
+		title="Java3D Grauwertgradient über die Krümmung"
+	   class="img">
+		<div class="screenshotthumb center">
+			<img class="center" src="images/sprott_m_angle_t.png">
+			<div class="thumbnailcaption">Java3D Grauwertgradient über die Krümmung</div>
+		</div>
+	</a>
+</li>
+<li class="anriss">
+	<a href="images/sprott_m_speed.png" rel="lightbox[screenshots]" 
+		title="Java3D Grauwertgradient über die Geschwindigkeit"
+	   class="img">
+		<div class="screenshotthumb center">
+			<img class="center" src="images/sprott_m_speed_t.png">
+			<div class="thumbnailcaption">Java3D Grauwertgradient über die Geschwindigkeit</div>
+		</div>
+	</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+  <a href="gedanken_zeit__ntp__gps_diy.html#content">
+<div class="date">21.09.2018</div>
+<h3>Gedanken zu Zeit, NTP, GPS und DIY</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich meinen eigenen
+Atomzeit-GPS-NTP-Server
+in Betrieb genommen habe, habe ich mir Gedanken gemacht, warum die
+käuflich zu erwerbenden einen so hohen Anschaffungswiderstand haben.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="blackhat_2018_keynote.html#content">
+<div class="date">08.09.2018</div>
+<h3>Blackhat 2018 Keynote</h3>
+<div class="abstract">
+<p>Ich folge gehorsam den Meldungen auf heise.de - neulich war ich gleichzeitig abgestoßen und fasziniert...
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="e_paper_tuerschild_esp8266.html#content">
+<div class="date">08.09.2018</div>
+<h3>E-Paper Türschild mit ESP8266</h3>
+<div class="abstract">
+<p>Nach meinen ersten Versuchen, das
+E-Paper-Display
+mit einem Raspi anzusteuern habe ich nunmehr den Schritt gewagt und - durch die ersten Erfolge mit der
+WLAN-Steckdose
+unvorsichtig geworden - erste Versuche mit der Ansteuerung durch einen ESP gemacht.
+</p></div>   </a>
+</li>
+</ul>
+</div>
+<nav id="C"> 
+<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
+			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+</div>
+	</h2><form method="get" action="http://www.google.com/search">
+
+<div style="padding:4px;width:90%;">
+<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
+ maxlength="255" value="" />
+<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
+<input style="width:0%;" type="checkbox"  name="sitesearch"
+ value="elbosso.github.io" checked hidden="true"/>
+</div>
+
+</form>
+<a href="tag_Android.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Android
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Alles rund um Googles Betriebssystem</p>
+</div>
+</div>
+</a>
+<a href="tag_Basteln.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Basteln
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Meistens Papier (Origami...)</p>
+</div>
+</div>
+</a>
+<a href="c_c__.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+C und C++
+</h3>
+</header>
+<div class="nav-item-body">
+</div>
+</div>
+</a>
+<a href="tag_Datenbanken.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Datenbanken
+</h3>
+</header>
+<div class="nav-item-body">
+<p>relationale und andere Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_dWb+.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+dWb+
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Werkzeug für rapid Prototyping</p>
+</div>
+</div>
+</a>
+<a href="tag_Garten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Garten
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Das grÃ¼ne Hobby</p>
+</div>
+</div>
+</a>
+<a href="tag_Geo.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Geo
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Karten und mehr run um Ortsinformationen</p>
+</div>
+</div>
+</a>
+<a href="tag_GUI.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+GUI
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Alles rund um graphische Benutzerschnittstellen</p>
+</div>
+</div>
+</a>
+<a href="tag_Hardware.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Hardware
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Elektronik und so Zeuchs...</p>
+</div>
+</div>
+</a>
+<a href="tag_Java.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+<strong>
+Java
+</strong>
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Hauptsächlich Desktop Themen und Java SE</p>
+</div>
+</div>
+</a>
+<a href="tag_Komponenten.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Komponenten
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Software-Komponenten</p>
+</div>
+</div>
+</a>
+<a href="tag_Links.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Links
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Linksammlungen zu verschiedenen Themen</p>
+</div>
+</div>
+</a>
+<a href="tag_Linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Linux
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Alles zum Thema Gnu Linux</p>
+</div>
+</div>
+</a>
+<a href="linux.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+linux
+</h3>
+</header>
+<div class="nav-item-body">
+</div>
+</div>
+</a>
+<a href="tag_Markup.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Markup
+</h3>
+</header>
+<div class="nav-item-body">
+<p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
+</div>
+</div>
+</a>
+<a href="tag_Music.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Music
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Musik, die mir gefällt</p>
+</div>
+</div>
+</a>
+<a href="tag_Numerik.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Numerik
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Numerische Mathematik in Computern</p>
+</div>
+</div>
+</a>
+<a href="tag_Python.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Python
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Mein Weg vom blutigen Anfänger aufwärts</p>
+</div>
+</div>
+</a>
+<a href="tag_Rants.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Rants
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Luft ablassen</p>
+</div>
+</div>
+</a>
+<a href="tag_Security.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Security
+</h3>
+</header>
+<div class="nav-item-body">
+<p>IT-Sicherheit</p>
+</div>
+</div>
+</a>
+<a href="tag_sQLshell.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+sQLshell
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
+</div>
+</div>
+</a>
+<a href="tag_Verschiedenes.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Verschiedenes
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Passt in keine der anderen Kategorien...</p>
+</div>
+</div>
+</a>
+<a href="tag_Video.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Video
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Artikel mit bunten Filmchen</p>
+</div>
+</div>
+</a>
+<a href="videos.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Videos
+</h3>
+</header>
+<div class="nav-item-body">
+</div>
+</div>
+</a>
+<a href="tag_Virtualisierung.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Virtualisierung
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Technologien und Themen rund um virtuelle Rechner</p>
+</div>
+</div>
+</a>
+<a href="windows.html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Windows
+</h3>
+</header>
+<div class="nav-item-body">
+</div>
+</div>
+</a>
+<a href="tag_Upcoming....html">
+<div class="nav-item accordion">
+<header class="nav-item-header">
+<h3>
+Upcoming...
+</h3>
+</header>
+<div class="nav-item-body">
+<p>Demnächst in diesem Theater...</p>
+</div>
+</div>
+</a>
+</nav>
+</div>
+	<div id="footer">
+		<span class="me">
+		<strong><a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>				
+
+, Damaschke 11, Rudolstadt, 
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
+			</a></strong>
+	</span></div><!-- #footer -->
+</div>
+</body>
+</html>
