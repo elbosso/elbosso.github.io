@@ -117,6 +117,172 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>Setting up the Kubernetes AWS Cloud Provider</h3>
+		</div>
+		<div class="collectiontext">
+			<p>The AWS cloud provider for <a href="https://kubernetes.io">Kubernetes</a> enables a couple of key integration points for Kubernetes running on AWS; namely, dynamic provisioning of Elastic Block Store (EBS) volumes and dynamic provisioning/configuration of Elastic Load Balancers (ELBs) for exposing Kubernetes Service objects. Unfortunately, the documentation surrounding how to set up the AWS cloud provider with Kubernetes is woefully inadequate. This article is an attempt to help address that shortcoming.</p>
+
+<p>More details are provided below, but at a high-level here&rsquo;s what you&rsquo;ll need to make the AWS cloud provider in Kubernetes work:</p>
+
+<ul>
+<li>The hostname of each node must match EC2&rsquo;s private DNS entry for that node</li>
+<li>An IAM role and policy that EC2 instances can assume as an instance profile</li>
+<li>Kubernetes-specific tags applied to the AWS resources used by the cluster</li>
+<li>Particular command-line flags added to the Kubernetes API server, Kubernetes controller manager, and the Kubelet</li>
+</ul>
+
+<p>Let&rsquo;s dig into these requirements in a bit more detail.</p>
+
+<h2 id="node-hostname">Node Hostname</h2>
+
+<p>It&rsquo;s important that the name of the Node object in Kubernetes matches the private DNS entry for the instance in EC2. You can use <code>hostnamectl</code> or a confiugration management tool (take your pick) to set the instance&rsquo;s hostname to the FQDN that matches the EC2 private DNS entry. This typically looks something like <code>ip-10-15-30-45.us-west-1.compute.internal</code>, where <code>10-15-30-45</code> is the private IP address and <code>us-west-1</code> is the region where the instance was launched.</p>
+
+<p>If you&rsquo;re unsure what it is, or if you&rsquo;re looking for a programmatic way to retrieve the FQDN, just <code>curl</code> the AWS metadata server:</p>
+
+<pre><code>curl http://169.254.169.254/latest/meta-data/local-hostname
+</code></pre>
+
+<p>Make sure you set the hostname before attempting to bootstrap the Kubernetes cluster, or you&rsquo;ll end up with nodes whose name in Kubernetes doesn&rsquo;t match up, and you&rsquo;ll see various &ldquo;permission denied&rdquo;/&ldquo;unable to enumerate&rdquo; errors in the logs. For what it&rsquo;s worth, preliminary testing indicates that this step&mdash;setting the hostname to the FQDN&mdash;is necessary for Ubuntu but may not be needed for CentOS/RHEL.</p>
+
+<h2 id="iam-role-and-policy">IAM Role and Policy</h2>
+
+<p>Because the AWS cloud provider performs some tasks on behalf of the operator&mdash;like creating an ELB or an EBS volume&mdash;the instances need IAM permissions to perform these tasks. Thus, you need to have an IAM instance profile assigned to the instances that gives them permissions.</p>
+
+<p>The <em>exact</em> permissions that are needed haven&rsquo;t been documented anywhere that I&rsquo;ve found (please contact me if you have more information), but here&rsquo;s a summary of permissions for control plane nodes that works:</p>
+
+<ul>
+<li>Allow permissions on <code>ec2:*</code></li>
+<li>Allow permissions on <code>elasticloadbalancing:*</code></li>
+<li>Allow permissions on <code>ecr:GetAuthorizationToken</code>, <code>ecr:BatchCheckLayerAvailability</code>, <code>ecr:GetDownloadUrlForLayer</code>, <code>ecr:GetRepositoryPolicy</code>, <code>ecr:DescribeRepositories</code>, <code>ecr:ListImages</code>, and <code>ecr:BatchGetImage</code></li>
+<li>Allow permissions on <code>autoscaling:DescribeAutoScalingGroup</code> and <code>autoscaling:UpdateAutoScalingGroup</code></li>
+</ul>
+
+<p>It&rsquo;s probably possible to whittle down the <code>ec2:*</code> permission for control plane nodes. Some preliminary thoughts that my colleague Joe Beda shared with me indicates that the following permissions may be enough: <code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroups</code>, <code>ec2:AttachVolume</code>, <code>ec2:DetachVolume</code>, <code>ec2:DescribeVolumes</code>, <code>ec2:CreateVolume</code>, <code>ec2:DeleteVolume</code>, <code>ec2:DescribeSubnets</code>, <code>ec2:CreateSecurityGroup</code>, <code>ec2:DeleteSecurityGroup</code>, <code>ec2:AuthorizeSecurityGroupIngress</code>, <code>ec2:RevokeSecurityGroupIngress</code>, <code>ec2:CreateTags</code>, <code>ec2:DescribeRouteTables</code>, <code>ec2:CreateRoute</code>, <code>ec2:DeleteRoute</code>, and <code>ec2:ModifyInstanceAttribute</code>. Note, however, that this list has <strong>not</strong> been tested or validated.</p>
+
+<p>For worker nodes, the permissions are not as far-reaching:</p>
+
+<ul>
+<li>Allow permission on <code>ec2:Describe*</code></li>
+<li>Allow permissions on <code>ecr:GetAuthorizationToken</code>, <code>ecr:BatchCheckLayerAvailability</code>, <code>ecr:GetDownloadUrlForLayer</code>, <code>ecr:GetRepositoryPolicy</code>, <code>ecr:DescribeRepositories</code>, <code>ecr:ListImages</code>, and <code>ecr:BatchGetImage</code></li>
+</ul>
+
+<p>You&rsquo;ll want to capture these permissions in a policy statement, associate that policy statement with a role, and then associate that role with an IAM instance profile. You&rsquo;ll end up with two IAM instance profiles: one for the control plane nodes with a broader set of permissions, and one for the worker nodes with a more restrictive set of permissions.</p>
+
+<h2 id="aws-tags">AWS Tags</h2>
+
+<p>The AWS cloud provider needs a specific tag to be present on almost all the AWS resources that a Kubernetes cluster needs. The tag key is <code>kubernetes.io/cluster/&lt;cluster-name&gt;</code>; the value of the tag is immaterial (this tag replaces an older <code>KubernetesCluster</code> tag). Note that Kubernetes itself will also use this tag on things that it creates, and it will use a value of &ldquo;owned&rdquo;. This value does <em>not</em> need to be used on resources that Kubernetes itself did not create. Most of the documentation I&rsquo;ve seen indicates that the tag is needed on all instances and on exactly one security group (this is the security group that will be modified to allow ELBs to access the nodes, so the worker nodes should be a part of this security group). However, I&rsquo;ve also found it necessary to make sure the <code>kubernetes.io/cluster/&lt;cluster-name&gt;</code> tag is present on subnets and route tables in order for the integration to work as expected.</p>
+
+<h2 id="kubernetes-configuration">Kubernetes Configuration</h2>
+
+<p>On the Kubernetes side of the house, you&rsquo;ll need to make sure that the <code>--cloud-provider=aws</code> command-line flag is present for the API server, controller manager, and every Kubelet in the cluster.</p>
+
+<p>If you&rsquo;re using <code>kubeadm</code> to set up your cluster, you can have <code>kubeadm</code> add the flags to the API server and controller manager by using the &ldquo;apiServerExtraArgs&rdquo; and &ldquo;controllerManagerExtraArgs&rdquo; sections in a configuration file, like this:</p>
+
+<pre><code class="language-yaml">apiServerExtraArgs:
+  cloud-provider: aws
+controllerManagerExtraArgs:
+  cloud-provider: aws
+</code></pre>
+
+<p>Likewise, you can use the &ldquo;nodeRegistration&rdquo; section of a <code>kubeadm</code> configuration file to pass extra arguments to the Kubelet, like this:</p>
+
+<pre><code class="language-yaml">nodeRegistration:
+  kubeletExtraArgs:
+    cloud-provider: aws
+</code></pre>
+
+<p>I&rsquo;d probably also recommend setting the name of the Kubelet to the node&rsquo;s private DNS entry in EC2 (this ensures it matches the hostname, as described earlier in this article). Thus, the full &ldquo;nodeRegistration&rdquo; section might look like this:</p>
+
+<pre><code class="language-yaml">nodeRegistration:
+  name: ip-10-15-30-45.us-west-1.compute.internal
+  kubeletExtraArgs:
+    cloud-provider: aws
+</code></pre>
+
+<p>You would need to substitute the correct fully-qualified domain name for each instance, of course.</p>
+
+<p>Finally, for dynamic provisioning of Persistent Volumes you&rsquo;ll need to create a default Storage Class. The AWS cloud provider has one, but it doesn&rsquo;t get created automatically. Use this command to define the default Storage Class:</p>
+
+<pre><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/master/cluster/addons/storage-class/aws/default.yaml
+</code></pre>
+
+<p>This will create a Storage Class named &ldquo;gp2&rdquo; that has the necessary annotation to make it the default Storage Class (see <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">here</a>). Once this Storage Class is defined, dynamic provisioning of Persistent Volumes should work as expected.</p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<p>Troubleshooting is notoriously difficult, as most errors seem to be &ldquo;transparently swallowed&rdquo; instead of exposed to the user/operator. Here are a few notes that may be helpful:</p>
+
+<ul>
+<li>You <em>must</em> have the <code>--cloud-provider=aws</code> flag added to the Kubelet <strong>before</strong> adding the node to the cluster. Key to the AWS integration is a particular field on the Node object&mdash;the <code>.spec.providerID</code> field&mdash;and that field will <em>only</em> get populated if the flag is present when the node is added to the cluster. If you add a node to the cluster and then add the command-line flag afterward, this field/value won&rsquo;t get populated and the integration won&rsquo;t work as expected. No error is surfaced in this situation (at least, not that I&rsquo;ve been able to find).</li>
+<li>If you do find yourself with a missing <code>.spec.providerID</code> field on the Node object, you can add it with a <code>kubectl edit node</code> command. The format of the value for this field is <code>aws:///&lt;az-of-instance&gt;/&lt;instance-id&gt;</code>.</li>
+<li>Missing AWS tags on resources will cause odd behaviors, like failing to create an ELB for a LoadBalancer-type Service. I haven&rsquo;t had time to test all the different failure scenarios, but if the cloud provider integration isn&rsquo;t working as expected I&rsquo;d double-check that the Kubernetes-specific tags are present on all the AWS resources.</li>
+</ul>
+
+<p>Hopefully the information in this article helps remove some of the confusion and lack of clarity around getting the AWS cloud provider working with your Kubernetes cluster. I intend to keep this document updated as I discover additional failure scenarios or find more detailed documentation. If you have questions, feel free to <a href="https://twitter.com/scott_lowe">hit me on Twitter</a> or find me in <a href="https://kubernetes.slack.com">the Kubernetes Slack community</a>. (If you&rsquo;re an expert in the AWS cloud provider code and can help flesh out the details of this post, please contact me as well!) Have fun out there, fellow Kubernauts!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/tWkqaP7tL0s" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/tWkqaP7tL0s/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>A Markdown-to-PDF Workflow on Linux</h3>
+		</div>
+		<div class="collectiontext">
+			<p>In May of last year I wrote about <a href="https://blog.scottlowe.org/2017/05/08/using-makefile-with-markdown-documents/">using a <code>Makefile</code> with Markdown documents</a>, in which I described how I use <code>make</code> and a <code>Makefile</code> along with CLI tools like <code>multimarkdown</code> (the binary, not the format) and <a href="http://pandoc.org/">Pandoc</a>. At that time, I&rsquo;d figured out how to use combinations of the various CLI tools to create various formats from the source <a href="https://twitter.com/scott_lowe">Markdown</a> document. The one format I hadn&rsquo;t gotten right at that time was PDF. Pandoc <em>can</em> create PDFs, but only if <a href="https://www.latex-project.org/">LaTeX</a> is installed. This article describes a method I found that allows me to create PDFs from my Markdown documents <em>without</em> using LaTeX.</p>
+
+<p>Two tools are involved in this new conversion process: Pandoc, which I&rsquo;ve discussed on this site before; and <a href="https://daringfireball.net/projects/markdown/"><code>wkhtmltopdf</code></a>, a new tool I just recently discovered. Basically, I use Pandoc to go from Markdown (MultiMarkdown, specifically) to HTML, and then use <code>wkhtmltopdf</code> to generate a PDF file from the HTML.</p>
+
+<p>The first step in the process is to use Pandoc to convert from Markdown to HTML, including the use of CSS to include custom formatting. The command looks something like this:</p>
+
+<pre><code>pandoc --from=markdown_mmd+yaml_metadata_block+smart --standalone \
+--to=html -V css=/home/slowe/Documents/std-styles.css \
+--output=&lt;destination-html-filename&gt; &lt;source-md-filename&gt;
+</code></pre>
+
+<p>This generates an HTML document and links it to the specified CSS document for formatting. I <em>could</em> embed the CSS specification in the YAML metadata block at the top of the Markdown document, but then I&rsquo;d lose the ability to create multiple versions of the document with different formatting. The <code>-V css=</code> parameter lets me specify formatting instructions at the time of creating the HTML document.</p>
+
+<p>Once I have the HTML document, then I can create a paginated PDF with this command:</p>
+
+<pre><code>wkhtmltopdf -B 25mm -T 25mm -L 25mm -R 25mm \
+-q -s Letter &lt;source-html-filename&gt; &lt;destination-pdf-filename&gt;
+</code></pre>
+
+<p>This will create a paginated PDF, based on US Letter paper size, with 25mm margins all the way around.</p>
+
+<p>Putting these together into a <code>make</code> workflow, I can do something like this:</p>
+
+<pre><code>PD = /usr/local/bin/pandoc
+PDFLAGS = --from=markdown_mmd+yaml_metadata_block+smart --standalone
+WK = /usr/bin/wkhtmltopdf
+WKFLAGS = -B 25mm -T 25mm -L 25mm -R 25mm -q -s Letter
+CSS ?= /home/slowe/Documents/std-styles.css
+
+%.md.pdf: %.md
+        $(PD) $(PDFLAGS) --to=html -V css=$(CSS) $&lt; | $(WK) $(WKFLAGS) - $@
+</code></pre>
+
+<p>With this in place, all I have to do is type <code>make filename.md.pdf</code>. Make will use <code>pandoc</code> to convert from Markdown to HTML, then pipe those results to <code>wkhtmltopdf</code> to create a paginated PDF. The beauty of defining the stylesheet to use as a variable is that I can override it on the command line if desired:</p>
+
+<pre><code>make CSS=/path/to/alternate/styles.css filename.md.pdf
+</code></pre>
+
+<p>This makes it super-easy to create PDFs from source Markdown documents.</p>
+
+<p>Have suggestions for improvement? I&rsquo;m always open to learn more&mdash;feel free to <a href="https://twitter.com/scott_lowe">hit me on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/RurSIaUhSS8" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/RurSIaUhSS8/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>Running the gcloud CLI in a Docker Container</h3>
 		</div>
 		<div class="collectiontext">
@@ -151,264 +317,6 @@ google/cloud-sdk gcloud&quot;
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/2gtaH-v-Czk/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 104</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take 104! For many of my readers, VMworld 2018 in Las Vegas was &ldquo;front and center&rdquo; for them since the last Tech Short Take. Since I wasn&rsquo;t attending the conference, I won&rsquo;t try to aggregate information from the event; instead, I&rsquo;ll focus on including some nuggets you may have missed amidst all the noise.</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Michael Kashin takes a look at AppSwitch and <a href="https://networkop.co.uk/post/2018-05-29-appswitch-sdn/">likens it to &ldquo;serverless SDN.&rdquo;</a></li>
-<li>Nick Buraglio <a href="https://www.forwardingplane.net/2018/07/trouble-with-tribbles-errr-nat/">exposes the different kinds of NAT</a>&mdash;helpful if you&rsquo;re new to networking and want to better understand NAT and the nuances involved.</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<ul>
-<li>Greg Schulz discusses new Power9-based systems announced by IBM; see <a href="https://storageioblog.com/ibm-announces-new-power9-processor-based-e950-e980-server-systems/">his post</a>. Normally I wouldn&rsquo;t be too interested in non-x86 stuff, as it seems like x86 is ascendant. However, given the rise of all the various speculative execution attacks, and given the recent interest in ARM platforms (can&rsquo;t recall if they are affected by the speculative execution attacks), is a revival of non-x86 platforms in the works?</li>
-</ul>
-
-<h2 id="security">Security</h2>
-
-<p>Nothing this time around, but I&rsquo;ll stay alert for items to include next time!</p>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li><a href="https://carolynvanslyck.com/blog/2017/10/my-little-cluster/">This is just awesome.</a></li>
-<li>It&rsquo;s fairly simplistic, but it could be useful nevertheless: the <a href="https://github.com/hjacobs/kube-resource-report">kube-resource-report project</a> offers some insight into the costing behind Kubernetes clusters on AWS.</li>
-<li>One of the interesting announcements to come out of the recent VMworld 2018 conference in Las Vegas is also described in <a href="https://aws.amazon.com/blogs/aws/in-the-works-amazon-rds-on-vmware/">this post on the AWS News Blog</a>: Amazon RDS on VMware. I suppose it&rsquo;s a win-win deal for both VMware and AWS (else why bother?), though the long-term implications of having AWS&rsquo; policy layer on top may come back to bite VMware. Time will tell.</li>
-<li>I wouldn&rsquo;t say <a href="https://technodrone.blogspot.com/2018/07/the-aws-world-shook-and-nobody-noticed.html">noboby noticed</a>, Maish. I called this out when I saw the announcement as well. Combine this with other recent moves (see previous bullet), and it sure seems that AWS is out for the &ldquo;private cloud&rdquo; use case (which isn&rsquo;t really a private cloud, but that&rsquo;s an entirely different discussion).</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>I&rsquo;ve made no secret of the fact that I&rsquo;m a Terraform fan, and I recently uncovered a great series by Ned Bellavance called <a href="https://nedinthecloud.com/tag/fotd/">Function of the Day (FotD)</a>, in which he discusses a Terraform interpolation function each day. This is a really useful learning resource.</li>
-<li>Want to become more of a CLI wizard? Start <a href="https://github.com/jlevy/the-art-of-command-line">here</a>.</li>
-<li>If you&rsquo;re still in need of an introductory article on building your own Docker image, <a href="https://ipnet.xyz/2018/07/how-to-create-your-own-docker-image/">this one</a> may help you out.</li>
-<li>Here&rsquo;s a great tutorial (sent in by a reader, thanks Mike!) on <a href="https://iridakos.com/tutorials/2018/03/01/bash-programmable-completion-tutorial.html">building your own Bash completion script</a>.</li>
-<li>Based partly on <a href="https://remysharp.com/2018/08/23/cli-improved">this article</a>, I&rsquo;ve started using <code>fzf</code> and <code>fd</code> on my Fedora laptop. I must admit that these are both pretty cool tools&mdash;I&rsquo;d recommend giving them a look if you spend a lot of time at a prompt. If you&rsquo;re interested in possibly giving <code>fzf</code> a try, you might have a look <a href="https://monades.roperzh.com/weekly-command-fuzzy-finding-everything-with-fzf/">here</a> and <a href="https://mike.place/2017/fzf-fd/">here</a> as well.</li>
-<li>Microsoft is adding a third Windows container image, in addition to the existing Nano Server and Windows Server Core images. More details and an explanation of why an additional image is needed are in <a href="https://blogs.technet.microsoft.com/virtualization/2018/06/27/insider-preview-windows-container-image/">this blog post</a>.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>An 8TB NVMe drive? Holy moly! Chris Evans has <a href="https://blog.architecting.it/samsung-8tb-nf1-nvme-ssd/">more details</a>.</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>Curtis (don&rsquo;t have the last name since it&rsquo;s not listed anywhere) has a write-up on <a href="http://serverascode.com/2018/06/26/using-cloud-images.html">using cloud images with KVM</a>.</li>
-<li>I said I wouldn&rsquo;t try to aggregate the news from VMworld, but I couldn&rsquo;t resist throwing in at least one &ldquo;wrap up&rdquo; from the show. Eric Siebert&rsquo;s post-conference thoughts are <a href="http://vsphere-land.com/news/my-thoughts-and-observations-on-vmworld-2018.html">here</a>; he does a pretty good job of capturing the major announcements. I also saw <a href="https://redmonk.com/rstephens/2018/09/06/impressions-from-vmworld/">this recap</a> by Rachel Stevens; she&rsquo;s pretty bullish about the RDS on VMware announcement (as a lot of folks are).</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>David Gee <a href="http://ipengineer.net/2018/08/automation-learning-approach/">shares his &ldquo;automation learning charter,&rdquo;</a> and the post contains some useful tidbits for those of us who are embracing lifelong learning and growth.</li>
-</ul>
-
-<p>That&rsquo;s all for today; it&rsquo;s a bit shorter than usual but hopefully there are still some useful tidbits in there. Feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> with comments or feedback!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/PDduTBnt2UI" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/PDduTBnt2UI/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Kubernetes with Cilium and Containerd using Kubeadm</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Now, if that isn&rsquo;t a title jam-packed with buzzwords, I don&rsquo;t know what is! In seriousness, though, I wanted to share how to use <code>kubeadm</code> to turn up a <a href="https://kubernetes.io/">Kubernetes</a> cluster using <a href="https://github.com/containerd/containerd">containerd</a> (instead of Docker) and <a href="https://cilium.io/">Cilium</a> as the CNI plugin. I&rsquo;m posting this because I wasn&rsquo;t able to find a reasonable article that combined <em>all</em> the different threads&mdash;some posts talked about using containerd, others talked about using Cilium, and the official Kubernetes docs have examples for using <code>kubeadm</code>. The purpose of this post is to try to pull those threads together.</p>
-
-<p>For structure and context, I&rsquo;ll build upon the official Kubernetes document outlining <a href="https://kubernetes.io/docs/setup/independent/high-availability/">creating highly available clusters with <code>kubeadm</code></a>. You may find it helpful to pull up that article next to this one, as I won&rsquo;t be duplicating that content here. Instead, I&rsquo;ll just reference additions/changes to the process in order to accommodate containerd and Cilium.</p>
-
-<p>Before getting started, make sure that your systems will meet the <a href="https://cilium.readthedocs.io/en/v1.2/install/system_requirements/">minimum requirements for Cilium</a>. For my testing, I used Ubuntu 16.04 with the latest HWE kernel (4.15.0-33-generic). I used a private fork of <a href="https://github.com/heptiolabs/wardroom">Wardroom</a> to build the AWS AMIs with containerd and all the Kubernetes 1.11.2 packages installed, and wrote a custom Ansible script to update the AMIs with the latest HWE kernel. (Side note: I do hope to get my containerd-related changes into Wardroom at some point in the future, so others will be able to leverage Wardroom as well.) Obviously, you can choose to manually build your own images; see the &ldquo;Additional Resources&rdquo; section for a link on how to install containerd. You&rsquo;ll want to do that before trying to turn up the Kubernetes cluster.</p>
-
-<p>Ready? Let&rsquo;s go! I&rsquo;ll organize the content below according to the section headings from the official Kubernetes procedure for <a href="https://kubernetes.io/docs/setup/independent/high-availability/">creating highly available clusters using <code>kubeadm</code></a>.</p>
-
-<h2 id="bootstrap-the-first-stacked-control-plane-node">Bootstrap the First Stacked Control Plane Node</h2>
-
-<p>Up until this point, everything remains the same (no changes are needed to accommodate an alternate container runtime or a specific CNI plugin). Once you get to this point and you&rsquo;re ready to bootstrap the first control plane node, some additional changes are needed. Specifically, you need to add the following content to the <code>kubeadm</code> configuration file:</p>
-
-<pre><code class="language-yaml">nodeRegistration:
-  criSocket: /var/run/containerd/containerd.sock
-</code></pre>
-
-<p>This assumes, naturally, that you&rsquo;re using the default location for the runtime endpoint. Modify as needed.</p>
-
-<p>I also had to do the following on my Ubuntu 16.04 nodes, but I take this as more of an issue with my images (you may not need these commands):</p>
-
-<pre><code>modprobe br_netfilter
-sysctl -w net.ipv4.ip_forward=1
-</code></pre>
-
-<p>With this content added, you&rsquo;re good to go to run <code>kubeadm init --config &lt;config-file-name&gt;</code> to bootstrap the first master. <code>kubectl get nodes</code> will report it as NotReady until you install the CNI, but that&rsquo;s OK. You can proceed with the next steps in the procedure.</p>
-
-<h2 id="add-the-second-stacked-control-plane-node">Add the Second Stacked Control Plane Node</h2>
-
-<p>The only change here is to (again) add this content to the <code>kubeadm</code> config file:</p>
-
-<pre><code class="language-yaml">nodeRegistration:
-  criSocket: /var/run/containerd/containerd.sock
-</code></pre>
-
-<p>You may also need to run the <code>modprobe</code> and <code>sysctl</code> commands outlined in the previous section. I suspect the need to run those commands reflects a problem in my custom AMIs.</p>
-
-<p>Run the rest of the commands in this section as outlined, and your second control plane node should come online.</p>
-
-<h2 id="add-the-third-stacked-control-plane-node">Add the Third Stacked Control Plane Node</h2>
-
-<p>The same change to the <code>kubeadm</code> configuration file is needed here, along with (maybe) the <code>modprobe</code> and <code>sysctl</code> commands.</p>
-
-<p>Once this step is complete, you&rsquo;ll have a three-node control plane up and running, although they&rsquo;ll all report NotReady in <code>kubectl get nodes</code> until you install a networking plugin. Fortunately, you&rsquo;ll tackle that next.</p>
-
-<h2 id="install-a-pod-network">Install a Pod Network</h2>
-
-<p>Now you&rsquo;ll start getting into some Cilium-specific stuff. For the most part, this is pretty straightforward. You can follow the instructions found <a href="https://cilium.readthedocs.io/en/v1.2/kubernetes/install/standard/">here</a>, with a few changes. I recommend downloading the Cilium-CRIO YAML file instead of the one linked in the instructions (you can find it <a href="https://github.com/cilium/cilium/blob/v1.2/examples/kubernetes/1.11/cilium-crio.yaml">here</a>). Then follow the instructions for configuring the ConfigMap for etcd and creating the TLS secrets.</p>
-
-<p>However, before proceeding with deploying Cilium, there are a few additional changes to make to the YAML file (these notes assume you are using v1.2 of the Cilium-CRIO YAML file):</p>
-
-<ul>
-<li>On line 120, change <code>--container-runtime=crio</code> to <code>--container-runtime=containerd</code>.</li>
-<li>Add a line immediately after line 120 with the contents <code>--container-runtime-endpoint=containerd=/var/run/containerd/containerd.sock</code> (follow the formatting/indentation of the previous line). Adjust the location of the runtime endpoint as needed.</li>
-<li>Change line 221 from <code>crio-socket</code> to <code>containerd-socket</code>.</li>
-<li>Change line 222 to <code>/var/run/containerd/containerd.sock</code>.</li>
-<li>Change line 249 from <code>crio-socket</code> to <code>containerd-socket</code>.</li>
-<li>Change line 251 to <code>/var/run/containerd/containerd.sock</code>.</li>
-</ul>
-
-<p>Once you have these changes in place, you can proceed with the instructions in the &ldquo;Deploying&rdquo; section of the <a href="https://cilium.readthedocs.io/en/v1.2/kubernetes/install/standard/">standard install guide</a>.</p>
-
-<p>Assuming that Cilium deploys properly, your control plane nodes should switch from NotReady to Ready in <code>kubectl get nodes</code>, and you should see some Cilium pods scheduled and running when you run <code>kubectl -n kube-system get pods</code>.</p>
-
-<h2 id="install-workers">Install Workers</h2>
-
-<p>Once the control plane nodes are reporting Ready (and perhaps you&rsquo;ve done some troubleshooting with Cilium to ensure that it&rsquo;s working as expected), then you&rsquo;re ready to add worker nodes.</p>
-
-<p>When you run <code>kubeadm init...</code> on the first stacked control plane node, it will spit out a command line you can use to join worker nodes to the Kubernetes cluster. You can use this command, but you must add one small piece. At the end of the command, add <code>--cri-socket /var/run/containerd/containerd.sock</code>. This tells <code>kubeadm</code> that this node is using containerd as the container runtime, and will enable the join operation to succeed.</p>
-
-<h2 id="additional-resources">Additional Resources</h2>
-
-<p>The information is this post was based on a number of other articles along with my direct hands-on experience. Readers may want to review these other documents for additional information:</p>
-
-<ul>
-<li><a href="https://cilium.readthedocs.io/en/v1.2/gettingstarted/cilium_install_crio/">Cilium, Kubernetes, and CRI-O</a>: Although this document is focused on CRI-O, comparing the YAML manifests referenced by this document with the YAML manifests compared in the standard install guide (found <a href="https://cilium.readthedocs.io/en/v1.2/kubernetes/install/standard/">here</a>) helped me understand the differences that would be necessary for containerd.</li>
-<li>The <a href="https://cilium.readthedocs.io/en/v1.2/cmdref/cilium-agent/">command reference for <code>cilium-agent</code></a></li>
-<li>The <a href="https://github.com/containerd/cri/tree/master/contrib/ansible">Ansible+<code>kubeadm</code> instructions in the containerd GitHub repository</a> provided insight on how to install containerd, although the <code>kubeadm</code> instructions aren&rsquo;t complete enough (need to be combined with the official Kubernetes docs as I describe above).</li>
-</ul>
-
-<p>I hope this information is useful. If you have questions (or corrections!), please <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/VV2mELdGRXc" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/VV2mELdGRXc/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Book Review: REST API Design Rulebook</h3>
-		</div>
-		<div class="collectiontext">
-			<p><em>REST API Design Rulebook</em> (written by Mark Masse and published by O&rsquo;Reilly Media; more details <a href="http://shop.oreilly.com/product/0636920021575.do">here</a>) is an older book, published in late 2011. However, having never attempted to design a REST API before, I found lots of useful information inside that really helped shape my understanding of REST APIs and REST API design.</p>
-
-<p>(In case you&rsquo;re wondering why I was reading a book about REST API design, this ties into <a href="https://blog.scottlowe.org/2018/03/05/looking-ahead-2018-projects/">my 2018 project list</a> and <a href="https://blog.scottlowe.org/2018/07/23/bolstering-my-software-development-skills/">the software development project</a> I recently launched.)</p>
-
-<p>Overall, I found the book quite helpful and useful. If I had one complaint about the book, it would be the book&rsquo;s repeated insistence on referring to <a href="https://github.com/wrml/wrml">WRML (Web Resource Modeling Language)</a>, which&mdash;as I understand it&mdash;is a <em>proposed</em> solution by the book&rsquo;s author to some of the challenges around REST API design. I get that the author is sold on the value of WRML, but at times the book felt very much like a WRML commercial.</p>
-
-<p>Aside from that one complaint, the book&rsquo;s organization into a set of &ldquo;rules&rdquo; helped make the material reasonably consumable, and I appreciated the review of key terms at the end of each chapter.</p>
-
-<p>I do still have some questions about REST APIs and REST API design; I suppose that&rsquo;s natural and expected for a newcomer like myself. In particular, the emphasis placed on HATEOAS (Hypermedia As The Engine of Application State) is still a bit unclear to me. Some things make sense&mdash;like including links to actions (provided by the API) that can be performed on an object&mdash;but there were times in the book when it seemed like HATEOAS was being overemphasized. However, I freely admit my perception could be due to my lack of practical experience in this area.</p>
-
-<p>If you&rsquo;re looking to learn more about REST API design, there are most certainly worse places to look for some useful and practical information.</p>
-
-<p><em>Disclaimer: I am an O&rsquo;Reilly author, but I did not receive any compensation from O&rsquo;Reilly, any other publisher or reviewer, or the author of the book mentioned in this review. These thoughts are mine alone.</em></p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/ahZ0Mej1vFo" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ahZ0Mej1vFo/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Better XMind-GNOME Integration</h3>
-		</div>
-		<div class="collectiontext">
-			<p>In December of 2017 I wrote about <a href="https://blog.scottlowe.org/2017/12/15/installing-xmind-8-on-fedora-27/">how to install XMind 8 on Fedora 27</a>, and at the time of that writing I hadn&rsquo;t quite figured out how to define a MIME type for XMind files that would allow users to double-click on an XMind file in Nautilus and open that file in XMind. After doing a bit of additional research and testing, I&rsquo;ve found a solution and would like to share it here.</p>
-
-<p>The solution I&rsquo;ll describe here has been tested on Fedora 28, but it should work on just about any distribution with the GNOME desktop environment.</p>
-
-<p>First, you&rsquo;ll want to define the MIME type by creating an XML file in the <code>~/.local/share/mime/packages</code> directory, as outlined <a href="https://help.gnome.org/admin/system-admin-guide/stable/mime-types-custom-user.html.en">here</a>. I called my file <code>application-vnd-xmind-workbook.xml</code>, but I don&rsquo;t know if the filename actually matters. (I derived the filename from <a href="https://github.com/xmindltd/xmind/wiki/FileTypes">this list of XMind file types</a>.) The contents of the file should look something like this:</p>
-
-<pre><code class="language-xml">&lt;mime-info xmlns=&quot;http://www.freedesktop.org/standards/shared-mime-info&quot;&gt;
-  &lt;mime-type type=&quot;application/vnd.xmind.workbook&quot;&gt;
-    &lt;comment&gt;XMind Workbook&lt;/comment&gt;
-    &lt;glob pattern=&quot;*.xmind&quot;/&gt;
-    &lt;glob pattern=&quot;*.XMIND&quot;/&gt;
-    &lt;glob pattern=&quot;*.XMind&quot;/&gt;
-  &lt;/mime-type&gt;
-&lt;/mime-info&gt;
-</code></pre>
-
-<p>You&rsquo;ll note that multiple glob patterns are included to help deal with case sensitivity issues. The specific values used in the <code>mime-type</code> element is again taken from <a href="https://github.com/xmindltd/xmind/wiki/FileTypes">the XMind wiki</a>.</p>
-
-<p>Next, you&rsquo;ll want to adjust the desktop launcher for XMind. Add the <code>MimeType=application/vnd.xmind.workbook</code> line to the desktop launcher file. I&rsquo;m using a desktop launcher that is user-specific, and found in the <code>~/.local/share/applications</code> directory. It should look something like this when you&rsquo;re done:</p>
-
-<pre><code class="language-text">[Desktop Entry]
-Comment=Create and share mind maps
-Exec=/opt/xmind/XMind_amd64/XMind %F
-Path=/opt/xmind/XMind_amd64
-Name=XMind
-Terminal=false
-Type=Application
-Categories=Office;Productivity
-Icon=/home/username/.local/share/icons/xmind.png
-MimeType=application/vnd.xmind.workbook
-</code></pre>
-
-<p>You&rsquo;ll note that this example points to an icon stored in a user-specific directory; be sure to adjust this as needed to point to the location of the icon you want to use for XMind.</p>
-
-<p>It also appears that the <code>Path=</code> statement in the desktop file is important; it specifies the working directory to run the program in (see <a href="https://developer.gnome.org/desktop-entry-spec/">this reference</a>). I saw at least one reference (here&rsquo;s <a href="https://github.com/xmindltd/xmind/issues/200">one example</a>) of needing to switch to the correct directory in order to get XMind to open files specified on the command line.</p>
-
-<p>Finally, update the MIME and application databases, respectively:</p>
-
-<pre><code>update-mime-database ~/.local/share/mime/packages
-update-desktop-database ~/.local/share/applications
-</code></pre>
-
-<p>You can run the <code>gio</code> commands outlined <a href="https://help.gnome.org/admin/system-admin-guide/stable/mime-types-custom-user.html.en">here</a> (look toward the bottom of the page) to test to make sure that the MIME type and application are correctly defined and linked, if you like.</p>
-
-<p>For a custom icon (otherwise GNOME will use the generic text document icon for XMind files) the process is a bit trickier. I use the <a href="https://github.com/numixproject/numix-icon-theme">Numix icon theme</a>, so I ran the following commands:</p>
-
-<pre><code>cd /usr/share/icons/Numix/48/mimetypes
-sudo ln -s inode-symlink.svg application-vnd.xmind.workbook.svg
-sudo gtk-update-icon-cache /usr/share/icons/Numix
-</code></pre>
-
-<p>After that, the icons for XMind files immediately changed. For readers using a different theme, you&rsquo;ll need to substitute the correct paths and the correct filenames; the trick, of course, is to end up with a filename that matches the new MIME type defined earlier.</p>
-
-<p>With these changes in place, you should now be able to double-click an XMind mind map and have it launch XMind (if not already running) and open the selected file (as one would expect). Enjoy!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/15tFjnAe_ko" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/15tFjnAe_ko/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -416,36 +324,38 @@ sudo gtk-update-icon-cache /usr/share/icons/Numix
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="chaotische_systeme_implizites_eulerverfahren.html">
+<div class="date">01.10.2018</div>
+<h3>Chaotische Systeme und implizites Eulerverfahren</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich erfolgreich einige
+chaotische Systeme
+mittels numerischer Verfahren untersucht hatte, reifte in mir der Entschluss, für diese Systeme
+implizite
+und explizite numerische Verfahren gegenüberzustellen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="18_04___kodi__tiny_rss__nextcloud.html">
+<div class="date">01.10.2018</div>
+<h3>18.04 - Kodi, Tiny-RSS, Nextcloud</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem nun auch Menschen mit Ubuntu 16.04 - also einer LTS-Version - der Umstieg angeboten wird,
+habe ich es ebenfalls versucht. Dieser Artikel beschreibt den ersten Teil der Erfahrungen, die ich
+damit machen durfte
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="gedanken_zeit__ntp__gps_diy.html">
 <div class="date">21.09.2018</div>
 <h3>Gedanken zu Zeit, NTP, GPS und DIY</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Nachdem ich meinen eigenen
 Atomzeit-GPS-NTP-Server
 in Betrieb genommen habe, habe ich mir Gedanken gemacht, warum die
 käuflich zu erwerbenden einen so hohen Anschaffungswiderstand haben.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="visualisierung_strange_attractors_java3d.html">
-<div class="date">21.09.2018</div>
-<h3>Visualisierung von Strange Attractors mit Java3D</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ich wollte mich schon lange mal wieder mit Chaos und Systemen mit Strange Attractors
-befassen. Schließlich habe ich ja
-die entsprechende Infrastruktur
-bereits als Framework für die numerische Behandlung von Differentialgleichungssystemen
-verfügbar.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="blackhat_2018_keynote.html">
-<div class="date">08.09.2018</div>
-<h3>Blackhat 2018 Keynote</h3>
-<div class="abstract">
-<p>Ich folge gehorsam den Meldungen auf heise.de - neulich war ich gleichzeitig abgestoßen und fasziniert...
 </p></div>   </a>
 </li>
 </ul>
@@ -477,6 +387,7 @@ verfügbar.
 <h3>
 Android
 </h3>
+	<span class="nav-item-counter">15</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um Googles Betriebssystem</p>
@@ -489,6 +400,7 @@ Android
 <h3>
 Basteln
 </h3>
+	<span class="nav-item-counter">13</span>
 </header>
 <div class="nav-item-body">
 <p>Meistens Papier (Origami...)</p>
@@ -501,6 +413,7 @@ Basteln
 <h3>
 C und C++
 </h3>
+	<span class="nav-item-counter">5</span>
 </header>
 <div class="nav-item-body">
 </div>
@@ -512,6 +425,7 @@ C und C++
 <h3>
 Datenbanken
 </h3>
+	<span class="nav-item-counter">13</span>
 </header>
 <div class="nav-item-body">
 <p>relationale und andere Datenbanken</p>
@@ -524,6 +438,7 @@ Datenbanken
 <h3>
 dWb+
 </h3>
+	<span class="nav-item-counter">85</span>
 </header>
 <div class="nav-item-body">
 <p>Werkzeug für rapid Prototyping</p>
@@ -536,6 +451,7 @@ dWb+
 <h3>
 Garten
 </h3>
+	<span class="nav-item-counter">3</span>
 </header>
 <div class="nav-item-body">
 <p>Das grÃ¼ne Hobby</p>
@@ -548,6 +464,7 @@ Garten
 <h3>
 Geo
 </h3>
+	<span class="nav-item-counter">26</span>
 </header>
 <div class="nav-item-body">
 <p>Karten und mehr run um Ortsinformationen</p>
@@ -560,6 +477,7 @@ Geo
 <h3>
 GUI
 </h3>
+	<span class="nav-item-counter">49</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um graphische Benutzerschnittstellen</p>
@@ -572,6 +490,7 @@ GUI
 <h3>
 Hardware
 </h3>
+	<span class="nav-item-counter">17</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -584,6 +503,7 @@ Hardware
 <h3>
 Java
 </h3>
+	<span class="nav-item-counter">207</span>
 </header>
 <div class="nav-item-body">
 <p>Hauptsächlich Desktop Themen und Java SE</p>
@@ -596,6 +516,7 @@ Java
 <h3>
 Komponenten
 </h3>
+	<span class="nav-item-counter">146</span>
 </header>
 <div class="nav-item-body">
 <p>Software-Komponenten</p>
@@ -608,6 +529,7 @@ Komponenten
 <h3>
 Links
 </h3>
+	<span class="nav-item-counter">42</span>
 </header>
 <div class="nav-item-body">
 <p>Linksammlungen zu verschiedenen Themen</p>
@@ -620,20 +542,10 @@ Links
 <h3>
 Linux
 </h3>
+	<span class="nav-item-counter">112</span>
 </header>
 <div class="nav-item-body">
 <p>Alles zum Thema Gnu Linux</p>
-</div>
-</div>
-</a>
-<a href="linux.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-linux
-</h3>
-</header>
-<div class="nav-item-body">
 </div>
 </div>
 </a>
@@ -643,6 +555,7 @@ linux
 <h3>
 Markup
 </h3>
+	<span class="nav-item-counter">17</span>
 </header>
 <div class="nav-item-body">
 <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
@@ -655,6 +568,7 @@ Markup
 <h3>
 Music
 </h3>
+	<span class="nav-item-counter">20</span>
 </header>
 <div class="nav-item-body">
 <p>Musik, die mir gefällt</p>
@@ -667,6 +581,7 @@ Music
 <h3>
 Numerik
 </h3>
+	<span class="nav-item-counter">5</span>
 </header>
 <div class="nav-item-body">
 <p>Numerische Mathematik in Computern</p>
@@ -679,6 +594,7 @@ Numerik
 <h3>
 Python
 </h3>
+	<span class="nav-item-counter">6</span>
 </header>
 <div class="nav-item-body">
 <p>Mein Weg vom blutigen Anfänger aufwärts</p>
@@ -691,6 +607,7 @@ Python
 <h3>
 Rants
 </h3>
+	<span class="nav-item-counter">78</span>
 </header>
 <div class="nav-item-body">
 <p>Luft ablassen</p>
@@ -703,6 +620,7 @@ Rants
 <h3>
 Security
 </h3>
+	<span class="nav-item-counter">21</span>
 </header>
 <div class="nav-item-body">
 <p>IT-Sicherheit</p>
@@ -715,6 +633,7 @@ Security
 <h3>
 sQLshell
 </h3>
+	<span class="nav-item-counter">25</span>
 </header>
 <div class="nav-item-body">
 <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
@@ -727,6 +646,7 @@ sQLshell
 <h3>
 Verschiedenes
 </h3>
+	<span class="nav-item-counter">11</span>
 </header>
 <div class="nav-item-body">
 <p>Passt in keine der anderen Kategorien...</p>
@@ -739,20 +659,10 @@ Verschiedenes
 <h3>
 Video
 </h3>
+	<span class="nav-item-counter">22</span>
 </header>
 <div class="nav-item-body">
 <p>Artikel mit bunten Filmchen</p>
-</div>
-</div>
-</a>
-<a href="videos.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Videos
-</h3>
-</header>
-<div class="nav-item-body">
 </div>
 </div>
 </a>
@@ -762,6 +672,7 @@ Videos
 <h3>
 Virtualisierung
 </h3>
+	<span class="nav-item-counter">25</span>
 </header>
 <div class="nav-item-body">
 <p>Technologien und Themen rund um virtuelle Rechner</p>
@@ -774,6 +685,7 @@ Virtualisierung
 <h3>
 Windows
 </h3>
+	<span class="nav-item-counter">3</span>
 </header>
 <div class="nav-item-body">
 </div>

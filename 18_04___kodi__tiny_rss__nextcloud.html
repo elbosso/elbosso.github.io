@@ -2,13 +2,43 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>linux</title>
+  <title>18.04 - Kodi, Tiny-RSS, Nextcloud</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta name="Description" content="Nachdem nun auch Menschen mit Ubuntu 16." />
   <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
 	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
 	<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
@@ -30,7 +60,7 @@ document.write(link)
 //-->
 </script>
 </head>
-<body>
+<body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
 <div id="logo">
@@ -52,66 +82,102 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 		<noscript>Der Verfasser</noscript>				
   </p>
 </div>
-<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-			<a href="https://github.com/elbosso">hier</a>.</p>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
+	über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
+	Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
+	daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
+	Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
+	Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+		<a href="https://github.com/elbosso">hier</a>.</p>
 	</div><!-- #header-->
 <div id="all">
 <div id="A">
 <div id="content">
-	<div class="heading">linux</div>
-<ul class="double"> 
-<li class="anriss">
-				<span class="tags">
-
-					<div class="popup">
-
-<div><a class="taglink" href="tag_Geo.html">Geo</a></div>
-<div><a class="taglink" href="linux.html">linux</a></div>
-<div><a class="taglink" href="tag_Datenbanken.html">Datenbanken</a></div>
-
+<div class="date">01.10.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+	<!--li--> <a href="ntp_server_raspi_em406a.html#content">Linux</a> <!--/li-->
+	<!--/ul-->
 </div>
-
-	<img src="images/tag_48.png" class="imgtag">
-
-				</span>
-  <a class="anriss" href="ads_b_zeitreihendatenbanken.html#content">
-<div class="date">07.07.2018</div>
-			<h3 class="head">
-				ADS-B in Zeitreihendatenbanken</h3>
+ 	<div class="heading">18.04 - Kodi, Tiny-RSS, Nextcloud</div>
+	<p>Nachdem nun auch Menschen mit Ubuntu 16.04 - also einer LTS-Version - der Umstieg angeboten wird,
+habe ich es ebenfalls versucht. Dieser Artikel beschreibt den ersten Teil der Erfahrungen, die ich
+damit machen durfte
+</p> <a name="content"> </a>
+ <p>Ich begann Stück für Stück mit der Umstellung - als erstes wollte ich mich meienr diversen
+Container annehmen. Dazu musste ich natürlich erst einmal den Container-Host aktualisieren.
+</p><p>
+Der Erfolg dieser Maßnahme war zwiespältig: Auf dem System laufen zwei Anwendungen, wenn man das mal
+kurz aus diesem Blickwinkel betrachtet: Zum einen versorgt es mich mit meienr Medienbibliothek über die
+dort vorhandene Kodi-Installation und zum anderen beherbergt es jede Menge LXC-Container. Kodi funktionierte anschließend
+hervorragend - wenn auch das neue Theme für mich etwas gewöhnungsbedürftig war.
+</p><p>
+Allerdings ließ sich keiner der LXC-Container mehr starten - das war für mich allerdings etwas alarmierend - schließlich
+läuft dort auch Gitlab und andere wichtige Dinge darin. Des Rätsels Lösung war hier, dass sich zwischen der LXC-Version in
+16.04 und 18.04 das Format der Config-Dateien enorm geändert hatte - namentlich die Namen der Einträge darin. Nachdem
+ich innerlich schon zu einer gewaltigen Schimpftirade angesetzt hatte, fand ich ein Skript, das die Config-Dateien migrieren
+können sollte. Damit war dieses Problem tatsächlich relativ flott aus der Welt geschafft: Man muss zwar immer noch jedes
+Config-File einzeln migrieren, aber der Automatismus spart doch sehr viel Zeit - und vor allem funktioniert er!
+</p><p>
+Danach hätte alles so schön sein können, allerdings erspähte ich sofort das nächste Problem: Ich aktualisierte
+nunmehr jeden der Container und dabei funktionierten manche exorbitant gut - hier ist PostrgeSQL zu nennen: nicht nur, dass
+nach dem Upgrade alles funktionierte: Meine bisherigen Datenbanken aus 9.x (der Version aus Ubuntu 16.04) konnte ich mit
+dem mitgelieferten Skript nahtlos auf 10.5 (18.08) migrieren. Erstaunlich schmerzhaft dagegen das Upgrade meines Apache2-Webserver-Containers:
+Auf diesem laufen zwei Webanwendungen: Tiny-RSS und NextCloud. Beide funktionierten nach dem Upgrade gar nicht mehr.
+Die Ursache dafür war, dass PHP 5.x unter 18.04 nicht mehr unterstützt wird und die Maintainer dieses dann nicht
+durch 7.2 ersetzen, sondern einfach jegliche Spur von PHP aus dem System und den Apache2-Configs entfernen. Ich musste PHP installieren
+und dann das entsprechende Modul im Apachen aktivieren. Danach funktionierten die beiden Anwendungen so weit, dass
+sie mich zumindestens über Fehler informierten: Tiny-RSS hatte ein Problem damit, dass ein früher externes Modul jetzt
+fest zum PHP-Kern gehört - konnte man durch eine Config-Änderung entschärfen - und dass die Version von NextCloud, die ich einsetze
+mit PHP 7.2 auf gar keinen Fall benutzt werden darf. Glücklicherweise fand ich eine neuere Version von NextCloud, installierte
+diese und damit war auch dieses Problem gelöst.
+</p><p>
+Nun hatte ich fast alle Container und meinen Server aktualisiert - als nächste Aufgabe stand die Aktualisierung eines Clients (Stichwort: "X")
+und meines Gitlab-Containers an - was sollte schon schiefgehen...
+</p> </div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+  <a href="chaotische_systeme_implizites_eulerverfahren.html#content">
+<div class="date">01.10.2018</div>
+<h3>Chaotische Systeme und implizites Eulerverfahren</h3>
 <div class="abstract">
-<p>Weitere Gedanken zu ADS-B Daten und deren Nutzung
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich erfolgreich einige
+chaotische Systeme
+mittels numerischer Verfahren untersucht hatte, reifte in mir der Entschluss, für diese Systeme
+implizite
+und explizite numerische Verfahren gegenüberzustellen.
 </p></div>   </a>
-
 </li>
 <li class="anriss">
-				<span class="tags">
-
-					<div class="popup">
-
-<div><a class="taglink" href="tag_Geo.html">Geo</a></div>
-<div><a class="taglink" href="linux.html">linux</a></div>
-
-</div>
-
-	<img src="images/tag_48.png" class="imgtag">
-
-				</span>
-  <a class="anriss" href="raspberry_pi_ads_b_receiver.html#content">
-<div class="date">24.06.2018</div>
-			<h3 class="head">
-				Raspberry Pi als ADS-B-Receiver</h3>
+  <a href="gedanken_zeit__ntp__gps_diy.html#content">
+<div class="date">21.09.2018</div>
+<h3>Gedanken zu Zeit, NTP, GPS und DIY</h3>
 <div class="abstract">
-<p>Ich habe bereits vor einiger Zeit darüber berichtet, wie man seinen eigenen
-ADS-B-Receiver
-bauen kann. Nachdem ich mein
-Projekt mit meinem Raspberry Pi
-abgeschlossen hatte, wollte ich ihn auch als Plattform für einen
-ADS-B-Receiver benutzen...
+<p>Nachdem ich meinen eigenen
+Atomzeit-GPS-NTP-Server
+in Betrieb genommen habe, habe ich mir Gedanken gemacht, warum die
+käuflich zu erwerbenden einen so hohen Anschaffungswiderstand haben.
 </p></div>   </a>
-
+</li>
+<li class="anriss">
+  <a href="visualisierung_strange_attractors_java3d.html#content">
+<div class="date">21.09.2018</div>
+<h3>Visualisierung von Strange Attractors mit Java3D</h3>
+<div class="abstract">
+<p>Ich wollte mich schon lange mal wieder mit Chaos und Systemen mit Strange Attractors
+befassen. Schließlich habe ich ja
+die entsprechende Infrastruktur
+bereits als Framework für die numerische Behandlung von Differentialgleichungssystemen
+verfügbar.
+</p></div>   </a>
 </li>
 </ul>
-</div>
 </div>
 <nav id="C"> 
 <h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
@@ -140,6 +206,7 @@ ADS-B-Receiver benutzen...
 <h3>
 Android
 </h3>
+<span class="nav-item-counter">15</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um Googles Betriebssystem</p>
@@ -152,6 +219,7 @@ Android
 <h3>
 Basteln
 </h3>
+<span class="nav-item-counter">13</span>
 </header>
 <div class="nav-item-body">
 <p>Meistens Papier (Origami...)</p>
@@ -164,6 +232,7 @@ Basteln
 <h3>
 C und C++
 </h3>
+<span class="nav-item-counter">5</span>
 </header>
 <div class="nav-item-body">
 </div>
@@ -175,6 +244,7 @@ C und C++
 <h3>
 Datenbanken
 </h3>
+<span class="nav-item-counter">13</span>
 </header>
 <div class="nav-item-body">
 <p>relationale und andere Datenbanken</p>
@@ -187,6 +257,7 @@ Datenbanken
 <h3>
 dWb+
 </h3>
+<span class="nav-item-counter">85</span>
 </header>
 <div class="nav-item-body">
 <p>Werkzeug für rapid Prototyping</p>
@@ -199,6 +270,7 @@ dWb+
 <h3>
 Garten
 </h3>
+<span class="nav-item-counter">3</span>
 </header>
 <div class="nav-item-body">
 <p>Das grÃ¼ne Hobby</p>
@@ -211,6 +283,7 @@ Garten
 <h3>
 Geo
 </h3>
+<span class="nav-item-counter">26</span>
 </header>
 <div class="nav-item-body">
 <p>Karten und mehr run um Ortsinformationen</p>
@@ -223,6 +296,7 @@ Geo
 <h3>
 GUI
 </h3>
+<span class="nav-item-counter">49</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um graphische Benutzerschnittstellen</p>
@@ -235,6 +309,7 @@ GUI
 <h3>
 Hardware
 </h3>
+<span class="nav-item-counter">17</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -247,6 +322,7 @@ Hardware
 <h3>
 Java
 </h3>
+<span class="nav-item-counter">207</span>
 </header>
 <div class="nav-item-body">
 <p>Hauptsächlich Desktop Themen und Java SE</p>
@@ -259,6 +335,7 @@ Java
 <h3>
 Komponenten
 </h3>
+<span class="nav-item-counter">146</span>
 </header>
 <div class="nav-item-body">
 <p>Software-Komponenten</p>
@@ -271,6 +348,7 @@ Komponenten
 <h3>
 Links
 </h3>
+<span class="nav-item-counter">42</span>
 </header>
 <div class="nav-item-body">
 <p>Linksammlungen zu verschiedenen Themen</p>
@@ -281,22 +359,14 @@ Links
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Linux
+</strong>
 </h3>
+<span class="nav-item-counter">112</span>
 </header>
 <div class="nav-item-body">
 <p>Alles zum Thema Gnu Linux</p>
-</div>
-</div>
-</a>
-<a href="linux.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-linux
-</h3>
-</header>
-<div class="nav-item-body">
 </div>
 </div>
 </a>
@@ -306,6 +376,7 @@ linux
 <h3>
 Markup
 </h3>
+<span class="nav-item-counter">17</span>
 </header>
 <div class="nav-item-body">
 <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
@@ -318,6 +389,7 @@ Markup
 <h3>
 Music
 </h3>
+<span class="nav-item-counter">20</span>
 </header>
 <div class="nav-item-body">
 <p>Musik, die mir gefällt</p>
@@ -330,6 +402,7 @@ Music
 <h3>
 Numerik
 </h3>
+<span class="nav-item-counter">5</span>
 </header>
 <div class="nav-item-body">
 <p>Numerische Mathematik in Computern</p>
@@ -342,6 +415,7 @@ Numerik
 <h3>
 Python
 </h3>
+<span class="nav-item-counter">6</span>
 </header>
 <div class="nav-item-body">
 <p>Mein Weg vom blutigen Anfänger aufwärts</p>
@@ -354,6 +428,7 @@ Python
 <h3>
 Rants
 </h3>
+<span class="nav-item-counter">78</span>
 </header>
 <div class="nav-item-body">
 <p>Luft ablassen</p>
@@ -366,6 +441,7 @@ Rants
 <h3>
 Security
 </h3>
+<span class="nav-item-counter">21</span>
 </header>
 <div class="nav-item-body">
 <p>IT-Sicherheit</p>
@@ -378,6 +454,7 @@ Security
 <h3>
 sQLshell
 </h3>
+<span class="nav-item-counter">25</span>
 </header>
 <div class="nav-item-body">
 <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
@@ -390,6 +467,7 @@ sQLshell
 <h3>
 Verschiedenes
 </h3>
+<span class="nav-item-counter">11</span>
 </header>
 <div class="nav-item-body">
 <p>Passt in keine der anderen Kategorien...</p>
@@ -402,20 +480,10 @@ Verschiedenes
 <h3>
 Video
 </h3>
+<span class="nav-item-counter">22</span>
 </header>
 <div class="nav-item-body">
 <p>Artikel mit bunten Filmchen</p>
-</div>
-</div>
-</a>
-<a href="videos.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Videos
-</h3>
-</header>
-<div class="nav-item-body">
 </div>
 </div>
 </a>
@@ -425,6 +493,7 @@ Videos
 <h3>
 Virtualisierung
 </h3>
+<span class="nav-item-counter">25</span>
 </header>
 <div class="nav-item-body">
 <p>Technologien und Themen rund um virtuelle Rechner</p>
@@ -437,6 +506,7 @@ Virtualisierung
 <h3>
 Windows
 </h3>
+<span class="nav-item-counter">3</span>
 </header>
 <div class="nav-item-body">
 </div>
@@ -454,9 +524,6 @@ Upcoming...
 </div>
 </div>
 </a>
-<!--
--->
-
 </nav>
 </div>
 	<div id="footer">
@@ -477,8 +544,7 @@ abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZ
 		</script>
 		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
 			</a></strong>
-	</span>
-</div><!-- #footer -->
+	</span></div><!-- #footer -->
 </div>
 </body>
 </html>
