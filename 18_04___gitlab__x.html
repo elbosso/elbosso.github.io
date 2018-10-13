@@ -2,9 +2,11 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>The Future of Microprocessors</title>
+  <title>18.04 - Gitlab, X</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta name="Description" content="Nach dem ersten Teil der beschriebenen
+Erfahrungen mit meinem Umstieg auf Ubuntu 18." />
   <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
@@ -92,78 +94,106 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 <div id="all">
 <div id="A">
 <div id="content">
-<div class="date">24.10.2016 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<div class="date">13.10.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
 <span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
 <div class="previousArticlesInCategories">
 	<!--ul-->
 	vorhergehende Artikel in:
-	<!--li--> <a href="ausbreitung_wasser_kuenstlichen_landschaften.html#content">Video</a> <!--/li-->
-	<!--li--> ,<a href="digispark.html#content">Hardware</a> <!--/li-->
+	<!--li--> <a href="ebcms.html#content">Linux</a> <!--/li-->
 	<!--/ul-->
 </div>
- 	<div class="heading">The Future of Microprocessors</div>
-	<p>Ein Video aus dem Programm der Konferenz Julia 2018
+ 	<div class="heading">18.04 - Gitlab, X</div>
+	<p>Nach dem ersten Teil der beschriebenen
+<a href="18_04___kodi__tiny_rss__nextcloud.html">Erfahrungen mit meinem Umstieg auf Ubuntu 18.04</a>
+folgt
+hier nun der zweite...
 </p> <a name="content"> </a>
- <p><iframe 
-	class="center"
-	width="410" 
-	height="410" 
-	src="https://www.youtube.com/embed/zX4ZNfvw1cw"
-	frameborder="0" 
-	allowfullscreen>
-</iframe>
-<a href="https://www.youtube.com/watch?v=zX4ZNfvw1cw">@youtube.com</a>
+ <p>Nach meinen Erfahrungen mit der Aktualisierung von Containern auf 18.04 machte ich vor dem Versuch
+mit dem Gitlab-Container ein Backup. Aus der Sicht von Gitlab war das nicht nötig - sowohl die Aktualisierung
+der Anwendung wie auch des Betriebssystems funktionierte nahtlos und korrekt im ersten Anlauf.
 </p><p>
-Und als Kontext dazu ein anderes Video (Hintergrundinformationen dazu
-<a href="https://monster6502.com/">hier</a>):
+Auf eine Subtilität wurde ich erst nach dem ersten Push aufmerksam: Die Pipelines für CI/CD schlugen plötzlich fehl.
+Um das zu korrigieren, musste ich jetzt im yaml-File der Pipeline von Hand das JAVA_HOME setzen. Damit lief
+die Pipeline los und ich lehnte mich zurück - in dem sicheren Bewusstsein, dass jetzt nichts mehr schiefgehen könne. Wie sehr
+ich mich doch täuschte!
 </p><p>
-<iframe
-	class="center"
-	width="410"
-	height="410"
-	src="https://www.youtube.com/embed/HDMkw6lnzmI"
-	frameborder="0"
-	allowfullscreen>
-</iframe>
-<a href="https://www.youtube.com/watch?v=HDMkw6lnzmI">@youtube.com</a>
+Plötzlich wurden keine JavaFX-Klassen mehr gefunden. Das irritierte mich - ich sah nach und siehe da: Java 11 war als Teil des
+Upgrades installiert worden - und wir wissen alle: In Java 11 wurde JavaFX entfernt. Lustigerweise antwortete Java aber
+immer noch bei der Ausführung, dass es die Version 10 sei. Ich fand auch in den Paketquellen der 18.04 keine Java-Version 10
+zum händischen installieren. Irgendwie haben die Maintainer hier ganz großen Mist gebaut: Die stellen eine Version zur Verfügung, die
+behauptet, Version 10 zu sein, allerdings JavaFX nicht mehr mitbringt, was erst in Java 11 der Fall sein sollte und das Paket haben
+sie daher auch schon mal Java 11 genannt um alle vollkommen zu verwirren.
+</p><p>
+Ich habe daher erstmal wieder die Version von Oracle installiert: dort gibt es nämlich noch ein Java 10, das auch wirklich
+eines ist.
+</p><p>
+Dadurch unvorsichtig geworden, habe ich versucht, einen graphischen Desktop auf 18.04 zu heben. Dabei kann es zu großen Verwerfungen kommen -
+ich meine damit nicht die Umstellung auf Wayland, sondern die Tatsache, dass Ubuntu Unity zu Gunsten von Gnome Shell
+abschafft - ich mochte Unity sehr wegen der Quicklists. Daher informierte ich mich vorher, ob die auch nach dem Upgrade noch
+funktionieren - diese Frage wurde positiv beantwortet, also zog ich das durch.
+</p><p>
+Danach war ich erst einmal enttäuscht von diversen Designentscheidungen des Gnome-Teams (Knöpfe zum Beenden eines Dialogs in
+der Titelzeile - gehts noch !?!?). Aber ich wollte ja meine Quicklists wiederhaben. Daher suchte ich verzweifelt nach einer Möglichkeit,
+diese zu installieren und zu diesem Zeitpunkt habe ich mir dann ernstlich Sorgen um die geistige Gesundheit der Entwickler gemacht:
+Um eine Gnome Extension zu installieren brauche ich einen Browser und muss dann zu allem Überfluss auch noch ein Addon installieren?
+Aber ich musste letztlich in diesen sauren Apfel beißen.
+</p><p>
+Nach der Installation zeigte sich, dass meine geliebten Quicklists verschwunden blieben - dachte ich zunächst. Im Dock an der
+linken Seite tauchten zwar alle Icons auf, die sort sein sollten, aber keine hatte Quicklists. Ich entdeckte jedoch, dass
+in der Activity-Ansicht ein anderes Verhalten zu beobachten war: Suchte ich dort nach Intellij Idea (hat Quicklist zum Starten von
+SmartGit und noch einigem mehr), konnte ich an dem gefundenen Icon plötzlich auf meine Quicklist zugreifen.
+</p><p>
+Dieses inkonsistente Verhalten sorgte dann auch dafür, dass ich eine Woche lang jeden möglichen Artikel zu diesem Thema (Gnome,
+Uniy, Quicklists, 18.04) las, den Google ausspuckte und keiner half. Bis ich dann auf die Idee kam, mir den Quelltext
+der betreffenden Extension ansehen zu wollen. So weit kam ich allerdings gar nicht - denn in dem Repository fand ich einen
+Launcher als Beispiel. Den probierte ich natürlich sofort aus und siehe da - der hatte auch im Dock Quicklists. Es lag also irgendwie
+an den Inhalten meiner Launcher, dass das Dock frei blieb von meinen Quicklists.
+</p><p>
+Nach einer ersten oberflächlichen Analyse stellte sich heraus, dass einige Schlüsselfelder im Launcher anders hießen und
+in dem mitgelieferten explizit die Version 2.1 angegeben war. Ich stellte meine entsprechend um und seit dem habe
+auch ich und meine angepassten Launcher im Dock Quicklists. Damit war ich dann erst einmal zufrieden.
+</p><p>
+Ein kleiner Nachtrag noch zu Wayland - ich weiß nicht, ob der jetzt bei mir aktiv ist oder nicht. Das interessiert mich auch nicht, denn
+das (meiner Ansicht nach) wichtigste Killerfeature von X funktioniert nach wie vor: Displayumleitung.
 </p> </div>
 </div>
 <div id="B"> 
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="videotips_aus_biologie.html#content">
+<div class="date">13.10.2018</div>
+<h3>Videotips aus der Biologie</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Diesmal möchte ich wieder einmal Anregungen zu Videos im Internet geben - allerdings nicht aus meiner normalen Ecke:
+Mathematik, Physik, Informatik oder Elektronik - und begebe mich dazu etwas aus meiner angestammten Komfortzone hinein in
+die Biologie
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="yubi_zur_2fa_gitlab.html#content">
+<div class="date">13.10.2018</div>
+<h3>Yubi zur 2FA mit GitLab</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich hatte hier ja schon
+verschiedentlich
+über Möglichkeiten des
+Einsatzes
+meines Yubi-Key berichtet - nun kam noch eine hinzu...
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="roessler_attractor_implizites_eulerverfahren.html#content">
 <div class="date">08.10.2018</div>
 <h3>Roessler Attractor und implizites Eulerverfahren</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Nachdem ich so viel Spaß bei der Untersuchung der Behandlung eines
 chaotischen Systems
 mittels
 impliziten Eulerverfahrens
 hatte, habe ich mir gleich noch eines vorgenommen...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="mathe_vorlesungen_auf_youtube.html#content">
-<div class="date">08.10.2018</div>
-<h3>Mathe-Vorlesungen auf Youtube</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Da der Herbst sich mit großen Schritten nähert und man vielleicht die eine oder andere Stunde schlechten Wetters überbrücken muss -
-hier einige (aus meiner Sicht) interessante Mathe-Vorlesungen auf Youtube...
-</p></div>   </a>
-</li>
-<li class="anriss">
-	<a href="ebcms.html#20">
-<div class="date">04.10.2018</div>
-<h3>EBCMS</h3>
-<div class="abstract">
-	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-<p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
-Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
-ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
-und was eigenes geschaffen!
 </p></div>   </a>
 </li>
 </ul>
@@ -296,11 +326,9 @@ GUI
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-<strong>
 Hardware
-</strong>
 </h3>
-<span class="nav-item-counter">18</span>
+<span class="nav-item-counter">17</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -350,9 +378,11 @@ Links
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Linux
+</strong>
 </h3>
-<span class="nav-item-counter">112</span>
+<span class="nav-item-counter">113</span>
 </header>
 <div class="nav-item-body">
 <p>Alles zum Thema Gnu Linux</p>
@@ -417,7 +447,7 @@ Python
 <h3>
 Rants
 </h3>
-<span class="nav-item-counter">79</span>
+<span class="nav-item-counter">80</span>
 </header>
 <div class="nav-item-body">
 <p>Luft ablassen</p>
@@ -456,7 +486,7 @@ sQLshell
 <h3>
 Verschiedenes
 </h3>
-<span class="nav-item-counter">11</span>
+<span class="nav-item-counter">12</span>
 </header>
 <div class="nav-item-body">
 <p>Passt in keine der anderen Kategorien...</p>
@@ -467,9 +497,7 @@ Verschiedenes
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-<strong>
 Video
-</strong>
 </h3>
 <span class="nav-item-counter">24</span>
 </header>
