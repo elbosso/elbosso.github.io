@@ -117,6 +117,59 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>Validating RAML Files Using Docker</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Back in July of this year I <a href="https://blog.scottlowe.org/2018/07/23/bolstering-my-software-development-skills/">introduced Polyglot</a>, a project whose only purpose is to provide a means for me to learn more about software development and programming (areas where am I sorely lacking real knowledge). In the limited spare time I&rsquo;ve had to work on Polyglot in the ensuing months, I&rsquo;ve been building out an API specification using <a href="https://raml.org/">RAML</a>, and in this post I&rsquo;ll share how I use <a href="https://www.docker.com/">Docker</a> and a Docker image to validate my RAML files.</p>
+
+<p>Since I was (am) using <a href="https://code.visualstudio.com/">Visual Studio Code</a> as my primary text editor/development environment these days, I started out by looking for a RAML extension that would provide some sort of linting/validation functionality. I found an extension to do RAML syntax highlighting, which seemed like a reasonable first step.</p>
+
+<p>After a bit more research, I found that there was a <code>raml-cli</code> NPM package that one could use to validate RAML files from the command line. I was a bit leery of installing an NPM package on my system, so I thought, &ldquo;Why not use a Docker container for this?&rdquo; It will keep my system clean of excess/unnecessary packages and dependencies, and it will provide some practice with building Docker containers.</p>
+
+<p>A bit of work later I had this <code>Dockerfile</code> (which you can find in <a href="https://github.com/scottslowe/dockerfiles/">my &ldquo;dockerfiles&rdquo; GitHub repository</a>):</p>
+
+<pre><code>FROM node:6.14.3-alpine
+
+LABEL maintainer &quot;Scott Lowe &lt;scott.lowe@scottlowe.org&gt;&quot;
+
+RUN apk add --no-cache git &amp;&amp; \
+    rm -rf /var/cache/apk/*
+
+RUN npm install -qg raml-cli &amp;&amp; \
+    npm cache clean
+
+RUN mkdir -p /data
+VOLUME /data
+WORKDIR /data
+
+ENTRYPOINT [&quot;raml&quot;]
+
+CMD [&quot;--help&quot;]
+</code></pre>
+
+<p>Feeding this to <code>docker build</code> results in an image of about 196MB in size, which isn&rsquo;t too shabby (I&rsquo;d like to continue to try to shave this down even further). With this image, I can now easily validate RAML files:</p>
+
+<pre><code class="language-sh">docker run --rm -v $(pwd):/data raml-cli:0.1 validate orders-api.raml
+</code></pre>
+
+<p>And, of course, I could make this even easier with a Bash alias:</p>
+
+<pre><code class="language-sh">alias raml-cli=&quot;docker run --rm -v $(pwd):/data raml-cli:0.1&quot;
+</code></pre>
+
+<p>Using the alias means I can now simply run <code>raml-cli validate &lt;filename.raml&gt;</code>. This makes it very easy for me to validate the RAML specifications I&rsquo;m writing.</p>
+
+<p>In the event others may find this helpful, the <code>Dockerfile</code> is on GitHub in <a href="https://github.com/scottslowe/dockerfiles/">my &ldquo;dockerfiles&rdquo; repository</a>, and I&rsquo;ve <a href="https://hub.docker.com/r/slowe/raml-cli/">pushed the Docker image to Docker Hub</a> for anyone to pull down.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/MO7BRwmhssQ" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/MO7BRwmhssQ/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>Technology Short Take 105</h3>
 		</div>
 		<div class="collectiontext">
@@ -224,178 +277,32 @@ display('news.html')
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/pb0ppyjy0Sg/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Setting up the Kubernetes AWS Cloud Provider</h3>
-		</div>
-		<div class="collectiontext">
-			<p>The AWS cloud provider for <a href="https://kubernetes.io">Kubernetes</a> enables a couple of key integration points for Kubernetes running on AWS; namely, dynamic provisioning of Elastic Block Store (EBS) volumes and dynamic provisioning/configuration of Elastic Load Balancers (ELBs) for exposing Kubernetes Service objects. Unfortunately, the documentation surrounding how to set up the AWS cloud provider with Kubernetes is woefully inadequate. This article is an attempt to help address that shortcoming.</p>
-
-<p>More details are provided below, but at a high-level here&rsquo;s what you&rsquo;ll need to make the AWS cloud provider in Kubernetes work:</p>
-
-<ul>
-<li>The hostname of each node must match EC2&rsquo;s private DNS entry for that node</li>
-<li>An IAM role and policy that EC2 instances can assume as an instance profile</li>
-<li>Kubernetes-specific tags applied to the AWS resources used by the cluster</li>
-<li>Particular command-line flags added to the Kubernetes API server, Kubernetes controller manager, and the Kubelet</li>
-</ul>
-
-<p>Let&rsquo;s dig into these requirements in a bit more detail.</p>
-
-<h2 id="node-hostname">Node Hostname</h2>
-
-<p>It&rsquo;s important that the name of the Node object in Kubernetes matches the private DNS entry for the instance in EC2. You can use <code>hostnamectl</code> or a confiugration management tool (take your pick) to set the instance&rsquo;s hostname to the FQDN that matches the EC2 private DNS entry. This typically looks something like <code>ip-10-15-30-45.us-west-1.compute.internal</code>, where <code>10-15-30-45</code> is the private IP address and <code>us-west-1</code> is the region where the instance was launched.</p>
-
-<p>If you&rsquo;re unsure what it is, or if you&rsquo;re looking for a programmatic way to retrieve the FQDN, just <code>curl</code> the AWS metadata server:</p>
-
-<pre><code>curl http://169.254.169.254/latest/meta-data/local-hostname
-</code></pre>
-
-<p>Make sure you set the hostname before attempting to bootstrap the Kubernetes cluster, or you&rsquo;ll end up with nodes whose name in Kubernetes doesn&rsquo;t match up, and you&rsquo;ll see various &ldquo;permission denied&rdquo;/&ldquo;unable to enumerate&rdquo; errors in the logs. For what it&rsquo;s worth, preliminary testing indicates that this step&mdash;setting the hostname to the FQDN&mdash;is necessary for Ubuntu but may not be needed for CentOS/RHEL.</p>
-
-<h2 id="iam-role-and-policy">IAM Role and Policy</h2>
-
-<p>Because the AWS cloud provider performs some tasks on behalf of the operator&mdash;like creating an ELB or an EBS volume&mdash;the instances need IAM permissions to perform these tasks. Thus, you need to have an IAM instance profile assigned to the instances that gives them permissions.</p>
-
-<p>The <em>exact</em> permissions that are needed haven&rsquo;t been documented anywhere that I&rsquo;ve found (please contact me if you have more information), but here&rsquo;s a summary of permissions for control plane nodes that works:</p>
-
-<ul>
-<li>Allow permissions on <code>ec2:*</code></li>
-<li>Allow permissions on <code>elasticloadbalancing:*</code></li>
-<li>Allow permissions on <code>ecr:GetAuthorizationToken</code>, <code>ecr:BatchCheckLayerAvailability</code>, <code>ecr:GetDownloadUrlForLayer</code>, <code>ecr:GetRepositoryPolicy</code>, <code>ecr:DescribeRepositories</code>, <code>ecr:ListImages</code>, and <code>ecr:BatchGetImage</code></li>
-<li>Allow permissions on <code>autoscaling:DescribeAutoScalingGroup</code> and <code>autoscaling:UpdateAutoScalingGroup</code></li>
-</ul>
-
-<p>It&rsquo;s probably possible to whittle down the <code>ec2:*</code> permission for control plane nodes. Some preliminary thoughts that my colleague Joe Beda shared with me indicates that the following permissions may be enough: <code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroups</code>, <code>ec2:AttachVolume</code>, <code>ec2:DetachVolume</code>, <code>ec2:DescribeVolumes</code>, <code>ec2:CreateVolume</code>, <code>ec2:DeleteVolume</code>, <code>ec2:DescribeSubnets</code>, <code>ec2:CreateSecurityGroup</code>, <code>ec2:DeleteSecurityGroup</code>, <code>ec2:AuthorizeSecurityGroupIngress</code>, <code>ec2:RevokeSecurityGroupIngress</code>, <code>ec2:CreateTags</code>, <code>ec2:DescribeRouteTables</code>, <code>ec2:CreateRoute</code>, <code>ec2:DeleteRoute</code>, and <code>ec2:ModifyInstanceAttribute</code>. Note, however, that this list has <strong>not</strong> been tested or validated.</p>
-
-<p>For worker nodes, the permissions are not as far-reaching:</p>
-
-<ul>
-<li>Allow permission on <code>ec2:Describe*</code></li>
-<li>Allow permissions on <code>ecr:GetAuthorizationToken</code>, <code>ecr:BatchCheckLayerAvailability</code>, <code>ecr:GetDownloadUrlForLayer</code>, <code>ecr:GetRepositoryPolicy</code>, <code>ecr:DescribeRepositories</code>, <code>ecr:ListImages</code>, and <code>ecr:BatchGetImage</code></li>
-</ul>
-
-<p>You&rsquo;ll want to capture these permissions in a policy statement, associate that policy statement with a role, and then associate that role with an IAM instance profile. You&rsquo;ll end up with two IAM instance profiles: one for the control plane nodes with a broader set of permissions, and one for the worker nodes with a more restrictive set of permissions.</p>
-
-<h2 id="aws-tags">AWS Tags</h2>
-
-<p>The AWS cloud provider needs a specific tag to be present on almost all the AWS resources that a Kubernetes cluster needs. The tag key is <code>kubernetes.io/cluster/&lt;cluster-name&gt;</code>; the value of the tag is immaterial (this tag replaces an older <code>KubernetesCluster</code> tag). Note that Kubernetes itself will also use this tag on things that it creates, and it will use a value of &ldquo;owned&rdquo;. This value does <em>not</em> need to be used on resources that Kubernetes itself did not create. Most of the documentation I&rsquo;ve seen indicates that the tag is needed on all instances and on exactly one security group (this is the security group that will be modified to allow ELBs to access the nodes, so the worker nodes should be a part of this security group). However, I&rsquo;ve also found it necessary to make sure the <code>kubernetes.io/cluster/&lt;cluster-name&gt;</code> tag is present on subnets and route tables in order for the integration to work as expected.</p>
-
-<h2 id="kubernetes-configuration">Kubernetes Configuration</h2>
-
-<p>On the Kubernetes side of the house, you&rsquo;ll need to make sure that the <code>--cloud-provider=aws</code> command-line flag is present for the API server, controller manager, and every Kubelet in the cluster.</p>
-
-<p>If you&rsquo;re using <code>kubeadm</code> to set up your cluster, you can have <code>kubeadm</code> add the flags to the API server and controller manager by using the &ldquo;apiServerExtraArgs&rdquo; and &ldquo;controllerManagerExtraArgs&rdquo; sections in a configuration file, like this:</p>
-
-<pre><code class="language-yaml">apiServerExtraArgs:
-  cloud-provider: aws
-controllerManagerExtraArgs:
-  cloud-provider: aws
-</code></pre>
-
-<p>Likewise, you can use the &ldquo;nodeRegistration&rdquo; section of a <code>kubeadm</code> configuration file to pass extra arguments to the Kubelet, like this:</p>
-
-<pre><code class="language-yaml">nodeRegistration:
-  kubeletExtraArgs:
-    cloud-provider: aws
-</code></pre>
-
-<p>I&rsquo;d probably also recommend setting the name of the Kubelet to the node&rsquo;s private DNS entry in EC2 (this ensures it matches the hostname, as described earlier in this article). Thus, the full &ldquo;nodeRegistration&rdquo; section might look like this:</p>
-
-<pre><code class="language-yaml">nodeRegistration:
-  name: ip-10-15-30-45.us-west-1.compute.internal
-  kubeletExtraArgs:
-    cloud-provider: aws
-</code></pre>
-
-<p>You would need to substitute the correct fully-qualified domain name for each instance, of course.</p>
-
-<p>Finally, for dynamic provisioning of Persistent Volumes you&rsquo;ll need to create a default Storage Class. The AWS cloud provider has one, but it doesn&rsquo;t get created automatically. Use this command to define the default Storage Class:</p>
-
-<pre><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/kubernetes/master/cluster/addons/storage-class/aws/default.yaml
-</code></pre>
-
-<p>This will create a Storage Class named &ldquo;gp2&rdquo; that has the necessary annotation to make it the default Storage Class (see <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">here</a>). Once this Storage Class is defined, dynamic provisioning of Persistent Volumes should work as expected.</p>
-
-<h2 id="troubleshooting">Troubleshooting</h2>
-
-<p>Troubleshooting is notoriously difficult, as most errors seem to be &ldquo;transparently swallowed&rdquo; instead of exposed to the user/operator. Here are a few notes that may be helpful:</p>
-
-<ul>
-<li>You <em>must</em> have the <code>--cloud-provider=aws</code> flag added to the Kubelet <strong>before</strong> adding the node to the cluster. Key to the AWS integration is a particular field on the Node object&mdash;the <code>.spec.providerID</code> field&mdash;and that field will <em>only</em> get populated if the flag is present when the node is added to the cluster. If you add a node to the cluster and then add the command-line flag afterward, this field/value won&rsquo;t get populated and the integration won&rsquo;t work as expected. No error is surfaced in this situation (at least, not that I&rsquo;ve been able to find).</li>
-<li>If you do find yourself with a missing <code>.spec.providerID</code> field on the Node object, you can add it with a <code>kubectl edit node</code> command. The format of the value for this field is <code>aws:///&lt;az-of-instance&gt;/&lt;instance-id&gt;</code>.</li>
-<li>Missing AWS tags on resources will cause odd behaviors, like failing to create an ELB for a LoadBalancer-type Service. I haven&rsquo;t had time to test all the different failure scenarios, but if the cloud provider integration isn&rsquo;t working as expected I&rsquo;d double-check that the Kubernetes-specific tags are present on all the AWS resources.</li>
-</ul>
-
-<p>Hopefully the information in this article helps remove some of the confusion and lack of clarity around getting the AWS cloud provider working with your Kubernetes cluster. I intend to keep this document updated as I discover additional failure scenarios or find more detailed documentation. If you have questions, feel free to <a href="https://twitter.com/scott_lowe">hit me on Twitter</a> or find me in <a href="https://kubernetes.slack.com">the Kubernetes Slack community</a>. (If you&rsquo;re an expert in the AWS cloud provider code and can help flesh out the details of this post, please contact me as well!) Have fun out there, fellow Kubernauts!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/tWkqaP7tL0s" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/tWkqaP7tL0s/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>A Markdown-to-PDF Workflow on Linux</h3>
-		</div>
-		<div class="collectiontext">
-			<p>In May of last year I wrote about <a href="https://blog.scottlowe.org/2017/05/08/using-makefile-with-markdown-documents/">using a <code>Makefile</code> with Markdown documents</a>, in which I described how I use <code>make</code> and a <code>Makefile</code> along with CLI tools like <code>multimarkdown</code> (the binary, not the format) and <a href="http://pandoc.org/">Pandoc</a>. At that time, I&rsquo;d figured out how to use combinations of the various CLI tools to create various formats from the source <a href="https://twitter.com/scott_lowe">Markdown</a> document. The one format I hadn&rsquo;t gotten right at that time was PDF. Pandoc <em>can</em> create PDFs, but only if <a href="https://www.latex-project.org/">LaTeX</a> is installed. This article describes a method I found that allows me to create PDFs from my Markdown documents <em>without</em> using LaTeX.</p>
-
-<p>Two tools are involved in this new conversion process: Pandoc, which I&rsquo;ve discussed on this site before; and <a href="https://daringfireball.net/projects/markdown/"><code>wkhtmltopdf</code></a>, a new tool I just recently discovered. Basically, I use Pandoc to go from Markdown (MultiMarkdown, specifically) to HTML, and then use <code>wkhtmltopdf</code> to generate a PDF file from the HTML.</p>
-
-<p>The first step in the process is to use Pandoc to convert from Markdown to HTML, including the use of CSS to include custom formatting. The command looks something like this:</p>
-
-<pre><code>pandoc --from=markdown_mmd+yaml_metadata_block+smart --standalone \
---to=html -V css=/home/slowe/Documents/std-styles.css \
---output=&lt;destination-html-filename&gt; &lt;source-md-filename&gt;
-</code></pre>
-
-<p>This generates an HTML document and links it to the specified CSS document for formatting. I <em>could</em> embed the CSS specification in the YAML metadata block at the top of the Markdown document, but then I&rsquo;d lose the ability to create multiple versions of the document with different formatting. The <code>-V css=</code> parameter lets me specify formatting instructions at the time of creating the HTML document.</p>
-
-<p>Once I have the HTML document, then I can create a paginated PDF with this command:</p>
-
-<pre><code>wkhtmltopdf -B 25mm -T 25mm -L 25mm -R 25mm \
--q -s Letter &lt;source-html-filename&gt; &lt;destination-pdf-filename&gt;
-</code></pre>
-
-<p>This will create a paginated PDF, based on US Letter paper size, with 25mm margins all the way around.</p>
-
-<p>Putting these together into a <code>make</code> workflow, I can do something like this:</p>
-
-<pre><code>PD = /usr/local/bin/pandoc
-PDFLAGS = --from=markdown_mmd+yaml_metadata_block+smart --standalone
-WK = /usr/bin/wkhtmltopdf
-WKFLAGS = -B 25mm -T 25mm -L 25mm -R 25mm -q -s Letter
-CSS ?= /home/slowe/Documents/std-styles.css
-
-%.md.pdf: %.md
-        $(PD) $(PDFLAGS) --to=html -V css=$(CSS) $&lt; | $(WK) $(WKFLAGS) - $@
-</code></pre>
-
-<p>With this in place, all I have to do is type <code>make filename.md.pdf</code>. Make will use <code>pandoc</code> to convert from Markdown to HTML, then pipe those results to <code>wkhtmltopdf</code> to create a paginated PDF. The beauty of defining the stylesheet to use as a variable is that I can override it on the command line if desired:</p>
-
-<pre><code>make CSS=/path/to/alternate/styles.css filename.md.pdf
-</code></pre>
-
-<p>This makes it super-easy to create PDFs from source Markdown documents.</p>
-
-<p>Have suggestions for improvement? I&rsquo;m always open to learn more&mdash;feel free to <a href="https://twitter.com/scott_lowe">hit me on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/RurSIaUhSS8" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/RurSIaUhSS8/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
 <div id="B"> 
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
+<li class="anriss">
+  <a href="kontinuierliche_visualisierung_strange_attractors.html">
+<div class="date">20.10.2018</div>
+<h3>Kontinuierliche Visualisierung für Strange Attractors</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich bereits verschiedene
+Möglichkeiten der Visualisierung
+von dynamischen Systemen mit strange attractors vorgestellt habe, hier eine weitere Alternative
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="the_future_of_microprocessors.html">
+<div class="date">20.10.2018</div>
+<h3>The Future of Microprocessors</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ein Video aus dem Programm der Konferenz Julia 2018
+</p></div>   </a>
+</li>
 <li class="anriss">
 	<a href="ntp_server_raspi_em406a.html#71">
 <div class="date">16.10.2018</div>
@@ -404,30 +311,6 @@ CSS ?= /home/slowe/Documents/std-styles.css
 	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
 <p>Ich habe herausfinden wollen, ob es mir mit ein paar zu Hause herumliegenden Teilen möglich wäre,
 eine Satellitenuhr zu bauen, die ich dann im Heimnetz als NTP-Server einsetzen könnte.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="videotips_aus_biologie.html">
-<div class="date">13.10.2018</div>
-<h3>Videotips aus der Biologie</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Diesmal möchte ich wieder einmal Anregungen zu Videos im Internet geben - allerdings nicht aus meiner normalen Ecke:
-Mathematik, Physik, Informatik oder Elektronik - und begebe mich dazu etwas aus meiner angestammten Komfortzone hinein in
-die Biologie
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="yubi_zur_2fa_gitlab.html">
-<div class="date">13.10.2018</div>
-<h3>Yubi zur 2FA mit GitLab</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ich hatte hier ja schon
-verschiedentlich
-über Möglichkeiten des
-Einsatzes
-meines Yubi-Key berichtet - nun kam noch eine hinzu...
 </p></div>   </a>
 </li>
 </ul>
@@ -562,7 +445,7 @@ GUI
 <h3>
 Hardware
 </h3>
-	<span class="nav-item-counter">17</span>
+	<span class="nav-item-counter">18</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -653,7 +536,7 @@ Music
 <h3>
 Numerik
 </h3>
-	<span class="nav-item-counter">6</span>
+	<span class="nav-item-counter">7</span>
 </header>
 <div class="nav-item-body">
 <p>Numerische Mathematik in Computern</p>
@@ -731,7 +614,7 @@ Verschiedenes
 <h3>
 Video
 </h3>
-	<span class="nav-item-counter">24</span>
+	<span class="nav-item-counter">26</span>
 </header>
 <div class="nav-item-body">
 <p>Artikel mit bunten Filmchen</p>
