@@ -165,118 +165,6 @@ CMD [&quot;--help&quot;]
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/MO7BRwmhssQ/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 105</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take #105! Here&rsquo;s another collection of articles and blog posts about some of the common technologies that modern IT professionals will typically encounter. I hope that something I&rsquo;ve included here proves to be useful for you.</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Jon Williams discusses <a href="https://jonwillia.ms/2018/09/23/anycast-dns-openbsd">deploying Anycast DNS using OpenBSD and BGP</a>.</li>
-<li>Brian Boucheron provides a great article on <a href="https://dev.to/digitalocean/how-to-inspect-and-debug-kubernetes-networking-primitives-d7n">how to inspect and debug Kubernetes network primitives</a>. The information in this article is a great foundation upon which to build, in my opinion.</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<ul>
-<li>The big news in the hardware space recently was <a href="https://www.bloomberg.com/news/features/2018-10-04/the-big-hack-how-china-used-a-tiny-chip-to-infiltrate-america-s-top-companies">the article regarding the purported Chinese hardware supply chain attack</a>. This has generated a <em>lot</em> of discussion. First, we have <a href="https://aws.amazon.com/blogs/security/setting-the-record-straight-on-bloomberg-businessweeks-erroneous-article/">Amazon&rsquo;s reply</a>, in which they categorically deny all such claims. <a href="https://www.apple.com/newsroom/2018/10/what-businessweek-got-wrong-about-apple/">Apple&rsquo;s response</a> similarly denies the allegations in the report. Of the (innumerable) articles commenting on the hardware hack, <a href="https://securinghardware.com/articles/hardware-implants/">this article by Joe FitzPatrick</a> and <a href="https://blog.erratasec.com/2018/10/notes-on-bloomberg-supermicro-supply.html">this ErrataSec article</a> caught my eye. Both articles point out the incredible difficulty of finding such a hardware hack, and point out that exploiting software vulnerabilities would probably be a much faster/easier way to accomplish the same goal. Will we ever know the truth as to whether this actually happened? Probably not.</li>
-</ul>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>I suspect I&rsquo;ll find myself here at some point, so Jeff Geerling&rsquo;s script to <a href="https://www.jeffgeerling.com/blog/2018/getting-aws-sts-session-tokens-mfa-aws-cli-and-kubectl-eks-automatically">get AWS STS session tokens for MFA with AWS CLI</a> is probably going to be handy when that time comes.</li>
-<li>Sathyajith Bhat covers <a href="https://opensource.com/article/18/8/tools-container-security">five open source tools for container security</a>.</li>
-<li>Cory O&rsquo;Daniel explains <a href="https://medium.com/coryodaniel/kubernetes-assigning-pod-security-policies-with-rbac-2ad2e847c754">how to use role-based access control to assign Pod Security Policies (PSPs) to Kubernetes workloads</a>.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>I talk about Terraform a fair amount (and I use it a fair amount). Many times that&rsquo;s in the context of a public cloud (since that&rsquo;s where I spend most of my time), but here&rsquo;s <a href="https://github.com/trodemaster/tfe-openstack-vsphere/">an example of using it for vSphere and OpenStack</a>.</li>
-<li>Chris Herrera tackles a little bit of the &ldquo;why&rdquo; in <a href="https://medium.com/hashmapinc/tips-for-designing-a-kubernetes-cluster-d020f0b728ee">this article on Kubernetes cluster design</a>.</li>
-<li>Bob Killen <a href="https://itnext.io/exposing-statefulsets-in-kubernetes-698730fb92a1">discusses exposing StatefulSets in Kubernetes</a>.</li>
-<li>Lots of folks are super-bullish on Helm, but Bartlomiej Antoniak suggests users <a href="https://medium.com/virtuslab/think-twice-before-using-helm-25fbb18bc822">think twice before using Helm</a>.</li>
-<li>Robert Verdam has a two-part series on deploying an application to AWS with Terraform and Ansible (<a href="https://robertverdam.nl/2018/09/03/deploying-an-application-to-aws-with-terraform-and-ansible-part-1-terraform/">part 1</a>, <a href="https://robertverdam.nl/2018/09/22/deploying-an-application-to-aws-with-terraform-and-ansible-part-2-ansible/">part 2</a>). Of particular interest&mdash;to me, anyway&mdash;was Robert&rsquo;s use of the Terraform provider+inventory script, which I&rsquo;m exploring for use in some of my own projects.</li>
-<li>The <code>kubespy</code> tool, released by the Pulumi folks, looks interesting. Have a look at <a href="https://blog.pulumi.com/kubespy-and-the-lifecycle-of-a-kubernetes-pod-in-four-images">part 1</a> and <a href="https://blog.pulumi.com/kubespy-trace-a-real-time-view-into-the-heart-of-a-kubernetes-service">part 2</a> of their blog posts about the CLI tool.</li>
-<li>Grant Orchard has a three-part series (so far) on VMware Cloud Assembly (<a href="https://grantorchard.com/tango/introducing-cas/">part 1</a>, <a href="https://grantorchard.com/tango/blueprinting-intro/">part 2</a>, <a href="https://grantorchard.com/tango/blueprint-versioning/">part 3</a>).</li>
-<li>The folks at Platform9 recently open-sourced a tool called <code>etcdadm</code> (inspired by <code>kubeadm</code>). The GitHub repository is <a href="https://github.com/platform9/etcdadm">here</a>, and the blog post with the announcement is <a href="https://platform9.com/blog/were-open-sourcing-etcdadm-heres-what-it-means-for-kubernetes-in-production/">here</a>.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>Sayan Chowdhury talks about <a href="https://words.yudocaa.in/fedora-amis-gets-ena-support/">Fedora 28 AMIs gaining Elastic Network Adapter (ENA) support</a>.</li>
-<li>I&rsquo;ve been looking into Dropbox replacements; <a href="https://syncthing.net/">Syncthing</a> is a leading candidate at the moment. Here&rsquo;s <a href="https://opensource.com/article/18/9/take-control-your-data-syncthing">an article on Syncthing</a> that provides some basic details. If any Syncthing users have any feedback they&rsquo;d like to share, <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>.</li>
-<li><a href="https://github.com/jessfraz/bpfd">This</a> looks interesting, although I don&rsquo;t (personally) have a use case just yet. It might be worth watching as eBPF grows in importance in the Linux community, though.</li>
-<li>I mentioned <a href="https://opensource.com/article/18/9/intro-pandoc">this article on Pandoc</a> in a tweet recently. I&rsquo;m a long-time Pandoc user, but I hadn&rsquo;t thought/didn&rsquo;t know about using the <code>-s</code> parameter with an external YAML file to control styling for different output formats. That&rsquo;s a neat trick.</li>
-<li>Matthew Green <a href="https://blog.cryptographyengineering.com/2018/09/23/why-im-leaving-chrome/">rants on Chrome&rsquo;s new forced login policy</a>. I&rsquo;m not a fan, either.</li>
-<li>Here&rsquo;s a nice deep dive <a href="https://ownyourbits.com/2018/05/23/the-real-power-of-linux-executables/">on Linux executables</a>.</li>
-<li>I&rsquo;m (increasingly) not a fan of Google services, but I thought it was interesting to find <a href="https://github.com/yakyak/yakyak">this Google Hangouts desktop client</a>.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<p>I don&rsquo;t have anything to share this time, but I&rsquo;ll stay alert for content or links to include next time.</p>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>William Lam explores some of the <a href="https://www.virtuallyghetto.com/2018/09/nested-esxi-on-vmware-cloud-on-aws-vmc.html">caveats/gotchas of Nested ESXi on VMware Cloud on AWS (VMC)</a>. Some of these gotchas are fairly significant (no inter-host networking for VMs running on nested HV&rsquo;s, for example).</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>I found a couple of resources for folks interested in learning Golang. First up is <a href="https://gophersource.com/study-group/">this Go study group</a>, which has both US and India meeting times. Next up is <a href="https://awesome-go.com/">Awesome Go</a>, which is&mdash;in the author&rsquo;s words&mdash;&ldquo;a curated list of awesome Go frameworks, libraries, and software.&rdquo;</li>
-</ul>
-
-<p>That&rsquo;s all for this Technology Short Take. Thanks for reading! If you have questions, comments, or suggestions for improvement, feel free to <a href="https://twitter.com/scott_lowe">contact me on Twitter</a>. Have a great weekend!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/5LkmFRFeSLw" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/5LkmFRFeSLw/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>VMworld EMEA 2018 and Spousetivities</h3>
-		</div>
-		<div class="collectiontext">
-			<p><a href="https://spousetivities.ticketleap.com/spousetivities-barcelona-2018/">Registration is now open</a> for Spousetivities at VMworld EMEA 2108 in Barcelona! Crystal just opened registration in the last day or so, and I wanted to help get the message out about these activities.</p>
-
-<p>Here&rsquo;s a quick peek at what Crystal has lined up for Spousetivities participants:</p>
-
-<ul>
-<li>A visit to the coastal village of Calella de Palafrugell, the village of Llafranc, and Pals (one of the most well-preserved medieval villages in all of Catalunya), along with wine in the Empordá region</li>
-<li>Tour of the Dali Museum</li>
-<li>Lunch and tour of Girona</li>
-<li>A lunch-time food tour</li>
-<li>A visit to the Collsera Natural Park and Mount Tibidabo, along with lunch at a 16th century stone farmhouse</li>
-</ul>
-
-<p>For even more details, visit <a href="http://spousetivities.com/2018/10/352/">the Spousetivities site</a>.</p>
-
-<p>These activities look <em>amazing</em>. Even if you&rsquo;ve been to Barcelona before, these unique activities and tours are <strong>not</strong> available to the public&mdash;they&rsquo;re specially crafted specifically for Spousetivities participants.</p>
-
-<p>Prices for all these activities are reduced thanks to <a href="https://www.veeam.com/">Veeam</a>&rsquo;s sponsorship, and to help make things even more affordable there is a Full Week Pass that gives you access to all the activities at an additional discount.</p>
-
-<p>These activities will almost certainly sell out, so <a href="https://spousetivities.ticketleap.com/spousetivities-barcelona-2018/">register today</a>!</p>
-
-<p><strong>Side note:</strong> Helping bring a more sane work-life balance to the demanding and often draining schedules of IT conferences like VMworld is something about which I&rsquo;m very passionate. I believe that a lack of work-life balance is a strong contributing factor to burnout. Supporting Spousetivities is one small thing that I can do. That&rsquo;s why I post these announcements, and why I do my best to help spread word of the activities. I&rsquo;d ask you to please consider how you might be able to help.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/pb0ppyjy0Sg" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/pb0ppyjy0Sg/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -284,33 +172,38 @@ CMD [&quot;--help&quot;]
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="ads_b_tracks_google_earth.html">
+<div class="date">27.10.2018</div>
+<h3>ADS-B Tracks in Google Earth</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich nun schon einige Experimente mit meinem
+selbstgebauten ADS-B Tracker
+gemacht habe, wollte ich
+eine eigene Visualisierung erstellen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="max7119_ntp_uhr.html">
+<div class="date">27.10.2018</div>
+<h3>Max7119 NTP Uhr</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nach meinen Erfolgen mit
+E-Paper
+und
+WLAN-Steckdosen
+dachte ich mir, dass es an der Zeit sei, etwas neues auszuprobieren...
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="kontinuierliche_visualisierung_strange_attractors.html">
 <div class="date">20.10.2018</div>
 <h3>Kontinuierliche Visualisierung für Strange Attractors</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Nachdem ich bereits verschiedene
 Möglichkeiten der Visualisierung
 von dynamischen Systemen mit strange attractors vorgestellt habe, hier eine weitere Alternative
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="the_future_of_microprocessors.html">
-<div class="date">20.10.2018</div>
-<h3>The Future of Microprocessors</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ein Video aus dem Programm der Konferenz Julia 2018
-</p></div>   </a>
-</li>
-<li class="anriss">
-	<a href="ntp_server_raspi_em406a.html#71">
-<div class="date">16.10.2018</div>
-<h3>NTP-Server mit Raspi und EM406a</h3>
-<div class="abstract">
-	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-<p>Ich habe herausfinden wollen, ob es mir mit ein paar zu Hause herumliegenden Teilen möglich wäre,
-eine Satellitenuhr zu bauen, die ich dann im Heimnetz als NTP-Server einsetzen könnte.
 </p></div>   </a>
 </li>
 </ul>
@@ -419,7 +312,7 @@ Garten
 <h3>
 Geo
 </h3>
-	<span class="nav-item-counter">26</span>
+	<span class="nav-item-counter">27</span>
 </header>
 <div class="nav-item-body">
 <p>Karten und mehr run um Ortsinformationen</p>
@@ -445,7 +338,7 @@ GUI
 <h3>
 Hardware
 </h3>
-	<span class="nav-item-counter">18</span>
+	<span class="nav-item-counter">19</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -458,7 +351,7 @@ Hardware
 <h3>
 Java
 </h3>
-	<span class="nav-item-counter">208</span>
+	<span class="nav-item-counter">209</span>
 </header>
 <div class="nav-item-body">
 <p>Hauptsächlich Desktop Themen und Java SE</p>

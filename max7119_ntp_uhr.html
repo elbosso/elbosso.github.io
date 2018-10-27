@@ -2,13 +2,47 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>Upcoming...</title>
+  <title>Max7119 NTP Uhr</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta name="Description" content="Nach meinen Erfolgen mit
+E-Paper
+und
+WLAN-Steckdosen
+dachte ich mir, dass es an der Zeit sei, etwas neues auszuprobieren." />
   <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
 	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
 	<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
@@ -30,7 +64,7 @@ document.write(link)
 //-->
 </script>
 </head>
-<body>
+<body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
 <div id="logo">
@@ -52,37 +86,107 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 		<noscript>Der Verfasser</noscript>				
   </p>
 </div>
-<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-			<a href="https://github.com/elbosso">hier</a>.</p>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
+	über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
+	Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
+	daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
+	Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
+	Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+		<a href="https://github.com/elbosso">hier</a>.</p>
 	</div><!-- #header-->
 <div id="all">
 <div id="A">
 <div id="content">
-	<div class="heading">Upcoming...</div>
-	<p>Demnächst in diesem Theater...</p>
-<ul class="double"> 
-<li class="anriss">
-			<h3 class="head">
-				Led-Matrix Laufschrift</h3>
-<div class="abstract">
-<p>Nachdem ich wie bereits
-hier
-beschrieben mein Herz für Led-Matrix-Displays wiederentdeckt habe, habe ich überlegt,was man wohl noch damit tun könnte...
-</p></div> 
-</li>
-<li class="anriss">
-			<h3 class="head">
-				NTP-Server mit Raspi und EM406a II</h3>
-<div class="abstract">
-<p>Nachdem ich die Hardwareanpasungen für mein altes GPS-Modul hier bereits als Grundlage für
-meinen eigenen
-Atomzeit-GPS-NTP-Server
-beschrieben und die Grundlagen der Hardware in ein
-GitHub-Repositoray gepackt habe, habe ich nun den letzten schritt vollzogen.
-</p></div> 
-</li>
+<div class="date">27.10.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+	<!--li--> <a href="the_future_of_microprocessors.html#content">Hardware</a> <!--/li-->
+	<!--/ul-->
+</div>
+ 	<div class="heading">Max7119 NTP Uhr</div>
+	<p>Nach meinen Erfolgen mit
+<a href="e_paper_tuerschild_esp8266.html">E-Paper</a>
+und
+<a href="eigene_firmware_sonoff_s20.html">WLAN-Steckdosen</a>
+dachte ich mir, dass es an der Zeit sei, etwas neues auszuprobieren...
+</p> <a name="content"> </a>
+ <p>Also bestellte ich eine
+<a href="https://www.amazon.de/dp/B01BUTAFW2/ref=pe_3044161_189395811_TE_SCE_3p_dp_1">vierstellige Anzeige mit 8x8 LEDs</a>
+und kombinierte die mit der Firmware der
+<a href="eigene_firmware_sonoff_s20.html">WLAN-Steckdose</a>
+und Wissen aus dem Internet - garniert mit einem Photowiderstand - heraus kam eine
+Uhr, die sich die Zeit per NTP aus dem WLAN holt.
+</p><p>
+Der Quellcode dafür ist natürlich wieder in ein
+<a href="https://github.com/elbosso/esp8266ntpledmatrixclock">Repository</a>
+gewandert...
+</p> <ul class="single"> 
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Wemos Clock with Dot Matrix Display
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://www.connectedcities.com.ph/blogs/tutorial/wemos-clock-with-dot-matrix-display" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>WiFi Marquee Scroller
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://www.hackster.io/wizworks/wifi-marquee-scroller-e68977" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectiontext">
+		<p>Python module to drive LED Matrices & 7-segment displays (MAX7219) and RGB NeoPixels (WS2812 / APA102)
+</p>
+		</div>
+		<div class="collectionhref">
+		<a href="https://github.com/rm-hull/luma.led_matrix" target="_blank">Öffnen</a>
+		</div>
+	</li>
 </ul>
 </div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
+<li class="anriss">
+  <a href="ads_b_tracks_google_earth.html#content">
+<div class="date">27.10.2018</div>
+<h3>ADS-B Tracks in Google Earth</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich nun schon einige Experimente mit meinem
+selbstgebauten ADS-B Tracker
+gemacht habe, wollte ich
+eine eigene Visualisierung erstellen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="kontinuierliche_visualisierung_strange_attractors.html#content">
+<div class="date">20.10.2018</div>
+<h3>Kontinuierliche Visualisierung für Strange Attractors</h3>
+<div class="abstract">
+<p>Nachdem ich bereits verschiedene
+Möglichkeiten der Visualisierung
+von dynamischen Systemen mit strange attractors vorgestellt habe, hier eine weitere Alternative
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="the_future_of_microprocessors.html#content">
+<div class="date">20.10.2018</div>
+<h3>The Future of Microprocessors</h3>
+<div class="abstract">
+<p>Ein Video aus dem Programm der Konferenz Julia 2018
+</p></div>   </a>
+</li>
+</ul>
 </div>
 <nav id="C"> 
 <h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
@@ -111,7 +215,7 @@ GitHub-Repositoray gepackt habe, habe ich nun den letzten schritt vollzogen.
 <h3>
 Android
 </h3>
-	<span class="nav-item-counter">15</span>
+<span class="nav-item-counter">15</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um Googles Betriebssystem</p>
@@ -124,7 +228,7 @@ Android
 <h3>
 Basteln
 </h3>
-	<span class="nav-item-counter">13</span>
+<span class="nav-item-counter">13</span>
 </header>
 <div class="nav-item-body">
 <p>Meistens Papier (Origami...)</p>
@@ -137,7 +241,7 @@ Basteln
 <h3>
 C und C++
 </h3>
-	<span class="nav-item-counter">5</span>
+<span class="nav-item-counter">5</span>
 </header>
 <div class="nav-item-body">
 </div>
@@ -149,7 +253,7 @@ C und C++
 <h3>
 Datenbanken
 </h3>
-	<span class="nav-item-counter">13</span>
+<span class="nav-item-counter">13</span>
 </header>
 <div class="nav-item-body">
 <p>relationale und andere Datenbanken</p>
@@ -162,7 +266,7 @@ Datenbanken
 <h3>
 dWb+
 </h3>
-	<span class="nav-item-counter">85</span>
+<span class="nav-item-counter">85</span>
 </header>
 <div class="nav-item-body">
 <p>Werkzeug für rapid Prototyping</p>
@@ -175,7 +279,7 @@ dWb+
 <h3>
 Garten
 </h3>
-	<span class="nav-item-counter">3</span>
+<span class="nav-item-counter">3</span>
 </header>
 <div class="nav-item-body">
 <p>Das grüne Hobby</p>
@@ -188,7 +292,7 @@ Garten
 <h3>
 Geo
 </h3>
-	<span class="nav-item-counter">26</span>
+<span class="nav-item-counter">27</span>
 </header>
 <div class="nav-item-body">
 <p>Karten und mehr run um Ortsinformationen</p>
@@ -201,7 +305,7 @@ Geo
 <h3>
 GUI
 </h3>
-	<span class="nav-item-counter">49</span>
+<span class="nav-item-counter">49</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um graphische Benutzerschnittstellen</p>
@@ -212,9 +316,11 @@ GUI
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Hardware
+</strong>
 </h3>
-	<span class="nav-item-counter">18</span>
+<span class="nav-item-counter">19</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -227,7 +333,7 @@ Hardware
 <h3>
 Java
 </h3>
-	<span class="nav-item-counter">208</span>
+<span class="nav-item-counter">209</span>
 </header>
 <div class="nav-item-body">
 <p>Hauptsächlich Desktop Themen und Java SE</p>
@@ -240,7 +346,7 @@ Java
 <h3>
 Komponenten
 </h3>
-	<span class="nav-item-counter">146</span>
+<span class="nav-item-counter">146</span>
 </header>
 <div class="nav-item-body">
 <p>Software-Komponenten</p>
@@ -253,7 +359,7 @@ Komponenten
 <h3>
 Links
 </h3>
-	<span class="nav-item-counter">43</span>
+<span class="nav-item-counter">43</span>
 </header>
 <div class="nav-item-body">
 <p>Linksammlungen zu verschiedenen Themen</p>
@@ -266,7 +372,7 @@ Links
 <h3>
 Linux
 </h3>
-	<span class="nav-item-counter">113</span>
+<span class="nav-item-counter">113</span>
 </header>
 <div class="nav-item-body">
 <p>Alles zum Thema Gnu Linux</p>
@@ -279,7 +385,7 @@ Linux
 <h3>
 Markup
 </h3>
-	<span class="nav-item-counter">17</span>
+<span class="nav-item-counter">17</span>
 </header>
 <div class="nav-item-body">
 <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
@@ -292,7 +398,7 @@ Markup
 <h3>
 Music
 </h3>
-	<span class="nav-item-counter">20</span>
+<span class="nav-item-counter">20</span>
 </header>
 <div class="nav-item-body">
 <p>Musik, die mir gefällt</p>
@@ -305,7 +411,7 @@ Music
 <h3>
 Numerik
 </h3>
-	<span class="nav-item-counter">7</span>
+<span class="nav-item-counter">7</span>
 </header>
 <div class="nav-item-body">
 <p>Numerische Mathematik in Computern</p>
@@ -318,7 +424,7 @@ Numerik
 <h3>
 Python
 </h3>
-	<span class="nav-item-counter">6</span>
+<span class="nav-item-counter">6</span>
 </header>
 <div class="nav-item-body">
 <p>Mein Weg vom blutigen Anfänger aufwärts</p>
@@ -331,7 +437,7 @@ Python
 <h3>
 Rants
 </h3>
-	<span class="nav-item-counter">80</span>
+<span class="nav-item-counter">80</span>
 </header>
 <div class="nav-item-body">
 <p>Luft ablassen</p>
@@ -344,7 +450,7 @@ Rants
 <h3>
 Security
 </h3>
-	<span class="nav-item-counter">21</span>
+<span class="nav-item-counter">21</span>
 </header>
 <div class="nav-item-body">
 <p>IT-Sicherheit</p>
@@ -357,7 +463,7 @@ Security
 <h3>
 sQLshell
 </h3>
-	<span class="nav-item-counter">25</span>
+<span class="nav-item-counter">25</span>
 </header>
 <div class="nav-item-body">
 <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
@@ -370,7 +476,7 @@ sQLshell
 <h3>
 Verschiedenes
 </h3>
-	<span class="nav-item-counter">12</span>
+<span class="nav-item-counter">12</span>
 </header>
 <div class="nav-item-body">
 <p>Passt in keine der anderen Kategorien...</p>
@@ -383,7 +489,7 @@ Verschiedenes
 <h3>
 Video
 </h3>
-	<span class="nav-item-counter">26</span>
+<span class="nav-item-counter">26</span>
 </header>
 <div class="nav-item-body">
 <p>Artikel mit bunten Filmchen</p>
@@ -396,7 +502,7 @@ Video
 <h3>
 Virtualisierung
 </h3>
-	<span class="nav-item-counter">25</span>
+<span class="nav-item-counter">25</span>
 </header>
 <div class="nav-item-body">
 <p>Technologien und Themen rund um virtuelle Rechner</p>
@@ -409,7 +515,7 @@ Virtualisierung
 <h3>
 Windows
 </h3>
-	<span class="nav-item-counter">3</span>
+<span class="nav-item-counter">3</span>
 </header>
 <div class="nav-item-body">
 </div>
@@ -419,9 +525,7 @@ Windows
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-<strong>
 Upcoming...
-</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -429,9 +533,6 @@ Upcoming...
 </div>
 </div>
 </a>
-<!--
--->
-
 </nav>
 </div>
 	<div id="footer">
@@ -452,8 +553,7 @@ abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZ
 		</script>
 		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
 			</a></strong>
-	</span>
-</div><!-- #footer -->
+	</span></div><!-- #footer -->
 </div>
 </body>
 </html>
