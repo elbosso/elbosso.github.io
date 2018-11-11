@@ -117,6 +117,87 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>Technology Short Take 106</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Welcome to Technology Short Take #106! It&rsquo;s been quite a while (over a month) since the last Tech Short Take, as this one kept getting pushed back. Sorry about that, folks! Hopefully I&rsquo;ve still managed to find useful and helpful links to include below. Enjoy!</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>Julia Evans provides <a href="https://jvns.ca/blog/2018/10/27/envoy-basics/">some Envoy basics</a>. <a href="https://www.envoyproxy.io/">Envoy</a> is a useful project with which to be familiar; it serves as the data plane for the <a href="https://istio.io/">Istio service mesh</a>, and it is the data plane for Heptio&rsquo;s <a href="https://github.com/heptio/contour">Contour ingress controller</a> (and, by extension, Heptio&rsquo;s <a href="https://github.com/heptio/gimbal">Gimbal multi-cluster routing solution</a>).</li>
+<li>Continuing on that Envoy theme, you may find <a href="https://blog.envoyproxy.io/introduction-to-modern-network-load-balancing-and-proxying-a57f6ff80236">this article</a> by Matt Klein&mdash;one of the primary authors of Envoy&mdash;helpful in understanding some of the concepts behind modern load balancing and proxying. Many of these concepts had direct impacts on the design of Envoy.</li>
+</ul>
+
+<h2 id="servers-hardware">Servers/Hardware</h2>
+
+<ul>
+<li>The Intel Management Engine (ME) has received a bit of attention as a potential security vulnerability; in <a href="http://blog.ptsecurity.com/2018/10/intel-me-manufacturing-mode-macbook.html">this article</a>, authors Maxim Goryachy and Mark Ermolov expose some new concerns around the Intel ME and its undocumented Manufacturing Mode.</li>
+<li>Serve The Home takes <a href="https://www.servethehome.com/investigating-implausible-bloomberg-supermicro-stories/">a critical look</a> at the Bloomberg Supermicro stories, debunking or at least calling into question many details of the alleged hardware hack as reported by Bloomberg.</li>
+</ul>
+
+<h2 id="security">Security</h2>
+
+<ul>
+<li>From an unknown author, we have <a href="http://flatkill.org/">this security rant on Flatpak</a>.</li>
+<li>Google&rsquo;s Project Zero team posted <a href="https://googleprojectzero.blogspot.com/2018/10/365-days-later-finding-and-exploiting.html">an update on finding and exploiting Safari bugs using publicly available tools</a>.</li>
+<li>This page has a list of <a href="https://null-byte.wonderhowto.com/how-to/ultimate-guide-hacking-macos-0188749/">ways to exploit (or hack) macOS</a>. I share this not to encourage illegal activities, but instead to point out that <em>no</em> operating system is secure, so be alert at all times and use good computing practices regardless of your OS.</li>
+<li>Björn Wenzel shows <a href="https://koudingspawn-blog.firebaseapp.com/combine-vault-with-kubeadm/">how to use HashiCorp Vault to generate short-lived certificates for use with <code>kubectl</code></a> for managing/interacting with a Kubernetes cluster. This is a pretty neat idea, but keep in mind you also have the &ldquo;overhead&rdquo; of managing a Vault installation (which has its own set of challenges).</li>
+</ul>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li>Ric Harvey shows <a href="https://digilution.io/posts/ci-cd-pipeline-for-hugo/">how to automatically deploy Hugo updates using AWS CodeBuild</a>. This is something I&rsquo;ve been considering for my own site, but just haven&rsquo;t taken the time to really dig in. Thanks for (potentially) saving me some time, Ric!</li>
+<li>If you use the AWS CLI but haven&rsquo;t read <a href="https://alestic.com/2013/11/aws-cli-query/">this post by Eric Hammond</a> yet, you are doing yourself a disservice.</li>
+<li>Maish Saidel-Keesing examines <a href="https://technodrone.blogspot.com/2018/10/aws-privatelink-vs-nat-gateway-from.html">the design trade-offs for NAT gateways versus AWS PrivateLink</a>.</li>
+<li>I, for one, was very glad to see <a href="https://kubernetes.io/blog/2018/10/04/introducing-the-non-code-contributors-guide/">this</a>. Non-code contributions are, in my opinion, an important but oft-overlooked aspect of open source communities.</li>
+<li>Clement Pang, co-founder and Chief Architect of Wavefront, <a href="https://medium.com/@clementpang/thoughts-from-the-front-line-operating-at-99-95-uptime-b97d772b5e66">talks about building a highly-available service</a>.</li>
+<li>Dušan Šušic has a write-up on <a href="https://medium.com/@dusansusic/traefik-ingress-controller-for-k8s-c1137c9c05c4">using Traefik as a Kubernetes ingress controller</a>.</li>
+<li>Fellow VMware alum Steve Flanders has a write-up on <a href="https://sflanders.net/2018/10/24/running-kubernetes-locally/">running Kubernetes locally</a> (on a Mac). Steve also shares what he thinks are <a href="https://sflanders.net/2018/10/26/must-have-kubernetes-tools/">some must-have tools for Kubernetes</a>.</li>
+<li>Steven Acreman shares a brief, high-level <a href="https://kubedex.com/nginx-ingress-vs-kong-vs-traefik-vs-haproxy-vs-voyager-vs-contour-vs-ambassador/">comparison of the major Kubernetes ingress solutions</a>.</li>
+<li>I enjoy Michael Hausenblas&rsquo; &ldquo;appops reloaded&rdquo; posts, which are similar to my Tech Short Takes but more tightly focused on cloud-native stuff. He recently hit <a href="https://tinyletter.com/mhausenblas/letters/appops-reloaded-100-o">post number 100 in the series</a>. Good stuff!</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>Denzil Ferreira shares some experiences with <a href="https://denzilferreira.github.io/microsoft-surface-pro-4-and-fedora-28/">the Microsoft Surface Pro 4 and Fedora 28</a>. The &ldquo;TL;DR&rdquo; is that it works, but there&rsquo;s a fair amount of effort involved to get there.</li>
+<li><a href="https://gist.github.com/a7madgamal/c2ce04dde8520f426005e5ed28da8608">This</a> got a fair amount of attention recently.</li>
+<li>Ed Haletky shares <a href="https://www.astroarch.com/2018/10/migration-week-to-an-apple-macbook-pro/">his experience in migrating to a new MacBook Pro</a>; perhaps some of the information he shares will be helpful to others.</li>
+<li>Daniele Polencic shares <a href="https://medium.com/skills-matter/3-simple-tricks-for-smaller-docker-images-cf2760645621">3 tricks for smaller Docker images</a>. The title is a bit misleading; the article is really more about using different base images to optimize for size. Useful nevertheless, though.</li>
+<li>I loved <a href="https://zwischenzugs.com/2018/10/12/eleven-bash-tips-you-might-want-to-know/">this set of Bash tips</a>.</li>
+<li>Andrej Yemelianov has <a href="https://blog.selectel.com/managing-containers-runc/">a quick introduction to managing containers in <code>runC</code></a>.</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<p>Nothing this time around, but I&rsquo;ll stay alert for items I can include in the next Technology Short Take.</p>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<ul>
+<li>In August of this year (2018), SSD published <a href="https://blogs.securiteam.com/index.php/archives/3736">this article on a guest-to-host escape found in VirtualBox</a>. It looks like the VirtualBox community fixed the issue fairly quickly, but you may want to double-check your version to make sure you aren&rsquo;t vulnerable.</li>
+</ul>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<ul>
+<li>Consider <a href="https://packetpushers.net/the-most-fragile-engineers-i-know/">this</a> to be a career skills &ldquo;anti-pattern,&rdquo; if you will (a list of things not to do or be).</li>
+<li>Nick Shrock provides <a href="https://medium.com/@schrockn/on-code-reviews-b1c7c94d868c">some guidelines and advice on performing code reviews</a>.</li>
+</ul>
+
+<p>OK, that&rsquo;s all I have for now. Question for the readers (we&rsquo;ll see how many of you make it this far)&mdash;which is better for you, regular Tech Short Takes that might be shorter <em>or</em> Tech Short Takes about this length (~30-ish links) but less frequently? <a href="https://twitter.com/scott_lowe">Hit me on Twitter and let me know.</a> Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/CJBgf9ZmX2Y" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/CJBgf9ZmX2Y/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>Spousetivities at DockerCon EU 18</h3>
 		</div>
 		<div class="collectiontext">
@@ -180,59 +261,6 @@ Restart=always
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/xHY1qUZJ2iI/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Validating RAML Files Using Docker</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Back in July of this year I <a href="https://blog.scottlowe.org/2018/07/23/bolstering-my-software-development-skills/">introduced Polyglot</a>, a project whose only purpose is to provide a means for me to learn more about software development and programming (areas where am I sorely lacking real knowledge). In the limited spare time I&rsquo;ve had to work on Polyglot in the ensuing months, I&rsquo;ve been building out an API specification using <a href="https://raml.org/">RAML</a>, and in this post I&rsquo;ll share how I use <a href="https://www.docker.com/">Docker</a> and a Docker image to validate my RAML files.</p>
-
-<p>Since I was (am) using <a href="https://code.visualstudio.com/">Visual Studio Code</a> as my primary text editor/development environment these days, I started out by looking for a RAML extension that would provide some sort of linting/validation functionality. I found an extension to do RAML syntax highlighting, which seemed like a reasonable first step.</p>
-
-<p>After a bit more research, I found that there was a <code>raml-cli</code> NPM package that one could use to validate RAML files from the command line. I was a bit leery of installing an NPM package on my system, so I thought, &ldquo;Why not use a Docker container for this?&rdquo; It will keep my system clean of excess/unnecessary packages and dependencies, and it will provide some practice with building Docker containers.</p>
-
-<p>A bit of work later I had this <code>Dockerfile</code> (which you can find in <a href="https://github.com/scottslowe/dockerfiles/">my &ldquo;dockerfiles&rdquo; GitHub repository</a>):</p>
-
-<pre><code>FROM node:6.14.3-alpine
-
-LABEL maintainer &quot;Scott Lowe &lt;scott.lowe@scottlowe.org&gt;&quot;
-
-RUN apk add --no-cache git &amp;&amp; \
-    rm -rf /var/cache/apk/*
-
-RUN npm install -qg raml-cli &amp;&amp; \
-    npm cache clean
-
-RUN mkdir -p /data
-VOLUME /data
-WORKDIR /data
-
-ENTRYPOINT [&quot;raml&quot;]
-
-CMD [&quot;--help&quot;]
-</code></pre>
-
-<p>Feeding this to <code>docker build</code> results in an image of about 196MB in size, which isn&rsquo;t too shabby (I&rsquo;d like to continue to try to shave this down even further). With this image, I can now easily validate RAML files:</p>
-
-<pre><code class="language-sh">docker run --rm -v $(pwd):/data raml-cli:0.1 validate orders-api.raml
-</code></pre>
-
-<p>And, of course, I could make this even easier with a Bash alias:</p>
-
-<pre><code class="language-sh">alias raml-cli=&quot;docker run --rm -v $(pwd):/data raml-cli:0.1&quot;
-</code></pre>
-
-<p>Using the alias means I can now simply run <code>raml-cli validate &lt;filename.raml&gt;</code>. This makes it very easy for me to validate the RAML specifications I&rsquo;m writing.</p>
-
-<p>In the event others may find this helpful, the <code>Dockerfile</code> is on GitHub in <a href="https://github.com/scottslowe/dockerfiles/">my &ldquo;dockerfiles&rdquo; repository</a>, and I&rsquo;ve <a href="https://hub.docker.com/r/slowe/raml-cli/">pushed the Docker image to Docker Hub</a> for anyone to pull down.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/MO7BRwmhssQ" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/MO7BRwmhssQ/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -240,40 +268,36 @@ CMD [&quot;--help&quot;]
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="neue_datengeneratoren_iv.html">
+<div class="date">11.11.2018</div>
+<h3>Neue Datengeneratoren IV</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich das letzte mal von einer Erweiterung des
+Frameworks selbst berichtet habe, soll es diesmal wieder um die Vorstellung
+einiger neuer Generatoren für das
+Framework zur Erzeugung von Testdaten
+gehen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="mathematik_beliebiger_praezision_java.html">
+<div class="date">11.11.2018</div>
+<h3>Mathematik mit beliebiger Präzision in Java</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Wann immer ich hier über Experimente mit
+berichte, habe ich im Hinterkopf, dass diese Verfahren eigentlich völlig ungeeignet
+dafür sind, solche Systeme zu analysieren, da heutige Digitalcomputer bereits rationale Zahlen
+nicht exakt darstellen können - von irrationalen ganz zu schweigen...
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="rechtevergabe_java.html">
 <div class="date">04.11.2018</div>
 <h3>Rechtevergabe in Java</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Eine Klarstellung zum Thema Java, SecurityManager, Principals und Permissions
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="update_tileserver_auf_18_04.html">
-<div class="date">04.11.2018</div>
-<h3>Update Tileserver auf 18.04</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem ich an dieser Stelle bereits
-einige
-der Erfahrungen mit einem Upgrade/Umstieg von Ubuntu 16.04 auf 18.04
-dargelegt habe,
-habe ich mich entschieden, den
-Hillshading-
-und den
-Openstreetmap-Server
-zu aktualisieren.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="ads_b_tracks_google_earth.html">
-<div class="date">27.10.2018</div>
-<h3>ADS-B Tracks in Google Earth</h3>
-<div class="abstract">
-<p>Nachdem ich nun schon einige Experimente mit meinem
-selbstgebauten ADS-B Tracker
-gemacht habe, wollte ich
-eine eigene Visualisierung erstellen.
 </p></div>   </a>
 </li>
 </ul>
@@ -421,7 +445,7 @@ Hardware
 <h3>
 Java
 </h3>
-	<span class="nav-item-counter">210</span>
+	<span class="nav-item-counter">211</span>
 </header>
 <div class="nav-item-body">
 <p>Hauptsächlich Desktop Themen und Java SE</p>
@@ -434,7 +458,7 @@ Java
 <h3>
 Komponenten
 </h3>
-	<span class="nav-item-counter">146</span>
+	<span class="nav-item-counter">147</span>
 </header>
 <div class="nav-item-body">
 <p>Software-Komponenten</p>
@@ -499,7 +523,7 @@ Music
 <h3>
 Numerik
 </h3>
-	<span class="nav-item-counter">7</span>
+	<span class="nav-item-counter">8</span>
 </header>
 <div class="nav-item-body">
 <p>Numerische Mathematik in Computern</p>
