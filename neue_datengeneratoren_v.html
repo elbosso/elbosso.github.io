@@ -2,13 +2,47 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
-  <title>Upcoming...</title>
+  <title>Neue Datengeneratoren V</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta name="Description" content="Wieder habe ich das
+Framework zur Erzeugung von Testdaten
+um einige
+neue Generatoren
+erweitert." />
   <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
 	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!--script type="text/javascript">
+function toggle(el)
+{
+myEl = document.getElementById(el);
+myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
+} 
+function toggleA()
+{
+myEl = document.getElementById('C');
+var computedStyle = getComputedStyle(myEl, null)
+/*alert(computedStyle.display);*/
+myEl = document.getElementById('A');
+if (computedStyle.display=="none") 
+{
+	document.getElementById('B').className = "nonreader";
+	document.getElementById('C').className = "nonreader";
+	myEl.className = "nonreader";
+	document.getElementById('all').className = "nonreader";
+}
+else 
+{
+	document.getElementById('B').className = "reader";
+	document.getElementById('C').className = "reader";
+	myEl.className = "reader";
+	document.getElementById('all').className = "reader";
+}
+/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
+}
+</script-->
 	<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
@@ -30,7 +64,7 @@ document.write(link)
 //-->
 </script>
 </head>
-<body>
+<body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
 <div id="logo">
@@ -52,36 +86,122 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 		<noscript>Der Verfasser</noscript>				
   </p>
 </div>
-<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-			<a href="https://github.com/elbosso">hier</a>.</p>
+<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
+	über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
+	Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
+	daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
+	Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
+	Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+		<a href="https://github.com/elbosso">hier</a>.</p>
 	</div><!-- #header-->
 <div id="all">
 <div id="A">
 <div id="content">
-	<div class="heading">Upcoming...</div>
-	<p>Demnächst in diesem Theater...</p>
-<ul class="double"> 
+<div class="date">18.11.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
+<div class="previousArticlesInCategories">
+	<!--ul-->
+	vorhergehende Artikel in:
+	<!--li--> <a href="neue_datengeneratoren_iv.html#content">Java</a> <!--/li-->
+	<!--li--> ,<a href="neue_datengeneratoren_iv.html#content">Komponenten</a> <!--/li-->
+	<!--/ul-->
+</div>
+ 	<div class="heading">Neue Datengeneratoren V</div>
+	<p>Wieder habe ich das
+Framework zur Erzeugung von Testdaten
+um einige
+<a href="neue_datengeneratoren_iv.html">neue Generatoren</a>
+erweitert.
+</p> <a name="content"> </a>
+ <p>Das Framework zur Erzeugung von Testdaten bietet die Möglichkeit,
+über Implementierung des Interface Collection eine beliebige Menge
+von Testdaten mit definierten Eigenschaften zu erzeugen.
+</p><p>
+Die zur Verfügung stehenden Generatoren lassen sich grob zwei Kategorien
+zuordnen: Allgemeine Generatoren erzeugen Instanzen einfacher Datentypen, wie Zahlen oder Strings,
+die keine tiefere Bedeutung haben. Semantische Generatoren erzeugen komplexere Daten 
+mit definierten Bedeutungen. Beispiele dafür sind zum Beispiel postalische
+Adressen, Kreditkartennummern oder Telefonnummern.
+</p><p>
+In letzter Zeit wurden wieder einige weitere Generatoren in das Framework integriert, das
+zum Beispiel in der 
+<a href="sQLshell.html">sQLshell</a>
+für die Erzeugung von Testdaten für Tabellen in relationalen Datenbanken
+benutzt wird.
+</p><p>
+Die neuen Generatoren sind diesmal dediziert semantische Generatoren - sie
+ erstellen unter Zuhilfenahme bereits vorhandener Generatoren
+ Personenbeschreibungen und Beschreibungen von Ereignissen:
+</p><p>
+Im einzelnen kamen folgende Generatoren hinzu:
+<dl>
+<dt>VCardSequence</dt>
+<dd>Erzeugt Datenstrukturen, die
+<a href="https://tools.ietf.org/html/rfc6350">RFC 6350</a> folgen und damit
+"...representing and
+    exchanging a variety of information about individuals and other
+    entities..."</dd>
+<dt>ICalSequence</dt>
+<dd>Erzeugt Datenstrukturen, die
+<a href="https://tools.ietf.org/html/rfc5545">RFC 5545</a> folgen und damit
+"...representing and
+ exchanging calendaring and scheduling information such as events,
+ to-dos, journal entries, and free/busy information..."</dd>
+</dl>
+</p><p>
+Hier ist je ein Beispiel für die von beiden Generatoren erzeugten Ergebnisse angehängt:
+</p><p>
+<dl>
+<a href="resources/generated_ical.ics">
+<dt><img src="images/mime/Oxygen480-mimetypes-text-calendar_48.png"></dt><dd>ICal</dd>
+</a>
+<a href="resources/generated_vcard.vcf">
+<dt><img src="images/mime/Oxygen480-mimetypes-text-x-vcard_48.png"></dt><dd>VCard</dd>
+</a>
+</dl>
+</p> </div>
+</div>
+<div id="B"> 
+	<h2>Neueste Artikel</h2>
+<ul class="inset"> 
 <li class="anriss">
-			<h3 class="head">
-				Literaturempfehlung: KI, AI, ML = Crap</h3>
+  <a href="strange_attractors_bigdecimal.html#content">
+<div class="date">18.11.2018</div>
+<h3>Strange Attractors mit BigDecimal</h3>
 <div class="abstract">
-<p>Ich weiß auch nicht, warum ich neuen Technologien - und ich nutze das Wort hier wirklich in seinem
-weitesten Sinne - neuerdings so ablehnend gegenüberstehe. Ist es mein Alter? Oder ist es, weils
-Bullshit
-ist?
-</p></div> 
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich mir in meinem
+früheren Artikel
+zum Thema der Mathematik mit beliebiger Präzision in Java noch nicht sicher war ob es Sinn machen würde,
+mein
+Framework für die numerische Behandlung von Differentialgleichungssystemen
+auf die Option der Benutzung von BigDecimal als unterliegenden Datentyp zu erweitern, habe ich nun doch damit experimentiert:
+</p></div>   </a>
 </li>
 <li class="anriss">
-			<h3 class="head">
-				Lyapunov-Koeffizienten</h3>
+  <a href="neue_datengeneratoren_iv.html#content">
+<div class="date">11.11.2018</div>
+<h3>Neue Datengeneratoren IV</h3>
 <div class="abstract">
-<p>Nachdem ich nun bereits
-Bifurcation Diagramme
-mittels Gnuplot visualisiert hatte, wollte ich auch Lyapunov Exponenten berechnen und darstellen...
-</p></div> 
+<p>Nachdem ich das letzte mal von einer Erweiterung des
+Frameworks selbst berichtet habe, soll es diesmal wieder um die Vorstellung
+einiger neuer Generatoren für das
+Framework zur Erzeugung von Testdaten
+gehen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="mathematik_beliebiger_praezision_java.html#content">
+<div class="date">11.11.2018</div>
+<h3>Mathematik mit beliebiger Präzision in Java</h3>
+<div class="abstract">
+<p>Wann immer ich hier über Experimente mit
+berichte, habe ich im Hinterkopf, dass diese Verfahren eigentlich völlig ungeeignet
+dafür sind, solche Systeme zu analysieren, da heutige Digitalcomputer bereits rationale Zahlen
+nicht exakt darstellen können - von irrationalen ganz zu schweigen...
+</p></div>   </a>
 </li>
 </ul>
-</div>
 </div>
 <nav id="C"> 
 <h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
@@ -110,7 +230,7 @@ mittels Gnuplot visualisiert hatte, wollte ich auch Lyapunov Exponenten berechne
 <h3>
 Android
 </h3>
-	<span class="nav-item-counter">15</span>
+<span class="nav-item-counter">15</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um Googles Betriebssystem</p>
@@ -123,7 +243,7 @@ Android
 <h3>
 Basteln
 </h3>
-	<span class="nav-item-counter">13</span>
+<span class="nav-item-counter">13</span>
 </header>
 <div class="nav-item-body">
 <p>Meistens Papier (Origami...)</p>
@@ -136,7 +256,7 @@ Basteln
 <h3>
 C und C++
 </h3>
-	<span class="nav-item-counter">5</span>
+<span class="nav-item-counter">5</span>
 </header>
 <div class="nav-item-body">
 </div>
@@ -148,7 +268,7 @@ C und C++
 <h3>
 Datenbanken
 </h3>
-	<span class="nav-item-counter">13</span>
+<span class="nav-item-counter">13</span>
 </header>
 <div class="nav-item-body">
 <p>relationale und andere Datenbanken</p>
@@ -161,7 +281,7 @@ Datenbanken
 <h3>
 dWb+
 </h3>
-	<span class="nav-item-counter">85</span>
+<span class="nav-item-counter">85</span>
 </header>
 <div class="nav-item-body">
 <p>Werkzeug für rapid Prototyping</p>
@@ -174,7 +294,7 @@ dWb+
 <h3>
 Garten
 </h3>
-	<span class="nav-item-counter">3</span>
+<span class="nav-item-counter">3</span>
 </header>
 <div class="nav-item-body">
 <p>Das grüne Hobby</p>
@@ -187,7 +307,7 @@ Garten
 <h3>
 Geo
 </h3>
-	<span class="nav-item-counter">28</span>
+<span class="nav-item-counter">28</span>
 </header>
 <div class="nav-item-body">
 <p>Karten und mehr run um Ortsinformationen</p>
@@ -200,7 +320,7 @@ Geo
 <h3>
 GUI
 </h3>
-	<span class="nav-item-counter">49</span>
+<span class="nav-item-counter">49</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um graphische Benutzerschnittstellen</p>
@@ -213,7 +333,7 @@ GUI
 <h3>
 Hardware
 </h3>
-	<span class="nav-item-counter">19</span>
+<span class="nav-item-counter">19</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -224,9 +344,11 @@ Hardware
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Java
+</strong>
 </h3>
-	<span class="nav-item-counter">211</span>
+<span class="nav-item-counter">213</span>
 </header>
 <div class="nav-item-body">
 <p>Hauptsächlich Desktop Themen und Java SE</p>
@@ -237,9 +359,11 @@ Java
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
+<strong>
 Komponenten
+</strong>
 </h3>
-	<span class="nav-item-counter">147</span>
+<span class="nav-item-counter">148</span>
 </header>
 <div class="nav-item-body">
 <p>Software-Komponenten</p>
@@ -252,7 +376,7 @@ Komponenten
 <h3>
 Links
 </h3>
-	<span class="nav-item-counter">43</span>
+<span class="nav-item-counter">43</span>
 </header>
 <div class="nav-item-body">
 <p>Linksammlungen zu verschiedenen Themen</p>
@@ -265,7 +389,7 @@ Links
 <h3>
 Linux
 </h3>
-	<span class="nav-item-counter">114</span>
+<span class="nav-item-counter">114</span>
 </header>
 <div class="nav-item-body">
 <p>Alles zum Thema Gnu Linux</p>
@@ -278,7 +402,7 @@ Linux
 <h3>
 Markup
 </h3>
-	<span class="nav-item-counter">17</span>
+<span class="nav-item-counter">17</span>
 </header>
 <div class="nav-item-body">
 <p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
@@ -291,7 +415,7 @@ Markup
 <h3>
 Music
 </h3>
-	<span class="nav-item-counter">20</span>
+<span class="nav-item-counter">20</span>
 </header>
 <div class="nav-item-body">
 <p>Musik, die mir gefällt</p>
@@ -304,7 +428,7 @@ Music
 <h3>
 Numerik
 </h3>
-	<span class="nav-item-counter">8</span>
+<span class="nav-item-counter">9</span>
 </header>
 <div class="nav-item-body">
 <p>Numerische Mathematik in Computern</p>
@@ -317,7 +441,7 @@ Numerik
 <h3>
 Python
 </h3>
-	<span class="nav-item-counter">6</span>
+<span class="nav-item-counter">6</span>
 </header>
 <div class="nav-item-body">
 <p>Mein Weg vom blutigen Anfänger aufwärts</p>
@@ -330,7 +454,7 @@ Python
 <h3>
 Rants
 </h3>
-	<span class="nav-item-counter">80</span>
+<span class="nav-item-counter">80</span>
 </header>
 <div class="nav-item-body">
 <p>Luft ablassen</p>
@@ -343,7 +467,7 @@ Rants
 <h3>
 Security
 </h3>
-	<span class="nav-item-counter">22</span>
+<span class="nav-item-counter">22</span>
 </header>
 <div class="nav-item-body">
 <p>IT-Sicherheit</p>
@@ -356,7 +480,7 @@ Security
 <h3>
 sQLshell
 </h3>
-	<span class="nav-item-counter">25</span>
+<span class="nav-item-counter">25</span>
 </header>
 <div class="nav-item-body">
 <p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
@@ -369,7 +493,7 @@ sQLshell
 <h3>
 Verschiedenes
 </h3>
-	<span class="nav-item-counter">12</span>
+<span class="nav-item-counter">12</span>
 </header>
 <div class="nav-item-body">
 <p>Passt in keine der anderen Kategorien...</p>
@@ -382,7 +506,7 @@ Verschiedenes
 <h3>
 Video
 </h3>
-	<span class="nav-item-counter">26</span>
+<span class="nav-item-counter">26</span>
 </header>
 <div class="nav-item-body">
 <p>Artikel mit bunten Filmchen</p>
@@ -395,7 +519,7 @@ Video
 <h3>
 Virtualisierung
 </h3>
-	<span class="nav-item-counter">26</span>
+<span class="nav-item-counter">26</span>
 </header>
 <div class="nav-item-body">
 <p>Technologien und Themen rund um virtuelle Rechner</p>
@@ -408,7 +532,7 @@ Virtualisierung
 <h3>
 Windows
 </h3>
-	<span class="nav-item-counter">3</span>
+<span class="nav-item-counter">3</span>
 </header>
 <div class="nav-item-body">
 </div>
@@ -418,9 +542,7 @@ Windows
 <div class="nav-item accordion">
 <header class="nav-item-header">
 <h3>
-<strong>
 Upcoming...
-</strong>
 </h3>
 </header>
 <div class="nav-item-body">
@@ -428,9 +550,6 @@ Upcoming...
 </div>
 </div>
 </a>
-<!--
--->
-
 </nav>
 </div>
 	<div id="footer">
@@ -451,8 +570,7 @@ abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZ
 		</script>
 		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
 			</a></strong>
-	</span>
-</div><!-- #footer -->
+	</span></div><!-- #footer -->
 </div>
 </body>
 </html>
