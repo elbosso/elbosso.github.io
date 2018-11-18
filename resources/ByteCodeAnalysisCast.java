@@ -59,7 +59,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 			double d=(a*1.0)/(b*1.0);
 			sum+=d;
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.measure());
+		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
 		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sum);
 	}
 	private void calcCast()
@@ -75,7 +75,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 			double d=(double)a/(double)b;
 			sum+=d;
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.measure());
+		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
 		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sum);
 	}
 	private java.util.List<java.lang.String> createStringList()
@@ -101,7 +101,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(string);
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.measure());
+		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
 	}
 	private void iterListVar(java.util.List<java.lang.String> l)
 	{
@@ -112,7 +112,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(l.get(i));
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.measure());
+		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
 	}
 	private void iterList(java.util.List<java.lang.String> l)
 	{
@@ -122,7 +122,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(string);
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.measure());
+		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
 	}
 	
 	public static void main(java.lang.String[] args)
