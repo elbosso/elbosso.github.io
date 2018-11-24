@@ -6,12 +6,18 @@
 
 package de.elbosso.util.beans;
 
+import de.elbosso.util.lang.annotations.BeanInfo;
 import de.elbosso.util.lang.annotations.Event;
+import de.elbosso.util.lang.annotations.Method;
+import de.elbosso.util.lang.annotations.Property;
 
 /**
  *
  * @author elbosso
  */
+@BeanInfo(
+//		i18nBundle = "\"de.netsysit.util.6i18n\""
+)
 public class EventHandlingSupport extends java.lang.Object implements de.netsysit.util.beans.PropertyChangeSender
 {
 	private final java.beans.PropertyChangeSupport pcs;
@@ -52,12 +58,32 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 		pcs.removePropertyChangeListener(name, l);
 	}
 
-	/**
+/*	@Property(
+			description = "\"huhu\"",
+			displayName = "\"hallo\"",
+			bound = true
+	)
+	public int getProperty()
+	{
+		return -1;
+	}
+	@Method
+			(
+					displayName="i18n.getString(\"ScalarBoxFilter.putInputBoxed.displayName\")"
+			)
+	public void meth()
+	{
+
+	}
+*/	/**
 	 *  This method registers listeners for PropertyChangeEvents.
 	 *
 	 * @param  l     The listener interested in changes in the named property.
 	 */
-	@Event
+
+	@Event(
+		inDefaultEventSet = true
+		)
 	public void addPropertyChangeListener( java.beans.PropertyChangeListener l)
     {
 		pcs.addPropertyChangeListener(l);
@@ -69,7 +95,9 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	 *
 	 * @param  l     The listener to be deregistered.
 	 */
-	@Event
+	@Event(
+		inDefaultEventSet = true
+		)
 	public void removePropertyChangeListener(java.beans.PropertyChangeListener l)
     {
 		pcs.removePropertyChangeListener( l);
