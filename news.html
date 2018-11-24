@@ -193,74 +193,6 @@ display('news.html')
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/CJBgf9ZmX2Y/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Spousetivities at DockerCon EU 18</h3>
-		</div>
-		<div class="collectiontext">
-			<p><a href="https://europe-2018.dockercon.com/">DockerCon EU 18</a> is set to kick off in early December (December 3-5, to be precise!) in Barcelona, Spain. Thanks to Docker&rsquo;s commitment to attendee families&mdash;something for which I have and will continue to commend them&mdash;DockerCon will offer both childcare (as they have in years past) <em>and</em> spouse/partner activities via Spousetivities. Let me just say: Spousetivities in Barcelona rocks. Crystal lines up a great set of activities that really cannot be beat.</p>
-
-<p>Here&rsquo;s some details on what&rsquo;s available in Barcelona for DockerCon EU 18:</p>
-
-<ul>
-<li>On Monday, December 3, there will be a private tour of Costa Brava and Girona. Girona is an extremely well-preserved medieval walled city dating back to the first century! If you&rsquo;re a fan of history, this is one not to miss. The tour will, of course, include an amazing lunch in a traditional local restaurant.</li>
-<li>Tuesday, December 4, participants will do a combined Barcelona city tour along with a visit to the famous La Sagrada Familia. The city tour will include stops to sample a wide variety of tapas in local venues. You&rsquo;ll also get to visit La Sagrada Familia, which is a definite must-see if you&rsquo;ve never visited before.</li>
-<li>Wrapping up the events on Wednesday, December 5, Spousetivities will go to Montserrat. This impressive monastery is a fantastic place to visit, full of history and culture. Also found at Montserrat is &ldquo;Moreneta de Montserrat,&rdquo; one of the famous black Madonnas of Europe. The tour will also include a fantastic lunch of local Catalan cuisine, followed by a visit to a nearby medieval village for more historic architecture.</li>
-</ul>
-
-<p>For this event, Docker is stepping up their support of Spousetivities by <em>integrating Spousetivities registration directly into their conference registration.</em> So, if you&rsquo;re a DockerCon attendee and you&rsquo;d like to add activities for your spouse or significant other, you can do so directly from within your DockerCon registration. <a href="https://europe-2018.dockercon.com/spousetivities/">This page</a> has more details on the activities and links to update your DockerCon registration with one or more activities.</p>
-
-<p>(BTW, if you need information on childcare, see <a href="https://europe-2018.dockercon.com/childcare">here</a>.)</p>
-
-<p>The pricing for Spousetivities is also pretty impressive: only 150 euros a day, and if you pay for 2 days you get a third day at no additional cost! That&rsquo;s right&mdash;150 euros for any one day of activities, or 300 euros for all three days of activities! Visit <a href="https://europe-2018.dockercon.com/spousetivities/">the DockerCon Spousetivities landing page</a> for a link to add activities to a DockerCon registration&mdash;and hurry before the events sell out!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/ahqV3Dj74BA" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ahqV3Dj74BA/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>More on Setting up etcd with Kubeadm</h3>
-		</div>
-		<div class="collectiontext">
-			<p>A while ago I wrote about <a href="https://blog.scottlowe.org/2018/08/21/bootstrapping-etcd-cluster-with-tls-using-kubeadm/">using <code>kubeadm</code> to bootstrap an etcd cluster with TLS</a>. In that post, I talked about one way to establish a secure etcd cluster using <code>kubeadm</code> and running etcd as systemd units. In this post, I want to focus on a slightly different approach: running etcd as static pods. The information on this post is intended to build upon the information already available in the Kubernetes official documentation, not serve as a replacement.</p>
-
-<p>For reference, the Kubernetes official documentation has a write-up on using <code>kubeadm</code> to establish an etcd cluster with etcd running as static pods. For Kubernetes 1.12.x (the current version as of this writing), that information is <a href="https://kubernetes.io/docs/setup/independent/setup-ha-etcd-with-kubeadm/">here</a>; for Kubernetes 1.11.x, that same information is <a href="https://v1-11.docs.kubernetes.io/docs/tasks/administer-cluster/setup-ha-etcd-with-kubeadm/">here</a>.</p>
-
-<p>When using these instructions for use with Kubernetes 1.11.x, the official guide leaves something out that is very important: reconfiguring the kubelet to operate in a standalone fashion (without the Kubernetes control plane). This information <em>is</em> present in the 1.12.x documentation, but it applies to both versions.</p>
-
-<p>Now, lest you think you can just follow the 1.12.x documentation for a 1.11.x cluster, you need to know that the <code>kubeadm</code> API changed from 1.11.x (where it is v1alpha2) to 1.12.x (where it is v1alpha3), and this means a number of changes elsewhere as well. This means that the <code>kubeadm</code> config files in the 1.12.x guide won&rsquo;t work for 1.11.x. Additionally, I found that the 1.12.x guide leaves out one additional piece of information that might be necessary in order to get a working kubelet.</p>
-
-<p>The extra step that is needed for 1.11.x (but that is included in the 1.12.x version of the documentation) is to provide an additional systemd drop-in file that configures the kubelet as a standalone kubelet. What the 1.12.x instructions are <em>potentially</em> missing&mdash;depending on your Linux distribution and/or the configuration of the Docker container runtime&mdash;is matching the kubelet&rsquo;s cgroup driver to the runtime&rsquo;s cgroup driver. If these two are mismatched, the kubelet will fail to start.</p>
-
-<p>In my testing on Ubuntu 16.04 images prepared using <a href="https://github.com/heptiolabs/wardroom">Wardroom</a>, the Docker container runtime was using the systemd cgroup driver. The kubelet, however, was not, and this caused the kubelet to fail even after adding the drop-in from the 1.12.x documentation.</p>
-
-<p>If this affects you, you can amend the 1.12.x systemd drop-in to add a <code>--cgroup-driver=systemd</code> flag, so that the complete drop-in now looks like this:</p>
-
-<pre><code>[Service]
-ExecStart=
-ExecStart=/usr/bin/kubelet --address=127.0.0.1 --pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true --cgroup-driver=systemd
-Restart=always
-</code></pre>
-
-<p>Put this file in <code>/etc/systemd/system/kubelet.service.d</code> with a higher priority than any other drop-ins found there. I found that, per the 1.12.x instructions, using the filename <code>20-etcd-service-manager.conf</code> was sufficient. Once this file is in place, then doing a <code>systemctl daemon-reload</code> and <code>systemctl restart kubelet</code> should be enough to get a running kubelet that can run etcd as a static pod.</p>
-
-<p>The official docs&mdash;for both 1.11.x and 1.12.x&mdash;also assume that you&rsquo;ll run all the <code>kubeadm alpha phase</code> commands from one specific host, then copy files around to the other hosts as appropriate. This <em>will</em> work, but if you do it this way the certificates generated by <code>kubeadm</code> will have an extra hostname attached to them: the hostname from the system generating the certificates. To avoid having this extra hostname attached to the certificates generated by <code>kubeadm</code>, you&rsquo;ll need to instead copy the <code>kubeadm</code> configuration files to each node, then run the <code>kubeadm alpha phase</code> commands on each node. This also means that you&rsquo;ll need to copy <em>both</em> the <code>ca.crt</code> <em>and</em> the <code>ca.key</code> generated on the first node to the second and third nodes. The instructions only say to copy the <code>ca.crt</code> file, but this is because it isn&rsquo;t needed on the other nodes when you&rsquo;re generating all the certificates on one node.</p>
-
-<p>Aside from these two (very) minor issues, the procedures in the official docs will get you a working etcd cluster, properly secured with TLS certificates, and running as static pods under the kubelet (instead of as systemd units). Between the official docs plus these notes (which I&rsquo;ll see about getting merged into the official docs) or my earlier article about running etcd as systemd units, you now have a couple of different approaches to setting up a properly-secured etcd cluster that can back your Kubernetes infrastructure.</p>
-
-<p>Feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> if you have any questions, or if you feel I&rsquo;ve made a mistake or misrepresented anything. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/xHY1qUZJ2iI" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/xHY1qUZJ2iI/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -268,42 +200,40 @@ Restart=always
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="gc_beliebige_praezision_java.html">
+<div class="date">24.11.2018</div>
+<h3>GC und beliebige Präzision in Java</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Das letzte Mal, als ich über Vor- und Nachteile der Durchführung mathematischer Berechnungen
+mit verschiedenen Datentypen
+schrieb,
+vernachlässigte ich einen Aspekt, dessen Einfluss und Wichtigkeit
+von der benutzten Programmiersprache und konkreten Implementierung abhängt:
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="led_matrix_laufschrift.html">
+<div class="date">24.11.2018</div>
+<h3>Led-Matrix Laufschrift</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich wie bereits
+hier
+beschrieben mein Herz für Led-Matrix-Displays wiederentdeckt habe, habe ich überlegt,was man wohl noch damit tun könnte...
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="strange_attractors_bigdecimal.html">
 <div class="date">18.11.2018</div>
 <h3>Strange Attractors mit BigDecimal</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Nachdem ich mir in meinem
 früheren Artikel
 zum Thema der Mathematik mit beliebiger Präzision in Java noch nicht sicher war ob es Sinn machen würde,
 mein
 Framework für die numerische Behandlung von Differentialgleichungssystemen
 auf die Option der Benutzung von BigDecimal als unterliegenden Datentyp zu erweitern, habe ich nun doch damit experimentiert:
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="neue_datengeneratoren_v.html">
-<div class="date">18.11.2018</div>
-<h3>Neue Datengeneratoren V</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Wieder habe ich das
-Framework zur Erzeugung von Testdaten
-um einige
-neue Generatoren
-erweitert.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="neue_datengeneratoren_iv.html">
-<div class="date">11.11.2018</div>
-<h3>Neue Datengeneratoren IV</h3>
-<div class="abstract">
-<p>Nachdem ich das letzte mal von einer Erweiterung des
-Frameworks selbst berichtet habe, soll es diesmal wieder um die Vorstellung
-einiger neuer Generatoren für das
-Framework zur Erzeugung von Testdaten
-gehen.
 </p></div>   </a>
 </li>
 </ul>
@@ -438,7 +368,7 @@ GUI
 <h3>
 Hardware
 </h3>
-	<span class="nav-item-counter">19</span>
+	<span class="nav-item-counter">20</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -529,7 +459,7 @@ Music
 <h3>
 Numerik
 </h3>
-	<span class="nav-item-counter">9</span>
+	<span class="nav-item-counter">10</span>
 </header>
 <div class="nav-item-body">
 <p>Numerische Mathematik in Computern</p>
