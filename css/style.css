@@ -238,14 +238,28 @@ li.spanrow{
 	padding:1%;
 
 }
+ul.double
+{
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+ul.triple
+{
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+}
 .double li
 {
-	width:46%;
+    float: none;
+	width:100%;
 	padding:1%;
 }
 .triple li
 {
-	width:30%;
+    float: none;
+	width:100%;
 	padding:1%;
 }
 .screenshotthumb

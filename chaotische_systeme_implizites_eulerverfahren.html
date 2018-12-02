@@ -70,7 +70,7 @@ document.write(link)
 <body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
-<div id="logo">
+		<div id="logo">
   <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
       display="inline">
     <mrow>
@@ -80,43 +80,55 @@ document.write(link)
     </mrow>
 </math>
 </h1-->
-  <p>
-		<script>
+			<p>
+				<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script>
-		<noscript>Der Verfasser</noscript>				
-  </p>
-</div>
-<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
-	über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
-	Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
-	daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
-	Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
-	Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-		<a href="https://github.com/elbosso">hier</a>.</p>
+				</script>
+				<noscript>Der Verfasser</noscript>
+  			</p>
+		</div>
+		<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
+			über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
+			Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
+			daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
+			Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
+			Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+			<a href="https://github.com/elbosso">hier</a>.
+		</p>
 	</div><!-- #header-->
-<div id="all">
-<div id="A">
-<div id="content">
-<div class="date">01.10.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
-<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
-<div class="previousArticlesInCategories">
+	<div id="all">
+		<div id="A">
+			<div id="content">
+					<div class="date">
+						01.10.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span-->
+					</div>
+			<div class="previousArticlesInCategories">
 	<!--ul-->
-	vorhergehende Artikel in:
-	<!--li--> <a href="visualisierung_strange_attractors_java3d.html#content">Java</a> <!--/li-->
-	<!--li--> ,<a href="implizites_eulerverfahren.html#content">Numerik</a> <!--/li-->
+				vorhergehende Artikel in:
+	<!--li--> 							<a href="visualisierung_strange_attractors_java3d.html#content">
+						Java
+					</a> <!--/li-->
+	<!--li--> 		,
+					<a href="implizites_eulerverfahren.html#content">
+						Numerik
+					</a> <!--/li-->
 	<!--/ul-->
-</div>
- 	<div class="heading">Chaotische Systeme und implizites Eulerverfahren</div>
-	<p>Nachdem ich erfolgreich einige
+			</div>
+ 			<div class="heading">
+				Chaotische Systeme und implizites Eulerverfahren
+			</div>
+<p>Nachdem ich erfolgreich einige
 <a href="visualisierung_strange_attractors_java3d.html">chaotische Systeme</a>
 mittels numerischer Verfahren untersucht hatte, reifte in mir der Entschluss, für diese Systeme
 <a href="implizites_eulerverfahren.html">implizite</a>
 und explizite numerische Verfahren gegenüberzustellen.
-</p> <a name="content"> </a>
- <p>Wie sich der Leser vielleicht noch erinnert, sind numerische Verfahren zur Lösung von Differentialgleichungen
+</p>			<a name="content">
+
+			</a>
+<p>Wie sich der Leser vielleicht noch erinnert, sind numerische Verfahren zur Lösung von Differentialgleichungen
 nichts anderes als Differenzenverfahren oder - anders gesagt - wird die Lösung stückweise approximiert: Man berechnet
 auf die eine oder andere Weise den Anstieg der Funktion in einem Punkt und nimmt an, dass die Funktion in einem hinreichend
 kleinen Intervall hinreichend linear verläuft. Dann berechnet man den Wert der Funktion am Ende des Intervalls aus dem
@@ -177,114 +189,165 @@ Lösung mehr ermittelt werden.
 Das letzte Bild stellt das Ergebnis des impliziten Verfahrens mit einer Schrittweite h=0.03 dar - man sieht, dass
 die Lösung qualitativ noch sehr nahe am Original liegt. Damit ist einmal mehr bewiesen, dass man sich für die numerische
 Lösung von Differentialgleichungssystemen der Mühe unterziehen sollte, das implizite Eulerverfahren zumindest in Betracht zu ziehen.
-</p>  <ul class="triple"> 
-<li class="anriss">
-	<a href="images/lorenz_explicit_ck.png" rel="lightbox[screenshots]" 
-		title="Cash-Karp adaptiv"
-	   class="img">
-		<div class="screenshotthumb center">
-			<img class="center" src="images/lorenz_explicit_ck_t.png">
-			<div class="thumbnailcaption">Cash-Karp adaptiv</div>
-		</div>
-	</a>
-</li>
-<li class="anriss">
-	<a href="images/lorenz_explicit_euler_0.003.png" rel="lightbox[screenshots]" 
-		title="Explizit Euler h=0.003"
-	   class="img">
-		<div class="screenshotthumb center">
-			<img class="center" src="images/lorenz_explicit_euler_0.003_t.png">
-			<div class="thumbnailcaption">Explizit Euler h=0.003</div>
-		</div>
-	</a>
-</li>
-<li class="anriss">
-	<a href="images/lorenz_explicit_euler_0.006.png" rel="lightbox[screenshots]" 
-		title="Explizit Euler h=0.006"
-	   class="img">
-		<div class="screenshotthumb center">
-			<img class="center" src="images/lorenz_explicit_euler_0.006_t.png">
-			<div class="thumbnailcaption">Explizit Euler h=0.006</div>
-		</div>
-	</a>
-</li>
-<li class="anriss">
-	<a href="images/lorenz_explicit_euler_0.02.png" rel="lightbox[screenshots]" 
-		title="Explizit Euler h=0.02"
-	   class="img">
-		<div class="screenshotthumb center">
-			<img class="center" src="images/lorenz_explicit_euler_0.02_t.png">
-			<div class="thumbnailcaption">Explizit Euler h=0.02</div>
-		</div>
-	</a>
-</li>
-<li class="anriss">
-	<a href="images/lorenz_explicit_euler_0.03.png" rel="lightbox[screenshots]" 
-		title="Explizit Euler h=0.03"
-	   class="img">
-		<div class="screenshotthumb center">
-			<img class="center" src="images/lorenz_explicit_euler_0.03_t.png">
-			<div class="thumbnailcaption">Explizit Euler h=0.03</div>
-		</div>
-	</a>
-</li>
-<li class="anriss">
-	<a href="images/lorenz_implicit_0.03.png" rel="lightbox[screenshots]" 
-		title="Implizit Euler h=0.03"
-	   class="img">
-		<div class="screenshotthumb center">
-			<img class="center" src="images/lorenz_implicit_0.03_t.png">
-			<div class="thumbnailcaption">Implizit Euler h=0.03</div>
-		</div>
-	</a>
-</li>
-</ul>
-</div>
-	<div id="referers">
-		<h1>Artikel, die hierher verlinken</h1>
-		<ul>
+</p>				<div>
+ 						<ul class="triple">
+						<li class="anriss">
+								<a href="images/lorenz_explicit_ck.png" rel="lightbox[screenshots]"
+									title="Cash-Karp adaptiv"
+	   							class="img">
+							<div class="screenshotthumb center">
+								<img class="center" src="images/lorenz_explicit_ck_t.png">
+								<div class="thumbnailcaption">
+									Cash-Karp adaptiv
+								</div>
+							</div>
+								</a>
+						</li>
+						<li class="anriss">
+								<a href="images/lorenz_explicit_euler_0.003.png" rel="lightbox[screenshots]"
+									title="Explizit Euler h=0.003"
+	   							class="img">
+							<div class="screenshotthumb center">
+								<img class="center" src="images/lorenz_explicit_euler_0.003_t.png">
+								<div class="thumbnailcaption">
+									Explizit Euler h=0.003
+								</div>
+							</div>
+								</a>
+						</li>
+						<li class="anriss">
+								<a href="images/lorenz_explicit_euler_0.006.png" rel="lightbox[screenshots]"
+									title="Explizit Euler h=0.006"
+	   							class="img">
+							<div class="screenshotthumb center">
+								<img class="center" src="images/lorenz_explicit_euler_0.006_t.png">
+								<div class="thumbnailcaption">
+									Explizit Euler h=0.006
+								</div>
+							</div>
+								</a>
+						</li>
+						<li class="anriss">
+								<a href="images/lorenz_explicit_euler_0.02.png" rel="lightbox[screenshots]"
+									title="Explizit Euler h=0.02"
+	   							class="img">
+							<div class="screenshotthumb center">
+								<img class="center" src="images/lorenz_explicit_euler_0.02_t.png">
+								<div class="thumbnailcaption">
+									Explizit Euler h=0.02
+								</div>
+							</div>
+								</a>
+						</li>
+						<li class="anriss">
+								<a href="images/lorenz_explicit_euler_0.03.png" rel="lightbox[screenshots]"
+									title="Explizit Euler h=0.03"
+	   							class="img">
+							<div class="screenshotthumb center">
+								<img class="center" src="images/lorenz_explicit_euler_0.03_t.png">
+								<div class="thumbnailcaption">
+									Explizit Euler h=0.03
+								</div>
+							</div>
+								</a>
+						</li>
+						<li class="anriss">
+								<a href="images/lorenz_implicit_0.03.png" rel="lightbox[screenshots]"
+									title="Implizit Euler h=0.03"
+	   							class="img">
+							<div class="screenshotthumb center">
+								<img class="center" src="images/lorenz_implicit_0.03_t.png">
+								<div class="thumbnailcaption">
+									Implizit Euler h=0.03
+								</div>
+							</div>
+								</a>
+						</li>
+					</ul>
+				</div>
+				<div id="referers">
+					<h1>
+						Artikel, die hierher verlinken
+					</h1>
+		<!--ul>
 			<li><a href="roessler_attractor_implizites_eulerverfahren.html">Roessler Attractor und implizites Eulerverfahren</a></li>
-		</ul>
+		</ul-->
+					<ul class="single">
+							<li class="anriss">
+								<div>
+									<h3>
+										Roessler Attractor und implizites Eulerverfahren
+									</h3>
+									<span class="tags">
+										<div class="popup">
+															<div>
+																<a class="taglink" href="tag_Java.html">
+																	Java
+																</a>
+															</div>
+															<div>
+																<a class="taglink" href="tag_Numerik.html">
+																	Numerik
+																</a>
+															</div>
+										</div>
+										<img src="images/tag_48.png" class="imgtag">
+									</span>
+								</div>
+								<div class="collectiontext">
+<p>Nachdem ich so viel Spaß bei der Untersuchung der Behandlung eines
+chaotischen Systems
+mittels
+impliziten Eulerverfahrens
+hatte, habe ich mir gleich noch eines vorgenommen...
+</p>								</div>
+								<div class="collectionhref">
+									<a href="roessler_attractor_implizites_eulerverfahren.html#content">
+										Öffnen
+									</a>
+								</div>
+							</li>
+					</ul>
+				</div>
+		</div>
 	</div>
-</div>
-<div id="B"> 
+	<div id="B">
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-  <a href="gc_beliebige_praezision_java.html#content">
-<div class="date">24.11.2018</div>
-<h3>GC und beliebige Präzision in Java</h3>
+  <a href="pam_nfc_ubuntu_18_04.html#content">
+<div class="date">02.12.2018</div>
+<h3>pam_nfc und Ubuntu 18.04</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Das letzte Mal, als ich über Vor- und Nachteile der Durchführung mathematischer Berechnungen
-mit verschiedenen Datentypen
-schrieb,
-vernachlässigte ich einen Aspekt, dessen Einfluss und Wichtigkeit
-von der benutzten Programmiersprache und konkreten Implementierung abhängt:
+<p>Ich habe bereits über einige Stolpersteine beim
+Umstieg auf Ubuntu 18.04
+berichtet - nunmehr bin ich auf einen neuen gestoßen, der
+den Fork und einen Pull-Request zur Folge hatte
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="led_matrix_laufschrift.html#content">
-<div class="date">24.11.2018</div>
-<h3>Led-Matrix Laufschrift</h3>
+	<a href="eigene_firmware_sonoff_s20.html#71">
+<div class="date">02.12.2018</div>
+<h3>Eigene Firmware für Sonoff S20</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem ich wie bereits
-hier
-beschrieben mein Herz für Led-Matrix-Displays wiederentdeckt habe, habe ich überlegt,was man wohl noch damit tun könnte...
+	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+<p>Nachdem ich nach meinen diversen Erfahrungen mit dem Arduino auch mal andere Projekte erforschen wollte,
+habe ich mich durch Artikel in zurückliegenden Ausgaben der c't inspirieren lassen und Projekte mit dem ESP8266
+ausprobiert - zuerst der Umbau einer WLAN-fähigen Steckdose...
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="strange_attractors_bigdecimal.html#content">
-<div class="date">18.11.2018</div>
-<h3>Strange Attractors mit BigDecimal</h3>
+  <a href="ntp_server_raspi_em406a_ii.html#content">
+<div class="date">02.12.2018</div>
+<h3>NTP-Server mit Raspi und EM406a II</h3>
 <div class="abstract">
-<p>Nachdem ich mir in meinem
-früheren Artikel
-zum Thema der Mathematik mit beliebiger Präzision in Java noch nicht sicher war ob es Sinn machen würde,
-mein
-Framework für die numerische Behandlung von Differentialgleichungssystemen
-auf die Option der Benutzung von BigDecimal als unterliegenden Datentyp zu erweitern, habe ich nun doch damit experimentiert:
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich die Hardwareanpasungen für mein altes GPS-Modul hier bereits als Grundlage für
+meinen eigenen
+Atomzeit-GPS-NTP-Server
+beschrieben und die Grundlagen der Hardware in ein
+GitHub-Repository gepackt habe, habe ich nun den letzten schritt vollzogen.
 </p></div>   </a>
 </li>
 </ul>
@@ -419,7 +482,7 @@ GUI
 <h3>
 Hardware
 </h3>
-<span class="nav-item-counter">20</span>
+<span class="nav-item-counter">21</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -473,7 +536,7 @@ Links
 <h3>
 Linux
 </h3>
-<span class="nav-item-counter">114</span>
+<span class="nav-item-counter">115</span>
 </header>
 <div class="nav-item-body">
 <p>Alles zum Thema Gnu Linux</p>

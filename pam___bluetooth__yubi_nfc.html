@@ -68,7 +68,7 @@ document.write(link)
 <body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
-<div id="logo">
+		<div id="logo">
   <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
       display="inline">
     <mrow>
@@ -78,44 +78,56 @@ document.write(link)
     </mrow>
 </math>
 </h1-->
-  <p>
-		<script>
+			<p>
+				<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script>
-		<noscript>Der Verfasser</noscript>				
-  </p>
-</div>
-<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
-	über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
-	Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
-	daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
-	Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
-	Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-		<a href="https://github.com/elbosso">hier</a>.</p>
+				</script>
+				<noscript>Der Verfasser</noscript>
+  			</p>
+		</div>
+		<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
+			über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
+			Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
+			daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
+			Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
+			Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+			<a href="https://github.com/elbosso">hier</a>.
+		</p>
 	</div><!-- #header-->
-<div id="all">
-<div id="A">
-<div id="content">
-<div class="date">02.10.2016 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
-<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
-<div class="previousArticlesInCategories">
+	<div id="all">
+		<div id="A">
+			<div id="content">
+					<div class="date">
+						02.10.2016 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span-->
+					</div>
+			<div class="previousArticlesInCategories">
 	<!--ul-->
-	vorhergehende Artikel in:
-	<!--li--> <a href="svn___trac_authentifizierung_mittels_pam.html#content">Linux</a> <!--/li-->
-	<!--li--> ,<a href="pki_beziehungsweise_ca_selber_bauen.html#content">Security</a> <!--/li-->
+				vorhergehende Artikel in:
+	<!--li--> 							<a href="svn___trac_authentifizierung_mittels_pam.html#content">
+						Linux
+					</a> <!--/li-->
+	<!--li--> 		,
+					<a href="pki_beziehungsweise_ca_selber_bauen.html#content">
+						Security
+					</a> <!--/li-->
 	<!--/ul-->
-</div>
- 	<div class="heading">PAM + Bluetooth, Yubi und NFC</div>
-	<p>Nach meinen diversen 
+			</div>
+ 			<div class="heading">
+				PAM + Bluetooth, Yubi und NFC
+			</div>
+<p>Nach meinen diversen 
 <a href="svn___trac_authentifizierung_mittels_pam.html">Experimenten mit PAM</a>
 und 
 <a href="vier_augen_prinzip_login_pam.html">der Authentifizierung am System</a>
 habe ich nunmehr verschiedene weitere Möglichkeiten untersucht, Hardware-Token
 als Hilfsmittel einzubeziehen.
-</p> <a name="content"> </a>
- <p>Ich versuchte, mehrere neue Authentifikationsmechanismen in mein Setup zur Mehrfaktor-Authentifizierung
+</p>			<a name="content">
+
+			</a>
+<p>Ich versuchte, mehrere neue Authentifikationsmechanismen in mein Setup zur Mehrfaktor-Authentifizierung
 einzubauen. Der erste Schritt dazu war Bluetooth - wann immer ein bekanntes Gerät in der Nähe ist und
 Bluetooth aktiviert hat, ist die Authentifizierung (bzw. dieser Authentifizierungsschritt - erfolgreich.
 </p><p>
@@ -163,246 +175,451 @@ Schließlich noch ein Wort der Warnung: NFC-Tags lassen sich kopieren und Blueto
 Beides ist nicht sicher - daher sollte man diese beiden Methoden wenn überhaupt nur als zusätzlichen Faktor und nie alleine nutzen!!
 </p><p>
 Hier jetzt noch einige Links, die mir geholfen haben, die beschriebenen Untersuchungen durchzuführen...
-</p> <ul class="single"> 
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Bluetooth Login and Locking
+</p>				<ul class="single">
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Bluetooth Login and Locking
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="http://tjworld.net/wiki/Linux/Ubuntu/BluetoothLoginAndLocking" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>PAM module for local authenticaction with bluetooth devices
+							</div>
+							<div class="collectionhref">
+								<a href="http://tjworld.net/wiki/Linux/Ubuntu/BluetoothLoginAndLocking" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>PAM module for local authenticaction with bluetooth devices
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://apps.ubuntu.com/cat/applications/precise/libpam-blue/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>How to use pam_blue with lightdm, and unity-greeter?
+							</div>
+							<div class="collectionhref">
+								<a href="https://apps.ubuntu.com/cat/applications/precise/libpam-blue/" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>How to use pam_blue with lightdm, and unity-greeter?
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="http://askubuntu.com/questions/227872/how-to-use-pam-blue-with-lightdm-and-unity-greeter" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Bluetooth fun (blueproximity + libpam_blue + motion) 
+							</div>
+							<div class="collectionhref">
+								<a href="http://askubuntu.com/questions/227872/how-to-use-pam-blue-with-lightdm-and-unity-greeter" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Bluetooth fun (blueproximity + libpam_blue + motion) 
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://ubuntuforums.org/showthread.php?t=1176758" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>The Yubico PAM module provides an easy way to integrate the Yubikey into your existing user authentication infrastructure. PAM is used by GNU/Linux, Solaris and Mac OS X for user authentication, and by other specialized applications such as NCSA MyProxy.
+							</div>
+							<div class="collectionhref">
+								<a href="https://ubuntuforums.org/showthread.php?t=1176758" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>The Yubico PAM module provides an easy way to integrate the Yubikey into your existing user authentication infrastructure. PAM is used by GNU/Linux, Solaris and Mac OS X for user authentication, and by other specialized applications such as NCSA MyProxy.
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://developers.yubico.com/yubico-pam/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Mit Yubikey unter Arch Linux einloggen (Challenge-Response, offline)
+							</div>
+							<div class="collectionhref">
+								<a href="https://developers.yubico.com/yubico-pam/" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Mit Yubikey unter Arch Linux einloggen (Challenge-Response, offline)
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://thomas-leister.de/mit-yubikey-unter-arch-linux-einloggen-offline/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Adding Yubikey 2-factor authentication to SSH and sudo in Debian
+							</div>
+							<div class="collectionhref">
+								<a href="https://thomas-leister.de/mit-yubikey-unter-arch-linux-einloggen-offline/" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Adding Yubikey 2-factor authentication to SSH and sudo in Debian
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://mig5.net/content/adding-yubikey-2-factor-authentication-ssh-and-sudo-debian" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Einfaches Multifaktor-Login mit Yubikey und Debian
+							</div>
+							<div class="collectionhref">
+								<a href="https://mig5.net/content/adding-yubikey-2-factor-authentication-ssh-and-sudo-debian" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Einfaches Multifaktor-Login mit Yubikey und Debian
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://www.tumelum.de/blog/index.php?/archives/164-Einfaches-Multifaktor-Login-mit-Yubikey-und-Debian.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>The YubiKey Personalization Tool is a Qt based Cross-Platform utility designed to facilitate re-configuration of YubiKeys on Windows, Linux and Mac platforms. The tool provides a same simple step-by-step approach to make configuration of YubiKeys easy to follow and understand, while still being powerful enough to exploit all functionality both of the YubiKey 1 and YubiKey 2 generation of keys. The tool provides the same functionality and user interface on Windows, Linux and Mac platforms.
+							</div>
+							<div class="collectionhref">
+								<a href="https://www.tumelum.de/blog/index.php?/archives/164-Einfaches-Multifaktor-Login-mit-Yubikey-und-Debian.html" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>The YubiKey Personalization Tool is a Qt based Cross-Platform utility designed to facilitate re-configuration of YubiKeys on Windows, Linux and Mac platforms. The tool provides a same simple step-by-step approach to make configuration of YubiKeys easy to follow and understand, while still being powerful enough to exploit all functionality both of the YubiKey 1 and YubiKey 2 generation of keys. The tool provides the same functionality and user interface on Windows, Linux and Mac platforms.
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://developers.yubico.com/yubikey-personalization-gui/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Configure 2-factor Yubikey authentication for Debian : the easiest way
+							</div>
+							<div class="collectionhref">
+								<a href="https://developers.yubico.com/yubikey-personalization-gui/" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Configure 2-factor Yubikey authentication for Debian : the easiest way
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="http://uname.pingveno.net/blog/index.php/post/2013/08/06/Configure-2-factor-Yubikey-authentication-for-Debian-%3A-the-easiest-way" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Yubikey : Configure your yubikey with pam
+							</div>
+							<div class="collectionhref">
+								<a href="http://uname.pingveno.net/blog/index.php/post/2013/08/06/Configure-2-factor-Yubikey-authentication-for-Debian-%3A-the-easiest-way" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Yubikey : Configure your yubikey with pam
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://wiki.deimos.fr/Yubikey_:_Configure_your_yubikey_with_pam" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>The purpose of this document is to guide readers through the configuration steps to use two factor authentication for SSH using Yubikey. This document assumes that the reader has advanced knowledge and experience in Linux system administration, particularly for how PAM authentication mechanism is configured on a Linux platform.
+							</div>
+							<div class="collectionhref">
+								<a href="https://wiki.deimos.fr/Yubikey_:_Configure_your_yubikey_with_pam" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>The purpose of this document is to guide readers through the configuration steps to use two factor authentication for SSH using Yubikey. This document assumes that the reader has advanced knowledge and experience in Linux system administration, particularly for how PAM authentication mechanism is configured on a Linux platform.
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://developers.yubico.com/yubico-pam/Yubikey_and_SSH_via_PAM.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Local Authentication Using Challenge Response
+							</div>
+							<div class="collectionhref">
+								<a href="https://developers.yubico.com/yubico-pam/Yubikey_and_SSH_via_PAM.html" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Local Authentication Using Challenge Response
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://developers.yubico.com/yubico-pam/Authentication_Using_Challenge-Response.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Protect multiple online accounts with just a press of a button
+							</div>
+							<div class="collectionhref">
+								<a href="https://developers.yubico.com/yubico-pam/Authentication_Using_Challenge-Response.html" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Protect multiple online accounts with just a press of a button
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://hypersecu.com/products/hyperfido" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>The PAM U2F module provides an easy way to integrate the Yubikey (or other U2F-compliant authenticators) into your existing user authentication infrastructure. PAM is used by GNU/Linux, Solaris and Mac OS X for user authentication.
+							</div>
+							<div class="collectionhref">
+								<a href="https://hypersecu.com/products/hyperfido" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>The PAM U2F module provides an easy way to integrate the Yubikey (or other U2F-compliant authenticators) into your existing user authentication infrastructure. PAM is used by GNU/Linux, Solaris and Mac OS X for user authentication.
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://developers.yubico.com/pam-u2f/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Pluggable Authentication Module which allows to login using NFC targets. 
+							</div>
+							<div class="collectionhref">
+								<a href="https://developers.yubico.com/pam-u2f/" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Pluggable Authentication Module which allows to login using NFC targets. 
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="http://nfc-tools.org/index.php?title=Pam_nfc" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Host-based Card Emulation
+							</div>
+							<div class="collectionhref">
+								<a href="http://nfc-tools.org/index.php?title=Pam_nfc" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Host-based Card Emulation
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://developer.android.com/guide/topics/connectivity/nfc/hce.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Touchatag is a RFID tag reader from Touchatag. It is a cheap set consisting of an ACR122U USB tag reader and MiFare Ultralight RFID tags. 
+							</div>
+							<div class="collectionhref">
+								<a href="https://developer.android.com/guide/topics/connectivity/nfc/hce.html" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Touchatag is a RFID tag reader from Touchatag. It is a cheap set consisting of an ACR122U USB tag reader and MiFare Ultralight RFID tags. 
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://wiki.archlinux.org/index.php/Touchatag_RFID_Reader" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Using the ACS ACR122 NFC card reader under linux
+							</div>
+							<div class="collectionhref">
+								<a href="https://wiki.archlinux.org/index.php/Touchatag_RFID_Reader" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Using the ACS ACR122 NFC card reader under linux
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://choffee.co.uk/posts/2015/01/nfc_reader_acr122_linux/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Ubuntu 14.04 with ACS ACR122U
+							</div>
+							<div class="collectionhref">
+								<a href="https://choffee.co.uk/posts/2015/01/nfc_reader_acr122_linux/" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Ubuntu 14.04 with ACS ACR122U
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://github.com/inventid/rfid-reader2keyboard/wiki/Ubuntu-14.04-with-ACS-ACR122U" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Playing with touchatag reader
+							</div>
+							<div class="collectionhref">
+								<a href="https://github.com/inventid/rfid-reader2keyboard/wiki/Ubuntu-14.04-with-ACS-ACR122U" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Playing with touchatag reader
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://www.hardill.me.uk/wordpress/2012/02/10/playing-with-touchatag-reader/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-</ul>
-</div>
-	<div id="referers">
-		<h1>Artikel, die hierher verlinken</h1>
-		<ul>
+							</div>
+							<div class="collectionhref">
+								<a href="https://www.hardill.me.uk/wordpress/2012/02/10/playing-with-touchatag-reader/" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+				</ul>
+				<div id="referers">
+					<h1>
+						Artikel, die hierher verlinken
+					</h1>
+		<!--ul>
+			<li><a href="pam_nfc_ubuntu_18_04.html">pam_nfc und Ubuntu 18.04</a></li>
 			<li><a href="yubi_zur_2fa_gitlab.html">Yubi zur 2FA mit GitLab</a></li>
 			<li><a href="android_smartcard__nfc_.html">Android als Smartcard (NFC)</a></li>
 			<li><a href="nfc_tags_trigger_linux_scripts.html">NFC-Tags als Trigger in Linux-Scripts</a></li>
 			<li><a href="yubi_windows.html">Yubi und Windows</a></li>
-		</ul>
+		</ul-->
+					<ul class="single">
+							<li class="anriss">
+								<div>
+									<h3>
+										pam_nfc und Ubuntu 18.04
+									</h3>
+									<span class="tags">
+										<div class="popup">
+															<div>
+																<a class="taglink" href="tag_Linux.html">
+																	Linux
+																</a>
+															</div>
+										</div>
+										<img src="images/tag_48.png" class="imgtag">
+									</span>
+								</div>
+								<div class="collectiontext">
+<p>Ich habe bereits über einige Stolpersteine beim
+Umstieg auf Ubuntu 18.04
+berichtet - nunmehr bin ich auf einen neuen gestoßen, der
+den Fork und einen Pull-Request zur Folge hatte
+</p>								</div>
+								<div class="collectionhref">
+									<a href="pam_nfc_ubuntu_18_04.html#content">
+										Öffnen
+									</a>
+								</div>
+							</li>
+							<li class="anriss">
+								<div>
+									<h3>
+										Yubi zur 2FA mit GitLab
+									</h3>
+									<span class="tags">
+										<div class="popup">
+															<div>
+																<a class="taglink" href="tag_Rants.html">
+																	Rants
+																</a>
+															</div>
+										</div>
+										<img src="images/tag_48.png" class="imgtag">
+									</span>
+								</div>
+								<div class="collectiontext">
+<p>Ich hatte hier ja schon
+verschiedentlich
+über Möglichkeiten des
+Einsatzes
+meines Yubi-Key berichtet - nun kam noch eine hinzu...
+</p>								</div>
+								<div class="collectionhref">
+									<a href="yubi_zur_2fa_gitlab.html#content">
+										Öffnen
+									</a>
+								</div>
+							</li>
+							<li class="anriss">
+								<div>
+									<h3>
+										Android als Smartcard (NFC)
+									</h3>
+									<span class="tags">
+										<div class="popup">
+															<div>
+																<a class="taglink" href="tag_Linux.html">
+																	Linux
+																</a>
+															</div>
+															<div>
+																<a class="taglink" href="tag_Android.html">
+																	Android
+																</a>
+															</div>
+										</div>
+										<img src="images/tag_48.png" class="imgtag">
+									</span>
+								</div>
+								<div class="collectiontext">
+<p>Nachdem ich bereits in der
+Vergangenheit
+verschiedene
+Experimente
+mit der NFC-Technologie
+gemacht habe,
+wollte ich endlich mein großes Ziel erreichen: Ein
+Smartphone als NFC-Smartcard
+zu nutzen...
+</p>								</div>
+								<div class="collectionhref">
+									<a href="android_smartcard__nfc_.html#content">
+										Öffnen
+									</a>
+								</div>
+							</li>
+							<li class="anriss">
+								<div>
+									<h3>
+										NFC-Tags als Trigger in Linux-Scripts
+									</h3>
+									<span class="tags">
+										<div class="popup">
+															<div>
+																<a class="taglink" href="tag_Linux.html">
+																	Linux
+																</a>
+															</div>
+										</div>
+										<img src="images/tag_48.png" class="imgtag">
+									</span>
+								</div>
+								<div class="collectiontext">
+<p>Nachdem ich meine neue Liebe für NFC entdeckt habe und unter anderem das entsprechende
+PAM-Modul
+ausprobiert habe, wollte ich nun versuchen, NFC-Tags in Linux-Skripten als Trigger einzusetzen.
+</p>								</div>
+								<div class="collectionhref">
+									<a href="nfc_tags_trigger_linux_scripts.html#content">
+										Öffnen
+									</a>
+								</div>
+							</li>
+							<li class="anriss">
+								<div>
+									<h3>
+										Yubi und Windows
+									</h3>
+									<span class="tags">
+										<div class="popup">
+															<div>
+																<a class="taglink" href="tag_Linux.html">
+																	Linux
+																</a>
+															</div>
+															<div>
+																<a class="taglink" href="windows.html">
+																	Windows
+																</a>
+															</div>
+															<div>
+																<a class="taglink" href="tag_Security.html">
+																	Security
+																</a>
+															</div>
+										</div>
+										<img src="images/tag_48.png" class="imgtag">
+									</span>
+								</div>
+								<div class="collectiontext">
+<p>Ich habe meine Tests zum 
+Yubikey
+nochmals intensiviert und einige neue Informationen gewonnen...
+</p>								</div>
+								<div class="collectionhref">
+									<a href="yubi_windows.html#content">
+										Öffnen
+									</a>
+								</div>
+							</li>
+					</ul>
+				</div>
+		</div>
 	</div>
-</div>
-<div id="B"> 
+	<div id="B">
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-  <a href="gc_beliebige_praezision_java.html#content">
-<div class="date">24.11.2018</div>
-<h3>GC und beliebige Präzision in Java</h3>
+  <a href="pam_nfc_ubuntu_18_04.html#content">
+<div class="date">02.12.2018</div>
+<h3>pam_nfc und Ubuntu 18.04</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Das letzte Mal, als ich über Vor- und Nachteile der Durchführung mathematischer Berechnungen
-mit verschiedenen Datentypen
-schrieb,
-vernachlässigte ich einen Aspekt, dessen Einfluss und Wichtigkeit
-von der benutzten Programmiersprache und konkreten Implementierung abhängt:
+<p>Ich habe bereits über einige Stolpersteine beim
+Umstieg auf Ubuntu 18.04
+berichtet - nunmehr bin ich auf einen neuen gestoßen, der
+den Fork und einen Pull-Request zur Folge hatte
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="led_matrix_laufschrift.html#content">
-<div class="date">24.11.2018</div>
-<h3>Led-Matrix Laufschrift</h3>
+	<a href="eigene_firmware_sonoff_s20.html#71">
+<div class="date">02.12.2018</div>
+<h3>Eigene Firmware für Sonoff S20</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem ich wie bereits
-hier
-beschrieben mein Herz für Led-Matrix-Displays wiederentdeckt habe, habe ich überlegt,was man wohl noch damit tun könnte...
+	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+<p>Nachdem ich nach meinen diversen Erfahrungen mit dem Arduino auch mal andere Projekte erforschen wollte,
+habe ich mich durch Artikel in zurückliegenden Ausgaben der c't inspirieren lassen und Projekte mit dem ESP8266
+ausprobiert - zuerst der Umbau einer WLAN-fähigen Steckdose...
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="strange_attractors_bigdecimal.html#content">
-<div class="date">18.11.2018</div>
-<h3>Strange Attractors mit BigDecimal</h3>
+  <a href="ntp_server_raspi_em406a_ii.html#content">
+<div class="date">02.12.2018</div>
+<h3>NTP-Server mit Raspi und EM406a II</h3>
 <div class="abstract">
-<p>Nachdem ich mir in meinem
-früheren Artikel
-zum Thema der Mathematik mit beliebiger Präzision in Java noch nicht sicher war ob es Sinn machen würde,
-mein
-Framework für die numerische Behandlung von Differentialgleichungssystemen
-auf die Option der Benutzung von BigDecimal als unterliegenden Datentyp zu erweitern, habe ich nun doch damit experimentiert:
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich die Hardwareanpasungen für mein altes GPS-Modul hier bereits als Grundlage für
+meinen eigenen
+Atomzeit-GPS-NTP-Server
+beschrieben und die Grundlagen der Hardware in ein
+GitHub-Repository gepackt habe, habe ich nun den letzten schritt vollzogen.
 </p></div>   </a>
 </li>
 </ul>
@@ -537,7 +754,7 @@ GUI
 <h3>
 Hardware
 </h3>
-<span class="nav-item-counter">20</span>
+<span class="nav-item-counter">21</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -591,7 +808,7 @@ Links
 Linux
 </strong>
 </h3>
-<span class="nav-item-counter">114</span>
+<span class="nav-item-counter">115</span>
 </header>
 <div class="nav-item-body">
 <p>Alles zum Thema Gnu Linux</p>

@@ -117,80 +117,160 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
-			<h3>Technology Short Take 106</h3>
+			<h3>Technology Short Take 107</h3>
 		</div>
 		<div class="collectiontext">
-			<p>Welcome to Technology Short Take #106! It&rsquo;s been quite a while (over a month) since the last Tech Short Take, as this one kept getting pushed back. Sorry about that, folks! Hopefully I&rsquo;ve still managed to find useful and helpful links to include below. Enjoy!</p>
+			<p>Welcome to Technology Short Take #107! In response to my request for feedback in the last Technology Short Take, a few readers responded in favor of a more regular publication schedule even if that means the articles are shorter in length. Thus, this Tech Short Take may be a bit shorter than usual, but hopefully you&rsquo;ll still find something useful.</p>
 
 <h2 id="networking">Networking</h2>
 
 <ul>
-<li>Julia Evans provides <a href="https://jvns.ca/blog/2018/10/27/envoy-basics/">some Envoy basics</a>. <a href="https://www.envoyproxy.io/">Envoy</a> is a useful project with which to be familiar; it serves as the data plane for the <a href="https://istio.io/">Istio service mesh</a>, and it is the data plane for Heptio&rsquo;s <a href="https://github.com/heptio/contour">Contour ingress controller</a> (and, by extension, Heptio&rsquo;s <a href="https://github.com/heptio/gimbal">Gimbal multi-cluster routing solution</a>).</li>
-<li>Continuing on that Envoy theme, you may find <a href="https://blog.envoyproxy.io/introduction-to-modern-network-load-balancing-and-proxying-a57f6ff80236">this article</a> by Matt Klein&mdash;one of the primary authors of Envoy&mdash;helpful in understanding some of the concepts behind modern load balancing and proxying. Many of these concepts had direct impacts on the design of Envoy.</li>
+<li>Matt Oswalt <a href="https://networkreliability.engineering/2018/11/how-nre-labs-implements-curriculum-as-code/">shares some details</a> on how NRE Labs implements &ldquo;curriculum-as-code.&rdquo;</li>
 </ul>
 
 <h2 id="servers-hardware">Servers/Hardware</h2>
 
 <ul>
-<li>The Intel Management Engine (ME) has received a bit of attention as a potential security vulnerability; in <a href="http://blog.ptsecurity.com/2018/10/intel-me-manufacturing-mode-macbook.html">this article</a>, authors Maxim Goryachy and Mark Ermolov expose some new concerns around the Intel ME and its undocumented Manufacturing Mode.</li>
-<li>Serve The Home takes <a href="https://www.servethehome.com/investigating-implausible-bloomberg-supermicro-stories/">a critical look</a> at the Bloomberg Supermicro stories, debunking or at least calling into question many details of the alleged hardware hack as reported by Bloomberg.</li>
+<li>Christian Kellner <a href="https://christian.kellner.me/2018/10/24/thunderbolt-port-guide-t480s-force-power/">provides</a> a brief reminder that not all USB-C ports are Thunderbolt ports, and updates everyone on the status of <code>bolt</code> (Linux utility for working with Thunderbolt ports and peripherals).</li>
 </ul>
 
 <h2 id="security">Security</h2>
 
 <ul>
-<li>From an unknown author, we have <a href="http://flatkill.org/">this security rant on Flatpak</a>.</li>
-<li>Google&rsquo;s Project Zero team posted <a href="https://googleprojectzero.blogspot.com/2018/10/365-days-later-finding-and-exploiting.html">an update on finding and exploiting Safari bugs using publicly available tools</a>.</li>
-<li>This page has a list of <a href="https://null-byte.wonderhowto.com/how-to/ultimate-guide-hacking-macos-0188749/">ways to exploit (or hack) macOS</a>. I share this not to encourage illegal activities, but instead to point out that <em>no</em> operating system is secure, so be alert at all times and use good computing practices regardless of your OS.</li>
-<li>Björn Wenzel shows <a href="https://koudingspawn-blog.firebaseapp.com/combine-vault-with-kubeadm/">how to use HashiCorp Vault to generate short-lived certificates for use with <code>kubectl</code></a> for managing/interacting with a Kubernetes cluster. This is a pretty neat idea, but keep in mind you also have the &ldquo;overhead&rdquo; of managing a Vault installation (which has its own set of challenges).</li>
+<li>Troy Hunt has a good article on <a href="https://www.troyhunt.com/beyond-passwords-2fa-u2f-and-google-advanced-protection/">security measures other than just passwords</a>, explaining some of the differences between multi-factor authentication and multi-step authentication (for example). Highly recommended reading.</li>
 </ul>
 
 <h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
 
 <ul>
-<li>Ric Harvey shows <a href="https://digilution.io/posts/ci-cd-pipeline-for-hugo/">how to automatically deploy Hugo updates using AWS CodeBuild</a>. This is something I&rsquo;ve been considering for my own site, but just haven&rsquo;t taken the time to really dig in. Thanks for (potentially) saving me some time, Ric!</li>
-<li>If you use the AWS CLI but haven&rsquo;t read <a href="https://alestic.com/2013/11/aws-cli-query/">this post by Eric Hammond</a> yet, you are doing yourself a disservice.</li>
-<li>Maish Saidel-Keesing examines <a href="https://technodrone.blogspot.com/2018/10/aws-privatelink-vs-nat-gateway-from.html">the design trade-offs for NAT gateways versus AWS PrivateLink</a>.</li>
-<li>I, for one, was very glad to see <a href="https://kubernetes.io/blog/2018/10/04/introducing-the-non-code-contributors-guide/">this</a>. Non-code contributions are, in my opinion, an important but oft-overlooked aspect of open source communities.</li>
-<li>Clement Pang, co-founder and Chief Architect of Wavefront, <a href="https://medium.com/@clementpang/thoughts-from-the-front-line-operating-at-99-95-uptime-b97d772b5e66">talks about building a highly-available service</a>.</li>
-<li>Dušan Šušic has a write-up on <a href="https://medium.com/@dusansusic/traefik-ingress-controller-for-k8s-c1137c9c05c4">using Traefik as a Kubernetes ingress controller</a>.</li>
-<li>Fellow VMware alum Steve Flanders has a write-up on <a href="https://sflanders.net/2018/10/24/running-kubernetes-locally/">running Kubernetes locally</a> (on a Mac). Steve also shares what he thinks are <a href="https://sflanders.net/2018/10/26/must-have-kubernetes-tools/">some must-have tools for Kubernetes</a>.</li>
-<li>Steven Acreman shares a brief, high-level <a href="https://kubedex.com/nginx-ingress-vs-kong-vs-traefik-vs-haproxy-vs-voyager-vs-contour-vs-ambassador/">comparison of the major Kubernetes ingress solutions</a>.</li>
-<li>I enjoy Michael Hausenblas&rsquo; &ldquo;appops reloaded&rdquo; posts, which are similar to my Tech Short Takes but more tightly focused on cloud-native stuff. He recently hit <a href="https://tinyletter.com/mhausenblas/letters/appops-reloaded-100-o">post number 100 in the series</a>. Good stuff!</li>
+<li>Another post from Matt Oswalt, also related to the NRE Labs post I mentioned above, discusses <a href="https://keepingitclassless.net/2018/11/troubleshooting-nginx-ingress-rewrites-in-kubernetes/">troubleshooting NGINX Ingress rewrites in Kubernetes</a>.</li>
+<li>Arush Salil reviews <a href="https://blog.kubernauts.io/ingress-on-kubernetes-with-cert-manager-ad7d413d76f0">using ingress on Kubernetes with <code>cert-manager</code></a>.</li>
+<li>Michael Hausenblas has an informative article with <a href="https://dev.to/mhausenblas/on-some-defaults-in-kubernetes-rbac-270l">information on Kubernetes RBAC defaults</a>.</li>
+<li>This post is a couple months old (a lifetime in the cloud-native world): <a href="https://aws.amazon.com/blogs/opensource/aws-service-operator-kubernetes-available/">the AWS Service Operator</a> enables users/developers to consume a select set of AWS services via Kubernetes YAML manifests.</li>
+<li>And speaking of YAML manifests, I saw <a href="https://github.com/google/kasane">this tool</a> mentioned somewhere among my various feeds. It&rsquo;s described as a &ldquo;layering tool&rdquo; that allows users to extend officially published YAML documents with local extensions/additions.</li>
+<li>There&rsquo;s some good stuff in Michael Hausenblas&rsquo; <a href="https://tinyletter.com/mhausenblas/letters/appops-reloaded-102">AppOps Reloaded #102</a> (as always).</li>
+<li><a href="https://aws.amazon.com/outposts/">AWS Outposts</a> is Amazon&rsquo;s move into the hybrid cloud market. It will be available next year, and will come in a &ldquo;native AWS&rdquo; flavor as well as a VMware flavor (see <a href="https://cloud.vmware.com/community/2018/11/28/vmware-cloud-aws-outposts-cloud-managed-sddc-data-center/">William Lam&rsquo;s post</a> for more details on the VMware flavor). This is a pretty significant market move, and I believe this move impact the technology industry in a variety of ways. For those of us in the IT field, we are definitely living in interesting times.</li>
 </ul>
 
 <h2 id="operating-systems-applications">Operating Systems/Applications</h2>
 
 <ul>
-<li>Denzil Ferreira shares some experiences with <a href="https://denzilferreira.github.io/microsoft-surface-pro-4-and-fedora-28/">the Microsoft Surface Pro 4 and Fedora 28</a>. The &ldquo;TL;DR&rdquo; is that it works, but there&rsquo;s a fair amount of effort involved to get there.</li>
-<li><a href="https://gist.github.com/a7madgamal/c2ce04dde8520f426005e5ed28da8608">This</a> got a fair amount of attention recently.</li>
-<li>Ed Haletky shares <a href="https://www.astroarch.com/2018/10/migration-week-to-an-apple-macbook-pro/">his experience in migrating to a new MacBook Pro</a>; perhaps some of the information he shares will be helpful to others.</li>
-<li>Daniele Polencic shares <a href="https://medium.com/skills-matter/3-simple-tricks-for-smaller-docker-images-cf2760645621">3 tricks for smaller Docker images</a>. The title is a bit misleading; the article is really more about using different base images to optimize for size. Useful nevertheless, though.</li>
-<li>I loved <a href="https://zwischenzugs.com/2018/10/12/eleven-bash-tips-you-might-want-to-know/">this set of Bash tips</a>.</li>
-<li>Andrej Yemelianov has <a href="https://blog.selectel.com/managing-containers-runc/">a quick introduction to managing containers in <code>runC</code></a>.</li>
+<li>Konstantin Suvorov helps bring <a href="https://ansibledaily.com/add-beauty-to-long-jinja2-chains/">readability to long Jinja2 chains</a> via YAML block scalar syntax. A simple tip, yes, but useful!</li>
+<li>Major Hayden provides some ways to <a href="https://major.io/2016/05/05/preventing-ubuntu-16-04-starting-daemons-package-installed/">prevent Ubuntu 16.04 from starting daemons when a package is installed</a>.</li>
+<li>Kevin Fleming discusses the idea of <a href="https://opensource.com/article/18/11/systemd-nspawn-system-recovery">using a systemd-nspawn container to help with system recovery</a>. I&rsquo;ve been interested in the use of systemd-nspawn for a while, but this is an interesting use case I hadn&rsquo;t considered.</li>
 </ul>
 
 <h2 id="storage">Storage</h2>
 
-<p>Nothing this time around, but I&rsquo;ll stay alert for items I can include in the next Technology Short Take.</p>
+<ul>
+<li>J Metz has launched his own, storage-focused &ldquo;Short Takes&rdquo; series; the first of these is found <a href="https://jmetz.com/2018/11/storage-short-take-1/">here</a>.</li>
+</ul>
 
 <h2 id="virtualization">Virtualization</h2>
 
 <ul>
-<li>In August of this year (2018), SSD published <a href="https://blogs.securiteam.com/index.php/archives/3736">this article on a guest-to-host escape found in VirtualBox</a>. It looks like the VirtualBox community fixed the issue fairly quickly, but you may want to double-check your version to make sure you aren&rsquo;t vulnerable.</li>
+<li>The big news in virtualization recently was <a href="https://aws.amazon.com/blogs/opensource/firecracker-open-source-secure-fast-microvm-serverless/">AWS&rsquo; announcement of Firecracker</a>, a lightweight VMM (virtual machine monitor) targeted at creating &ldquo;microVMs&rdquo; that are ideally suited for serverless environments. Apparently, Firecracker is part of the technology stack behind Lambda and Fargate. More information is also available via <a href="https://aws.amazon.com/blogs/aws/firecracker-lightweight-virtualization-for-serverless-computing/">Jeff Barr&rsquo;s blog post</a>, the <a href="https://firecracker-microvm.github.io/">Firecracker web site</a>, and the <a href="https://github.com/firecracker-microvm/firecracker">Firecracker GitHub repository</a>.</li>
 </ul>
 
 <h2 id="career-soft-skills">Career/Soft Skills</h2>
 
 <ul>
-<li>Consider <a href="https://packetpushers.net/the-most-fragile-engineers-i-know/">this</a> to be a career skills &ldquo;anti-pattern,&rdquo; if you will (a list of things not to do or be).</li>
-<li>Nick Shrock provides <a href="https://medium.com/@schrockn/on-code-reviews-b1c7c94d868c">some guidelines and advice on performing code reviews</a>.</li>
+<li>This article by Phil Estes on <a href="https://opensource.com/article/18/11/learning-golang">4 tips for learning Golang</a> may prove useful to folks who, like myself, are interested in becoming more fluent in Go.</li>
 </ul>
 
-<p>OK, that&rsquo;s all I have for now. Question for the readers (we&rsquo;ll see how many of you make it this far)&mdash;which is better for you, regular Tech Short Takes that might be shorter <em>or</em> Tech Short Takes about this length (~30-ish links) but less frequently? <a href="https://twitter.com/scott_lowe">Hit me on Twitter and let me know.</a> Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/CJBgf9ZmX2Y" height="1" width="1" alt=""/>
+<p>In the immortal words of Porky Pig, th-th-that&rsquo;s all folks! As always, feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> with your feedback, suggestions, or corrections. Thanks for reading!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/h9cAsK3Yc0E" height="1" width="1" alt=""/>
 		</div>
 		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/CJBgf9ZmX2Y/" target="_blank">Öffnen</a>
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/h9cAsK3Yc0E/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Supercharging my CLI</h3>
+		</div>
+		<div class="collectiontext">
+			<p>I spent a <em>lot</em> of time in the terminal. I can&rsquo;t really explain why; for many things it just feels faster and more comfortable to do them via the command line interface (CLI) instead of via a graphical point-and-click interface. (I&rsquo;m not totally against GUIs, for some tasks they&rsquo;re far easier.) As a result, when I find tools that make my CLI experience faster/easier/more powerful, that&rsquo;s a big boon. Over the last few months, I&rsquo;ve added some tools to my <a href="https://getfedora.org">Fedora</a> laptop that have really added some power and flexibility to my CLI environment. In this post, I want to share some details on these tools and how I&rsquo;m using them.</p>
+
+<p>The tools I&rsquo;ve adopted and that I&rsquo;ll discuss in this post are:</p>
+
+<ul>
+<li><code>powerline-go</code> for an informative CLI prompt</li>
+<li><code>rg</code> for faster content searches</li>
+<li><code>fd</code> for faster filename searches</li>
+<li><code>fzf</code> for fuzzy command history access and faster directory navigation</li>
+</ul>
+
+<p>Let&rsquo;s take a closer look at each of these.</p>
+
+<h2 id="a-more-informative-shell-prompt">A More Informative Shell Prompt</h2>
+
+<p>There&rsquo;s been quite a few articles written about <a href="https://powerline.readthedocs.io/en/latest/">powerline</a>, a Python-based utility that provides a much more informative shell prompt. Instead of going down the traditional powerline route, I found <a href="https://github.com/justjanne/powerline-go">powerline-go</a>&mdash;a small, statically linked Go binary that provides similar functionality.</p>
+
+<p>Now, my shell prompt automatically displays things like:</p>
+
+<ul>
+<li>The currently checked-out branch in a Git repository and indicators for untracked/modified files in the repository</li>
+<li>The name of the currently-active Python virtual environment</li>
+<li>The name of the Kubernetes cluster against which <code>kubectl</code> will operate (and the namespace, if one is selected)</li>
+<li>And more mundane information like the username, hostname, and current working directory</li>
+</ul>
+
+<p>I&rsquo;ve found powerline-go to be very easy to use and very easy to configure. If you&rsquo;re looking for a way to make your shell prompt a bit more interactive and a bit more informative, powerline-go is definitely worth a look.</p>
+
+<h2 id="faster-content-searches-with-ripgrep">Faster Content Searches with Ripgrep</h2>
+
+<p><a href="https://github.com/BurntSushi/ripgrep">Ripgrep</a>, or <code>rg</code>, is an insanely fast search tool that recursively searches a path for a regex (regular expression) pattern. Ripgrep is faster than most other search tools, ignores binary files by default, and honors <code>.gitignore</code> files (which can be both handy and annoying at times). Ripgrep also offers pretty impressive platform support, with releases available for virtually all major Linux distributions, various BSDs, Windows, and macOS.</p>
+
+<p>This is probably subjective, but I find myself now more likely to use <code>rg</code> to find a file that I need than I would have before with some other search tool. When I combine it with other tools, it&rsquo;s really become quite handy. That being said, the &ldquo;regular&rdquo; <code>grep</code> utility may be sufficient for some users&rsquo; needs.</p>
+
+<h2 id="faster-filename-searches-with-fd">Faster Filename Searches with <code>fd</code></h2>
+
+<p><a href="https://github.com/sharkdp/fd"><code>fd</code></a> is a super-fast alternative to the traditional <code>find</code> command. It offers a simpler syntax (just <code>fd &lt;pattern&gt;</code> and you&rsquo;re off to the races) and honors <code>.gitignore</code> files by default (although there is an option to not honor them and include hidden/ignored items). You can use it to find only files or only directories in a particular path. (Did I mention it&rsquo;s really fast?)</p>
+
+<p>Like with <code>rg</code>, the ease of use and speed of <code>fd</code> have led me to use it more often than I would have used the traditional <code>find</code> utility. Making it more approachable to perform filename searches has, for me, made the tool more useful in the end.</p>
+
+<h2 id="fuzzy-searching-with-fzf">Fuzzy Searching with <code>fzf</code></h2>
+
+<p>This tool has changed my life.</p>
+
+<p>OK, that&rsquo;s probably hyperbole, but <a href="https://github.com/junegunn/fzf"><code>fzf</code></a> is a truly amazing and useful tool. <code>fzf</code> describes itself as a &ldquo;command-line fuzzy finder,&rdquo; and it can be used to perform fuzzy searching in any list of things&mdash;filenames, directories, processes, URLs, whatever. Like <code>rg</code> and <code>fd</code>, it&rsquo;s super-fast.</p>
+
+<p>Out of the box (so to speak), <code>fzf</code> enhances the CLI in a couple different ways:</p>
+
+<ul>
+<li>It replaces the default Ctrl-R history search with a fuzzy history search that lets me search and interactively select commands to run from the command history. (What&rsquo;s that? You didn&rsquo;t know about the Ctrl-R command history search in Bash? Your CLI experience is definitely about to change!)</li>
+<li><code>fzf</code> adds a new keybinding for Ctrl-T, which lets me interactively search for and add parameters to a command-line argument. For example, let&rsquo;s say I want to edit a file in <a href="https://code.visualstudio.com/">Visual Studio Code</a> (my current preferred text editor). I can type <code>code</code>, press Ctrl-T, then fuzzy search for the file or directory I want to open, press Enter to select it, and press Enter again to execute the command. My <code>fzf</code> configuration for the Ctrl-T functionality uses <code>fd</code> to search anywhere in my home directory, but that&rsquo;s configurable.</li>
+<li>Finally, <code>fzf</code> adds a keybinding for Alt-C, which adds the ability to use <code>fzf</code> to quickly change directories. Again, <code>fzf</code> is leveraging <code>fd</code> with a list of all the directories in my home directory, but the tool that <code>fzf</code> uses and the scope of the search are configurable.</li>
+</ul>
+
+<p>These three features alone make <code>fzf</code> so useful. But wait&mdash;there&rsquo;s more! <code>fzf</code> can also perform Bash completion for files and directories, process IDs, host names, and environment variables.</p>
+
+<p>It&rsquo;s also highly customizable; see <a href="https://github.com/junegunn/fzf">the GitHub repo</a> for more details.</p>
+
+<h2 id="combining-these-tools">Combining These Tools</h2>
+
+<p>I mentioned above that <code>fzf</code> can use <code>fd</code> for various functions (like the Alt-C and Ctrl-T functions), so you can already get an idea of how useful it can be to combine these tools with each other or with other tools.</p>
+
+<p>Here&rsquo;s a couple examples:</p>
+
+<ul>
+<li>Let&rsquo;s say I know I have a file containing the word &ldquo;Kubernetes&rdquo; in my home directory, and I remember part of the filename but not the full filename. No worries, <code>rg</code> and <code>fzf</code> to the rescue! From my home directory, I can run <code>rg -il kubernetes . | fzf | xargs code</code>. <code>rg</code> will find all the matching files, pass them to <code>fzf</code> for interactive fuzzy searching, and then pass the one I select to <code>code</code> for editing.</li>
+<li>The <code>fzf</code> wiki has an example of using <code>fzf</code> for fuzzy searching of Chrome browsing history; I adapted this for Firefox. (See the <code>fwh</code> file in <a href="https://github.com/scottslowe/scripts">my &ldquo;scripts&rdquo; repository</a>. I&rsquo;m still fine-tuning it for the best results.) There&rsquo;s also a <em>ton</em> of other examples in the wiki, so have a look there.</li>
+</ul>
+
+<p>I&rsquo;m also working on a command/script that will use both <code>rg</code> <em>and</em> <code>fd</code> for a combined filename/content search that passes the unique results back to <code>fzf</code> for selecting a file to edit. I haven&rsquo;t quite gotten that one worked out just yet.</p>
+
+<h2 id="other-tools">Other Tools</h2>
+
+<p>Other tools I&rsquo;m currently testing (but haven&rsquo;t necessarily fully adopted as core part of my workflow) are <a href="https://github.com/knqyf263/pet">pet</a> (described as a command-line snippet manager) and <a href="https://github.com/mattn/memo">memo</a> (a tool for creating/editing/finding &ldquo;memos&rdquo; or short notes). Both of these tools can also leverage <code>fzf</code> for finding information, so that brings a bit of consistency to my toolset (fuzzy searching for the win!).</p>
+
+<p>Anyway, I hope you found something useful here, and feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> if you have questions or suggestions for other tools I should consider. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/lUWIunRgcGM" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/lUWIunRgcGM/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 </ul>
@@ -200,40 +280,39 @@ display('news.html')
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-  <a href="gc_beliebige_praezision_java.html">
-<div class="date">24.11.2018</div>
-<h3>GC und beliebige Präzision in Java</h3>
+  <a href="pam_nfc_ubuntu_18_04.html">
+<div class="date">02.12.2018</div>
+<h3>pam_nfc und Ubuntu 18.04</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Das letzte Mal, als ich über Vor- und Nachteile der Durchführung mathematischer Berechnungen
-mit verschiedenen Datentypen
-schrieb,
-vernachlässigte ich einen Aspekt, dessen Einfluss und Wichtigkeit
-von der benutzten Programmiersprache und konkreten Implementierung abhängt:
+<p>Ich habe bereits über einige Stolpersteine beim
+Umstieg auf Ubuntu 18.04
+berichtet - nunmehr bin ich auf einen neuen gestoßen, der
+den Fork und einen Pull-Request zur Folge hatte
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="led_matrix_laufschrift.html">
-<div class="date">24.11.2018</div>
-<h3>Led-Matrix Laufschrift</h3>
+	<a href="eigene_firmware_sonoff_s20.html#71">
+<div class="date">02.12.2018</div>
+<h3>Eigene Firmware für Sonoff S20</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem ich wie bereits
-hier
-beschrieben mein Herz für Led-Matrix-Displays wiederentdeckt habe, habe ich überlegt,was man wohl noch damit tun könnte...
+	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+<p>Nachdem ich nach meinen diversen Erfahrungen mit dem Arduino auch mal andere Projekte erforschen wollte,
+habe ich mich durch Artikel in zurückliegenden Ausgaben der c't inspirieren lassen und Projekte mit dem ESP8266
+ausprobiert - zuerst der Umbau einer WLAN-fähigen Steckdose...
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="strange_attractors_bigdecimal.html">
-<div class="date">18.11.2018</div>
-<h3>Strange Attractors mit BigDecimal</h3>
+  <a href="ntp_server_raspi_em406a_ii.html">
+<div class="date">02.12.2018</div>
+<h3>NTP-Server mit Raspi und EM406a II</h3>
 <div class="abstract">
-<p>Nachdem ich mir in meinem
-früheren Artikel
-zum Thema der Mathematik mit beliebiger Präzision in Java noch nicht sicher war ob es Sinn machen würde,
-mein
-Framework für die numerische Behandlung von Differentialgleichungssystemen
-auf die Option der Benutzung von BigDecimal als unterliegenden Datentyp zu erweitern, habe ich nun doch damit experimentiert:
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich die Hardwareanpasungen für mein altes GPS-Modul hier bereits als Grundlage für
+meinen eigenen
+Atomzeit-GPS-NTP-Server
+beschrieben und die Grundlagen der Hardware in ein
+GitHub-Repository gepackt habe, habe ich nun den letzten schritt vollzogen.
 </p></div>   </a>
 </li>
 </ul>
@@ -368,7 +447,7 @@ GUI
 <h3>
 Hardware
 </h3>
-	<span class="nav-item-counter">20</span>
+	<span class="nav-item-counter">21</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -420,7 +499,7 @@ Links
 <h3>
 Linux
 </h3>
-	<span class="nav-item-counter">114</span>
+	<span class="nav-item-counter">115</span>
 </header>
 <div class="nav-item-body">
 <p>Alles zum Thema Gnu Linux</p>

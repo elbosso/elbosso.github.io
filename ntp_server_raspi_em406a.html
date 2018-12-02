@@ -67,7 +67,7 @@ document.write(link)
 <body onload="toggle('show');">
 <div id="wrapper">
 	<div id="header">
-<div id="logo">
+		<div id="logo">
   <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
       display="inline">
     <mrow>
@@ -77,46 +77,62 @@ document.write(link)
     </mrow>
 </math>
 </h1-->
-  <p>
-		<script>
+			<p>
+				<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script>
-		<noscript>Der Verfasser</noscript>				
-  </p>
-</div>
-<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
-	über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
-	Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
-	daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
-	Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
-	Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-		<a href="https://github.com/elbosso">hier</a>.</p>
+				</script>
+				<noscript>Der Verfasser</noscript>
+  			</p>
+		</div>
+		<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
+			über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
+			Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
+			daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
+			Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
+			Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+			<a href="https://github.com/elbosso">hier</a>.
+		</p>
 	</div><!-- #header-->
-<div id="all">
-<div id="A">
-<div id="content">
-<div class="date">16.10.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
-<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span--></div>
-<div class="previousArticlesInCategories">
+	<div id="all">
+		<div id="A">
+			<div id="content">
+					<div class="date">
+						16.10.2018 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
+<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span-->
+					</div>
+			<div class="previousArticlesInCategories">
 	<!--ul-->
-	vorhergehende Artikel in:
-	<!--li--> <a href="18_04___gitlab__x.html#content">Linux</a> <!--/li-->
-	<!--li--> ,<a href="gedanken_zeit__ntp__gps_diy.html#content">Hardware</a> <!--/li-->
+				vorhergehende Artikel in:
+	<!--li--> 							<a href="18_04___gitlab__x.html#content">
+						Linux
+					</a> <!--/li-->
+	<!--li--> 		,
+					<a href="gedanken_zeit__ntp__gps_diy.html#content">
+						Hardware
+					</a> <!--/li-->
 	<!--/ul-->
-</div>
- 	<div class="heading">NTP-Server mit Raspi und EM406a</div>
-	<div class="update" id="updates">
-		<h1>Updates</h1>
-		<ul>
-			<li><a href="#71">16. Oktober 2018</a></li>
-		</ul>
-	</div>
-	<p>Ich habe herausfinden wollen, ob es mir mit ein paar zu Hause herumliegenden Teilen möglich wäre,
+			</div>
+ 			<div class="heading">
+				NTP-Server mit Raspi und EM406a
+			</div>
+				<div class="update" id="updates">
+					<h1>Updates</h1>
+					<ul>
+							<li>
+								<a href="#72">
+									16. Oktober 2018
+								</a>
+							</li>
+					</ul>
+				</div>
+<p>Ich habe herausfinden wollen, ob es mir mit ein paar zu Hause herumliegenden Teilen möglich wäre,
 eine Satellitenuhr zu bauen, die ich dann im Heimnetz als NTP-Server einsetzen könnte.
-</p> <a name="content"> </a>
- <p>  <img src="images/icons/servers_ntp_48.png"
+</p>			<a name="content">
+
+			</a>
+<p>  <img src="images/icons/servers_ntp_48.png"
 	   alt="NTP-Server"
 	class="imgright">
 Ich hatte vor, diese Installation auf dem sowieso schon vorhandenen Pi vorzunehmen, der bei mir als
@@ -158,188 +174,289 @@ Die Schaltung ist einfach - ich werde sie trotzdem demnächst nochmals in
 entwerfen und die Schaltung dann auch hier veröffentlichen - nunmehr müssen Bilder des Gesamtkunstwerks in einer Pappkiste und Details vom
 prototypischen Steckbrettaufbau der Impulsanpassung reichen (am Ende des Artikels).
 </p><p>
-<h1><a name="71">Aktualisierung vom 16. Oktober 2018</a></h1><div class="update">Inzwischen existiert ein
+<h1><a name="72">Aktualisierung vom 16. Oktober 2018</a></h1><div class="update">Inzwischen existiert ein
 <a href="https://github.com/elbosso/E406A-PPS-Impuls-Widener">GitHub-Repository</a>,
 das das fertige KiCad-Projekt für die kleine Anpassungsschaltung enthält.
 </div>
-</p> <ul class="single"> 
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>GPS Shield
+</p>				<ul class="single">
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>GPS Shield
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="http://www.ladyada.net/make/gpsshield/parts.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>EM 406A
+							</div>
+							<div class="collectionhref">
+								<a href="http://www.ladyada.net/make/gpsshield/parts.html" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>EM 406A
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://www.sparkfun.com/datasheets/GPS/EM-406A_User_Manual.PDF" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>GPS Shield
+							</div>
+							<div class="collectionhref">
+								<a href="https://www.sparkfun.com/datasheets/GPS/EM-406A_User_Manual.PDF" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>GPS Shield
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://www.sparkfun.com/products/retired/9487" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>GPS Receiver - EM-406A SiRF III (20 Channel)
+							</div>
+							<div class="collectionhref">
+								<a href="https://www.sparkfun.com/products/retired/9487" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>GPS Receiver - EM-406A SiRF III (20 Channel)
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://www.sparkfun.com/products/retired/465" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>GPS Receiver - EM-506 (48 Channel)
+							</div>
+							<div class="collectionhref">
+								<a href="https://www.sparkfun.com/products/retired/465" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>GPS Receiver - EM-506 (48 Channel)
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://www.sparkfun.com/products/12751" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>"/dev/tty? Device or resource busy"
+							</div>
+							<div class="collectionhref">
+								<a href="https://www.sparkfun.com/products/12751" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>"/dev/tty? Device or resource busy"
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://www.tldp.org/HOWTO/Serial-HOWTO-16.html#busy_err" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Building a GPS Time Server with the Raspberry Pi 3
+							</div>
+							<div class="collectionhref">
+								<a href="https://www.tldp.org/HOWTO/Serial-HOWTO-16.html#busy_err" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Building a GPS Time Server with the Raspberry Pi 3
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="http://unixwiz.net/techtips/raspberry-pi3-gps-time.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Disabling Bluetooth on Raspberry Pi
+							</div>
+							<div class="collectionhref">
+								<a href="http://unixwiz.net/techtips/raspberry-pi3-gps-time.html" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Disabling Bluetooth on Raspberry Pi
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://scribles.net/disabling-bluetooth-on-raspberry-pi/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Overlay to remap Pi 3 UART
+							</div>
+							<div class="collectionhref">
+								<a href="https://scribles.net/disabling-bluetooth-on-raspberry-pi/" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Overlay to remap Pi 3 UART
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://www.raspberrypi.org/forums/viewtopic.php?t=138223&p=918859" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>Raspberry Pi 3: GPIO-Port Module und Bluetooth
+							</div>
+							<div class="collectionhref">
+								<a href="https://www.raspberrypi.org/forums/viewtopic.php?t=138223&p=918859" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>Raspberry Pi 3: GPIO-Port Module und Bluetooth
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://wiki.fhem.de/wiki/Raspberry_Pi_3:_GPIO-Port_Module_und_Bluetooth" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>xx555 Precision Timer
+							</div>
+							<div class="collectionhref">
+								<a href="https://wiki.fhem.de/wiki/Raspberry_Pi_3:_GPIO-Port_Module_und_Bluetooth" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>xx555 Precision Timer
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="http://www.ti.com/lit/ds/symlink/ne555.pdf" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectiontext">
-		<p>NE555
+							</div>
+							<div class="collectionhref">
+								<a href="http://www.ti.com/lit/ds/symlink/ne555.pdf" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+						<li class="anriss">
+							<div class="collectiontext">
+								<p>NE555
 </p>
-		</div>
-		<div class="collectionhref">
-		<a href="https://de.wikipedia.org/wiki/NE555" target="_blank">Öffnen</a>
-		</div>
-	</li>
-</ul>
-<ul class="double"> 
-<li class="anriss">
-	<a href="images/ntp/whole.png" rel="lightbox[screenshots]" 
-		title="Gesamtkunstwerk"
-	   class="img">
-		<div class="screenshotthumb center">
-			<img class="center" src="images/ntp/whole_t.png">
-			<div class="thumbnailcaption">Gesamtkunstwerk</div>
-		</div>
-	</a>
-</li>
-<li class="anriss">
-	<a href="images/ntp/impulsebreadboard.png" rel="lightbox[screenshots]" 
-		title="Gesamtkunstwerk"
-	   class="img">
-		<div class="screenshotthumb center">
-			<img class="center" src="images/ntp/impulsebreadboard_t.png">
-			<div class="thumbnailcaption">Gesamtkunstwerk</div>
-		</div>
-	</a>
-</li>
-</ul>
-</div>
-	<div id="referers">
-		<h1>Artikel, die hierher verlinken</h1>
-		<ul>
+							</div>
+							<div class="collectionhref">
+								<a href="https://de.wikipedia.org/wiki/NE555" target="_blank">
+									Öffnen
+								</a>
+							</div>
+						</li>
+				</ul>
+				<div>
+						<ul class="double">
+						<li class="anriss">
+								<a href="images/ntp/whole.png" rel="lightbox[screenshots]"
+									title="Gesamtkunstwerk"
+	   							class="img">
+							<div class="screenshotthumb center">
+								<img class="center" src="images/ntp/whole_t.png">
+								<div class="thumbnailcaption">
+									Gesamtkunstwerk
+								</div>
+							</div>
+								</a>
+						</li>
+						<li class="anriss">
+								<a href="images/ntp/impulsebreadboard.png" rel="lightbox[screenshots]"
+									title="Gesamtkunstwerk"
+	   							class="img">
+							<div class="screenshotthumb center">
+								<img class="center" src="images/ntp/impulsebreadboard_t.png">
+								<div class="thumbnailcaption">
+									Gesamtkunstwerk
+								</div>
+							</div>
+								</a>
+						</li>
+					</ul>
+				</div>
+				<div id="referers">
+					<h1>
+						Artikel, die hierher verlinken
+					</h1>
+		<!--ul>
+			<li><a href="ntp_server_raspi_em406a_ii.html">NTP-Server mit Raspi und EM406a II</a></li>
 			<li><a href="gedanken_zeit__ntp__gps_diy.html">Gedanken zu Zeit, NTP, GPS und DIY</a></li>
-		</ul>
+		</ul-->
+					<ul class="single">
+							<li class="anriss">
+								<div>
+									<h3>
+										NTP-Server mit Raspi und EM406a II
+									</h3>
+									<span class="tags">
+										<div class="popup">
+															<div>
+																<a class="taglink" href="tag_Hardware.html">
+																	Hardware
+																</a>
+															</div>
+										</div>
+										<img src="images/tag_48.png" class="imgtag">
+									</span>
+								</div>
+								<div class="collectiontext">
+<p>Nachdem ich die Hardwareanpasungen für mein altes GPS-Modul hier bereits als Grundlage für
+meinen eigenen
+Atomzeit-GPS-NTP-Server
+beschrieben und die Grundlagen der Hardware in ein
+GitHub-Repository gepackt habe, habe ich nun den letzten schritt vollzogen.
+</p>								</div>
+								<div class="collectionhref">
+									<a href="ntp_server_raspi_em406a_ii.html#content">
+										Öffnen
+									</a>
+								</div>
+							</li>
+							<li class="anriss">
+								<div>
+									<h3>
+										Gedanken zu Zeit, NTP, GPS und DIY
+									</h3>
+									<span class="tags">
+										<div class="popup">
+															<div>
+																<a class="taglink" href="tag_Video.html">
+																	Video
+																</a>
+															</div>
+															<div>
+																<a class="taglink" href="tag_Hardware.html">
+																	Hardware
+																</a>
+															</div>
+															<div>
+																<a class="taglink" href="tag_Rants.html">
+																	Rants
+																</a>
+															</div>
+										</div>
+										<img src="images/tag_48.png" class="imgtag">
+									</span>
+								</div>
+								<div class="collectiontext">
+<p>Nachdem ich meinen eigenen
+Atomzeit-GPS-NTP-Server
+in Betrieb genommen habe, habe ich mir Gedanken gemacht, warum die
+käuflich zu erwerbenden einen so hohen Anschaffungswiderstand haben.
+</p>								</div>
+								<div class="collectionhref">
+									<a href="gedanken_zeit__ntp__gps_diy.html#content">
+										Öffnen
+									</a>
+								</div>
+							</li>
+					</ul>
+				</div>
+		</div>
 	</div>
-</div>
-<div id="B"> 
+	<div id="B">
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-  <a href="gc_beliebige_praezision_java.html#content">
-<div class="date">24.11.2018</div>
-<h3>GC und beliebige Präzision in Java</h3>
+  <a href="pam_nfc_ubuntu_18_04.html#content">
+<div class="date">02.12.2018</div>
+<h3>pam_nfc und Ubuntu 18.04</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Das letzte Mal, als ich über Vor- und Nachteile der Durchführung mathematischer Berechnungen
-mit verschiedenen Datentypen
-schrieb,
-vernachlässigte ich einen Aspekt, dessen Einfluss und Wichtigkeit
-von der benutzten Programmiersprache und konkreten Implementierung abhängt:
+<p>Ich habe bereits über einige Stolpersteine beim
+Umstieg auf Ubuntu 18.04
+berichtet - nunmehr bin ich auf einen neuen gestoßen, der
+den Fork und einen Pull-Request zur Folge hatte
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="led_matrix_laufschrift.html#content">
-<div class="date">24.11.2018</div>
-<h3>Led-Matrix Laufschrift</h3>
+	<a href="eigene_firmware_sonoff_s20.html#71">
+<div class="date">02.12.2018</div>
+<h3>Eigene Firmware für Sonoff S20</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem ich wie bereits
-hier
-beschrieben mein Herz für Led-Matrix-Displays wiederentdeckt habe, habe ich überlegt,was man wohl noch damit tun könnte...
+	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+<p>Nachdem ich nach meinen diversen Erfahrungen mit dem Arduino auch mal andere Projekte erforschen wollte,
+habe ich mich durch Artikel in zurückliegenden Ausgaben der c't inspirieren lassen und Projekte mit dem ESP8266
+ausprobiert - zuerst der Umbau einer WLAN-fähigen Steckdose...
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="strange_attractors_bigdecimal.html#content">
-<div class="date">18.11.2018</div>
-<h3>Strange Attractors mit BigDecimal</h3>
+  <a href="ntp_server_raspi_em406a_ii.html#content">
+<div class="date">02.12.2018</div>
+<h3>NTP-Server mit Raspi und EM406a II</h3>
 <div class="abstract">
-<p>Nachdem ich mir in meinem
-früheren Artikel
-zum Thema der Mathematik mit beliebiger Präzision in Java noch nicht sicher war ob es Sinn machen würde,
-mein
-Framework für die numerische Behandlung von Differentialgleichungssystemen
-auf die Option der Benutzung von BigDecimal als unterliegenden Datentyp zu erweitern, habe ich nun doch damit experimentiert:
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich die Hardwareanpasungen für mein altes GPS-Modul hier bereits als Grundlage für
+meinen eigenen
+Atomzeit-GPS-NTP-Server
+beschrieben und die Grundlagen der Hardware in ein
+GitHub-Repository gepackt habe, habe ich nun den letzten schritt vollzogen.
 </p></div>   </a>
 </li>
 </ul>
@@ -476,7 +593,7 @@ GUI
 Hardware
 </strong>
 </h3>
-<span class="nav-item-counter">20</span>
+<span class="nav-item-counter">21</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -530,7 +647,7 @@ Links
 Linux
 </strong>
 </h3>
-<span class="nav-item-counter">114</span>
+<span class="nav-item-counter">115</span>
 </header>
 <div class="nav-item-body">
 <p>Alles zum Thema Gnu Linux</p>
