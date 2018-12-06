@@ -1,50 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
-<head>
-  <title>sQLshell</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-		<meta name="Description" content="Die sQLshell bietet grundlegende Features wie SQL-Editor mit Syntaxhighlighting, 
-Autovervollständigung und Code-Templates kombiniert mit spezifischen Erweiterungen 
-für die Arbeit mit SQL-Skripts." />
-  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
-  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
-	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<!DOCTYPE html>
+<html>
+<title>sQLshell</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" /><link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
 <script src="js/jquery-1.7.2.min.js"></script>
 <script src="js/lightbox.js"></script>
 <link href="css/lightbox.css" rel="stylesheet" />
-<!--script type="text/javascript">
-function toggle(el)
-{
-myEl = document.getElementById(el);
-myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
-} 
-function toggleA()
-{
-myEl = document.getElementById('C');
-var computedStyle = getComputedStyle(myEl, null)
-/*alert(computedStyle.display);*/
-myEl = document.getElementById('A');
-if (computedStyle.display=="none") 
-{
-	document.getElementById('B').className = "nonreader";
-	document.getElementById('C').className = "nonreader";
-	myEl.className = "nonreader";
-	document.getElementById('all').className = "nonreader";
-}
-else 
-{
-	document.getElementById('B').className = "reader";
-	document.getElementById('C').className = "reader";
-	myEl.className = "reader";
-	document.getElementById('all').className = "reader";
-}
-/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
-}
-</script-->
-	<script type="text/javascript" language="javascript">
+<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -55,7 +19,7 @@ function abc(coded,key)
       ltr = coded.charAt(i)
       link += (ltr)
     }
-    else {     
+    else {
       ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
       link += (key.charAt(ltr))
     }
@@ -64,59 +28,47 @@ document.write(link)
 }
 //-->
 </script>
-</head>
-<body onload="toggle('show');">
-<div id="wrapper">
-	<div id="header">
-		<div id="logo">
-  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
-      display="inline">
-    <mrow>
-      <mn>1</mn>
-      <mo>&isin;</mo>
-      <mi>&infin;</mi>
-    </mrow>
-</math>
-</h1-->
-			<p>
-				<script>
-		<!--
-abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
--->
-				</script>
-				<noscript>Der Verfasser</noscript>
-  			</p>
-		</div>
-		<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
-			über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
-			Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
-			daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
-			Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
-			Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-			<a href="https://github.com/elbosso">hier</a>.
-		</p>
-	</div><!-- #header-->
-	<div id="all">
-		<div id="A">
-			<div id="content">
-					<div class="date">
-						20.04.2013 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
-<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span-->
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l6">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>sQLshell</h4>
+				</div>
+				<div class="w3-container">
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							vorhergehende Artikel in:
+						</div>
+						<div class="w3-col m4"><p style="text-align: right">
+							<span class="w3-opacity">20.04.2013</span>
+						</p>
+						</div>
 					</div>
-			<div class="previousArticlesInCategories">
-	<!--ul-->
-				vorhergehende Artikel in:
-	<!--/ul-->
+				</div>
 			</div>
- 			<div class="heading">
-				sQLshell
-			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
 <p>Die sQLshell bietet grundlegende Features wie SQL-Editor mit Syntaxhighlighting, 
 Autovervollständigung und Code-Templates kombiniert mit spezifischen Erweiterungen 
 für die Arbeit mit SQL-Skripts.
-</p>			<a name="content">
-
-			</a>
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
 <p>  <img src="images/medium/sQLshell_logo.png" 
 	   alt="sQLshell Logo" 
 	class="imgright">
@@ -140,361 +92,201 @@ ansprechend visualisiert werden.
 <h1>Datenmigration</h1>
     Die sQLshell bietet die Möglichkeit, Datenmodelle mit Struktur und Inhalt in ein neutrales XML-basiertes Format zu exportieren. Die Anwendung kann das komplette Datenmodell aus einem solchen Export wiederherstellen. Damit ist effektiv eine Datenmigration zwischen verschiedenen DBMS verschiedener Hersteller möglich. Der Import bietet dabei verschiedenste Möglichkeiten zum Feintuning bis hin zu on-the-fly Datentransformationen. 
 <h1>Screenshots</h1>
-</p>				<div>
- 						<ul class="triple">
-						<li class="anriss">
-								<a href="images/sQLshell/screen.PNG" rel="lightbox[screenshots]"
-									title="Ansicht der Bedienoberfläche"
-	   							class="img">
-							<div class="screenshotthumb center">
-								<img class="center" src="images/sQLshell/screen_t.PNG">
-								<div class="thumbnailcaption">
-									Screenshot
+</p>				</div>
+				<div class="w3-container w3-padding" id="screenshots">
+					<hr/>
+					<h3>
+						Screenshots
+					</h3>
+					<div class="w3-row">
+						<div class="w3-third">
+							<a href="images/sQLshell/screen.PNG" rel="lightbox[screenshots]"
+							   title="Ansicht der Bedienoberfläche"
+							   class="img">
+								<div class="screenshotthumb center">
+									<img class="center" src="images/sQLshell/screen_t.PNG">
+									<div class="thumbnailcaption">
+										Screenshot
+									</div>
 								</div>
-							</div>
-								</a>
-						</li>
-						<li class="anriss">
-								<a href="images/sQLshell/Editor.PNG" rel="lightbox[screenshots]"
-									title="Der SQL-Editor für traditionelle SQL-Anweisungen und -Abfragen in Textform"
-	   							class="img">
-							<div class="screenshotthumb center">
-								<img class="center" src="images/sQLshell/Editor_t.PNG">
-								<div class="thumbnailcaption">
-									SQL-Editor
+							</a>
+						</div>
+						<div class="w3-third">
+							<a href="images/sQLshell/Editor.PNG" rel="lightbox[screenshots]"
+							   title="Der SQL-Editor für traditionelle SQL-Anweisungen und -Abfragen in Textform"
+							   class="img">
+								<div class="screenshotthumb center">
+									<img class="center" src="images/sQLshell/Editor_t.PNG">
+									<div class="thumbnailcaption">
+										SQL-Editor
+									</div>
 								</div>
-							</div>
-								</a>
-						</li>
-						<li class="anriss">
-								<a href="images/sQLshell/Online-Help.PNG" rel="lightbox[screenshots]"
-									title="Online-Hilfe"
-	   							class="img">
-							<div class="screenshotthumb center">
-								<img class="center" src="images/sQLshell/Online-Help_t.PNG">
-								<div class="thumbnailcaption">
-									Online-Hilfe
+							</a>
+						</div>
+						<div class="w3-third">
+							<a href="images/sQLshell/Online-Help.PNG" rel="lightbox[screenshots]"
+							   title="Online-Hilfe"
+							   class="img">
+								<div class="screenshotthumb center">
+									<img class="center" src="images/sQLshell/Online-Help_t.PNG">
+									<div class="thumbnailcaption">
+										Online-Hilfe
+									</div>
 								</div>
-							</div>
-								</a>
-						</li>
-						<li class="anriss">
-								<a href="images/sQLshell/VisualComposer.PNG" rel="lightbox[screenshots]"
-									title="Abfragen können auch mittels Drag'n'Drop komponiert werden"
-	   							class="img">
-							<div class="screenshotthumb center">
-								<img class="center" src="images/sQLshell/VisualComposer_t.PNG">
-								<div class="thumbnailcaption">
-									Visuelle Abfragen
+							</a>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-third">
+							<a href="images/sQLshell/VisualComposer.PNG" rel="lightbox[screenshots]"
+							   title="Abfragen können auch mittels Drag'n'Drop komponiert werden"
+							   class="img">
+								<div class="screenshotthumb center">
+									<img class="center" src="images/sQLshell/VisualComposer_t.PNG">
+									<div class="thumbnailcaption">
+										Visuelle Abfragen
+									</div>
 								</div>
-							</div>
-								</a>
-						</li>
-						<li class="anriss">
-								<a href="images/sQLshell/rules.PNG" rel="lightbox[screenshots]"
-									title="Es ist möglich, einzelne Zellen von Abfrageresultaten abhängig von (beinahe) beliebig komplexen Regeln hervorzuheben"
-	   							class="img">
-							<div class="screenshotthumb center">
-								<img class="center" src="images/sQLshell/rules_t.PNG">
-								<div class="thumbnailcaption">
-									Regeln
+							</a>
+						</div>
+						<div class="w3-third">
+							<a href="images/sQLshell/rules.PNG" rel="lightbox[screenshots]"
+							   title="Es ist möglich, einzelne Zellen von Abfrageresultaten abhängig von (beinahe) beliebig komplexen Regeln hervorzuheben"
+							   class="img">
+								<div class="screenshotthumb center">
+									<img class="center" src="images/sQLshell/rules_t.PNG">
+									<div class="thumbnailcaption">
+										Regeln
+									</div>
 								</div>
-							</div>
-								</a>
-						</li>
-						<li class="anriss">
-								<a href="images/sQLshell/report.PNG" rel="lightbox[screenshots]"
-									title="Der Berichtsgenerator bietet mächtige Möglichkeiten zur Anpassung von Design und Inhalt ohne den Anwender durch überbordende Komplexität zu überfordern"
-	   							class="img">
-							<div class="screenshotthumb center">
-								<img class="center" src="images/sQLshell/report_t.PNG">
-								<div class="thumbnailcaption">
-									Berichte
+							</a>
+						</div>
+						<div class="w3-third">
+							<a href="images/sQLshell/report.PNG" rel="lightbox[screenshots]"
+							   title="Der Berichtsgenerator bietet mächtige Möglichkeiten zur Anpassung von Design und Inhalt ohne den Anwender durch überbordende Komplexität zu überfordern"
+							   class="img">
+								<div class="screenshotthumb center">
+									<img class="center" src="images/sQLshell/report_t.PNG">
+									<div class="thumbnailcaption">
+										Berichte
+									</div>
 								</div>
-							</div>
-								</a>
-						</li>
-					</ul>
+							</a>
+						</div>
+					</div>
 				</div>
-				<div id="referers">
-					<h1>
-						Artikel, die hierher verlinken
-					</h1>
-		<!--ul>
-			<li><a href="neue_datengeneratoren_v.html">Neue Datengeneratoren V</a></li>
-			<li><a href="neue_datengeneratoren_iv.html">Neue Datengeneratoren IV</a></li>
-			<li><a href="gitlab_ci.html">Gitlab-CI</a></li>
-			<li><a href="java9_umstellung.html">Java9 Umstellung</a></li>
-			<li><a href="aktualisierung_jfreechart.html">Aktualisierung JFreeChart</a></li>
-			<li><a href="custom_appender_log4j_1_x.html">Custom Appender für Log4J 1.x</a></li>
-			<li><a href="batik_java9_modulsystem_____9760_.html">Batik und Java9 Modulsystem = &#9760;</a></li>
-			<li><a href="sqlshell_integriert_ldap_jdbc_bridge.html">sQLshell integriert LDAP-JDBC-Bridge</a></li>
-			<li><a href="topologische_sortierung.html">Topologische Sortierung</a></li>
-			<li><a href="aktualisierung_velocity.html">Aktualisierung Velocity</a></li>
-			<li><a href="trac_reorganisation.html">Trac Reorganisation</a></li>
-			<li><a href="neue_datengeneratoren_ii.html">Neue Datengeneratoren II</a></li>
-			<li><a href="neue_datengeneratoren_iii.html">Neue Datengeneratoren III</a></li>
-			<li><a href="rekursive_abfragen_sqlshell.html">Rekursive Abfragen in der sQLshell</a></li>
-			<li><a href="verbesserungen_moduleworkspace_i.html">Verbesserungen ModuleWorkspace I</a></li>
-			<li><a href="autolayout_moduleworkspace.html">AutoLayout für ModuleWorkspace</a></li>
-			<li><a href="oracle_jdbc_treiber_eigenarten.html">Oracle-JDBC-Treiber Eigenarten</a></li>
-			<li><a href="zeitliche_gruppierung_zeitreihen_diagramme.html">Zeitliche Gruppierung und Zeitreihen-Diagramme</a></li>
-			<li><a href="moduleworkspace_gruppen.html">ModuleWorkspace Gruppen</a></li>
-			<li><a href="datenbank_spezifische_erweiterungen_sqlshell.html">Datenbank-spezifische Erweiterungen für sQLshell</a></li>
-			<li><a href="generierung_skripts_sqlshell.html">Generierung von Skripts für sQLshell</a></li>
-			<li><a href="syntaxerweiterungen_den_sql_editor_sqlshell.html">Syntaxerweiterungen für den SQL-Editor in der sQLshell</a></li>
-			<li><a href="moduleworkspace_roadmap_ii.html">ModuleWorkspace Roadmap II</a></li>
-			<li><a href="binaerdaten_postgres.html">Binärdaten in Postgres</a></li>
-			<li><a href="moduleworkspace_roadmap_i.html">ModuleWorkspace Roadmap I</a></li>
-			<li><a href="verbindungen_moduleworkspace_editierbar.html">Verbindungen im ModuleWorkspace editierbar</a></li>
-			<li><a href="validatoren_datenstroeme.html">Validatoren für Datenströme</a></li>
-			<li><a href="modell_fuers_bewerbermanagement_relationalen_datenbanken.html">Modell fürs Bewerbermanagement in relationalen Datenbanken</a></li>
-			<li><a href="modell_icals_relationalen_datenbanken.html">Modell für ICals in relationalen Datenbanken</a></li>
-			<li><a href="modell_vcards_relationalen_datenbanken.html">Modell für VCards in relationalen Datenbanken</a></li>
-			<li><a href="aviator.html">Aviator</a></li>
-			<li><a href="dekorieren_spalten_beim_reporting_sqlshell.html">Dekorieren von Spalten beim Reporting mit sQLshell</a></li>
-			<li><a href="javas_umgang_zwei_bildschirmen.html">Javas Umgang mit zwei Bildschirmen</a></li>
-			<li><a href="netem_zur_wan_simulation.html">Netem zur WAN-Simulation</a></li>
-			<li><a href="beliebige_spezifikationen_dwb_module.html">Beliebige Spezifikationen für dWb-Module</a></li>
-			<li><a href="sqlshell_xinclude.html">sQLshell und xinclude</a></li>
-			<li><a href="neues_sqlshell_plugin_volltextsuche.html">Neues sQLshell-Plugin Volltextsuche</a></li>
-			<li><a href="tastaturbedienung_moduleworkspace.html">Tastaturbedienung für ModuleWorkspace</a></li>
-			<li><a href="plugin_system_dwb_.html">Plugin-System für dWb+</a></li>
-			<li><a href="fehler_finden_kuenstlich_verlangsamtes_netzwerk.html">Fehler finden durch künstlich verlangsamtes Netzwerk</a></li>
-			<li><a href="neue_datengeneratoren.html">Neue Datengeneratoren</a></li>
-			<li><a href="odata_content_browser.html">OData Content Browser</a></li>
-			<li><a href="verbesserte_dokumentation_datenmodelle_sqlshell.html">Verbesserte Dokumentation für Datenmodelle in der sQLshell</a></li>
-			<li><a href="odata_metadatenextraktion.html">OData Metadatenextraktion</a></li>
-			<li><a href="odata_jdbc_sqlshell.html">OData per JDBC in der sQLshell</a></li>
-			<li><a href="auswahl_m_aus_n_java_jtable.html">Auswahl m aus n in Java per JTable</a></li>
-			<li><a href="fuellen_datenmodellen_tests_mittels_generatoren.html">Füllen von Datenmodellen für Tests mittels Generatoren</a></li>
-			<li><a href="neue_versionen_dwb___sqlshell.html">Neue Versionen dWb+, sQLshell</a></li>
-			<li><a href="sqlshell_plugins_sind_zurueck_.html">sQLshell-Plugins sind zurück!</a></li>
-			<li><a href="gitter_hilfslinien.html">Gitter und Hilfslinien</a></li>
-			<li><a href="kleines_stueck_mui_java.html">Ein kleines Stück MUI in Java</a></li>
-		</ul-->
-					<ul class="single">
-							<li class="anriss">
-								<div>
-									<h3>
-										Neue Datengeneratoren V
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Wieder habe ich das
+				<div class="w3-container w3-padding" id="referers">
+				<h3>
+					Artikel, die hierher verlinken
+				</h3>
+					<h4>
+						Neue Datengeneratoren V
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Wieder habe ich das
 Framework zur Erzeugung von Testdaten
 um einige
 neue Generatoren
 erweitert.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="neue_datengeneratoren_v.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Neue Datengeneratoren IV
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Nachdem ich das letzte mal von einer Erweiterung des
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="neue_datengeneratoren_v.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Neue Datengeneratoren IV
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Nachdem ich das letzte mal von einer Erweiterung des
 Frameworks selbst berichtet habe, soll es diesmal wieder um die Vorstellung
 einiger neuer Generatoren für das
 Framework zur Erzeugung von Testdaten
 gehen.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="neue_datengeneratoren_iv.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Gitlab-CI
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Verschiedenes.html">
-																	Verschiedenes
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Linux.html">
-																	Linux
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Nachdem ich mein Build-Ökosystem hin zu Gitlab
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="neue_datengeneratoren_iv.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Gitlab-CI
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Nachdem ich mein Build-Ökosystem hin zu Gitlab
 migriert
 habe, habe ich nun den nächsten Schritt in Angriff genommen: Continuous Integration oder kurz: CI...
-</p>								</div>
-								<div class="collectionhref">
-									<a href="gitlab_ci.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Java9 Umstellung
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die Umstellung auf Java9 in meinen eigenen Projekten ist abgeschlossen
-</p>								</div>
-								<div class="collectionhref">
-									<a href="java9_umstellung.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Aktualisierung JFreeChart
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Ich habe eine der von mir benutzten Softwarekomponenten aktualisiert: die Chart-Bibliothek JFreeChart.
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="gitlab_ci.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Java9 Umstellung
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die Umstellung auf Java9 in meinen eigenen Projekten ist abgeschlossen
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="java9_umstellung.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Aktualisierung JFreeChart
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Ich habe eine der von mir benutzten Softwarekomponenten aktualisiert: die Chart-Bibliothek JFreeChart.
 Damit sind auch neue Versionen von
 sQLshell
 und
 dWb+
 verfügbar
-</p>								</div>
-								<div class="collectionhref">
-									<a href="aktualisierung_jfreechart.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Custom Appender für Log4J 1.x
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Nachdem ich erfolglos versucht habe, Log4J 2 auf Arbeit in ein Projekt zu integrieren (Die Liste der Abhängigkeiten ist
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="aktualisierung_jfreechart.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Custom Appender für Log4J 1.x
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Nachdem ich erfolglos versucht habe, Log4J 2 auf Arbeit in ein Projekt zu integrieren (Die Liste der Abhängigkeiten ist
 endlos und für ein Framework, dessen einziger Zweck das Logging ist, ehrlich gesagt eine Frechheit),
 habe ich neulich wieder einmal mit der Idee herumgespielt, Log4J 1.x komplett zur Laufzeit konfigurierbar zu machen. Als
 Abfallprodukt sind zwei neue Appender entstanden.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="custom_appender_log4j_1_x.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Batik und Java9 Modulsystem = &#9760;
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Nachdem ich
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="custom_appender_log4j_1_x.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Batik und Java9 Modulsystem = &#9760;
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Nachdem ich
 bereits
 über den
 einen
@@ -502,309 +294,155 @@ oder
 anderen
 Bug in Verbindung mit Java 9 berichtet habe, habe ich bereits wieder einen gefunden - und wieder verbunden mit der
 ach so tollen Erfindung des Java-Modulsystems
-</p>								</div>
-								<div class="collectionhref">
-									<a href="batik_java9_modulsystem_____9760_.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										sQLshell integriert LDAP-JDBC-Bridge
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Datenbanken.html">
-																	Datenbanken
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="batik_java9_modulsystem_____9760_.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						sQLshell integriert LDAP-JDBC-Bridge
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die
 sQLshell
 hat auch in der Vergangenheit schon
 Brücken geschlagen
 - jetzt kommt eine weitere hinzu.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="sqlshell_integriert_ldap_jdbc_bridge.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Topologische Sortierung
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Ich fand einen sehr interessanten Artikel, der sich mit der effizienten Auslastung aller Kerne eines Prozessors bei der Abarbeitung
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="sqlshell_integriert_ldap_jdbc_bridge.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Topologische Sortierung
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Ich fand einen sehr interessanten Artikel, der sich mit der effizienten Auslastung aller Kerne eines Prozessors bei der Abarbeitung
 voneinander abhängiger Tasks beschäftigt. Daraus wuchs der Wunsch, dies Idee zu implementieren und dann damit zu experimentieren.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="topologische_sortierung.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Aktualisierung Velocity
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Ich habe eine der von mir benutzten Softwarekomponenten aktualisiert: die Template-Engine Velocity.
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="topologische_sortierung.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Aktualisierung Velocity
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Ich habe eine der von mir benutzten Softwarekomponenten aktualisiert: die Template-Engine Velocity.
 Damit sind auch neue Versionen von
 sQLshell
 und
 dWb+
 verfügbar
-</p>								</div>
-								<div class="collectionhref">
-									<a href="aktualisierung_velocity.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Trac Reorganisation
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Linux.html">
-																	Linux
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Rants.html">
-																	Rants
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Wie in einem
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="aktualisierung_velocity.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Trac Reorganisation
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Wie in einem
 früheren Artikel bereits angekündigt habe ich mein persönliches Ticketingsystem
 ein wenig angepasst.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="trac_reorganisation.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Neue Datengeneratoren II
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Einige neue Generatoren wurden für das
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="trac_reorganisation.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Neue Datengeneratoren II
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Einige neue Generatoren wurden für das
 Framework zur Erzeugung von Testdaten geschaffen.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="neue_datengeneratoren_ii.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Neue Datengeneratoren III
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Einige neue Generatoren wurden für das
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="neue_datengeneratoren_ii.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Neue Datengeneratoren III
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Einige neue Generatoren wurden für das
 Framework zur Erzeugung von Testdaten geschaffen.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="neue_datengeneratoren_iii.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Rekursive Abfragen in der sQLshell
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Datenbanken.html">
-																	Datenbanken
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Nachdem auch in Rahmen meiner Arbeit neulich wieder ein rekursives Datenmodell sein hässliches Haupt erhob,musst
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="neue_datengeneratoren_iii.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Rekursive Abfragen in der sQLshell
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Nachdem auch in Rahmen meiner Arbeit neulich wieder ein rekursives Datenmodell sein hässliches Haupt erhob,musst
 ich mich damit beschäftigen. Ich fand heraus, dass es für verschiedene DBMS spezielle SQL-Konstrukte gibt, die es erlauben,
 solche rekursiven Strukturen in einer Query abzufragen. Danach dachte ich nach und stellte fest, dass eines der Features der
 sQLshell
 bereits sehr einfaches Arbeiten mit solchen Strukturen ermöglicht:
-</p>								</div>
-								<div class="collectionhref">
-									<a href="rekursive_abfragen_sqlshell.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Verbesserungen ModuleWorkspace I
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_dWb+.html">
-																	dWb+
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>In der Zeit über Weihnachten haben sich einige Verbesserungen in
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="rekursive_abfragen_sqlshell.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Verbesserungen ModuleWorkspace I
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>In der Zeit über Weihnachten haben sich einige Verbesserungen in
 der ModuleWorkspace-Komponente - unter anderem verwendet in der
 sQLshell
 und im Rapid-Prototyping-Werkzeug
 dWb+
 ergeben, die die allgemeine Benutzbarkeit verbessern:
-</p>								</div>
-								<div class="collectionhref">
-									<a href="verbesserungen_moduleworkspace_i.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										AutoLayout für ModuleWorkspace
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_GUI.html">
-																	GUI
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Ich wollte schon lange einmal den überfälligen Schritt tun und
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="verbesserungen_moduleworkspace_i.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						AutoLayout für ModuleWorkspace
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Ich wollte schon lange einmal den überfälligen Schritt tun und
 die ModuleWorkspace-Komponente,
 auf der unter anderem die 
 sQLshell
@@ -812,190 +450,90 @@ und
 dWb+
 beruhen um eine Möglichkeit erweitern, die Module und Tabellen automatisch
 bestmöglich anzuordnen.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="autolayout_moduleworkspace.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Oracle-JDBC-Treiber Eigenarten
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Datenbanken.html">
-																	Datenbanken
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Rants.html">
-																	Rants
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="autolayout_moduleworkspace.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Oracle-JDBC-Treiber Eigenarten
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die 
 sQLshell
 wurde in einer neuen Version veröffentlicht. Grund dafür war eine Inkompatibilität des Oracle-JDBC-Treibers
-</p>								</div>
-								<div class="collectionhref">
-									<a href="oracle_jdbc_treiber_eigenarten.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Zeitliche Gruppierung und Zeitreihen-Diagramme
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="oracle_jdbc_treiber_eigenarten.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Zeitliche Gruppierung und Zeitreihen-Diagramme
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die
 sQLshell
 hat im Laufe der letzten Wochen wieder verstärkt Aufmerksamkeit von mir bekommen - zwei neue Features wurden
 zum Reporting hinzugefügt.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="zeitliche_gruppierung_zeitreihen_diagramme.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										ModuleWorkspace Gruppen
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_dWb+.html">
-																	dWb+
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_GUI.html">
-																	GUI
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Ein neues Feature hat Einzug gehalten in 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="zeitliche_gruppierung_zeitreihen_diagramme.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						ModuleWorkspace Gruppen
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Ein neues Feature hat Einzug gehalten in 
 die ModuleWorkspace-Komponente - unter anderem verwendet in der 
 sQLshell
 und im Rapid-Prototyping-Werkzeug
 dWb+:
 Module können nun zu Gruppen zusammengefasst werden, wie etwa Objekte in Graphikprogrammen
-</p>								</div>
-								<div class="collectionhref">
-									<a href="moduleworkspace_gruppen.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Datenbank-spezifische Erweiterungen für sQLshell
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Nachdem die Entwicklung der 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="moduleworkspace_gruppen.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Datenbank-spezifische Erweiterungen für sQLshell
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Nachdem die Entwicklung der 
 sQLshell
 jetzt langsam wieder 
 Fahrt
 aufnimmt, wurde entschieden, der sQLshell auch Datenbank-spezifische Erweiterungen zu gönnen.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="datenbank_spezifische_erweiterungen_sqlshell.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Generierung von Skripts für sQLshell
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="datenbank_spezifische_erweiterungen_sqlshell.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Generierung von Skripts für sQLshell
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die 
 sQLshell
 wurde nach dem erfolgreichen Einsatz von Annotation Prozessoren für 
 Generatoren
@@ -1004,1477 +542,679 @@ Validatoren
 in 
 dWb+
 ebenfalls mittels dieser Technologien um neue Features erweitert.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="generierung_skripts_sqlshell.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Syntaxerweiterungen für den SQL-Editor in der sQLshell
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Nach längerer Zeit gibt es wieder etwas über neue Features der
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="generierung_skripts_sqlshell.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Syntaxerweiterungen für den SQL-Editor in der sQLshell
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Nach längerer Zeit gibt es wieder etwas über neue Features der
 sQLshell
 zu berichten: Der SQL-Texteditor versteht neue syntaktische Konstrukte.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="syntaxerweiterungen_den_sql_editor_sqlshell.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										ModuleWorkspace Roadmap II
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_dWb+.html">
-																	dWb+
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_GUI.html">
-																	GUI
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="syntaxerweiterungen_den_sql_editor_sqlshell.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						ModuleWorkspace Roadmap II
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
 die ModuleWorkspace-Komponente - unter anderem verwendet in der 
 sQLshell
 und im Rapid-Prototyping-Werkzeug
 dWb+
 erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
 zu koppeln - das könnte sich bald ändern...
-</p>								</div>
-								<div class="collectionhref">
-									<a href="moduleworkspace_roadmap_ii.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Binärdaten in Postgres
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Datenbanken.html">
-																	Datenbanken
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Ein potentieller Kunde hat neulich mit einer Frage dafür gesorgt, dass ich mich tiefgreifender mit der 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="moduleworkspace_roadmap_ii.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Binärdaten in Postgres
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Ein potentieller Kunde hat neulich mit einer Frage dafür gesorgt, dass ich mich tiefgreifender mit der 
 Speicherung und dem Management von Binärdaten in Postgres beschäftigt habe.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="binaerdaten_postgres.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										ModuleWorkspace Roadmap I
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_dWb+.html">
-																	dWb+
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_GUI.html">
-																	GUI
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="binaerdaten_postgres.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						ModuleWorkspace Roadmap I
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die ModuleWorkspace-Komponente - unter anderem verwendet in der 
 sQLshell
 und im Rapid-Prototyping-Werkzeug
 dWb+
 wird erweitert - diesmal werden die Verbindungen einige neue Features erhalten...
-</p>								</div>
-								<div class="collectionhref">
-									<a href="moduleworkspace_roadmap_i.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Verbindungen im ModuleWorkspace editierbar
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_dWb+.html">
-																	dWb+
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Video.html">
-																	Video
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="moduleworkspace_roadmap_i.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Verbindungen im ModuleWorkspace editierbar
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die ModuleWorkspace-Komponente - unter anderem verwendet in der 
 sQLshell
 und im Rapid-Prototyping-Werkzeug
 dWb+
 - wurde um die Möglichkeit erweitert, das Layout von Verbindungen zwischen Modulen
 feiner bestimmen zu können.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="verbindungen_moduleworkspace_editierbar.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Validatoren für Datenströme
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Nachdem sich schon länger nichts aufregend Neues mehr im
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="verbindungen_moduleworkspace_editierbar.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Validatoren für Datenströme
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Nachdem sich schon länger nichts aufregend Neues mehr im
 Bereich meines Validatoreframeworks getan hat - abgesehen von der Tatsache,
 dass ich in der Lage bin, daraus 
 automatisch Module für dWb+
 zu generieren - hier eine Architekturerweiterung
-</p>								</div>
-								<div class="collectionhref">
-									<a href="validatoren_datenstroeme.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Modell fürs Bewerbermanagement in relationalen Datenbanken
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Datenbanken.html">
-																	Datenbanken
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Eher etwas für mich zum Merken: Ein Datenmodell zur Abbildung der
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="validatoren_datenstroeme.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Modell fürs Bewerbermanagement in relationalen Datenbanken
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Eher etwas für mich zum Merken: Ein Datenmodell zur Abbildung der
 Prozesse beim Bewerbermanagement - 
 zum Beispiel zur Benutzung mit der 
 sQLshell...
-</p>								</div>
-								<div class="collectionhref">
-									<a href="modell_fuers_bewerbermanagement_relationalen_datenbanken.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Modell für ICals in relationalen Datenbanken
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Datenbanken.html">
-																	Datenbanken
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Eher etwas für mich zum Merken: Ein Datenmodell zur Abbildung von ICal-Kalendern - 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="modell_fuers_bewerbermanagement_relationalen_datenbanken.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Modell für ICals in relationalen Datenbanken
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Eher etwas für mich zum Merken: Ein Datenmodell zur Abbildung von ICal-Kalendern - 
 zum Beispiel zur Benutzung mit der 
 sQLshell...
-</p>								</div>
-								<div class="collectionhref">
-									<a href="modell_icals_relationalen_datenbanken.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Modell für VCards in relationalen Datenbanken
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Datenbanken.html">
-																	Datenbanken
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Eher etwas für mich zum Merken: Ein Datenmodell zur Abbildung von VCards - 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="modell_icals_relationalen_datenbanken.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Modell für VCards in relationalen Datenbanken
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Eher etwas für mich zum Merken: Ein Datenmodell zur Abbildung von VCards - 
 zum Beispiel zur Benutzung mit der 
 sQLshell...
-</p>								</div>
-								<div class="collectionhref">
-									<a href="modell_vcards_relationalen_datenbanken.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Aviator
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_dWb+.html">
-																	dWb+
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Video.html">
-																	Video
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_GUI.html">
-																	GUI
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Der Aviator entstand, um Anwendern die Möglichkeit zu bieten, ohne
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="modell_vcards_relationalen_datenbanken.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Aviator
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Der Aviator entstand, um Anwendern die Möglichkeit zu bieten, ohne
 Programmmierkenntnisse schnell ansprechende Visualisierungen für 
 Prozesse zu erstellen. Diese Lösung existiert unter anderem als Addon für
 dWb+,
 sQLshell
 und ESRI ArcGIS.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="aviator.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Dekorieren von Spalten beim Reporting mit sQLshell
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die sQLshell - oder genauer: ihre Reporting-Komponente - hat eine neue Funktionalität erhalten:
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="aviator.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Dekorieren von Spalten beim Reporting mit sQLshell
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die sQLshell - oder genauer: ihre Reporting-Komponente - hat eine neue Funktionalität erhalten:
 in der 
 sQLshell
 wird diese Funktionalität benutzt, um Primär- und Fremdschlüsselspalten zu kennzeichnen.
 Bei allgemeinem Reporting kann man beliebige Symbole zu den Spalten hinzufügen.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="dekorieren_spalten_beim_reporting_sqlshell.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Javas Umgang mit zwei Bildschirmen
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Rants.html">
-																	Rants
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Ich muss hier mal meine Erlebnisse mit Java darlegen, die mich fast dazu gebracht hätten, Java abzuschwören...
-</p>								</div>
-								<div class="collectionhref">
-									<a href="javas_umgang_zwei_bildschirmen.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Netem zur WAN-Simulation
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Linux.html">
-																	Linux
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Bereits in meinem vorherigen Angestelltenverhältnis habe ich nach einer Möglichkeit gesucht, 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="dekorieren_spalten_beim_reporting_sqlshell.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Javas Umgang mit zwei Bildschirmen
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Ich muss hier mal meine Erlebnisse mit Java darlegen, die mich fast dazu gebracht hätten, Java abzuschwören...
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="javas_umgang_zwei_bildschirmen.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Netem zur WAN-Simulation
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Bereits in meinem vorherigen Angestelltenverhältnis habe ich nach einer Möglichkeit gesucht, 
 das Netzwerk künstlich zu verschlechtern, um reale Verhältnisse in einem WAN nachzubilden und
 die Robustheit unserer Netzwerkkomponenten zu validieren. Jetzt baue ich ein virtuelles Netzwerklabor
 auf und habe die damals verwendete Lösung dazu wieder hervorgeholt und abgestaubt.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="netem_zur_wan_simulation.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Beliebige Spezifikationen für dWb-Module
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_dWb+.html">
-																	dWb+
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die Anwendung
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="netem_zur_wan_simulation.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Beliebige Spezifikationen für dWb-Module
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die Anwendung
 dWb+
 wurde erweitert für den Umgang mit beliebigen Komponenten-Spezifikationen.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="beliebige_spezifikationen_dwb_module.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										sQLshell und xinclude
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Markup.html">
-																	Markup
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="beliebige_spezifikationen_dwb_module.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						sQLshell und xinclude
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die 
 sQLshell
 unterstützt in ihrer neuesten Version das Aufteilen der Daten beim XML-Import
 auf mehrere Dateien.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="sqlshell_xinclude.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Neues sQLshell-Plugin Volltextsuche
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Nach längerer Zeit gibt es heute ein neues Plugin für die
-sQLshell
-</p>								</div>
-								<div class="collectionhref">
-									<a href="neues_sqlshell_plugin_volltextsuche.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Tastaturbedienung für ModuleWorkspace
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_GUI.html">
-																	GUI
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="sqlshell_xinclude.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Tastaturbedienung für ModuleWorkspace
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die ModuleWorkspace-Komponente - unter anderem verwendet in der 
 sQLshell
 und im Rapid-Prototyping-Werkzeug
 dWb+
 - wurde um Möglichkeiten zur Tastaturbedienung erweitert.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="tastaturbedienung_moduleworkspace.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Plugin-System für dWb+
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_dWb+.html">
-																	dWb+
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Dieser Artikel beschreibt einen weiteren Meilenstein, der diesmal die Modularisierung
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="tastaturbedienung_moduleworkspace.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Neues sQLshell-Plugin Volltextsuche
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Nach längerer Zeit gibt es heute ein neues Plugin für die
+sQLshell
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="neues_sqlshell_plugin_volltextsuche.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Plugin-System für dWb+
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Dieser Artikel beschreibt einen weiteren Meilenstein, der diesmal die Modularisierung
 und einfachere Erweiterbarkeit von 
 dWb+
 zum Ziel hat.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="plugin_system_dwb_.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Fehler finden durch künstlich verlangsamtes Netzwerk
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Linux.html">
-																	Linux
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Datenbanken.html">
-																	Datenbanken
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Ich suchte nach einer simplen Möglichkeit, ein langsames Netzwerk zu simulieren, damit
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="plugin_system_dwb_.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Fehler finden durch künstlich verlangsamtes Netzwerk
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Ich suchte nach einer simplen Möglichkeit, ein langsames Netzwerk zu simulieren, damit
 ich damit die Auswirkungen auf die 
 sQLshell
 studieren konnte.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="fehler_finden_kuenstlich_verlangsamtes_netzwerk.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Neue Datengeneratoren
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Einige neue Generatoren wurden für das Framework zur Erzeugung von Testdaten geschaffen.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="neue_datengeneratoren.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										OData Content Browser
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>OData ist ein standardisiertes Protokoll für das Publizieren und Konsumieren von Daten-APIs.
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="fehler_finden_kuenstlich_verlangsamtes_netzwerk.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Neue Datengeneratoren
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Einige neue Generatoren wurden für das Framework zur Erzeugung von Testdaten geschaffen.
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="neue_datengeneratoren.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						OData Content Browser
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>OData ist ein standardisiertes Protokoll für das Publizieren und Konsumieren von Daten-APIs.
 In meinen ersten
 beiden
 Artikeln
 habe ich mich mit der Analyse von Metadaten beschäftigt. Nun war es an der Zeit, einen
 einfachen Content Browser für OData Services zu stricken.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="odata_content_browser.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Verbesserte Dokumentation für Datenmodelle in der sQLshell
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Markup.html">
-																	Markup
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="odata_content_browser.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Verbesserte Dokumentation für Datenmodelle in der sQLshell
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die 
 sQLshell
 wurde im Visuellen Abfrageeditor um eine neue Möglichkeit erweitert, Datenmodelle
 zu dokumentieren
-</p>								</div>
-								<div class="collectionhref">
-									<a href="verbesserte_dokumentation_datenmodelle_sqlshell.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										OData Metadatenextraktion
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>OData ist ein standardisiertes Protokoll für das Publizieren und Konsumieren von Daten-APIs.
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="verbesserte_dokumentation_datenmodelle_sqlshell.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						OData Metadatenextraktion
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>OData ist ein standardisiertes Protokoll für das Publizieren und Konsumieren von Daten-APIs.
 In meinem ersten
 Artikel
 zu diesem Thema war ich unzufrieden über die rudimentär vorhandenen Metadaten beim Versuch, einen 
 OData-JDBC-Wrapper einzusetzen. Daher mein Versuch, diese Metadaten selbst zu analysieren.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="odata_metadatenextraktion.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										OData per JDBC in der sQLshell
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>OData ist ein standardisiertes Protokoll für das Publizieren und Konsumieren von Daten-APIs.
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="odata_metadatenextraktion.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						OData per JDBC in der sQLshell
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>OData ist ein standardisiertes Protokoll für das Publizieren und Konsumieren von Daten-APIs.
 Daher dachte ich, es wäre einen Versuch wert, die 
 sQLshell
 dafür fitzumachen. Hier meine ersten 
 Ergebnisse aus diesen Bemühungen.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="odata_jdbc_sqlshell.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Auswahl m aus n in Java per JTable
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Beim Programmieren hat man öfter mal den Fall, daß der Anwender aus einer
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="odata_jdbc_sqlshell.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Auswahl m aus n in Java per JTable
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Beim Programmieren hat man öfter mal den Fall, daß der Anwender aus einer
 zur Verfügung gestellten Grundgesamtheit eine Untermenge auswählen soll. Hier einige
 Klassen, die dabei helfen könnten:
-</p>								</div>
-								<div class="collectionhref">
-									<a href="auswahl_m_aus_n_java_jtable.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Füllen von Datenmodellen für Tests mittels Generatoren
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Eine neue Version der 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="auswahl_m_aus_n_java_jtable.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Füllen von Datenmodellen für Tests mittels Generatoren
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Eine neue Version der 
 sQLshell
 bringt einen Versionssprung, weil es die erste Version ist, die offiziell nicht mehr
 von der (aufgelösten) NetSys.IT GbR herausgegeben wird. Außerdem bietet sie jetzt 
 Möglichkeiten zum schnellen Füllen von Datenmodellen für Tests
-</p>								</div>
-								<div class="collectionhref">
-									<a href="fuellen_datenmodellen_tests_mittels_generatoren.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Neue Versionen dWb+, sQLshell
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_dWb+.html">
-																	dWb+
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Neue Versionen der Anwendungen
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="fuellen_datenmodellen_tests_mittels_generatoren.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Neue Versionen dWb+, sQLshell
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Neue Versionen der Anwendungen
 sQlshell
 und
 dWb+
 sind verfügbar
-</p>								</div>
-								<div class="collectionhref">
-									<a href="neue_versionen_dwb___sqlshell.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										sQLshell-Plugins sind zurück!
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die Plugins sind - unter neuer Adresse - wieder online verfügbar
-</p>								</div>
-								<div class="collectionhref">
-									<a href="sqlshell_plugins_sind_zurueck_.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Gitter und Hilfslinien
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_dWb+.html">
-																	dWb+
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Video.html">
-																	Video
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_sQLshell.html">
-																	sQLshell
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_GUI.html">
-																	GUI
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="neue_versionen_dwb___sqlshell.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						sQLshell-Plugins sind zurück!
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die Plugins sind - unter neuer Adresse - wieder online verfügbar
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="sqlshell_plugins_sind_zurueck_.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Gitter und Hilfslinien
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Die ModuleWorkspace-Komponente - unter anderem verwendet in der 
 sQLshell
 und im Rapid-Prototyping-Werkzeug
 dWb+
 - wurde um neue Verwaltungsfunktionen erweitert.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="gitter_hilfslinien.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										Ein kleines Stück MUI in Java
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Java.html">
-																	Java
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Komponenten.html">
-																	Komponenten
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Ich stelle hier zwei Komponenten vor, die ihren Zweck gemeinsam haben: Sie sollen
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="gitter_hilfslinien.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						Ein kleines Stück MUI in Java
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Ich stelle hier zwei Komponenten vor, die ihren Zweck gemeinsam haben: Sie sollen
  andere Komponenten in sich aufzunehmen und dem Anwender ermöglichen, die Größe dieser Komponenten
 einzustellen.
-</p>								</div>
-								<div class="collectionhref">
-									<a href="kleines_stueck_mui_java.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-					</ul>
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="kleines_stueck_mui_java.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
 				</div>
+
+			</div>
+			<!-- END BLOG ENTRY -->
 		</div>
-	</div>
-	<div id="B">
-	<h2>Neueste Artikel</h2>
-<ul class="inset"> 
-<li class="anriss">
-  <a href="pam_nfc_ubuntu_18_04.html#content">
-<div class="date">02.12.2018</div>
-<h3>pam_nfc und Ubuntu 18.04</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
+
+		<!-- Introduction menu -->
+		<div class="w3-col l3">
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-black w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-black w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+						<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+			<div class="w3-col w3-hide-small l3 s12">
+				<!-- Posts -->
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+									<span class="w3-large">pam_nfc und Ubuntu 18.04</span><br>
+<span>
+						<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Ich habe bereits über einige Stolpersteine beim
 Umstieg auf Ubuntu 18.04
 berichtet - nunmehr bin ich auf einen neuen gestoßen, der
 den Fork und einen Pull-Request zur Folge hatte
-</p></div>   </a>
-</li>
-<li class="anriss">
-	<a href="eigene_firmware_sonoff_s20.html#71">
-<div class="date">02.12.2018</div>
-<h3>Eigene Firmware für Sonoff S20</h3>
-<div class="abstract">
-	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border" href="pam_nfc_ubuntu_18_04.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+									<span class="w3-large">Eigene Firmware für Sonoff S20</span><br>
+<span>
+						<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
 <p>Nachdem ich nach meinen diversen Erfahrungen mit dem Arduino auch mal andere Projekte erforschen wollte,
 habe ich mich durch Artikel in zurückliegenden Ausgaben der c't inspirieren lassen und Projekte mit dem ESP8266
 ausprobiert - zuerst der Umbau einer WLAN-fähigen Steckdose...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="ntp_server_raspi_em406a_ii.html#content">
-<div class="date">02.12.2018</div>
-<h3>NTP-Server mit Raspi und EM406a II</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border" href="eigene_firmware_sonoff_s20.html#71">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+									<span class="w3-large">NTP-Server mit Raspi und EM406a II</span><br>
+<span>
+						<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Nachdem ich die Hardwareanpasungen für mein altes GPS-Modul hier bereits als Grundlage für
 meinen eigenen
 Atomzeit-GPS-NTP-Server
 beschrieben und die Grundlagen der Hardware in ein
 GitHub-Repository gepackt habe, habe ich nun den letzten schritt vollzogen.
-</p></div>   </a>
-</li>
-</ul>
-</div>
-<nav id="C"> 
-<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
-			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
-			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
-			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
-			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
-			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
-			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
-<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
-</div>
-	</h2><form method="get" action="http://www.google.com/search">
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border" href="ntp_server_raspi_em406a_ii.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 
-<div style="padding:4px;width:90%;">
-<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
- maxlength="255" value="" />
-<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
-<input style="width:0%;" type="checkbox"  name="sitesearch"
- value="elbosso.github.io" checked hidden="true"/>
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
 </div>
 
-</form>
-<a href="tag_Android.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Android
-</h3>
-<span class="nav-item-counter">15</span>
-</header>
-<div class="nav-item-body">
-<p>Alles rund um Googles Betriebssystem</p>
-</div>
-</div>
-</a>
-<a href="tag_Basteln.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Basteln
-</h3>
-<span class="nav-item-counter">13</span>
-</header>
-<div class="nav-item-body">
-<p>Meistens Papier (Origami...)</p>
-</div>
-</div>
-</a>
-<a href="c_c__.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-C und C++
-</h3>
-<span class="nav-item-counter">5</span>
-</header>
-<div class="nav-item-body">
-</div>
-</div>
-</a>
-<a href="tag_Datenbanken.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-<strong>
-Datenbanken
-</strong>
-</h3>
-<span class="nav-item-counter">13</span>
-</header>
-<div class="nav-item-body">
-<p>relationale und andere Datenbanken</p>
-</div>
-</div>
-</a>
-<a href="tag_dWb+.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-dWb+
-</h3>
-<span class="nav-item-counter">85</span>
-</header>
-<div class="nav-item-body">
-<p>Werkzeug für rapid Prototyping</p>
-</div>
-</div>
-</a>
-<a href="tag_Garten.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Garten
-</h3>
-<span class="nav-item-counter">3</span>
-</header>
-<div class="nav-item-body">
-<p>Das grüne Hobby</p>
-</div>
-</div>
-</a>
-<a href="tag_Geo.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Geo
-</h3>
-<span class="nav-item-counter">28</span>
-</header>
-<div class="nav-item-body">
-<p>Karten und mehr run um Ortsinformationen</p>
-</div>
-</div>
-</a>
-<a href="tag_GUI.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-GUI
-</h3>
-<span class="nav-item-counter">49</span>
-</header>
-<div class="nav-item-body">
-<p>Alles rund um graphische Benutzerschnittstellen</p>
-</div>
-</div>
-</a>
-<a href="tag_Hardware.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Hardware
-</h3>
-<span class="nav-item-counter">21</span>
-</header>
-<div class="nav-item-body">
-<p>Elektronik und so Zeuchs...</p>
-</div>
-</div>
-</a>
-<a href="tag_Java.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-<strong>
-Java
-</strong>
-</h3>
-<span class="nav-item-counter">213</span>
-</header>
-<div class="nav-item-body">
-<p>Hauptsächlich Desktop Themen und Java SE</p>
-</div>
-</div>
-</a>
-<a href="tag_Komponenten.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Komponenten
-</h3>
-<span class="nav-item-counter">148</span>
-</header>
-<div class="nav-item-body">
-<p>Software-Komponenten</p>
-</div>
-</div>
-</a>
-<a href="tag_Links.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Links
-</h3>
-<span class="nav-item-counter">43</span>
-</header>
-<div class="nav-item-body">
-<p>Linksammlungen zu verschiedenen Themen</p>
-</div>
-</div>
-</a>
-<a href="tag_Linux.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Linux
-</h3>
-<span class="nav-item-counter">115</span>
-</header>
-<div class="nav-item-body">
-<p>Alles zum Thema Gnu Linux</p>
-</div>
-</div>
-</a>
-<a href="tag_Markup.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Markup
-</h3>
-<span class="nav-item-counter">17</span>
-</header>
-<div class="nav-item-body">
-<p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
-</div>
-</div>
-</a>
-<a href="tag_Music.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Music
-</h3>
-<span class="nav-item-counter">20</span>
-</header>
-<div class="nav-item-body">
-<p>Musik, die mir gefällt</p>
-</div>
-</div>
-</a>
-<a href="tag_Numerik.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Numerik
-</h3>
-<span class="nav-item-counter">10</span>
-</header>
-<div class="nav-item-body">
-<p>Numerische Mathematik in Computern</p>
-</div>
-</div>
-</a>
-<a href="tag_Python.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Python
-</h3>
-<span class="nav-item-counter">6</span>
-</header>
-<div class="nav-item-body">
-<p>Mein Weg vom blutigen Anfänger aufwärts</p>
-</div>
-</div>
-</a>
-<a href="tag_Rants.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Rants
-</h3>
-<span class="nav-item-counter">80</span>
-</header>
-<div class="nav-item-body">
-<p>Luft ablassen</p>
-</div>
-</div>
-</a>
-<a href="tag_Security.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Security
-</h3>
-<span class="nav-item-counter">22</span>
-</header>
-<div class="nav-item-body">
-<p>IT-Sicherheit</p>
-</div>
-</div>
-</a>
-<a href="tag_sQLshell.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-<strong>
-sQLshell
-</strong>
-</h3>
-<span class="nav-item-counter">25</span>
-</header>
-<div class="nav-item-body">
-<p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
-</div>
-</div>
-</a>
-<a href="tag_Verschiedenes.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Verschiedenes
-</h3>
-<span class="nav-item-counter">12</span>
-</header>
-<div class="nav-item-body">
-<p>Passt in keine der anderen Kategorien...</p>
-</div>
-</div>
-</a>
-<a href="tag_Video.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Video
-</h3>
-<span class="nav-item-counter">26</span>
-</header>
-<div class="nav-item-body">
-<p>Artikel mit bunten Filmchen</p>
-</div>
-</div>
-</a>
-<a href="tag_Virtualisierung.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Virtualisierung
-</h3>
-<span class="nav-item-counter">26</span>
-</header>
-<div class="nav-item-body">
-<p>Technologien und Themen rund um virtuelle Rechner</p>
-</div>
-</div>
-</a>
-<a href="windows.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Windows
-</h3>
-<span class="nav-item-counter">3</span>
-</header>
-<div class="nav-item-body">
-</div>
-</div>
-</a>
-<a href="tag_Upcoming....html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Upcoming...
-</h3>
-</header>
-<div class="nav-item-body">
-<p>Demnächst in diesem Theater...</p>
-</div>
-</div>
-</a>
-</nav>
-</div>
-	<div id="footer">
-		<span class="me">
-		<strong><a href="me.html">
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
 		<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
 		</script>
-		<noscript>Der Verfasser</noscript>				
+		<noscript>Der Verfasser</noscript>
 
-, Damaschke 11, Rudolstadt, 
+		, Damaschke 11, Rudolstadt,
 		<script>
 		<!--
 abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
 -->
 		</script>
-		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
-			</a></strong>
-	</span></div><!-- #footer -->
-</div>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
 </body>
 </html>

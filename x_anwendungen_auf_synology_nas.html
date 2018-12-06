@@ -1,48 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
-<head>
-  <title>X-Anwendungen auf Synology-NAS</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-		<meta name="Description" content="Ein Artikel, auf den ich durch Zufall stieß, zeigte mir einen Weg, wie man 
-beliebige Anwendungen auf einem 
-Synology-NAS
-zur Ausführung bringen kann." />
-  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
-  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
-	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
-<!--script type="text/javascript">
-function toggle(el)
-{
-myEl = document.getElementById(el);
-myEl.style.display = (myEl.style.display == 'none') ? 'inline' : 'none';
-} 
-function toggleA()
-{
-myEl = document.getElementById('C');
-var computedStyle = getComputedStyle(myEl, null)
-/*alert(computedStyle.display);*/
-myEl = document.getElementById('A');
-if (computedStyle.display=="none") 
-{
-	document.getElementById('B').className = "nonreader";
-	document.getElementById('C').className = "nonreader";
-	myEl.className = "nonreader";
-	document.getElementById('all').className = "nonreader";
-}
-else 
-{
-	document.getElementById('B').className = "reader";
-	document.getElementById('C').className = "reader";
-	myEl.className = "reader";
-	document.getElementById('all').className = "reader";
-}
-/*myEl.style.display = (myEl.style.display == 'none') ? 'block' : 'none';*/
-}
-</script-->
-	<script type="text/javascript" language="javascript">
+<!DOCTYPE html>
+<html>
+<title>X-Anwendungen auf Synology-NAS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" /><link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -53,7 +16,7 @@ function abc(coded,key)
       ltr = coded.charAt(i)
       link += (ltr)
     }
-    else {     
+    else {
       ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
       link += (key.charAt(ltr))
     }
@@ -62,69 +25,56 @@ document.write(link)
 }
 //-->
 </script>
-</head>
-<body onload="toggle('show');">
-<div id="wrapper">
-	<div id="header">
-		<div id="logo">
-  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
-      display="inline">
-    <mrow>
-      <mn>1</mn>
-      <mo>&isin;</mo>
-      <mi>&infin;</mi>
-    </mrow>
-</math>
-</h1-->
-			<p>
-				<script>
-		<!--
-abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
--->
-				</script>
-				<noscript>Der Verfasser</noscript>
-  			</p>
-		</div>
-		<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder
-			über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.
-			Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben,
-			daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT,
-			Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen
-			Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-			<a href="https://github.com/elbosso">hier</a>.
-		</p>
-	</div><!-- #header-->
-	<div id="all">
-		<div id="A">
-			<div id="content">
-					<div class="date">
-						17.05.2015 <!--span id="show" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&lt; &gt;</a></span>
-<span id="hide" style="display: none;"><a href="#" onclick="toggle('show');toggle('hide');toggleA();">&gt; &lt;</a></span-->
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l6">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>X-Anwendungen auf Synology-NAS</h4>
+				</div>
+				<div class="w3-container">
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							vorhergehende Artikel in:
+							<a href="lxc_vs__kvm_vs__virtualbox.html#content">
+								<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
+							</a> <!--/li-->
+							<a href="lxc_vs__kvm_vs__virtualbox.html#content">
+								<span class="w3-tag w3-black w3-margin-bottom">Virtualisierung</span>
+							</a> <!--/li-->
+						</div>
+						<div class="w3-col m4"><p style="text-align: right">
+							<span class="w3-opacity">17.05.2015</span>
+						</p>
+						</div>
 					</div>
-			<div class="previousArticlesInCategories">
-	<!--ul-->
-				vorhergehende Artikel in:
-	<!--li--> 							<a href="lxc_vs__kvm_vs__virtualbox.html#content">
-						Linux
-					</a> <!--/li-->
-	<!--li--> 		,
-					<a href="lxc_vs__kvm_vs__virtualbox.html#content">
-						Virtualisierung
-					</a> <!--/li-->
-	<!--/ul-->
+				</div>
 			</div>
- 			<div class="heading">
-				X-Anwendungen auf Synology-NAS
-			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
 <p>Ein Artikel, auf den ich durch Zufall stieß, zeigte mir einen Weg, wie man 
 beliebige Anwendungen auf einem 
 <a href="synology_ds_214.html">Synology-NAS</a>
 zur Ausführung bringen kann.
 Ich führte einige Anpassungen an dem dort geschilderten Vorgehen durch und 
 kann jetzt auch X-Anwendungen auf dem NAS benutzen...
-</p>			<a name="content">
-
-			</a>
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
 <p><h1>Grundlegende Tests</h1>
 Synology NAS sind nur schwer um eigene Softwarekomponenten zu erweitern:
 die zur Verfügung gestellten Pakete sind sehr überschaubar und die durch die Community
@@ -176,658 +126,362 @@ Getestet habe ich das mit xterm und xeyes - Beide funktionierten auf die beschri
 </p><p>
 Vielleicht teste ich irgendwann - wenn ich ganz verwegen bin - auch mal Eclipse oder Netbeans...
 <h1>Einige hilfreiche Links</h1>
-</p>				<ul class="single">
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>This article provides several easy steps that would allow you to create a most basic chroot-ed environment for a user on your Linux/Unix based system.
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="http://www.adminarticles.com/create-a-simple-chroot-jail/" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>In this article we will look on how to automatically chroot jail selected user ssh login based on the user group.
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="http://how-to.linuxcareer.com/how-to-automatically-chroot-jail-selected-ssh-user-logins" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>How do I allow a user to use SCREEN on a chrooted user?
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="http://superuser.com/questions/487013/how-do-i-use-the-terminal-screen-when-chrooted" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>I cannot get it to work on the chrooted shell.
+</p>				</div>
+				<div class="w3-container w3-padding" id="links">
+					<hr/>
+					<h3>
+						Links
+					</h3>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>This article provides several easy steps that would allow you to create a most basic chroot-ed environment for a user on your Linux/Unix based system.
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://www.adminarticles.com/create-a-simple-chroot-jail/" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>In this article we will look on how to automatically chroot jail selected user ssh login based on the user group.
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://how-to.linuxcareer.com/how-to-automatically-chroot-jail-selected-ssh-user-logins" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>How do I allow a user to use SCREEN on a chrooted user?
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://superuser.com/questions/487013/how-do-i-use-the-terminal-screen-when-chrooted" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>I cannot get it to work on the chrooted shell.
 The first error I had was something like:
 Error: Must be connected to a terminal.
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="https://www.howtoforge.com/community/threads/chrooted-ssh-sftp-screen-problems.23583/" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>I call the system using ssh -X And I get no entropy gathering module detected..
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="https://forum.openoffice.org/en/forum/viewtopic.php?f=5&t=995" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>openssl is failing because it is trying to read the /dev/random file and it is failing because there is no /dev/random inside the chroot. 
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="http://stackoverflow.com/questions/8591394/openssl-inside-a-chroot" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>chroot Warning: cannot open /proc/net/dev (No such file or directory). Limited output.
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="http://www.aiuxian.com/article/p-426209.html" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>ifconfig Warning: cannot open /proc/net/dev (No such file or directory). Limited output.
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="http://ubuntuforums.org/showthread.php?t=1851257" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>ifconfig produces warnings:
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://www.howtoforge.com/community/threads/chrooted-ssh-sftp-screen-problems.23583/" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>I call the system using ssh -X And I get no entropy gathering module detected..
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://forum.openoffice.org/en/forum/viewtopic.php?f=5&t=995" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>openssl is failing because it is trying to read the /dev/random file and it is failing because there is no /dev/random inside the chroot. 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://stackoverflow.com/questions/8591394/openssl-inside-a-chroot" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>chroot Warning: cannot open /proc/net/dev (No such file or directory). Limited output.
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://www.aiuxian.com/article/p-426209.html" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>ifconfig Warning: cannot open /proc/net/dev (No such file or directory). Limited output.
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://ubuntuforums.org/showthread.php?t=1851257" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>ifconfig produces warnings:
 Warning: cannot open /proc/net/dev (no such file or directory). Limited output. 
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="http://forums.gentoo.org/viewtopic-t-140165-view-previous.html" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>Hi there, i've installed a debian/zimbra inside a chroot envorment using
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://forums.gentoo.org/viewtopic-t-140165-view-previous.html" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Hi there, i've installed a debian/zimbra inside a chroot envorment using
 gentoo. But, the command df -h don't work cos i don't have /etc/mtab
 arch in chroot.
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="http://www.gossamer-threads.com/lists/gentoo/user/220199" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>I am trying to enable remote X access to my server but it seems that I need a .Xauthority file to be able to connect to the server.
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="http://ubuntuforums.org/showthread.php?t=1863739" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-						<li class="anriss">
-							<div class="collectiontext">
-								<p>Can't run startx xauth: file /root/.Xauthority does not exist 
-</p>
-							</div>
-							<div class="collectionhref">
-								<a href="http://ubuntuforums.org/showthread.php?t=1961646" target="_blank">
-									Öffnen
-								</a>
-							</div>
-						</li>
-				</ul>
-				<div id="referers">
-					<h1>
-						Artikel, die hierher verlinken
-					</h1>
-		<!--ul>
-			<li><a href="synology_nas_festplattenrekorder.html">Synology-NAS als Festplattenrekorder</a></li>
-			<li><a href="owncloud__android_kalender.html">OwnCloud, Android und der Kalender</a></li>
-			<li><a href="screen_for_x_synology_nas.html">screen for X mit Synology-NAS</a></li>
-		</ul-->
-					<ul class="single">
-							<li class="anriss">
-								<div>
-									<h3>
-										Synology-NAS als Festplattenrekorder
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Linux.html">
-																	Linux
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Nachdem ich eigentlich recht zufrieden mit meinem 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://www.gossamer-threads.com/lists/gentoo/user/220199" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>I am trying to enable remote X access to my server but it seems that I need a .Xauthority file to be able to connect to the server.
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://ubuntuforums.org/showthread.php?t=1863739" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Can't run startx xauth: file /root/.Xauthority does not exist 
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://ubuntuforums.org/showthread.php?t=1961646" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-padding" id="referers">
+				<h3>
+					Artikel, die hierher verlinken
+				</h3>
+					<h4>
+						Synology-NAS als Festplattenrekorder
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Nachdem ich eigentlich recht zufrieden mit meinem 
 Synology-NAS
 bin, hat mich neulich wieder dieses Nerd-Jucken erwischt: Wir können einfach nichts in Ruhe lassen,
 das funktioniert.
 Daher nahm ich mir vor, mein Haus mit der Möglichkeit auszustatten, zeitgesteuerte Fernsehmitschnitte
 anzufertigen - natürlich ohne den Kauf eines entsprechenden fertigen Geräts...
-</p>								</div>
-								<div class="collectionhref">
-									<a href="synology_nas_festplattenrekorder.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										OwnCloud, Android und der Kalender
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Linux.html">
-																	Linux
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Ich habe neulich die OwnCloud-Integration ein wenig weiter vorangetrieben - und wollte gleich wieder viel zu viel: Android-Integration sollte es auch geben...
-</p>								</div>
-								<div class="collectionhref">
-									<a href="owncloud__android_kalender.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-							<li class="anriss">
-								<div>
-									<h3>
-										screen for X mit Synology-NAS
-									</h3>
-									<span class="tags">
-										<div class="popup">
-															<div>
-																<a class="taglink" href="tag_Linux.html">
-																	Linux
-																</a>
-															</div>
-															<div>
-																<a class="taglink" href="tag_Virtualisierung.html">
-																	Virtualisierung
-																</a>
-															</div>
-										</div>
-										<img src="images/tag_48.png" class="imgtag">
-									</span>
-								</div>
-								<div class="collectiontext">
-<p>Nachdem ich jetzt X-Anwendungen auf meinem  
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="synology_nas_festplattenrekorder.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						OwnCloud, Android und der Kalender
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Ich habe neulich die OwnCloud-Integration ein wenig weiter vorangetrieben - und wollte gleich wieder viel zu viel: Android-Integration sollte es auch geben...
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="owncloud__android_kalender.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<h4>
+						screen for X mit Synology-NAS
+					</h4>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Nachdem ich jetzt X-Anwendungen auf meinem  
 Synology-NAS
 zur Ausführung bringen kann, habe ich das Thema noch weiter verfolgt:
 Man kann das System mit
 Screen für X
 kombinieren!
-</p>								</div>
-								<div class="collectionhref">
-									<a href="screen_for_x_synology_nas.html#content">
-										Öffnen
-									</a>
-								</div>
-							</li>
-					</ul>
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="screen_for_x_synology_nas.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
 				</div>
+
+			</div>
+			<!-- END BLOG ENTRY -->
 		</div>
-	</div>
-	<div id="B">
-	<h2>Neueste Artikel</h2>
-<ul class="inset"> 
-<li class="anriss">
-  <a href="pam_nfc_ubuntu_18_04.html#content">
-<div class="date">02.12.2018</div>
-<h3>pam_nfc und Ubuntu 18.04</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
+
+		<!-- Introduction menu -->
+		<div class="w3-col l3">
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-black w3-margin-bottom">Virtualisierung</span></a>
+						<a href="windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+						<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+			<div class="w3-col w3-hide-small l3 s12">
+				<!-- Posts -->
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+									<span class="w3-large">pam_nfc und Ubuntu 18.04</span><br>
+<span>
+						<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Ich habe bereits über einige Stolpersteine beim
 Umstieg auf Ubuntu 18.04
 berichtet - nunmehr bin ich auf einen neuen gestoßen, der
 den Fork und einen Pull-Request zur Folge hatte
-</p></div>   </a>
-</li>
-<li class="anriss">
-	<a href="eigene_firmware_sonoff_s20.html#71">
-<div class="date">02.12.2018</div>
-<h3>Eigene Firmware für Sonoff S20</h3>
-<div class="abstract">
-	<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border" href="pam_nfc_ubuntu_18_04.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+									<span class="w3-large">Eigene Firmware für Sonoff S20</span><br>
+<span>
+						<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
 <p>Nachdem ich nach meinen diversen Erfahrungen mit dem Arduino auch mal andere Projekte erforschen wollte,
 habe ich mich durch Artikel in zurückliegenden Ausgaben der c't inspirieren lassen und Projekte mit dem ESP8266
 ausprobiert - zuerst der Umbau einer WLAN-fähigen Steckdose...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="ntp_server_raspi_em406a_ii.html#content">
-<div class="date">02.12.2018</div>
-<h3>NTP-Server mit Raspi und EM406a II</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border" href="eigene_firmware_sonoff_s20.html#71">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+									<span class="w3-large">NTP-Server mit Raspi und EM406a II</span><br>
+<span>
+						<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Nachdem ich die Hardwareanpasungen für mein altes GPS-Modul hier bereits als Grundlage für
 meinen eigenen
 Atomzeit-GPS-NTP-Server
 beschrieben und die Grundlagen der Hardware in ein
 GitHub-Repository gepackt habe, habe ich nun den letzten schritt vollzogen.
-</p></div>   </a>
-</li>
-</ul>
-</div>
-<nav id="C"> 
-<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
-			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
-			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
-			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
-			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
-			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
-			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
-<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
-</div>
-	</h2><form method="get" action="http://www.google.com/search">
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border" href="ntp_server_raspi_em406a_ii.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 
-<div style="padding:4px;width:90%;">
-<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
- maxlength="255" value="" />
-<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
-<input style="width:0%;" type="checkbox"  name="sitesearch"
- value="elbosso.github.io" checked hidden="true"/>
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
 </div>
 
-</form>
-<a href="tag_Android.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Android
-</h3>
-<span class="nav-item-counter">15</span>
-</header>
-<div class="nav-item-body">
-<p>Alles rund um Googles Betriebssystem</p>
-</div>
-</div>
-</a>
-<a href="tag_Basteln.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Basteln
-</h3>
-<span class="nav-item-counter">13</span>
-</header>
-<div class="nav-item-body">
-<p>Meistens Papier (Origami...)</p>
-</div>
-</div>
-</a>
-<a href="c_c__.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-C und C++
-</h3>
-<span class="nav-item-counter">5</span>
-</header>
-<div class="nav-item-body">
-</div>
-</div>
-</a>
-<a href="tag_Datenbanken.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Datenbanken
-</h3>
-<span class="nav-item-counter">13</span>
-</header>
-<div class="nav-item-body">
-<p>relationale und andere Datenbanken</p>
-</div>
-</div>
-</a>
-<a href="tag_dWb+.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-dWb+
-</h3>
-<span class="nav-item-counter">85</span>
-</header>
-<div class="nav-item-body">
-<p>Werkzeug für rapid Prototyping</p>
-</div>
-</div>
-</a>
-<a href="tag_Garten.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Garten
-</h3>
-<span class="nav-item-counter">3</span>
-</header>
-<div class="nav-item-body">
-<p>Das grüne Hobby</p>
-</div>
-</div>
-</a>
-<a href="tag_Geo.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Geo
-</h3>
-<span class="nav-item-counter">28</span>
-</header>
-<div class="nav-item-body">
-<p>Karten und mehr run um Ortsinformationen</p>
-</div>
-</div>
-</a>
-<a href="tag_GUI.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-GUI
-</h3>
-<span class="nav-item-counter">49</span>
-</header>
-<div class="nav-item-body">
-<p>Alles rund um graphische Benutzerschnittstellen</p>
-</div>
-</div>
-</a>
-<a href="tag_Hardware.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Hardware
-</h3>
-<span class="nav-item-counter">21</span>
-</header>
-<div class="nav-item-body">
-<p>Elektronik und so Zeuchs...</p>
-</div>
-</div>
-</a>
-<a href="tag_Java.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Java
-</h3>
-<span class="nav-item-counter">213</span>
-</header>
-<div class="nav-item-body">
-<p>Hauptsächlich Desktop Themen und Java SE</p>
-</div>
-</div>
-</a>
-<a href="tag_Komponenten.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Komponenten
-</h3>
-<span class="nav-item-counter">148</span>
-</header>
-<div class="nav-item-body">
-<p>Software-Komponenten</p>
-</div>
-</div>
-</a>
-<a href="tag_Links.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Links
-</h3>
-<span class="nav-item-counter">43</span>
-</header>
-<div class="nav-item-body">
-<p>Linksammlungen zu verschiedenen Themen</p>
-</div>
-</div>
-</a>
-<a href="tag_Linux.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-<strong>
-Linux
-</strong>
-</h3>
-<span class="nav-item-counter">115</span>
-</header>
-<div class="nav-item-body">
-<p>Alles zum Thema Gnu Linux</p>
-</div>
-</div>
-</a>
-<a href="tag_Markup.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Markup
-</h3>
-<span class="nav-item-counter">17</span>
-</header>
-<div class="nav-item-body">
-<p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
-</div>
-</div>
-</a>
-<a href="tag_Music.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Music
-</h3>
-<span class="nav-item-counter">20</span>
-</header>
-<div class="nav-item-body">
-<p>Musik, die mir gefällt</p>
-</div>
-</div>
-</a>
-<a href="tag_Numerik.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Numerik
-</h3>
-<span class="nav-item-counter">10</span>
-</header>
-<div class="nav-item-body">
-<p>Numerische Mathematik in Computern</p>
-</div>
-</div>
-</a>
-<a href="tag_Python.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Python
-</h3>
-<span class="nav-item-counter">6</span>
-</header>
-<div class="nav-item-body">
-<p>Mein Weg vom blutigen Anfänger aufwärts</p>
-</div>
-</div>
-</a>
-<a href="tag_Rants.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Rants
-</h3>
-<span class="nav-item-counter">80</span>
-</header>
-<div class="nav-item-body">
-<p>Luft ablassen</p>
-</div>
-</div>
-</a>
-<a href="tag_Security.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Security
-</h3>
-<span class="nav-item-counter">22</span>
-</header>
-<div class="nav-item-body">
-<p>IT-Sicherheit</p>
-</div>
-</div>
-</a>
-<a href="tag_sQLshell.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-sQLshell
-</h3>
-<span class="nav-item-counter">25</span>
-</header>
-<div class="nav-item-body">
-<p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
-</div>
-</div>
-</a>
-<a href="tag_Verschiedenes.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Verschiedenes
-</h3>
-<span class="nav-item-counter">12</span>
-</header>
-<div class="nav-item-body">
-<p>Passt in keine der anderen Kategorien...</p>
-</div>
-</div>
-</a>
-<a href="tag_Video.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Video
-</h3>
-<span class="nav-item-counter">26</span>
-</header>
-<div class="nav-item-body">
-<p>Artikel mit bunten Filmchen</p>
-</div>
-</div>
-</a>
-<a href="tag_Virtualisierung.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-<strong>
-Virtualisierung
-</strong>
-</h3>
-<span class="nav-item-counter">26</span>
-</header>
-<div class="nav-item-body">
-<p>Technologien und Themen rund um virtuelle Rechner</p>
-</div>
-</div>
-</a>
-<a href="windows.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Windows
-</h3>
-<span class="nav-item-counter">3</span>
-</header>
-<div class="nav-item-body">
-</div>
-</div>
-</a>
-<a href="tag_Upcoming....html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Upcoming...
-</h3>
-</header>
-<div class="nav-item-body">
-<p>Demnächst in diesem Theater...</p>
-</div>
-</div>
-</a>
-</nav>
-</div>
-	<div id="footer">
-		<span class="me">
-		<strong><a href="me.html">
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
 		<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
 		</script>
-		<noscript>Der Verfasser</noscript>				
+		<noscript>Der Verfasser</noscript>
 
-, Damaschke 11, Rudolstadt, 
+		, Damaschke 11, Rudolstadt,
 		<script>
 		<!--
 abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
 -->
 		</script>
-		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
-			</a></strong>
-	</span></div><!-- #footer -->
-</div>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
 </body>
 </html>

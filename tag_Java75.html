@@ -1,15 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
-<head>
-  <title>Java</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-  <link rel="stylesheet" type="text/css" href="css/styleglobal.css" />
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
-  <link rel="stylesheet" type="text/css" href="css/styleflex.css" />
-	<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
-	<script type="text/javascript" language="javascript">
+<!DOCTYPE html>
+<html>
+<title>Java</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" />
+<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -20,7 +17,7 @@ function abc(coded,key)
       ltr = coded.charAt(i)
       link += (ltr)
     }
-    else {     
+    else {
       ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
       link += (key.charAt(ltr))
     }
@@ -29,163 +26,201 @@ document.write(link)
 }
 //-->
 </script>
-</head>
-<body>
-<div id="wrapper">
-	<div id="header">
-<div id="logo">
-  <!--h1><math xmlns="http://www.w3.org/1998/Math/MathML"
-      display="inline">
-    <mrow>
-      <mn>1</mn>
-      <mo>&isin;</mo>
-      <mi>&infin;</mi>
-    </mrow>
-</math>
-</h1-->
-  <p>
-		<script>
-		<!--
-abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
--->
-		</script>
-		<noscript>Der Verfasser</noscript>				
-  </p>
-</div>
-<p>	Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies. Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben. Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt... PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-			<a href="https://github.com/elbosso">hier</a>.</p>
-	</div><!-- #header-->
-<div id="all">
-<div id="A">
-<div id="content">
-	<div class="heading">Java</div>
-	<p>Hauptsächlich Desktop Themen und Java SE</p>
-<ul class="double"> 
-<li class="anriss">
-				<span class="tags">
+<body class="w3-light-grey">
 
-					<div class="popup">
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
 
-<div><a class="taglink" href="tag_Java.html">Java</a></div>
-<div><a class="taglink" href="tag_Komponenten.html">Komponenten</a></div>
+    <!-- Header -->
+    <header class="w3-container w3-center w3-padding-32">
+        <h1><b>Java</b></h1>
+        <p>Hauptsächlich Desktop Themen und Java SE</p>
+        <!--p>Welcome to the blog of <span class="w3-tag">unknown</span></p-->
+    </header>
 
-</div>
+    <!-- Grid -->
+    <div class="w3-row">
 
-	<img src="images/tag_48.png" class="imgtag">
+        <!-- Blog entries -->
+        <div class="w3-col l8 s12">
+            <!-- Blog entry -->
+            <div class="w3-card-4 w3-margin w3-white">
+                <div class="w3-container">
+                    <h3>                        <b>BeanShell Debugger ohne IDE</b></h3>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p>
+                                <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+                                <a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a>
+                            </p>
+                        </div>
+                        <div class="w3-col m4"><p style="text-align: right">
+                        </p>
+                        </div>
+                    </div>
+                </div>
 
-				</span>
-  <a class="anriss" href="beanshell_debugger_ohne_ide.html#content">
-<div class="date">24.09.2016</div>
-			<h3 class="head">
-				BeanShell Debugger ohne IDE</h3>
-<div class="abstract">
-<p>Der vor einiger Zeit vorgestellte
+                <div class="w3-container">
+                    <p><p>Der vor einiger Zeit vorgestellte
 BeanShellDebugger
 funktioniert nur dann gut, wenn die Anwendung noch entwickelt wird und man noch Zugriff auf den Debugger der IDE hat.
-</p></div>   </a>
+</p></p>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p/>
+                        </div>
+                        <div class="w3-col m4">
+                            <p style="text-align: right">
+                                <a class="w3-button w3-padding-large w3-white w3-border" href="beanshell_debugger_ohne_ide.html#content">
+                                    Weiterlesen
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- Blog entry -->
+            <div class="w3-card-4 w3-margin w3-white">
+                <div class="w3-container">
+                    <h3>                        <b>FOP und PDF-Formulare mittels iText</b></h3>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p>
+                                <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+                                <a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a>
+                                <a href="tag_Markup.html"><span class="w3-tag w3-black w3-margin-bottom">Markup</span></a>
+                            </p>
+                        </div>
+                        <div class="w3-col m4"><p style="text-align: right">
+                        </p>
+                        </div>
+                    </div>
+                </div>
 
-</li>
-<li class="anriss">
-				<span class="tags">
-
-					<div class="popup">
-
-<div><a class="taglink" href="tag_Java.html">Java</a></div>
-<div><a class="taglink" href="tag_Komponenten.html">Komponenten</a></div>
-<div><a class="taglink" href="tag_Markup.html">Markup</a></div>
-
-</div>
-
-	<img src="images/tag_48.png" class="imgtag">
-
-				</span>
-  <a class="anriss" href="fop_pdf_formulare_mittels_itext.html#content">
-<div class="date">08.09.2016</div>
-			<h3 class="head">
-				FOP und PDF-Formulare mittels iText</h3>
-<div class="abstract">
-<p>Der 
+                <div class="w3-container">
+                    <p><p>Der 
 Editor für Testprozeduren und Checklisten
 verfügte bereits seit längerer Zeit über eine Vielzahl von Features - allerdings mit dem Fokus auf 
 Protokolle, die in Papierform erzeugt und ausgefüllt wurden. Das hat sich nun geändert...
-</p></div>   </a>
+</p></p>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p/>
+                        </div>
+                        <div class="w3-col m4">
+                            <p style="text-align: right">
+                                <a class="w3-button w3-padding-large w3-white w3-border" href="fop_pdf_formulare_mittels_itext.html#content">
+                                    Weiterlesen
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- Blog entry -->
+            <div class="w3-card-4 w3-margin w3-white">
+                <div class="w3-container">
+                    <h3>                        <b>ModuleWorkspace Gruppen</b></h3>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p>
+                                <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+                                <a href="tag_dWb+.html"><span class="w3-tag w3-black w3-margin-bottom">dWb+</span></a>
+                                <a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a>
+                                <a href="tag_sQLshell.html"><span class="w3-tag w3-black w3-margin-bottom">sQLshell</span></a>
+                                <a href="tag_GUI.html"><span class="w3-tag w3-black w3-margin-bottom">GUI</span></a>
+                            </p>
+                        </div>
+                        <div class="w3-col m4"><p style="text-align: right">
+                        </p>
+                        </div>
+                    </div>
+                </div>
 
-</li>
-<li class="anriss">
-				<span class="tags">
-
-					<div class="popup">
-
-<div><a class="taglink" href="tag_Java.html">Java</a></div>
-<div><a class="taglink" href="tag_dWb+.html">dWb+</a></div>
-<div><a class="taglink" href="tag_Komponenten.html">Komponenten</a></div>
-<div><a class="taglink" href="tag_sQLshell.html">sQLshell</a></div>
-<div><a class="taglink" href="tag_GUI.html">GUI</a></div>
-
-</div>
-
-	<img src="images/tag_48.png" class="imgtag">
-
-				</span>
-  <a class="anriss" href="moduleworkspace_gruppen.html#content">
-<div class="date">08.09.2016</div>
-			<h3 class="head">
-				ModuleWorkspace Gruppen</h3>
-<div class="abstract">
-<p>Ein neues Feature hat Einzug gehalten in 
+                <div class="w3-container">
+                    <p><p>Ein neues Feature hat Einzug gehalten in 
 die ModuleWorkspace-Komponente - unter anderem verwendet in der 
 sQLshell
 und im Rapid-Prototyping-Werkzeug
 dWb+:
 Module können nun zu Gruppen zusammengefasst werden, wie etwa Objekte in Graphikprogrammen
-</p></div>   </a>
+</p></p>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p/>
+                        </div>
+                        <div class="w3-col m4">
+                            <p style="text-align: right">
+                                <a class="w3-button w3-padding-large w3-white w3-border" href="moduleworkspace_gruppen.html#content">
+                                    Weiterlesen
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- Blog entry -->
+            <div class="w3-card-4 w3-margin w3-white">
+                <div class="w3-container">
+                    <h3>                        <b>FOP und PDF-Formulare</b></h3>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p>
+                                <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+                                <a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a>
+                                <a href="tag_Markup.html"><span class="w3-tag w3-black w3-margin-bottom">Markup</span></a>
+                            </p>
+                        </div>
+                        <div class="w3-col m4"><p style="text-align: right">
+                        </p>
+                        </div>
+                    </div>
+                </div>
 
-</li>
-<li class="anriss">
-				<span class="tags">
-
-					<div class="popup">
-
-<div><a class="taglink" href="tag_Java.html">Java</a></div>
-<div><a class="taglink" href="tag_Komponenten.html">Komponenten</a></div>
-<div><a class="taglink" href="tag_Markup.html">Markup</a></div>
-
-</div>
-
-	<img src="images/tag_48.png" class="imgtag">
-
-				</span>
-  <a class="anriss" href="fop_pdf_formulare.html#content">
-<div class="date">28.08.2016</div>
-			<h3 class="head">
-				FOP und PDF-Formulare</h3>
-<div class="abstract">
-<p>Der 
+                <div class="w3-container">
+                    <p><p>Der 
 Editor für Testprozeduren und Checklisten
 verfügte bereits seit längerer Zeit über eine Vielzahl von Features - allerdings mit dem Fokus auf 
 Protokolle, die in Papierform erzeugt und ausgefüllt wurden. Das ändert sich gerade...
-</p></div>   </a>
+</p></p>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p/>
+                        </div>
+                        <div class="w3-col m4">
+                            <p style="text-align: right">
+                                <a class="w3-button w3-padding-large w3-white w3-border" href="fop_pdf_formulare.html#content">
+                                    Weiterlesen
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- Blog entry -->
+            <div class="w3-card-4 w3-margin w3-white">
+                <div class="w3-container">
+                    <h3>                        <b>Generierung von Skripts für sQLshell</b></h3>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p>
+                                <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+                                <a href="tag_sQLshell.html"><span class="w3-tag w3-black w3-margin-bottom">sQLshell</span></a>
+                            </p>
+                        </div>
+                        <div class="w3-col m4"><p style="text-align: right">
+                        </p>
+                        </div>
+                    </div>
+                </div>
 
-</li>
-<li class="anriss">
-				<span class="tags">
-
-					<div class="popup">
-
-<div><a class="taglink" href="tag_Java.html">Java</a></div>
-<div><a class="taglink" href="tag_sQLshell.html">sQLshell</a></div>
-
-</div>
-
-	<img src="images/tag_48.png" class="imgtag">
-
-				</span>
-  <a class="anriss" href="generierung_skripts_sqlshell.html#content">
-<div class="date">21.08.2016</div>
-			<h3 class="head">
-				Generierung von Skripts für sQLshell</h3>
-<div class="abstract">
-<p>Die 
+                <div class="w3-container">
+                    <p><p>Die 
 sQLshell
 wurde nach dem erfolgreichen Einsatz von Annotation Prozessoren für 
 Generatoren
@@ -194,389 +229,188 @@ Validatoren
 in 
 dWb+
 ebenfalls mittels dieser Technologien um neue Features erweitert.
-</p></div>   </a>
+</p></p>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p/>
+                        </div>
+                        <div class="w3-col m4">
+                            <p style="text-align: right">
+                                <a class="w3-button w3-padding-large w3-white w3-border" href="generierung_skripts_sqlshell.html#content">
+                                    Weiterlesen
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- Blog entry -->
+            <div class="w3-card-4 w3-margin w3-white">
+                <div class="w3-container">
+                    <h3>                        <b>Ältere Artikel</b></h3>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p>
+                            </p>
+                        </div>
+                        <div class="w3-col m4"><p style="text-align: right">
+                        </p>
+                        </div>
+                    </div>
+                </div>
 
-</li>
-<li class="anriss">
-  <a class="anriss" href="tag_Java80.html#content">
-<div class="date">06.08.2016</div>
-			<h3 class="head">
-				Ältere Artikel</h3>
-<div class="abstract">
-<p>Hier geht es zum Archiv der Artikel, die vor dem 06.08.2016 verfasst wurden:<ul><li class="single">BeanShell Debugger</li><li class="single">Permissions zum Zugriff auf JBoss-EJBs</li><li class="single">...</li></ul></p></div>   </a>
+                <div class="w3-container">
+                    <p><p>Hier geht es zum Archiv der Artikel, die vor dem 06.08.2016 verfasst wurden:<ul><li class="single">BeanShell Debugger</li><li class="single">Permissions zum Zugriff auf JBoss-EJBs</li><li class="single">...</li></ul></p></p>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p/>
+                        </div>
+                        <div class="w3-col m4">
+                            <p style="text-align: right">
+                                <a class="w3-button w3-padding-large w3-white w3-border" href="tag_Java80.html#content">
+                                    Ältere Artikel ansehen
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- END BLOG ENTRIES -->
+        </div>
 
-</li>
-</ul>
-</div>
-</div>
-<nav id="C"> 
-<h2 style="height:3em;">Kategorien<div style="padding-top:4px;float:right">
-			<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
-			<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
-			<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
-			<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
-			<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
-			<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
-<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
-</div>
-	</h2><form method="get" action="http://www.google.com/search">
+        <!-- Introduction menu -->
+        <div class="w3-col l4">
 
-<div style="padding:4px;width:90%;">
-<input  type="text"   name="q" style="padding:4px;margin-top:4px;"
- maxlength="255" value="" />
-<input type="image" value="Google Search" alt="Suche starten" src="images/lupe.png"/>
-<input style="width:0%;" type="checkbox"  name="sitesearch"
- value="elbosso.github.io" checked hidden="true"/>
-</div>
+            <!-- Shortcuts -->
+            <div class="w3-card w3-margin w3-margin-top">
+                <div class="w3-container w3-white">
+                    <p style="text-align: center">
+                        <a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+                        <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+                        <a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+                        <a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+                        <a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+                        <a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+                        <a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+                    </p>
+                </div>
+            </div><hr>
 
-</form>
-<a href="tag_Android.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Android
-</h3>
-	<span class="nav-item-counter">15</span>
-</header>
-<div class="nav-item-body">
-<p>Alles rund um Googles Betriebssystem</p>
-</div>
-</div>
-</a>
-<a href="tag_Basteln.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Basteln
-</h3>
-	<span class="nav-item-counter">13</span>
-</header>
-<div class="nav-item-body">
-<p>Meistens Papier (Origami...)</p>
-</div>
-</div>
-</a>
-<a href="c_c__.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-C und C++
-</h3>
-	<span class="nav-item-counter">5</span>
-</header>
-<div class="nav-item-body">
-</div>
-</div>
-</a>
-<a href="tag_Datenbanken.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Datenbanken
-</h3>
-	<span class="nav-item-counter">13</span>
-</header>
-<div class="nav-item-body">
-<p>relationale und andere Datenbanken</p>
-</div>
-</div>
-</a>
-<a href="tag_dWb+.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-dWb+
-</h3>
-	<span class="nav-item-counter">85</span>
-</header>
-<div class="nav-item-body">
-<p>Werkzeug für rapid Prototyping</p>
-</div>
-</div>
-</a>
-<a href="tag_Garten.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Garten
-</h3>
-	<span class="nav-item-counter">3</span>
-</header>
-<div class="nav-item-body">
-<p>Das grüne Hobby</p>
-</div>
-</div>
-</a>
-<a href="tag_Geo.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Geo
-</h3>
-	<span class="nav-item-counter">28</span>
-</header>
-<div class="nav-item-body">
-<p>Karten und mehr run um Ortsinformationen</p>
-</div>
-</div>
-</a>
-<a href="tag_GUI.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-GUI
-</h3>
-	<span class="nav-item-counter">49</span>
-</header>
-<div class="nav-item-body">
-<p>Alles rund um graphische Benutzerschnittstellen</p>
-</div>
-</div>
-</a>
-<a href="tag_Hardware.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Hardware
-</h3>
-	<span class="nav-item-counter">21</span>
-</header>
-<div class="nav-item-body">
-<p>Elektronik und so Zeuchs...</p>
-</div>
-</div>
-</a>
-<a href="tag_Java.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Java
-</h3>
-	<span class="nav-item-counter">213</span>
-</header>
-<div class="nav-item-body">
-<p>Hauptsächlich Desktop Themen und Java SE</p>
-</div>
-</div>
-</a>
-<a href="tag_Komponenten.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Komponenten
-</h3>
-	<span class="nav-item-counter">148</span>
-</header>
-<div class="nav-item-body">
-<p>Software-Komponenten</p>
-</div>
-</div>
-</a>
-<a href="tag_Links.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Links
-</h3>
-	<span class="nav-item-counter">43</span>
-</header>
-<div class="nav-item-body">
-<p>Linksammlungen zu verschiedenen Themen</p>
-</div>
-</div>
-</a>
-<a href="tag_Linux.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Linux
-</h3>
-	<span class="nav-item-counter">115</span>
-</header>
-<div class="nav-item-body">
-<p>Alles zum Thema Gnu Linux</p>
-</div>
-</div>
-</a>
-<a href="tag_Markup.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Markup
-</h3>
-	<span class="nav-item-counter">17</span>
-</header>
-<div class="nav-item-body">
-<p>(X)HTML, (La)TeX, CSS, XML, XSLT und der ganze Rest...</p>
-</div>
-</div>
-</a>
-<a href="tag_Music.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Music
-</h3>
-	<span class="nav-item-counter">20</span>
-</header>
-<div class="nav-item-body">
-<p>Musik, die mir gefällt</p>
-</div>
-</div>
-</a>
-<a href="tag_Numerik.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Numerik
-</h3>
-	<span class="nav-item-counter">10</span>
-</header>
-<div class="nav-item-body">
-<p>Numerische Mathematik in Computern</p>
-</div>
-</div>
-</a>
-<a href="tag_Python.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Python
-</h3>
-	<span class="nav-item-counter">6</span>
-</header>
-<div class="nav-item-body">
-<p>Mein Weg vom blutigen Anfänger aufwärts</p>
-</div>
-</div>
-</a>
-<a href="tag_Rants.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Rants
-</h3>
-	<span class="nav-item-counter">80</span>
-</header>
-<div class="nav-item-body">
-<p>Luft ablassen</p>
-</div>
-</div>
-</a>
-<a href="tag_Security.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Security
-</h3>
-	<span class="nav-item-counter">22</span>
-</header>
-<div class="nav-item-body">
-<p>IT-Sicherheit</p>
-</div>
-</div>
-</a>
-<a href="tag_sQLshell.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-sQLshell
-</h3>
-	<span class="nav-item-counter">25</span>
-</header>
-<div class="nav-item-body">
-<p>Werkzeug zur Arbeit mit relationalen Datenbanken</p>
-</div>
-</div>
-</a>
-<a href="tag_Verschiedenes.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Verschiedenes
-</h3>
-	<span class="nav-item-counter">12</span>
-</header>
-<div class="nav-item-body">
-<p>Passt in keine der anderen Kategorien...</p>
-</div>
-</div>
-</a>
-<a href="tag_Video.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Video
-</h3>
-	<span class="nav-item-counter">26</span>
-</header>
-<div class="nav-item-body">
-<p>Artikel mit bunten Filmchen</p>
-</div>
-</div>
-</a>
-<a href="tag_Virtualisierung.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Virtualisierung
-</h3>
-	<span class="nav-item-counter">26</span>
-</header>
-<div class="nav-item-body">
-<p>Technologien und Themen rund um virtuelle Rechner</p>
-</div>
-</div>
-</a>
-<a href="windows.html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Windows
-</h3>
-	<span class="nav-item-counter">3</span>
-</header>
-<div class="nav-item-body">
-</div>
-</div>
-</a>
-<a href="tag_Upcoming....html">
-<div class="nav-item accordion">
-<header class="nav-item-header">
-<h3>
-Upcoming...
-</h3>
-</header>
-<div class="nav-item-body">
-<p>Demnächst in diesem Theater...</p>
-</div>
-</div>
-</a>
-<!--
--->
 
-</nav>
-</div>
-	<div id="footer">
-		<span class="me">
-		<strong><a href="me.html">
-		<script>
+            <!-- Labels / tags -->
+            <div class="w3-card w3-margin">
+                <div class="w3-container w3-padding">
+                    <h4>Tags</h4>
+                </div>
+                <div class="w3-container w3-white">
+                    <p>
+                        <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+                        <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+                        <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+                        <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+                        <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+                        <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+                        <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+                        <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+                        <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+                        <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+                        <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+                        <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+                        <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+                        <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+                        <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+                        <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+                        <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+                        <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+                        <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+                        <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+                        <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+                        <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+                        <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+                        <a href="windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+                        <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- About Card -->
+            <div class="w3-card w3-margin w3-margin-top">
+                <div class="w3-container w3-white">
+                    <h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
 		</script>
-		<noscript>Der Verfasser</noscript>				
+                        <noscript>Der Verfasser</noscript></h4>
+                    <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+                    <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+                    <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+                    <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+                        <a href="https://github.com/elbosso">hier</a>.</p>
+                </div>
+            </div><hr>
 
-, Damaschke 11, Rudolstadt, 
-		<script>
+            <!-- Posts -->
+            <!--div class="w3-card w3-margin">
+                <div class="w3-container w3-padding">
+                    <h4>Popular Posts</h4>
+                </div>
+                <ul class="w3-ul w3-hoverable w3-white">
+                    <li class="w3-padding-16">
+                        <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                        <span class="w3-large">Lorem</span><br>
+                        <span>Sed mattis nunc</span>
+                    </li>
+                    <li class="w3-padding-16">
+                        <img src="/w3images/gondol.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                        <span class="w3-large">Ipsum</span><br>
+                        <span>Praes tinci sed</span>
+                    </li>
+                    <li class="w3-padding-16">
+                        <img src="/w3images/skies.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                        <span class="w3-large">Dorum</span><br>
+                        <span>Ultricies congue</span>
+                    </li>
+                    <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+                        <img src="/w3images/rock.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                        <span class="w3-large">Mingsum</span><br>
+                        <span>Lorem ipsum dipsum</span>
+                    </li>
+                </ul>
+            </div>
+            <hr-->
+
+            <!-- END Introduction Menu -->
+        </div>
+
+        <!-- END GRID -->
+    </div><br>
+
+    <!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+    <a href="me.html">
+        <script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+        <noscript>Der Verfasser</noscript>
+
+        , Damaschke 11, Rudolstadt,
+        <script>
 		<!--
 abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
 -->
 		</script>
-		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>				
-			</a></strong>
-	</span>
-</div><!-- #footer -->
-</div>
+        <noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+    </a>
+    <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
 </body>
 </html>
