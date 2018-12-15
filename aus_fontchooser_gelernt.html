@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<title>Aus FontChooser gelernt</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" /><link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Aus FontChooser gelernt</h4>
+				</div>
+				<div class="w3-container">
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							vorhergehende Artikel in:
+							<a href="strange_attractors_bigdecimal.html#content">
+								<span class="w3-tag w3-black w3-margin-bottom">Java</span>
+							</a> <!--/li-->
+							<a href="neue_datengeneratoren_v.html#content">
+								<span class="w3-tag w3-black w3-margin-bottom">Komponenten</span>
+							</a> <!--/li-->
+							<a href="icons___woher_nehmen____iii.html#content">
+								<span class="w3-tag w3-black w3-margin-bottom">GUI</span>
+							</a> <!--/li-->
+						</div>
+						<div class="w3-col m4"><p style="text-align: right">
+							<span class="w3-opacity">15.12.2018</span>
+						</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Java selbst bietet keine Gui-Komponente zur Auswahl einer Schriftart an. Daher hatte ich vor einigen Jahren - wie so viele
+andere auch - eine eigene Komponente dafür erstellt. Ich wollte sie etwas aktualisieren und aufpeppen und lernte
+dabei eine interessante Lektion...
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p>Bisher sah meine Komponente so aus:
+</p><p>
+<img src="images/fontchooser@44459180.png" style="max-width:387px;"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+FontChooser alt
+</span>
+</p><p>
+Eher langweilig und auch nicht das Layout, das man standardmäßig erwarten würde. Daher wurde die Komponente neu
+strukturiert und bei der Gelegenheit auch gleich internationalisiert - danach sah sie dann so aus:
+</p><p>
+<img src="images/fontchooser@7f38b059.png" style="max-width:461px;"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+FontChooser neuer
+</span>
+</p><p>
+Aus meiner Sicht bereits eine klare Verbesserung.
+</p><p>
+Allerdings hatte ich an dieser Stelle einen schweren anfall von Featuritis - ich wollte, dass man bereits in der Liste
+mit Schriftnamen einen ersten Eindruck von der visuellen Erscheinung der jeweiligen Schriftart erhalten kann,
+wie das heutzutage viele andere Anwendungen auch bieten. Bei Googles Bildersuche findet man dazu zum Beispiel
+<a href="https://www.c-sharpcorner.com/UploadFile/mahesh/fontdialog-in-C-Sharp/">folgende
+Illustration</a> dazu:
+</p><p>
+<img src="https://csharpcorner-mindcrackerinc.netdna-ssl.com/UploadFile/mahesh/fontdialog-in-C-Sharp/Images/FontDlgImg1.jpg" style="max-width:447px;"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Angestrebtes Feature
+</span>
+</p><p>
+Als ich einen entsprechenden Renderer dafür entwarf stellte ich fest, dass das Öffnen des Dialogs ewig dauerte. Die
+Ursache dafür war, dass für alle Zeilen der Liste der Renderer instantiiert wurde, was eine gewisse Zeit in Anspruch nahm,
+da dafür ja jetzt jedesmal eine neue Schrift geladen und aufbereitet werden musste. Ich hatte natürlich angenommen, dass
+das nur für die Zeilen geschehen würde, die im sichtbaren Ausschnitt lagen.
+</p><p>
+Daher machte ich mich nun daran, den Renderer so umzuschreiben, dass er nur dann eine Schriftart laden würde, wenn er für
+eine der im sichtbaren Bereich liegenden Zeilen der Liste aufgerufen werden würde. Dabei lernte ich Interessantes: Ich wollte
+den Check erledigen, indem ich nachsah, ob der Punkt
+(indexToLocation) der darzustellenden Zeile im sichtbaren Rechteck lag. Ergebnis dieser Idee war eine StackOverflowException,
+da zur Berechnung der Location der Renderer benutzt wird. Letztlich scheiterten alle Versuche, die Information zu erlangen,
+aus genau diesem Grund - ich musste tatsächlich diese Informationen von Hand errechnen - aus der festen Zeilenhöhe (die ich auch schon vor den
+StackOverflow-Versuchen festgelegt hatte) und dem sichtbaren Rechteck errechnete ich die erste und letzte sichtbare Zeile
+und setzte den Font nur dann am Renderer, wenn der aktuelle Index zwischen diesen beiden errechneten werten lag. Dadurch
+war der Dialog jetzt nicht nur so schnell, wie ich es erwarten würde, sondern er sah auch so aus, wie ich es mir
+gewünscht hatte:
+</p><p>
+<img src="images/fontchooser_new.png" style="max-width:459px;"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+FontChooser neu
+</span>
+</p><p>
+Daraus ergab sich für mich eine wichtige Information zum Thema Renderer, die ich so formuliert bisher noch nirgends
+gefunden habe: zeitkritische Operationen gehören nicht in die getXXXRenderer-Methoden hinein (da die für jedes Item in der
+Komponente aufgerufen wird - unabhängig von ihrer Sichtbarkeit), sondern in die paint-Methode -
+die wird nämlich tatsächlich nur aufgerufen, wenn der Renderer für ein Item im sichtbaren Ausschnitt der Komponente
+verantwortlich ist.
+</p>				</div>
+
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-black w3-margin-bottom">GUI</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a>
+						<a href="weeks.html"><img src="images/calendar_view_week_24.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_24.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="me.html"><img src="images/about.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/home.png" alt="home" title="home"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Links zu InfluxDB, Grafana</span><br>
+						<span class="smallabstract"><p>Nach meinen ersten Versuchen mit InfluxDB und grafana habe ich mir hier mal eine Liste
+mit (für mich beim Einstieg) hilfreichen Links abgelegt
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="links_influxdb__grafana.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Oled Status Display für Time-Server</span><br>
+						<span class="smallabstract"><p>Nachdem meine Adapterschaltung für den älteren GPS-Empfänger E406A auf einer
+professionell gefertigten Leiterplatte
+bestückt war und funktionierte, fand ich hinten in meiner Bastelkiste
+ein I2C-Oled-Display.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="oled_status_display_time_server.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Raspi Backup mit rsync</span><br>
+						<span class="smallabstract"><p>Nachdem ich nun schon einige Experimente mit dem Raspi veranstaltet habe, wollte ich eine Backuplösung,
+die nicht verlangt, den Rechner abzuschalten und die SD-Karte ewig ausbauen zu müssen. Meine Idee war rsync
+und ich stieß auf einige hilfreiche Links...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="raspi_backup_rsync.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Links zu InfluxDB, Grafana</span><br>
+							<span class="smallabstract"><p>Nach meinen ersten Versuchen mit InfluxDB und grafana habe ich mir hier mal eine Liste
+mit (für mich beim Einstieg) hilfreichen Links abgelegt
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="links_influxdb__grafana.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Oled Status Display für Time-Server</span><br>
+							<span class="smallabstract"><p>Nachdem meine Adapterschaltung für den älteren GPS-Empfänger E406A auf einer
+professionell gefertigten Leiterplatte
+bestückt war und funktionierte, fand ich hinten in meiner Bastelkiste
+ein I2C-Oled-Display.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="oled_status_display_time_server.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Raspi Backup mit rsync</span><br>
+							<span class="smallabstract"><p>Nachdem ich nun schon einige Experimente mit dem Raspi veranstaltet habe, wollte ich eine Backuplösung,
+die nicht verlangt, den Rechner abzuschalten und die SD-Karte ewig ausbauen zu müssen. Meine Idee war rsync
+und ich stieß auf einige hilfreiche Links...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="raspi_backup_rsync.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
