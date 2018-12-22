@@ -117,6 +117,159 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>Technology Short Take 108</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Welcome to Technology Short Take #108! This will be the last Technology Short Take of 2018, so here&rsquo;s hoping I can provide something useful for you. Enjoy!</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>Maish Saidel-Keesing has a 5-part series on replacing the AWS ELB. This is an older post (from August) that I&rsquo;ve had in my backlog for a while, and I&rsquo;m just now getting around to reading the series. There&rsquo;s some really good information in here. I won&rsquo;t link to all five, but rather just point you at <a href="https://technodrone.blogspot.com/2018/08/replacing-aws-elb-problem.html">the introductory post</a> (and Maish has done a great job&mdash;better than a lot of bloggers&mdash;making the entire series easily accessible).</li>
+<li>Quentin Machu <a href="https://blog.quentin-machu.fr/2018/06/24/5-15s-dns-lookups-on-kubernetes/">delves deep into an obscure DNS resolution issue</a> that was introducing seemingly-erratic delays with DNS lookups. Quentin&rsquo;s post is very detailed, and has lots of good information.</li>
+<li>Anthony Burke has some information on <a href="https://networkinferno.net/preparing-a-node-for-kubernetes-and-nsx-ncp">preparing a node for Kubernetes and the NSX NCP</a>.</li>
+<li>Benjamin Dale suggests that <a href="http://blog.eighthlayer.io/you-dont-know-junos/">you don&rsquo;t know JunOS</a>.</li>
+</ul>
+
+<h2 id="servers-hardware">Servers/Hardware</h2>
+
+<ul>
+<li>On the hardware side of things, we have James Hamilton of AWS discussing two hardware-related items coming out of AWS re:Invent 2018. First, Hamilton <a href="https://perspectives.mvdirona.com/2018/11/aws-designed-processor-graviton/">discusses the Arm-based AWS Graviton processor</a> powering the newly-announced A1 family of EC2 instances. Next, Hamilton <a href="https://perspectives.mvdirona.com/2018/11/aws-inferentia-machine-learning-processor/">tackles the need for the Inferentia machine learning processor</a> that will help reduce the computing power required for ML workloads. Both posts are a bit high-level, but a useful read nevertheless.</li>
+</ul>
+
+<h2 id="security">Security</h2>
+
+<ul>
+<li>Kirill Kuznetsov has <a href="https://evilmartians.com/chronicles/stick-with-security-yubikey-ssh-gnupg-macos">a macOS-specific write-up on using Yubikeys with GPG and SSH</a>.</li>
+<li>David Hepkin <a href="https://blogs.technet.microsoft.com/virtualization/2018/08/14/hyper-v-hyperclear/">discusses</a> the HyperClear mitigation for L1TF under Hyper-V.</li>
+<li>Kenneth Hui digs into <a href="https://cloudarchitectmusings.com/2018/12/18/using-aws-kms-custom-key-store-with-cloudhsm-to-encrypt-your-data/">using AWS KMS Custom Key Store with CloudHSM to encrypt your data</a>.</li>
+</ul>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li>Here&rsquo;s <a href="https://blog.upbound.io/introducing-crossplane-open-source-multicloud-control-plane/">another stab at a multi-cloud control plane</a>.</li>
+<li>My colleague Josh Rosso has a post up on <a href="https://joshrosso.com/posts/secure-port-k8s-cm-sched">securing communication to the Kubernetes controller manager and Kubernetes scheduler</a>. It even includes a video&mdash;nice!</li>
+<li>This is <a href="http://www.mitchyb.com/2018/05/mid-week-fun-with-draft-kubernetes-and.html">a slightly older article by Mitch Beaumont</a> that I&rsquo;ve had sitting in the hopper for a while. When I first read it, I was still (relatively) early in my Kubernetes journey, and a fair amount of what he discussed wasn&rsquo;t quick &ldquo;clicking&rdquo; in my brain (no fault of his). Now, it makes a lot more sense to me. Time and experience can make quite a difference sometimes!</li>
+<li>Weijuan Shi Davis collected some resources related to Windows containers on Kubernetes in <a href="https://blogs.technet.microsoft.com/virtualization/2018/12/15/kubecon-windows-containers-on-kubernetes-and-101-materials-for-your-holiday-reading/">this post-KubeCon post</a>.</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>Suvash Thapaliya describes a mechanism for <a href="https://suva.sh/posts/well-documented-makefiles/">building a self-documenting <code>Makefile</code></a>.</li>
+<li>In part 5 of a series on Kubernetes metrics, Bob Cotton discusses <a href="https://blog.freshtracks.io/a-deep-dive-into-kubernetes-metrics-part-5-etcd-metrics-6502693fa58">etcd metrics</a>. (This post reminds me that I need to write up the procedure I followed to get the Prometheus Operator scraping metrics from a TLS-secured etcd cluster bootstrapped using <code>kubeadm</code>.)</li>
+<li>Kyle Ruddy helps folks <a href="https://blogs.vmware.com/PowerCLI/2018/12/getting-started-dsc-for-vmware.html">get started with the Desired State Configuration Resources (DSCR) for VMware</a>, a new way of using PowerShell DSC with VMware vSphere environments.</li>
+<li>Nick Janetakis <a href="https://nickjanetakis.com/blog/conemu-vs-hyper-vs-terminus-vs-mobaxterm-terminator-vs-ubuntu-wsl">describes</a> what he finds to be&mdash;in his words&mdash;&ldquo;a really, really good terminal set up&rdquo; for WSL.</li>
+<li><a href="https://medium.com/@PaulDJohnston/lambda-layers-and-custom-runtimes-cdb4d9a848dc">This article by Paul Johnston</a> provided (for me, anyway) a very usable and understandable explanation of Lambda Layers and custom runtimes for Lambda.</li>
+<li>Mikhail Shilkov <a href="https://hackernoon.com/making-sense-of-azure-durable-functions-645ecb3c1d58">provides a great overview</a> of Azure Durable Functions and how they fit into the bigger picture of microservices architectures, serverless platforms, and event-driven models.</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<ul>
+<li>Nilesh Jayanandana shares some information on <a href="https://medium.com/platformer-blog/nfs-persistent-volumes-with-kubernetes-a-case-study-ce1ed6e2c266">a case study for NFS with Kubernetes</a> (via GKE).</li>
+<li>Stephen Foskett explains <a href="https://blog.fosketts.net/2017/12/11/add-mirror-existing-zfs-drive/">how to add a mirror to an existing ZFS drive</a>.</li>
+</ul>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<ul>
+<li>William Lam provides <a href="https://www.virtuallyghetto.com/2018/12/learning-more-about-the-nitro-platform-which-will-power-vmware-cloud-on-aws-outposts.html">some resources to learning more about the AWS Nitro platform</a>. There are some good links here to video recordings of re:Invent sessions, so go install <code>youtube-dl</code> if you haven&rsquo;t already and download those videos for offline viewing!</li>
+<li>Dave Taylor provides s<a href="https://www.askdavetaylor.com/how-to-configure-vmware-fusion-for-linux-os-usage/">ome tips for configuring VMware Fusion for Linux usage</a>. Personally, I say just switch to Linux full-time, but hey not everyone is down for that.</li>
+</ul>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<ul>
+<li>Via the AWS News blog, Michael Wittig shares some information on <a href="https://aws.amazon.com/blogs/aws/how-to-become-an-aws-expert/">how to become an AWS expert</a>. While the article is specific to AWS (a useful skill to have), the tips that he shares can be equally applicable in learning other technology areas as well.</li>
+<li>Emily Ludolph shares <a href="https://99u.adobe.com/articles/60545/from-checking-your-ego-to-making-meetings-less-scary-for-introverts-99us-10-best-ideas-for-leaders">some ideas for leaders</a>. While this originates in the &ldquo;creative&rdquo; industry, the ideas shared here are, I think, equally applicable in other industries.</li>
+</ul>
+
+<p>That&rsquo;s it for the Technology Short Take series in 2018! Look for the next one in early 2019. Until then (or even after then), feel free <a href="https://twitter.com/scott_lowe">to hit me on Twitter</a> if you have any questions, comments, or suggestions for improvement. Have a great remainder of 2018, folks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/9IPEwD7QMEE" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/9IPEwD7QMEE/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.neuesvonfraumeyer.de/" target="_blank">Neues von Frau Meyer</a>
+		</div>
+		<div>
+			<h3>Laub - Ein Herbsttext</h3>
+		</div>
+		<div class="collectiontext">
+<!--				SyndContentImpl.mode=null
+SyndContentImpl.type=html
+SyndContentImpl.interface=interface com.rometools.rome.feed.synd.SyndContent
+SyndContentImpl.value=<span style="font-family: &quot;arial&quot;;"><em>Mein Beitrag zum Kurzgeschichten Wettbewerb der Mayerschen Buchhandlung Friedrichstraße.</em></span><br /><em><span style="font-family: &quot;arial&quot;;">Thema HERBST </span></em><br /><em><span style="font-family: &quot;arial&quot;;">Vorgabe: Maximal 200 Wörter</span></em><br /><span style="font-family: &quot;arial&quot;; font-size: large;"><br /></span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Laub</span><br /><span style="font-family: &quot;arial&quot;; font-size: large;"><br /></span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Sie haben ihn gefunden.</span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Schräg gegenüber, vor dem gelben Haus mit Vorgarten, stehen Polizei und ein Notarztwagen. Auf dem feuchten Kopfsteinpflaster zucken die Blaulichter.</span><br /><span style="font-family: &quot;arial&quot;; font-size: large;"><br /></span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Der Sakowski zuckt nicht mehr. Er ist tot. </span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Durch mein Küchenfenster kann ich sie alle sehen.</span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Polizisten, Sanitäter, eine Ärztin, die mit dem Kopf schüttelt.</span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">"Da kann man nichts mehr machen", wird sie sagen. Die Frau vom Sakowski geht in die Knie und heult. </span><br /><span style="font-family: &quot;arial&quot;; font-size: large;"><br /></span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Ich nehme einen Schluck von meinem Kaffee und lehne meine Stirn gegen die Scheibe. Ein BMW fährt vor. Zwei Männer steigen aus, beide tragen Trenchcoats. </span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Sie unterhalten sich mit einem Polizisten und drehen sich dann beide um. Gucken genau in meine Richtung. Sofort husche ich zur Seite. Sie sollen mich nicht sehen. Ich setze mich auf einen Küchenstuhl und nehme mir einen von den Schokokeksen. </span><br /><span style="font-family: &quot;arial&quot;; font-size: large;"><br /></span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Jeden verdammten Tag hat er das Laub vom Bürgersteig vor seinem Haus weggeblasen mit diesem dröhnenden Ungetüm. Kleine Wirbelstürme goldener Blätter landeten am Straßenrand. Der Wind wehte sie wieder zurück. </span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Meine Migräne quälte mich. Sakowski schmiss den Laubbläser an. </span><br /><span style="font-family: &quot;arial&quot;; font-size: large;"><br /></span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Wir hatten Streit deswegen. Seit Wochen. </span><br /><span style="font-family: &quot;arial&quot;; font-size: large;">Seit eben ist es ruhig.</span><br /><span style="font-family: &quot;arial&quot;; font-size: large;"><br /></span>
+
+ -->
+		</div>
+		<div class="collectionhref">
+		<a href="http://www.neuesvonfraumeyer.de/2018/12/ein-herbsttext-mit-maximal-200-wortern.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="http://www.evanmiller.org/" target="_blank">Evan Miller’s News</a>
+		</div>
+		<div>
+			<h3>Things That Bother Me About macOS</h3>
+		</div>
+		<div class="collectiontext">
+			In honor of the upcoming Festivus, I am sharing some Mac-related grievances: <a href="//www.evanmiller.org/things-that-bother-me-about-macos.html">Things That Bother Me About macOS</a>
+		</div>
+		<div class="collectionhref">
+		<a href="http://www.evanmiller.org/things-that-bother-me-about-macos.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Running Fedora on my Mac Pro</h3>
+		</div>
+		<div class="collectiontext">
+			<p>I&rsquo;ve been working on migrating off macOS for a couple of years (10+ years on a single OS isn&rsquo;t undone quickly or easily). I won&rsquo;t go into all the gory details here; see <a href="https://blog.scottlowe.org/2012/11/30/why-i-might-leave-os-x/">this post for some background</a> and then see <a href="https://blog.scottlowe.org/2017/10/25/linux-migration-wrap-up/">this update from last October</a> that summarized my previous efforts to migrate to Linux (<a href="https://getfedora.org/">Fedora</a>, specifically) as my primary desktop operating system. (What I <em>haven&rsquo;t</em> blogged about is the success I had switching to Fedora full-time when I joined Heptio.) I took another big step forward in my efforts this past week, when I rebuilt my 2011-era Mac Pro workstation to run Fedora.</p>
+
+<p>When I mentioned this on Twitter, a few people asked the question every parent dreads hearing: &ldquo;Why?&rdquo; (If you&rsquo;ve been a parent for more than a couple years you&rsquo;ll understand this.) The motivation for using Linux is something I&rsquo;ve already discussed. As for the hardware, it&rsquo;s simple: the hardware for the Mac Pro is very good (see the base specs <a href="https://everymac.com/systems/apple/mac_pro/specs/mac-pro-eight-core-2.4-mid-2010-westmere-specs.html">here</a>), so why <em>not</em> re-use the hardware for use with Linux? I mean, if I&rsquo;ve already decided on running Linux (which I have), then why spend money on new hardware when the hardware I have meets my requirements?</p>
+
+<p>Anyway, once I&rsquo;d migrated all my data off&mdash;which itself was no small feat, and perhaps worthy of a separate blog post of its own&mdash;I installed Fedora 28 via a USB drive I created using Fedora Media Writer on my MacBook Pro (that&rsquo;s right, I haven&rsquo;t <em>completely</em> eradicated macOS just yet). The installation seemed to go fine, but in reality I encountered a number of issues after it completed:</p>
+
+<ul>
+<li>The installer didn&rsquo;t set the hostname (I admit that I may have missed this during the installation process).</li>
+<li>I would get <code>sss_cache</code> messages along the lines of <code>confdb_get_domains error</code> anytime I tried to manipulate users or groups; turns out the system&rsquo;s <code>sssd</code> configuration was mangled (in comparison to my laptop&rsquo;s configuration) with missing services, services not enabled or running, etc.</li>
+<li>As of Fedora 28, the installer no longer creates an account during the installation. Unfortunately, the user creation process post-installation doesn&rsquo;t expose all the options, so I couldn&rsquo;t set a consistent UID and GID across my Fedora systems. (This probably doesn&rsquo;t matter in the long run, but I still prefer to keep them consistent.)</li>
+</ul>
+
+<p>After fighting with the Samsung SSD I was using as my boot drive in the Mac Pro (and finally accepting that there would be an additional EFI System Partition on the drive that would apparently go unused), I re-installed Fedora, this time using Fedora 27 bootable media (again, created using Fedora Media Writer). This time the installation was <em>much</em> smoother, and the resulting system build was <em>much</em> more stable. After a not-so-quick <code>dnf update</code> followed by an even-longer <code>dnf system-upgrade</code> (to upgrade to Fedora 28), I was back to Fedora 28, but this time without any of the issues I&rsquo;d experienced earlier. I don&rsquo;t know the source of the problems with the original F28 installation, but re-installing using F27 and then upgrading to F28 worked better than a fresh F28 installation. Go figure!</p>
+
+<p>Overall, most everything works as expected. There are a few oddities:</p>
+
+<ul>
+<li>I&rsquo;m using the Mac Pro&rsquo;s digital audio out (S/PDIF) to connect to a Samsung sound bar under the monitors. I guess Fedora doesn&rsquo;t send enough information to the sound bar, because it will turn itself off after a short after no sound being sent to it. It turns itself back on when the system sends sound, so it&rsquo;s more of an annoyance than anything else.</li>
+<li>The built-in Wi-Fi adapter doesn&rsquo;t work (but this is a known issue with most Apple hardware, and can be resolved if needed), but I don&rsquo;t need it so it doesn&rsquo;t really matter.</li>
+<li>I&rsquo;m not using an Apple keyboard so I didn&rsquo;t have an Eject key on the keyboard to open/close the Mac Pro&rsquo;s optical drive (which <em>is</em> recognized by Fedora). CLI to the rescue&mdash;just use <code>eject -T /dev/sr0</code> to toggle the drive&rsquo;s open/close status.</li>
+</ul>
+
+<p>Otherwise, Fedora seems to run just fine. I am seeing some kernel-related errors on boot that I need to track down, but those errors don&rsquo;t seem to be translating into issues actually using the system (I&rsquo;m writing this blog post on the Fedora-powered Mac Pro right now).</p>
+
+<p>As a bonus, the Micron p420m PCI SSD drive that wasn&rsquo;t recognized under macOS works perfectly under Fedora. Now to get Libvirt configured to use that for all VM-related storage&hellip;</p>
+
+<p>If you have any questions or want more information, feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/oZQ1T2DlRGA" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/oZQ1T2DlRGA/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>KubeCon 2018 Day 2 Keynote</h3>
 		</div>
 		<div class="collectiontext">
@@ -289,167 +442,6 @@ display('news.html')
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/sGRsFXiU-Fw/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 107</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take #107! In response to my request for feedback in the last Technology Short Take, a few readers responded in favor of a more regular publication schedule even if that means the articles are shorter in length. Thus, this Tech Short Take may be a bit shorter than usual, but hopefully you&rsquo;ll still find something useful.</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Matt Oswalt <a href="https://networkreliability.engineering/2018/11/how-nre-labs-implements-curriculum-as-code/">shares some details</a> on how NRE Labs implements &ldquo;curriculum-as-code.&rdquo;</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<ul>
-<li>Christian Kellner <a href="https://christian.kellner.me/2018/10/24/thunderbolt-port-guide-t480s-force-power/">provides</a> a brief reminder that not all USB-C ports are Thunderbolt ports, and updates everyone on the status of <code>bolt</code> (Linux utility for working with Thunderbolt ports and peripherals).</li>
-</ul>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>Troy Hunt has a good article on <a href="https://www.troyhunt.com/beyond-passwords-2fa-u2f-and-google-advanced-protection/">security measures other than just passwords</a>, explaining some of the differences between multi-factor authentication and multi-step authentication (for example). Highly recommended reading.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>Another post from Matt Oswalt, also related to the NRE Labs post I mentioned above, discusses <a href="https://keepingitclassless.net/2018/11/troubleshooting-nginx-ingress-rewrites-in-kubernetes/">troubleshooting NGINX Ingress rewrites in Kubernetes</a>.</li>
-<li>Arush Salil reviews <a href="https://blog.kubernauts.io/ingress-on-kubernetes-with-cert-manager-ad7d413d76f0">using ingress on Kubernetes with <code>cert-manager</code></a>.</li>
-<li>Michael Hausenblas has an informative article with <a href="https://dev.to/mhausenblas/on-some-defaults-in-kubernetes-rbac-270l">information on Kubernetes RBAC defaults</a>.</li>
-<li>This post is a couple months old (a lifetime in the cloud-native world): <a href="https://aws.amazon.com/blogs/opensource/aws-service-operator-kubernetes-available/">the AWS Service Operator</a> enables users/developers to consume a select set of AWS services via Kubernetes YAML manifests.</li>
-<li>And speaking of YAML manifests, I saw <a href="https://github.com/google/kasane">this tool</a> mentioned somewhere among my various feeds. It&rsquo;s described as a &ldquo;layering tool&rdquo; that allows users to extend officially published YAML documents with local extensions/additions.</li>
-<li>There&rsquo;s some good stuff in Michael Hausenblas&rsquo; <a href="https://tinyletter.com/mhausenblas/letters/appops-reloaded-102">AppOps Reloaded #102</a> (as always).</li>
-<li><a href="https://aws.amazon.com/outposts/">AWS Outposts</a> is Amazon&rsquo;s move into the hybrid cloud market. It will be available next year, and will come in a &ldquo;native AWS&rdquo; flavor as well as a VMware flavor (see <a href="https://cloud.vmware.com/community/2018/11/28/vmware-cloud-aws-outposts-cloud-managed-sddc-data-center/">William Lam&rsquo;s post</a> for more details on the VMware flavor). This is a pretty significant market move, and I believe this move impact the technology industry in a variety of ways. For those of us in the IT field, we are definitely living in interesting times.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>Konstantin Suvorov helps bring <a href="https://ansibledaily.com/add-beauty-to-long-jinja2-chains/">readability to long Jinja2 chains</a> via YAML block scalar syntax. A simple tip, yes, but useful!</li>
-<li>Major Hayden provides some ways to <a href="https://major.io/2016/05/05/preventing-ubuntu-16-04-starting-daemons-package-installed/">prevent Ubuntu 16.04 from starting daemons when a package is installed</a>.</li>
-<li>Kevin Fleming discusses the idea of <a href="https://opensource.com/article/18/11/systemd-nspawn-system-recovery">using a systemd-nspawn container to help with system recovery</a>. I&rsquo;ve been interested in the use of systemd-nspawn for a while, but this is an interesting use case I hadn&rsquo;t considered.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>J Metz has launched his own, storage-focused &ldquo;Short Takes&rdquo; series; the first of these is found <a href="https://jmetz.com/2018/11/storage-short-take-1/">here</a>.</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>The big news in virtualization recently was <a href="https://aws.amazon.com/blogs/opensource/firecracker-open-source-secure-fast-microvm-serverless/">AWS&rsquo; announcement of Firecracker</a>, a lightweight VMM (virtual machine monitor) targeted at creating &ldquo;microVMs&rdquo; that are ideally suited for serverless environments. Apparently, Firecracker is part of the technology stack behind Lambda and Fargate. More information is also available via <a href="https://aws.amazon.com/blogs/aws/firecracker-lightweight-virtualization-for-serverless-computing/">Jeff Barr&rsquo;s blog post</a>, the <a href="https://firecracker-microvm.github.io/">Firecracker web site</a>, and the <a href="https://github.com/firecracker-microvm/firecracker">Firecracker GitHub repository</a>.</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>This article by Phil Estes on <a href="https://opensource.com/article/18/11/learning-golang">4 tips for learning Golang</a> may prove useful to folks who, like myself, are interested in becoming more fluent in Go.</li>
-</ul>
-
-<p>In the immortal words of Porky Pig, th-th-that&rsquo;s all folks! As always, feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> with your feedback, suggestions, or corrections. Thanks for reading!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/h9cAsK3Yc0E" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/h9cAsK3Yc0E/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Supercharging my CLI</h3>
-		</div>
-		<div class="collectiontext">
-			<p>I spent a <em>lot</em> of time in the terminal. I can&rsquo;t really explain why; for many things it just feels faster and more comfortable to do them via the command line interface (CLI) instead of via a graphical point-and-click interface. (I&rsquo;m not totally against GUIs, for some tasks they&rsquo;re far easier.) As a result, when I find tools that make my CLI experience faster/easier/more powerful, that&rsquo;s a big boon. Over the last few months, I&rsquo;ve added some tools to my <a href="https://getfedora.org">Fedora</a> laptop that have really added some power and flexibility to my CLI environment. In this post, I want to share some details on these tools and how I&rsquo;m using them.</p>
-
-<p>The tools I&rsquo;ve adopted and that I&rsquo;ll discuss in this post are:</p>
-
-<ul>
-<li><code>powerline-go</code> for an informative CLI prompt</li>
-<li><code>rg</code> for faster content searches</li>
-<li><code>fd</code> for faster filename searches</li>
-<li><code>fzf</code> for fuzzy command history access and faster directory navigation</li>
-</ul>
-
-<p>Let&rsquo;s take a closer look at each of these.</p>
-
-<h2 id="a-more-informative-shell-prompt">A More Informative Shell Prompt</h2>
-
-<p>There&rsquo;s been quite a few articles written about <a href="https://powerline.readthedocs.io/en/latest/">powerline</a>, a Python-based utility that provides a much more informative shell prompt. Instead of going down the traditional powerline route, I found <a href="https://github.com/justjanne/powerline-go">powerline-go</a>&mdash;a small, statically linked Go binary that provides similar functionality.</p>
-
-<p>Now, my shell prompt automatically displays things like:</p>
-
-<ul>
-<li>The currently checked-out branch in a Git repository and indicators for untracked/modified files in the repository</li>
-<li>The name of the currently-active Python virtual environment</li>
-<li>The name of the Kubernetes cluster against which <code>kubectl</code> will operate (and the namespace, if one is selected)</li>
-<li>And more mundane information like the username, hostname, and current working directory</li>
-</ul>
-
-<p>I&rsquo;ve found powerline-go to be very easy to use and very easy to configure. If you&rsquo;re looking for a way to make your shell prompt a bit more interactive and a bit more informative, powerline-go is definitely worth a look.</p>
-
-<h2 id="faster-content-searches-with-ripgrep">Faster Content Searches with Ripgrep</h2>
-
-<p><a href="https://github.com/BurntSushi/ripgrep">Ripgrep</a>, or <code>rg</code>, is an insanely fast search tool that recursively searches a path for a regex (regular expression) pattern. Ripgrep is faster than most other search tools, ignores binary files by default, and honors <code>.gitignore</code> files (which can be both handy and annoying at times). Ripgrep also offers pretty impressive platform support, with releases available for virtually all major Linux distributions, various BSDs, Windows, and macOS.</p>
-
-<p>This is probably subjective, but I find myself now more likely to use <code>rg</code> to find a file that I need than I would have before with some other search tool. When I combine it with other tools, it&rsquo;s really become quite handy. That being said, the &ldquo;regular&rdquo; <code>grep</code> utility may be sufficient for some users&rsquo; needs.</p>
-
-<h2 id="faster-filename-searches-with-fd">Faster Filename Searches with <code>fd</code></h2>
-
-<p><a href="https://github.com/sharkdp/fd"><code>fd</code></a> is a super-fast alternative to the traditional <code>find</code> command. It offers a simpler syntax (just <code>fd &lt;pattern&gt;</code> and you&rsquo;re off to the races) and honors <code>.gitignore</code> files by default (although there is an option to not honor them and include hidden/ignored items). You can use it to find only files or only directories in a particular path. (Did I mention it&rsquo;s really fast?)</p>
-
-<p>Like with <code>rg</code>, the ease of use and speed of <code>fd</code> have led me to use it more often than I would have used the traditional <code>find</code> utility. Making it more approachable to perform filename searches has, for me, made the tool more useful in the end.</p>
-
-<h2 id="fuzzy-searching-with-fzf">Fuzzy Searching with <code>fzf</code></h2>
-
-<p>This tool has changed my life.</p>
-
-<p>OK, that&rsquo;s probably hyperbole, but <a href="https://github.com/junegunn/fzf"><code>fzf</code></a> is a truly amazing and useful tool. <code>fzf</code> describes itself as a &ldquo;command-line fuzzy finder,&rdquo; and it can be used to perform fuzzy searching in any list of things&mdash;filenames, directories, processes, URLs, whatever. Like <code>rg</code> and <code>fd</code>, it&rsquo;s super-fast.</p>
-
-<p>Out of the box (so to speak), <code>fzf</code> enhances the CLI in a couple different ways:</p>
-
-<ul>
-<li>It replaces the default Ctrl-R history search with a fuzzy history search that lets me search and interactively select commands to run from the command history. (What&rsquo;s that? You didn&rsquo;t know about the Ctrl-R command history search in Bash? Your CLI experience is definitely about to change!)</li>
-<li><code>fzf</code> adds a new keybinding for Ctrl-T, which lets me interactively search for and add parameters to a command-line argument. For example, let&rsquo;s say I want to edit a file in <a href="https://code.visualstudio.com/">Visual Studio Code</a> (my current preferred text editor). I can type <code>code</code>, press Ctrl-T, then fuzzy search for the file or directory I want to open, press Enter to select it, and press Enter again to execute the command. My <code>fzf</code> configuration for the Ctrl-T functionality uses <code>fd</code> to search anywhere in my home directory, but that&rsquo;s configurable.</li>
-<li>Finally, <code>fzf</code> adds a keybinding for Alt-C, which adds the ability to use <code>fzf</code> to quickly change directories. Again, <code>fzf</code> is leveraging <code>fd</code> with a list of all the directories in my home directory, but the tool that <code>fzf</code> uses and the scope of the search are configurable.</li>
-</ul>
-
-<p>These three features alone make <code>fzf</code> so useful. But wait&mdash;there&rsquo;s more! <code>fzf</code> can also perform Bash completion for files and directories, process IDs, host names, and environment variables.</p>
-
-<p>It&rsquo;s also highly customizable; see <a href="https://github.com/junegunn/fzf">the GitHub repo</a> for more details.</p>
-
-<h2 id="combining-these-tools">Combining These Tools</h2>
-
-<p>I mentioned above that <code>fzf</code> can use <code>fd</code> for various functions (like the Alt-C and Ctrl-T functions), so you can already get an idea of how useful it can be to combine these tools with each other or with other tools.</p>
-
-<p>Here&rsquo;s a couple examples:</p>
-
-<ul>
-<li>Let&rsquo;s say I know I have a file containing the word &ldquo;Kubernetes&rdquo; in my home directory, and I remember part of the filename but not the full filename. No worries, <code>rg</code> and <code>fzf</code> to the rescue! From my home directory, I can run <code>rg -il kubernetes . | fzf | xargs code</code>. <code>rg</code> will find all the matching files, pass them to <code>fzf</code> for interactive fuzzy searching, and then pass the one I select to <code>code</code> for editing.</li>
-<li>The <code>fzf</code> wiki has an example of using <code>fzf</code> for fuzzy searching of Chrome browsing history; I adapted this for Firefox. (See the <code>fwh</code> file in <a href="https://github.com/scottslowe/scripts">my &ldquo;scripts&rdquo; repository</a>. I&rsquo;m still fine-tuning it for the best results.) There&rsquo;s also a <em>ton</em> of other examples in the wiki, so have a look there.</li>
-</ul>
-
-<p>I&rsquo;m also working on a command/script that will use both <code>rg</code> <em>and</em> <code>fd</code> for a combined filename/content search that passes the unique results back to <code>fzf</code> for selecting a file to edit. I haven&rsquo;t quite gotten that one worked out just yet.</p>
-
-<h2 id="other-tools">Other Tools</h2>
-
-<p>Other tools I&rsquo;m currently testing (but haven&rsquo;t necessarily fully adopted as core part of my workflow) are <a href="https://github.com/knqyf263/pet">pet</a> (described as a command-line snippet manager) and <a href="https://github.com/mattn/memo">memo</a> (a tool for creating/editing/finding &ldquo;memos&rdquo; or short notes). Both of these tools can also leverage <code>fzf</code> for finding information, so that brings a bit of consistency to my toolset (fuzzy searching for the win!).</p>
-
-<p>Anyway, I hope you found something useful here, and feel free to <a href="https://twitter.com/scott_lowe">hit me up on Twitter</a> if you have questions or suggestions for other tools I should consider. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/lUWIunRgcGM" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/lUWIunRgcGM/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -457,35 +449,33 @@ display('news.html')
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="bifurcation_diagramme_gnuplot.html">
+<div class="date">22.12.2018</div>
+<h3>Bifurcation Diagramme und Gnuplot</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Ich beschäftige mich ja gerade wieder mehr mit Chaostheorie und nichtlinearen Differentialgleichungssystemen.
+Viele der Visualisierungen, die man hierzu auf dieser Seite finden kann, wurden mit Java3D odr Gnuplot erstellt.
+Für die Untersuchung von Bifurcation Diagrammen wollte ich etwas neues versuchen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="weihnachts_flashmobs.html">
+<div class="date">22.12.2018</div>
+<h3>Weihnachts-Flashmobs</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>und etwas Weihnachtliches...
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="aus_fontchooser_gelernt.html">
 <div class="date">15.12.2018</div>
 <h3>Aus FontChooser gelernt</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Java selbst bietet keine Gui-Komponente zur Auswahl einer Schriftart an. Daher hatte ich vor einigen Jahren - wie so viele
 andere auch - eine eigene Komponente dafür erstellt. Ich wollte sie etwas aktualisieren und aufpeppen und lernte
 dabei eine interessante Lektion...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="links_influxdb__grafana.html">
-<div class="date">15.12.2018</div>
-<h3>Links zu InfluxDB, Grafana</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nach meinen ersten Versuchen mit InfluxDB und grafana habe ich mir hier mal eine Liste
-mit (für mich beim Einstieg) hilfreichen Links abgelegt
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="oled_status_display_time_server.html">
-<div class="date">09.12.2018</div>
-<h3>Oled Status Display für Time-Server</h3>
-<div class="abstract">
-<p>Nachdem meine Adapterschaltung für den älteren GPS-Empfänger E406A auf einer
-professionell gefertigten Leiterplatte
-bestückt war und funktionierte, fand ich hinten in meiner Bastelkiste
-ein I2C-Oled-Display.
 </p></div>   </a>
 </li>
 </ul>
@@ -607,7 +597,7 @@ Geo
 <h3>
 GUI
 </h3>
-	<span class="nav-item-counter">50</span>
+	<span class="nav-item-counter">51</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um graphische Benutzerschnittstellen</p>
@@ -633,7 +623,7 @@ Hardware
 <h3>
 Java
 </h3>
-	<span class="nav-item-counter">214</span>
+	<span class="nav-item-counter">215</span>
 </header>
 <div class="nav-item-body">
 <p>Hauptsächlich Desktop Themen und Java SE</p>
@@ -646,7 +636,7 @@ Java
 <h3>
 Komponenten
 </h3>
-	<span class="nav-item-counter">149</span>
+	<span class="nav-item-counter">150</span>
 </header>
 <div class="nav-item-body">
 <p>Software-Komponenten</p>
@@ -698,7 +688,7 @@ Markup
 <h3>
 Music
 </h3>
-	<span class="nav-item-counter">20</span>
+	<span class="nav-item-counter">21</span>
 </header>
 <div class="nav-item-body">
 <p>Musik, die mir gefällt</p>
@@ -711,7 +701,7 @@ Music
 <h3>
 Numerik
 </h3>
-	<span class="nav-item-counter">10</span>
+	<span class="nav-item-counter">11</span>
 </header>
 <div class="nav-item-body">
 <p>Numerische Mathematik in Computern</p>
