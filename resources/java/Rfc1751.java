@@ -323,7 +323,7 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 			{
 				if (dictionary[i].equals("USE"))
 				{
-					de.elbosso.util.Utilities.sopln(i + " " + java.lang.Integer.toHexString(i));
+					de.elbosso.util.UtilitiesBase.sopln(i + " " + java.lang.Integer.toHexString(i));
 					break;
 				}
 			}*/
