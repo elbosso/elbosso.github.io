@@ -1,5 +1,7 @@
 package de.elbosso.scratch.misc;
 
+import de.elbosso.util.Utilities;
+
 /**
  * Two part licence here: The dictionary is Copyright (c) 2011 IETF Trust while the implementation is
  * only inspired by the IETF implementation given in the RFC and realy concocted by me - therefore has a slightly different licence
@@ -247,7 +249,7 @@ public class Rfc1751
 					"YEAR", "YELL", "YOGA", "YOKE"
 			};
 /*
-Copyright (c) 2012-2018.
+Copyright (c) 2012-2019.
 
 Juergen Key. Alle Rechte vorbehalten.
 
@@ -341,22 +343,22 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 		long l = bs.toLongArray()[0];
 
 		java.lang.String raw = "CCAC2AED591056BE";
-		byte[] bytes = de.elbosso.util.Utilities.fromHex(raw);
+		byte[] bytes = Utilities.fromHex(raw);
 		java.lang.String s = translate(bytes);
 		raw = "4F90FD441C534766";
-		bytes = de.elbosso.util.Utilities.fromHex(raw);
+		bytes = Utilities.fromHex(raw);
 		s += translate(bytes);
-		de.elbosso.util.Utilities.sopln(s);
+		Utilities.sopln(s);
 		raw = "EFF81F9BFBC65350";
-		bytes = de.elbosso.util.Utilities.fromHex(raw);
+		bytes = Utilities.fromHex(raw);
 		s = translate(bytes);
 		raw = "920CDD7416DE8009";
-		bytes = de.elbosso.util.Utilities.fromHex(raw);
+		bytes = Utilities.fromHex(raw);
 		s += translate(bytes);
-		de.elbosso.util.Utilities.sopln(s);
+		Utilities.sopln(s);
 		raw = "EB33F77EE73D4053";
-		bytes = de.elbosso.util.Utilities.fromHex(raw);
+		bytes = Utilities.fromHex(raw);
 		s = translate(bytes);
-		de.elbosso.util.Utilities.sopln(s);
+		Utilities.sopln(s);
 	}
 }

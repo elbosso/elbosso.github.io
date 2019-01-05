@@ -1,6 +1,6 @@
 package de.elbosso.ui.components;
 /*
-Copyright (c) 2013-2018.
+Copyright (c) 2013-2019.
 
 Juergen Key. Alle Rechte vorbehalten.
 
@@ -116,7 +116,7 @@ public class NixieNumberDisplay extends NumberDisplay
 	}
 	public static void main(java.lang.String[] args) throws InterruptedException
 	{
-		java.util.Random rand=new java.util.Random(System.currentTimeMillis());
+//		java.util.Random rand=new java.util.Random(System.currentTimeMillis());
 		javax.swing.JFrame f=new javax.swing.JFrame();
 		NixieNumberDisplay nixieNumberDisplay=new NixieNumberDisplay(5, .62f);
 		nixieNumberDisplay.setBackground(java.awt.Color.DARK_GRAY);

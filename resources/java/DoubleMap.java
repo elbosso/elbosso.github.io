@@ -1,5 +1,7 @@
 package de.elbosso.scratch.misc;
 
+import de.elbosso.util.Utilities;
+
 /*
 Copyright (c) 2015.
 
@@ -39,14 +41,14 @@ public class DoubleMap
 	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(DoubleMap.class);
 	public static void main(java.lang.String[] args)
 	{
-		de.elbosso.util.Utilities.sopln("huhu");
-		de.elbosso.util.Utilities.configureBasicStdoutLogging(org.apache.log4j.Level.TRACE);
+		Utilities.sopln("huhu");
+		Utilities.configureBasicStdoutLogging(org.apache.log4j.Level.TRACE);
 		double machEps = 1.0;
 
 		do
 		{
 			machEps /= 2.0;
-			de.elbosso.util.Utilities.sopln(machEps);
+			Utilities.sopln(machEps);
 		}
 		while ((double) (1.0 + (machEps / 2.0)) != 1.0);
 		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("machine Epsilon (double)= "+machEps);

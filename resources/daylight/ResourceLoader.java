@@ -1,14 +1,14 @@
 package de.netsysit.util;
 //$Id$
 
+import de.elbosso.util.Utilities;
+
 import javax.accessibility.AccessibleContext;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.beans.Transient;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*#LICENCE#*/
 public class ResourceLoader extends java.lang.Object
@@ -407,18 +407,31 @@ public class ResourceLoader extends java.lang.Object
 								ps = size.getPixelSize();
 							else
 								ps = size.getSmallerPixelSize();
-						}
-						if (ps != null)
-						{
-							for (int size : ps)
+							if (ps != null)
 							{
-								replacement = prefix + "_" + size + suffix + ".png";
+								for (int sizepx : ps)
+								{
+									replacement = prefix + "_" + java.lang.Integer.toString(sizepx) + suffix + ".png";
+									if (replacement.startsWith("!"))
+										replacement = replacement.substring(1);
+									rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+									if (rv != null)
+										break;
+
+								}
+								if(rv==null)
+								{
+									replacement = prefix + "_" + java.lang.Integer.toString(osize) + suffix + ".png";
+									if (replacement.startsWith("!"))
+										replacement = replacement.substring(1);
+									rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+								}
+							}
+							else
+							{
 								if (replacement.startsWith("!"))
 									replacement = replacement.substring(1);
 								rv = ResourceLoader.class.getClassLoader().getResource(replacement);
-								if (rv != null)
-									break;
-
 							}
 						}
 						else
@@ -479,7 +492,7 @@ public class ResourceLoader extends java.lang.Object
 	}
 	public static void main(java.lang.String[] args)
 	{
-		de.elbosso.util.Utilities.configureBasicStdoutLogging(org.apache.log4j.Level.ALL);
+		Utilities.configureBasicStdoutLogging(org.apache.log4j.Level.ALL);
 		de.netsysit.util.ResourceLoader.setSize(IconSize.small);
 		javax.swing.ImageIcon i1=new javax.swing.ImageIcon(de.netsysit.util.ResourceLoader.getImgResource("de/netsysit/ressources/gfx/ca/Makro expandieren_48.png"));
 		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012-2018.
+Copyright (c) 2012-2019.
 
 Juergen Key. Alle Rechte vorbehalten.
 
@@ -61,7 +61,7 @@ public class ModelPojoMBeanCreator extends java.lang.Object
 
 		java.lang.reflect.Method[] methods = resource.getClass().getMethods();
 
-		java.util.List<java.beans.PropertyDescriptor> properties = new java.util.ArrayList();
+//		java.util.List<java.beans.PropertyDescriptor> properties = new java.util.ArrayList();
 		java.util.List<java.beans.MethodDescriptor> operations = new java.util.ArrayList();
 //		java.util.List<java.lang.reflect.Method> getters = new java.util.ArrayList<java.lang.reflect.Method>();
 //		java.util.Map<String, java.lang.reflect.Method> setters = new java.util.LinkedHashMap<String, java.lang.reflect.Method>();
@@ -111,14 +111,35 @@ public class ModelPojoMBeanCreator extends java.lang.Object
 		java.beans.MethodDescriptor[] mds=bi.getMethodDescriptors();
 		for (MethodDescriptor md : mds)
 		{
+			boolean found=false;
+			for(java.lang.reflect.Method m:getters)
+			{
+				if(md.getMethod()==m)
+				{
+					found=true;
+					break;
+				}
+			}
+			if(found==false)
+			{
+				for(java.lang.reflect.Method m:setters.values())
+				{
+					if(md.getMethod()==m)
+					{
+						found=true;
+						break;
+					}
+				}
+			}
+			if(found==false)
 			operations.add(md);
 		}
 //		for()
 
 		javax.management.modelmbean.ModelMBeanAttributeInfo[] attrs
 				= attrinfo.toArray(new javax.management.modelmbean.ModelMBeanAttributeInfo[attrinfo.size()]);
-		operations.removeAll(getters);
-		operations.removeAll(setters.values());
+//		operations.removeAll(getters);
+//		operations.removeAll(setters.values());
 		int opcount = operations.size()+getters.size()+setters.size();
 		javax.management.modelmbean.ModelMBeanOperationInfo[] ops
 				= new javax.management.modelmbean.ModelMBeanOperationInfo[opcount];

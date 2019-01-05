@@ -34,6 +34,7 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.elbosso.scratch.util;
 
+import de.elbosso.util.Utilities;
 import de.netsysit.util.StopWatch;
 import org.apache.log4j.Level;
 
@@ -127,7 +128,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 	
 	public static void main(java.lang.String[] args)
 	{
-		de.elbosso.util.Utilities.configureBasicStdoutLogging(Level.TRACE);
+		Utilities.configureBasicStdoutLogging(Level.TRACE);
 		ByteCodeAnalysisCast bcac=new ByteCodeAnalysisCast();
 //		for(int i=0;i<10;++i)
 //		{

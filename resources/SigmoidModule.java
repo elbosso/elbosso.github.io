@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012-2018.
+Copyright (c) 2012-2019.
 
 Juergen Key. Alle Rechte vorbehalten.
 
@@ -34,7 +34,7 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.elbosso.dataflowframework.modules.convert.algorithms.functions;
 
-@javax.annotation.Generated(value="de.elbosso.dataflowframework.processors.OneDFunctionProcessor", date="2018-12-29T18:00:49.800Z")
+@javax.annotation.Generated(value="de.elbosso.dataflowframework.processors.OneDFunctionProcessor", date="2019-01-01T12:48:01.528Z")
 public class SigmoidModule extends de.netsysit.dataflowframework.modules.ThreadingBeanContextChildModuleBase
 {
 	static

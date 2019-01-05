@@ -7,7 +7,7 @@
 //gcc -shared -o libebunity.so UnityLauncher.o -lunity -lunity-misc -lunity-extras -lunity-core-6.0
 //cp  libebunity.so /tmp/dll/
 /*
-Copyright (c) 2012-2018.
+Copyright (c) 2012-2019.
 
 Juergen Key. Alle Rechte vorbehalten.
 

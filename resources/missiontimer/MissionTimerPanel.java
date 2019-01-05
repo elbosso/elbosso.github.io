@@ -1,7 +1,7 @@
 package de.elbosso.ui.components;
 /*
  
-Copyright (c) 2013-2018.
+Copyright (c) 2013-2019.
 
 Juergen Key. Alle Rechte vorbehalten.
 

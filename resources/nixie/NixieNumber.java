@@ -7,7 +7,7 @@ import java.awt.*;
  Die untenstehende Lizenz berührt nicht die Rechte des Autors der zugrundeliegenden Software
  http://www.jug-muenster.de/swing-nixieclock-321/
   
-Copyright (c) 2013-2018.
+Copyright (c) 2013-2019.
 
 Juergen Key. Alle Rechte vorbehalten.
 
