@@ -114,6 +114,124 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>On Thinking About Infrastructure as Code</h3>
+		</div>
+		<div class="collectiontext">
+			<p>I just finished reading Cindy Sridharan&rsquo;s excellent post titled &ldquo;<a href="https://medium.com/@copyconstruct/effective-mental-models-for-code-and-systems-7c55918f1b3e">Effective Mental Models for Code and Systems</a>,&rdquo; and some of the points Sridharan makes immediately jumped out to me&mdash;not for &ldquo;traditional&rdquo; code development, but for the development of infrastructure as code. Take a few minutes to go read the post&mdash;seriously, it&rsquo;s <em>really</em> good. Done reading it? Good, now we can proceed.</p>
+
+<p>Some of these thoughts I was going to share in a planned presentation at Interop ITX in May 2019, but since I&rsquo;m unable to speak at the conference this year due to schedule conflicts (my son&rsquo;s graduation from college and a major anniversary trip for me and Crystal), I figured now was as good a time as any, especially given the timing of Sridharan&rsquo;s post. Also, a lot of these thoughts stem from a discussion with a colleague at work, which in turn led to <a href="https://packetpushers.net/podcast/full-stack-journey-027-understanding-infrastructure-as-code-and-terraform-with-curt-micol/">this Full Stack Journey podcast on practical infrastructure as code</a>.</p>
+
+<p>Anyway, let me get back to Sridharan&rsquo;s post. One of the things that jumped out to me right away was Sridharan&rsquo;s proposed hierarchy of needs for code:</p>
+
+<p><img src="https://blog.scottlowe.org/public/img/sridharan-hierarchy-needs.png" alt="Sridharan's hierarcy of needs for code" /></p>
+
+<p>As you can see in the image (full credit for which belongs to Sridharan, as far as I know), making code <em>understandable</em> lies at the bottom of the hierarchy of needs, meaning it is the most basic necessity needed. Until this need is satisfied, you can&rsquo;t move on to the other needs. Sridharan puts it this way:</p>
+
+<blockquote>
+<p>Optimizing for understandability can result in optimizing for everything else on the hierarchy depicted above.</p>
+</blockquote>
+
+<p>Many readers have probably heard of <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">the DRY principle</a> when it comes to writing code. (DRY stands for Don&rsquo;t Repeat Yourself.) In many of the examples of infrastructure as code that I see online, the authors of these examples tend to use control structures such as Terraform&rsquo;s <code>count</code> construct when creating multiple infrastructure objects. I&rsquo;ll use some code that I wrote as an example: consider the use of a module to create a group of AWS instances as illustrated <a href="https://github.com/scottslowe/learning-tools/blob/master/terraform/aws/ic-module/main.tf">here</a>. Yes, there is very little repetition in this code. The code is modular and re-usable. But is it <em>understandable</em>? Have I optimized for understandability, and (by extension) all the other needs listed in Sridharan&rsquo;s hierarchy of needs for code?</p>
+
+<p>Consider this as well: have I <em>really</em> violated the DRY principle if I were to explicitly spell out, with proper parameterization, the creation of each infrastructure object instead of using a <code>count</code> control structure or a module as a layer of abstraction? Is it not still true that there remains only &ldquo;a single, unambiguous, authoritative representation&rdquo; of each infrastructure object?</p>
+
+<p>It seems to me that the latter approach&mdash;explicitly spelling out the creation of infrastructure objects in your infrastructure as code&mdash;may be a bit more verbose, but eminently more understandable and does not violate the DRY principle. It may not be as elegant, but as individuals creating infrastructure as code artifacts should be we optimizing for elegance, or optimizing for understandability?</p>
+
+<p>Sridharan also talks about being explicit:</p>
+
+<blockquote>
+<p>&hellip;it is worth reiterating this again that implicit assumptions and dependencies are one of the worst offenders when it comes to contributing to the obscurity of code.</p>
+</blockquote>
+
+<p>Again, it seems to me that&mdash;for infrastructure as code especially&mdash;being explicit about the creation of infrastructure objects not only contributes to greater understandability, but also helps eliminate implicit assumptions and dependencies. Instead of using a loop or control structure to manage the creation of multiple objects, spell out the creation of those objects explicitly. It may seem like a violation of the DRY principle to have three (nearly) identical snippets of code creating three (nearly) identical compute instances, but applying the DRY principle here means ensuring that each instance is authoritatively represented in the code only once, not that we are minimizing lines of code.</p>
+
+<p>&ldquo;Now wait,&rdquo; you say. &ldquo;It&rsquo;s not my fault if someone can&rsquo;t read my Terraform code. They need to learn more about Terraform, and then they&rsquo;ll better understand how the code works.&rdquo;</p>
+
+<p>Well, Sridharan talks about that as well in a discussion of properly identifying the target audience of your artifacts:</p>
+
+<blockquote>
+<p>In general, when identifying the target audience and deciding what narrative they need to be exposed to in order to allow for them to get up and running quickly, it becomes necessary to consider the audience’s background, level of domain expertise and experience.</p>
+</blockquote>
+
+<p>Sridharan goes on to point out that in situations where both novices and veterans may be present in the target audience, the experience of the novice is key to determining the understandability of the code. So, if we are optimizing for understandability, can we afford to take a &ldquo;hands off&rdquo; approach to maintenance of the code by our successors? Can we be guaranteed that a successor tasked with maintaining our code will have the same level of knowledge and experience we have?</p>
+
+<p>I&rsquo;ll stop here; there are more good points that Sridharan makes, but for now this post suffices to capture most of the thinking generated by the article when it comes to infrastructure as code. After I&rsquo;ve had some time to continue to parse Sridharan&rsquo;s article, I may come back with some additional thoughts. In the meantime, feel free <a href="https://twitter.com/scott_lowe">to engage with me on Twitter</a> if you have some thoughts or perspectives you&rsquo;d like to share on this matter.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/BF2Hey6UDCE" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/BF2Hey6UDCE/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>The Linux Migration: December 2018 Progress Report</h3>
+		</div>
+		<div class="collectiontext">
+			<p>In December 2016, I kicked off a migration from macOS to Linux as my primary laptop OS. Throughout 2017, I chronicled my progress and challenges along the way; links to all those posts are found <a href="https://blog.scottlowe.org/2018/12/23/the-linux-migration-series/">here</a>. Although I stopped the migration in August 2017, I restarted it in April 2018 when I left VMware to join Heptio. In this post, I&rsquo;d like to recap where things stand as of December 2018, after 8 months of full-time use of Linux as my primary laptop OS.</p>
+
+<p>I&rsquo;ll structure this post roughly as a blend of the formats I used in my <a href="https://blog.scottlowe.org/2017/04/12/linux-migration-april-2017-progress-report/">April 2017</a> and <a href="https://blog.scottlowe.org/2017/07/10/linux-migration-july-2017-progress-report/">July 2017</a> progress reports.</p>
+
+<h2 id="hardware">Hardware</h2>
+
+<p>Readers may recall that I was using a Dell Latitude E7370 (see <a href="https://blog.scottlowe.org/2017/01/30/review-dell-latitude-e7370/">my E7370 hardware review</a>) up until August 2017, when I put the Linux migration on hold indefinitely due to productivity concerns. Upon moving to Heptio, I switched to a Lenovo ThinkPad X1 Carbon (see <a href="https://blog.scottlowe.org/2018/04/13/review-lenovo-thinkpad-x1-carbon/">here</a> for my review of the X1 Carbon&mdash;the &ldquo;TL;DR&rdquo; is that I <em>love</em> it). In my home office, the X1 Carbon connects to a USB-C expansion hub that provides connectivity to a 34&rdquo; 21:9 ultrawide curved monitor, external HD webcam, and a USB headset for Zoom meetings. I also recently converted my Mac Pro to Linux as well (see <a href="https://blog.scottlowe.org/2018/12/19/running-fedora-on-my-mac-pro/">this post</a> for details); that&rsquo;s a workstation with dual quad-core Xeon CPUs, 24GB of RAM, a 512GB SSD, a 1TB hard drive, and a 700GB PCIe SSD from Micron, also connected to a 34&rdquo; 21:9 ultrawide curved monitor.</p>
+
+<h2 id="linux-distribution">Linux Distribution</h2>
+
+<p>Early (very early) in the migration I thought I would end up using Ubuntu 16.04, but I switched to <a href="https://getfedora.org">Fedora</a> and haven&rsquo;t looked back. I started with Fedora 25 on the E7370, switching to Fedora 27 on the X1 Carbon and later upgrading to Fedora 28. The Mac Pro started out with Fedora 27 (<a href="https://blog.scottlowe.org/2018/12/19/running-fedora-on-my-mac-pro/">this post</a> outlines the reasons why) and was upgraded to Fedora 28.</p>
+
+<h2 id="applications">Applications</h2>
+
+<p>By and large, application usage remains mostly unchanged from earlier:</p>
+
+<ul>
+<li><em>Markdown:</em> I switched from <a href="http://www.sublimetext.com/">Sublime Text</a> to <a href="https://code.visualstudio.com/">Visual Studio Code</a>, but otherwise my Markdown workflows remain largely the same. I still use Markdown for the vast majority of my content creation.</li>
+<li><em>Browsing:</em> While I have <a href="https://www.google.com/chrome/">Google Chrome</a> installed, I use <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a> for the vast majority of my browsing (I don&rsquo;t care for the changes Chrome made with regard to signing you into the browser when you sign into Google). I make regular use of the Firefox Multi-Account Containers add-on to streamline some browser-based workflows while also protecting my privacy.</li>
+<li><em>Chat/Instant messaging:</em> I continue to use <a href="https://slack.com/downloads/linux">the Slack Linux client</a> and <a href="https://pidgin.im/">Pidgin</a>. For IRC&mdash;though I rarely use it these days&mdash;I have <a href="https://hexchat.github.io/">HexChat</a>, as before.</li>
+<li><em>Cloud storage/sync:</em> GNOME offers built-in integration for Google Drive, and I&rsquo;m still using <a href="https://www.dropbox.com/">Dropbox</a> for non-confidential information. I&rsquo;ll probably have to start using <a href="https://www.odrive.com/">ODrive</a> again for access to OneDrive.</li>
+<li><em>Basic office productivity:</em> I&rsquo;m still using <a href="https://www.libreoffice.org/">LibreOffice</a>, though it&rsquo;s a newer version.</li>
+<li><em>Graphics:</em> No changes here, except some occasional use of LibreOffice Draw.</li>
+<li><em>Mind mapping:</em> I&rsquo;m still using <a href="http://www.xmind.net/">XMind</a>, and still evaluating whether a Pro license is needed or not. I haven&rsquo;t had a strong need for the extra features yet.</li>
+<li><em>E-mail:</em> I continue to use <a href="https://www.mozilla.org/en-US/thunderbird/">Thunderbird</a>, and I resolved the nagging performance concerns that I noted during the July 2017 progress report (these appear to have been caused by some TCP timeouts related to the NAT configuration on my ASA 5505). I&rsquo;ve settled on IMAP/SMTP for all e-mail access. Having recently re-joined VMware via the Heptio acquisition, I&rsquo;m currently using <a href="https://github.com/jobisoft/TbSync">TbSync</a> with the Active Sync add-on for calendar and contacts access (it also provides access to the Global Address List). The TbSync CalDAV/CardDAV provider enables access to the existing CalDAV- and CardDAV-based sync service I&rsquo;m using on my mobile devices, providing a smoother user experience.</li>
+<li><em>Task management:</em> Aside from switching from Sublime Text to Visual Studio Code, this solution remains the same (plain text-based files on Dropbox, changes reconciled via a graphical diff program).</li>
+<li><em>Calendaring/time management:</em> I gave up on GNOME Calendar and settled for leveraging Lightning inside Thunderbird. Via the TbSync add-on, I have access to corporate and personal calendars. Access to Google Calendar (which is what we were using at Heptio) was and is problematic; I managed to get read-only access from Thunderbird, but read/write access was only through the web interface.</li>
+<li><em>Password management:</em> I switched back to <a href="https://1password.com/">1Password</a>, leveraging the 1Password X add-on for Firefox for access from my Linux systems.</li>
+<li><em>Corporate connectivity:</em> This wasn&rsquo;t needed at Heptio, but now that I&rsquo;m back at VMware I&rsquo;m back to using the Linux client for VMware Horizon and <code>vpnc</code> (with integration into GNOME) for VPN connectivity.</li>
+<li><em>Social media:</em> I&rsquo;m just using the Twitter web site; with the API changes, there aren&rsquo;t really any other options on Linux.</li>
+</ul>
+
+<p>So what&rsquo;s working well with this configuration?</p>
+
+<ul>
+<li>Calendar access via TbSync seems to work really well; I&rsquo;m really pleased that the CalDAV/CardDAV provider for TbSync works as seamlessly as it does.</li>
+<li>As I mentioned above, the performance issues I was seeing with e-mail seem to have been resolved. I&rsquo;m not seeing the same lockups and delays that I was seeing in 2017.</li>
+<li>Switching to the <a href="https://github.com/nana-4/materia-theme">Materia theme</a> for GNOME/GTK has relieved the eyestrain issues I reported in <a href="https://blog.scottlowe.org/2017/07/10/linux-migration-july-2017-progress-report/">my July 2017 update</a>.</li>
+</ul>
+
+<p>What&rsquo;s not working well?</p>
+
+<ul>
+<li>Now that I&rsquo;m back at VMware via the Heptio acquisition, I&rsquo;m moving back into a Microsoft-heavy environment. I anticipate I&rsquo;ll run into compatibility issues between LibreOffice and Office 365, as I did before, though there is a chance that the newer version of LibreOffice will work better. It&rsquo;s still too early to tell yet.</li>
+</ul>
+
+<h2 id="where-i-still-use-macos">Where I Still Use macOS</h2>
+
+<p>With <a href="https://blog.scottlowe.org/2018/12/19/running-fedora-on-my-mac-pro/">the migration of my Mac Pro to Fedora 28</a>, that leaves my 2017 MacBook Pro as the only remaining macOS-based system. I will still use it for podcast recording, viewing archived e-mail, and viewing documents in formats that I couldn&rsquo;t/didn&rsquo;t translate to a Linux equivalent (OmniGraffle, OmniOutliner, and MindNode, primarily). I&rsquo;ll also use it to transcode media into industry-standard formats (MP3 and MP4/H.264) that my Linux systems can use. Aside from that, it sees very little regular use.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Through a combination of technology-related improvements in various applications plus personal growth on my part, I&rsquo;ve been able to make Linux my full-time primary laptop OS since April 2018. Hopefully, moving back to VMware and its Microsoft-centric environment won&rsquo;t present the same kind of insurmountable hurdles I saw last time. Time will tell whether my hopes are valid, but I do want to do a better job of keeping readers informed about how things are going overall. As always, if you have questions, comments, or suggestions, I encourage you to <a href="https://twitter.com/scott_lowe">contact me on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/0V4SmjV-1dk" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/0V4SmjV-1dk/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="http://www.evanmiller.org/" target="_blank">Evan Miller’s News</a>
 		</div>
 		<div>
@@ -251,7 +369,7 @@ display('news.html')
 <ul>
 <li>Here&rsquo;s <a href="https://blog.upbound.io/introducing-crossplane-open-source-multicloud-control-plane/">another stab at a multi-cloud control plane</a>.</li>
 <li>My colleague Josh Rosso has a post up on <a href="https://joshrosso.com/posts/secure-port-k8s-cm-sched">securing communication to the Kubernetes controller manager and Kubernetes scheduler</a>. It even includes a video&mdash;nice!</li>
-<li>This is <a href="http://www.mitchyb.com/2018/05/mid-week-fun-with-draft-kubernetes-and.html">a slightly older article by Mitch Beaumont</a> that I&rsquo;ve had sitting in the hopper for a while. When I first read it, I was still (relatively) early in my Kubernetes journey, and a fair amount of what he discussed wasn&rsquo;t quick &ldquo;clicking&rdquo; in my brain (no fault of his). Now, it makes a lot more sense to me. Time and experience can make quite a difference sometimes!</li>
+<li>This is <a href="http://www.mitchyb.com/2018/05/mid-week-fun-with-draft-kubernetes-and.html">a slightly older article by Mitch Beaumont</a> that I&rsquo;ve had sitting in the hopper for a while. When I first read it, I was still (relatively) early in my Kubernetes journey, and a fair amount of what he discussed wasn&rsquo;t quite &ldquo;clicking&rdquo; in my brain (no fault of his). Now, it makes a lot more sense to me. Time and experience can make quite a difference sometimes!</li>
 <li>Weijuan Shi Davis collected some resources related to Windows containers on Kubernetes in <a href="https://blogs.technet.microsoft.com/virtualization/2018/12/15/kubecon-windows-containers-on-kubernetes-and-101-materials-for-your-holiday-reading/">this post-KubeCon post</a>.</li>
 </ul>
 
@@ -366,183 +484,6 @@ SyndContentImpl.value=<span style="font-family: &quot;arial&quot;;"><em>Mein Bei
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/oZQ1T2DlRGA/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>KubeCon 2018 Day 2 Keynote</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is a liveblog of the day 2 (Wednesday) keynotes at KubeCon/CloudNativeCon 2018 in Seattle, WA. For additional KubeCon 2018 coverage, check out other articles tagged <a href="https://blog.scottlowe.org/tags/kubecon2018/">KubeCon2018</a>.</p>
-
-<p>Kicking off the day 2 keynotes, Liz Rice takes the stage at 9:02am (same time as yesterday, making me wonder if my clock is off by 2 minutes). Rice immediately brings out Janet Kuo, Software Engineer at Google and co-chair with Rice of the KubeCon/CloudNativeCon event program. Kuo will be delivering a Kubernetes project update.</p>
-
-<p>Kuo starts off by reiterating the announcement of the Kubernetes 1.13 release, and looking back on her very first commit to Kubernetes in 2015 (just prior to the 1.0 release and the formation of the CNCF). Kuo talks about how Kubernetes, as a software cycle, has matured through the cycle of first focusing on innovation, then expanding to include scale, and finally expanding again to include stability (critical for enterprise adopters).</p>
-
-<p>Reviewing usage details, Kuo states that she believes Kubernetes has moved&mdash;in the context of the technology adoption curve&mdash;from early adopters to early majority, the first phase in the mainstream market (and, for those who think in these terms, has crossed the chasm). However, this also means that Kubernetes has gotten <em>boring</em>.</p>
-
-<p>In looking at Kubernetes, Kuo draws out two key facets of Kubernetes: open standards and extensibility. Open standards includes, according to Kuo, built-in APIs and conformance; these provide consistent behavior around expectations for developers deploying applications or developing applications to be deployed onto Kubernetes. Extensibility has two parts: infrastructure extensibility, and API extensibility.</p>
-
-<p>Infrastructure extensibility is all about how Kubernetes consumes the underlying infrastructure; this would include, for example, cloud provider integrations, storage plugins (CSI), networking plugins (CNI), and the container runtime (CRI). API extensibility is mostly encompassed by Custom Resource Definitions (CRDs) and controllers (automation engines). Kuo uses Istio as an example of using API extensibility to create Istio-specific resources. This allows you to, according to Kuo, build &ldquo;everything the Kubernetes way.&rdquo;</p>
-
-<p>Recapping her presentation, Kuo reminds attendees that boring is essential for building a platform upon which other solutions can be built.</p>
-
-<p>At this point, Rice returns to the stage to introduce Jason McGee, who is CTO for IBM Cloud and an IBM Fellow. McGee emphasizes that good application design is always a tradeoff of attributes; it&rsquo;s not just about stateless applications. McGee states that the cloud-native efforts have, thus far, focused only on 12-factor applications, functions, and serverless. However, applications are more than just these areas. This leads McGee to review developments in the Cloud Foundry space and the landscape around functions. The functions landscape, McGee stresses, is terribly fragmented and is holding the entire industry and community from moving forward. What&rsquo;s the answer? McGee moves into a discussion of Knative, and how Knative provides a single, unified platform that supports both containers, functions, and applications&mdash;all on top of Kubernetes.</p>
-
-<p>McGee shifts into a product pitch talking about IBM Cloud and its use of Kubernetes before he wraps up his portion of this morning&rsquo;s keynotes.</p>
-
-<p>Rice returns to the stage again, this time not to introduce someone else but to provide her own keynote focused&mdash;naturally, given her role at Aqua Security&mdash;Kubernetes security. Asking the question, &ldquo;Don&rsquo;t we have security people for that?&rdquo;, Rice says she believes that <em>everyone</em> can do something to help improve security; it&rsquo;s not just for security-dedicated people. Reiterating that every system has vulnerability, Rice reminds attendees that they should not be surprised or afraid that Kubernetes will have vulnerabilities discovered from time to time. (And she reminds everyone to update their clusters.) So what can attendees do to help improve security?</p>
-
-<p>This leads Rice into a discussion of other security weak points that might exist in a Kubernetes deployment. She shows the example of just copying some YAML and pasting it into a <code>kubectl</code> command without any knowledge of what that YAML <em>actually</em> does. She expands that example into showing how a single compromised Pod in turn exposes the Kubernetes API (via the default service account) and thus the entire cluster. Naturally, the answer here is to not just blindly apply YAML to our clusters. Rice next shows how she wrote a Validating Admission Webhook and associated controller/service that checks for and blocks the creation of service accounts.</p>
-
-<p>This leads Rice to a discussion of Open Policy Agent (OPA), a CNCF Sandbox project that can act as the controller/service behind a Validating Admission Webhook to perform the same types of functions that Rice just showed (like blocking the creation of service accounts). This can enable users to load rulesets for OPA in as ConfigMaps to enforce policy decisions like blocking the creation of service accounts. Rice reminds attendees that OPA is still a relatively young project, but says she believes it&rsquo;s pretty important to watch.</p>
-
-<p>So what sorts of things could users do with OPA to help improve Kubernetes security?</p>
-
-<ul>
-<li>Ensuring that only allowed registries are leveraged</li>
-<li>Checking to ensure that only scanned (and safe) images can be deployed</li>
-<li>Verifying software provenance to ensure that images are actually the images you want/expect</li>
-</ul>
-
-<p>However, trusted code can still be bad, Rice reminds the audience. Open source libraries may change governance and &ldquo;bad&rdquo; code may be introduced (Rice uses the example of an NPM library compromised to include crypto-mining code). This underscores the importance of open source governance and the role of foundations such as the Linux Foundation and the CNCF in that governance.</p>
-
-<p>As she wraps up her portion of the keynotes, Rice drops in a quick plug for the security book she recently wrote with Michael Hausenblas.</p>
-
-<p>Rice now brings out Melanie Cebula from AirBnB to talk about AirBnB&rsquo;s use of Kubernetes (which now hosts about 40% of all of AirBnB&rsquo;s services). Cebula reviews how AirBnB has been moving away from a monolithic architecture to Kubernetes, and how the AirBnB team is now handling 125,000 deployments annually. More helpfully&mdash;in my opinion&mdash;is the portion of Cebula&rsquo;s presentation on addressing key challenges with Kubernetes. For example, AirBnB leveraged Go templating to make it easier to reduce YAML boilerplate. (Other examples in this space include Helm, kustomize, and kapitan.) Cebula also reviews how AirBnB generates boilerplate for new services, and how she used that to help enforce/encourage the use of documentation, testing, CI/CD, etc. Finally, Cebula talks about how AirBnb wrapped the use of <code>kubectl</code> to make it easier for developers and standardizes (again) things like namespaces and environments. Cebula does something lots of presenters often fail to do, and that&rsquo;s clearly summarize the recommendations out of the various portions of her presentation. All in all, this was an excellent presentation, full of very practical information learned from real-world use of Kubernetes.</p>
-
-<p>Rice returns to the stage to wrap up the keynotes and remind folks of the evening events, and then closes the keynotes.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/XGvst5HHbZg" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/XGvst5HHbZg/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Liveblog: Hardening Kubernetes Setups</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is a liveblog of the KubeCon NA 2018 session titled &ldquo;Hardening Kubernetes Setup: War Stories from the Trenches of Production.&rdquo; The speaker is Puja Abbassi (<a href="https://twitter.com/puja108">@puja108</a> on Twitter) from Giant Swarm. It&rsquo;s a pretty popular session, held in one of the larger ballrooms up on level 6 of the convention center, and nearly every seat was full.</p>
-
-<p>Abbassi starts by talking about Giant Swarm&rsquo;s environment, in which they run more than 100 clusters across different clouds and different regions. These clusters are running for different companies, different industries, and they serve different use cases for various constituents of users. Abbassi says that Giant Swarm opts to give users more freedom in how they use (and potentially misuse) the clusters.</p>
-
-<p>Obviously, this can lead to problems, and that&rsquo;s where the postmortems come into play. Abbassi explains the idea behind postmortems by quoting a definition from the Google SRE book, and then provides some context about the process that Giant Swarm follows when conducting postmortems. That leads into a discussion of various postmortems conducted at Giant Swarm.</p>
-
-<p>The first one mentioned by Abbassi concerns a memory leak first fixed in 1.11.4 and 1.12.0. Prior to the fix, the memory leak could cause downtime due to failures of the control plane components.</p>
-
-<p>(Side note: I was thinking that this session was security-related, but apparently it is not.)</p>
-
-<p>The next one mentioned was an issue with Calico that was causing IP-in-IP tunnels to go down. Giant Swarm fixed this by writing a small ICMP pinger that generated enough traffic to keep the tunnels up.</p>
-
-<p>After sharing a couple examples from Giant Swarm postmortems, Abbassi moves into a review of some hardening steps and best practices. Some of the hotspots for issues included flaws in older (non-upgraded) Kubernetes clusters, ingress, networking and DNS, resource (CPU or memory) pressure, and multi-tenancy. Next, Abbassi delves into a bit more detail on these hotspots:</p>
-
-<ul>
-<li>Old issues typically have issues that have been solved in newer versions. Customers should test upgrades extensively, and automate the upgrade process in order to reduce the &ldquo;cost&rdquo; of upgrading so that your organization is more likely to upgrade on a regular basis.</li>
-<li>Ingress: When it comes to the Nginx ingress controller, newer versions are less prone to misconfiguration. Users may also want to consider running multiple classes of ingress controllers, to help separate traffic types and protect against failures. Performing load testing and failover testing is also strongly recommended.</li>
-<li>Networking and DNS: Be sure to monitor and alert on network health and connectivity. Monitor DNS latency (via Prometheus?). Check for known issues, and apply best practices. (Abbassi stops short of actually discussing some best practices.)</li>
-<li>Resource pressure: Be sure to use resource management (use quotes, limits, and requests). Be aware many Java-based apps in containers don&rsquo;t behave well. Include buffers (extra headroom) in resource capacity. Be sure to protect K8s and critical addons, so that the Kubernetes infrastructure isn&rsquo;t crippled.</li>
-<li>Multi-tenancy: Namespaces and <em>proper</em> RBAC configuration can help here. Avoid the use of the cluster-admin role! Use separate clusters where possible, and automate application deployment with CI/CD. Minimize manual operations as much as you can.</li>
-</ul>
-
-<p>Finally, Abbassi provides a few &ldquo;best practices&rdquo;:</p>
-
-<ul>
-<li>Use a monitoring/alerting solution, like Prometheus with Alert Manager.</li>
-<li>Logging&mdash;and sometimes tracing&mdash;can help with debugging.</li>
-<li>Be sure to fix issues fast; don&rsquo;t let them escalate and cause even bigger/more significant issues.</li>
-<li>Educate users on the correct/preferred way to interact with and/or use Kubernetes.</li>
-<li>Have a postmortem process (and learn from it!).</li>
-<li>Train on recovery, so that staff are able to more quickly get back to operational. (Heptio Ark gets a mention here as a solution.)</li>
-</ul>
-
-<p>Finally, Abbassi mentions that many of the attendees are &ldquo;standing on the shoulders of giants&rdquo;&mdash;be sure to leverage the learnings that many others have already encountered and shared with the broader community. There&rsquo;s no need to reinvent the wheel, and don&rsquo;t be afraid to ask for help!</p>
-
-<p>Abbassi closes out the session with thanks to his team at Giant Swarm, and then opens up for questions.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/mIBPTCxpjus" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/mIBPTCxpjus/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Liveblog: Linkerd 2.0, Now with Extra Prometheus</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is a liveblog of the KubeCon NA 2018 session titled &ldquo;Linkerd 2.0, Now with Extra Prometheus.&rdquo; The speakers are Frederic Branczyk from Red Hat and Andrew Seigner with Buoyant.</p>
-
-<p>Seigner kicks off the session with a quick introduction before handing off to Branczyk. Prometheus, for folks who didn&rsquo;t know, originated at SoundCloud with a couple of ex-Googlers. Prometheus is one of the graduated CNCF projects and&mdash;judging by a show of hands in response to a speaker question&mdash;lots of folks here at KubeCon know about Prometheus and are using Prometheus in production.</p>
-
-<p>Branczyk provides an overview of Prometheus, explaining that it pulls metrics from a target on a set of regular intervals (like every 15 seconds, for example). Prometheus stores those metrics in a time-series database, so every time it pulls metrics it stores them in a time series. As a monitoring solution, it also has to provide alerting, to notify cluster operators/administrators that some metric is outside of some predefined threshold.</p>
-
-<p>With regards to Kubernetes, Prometheus has built-in support to perform service discovery in Kubernetes by querying the Kubernetes API. This enables it to discover Pods backing a Service and scrape (pull) the metrics from those discovered Pods. Branczyk also spends some time talking about time series churn and a series of changes that went into Prometheus 2.0 to help address this and other challenges around gathering time-series data from ephemeral data sources (Pods).</p>
-
-<p>A single Prometheus server has pretty amazing scale; Branczyk indicates he&rsquo;s seen a single server ingesting 700K samples per second (which translates, roughly, to a Kubernetes cluster with 350 nodes).</p>
-
-<p>At this point, Branczyk hands it over to Seigner, who shifts the focus to Linkerd. Seigner provides an overview of Linkerd. Linkerd originated at Twitter, as part of their effort to decompose the Twitter application into microservices. As part of that decomposition process, the people at Twitter realized there was a common set of functionality that all services needed, and this led to the creation of Linkerd to provide common functionality via a service mesh and a sidecar proxy.</p>
-
-<p>But Linkerd 1.x was written in Scala, but Scala was a bit heavyweight. As part of the re-write from Linkerd 1.x to Linkerd 2.0, the proxy was re-written in Golang (for the control plane) and Rust (for the data plane). Linkerd 2.0 also incorporated native Kubernetes support and integrated support for Prometheus. This integrated support means Prometheus can scrape metrics from every Linkerd proxy running as a sidecar, which gives access to lots of very useful metrics.</p>
-
-<p>This leads into a quick demo of Linkerd to show its usage with a simple microservices-based application. The demo shows the use of the <code>linkerd</code> CLI tool to install Linkerd onto a Kubernetes cluster, and then to inject Linkerd into the existing microservices-based application. The <code>linkerd</code> command also includes a ton of sub-commands that can show staticstics, show summary statistics, and expose a graphical web-based dashboard.</p>
-
-<p>At this point, Seigner wraps up the session and opens up for questions.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/-ccP0Z9j7hM" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/-ccP0Z9j7hM/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>KubeCon 2018 Day 1 Keynote</h3>
-		</div>
-		<div class="collectiontext">
-			<p>This is a liveblog from the day 1 (Tuesday, December 11) keynote of KubeCon/CloudNativeCon 2018 in Seattle, WA. This will be my first (and last!) KubeCon as a Heptio employee, and looking forward to the event.</p>
-
-<p>The keynote kicks off at 9:02am with Liz Rice, Technology Evangelist at Aqua Security. Rice welcomes attendees (back) to Seattle, and she shares that this year&rsquo;s event in Seattle is 8x the size of the same event in Seattle just two years ago. Rice also shares some statistics from other CNCF events around the world, stressing the growth of these events both in size and in the number of events happening worldwide.</p>
-
-<p>Rice next shares some entertaining statistics about web site visits to kubernetes.io versus some other popular brands. (TL;DR: Kubernetes gets more web site visits than the Seahawks and Manchester United, but not as many as Starbucks.)</p>
-
-<p>Moving on, Rice talks for a few minutes about the strategy or purpose behind the collection of projects that fall under the CNCF umbrella (to provide some of the important building blocks in the full stack of technologies to support cloud-native environments). At this point, Rice turns it over to <a href="https://twitter.com/michellenoorali">Michelle Noorali</a>, a key maintainer of Helm.</p>
-
-<p>Noorali starts out with a quick introduction/overview of Helm, likening it to <code>yum</code> or <code>apt</code> for Linux packages. Noorali then reviews the history of Helm, provides a high-level description of the Helm governance model, and introduces the Helm Hub (<a href="https://hub.helm.sh">https://hub.helm.sh</a>)&mdash;a new, centralized way to search for and deploy Helm Charts. Helm v2.12.0 (the &ldquo;Egg Nog&rdquo; edition) was also recently released. This leads Noorali into a high-level description of some of the features planned for Helm v3, which will move to an entirely client-side architecture (no more Tiller, yay!). Chart Museum, an open source Helm chart repository server, also recently released an update. Noorali ends her section with a call to action to participate in the Helm community.</p>
-
-<p>Rice returns to the stage, this time discussing the second of the three graduated projects in the CNCF, Prometheus. After a brief discussion of Prometheus, Rice shifts her focus to discuss recent updates on Fluentd and Fluent Bit. OpenTracing and Jaeger (Jaeger is an open source implementation of the specifications created by OpenTracing) are next up for Rice to review, and she shares that deploying Jaeger has gotten easier via the Jaeger Operator.</p>
-
-<p>Rice introduces Matt Klein, Constance Caramanolis, and Jose Nino to talk about the third graduated project, Envoy. All three of these individuals are (apparently) with Lyft, where Envoy originated. Using the Lyft architecture as a framework, Caramanolis provides an overview of the need for Envoy before turning it over to Nino to provide an update on where Lyft stands now with Envoy deployed almost everywhere. Nino turns it over to Matt Klein, who provides context on Envoy in the larger ecosystem, and who speculates on why Envoy has become so popular in such a short period of time. Klein attributes Envoy&rsquo;s success to performance, reliability, a modern codebase, extensibility, best-in-class observability, and a strong configuration API.</p>
-
-<p>Following the discussion of Envoy, Rice returns to the stage to continue to review the CNCF projects. She starts with CoreDNS, which in the 1.13 release becomes the default DNS project for Kubernetes deployments. Rice moves on to Linkerd 2.0, and shows a quick video demo of deploying Linkerd into Kubernetes and seeing some of the detailed statistics that Linkerd enables.</p>
-
-<p>Moving into storage, Rice mentions Rook, which as of September moved from the Sandbox into the CNCF Incubator. Next up is Vitess, which is now at version 3.0 and sports a number of important new features. gRPC, a high-performance RPC framework based on HTTP/2, is the next project that Rice mentions. With regards to messaging, Rice mentions NATS, the next CNCF project in the list to be reviewed.</p>
-
-<p>The last project Rice mentions is Harbor, a container registry that also recently moved from Sandbox to the CNCF Incubator, and which integrates with Notary for providing content trust/signing for container images.</p>
-
-<p>Following a quick review of the sponsors, Rice introduces Brandon Philips and Xiang Li, who take the stage to talk about 5 years of etcd. (Etcd is the consensus platform underneath Kubernetes.) Philips provides a quick overview of etcd and the origins that drove the creation of etcd at CoreOS. Philips announces that etcd is being moved to the CNCF today. This is a good move, in my opinion, and one that was much-needed. Li takes over to review the development of etcd over the last five years, including etcd&rsquo;s own implementation of the Raft consensus protocol. Etcd itself leverages or integrates with other cloud-native technologies, like Prometheus, gRPC, and the Operator framework (not necessarily a CNFC project, but a common design pattern emerging in Kubernetes).</p>
-
-<p>Li turns it back over to Philips to talk about the future of etcd in the CNCF. Key support items that the etcd community is looking forward to it more robust testing, support for etcd discovery service(s), and performing third-party security and correctness audits. Philips ends with a review of all the etcd-related sessions coming up at the conference.</p>
-
-<p>Next, Janet Kuo, co-chair of the KubeCon track, takes the stage to introduce Aparna Sinha, the Group Product Manager for Kubernetes at Google. Sinha spends a few minutes re-iterating the success and growth of the Kubernetes community before moving on to new projects like Istio and Knative. Istio is an Envoy-based service mesh to provide observability, security, and control. Knative is a portable serverless framework that runs on top of Kubernetes (naturally). Sinha shows a recorded demo that shows GKE running with one-click installs of both Istio and Knative. (Sinha does point about that these projects are not limited to GKE, of course.)</p>
-
-<p>Kuo comes back to the stage to introduce Wendy Cartee, Senior Director of Cloud Native Advocacy at VMware. Cartee reviews the lessons learned at VMware in reaching enterprises. Cartee also reviews some of VMware&rsquo;s new and expanded open source efforts.</p>
-
-<p>Kuo returns to the stage to introduce Matt Butcher and Karen Chu, both with Microsoft. Butcher and Chu are presenting &ldquo;Phippy Goes to the Zoo,&rdquo; an illustrated children&rsquo;s guide to Kubernetes. After reading the book and going over the process for creating the book, Butcher and Chu announce that Phippy and all characters are being donated to the CNCF. Rice adds that the CNCF is licensing Phippy and the characters as Creative Commons, which allows people to re-use these characters in their own materials.</p>
-
-<p>Another set of keynotes is happening this afternoon; if my schedule permits, I&rsquo;ll try to liveblog those keynotes as well.</p>
-
-<p>At this point, Rice and Kuo wrap up the morning keynotes.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/sGRsFXiU-Fw" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/sGRsFXiU-Fw/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -550,36 +491,34 @@ SyndContentImpl.value=<span style="font-family: &quot;arial&quot;;"><em>Mein Bei
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="one_note_samba_stecey_kent.html">
+<div class="date">05.01.2019</div>
+<h3>One Note Samba Stecey Kent</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Um ein wenig Abwechslung reinzubringen - etwas lateinamerikanisch angehauchte Musik...
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="35c3___meine_favoriten_zweiter_teil.html">
+<div class="date">05.01.2019</div>
+<h3>35c3 - Meine Favoriten zweiter Teil</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Schon im ersten
+Artikel zum 35c3
+habe ich einige meiner favorisierten Vorträge des 35c3 vorgestellt...
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="35c3___meine_favoriten_bisher.html">
 <div class="date">30.12.2018</div>
 <h3>35c3 - Meine Favoriten bisher</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Wie
 jedes Jahr
 habe ich auch diesmal wieder die Vorträge des 35c3 genossen - ich habe nicht alle
 gesehen, aber das hier ist die Auswahl meiner Favoriten aus denen, die ich gesehen habe:
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="literaturempfehlung__ki__ai__ml___crap.html">
-<div class="date">28.12.2018</div>
-<h3>Literaturempfehlung: KI, AI, ML = Crap</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ich weiß auch nicht, warum ich neuen Technologien - und ich nutze das Wort hier wirklich in seinem
-weitesten Sinne - neuerdings so ablehnend gegenüberstehe. Ist es mein Alter? Oder ist es, weils
-Bullshit
-ist?
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="angel_sarah_mclachlan___pink.html">
-<div class="date">28.12.2018</div>
-<h3>Angel Sarah McLachlan & Pink</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nach längerer Zeit wieder einmal ein Musiktip von mir
 </p></div>   </a>
 </li>
 </ul>
@@ -754,7 +693,7 @@ Komponenten
 <h3>
 Links
 </h3>
-	<span class="nav-item-counter">46</span>
+	<span class="nav-item-counter">47</span>
 </header>
 <div class="nav-item-body">
 <p>Linksammlungen zu verschiedenen Themen</p>
@@ -793,7 +732,7 @@ Markup
 <h3>
 Music
 </h3>
-	<span class="nav-item-counter">22</span>
+	<span class="nav-item-counter">23</span>
 </header>
 <div class="nav-item-body">
 <p>Musik, die mir gefällt</p>
@@ -884,7 +823,7 @@ Verschiedenes
 <h3>
 Video
 </h3>
-	<span class="nav-item-counter">27</span>
+	<span class="nav-item-counter">28</span>
 </header>
 <div class="nav-item-body">
 <p>Artikel mit bunten Filmchen</p>
