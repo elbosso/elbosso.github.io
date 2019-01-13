@@ -80,18 +80,23 @@ hatte, habe ich mir gleich noch eines vorgenommen...
 <a href="https://en.wikipedia.org/wiki/R%C3%B6ssler_attractor">Rössler-Attractor</a>
 stellt sich wie folgt dar:
 <img class="formula" src="images/tex/-357309461.png" alt="\begin{matrix}\dot x&=&-y-z\hfill\cr\dot y&=&x+\alpha z\hfill\cr\dot z&=&\beta+zx+\gamma z\hfill\end{matrix}
+" title="\begin{matrix}\dot x&=&-y-z\hfill\cr\dot y&=&x+\alpha z\hfill\cr\dot z&=&\beta+zx+\gamma z\hfill\end{matrix}
 ">
 mit
 <img class="formula" src="images/tex/-357309462.png" alt="\alpha=0.2\;\; \beta=0.2\;\; \gamma=5.7
+" title="\alpha=0.2\;\; \beta=0.2\;\; \gamma=5.7
 ">
 Daraus folgt für die Behandlung mit dem impliziten Eulerverfahren und einer Schrittweite (oder Intervallänge) h:
 <img class="formula" src="images/tex/-357309463.png" alt="\begin{matrix}x_{t+h}&=&x_t+h\dot x_{t+h}\hfill\cr y_{t+h}&=&y_t+h\dot y_{t+h}\hfill\cr z_{t+h}&=&z_t+h\dot z_{t+h}\hfill\end{matrix}
+" title="\begin{matrix}x_{t+h}&=&x_t+h\dot x_{t+h}\hfill\cr y_{t+h}&=&y_t+h\dot y_{t+h}\hfill\cr z_{t+h}&=&z_t+h\dot z_{t+h}\hfill\end{matrix}
 ">
 und eingesetzt:
 <img class="formula" src="images/tex/-357309464.png" alt="\begin{matrix}0&=&x_t-hy_{t+h}-hz_{t+h}-x_{t+h}\hfill\cr 0&=&y_t+hx_{t+h}+h\alpha y_{t+h}-y_{t+h}\hfill\cr 0&=&z_t+h\beta+hz_{t+h}x_{t+h}-h\gamma z_{t+h}-z_{t+h}\hfill\end{matrix}
+" title="\begin{matrix}0&=&x_t-hy_{t+h}-hz_{t+h}-x_{t+h}\hfill\cr 0&=&y_t+hx_{t+h}+h\alpha y_{t+h}-y_{t+h}\hfill\cr 0&=&z_t+h\beta+hz_{t+h}x_{t+h}-h\gamma z_{t+h}-z_{t+h}\hfill\end{matrix}
 ">
 Und wegen der Übersichtlichkeit:
 <img class="formula" src="images/tex/-357309465.png" alt="\begin{matrix}0&=&a-hy_{t+h}-hz_{t+h}-x_{t+h}\hfill\cr 0&=&b+hx_{t+h}+c y_{t+h}-y_{t+h}\hfill\cr 0&=&d+e+hz_{t+h}x_{t+h}-f z_{t+h}-z_{t+h}\hfill\end{matrix}
+" title="\begin{matrix}0&=&a-hy_{t+h}-hz_{t+h}-x_{t+h}\hfill\cr 0&=&b+hx_{t+h}+c y_{t+h}-y_{t+h}\hfill\cr 0&=&d+e+hz_{t+h}x_{t+h}-f z_{t+h}-z_{t+h}\hfill\end{matrix}
 ">
 Löst man dieses Gleichungssystem - und ich gebe zu, dass ich mich außerstande sah und Hilfe bei
 <a href="https://www.sympy.org/en/index.html">SymPy</a>
@@ -115,6 +120,7 @@ h**3*x + h**2*z + h**2 - h*x + 1), (h**2*z*(a*h + b) -
 </pre>
 Eindrucksvoll und dennoch verwirrend - daher habe ich es hier nochmal aufbereitet:
 <img class="formula" src="images/tex/-357309466.png" alt="\begin{matrix}x_{t+h}&=&{{h(c - 1)(h^2z_t(ah + b) - (-c + h^2 + 1)(ahz_t + d + e)) + (a(-c + h^2 + 1) - h(ah + b))(h^2z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))}\over{(h^4z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))(-c + h^2 + 1)}}\hfill\cr y_{t+h}&=&{{afh - ah^2x_t + ah + bf + bh^2z_t - bhx_t + b - dh^2 - eh^2}\over{-cf - ch^2z_t + chx_t - c + fh^2 + f - h^3x_t + h^2z_t + h^2 - hx_t + 1)}}\hfill\cr z_{t+h}&=&{{h^2z_t(ah + b) - (-c + h^2 + 1)(ahz_t + d + e)}\over{(h^4z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))}}\hfill\end{matrix}
+" title="\begin{matrix}x_{t+h}&=&{{h(c - 1)(h^2z_t(ah + b) - (-c + h^2 + 1)(ahz_t + d + e)) + (a(-c + h^2 + 1) - h(ah + b))(h^2z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))}\over{(h^4z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))(-c + h^2 + 1)}}\hfill\cr y_{t+h}&=&{{afh - ah^2x_t + ah + bf + bh^2z_t - bhx_t + b - dh^2 - eh^2}\over{-cf - ch^2z_t + chx_t - c + fh^2 + f - h^3x_t + h^2z_t + h^2 - hx_t + 1)}}\hfill\cr z_{t+h}&=&{{h^2z_t(ah + b) - (-c + h^2 + 1)(ahz_t + d + e)}\over{(h^4z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))}}\hfill\end{matrix}
 ">
 </p><p>
 Die hier gezeigten Darstellung veranschaulichen den Vorteil des impliziten Eulerverfahrens noch einmal schön: Als Referenz habe
@@ -283,32 +289,30 @@ Lösung von Differentialgleichungssystemen der Mühe unterziehen sollte, das imp
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							One Note Samba Stecey Kent</span><br>
-						<span class="smallabstract"><p>Um ein wenig Abwechslung reinzubringen - etwas lateinamerikanisch angehauchte Musik...
+							Lyapunov-Koeffizienten</span><br>
+						<span class="smallabstract"><p>Nachdem ich nun bereits
+Bifurcation Diagramme
+mittels Gnuplot visualisiert hatte, wollte ich auch Lyapunov Exponenten berechnen und darstellen...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="one_note_samba_stecey_kent.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lyapunov_koeffizienten.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							35c3 - Meine Favoriten zweiter Teil</span><br>
-						<span class="smallabstract"><p>Schon im ersten
-Artikel zum 35c3
-habe ich einige meiner favorisierten Vorträge des 35c3 vorgestellt...
+							Lambda Expressions vs. anon. Inner Classes</span><br>
+						<span class="smallabstract"><p>Angefangen hat alles mit der Information, dass ein Meetup hier in der Nähe zum Thema
+"Java upside down: funktionale Programmierung in Java mit Vavr"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="35c3___meine_favoriten_zweiter_teil.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lambda_expressions_vs__anon__inner_classes.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							35c3 - Meine Favoriten bisher</span><br>
-						<span class="smallabstract"><p>Wie
-jedes Jahr
-habe ich auch diesmal wieder die Vorträge des 35c3 genossen - ich habe nicht alle
-gesehen, aber das hier ist die Auswahl meiner Favoriten aus denen, die ich gesehen habe:
+							<span class="w3-large">							One Note Samba Stecey Kent</span><br>
+						<span class="smallabstract"><p>Um ein wenig Abwechslung reinzubringen - etwas lateinamerikanisch angehauchte Musik...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="35c3___meine_favoriten_bisher.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="one_note_samba_stecey_kent.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -344,32 +348,30 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							One Note Samba Stecey Kent</span><br>
-							<span class="smallabstract"><p>Um ein wenig Abwechslung reinzubringen - etwas lateinamerikanisch angehauchte Musik...
+							Lyapunov-Koeffizienten</span><br>
+							<span class="smallabstract"><p>Nachdem ich nun bereits
+Bifurcation Diagramme
+mittels Gnuplot visualisiert hatte, wollte ich auch Lyapunov Exponenten berechnen und darstellen...
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="one_note_samba_stecey_kent.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lyapunov_koeffizienten.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							35c3 - Meine Favoriten zweiter Teil</span><br>
-							<span class="smallabstract"><p>Schon im ersten
-Artikel zum 35c3
-habe ich einige meiner favorisierten Vorträge des 35c3 vorgestellt...
+							Lambda Expressions vs. anon. Inner Classes</span><br>
+							<span class="smallabstract"><p>Angefangen hat alles mit der Information, dass ein Meetup hier in der Nähe zum Thema
+"Java upside down: funktionale Programmierung in Java mit Vavr"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="35c3___meine_favoriten_zweiter_teil.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lambda_expressions_vs__anon__inner_classes.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							35c3 - Meine Favoriten bisher</span><br>
-							<span class="smallabstract"><p>Wie
-jedes Jahr
-habe ich auch diesmal wieder die Vorträge des 35c3 genossen - ich habe nicht alle
-gesehen, aber das hier ist die Auswahl meiner Favoriten aus denen, die ich gesehen habe:
+							<span class="w3-large">							One Note Samba Stecey Kent</span><br>
+							<span class="smallabstract"><p>Um ein wenig Abwechslung reinzubringen - etwas lateinamerikanisch angehauchte Musik...
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="35c3___meine_favoriten_bisher.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="one_note_samba_stecey_kent.html#content">
  Weiterlesen...
 								</a>
 						</li>

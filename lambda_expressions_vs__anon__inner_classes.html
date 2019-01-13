@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<title>Lambda Expressions vs. anon. Inner Classes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" /><link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/lightbox.js"></script>
+<link href="css/lightbox.css" rel="stylesheet" />
+<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Lambda Expressions vs. anon. Inner Classes</h4>
+					<div class="w3-container">
+						<div class="w3-row">
+							<div class="w3-col m8 s12">
+								vorhergehende Artikel in:
+								<a href="bifurcation_diagramme_gnuplot.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Java</span>
+								</a> <!--/li-->
+								<a href="literaturempfehlung__ki__ai__ml___crap.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Rants</span>
+								</a> <!--/li-->
+							</div>
+							<div class="w3-col m4" style="text-align: right">
+								<span class="w3-opacity">13.01.2019</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Angefangen hat alles mit der Information, dass ein Meetup hier in der Nähe zum Thema
+"Java upside down: funktionale Programmierung in Java mit Vavr"
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p>Auf das Meetup
+<a href="https://www.meetup.com/de-DE/REWE-digital-Ilmenau-Meetup/events/256104335/">Java upside down: funktionale Programmierung in Java mit Vavr</a>
+hat mich ein Kollege aufmerksam gemacht. Ich werde wahrscheinlich hingehen.
+Nun habe ich mich hier bereits hin und wieder als jemand dargestellt, der
+<a href="gc_minimierung_java.html">nicht unbedingt</a>
+ein Fanboy des funktionalen Ansatzes in Java ist.
+</p><p>
+Ich habe allerdings auch schon einmal gezeigt, dass
+<a href="vergleichende_bytecode_analyse.html">manche Neuerungen in Java nicht nur syntactic Sugar</a>
+darstellen und ich mich von handfesten, messbaren Vorteilen durchaus überzeugen lasse.
+</p><p>
+Also habe ich einfach mal einen Test gemacht und 30 mal hintereinander 1000000 Runnables
+instantiiert - einmal als anonymous inner class und einmal als Lambda-Expression. Die Visualisierung -
+<a href="lyapunov_koeffizienten.html">mittels Gnuplot</a>
+- des Ergebnisses ist  unten angehängt. Man sieht, dass die Variante mit anonymer innerer Klasse sowohl
+vor Tätigwerden des JIT-Compilers als auch danach deutliche Nachteile gegenüber den Lambda-Ausdrücken hat.
+Nachdem der JIT tätig geworden ist ist der Speedup sogar wesentlich dramatischer. Diese Versuche fanden mit sehr
+einfachen Implementierungen statt - die jeweilige run-Methode enthielt gerade mal eine Zeile. Vorsichtigerweise probierte
+ich daher den Test nochmals mit einem vergleichsweise umfangreichen Codeabschnitt als Inhalt des Lambda-Ausdrucks -
+das Ergebnis blieb dasselbe.
+</p><p>
+Das deutet wieder mal darauf hin, dass ich bei genügend freier Zeit einmal meinen Codebestand nach alten anonymen Inner Classes
+durchflöhen und diese doch durch Lambdas ersetzen sollte...
+</p><p>
+Java 8 - Runnable example using Lambda expression
+https://www.boraji.com/java-8-runnable-example-using-lambda-expression
+</p>				</div>
+				<div class="w3-container w3-padding" id="links">
+					<hr/>
+					<h3>
+						Links
+					</h3>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Java 8 Lambda - Runnable Example
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://www.codejava.net/java-core/the-java-language/java-8-lambda-runnable-example" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Implementing Runnables the Lambda Way
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://javajdk.net/tutorial/implementing-runnables-the-lambda-way/" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Invokedynamic 101
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://www.javaworld.com/article/2860079/learn-java/invokedynamic-101.html?page=3" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Invokedynamic - Java’s Secret Weapon
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://www.infoq.com/articles/Invokedynamic-Javas-secret-weapon" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-padding" id="screenshots">
+					<hr/>
+					<h3>
+						Screenshots
+					</h3>
+					<div class="w3-row">
+							<div class="w3-col  w3-center">
+							<a href="images/anonymousvslambdainstantiation.png" rel="lightbox[screenshots]"
+							   title="Zeitbedarf für Instantiierung"
+							   class="img">
+								<div class="screenshotthumb center">
+									<img class="center" src="images/anonymousvslambdainstantiation_t.png">
+									<div class="thumbnailcaption">
+										Zeitbedarf für Instantiierung
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git(lab|hub).html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-black w3-margin-bottom">Rants</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Lyapunov-Koeffizienten</span><br>
+						<span class="smallabstract"><p>Nachdem ich nun bereits
+Bifurcation Diagramme
+mittels Gnuplot visualisiert hatte, wollte ich auch Lyapunov Exponenten berechnen und darstellen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lyapunov_koeffizienten.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							One Note Samba Stecey Kent</span><br>
+						<span class="smallabstract"><p>Um ein wenig Abwechslung reinzubringen - etwas lateinamerikanisch angehauchte Musik...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="one_note_samba_stecey_kent.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							35c3 - Meine Favoriten zweiter Teil</span><br>
+						<span class="smallabstract"><p>Schon im ersten
+Artikel zum 35c3
+habe ich einige meiner favorisierten Vorträge des 35c3 vorgestellt...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="35c3___meine_favoriten_zweiter_teil.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Lyapunov-Koeffizienten</span><br>
+							<span class="smallabstract"><p>Nachdem ich nun bereits
+Bifurcation Diagramme
+mittels Gnuplot visualisiert hatte, wollte ich auch Lyapunov Exponenten berechnen und darstellen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lyapunov_koeffizienten.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							One Note Samba Stecey Kent</span><br>
+							<span class="smallabstract"><p>Um ein wenig Abwechslung reinzubringen - etwas lateinamerikanisch angehauchte Musik...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="one_note_samba_stecey_kent.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							35c3 - Meine Favoriten zweiter Teil</span><br>
+							<span class="smallabstract"><p>Schon im ersten
+Artikel zum 35c3
+habe ich einige meiner favorisierten Vorträge des 35c3 vorgestellt...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="35c3___meine_favoriten_zweiter_teil.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>

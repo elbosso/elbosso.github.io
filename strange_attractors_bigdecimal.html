@@ -106,32 +106,38 @@ Ein weiterer Beleg für die unzureichende Qualität bei der Berechnung mathemati
 mittels Java - zeigt sich bei der Berechnung der Differentialgleichung erster Ordung
 </p><p>
 <img class="formula" src="images/tex/-20288391301.png" alt="\dot x=(ku-ax)/t;
+" title="\dot x=(ku-ax)/t;
 ">
 </p><p>
 mit
 </p><p>
 <img class="formula" src="images/tex/-20288391302.png" alt="\begin{matrix}k&=&1\hfill\cr a&=&1\hfill\cr t&=&1\hfill\end{matrix}
+" title="\begin{matrix}k&=&1\hfill\cr a&=&1\hfill\cr t&=&1\hfill\end{matrix}
 ">
 </p><p>
 und dem Anfangswert
 </p><p>
 <img class="formula" src="images/tex/-20288391303.png" alt="x_0=0
+" title="x_0=0
 ">
 </p><p>
 Hier sollte sich der Zustand (der Wert von x) asymptotisch dem Wert der Störung u annähern. Setzt man zum Beispiel
 </p><p>
 <img class="formula" src="images/tex/-20288391304.png" alt="u=1
+" title="u=1
 ">
 </p><p>
 so sollte sich bei numerischer Lösung des Gleichungssystems der Wert von x langsam dem Wert 1 nähern. Behandelt man die Differentialgleichung
 aber mit dem Eulerverfahren mit einer festen Schrittweite von
 </p><p>
 <img class="formula" src="images/tex/-20288391305.png" alt="h=0.1
+" title="h=0.1
 ">
 </p><p>
 so ändert sich der Wert von x ab Schritt 333 nicht mehr - er bleibt bei
 </p><p>
 <img class="formula" src="images/tex/-20288391306.png" alt="x_{333}=0.9999999999999996
+" title="x_{333}=0.9999999999999996
 ">
 </p><p>
 stehen. Wenn aber gerade die 16. Stelle nach dem Komma für einen nachfolgenden Rechenschritt wichtig wäre - oder schlimmer noch:
@@ -142,6 +148,7 @@ Zum Vergleich noch die Werte an dieser Stelle bei der Berechnung mittels des Typ
 (zur Darstellung schneide ich hier jeweils nach 20 Nachkommastellen ab):
 </p><p>
 <img class="formula" src="images/tex/-20288391307.png" alt="\begin{matrix}x_{333}&=&0.99999999999999942089\hfill\cr x_{334}&=&0.99999999999999947880\hfill\cr x_{335}&=&0.99999999999999953092\hfill\end{matrix}
+" title="\begin{matrix}x_{333}&=&0.99999999999999942089\hfill\cr x_{334}&=&0.99999999999999947880\hfill\cr x_{335}&=&0.99999999999999953092\hfill\end{matrix}
 ">
 </p><p>
 Man sieht deutlich, dass die Berechnung nach dem 333. Schritt wegen der größeren Präzision weitergeht und auch den doch schon
@@ -323,32 +330,30 @@ von der benutzten Programmiersprache und konkreten Implementierung abhängt:
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							One Note Samba Stecey Kent</span><br>
-						<span class="smallabstract"><p>Um ein wenig Abwechslung reinzubringen - etwas lateinamerikanisch angehauchte Musik...
+							Lyapunov-Koeffizienten</span><br>
+						<span class="smallabstract"><p>Nachdem ich nun bereits
+Bifurcation Diagramme
+mittels Gnuplot visualisiert hatte, wollte ich auch Lyapunov Exponenten berechnen und darstellen...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="one_note_samba_stecey_kent.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lyapunov_koeffizienten.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							35c3 - Meine Favoriten zweiter Teil</span><br>
-						<span class="smallabstract"><p>Schon im ersten
-Artikel zum 35c3
-habe ich einige meiner favorisierten Vorträge des 35c3 vorgestellt...
+							Lambda Expressions vs. anon. Inner Classes</span><br>
+						<span class="smallabstract"><p>Angefangen hat alles mit der Information, dass ein Meetup hier in der Nähe zum Thema
+"Java upside down: funktionale Programmierung in Java mit Vavr"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="35c3___meine_favoriten_zweiter_teil.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lambda_expressions_vs__anon__inner_classes.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							35c3 - Meine Favoriten bisher</span><br>
-						<span class="smallabstract"><p>Wie
-jedes Jahr
-habe ich auch diesmal wieder die Vorträge des 35c3 genossen - ich habe nicht alle
-gesehen, aber das hier ist die Auswahl meiner Favoriten aus denen, die ich gesehen habe:
+							<span class="w3-large">							One Note Samba Stecey Kent</span><br>
+						<span class="smallabstract"><p>Um ein wenig Abwechslung reinzubringen - etwas lateinamerikanisch angehauchte Musik...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="35c3___meine_favoriten_bisher.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="one_note_samba_stecey_kent.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -384,32 +389,30 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							One Note Samba Stecey Kent</span><br>
-							<span class="smallabstract"><p>Um ein wenig Abwechslung reinzubringen - etwas lateinamerikanisch angehauchte Musik...
+							Lyapunov-Koeffizienten</span><br>
+							<span class="smallabstract"><p>Nachdem ich nun bereits
+Bifurcation Diagramme
+mittels Gnuplot visualisiert hatte, wollte ich auch Lyapunov Exponenten berechnen und darstellen...
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="one_note_samba_stecey_kent.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lyapunov_koeffizienten.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							35c3 - Meine Favoriten zweiter Teil</span><br>
-							<span class="smallabstract"><p>Schon im ersten
-Artikel zum 35c3
-habe ich einige meiner favorisierten Vorträge des 35c3 vorgestellt...
+							Lambda Expressions vs. anon. Inner Classes</span><br>
+							<span class="smallabstract"><p>Angefangen hat alles mit der Information, dass ein Meetup hier in der Nähe zum Thema
+"Java upside down: funktionale Programmierung in Java mit Vavr"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="35c3___meine_favoriten_zweiter_teil.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lambda_expressions_vs__anon__inner_classes.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							35c3 - Meine Favoriten bisher</span><br>
-							<span class="smallabstract"><p>Wie
-jedes Jahr
-habe ich auch diesmal wieder die Vorträge des 35c3 genossen - ich habe nicht alle
-gesehen, aber das hier ist die Auswahl meiner Favoriten aus denen, die ich gesehen habe:
+							<span class="w3-large">							One Note Samba Stecey Kent</span><br>
+							<span class="smallabstract"><p>Um ein wenig Abwechslung reinzubringen - etwas lateinamerikanisch angehauchte Musik...
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="35c3___meine_favoriten_bisher.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="one_note_samba_stecey_kent.html#content">
  Weiterlesen...
 								</a>
 						</li>
