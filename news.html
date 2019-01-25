@@ -114,6 +114,20 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="http://www.evanmiller.org/" target="_blank">Evan Miller’s News</a>
+		</div>
+		<div>
+			<h3>The Amex EveryDay Bonus: A Stochastic Valuation Model</h3>
+		</div>
+		<div class="collectiontext">
+			How much is the EveryDay Bonus from American Express worth? A probabilistic investigation: <a href="//www.evanmiller.org/amex-everyday-bonus-stochastic-valuation.html">The Amex EveryDay Bonus: A Stochastic Valuation Model</a>
+		</div>
+		<div class="collectionhref">
+		<a href="http://www.evanmiller.org/amex-everyday-bonus-stochastic-valuation.html" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
@@ -194,138 +208,6 @@ display('news.html')
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/uo4tG_Iq8lQ/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>On Thinking About Infrastructure as Code</h3>
-		</div>
-		<div class="collectiontext">
-			<p>I just finished reading Cindy Sridharan&rsquo;s excellent post titled &ldquo;<a href="https://medium.com/@copyconstruct/effective-mental-models-for-code-and-systems-7c55918f1b3e">Effective Mental Models for Code and Systems</a>,&rdquo; and some of the points Sridharan makes immediately jumped out to me&mdash;not for &ldquo;traditional&rdquo; code development, but for the development of infrastructure as code. Take a few minutes to go read the post&mdash;seriously, it&rsquo;s <em>really</em> good. Done reading it? Good, now we can proceed.</p>
-
-<p>Some of these thoughts I was going to share in a planned presentation at Interop ITX in May 2019, but since I&rsquo;m unable to speak at the conference this year due to schedule conflicts (my son&rsquo;s graduation from college and a major anniversary trip for me and Crystal), I figured now was as good a time as any, especially given the timing of Sridharan&rsquo;s post. Also, a lot of these thoughts stem from a discussion with a colleague at work, which in turn led to <a href="https://packetpushers.net/podcast/full-stack-journey-027-understanding-infrastructure-as-code-and-terraform-with-curt-micol/">this Full Stack Journey podcast on practical infrastructure as code</a>.</p>
-
-<p>Anyway, let me get back to Sridharan&rsquo;s post. One of the things that jumped out to me right away was Sridharan&rsquo;s proposed hierarchy of needs for code:</p>
-
-<p><img src="https://blog.scottlowe.org/public/img/sridharan-hierarchy-needs.png" alt="Sridharan's hierarcy of needs for code" /></p>
-
-<p>As you can see in the image (full credit for which belongs to Sridharan, as far as I know), making code <em>understandable</em> lies at the bottom of the hierarchy of needs, meaning it is the most basic necessity needed. Until this need is satisfied, you can&rsquo;t move on to the other needs. Sridharan puts it this way:</p>
-
-<blockquote>
-<p>Optimizing for understandability can result in optimizing for everything else on the hierarchy depicted above.</p>
-</blockquote>
-
-<p>Many readers have probably heard of <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">the DRY principle</a> when it comes to writing code. (DRY stands for Don&rsquo;t Repeat Yourself.) In many of the examples of infrastructure as code that I see online, the authors of these examples tend to use control structures such as Terraform&rsquo;s <code>count</code> construct when creating multiple infrastructure objects. I&rsquo;ll use some code that I wrote as an example: consider the use of a module to create a group of AWS instances as illustrated <a href="https://github.com/scottslowe/learning-tools/blob/master/terraform/aws/ic-module/main.tf">here</a>. Yes, there is very little repetition in this code. The code is modular and re-usable. But is it <em>understandable</em>? Have I optimized for understandability, and (by extension) all the other needs listed in Sridharan&rsquo;s hierarchy of needs for code?</p>
-
-<p>Consider this as well: have I <em>really</em> violated the DRY principle if I were to explicitly spell out, with proper parameterization, the creation of each infrastructure object instead of using a <code>count</code> control structure or a module as a layer of abstraction? Is it not still true that there remains only &ldquo;a single, unambiguous, authoritative representation&rdquo; of each infrastructure object?</p>
-
-<p>It seems to me that the latter approach&mdash;explicitly spelling out the creation of infrastructure objects in your infrastructure as code&mdash;may be a bit more verbose, but eminently more understandable and does not violate the DRY principle. It may not be as elegant, but as individuals creating infrastructure as code artifacts should be we optimizing for elegance, or optimizing for understandability?</p>
-
-<p>Sridharan also talks about being explicit:</p>
-
-<blockquote>
-<p>&hellip;it is worth reiterating this again that implicit assumptions and dependencies are one of the worst offenders when it comes to contributing to the obscurity of code.</p>
-</blockquote>
-
-<p>Again, it seems to me that&mdash;for infrastructure as code especially&mdash;being explicit about the creation of infrastructure objects not only contributes to greater understandability, but also helps eliminate implicit assumptions and dependencies. Instead of using a loop or control structure to manage the creation of multiple objects, spell out the creation of those objects explicitly. It may seem like a violation of the DRY principle to have three (nearly) identical snippets of code creating three (nearly) identical compute instances, but applying the DRY principle here means ensuring that each instance is authoritatively represented in the code only once, not that we are minimizing lines of code.</p>
-
-<p>&ldquo;Now wait,&rdquo; you say. &ldquo;It&rsquo;s not my fault if someone can&rsquo;t read my Terraform code. They need to learn more about Terraform, and then they&rsquo;ll better understand how the code works.&rdquo;</p>
-
-<p>Well, Sridharan talks about that as well in a discussion of properly identifying the target audience of your artifacts:</p>
-
-<blockquote>
-<p>In general, when identifying the target audience and deciding what narrative they need to be exposed to in order to allow for them to get up and running quickly, it becomes necessary to consider the audience’s background, level of domain expertise and experience.</p>
-</blockquote>
-
-<p>Sridharan goes on to point out that in situations where both novices and veterans may be present in the target audience, the experience of the novice is key to determining the understandability of the code. So, if we are optimizing for understandability, can we afford to take a &ldquo;hands off&rdquo; approach to maintenance of the code by our successors? Can we be guaranteed that a successor tasked with maintaining our code will have the same level of knowledge and experience we have?</p>
-
-<p>I&rsquo;ll stop here; there are more good points that Sridharan makes, but for now this post suffices to capture most of the thinking generated by the article when it comes to infrastructure as code. After I&rsquo;ve had some time to continue to parse Sridharan&rsquo;s article, I may come back with some additional thoughts. In the meantime, feel free <a href="https://twitter.com/scott_lowe">to engage with me on Twitter</a> if you have some thoughts or perspectives you&rsquo;d like to share on this matter.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/BF2Hey6UDCE" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/BF2Hey6UDCE/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>The Linux Migration: December 2018 Progress Report</h3>
-		</div>
-		<div class="collectiontext">
-			<p>In December 2016, I kicked off a migration from macOS to Linux as my primary laptop OS. Throughout 2017, I chronicled my progress and challenges along the way; links to all those posts are found <a href="https://blog.scottlowe.org/2018/12/23/the-linux-migration-series/">here</a>. Although I stopped the migration in August 2017, I restarted it in April 2018 when I left VMware to join Heptio. In this post, I&rsquo;d like to recap where things stand as of December 2018, after 8 months of full-time use of Linux as my primary laptop OS.</p>
-
-<p>I&rsquo;ll structure this post roughly as a blend of the formats I used in my <a href="https://blog.scottlowe.org/2017/04/12/linux-migration-april-2017-progress-report/">April 2017</a> and <a href="https://blog.scottlowe.org/2017/07/10/linux-migration-july-2017-progress-report/">July 2017</a> progress reports.</p>
-
-<h2 id="hardware">Hardware</h2>
-
-<p>Readers may recall that I was using a Dell Latitude E7370 (see <a href="https://blog.scottlowe.org/2017/01/30/review-dell-latitude-e7370/">my E7370 hardware review</a>) up until August 2017, when I put the Linux migration on hold indefinitely due to productivity concerns. Upon moving to Heptio, I switched to a Lenovo ThinkPad X1 Carbon (see <a href="https://blog.scottlowe.org/2018/04/13/review-lenovo-thinkpad-x1-carbon/">here</a> for my review of the X1 Carbon&mdash;the &ldquo;TL;DR&rdquo; is that I <em>love</em> it). In my home office, the X1 Carbon connects to a USB-C expansion hub that provides connectivity to a 34&rdquo; 21:9 ultrawide curved monitor, external HD webcam, and a USB headset for Zoom meetings. I also recently converted my Mac Pro to Linux as well (see <a href="https://blog.scottlowe.org/2018/12/19/running-fedora-on-my-mac-pro/">this post</a> for details); that&rsquo;s a workstation with dual quad-core Xeon CPUs, 24GB of RAM, a 512GB SSD, a 1TB hard drive, and a 700GB PCIe SSD from Micron, also connected to a 34&rdquo; 21:9 ultrawide curved monitor.</p>
-
-<h2 id="linux-distribution">Linux Distribution</h2>
-
-<p>Early (very early) in the migration I thought I would end up using Ubuntu 16.04, but I switched to <a href="https://getfedora.org">Fedora</a> and haven&rsquo;t looked back. I started with Fedora 25 on the E7370, switching to Fedora 27 on the X1 Carbon and later upgrading to Fedora 28. The Mac Pro started out with Fedora 27 (<a href="https://blog.scottlowe.org/2018/12/19/running-fedora-on-my-mac-pro/">this post</a> outlines the reasons why) and was upgraded to Fedora 28.</p>
-
-<h2 id="applications">Applications</h2>
-
-<p>By and large, application usage remains mostly unchanged from earlier:</p>
-
-<ul>
-<li><em>Markdown:</em> I switched from <a href="http://www.sublimetext.com/">Sublime Text</a> to <a href="https://code.visualstudio.com/">Visual Studio Code</a>, but otherwise my Markdown workflows remain largely the same. I still use Markdown for the vast majority of my content creation.</li>
-<li><em>Browsing:</em> While I have <a href="https://www.google.com/chrome/">Google Chrome</a> installed, I use <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a> for the vast majority of my browsing (I don&rsquo;t care for the changes Chrome made with regard to signing you into the browser when you sign into Google). I make regular use of the Firefox Multi-Account Containers add-on to streamline some browser-based workflows while also protecting my privacy.</li>
-<li><em>Chat/Instant messaging:</em> I continue to use <a href="https://slack.com/downloads/linux">the Slack Linux client</a> and <a href="https://pidgin.im/">Pidgin</a>. For IRC&mdash;though I rarely use it these days&mdash;I have <a href="https://hexchat.github.io/">HexChat</a>, as before.</li>
-<li><em>Cloud storage/sync:</em> GNOME offers built-in integration for Google Drive, and I&rsquo;m still using <a href="https://www.dropbox.com/">Dropbox</a> for non-confidential information. I&rsquo;ll probably have to start using <a href="https://www.odrive.com/">ODrive</a> again for access to OneDrive.</li>
-<li><em>Basic office productivity:</em> I&rsquo;m still using <a href="https://www.libreoffice.org/">LibreOffice</a>, though it&rsquo;s a newer version.</li>
-<li><em>Graphics:</em> No changes here, except some occasional use of LibreOffice Draw.</li>
-<li><em>Mind mapping:</em> I&rsquo;m still using <a href="http://www.xmind.net/">XMind</a>, and still evaluating whether a Pro license is needed or not. I haven&rsquo;t had a strong need for the extra features yet.</li>
-<li><em>E-mail:</em> I continue to use <a href="https://www.mozilla.org/en-US/thunderbird/">Thunderbird</a>, and I resolved the nagging performance concerns that I noted during the July 2017 progress report (these appear to have been caused by some TCP timeouts related to the NAT configuration on my ASA 5505). I&rsquo;ve settled on IMAP/SMTP for all e-mail access. Having recently re-joined VMware via the Heptio acquisition, I&rsquo;m currently using <a href="https://github.com/jobisoft/TbSync">TbSync</a> with the Active Sync add-on for calendar and contacts access (it also provides access to the Global Address List). The TbSync CalDAV/CardDAV provider enables access to the existing CalDAV- and CardDAV-based sync service I&rsquo;m using on my mobile devices, providing a smoother user experience.</li>
-<li><em>Task management:</em> Aside from switching from Sublime Text to Visual Studio Code, this solution remains the same (plain text-based files on Dropbox, changes reconciled via a graphical diff program).</li>
-<li><em>Calendaring/time management:</em> I gave up on GNOME Calendar and settled for leveraging Lightning inside Thunderbird. Via the TbSync add-on, I have access to corporate and personal calendars. Access to Google Calendar (which is what we were using at Heptio) was and is problematic; I managed to get read-only access from Thunderbird, but read/write access was only through the web interface.</li>
-<li><em>Password management:</em> I switched back to <a href="https://1password.com/">1Password</a>, leveraging the 1Password X add-on for Firefox for access from my Linux systems.</li>
-<li><em>Corporate connectivity:</em> This wasn&rsquo;t needed at Heptio, but now that I&rsquo;m back at VMware I&rsquo;m back to using the Linux client for VMware Horizon and <code>vpnc</code> (with integration into GNOME) for VPN connectivity.</li>
-<li><em>Social media:</em> I&rsquo;m just using the Twitter web site; with the API changes, there aren&rsquo;t really any other options on Linux.</li>
-</ul>
-
-<p>So what&rsquo;s working well with this configuration?</p>
-
-<ul>
-<li>Calendar access via TbSync seems to work really well; I&rsquo;m really pleased that the CalDAV/CardDAV provider for TbSync works as seamlessly as it does.</li>
-<li>As I mentioned above, the performance issues I was seeing with e-mail seem to have been resolved. I&rsquo;m not seeing the same lockups and delays that I was seeing in 2017.</li>
-<li>Switching to the <a href="https://github.com/nana-4/materia-theme">Materia theme</a> for GNOME/GTK has relieved the eyestrain issues I reported in <a href="https://blog.scottlowe.org/2017/07/10/linux-migration-july-2017-progress-report/">my July 2017 update</a>.</li>
-</ul>
-
-<p>What&rsquo;s not working well?</p>
-
-<ul>
-<li>Now that I&rsquo;m back at VMware via the Heptio acquisition, I&rsquo;m moving back into a Microsoft-heavy environment. I anticipate I&rsquo;ll run into compatibility issues between LibreOffice and Office 365, as I did before, though there is a chance that the newer version of LibreOffice will work better. It&rsquo;s still too early to tell yet.</li>
-</ul>
-
-<h2 id="where-i-still-use-macos">Where I Still Use macOS</h2>
-
-<p>With <a href="https://blog.scottlowe.org/2018/12/19/running-fedora-on-my-mac-pro/">the migration of my Mac Pro to Fedora 28</a>, that leaves my 2017 MacBook Pro as the only remaining macOS-based system. I will still use it for podcast recording, viewing archived e-mail, and viewing documents in formats that I couldn&rsquo;t/didn&rsquo;t translate to a Linux equivalent (OmniGraffle, OmniOutliner, and MindNode, primarily). I&rsquo;ll also use it to transcode media into industry-standard formats (MP3 and MP4/H.264) that my Linux systems can use. Aside from that, it sees very little regular use.</p>
-
-<h2 id="summary">Summary</h2>
-
-<p>Through a combination of technology-related improvements in various applications plus personal growth on my part, I&rsquo;ve been able to make Linux my full-time primary laptop OS since April 2018. Hopefully, moving back to VMware and its Microsoft-centric environment won&rsquo;t present the same kind of insurmountable hurdles I saw last time. Time will tell whether my hopes are valid, but I do want to do a better job of keeping readers informed about how things are going overall. As always, if you have questions, comments, or suggestions, I encourage you to <a href="https://twitter.com/scott_lowe">contact me on Twitter</a>.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/0V4SmjV-1dk" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/0V4SmjV-1dk/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="http://www.evanmiller.org/" target="_blank">Evan Miller’s News</a>
-		</div>
-		<div>
-			<h3>Things That Bother Me About Swift</h3>
-		</div>
-		<div class="collectiontext">
-			I’m learning Swift. Some minor grievances I have with the language: <a href="//www.evanmiller.org/things-that-bother-me-about-swift.html">Things That Bother Me About Swift</a>
-		</div>
-		<div class="collectionhref">
-		<a href="http://www.evanmiller.org/things-that-bother-me-about-swift.html" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -333,39 +215,39 @@ display('news.html')
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-  <a href="satelliten_layer.html">
-<div class="date">19.01.2019</div>
-<h3>Satelliten-Layer</h3>
+  <a href="layers_ueber_java_service_provider_infrastructure.html">
+<div class="date">25.01.2019</div>
+<h3>Layers über Java Service Provider Infrastructure</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ich habe im Zuge der letzten erfolgreichen
-Mars-Landung
-ein Thema wiederbelebt, das schon länger auf meiner
-Platte geschlummert
-hat:
+<p>Nachdem Berichte über Neuigkeiten in
+EBMap4D
+schon längere Zeit her sind und die letzten Artikel sich fast ausschließlich mit
+Tile-Servern
+beschäftigt haben, hier nun ein neues Update zu
+EBMap4D.
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="esp8266_zigbee.html">
-<div class="date">19.01.2019</div>
-<h3>ESP8266 und ZigBee</h3>
+  <a href="beaninfo_annotationprocessor_neu.html">
+<div class="date">25.01.2019</div>
+<h3>BeanInfo AnnotationProcessor neu</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Ich habe neulich bereits über einen
-Fund in meiner Bastelkiste
-berichtet und jetzt hatte ich wieder eine Idee, die sich meiner Ansicht nach in den anstehenden langen
-dunklen Nächten zu untersuchen lohnen würde: Will man einen ESP 8266 schlafen legen, ist das sehr einfach - man kann ihn aufwecken,
-indem man an einem seiner Beine zieht.
+<p>Wie ich bereits in früheren
+Artikeln
+dargelegt
+habe,
+interessiert mich eine zeitgemäßere Art der BeanInfo-Erstellung ohne IDE-Vendor-Lockin...
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="lyapunov_koeffizienten.html">
-<div class="date">13.01.2019</div>
-<h3>Lyapunov-Koeffizienten</h3>
+  <a href="terry_miles.html">
+<div class="date">25.01.2019</div>
+<h3>Terry Miles</h3>
 <div class="abstract">
-<p>Nachdem ich nun bereits
-Bifurcation Diagramme
-mittels Gnuplot visualisiert hatte, wollte ich auch Lyapunov Exponenten berechnen und darstellen...
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Der Typ (the Dude on the public piano) macht mir jedenfalls immer gute Laune...
 </p></div>   </a>
 </li>
 </ul>
@@ -475,7 +357,7 @@ Garten
 <h3>
 Geo
 </h3>
-	<span class="nav-item-counter">29</span>
+	<span class="nav-item-counter">30</span>
 </header>
 <div class="nav-item-body">
 <p>Karten und mehr run um Ortsinformationen</p>
@@ -488,7 +370,7 @@ Geo
 <h3>
 Git(lab|hub)
 </h3>
-	<span class="nav-item-counter">43</span>
+	<span class="nav-item-counter">45</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um Gitlab und Github</p>
@@ -527,7 +409,7 @@ Hardware
 <h3>
 Java
 </h3>
-	<span class="nav-item-counter">218</span>
+	<span class="nav-item-counter">220</span>
 </header>
 <div class="nav-item-body">
 <p>Hauptsächlich Desktop Themen und Java SE</p>
@@ -540,7 +422,7 @@ Java
 <h3>
 Komponenten
 </h3>
-	<span class="nav-item-counter">151</span>
+	<span class="nav-item-counter">153</span>
 </header>
 <div class="nav-item-body">
 <p>Software-Komponenten</p>
@@ -592,7 +474,7 @@ Markup
 <h3>
 Music
 </h3>
-	<span class="nav-item-counter">23</span>
+	<span class="nav-item-counter">24</span>
 </header>
 <div class="nav-item-body">
 <p>Musik, die mir gefällt</p>
