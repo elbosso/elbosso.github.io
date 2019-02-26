@@ -114,7 +114,7 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
-		<a href="/atom/index.xml" target="_blank">Dan Luu</a>
+		<a href="https://danluu.com/atom/index.xml" target="_blank">Dan Luu</a>
 		</div>
 		<div>
 			<h3>Randomized trial on gender in Overwatch</h3>
@@ -374,7 +374,7 @@ Robert Schuessler, Wesley Aptekar-Cassels, Julia Evans, Paul Gowder, Jonathan Da
 
 		</div>
 		<div class="collectionhref">
-		<a href="/overwatch-gender/" target="_blank">Öffnen</a>
+		<a href="https://danluu.com/overwatch-gender/" target="_blank">Öffnen</a>
 		</div>
 	</li>
 	<li class="anriss">
@@ -506,190 +506,6 @@ nodeRegistration:
 		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/jhmkIEklZ3o/" target="_blank">Öffnen</a>
 		</div>
 	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Scraping Envoy Metrics Using the Prometheus Operator</h3>
-		</div>
-		<div class="collectiontext">
-			<p>On a recent customer project, I recommended the use of <a href="https://github.com/heptio/contour">Heptio Contour</a> for ingress on their Kubernetes cluster. For this particular customer, Contour&rsquo;s support of the IngressRoute CRD and the ability to delegate paths via IngressRoutes made a lot of sense. Of course, the customer wanted to be able to scrape metrics using <a href="https://prometheus.io/">Prometheus</a>, which meant I not only needed to scrape metrics from Contour but <em>also</em> from <a href="https://www.envoyproxy.io/">Envoy</a> (which provides the data plane for Contour). In this post, I&rsquo;ll show you how to scrape metrics from Envoy using the Prometheus Operator.</p>
-
-<p>First, I&rsquo;ll assume that you&rsquo;ve already installed and configured Prometheus using the Prometheus Operator, a task which is already fairly well-documented and well-understood. If this is something you think would be helpful for me to write a blog post on, please <a href="https://twitter.com/scott_lowe">contact me on Twitter</a> and let me know.</p>
-
-<p>The overall process looks something like this:</p>
-
-<ol>
-<li>Modify the Envoy DaemonSet (or Deployment, depending on your preference) to add a sidecar container and expose additional ports.</li>
-<li>Modify the Service for the Envoy DaemonSet/Deployment to expose the ports you added in step 1.</li>
-<li>Add a ServiceMonitor object (a CRD added by the Prometheus Operator) to tell Prometheus to scrape the metric from Envoy.</li>
-</ol>
-
-<p>Let&rsquo;s take a closer look at each of these steps.</p>
-
-<h2 id="modifying-the-envoy-daemonset-deployment">Modifying the Envoy DaemonSet/Deployment</h2>
-
-<p>The first step is to modify the Envoy DaemonSet (or Deployment) to include a sidecar container and expose some additional ports. I found it helpful to use <a href="https://github.com/heptio/gimbal/blob/master/deployment/contour/03-envoy.yaml">this example DaemonSet configuration from the Heptio Gimbal repository</a> as a guide. There are three sets of changes you need to make:</p>
-
-<ol>
-<li>Add port 8002 to the Envoy container.</li>
-<li>Add a sidecar container for the statsd-exporter.</li>
-<li>Modify the Contour initContainer to add the <code>--statsd-enabled</code> flag.</li>
-</ol>
-
-<p>The first set of changes&mdash;adding port 8002&mdash;isn&rsquo;t reflected in the linked Gimbal example because that configuration assumes Prometheus has a scrape configuration that finds the annotations. From everything I&rsquo;ve been able to find so far, the Prometheus Operator doesn&rsquo;t use that sort of configuration, so you&rsquo;ll have to manually add the necessary ports. So add port 8002 to the list of ports for the Envoy container using something like this:</p>
-
-<pre><code class="language-yaml">ports:
-- containerPort: 8002
-  hostPort: 8002
-  name: metrics
-  protocol: TCP
-</code></pre>
-
-<p>Next, add a sidecar container for the statsd-exporter. You can see this in <a href="https://github.com/heptio/gimbal/blob/master/deployment/contour/03-envoy.yaml#L52-#L64">lines 52 through 64</a> in the example configuration from Gimbal. You&rsquo;ll also need to add a reference to a ConfigMap (see <a href="https://github.com/heptio/gimbal/blob/master/deployment/contour/03-envoy.yaml#L88-#L90">lines 88 through 90</a>); the ConfigMap itself can be found <a href="https://github.com/heptio/gimbal/blob/master/deployment/contour/02-statsd.yaml">here</a>. Note that the Gimbal example uses the name &ldquo;metrics&rdquo; for port 9102 on the sidecar container; I chose to differentiate this using the name &ldquo;statsd-exporter&rdquo;.</p>
-
-<p>The final change is reflected <a href="https://github.com/heptio/gimbal/blob/master/deployment/contour/03-envoy.yaml#L75">on line 75</a> of the Gimbal example.</p>
-
-<p>Once all these changes have been made, you&rsquo;re ready to proceed to the next step.</p>
-
-<h2 id="modifying-the-envoy-service">Modifying the Envoy Service</h2>
-
-<p>The changes here are pretty straightforward; you&rsquo;re just going to add a couple additional ports on the service:</p>
-
-<pre><code class="language-yaml">ports:
-- port: 8002
-  name: metrics
-  protocol: TCP
-- port: 9102
-  name: statsd-exporter
-  protocol: TCP
-</code></pre>
-
-<p>These should be the only changes to the Service that are needed.</p>
-
-<h2 id="creating-a-servicemonitor">Creating a ServiceMonitor</h2>
-
-<p>Finally, we can create the Prometheus ServiceMonitor to tell Prometheus to scrape the newly-exposed ports to gather metrics. Here&rsquo;s an example ServiceMonitor definition you could use:</p>
-
-<pre><code class="language-yaml">apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  labels:
-    prometheus: kube-prometheus
-  name: envoy
-  namespace: monitoring
-spec:
-  selector:
-    matchLabels:
-      app: envoy
-  namespaceSelector:
-    matchNames:
-      - ingress
-  endpoints:
-  - targetPort: 8002
-    interval: 30s
-    path: /stats/prometheus
-  - targetPort: 9102
-    interval: 30s
-</code></pre>
-
-<p>There are a few changes you might need to make to <em>your</em> ServiceMonitor definition:</p>
-
-<ul>
-<li>Under <code>metadata.labels</code>, you&rsquo;ll want to change the value of the <code>prometheus</code> label to point to the Prometheus Operator instance in your cluster.</li>
-<li>You may need to specify a different namespace.</li>
-<li>Under <code>spec.selector.MatchLabels</code> and <code>spec.namespaceSelector</code>, you&rsquo;ll most likely need to specify different values here. <em>Make sure</em> the labels listed under <code>spec.selector.MatchLabels</code> matches the label(s) on the Envoy Service, not the Envoy Pods.</li>
-<li>Note that the path of &ldquo;/stats/prometheus&rdquo; under <code>spec.endpoints</code> for port 8002 is <em>required</em>.</li>
-</ul>
-
-<p>If you are using NetworkPolicies in your Kubernetes cluster, you&rsquo;ll want to be sure that your policies allow the appropriate traffic from Prometheus to the Envoy Pods.</p>
-
-<h2 id="applying-the-changes">Applying the Changes</h2>
-
-<p>With all the changes in place, you&rsquo;re ready to use <code>kubectl</code> to apply the changes to the DaemonSet/Deployment and the Service, and then to create the ServiceMonitor. Assuming you don&rsquo;t have any typos (I almost always do!), you should be able to browse the Prometheus web interface and see your Envoy instances show up as targets for Prometheus. Now you&rsquo;re good to go!</p>
-
-<p>If you have any questions or run into issues, feel free to <a href="https://twitter.com/scott_lowe">contact me on Twitter</a> and I&rsquo;ll do my best to help you out.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/ZUWoZDmr_Oo" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/ZUWoZDmr_Oo/" target="_blank">Öffnen</a>
-		</div>
-	</li>
-	<li class="anriss">
-		<div class="collectionhref">
-		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
-		</div>
-		<div>
-			<h3>Technology Short Take 110</h3>
-		</div>
-		<div class="collectiontext">
-			<p>Welcome to Technology Short Take #110! Here&rsquo;s a look at a few of the articles and posts that have caught my attention over the last few weeks. I hope something I&rsquo;ve included here is useful for you also!</p>
-
-<h2 id="networking">Networking</h2>
-
-<ul>
-<li>Via <a href="https://pynet.twb-tech.com/">Kirk Byers</a> (who is himself a <em>fantastic</em> resource), I read a couple of articles on network automation that I think readers may find helpful. First up is a treatise from Mircea Ulinic <a href="https://mirceaulinic.net/2019-01-09-do-we-need-network-automation/">on whether network automation is needed</a>. Next is an older article from Patrick Ogenstad that provides <a href="https://networklore.com/ztp-tutorial/introduction/">an introduction to ZTP</a> (Zero Touch Provisioning).</li>
-<li>The folks over at Cilium took a look at a recent CNI benchmark comparison and unpacked it a bit. There&rsquo;s some good information in <a href="https://cilium.io/blog/2018/12/03/cni-performance/">their article</a>.</li>
-<li>I first ran into Forward Networks a few years ago at Fall ONUG in New York. At the time, I was recommending that they explore integration with NSX. Fast-forward to this year, and the company <a href="https://www.prnewswire.com/news-releases/forward-networks-announces-support-for-vmware-nsx-data-center-300779095.html">announces support for NSX</a> and (more recently) <a href="https://www.prnewswire.com/news-releases/forward-networks-announces-support-of-cisco-aci-300784087.html">support for Cisco ACI</a>. The recent announcement of their GraphQL-based Network Query Engine (NQE)&mdash;more information is available in <a href="https://www.forwardnetworks.com/network-query-engine/">this blog post</a>&mdash;is also pretty interesting to me.</li>
-</ul>
-
-<h2 id="servers-hardware">Servers/Hardware</h2>
-
-<ul>
-<li>Patrick Kennedy over at Serve The Home shares the story of <a href="https://www.servethehome.com/introducing-the-ultra-epyc-amd-powered-sun-ultra-24-workstation/">the Ultra EPYC AMD-powered Sun Ultra 24 workstation</a>. Fun read!</li>
-</ul>
-
-<h2 id="security">Security</h2>
-
-<ul>
-<li>Maarten Goet has a few recommendations on <a href="https://medium.com/@maarten.goet/securing-kubernetes-on-microsoft-azure-are-your-container-doors-wide-open-bb6e879cec5d">securing Kubernetes on Microsoft Azure</a>.</li>
-</ul>
-
-<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
-
-<ul>
-<li>Lior Kamrat has an article on <a href="http://thewalkingdevs.io/2019/01/21/acr-spn/">securing Azure Container Registry for CI/CD pipelines using Azure service principals</a>.</li>
-<li>Christopher Damerau explains <a href="https://christopherdamerau.com/ansible-part-ii/">how to use Ansible to manage VMware resources</a>. The article is a bit high-level, and most readers will need to seek out other resources for more details.</li>
-<li>Graham Moore shares some of his experiences and recommendations after <a href="https://kubedex.com/90-days-of-aws-eks-in-production/">90 days of AWS EKS in production</a>.</li>
-<li>Tobias Zimmergren shows <a href="https://zimmergren.net/enable-monitoring-with-azure-monitor-log-analytics-for-aks/">how to enable Azure Monitor for your AKS clusters</a>.</li>
-<li>And while we&rsquo;re on the topic of AKS, AKS developer Weinong Wang shares <a href="https://medium.com/@weinong/azure-kubernetes-service-control-plane-logs-f8ffa449fd">how to access control plane logs for AKS</a>. (Note: Weinong doesn&rsquo;t mention in his article that a specific feature flag must be enabled on the Azure subscription in order to see AKS audit logs, but <a href="https://docs.microsoft.com/en-us/azure/aks/view-master-logs">the official docs do</a>.)</li>
-<li>Panagiotis Georgiadis explains <a href="https://kubic.opensuse.org/blog/2019-01-24-traefik/">how to enable PSP (Pod Security Policies) with Traefik</a>.</li>
-</ul>
-
-<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
-
-<ul>
-<li>Jorge Castro shares some informal notes on <a href="https://github.com/castrojo/clearlinux-systemd/wiki">using Clear Linux as an everyday DevOps/cloud-native/Kubernetes client</a>.</li>
-<li>Dylan Tientcheu has <a href="https://medium.freecodecamp.org/here-are-some-super-secret-vs-code-hacks-to-boost-your-productivity-20d30197ac76">a list</a> of &ldquo;super secret&rdquo; Visual Studio Code hacks to improve productivity.</li>
-<li>Jessie Frazelle&rsquo;s <a href="https://blog.jessfraz.com/post/for-the-love-of-pipes/">post on pipes</a> captures many of my own thoughts perfectly.</li>
-<li>Aleksa Sarai dives deep into <code>tar</code> and its challenges when used for container image formats in <a href="https://www.cyphar.com/blog/post/20190121-ociv2-images-i-tar">this article</a> on the path to OCI v2 images.</li>
-<li>Megan O&rsquo;Keefe shares <a href="https://medium.com/@mo_keefe/a-kubernetes-development-workflow-for-macos-8c41669a4518">a Kubernetes developer workflow for macOS</a> that includes a list of applications, themes, tools, and shortcuts. There&rsquo;s some handy tips/ideas in here.</li>
-</ul>
-
-<h2 id="storage">Storage</h2>
-
-<ul>
-<li>Jeff Hunter launches what appears to be a series on vSAN capacity management and monitoring with part 1, found <a href="https://blogs.vmware.com/virtualblocks/2019/01/14/vsan-capacity-management-and-monitoring-part-1/">here</a>.</li>
-</ul>
-
-<h2 id="virtualization">Virtualization</h2>
-
-<ul>
-<li>Myles Gray <a href="https://blah.cloud/kubernetes/creating-an-ubuntu-18-04-lts-cloud-image-for-cloning-on-vmware/">explains how to create</a> an Ubuntu 18.04 LTS cloud image that will work with Guest OS Customization in vSphere.</li>
-</ul>
-
-<h2 id="career-soft-skills">Career/Soft Skills</h2>
-
-<ul>
-<li>I&rsquo;ve talked before about how I use mind maps as a brainstorming or thought exploration process. After reading <a href="https://www.xmind.net/blog/en/2019/01/mindmapping-mistakes-most-beginners-make/">this article from XMind on 9 mind mapping mistakes beginners make</a>, I realized I make some of these mistakes as well. Here&rsquo;s to improving!</li>
-</ul>
-
-<p>OK, that&rsquo;s all for now. I&rsquo;ll have another Tech Short Take in a few weeks, and hopefully I can finally publish some of the original content I&rsquo;ve been working on. Feel free to <a href="https://twitter.com/scott_lowe">contact me on Twitter</a> if you&rsquo;d like to chat, if you have a questions, or if you have suggestions for content I should include in the future. Thanks!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/Kw8Fm0ylFB0" height="1" width="1" alt=""/>
-		</div>
-		<div class="collectionhref">
-		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/Kw8Fm0ylFB0/" target="_blank">Öffnen</a>
-		</div>
-	</li>
 </ul>
 </div>
 </div>
@@ -697,14 +513,27 @@ spec:
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-  <a href="neue_version_qbrowser.html">
-<div class="date">21.02.2019</div>
-<h3>Neue Version QBrowser</h3>
+  <a href="gps_logger_abgestaubt.html">
+<div class="date">26.02.2019</div>
+<h3>GPS-Logger abgestaubt</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Auf meinem Github-Repository für das
-Werkzeug zum Arbeiten mit JMS Messaging Brokern
-hat sich wieder etwas getan...
+<p>Nachdem ich bereits über
+andere Ideen
+zur Benutzung meines schon ein wenig in die Jahre
+gekommenen GPS-Empfängers berichtet habe, habe ich ihn nun noch einmal
+seinem ursprünglichen Zweck zugeführt.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="been_kicked_by_a_mule_gretchen_wilson.html">
+<div class="date">26.02.2019</div>
+<h3>Been Kicked By a Mule Gretchen Wilson</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Zuerst bin ich über sie gestolpert als ich auch
+Big n Rich
+entdeckte. Diesmal habe ich eine interessante Unplugged/Live-session entdeckt...
 </p></div>   </a>
 </li>
 <li class="anriss">
@@ -712,22 +541,10 @@ hat sich wieder etwas getan...
 <div class="date">21.02.2019</div>
 <h3>Dynamische Gitlab Badges II</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>In einem
 früheren Artikel
 habe ich eine Möglichkeit vorgestellt, echt dynamische Badges für Gitlab zu erstellen. diese
 Herangehensweise hat aber einen großen Nachteil
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="dynamische_gitlab_badges.html">
-<div class="date">16.02.2019</div>
-<h3>Dynamische Gitlab Badges</h3>
-<div class="abstract">
-<p>In einem
-früheren Artikel
-untersuchte ich bereits verschiedene Möglichkeiten, Badges in Gitlab zu erzeugen - allerdings
-stellte mich die gefundene Lösung noch nicht endgültig zufrieden - bis jetzt...
 </p></div>   </a>
 </li>
 </ul>
@@ -862,7 +679,7 @@ Geo
 <h3>
 Git(lab|hub)
 </h3>
-	<span class="nav-item-counter">52</span>
+	<span class="nav-item-counter">53</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um Gitlab und Github</p>
@@ -888,7 +705,7 @@ GUI
 <h3>
 Hardware
 </h3>
-	<span class="nav-item-counter">26</span>
+	<span class="nav-item-counter">27</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -966,7 +783,7 @@ Markup
 <h3>
 Music
 </h3>
-	<span class="nav-item-counter">28</span>
+	<span class="nav-item-counter">29</span>
 </header>
 <div class="nav-item-body">
 <p>Musik, die mir gefällt</p>
