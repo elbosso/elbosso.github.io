@@ -114,6 +114,108 @@ display('news.html')
 <ul class="single"> 
 	<li class="anriss">
 		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Technology Short Take 111</h3>
+		</div>
+		<div class="collectiontext">
+			<p>Welcome to Technology Short Take #111! I&rsquo;m a couple weeks late on this one; wanted to publish it earlier but work has been keeping me busy (lots and lots of interest in Kubernetes and cloud-native technologies out there!). In any event, here you are&mdash;I hope you find something useful for you!</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>Daniel Dib has <a href="http://lostintransit.se/2019/02/04/sdn-ate-my-hamster/">a great article</a> on how network engineers need to evolve. The network isn&rsquo;t going away, it&rsquo;s just changing.</li>
+<li>I referenced part 1 of Ajay Chenampara&rsquo;s series on the Ansible <code>network-engine</code> command parser back in <a href="https://blog.scottlowe.org/2018/07/13/technology-short-take-102/">Technology Short Take 102</a> (July of last year). I&rsquo;m not sure how I missed that part 2 was published only 2 days later, so I&rsquo;m rectifying that now. Go check out <a href="https://termlen0.github.io/2018/07/15/observations/">part 2</a>.</li>
+<li>Paul Fitzgerald shows <a href="https://pgfitzgerald.wordpress.com/2019/02/11/how-to-build-a-vyos-1-2-0-iso-image/">how to use Hyper-V and Docker to build a VyOS 1.2.0 ISO image</a>. (<a href="https://vyos.io">VyOS</a> is an open source Linux-based network operating system.)</li>
+<li>Matt Cowger shares <a href="https://blog.cowger.us/2019/02/10/using-metallb-with-the-unifi-usg-for-in-home-kubernetes-loadbalancer-services.html">how to use MetalLB with the Unifi USG</a> to take advantage of Kubernetes LoadBalancer functionality in your home lab. Nifty.</li>
+</ul>
+
+<h2 id="servers-hardware">Servers/Hardware</h2>
+
+<ul>
+<li>James Hamilton is back with <a href="https://perspectives.mvdirona.com/2019/02/aws-nitro-system/">a more in-depth look</a> at the components of the AWS Nitro System.</li>
+<li>I must say that my conclusions regarding the ThinkPad X1 Carbon mirror those found in <a href="https://www.secretfader.com/blog/2019/02/lenovo-thinkpad-x1-carbon-all-business/">this post</a>.</li>
+</ul>
+
+<h2 id="security">Security</h2>
+
+<ul>
+<li>Etiene Dalcol of Gruntwork has a three part series on automating HashiCorp Vault. Part 1 covers <a href="https://blog.gruntwork.io/a-guide-to-automating-hashicorp-vault-1-auto-unsealing-b219970f02c6">auto-unsealing Vault</a>; part 2 covers <a href="https://blog.gruntwork.io/a-guide-to-automating-hashicorp-vault-2-authenticating-with-instance-metadata-c3f9eaeaba53">authenticating to Vault using instance metadata</a>; and part 3 discusses <a href="https://blog.gruntwork.io/a-guide-to-automating-hashicorp-vault-3-authenticating-with-an-iam-user-or-role-a3203a3ee088">authenticating to Vault using an IAM user or role</a>.</li>
+</ul>
+
+<h2 id="cloud-computing-cloud-management">Cloud Computing/Cloud Management</h2>
+
+<ul>
+<li>Stefan Büringer writes about how you <a href="https://itnext.io/kubernetes-authorization-via-open-policy-agent-a9455d9d5ceb">can implement &ldquo;advanced&rdquo; RBAC functionality in Kubernetes using Open Policy Agent (OPA)</a>.</li>
+<li>Cormac Hogan is back to playing around with PKS, and he explains <a href="https://cormachogan.com/2019/02/05/reviewing-pks-logs-and-status/">how to review PKS logs and status</a>.</li>
+<li>Kamesh Sampath talks about <a href="https://medium.com/@kamesh_sampath/knative-as-a-pod-time-machine-3c1ca0cfb48a">configuring Knative auto-scaling</a> (mostly focusing on scale-to-zero).</li>
+<li>I&rsquo;m not sure I would refer to using <code>kubeadm</code> to bootstrap a Kubernetes cluster as &ldquo;the hard way,&rdquo; but if you&rsquo;re looking for a fairly detailed tutorial on using <code>kubeadm</code> to bootstrap a Kubernetes cluster, <a href="https://medium.com/polarsquad/how-to-bootstrap-kubernetes-the-hard-way-ca7ca46381f5">this post</a> by Yair Etziony has quite a bit of information on the process.</li>
+<li>Forrest Brazeal hits the nail on the head with the assertion that <a href="https://forrestbrazeal.com/2019/02/18/cloud-irregular-iam-is-the-real-cloud-lock-in/">IAM is the real cloud lock-in</a>.</li>
+</ul>
+
+<h2 id="operating-systems-applications">Operating Systems/Applications</h2>
+
+<ul>
+<li>Oriol Tauleria has <a href="https://medium.com/@uri.tau/terraform-layout-be3674dfe657">a write-up on how to layout Terraform code</a> to accommodate a project as it scales. I like some of the ideas Tauleria presents and hope to be able to implement some of them soon in my own project(s).</li>
+<li>David Holder explores some thoughts around <a href="https://www.virtualthoughts.co.uk/2019/02/11/efficiency-gains-from-smaller-containers/">efficiency gains from small(er) containers</a>.</li>
+<li>Maish Saidel-Keesing lays out <a href="https://technodrone.blogspot.com/2019/02/goodbye-docker-and-thanks-for-all-fish.html">his thoughts on the death of Docker</a>. In the past, I might have felt the same way. However, Docker&rsquo;s recent (seeming) pivot to focus on a paid desktop product might change things a pretty fair amount. Let&rsquo;s face it, Docker&rsquo;s hold wasn&rsquo;t on the back-end systems&mdash;it was on the developers who valued the workflow. Focusing on a paid desktop solution caters to that audience. Given that containerd seems to be winning on the back-end, this allows Docker to remain influential in the container space, in my opinion.</li>
+<li>Folks running Fedora who have work/corporate VPNs that muck up their DNS settings might be interested in <a href="https://fedoramagazine.org/using-the-networkmanagers-dnsmasq-plugin/">this article on the DNSMasq plugin for Network Manager</a>.</li>
+</ul>
+
+<h2 id="storage">Storage</h2>
+
+<p>Nothing this time around, but I&rsquo;ll stay alert for items to add next time.</p>
+
+<h2 id="virtualization">Virtualization</h2>
+
+<ul>
+<li>William Lam talks about <a href="https://www.virtuallyghetto.com/2019/02/esxi-native-driver-for-usb-nic-fling.html">the ESXi native driver for USB NIC</a>, a Fling that will enable ESXi support for three of the most popular USB NIC chipsets (see the article for the specific chipsets).</li>
+</ul>
+
+<h2 id="career-soft-skills">Career/Soft Skills</h2>
+
+<ul>
+<li>You may have heard of Wardley mapping, a way of understanding context and situational awareness. If you&rsquo;re looking for a reasonably gentle introduction to the concept, check out <a href="https://realtimeboard.com/blog/wardley-maps-whiteboard-canvas/">this article</a>.</li>
+<li>Readers may find <a href="https://blog.jessfraz.com/post/books/">this list of recommended books</a> from Jessie Frazelle of interest.</li>
+</ul>
+
+<p>OK, that&rsquo;s all for now. <a href="https://twitter.com/scott_lowe">Hit me up on Twitter</a> if you have any comments, questions, suggestions, or corrections&mdash;I&rsquo;d love to hear from you!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/gEn19xCVxw8" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/gEn19xCVxw8/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
+			<h3>Thoughts on VPNs for Road Warriors</h3>
+		</div>
+		<div class="collectiontext">
+			<p>A few days ago I was talking with a few folks on <a href="https://twitter.com/">Twitter</a> and the topic of using VPNs while traveling came up. For those that travel regularly, using a VPN to bypass traffic restrictions is not uncommon. Prompted by my former manager <a href="https://twitter.com/martin_casado/">Martin Casado</a>, I thought I might share a few thoughts on VPN options for road warriors. This is by no means a comprehensive list, but hopefully something I share here will be helpful.</p>
+
+<p>There were a few things I wanted to share with readers:</p>
+
+<ul>
+<li>I found commercial VPN services too unreliable (it&rsquo;s not uncommon for commercial VPN services to get blocked and thus defeat the purpose of using a VPN).</li>
+<li>Instead, I&rsquo;ve found more success using something like <a href="https://github.com/ttlequals0/autovpn">AutoVPN</a>. AutoVPN helps you stand up an on-demand OpenVPN endpoint on AWS. I used this successfully in Beijing, setting up endpoints in Seoul, Singapore, Tokyo, and sometimes Sydney. Because these IP addresses are &ldquo;ephemeral,&rdquo; they&rsquo;re far less likely to be blocked. (Here&rsquo;s <a href="https://zugdud.io/index.php/2017/10/08/using-aws-as-a-personal-vpn/">another example</a> of using AWS as a personal VPN service.)</li>
+<li>I also had success using AutoVPN not to get around traffic restrictions, but to change my source IP. My wife needed to access some real estate-related sites while she was traveling in Europe, but because her IP address was outside the US the login process was failing. I had her use AutoVPN with an instance in us-east-1 from her Mac. It worked very well!</li>
+<li>If you have a static IP address, you can host your own VPN endpoint (Martin Casado shared that this was something he did for years when he had a static IP address).</li>
+<li>If you don&rsquo;t have a static IP address but still want to host your own VPN endpoints, one potential workaround is to use a dynamic DNS service like DynDNS. I did this for several years, and it ran flawlessly.</li>
+<li><em>Be sure to appropriately secure your VPN server!</em> Use two-factor authentication, use a secure OS (I built mine on <a href="https://www.openbsd.org/">OpenBSD</a>), keep it patched/updated, etc. The last thing you want is folks routing traffic through your VPN endpoint without your knowledge/approval.</li>
+<li>OpenVPN seems to be the VPN of choice, probably due to flexibility of encapsulation (UDP or TCP). It&rsquo;s also well-supported on the client side, with your choice of clients on macOS (<a href="https://tunnelblick.net/">Tunnelblick</a> and <a href="https://www.sparklabs.com/viscosity/">Viscosity</a> spring to mind) and Linux (both command-line and GUI options are available).</li>
+</ul>
+
+<p>Hopefully something I&rsquo;ve shared here will prove useful to readers. If anyone has any other suggestions they&rsquo;d like to mention, <a href="https://twitter.com/scott_lowe/">hit me on Twitter</a>. Thanks for reading!</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/fHtjrwhRnus" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/fHtjrwhRnus/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
 		<a href="https://danluu.com/atom/index.xml" target="_blank">Dan Luu</a>
 		</div>
 		<div>
@@ -513,38 +615,37 @@ nodeRegistration:
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
-  <a href="gps_logger_abgestaubt.html">
-<div class="date">26.02.2019</div>
-<h3>GPS-Logger abgestaubt</h3>
+  <a href="werkzeuge.html">
+<div class="date">01.03.2019</div>
+<h3>Werkzeuge</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem ich bereits über
-andere Ideen
-zur Benutzung meines schon ein wenig in die Jahre
-gekommenen GPS-Empfängers berichtet habe, habe ich ihn nun noch einmal
-seinem ursprünglichen Zweck zugeführt.
+<p>Ich stelle hier mal ein paar Links und Ressourcen zu Werkzeugen zusammen, die mir bis vor kurzem unbekannt waren und/oder
+mit denen ich mich bereits näher beschäftigt habe oder dies noch vorhabe.
 </p></div>   </a>
 </li>
 <li class="anriss">
-  <a href="been_kicked_by_a_mule_gretchen_wilson.html">
-<div class="date">26.02.2019</div>
-<h3>Been Kicked By a Mule Gretchen Wilson</h3>
+  <a href="dynamische_gitlab_badges_iii.html">
+<div class="date">28.02.2019</div>
+<h3>Dynamische Gitlab Badges III</h3>
 <div class="abstract">
 	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Zuerst bin ich über sie gestolpert als ich auch
-Big n Rich
-entdeckte. Diesmal habe ich eine interessante Unplugged/Live-session entdeckt...
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="dynamische_gitlab_badges_ii.html">
-<div class="date">21.02.2019</div>
-<h3>Dynamische Gitlab Badges II</h3>
-<div class="abstract">
 <p>In einem
 früheren Artikel
-habe ich eine Möglichkeit vorgestellt, echt dynamische Badges für Gitlab zu erstellen. diese
-Herangehensweise hat aber einen großen Nachteil
+hatte ich geschrieben, dass die Python-Bindings für die Gitlab-API nicht in konstanter Zeit arbeiten können, wenn man nur
+die Gesamtanzahl aller Items haben will, die auf die Filterkriterien passen und Wege aufgezeigt, dieses Defizit zu umgehen.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="week_rollover_gps.html">
+<div class="date">28.02.2019</div>
+<h3>Week Rollover GPS</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich erfolgreich meine
+eigene Atomuhr
+in Betrieb genommen habe, muss sie sich bereits einer
+(von mir) ungeahnten Herausforderung stellen...
 </p></div>   </a>
 </li>
 </ul>
@@ -679,7 +780,7 @@ Geo
 <h3>
 Git(lab|hub)
 </h3>
-	<span class="nav-item-counter">53</span>
+	<span class="nav-item-counter">54</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um Gitlab und Github</p>
@@ -705,7 +806,7 @@ GUI
 <h3>
 Hardware
 </h3>
-	<span class="nav-item-counter">27</span>
+	<span class="nav-item-counter">28</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -744,7 +845,7 @@ Komponenten
 <h3>
 Links
 </h3>
-	<span class="nav-item-counter">48</span>
+	<span class="nav-item-counter">49</span>
 </header>
 <div class="nav-item-body">
 <p>Linksammlungen zu verschiedenen Themen</p>
@@ -757,7 +858,7 @@ Links
 <h3>
 Linux
 </h3>
-	<span class="nav-item-counter">120</span>
+	<span class="nav-item-counter">121</span>
 </header>
 <div class="nav-item-body">
 <p>Alles zum Thema Gnu Linux</p>
@@ -809,7 +910,7 @@ Numerik
 <h3>
 Python
 </h3>
-	<span class="nav-item-counter">10</span>
+	<span class="nav-item-counter">11</span>
 </header>
 <div class="nav-item-body">
 <p>Mein Weg vom blutigen Anfänger aufwärts</p>
@@ -848,7 +949,7 @@ Rants
 <h3>
 Raspi
 </h3>
-	<span class="nav-item-counter">13</span>
+	<span class="nav-item-counter">14</span>
 </header>
 <div class="nav-item-body">
 <p>Projekte rund um den und mit dem Raspberry Pi</p>
