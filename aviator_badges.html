@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<title>Aviator-Badges</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" /><link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<div class="w3-row">
+						<div class="w3-col m9 s12">
+							<h4>Aviator-Badges</h4>
+							<div class="w3-container">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										vorhergehende Artikel in:
+										<a href="mqtt___raspi___grafana.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span>
+										</a> <!--/li-->
+										<a href="sonoff_s20_mqtt.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span>
+										</a> <!--/li-->
+									</div>
+									<div class="w3-col m4" style="text-align: right">
+										<span class="w3-opacity">07.03.2019</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col m3"><p style="text-align: right">
+							<img style="max-width:128px;" src="images/small/aviator_logo.png">
+						</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Nachdem ich bereits einige Erfolge dabei feiern konnte,
+<a href="dynamische_gitlab_badges_iii.html">Grafana</a>
+an meine Wünsche anzupassen
+habe ich weitere Ideen entwickelt.
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p>Eine davon war, bestimmte Metriken aus
+<a href="dynamische_gitlab_badges_iii.html">Gitlab</a>
+auf einem Grafana-Dashboard darzustellen. Das könnte im Prinzip ganz einfach sein,
+denn wenn man einfach ein Custom-Script schreibt und dieses in Telegraf einbindet,
+wandert die entsprechende Metrik in InfluxDB und
+steht zur Visualisierung mittels Grafana bereit.
+</p><p>
+Allerdings ändern sich (zumindest bei mir)
+die Metriken in Gitlab (offene Issues,...) nur sehr langsam - man
+könnte auch sagen: "mit großer Zeitkonstante". Alle anderen erfassten Metriken ändern sich
+wesentlich schneller, weswegen meine
+<a href="https://www.influxdata.com/time-series-platform/telegraf/">Telegraf-Instanzen</a>
+auch Daten in Minutenabständen in die unterliegende InfluxDB-Instanz schreiben.
+Für diese neuen Gitlab-Metriken würde das aber bedeuten, dass
+eine Menge unnützer Datenpunkte die Datenbank aufblähen würde, da ich eigentlich auch vorhatte,
+die Darstellung in Grafana mittels
+<a href="http://docs.grafana.org/features/panels/singlestat/">SingleStat-Panels</a>
+zu erledigen und dabei immer den letzten Wert anzuzeigen.
+</p><p>
+Es müsste also ein Weg gefunden werden, nur dann wirklich Datenpunkte in InfluxDB
+zu schreiben, wenn sich die entsprechende Metrik auch wirklich geändert hatte.
+Dazu müsste man den letzten Wert aus der InfluxDB lesen und ihn mit dem aktuellen
+vergleichen. Als Sonderfall müsste noch beachtet werden, dass
+sich ein solcher Wert über die gesamte Dauer der aktiven
+<a href="https://www.influxdata.com/blog/influxdb-shards-retention-policies/">Retention Policy</a>
+nicht ändern muss und es daher eventuell gar keinen gibt - in diesem Fall
+muss auf jeden Fall ein neuer geschrieben werden. Man könnte in diesem Sinne auch festlegen, dass
+pro Tag mindestens  einer zu schreiben ist.
+</p><p>
+Schön wäre es, wenn soche Abfragen auch mittels HTTP-Schnittstelle möglich wären -
+dann könnte man diesen gesamten Vorgang mittels curl + bash abbilden und müsste nicht
+erst irgendwelche fetten Pakete installieren. Das käme wieder meinem Ziel nahe, meinen
+<a href="mqtt___raspi___grafana.html">Raspi</a>
+auf dem das alles laufen sollte möglichst schlank zu halten.  Auf der anderen Seite
+ist mein
+<a href="dynamische_gitlab_badges_iii.html">Gitlab-LXC-Container</a>
+auch nicht ständig aktiv - ich werde diesen Aspekt also
+wahrscheinlich in meine Telegraf-Installation dieses Containers einbauen.
+Ein weiterer Aspekt, der mich in diesem Zusammenhang interessiert ist die Tatsache, dass
+meine selbst geschriebenen Inputs in Telegraf bisher lediglich einen Wert erfassen. Ich halte das
+für ein wenig unökonomisch. Daher werde ich in diesem Zusammenhang einmal überprüfen, ob diese
+Art von Input auch mehrere Zeilen auf einmal verdauen können und dafür
+dann nicht mehr das Format
+<a href="https://docs.influxdata.com/telegraf/v1.9/data_formats/input/value/">value</a>
+verwenden, sondern
+<a href="https://docs.influxdata.com/telegraf/v1.9/data_formats/input/influx/">influx.</a>
+Das hat mich dann auch gleich wieder inspiriert, ein anderes OpenSource-Projekt näher auf Modifizierbarkeit zu untersuchen:
+Ich habe mit
+<a href="https://github.com/jongracecox/anybadge">anybadge</a>
+ja bereits
+<a href="dynamische_gitlab_badges_iii.html">Erfahrungen  gesammelt.</a>
+Dort ist erwähnt, dass man eigene Templates zur Erzeugung der Badges angeben kann.
+Ich würde also gern versuchen, ob dieses auch auf die
+im Projekt
+<a href="aviator.html">Aviator</a>
+entstandenen anwendbar ist - dann müsste ich nämlich zur Darstellung der
+entsprechenden Werte nicht nur auf Grafana und Telefgraf zurückgreifen,
+sondern könnte einfach entsprechende Badges direkt  in Gitlab erzeugen und integrieren.
+</p>				</div>
+
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git(lab|hub).html"><span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Wochenübersicht" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Sonoff S20 und MQTT</span><br>
+						<span class="smallabstract"><p>Wie bereits verschiedentlich
+beschrieben
+habe ich noch einmal an meiner eigenen Firmware für WLAN.Steckdosen weitergeschraubt
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="sonoff_s20_mqtt.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Werkzeuge</span><br>
+						<span class="smallabstract"><p>Ich stelle hier mal ein paar Links und Ressourcen zu Werkzeugen zusammen, die mir bis vor kurzem unbekannt waren und/oder
+mit denen ich mich bereits näher beschäftigt habe oder dies noch vorhabe.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="werkzeuge.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Dynamische Gitlab Badges III</span><br>
+						<span class="smallabstract"><p>In einem
+früheren Artikel
+hatte ich geschrieben, dass die Python-Bindings für die Gitlab-API nicht in konstanter Zeit arbeiten können, wenn man nur
+die Gesamtanzahl aller Items haben will, die auf die Filterkriterien passen und Wege aufgezeigt, dieses Defizit zu umgehen.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dynamische_gitlab_badges_iii.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Sonoff S20 und MQTT</span><br>
+							<span class="smallabstract"><p>Wie bereits verschiedentlich
+beschrieben
+habe ich noch einmal an meiner eigenen Firmware für WLAN.Steckdosen weitergeschraubt
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="sonoff_s20_mqtt.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Werkzeuge</span><br>
+							<span class="smallabstract"><p>Ich stelle hier mal ein paar Links und Ressourcen zu Werkzeugen zusammen, die mir bis vor kurzem unbekannt waren und/oder
+mit denen ich mich bereits näher beschäftigt habe oder dies noch vorhabe.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="werkzeuge.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Dynamische Gitlab Badges III</span><br>
+							<span class="smallabstract"><p>In einem
+früheren Artikel
+hatte ich geschrieben, dass die Python-Bindings für die Gitlab-API nicht in konstanter Zeit arbeiten können, wenn man nur
+die Gesamtanzahl aller Items haben will, die auf die Filterkriterien passen und Wege aufgezeigt, dieses Defizit zu umgehen.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dynamische_gitlab_badges_iii.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>

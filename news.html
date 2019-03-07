@@ -117,6 +117,58 @@ display('news.html')
 		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
 		</div>
 		<div>
+			<h3>Advanced AMI Filtering with JMESPath</h3>
+		</div>
+		<div class="collectiontext">
+			<p>I recently had a need to do some &ldquo;advanced&rdquo; filtering of AMIs returned by the AWS CLI. I&rsquo;d already mastered the use of the <code>--filters</code> parameter, which let me greatly reduce the number of AMIs returned by <code>aws ec2 describe-images</code>. In many cases, using filters alone got me what I needed. In one case, however, I needed to be even more selective in returning results, and this lead me to some (slightly more) complex <a href="http://jmespath.org/">JMESPath</a> queries than I&rsquo;d used before. I wanted to share them here for the benefit of my readers.</p>
+
+<p>What I&rsquo;d been using before was a command that looked something like this:</p>
+
+<pre><code class="language-bash">ec2 describe-images --owners 099720109477 \
+--filters Name=name,Values=&quot;*ubuntu-xenial-16.04*&quot; \
+Name=virtualization-type,Values=hvm \
+Name=root-device-type,Values=ebs \
+Name=architecture,Values=x86_64 \
+--query 'sort_by(Images,&amp;CreationDate)[-1].ImageId'
+</code></pre>
+
+<p>The part after <code>--query</code> is a JMESPath query that sorts the results, returning only the <code>ImageId</code> attribute of the most recent result (sorted by creation date). In this particular case, this works just fine&mdash;it returns the most recent Ubuntu Xenial 16.04 LTS AMI.</p>
+
+<p>Turning to Ubuntu Bionic 18.04, though, I found that the same query <em>didn&rsquo;t</em> return the result I needed. In addition to the regular builds of 18.04, Canonical apparently also builds EKS (Amazon&rsquo;s managed Kubernetes offering) versions and special minimal versions of Ubuntu 18.04 AMIs. It was one of those AMIs (the EKS-related one, in fact) that was getting returned by my command. So how do I go about filtering out images in a more granular fashion?</p>
+
+<p>After reading through a few blogs (see <a href="https://opensourceconnections.com/blog/2015/07/27/advanced-aws-cli-jmespath-query/">here</a>, <a href="https://blog.ashiny.cloud/2017/09/25/useful-jmespath-in-awscli/">here</a>, and <a href="http://iambelmin.com/2016/03/20/using-aws-cli-to-find-rhel-and-ubuntu-amis/">here</a>&mdash;great work by their respective authors, thank you!), I finally stumbled upon the syntax that would work:</p>
+
+<pre><code class="language-bash">ec2 describe-images --owners 099720109477 \
+--filters Name=name,Values=&quot;*ubuntu-bionic-18.04*&quot; \
+Name=virtualization-type,Values=hvm \
+Name=root-device-type,Values=ebs \
+Name=architecture,Values=x86_64 \
+--query 'sort_by(Images,&amp;CreationDate)[?Name!=`null`]|[?contains(Name,`ubuntu-eks`)==`false`]|[?contains(Name,`minimal`)==`false`]|[-1].ImageId'
+</code></pre>
+
+<p>Let me walk through this command a bit:</p>
+
+<ul>
+<li>The first part of it uses <code>--filters</code> to show only those AMIs that are for the x86_64 architecture, using an EBS volume as the root device type, using hardware virtualization, with the string &ldquo;ubuntu-bionic-18.04&rdquo; somewhere in the name. This is pretty much identical to the Xenial version I showed earlier.</li>
+<li>The JMESPath query is more complex, however. The first part removes entries that don&rsquo;t have a value for the Name attribute. This is to prevent an error with JMESPath trying to evaluate results with no Name attribute and failing.</li>
+<li>The next two portions check for results that contain either &ldquo;ubuntu-eks&rdquo; <em>or</em> &ldquo;minimal&rdquo; in the Name attribute. If either of those strings are present, the query will return a true result, and those AMIs would not be included in the final set of results (because the command is only selecting false results, i.e., items that do <em>not</em> contain those strings).</li>
+<li>Finally, it selects the most recent AMI (using the <code>[-1]</code> syntax, since things are sorted by the creation date) and then returns only the value of the <code>ImageId</code> attribute.</li>
+<li>You&rsquo;ll note the command is using JMESPath&rsquo;s pipe (<code>|</code>) operator, which just takes the result of the previous query as its input.</li>
+</ul>
+
+<p>This got me the result I saw seeking: the AMI ID for the latest Canonical build of Ubuntu Bionic 18.04, not any of the &ldquo;special&rdquo; builds that are also offered. Obviously, I can extend this command to exclude other variations as well as needed.</p>
+
+<p>Hopefully, providing this example will be useful to readers in the event one of you needs to do the same kind of slightly more &ldquo;advanced&rdquo; filtering of results from an AWS CLI command. This example was for AMIs, but you could equally apply the same concepts to any number of other resources as well.</p><img src="http://feeds.feedburner.com/~r/slowe/content/feed/~4/S2pjlQGlxak" height="1" width="1" alt=""/>
+		</div>
+		<div class="collectionhref">
+		<a href="http://feeds.scottlowe.org/~r/slowe/content/feed/~3/S2pjlQGlxak/" target="_blank">Öffnen</a>
+		</div>
+	</li>
+	<li class="anriss">
+		<div class="collectionhref">
+		<a href="https://blog.scottlowe.org/" target="_blank">Scott's Weblog </a>
+		</div>
+		<div>
 			<h3>Technology Short Take 111</h3>
 		</div>
 		<div class="collectiontext">
@@ -615,37 +667,35 @@ nodeRegistration:
 	<h2>Neueste Artikel</h2>
 <ul class="inset"> 
 <li class="anriss">
+  <a href="aviator_badges.html">
+<div class="date">07.03.2019</div>
+<h3>Aviator-Badges</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Nachdem ich bereits einige Erfolge dabei feiern konnte,
+Grafana
+an meine Wünsche anzupassen
+habe ich weitere Ideen entwickelt.
+</p></div>   </a>
+</li>
+<li class="anriss">
+  <a href="sonoff_s20_mqtt.html">
+<div class="date">07.03.2019</div>
+<h3>Sonoff S20 und MQTT</h3>
+<div class="abstract">
+	<img class="initial" title="Neu" src="images/page_new_48.png">
+<p>Wie bereits verschiedentlich
+beschrieben
+habe ich noch einmal an meiner eigenen Firmware für WLAN.Steckdosen weitergeschraubt
+</p></div>   </a>
+</li>
+<li class="anriss">
   <a href="werkzeuge.html">
 <div class="date">01.03.2019</div>
 <h3>Werkzeuge</h3>
 <div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
 <p>Ich stelle hier mal ein paar Links und Ressourcen zu Werkzeugen zusammen, die mir bis vor kurzem unbekannt waren und/oder
 mit denen ich mich bereits näher beschäftigt habe oder dies noch vorhabe.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="dynamische_gitlab_badges_iii.html">
-<div class="date">28.02.2019</div>
-<h3>Dynamische Gitlab Badges III</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>In einem
-früheren Artikel
-hatte ich geschrieben, dass die Python-Bindings für die Gitlab-API nicht in konstanter Zeit arbeiten können, wenn man nur
-die Gesamtanzahl aller Items haben will, die auf die Filterkriterien passen und Wege aufgezeigt, dieses Defizit zu umgehen.
-</p></div>   </a>
-</li>
-<li class="anriss">
-  <a href="week_rollover_gps.html">
-<div class="date">28.02.2019</div>
-<h3>Week Rollover GPS</h3>
-<div class="abstract">
-	<img class="initial" title="Neu" src="images/page_new_48.png">
-<p>Nachdem ich erfolgreich meine
-eigene Atomuhr
-in Betrieb genommen habe, muss sie sich bereits einer
-(von mir) ungeahnten Herausforderung stellen...
 </p></div>   </a>
 </li>
 </ul>
@@ -780,7 +830,7 @@ Geo
 <h3>
 Git(lab|hub)
 </h3>
-	<span class="nav-item-counter">54</span>
+	<span class="nav-item-counter">56</span>
 </header>
 <div class="nav-item-body">
 <p>Alles rund um Gitlab und Github</p>
@@ -806,7 +856,7 @@ GUI
 <h3>
 Hardware
 </h3>
-	<span class="nav-item-counter">28</span>
+	<span class="nav-item-counter">29</span>
 </header>
 <div class="nav-item-body">
 <p>Elektronik und so Zeuchs...</p>
@@ -988,7 +1038,7 @@ sQLshell
 <h3>
 TeleGrafana
 </h3>
-	<span class="nav-item-counter">10</span>
+	<span class="nav-item-counter">11</span>
 </header>
 <div class="nav-item-body">
 <p>Thema Monitoring und Alarmierung</p>
