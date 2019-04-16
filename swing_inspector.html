@@ -83,7 +83,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 <p>Ich trug mich schon länger mit dem Gedanken, ein Werkzeug zu schaffen, das den diversen Entwickler-Tools
 in Browsern gleichen sollte: Es sollte die Selektion von GUI-Komponenten mittels Maus ermöglichen und
 die Ergebnisse der Manipulation ausgewählter Komponenten sollte live - während die eigentliche Applikation
-nor mal arbeitet - möglich sein.
+normal arbeitet - möglich sein.
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
 <p>Die erste Version eines solchen Werkzeugs ist fertiggestellt. Zur Zeit wird sie noch benutzt, um grundlegende
@@ -105,13 +105,17 @@ Komponente geklickt wird, wird diese analysiert und ein Formular
 mit dem man alle Aspekte der Komponente interaktiv und live manipulieren kann.
 </p><p>
 Ich musste dazu das Framework ein wenig erweitern: Es verfügt bereits über eine Automatik, die eine unendliche
-Rekursion bei Kreisschlüssen im Objektgraphen verhindert. Speziell Swing-Objekte (genauso wie Groovy - aber das ist eine andere Geschichte...)
+Rekursion bei Kreisschlüssen im Objektgraphen verhindert. Speziell Swing-Objekte (genauso wie Groovy -
+aber das ist eine andere Geschichte...)
 verfügen über einen extrem verzweigten Objektgraphen, der schnell so viele Instanzen umfasst, dass die vollständige Analyse
 und vor allem die Erzeugung eines umfassenden Formulars zur Manipulation der Objekte performant nicht mehr
 zu erledigen ist. Ich habe daher eine Möglichkeit in das Framework eingebaut, eine maximale Analysetiefe vorzugeben und sie
 für den Prototypen auf den Wert 2 begrenzt.
 </p><p>
 Das hier verlinkte Video gibt einen kleinen Einblick in das Handling und die sich eröffnenden Möglichkeiten:
+</p><p>
+Demnächst werde ich versuchen, dieses Werkzeug auch auf JavaFX-Applikationen anzuwenden und sehen, ob
+es dor
 </p><p>
 
 <center>
@@ -193,33 +197,34 @@ frameborder="0" allowfullscreen></iframe>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Phishern zugeschaut</span><br>
+							Certstream, InfluxDB, Grafana und Netflix</span><br>
+						<span class="smallabstract"><p>Nachdem ich vor kurzem über mein erstes Spielen mit dem
+certstream
+berichtete, habe ich weitere Experimente gemacht und
+die Daten zur besseren Auswertung in eine InfluxDB gepackt, um sie mit
+Grafana untersuchen zu können.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="certstream__influxdb__grafana_netflix.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Fermi-Pasta-Ulam–Tsingou-Experiment</span><br>
+						<span class="smallabstract"><p>Nachdem ich nun schon längere Zeit nichts mehr über
+Chaos und nichtlineare Systeme
+geschrieben habe,
+habe ich meinen Urlaub dazu genutzt, mich des Fermi-Pasta-Ulam–Tsingou-Experiments anzunehmen. Hier meine Ergebnisse...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fermi_pasta_ulam_tsingou_experiment.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Phishern zugeschaut</span><br>
 						<span class="smallabstract"><p>Ich habe wieder einmal interessante Datenquellen entdeckt - diesmal im Bereich IT-Security und PKI...
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="phishern_zugeschaut.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							esp-link und GPS-Logger</span><br>
-						<span class="smallabstract"><p>Nachdem ich bereits
-angekündigt hatte,
-den ESP8266 als Wireless-Bridge für serielle Verbindungen nutzen zu wollen, habe ich
-nun ein konkretes Projekt damit umgesetzt.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="esp_link_gps_logger.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Telegraf Inputs mit unterschiedlicher Frequenz</span><br>
-						<span class="smallabstract"><p>Ich hatte in einem
-früheren Artikel
-beschrieben, dass ich noch einige weitere Ideen für die Darstellung mittels Grafana hatte.
-Zwischenzeitlich hatte ich sogar bereits einiges davon
-umgesetzt.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="telegraf_inputs_unterschiedlicher_frequenz.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -255,33 +260,34 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Phishern zugeschaut</span><br>
+							Certstream, InfluxDB, Grafana und Netflix</span><br>
+							<span class="smallabstract"><p>Nachdem ich vor kurzem über mein erstes Spielen mit dem
+certstream
+berichtete, habe ich weitere Experimente gemacht und
+die Daten zur besseren Auswertung in eine InfluxDB gepackt, um sie mit
+Grafana untersuchen zu können.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="certstream__influxdb__grafana_netflix.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Fermi-Pasta-Ulam–Tsingou-Experiment</span><br>
+							<span class="smallabstract"><p>Nachdem ich nun schon längere Zeit nichts mehr über
+Chaos und nichtlineare Systeme
+geschrieben habe,
+habe ich meinen Urlaub dazu genutzt, mich des Fermi-Pasta-Ulam–Tsingou-Experiments anzunehmen. Hier meine Ergebnisse...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fermi_pasta_ulam_tsingou_experiment.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Phishern zugeschaut</span><br>
 							<span class="smallabstract"><p>Ich habe wieder einmal interessante Datenquellen entdeckt - diesmal im Bereich IT-Security und PKI...
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="phishern_zugeschaut.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							esp-link und GPS-Logger</span><br>
-							<span class="smallabstract"><p>Nachdem ich bereits
-angekündigt hatte,
-den ESP8266 als Wireless-Bridge für serielle Verbindungen nutzen zu wollen, habe ich
-nun ein konkretes Projekt damit umgesetzt.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="esp_link_gps_logger.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Telegraf Inputs mit unterschiedlicher Frequenz</span><br>
-							<span class="smallabstract"><p>Ich hatte in einem
-früheren Artikel
-beschrieben, dass ich noch einige weitere Ideen für die Darstellung mittels Grafana hatte.
-Zwischenzeitlich hatte ich sogar bereits einiges davon
-umgesetzt.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="telegraf_inputs_unterschiedlicher_frequenz.html#content">
  Weiterlesen...
 								</a>
 						</li>
