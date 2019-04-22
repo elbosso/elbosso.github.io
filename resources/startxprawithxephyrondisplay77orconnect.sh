@@ -40,7 +40,8 @@ if xterm -iconic -e "exit" > /dev/null 2>&1; then
   DISPLAY=:0 xpra attach :77 &
 else
   echo "user $user cannot connect to display $display"
-  xpra start :77 --start-child="Xephyr -ac -keybd ephyr,,,xkbmodel=evdev,xkblayout=de -screen 1280x1024 -br  :78&"
+#  xpra start :77 --start-child="Xephyr -ac -keybd ephyr,,,xkbmodel=evdev,xkblayout=de -screen 1280x1024 -br  :78&"
+  xpra start :77 --start-child="Xephyr -ac -keybd ephyr,xkbmodel=pc105,xkblayout='de(nodeadkeys)',xkbrules=evdev,xkboption=grp:alts_toogle -screen 1280x1024 -br  :78&"
   DISPLAY=:78
   DISPLAY=:78 xterm -iconic -e "exit"
 #  echo $?
@@ -51,7 +52,10 @@ else
   done
 echo "trying openbox"
   DISPLAY=:78 xterm &
+#  DISPLAY=:78 openbox &
   DISPLAY=:0 xpra attach :77 &
+  DISPLAY=:0 xmodmap -pke > /tmp/my_xmodmap
+  DISPLAY=:78 xmodmap /tmp/my_xmodmap
 fi
 }
 stop() {
