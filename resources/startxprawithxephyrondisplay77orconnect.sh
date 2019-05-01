@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#Copyright (c) 2012-2015.
+#Copyright (c) 2012-2019.
 #
 #Juergen Key. Alle Rechte vorbehalten.
 #
@@ -34,45 +34,63 @@
 #WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 
 start() {
-DISPLAY=:77
-if xterm -iconic -e "exit" > /dev/null 2>&1; then
+  DISPLAY=:0 xmodmap -pke > /tmp/my_xmodmap
+  scp /tmp/my_xmodmap $XPRA_SSH_USER@$XPRA_SSH_SERVER:/tmp
+if ssh $XPRA_SSH_USER@$XPRA_SSH_SERVER 'DISPLAY=:78 xmodmap /tmp/my_xmodmap' > /dev/null 2>&1; then
   echo "user $user can connect to display $display"
-  DISPLAY=:0 xpra attach :77 &
+  xpra attach --clipboard=yes --clipboard-direction=both ssh/$XPRA_SSH_USER@$XPRA_SSH_SERVER/77&
+  pkill -f ".*/tmp/start_xpra_remote.sh.*"
 else
   echo "user $user cannot connect to display $display"
-#  xpra start :77 --start-child="Xephyr -ac -keybd ephyr,,,xkbmodel=evdev,xkblayout=de -screen 1280x1024 -br  :78&"
-  xpra start :77 --start-child="Xephyr -ac -keybd ephyr,xkbmodel=pc105,xkblayout='de(nodeadkeys)',xkbrules=evdev,xkboption=grp:alts_toogle -screen 1280x1024 -br  :78&"
-  DISPLAY=:78
+cat <<EOM >/tmp/start_xpra_remote.sh
+  xpra start :77 --clipboard=yes --clipboard-direction=both --start-child="Xephyr -ac -keybd ephyr,xkbmodel=pc105,xkblayout='de(nodeadkeys)',xkbrules=evdev,xkboption=grp:alts_toogle -screen 1280x1024 -br  :78&"
   DISPLAY=:78 xterm -iconic -e "exit"
-#  echo $?
-  while [ $? -ne 0 ] ;do
-	sleep 1
+  while [ \$? -ne 0 ] ;do
+    echo "waiting "\$?
+    sleep 1
     DISPLAY=:78 xterm -iconic -e "exit"
-#echo "waiting "$?
   done
-echo "trying openbox"
+  echo "trying openbox"
   DISPLAY=:78 xterm &
+#just install a minimal lightweight window manager i thought...
+#turns out that full-fledged web browssers (firefox as well as chromium-browser) 
+#open ghost windows that dont get redrawn and can not be closed except for
+#a restart of the window manager. So i had to resort to fluxbox where this
+# is not so big a problem because those windows open iconified there...
+# The browsers mentioned above were not the real problem - the script
+#start_xpra_remote running amok was it!
+  DISPLAY=:78 blackbox &
 #  DISPLAY=:78 openbox &
-  DISPLAY=:0 xpra attach :77 &
-  DISPLAY=:0 xmodmap -pke > /tmp/my_xmodmap
-  DISPLAY=:78 xmodmap /tmp/my_xmodmap
+#  DISPLAY=:78 fluxbox &
+EOM
+  scp /tmp/start_xpra_remote.sh $XPRA_SSH_USER@$XPRA_SSH_SERVER:/tmp
+  ssh $XPRA_SSH_USER@$XPRA_SSH_SERVER '/bin/bash /tmp/start_xpra_remote.sh> /dev/null 2>&1'
+  echo "user $user can connect to display $display"
+  ssh $XPRA_SSH_USER@$XPRA_SSH_SERVER 'DISPLAY=:78 xmodmap /tmp/my_xmodmap'
+  xpra attach --clipboard=yes --clipboard-direction=both ssh/$XPRA_SSH_USER@$XPRA_SSH_SERVER/77&
+  pkill -f ".*/tmp/start_xpra_remote.sh.*"
+fi
+}
+detach() {
+DISPLAY=:77
+if ssh $XPRA_SSH_USER@$XPRA_SSH_SERVER 'DISPLAY=:78 xterm -iconic -e "exit"' > /dev/null 2>&1; then
+   echo "user $user can connect to display $display"
+  xpra detach ssh/$XPRA_SSH_USER@$XPRA_SSH_SERVER/77&
 fi
 }
 stop() {
-DISPLAY=:77
-if xterm -iconic -e "exit" > /dev/null 2>&1; then
+if ssh $XPRA_SSH_USER@$XPRA_SSH_SERVER 'DISPLAY=:78 xterm -iconic -e "exit"' > /dev/null 2>&1; then
   echo "user $user can connect to display $display"
-  DISPLAY=:0 xpra stop :77
+  ssh $XPRA_SSH_USER@$XPRA_SSH_SERVER 'xpra stop :77'
 fi
 }
 status() {
 DISPLAY=:77
-if xterm -iconic -e "exit" > /dev/null 2>&1; then
+if ssh $XPRA_SSH_USER@$XPRA_SSH_SERVER 'DISPLAY=:78 xterm -iconic -e "exit"' > /dev/null 2>&1; then
   echo "running"
 else
   echo "not running"
 fi
-
 }
 ### main logic ###
 case "$1" in
@@ -82,15 +100,18 @@ case "$1" in
   stop)
         stop
         ;;
+  detach)
+        detach
+        ;;
   status)
         status
         ;;
-  restart|reload|condrestart)
+  restart|reload)
         stop
         start
         ;;
   *)
-        echo "Usage: $0 {start|stop|restart|reload|status}"
+        echo "Usage: $0 {start|stop|detach|restart|status}"
         exit 1
 esac
 exit 0
