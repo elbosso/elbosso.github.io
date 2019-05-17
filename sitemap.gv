@@ -9,6 +9,7 @@ rankdir=LR
     Garten [label="Garten" href="https://elbosso.github.io/tag_Garten.html" shape="doublecircle"]
     Geo [label="Geo" href="https://elbosso.github.io/tag_Geo.html" shape="doublecircle"]
     Gitlabhub [label="Git(lab|hub)" href="https://elbosso.github.io/tag_Git(lab|hub).html" shape="doublecircle"]
+    Gitlabhub [label="Gitlab|hub" href="https://elbosso.github.io/gitlab_hub.html" shape="doublecircle"]
     GUI [label="GUI" href="https://elbosso.github.io/tag_GUI.html" shape="doublecircle"]
     Hardware [label="Hardware" href="https://elbosso.github.io/tag_Hardware.html" shape="doublecircle"]
     Java [label="Java" href="https://elbosso.github.io/tag_Java.html" shape="doublecircle"]
@@ -29,6 +30,10 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_garten_fruehjahr_2019 [label="Garten im Frühjahr 2019" href="https://elbosso.github.io/garten_fruehjahr_2019.html"]
+    node_mandelbrot_sets_mittels_shadern_berechnen [label="Mandelbrot-Sets mittels Shadern berechnen" href="https://elbosso.github.io/mandelbrot_sets_mittels_shadern_berechnen.html"]
+                node_mandelbrot_sets_mittels_shadern_berechnen -> node_faehrnisse_des_buildprozesses_unter_windows
+            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
 node_android_smartcard__nfc__ii [label="Android als Smartcard (NFC) II" href="https://elbosso.github.io/android_smartcard__nfc__ii.html"]
     node_alte_rechner_zukunftsfaehig____ [label="Alte Rechner zukunftsfähig (?)" href="https://elbosso.github.io/alte_rechner_zukunftsfaehig____.html"]
                 node_alte_rechner_zukunftsfaehig____ -> node_xpra_xephyr_openbox_a_la_sysv_init
@@ -105,7 +110,8 @@ node_ode_an_freude [label="Ode an die Freude" href="https://elbosso.github.io/od
     node_dwb__grafana [label="dWb+ und Grafana" href="https://elbosso.github.io/dwb__grafana.html"]
                 node_dwb__grafana -> node_fritzbox__monitoring__tr064
 node_beaninfo_annotationprocessor_neu [label="BeanInfo AnnotationProcessor neu" href="https://elbosso.github.io/beaninfo_annotationprocessor_neu.html"]
-    node_layers_ueber_java_service_provider_infrastructure [label="Layers über Java Service Provider Infrastructure" href="https://elbosso.github.io/layers_ueber_java_service_provider_infrastructure.html"]
+                node_beaninfo_annotationprocessor_neu -> node_generierter_code_aop
+node_layers_ueber_java_service_provider_infrastructure [label="Layers über Java Service Provider Infrastructure" href="https://elbosso.github.io/layers_ueber_java_service_provider_infrastructure.html"]
                 node_layers_ueber_java_service_provider_infrastructure -> node_elektronisches_fahrtenbuch_ebmap4d
 node_terry_miles [label="Terry Miles" href="https://elbosso.github.io/terry_miles.html"]
     node_satelliten_layer [label="Satelliten-Layer" href="https://elbosso.github.io/satelliten_layer.html"]
@@ -234,7 +240,9 @@ node_ads_b_zeitreihendatenbanken [label="ADS-B in Zeitreihendatenbanken" href="h
                 node_royal_institution_youtube_channel -> node_gedanken_zeit__ntp__gps_diy
             node_royal_institution_youtube_channel -> node_andrew_szydlo
 node_gitlab_ci [label="Gitlab-CI" href="https://elbosso.github.io/gitlab_ci.html"]
-    node_tpedit_referenzen [label="TPEdit mit Referenzen" href="https://elbosso.github.io/tpedit_referenzen.html"]
+                node_gitlab_ci -> node_dwb__grafana
+            node_gitlab_ci -> node_faehrnisse_des_buildprozesses_unter_windows
+node_tpedit_referenzen [label="TPEdit mit Referenzen" href="https://elbosso.github.io/tpedit_referenzen.html"]
     node_raspberry_pi_ads_b_receiver [label="Raspberry Pi als ADS-B-Receiver" href="https://elbosso.github.io/raspberry_pi_ads_b_receiver.html"]
                 node_raspberry_pi_ads_b_receiver -> node_ntp_server_raspi_em406a
             node_raspberry_pi_ads_b_receiver -> node_ads_b_zeitreihendatenbanken
@@ -242,7 +250,8 @@ node_gitlab_ci [label="Gitlab-CI" href="https://elbosso.github.io/gitlab_ci.html
 node_modul_wrapper_implementiert [label="Modul-Wrapper implementiert" href="https://elbosso.github.io/modul_wrapper_implementiert.html"]
                 node_modul_wrapper_implementiert -> node_influxdb_wrapper_dwb_
 node_garten_fruehjahr_2018 [label="Garten im Frühjahr 2018" href="https://elbosso.github.io/garten_fruehjahr_2018.html"]
-    node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" href="https://elbosso.github.io/linux_wifi_accesspoint_aus_raspi.html"]
+                node_garten_fruehjahr_2018 -> node_garten_fruehjahr_2019
+node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" href="https://elbosso.github.io/linux_wifi_accesspoint_aus_raspi.html"]
                 node_linux_wifi_accesspoint_aus_raspi -> node_raspberry_pi_ads_b_receiver
 node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
                 node_implizites_eulerverfahren -> node_visualisierung_strange_attractors_java3d
@@ -281,6 +290,7 @@ node_aenderungen_datumsformat_java___schon_wieder_ [label="Änderungen im Datums
             node_aenderungen_datumsformat_java___schon_wieder_ -> node_batik_java9_modulsystem_____9760_
 node_batik_java9_modulsystem_____9760_ [label="Batik und Java9 Modulsystem = &#9760;" href="https://elbosso.github.io/batik_java9_modulsystem_____9760_.html"]
                 node_batik_java9_modulsystem_____9760_ -> node_java9_umstellung
+            node_batik_java9_modulsystem_____9760_ -> node_faehrnisse_des_buildprozesses_unter_windows
 node_java_bug_modulsystem_nutzung_jaas [label="Java-Bug in Modulsystem bei Nutzung von JAAS" href="https://elbosso.github.io/java_bug_modulsystem_nutzung_jaas.html"]
                 node_java_bug_modulsystem_nutzung_jaas -> node_java9_umstellung
             node_java_bug_modulsystem_nutzung_jaas -> node_aenderungen_datumsformat_java___schon_wieder_
@@ -349,7 +359,8 @@ node_xml_ungueltige_zeichen [label="XML und ungültige Zeichen" href="https://el
     node_another_round_of_trac [label="Another Round of Trac" href="https://elbosso.github.io/another_round_of_trac.html"]
                 node_another_round_of_trac -> node_trac_reorganisation
 node_aop_identifiziert_exception_ausloesende_instanz [label="AOP identifiziert Exception-auslösende Instanz" href="https://elbosso.github.io/aop_identifiziert_exception_ausloesende_instanz.html"]
-    node_implementierung_rfc_1751 [label="Implementierung RFC 1751" href="https://elbosso.github.io/implementierung_rfc_1751.html"]
+                node_aop_identifiziert_exception_ausloesende_instanz -> node_generierter_code_aop
+node_implementierung_rfc_1751 [label="Implementierung RFC 1751" href="https://elbosso.github.io/implementierung_rfc_1751.html"]
     node_etwas_leichtes_zwischendurch_i [label="Etwas leichtes für zwischendurch I" href="https://elbosso.github.io/etwas_leichtes_zwischendurch_i.html"]
     node_the_unlicense [label="The Unlicense" href="https://elbosso.github.io/the_unlicense.html"]
     node_rfc_6238_jaas [label="RFC 6238 und JAAS" href="https://elbosso.github.io/rfc_6238_jaas.html"]
