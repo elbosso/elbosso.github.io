@@ -30,12 +30,16 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian May, Kerry Ellis & Vittorio Grigolo: Bohemian Rhapsody" href="https://elbosso.github.io/brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody.html"]
-    node_garten_fruehjahr_2019 [label="Garten im Frühjahr 2019" href="https://elbosso.github.io/garten_fruehjahr_2019.html"]
+node_garten_fruehjahr_2019 [label="Garten im Frühjahr 2019" href="https://elbosso.github.io/garten_fruehjahr_2019.html"]
+    node_sqlshell_unterstuetzt_comment [label="sQLshell unterstützt COMMENT" href="https://elbosso.github.io/sqlshell_unterstuetzt_comment.html"]
+                node_sqlshell_unterstuetzt_comment -> node_aviator___websockets
+node_certstream___ressourcenverbrauch [label="Certstream - Ressourcenverbrauch" href="https://elbosso.github.io/certstream___ressourcenverbrauch.html"]
+    node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian May, Kerry Ellis & Vittorio Grigolo: Bohemian Rhapsody" href="https://elbosso.github.io/brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody.html"]
     node_mandelbrot_sets_mittels_shadern_berechnen [label="Mandelbrot-Sets mittels Shadern berechnen" href="https://elbosso.github.io/mandelbrot_sets_mittels_shadern_berechnen.html"]
                 node_mandelbrot_sets_mittels_shadern_berechnen -> node_faehrnisse_des_buildprozesses_unter_windows
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_java
+            node_mandelbrot_sets_mittels_shadern_berechnen -> node_julia_mengen_shadern_umgesetzt
 node_android_smartcard__nfc__ii [label="Android als Smartcard (NFC) II" href="https://elbosso.github.io/android_smartcard__nfc__ii.html"]
     node_alte_rechner_zukunftsfaehig____ [label="Alte Rechner zukunftsfähig (?)" href="https://elbosso.github.io/alte_rechner_zukunftsfaehig____.html"]
                 node_alte_rechner_zukunftsfaehig____ -> node_certstream___ressourcenverbrauch
@@ -1054,10 +1058,10 @@ node_daylight [label="DayLight" href="https://elbosso.github.io/daylight.html"]
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
                 node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-                node_ebmap4d -> node_ebmap4d___geojson
+                node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
             node_ebmap4d -> node_ortsbezuege_dwb_
-            node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
+            node_ebmap4d -> node_ebmap4d___geojson
             node_ebmap4d -> node_tile_server_openstreetmap
             node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
