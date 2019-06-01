@@ -30,7 +30,10 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_garten_fruehjahr_2019 [label="Garten im Frühjahr 2019" href="https://elbosso.github.io/garten_fruehjahr_2019.html"]
+node_swing_inspector [label="Swing Inspector" href="https://elbosso.github.io/swing_inspector.html"]
+    node_diy_ebook_reader [label="DIY EBook-Reader" href="https://elbosso.github.io/diy_ebook_reader.html"]
+    node_datamodel2html_plugin [label="DataModel2HTML-Plugin" href="https://elbosso.github.io/datamodel2html_plugin.html"]
+    node_garten_fruehjahr_2019 [label="Garten im Frühjahr 2019" href="https://elbosso.github.io/garten_fruehjahr_2019.html"]
     node_sqlshell_unterstuetzt_comment [label="sQLshell unterstützt COMMENT" href="https://elbosso.github.io/sqlshell_unterstuetzt_comment.html"]
                 node_sqlshell_unterstuetzt_comment -> node_aviator___websockets
 node_certstream___ressourcenverbrauch [label="Certstream - Ressourcenverbrauch" href="https://elbosso.github.io/certstream___ressourcenverbrauch.html"]
@@ -44,6 +47,7 @@ node_android_smartcard__nfc__ii [label="Android als Smartcard (NFC) II" href="ht
     node_alte_rechner_zukunftsfaehig____ [label="Alte Rechner zukunftsfähig (?)" href="https://elbosso.github.io/alte_rechner_zukunftsfaehig____.html"]
                 node_alte_rechner_zukunftsfaehig____ -> node_certstream___ressourcenverbrauch
             node_alte_rechner_zukunftsfaehig____ -> node_xpra_xephyr_openbox_a_la_sysv_init
+            node_alte_rechner_zukunftsfaehig____ -> node_diy_ebook_reader
             node_alte_rechner_zukunftsfaehig____ -> node_lxc_bootstrap_gui_container
 node_xpra_xephyr_openbox_a_la_sysv_init [label="Xpra und Xephyr mit OpenBox a la SysV init" href="https://elbosso.github.io/xpra_xephyr_openbox_a_la_sysv_init.html"]
                 node_xpra_xephyr_openbox_a_la_sysv_init -> node_lxc_bootstrap_gui_container
@@ -58,8 +62,7 @@ node_certstream__influxdb__grafana_netflix [label="Certstream, InfluxDB, Grafana
             node_certstream__influxdb__grafana_netflix -> node_repo_auf_github__telegraf_
             node_certstream__influxdb__grafana_netflix -> node_certstream___ressourcenverbrauch
             node_certstream__influxdb__grafana_netflix -> node_conky___influxdb
-node_swing_inspector [label="Swing Inspector" href="https://elbosso.github.io/swing_inspector.html"]
-    node_phishern_zugeschaut [label="Phishern zugeschaut" href="https://elbosso.github.io/phishern_zugeschaut.html"]
+node_phishern_zugeschaut [label="Phishern zugeschaut" href="https://elbosso.github.io/phishern_zugeschaut.html"]
                 node_phishern_zugeschaut -> node_certstream__influxdb__grafana_netflix
 node_esp_link_gps_logger [label="esp-link und GPS-Logger" href="https://elbosso.github.io/esp_link_gps_logger.html"]
     node_telegraf_inputs_unterschiedlicher_frequenz [label="Telegraf Inputs mit unterschiedlicher Frequenz" href="https://elbosso.github.io/telegraf_inputs_unterschiedlicher_frequenz.html"]
@@ -214,7 +217,8 @@ node_gedanken_zeit__ntp__gps_diy [label="Gedanken zu Zeit, NTP, GPS und DIY" hre
             node_visualisierung_strange_attractors_java3d -> node_kontinuierliche_visualisierung_strange_attractors
 node_blackhat_2018_keynote [label="Blackhat 2018 Keynote" href="https://elbosso.github.io/blackhat_2018_keynote.html"]
     node_e_paper_tuerschild_esp8266 [label="E-Paper Türschild mit ESP8266" href="https://elbosso.github.io/e_paper_tuerschild_esp8266.html"]
-                node_e_paper_tuerschild_esp8266 -> node_max7119_ntp_uhr
+                node_e_paper_tuerschild_esp8266 -> node_diy_ebook_reader
+            node_e_paper_tuerschild_esp8266 -> node_max7119_ntp_uhr
 node_mehrere_tile_layer_aus_einem_server [label="Mehrere Tile-Layer aus einem Server" href="https://elbosso.github.io/mehrere_tile_layer_aus_einem_server.html"]
                 node_mehrere_tile_layer_aus_einem_server -> node_update_tileserver_auf_18_04
             node_mehrere_tile_layer_aus_einem_server -> node_lxc_bootstrap_gui_container
