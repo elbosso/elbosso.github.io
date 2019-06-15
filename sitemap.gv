@@ -30,7 +30,11 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_swing_inspector [label="Swing Inspector" href="https://elbosso.github.io/swing_inspector.html"]
+node_raspi_vpn_endpunkt [label="Raspi als VPN-Endpunkt" href="https://elbosso.github.io/raspi_vpn_endpunkt.html"]
+                node_raspi_vpn_endpunkt -> node_dnssec_faehiger_resolver_auf_dem_pi
+node_procol_harum___a_whiter_shade_of_pale [label="Procol Harum - A Whiter Shade of Pale" href="https://elbosso.github.io/procol_harum___a_whiter_shade_of_pale.html"]
+    node_aviator___websockets [label="Aviator + Websockets" href="https://elbosso.github.io/aviator___websockets.html"]
+    node_swing_inspector [label="Swing Inspector" href="https://elbosso.github.io/swing_inspector.html"]
     node_diy_ebook_reader [label="DIY EBook-Reader" href="https://elbosso.github.io/diy_ebook_reader.html"]
     node_datamodel2html_plugin [label="DataModel2HTML-Plugin" href="https://elbosso.github.io/datamodel2html_plugin.html"]
     node_garten_fruehjahr_2019 [label="Garten im Frühjahr 2019" href="https://elbosso.github.io/garten_fruehjahr_2019.html"]
@@ -74,7 +78,8 @@ node_atomicinteger_vs__integer [label="AtomicInteger vs. Integer" href="https://
 node_gnuplot_wrapper_plugins [label="Gnuplot-Wrapper-Plugins" href="https://elbosso.github.io/gnuplot_wrapper_plugins.html"]
                 node_gnuplot_wrapper_plugins -> node_datamodel2html_plugin
 node_gitlab_metriken_grafana [label="Gitlab-Metriken in Grafana" href="https://elbosso.github.io/gitlab_metriken_grafana.html"]
-                node_gitlab_metriken_grafana -> node_telegraf_inputs_unterschiedlicher_frequenz
+                node_gitlab_metriken_grafana -> node_raspi_vpn_endpunkt
+            node_gitlab_metriken_grafana -> node_telegraf_inputs_unterschiedlicher_frequenz
 node_warum_blockchain_ [label="Warum Blockchain?" href="https://elbosso.github.io/warum_blockchain_.html"]
     node_aviator_badges [label="Aviator-Badges" href="https://elbosso.github.io/aviator_badges.html"]
                 node_aviator_badges -> node_aviator___websockets
@@ -1062,10 +1067,10 @@ node_daylight [label="DayLight" href="https://elbosso.github.io/daylight.html"]
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
                 node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-                node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
+                node_ebmap4d -> node_ebmap4d___geojson
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
             node_ebmap4d -> node_ortsbezuege_dwb_
-            node_ebmap4d -> node_ebmap4d___geojson
+            node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_tile_server_openstreetmap
             node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
