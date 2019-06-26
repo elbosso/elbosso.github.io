@@ -30,7 +30,8 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_ssh_mfa [label="SSH und MFA" href="https://elbosso.github.io/ssh_mfa.html"]
+node_daten_inline_gnuplot_scripts [label="Daten inline in Gnuplot-Scripts" href="https://elbosso.github.io/daten_inline_gnuplot_scripts.html"]
+    node_ssh_mfa [label="SSH und MFA" href="https://elbosso.github.io/ssh_mfa.html"]
     node_warten_auf_jupiter_hell___ [label="Warten auf Jupiter Hell..." href="https://elbosso.github.io/warten_auf_jupiter_hell___.html"]
     node_dnssec_faehiger_resolver_auf_dem_pi [label="DNSSEC fähiger Resolver auf dem Pi" href="https://elbosso.github.io/dnssec_faehiger_resolver_auf_dem_pi.html"]
                 node_dnssec_faehiger_resolver_auf_dem_pi -> node_lxc_bootstrap_gui_container
@@ -78,7 +79,8 @@ node_esp_link_gps_logger [label="esp-link und GPS-Logger" href="https://elbosso.
     node_telegraf_inputs_unterschiedlicher_frequenz [label="Telegraf Inputs mit unterschiedlicher Frequenz" href="https://elbosso.github.io/telegraf_inputs_unterschiedlicher_frequenz.html"]
                 node_telegraf_inputs_unterschiedlicher_frequenz -> node_certstream__influxdb__grafana_netflix
 node_atomicinteger_vs__integer [label="AtomicInteger vs. Integer" href="https://elbosso.github.io/atomicinteger_vs__integer.html"]
-    node_prozesse_nach_maximaler_laufzeit_beenden [label="Prozesse nach maximaler Laufzeit beenden" href="https://elbosso.github.io/prozesse_nach_maximaler_laufzeit_beenden.html"]
+                node_atomicinteger_vs__integer -> node_daten_inline_gnuplot_scripts
+node_prozesse_nach_maximaler_laufzeit_beenden [label="Prozesse nach maximaler Laufzeit beenden" href="https://elbosso.github.io/prozesse_nach_maximaler_laufzeit_beenden.html"]
     node_raspi_usb_otg [label="Raspi und USB-OTG" href="https://elbosso.github.io/raspi_usb_otg.html"]
                 node_raspi_usb_otg -> node_certstream__influxdb__grafana_netflix
 node_gnuplot_wrapper_plugins [label="Gnuplot-Wrapper-Plugins" href="https://elbosso.github.io/gnuplot_wrapper_plugins.html"]
