@@ -30,9 +30,11 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_repo_auf_github__telegraf_ [label="Repo auf Github (Telegraf)" href="https://elbosso.github.io/repo_auf_github__telegraf_.html"]
+node_lxc_bootstrap_gui_container [label="LXC bootstrap für GUI Container" href="https://elbosso.github.io/lxc_bootstrap_gui_container.html"]
+    node_repo_auf_github__telegraf_ [label="Repo auf Github (Telegraf)" href="https://elbosso.github.io/repo_auf_github__telegraf_.html"]
     node_conky___influxdb [label="Conky & InfluxDB" href="https://elbosso.github.io/conky___influxdb.html"]
-    node_daten_inline_gnuplot_scripts [label="Daten inline in Gnuplot-Scripts" href="https://elbosso.github.io/daten_inline_gnuplot_scripts.html"]
+                node_conky___influxdb -> node_grafana__alarmierung_xmpp
+node_daten_inline_gnuplot_scripts [label="Daten inline in Gnuplot-Scripts" href="https://elbosso.github.io/daten_inline_gnuplot_scripts.html"]
     node_ssh_mfa [label="SSH und MFA" href="https://elbosso.github.io/ssh_mfa.html"]
     node_warten_auf_jupiter_hell___ [label="Warten auf Jupiter Hell..." href="https://elbosso.github.io/warten_auf_jupiter_hell___.html"]
     node_dnssec_faehiger_resolver_auf_dem_pi [label="DNSSEC fähiger Resolver auf dem Pi" href="https://elbosso.github.io/dnssec_faehiger_resolver_auf_dem_pi.html"]
@@ -50,7 +52,8 @@ node_datamodel2html_plugin [label="DataModel2HTML-Plugin" href="https://elbosso.
     node_sqlshell_unterstuetzt_comment [label="sQLshell unterstützt COMMENT" href="https://elbosso.github.io/sqlshell_unterstuetzt_comment.html"]
                 node_sqlshell_unterstuetzt_comment -> node_aviator___websockets
 node_certstream___ressourcenverbrauch [label="Certstream - Ressourcenverbrauch" href="https://elbosso.github.io/certstream___ressourcenverbrauch.html"]
-    node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian May, Kerry Ellis & Vittorio Grigolo: Bohemian Rhapsody" href="https://elbosso.github.io/brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody.html"]
+                node_certstream___ressourcenverbrauch -> node_grafana__alarmierung_xmpp
+node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian May, Kerry Ellis & Vittorio Grigolo: Bohemian Rhapsody" href="https://elbosso.github.io/brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody.html"]
     node_mandelbrot_sets_mittels_shadern_berechnen [label="Mandelbrot-Sets mittels Shadern berechnen" href="https://elbosso.github.io/mandelbrot_sets_mittels_shadern_berechnen.html"]
                 node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_java
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
@@ -510,7 +513,8 @@ node_osgi_plugin_dwb_ [label="OSGI-Plugin für dWb+" href="https://elbosso.githu
 node_name_constraints_x509_zertifikaten [label="Name Constraints in X509 Zertifikaten" href="https://elbosso.github.io/name_constraints_x509_zertifikaten.html"]
     node_bildverwaltung_automatisiert [label="Bildverwaltung automatisiert" href="https://elbosso.github.io/bildverwaltung_automatisiert.html"]
     node_roadmap_i_alarmmonitoring [label="Roadmap I Alarmmonitoring" href="https://elbosso.github.io/roadmap_i_alarmmonitoring.html"]
-    node_jackie_greene___concert [label="Jackie Greene - in Concert" href="https://elbosso.github.io/jackie_greene___concert.html"]
+                node_roadmap_i_alarmmonitoring -> node_grafana__alarmierung_xmpp
+node_jackie_greene___concert [label="Jackie Greene - in Concert" href="https://elbosso.github.io/jackie_greene___concert.html"]
     node_osgi_i [label="OSGI I" href="https://elbosso.github.io/osgi_i.html"]
                 node_osgi_i -> node_osgi_plugin_dwb_
 node_zeitliche_gruppierung_zeitreihen_diagramme [label="Zeitliche Gruppierung und Zeitreihen-Diagramme" href="https://elbosso.github.io/zeitliche_gruppierung_zeitreihen_diagramme.html"]
