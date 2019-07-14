@@ -30,11 +30,14 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_the_alan_parsons_project___old_and_wise [label="The Alan Parsons Project - Old And Wise" href="https://elbosso.github.io/the_alan_parsons_project___old_and_wise.html"]
+node_give_it_away___jamey_johnson [label="Give it away - Jamey Johnson" href="https://elbosso.github.io/give_it_away___jamey_johnson.html"]
+    node_generierter_code_aop [label="Generierter Code und AOP" href="https://elbosso.github.io/generierter_code_aop.html"]
+    node_the_alan_parsons_project___old_and_wise [label="The Alan Parsons Project - Old And Wise" href="https://elbosso.github.io/the_alan_parsons_project___old_and_wise.html"]
     node_sitemap_mittels_graphviz [label="Sitemap mittels Graphviz" href="https://elbosso.github.io/sitemap_mittels_graphviz.html"]
     node_lesetipp__the_art_of_unix_programming [label="Lesetipp: The Art of UNIX Programming" href="https://elbosso.github.io/lesetipp__the_art_of_unix_programming.html"]
     node_lxc_bootstrap_gui_container [label="LXC bootstrap für GUI Container" href="https://elbosso.github.io/lxc_bootstrap_gui_container.html"]
-    node_repo_auf_github__telegraf_ [label="Repo auf Github (Telegraf)" href="https://elbosso.github.io/repo_auf_github__telegraf_.html"]
+                node_lxc_bootstrap_gui_container -> node_lxc_netzwerk_router
+node_repo_auf_github__telegraf_ [label="Repo auf Github (Telegraf)" href="https://elbosso.github.io/repo_auf_github__telegraf_.html"]
     node_conky___influxdb [label="Conky & InfluxDB" href="https://elbosso.github.io/conky___influxdb.html"]
                 node_conky___influxdb -> node_grafana__alarmierung_xmpp
 node_daten_inline_gnuplot_scripts [label="Daten inline in Gnuplot-Scripts" href="https://elbosso.github.io/daten_inline_gnuplot_scripts.html"]
@@ -447,6 +450,7 @@ node_erzeugung_beaninfo_annotations [label="Erzeugung von BeanInfo mit Annotatio
                 node_erzeugung_beaninfo_annotations -> node_beaninfo_generierung_via_annotations
 node_dokumentation_netzwerklabor_dwb_ [label="Dokumentation Netzwerklabor mit dWb+" href="https://elbosso.github.io/dokumentation_netzwerklabor_dwb_.html"]
                 node_dokumentation_netzwerklabor_dwb_ -> node_vorhaben_2019
+            node_dokumentation_netzwerklabor_dwb_ -> node_lxc_netzwerk_router
 node_material_design_anyone_ [label="Material Design anyone?" href="https://elbosso.github.io/material_design_anyone_.html"]
     node_integration_cloudmqtt___dwb_ [label="Integration CloudMQTT & dWb+" href="https://elbosso.github.io/integration_cloudmqtt___dwb_.html"]
                 node_integration_cloudmqtt___dwb_ -> node_mqtt___raspi___grafana
