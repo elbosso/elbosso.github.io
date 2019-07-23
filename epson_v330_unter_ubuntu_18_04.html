@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>ESP8266 und ZigBee</title>
+<title>Epson V330 unter Ubuntu 18.04</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -45,20 +45,17 @@ and is wrapped around the whole page content, except for the footer in this exam
 			<a name="content"></a>
 			<div class="w3-card w3-margin">
 				<div class="w3-container w3-padding">
-					<h4>ESP8266 und ZigBee</h4>
+					<h4>Epson V330 unter Ubuntu 18.04</h4>
 					<div class="w3-container">
 						<div class="w3-row">
 							<div class="w3-col m8 s12">
 								vorhergehende Artikel in:
-								<a href="eigene_firmware_sonoff_s20.html#content">
-									<span class="w3-tag w3-black w3-margin-bottom">ESP Wifi</span>
-								</a> <!--/li-->
-								<a href="oled_status_display_time_server.html#content">
-									<span class="w3-tag w3-black w3-margin-bottom">Hardware</span>
+								<a href="2fa_google_software_update_lahmgelegt.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
 								</a> <!--/li-->
 							</div>
 							<div class="w3-col m4" style="text-align: right">
-								<span class="w3-opacity">19.01.2019</span>
+								<span class="w3-opacity">23.07.2019</span>
 							</div>
 						</div>
 					</div>
@@ -66,32 +63,58 @@ and is wrapped around the whole page content, except for the footer in this exam
 			</div>
 			<div class="w3-card-4 w3-margin w3-white">
 				<div class="w3-container w3-padding" id="abstract">
-<p>Ich habe neulich bereits über einen
-<a href="oled_status_display_time_server.html">Fund in meiner Bastelkiste</a>
-berichtet und jetzt hatte ich wieder eine Idee, die sich meiner Ansicht nach in den anstehenden langen
-dunklen Nächten zu untersuchen lohnen würde: Will man einen ESP 8266 schlafen legen, ist das sehr einfach - man kann ihn aufwecken,
-indem man an einem seiner Beine zieht.
+<p>Wer mich kennt weiß, dass ich sehr selten funktionsfähige elektronische Geräte entsorge und neue
+anschaffe, nur um etwas neues zu besitzen. Bestes Beispiel dafür ist mein
+nun bereits über 13 Jahre alter
+<a href="alte_rechner_zukunftsfaehig____.html">Sony Vaio Laptop.</a>
+Manchmal bringen ältere Geräte aber auch Probleme mit sich...
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
-<p>Das kann durch eine beliebige externe Schaltung geschehen oder durch den internen Timer - dazu muss man dessen Ausgang
-mit dem entsprechenden "Aufwachbeinchen" verbinden.
-Leider kann der interne Counter nur etwas mehr als eine Stunde durchhalten - danach läuft er wegen des geringen Wertebereichs
-über. Möchte man also eine längere Schlafetappe programmieren, muss man stündlich aufwachen und - nachdem man festgestellt hat,
-dass die Zeit zum aufstehen noch nicht gekommen ist - wieder einschlafen.
+<p>Als ich nach längerer Zeit wieder einmal etwas einscannen wollte, holte ich mir
+meinen schon etwas betagten Epson Scanner aus dem Schrank und schloss ihn
+an den Computer an.
 </p><p>
-Eine weitere Möglichkeit, dieses Problem zu lösen wäre der Einsatz eines dedizierten Timerschaltkreises ähnlich dem
-<a href="ntp_server_raspi_em406a.html">555 -</a>
-allerdings erreicht der
-<a href="https://www.electronics-tutorials.ws/waveforms/555_timer.html">555</a>
-nicht die benötigten Verzögerungen.
+Aber egal, was ich auch tat - es wollte keine Kommunikation zwischen beiden in Gang
+kommen. Nach einem vergleichstest mit Windows konnte ich sicher
+sein, dass kein technisches Problem am Gerät vorlag: Dort konnte ich problemlos
+scannen.
 </p><p>
-Und beim Kramen ist mir ein ZigBee-Modul in die Hände gefallen. Das hat mich daran erinnert, dass es möglich ist,
-diese so zu programmieren, dass sie auf den Eingang eines bestimmten Signals hin ihre
-<a href="https://xbee-sdk-doc.readthedocs.io/en/1.5.7/api_doc/pg/">GPIO-Pins</a>
-umschalten können. Man muss natürlich abwägen, ob die Stromkosten einer entsprechenden Schaltung nicht vielleicht die Einsparung
-durch den Tiefschlaf des ESP8266 wieder aufzehren - jedoch ein lohnendes Projekt, das Ganze mal zu untersuchen und wieder
-ein wenig mit dem ZigBee rumzuspielen...
+Ich recherchierte dann ein wenig und stellte fest, dass dieses Verhalten ein
+bekanntes war und schon viele Leute sich damit herumschlagen mussten. Die meisten Suchtreffer
+beklagten Probleme mit Ubuntu 18.04 - der von mir eingesetzten Variante.
+</p><p>
+Ich fand glücklicherweise in den vielen Artikeln, die sich mit dem Problem beschäftigten die Hilfe,
+die es mir schlussendlich ermöglichte, meine Scanner auch wieder unter Linux zu benutzen. Die
+zwei hilfreichsten sind hier unten verlinkt...
 </p>				</div>
+				<div class="w3-container w3-padding" id="links">
+					<hr/>
+					<h3>
+						Links
+					</h3>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>(Solved) Epson Scanner not usable since update to Mint 19 - Pipe error
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://forums.linuxmint.com/viewtopic.php?f=51&t=272874" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Comment 25 for bug 1728012
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://bugs.launchpad.net/ubuntu/+source/sane-backends/+bug/1728012/comments/25" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+				</div>
 
 			</div>
 			<!-- END BLOG ENTRY -->
@@ -112,17 +135,17 @@ ein wenig mit dem ZigBee rumzuspielen...
 						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
 						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
 						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
-						<a href="esp_wifi.html"><span class="w3-tag w3-black w3-margin-bottom">ESP Wifi</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
 						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
 						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
 						<a href="tag_Git(lab|hub).html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
 						<a href="gitlab_hub.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gitlab|hub</span></a>
 						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
-						<a href="tag_Hardware.html"><span class="w3-tag w3-black w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
 						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
 						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
 						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
-						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
 						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
 						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
 						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
@@ -165,19 +188,6 @@ ein wenig mit dem ZigBee rumzuspielen...
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Epson V330 unter Ubuntu 18.04</span><br>
-						<span class="smallabstract"><p>Wer mich kennt weiß, dass ich sehr selten funktionsfähige elektronische Geräte entsorge und neue
-anschaffe, nur um etwas neues zu besitzen. Bestes Beispiel dafür ist mein
-nun bereits über 13 Jahre alter
-Sony Vaio Laptop.
-Manchmal bringen ältere Geräte aber auch Probleme mit sich...
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="epson_v330_unter_ubuntu_18_04.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
 							<span class="w3-large">							Preaching Blues - Larkin Poe</span><br>
 						<span class="smallabstract"><p>
 </p></span>
@@ -195,6 +205,17 @@ einzusetzen. Ein Softwareupdate auf besagtem Smartphone legte diese Woche diesen
 zweiten Faktor lahm - und das kam so...
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="2fa_google_software_update_lahmgelegt.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Fährnisse des Buildprozesses unter Windows</span><br>
+						<span class="smallabstract"><p>Nachdem ich begonnen hatte, mich mit der Beschleunigung der Berechnung des Mandelbrot-Fraktals unter
+Zuhilfenahme der Shadereinheiten in Graphikkarten
+zu beschäftigen und erste Erfolge feiern konnte, wollte ich das mal auf einer richtigen Graphikkarte
+ausprobieren...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="faehrnisse_des_buildprozesses_unter_windows.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -229,19 +250,6 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Epson V330 unter Ubuntu 18.04</span><br>
-							<span class="smallabstract"><p>Wer mich kennt weiß, dass ich sehr selten funktionsfähige elektronische Geräte entsorge und neue
-anschaffe, nur um etwas neues zu besitzen. Bestes Beispiel dafür ist mein
-nun bereits über 13 Jahre alter
-Sony Vaio Laptop.
-Manchmal bringen ältere Geräte aber auch Probleme mit sich...
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="epson_v330_unter_ubuntu_18_04.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
 							<span class="w3-large">							Preaching Blues - Larkin Poe</span><br>
 							<span class="smallabstract"><p>
 </p></span>
@@ -259,6 +267,17 @@ einzusetzen. Ein Softwareupdate auf besagtem Smartphone legte diese Woche diesen
 zweiten Faktor lahm - und das kam so...
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="2fa_google_software_update_lahmgelegt.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Fährnisse des Buildprozesses unter Windows</span><br>
+							<span class="smallabstract"><p>Nachdem ich begonnen hatte, mich mit der Beschleunigung der Berechnung des Mandelbrot-Fraktals unter
+Zuhilfenahme der Shadereinheiten in Graphikkarten
+zu beschäftigen und erste Erfolge feiern konnte, wollte ich das mal auf einer richtigen Graphikkarte
+ausprobieren...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="faehrnisse_des_buildprozesses_unter_windows.html#content">
  Weiterlesen...
 								</a>
 						</li>
