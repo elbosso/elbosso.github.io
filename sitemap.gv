@@ -30,6 +30,9 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_synchronisieren_zwischenablage_xpra [label="Synchronisieren Zwischenablage mit XPRA" href="https://elbosso.github.io/synchronisieren_zwischenablage_xpra.html"]
+    node_grafana__alarmierung_xmpp [label="Grafana: Alarmierung mit XMPP" href="https://elbosso.github.io/grafana__alarmierung_xmpp.html"]
+                node_grafana__alarmierung_xmpp -> node_alarmierung_ueber_skripte
 node_streaming_server_linux [label="Streaming Server mit Linux" href="https://elbosso.github.io/streaming_server_linux.html"]
     node_julia_mengen_shadern_umgesetzt [label="Julia-Mengen mit Shadern umgesetzt" href="https://elbosso.github.io/julia_mengen_shadern_umgesetzt.html"]
     node_migration_kanboard_nach_gitlab [label="Migration von KanBoard nach GitLab" href="https://elbosso.github.io/migration_kanboard_nach_gitlab.html"]
@@ -214,7 +217,8 @@ node_gc_beliebige_praezision_java [label="GC und beliebige Präzision in Java" h
                 node_strange_attractors_bigdecimal -> node_gc_beliebige_praezision_java
             node_strange_attractors_bigdecimal -> node_doppelte_genauigkeit_java
 node_neue_datengeneratoren_v [label="Neue Datengeneratoren V" href="https://elbosso.github.io/neue_datengeneratoren_v.html"]
-    node_neue_datengeneratoren_iv [label="Neue Datengeneratoren IV" href="https://elbosso.github.io/neue_datengeneratoren_iv.html"]
+                node_neue_datengeneratoren_v -> node_testdatengeneratoren_microservices_docker
+node_neue_datengeneratoren_iv [label="Neue Datengeneratoren IV" href="https://elbosso.github.io/neue_datengeneratoren_iv.html"]
                 node_neue_datengeneratoren_iv -> node_neue_datengeneratoren_v
 node_mathematik_beliebiger_praezision_java [label="Mathematik mit beliebiger Präzision in Java" href="https://elbosso.github.io/mathematik_beliebiger_praezision_java.html"]
                 node_mathematik_beliebiger_praezision_java -> node_strange_attractors_bigdecimal
@@ -580,6 +584,7 @@ node_datenbank_spezifische_erweiterungen_sqlshell [label="Datenbank-spezifische 
                 node_generierung_skripts_sqlshell -> node_datenbank_spezifische_erweiterungen_sqlshell
 node_beanshell_debugger [label="BeanShell Debugger" href="https://elbosso.github.io/beanshell_debugger.html"]
                 node_beanshell_debugger -> node_beanshell_debugger_ohne_ide
+            node_beanshell_debugger -> node_beanshell_debugger___neue_version
 node_wlan_reichweite___pebcac [label="WLAN-Reichweite - PEBCAC" href="https://elbosso.github.io/wlan_reichweite___pebcac.html"]
     node_rattle_my_bones___secret_sisters [label="Rattle my Bones - Secret Sisters" href="https://elbosso.github.io/rattle_my_bones___secret_sisters.html"]
     node_permissions_zugriff_auf_jboss_ejbs [label="Permissions zum Zugriff auf JBoss-EJBs" href="https://elbosso.github.io/permissions_zugriff_auf_jboss_ejbs.html"]

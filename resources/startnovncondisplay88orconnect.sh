@@ -1,5 +1,5 @@
 #!/bin/sh
-
+# shellcheck disable=SC2154,SC2039
 #Copyright (c) 2012-2015.
 #
 #Juergen Key. Alle Rechte vorbehalten.
@@ -36,25 +36,25 @@
 start() {
 DISPLAY=:88
 if xterm -iconic -e "exit" > /dev/null 2>&1; then
-  echo "user $user can connect to display $display"
+  echo "user $user can connect to display $DISPLAY"
 #  DISPLAY=:0 xpra attach :77 &
 else
-  echo "user $user cannot connect to display $display"
+  echo "user $user can connect to display $DISPLAY"
   vncserver :88 -geometry 1280x900
-  cd noVNC-master
+  cd noVNC-master || return
   ./utils/websockify/websockify.py --web ./ 8787 localhost:5988 &
-  mypid=$!
-  echo -n $mypid >/tmp/run/`basename "$0"`
+  mypid="$!"
+  echo -n "$mypid" >/tmp/run/"$(basename "$0")"
 fi
 }
 stop() {
 DISPLAY=:88
 if xterm -iconic -e "exit" > /dev/null 2>&1; then
-  echo "user $user can connect to display $display"
-  me=`basename "$0"`
-  mypid=`cat /tmp/run/$me`
-  echo "killing "$mypid
-  kill -9 $mypid
+  echo "user $user can connect to display $DISPLAY"
+  me=$(basename "$0")
+  mypid=$(cat /tmp/run/"$me")
+  echo "killing $mypid"
+  kill -9 "$mypid"
   DISPLAY=:0 vncserver -kill :88
 fi
 }

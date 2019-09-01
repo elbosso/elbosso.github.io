@@ -35,9 +35,9 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 
 /* Example:
 //Switch, to enable (true) or disable (false) Debugging
-___eb_debug_on___=true;
+global.___eb_debug_on___=true;
 //Switch, to enable (true) or disable (false) interactive console for breakpoints
-___eb_debug_on___="console";
+global.___eb_debug_on___="console";
 doFunc()
 {
 	a=3+4;
@@ -62,15 +62,19 @@ package de.elbosso.util;
  *
  * @author elbosso
  */
-public class BeanShellDebugger
+public class BeanShellDebugger extends java.lang.Object
 {
+	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(BeanShellDebugger.class);
+
 	private static final java.util.Set<java.lang.String> hidden=new java.util.HashSet();
 	static
 	{
 		hidden.add("___eb_debug_on___");
 		hidden.add("bsh");
 	}
-	public static void debug(java.lang.String key,bsh.CallStack callStack,Object[] arguments)
+
+	private static Visitor visitor;
+	public synchronized static void debug(java.lang.String key,bsh.CallStack callStack,Object[] arguments)
 	{
 		try
 		{
@@ -128,12 +132,30 @@ public class BeanShellDebugger
 				f.setVisible(false);
 				f.dispose();
 			}
+			else
+			{
+//				System.out.println(key+" "+visitor);
+				if(key.equals("_uncaughtExceptionCaught"))
+				{
+					CLASS_LOGGER.debug("Exception caught!");
+					if(((arguments.length>0)&&(arguments[0]!=null))&&(java.lang.Throwable.class.isAssignableFrom(arguments[0].getClass())))
+					{
+						java.lang.Throwable t = (java.lang.Throwable) arguments[0];
+						CLASS_LOGGER.debug(t.getMessage(), t);
+					}
+				}
+				else
+				{
+					CLASS_LOGGER.debug("Undefined method called: "+key+"!");
+				}
+				if(visitor!=null)
+					visitor.debug(key, callStack, arguments);
+			}
 		}
 		catch(bsh.UtilEvalError e)
 		{
-			e.printStackTrace();
+			CLASS_LOGGER.error(e.getMessage(),e);
 		}
-		//Set Breakpoint in next line!
 	}
 	private static void printVariableNames(bsh.Interpreter inter, bsh.NameSpace ns,java.util.Set<java.lang.String> alreadyPrinted) throws bsh.EvalError
 	{
@@ -154,7 +176,9 @@ public class BeanShellDebugger
 	}
 	private static void instrument(bsh.Interpreter inter) throws bsh.EvalError
 	{
-		inter.eval("invoke(String methodName, Object [] arguments){"
+		java.lang.String statements="invoke(String methodName, Object [] arguments){"
+//				+ "System.out.println(\"invoke \"+methodName+\" \"+(___eb_debug_on___!=null?___eb_debug_on___:false));"
+//				+ "System.out.println(\"invoke \"+global.___eb_debug_on___);"
 				+ "if((___eb_debug_on___!=void)&&((___eb_debug_on___==true)||(___eb_debug_on___.equals(\"console\"))))"
 				+ "{"
 				+ "cs=this.callstack.copy();"
@@ -162,23 +186,45 @@ public class BeanShellDebugger
 				+ BeanShellDebugger.class.getName()
 				+ ".debug(methodName,cs,arguments);"
 				+ "}"
-				+ "}");
+				+ "}";
+		inter.eval(statements);
 	}
-	public static void eval(bsh.Interpreter inter, java.lang.String fragment) throws bsh.EvalError
+	public static java.lang.Object eval(bsh.Interpreter inter, java.lang.String fragment) throws bsh.EvalError
 	{
-		instrument(inter);
-		inter.eval("try{\n"+fragment+"\n}catch(exp){_uncaughtExceptionCaught()}");
+		return eval(inter,fragment,null);
 	}
-	public static void eval(bsh.Interpreter inter, java.io.Reader reader) throws bsh.EvalError
+	public static java.lang.Object eval(bsh.Interpreter inter, java.io.Reader reader) throws bsh.EvalError
 	{
+		return eval(inter,reader,null);
+	}
+	public static java.lang.Object eval(bsh.Interpreter inter, java.lang.String fragment,de.elbosso.util.BeanShellDebugger.Visitor visitor) throws bsh.EvalError
+	{
+		java.lang.Object rv=null;
+		BeanShellDebugger.visitor=visitor;
 		instrument(inter);
-		inter.eval(reader);
+		rv=inter.eval("try{___eb_function___(){\n"+fragment+"\n}\nreturn ___eb_function___();}catch(exp){_uncaughtExceptionCaught(exp);throw(exp);}");
+		BeanShellDebugger.visitor=null;
+		return rv;
+	}
+	public static java.lang.Object eval(bsh.Interpreter inter, java.io.Reader reader,de.elbosso.util.BeanShellDebugger.Visitor visitor) throws bsh.EvalError
+	{
+		java.lang.Object rv=null;
+		BeanShellDebugger.visitor=visitor;
+		instrument(inter);
+		rv=inter.eval(new ReaderFacade(reader));
+		BeanShellDebugger.visitor=null;
+		return rv;
+	}
+
+	public static interface Visitor
+	{
+		void debug(java.lang.String key,bsh.CallStack callStack,Object[] arguments);
 	}
 	
-	static class ReaderFacade extends java.io.BufferedReader
+	private static class ReaderFacade extends java.io.BufferedReader
 	{
-		private final java.io.StringReader prepend=new java.io.StringReader("try{\n");
-		private final java.io.StringReader append=new java.io.StringReader("\n}catch(exp){_uncaughtExceptionCaught();}");
+		private final java.io.StringReader prepend=new java.io.StringReader("try{___eb_function___(){\n");
+		private final java.io.StringReader append=new java.io.StringReader("\n}\nreturn ___eb_function___();}catch(exp){_uncaughtExceptionCaught(exp);throw(exp);}");
 		public ReaderFacade(java.io.Reader reader)
 		{
 			super(reader);
