@@ -57,7 +57,7 @@ public class SevenSegmentDoubleNumberDisplay extends NumberDisplay
 			throw new java.lang.IllegalArgumentException("fraclen must not be smaller than 1!");
 		this.fraclen=fraclen;
 		if(factor<0.6)
-			throw new java.lang.IllegalArgumentException("factor must not be smaller than 0.1!");
+			throw new java.lang.IllegalArgumentException("factor must not be smaller than 0.6!");
 		this.factor=factor;
 		this.sevenSegment=new SevenSegment(factor);
 		dim=new java.awt.Dimension((int)((38*2+(this.len+fraclen)*46)*factor), (int)(100*factor));

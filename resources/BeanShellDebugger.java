@@ -200,19 +200,33 @@ public class BeanShellDebugger extends java.lang.Object
 	public static java.lang.Object eval(bsh.Interpreter inter, java.lang.String fragment,de.elbosso.util.BeanShellDebugger.Visitor visitor) throws bsh.EvalError
 	{
 		java.lang.Object rv=null;
-		BeanShellDebugger.visitor=visitor;
-		instrument(inter);
-		rv=inter.eval("try{___eb_function___(){\n"+fragment+"\n}\nreturn ___eb_function___();}catch(exp){_uncaughtExceptionCaught(exp);throw(exp);}");
-		BeanShellDebugger.visitor=null;
+		if(System.getProperty("de.elbosso.util.BeanShellDebugger.active","true").equals("true"))
+		{
+			BeanShellDebugger.visitor=visitor;
+			instrument(inter);
+			rv=inter.eval("try{___eb_function___(){\n"+fragment+"\n}\nreturn ___eb_function___();}catch(exp){_uncaughtExceptionCaught(exp);throw(exp);}");
+			BeanShellDebugger.visitor=null;
+		}
+		else
+		{
+			rv=inter.eval(fragment);
+		}
 		return rv;
 	}
 	public static java.lang.Object eval(bsh.Interpreter inter, java.io.Reader reader,de.elbosso.util.BeanShellDebugger.Visitor visitor) throws bsh.EvalError
 	{
 		java.lang.Object rv=null;
-		BeanShellDebugger.visitor=visitor;
-		instrument(inter);
-		rv=inter.eval(new ReaderFacade(reader));
-		BeanShellDebugger.visitor=null;
+		if(System.getProperty("de.elbosso.util.BeanShellDebugger.active","true").equals("true"))
+		{
+			BeanShellDebugger.visitor=visitor;
+			instrument(inter);
+			rv=inter.eval(new ReaderFacade(reader));
+			BeanShellDebugger.visitor=null;
+		}
+		else
+		{
+			rv=inter.eval(reader);
+		}
 		return rv;
 	}
 

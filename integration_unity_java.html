@@ -119,7 +119,7 @@ sudo apt-get install libunity-dev
 reicht, um alle benötigten Software-Komponenten zu installieren, allerdings muß man 
 beim Kompilieren etwas variieren: Der letztendlich korrekte Aufruf war:
 <pre>
-gcc `pkg-config --cflags --libs glib-2.0` `pkg-config --cflags --libs dee-1.0` `pkg-config --cflags --libs dbusmenu-glib-0.4` -I$JAVA_HOME/include/  -fpic  -c UnityLauncher.c
+gcc <span class="mdcode">pkg-config --cflags --libs glib-2.0</span> <span class="mdcode">pkg-config --cflags --libs dee-1.0</span> <span class="mdcode">pkg-config --cflags --libs dbusmenu-glib-0.4</span> -I$JAVA_HOME/include/  -fpic  -c UnityLauncher.c
 </pre>
 Das Erstellen der DLL gestaltete sich schon schwieriger: zunächst sah ich die
 Meldung, daß Symbole nicht gefunden werden konnten. Dann wurde ich durch das Internet
@@ -128,7 +128,7 @@ Viele Leute denken nämlich, daß es ein Problem ist, wenn eine JNI-Bibliothek
 Symbole aus anderen benötigt. Schließlich aber fiel bei mir der Groschen: um das zu vermeiden,
 muß man die JNI-DLL einfach mit den von ihr benötigten DLLs zusammen linken:
 <pre>
-gcc -shared -o libebunity.so UnityLauncher.o `pkg-config --cflags --libs unity`
+gcc -shared -o libebunity.so UnityLauncher.o <span class="mdcode">pkg-config --cflags --libs unity</span>
 </pre>
 Diese DLL muß man dann in den Pfad legen, in dem Java DLLs sucht und kann sie dann 
 laden:
@@ -260,6 +260,18 @@ geht die Reise nun weiter...
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							EBCMS</span><br>
+						<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
+Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
+ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
+und was eigenes geschaffen!
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#22">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
 							Synchronisieren Zwischenablage mit XPRA</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich mein
@@ -281,16 +293,6 @@ prächtig funktioniert, habe ich mir über
 das Thema Alarmierung Gedanken gemacht...
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="grafana__alarmierung_xmpp.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Streaming Server mit Linux</span><br>
-						<span class="smallabstract"><p>Ich habe schon länger darüber nachgedacht, einmal zu versuchen, einen Streaming-Server aufzubauen.
-Da es in letzter Zeit wieder einmal sehr war draußen ist, habe ich die Zeit, die ich vor der Hitze
-Schutz suchte dazu genutzt, diese Idee in die Praxis umzusetzen...
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="streaming_server_linux.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -325,6 +327,18 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							EBCMS</span><br>
+							<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
+Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
+ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
+und was eigenes geschaffen!
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#22">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
 							Synchronisieren Zwischenablage mit XPRA</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich mein
@@ -346,16 +360,6 @@ prächtig funktioniert, habe ich mir über
 das Thema Alarmierung Gedanken gemacht...
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="grafana__alarmierung_xmpp.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Streaming Server mit Linux</span><br>
-							<span class="smallabstract"><p>Ich habe schon länger darüber nachgedacht, einmal zu versuchen, einen Streaming-Server aufzubauen.
-Da es in letzter Zeit wieder einmal sehr war draußen ist, habe ich die Zeit, die ich vor der Hitze
-Schutz suchte dazu genutzt, diese Idee in die Praxis umzusetzen...
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="streaming_server_linux.html#content">
  Weiterlesen...
 								</a>
 						</li>
