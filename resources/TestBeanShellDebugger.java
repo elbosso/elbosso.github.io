@@ -54,8 +54,12 @@ public class TestBeanShellDebugger
 	private Visitor visitor;
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte aber deaktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn im Skript eine nicht
+	 * durch das Skript abgefangene Exception geworfen wird. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu=null;huhu.toString();</pre> als String übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -89,8 +93,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte und aktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn im Skript eine nicht
+	 * durch das Skript abgefangene Exception geworfen wird. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu=null;huhu.toString();</pre> als String übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -123,6 +131,14 @@ public class TestBeanShellDebugger
 		org.junit.Assert.assertEquals("_uncaughtExceptionCaught",visitor.getKey());
 	}
 
+	/**
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte aber deaktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn im Skript eine nicht
+	 * durch das Skript abgefangene Exception geworfen wird. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu=null;huhu.toString();</pre> als Reader übergeben wird.
+	 */
 //	@org.junit.Ignore
 	@org.junit.Test
 	public void methodExceptionThrownReader()
@@ -155,8 +171,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte und aktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn im Skript eine nicht
+	 * durch das Skript abgefangene Exception geworfen wird. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu=null;huhu.toString();</pre> als Reader übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -190,8 +210,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte aber deaktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes nicht gleich verhalten, wenn im Skript eine nicht
+	 * durch das Skript definierte Methode aufgerufen wird. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu="hallo";toStrinng();</pre> als String übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -221,8 +245,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte und aktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes nicht gleich verhalten, wenn im Skript eine nicht
+	 * durch das Skript definierte Methode aufgerufen wird. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu="hallo";toStrinng();</pre> als String übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -252,8 +280,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte aber deaktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes nicht gleich verhalten, wenn im Skript eine nicht
+	 * durch das Skript definierte Methode aufgerufen wird. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu="hallo";toStrinng();</pre> als Reader übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -283,8 +315,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte und aktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes nicht gleich verhalten, wenn im Skript eine nicht
+	 * durch das Skript definierte Methode aufgerufen wird. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu="hallo";toStrinng();</pre> als Reader übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -314,8 +350,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte aber deaktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn im Skript
+	 * Syntaxfehler enthalten ist. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu=\"hallo\";-;huhu.toString();</pre> als String übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -349,8 +389,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte und aktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn im Skript
+	 * Syntaxfehler enthalten ist. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu=\"hallo\";-;huhu.toString();</pre> als String übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -384,8 +428,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte aber deaktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn im Skript
+	 * Syntaxfehler enthalten ist. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu=\"hallo\";-;huhu.toString();</pre> als Reader übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -419,8 +467,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte und aktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn im Skript
+	 * Syntaxfehler enthalten ist. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>java.lang.Object huhu=\"hallo\";-;huhu.toString();</pre> als Reader übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -454,8 +506,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte aber deaktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn aus dem Skript
+	 * ein impliziter Rückgabewert an den Aufrufer übergeben werden soll. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>a=2*2;</pre> als String übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -475,8 +531,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte und aktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn aus dem Skript
+	 * ein impliziter Rückgabewert an den Aufrufer übergeben werden soll. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>a=2*2;</pre> als String übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -496,8 +556,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte aber deaktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn aus dem Skript
+	 * ein impliziter Rückgabewert an den Aufrufer übergeben werden soll. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>a=2*2;</pre> als Reader übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -516,8 +580,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte und aktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn aus dem Skript
+	 * ein impliziter Rückgabewert an den Aufrufer übergeben werden soll. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>a=2*2;</pre> als Reader übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -536,8 +604,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte aber deaktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn aus dem Skript
+	 * ein expliziter Rückgabewert an den Aufrufer übergeben werden soll. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>a=2*2;b=3*3;return a;</pre> als String übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -557,8 +629,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte und aktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn aus dem Skript
+	 * ein expliziter Rückgabewert an den Aufrufer übergeben werden soll. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>a=2*2;b=3*3;return a;</pre> als String übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -578,8 +654,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte aber deaktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn aus dem Skript
+	 * ein expliziter Rückgabewert an den Aufrufer übergeben werden soll. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>a=2*2;b=3*3;return a;</pre> als Reader übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test
@@ -598,8 +678,12 @@ public class TestBeanShellDebugger
 	}
 
 	/**
-	 * The Test annotation indicates that the public void method to which it is
-	 * attached can be run as a test case.
+	 * Dieser Test prüft, ob sich der BeanShell-Interpreter und der
+	 * instrumentierte und aktivierte BeanShellDebugger aus Sicht des aufrufenden
+	 * Codes gleich verhalten, wenn aus dem Skript
+	 * ein expliziter Rückgabewert an den Aufrufer übergeben werden soll. Dieser Test wird durchgeführt,
+	 * indem das zu interpretierende BeanShell-Fragment
+	 * <pre>a=2*2;b=3*3;return a;</pre> als Reader übergeben wird.
 	 */
 //	@org.junit.Ignore
 	@org.junit.Test

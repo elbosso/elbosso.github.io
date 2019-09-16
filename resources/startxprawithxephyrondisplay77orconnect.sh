@@ -64,7 +64,7 @@ cat <<EOM >/tmp/start_xpra_remote.sh
 #  DISPLAY=:78 fluxbox &
 EOM
   scp /tmp/start_xpra_remote.sh "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER":/tmp
-  ssh "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER" '/bin/bash /tmp/start_xpra_remote.sh> /dev/null 2>&1'
+  ssh "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER" '/bin/bash /tmp/start_xpra_remote.sh > /dev/null &2>1'
   echo "user $XPRA_SSH_USER can connect to display $DISPLAY"
   ssh "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER" 'DISPLAY=:78 xmodmap /tmp/my_xmodmap'
   xpra attach --clipboard=yes --clipboard-direction=both ssh/"$XPRA_SSH_USER"@"$XPRA_SSH_SERVER"/77&

@@ -1,6 +1,8 @@
 package de.elbosso.ui.components;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /*
 Copyright (c) 2013-2019.
@@ -169,7 +171,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		}
 		
 	}
-	public static void main(java.lang.String[] args) throws InterruptedException
+	public static void main(java.lang.String[] args) throws InterruptedException, IOException
 	{
 		java.util.Random rand=new java.util.Random(System.currentTimeMillis());
 		javax.swing.JFrame f=new javax.swing.JFrame();
@@ -197,7 +199,22 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		nixieNumberDisplay.register(Color.YELLOW,miniMax);
 		miniMax=new de.netsysit.util.lang.MiniMax(10000, Double.MAX_VALUE);
 		nixieNumberDisplay.register(Color.RED,miniMax);
-		p.add(nixieNumberDisplay);
+			java.awt.Dimension dim=nixieNumberDisplay.getPreferredSize();
+			System.out.println(dim);
+			//if we wouldnt do that -width and height of nnd would be 0 and that would mean that JComponent doesnt even start to paint anything
+			nixieNumberDisplay.setSize(dim);
+		nixieNumberDisplay.invalidate();
+		nixieNumberDisplay.validate();
+		nixieNumberDisplay.doLayout();
+				double v=rand.nextDouble()*24000-12000;
+			nixieNumberDisplay.setValue(v);
+			java.awt.image.BufferedImage bufferedImage=new java.awt.image.BufferedImage(dim.width,dim.height, BufferedImage.TYPE_INT_ARGB);
+			java.awt.Graphics g=bufferedImage.createGraphics();
+			nixieNumberDisplay.paint(g);
+			g.dispose();
+			javax.imageio.ImageIO.write(bufferedImage,"png",new java.io.File("/tmp/nnd.png"));
+
+/*		p.add(nixieNumberDisplay);
 		f.setContentPane(p);
 		nixieNumberDisplay.setValue(0);
 		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
@@ -213,7 +230,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 			}catch(java.lang.IllegalArgumentException exp){exp.printStackTrace();}
 			java.lang.Thread.currentThread().sleep(300l);
 		}			
-	}
+*/	}
 
 	public void switchOff()
 	{
