@@ -30,6 +30,12 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_lxc_netzwerk_router [label="LXC Netzwerk Router" href="https://elbosso.github.io/lxc_netzwerk_router.html"]
+                node_lxc_netzwerk_router -> node_docker_ci_cd
+            node_lxc_netzwerk_router -> node_umzug_netzwerklabor_abgeschlossen
+            node_lxc_netzwerk_router -> node_lxc_netzwerk_degrader
+            node_lxc_netzwerk_router -> node_ci_cd_shellcheck
+            node_lxc_netzwerk_router -> node_performanceprobleme_kvm_windows
 node_alarmierung_ueber_skripte [label="Alarmierung über Skripte" href="https://elbosso.github.io/alarmierung_ueber_skripte.html"]
     node_ebcms [label="EBCMS" href="https://elbosso.github.io/ebcms.html"]
                 node_ebcms -> node_aenderungen_datumsformat_java
@@ -39,7 +45,8 @@ node_alarmierung_ueber_skripte [label="Alarmierung über Skripte" href="https://
             node_ebcms -> node_ant_erweitern_mittels_javascript
 node_synchronisieren_zwischenablage_xpra [label="Synchronisieren Zwischenablage mit XPRA" href="https://elbosso.github.io/synchronisieren_zwischenablage_xpra.html"]
     node_grafana__alarmierung_xmpp [label="Grafana: Alarmierung mit XMPP" href="https://elbosso.github.io/grafana__alarmierung_xmpp.html"]
-                node_grafana__alarmierung_xmpp -> node_alarmierung_ueber_skripte
+                node_grafana__alarmierung_xmpp -> node_sqlshell_echtzeitdatenbanken
+            node_grafana__alarmierung_xmpp -> node_alarmierung_ueber_skripte
 node_streaming_server_linux [label="Streaming Server mit Linux" href="https://elbosso.github.io/streaming_server_linux.html"]
     node_julia_mengen_shadern_umgesetzt [label="Julia-Mengen mit Shadern umgesetzt" href="https://elbosso.github.io/julia_mengen_shadern_umgesetzt.html"]
     node_migration_kanboard_nach_gitlab [label="Migration von KanBoard nach GitLab" href="https://elbosso.github.io/migration_kanboard_nach_gitlab.html"]
