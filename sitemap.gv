@@ -30,7 +30,8 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_lxc_netzwerk_router [label="LXC Netzwerk Router" href="https://elbosso.github.io/lxc_netzwerk_router.html"]
+node_umzug_netzwerklabor_abgeschlossen [label="Umzug Netzwerklabor abgeschlossen" href="https://elbosso.github.io/umzug_netzwerklabor_abgeschlossen.html"]
+    node_lxc_netzwerk_router [label="LXC Netzwerk Router" href="https://elbosso.github.io/lxc_netzwerk_router.html"]
                 node_lxc_netzwerk_router -> node_docker_ci_cd
             node_lxc_netzwerk_router -> node_umzug_netzwerklabor_abgeschlossen
             node_lxc_netzwerk_router -> node_lxc_netzwerk_degrader
