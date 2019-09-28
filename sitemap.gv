@@ -4,6 +4,7 @@ rankdir=LR
     Basteln [label="Basteln" href="https://elbosso.github.io/tag_Basteln.html" shape="doublecircle"]
     CundC [label="C und C++" href="https://elbosso.github.io/c_c__.html" shape="doublecircle"]
     Datenbanken [label="Datenbanken" href="https://elbosso.github.io/tag_Datenbanken.html" shape="doublecircle"]
+    Docker [label="Docker" href="https://elbosso.github.io/tag_Docker.html" shape="doublecircle"]
     dWb [label="dWb+" href="https://elbosso.github.io/tag_dWb+.html" shape="doublecircle"]
     ESPWifi [label="ESP Wifi" href="https://elbosso.github.io/esp_wifi.html" shape="doublecircle"]
     Garten [label="Garten" href="https://elbosso.github.io/tag_Garten.html" shape="doublecircle"]
@@ -30,7 +31,10 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_docker_ci_cd [label="Docker und CI/CD" href="https://elbosso.github.io/docker_ci_cd.html"]
+node_performanceprobleme_kvm_windows [label="Performanceprobleme mit KVM und Windows" href="https://elbosso.github.io/performanceprobleme_kvm_windows.html"]
+                node_performanceprobleme_kvm_windows -> node_mulit_user_webdav__docker__github
+node_git_ressources__epubs [label="Git-Ressources und -EPUBs" href="https://elbosso.github.io/git_ressources__epubs.html"]
+    node_docker_ci_cd [label="Docker und CI/CD" href="https://elbosso.github.io/docker_ci_cd.html"]
                 node_docker_ci_cd -> node_performanceprobleme_kvm_windows
 node_umzug_netzwerklabor_abgeschlossen [label="Umzug Netzwerklabor abgeschlossen" href="https://elbosso.github.io/umzug_netzwerklabor_abgeschlossen.html"]
     node_lxc_netzwerk_router [label="LXC Netzwerk Router" href="https://elbosso.github.io/lxc_netzwerk_router.html"]

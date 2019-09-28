@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<title>Performanceprobleme mit KVM und Windows</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" /><link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Performanceprobleme mit KVM und Windows</h4>
+					<div class="w3-container">
+						<div class="w3-row">
+							<div class="w3-col m8 s12">
+								vorhergehende Artikel in:
+								<a href="git_ressources__epubs.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Docker</span>
+								</a> <!--/li-->
+								<a href="docker_ci_cd.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
+								</a> <!--/li-->
+								<a href="git_ressources__epubs.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Virtualisierung</span>
+								</a> <!--/li-->
+							</div>
+							<div class="w3-col m4" style="text-align: right">
+								<span class="w3-opacity">28.09.2019</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Ich strebe wieder einmal nach mehr Wissen und versuche mich daher momentan im Bereich Virtualisierung weiterzubilden.
+Durch einen Kollegen angeregt nahm ich mir diesmal KVM vor...
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p>Ich bin ja schon lange überzeugt von
+<a href="lxc_netzwerk_router.html">LXC</a>
+und habe inzwischen auch
+<a href="docker_ci_cd.html">Docker</a>
+einiges abgewinnen können.
+</p><p>
+Nun wollte ich praktische Erfahrungen mit QEMU und KVM sammeln. Ich strebte dazu an, meine letzte noch
+existierende VirtualBox-VM nach QEMU zu migrieren. Es handelt sich dabei um ein 32-Bit Windows 10,
+auf der eine gekaufte Software installiert ist.
+</p><p>
+Nach meinen ersten Versuchen, dem Internet zu folgen stellte ich fest, dass nichts funktionierte - ich
+konnte die virtuelle Maschine nicht einmal booten: Ich hatte das virtuelle Festplattenimage
+in das Format qcow2 konvertiert und mittels virt-manager eine neue Virtuelle Maschine erstellt, mittels derer
+ich versuchte, dieses Image zu booten. Mein Kollege brachte mich dann darauf, dass dieses Image vielleicht per UEFI
+gebootet werden möchte - dazu musste ich noch einige Installationsaufwand an meinem KVM-Host betreiben,
+aber damit bootete die Maschine.
+</p><p>
+Allerdings wurde ich was die Alltagstauglichkeit anging enttäuscht - hatte Windows laut Taskmanager nichts zu tun,
+betrug die Auslastung des Docker-Host dennoch über 60%! Das wäre für mich ein Grund gewesen, die Maschine als VirtualBox
+weiter zu betreiben und zunächst Abstand von QEMU/KVM zu nehmen.
+</p><p>
+Aber ich hatte bei meinem Kollegen gesehen, dass es auch anders geht. Daher recherchierte ich ein wenig im Internet
+und fand auch recht rasch die Ansage, dass Windows 10 in der Version 1803 an den internen Timern Änderungen vorgenommen hat,
+die dafür sorgen, dass unter KVM Windows nicht mehr rund 140 Interrupts abarbeiten muss, sondern in derselben Zeit 2000!
+Das erklärt zunächst die hohe Last auf dem Hostsystem.
+</p><p>
+Ich fand auch diverse Ideen, wie man dieses Problem lösen könnte - eins gleich vornweg: Ich verschwendete einen halben Tag meiner Lebenszeit
+damit, die falschen Dateien zu editieren: Ich fand Beschreibungen meiner Windows VM in meinem Homeverzeichnis wie auch unter
+/etc/ - keine dieser Dateien ist diejenige welche. Daher dachte ich auch, das all die vielen Tips im Internet zu diesem
+Thema keine Lösung enthielten. Als ich dann realisierte, dass diese Dateien vom System nicht genutzt werden und die einzige
+zuverlässige Methode zum Anpassen der Konfiguration das Kommando
+</p><p>
+<pre>
+virsh -c qemu:///system edit mywin
+</pre>
+</p><p>
+ist, habe ich auch die für mich funktionierende Konfiguration gefunden: Dieses Problem betreffend musste ich die
+Abschnitte features und clock in der Konfiguration wie folgt abändern:
+</p><p>
+<pre>
+  &lt;features>
+    &lt;acpi/>
+    &lt;apic/>
+    &lt;hyperv>
+      &lt;relaxed state='on'/>
+      &lt;vapic state='on'/>
+      &lt;spinlocks state='on' retries='8191'/>
+    &lt;/hyperv>
+    &lt;vmport state='off'/>
+  &lt;/features>
+  &lt;clock offset='localtime'>
+    &lt;timer name='hpet' present='yes'/>
+    &lt;timer name='hypervclock' present='yes'/>
+  &lt;/clock>
+</pre>
+</p>				</div>
+				<div class="w3-container w3-padding" id="links">
+					<hr/>
+					<h3>
+						Links
+					</h3>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Installing Virtio Drivers In Windows On KVM
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="http://www.zeta.systems/blog/2018/07/03/Installing-Virtio-Drivers-In-Windows-On-KVM/" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>virt-manager is not giving me an option to change my firmware from BIOS to UEFI
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://www.reddit.com/r/VFIO/comments/5v0b0z/virtmanager_is_not_giving_me_an_option_to_change/" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Using UEFI with QEMU
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://fedoraproject.org/wiki/Using_UEFI_with_QEMU" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Virtualbox nach KVM: Virtuelle Maschinen migrieren
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://www.karl-deutsch.at/virtualbox_kvm_migration_vdi.html" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Dynamic Memory Management
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://pve.proxmox.com/wiki/Dynamic_Memory_Management" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p><p>Paravirtualized Block Drivers for Windows
+</p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="https://pve.proxmox.com/wiki/Paravirtualized_Block_Drivers_for_Windows" target="_blank">Öffnen</a>
+							</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-black w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git(lab|hub).html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="gitlab_hub.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gitlab|hub</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-black w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Git-Ressources und -EPUBs</span><br>
+						<span class="smallabstract"><p>Nachdem ich mich entschieden hatte, mein Docker-Test-Setup konsequent mittels Git zu verwalten, kam ich schnell an einen
+Punkt, an dem ich mir so unsicher war, dass ich mich zunächst einmal in die entsprechende Literatur vertiefen musste: Sub-Module
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="git_ressources__epubs.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Docker und CI/CD</span><br>
+						<span class="smallabstract"><p>Nachdem ich mich lange dagegen gewehrt habe, Docker privat einzusetzen,
+habe ich jetzt doch wieder angefangen, mich damit zu beschäftigen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="docker_ci_cd.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Umzug Netzwerklabor abgeschlossen</span><br>
+						<span class="smallabstract"><p>In meinem
+vorhergehenden Artikel
+zu diesem Thema habe ich beschrieben, wie man mit einem einfachen Bash-Skript
+sehr schnell einen rudimentären Router als LXC-Container aufbauen kann.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="umzug_netzwerklabor_abgeschlossen.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Git-Ressources und -EPUBs</span><br>
+							<span class="smallabstract"><p>Nachdem ich mich entschieden hatte, mein Docker-Test-Setup konsequent mittels Git zu verwalten, kam ich schnell an einen
+Punkt, an dem ich mir so unsicher war, dass ich mich zunächst einmal in die entsprechende Literatur vertiefen musste: Sub-Module
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="git_ressources__epubs.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Docker und CI/CD</span><br>
+							<span class="smallabstract"><p>Nachdem ich mich lange dagegen gewehrt habe, Docker privat einzusetzen,
+habe ich jetzt doch wieder angefangen, mich damit zu beschäftigen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="docker_ci_cd.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Umzug Netzwerklabor abgeschlossen</span><br>
+							<span class="smallabstract"><p>In meinem
+vorhergehenden Artikel
+zu diesem Thema habe ich beschrieben, wie man mit einem einfachen Bash-Skript
+sehr schnell einen rudimentären Router als LXC-Container aufbauen kann.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="umzug_netzwerklabor_abgeschlossen.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>

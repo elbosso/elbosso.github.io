@@ -43,6 +43,7 @@ if ssh "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER" 'DISPLAY=:78 xmodmap /tmp/my_xmodmap'
 else
   echo "user $XPRA_SSH_USER cannot connect to display $DISPLAY"
 cat <<EOM >/tmp/start_xpra_remote.sh
+  rm -fr ~/.Xauthority-*
   xpra start :77 --clipboard=yes --clipboard-direction=both --start-child="Xephyr -ac -keybd ephyr,xkbmodel=pc105,xkblayout='de(nodeadkeys)',xkbrules=evdev,xkboption=grp:alts_toogle -screen 1280x1024 -br  :78&"
   DISPLAY=:78 xterm -iconic -e "exit"
   while [ \$? -ne 0 ] ;do
@@ -66,7 +67,7 @@ EOM
   scp /tmp/start_xpra_remote.sh "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER":/tmp
   ssh "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER" '/bin/bash /tmp/start_xpra_remote.sh > /dev/null &2>1'
   echo "user $XPRA_SSH_USER can connect to display $DISPLAY"
-  ssh "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER" 'DISPLAY=:78 xmodmap /tmp/my_xmodmap'
+  ssh -Y "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER" 'DISPLAY=:78 xmodmap /tmp/my_xmodmap'
   xpra attach --clipboard=yes --clipboard-direction=both ssh/"$XPRA_SSH_USER"@"$XPRA_SSH_SERVER"/77&
   pkill -f ".*/tmp/start_xpra_remote.sh.*"
 fi
