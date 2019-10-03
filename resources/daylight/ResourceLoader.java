@@ -494,9 +494,9 @@ public class ResourceLoader extends java.lang.Object
 	{
 		Utilities.configureBasicStdoutLogging(org.apache.log4j.Level.ALL);
 		de.netsysit.util.ResourceLoader.setSize(IconSize.small);
-		javax.swing.ImageIcon i1=new javax.swing.ImageIcon(de.netsysit.util.ResourceLoader.getImgResource("de/netsysit/ressources/gfx/ca/Makro expandieren_48.png"));
+		javax.swing.ImageIcon i1=de.netsysit.util.ResourceLoader.getIcon("de/netsysit/ressources/gfx/ca/Makro expandieren_48.png");
 		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());
-		javax.swing.ImageIcon i2=new javax.swing.ImageIcon(de.netsysit.util.ResourceLoader.getImgResource("de/netsysit/ressources/gfx/ca/Makro expandieren_48.png"));
+		javax.swing.ImageIcon i2=de.netsysit.util.ResourceLoader.getIcon("de/netsysit/ressources/gfx/ca/Makro expandieren_48.png");
 		CLASS_LOGGER.trace(i2.getIconWidth()+" "+i2.getIconHeight());
 	}
 }

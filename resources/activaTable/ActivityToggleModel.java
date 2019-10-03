@@ -62,7 +62,7 @@ public class ActivityToggleModel<T> extends de.netsysit.model.table.EventHandlin
 
 	private void createActions()
 	{
-		selectAllAction=new javax.swing.AbstractAction(i18n.getString("ActivityToggleModel.selectAllAction.text"),new javax.swing.ImageIcon(de.netsysit.util.ResourceLoader.getImgResource("de/elbosso/ressources/gfx/eb/select all_48.png")))
+		selectAllAction=new javax.swing.AbstractAction(i18n.getString("ActivityToggleModel.selectAllAction.text"),de.netsysit.util.ResourceLoader.getIcon("de/elbosso/ressources/gfx/eb/select all_48.png"))
 		{
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e)
@@ -75,7 +75,7 @@ public class ActivityToggleModel<T> extends de.netsysit.model.table.EventHandlin
 			}
 		};
 		selectAllAction.putValue(Action.SHORT_DESCRIPTION,i18n.getString("ActivityToggleModel.selectAllAction.tooltip"));
-		selectNoneAction=new javax.swing.AbstractAction(i18n.getString("ActivityToggleModel.selectNoneAction.text"),new javax.swing.ImageIcon(de.netsysit.util.ResourceLoader.getImgResource("de/elbosso/ressources/gfx/eb/deselect all_48.png")))
+		selectNoneAction=new javax.swing.AbstractAction(i18n.getString("ActivityToggleModel.selectNoneAction.text"),de.netsysit.util.ResourceLoader.getIcon("de/elbosso/ressources/gfx/eb/deselect all_48.png"))
 		{
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e)
@@ -88,7 +88,7 @@ public class ActivityToggleModel<T> extends de.netsysit.model.table.EventHandlin
 			}
 		};
 		selectNoneAction.putValue(Action.SHORT_DESCRIPTION,i18n.getString("ActivityToggleModel.selectNoneAction.tooltip"));
-		toggleSelectionAction=new javax.swing.AbstractAction(i18n.getString("ActivityToggleModel.toggleSelectionAction.text"),new javax.swing.ImageIcon(de.netsysit.util.ResourceLoader.getImgResource("de/netsysit/ressources/gfx/common/ToggleSelectionState24.gif")))
+		toggleSelectionAction=new javax.swing.AbstractAction(i18n.getString("ActivityToggleModel.toggleSelectionAction.text"),de.netsysit.util.ResourceLoader.getIcon("de/netsysit/ressources/gfx/common/ToggleSelectionState24.gif"))
 		{
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e)
