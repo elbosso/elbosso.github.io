@@ -14,7 +14,7 @@ import java.net.URL;
 public class ResourceLoader extends java.lang.Object
 {
 	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(ResourceLoader.class);
-	private final static java.util.regex.Pattern pat1=java.util.regex.Pattern.compile("(.*?)_(\\d*?)([^\\d]*?)\\.png");
+	private final static java.util.regex.Pattern pat1=java.util.regex.Pattern.compile("([^\\!].*?)_(\\d*?)([^\\d]*?)\\.png");
 	private final static java.util.regex.Pattern pat2=java.util.regex.Pattern.compile("(.*?)_(\\d*?)([^\\d]*?)\\.png");
 	private static java.util.Properties props=new java.util.Properties();
 	private static java.io.File f;
@@ -337,51 +337,62 @@ public class ResourceLoader extends java.lang.Object
 				{
 					int[] ps = null;
 					java.lang.String replacement = props.getProperty(arg, arg);
-					if (replacement.startsWith("#"))
+					while(replacement.equals(arg)==false)
 					{
-						if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("found url in props " + replacement);
-						rv = new java.net.URL(replacement.substring(1));
-					}
-					else
-					{
-						if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("replacement in props " + replacement);
-						java.lang.String prefix = null;
-						java.lang.String suffix = null;
-						java.util.regex.Matcher m = pat1.matcher(replacement);
-						if (m.matches())
+						if (replacement.startsWith("#"))
 						{
-							prefix = m.group(1);
-							suffix = m.group(3);
-							int osize = java.lang.Integer.parseInt(m.group(2));
-							if (osize == 48)
-								ps = size.getPixelSize();
-							else
-								ps = size.getSmallerPixelSize();
-							if (CLASS_LOGGER.isTraceEnabled())
-								CLASS_LOGGER.trace("prefix#suffix#osize#ps " + prefix + "#" + suffix + "#" + osize + "#" + ps.length);
+							if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("found url in props " + replacement);
+							rv = new java.net.URL(replacement.substring(1));
 						}
-						if (ps != null)
+						else
 						{
-							for (int size : ps)
+							if (CLASS_LOGGER.isTraceEnabled())
+								CLASS_LOGGER.trace("replacement in props " + replacement);
+							java.lang.String prefix = null;
+							java.lang.String suffix = null;
+							java.util.regex.Matcher m = pat1.matcher(replacement);
+							if (m.matches())
 							{
-								java.lang.String constructedReplacement = prefix + "_" + size + suffix + ".png";
+								prefix = m.group(1);
+								suffix = m.group(3);
+								int osize = java.lang.Integer.parseInt(m.group(2));
+								if (osize == 48)
+									ps = size.getPixelSize();
+								else
+									ps = size.getSmallerPixelSize();
 								if (CLASS_LOGGER.isTraceEnabled())
-									CLASS_LOGGER.trace("trying " + constructedReplacement);
-								rv = ResourceLoader.class.getClassLoader().getResource(constructedReplacement);
-								if (rv != null)
-									break;
+									CLASS_LOGGER.trace("prefix#suffix#osize#ps " + prefix + "#" + suffix + "#" + osize + "#" + ps.length);
+							}
+							else
+							{
+								if(replacement.startsWith("!"))
+									replacement=replacement.substring(1);
+							}
+							if (ps != null)
+							{
+								for (int size : ps)
+								{
+									java.lang.String constructedReplacement = prefix + "_" + size + suffix + ".png";
+									if (CLASS_LOGGER.isTraceEnabled())
+										CLASS_LOGGER.trace("trying " + constructedReplacement);
+									rv = ResourceLoader.class.getClassLoader().getResource(constructedReplacement);
+									if (rv != null)
+										break;
+								}
+							}
+							if (rv == null)
+							{
+								if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + replacement);
+								rv = ResourceLoader.class.getClassLoader().getResource(replacement);
+							}
+							if (rv == null)
+							{
+								if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + arg);
+								rv = ResourceLoader.class.getClassLoader().getResource(arg);
 							}
 						}
-						if (rv == null)
-						{
-							if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + replacement);
-							rv = ResourceLoader.class.getClassLoader().getResource(replacement);
-						}
-						if (rv == null)
-						{
-							if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + arg);
-							rv = ResourceLoader.class.getClassLoader().getResource(arg);
-						}
+						arg = replacement;
+						replacement = props.getProperty(arg, arg);
 					}
 				}
 				else

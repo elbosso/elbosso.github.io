@@ -31,9 +31,14 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_lxc_netzwerk_degrader [label="LXC Netzwerk Degrader" href="https://elbosso.github.io/lxc_netzwerk_degrader.html"]
+                node_lxc_netzwerk_degrader -> node_ci_cd_shellcheck
+            node_lxc_netzwerk_degrader -> node_mulit_user_webdav__docker__github
+            node_lxc_netzwerk_degrader -> node_automatisches_setup_eines_netzwerklabors
 node_anpassung_gnu_screen [label="Anpassung von Gnu Screen" href="https://elbosso.github.io/anpassung_gnu_screen.html"]
     node_i18neditor_github_projekt [label="I18NEditor als GitHub-Projekt" href="https://elbosso.github.io/i18neditor_github_projekt.html"]
-    node_diy_ebook_reader_iii [label="DIY EBook-Reader III" href="https://elbosso.github.io/diy_ebook_reader_iii.html"]
+                node_i18neditor_github_projekt -> node_fork_material_design_icons_google
+node_diy_ebook_reader_iii [label="DIY EBook-Reader III" href="https://elbosso.github.io/diy_ebook_reader_iii.html"]
     node_performanceprobleme_kvm_windows [label="Performanceprobleme mit KVM und Windows" href="https://elbosso.github.io/performanceprobleme_kvm_windows.html"]
                 node_performanceprobleme_kvm_windows -> node_mulit_user_webdav__docker__github
 node_git_ressources__epubs [label="Git-Ressources und -EPUBs" href="https://elbosso.github.io/git_ressources__epubs.html"]
@@ -352,6 +357,7 @@ node_icons___woher_nehmen____iii [label="Icons - woher nehmen? - III" href="http
     node_maven_archetype_dwb__module [label="Maven-Archetype für dWb+ Module" href="https://elbosso.github.io/maven_archetype_dwb__module.html"]
     node_log4j_plugin_jconsole_visualvm [label="Log4J Plugin für JConsole/VisualVM" href="https://elbosso.github.io/log4j_plugin_jconsole_visualvm.html"]
                 node_log4j_plugin_jconsole_visualvm -> node_icons___woher_nehmen____iii
+            node_log4j_plugin_jconsole_visualvm -> node_fork_material_design_icons_google
 node_linux_wifi_accesspoint [label="Linux WiFi Accesspoint" href="https://elbosso.github.io/linux_wifi_accesspoint.html"]
                 node_linux_wifi_accesspoint -> node_linux_wifi_accesspoint_zweite
 node_influxdb_appender_log4j_1_x [label="InfluxDB Appender für Log4J 1.x" href="https://elbosso.github.io/influxdb_appender_log4j_1_x.html"]
@@ -366,6 +372,7 @@ node_aktualisierung_jfreechart [label="Aktualisierung JFreeChart" href="https://
                 node_qbrowser -> node_java9_umstellung
             node_qbrowser -> node_icons___woher_nehmen____iii
             node_qbrowser -> node_neue_version_qbrowser
+            node_qbrowser -> node_fork_material_design_icons_google
 node_beaninfo_runtime_annotations__gist_ [label="BeanInfo durch Runtime-Annotations (Gist)" href="https://elbosso.github.io/beaninfo_runtime_annotations__gist_.html"]
                 node_beaninfo_runtime_annotations__gist_ -> node_beaninfo_annotationprocessor_neu
 node_aenderungen_datumsformat_java___schon_wieder_ [label="Änderungen im Datumsformat von Java - schon wieder!" href="https://elbosso.github.io/aenderungen_datumsformat_java___schon_wieder_.html"]
