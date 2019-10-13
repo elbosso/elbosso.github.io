@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.beans.Transient;
+import java.io.InputStream;
 import java.net.URL;
 
 /*#LICENCE#*/
@@ -22,6 +23,25 @@ public class ResourceLoader extends java.lang.Object
 	private static java.net.URL fallBack;
 	private static java.util.Map<java.lang.String, java.net.URL> resourceCache=new java.util.HashMap();
 	private static java.util.Map<java.lang.String, java.net.URL> resourceCacheUnaltered=new java.util.HashMap();
+
+	public static InputStream getResourceAsStream(String s)
+	{
+		java.io.InputStream rv=null;
+		java.net.URL url=getResource(s);
+		if(url!=null)
+		{
+			try
+			{
+				java.net.URLConnection conn = url.openConnection();
+				rv = conn.getInputStream();
+			}
+			catch(java.io.IOException exp)
+			{
+				CLASS_LOGGER.warn(exp.getMessage(),exp);
+			}
+		}
+		return rv;
+	}
 
 	public enum IconSize
 	{
