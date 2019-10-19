@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>GPS-Logger abgestaubt</title>
+<title>Erkennung virtualisierter Umgebungen</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -45,20 +45,26 @@ and is wrapped around the whole page content, except for the footer in this exam
 			<a name="content"></a>
 			<div class="w3-card w3-margin">
 				<div class="w3-container w3-padding">
-					<h4>GPS-Logger abgestaubt</h4>
+					<h4>Erkennung virtualisierter Umgebungen</h4>
 					<div class="w3-container">
 						<div class="w3-row">
 							<div class="w3-col m8 s12">
 								vorhergehende Artikel in:
-								<a href="mqtt___raspi___grafana.html#content">
-									<span class="w3-tag w3-black w3-margin-bottom">Hardware</span>
+								<a href="ci_cd_shellcheck.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
 								</a> <!--/li-->
-								<a href="dynamische_gitlab_badges_ii.html#content">
+								<a href="lxc_netzwerk_degrader.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Docker</span>
+								</a> <!--/li-->
+								<a href="lxc_netzwerk_degrader.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Virtualisierung</span>
+								</a> <!--/li-->
+								<a href="ci_cd_shellcheck.html#content">
 									<span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span>
 								</a> <!--/li-->
 							</div>
 							<div class="w3-col m4" style="text-align: right">
-								<span class="w3-opacity">26.02.2019</span>
+								<span class="w3-opacity">19.10.2019</span>
 							</div>
 						</div>
 					</div>
@@ -66,56 +72,21 @@ and is wrapped around the whole page content, except for the footer in this exam
 			</div>
 			<div class="w3-card-4 w3-margin w3-white">
 				<div class="w3-container w3-padding" id="abstract">
-<p>Nachdem ich bereits über
-<a href="ntp_server_raspi_em406a.html">andere Ideen</a>
-zur Benutzung meines schon ein wenig in die Jahre
-gekommenen GPS-Empfängers berichtet habe, habe ich ihn nun noch einmal
-seinem ursprünglichen Zweck zugeführt.
+<p>Nachdem ich neulich mein Backup bemühen musste, weil ich nicht realisierte, dass ich mich nicht mehr in der Container-Shell
+befand sondern am Host arbeitete überlegte ich, ob es eine einfache Variante gäbe, das Shell-Prompt
+so zu ändern, dass es nicht nur Auskunft darüber gibt, ob man sich innerhalb einer virtualisierten Umgebung
+befindet, sondern auch mit welcher Technologie diese umgesetzt ist (docker, Lxc, KVM,...)
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
-<p>Die
-<a href="http://www.ladyada.net/make/gpsshield/parts.html">Platine</a>
-- mein erstes Zubehör zu dem damals unerhört neuen Arduino - und
-das
-<a href="https://www.sparkfun.com/datasheets/GPS/EM-406A_User_Manual.PDF">GPS-Modul</a>
-ergeben zusammen mit einer SD-Speicherkarte einen sehr guten GPS-Logger - wenn auch im Stromsparmodus
-sehr ungenau.
+<p>Dazu existieren natürlich im Netz bereits viele verschiedene Ideen. Ich habe einige davon
+unter dem Gesichtspunkt zusammengetragen, dass die jeweiligen Tests auch durch Nutzer ausgeführt
+werden können sollen, die nicht über Superuser-Privilegien verfügen und sie in einen
+<a href="https://gist.github.com/elbosso/aeac5a55f5083f6261bbc68926531d72">Gist</a>
+gepackt...
 </p><p>
-Der Code für den Arduino ist inzwischen in einem
-eigenen
-<a href="https://github.com/elbosso/GPSRaw_new">GitHub-Repository</a>
-gelandet.
+Damit kann man dann zum Beispiel seine .bashrc anreichern und den Prompt entsprechend erstellen (Dazu
+wäre es dann vllt. schön, wenn dieser oder ähnlicher Code in eine Funktiongekapselt würde...)
 </p>				</div>
-				<div class="w3-container w3-padding" id="referers">
-				<h3>
-					Artikel, die hierher verlinken
-				</h3>
-					<div class="w3-row">
-					<div class="w3-col m8 s12">
-						<h4>
-							Week Rollover GPS
-						</h4>
-					</div>
-					<div class="w3-col m4"><p style="text-align: right">
-						<span class="w3-opacity">21.04.2019</span>
-					</p>
-					</div>
-					</div>
-					<div class="w3-row">
-						<div class="w3-col m8 s12">
-							<p><p>Nachdem ich erfolgreich meine
-eigene Atomuhr
-in Betrieb genommen habe, muss sie sich bereits einer
-(von mir) ungeahnten Herausforderung stellen...
-</p></p>
-						</div>
-						<div class="w3-col m4">
-							<p style="text-align: right">
-								<a class="w3-button w3-padding-large w3-white w3-border" href="week_rollover_gps.html#content">Öffnen</a>
-							</p>
-						</div>
-					</div>
-				</div>
 
 			</div>
 			<!-- END BLOG ENTRY -->
@@ -135,7 +106,7 @@ in Betrieb genommen habe, muss sie sich bereits einer
 						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
 						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
 						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
-						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-black w3-margin-bottom">Docker</span></a>
 						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
 						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
 						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
@@ -143,11 +114,11 @@ in Betrieb genommen habe, muss sie sich bereits einer
 						<a href="tag_Git(lab|hub).html"><span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span></a>
 						<a href="gitlab_hub.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gitlab|hub</span></a>
 						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
-						<a href="tag_Hardware.html"><span class="w3-tag w3-black w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
 						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
 						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
 						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
-						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
 						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
 						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
 						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
@@ -160,7 +131,7 @@ in Betrieb genommen habe, muss sie sich bereits einer
 						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
 						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
 						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
-						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-black w3-margin-bottom">Virtualisierung</span></a>
 						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
 						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
 					</p>
@@ -201,23 +172,21 @@ nochmals überarbeitet...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Erkennung virtualisierter Umgebungen</span><br>
-						<span class="smallabstract"><p>Nachdem ich neulich mein Backup bemühen musste, weil ich nicht realisierte, dass ich mich nicht mehr in der Container-Shell
-befand sondern am Host arbeitete überlegte ich, ob es eine einfache Variante gäbe, das Shell-Prompt
-so zu ändern, dass es nicht nur Auskunft darüber gibt, ob man sich innerhalb einer virtualisierten Umgebung
-befindet, sondern auch mit welcher Technologie diese umgesetzt ist (docker, Lxc, KVM,...)
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erkennung_virtualisierter_umgebungen.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD mit shellcheck</span><br>
 						<span class="smallabstract"><p>Ich habe mich entschlossen, in meinen diversen Shell-Projekten shellcheck als Mittel
 zur Qualitätssicherung einzusetzen.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_shellcheck.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							LXC Netzwerk Degrader</span><br>
+						<span class="smallabstract"><p>Ich habe neulich ein Skript zur automatisierten Erstellung eines
+Routers in einem LXC-Container
+präsentiert - ein wenig wie Docker nur ohne Docker.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lxc_netzwerk_degrader.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -263,23 +232,21 @@ nochmals überarbeitet...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Erkennung virtualisierter Umgebungen</span><br>
-							<span class="smallabstract"><p>Nachdem ich neulich mein Backup bemühen musste, weil ich nicht realisierte, dass ich mich nicht mehr in der Container-Shell
-befand sondern am Host arbeitete überlegte ich, ob es eine einfache Variante gäbe, das Shell-Prompt
-so zu ändern, dass es nicht nur Auskunft darüber gibt, ob man sich innerhalb einer virtualisierten Umgebung
-befindet, sondern auch mit welcher Technologie diese umgesetzt ist (docker, Lxc, KVM,...)
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erkennung_virtualisierter_umgebungen.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD mit shellcheck</span><br>
 							<span class="smallabstract"><p>Ich habe mich entschlossen, in meinen diversen Shell-Projekten shellcheck als Mittel
 zur Qualitätssicherung einzusetzen.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_shellcheck.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							LXC Netzwerk Degrader</span><br>
+							<span class="smallabstract"><p>Ich habe neulich ein Skript zur automatisierten Erstellung eines
+Routers in einem LXC-Container
+präsentiert - ein wenig wie Docker nur ohne Docker.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lxc_netzwerk_degrader.html#content">
  Weiterlesen...
 								</a>
 						</li>
