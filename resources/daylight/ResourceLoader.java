@@ -237,9 +237,9 @@ public class ResourceLoader extends java.lang.Object
 		if(fallBack==null)
 		{
 			try{
-				javax.swing.Icon ic=javax.swing.UIManager.getIcon("OptionPane.errorIcon");
 				java.awt.image.BufferedImage bi=null;
-				if(ic!=null)
+				javax.swing.Icon ic=javax.swing.UIManager.getIcon("OptionPane.errorIcon");
+				if((java.awt.GraphicsEnvironment.isHeadless()==false)&&(ic!=null))
 					bi=de.elbosso.ui.image.Utilities.iconToImage(ic);
 				else
 					bi=new java.awt.image.BufferedImage(getSize().getPixelSize()[0],getSize().getPixelSize()[0], BufferedImage.TYPE_INT_ARGB);
@@ -247,7 +247,20 @@ public class ResourceLoader extends java.lang.Object
 				f.deleteOnExit();
 				javax.imageio.ImageIO.write(bi, "png", f);
 				fallBack=f.toURI().toURL();
-			}catch(java.lang.Throwable exp){exp.printStackTrace();}
+			}catch(java.lang.Throwable exp)
+			{
+				CLASS_LOGGER.warn(exp.getMessage(),exp);
+				try{
+					java.awt.image.BufferedImage bi=new java.awt.image.BufferedImage(getSize().getPixelSize()[0],getSize().getPixelSize()[0], BufferedImage.TYPE_INT_ARGB);
+					java.io.File f=java.io.File.createTempFile("fallbackicon", "png");
+					f.deleteOnExit();
+					javax.imageio.ImageIO.write(bi, "png", f);
+					fallBack=f.toURI().toURL();
+				}catch(java.lang.Throwable ex)
+				{
+					CLASS_LOGGER.warn(ex.getMessage(), ex);
+				}
+			}
 		}
 	}
 
