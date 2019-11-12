@@ -6,8 +6,7 @@
 
 package de.elbosso.util.generator.generalpurpose;
 
-import de.elbosso.util.lang.annotations.GeneratorModule;
-import de.elbosso.util.lang.annotations.GeneratorScript;
+import de.elbosso.util.lang.annotations.*;
 
 /**
  *
@@ -15,6 +14,19 @@ import de.elbosso.util.lang.annotations.GeneratorScript;
  */
 @GeneratorScript
 @GeneratorModule(datatype=java.lang.Number.class)
+@GeneratorRestHandler(datatype = java.lang.Number.class,
+		path="normalDistributedRandom",
+//		operationId = "operationId",
+//		description = "description",
+//		summary = "summary",
+				parameters = {
+						@KeyValueMapStore(key="Mue", valueMap ={
+								@KeyValueStore(key="type", value="double"),
+								@KeyValueStore(key="default", value="0.0")}),
+						@KeyValueMapStore(key="WantedSigma", valueMap ={
+								@KeyValueStore(key="type", value="double"),
+								@KeyValueStore(key="default", value="0.5")})
+				})
 public class NormalDistributedRandom extends de.elbosso.util.beans.EventHandlingSupport implements de.netsysit.util.generator.Sequence<java.lang.Number>
 {
 	private java.util.Random random;

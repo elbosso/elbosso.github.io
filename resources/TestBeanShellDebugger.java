@@ -748,7 +748,7 @@ public class TestBeanShellDebugger
 	public static void methodAfterClass()
 	{
 	}
-	class Visitor extends java.lang.Object implements de.elbosso.util.BeanShellDebugger.Visitor
+	public static class Visitor extends java.lang.Object implements de.elbosso.util.BeanShellDebugger.Visitor
 	{
 		private java.lang.String key;
 

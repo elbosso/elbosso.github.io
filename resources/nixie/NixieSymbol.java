@@ -1,4 +1,7 @@
 package de.elbosso.ui.components;
+
+import java.awt.image.BufferedImage;
+
 /*
  
  Die untenstehende Lizenz berührt nicht die Rechte des Autors der zugrundeliegenden Software
@@ -138,8 +141,7 @@ public class NixieSymbol extends NixieTube
 
     private java.awt.image.BufferedImage createBackgroundImage()
     {
-        java.awt.GraphicsConfiguration gfxConf = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        final java.awt.image.BufferedImage IMAGE = gfxConf.createCompatibleImage((int)(86*factor), (int)(146*factor), java.awt.Transparency.TRANSLUCENT);
+        final java.awt.image.BufferedImage IMAGE = new java.awt.image.BufferedImage((int)(86*factor), (int)(146*factor), BufferedImage.TYPE_INT_ARGB);
 
         java.awt.Graphics2D g2 = IMAGE.createGraphics();
 
@@ -190,8 +192,7 @@ public class NixieSymbol extends NixieTube
 
     private java.awt.image.BufferedImage createMiddleImage()
     {
-        java.awt.GraphicsConfiguration gfxConf = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        final java.awt.image.BufferedImage IMAGE = gfxConf.createCompatibleImage((int)(86*factor), (int)(146*factor), java.awt.Transparency.TRANSLUCENT);
+        final java.awt.image.BufferedImage IMAGE = new java.awt.image.BufferedImage((int)(86*factor), (int)(146*factor), BufferedImage.TYPE_INT_ARGB);
 
         java.awt.Graphics2D g2 = IMAGE.createGraphics();
 
@@ -258,8 +259,7 @@ public class NixieSymbol extends NixieTube
 
     private java.awt.image.BufferedImage createForegroundImage()
     {
-        java.awt.GraphicsConfiguration gfxConf = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        final java.awt.image.BufferedImage IMAGE = gfxConf.createCompatibleImage((int)(86*factor), (int)(146*factor), java.awt.Transparency.TRANSLUCENT);
+        final java.awt.image.BufferedImage IMAGE = new java.awt.image.BufferedImage((int)(86*factor), (int)(146*factor), BufferedImage.TYPE_INT_ARGB);
 
         java.awt.Graphics2D g2 = IMAGE.createGraphics();
 
@@ -373,8 +373,7 @@ public class NixieSymbol extends NixieTube
     private java.awt.image.BufferedImage createSymbol(int number, boolean active)
     {
 
-        java.awt.GraphicsConfiguration gfxConf = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        final java.awt.image.BufferedImage IMAGE = gfxConf.createCompatibleImage((int)(62*factor), (int)(97*factor), java.awt.Transparency.TRANSLUCENT);
+        final java.awt.image.BufferedImage IMAGE = new java.awt.image.BufferedImage((int)(62*factor), (int)(97*factor), BufferedImage.TYPE_INT_ARGB);
 
         java.awt.Graphics2D g2 = IMAGE.createGraphics();
 

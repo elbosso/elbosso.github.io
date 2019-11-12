@@ -1,4 +1,7 @@
 package de.elbosso.ui.components;
+
+import java.awt.image.BufferedImage;
+
 /*
  
 Copyright (c) 2013-2019.
@@ -200,8 +203,7 @@ public class MissionTimerPanel extends javax.swing.JPanel implements java.awt.ev
 
     private java.awt.image.BufferedImage createBackground(int width, int height)
     {
-        java.awt.GraphicsConfiguration gfxConf = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        java.awt.image.BufferedImage IMAGE = gfxConf.createCompatibleImage(width, height, java.awt.Transparency.TRANSLUCENT);
+        java.awt.image.BufferedImage IMAGE = new java.awt.image.BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
         java.awt.Graphics2D g2 = (java.awt.Graphics2D) IMAGE.getGraphics();
         g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
@@ -304,8 +306,7 @@ public class MissionTimerPanel extends javax.swing.JPanel implements java.awt.ev
 
     private java.awt.image.BufferedImage createDots(boolean on)
     {
-        java.awt.GraphicsConfiguration gfxConf = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        java.awt.image.BufferedImage IMAGE = gfxConf.createCompatibleImage((int)(23*factor), (int)(65*factor), java.awt.Transparency.TRANSLUCENT);
+        java.awt.image.BufferedImage IMAGE = new java.awt.image.BufferedImage((int)(23*factor), (int)(65*factor), BufferedImage.TYPE_INT_ARGB);
 
         final java.awt.Color COLOR_ON = new java.awt.Color(0xEEFFEE);
         final java.awt.Color FRAME_COLOR_ON = new java.awt.Color(50, 200, 100, 128);

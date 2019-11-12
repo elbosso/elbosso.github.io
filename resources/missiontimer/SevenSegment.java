@@ -1,6 +1,8 @@
 package de.elbosso.ui.components;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+
 /*
  
  Die untenstehende Lizenz berührt nicht die Rechte des Autors der zugrundeliegenden Software
@@ -172,8 +174,7 @@ public class SevenSegment extends java.lang.Object
 
     private java.awt.image.BufferedImage createDigit(int digit,double fac,boolean dotted)
     {
-        java.awt.GraphicsConfiguration gfxConf = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        java.awt.image.BufferedImage IMAGE = gfxConf.createCompatibleImage((int)(46*fac), (int)(65*fac), java.awt.Transparency.TRANSLUCENT);
+        java.awt.image.BufferedImage IMAGE = new java.awt.image.BufferedImage((int)(46*fac), (int)(65*fac), BufferedImage.TYPE_INT_ARGB);
 
         java.awt.Graphics2D g2 = (java.awt.Graphics2D) IMAGE.getGraphics();
         g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);

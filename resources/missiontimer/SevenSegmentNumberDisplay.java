@@ -38,7 +38,9 @@ WEG SIE AUCH IMMER DURCH DIE BENUTZUNG DIESER SOFTWARE ENTSTANDEN SIND, SOGAR,
 WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
  */
 
-public class SevenSegmentNumberDisplay extends NumberDisplay 
+import java.awt.image.BufferedImage;
+
+public class SevenSegmentNumberDisplay extends NumberDisplay
 {    
     private java.awt.image.BufferedImage BACKGROUND_IMAGE;
 	private double factor;
@@ -159,8 +161,7 @@ public class SevenSegmentNumberDisplay extends NumberDisplay
 
     private java.awt.image.BufferedImage createBackground(int width, int height)
     {
-        java.awt.GraphicsConfiguration gfxConf = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        java.awt.image.BufferedImage IMAGE = gfxConf.createCompatibleImage(width, height, java.awt.Transparency.TRANSLUCENT);
+        java.awt.image.BufferedImage IMAGE = new java.awt.image.BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
 
         java.awt.Graphics2D g2 = (java.awt.Graphics2D) IMAGE.getGraphics();
         g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);

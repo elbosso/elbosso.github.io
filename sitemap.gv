@@ -3,7 +3,6 @@ rankdir=LR
     Android [label="Android" href="https://elbosso.github.io/tag_Android.html" shape="doublecircle"]
     Basteln [label="Basteln" href="https://elbosso.github.io/tag_Basteln.html" shape="doublecircle"]
     CundC [label="C und C++" href="https://elbosso.github.io/c_c__.html" shape="doublecircle"]
-    CA [label="CA" href="https://elbosso.github.io/ca.html" shape="doublecircle"]
     Datenbanken [label="Datenbanken" href="https://elbosso.github.io/tag_Datenbanken.html" shape="doublecircle"]
     Docker [label="Docker" href="https://elbosso.github.io/tag_Docker.html" shape="doublecircle"]
     dWb [label="dWb+" href="https://elbosso.github.io/tag_dWb+.html" shape="doublecircle"]
@@ -21,7 +20,7 @@ rankdir=LR
     Markup [label="Markup" href="https://elbosso.github.io/tag_Markup.html" shape="doublecircle"]
     Music [label="Music" href="https://elbosso.github.io/tag_Music.html" shape="doublecircle"]
     Numerik [label="Numerik" href="https://elbosso.github.io/tag_Numerik.html" shape="doublecircle"]
-    PKI [label="PKI" href="https://elbosso.github.io/pki.html" shape="doublecircle"]
+    PKI-X.509-CA [label="PKI-X.509-CA" href="https://elbosso.github.io/tag_PKI-X.509-CA.html" shape="doublecircle"]
     Python [label="Python" href="https://elbosso.github.io/tag_Python.html" shape="doublecircle"]
     QBrowser [label="QBrowser" href="https://elbosso.github.io/tag_QBrowser.html" shape="doublecircle"]
     Rants [label="Rants" href="https://elbosso.github.io/tag_Rants.html" shape="doublecircle"]
@@ -33,9 +32,12 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-    X.509 [label="X.509" href="https://elbosso.github.io/x_509.html" shape="doublecircle"]
+node_vaadin_swing_ersatz [label="Vaadin als Swing-Ersatz" href="https://elbosso.github.io/vaadin_swing_ersatz.html"]
+    node_sqlshell_echtzeitdatenbanken [label="sQLshell und Echtzeitdatenbanken" href="https://elbosso.github.io/sqlshell_echtzeitdatenbanken.html"]
+                node_sqlshell_echtzeitdatenbanken -> node_syntax_highlighting_influxdb_java_anwendungen
 node_testdatengeneratoren_microservices_docker [label="Testdatengeneratoren als Microservices mit Docker" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker.html"]
-    node_tpedit_erstellt_interaktive_formulare [label="TPEdit erstellt interaktive Formulare" href="https://elbosso.github.io/tpedit_erstellt_interaktive_formulare.html"]
+                node_testdatengeneratoren_microservices_docker -> node_vaadin_swing_ersatz
+node_tpedit_erstellt_interaktive_formulare [label="TPEdit erstellt interaktive Formulare" href="https://elbosso.github.io/tpedit_erstellt_interaktive_formulare.html"]
     node_beanshell_debugger___neue_version [label="BeanShell Debugger - neue Version" href="https://elbosso.github.io/beanshell_debugger___neue_version.html"]
     node_erkennung_virtualisierter_umgebungen [label="Erkennung virtualisierter Umgebungen" href="https://elbosso.github.io/erkennung_virtualisierter_umgebungen.html"]
     node_ci_cd_shellcheck [label="CI/CD mit shellcheck" href="https://elbosso.github.io/ci_cd_shellcheck.html"]
@@ -45,7 +47,8 @@ node_testdatengeneratoren_microservices_docker [label="Testdatengeneratoren als 
             node_lxc_netzwerk_degrader -> node_automatisches_setup_eines_netzwerklabors
 node_anpassung_gnu_screen [label="Anpassung von Gnu Screen" href="https://elbosso.github.io/anpassung_gnu_screen.html"]
     node_i18neditor_github_projekt [label="I18NEditor als GitHub-Projekt" href="https://elbosso.github.io/i18neditor_github_projekt.html"]
-                node_i18neditor_github_projekt -> node_fork_material_design_icons_google
+                node_i18neditor_github_projekt -> node_inkonsistenz_api_awt
+            node_i18neditor_github_projekt -> node_fork_material_design_icons_google
 node_diy_ebook_reader_iii [label="DIY EBook-Reader III" href="https://elbosso.github.io/diy_ebook_reader_iii.html"]
     node_performanceprobleme_kvm_windows [label="Performanceprobleme mit KVM und Windows" href="https://elbosso.github.io/performanceprobleme_kvm_windows.html"]
                 node_performanceprobleme_kvm_windows -> node_mulit_user_webdav__docker__github
@@ -984,6 +987,7 @@ node_sony_vaio_vgn_b1xp_aufgeruestet [label="Sony Vaio VGN-B1XP aufgerüstet" hr
             node_gnu_screen_sitzung_wenig_aufgepeppt -> node_conky___influxdb
 node_odata_content_browser [label="OData Content Browser" href="https://elbosso.github.io/odata_content_browser.html"]
                 node_odata_content_browser -> node_sqlshell_integriert_ldap_jdbc_bridge
+            node_odata_content_browser -> node_sqlshell_echtzeitdatenbanken
 node_icons_conky [label="Icons für Conky" href="https://elbosso.github.io/icons_conky.html"]
                 node_icons_conky -> node_conky___influxdb
 node_aenderung_netzwerkkonfiguration_linux_update [label="Änderung der Netzwerkkonfiguration in Linux durch Update" href="https://elbosso.github.io/aenderung_netzwerkkonfiguration_linux_update.html"]

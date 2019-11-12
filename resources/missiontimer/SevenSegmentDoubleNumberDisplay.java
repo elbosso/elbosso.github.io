@@ -39,6 +39,7 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
  */
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class SevenSegmentDoubleNumberDisplay extends NumberDisplay
 {    
@@ -194,8 +195,7 @@ public class SevenSegmentDoubleNumberDisplay extends NumberDisplay
 
     private java.awt.image.BufferedImage createBackground(int width, int height)
     {
-        java.awt.GraphicsConfiguration gfxConf = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        java.awt.image.BufferedImage IMAGE = gfxConf.createCompatibleImage(width, height, java.awt.Transparency.TRANSLUCENT);
+        java.awt.image.BufferedImage IMAGE = new java.awt.image.BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
         java.awt.Graphics2D g2 = (java.awt.Graphics2D) IMAGE.getGraphics();
         g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
