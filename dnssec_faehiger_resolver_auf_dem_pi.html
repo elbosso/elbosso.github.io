@@ -50,18 +50,28 @@ and is wrapped around the whole page content, except for the footer in this exam
 						<div class="w3-row">
 							<div class="w3-col m8 s12">
 								vorhergehende Artikel in:
-								<a href="raspi_vpn_endpunkt.html#content">
+								<a href="multi_user_webdav__docker__github.html#content">
 									<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
 								</a> <!--/li-->
 							</div>
 							<div class="w3-col m4" style="text-align: right">
-								<span class="w3-opacity">22.06.2019</span>
+								<span class="w3-opacity">01.12.2019</span>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="updates">
+					<h5>Updates</h5>
+					<ul>
+						<li>
+							<a href="#46">
+								1. Dezember 2019
+							</a>
+						</li>
+					</ul>
+				</div>
 				<div class="w3-container w3-padding" id="abstract">
 <p>Nachdem ich meinen Raspi immer weiter zum Home-Server ausbaue, versuche ich auch immer mehr, mich vor den Versuchen
 zu schützen, in das einzudringen, was ich für meine Privatsphäre halte. Nun habe ich einen weiteren Schritt in
@@ -108,6 +118,20 @@ sich so etwas bereits andere und es liegt allerdings
 bereits ein
 <a href="https://github.com/influxdata/telegraf/pull/4545">Merge-Request</a>
 für ein solches vor; daher gehe ich davon aus, dass ich auch das in naher Zukunft umsetzen kann...
+</p><p>
+<h3><a name="46">Aktualisierung vom 1. Dezember 2019</a></h3><div class="update">Nachdem ich bisher eigentlich nie Probleme mit dem beschriebenen Setup hatte - von einigen kleineren
+Ausfällen einmal abgesehen, die sich aber immer durch einen Neustart des Pi lösen ließen - war
+heute morgen Schluss mit Internet. Nichts ging mehr - weder die lokalen Zonen noch das große weiter Internet.
+Es dauerte eine Weile, bis ich die Ursache gefunden hatte: Das Update der Zonen war fehlgeschlagen und hatte die
+Datei in einen 0 Byte großen Zombie verwandelt. Das Cron-gesteuerte wget-Statement zur Aktualisierung versucht
+den Download aber über einen DNS-Namen für den Server. Damit hatte ich ein wunderschönes Henne-Ei-Problem und ich
+musste meine DNS-Auflösung von Hand um den Pihole herumbiegen, um zunächst einmal wieder die Datei herunterladen zu können,
+die anschließend die Namensauflösung für alle wieder möglich machte.
+</p><p>
+Kurz zusammengefasst: Ich habe das Management des DNS auf meinem Pihole nun geändert: vor dem Herunterladen der neuen Datei wird zunächst
+mal die bisherige asl Backup-Kopie verewigt - für den unwahrscheinlichen Fall, dass beim Herunterladen noch einmal
+Probleme auftauchen werde ich dann auf das lokale Backup zurückgreifen können.
+</div>
 </p>				</div>
 				<div class="w3-container w3-padding" id="referers">
 				<h3>
@@ -218,38 +242,40 @@ wären.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Multi-User-WebDAV, Docker, GitHub</span><br>
-						<span class="smallabstract"><p>Nachdem ich mich in letzter Zeit verstärkt mit Docker und dem zugehörigen Ökosystem
-beschäftige,
-habe ich begonnen, verschiedenste Dienste in Containern zu testen um zu sehen,
-ob in manchen Fällen
-LXC
-oder
-KVM
-nicht doch die bessere Wahl wäre...
+							Syntax-Highlighting für InfluxDB in Java-Anwendungen</span><br>
+						<span class="smallabstract"><p>Wie bereits in einem
+Artikel
+beschrieben beschäftige ich mich derzeit mit Ideen, Echtzeitdatenbanken und speziell InfluxDB in die
+sQLshell
+zu integrieren.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="multi_user_webdav__docker__github.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="syntax_highlighting_influxdb_java_anwendungen.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							CI/CD mit Grafana</span><br>
-						<span class="smallabstract"><p>Ich habe mich schon längere Zeit gefragt, ob es nicht eine Möglichkeit gibt, Dashboards auch außerhalb
-von Grafana zu versionieren - etwa mit bestehenden Standardtools wie Git oder ähnlichem...
+							Biometrie ist tot</span><br>
+						<span class="smallabstract"><p>Ich habe im Zuge neuer Nachrichten auf diesem Gebiet meine Gedanken und Meinungen zum Thema Biometrie einer Revision unterzogen
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_grafana.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="biometrie_ist_tot.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Vaadin als Swing-Ersatz</span><br>
-						<span class="smallabstract"><p>Bereits in einem kürzlich erschienenen
-Artikel
-hier auf der Webseite habe ich vom Ausprobieren neuer Frameworks
-geschrieben - dieser Artikel behandelt ein weiteres...
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Automatisches Setup eines Netzwerklabors</span><br>
+						<span class="smallabstract"><p>Ich hatte hier schon über
+Möglichkeiten
+geschrieben,
+Komponenten
+eines
+Netzwerklabors
+automatisch als LXC-Container
+aufzusetzen. Nachdem ich neulich mit einem Kollegen über Testszenarien für GlusterFS philosophiert habe, habe
+ich nunmehr versucht, diese Fragmente zu konsolidieren...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vaadin_swing_ersatz.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="automatisches_setup_eines_netzwerklabors.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -285,38 +311,40 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Multi-User-WebDAV, Docker, GitHub</span><br>
-							<span class="smallabstract"><p>Nachdem ich mich in letzter Zeit verstärkt mit Docker und dem zugehörigen Ökosystem
-beschäftige,
-habe ich begonnen, verschiedenste Dienste in Containern zu testen um zu sehen,
-ob in manchen Fällen
-LXC
-oder
-KVM
-nicht doch die bessere Wahl wäre...
+							Syntax-Highlighting für InfluxDB in Java-Anwendungen</span><br>
+							<span class="smallabstract"><p>Wie bereits in einem
+Artikel
+beschrieben beschäftige ich mich derzeit mit Ideen, Echtzeitdatenbanken und speziell InfluxDB in die
+sQLshell
+zu integrieren.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="multi_user_webdav__docker__github.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="syntax_highlighting_influxdb_java_anwendungen.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							CI/CD mit Grafana</span><br>
-							<span class="smallabstract"><p>Ich habe mich schon längere Zeit gefragt, ob es nicht eine Möglichkeit gibt, Dashboards auch außerhalb
-von Grafana zu versionieren - etwa mit bestehenden Standardtools wie Git oder ähnlichem...
+							Biometrie ist tot</span><br>
+							<span class="smallabstract"><p>Ich habe im Zuge neuer Nachrichten auf diesem Gebiet meine Gedanken und Meinungen zum Thema Biometrie einer Revision unterzogen
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_grafana.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="biometrie_ist_tot.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Vaadin als Swing-Ersatz</span><br>
-							<span class="smallabstract"><p>Bereits in einem kürzlich erschienenen
-Artikel
-hier auf der Webseite habe ich vom Ausprobieren neuer Frameworks
-geschrieben - dieser Artikel behandelt ein weiteres...
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Automatisches Setup eines Netzwerklabors</span><br>
+							<span class="smallabstract"><p>Ich hatte hier schon über
+Möglichkeiten
+geschrieben,
+Komponenten
+eines
+Netzwerklabors
+automatisch als LXC-Container
+aufzusetzen. Nachdem ich neulich mit einem Kollegen über Testszenarien für GlusterFS philosophiert habe, habe
+ich nunmehr versucht, diese Fragmente zu konsolidieren...
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vaadin_swing_ersatz.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="automatisches_setup_eines_netzwerklabors.html#content">
  Weiterlesen...
 								</a>
 						</li>

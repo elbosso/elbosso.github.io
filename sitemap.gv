@@ -32,13 +32,22 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_syntax_highlighting_influxdb_java_anwendungen [label="Syntax-Highlighting für InfluxDB in Java-Anwendungen" href="https://elbosso.github.io/syntax_highlighting_influxdb_java_anwendungen.html"]
+    node_biometrie_ist_tot [label="Biometrie ist tot" href="https://elbosso.github.io/biometrie_ist_tot.html"]
+    node_automatisches_setup_eines_netzwerklabors [label="Automatisches Setup eines Netzwerklabors" href="https://elbosso.github.io/automatisches_setup_eines_netzwerklabors.html"]
+                node_automatisches_setup_eines_netzwerklabors -> node_vpn_netzwerklabor
+node_dnssec_faehiger_resolver_auf_dem_pi [label="DNSSEC fähiger Resolver auf dem Pi" href="https://elbosso.github.io/dnssec_faehiger_resolver_auf_dem_pi.html"]
+                node_dnssec_faehiger_resolver_auf_dem_pi -> node_lxc_bootstrap_gui_container
 node_multi_user_webdav__docker__github [label="Multi-User-WebDAV, Docker, GitHub" href="https://elbosso.github.io/multi_user_webdav__docker__github.html"]
     node_ci_cd_grafana [label="CI/CD mit Grafana" href="https://elbosso.github.io/ci_cd_grafana.html"]
-    node_vaadin_swing_ersatz [label="Vaadin als Swing-Ersatz" href="https://elbosso.github.io/vaadin_swing_ersatz.html"]
+                node_ci_cd_grafana -> node_applikationsmonitoring_influxdb
+node_vaadin_swing_ersatz [label="Vaadin als Swing-Ersatz" href="https://elbosso.github.io/vaadin_swing_ersatz.html"]
     node_sqlshell_echtzeitdatenbanken [label="sQLshell und Echtzeitdatenbanken" href="https://elbosso.github.io/sqlshell_echtzeitdatenbanken.html"]
                 node_sqlshell_echtzeitdatenbanken -> node_syntax_highlighting_influxdb_java_anwendungen
 node_testdatengeneratoren_microservices_docker [label="Testdatengeneratoren als Microservices mit Docker" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker.html"]
                 node_testdatengeneratoren_microservices_docker -> node_vaadin_swing_ersatz
+node_testdatengeneratoren_microservices_docker_ueberarbeitet [label="Testdatengeneratoren als Microservices mit Docker überarbeitet" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker_ueberarbeitet.html"]
+                node_testdatengeneratoren_microservices_docker_ueberarbeitet -> node_dynamische_gitlab_badges_iv
 node_tpedit_erstellt_interaktive_formulare [label="TPEdit erstellt interaktive Formulare" href="https://elbosso.github.io/tpedit_erstellt_interaktive_formulare.html"]
     node_beanshell_debugger___neue_version [label="BeanShell Debugger - neue Version" href="https://elbosso.github.io/beanshell_debugger___neue_version.html"]
     node_erkennung_virtualisierter_umgebungen [label="Erkennung virtualisierter Umgebungen" href="https://elbosso.github.io/erkennung_virtualisierter_umgebungen.html"]
@@ -104,9 +113,7 @@ node_repo_auf_github__telegraf_ [label="Repo auf Github (Telegraf)" href="https:
 node_daten_inline_gnuplot_scripts [label="Daten inline in Gnuplot-Scripts" href="https://elbosso.github.io/daten_inline_gnuplot_scripts.html"]
     node_ssh_mfa [label="SSH und MFA" href="https://elbosso.github.io/ssh_mfa.html"]
     node_warten_auf_jupiter_hell___ [label="Warten auf Jupiter Hell..." href="https://elbosso.github.io/warten_auf_jupiter_hell___.html"]
-    node_dnssec_faehiger_resolver_auf_dem_pi [label="DNSSEC fähiger Resolver auf dem Pi" href="https://elbosso.github.io/dnssec_faehiger_resolver_auf_dem_pi.html"]
-                node_dnssec_faehiger_resolver_auf_dem_pi -> node_lxc_bootstrap_gui_container
-node_diy_ebook_reader_ii [label="DIY EBook-Reader II" href="https://elbosso.github.io/diy_ebook_reader_ii.html"]
+    node_diy_ebook_reader_ii [label="DIY EBook-Reader II" href="https://elbosso.github.io/diy_ebook_reader_ii.html"]
                 node_diy_ebook_reader_ii -> node_diy_ebook_reader_iii
 node_raspi_vpn_endpunkt [label="Raspi als VPN-Endpunkt" href="https://elbosso.github.io/raspi_vpn_endpunkt.html"]
                 node_raspi_vpn_endpunkt -> node_dnssec_faehiger_resolver_auf_dem_pi
@@ -174,6 +181,7 @@ node_sonoff_s20_mqtt [label="Sonoff S20 und MQTT" href="https://elbosso.github.i
     node_dynamische_gitlab_badges_iii [label="Dynamische Gitlab Badges III" href="https://elbosso.github.io/dynamische_gitlab_badges_iii.html"]
                 node_dynamische_gitlab_badges_iii -> node_gitlab_metriken_grafana
             node_dynamische_gitlab_badges_iii -> node_aviator_badges
+            node_dynamische_gitlab_badges_iii -> node_dynamische_gitlab_badges_iv
 node_gps_logger_abgestaubt [label="GPS-Logger abgestaubt" href="https://elbosso.github.io/gps_logger_abgestaubt.html"]
                 node_gps_logger_abgestaubt -> node_week_rollover_gps
 node_been_kicked_by_a_mule_gretchen_wilson [label="Been Kicked By a Mule Gretchen Wilson" href="https://elbosso.github.io/been_kicked_by_a_mule_gretchen_wilson.html"]
@@ -189,6 +197,7 @@ node_mqtt___raspi___grafana [label="MQTT + Raspi + Grafana" href="https://elboss
 node_walkin__blues_joanna_connor_band [label="Walkin' Blues Joanna Connor Band" href="https://elbosso.github.io/walkin__blues_joanna_connor_band.html"]
     node_gitlab_badges [label="Gitlab Badges" href="https://elbosso.github.io/gitlab_badges.html"]
                 node_gitlab_badges -> node_dynamische_gitlab_badges_ii
+            node_gitlab_badges -> node_dynamische_gitlab_badges_iv
             node_gitlab_badges -> node_dynamische_gitlab_badges
 node_telegraf_windows [label="Telegraf und Windows" href="https://elbosso.github.io/telegraf_windows.html"]
     node_i_m_an_old_cowhand__hot_club_of_cowtown_ [label="I'm An Old Cowhand (Hot Club of Cowtown)" href="https://elbosso.github.io/i_m_an_old_cowhand__hot_club_of_cowtown_.html"]

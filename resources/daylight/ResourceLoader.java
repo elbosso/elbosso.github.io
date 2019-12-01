@@ -365,12 +365,12 @@ public class ResourceLoader extends java.lang.Object
 		{
 			try
 			{
-				if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("requested image resource " + arg);
+				if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("requested resource " + arg);
 				if (props.containsKey(arg))
 				{
 					int[] ps = null;
 					java.lang.String replacement = props.getProperty(arg, arg);
-					while(replacement.equals(arg)==false)
+					while(true)//(replacement.equals(arg)==false)
 					{
 						if (replacement.startsWith("#"))
 						{
@@ -426,6 +426,8 @@ public class ResourceLoader extends java.lang.Object
 						}
 						arg = replacement;
 						replacement = props.getProperty(arg, arg);
+						if(replacement.equals(arg))
+							break;
 					}
 				}
 				else
