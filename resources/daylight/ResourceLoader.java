@@ -2,6 +2,7 @@ package de.netsysit.util;
 //$Id$
 
 import de.elbosso.util.Utilities;
+import org.apache.log4j.Level;
 
 import javax.accessibility.AccessibleContext;
 import java.awt.*;
@@ -23,6 +24,7 @@ public class ResourceLoader extends java.lang.Object
 	private static java.net.URL fallBack;
 	private static java.util.Map<java.lang.String, java.net.URL> resourceCache=new java.util.HashMap();
 	private static java.util.Map<java.lang.String, java.net.URL> resourceCacheUnaltered=new java.util.HashMap();
+	private static java.io.File dockerSecretRoot=new java.io.File("/run/secrets/");
 
 	public static InputStream getResourceAsStream(String s)
 	{
@@ -350,6 +352,37 @@ public class ResourceLoader extends java.lang.Object
 		{
 			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("getImgResourceUnaltered "+arg);
 			rv=fallBack;
+		}
+		return rv;
+	}
+	public static synchronized java.net.URL getDockerSecretResource(java.lang.String arg)
+	{
+		return getDockerSecretResource(arg,false);
+	}
+	public static synchronized java.net.URL getDockerSecretResource(java.lang.String arg,boolean classpathFallback)
+	{
+		java.net.URL rv=null;
+		if(dockerSecretRoot.exists())
+		{
+			java.io.File f=new java.io.File(dockerSecretRoot,arg);
+			if(f.exists())
+			{
+				try
+				{
+					rv = f.toURI().toURL();
+				}
+				catch (java.net.MalformedURLException exp)
+				{
+					rv = null;
+					if (CLASS_LOGGER.isEnabledFor(Level.WARN))
+						CLASS_LOGGER.warn(exp.getMessage(),exp);
+				}
+			}
+		}
+		if(rv==null)
+		{
+			if(CLASS_LOGGER.isEnabledFor(Level.WARN))CLASS_LOGGER.warn("found no docker secret named "+arg+" searching instead on CLASSPATH!");
+			rv = getResource(arg);
 		}
 		return rv;
 	}
