@@ -291,10 +291,10 @@ public class MissionTimerPanel extends javax.swing.JPanel implements java.awt.ev
         g2.drawLine((int)(318*factor), (int)(30*factor), width-(int)(21*factor), (int)(30*factor));
         g2.drawLine(width-(int)(21*factor), (int)(30*factor), width-(int)(21*factor),(int)( 36*factor));
 
-        g2.setFont(new java.awt.Font("Arial", 1, (int)(22*factor)));
+        g2.setFont(new java.awt.Font("SansSerif", 1, (int)(22*factor)));
         g2.drawString("MISSION TIMER", (int)(140*factor), (int)(37*factor));
 
-        g2.setFont(new java.awt.Font("Arial", 1, (int)(16*factor)));
+        g2.setFont(new java.awt.Font("SansSerif", 1, (int)(16*factor)));
         g2.drawString("HOURS", (int)(75*factor), (int)(65*factor));
         g2.drawString("MIN", (int)(243*factor), (int)(65*factor));
         g2.drawString("SEC", (int)(355*factor), (int)(65*factor));

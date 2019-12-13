@@ -379,9 +379,9 @@ public class ResourceLoader extends java.lang.Object
 				}
 			}
 		}
-		if(rv==null)
+		if((rv==null)&&(classpathFallback==true))
 		{
-			if(CLASS_LOGGER.isEnabledFor(Level.WARN))CLASS_LOGGER.warn("found no docker secret named "+arg+" searching instead on CLASSPATH!");
+			if(CLASS_LOGGER.isEnabledFor(Level.WARN))CLASS_LOGGER.warn("found no docker secret named "+arg+" - searching instead on CLASSPATH!");
 			rv = getResource(arg);
 		}
 		return rv;
