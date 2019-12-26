@@ -7,7 +7,7 @@ import java.awt.geom.AffineTransform;
 import java.io.IOException;
 
 /*
-Copyright (c) 2013-2019.
+Copyright (c) 2013-2020.
 
 Juergen Key. Alle Rechte vorbehalten.
 
