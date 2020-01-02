@@ -31,9 +31,14 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_36c3___meine_favoriten_zweiter_teil [label="36c3 - Meine Favoriten zweiter Teil" href="https://elbosso.github.io/36c3___meine_favoriten_zweiter_teil.html"]
-    node_36c3___meine_favoriten_bisher [label="36c3 - Meine Favoriten bisher" href="https://elbosso.github.io/36c3___meine_favoriten_bisher.html"]
+node_erweiterung_ini4j [label="Erweiterung von ini4j" href="https://elbosso.github.io/erweiterung_ini4j.html"]
+    node_vorhaben_2020 [label="Vorhaben 2020" href="https://elbosso.github.io/vorhaben_2020.html"]
+    node_36c3___nachlese [label="36c3 - Nachlese" href="https://elbosso.github.io/36c3___nachlese.html"]
+    node_36c3___meine_favoriten_zweiter_teil [label="36c3 - Meine Favoriten zweiter Teil" href="https://elbosso.github.io/36c3___meine_favoriten_zweiter_teil.html"]
+                node_36c3___meine_favoriten_zweiter_teil -> node_36c3___nachlese
+node_36c3___meine_favoriten_bisher [label="36c3 - Meine Favoriten bisher" href="https://elbosso.github.io/36c3___meine_favoriten_bisher.html"]
                 node_36c3___meine_favoriten_bisher -> node_36c3___meine_favoriten_zweiter_teil
+            node_36c3___meine_favoriten_bisher -> node_36c3___nachlese
 node_anpassen_expext_dialog_ca [label="Anpassen der Expext-Dialog-CA" href="https://elbosso.github.io/anpassen_expext_dialog_ca.html"]
     node_inkonsistenz_api_awt [label="Inkonsistenz im API von AWT" href="https://elbosso.github.io/inkonsistenz_api_awt.html"]
     node_expect_dialog_ca_version_1_2 [label="Expect-Dialog-CA Version 1.2" href="https://elbosso.github.io/expect_dialog_ca_version_1_2.html"]
@@ -49,6 +54,7 @@ node_icons___woher_nehmen____iv [label="Icons - woher nehmen? - IV" href="https:
     node_biometrie_ist_tot [label="Biometrie ist tot" href="https://elbosso.github.io/biometrie_ist_tot.html"]
     node_automatisches_setup_eines_netzwerklabors [label="Automatisches Setup eines Netzwerklabors" href="https://elbosso.github.io/automatisches_setup_eines_netzwerklabors.html"]
                 node_automatisches_setup_eines_netzwerklabors -> node_vpn_netzwerklabor
+            node_automatisches_setup_eines_netzwerklabors -> node_vorhaben_2020
 node_dnssec_faehiger_resolver_auf_dem_pi [label="DNSSEC fähiger Resolver auf dem Pi" href="https://elbosso.github.io/dnssec_faehiger_resolver_auf_dem_pi.html"]
                 node_dnssec_faehiger_resolver_auf_dem_pi -> node_lxc_bootstrap_gui_container
 node_multi_user_webdav__docker__github [label="Multi-User-WebDAV, Docker, GitHub" href="https://elbosso.github.io/multi_user_webdav__docker__github.html"]
@@ -74,7 +80,8 @@ node_anpassung_gnu_screen [label="Anpassung von Gnu Screen" href="https://elboss
                 node_i18neditor_github_projekt -> node_inkonsistenz_api_awt
             node_i18neditor_github_projekt -> node_fork_material_design_icons_google
 node_diy_ebook_reader_iii [label="DIY EBook-Reader III" href="https://elbosso.github.io/diy_ebook_reader_iii.html"]
-    node_performanceprobleme_kvm_windows [label="Performanceprobleme mit KVM und Windows" href="https://elbosso.github.io/performanceprobleme_kvm_windows.html"]
+                node_diy_ebook_reader_iii -> node_vorhaben_2020
+node_performanceprobleme_kvm_windows [label="Performanceprobleme mit KVM und Windows" href="https://elbosso.github.io/performanceprobleme_kvm_windows.html"]
                 node_performanceprobleme_kvm_windows -> node_multi_user_webdav__docker__github
 node_git_ressources__epubs [label="Git-Ressources und -EPUBs" href="https://elbosso.github.io/git_ressources__epubs.html"]
     node_docker_ci_cd [label="Docker und CI/CD" href="https://elbosso.github.io/docker_ci_cd.html"]
@@ -220,6 +227,7 @@ node_telegraf_windows [label="Telegraf und Windows" href="https://elbosso.github
             node_vorhaben_2019 -> node_dynamische_gitlab_badges_ii
             node_vorhaben_2019 -> node_diy_ebook_reader_iii
             node_vorhaben_2019 -> node_esp_link_gps_logger
+            node_vorhaben_2019 -> node_vorhaben_2020
 node_jon_batiste___stay_human_perform__auld_lang_syne_ [label="Jon Batiste & Stay Human Perform 'Auld Lang Syne'" href="https://elbosso.github.io/jon_batiste___stay_human_perform__auld_lang_syne_.html"]
     node_fritzbox__monitoring__tr064 [label="FritzBox, Monitoring, TR064" href="https://elbosso.github.io/fritzbox__monitoring__tr064.html"]
                 node_fritzbox__monitoring__tr064 -> node_vorhaben_2019
@@ -310,7 +318,8 @@ node_kontinuierliche_visualisierung_strange_attractors [label="Kontinuierliche V
             node_ntp_server_raspi_em406a -> node_satelliten_layer
             node_ntp_server_raspi_em406a -> node_esp8266_zigbee
 node_videotips_aus_biologie [label="Videotips aus der Biologie" href="https://elbosso.github.io/videotips_aus_biologie.html"]
-    node_yubi_zur_2fa_gitlab [label="Yubi zur 2FA mit GitLab" href="https://elbosso.github.io/yubi_zur_2fa_gitlab.html"]
+                node_videotips_aus_biologie -> node_vorhaben_2020
+node_yubi_zur_2fa_gitlab [label="Yubi zur 2FA mit GitLab" href="https://elbosso.github.io/yubi_zur_2fa_gitlab.html"]
                 node_yubi_zur_2fa_gitlab -> node_ssh_mfa
 node_18_04___gitlab__x [label="18.04 - Gitlab, X" href="https://elbosso.github.io/18_04___gitlab__x.html"]
                 node_18_04___gitlab__x -> node_dwb__grafana
@@ -511,6 +520,7 @@ node_neue_datengeneratoren_ii [label="Neue Datengeneratoren II" href="https://el
                 node_neue_datengeneratoren_ii -> node_generierung_skripts_sqlshell
             node_neue_datengeneratoren_ii -> node_neue_datengeneratoren_iii
             node_neue_datengeneratoren_ii -> node_another_round_of_trac
+            node_neue_datengeneratoren_ii -> node_vorhaben_2020
 node_neue_datengeneratoren_iii [label="Neue Datengeneratoren III" href="https://elbosso.github.io/neue_datengeneratoren_iii.html"]
                 node_neue_datengeneratoren_iii -> node_neue_datengeneratoren_iv
 node_autostereoskopie_generierten_planeten [label="Autostereoskopie mit generierten Planeten" href="https://elbosso.github.io/autostereoskopie_generierten_planeten.html"]
