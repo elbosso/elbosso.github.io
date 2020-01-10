@@ -32,6 +32,12 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_expect_dialog_ca_version_2_0_0 [label="Expect-Dialog-CA Version 2.0.0" href="https://elbosso.github.io/expect_dialog_ca_version_2_0_0.html"]
+                node_expect_dialog_ca_version_2_0_0 -> node_timestamping_server_projekt
+node_van_der_pol__chua_systeme [label="Van-der-Pol- und Chua-Systeme" href="https://elbosso.github.io/van_der_pol__chua_systeme.html"]
+                node_van_der_pol__chua_systeme -> node_fraktal_selberbauen
+            node_van_der_pol__chua_systeme -> node_periodisch_angeregter_duffing_oszillator
+            node_van_der_pol__chua_systeme -> node_bouali_systeme
 node_docker_multi_stage_builds_go [label="Docker Multi-Stage-Builds für Go" href="https://elbosso.github.io/docker_multi_stage_builds_go.html"]
     node_motp_revisited [label="mOTP revisited" href="https://elbosso.github.io/motp_revisited.html"]
     node_2020_links_i [label="2020 Links I" href="https://elbosso.github.io/2020_links_i.html"]
@@ -115,7 +121,8 @@ node_synchronisieren_zwischenablage_xpra [label="Synchronisieren Zwischenablage 
             node_grafana__alarmierung_xmpp -> node_alarmierung_ueber_skripte
 node_streaming_server_linux [label="Streaming Server mit Linux" href="https://elbosso.github.io/streaming_server_linux.html"]
     node_julia_mengen_shadern_umgesetzt [label="Julia-Mengen mit Shadern umgesetzt" href="https://elbosso.github.io/julia_mengen_shadern_umgesetzt.html"]
-    node_migration_kanboard_nach_gitlab [label="Migration von KanBoard nach GitLab" href="https://elbosso.github.io/migration_kanboard_nach_gitlab.html"]
+                node_julia_mengen_shadern_umgesetzt -> node_van_der_pol__chua_systeme
+node_migration_kanboard_nach_gitlab [label="Migration von KanBoard nach GitLab" href="https://elbosso.github.io/migration_kanboard_nach_gitlab.html"]
     node_beamen_ohrenschmerzen [label="Beamen und Ohrenschmerzen" href="https://elbosso.github.io/beamen_ohrenschmerzen.html"]
     node_doppelte_genauigkeit_java [label="Doppelte Genauigkeit in Java" href="https://elbosso.github.io/doppelte_genauigkeit_java.html"]
                 node_doppelte_genauigkeit_java -> node_fraktal_selberbauen
