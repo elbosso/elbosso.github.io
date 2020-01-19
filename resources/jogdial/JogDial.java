@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 
 /*
-Copyright (c) 2013-2016.
+Copyright (c) 2013-2020.
 
 Juergen Key. Alle Rechte vorbehalten.
 
@@ -155,8 +155,8 @@ public class JogDial extends javax.swing.JComponent implements
 		{
 			smallColors[i]=CONE_COLORS[(i+off)%9];
 		}
-		
-		miniMax.addPropertyChangeListener(this);
+		if(this.miniMax!=null)
+			this.miniMax.addPropertyChangeListener(this);
 		oldfracture=-1;
 		computeValues();
 		addMouseMotionListener(new java.awt.event.MouseMotionListener() {
@@ -177,7 +177,7 @@ public class JogDial extends javax.swing.JComponent implements
 					
 //				if((dragging==false)&&(dragstarted==false))
 				{
-					if(inside==false)
+					if((inside==false)&&(miniMax!=null))
 					{
 						double frac=(double)(getBounds().height-e.getPoint().y)/(double)getBounds().height;
 						if(frac<0.0)
@@ -228,19 +228,19 @@ public class JogDial extends javax.swing.JComponent implements
 						if(e.getPoint().y>getBounds().height/2)
 						{
 							double intermediate=getValue()-JogDial.this.oneround;
-							if(intermediate<getMiniMax().getMin())
+							if((miniMax!=null)&&(intermediate<getMiniMax().getMin()))
 								intermediate=getMiniMax().getMin();
 							setValue(intermediate);
 						}
 						else
 						{
 							double intermediate=getValue()+JogDial.this.oneround;
-							if(intermediate>getMiniMax().getMax())
+							if((miniMax!=null)&&(intermediate>getMiniMax().getMax()))
 								intermediate=getMiniMax().getMax();
 							setValue(intermediate);
 						}
 					}
-					else
+					else if(miniMax!=null)
 					{
 						double frac=(double)(getBounds().height-e.getPoint().y)/(double)getBounds().height;
 						if(frac<0.0)
@@ -402,9 +402,16 @@ public class JogDial extends javax.swing.JComponent implements
 	}
 	private void computeValues()
 	{
-		actualdialvalue=(invertRotation?-2:2)*java.lang.Math.PI*((value-miniMax.getMin())%oneround)/oneround;
-		actualfillvalue=1.0-((value-miniMax.getMin())/(miniMax.getSpan()));
-
+		if(miniMax!=null)
+		{
+			actualdialvalue = (invertRotation ? -2 : 2) * java.lang.Math.PI * ((value - miniMax.getMin()) % oneround) / oneround;
+			actualfillvalue = 1.0 - ((value - miniMax.getMin()) / (miniMax.getSpan()));
+		}
+		else
+		{
+			actualdialvalue = (invertRotation ? -2 : 2)* java.lang.Math.PI * (value % oneround) / oneround;
+			actualfillvalue=0.0;
+		}
 	}
 
 	public boolean isInvertRotation()
@@ -424,7 +431,7 @@ public class JogDial extends javax.swing.JComponent implements
 	public synchronized void setValue(double value)
 	{
 		double oldvalue=this.value;
-		this.value = miniMax.constrain(value);
+		this.value = miniMax!=null?miniMax.constrain(value):value;
 		computeValues();
 		pcs.firePropertyChange("value", oldvalue, value);
 		repaint();
