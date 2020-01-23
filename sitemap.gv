@@ -33,7 +33,9 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_timestamping_server_projekt [label="Timestamping Server Projekt" href="https://elbosso.github.io/timestamping_server_projekt.html"]
+node_irving_finkel [label="Irving Finkel" href="https://elbosso.github.io/irving_finkel.html"]
+    node_migration_traefik_2_x [label="Migration zu Traefik 2.x" href="https://elbosso.github.io/migration_traefik_2_x.html"]
+    node_timestamping_server_projekt [label="Timestamping Server Projekt" href="https://elbosso.github.io/timestamping_server_projekt.html"]
                 node_timestamping_server_projekt -> node_oauth_otp
             node_timestamping_server_projekt -> node_applikationsmonitoring_influxdb
             node_timestamping_server_projekt -> node_timestamping_server_projekt___update
@@ -392,7 +394,8 @@ node_tile_server_openstreetmap_lxc_ii [label="Tile-Server für Openstreetmap in 
             node_tile_server_openstreetmap_lxc_ii -> node_mehrere_tile_layer_aus_einem_server
 node_ads_b_zeitreihendatenbanken [label="ADS-B in Zeitreihendatenbanken" href="https://elbosso.github.io/ads_b_zeitreihendatenbanken.html"]
     node_royal_institution_youtube_channel [label="Royal Institution YouTube Channel" href="https://elbosso.github.io/royal_institution_youtube_channel.html"]
-                node_royal_institution_youtube_channel -> node_gedanken_zeit__ntp__gps_diy
+                node_royal_institution_youtube_channel -> node_irving_finkel
+            node_royal_institution_youtube_channel -> node_gedanken_zeit__ntp__gps_diy
             node_royal_institution_youtube_channel -> node_andrew_szydlo
 node_gitlab_ci [label="Gitlab-CI" href="https://elbosso.github.io/gitlab_ci.html"]
                 node_gitlab_ci -> node_dwb__grafana

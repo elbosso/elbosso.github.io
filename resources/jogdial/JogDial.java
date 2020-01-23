@@ -111,13 +111,17 @@ public class JogDial extends javax.swing.JComponent implements
 	{
 		this(new de.netsysit.util.lang.MiniMax(min,max),oneround);
 	}
+	public JogDial( double oneround)
+	{
+		this(null,oneround);
+	}
 	@java.beans.ConstructorProperties({"miniMax", "oneround"})
 	public JogDial(de.netsysit.util.lang.MiniMax minimax, double oneround)
 	{
 		super();
 		this.miniMax=minimax;
 		this.oneround=oneround;
-		this.value=miniMax.getMin();
+		this.value=this.miniMax!=null?this.miniMax.getMin():0.0;
 		float lsum=0.0f;
 		float ssum=0.0f;
 		largeFractions=new float[9];
@@ -205,7 +209,7 @@ public class JogDial extends javax.swing.JComponent implements
 			{
 				draginitiated=true;
 				computeSinAngle(e);
-				if((inside==false)&&(dragging==false))
+				if((miniMax!=null)&&((inside==false)&&(dragging==false)))
 				{
 					double frac=(double)(getBounds().height-e.getPoint().y)/(double)getBounds().height;
 					if(frac<0.0)
@@ -511,38 +515,33 @@ public class JogDial extends javax.swing.JComponent implements
 
 
 			oldfracture=frac;
-//			if((((getValue()==max)&&(df<0.0))||((getValue()==min)&&(df>0.0)))||((getValue()<max)&&(getValue()>min)))
-//				setValue(newv);
-//			double v=getValue();
-
-//			double aactualdialvalue+=df*2*java.lang.Math.PI;
-
 			double v=value+df*oneround;
-			if((((getValue()+java.lang.Math.log10(oneround)/100.0>miniMax.getMax())&&(df<0.0))||((getValue()-java.lang.Math.log10(oneround)/100.0<miniMax.getMin())&&(df>0.0)))||((getValue()+java.lang.Math.log10(oneround)/100.0<miniMax.getMax())&&(getValue()-java.lang.Math.log10(oneround)/100.0>miniMax.getMin())))
+			if((((getValue()>(miniMax!=null?miniMax.getMax(): Double.MAX_VALUE)-java.lang.Math.log10(oneround)/100.0)&&(df<0.0))||
+					((getValue()<(miniMax!=null?miniMax.getMin(): -Double.MAX_VALUE)+java.lang.Math.log10(oneround)/100.0)&&(df>0.0)))
+					||((getValue()<(miniMax!=null?miniMax.getMax(): Double.MAX_VALUE)-java.lang.Math.log10(oneround)/100.0)&&
+					(getValue()>(miniMax!=null?miniMax.getMin(): -Double.MAX_VALUE)+java.lang.Math.log10(oneround)/100.0)))
 			{
-			if((v<=miniMax.getMax())&&(v>=miniMax.getMin()))
-			{
+				if((miniMax==null)||((v<=miniMax.getMax())&&(v>=miniMax.getMin())))
+				{
 
-//		actualdialvalue=2*java.lang.Math.PI*((value-min)%oneround)/oneround;
-//			double latvh=actualfillvalue;
-				double oldvalue=value;
-				value=v;
-		actualfillvalue=1.0-((value-miniMax.getMin())/(miniMax.getSpan()));
+					double oldvalue=value;
+					value=v;
+					if(miniMax!=null)
+						actualfillvalue=1.0-((value-miniMax.getMin())/(miniMax.getSpan()));
 
 
-		pcs.firePropertyChange("value", oldvalue, value);
+					pcs.firePropertyChange("value", oldvalue, value);
 
-			rv=true;
+					rv=true;
+				}
+				else
+					dragging=false;
 			}
 			else
 				dragging=false;
-			}
-			else
-				dragging=false;
-//			actualfillvalue=latvh;
 		}
-			repaint();
-			return rv;
+		repaint();
+		return rv;
 	}
 	@Override
 	public java.awt.Dimension getMinimumSize()
@@ -594,7 +593,7 @@ public class JogDial extends javax.swing.JComponent implements
 		javax.swing.JFrame f=new javax.swing.JFrame(JogDial.class.getSimpleName());
 		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
 		javax.swing.JPanel p=new javax.swing.JPanel(new java.awt.BorderLayout());
-		final JogDial jd=new JogDial(-32,101,11.37);
+		final JogDial jd=new JogDial(11.37);
 		final javax.swing.JScrollBar scroller=new javax.swing.JScrollBar(javax.swing.SwingConstants.HORIZONTAL);
 		p.add(jd);
 		scroller.setMinimum(-32);
