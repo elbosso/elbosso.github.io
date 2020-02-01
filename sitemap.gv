@@ -3,7 +3,7 @@ rankdir=LR
     Android [label="Android" href="https://elbosso.github.io/tag_Android.html" shape="doublecircle"]
     Basteln [label="Basteln" href="https://elbosso.github.io/tag_Basteln.html" shape="doublecircle"]
     CundC [label="C und C++" href="https://elbosso.github.io/c_c__.html" shape="doublecircle"]
-    Chaos [label="Chaos" href="https://elbosso.github.io/chaos.html" shape="doublecircle"]
+    Chaos [label="Chaos" href="https://elbosso.github.io/tag_Chaos.html" shape="doublecircle"]
     Datenbanken [label="Datenbanken" href="https://elbosso.github.io/tag_Datenbanken.html" shape="doublecircle"]
     Docker [label="Docker" href="https://elbosso.github.io/tag_Docker.html" shape="doublecircle"]
     dWb [label="dWb+" href="https://elbosso.github.io/tag_dWb+.html" shape="doublecircle"]
@@ -33,14 +33,17 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_irving_finkel [label="Irving Finkel" href="https://elbosso.github.io/irving_finkel.html"]
+node_timestamping_server_projekt___update [label="Timestamping Server Projekt - Update" href="https://elbosso.github.io/timestamping_server_projekt___update.html"]
+                node_timestamping_server_projekt___update -> node_applikationsmonitoring_influxdb
+node_neue_dienste_docker_zoo [label="Neue Dienste im Docker-Zoo" href="https://elbosso.github.io/neue_dienste_docker_zoo.html"]
+    node_8tb_raid5_raspberry_pi [label="8TB Raid5 mit Raspberry Pi" href="https://elbosso.github.io/8tb_raid5_raspberry_pi.html"]
+    node_irving_finkel [label="Irving Finkel" href="https://elbosso.github.io/irving_finkel.html"]
     node_migration_traefik_2_x [label="Migration zu Traefik 2.x" href="https://elbosso.github.io/migration_traefik_2_x.html"]
     node_timestamping_server_projekt [label="Timestamping Server Projekt" href="https://elbosso.github.io/timestamping_server_projekt.html"]
                 node_timestamping_server_projekt -> node_oauth_otp
             node_timestamping_server_projekt -> node_applikationsmonitoring_influxdb
             node_timestamping_server_projekt -> node_timestamping_server_projekt___update
-node_8tb_raid5_raspberry_pi [label="8TB Raid5 mit Raspberry Pi" href="https://elbosso.github.io/8tb_raid5_raspberry_pi.html"]
-    node_expect_dialog_ca_version_2_0_0 [label="Expect-Dialog-CA Version 2.0.0" href="https://elbosso.github.io/expect_dialog_ca_version_2_0_0.html"]
+node_expect_dialog_ca_version_2_0_0 [label="Expect-Dialog-CA Version 2.0.0" href="https://elbosso.github.io/expect_dialog_ca_version_2_0_0.html"]
                 node_expect_dialog_ca_version_2_0_0 -> node_timestamping_server_projekt
 node_van_der_pol__chua_systeme [label="Van-der-Pol- und Chua-Systeme" href="https://elbosso.github.io/van_der_pol__chua_systeme.html"]
                 node_van_der_pol__chua_systeme -> node_fraktal_selberbauen
@@ -215,7 +218,8 @@ node_gitlab_metriken_grafana [label="Gitlab-Metriken in Grafana" href="https://e
                 node_gitlab_metriken_grafana -> node_raspi_vpn_endpunkt
             node_gitlab_metriken_grafana -> node_telegraf_inputs_unterschiedlicher_frequenz
 node_warum_blockchain_ [label="Warum Blockchain?" href="https://elbosso.github.io/warum_blockchain_.html"]
-    node_aviator_badges [label="Aviator-Badges" href="https://elbosso.github.io/aviator_badges.html"]
+                node_warum_blockchain_ -> node_blockchain___zeitlos____das_ist_kein_lob_
+node_aviator_badges [label="Aviator-Badges" href="https://elbosso.github.io/aviator_badges.html"]
                 node_aviator_badges -> node_aviator___websockets
             node_aviator_badges -> node_gitlab_metriken_grafana
             node_aviator_badges -> node_telegraf_inputs_unterschiedlicher_frequenz
