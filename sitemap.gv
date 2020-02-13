@@ -33,7 +33,11 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_fraktal_selberbauen [label="Fraktal zum Selberbauen" href="https://elbosso.github.io/fraktal_selberbauen.html"]
+node_bouali_systeme [label="Bouali-Systeme" href="https://elbosso.github.io/bouali_systeme.html"]
+                node_bouali_systeme -> node_three_scroll_unified_chaotic_system
+            node_bouali_systeme -> node_periodisch_angeregter_duffing_oszillator
+node_tomboy_nextcloud_docker [label="Tomboy und Nextcloud in Docker" href="https://elbosso.github.io/tomboy_nextcloud_docker.html"]
+    node_fraktal_selberbauen [label="Fraktal zum Selberbauen" href="https://elbosso.github.io/fraktal_selberbauen.html"]
                 node_fraktal_selberbauen -> node_magnetisches_pendel
 node_python__data_science__jupyter [label="Python, Data Science, Jupyter" href="https://elbosso.github.io/python__data_science__jupyter.html"]
     node_applikationsmonitoring_influxdb [label="Applikationsmonitoring mit InfluxDB" href="https://elbosso.github.io/applikationsmonitoring_influxdb.html"]
