@@ -33,8 +33,13 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_oauth_otp [label="OAuth und OTP" href="https://elbosso.github.io/oauth_otp.html"]
-    node_three_scroll_unified_chaotic_system [label="Three-Scroll Unified Chaotic System" href="https://elbosso.github.io/three_scroll_unified_chaotic_system.html"]
+node_jupyter_self_hosted [label="Jupyter self-hosted" href="https://elbosso.github.io/jupyter_self_hosted.html"]
+    node_periodisch_angeregter_duffing_oszillator [label="Periodisch angeregter Duffing-Oszillator" href="https://elbosso.github.io/periodisch_angeregter_duffing_oszillator.html"]
+                node_periodisch_angeregter_duffing_oszillator -> node_aizawa_system
+            node_periodisch_angeregter_duffing_oszillator -> node_jupyter_self_hosted
+            node_periodisch_angeregter_duffing_oszillator -> node_magnetisches_pendel
+node_three_scroll_unified_chaotic_system [label="Three-Scroll Unified Chaotic System" href="https://elbosso.github.io/three_scroll_unified_chaotic_system.html"]
+    node_oauth_otp [label="OAuth und OTP" href="https://elbosso.github.io/oauth_otp.html"]
     node_bouali_systeme [label="Bouali-Systeme" href="https://elbosso.github.io/bouali_systeme.html"]
                 node_bouali_systeme -> node_three_scroll_unified_chaotic_system
             node_bouali_systeme -> node_periodisch_angeregter_duffing_oszillator
