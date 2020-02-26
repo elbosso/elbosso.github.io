@@ -15,6 +15,7 @@ rankdir=LR
     GUI [label="GUI" href="https://elbosso.github.io/tag_GUI.html" shape="doublecircle"]
     Hardware [label="Hardware" href="https://elbosso.github.io/tag_Hardware.html" shape="doublecircle"]
     Java [label="Java" href="https://elbosso.github.io/tag_Java.html" shape="doublecircle"]
+    Jupyter [label="Jupyter" href="https://elbosso.github.io/tag_Jupyter.html" shape="doublecircle"]
     Komponenten [label="Komponenten" href="https://elbosso.github.io/tag_Komponenten.html" shape="doublecircle"]
     Links [label="Links" href="https://elbosso.github.io/tag_Links.html" shape="doublecircle"]
     Linux [label="Linux" href="https://elbosso.github.io/tag_Linux.html" shape="doublecircle"]
@@ -33,17 +34,31 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_jupyter_self_hosted [label="Jupyter self-hosted" href="https://elbosso.github.io/jupyter_self_hosted.html"]
+node_van_der_pol__chua_systeme [label="Van-der-Pol- und Chua-Systeme" href="https://elbosso.github.io/van_der_pol__chua_systeme.html"]
+                node_van_der_pol__chua_systeme -> node_fraktal_selberbauen
+            node_van_der_pol__chua_systeme -> node_periodisch_angeregter_duffing_oszillator
+            node_van_der_pol__chua_systeme -> node_bouali_systeme
+node_bouali_systeme [label="Bouali-Systeme" href="https://elbosso.github.io/bouali_systeme.html"]
+                node_bouali_systeme -> node_three_scroll_unified_chaotic_system
+            node_bouali_systeme -> node_periodisch_angeregter_duffing_oszillator
+node_three_scroll_unified_chaotic_system [label="Three-Scroll Unified Chaotic System" href="https://elbosso.github.io/three_scroll_unified_chaotic_system.html"]
     node_periodisch_angeregter_duffing_oszillator [label="Periodisch angeregter Duffing-Oszillator" href="https://elbosso.github.io/periodisch_angeregter_duffing_oszillator.html"]
                 node_periodisch_angeregter_duffing_oszillator -> node_aizawa_system
             node_periodisch_angeregter_duffing_oszillator -> node_jupyter_self_hosted
             node_periodisch_angeregter_duffing_oszillator -> node_magnetisches_pendel
-node_three_scroll_unified_chaotic_system [label="Three-Scroll Unified Chaotic System" href="https://elbosso.github.io/three_scroll_unified_chaotic_system.html"]
+node_aizawa_system [label="Aizawa-System" href="https://elbosso.github.io/aizawa_system.html"]
+    node_roessler_attractor_implizites_eulerverfahren [label="Roessler Attractor und implizites Eulerverfahren" href="https://elbosso.github.io/roessler_attractor_implizites_eulerverfahren.html"]
+                node_roessler_attractor_implizites_eulerverfahren -> node_mathematik_beliebiger_praezision_java
+node_visualisierung_strange_attractors_java3d [label="Visualisierung von Strange Attractors mit Java3D" href="https://elbosso.github.io/visualisierung_strange_attractors_java3d.html"]
+                node_visualisierung_strange_attractors_java3d -> node_chaotische_systeme_implizites_eulerverfahren
+            node_visualisierung_strange_attractors_java3d -> node_kontinuierliche_visualisierung_strange_attractors
+node_strange_attractors_bigdecimal [label="Strange Attractors mit BigDecimal" href="https://elbosso.github.io/strange_attractors_bigdecimal.html"]
+                node_strange_attractors_bigdecimal -> node_gc_beliebige_praezision_java
+            node_strange_attractors_bigdecimal -> node_doppelte_genauigkeit_java
+            node_strange_attractors_bigdecimal -> node_van_der_pol__chua_systeme
+node_jupyter_self_hosted [label="Jupyter self-hosted" href="https://elbosso.github.io/jupyter_self_hosted.html"]
     node_oauth_otp [label="OAuth und OTP" href="https://elbosso.github.io/oauth_otp.html"]
-    node_bouali_systeme [label="Bouali-Systeme" href="https://elbosso.github.io/bouali_systeme.html"]
-                node_bouali_systeme -> node_three_scroll_unified_chaotic_system
-            node_bouali_systeme -> node_periodisch_angeregter_duffing_oszillator
-node_tomboy_nextcloud_docker [label="Tomboy und Nextcloud in Docker" href="https://elbosso.github.io/tomboy_nextcloud_docker.html"]
+    node_tomboy_nextcloud_docker [label="Tomboy und Nextcloud in Docker" href="https://elbosso.github.io/tomboy_nextcloud_docker.html"]
     node_fraktal_selberbauen [label="Fraktal zum Selberbauen" href="https://elbosso.github.io/fraktal_selberbauen.html"]
                 node_fraktal_selberbauen -> node_magnetisches_pendel
 node_python__data_science__jupyter [label="Python, Data Science, Jupyter" href="https://elbosso.github.io/python__data_science__jupyter.html"]
@@ -62,10 +77,6 @@ node_neue_dienste_docker_zoo [label="Neue Dienste im Docker-Zoo" href="https://e
             node_timestamping_server_projekt -> node_timestamping_server_projekt___update
 node_expect_dialog_ca_version_2_0_0 [label="Expect-Dialog-CA Version 2.0.0" href="https://elbosso.github.io/expect_dialog_ca_version_2_0_0.html"]
                 node_expect_dialog_ca_version_2_0_0 -> node_timestamping_server_projekt
-node_van_der_pol__chua_systeme [label="Van-der-Pol- und Chua-Systeme" href="https://elbosso.github.io/van_der_pol__chua_systeme.html"]
-                node_van_der_pol__chua_systeme -> node_fraktal_selberbauen
-            node_van_der_pol__chua_systeme -> node_periodisch_angeregter_duffing_oszillator
-            node_van_der_pol__chua_systeme -> node_bouali_systeme
 node_docker_multi_stage_builds_go [label="Docker Multi-Stage-Builds für Go" href="https://elbosso.github.io/docker_multi_stage_builds_go.html"]
                 node_docker_multi_stage_builds_go -> node_jupyter_self_hosted
 node_motp_revisited [label="mOTP revisited" href="https://elbosso.github.io/motp_revisited.html"]
@@ -120,6 +131,13 @@ node_anpassung_gnu_screen [label="Anpassung von Gnu Screen" href="https://elboss
     node_i18neditor_github_projekt [label="I18NEditor als GitHub-Projekt" href="https://elbosso.github.io/i18neditor_github_projekt.html"]
                 node_i18neditor_github_projekt -> node_inkonsistenz_api_awt
             node_i18neditor_github_projekt -> node_fork_material_design_icons_google
+node_lxc_netzwerk_router [label="LXC Netzwerk Router" href="https://elbosso.github.io/lxc_netzwerk_router.html"]
+                node_lxc_netzwerk_router -> node_docker_ci_cd
+            node_lxc_netzwerk_router -> node_umzug_netzwerklabor_abgeschlossen
+            node_lxc_netzwerk_router -> node_lxc_netzwerk_degrader
+            node_lxc_netzwerk_router -> node_ci_cd_shellcheck
+            node_lxc_netzwerk_router -> node_automatisches_setup_eines_netzwerklabors
+            node_lxc_netzwerk_router -> node_performanceprobleme_kvm_windows
 node_diy_ebook_reader_iii [label="DIY EBook-Reader III" href="https://elbosso.github.io/diy_ebook_reader_iii.html"]
                 node_diy_ebook_reader_iii -> node_vorhaben_2020
 node_performanceprobleme_kvm_windows [label="Performanceprobleme mit KVM und Windows" href="https://elbosso.github.io/performanceprobleme_kvm_windows.html"]
@@ -130,13 +148,6 @@ node_git_ressources__epubs [label="Git-Ressources und -EPUBs" href="https://elbo
             node_docker_ci_cd -> node_performanceprobleme_kvm_windows
 node_umzug_netzwerklabor_abgeschlossen [label="Umzug Netzwerklabor abgeschlossen" href="https://elbosso.github.io/umzug_netzwerklabor_abgeschlossen.html"]
                 node_umzug_netzwerklabor_abgeschlossen -> node_automatisches_setup_eines_netzwerklabors
-node_lxc_netzwerk_router [label="LXC Netzwerk Router" href="https://elbosso.github.io/lxc_netzwerk_router.html"]
-                node_lxc_netzwerk_router -> node_docker_ci_cd
-            node_lxc_netzwerk_router -> node_umzug_netzwerklabor_abgeschlossen
-            node_lxc_netzwerk_router -> node_lxc_netzwerk_degrader
-            node_lxc_netzwerk_router -> node_ci_cd_shellcheck
-            node_lxc_netzwerk_router -> node_automatisches_setup_eines_netzwerklabors
-            node_lxc_netzwerk_router -> node_performanceprobleme_kvm_windows
 node_alarmierung_ueber_skripte [label="Alarmierung über Skripte" href="https://elbosso.github.io/alarmierung_ueber_skripte.html"]
     node_ebcms [label="EBCMS" href="https://elbosso.github.io/ebcms.html"]
                 node_ebcms -> node_aenderungen_datumsformat_java
@@ -333,11 +344,7 @@ node_eigene_firmware_sonoff_s20 [label="Eigene Firmware für Sonoff S20" href="h
             node_eigene_firmware_sonoff_s20 -> node_max7119_ntp_uhr
 node_gc_beliebige_praezision_java [label="GC und beliebige Präzision in Java" href="https://elbosso.github.io/gc_beliebige_praezision_java.html"]
     node_led_matrix_laufschrift [label="Led-Matrix Laufschrift" href="https://elbosso.github.io/led_matrix_laufschrift.html"]
-    node_strange_attractors_bigdecimal [label="Strange Attractors mit BigDecimal" href="https://elbosso.github.io/strange_attractors_bigdecimal.html"]
-                node_strange_attractors_bigdecimal -> node_gc_beliebige_praezision_java
-            node_strange_attractors_bigdecimal -> node_doppelte_genauigkeit_java
-            node_strange_attractors_bigdecimal -> node_van_der_pol__chua_systeme
-node_neue_datengeneratoren_v [label="Neue Datengeneratoren V" href="https://elbosso.github.io/neue_datengeneratoren_v.html"]
+    node_neue_datengeneratoren_v [label="Neue Datengeneratoren V" href="https://elbosso.github.io/neue_datengeneratoren_v.html"]
                 node_neue_datengeneratoren_v -> node_testdatengeneratoren_microservices_docker
 node_neue_datengeneratoren_iv [label="Neue Datengeneratoren IV" href="https://elbosso.github.io/neue_datengeneratoren_iv.html"]
                 node_neue_datengeneratoren_iv -> node_neue_datengeneratoren_v
@@ -367,8 +374,7 @@ node_yubi_zur_2fa_gitlab [label="Yubi zur 2FA mit GitLab" href="https://elbosso.
 node_18_04___gitlab__x [label="18.04 - Gitlab, X" href="https://elbosso.github.io/18_04___gitlab__x.html"]
                 node_18_04___gitlab__x -> node_dwb__grafana
             node_18_04___gitlab__x -> node_update_tileserver_auf_18_04
-node_roessler_attractor_implizites_eulerverfahren [label="Roessler Attractor und implizites Eulerverfahren" href="https://elbosso.github.io/roessler_attractor_implizites_eulerverfahren.html"]
-    node_mathe_vorlesungen_auf_youtube [label="Mathe-Vorlesungen auf Youtube" href="https://elbosso.github.io/mathe_vorlesungen_auf_youtube.html"]
+node_mathe_vorlesungen_auf_youtube [label="Mathe-Vorlesungen auf Youtube" href="https://elbosso.github.io/mathe_vorlesungen_auf_youtube.html"]
     node_apples_drm_crap_web [label="Apples DRM Crap im Web" href="https://elbosso.github.io/apples_drm_crap_web.html"]
     node_chaotische_systeme_implizites_eulerverfahren [label="Chaotische Systeme und implizites Eulerverfahren" href="https://elbosso.github.io/chaotische_systeme_implizites_eulerverfahren.html"]
                 node_chaotische_systeme_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
@@ -376,10 +382,7 @@ node_18_04___kodi__tiny_rss__nextcloud [label="18.04 - Kodi, Tiny-RSS, Nextcloud
                 node_18_04___kodi__tiny_rss__nextcloud -> node_update_tileserver_auf_18_04
             node_18_04___kodi__tiny_rss__nextcloud -> node_18_04___gitlab__x
 node_gedanken_zeit__ntp__gps_diy [label="Gedanken zu Zeit, NTP, GPS und DIY" href="https://elbosso.github.io/gedanken_zeit__ntp__gps_diy.html"]
-    node_visualisierung_strange_attractors_java3d [label="Visualisierung von Strange Attractors mit Java3D" href="https://elbosso.github.io/visualisierung_strange_attractors_java3d.html"]
-                node_visualisierung_strange_attractors_java3d -> node_chaotische_systeme_implizites_eulerverfahren
-            node_visualisierung_strange_attractors_java3d -> node_kontinuierliche_visualisierung_strange_attractors
-node_e_paper_tuerschild_esp8266 [label="E-Paper Türschild mit ESP8266" href="https://elbosso.github.io/e_paper_tuerschild_esp8266.html"]
+    node_e_paper_tuerschild_esp8266 [label="E-Paper Türschild mit ESP8266" href="https://elbosso.github.io/e_paper_tuerschild_esp8266.html"]
                 node_e_paper_tuerschild_esp8266 -> node_diy_ebook_reader
             node_e_paper_tuerschild_esp8266 -> node_diy_ebook_reader_ii
             node_e_paper_tuerschild_esp8266 -> node_max7119_ntp_uhr
@@ -451,6 +454,7 @@ node_java9_umstellung [label="Java9 Umstellung" href="https://elbosso.github.io/
             node_log4j_plugin_jconsole_visualvm -> node_fork_material_design_icons_google
 node_linux_wifi_accesspoint [label="Linux WiFi Accesspoint" href="https://elbosso.github.io/linux_wifi_accesspoint.html"]
                 node_linux_wifi_accesspoint -> node_linux_wifi_accesspoint_zweite
+            node_linux_wifi_accesspoint -> node_linux_wifi_accesspoint_aus_raspi
 node_influxdb_appender_log4j_1_x [label="InfluxDB Appender für Log4J 1.x" href="https://elbosso.github.io/influxdb_appender_log4j_1_x.html"]
                 node_influxdb_appender_log4j_1_x -> node_dwb__grafana
             node_influxdb_appender_log4j_1_x -> node_influxdb_wrapper_dwb_
