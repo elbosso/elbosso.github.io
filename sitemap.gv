@@ -34,7 +34,9 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_ronnie_dunn___cost_of_livin_ [label="Ronnie Dunn - Cost Of Livin'" href="https://elbosso.github.io/ronnie_dunn___cost_of_livin_.html"]
+node_ticketsysteme_sind_lebende_wesen [label="Ticketsysteme sind lebende Wesen" href="https://elbosso.github.io/ticketsysteme_sind_lebende_wesen.html"]
+    node_beth_hart___as_long_as_i_have_a_song [label="Beth Hart - As Long As I Have A Song" href="https://elbosso.github.io/beth_hart___as_long_as_i_have_a_song.html"]
+    node_ronnie_dunn___cost_of_livin_ [label="Ronnie Dunn - Cost Of Livin'" href="https://elbosso.github.io/ronnie_dunn___cost_of_livin_.html"]
     node_magnetisches_pendel [label="Magnetisches Pendel" href="https://elbosso.github.io/magnetisches_pendel.html"]
     node_multiarch_docker_images_erstellen [label="Multiarch Docker Images erstellen" href="https://elbosso.github.io/multiarch_docker_images_erstellen.html"]
     node_randombiginteger [label="RandomBigInteger" href="https://elbosso.github.io/randombiginteger.html"]
@@ -64,8 +66,10 @@ node_three_scroll_unified_chaotic_system [label="Three-Scroll Unified Chaotic Sy
             node_periodisch_angeregter_duffing_oszillator -> node_jupyter_self_hosted
             node_periodisch_angeregter_duffing_oszillator -> node_magnetisches_pendel
 node_aizawa_system [label="Aizawa-System" href="https://elbosso.github.io/aizawa_system.html"]
+    node_bifurkationen_lorenz_system [label="Bifurkationen im Lorenz-System" href="https://elbosso.github.io/bifurkationen_lorenz_system.html"]
     node_roessler_attractor_implizites_eulerverfahren [label="Roessler Attractor und implizites Eulerverfahren" href="https://elbosso.github.io/roessler_attractor_implizites_eulerverfahren.html"]
                 node_roessler_attractor_implizites_eulerverfahren -> node_mathematik_beliebiger_praezision_java
+            node_roessler_attractor_implizites_eulerverfahren -> node_bifurkationen_lorenz_system
 node_visualisierung_strange_attractors_java3d [label="Visualisierung von Strange Attractors mit Java3D" href="https://elbosso.github.io/visualisierung_strange_attractors_java3d.html"]
                 node_visualisierung_strange_attractors_java3d -> node_chaotische_systeme_implizites_eulerverfahren
             node_visualisierung_strange_attractors_java3d -> node_kontinuierliche_visualisierung_strange_attractors
@@ -331,6 +335,7 @@ node_literaturempfehlung__ki__ai__ml___crap [label="Literaturempfehlung: KI, AI,
                 node_bifurcation_diagramme_gnuplot -> node_vorhaben_2019
             node_bifurcation_diagramme_gnuplot -> node_lyapunov_koeffizienten
             node_bifurcation_diagramme_gnuplot -> node_gnuplot_wrapper_plugins
+            node_bifurcation_diagramme_gnuplot -> node_bifurkationen_lorenz_system
 node_weihnachts_flashmobs [label="Weihnachts-Flashmobs" href="https://elbosso.github.io/weihnachts_flashmobs.html"]
     node_aus_fontchooser_gelernt [label="Aus FontChooser gelernt" href="https://elbosso.github.io/aus_fontchooser_gelernt.html"]
     node_links_influxdb__grafana [label="Links zu InfluxDB, Grafana" href="https://elbosso.github.io/links_influxdb__grafana.html"]
@@ -369,7 +374,8 @@ node_rechtevergabe_java [label="Rechtevergabe in Java" href="https://elbosso.git
 node_ads_b_tracks_google_earth [label="ADS-B Tracks in Google Earth" href="https://elbosso.github.io/ads_b_tracks_google_earth.html"]
                 node_ads_b_tracks_google_earth -> node_eigene_firmware_sonoff_s20
 node_kontinuierliche_visualisierung_strange_attractors [label="Kontinuierliche Visualisierung für Strange Attractors" href="https://elbosso.github.io/kontinuierliche_visualisierung_strange_attractors.html"]
-    node_the_future_of_microprocessors [label="The Future of Microprocessors" href="https://elbosso.github.io/the_future_of_microprocessors.html"]
+                node_kontinuierliche_visualisierung_strange_attractors -> node_bifurkationen_lorenz_system
+node_the_future_of_microprocessors [label="The Future of Microprocessors" href="https://elbosso.github.io/the_future_of_microprocessors.html"]
     node_ntp_server_raspi_em406a [label="NTP-Server mit Raspi und EM406a" href="https://elbosso.github.io/ntp_server_raspi_em406a.html"]
                 node_ntp_server_raspi_em406a -> node_dnssec_faehiger_resolver_auf_dem_pi
             node_ntp_server_raspi_em406a -> node_gps_logger_abgestaubt
