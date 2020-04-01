@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Docbook Template</title>
+<title>Aizawa-System</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -45,96 +45,111 @@ and is wrapped around the whole page content, except for the footer in this exam
 			<a name="content"></a>
 			<div class="w3-card w3-margin">
 				<div class="w3-container w3-padding">
-					<h4>Docbook Template</h4>
-					<div class="w3-container">
-						<div class="w3-row">
-							<div class="w3-col m8 s12">
-								vorhergehende Artikel in:
-								<a href="svg_kalendergenerator.html#content">
-									<span class="w3-tag w3-black w3-margin-bottom">Markup</span>
-								</a> <!--/li-->
+					<div class="w3-row">
+						<div class="w3-col m9 s12">
+							<h4>Aizawa-System</h4>
+							<div class="w3-container">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										vorhergehende Artikel in:
+										<a href="magnetisches_pendel.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Chaos</span>
+										</a> <!--/li-->
+										<a href="randombiginteger.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Java</span>
+										</a> <!--/li-->
+										<a href="magnetisches_pendel.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Video</span>
+										</a> <!--/li-->
+										<a href="magnetisches_pendel.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Numerik</span>
+										</a> <!--/li-->
+										<a href="van_der_pol__chua_systeme.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Jupyter</span>
+										</a> <!--/li-->
+										<a href="van_der_pol__chua_systeme.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Python</span>
+										</a> <!--/li-->
+									</div>
+									<div class="w3-col m4" style="text-align: right">
+										<span class="w3-opacity">01.04.2020</span>
+									</div>
+								</div>
 							</div>
-							<div class="w3-col m4" style="text-align: right">
-								<span class="w3-opacity">27.04.2014</span>
-							</div>
+						</div>
+						<div class="w3-col m3"><p style="text-align: right">
+							<img style="max-width:128px;" src="https://img.youtube.com/vi/Tqm1mq6zxLQ/default.jpg">
+						</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="w3-card-4 w3-margin w3-white">
-				<div class="w3-container w3-padding" id="updates">
-					<h5>Updates</h5>
-					<ul>
-						<li>
-							<a href="#34">
-								27. April 2014
-							</a>
-						</li>
-					</ul>
-				</div>
 				<div class="w3-container w3-padding" id="abstract">
-<p>Da ich immer wieder mal Dokumentationen mittels Docbook verfasse, jedoch nicht oft genug,
-damit ich mir merke, wies geht - habe ich mir ein Template geschaffen, das zum einen
-die korrekte Projektstruktur vorgibt und zum anderen Beispiele für verschiedene Konstrukte wie 
-Tabellen, Querverweise, Abbildungen enthält.
+<p>Und wieder habe ich mich mit
+<a href="periodisch_angeregter_duffing_oszillator.html">chaotichen Systemen</a>
+beschäftigt - dieses Mal, um für mich neue
+Visualisierungsmethoden zu untersuchen.
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
-<p>Das Template enthält eine komplette Projektstruktur einschließlich eines Build-Skriptes.
-Das Projekt erzeugt sowohl HTML- wie auch PDF-Versionen. Das Projekt 
-ist angelegt als Set - also als Menge mehrerer Bücher oder Buchreihe. Es enthält
-ein Buch.
+<p>Das
+<a href="https://www.algosome.com/articles/aizawa-attractor-chaos.html">System</a>
+bildet einen sehr schönen Strange Attractor aus - die Abbildung hier zeigt zunächst eine Trajektorie des Systems
+für unterschiedlich lange Berechnungszeiten mit jeweils identischen Anfangsbedingungen:
 </p><p>
-Das Template zeigt exemplarisch
-<ul>
-<li>Aufteilen eines Docbook-Projektes in verschiedene Dateien</li>
-<li>Abbildungen</li>
-<li>Tabellen</li>
-<li>Querverweise (nicht nur auf Abschnitte, sondern  auch Tabellen, Abbildungen, Beispiele,...)</li>
-<li>Callouts und Programm-Listings</li>
-</ul>
-<h1>Voraussetzungen</h1>
-Voraussetzungen sind vier Softwarepakete:
-<dl>
-<dt>Docbook Stylesheets</dt><dd>erlauben die Transformation von Docbook-XML-Dateien 
-in andere Formate</dd>
-<dt>XSLT-Prozessor Saxon</dt><dd>Führt die Transformation von Docbook-XML-Dateien 
-in andere Formate durch</dd>
-<dt>Formatting Objects Prozessor FOP</dt><dd>PDF-Erzeugung läuft über ein 
-Zwischenformat: fo - FOP transformiert dieses Format in ein PDF</dd>
-<dt>ANT</dt><dd>Dieses Werkzeug dient der Erstellung der Ausgabedokumente - 
-es wird ohne weitere Parameter in dem Verzeichnis ausgeführt, das auch
-die Datei build.xml enthält</dd>
-</dl>
-<h1>Konfiguration</h1>
-Zur Inbetriebnahme des Projektes genügt es, eine Konfigurationsdatei namens
-build.properties in das Verzeichnis zu legen, welches auch die Datei build.xml enthält.
-Diese Datei muß folgenden Inhalt aufweisen:
-<pre>
-docbook-xsl=&lt;Pfad zu den Stylesheets&gt;
-saxon.dir=&lt;Verzeichnis, das die Datei saxon9he.jar enthält&gt;
-fop.executable=&lt;Name des ausführbaren FOP-Programms einschließlich absoluter Pfadangabe&gt;
-</pre>
-<h3><a name="34">Aktualisierung vom 27. April 2014</a></h3><div class="update">Das Beispielprojekt kann nun auch zur Erzeugung des Formates EPUB benutzt werden. Dadurch haben sich
-die Voraussetzungen ein wenig geändert: Dazu word zwingend ein XSLT-1.0-Prozessor benötigt, daher:
-ändert sich die Datei build.properties wie folgt:
-<pre>
-docbook-xsl=&lt;Pfad zu den Stylesheets&gt;
-saxon1.dir=&lt;Verzeichnis, das die Datei saxon.jar enthält&gt (saxon bis maximal Version 6.5.5);
-saxon2.dir=&lt;Verzeichnis, das die Datei saxon9he.jar enthält&gt;
-fop.executable=&lt;Name des ausführbaren FOP-Programms einschließlich absoluter Pfadangabe&gt;
-</pre>
-Das Archiv wurde ebenfalls aktualisiert.
-</div>
+<img src="images/aizawa.png" style="max-width:1280px;"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Aizawa-System - Trajektorie mit unterschiedlich langen Berechnungszeiten und identischen Startbedingungen
+</span>
+</p><p>
+Die nächste Abbildung versucht, die Tatsache zu illustrieren, dass Trajektorien, die von nahe beieinanderliegenden Systemzuständen
+aus starten sich nach endlicher Zeit exponentiell voneinander entfernen. Dazu habe ich Ausschnitte der Trajektorien von fünf nahe beieinanderliegenden
+Anfangszuständen zu unterschiedlichen Zeitpunkten dargestellt - in der linken Spalte sind die Trajektorien der einzelnen Anfangszustände
+jeweils verschieden eingefärbt, in der rechten Spalte ist jeweils derselbe Ausschnitt dargestellt, allerdings kodiert die
+Farbe nun den Zeitpunkt:
+</p><p>
+<img src="images/aizawa2.png" style="max-width:1280px;"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Aizawa-System - Trajektorie mit unterschiedlich langen Berechnungszeiten und identischen Startbedingungen
+</span>
+</p><p>
+Vergleicht man die Trajektorien aus den ersten fünf Sekunden mit denen aus dem Intervall zwischen 15 und 20 Sekunden,
+sieht man die angesprochene Diversifizierung im Zustandsraum sehr deutlich.
+</p><p>
+Zu Ende des Intervalls zwischen 35 und 40 Sekunden kann man die fraktale Natur von Strange Attractors erahnen, die durch Strecken und Falten
+der trajektorien zustande kommt: Schwarz und Hellblau sich sich durch diese Operationen wieder nahe gekommen, werden sich jedoch
+im Weiteren wieder voneinander entfernen...
+</p><p>
+Zum Schluss hier noch eine Variante der zuletzt vorgestellten Visualisierung: Das Video stellt den Verlauf der Trajektorien
+für fünf minimal voneinander abweichenden Startzuständen mittels Java3D dar:
+</p><p>
+<center>
+<iframe style="width:100%;max-width:450px;height:450px"
+src="https://www.youtube.com/embed/Tqm1mq6zxLQ?list=PLpe-62fsCq_wDEvu3QPAxKNUwzszqRbe-"
+frameborder="0" allowfullscreen></iframe>
+</center>
+</p><p>
+Eine Anmerkung noch zum Schluss: dieses System ist eines derjenigen, die auf extrem unterschiedlichen Zeitskalen arbeiten: Während meiner versuche
+experimentierte ich mit verschiedenen Anfangsbedingungen. Das System "fördert" die Zustände im inneren Kamin von -z nach z und sobald sie oben im Kamin angekommen sind, bewegen
+sie sich auf weiten Außenbahnen wieder nach unten wo das Spiel von vorn beginnt. Manche Trajektorien führen am Fußpunkt des Kamins sehr nahe am Mittelpunkt desselben entlang.
+Dort wird das System extrem langsam: für die gleiche Zeiteinheit werden die Ableitungen in x,y und z dort extrem klein - das kann sogar so weit gehen,
+das die Genauigkeit des Java-Typs Double nicht mehr
+<a href="machine_epsilon_iterativen_numerischen_verfahren.html">ausreicht,</a>
+um diese Werte dazustellen - in diesem Fall wird das System dann plötzlich stationär!
 </p><p>
 
-<dl>
-<a href="resources/license.txt">
-<dt><img src="images/mime/Oxygen480-mimetypes-signature_48.png"></dt><dd>Lizenz</dd>
-</a>
-<a href="resources/docbooktemplate.zip">
-<dt><img src="images/mime/Oxygen480-mimetypes-application-x-compressed-zip_48.png"></dt><dd>docbooktemplate</dd>
-</a>
-</dl>
+Das Verhalten dieses Systems kann nun auch interaktiv mittels Jupyter erforscht werden: Mein Projekt auf GitHub
+zum Thema
+<a href="https://github.com/elbosso/nonlinear_chaotic_systems">Nichtlineare dynamische Systeme</a>
+enthält dazu ein
+<a href="https://github.com/elbosso/nonlinear_chaotic_systems/blob/master/Aizawa.ipynb">Notebook</a>,
+das direkt über
+<a href="https://mybinder.org/v2/gh/elbosso/nonlinear_chaotic_systems.git/master">diesen Link in MyBinder</a>
+gestartet werden kann.
 </p>				</div>
 
 			</div>
@@ -154,7 +169,7 @@ Das Archiv wurde ebenfalls aktualisiert.
 						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
 						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
 						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
-						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-black w3-margin-bottom">Chaos</span></a>
 						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
 						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
 						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
@@ -165,16 +180,16 @@ Das Archiv wurde ebenfalls aktualisiert.
 						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
 						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
 						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
-						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
-						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-black w3-margin-bottom">Jupyter</span></a>
 						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
 						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
 						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
-						<a href="tag_Markup.html"><span class="w3-tag w3-black w3-margin-bottom">Markup</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
 						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
-						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-black w3-margin-bottom">Numerik</span></a>
 						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
-						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-black w3-margin-bottom">Python</span></a>
 						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
 						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
 						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
@@ -182,7 +197,7 @@ Das Archiv wurde ebenfalls aktualisiert.
 						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
 						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
 						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
-						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-black w3-margin-bottom">Video</span></a>
 						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
 						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
 						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
@@ -215,18 +230,6 @@ Das Archiv wurde ebenfalls aktualisiert.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Aizawa-System</span><br>
-						<span class="smallabstract"><p>Und wieder habe ich mich mit
-chaotichen Systemen
-beschäftigt - dieses Mal, um für mich neue
-Visualisierungsmethoden zu untersuchen.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="aizawa_system.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
 							Ticketsysteme sind lebende Wesen</span><br>
 						<span class="smallabstract"><p>Hier zunächst wieder eine Triggerwarnung: Dieser Artikel wird meine Meinung abbilden. es kann sein, dass sie dem einen oder anderen nicht gefällt - das ist mir aber
 egal. Und wenn hier irgendwelche Schneeflocken mitlesen, dann sind die selber schuld.
@@ -241,6 +244,14 @@ egal. Und wenn hier irgendwelche Schneeflocken mitlesen, dann sind die selber sc
 						<span class="smallabstract"><p>Ein etwas anderer Konzertauftakt...
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="beth_hart___as_long_as_i_have_a_song.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Ronnie Dunn - Cost Of Livin'</span><br>
+						<span class="smallabstract"><p>
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ronnie_dunn___cost_of_livin_.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -276,18 +287,6 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Aizawa-System</span><br>
-							<span class="smallabstract"><p>Und wieder habe ich mich mit
-chaotichen Systemen
-beschäftigt - dieses Mal, um für mich neue
-Visualisierungsmethoden zu untersuchen.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="aizawa_system.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
 							Ticketsysteme sind lebende Wesen</span><br>
 							<span class="smallabstract"><p>Hier zunächst wieder eine Triggerwarnung: Dieser Artikel wird meine Meinung abbilden. es kann sein, dass sie dem einen oder anderen nicht gefällt - das ist mir aber
 egal. Und wenn hier irgendwelche Schneeflocken mitlesen, dann sind die selber schuld.
@@ -302,6 +301,14 @@ egal. Und wenn hier irgendwelche Schneeflocken mitlesen, dann sind die selber sc
 							<span class="smallabstract"><p>Ein etwas anderer Konzertauftakt...
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="beth_hart___as_long_as_i_have_a_song.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Ronnie Dunn - Cost Of Livin'</span><br>
+							<span class="smallabstract"><p>
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ronnie_dunn___cost_of_livin_.html#content">
  Weiterlesen...
 								</a>
 						</li>
