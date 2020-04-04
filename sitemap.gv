@@ -34,7 +34,9 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_aizawa_system [label="Aizawa-System" href="https://elbosso.github.io/aizawa_system.html"]
+node_etherpad_docker_container [label="Etherpad als Docker-Container" href="https://elbosso.github.io/etherpad_docker_container.html"]
+    node_john_rich___shuttin__detroit_down [label="John Rich - Shuttin' Detroit Down" href="https://elbosso.github.io/john_rich___shuttin__detroit_down.html"]
+    node_aizawa_system [label="Aizawa-System" href="https://elbosso.github.io/aizawa_system.html"]
     node_ticketsysteme_sind_lebende_wesen [label="Ticketsysteme sind lebende Wesen" href="https://elbosso.github.io/ticketsysteme_sind_lebende_wesen.html"]
     node_beth_hart___as_long_as_i_have_a_song [label="Beth Hart - As Long As I Have A Song" href="https://elbosso.github.io/beth_hart___as_long_as_i_have_a_song.html"]
     node_ronnie_dunn___cost_of_livin_ [label="Ronnie Dunn - Cost Of Livin'" href="https://elbosso.github.io/ronnie_dunn___cost_of_livin_.html"]
@@ -77,7 +79,8 @@ node_strange_attractors_bigdecimal [label="Strange Attractors mit BigDecimal" hr
             node_strange_attractors_bigdecimal -> node_doppelte_genauigkeit_java
             node_strange_attractors_bigdecimal -> node_van_der_pol__chua_systeme
 node_jupyter_self_hosted [label="Jupyter self-hosted" href="https://elbosso.github.io/jupyter_self_hosted.html"]
-    node_oauth_otp [label="OAuth und OTP" href="https://elbosso.github.io/oauth_otp.html"]
+                node_jupyter_self_hosted -> node_etherpad_docker_container
+node_oauth_otp [label="OAuth und OTP" href="https://elbosso.github.io/oauth_otp.html"]
     node_tomboy_nextcloud_docker [label="Tomboy und Nextcloud in Docker" href="https://elbosso.github.io/tomboy_nextcloud_docker.html"]
     node_fraktal_selberbauen [label="Fraktal zum Selberbauen" href="https://elbosso.github.io/fraktal_selberbauen.html"]
                 node_fraktal_selberbauen -> node_magnetisches_pendel
@@ -88,7 +91,8 @@ node_python__data_science__jupyter [label="Python, Data Science, Jupyter" href="
     node_timestamping_server_projekt___update [label="Timestamping Server Projekt - Update" href="https://elbosso.github.io/timestamping_server_projekt___update.html"]
                 node_timestamping_server_projekt___update -> node_applikationsmonitoring_influxdb
 node_neue_dienste_docker_zoo [label="Neue Dienste im Docker-Zoo" href="https://elbosso.github.io/neue_dienste_docker_zoo.html"]
-    node_8tb_raid5_raspberry_pi [label="8TB Raid5 mit Raspberry Pi" href="https://elbosso.github.io/8tb_raid5_raspberry_pi.html"]
+                node_neue_dienste_docker_zoo -> node_etherpad_docker_container
+node_8tb_raid5_raspberry_pi [label="8TB Raid5 mit Raspberry Pi" href="https://elbosso.github.io/8tb_raid5_raspberry_pi.html"]
     node_irving_finkel [label="Irving Finkel" href="https://elbosso.github.io/irving_finkel.html"]
     node_migration_traefik_2_x [label="Migration zu Traefik 2.x" href="https://elbosso.github.io/migration_traefik_2_x.html"]
     node_timestamping_server_projekt [label="Timestamping Server Projekt" href="https://elbosso.github.io/timestamping_server_projekt.html"]
