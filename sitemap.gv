@@ -35,7 +35,8 @@ rankdir=LR
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
 node_etherpad_docker_container [label="Etherpad als Docker-Container" href="https://elbosso.github.io/etherpad_docker_container.html"]
-    node_john_rich___shuttin__detroit_down [label="John Rich - Shuttin' Detroit Down" href="https://elbosso.github.io/john_rich___shuttin__detroit_down.html"]
+                node_etherpad_docker_container -> node_xpra_docker
+node_john_rich___shuttin__detroit_down [label="John Rich - Shuttin' Detroit Down" href="https://elbosso.github.io/john_rich___shuttin__detroit_down.html"]
     node_aizawa_system [label="Aizawa-System" href="https://elbosso.github.io/aizawa_system.html"]
     node_ticketsysteme_sind_lebende_wesen [label="Ticketsysteme sind lebende Wesen" href="https://elbosso.github.io/ticketsysteme_sind_lebende_wesen.html"]
     node_beth_hart___as_long_as_i_have_a_song [label="Beth Hart - As Long As I Have A Song" href="https://elbosso.github.io/beth_hart___as_long_as_i_have_a_song.html"]
@@ -175,7 +176,8 @@ node_alarmierung_ueber_skripte [label="Alarmierung über Skripte" href="https://
             node_ebcms -> node_reader_mode_enabled
             node_ebcms -> node_ant_erweitern_mittels_javascript
 node_synchronisieren_zwischenablage_xpra [label="Synchronisieren Zwischenablage mit XPRA" href="https://elbosso.github.io/synchronisieren_zwischenablage_xpra.html"]
-    node_grafana__alarmierung_xmpp [label="Grafana: Alarmierung mit XMPP" href="https://elbosso.github.io/grafana__alarmierung_xmpp.html"]
+                node_synchronisieren_zwischenablage_xpra -> node_xpra_docker
+node_grafana__alarmierung_xmpp [label="Grafana: Alarmierung mit XMPP" href="https://elbosso.github.io/grafana__alarmierung_xmpp.html"]
                 node_grafana__alarmierung_xmpp -> node_sqlshell_echtzeitdatenbanken
             node_grafana__alarmierung_xmpp -> node_alarmierung_ueber_skripte
 node_streaming_server_linux [label="Streaming Server mit Linux" href="https://elbosso.github.io/streaming_server_linux.html"]
