@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Mandantenfähigkeit (Context) für dWb+</title>
+<title>Max7119 NTP Uhr - nächste Version</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -45,17 +45,17 @@ and is wrapped around the whole page content, except for the footer in this exam
 			<a name="content"></a>
 			<div class="w3-card w3-margin">
 				<div class="w3-container w3-padding">
-					<h4>Mandantenfähigkeit (Context) für dWb+</h4>
+					<h4>Max7119 NTP Uhr - nächste Version</h4>
 					<div class="w3-container">
 						<div class="w3-row">
 							<div class="w3-col m8 s12">
 								vorhergehende Artikel in:
-								<a href="enzo_komponenten_javascript_dwb_.html#content">
-									<span class="w3-tag w3-black w3-margin-bottom">dWb+</span>
+								<a href="max7119_ntp_uhr.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Hardware</span>
 								</a> <!--/li-->
 							</div>
 							<div class="w3-col m4" style="text-align: right">
-								<span class="w3-opacity">26.10.2015</span>
+								<span class="w3-opacity">13.04.2020</span>
 							</div>
 						</div>
 					</div>
@@ -63,168 +63,42 @@ and is wrapped around the whole page content, except for the footer in this exam
 			</div>
 			<div class="w3-card-4 w3-margin w3-white">
 				<div class="w3-container w3-padding" id="abstract">
-<p>Bereits vor einigen Jahren wurde für 
-<a href="dWb.html">dWb+</a>
-die Einführung von Mandantenfähigkeit diskutiert. Die damaligen ersten Skizzen 
-der Konzeptionierung und Implementierung werden derzeit wieder aus der Schublade geholt
-und ihre Implementierung von Neuem diskutiert. 
+<p>Ich berichtete
+<a href="max7119_ntp_uhr.html">hier</a>
+bereits über meine erste Version einer Uhr, die die Zeit per NTP holt
+und sie mittels einer Ledmatrix anzeigt. Dieses Projekt wurde in den letzten Wochen überarbeitet und erweitert...
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
-<p><h1>Einleitung</h1>
-Beim Stichwort Mandantenfähigkeit geht es darum, dass es in datenflussorientierten Umgebungen
-	durchaus so sein kann, dass neben den eigentlichen Daten noch Informationen zu ihrer Entstehung 
-	für die Verarbeitungseinheiten weiter hinten in der Verarbeitungskette interessant sein könnten.
+<p>Das
+<a href="https://github.com/elbosso/esp8266ntpledmatrixclock">Repository</a>
+war in den letzten Wochen stark beschäftigt - nicht nur, dass ich die kleine Schaltung
+mittels KiCad ordentlich dokumentiert habe - ich habe darüber hinaus die Software in weiten Teilen umgestellt.
 </p><p>
-Es soll hier zunächst an einigen Beispielen gezeigt werden, wofür eine solche Mandantenfähigkeit nützlich sein kann.
-    <h1>Szenario A - Serverdienst</h1>
-  <img src="images/medium/dWb_logo.png" 
-	   alt="Dataflow Workbench dWb+" 
-	class="imgright">
-	In diesem ersten Szenario geht es um die Umsetzung eines einfachen HTTP-Servers, der 
-		basierend auf der abgeforderten URL eine Datenverarbeitung anstößt und das Ergebnis der Datenverarbeitung an den 
-		Anfragenden zurückliefern soll.
-		Dabei stelle man sich den Workflow so vor, dass es einen  BeanContextService gibt, der 
-		die HTTP-Protokollunterstützung liefert. Auf dem Arbeitstisch werden zwei Module abgelegt: HTTP-Sender
-		und HTTP-Receiver. Das Receiver-Modul gibt die empfangene URL an das nächste Modul weiter. zwischen Sender und Receiver
-		sind beliebig viele andere Module geschaltet, die entsprechend der URL verschiedene Arbeitsschritte
-		durchführen, bis wieder ein String entsteht, der über den Sender an den Client zurückübertragen werden soll.
+Dadurch kann man die Software auf beliebig vielen aneinandergereihten Displays nutzen.
 </p><p>
-		Da aber HTTP ein Protokoll ist, bei dem sich quasi gleichzeitig beliebig viele Clients mit einem Server
-		verbinden können, existiert im beschriebenen Szenario ein Problem: Wenn sich während der Bearbeitung 
-		eines Requests bereits vier neue Clients mit dem Server verbinden, weiß das Sender-Modul am Ende nicht 
-		mehr, welchem Client es die Antwort zusenden soll. Das könnte man verhindern, indem man 503 (Service Unavailable)
-		an den Client meldet, solange die Bearbeitung des letzten Requestes nicht abgeschlossen ist. 
-		Eine solche Lösung wäre arnselig und nicht mehr zeitgemäß.
+Weiterhin habe ich mein altes
+<a href="https://github.com/elbosso/ESP8266-WiFi-Marquee">Repository</a>
+zum Thema Laufschrift archiviert - diese Funktionalität ist jetzt im Uhrenprojekt aufgegangen: Die Uhr bietet
+das von der Laufschriftanzeoge her bekannte Formular zur Eingabe beliebigen Texts, der Scroll-Geschwindigkeit und der
+Anzahl der Wiederholungen.
 </p><p>
-		Wenn man es aber schaffen könnte, mit den eigentlichen Nutzdaten einen Datenspeicher zu verknüpfen,
-		der Daten zum Kontext der Operation enthält, der die Datenverarbeitung angestoßen hat, und diese Information  
-		über viele verschiedene Komponenten oder Verarbeitungseinheiten hinweg konsistent bliebe, könnte man 
-		im Receiver-Modul die Kennung des Client in den Kontext schreiben. Dieser würde bei jeder Kommunikation
-		zweier Module weitergegeben und das Sender-Modul müsste lediglich in den Kontext schauen, um zu wissen,
-		welchem Client es die in Rede stehende Antwortbotschaft übermitteln soll.
-    <h1>Szenario B - Synchronisation</h1>
-	Das zweite Beispiel ist die Synchronisation, die sich in wenigen Worten wie folgt
-	zusammenfassen lässt: Wenn ein Modul zwei Daten erzeugt und diese über verschiedene
-	Kanäle an unterschiedliche nachfolgende Verarbeitungsketten - also ein oder mehrere 
-		gekoppelte Verarbeitungseinheiten - zur Weiterverarbeitung übergibt, ist das ein normales Szenario,
-	das keine besonderen Vorbereitungen bedarf. 
+Darüber hinaus stellt das Formular noch einige Schalter zur Steuerung der Uhrenanzeige zur Verfügung - zu deren
+Einschalten, zum Ausschalten und zum Umschalten.
 </p><p>
-Sollen aber die Ergebnisse der beiden Verarbeitungseinheiten
-	am Ende miteinander verschmolzen werden, muss man wissen, welches Ergebnis aus Verarbeitungskette A mit
-	welchem Ergebnis aus der Kette B kombiniert werden soll. Timestamps zur Kennzeichnung der Ergebnisse
-	des ersten Modul fallen aus, da keine zwei Ereignisse in Rechnersystemen wirklich gleichzeitig geschehen.
-	Man muss an die Daten Marker anfügen. Das letzte Modul könnte dann die Marker vergleichen und herausfinden, welche 
-	zwei seiner Inputs miteinander kombiniert werden müssten.
+Schließlich habe ich dem Projekt noch einen weiteren Schalter spendiert, mit dem zwischen zwei Schriftvarianten
+für die Anzeige der Laufschrift umgeschaltet werden kann: Die zwei Varianten unterscheiden sich in der Zeichenbreite - möglich sind
+8 und 6 Pixel Breite.
 </p><p>
-	Auch hier ist es wieder So., dass diese Marker über die gesamte Kette der Verarbeitungseinheiten
-	konsistent erhalten bleiben müssten.
-    <h1>Szenario C - Transaktionen</h1>
-	Das dritte Beispiel sind Transaktionen, die sich in datenflussgetriebenen Systemen mittels
-		Mandantenfähigkeit wie folgt umsetzen ließen:
-		In diesem Szenario sind die Verarbeitungen in den einzelnen Modulen einer Verarbeitungskette
-		vergleichbar den atomaren Operationen in einer durch eine Transaktion gekapselten Operation.
-		Das erste Atom eröffnet die Transaktion. Jedes weitere Glied in der Kette muss über die geöffnete Transaktion
-		informiert sein, denn im Fehlerfall muss diese zurückgerollt werden. 
-		Das letzte Modul in der Kette muss schließlich dafür sorgen, die Transaktion
-		"zu committen" - also die Ergebnisse persistent zu machen. Auch dazu muss es auf Wissen über die laufende Transaktion
-		zugreifen können.
-</p><p>
-Dieses Szenario ist ebenfalls ein gutes Beispiel für die 
-			Nützlichkeit des Konzeptes der Mandantenfähigkeit oder eines globalen Kontextes:
-	
-	Diesmal muss die Information über die Transaktion über die gesamte Kette der Verarbeitungseinheiten
-	konsistent erhalten bleiben.
+Die
+<a href="https://github.com/dhepper/font8x8">beiden</a>
+unterschiedlichen
+<a href="https://www.mikrocontroller.net/topic/54860">Schriftarten</a>
+bearbeitete ich nach, um sie an meine Anforderungen anzupassen. Dazu schrieb ich ein
+simples Programm, dass C-Header in Text-Dateien umwandeln kann und diese Textdateien wiederum in C-Header zurückübersetzt.
+Die Textdateien enthalten untereinander Darstellungen der gesetzten und ungesetzten Pixel für jedes Zeichen und können mit jedem beliebigen Texteditor
+bearbeitet werden. Wenn ich Zeit finde, den Quelltext dieses kleinen Werkzeuges zu bereinigen werde ich dieses ebenfalls
+zur freien Benutzung veröffentlichen.
 </p>				</div>
-				<div class="w3-container w3-padding" id="referers">
-				<h3>
-					Artikel, die hierher verlinken
-				</h3>
-					<div class="w3-row">
-					<div class="w3-col m8 s12">
-						<h4>
-							Verschiedene Interaktionsmetaphern in dWb+
-						</h4>
-					</div>
-					<div class="w3-col m4"><p style="text-align: right">
-						<span class="w3-opacity">18.09.2016</span>
-					</p>
-					</div>
-					</div>
-					<div class="w3-row">
-						<div class="w3-col m8 s12">
-							<p><p>Nach Fertigstellung einiger Module, die die Kommunikation zwischen Komponenten auf Dateiebene
-unterstützen, werde ich versuchen, verschiedene Interaktionsmetaphern bzw. Kommunikationsstrategien
-aus anderen datenflussgetriebenen Systemen in 
-dWb+
-nachzuvollziehen, um die Effizienz der Implementierung
-und die Vor- und Nachteile ihrer Anwendung diskutieren zu können.
-</p></p>
-						</div>
-						<div class="w3-col m4">
-							<p style="text-align: right">
-								<a class="w3-button w3-padding-large w3-white w3-border" href="verschiedene_interaktionsmetaphern_dwb_.html#content">Öffnen</a>
-							</p>
-						</div>
-					</div>
-					<div class="w3-row">
-					<div class="w3-col m8 s12">
-						<h4>
-							WebSocket Server in dWb+
-						</h4>
-					</div>
-					<div class="w3-col m4"><p style="text-align: right">
-						<span class="w3-opacity">08.11.2015</span>
-					</p>
-					</div>
-					</div>
-					<div class="w3-row">
-						<div class="w3-col m8 s12">
-							<p><p>Bereits vor einigen Jahren wurde für 
-dWb+
-die Einführung von 
-Mandantenfähigkeit
-diskutiert. 
-Die aus der Schublade geholte Implementierung 
-wurde nach erfolgreichen
-Lasttests
-für die Entwicklung von Servern verschiedenster Art eingesetzt. 
-</p></p>
-						</div>
-						<div class="w3-col m4">
-							<p style="text-align: right">
-								<a class="w3-button w3-padding-large w3-white w3-border" href="websocket_server_dwb_.html#content">Öffnen</a>
-							</p>
-						</div>
-					</div>
-					<div class="w3-row">
-					<div class="w3-col m8 s12">
-						<h4>
-							Lasttests für Mandantenfähigkeit in dWb+
-						</h4>
-					</div>
-					<div class="w3-col m4"><p style="text-align: right">
-						<span class="w3-opacity">27.10.2015</span>
-					</p>
-					</div>
-					</div>
-					<div class="w3-row">
-						<div class="w3-col m8 s12">
-							<p><p>Bereits vor einigen Jahren wurde für 
-dWb+
-die Einführung von 
-Mandantenfähigkeit
-diskutiert. 
-Die aus der Schublade geholten Implementierungen wurden nach leichten Änderungen 
-in verschiedenen Szenarien Lasttests unterzogen. 
-</p></p>
-						</div>
-						<div class="w3-col m4">
-							<p style="text-align: right">
-								<a class="w3-button w3-padding-large w3-white w3-border" href="lasttests_mandantenfaehigkeit_dwb_.html#content">Öffnen</a>
-							</p>
-						</div>
-					</div>
-				</div>
 
 			</div>
 			<!-- END BLOG ENTRY -->
@@ -246,14 +120,14 @@ in verschiedenen Szenarien Lasttests unterzogen.
 						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
 						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
 						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
-						<a href="tag_dWb+.html"><span class="w3-tag w3-black w3-margin-bottom">dWb+</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
 						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
 						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
 						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
 						<a href="tag_Git(lab|hub).html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
 						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
 						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
-						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-black w3-margin-bottom">Hardware</span></a>
 						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
 						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
 						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
@@ -315,18 +189,6 @@ Man könnte meinen, dass ich ein Feind dieser Technologie bin
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Max7119 NTP Uhr - nächste Version</span><br>
-						<span class="smallabstract"><p>Ich berichtete
-hier
-bereits über meine erste Version einer Uhr, die die Zeit per NTP holt
-und sie mittels einer Ledmatrix anzeigt. Dieses Projekt wurde in den letzten Wochen überarbeitet und erweitert...
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="max7119_ntp_uhr___naechste_version.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
 							<span class="w3-large">							Etherpad als Docker-Container</span><br>
 						<span class="smallabstract"><p>Ich habe in letzter Zeit hin und wieder
 neue
@@ -335,6 +197,14 @@ Docker-Zoo
 hinzugefügt - nunmehr noch einen weiteren...
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="etherpad_docker_container.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							John Rich - Shuttin' Detroit Down</span><br>
+						<span class="smallabstract"><p>
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="john_rich___shuttin__detroit_down.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -380,18 +250,6 @@ Man könnte meinen, dass ich ein Feind dieser Technologie bin
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Max7119 NTP Uhr - nächste Version</span><br>
-							<span class="smallabstract"><p>Ich berichtete
-hier
-bereits über meine erste Version einer Uhr, die die Zeit per NTP holt
-und sie mittels einer Ledmatrix anzeigt. Dieses Projekt wurde in den letzten Wochen überarbeitet und erweitert...
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="max7119_ntp_uhr___naechste_version.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
 							<span class="w3-large">							Etherpad als Docker-Container</span><br>
 							<span class="smallabstract"><p>Ich habe in letzter Zeit hin und wieder
 neue
@@ -400,6 +258,14 @@ Docker-Zoo
 hinzugefügt - nunmehr noch einen weiteren...
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="etherpad_docker_container.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							John Rich - Shuttin' Detroit Down</span><br>
+							<span class="smallabstract"><p>
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="john_rich___shuttin__detroit_down.html#content">
  Weiterlesen...
 								</a>
 						</li>
