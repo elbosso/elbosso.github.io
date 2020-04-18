@@ -44,7 +44,7 @@ else
   echo "user $XPRA_SSH_USER cannot connect to display $DISPLAY"
 cat <<EOM >/tmp/start_xpra_remote.sh
   rm -fr ~/.Xauthority-*
-  xpra start :77 --clipboard=yes --clipboard-direction=both --start-child="Xephyr -ac -keybd ephyr,xkbmodel=pc105,xkblayout='de(nodeadkeys)',xkbrules=evdev,xkboption=grp:alts_toogle -screen 1280x1024 -br  :78&"
+  xpra start :77 --clipboard=yes --clipboard-direction=both --start-child="Xephyr -ac -keybd ephyr,xkbmodel=pc105,xkblayout='de(nodeadkeys)',xkbrules=evdev,xkboption=grp:alts_toogle -screen 1680x1050 -br  :78&"
   DISPLAY=:78 xterm -iconic -e "exit"
   while [ \$? -ne 0 ] ;do
     echo "waiting "\$?

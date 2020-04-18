@@ -35,7 +35,9 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_marketing_getriebene_krypto_funktioniert_nicht [label="Marketing-getriebene Krypto funktioniert nicht" href="https://elbosso.github.io/marketing_getriebene_krypto_funktioniert_nicht.html"]
+node_blind_signatures__java__openssl [label="Blind Signatures, Java, OpenSSL" href="https://elbosso.github.io/blind_signatures__java__openssl.html"]
+    node_jim_james___wonderful [label="Jim James - Wonderful" href="https://elbosso.github.io/jim_james___wonderful.html"]
+    node_marketing_getriebene_krypto_funktioniert_nicht [label="Marketing-getriebene Krypto funktioniert nicht" href="https://elbosso.github.io/marketing_getriebene_krypto_funktioniert_nicht.html"]
     node_max7119_ntp_uhr___naechste_version [label="Max7119 NTP Uhr - nächste Version" href="https://elbosso.github.io/max7119_ntp_uhr___naechste_version.html"]
     node_etherpad_docker_container [label="Etherpad als Docker-Container" href="https://elbosso.github.io/etherpad_docker_container.html"]
                 node_etherpad_docker_container -> node_xpra_docker
@@ -90,14 +92,16 @@ node_oauth_otp [label="OAuth und OTP" href="https://elbosso.github.io/oauth_otp.
                 node_fraktal_selberbauen -> node_magnetisches_pendel
 node_python__data_science__jupyter [label="Python, Data Science, Jupyter" href="https://elbosso.github.io/python__data_science__jupyter.html"]
     node_applikationsmonitoring_influxdb [label="Applikationsmonitoring mit InfluxDB" href="https://elbosso.github.io/applikationsmonitoring_influxdb.html"]
-    node_upgrade_klay_auf_elk_js [label="Upgrade von Klay auf Elk.js" href="https://elbosso.github.io/upgrade_klay_auf_elk_js.html"]
+                node_applikationsmonitoring_influxdb -> node_raspberry_schnellem_massenspeicher
+node_upgrade_klay_auf_elk_js [label="Upgrade von Klay auf Elk.js" href="https://elbosso.github.io/upgrade_klay_auf_elk_js.html"]
     node_linksammlung_chaos_fraktale_1 [label="Linksammlung Chaos und Fraktale 1" href="https://elbosso.github.io/linksammlung_chaos_fraktale_1.html"]
     node_timestamping_server_projekt___update [label="Timestamping Server Projekt - Update" href="https://elbosso.github.io/timestamping_server_projekt___update.html"]
                 node_timestamping_server_projekt___update -> node_applikationsmonitoring_influxdb
 node_neue_dienste_docker_zoo [label="Neue Dienste im Docker-Zoo" href="https://elbosso.github.io/neue_dienste_docker_zoo.html"]
                 node_neue_dienste_docker_zoo -> node_etherpad_docker_container
 node_8tb_raid5_raspberry_pi [label="8TB Raid5 mit Raspberry Pi" href="https://elbosso.github.io/8tb_raid5_raspberry_pi.html"]
-    node_irving_finkel [label="Irving Finkel" href="https://elbosso.github.io/irving_finkel.html"]
+                node_8tb_raid5_raspberry_pi -> node_raspberry_schnellem_massenspeicher
+node_irving_finkel [label="Irving Finkel" href="https://elbosso.github.io/irving_finkel.html"]
     node_migration_traefik_2_x [label="Migration zu Traefik 2.x" href="https://elbosso.github.io/migration_traefik_2_x.html"]
     node_timestamping_server_projekt [label="Timestamping Server Projekt" href="https://elbosso.github.io/timestamping_server_projekt.html"]
                 node_timestamping_server_projekt -> node_oauth_otp
@@ -137,9 +141,11 @@ node_vpn_netzwerklabor [label="VPN im Netzwerklabor" href="https://elbosso.githu
             node_automatisches_setup_eines_netzwerklabors -> node_vorhaben_2020
 node_dnssec_faehiger_resolver_auf_dem_pi [label="DNSSEC fähiger Resolver auf dem Pi" href="https://elbosso.github.io/dnssec_faehiger_resolver_auf_dem_pi.html"]
                 node_dnssec_faehiger_resolver_auf_dem_pi -> node_lxc_bootstrap_gui_container
+            node_dnssec_faehiger_resolver_auf_dem_pi -> node_raspberry_schnellem_massenspeicher
 node_multi_user_webdav__docker__github [label="Multi-User-WebDAV, Docker, GitHub" href="https://elbosso.github.io/multi_user_webdav__docker__github.html"]
     node_ci_cd_grafana [label="CI/CD mit Grafana" href="https://elbosso.github.io/ci_cd_grafana.html"]
                 node_ci_cd_grafana -> node_applikationsmonitoring_influxdb
+            node_ci_cd_grafana -> node_raspberry_schnellem_massenspeicher
 node_vaadin_swing_ersatz [label="Vaadin als Swing-Ersatz" href="https://elbosso.github.io/vaadin_swing_ersatz.html"]
     node_sqlshell_echtzeitdatenbanken [label="sQLshell und Echtzeitdatenbanken" href="https://elbosso.github.io/sqlshell_echtzeitdatenbanken.html"]
                 node_sqlshell_echtzeitdatenbanken -> node_syntax_highlighting_influxdb_java_anwendungen
@@ -215,6 +221,7 @@ node_daten_inline_gnuplot_scripts [label="Daten inline in Gnuplot-Scripts" href=
                 node_diy_ebook_reader_ii -> node_diy_ebook_reader_iii
 node_raspi_vpn_endpunkt [label="Raspi als VPN-Endpunkt" href="https://elbosso.github.io/raspi_vpn_endpunkt.html"]
                 node_raspi_vpn_endpunkt -> node_dnssec_faehiger_resolver_auf_dem_pi
+            node_raspi_vpn_endpunkt -> node_raspberry_schnellem_massenspeicher
 node_procol_harum___a_whiter_shade_of_pale [label="Procol Harum - A Whiter Shade of Pale" href="https://elbosso.github.io/procol_harum___a_whiter_shade_of_pale.html"]
     node_aviator___websockets [label="Aviator + Websockets" href="https://elbosso.github.io/aviator___websockets.html"]
     node_swing_inspector [label="Swing Inspector" href="https://elbosso.github.io/swing_inspector.html"]
@@ -381,6 +388,7 @@ node_rechtevergabe_java [label="Rechtevergabe in Java" href="https://elbosso.git
             node_update_tileserver_auf_18_04 -> node_pam_nfc_ubuntu_18_04
 node_ads_b_tracks_google_earth [label="ADS-B Tracks in Google Earth" href="https://elbosso.github.io/ads_b_tracks_google_earth.html"]
                 node_ads_b_tracks_google_earth -> node_eigene_firmware_sonoff_s20
+            node_ads_b_tracks_google_earth -> node_raspberry_schnellem_massenspeicher
 node_kontinuierliche_visualisierung_strange_attractors [label="Kontinuierliche Visualisierung für Strange Attractors" href="https://elbosso.github.io/kontinuierliche_visualisierung_strange_attractors.html"]
                 node_kontinuierliche_visualisierung_strange_attractors -> node_bifurkationen_lorenz_system
 node_the_future_of_microprocessors [label="The Future of Microprocessors" href="https://elbosso.github.io/the_future_of_microprocessors.html"]
@@ -423,6 +431,7 @@ node_pihole [label="PiHole" href="https://elbosso.github.io/pihole.html"]
                 node_pihole -> node_ntp_server_raspi_em406a
             node_pihole -> node_dnssec_faehiger_resolver_auf_dem_pi
             node_pihole -> node_raspi_booten_ueber_usb
+            node_pihole -> node_raspberry_schnellem_massenspeicher
 node_raspi_booten_ueber_usb [label="Raspi booten über USB" href="https://elbosso.github.io/raspi_booten_ueber_usb.html"]
     node_andrew_szydlo [label="Andrew Szydlo" href="https://elbosso.github.io/andrew_szydlo.html"]
                 node_andrew_szydlo -> node_andrew_szydlo_ii
