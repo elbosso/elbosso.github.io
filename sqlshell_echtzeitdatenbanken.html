@@ -85,7 +85,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 				<div class="w3-container w3-padding" id="abstract">
 <p>Die
 <a href="sQLshell.html">sQLshell</a>
-wurde eigentlich für die Arbeit mit relationalen Datenbanken geschaffe. Trotzdem hat sie bereits
+wurde eigentlich für die Arbeit mit relationalen Datenbanken geschaffen. Trotzdem hat sie bereits
 diverse
 <a href="odata_content_browser.html">Ausflüge</a>
 in andere Bereiche unternommen. Jetzt kam ein weiterer dazu...
@@ -105,13 +105,15 @@ nutzen zu können.
 </p><p>
 Eine erste Idee war der Versuch, eine ähnliche Funktionalität zu implementieren, wie sie bereits in Grafana enthalten ist:
 eine GUI, mittels derer man Abfragen zusammenklicken kann. Diese Idee wurde vorerst ins Backlog verbannt: Es erschien
-zunächst verlockender, ähnlich wie ich es bereits mit OData getan hatte, einen Wrapper zu erstellen, der als JDBC-Treiber
+zunächst verlockender, ähnlich wie ich es bereits mit
+<a href="odata_content_browser.html">OData</a>
+getan hatte, einen Wrapper zu erstellen, der als JDBC-Treiber
 dienen kann, so dass es möglich wäre, InfluxDB transparent in der sQLshell zu nutzen. Die Implementierung eines vollständigen JDBC-Treibers
 verschob ich zunächst auch ins Backlog, weil bereits eine Teilimplementierung dazu führen könnte, die Tauglichkeit dieses
 Ansatzes zu prüfen:
 </p><p>
-Eine der zentralen Komponenten der sQLshell ist das sogenannte <span class="mdbold">ViewPanel*, das ein <span class="mdcode">java.sql.ResultSet</span> als Input nimmt und
-ein DataGrid mit diversen mächtigen Funkltionen daraus entwickelt. Bisher war diese Komponente allerdings sehr eng mit der
+Eine der zentralen Komponenten der sQLshell ist das sogenannte <span class="mdbold">ViewPanel,</span> das ein <span class="mdcode">java.sql.ResultSet</span> als Input nimmt und
+ein DataGrid mit diversen mächtigen Funktionen daraus entwickelt. Bisher war diese Komponente allerdings sehr eng mit der
 unterliegenden relationalen Datenbank verwoben, so dass eine Verwendung mit einem ResultSetWrapper, dem keine relationale Datenbank
 zugrunde lag schwierig möglich erschien.
 </p><p>
@@ -119,14 +121,14 @@ Daher setzte ich zunächst am Kern der
 <a href="sQLshell.html">sQLshell</a>
 an und erreichte durch ein umfassendes Refactoring eine Aufteilung der Komponente
 <span class="mdbold">ViewPanel</span> in eine gleichnamige Komponente, die aber keine Live-Datenbank-Verbindung für das dargestellte
-<span class="mdcode">java.sql.ResultSet</span> mehr verlangt und eine davon abgeleitete Komponente namens <span class="mdbold">LiveViewPanel*, die sofern vorhanden
+<span class="mdcode">java.sql.ResultSet</span> mehr verlangt und eine davon abgeleitete Komponente namens <span class="mdbold">LiveViewPanel,</span> die sofern vorhanden
 über eine vorhandene Live-Session hinter dem <span class="mdcode">java.sql.ResultSet</span> weitere Funktionalitäten anbieten kann. Damit wurde erreicht,
 dass das ViewPanel nunmehr tatsächlich vollständig Datenbank-neutral implementiert ist und auch mit dem erstellten
 Wrapper für InfluxDB zusammenarbeitet. Damit stehen viele der mächtigen Funktionen der Komponente nun auch zur Arbeit
 mit Echtzeitdatenbanken - speziell InfluxDB - zur Verfügung.
 </p><p>
 Die nächsten Schritte in der Implementierung sind zunächst ein Code-Cleanup im Wrapper, anschließend die Erhöhung der Robustheit
-der Implementierung und der Versuch, eine gekapselte Komponente daraus zu erstellen, die in andere Anwendungen integrierbar ist.
+der Implementierung und der Versuch, eine gekapselte Komponente daraus zu erstellen die in andere Anwendungen integrierbar ist.
 Daran wird sich die Entscheidung anschließen, ob die Implementierung eines vollständigen JDBC-Treibers weiter verfolgt und die
 InfluxDB somit die erste First-Class-Citizen nichtrationale Datenbank in der sQLshell wird.
 </p>				</div>
@@ -242,31 +244,40 @@ zu integrieren.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Tresenlesen - Frank und Jochen, Schausaufen mit Betonung</span><br>
-						<span class="smallabstract"><p>Eine Idee, regnerische und kalte Tage in der Quarantäne zu überbrücken... dieses Mal etwas Leichtes zum Schmunzeln...
+							Xpra und Docker</span><br>
+						<span class="smallabstract"><p>Ich berichtete neulich über weiteren Zuwachs in meinem
+Docker-Zoo.
+Ich habe hier auch verschiedentlich über
+xpra
+berichtet - das Gnu-Screen-Äquivalent für X11.
+Nun habe ich versucht beides zu verbinden
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tresenlesen___frank_jochen__schausaufen_betonung.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="xpra_docker.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Testdaten für ein XML Schema generieren</span><br>
-						<span class="smallabstract"><p>Ich suche immer wieder nach neuen Ideen, möglichst
-einfach
-problemangepasste Testdaten zu erzeugen. Diesmal habe ich damit begonnen,
-XML-Dokumente zu erzeugen, die einem vorgegebenen XML-Schema genügen sollten
+							Bifurkationen im Lorenz-System</span><br>
+						<span class="smallabstract"><p>Nachdem ich hier schon einmal kurz über
+Bifurkationen und Lyapunov-Exponenten
+berichtet habe, habe ich den Code dafür aufgeräumt und flexibilisiert - nun
+kann ich diese Werkzeuge auf beliebige Systeme anwenden: Das erste Beispiel
+war ja das
+Roessler-System,
+jetzt habe ich sie auf das
+Lorenz-System
+angewendet.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="testdaten_xml_schema_generieren.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bifurkationen_lorenz_system.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							S/MIME Email Crypto</span><br>
-						<span class="smallabstract"><p>Nachdem mich neulich ein Kollege auf eine mir bis dahin unbekannte Möglichkeit aufmerksam gemacht hat, EMail-Funktionalitäten
-ohne EMail-Server und -Konto zu testen holte ich ein altes Projekt aus der Versenkung hervor...
+							<span class="w3-large">							Tresenlesen - Frank und Jochen, Schausaufen mit Betonung</span><br>
+						<span class="smallabstract"><p>Eine Idee, regnerische und kalte Tage in der Quarantäne zu überbrücken... dieses Mal etwas Leichtes zum Schmunzeln...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="s_mime_email_crypto.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tresenlesen___frank_jochen__schausaufen_betonung.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -302,31 +313,40 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Tresenlesen - Frank und Jochen, Schausaufen mit Betonung</span><br>
-							<span class="smallabstract"><p>Eine Idee, regnerische und kalte Tage in der Quarantäne zu überbrücken... dieses Mal etwas Leichtes zum Schmunzeln...
+							Xpra und Docker</span><br>
+							<span class="smallabstract"><p>Ich berichtete neulich über weiteren Zuwachs in meinem
+Docker-Zoo.
+Ich habe hier auch verschiedentlich über
+xpra
+berichtet - das Gnu-Screen-Äquivalent für X11.
+Nun habe ich versucht beides zu verbinden
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tresenlesen___frank_jochen__schausaufen_betonung.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="xpra_docker.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Testdaten für ein XML Schema generieren</span><br>
-							<span class="smallabstract"><p>Ich suche immer wieder nach neuen Ideen, möglichst
-einfach
-problemangepasste Testdaten zu erzeugen. Diesmal habe ich damit begonnen,
-XML-Dokumente zu erzeugen, die einem vorgegebenen XML-Schema genügen sollten
+							Bifurkationen im Lorenz-System</span><br>
+							<span class="smallabstract"><p>Nachdem ich hier schon einmal kurz über
+Bifurkationen und Lyapunov-Exponenten
+berichtet habe, habe ich den Code dafür aufgeräumt und flexibilisiert - nun
+kann ich diese Werkzeuge auf beliebige Systeme anwenden: Das erste Beispiel
+war ja das
+Roessler-System,
+jetzt habe ich sie auf das
+Lorenz-System
+angewendet.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="testdaten_xml_schema_generieren.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bifurkationen_lorenz_system.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							S/MIME Email Crypto</span><br>
-							<span class="smallabstract"><p>Nachdem mich neulich ein Kollege auf eine mir bis dahin unbekannte Möglichkeit aufmerksam gemacht hat, EMail-Funktionalitäten
-ohne EMail-Server und -Konto zu testen holte ich ein altes Projekt aus der Versenkung hervor...
+							<span class="w3-large">							Tresenlesen - Frank und Jochen, Schausaufen mit Betonung</span><br>
+							<span class="smallabstract"><p>Eine Idee, regnerische und kalte Tage in der Quarantäne zu überbrücken... dieses Mal etwas Leichtes zum Schmunzeln...
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="s_mime_email_crypto.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tresenlesen___frank_jochen__schausaufen_betonung.html#content">
  Weiterlesen...
 								</a>
 						</li>

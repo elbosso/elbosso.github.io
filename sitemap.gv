@@ -35,7 +35,10 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_tresenlesen___frank_jochen__schausaufen_betonung [label="Tresenlesen - Frank und Jochen, Schausaufen mit Betonung" href="https://elbosso.github.io/tresenlesen___frank_jochen__schausaufen_betonung.html"]
+node_xpra_docker [label="Xpra und Docker" href="https://elbosso.github.io/xpra_docker.html"]
+                node_xpra_docker -> node_docker_auf_raspberry_pi_model_3b_
+node_bifurkationen_lorenz_system [label="Bifurkationen im Lorenz-System" href="https://elbosso.github.io/bifurkationen_lorenz_system.html"]
+    node_tresenlesen___frank_jochen__schausaufen_betonung [label="Tresenlesen - Frank und Jochen, Schausaufen mit Betonung" href="https://elbosso.github.io/tresenlesen___frank_jochen__schausaufen_betonung.html"]
     node_testdaten_xml_schema_generieren [label="Testdaten für ein XML Schema generieren" href="https://elbosso.github.io/testdaten_xml_schema_generieren.html"]
     node_s_mime_email_crypto [label="S/MIME Email Crypto" href="https://elbosso.github.io/s_mime_email_crypto.html"]
     node_bill_withers__stevie_wonder__john_legend___lean_on_me [label="Bill Withers, Stevie Wonder, John Legend - Lean On Me" href="https://elbosso.github.io/bill_withers__stevie_wonder__john_legend___lean_on_me.html"]
@@ -107,7 +110,8 @@ node_neue_dienste_docker_zoo [label="Neue Dienste im Docker-Zoo" href="https://e
                 node_neue_dienste_docker_zoo -> node_etherpad_docker_container
 node_irving_finkel [label="Irving Finkel" href="https://elbosso.github.io/irving_finkel.html"]
     node_migration_traefik_2_x [label="Migration zu Traefik 2.x" href="https://elbosso.github.io/migration_traefik_2_x.html"]
-                node_migration_traefik_2_x -> node_docker_auf_raspberry_pi_model_3b_
+                node_migration_traefik_2_x -> node_tcp_routing_traefik_2_x
+            node_migration_traefik_2_x -> node_docker_auf_raspberry_pi_model_3b_
 node_timestamping_server_projekt [label="Timestamping Server Projekt" href="https://elbosso.github.io/timestamping_server_projekt.html"]
                 node_timestamping_server_projekt -> node_oauth_otp
             node_timestamping_server_projekt -> node_applikationsmonitoring_influxdb
@@ -140,7 +144,8 @@ node_icons___woher_nehmen____iv [label="Icons - woher nehmen? - IV" href="https:
 node_vpn_netzwerklabor [label="VPN im Netzwerklabor" href="https://elbosso.github.io/vpn_netzwerklabor.html"]
     node_glusterfs_java [label="Von GlusterFS zu Java" href="https://elbosso.github.io/glusterfs_java.html"]
     node_syntax_highlighting_influxdb_java_anwendungen [label="Syntax-Highlighting für InfluxDB in Java-Anwendungen" href="https://elbosso.github.io/syntax_highlighting_influxdb_java_anwendungen.html"]
-    node_biometrie_ist_tot [label="Biometrie ist tot" href="https://elbosso.github.io/biometrie_ist_tot.html"]
+                node_syntax_highlighting_influxdb_java_anwendungen -> node_viewpanel_sqlshell_zeitreihendatenbanken
+node_biometrie_ist_tot [label="Biometrie ist tot" href="https://elbosso.github.io/biometrie_ist_tot.html"]
     node_automatisches_setup_eines_netzwerklabors [label="Automatisches Setup eines Netzwerklabors" href="https://elbosso.github.io/automatisches_setup_eines_netzwerklabors.html"]
                 node_automatisches_setup_eines_netzwerklabors -> node_vpn_netzwerklabor
             node_automatisches_setup_eines_netzwerklabors -> node_vorhaben_2020
@@ -154,6 +159,7 @@ node_multi_user_webdav__docker__github [label="Multi-User-WebDAV, Docker, GitHub
 node_vaadin_swing_ersatz [label="Vaadin als Swing-Ersatz" href="https://elbosso.github.io/vaadin_swing_ersatz.html"]
     node_sqlshell_echtzeitdatenbanken [label="sQLshell und Echtzeitdatenbanken" href="https://elbosso.github.io/sqlshell_echtzeitdatenbanken.html"]
                 node_sqlshell_echtzeitdatenbanken -> node_syntax_highlighting_influxdb_java_anwendungen
+            node_sqlshell_echtzeitdatenbanken -> node_viewpanel_sqlshell_zeitreihendatenbanken
 node_testdatengeneratoren_microservices_docker [label="Testdatengeneratoren als Microservices mit Docker" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker.html"]
                 node_testdatengeneratoren_microservices_docker -> node_vaadin_swing_ersatz
             node_testdatengeneratoren_microservices_docker -> node_testdatengeneratoren_microservices_docker_ueberarbeitet
@@ -281,6 +287,7 @@ node_gnuplot_wrapper_plugins [label="Gnuplot-Wrapper-Plugins" href="https://elbo
 node_gitlab_metriken_grafana [label="Gitlab-Metriken in Grafana" href="https://elbosso.github.io/gitlab_metriken_grafana.html"]
                 node_gitlab_metriken_grafana -> node_raspi_vpn_endpunkt
             node_gitlab_metriken_grafana -> node_telegraf_inputs_unterschiedlicher_frequenz
+            node_gitlab_metriken_grafana -> node_erweiterung_gitlab_metriken_grafana
 node_warum_blockchain_ [label="Warum Blockchain?" href="https://elbosso.github.io/warum_blockchain_.html"]
                 node_warum_blockchain_ -> node_blockchain___zeitlos____das_ist_kein_lob_
 node_aviator_badges [label="Aviator-Badges" href="https://elbosso.github.io/aviator_badges.html"]
