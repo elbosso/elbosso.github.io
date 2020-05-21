@@ -35,10 +35,13 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_xpra_docker [label="Xpra und Docker" href="https://elbosso.github.io/xpra_docker.html"]
-                node_xpra_docker -> node_docker_auf_raspberry_pi_model_3b_
-node_bifurkationen_lorenz_system [label="Bifurkationen im Lorenz-System" href="https://elbosso.github.io/bifurkationen_lorenz_system.html"]
-    node_tresenlesen___frank_jochen__schausaufen_betonung [label="Tresenlesen - Frank und Jochen, Schausaufen mit Betonung" href="https://elbosso.github.io/tresenlesen___frank_jochen__schausaufen_betonung.html"]
+node_fehlersuche_ressourcenleaks [label="Fehlersuche bei Ressourcenleaks" href="https://elbosso.github.io/fehlersuche_ressourcenleaks.html"]
+    node_unit_tests_javas_collections [label="Unit-Tests für Javas Collections" href="https://elbosso.github.io/unit_tests_javas_collections.html"]
+    node_bifurkationen_lorenz_system [label="Bifurkationen im Lorenz-System" href="https://elbosso.github.io/bifurkationen_lorenz_system.html"]
+    node_xpra_docker [label="Xpra und Docker" href="https://elbosso.github.io/xpra_docker.html"]
+                node_xpra_docker -> node_vnc_desktop_container
+            node_xpra_docker -> node_docker_auf_raspberry_pi_model_3b_
+node_tresenlesen___frank_jochen__schausaufen_betonung [label="Tresenlesen - Frank und Jochen, Schausaufen mit Betonung" href="https://elbosso.github.io/tresenlesen___frank_jochen__schausaufen_betonung.html"]
     node_testdaten_xml_schema_generieren [label="Testdaten für ein XML Schema generieren" href="https://elbosso.github.io/testdaten_xml_schema_generieren.html"]
     node_s_mime_email_crypto [label="S/MIME Email Crypto" href="https://elbosso.github.io/s_mime_email_crypto.html"]
     node_bill_withers__stevie_wonder__john_legend___lean_on_me [label="Bill Withers, Stevie Wonder, John Legend - Lean On Me" href="https://elbosso.github.io/bill_withers__stevie_wonder__john_legend___lean_on_me.html"]
@@ -740,7 +743,8 @@ node_verschiedene_interaktionsmetaphern_dwb_ [label="Verschiedene Interaktionsme
     node_shell_scripting_links [label="Shell-Scripting-Links" href="https://elbosso.github.io/shell_scripting_links.html"]
     node_idina_menzel__kristin_chenoweth___for_good [label="Idina Menzel, Kristin Chenoweth - For Good" href="https://elbosso.github.io/idina_menzel__kristin_chenoweth___for_good.html"]
     node_digispark [label="DigiSpark" href="https://elbosso.github.io/digispark.html"]
-    node_alarmierung_sms_um_rufgruppen_erweitert [label="Alarmierung per SMS um Rufgruppen erweitert" href="https://elbosso.github.io/alarmierung_sms_um_rufgruppen_erweitert.html"]
+                node_digispark -> node_digisparkblinkstick
+node_alarmierung_sms_um_rufgruppen_erweitert [label="Alarmierung per SMS um Rufgruppen erweitert" href="https://elbosso.github.io/alarmierung_sms_um_rufgruppen_erweitert.html"]
                 node_alarmierung_sms_um_rufgruppen_erweitert -> node_monitoring_app_android_opensource
 node_pki_beziehungsweise_ca_selber_bauen [label="PKI beziehungsweise CA selber bauen" href="https://elbosso.github.io/pki_beziehungsweise_ca_selber_bauen.html"]
                 node_pki_beziehungsweise_ca_selber_bauen -> node_expect_dialog_ca_opensource
