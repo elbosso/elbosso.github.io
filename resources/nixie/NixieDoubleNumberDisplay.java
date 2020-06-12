@@ -212,7 +212,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 			java.awt.Graphics g=bufferedImage.createGraphics();
 			nixieNumberDisplay.paint(g);
 			g.dispose();
-			javax.imageio.ImageIO.write(bufferedImage,"png",new java.io.File("/tmp/nnd.png"));
+			javax.imageio.ImageIO.write(bufferedImage,"png",new java.io.File(de.elbosso.util.Utilities.getTempDir()+"/nnd.png"));
 
 /*		p.add(nixieNumberDisplay);
 		f.setContentPane(p);

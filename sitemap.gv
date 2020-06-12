@@ -35,6 +35,9 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_docker_images_armhf [label="Docker Images für armhf" href="https://elbosso.github.io/docker_images_armhf.html"]
+    node_tcp_routing_traefik_2_x [label="TCP Routing in Traefik 2.x" href="https://elbosso.github.io/tcp_routing_traefik_2_x.html"]
+                node_tcp_routing_traefik_2_x -> node_guacamole_on_docker
 node_docker_auf_raspberry_pi_model_3b_ [label="Docker auf Raspberry Pi Model 3B+" href="https://elbosso.github.io/docker_auf_raspberry_pi_model_3b_.html"]
                 node_docker_auf_raspberry_pi_model_3b_ -> node_docker_images_armhf
             node_docker_auf_raspberry_pi_model_3b_ -> node_paste_gg_docker
@@ -221,6 +224,7 @@ node_migration_kanboard_nach_gitlab [label="Migration von KanBoard nach GitLab" 
                 node_doppelte_genauigkeit_java -> node_fraktal_selberbauen
 node_doppelte_genauigkeit_beim_rechnen_shadern [label="Doppelte Genauigkeit beim Rechnen mit Shadern" href="https://elbosso.github.io/doppelte_genauigkeit_beim_rechnen_shadern.html"]
                 node_doppelte_genauigkeit_beim_rechnen_shadern -> node_julia_mengen_shadern_umgesetzt
+            node_doppelte_genauigkeit_beim_rechnen_shadern -> node_gpu_programmierung_java_revisited
 node_sqlshell_version_7_1pre4_build_8254 [label="sQLshell Version 7.1pre4 build 8254" href="https://elbosso.github.io/sqlshell_version_7_1pre4_build_8254.html"]
     node_epson_v330_unter_ubuntu_18_04 [label="Epson V330 unter Ubuntu 18.04" href="https://elbosso.github.io/epson_v330_unter_ubuntu_18_04.html"]
     node_preaching_blues___larkin_poe [label="Preaching Blues - Larkin Poe" href="https://elbosso.github.io/preaching_blues___larkin_poe.html"]
@@ -264,6 +268,7 @@ node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian 
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_julia_mengen_shadern_umgesetzt
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_faehrnisse_des_buildprozesses_unter_windows
+            node_mandelbrot_sets_mittels_shadern_berechnen -> node_gpu_programmierung_java_revisited
 node_android_smartcard__nfc__ii [label="Android als Smartcard (NFC) II" href="https://elbosso.github.io/android_smartcard__nfc__ii.html"]
                 node_android_smartcard__nfc__ii -> node_2fa_google_software_update_lahmgelegt
 node_alte_rechner_zukunftsfaehig____ [label="Alte Rechner zukunftsfähig (?)" href="https://elbosso.github.io/alte_rechner_zukunftsfaehig____.html"]
@@ -495,7 +500,8 @@ node_garten_fruehjahr_2018 [label="Garten im Frühjahr 2018" href="https://elbos
 node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" href="https://elbosso.github.io/linux_wifi_accesspoint_aus_raspi.html"]
                 node_linux_wifi_accesspoint_aus_raspi -> node_raspberry_pi_ads_b_receiver
 node_eine_ganz_alte_bibliothek_bildverarbeitung [label="Eine ganz alte Bibliothek für Bildverarbeitung" href="https://elbosso.github.io/eine_ganz_alte_bibliothek_bildverarbeitung.html"]
-    node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
+                node_eine_ganz_alte_bibliothek_bildverarbeitung -> node_gpu_programmierung_java_revisited
+node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
                 node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
             node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren

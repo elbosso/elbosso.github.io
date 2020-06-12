@@ -60,7 +60,7 @@ public class Files
 		p.waitFor();
 		if (System.currentTimeMillis() > 0)
 		{
-			java.io.FileOutputStream fos = new java.io.FileOutputStream("/tmp/console");
+			java.io.FileOutputStream fos = new java.io.FileOutputStream(de.elbosso.util.Utilities.getTempDir()+"/console");
 			java.io.PrintWriter pw = new java.io.PrintWriter(fos);
 			pw.println("console");
 			p = Runtime.getRuntime().exec(cmda);
@@ -78,7 +78,7 @@ public class Files
 		}
 		if (System.currentTimeMillis() > 0)
 		{
-			java.io.FileOutputStream fos = new java.io.FileOutputStream("/tmp/console");
+			java.io.FileOutputStream fos = new java.io.FileOutputStream(de.elbosso.util.Utilities.getTempDir()+"/console");
 			java.io.PrintWriter pw = new java.io.PrintWriter(fos);
 			pw.println("console");
 			p = Runtime.getRuntime().exec(cmda);
