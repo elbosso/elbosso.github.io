@@ -35,7 +35,11 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_docker_images_armhf [label="Docker Images für armhf" href="https://elbosso.github.io/docker_images_armhf.html"]
+node_viewpanel_sqlshell_zeitreihendatenbanken [label="Viewpanel der sQLshell für Zeitreihendatenbanken" href="https://elbosso.github.io/viewpanel_sqlshell_zeitreihendatenbanken.html"]
+                node_viewpanel_sqlshell_zeitreihendatenbanken -> node_generierung_gnuplot_skripten_influxdb
+node_the_interrupters_perform_all_acoustic_set_live [label="The Interrupters Perform All Acoustic Set Live" href="https://elbosso.github.io/the_interrupters_perform_all_acoustic_set_live.html"]
+    node_erweiterung_gitlab_metriken_grafana [label="Erweiterung der Gitlab-Metriken in Grafana" href="https://elbosso.github.io/erweiterung_gitlab_metriken_grafana.html"]
+    node_docker_images_armhf [label="Docker Images für armhf" href="https://elbosso.github.io/docker_images_armhf.html"]
     node_tcp_routing_traefik_2_x [label="TCP Routing in Traefik 2.x" href="https://elbosso.github.io/tcp_routing_traefik_2_x.html"]
                 node_tcp_routing_traefik_2_x -> node_guacamole_on_docker
 node_docker_auf_raspberry_pi_model_3b_ [label="Docker auf Raspberry Pi Model 3B+" href="https://elbosso.github.io/docker_auf_raspberry_pi_model_3b_.html"]
@@ -63,7 +67,8 @@ node_blind_signatures__java__openssl [label="Blind Signatures, Java, OpenSSL" hr
     node_jim_james___wonderful [label="Jim James - Wonderful" href="https://elbosso.github.io/jim_james___wonderful.html"]
     node_marketing_getriebene_krypto_funktioniert_nicht [label="Marketing-getriebene Krypto funktioniert nicht" href="https://elbosso.github.io/marketing_getriebene_krypto_funktioniert_nicht.html"]
     node_max7119_ntp_uhr___naechste_version [label="Max7119 NTP Uhr - nächste Version" href="https://elbosso.github.io/max7119_ntp_uhr___naechste_version.html"]
-    node_etherpad_docker_container [label="Etherpad als Docker-Container" href="https://elbosso.github.io/etherpad_docker_container.html"]
+                node_max7119_ntp_uhr___naechste_version -> node_wetterstation___vorueberlegungen
+node_etherpad_docker_container [label="Etherpad als Docker-Container" href="https://elbosso.github.io/etherpad_docker_container.html"]
                 node_etherpad_docker_container -> node_xpra_docker
 node_john_rich___shuttin__detroit_down [label="John Rich - Shuttin' Detroit Down" href="https://elbosso.github.io/john_rich___shuttin__detroit_down.html"]
     node_aizawa_system [label="Aizawa-System" href="https://elbosso.github.io/aizawa_system.html"]
@@ -204,7 +209,8 @@ node_git_ressources__epubs [label="Git-Ressources und -EPUBs" href="https://elbo
 node_umzug_netzwerklabor_abgeschlossen [label="Umzug Netzwerklabor abgeschlossen" href="https://elbosso.github.io/umzug_netzwerklabor_abgeschlossen.html"]
                 node_umzug_netzwerklabor_abgeschlossen -> node_automatisches_setup_eines_netzwerklabors
 node_alarmierung_ueber_skripte [label="Alarmierung über Skripte" href="https://elbosso.github.io/alarmierung_ueber_skripte.html"]
-    node_ebcms [label="EBCMS" href="https://elbosso.github.io/ebcms.html"]
+                node_alarmierung_ueber_skripte -> node_wetterstation___vorueberlegungen
+node_ebcms [label="EBCMS" href="https://elbosso.github.io/ebcms.html"]
                 node_ebcms -> node_aenderungen_datumsformat_java
             node_ebcms -> node_aenderungen_datumsformat_java___schon_wieder_
             node_ebcms -> node_sitemap_mittels_graphviz
@@ -213,7 +219,8 @@ node_alarmierung_ueber_skripte [label="Alarmierung über Skripte" href="https://
 node_synchronisieren_zwischenablage_xpra [label="Synchronisieren Zwischenablage mit XPRA" href="https://elbosso.github.io/synchronisieren_zwischenablage_xpra.html"]
                 node_synchronisieren_zwischenablage_xpra -> node_xpra_docker
 node_grafana__alarmierung_xmpp [label="Grafana: Alarmierung mit XMPP" href="https://elbosso.github.io/grafana__alarmierung_xmpp.html"]
-                node_grafana__alarmierung_xmpp -> node_sqlshell_echtzeitdatenbanken
+                node_grafana__alarmierung_xmpp -> node_wetterstation___vorueberlegungen
+            node_grafana__alarmierung_xmpp -> node_sqlshell_echtzeitdatenbanken
             node_grafana__alarmierung_xmpp -> node_alarmierung_ueber_skripte
 node_streaming_server_linux [label="Streaming Server mit Linux" href="https://elbosso.github.io/streaming_server_linux.html"]
     node_julia_mengen_shadern_umgesetzt [label="Julia-Mengen mit Shadern umgesetzt" href="https://elbosso.github.io/julia_mengen_shadern_umgesetzt.html"]
@@ -501,6 +508,7 @@ node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" 
                 node_linux_wifi_accesspoint_aus_raspi -> node_raspberry_pi_ads_b_receiver
 node_eine_ganz_alte_bibliothek_bildverarbeitung [label="Eine ganz alte Bibliothek für Bildverarbeitung" href="https://elbosso.github.io/eine_ganz_alte_bibliothek_bildverarbeitung.html"]
                 node_eine_ganz_alte_bibliothek_bildverarbeitung -> node_gpu_programmierung_java_revisited
+            node_eine_ganz_alte_bibliothek_bildverarbeitung -> node_bildverarbeitung_java_multi_threaded
 node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
                 node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
             node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
