@@ -35,6 +35,9 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_vulfpeck_live [label="Vulfpeck Live" href="https://elbosso.github.io/vulfpeck_live.html"]
+    node_paste_gg_docker [label="Paste.gg in Docker" href="https://elbosso.github.io/paste_gg_docker.html"]
+                node_paste_gg_docker -> node_openfire_on_docker_arm
 node_viewpanel_sqlshell_zeitreihendatenbanken [label="Viewpanel der sQLshell für Zeitreihendatenbanken" href="https://elbosso.github.io/viewpanel_sqlshell_zeitreihendatenbanken.html"]
                 node_viewpanel_sqlshell_zeitreihendatenbanken -> node_generierung_gnuplot_skripten_influxdb
 node_the_interrupters_perform_all_acoustic_set_live [label="The Interrupters Perform All Acoustic Set Live" href="https://elbosso.github.io/the_interrupters_perform_all_acoustic_set_live.html"]
@@ -1156,7 +1159,8 @@ node_icons_conky [label="Icons für Conky" href="https://elbosso.github.io/icons
                 node_icons_conky -> node_conky___influxdb
 node_aenderung_netzwerkkonfiguration_linux_update [label="Änderung der Netzwerkkonfiguration in Linux durch Update" href="https://elbosso.github.io/aenderung_netzwerkkonfiguration_linux_update.html"]
     node_whiteboards_verteilten_kreativ [label="Whiteboards zum verteilten kreativ Sein" href="https://elbosso.github.io/whiteboards_verteilten_kreativ.html"]
-                node_whiteboards_verteilten_kreativ -> node_kanban_boards___eine_uebersicht
+                node_whiteboards_verteilten_kreativ -> node_verteiltes_whiteboard_docker_container
+            node_whiteboards_verteilten_kreativ -> node_kanban_boards___eine_uebersicht
 node_multitouch_emulator_linux [label="Multitouch Emulator für Linux" href="https://elbosso.github.io/multitouch_emulator_linux.html"]
     node_verbesserte_dokumentation_datenmodelle_sqlshell [label="Verbesserte Dokumentation für Datenmodelle in der sQLshell" href="https://elbosso.github.io/verbesserte_dokumentation_datenmodelle_sqlshell.html"]
     node_odata_metadatenextraktion [label="OData Metadatenextraktion" href="https://elbosso.github.io/odata_metadatenextraktion.html"]
