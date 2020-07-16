@@ -35,7 +35,12 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_vulfpeck_live [label="Vulfpeck Live" href="https://elbosso.github.io/vulfpeck_live.html"]
+node_openfire_on_docker_arm [label="Openfire on Docker@ARM" href="https://elbosso.github.io/openfire_on_docker_arm.html"]
+                node_openfire_on_docker_arm -> node_guacamole_on_docker
+node_digisparkblinkstick [label="DigiSparkBlinkStick" href="https://elbosso.github.io/digisparkblinkstick.html"]
+                node_digisparkblinkstick -> node_mosquitto_mqtt_broker_on_docker_raspi
+node_erkennung_virtualisierter_umgebungen [label="Erkennung virtualisierter Umgebungen" href="https://elbosso.github.io/erkennung_virtualisierter_umgebungen.html"]
+    node_vulfpeck_live [label="Vulfpeck Live" href="https://elbosso.github.io/vulfpeck_live.html"]
     node_paste_gg_docker [label="Paste.gg in Docker" href="https://elbosso.github.io/paste_gg_docker.html"]
                 node_paste_gg_docker -> node_openfire_on_docker_arm
 node_viewpanel_sqlshell_zeitreihendatenbanken [label="Viewpanel der sQLshell für Zeitreihendatenbanken" href="https://elbosso.github.io/viewpanel_sqlshell_zeitreihendatenbanken.html"]
@@ -45,6 +50,7 @@ node_the_interrupters_perform_all_acoustic_set_live [label="The Interrupters Per
     node_docker_images_armhf [label="Docker Images für armhf" href="https://elbosso.github.io/docker_images_armhf.html"]
     node_tcp_routing_traefik_2_x [label="TCP Routing in Traefik 2.x" href="https://elbosso.github.io/tcp_routing_traefik_2_x.html"]
                 node_tcp_routing_traefik_2_x -> node_guacamole_on_docker
+            node_tcp_routing_traefik_2_x -> node_wireviz_docker_container
 node_docker_auf_raspberry_pi_model_3b_ [label="Docker auf Raspberry Pi Model 3B+" href="https://elbosso.github.io/docker_auf_raspberry_pi_model_3b_.html"]
                 node_docker_auf_raspberry_pi_model_3b_ -> node_docker_images_armhf
             node_docker_auf_raspberry_pi_model_3b_ -> node_paste_gg_docker
@@ -191,7 +197,6 @@ node_testdatengeneratoren_microservices_docker_ueberarbeitet [label="Testdatenge
             node_testdatengeneratoren_microservices_docker_ueberarbeitet -> node_testdaten_xml_schema_generieren
 node_tpedit_erstellt_interaktive_formulare [label="TPEdit erstellt interaktive Formulare" href="https://elbosso.github.io/tpedit_erstellt_interaktive_formulare.html"]
     node_beanshell_debugger___neue_version [label="BeanShell Debugger - neue Version" href="https://elbosso.github.io/beanshell_debugger___neue_version.html"]
-    node_erkennung_virtualisierter_umgebungen [label="Erkennung virtualisierter Umgebungen" href="https://elbosso.github.io/erkennung_virtualisierter_umgebungen.html"]
     node_ci_cd_shellcheck [label="CI/CD mit shellcheck" href="https://elbosso.github.io/ci_cd_shellcheck.html"]
     node_lxc_netzwerk_degrader [label="LXC Netzwerk Degrader" href="https://elbosso.github.io/lxc_netzwerk_degrader.html"]
                 node_lxc_netzwerk_degrader -> node_ci_cd_shellcheck
@@ -245,7 +250,8 @@ node_give_it_away___jamey_johnson [label="Give it away - Jamey Johnson" href="ht
     node_generierter_code_aop [label="Generierter Code und AOP" href="https://elbosso.github.io/generierter_code_aop.html"]
     node_the_alan_parsons_project___old_and_wise [label="The Alan Parsons Project - Old And Wise" href="https://elbosso.github.io/the_alan_parsons_project___old_and_wise.html"]
     node_sitemap_mittels_graphviz [label="Sitemap mittels Graphviz" href="https://elbosso.github.io/sitemap_mittels_graphviz.html"]
-    node_lesetipp__the_art_of_unix_programming [label="Lesetipp: The Art of UNIX Programming" href="https://elbosso.github.io/lesetipp__the_art_of_unix_programming.html"]
+                node_sitemap_mittels_graphviz -> node_wireviz_docker_container
+node_lesetipp__the_art_of_unix_programming [label="Lesetipp: The Art of UNIX Programming" href="https://elbosso.github.io/lesetipp__the_art_of_unix_programming.html"]
     node_lxc_bootstrap_gui_container [label="LXC bootstrap für GUI Container" href="https://elbosso.github.io/lxc_bootstrap_gui_container.html"]
                 node_lxc_bootstrap_gui_container -> node_lxc_netzwerk_router
 node_repo_auf_github__telegraf_ [label="Repo auf Github (Telegraf)" href="https://elbosso.github.io/repo_auf_github__telegraf_.html"]
