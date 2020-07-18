@@ -35,6 +35,9 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_guacamole_on_docker [label="Guacamole on Docker" href="https://elbosso.github.io/guacamole_on_docker.html"]
+                node_guacamole_on_docker -> node_vnc_desktop_container
+            node_guacamole_on_docker -> node_mosquitto_mqtt_broker_on_docker_raspi
 node_openfire_on_docker_arm [label="Openfire on Docker@ARM" href="https://elbosso.github.io/openfire_on_docker_arm.html"]
                 node_openfire_on_docker_arm -> node_guacamole_on_docker
 node_digisparkblinkstick [label="DigiSparkBlinkStick" href="https://elbosso.github.io/digisparkblinkstick.html"]
@@ -63,7 +66,8 @@ node_raspberry_schnellem_massenspeicher [label="Raspberry mit schnellem Massensp
 node_fehlersuche_ressourcenleaks [label="Fehlersuche bei Ressourcenleaks" href="https://elbosso.github.io/fehlersuche_ressourcenleaks.html"]
     node_unit_tests_javas_collections [label="Unit-Tests für Javas Collections" href="https://elbosso.github.io/unit_tests_javas_collections.html"]
     node_bifurkationen_lorenz_system [label="Bifurkationen im Lorenz-System" href="https://elbosso.github.io/bifurkationen_lorenz_system.html"]
-    node_xpra_docker [label="Xpra und Docker" href="https://elbosso.github.io/xpra_docker.html"]
+                node_bifurkationen_lorenz_system -> node_einbinden_wettervorhersagedaten_grafana
+node_xpra_docker [label="Xpra und Docker" href="https://elbosso.github.io/xpra_docker.html"]
                 node_xpra_docker -> node_vnc_desktop_container
             node_xpra_docker -> node_docker_auf_raspberry_pi_model_3b_
 node_tresenlesen___frank_jochen__schausaufen_betonung [label="Tresenlesen - Frank und Jochen, Schausaufen mit Betonung" href="https://elbosso.github.io/tresenlesen___frank_jochen__schausaufen_betonung.html"]
