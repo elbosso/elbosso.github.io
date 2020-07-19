@@ -35,7 +35,8 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_guacamole_on_docker [label="Guacamole on Docker" href="https://elbosso.github.io/guacamole_on_docker.html"]
+node_vnc_desktop_container [label="VNC-Desktop Container" href="https://elbosso.github.io/vnc_desktop_container.html"]
+    node_guacamole_on_docker [label="Guacamole on Docker" href="https://elbosso.github.io/guacamole_on_docker.html"]
                 node_guacamole_on_docker -> node_vnc_desktop_container
             node_guacamole_on_docker -> node_mosquitto_mqtt_broker_on_docker_raspi
 node_openfire_on_docker_arm [label="Openfire on Docker@ARM" href="https://elbosso.github.io/openfire_on_docker_arm.html"]
