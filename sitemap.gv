@@ -35,14 +35,18 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_vnc_desktop_container [label="VNC-Desktop Container" href="https://elbosso.github.io/vnc_desktop_container.html"]
+node_mosquitto_mqtt_broker_on_docker_raspi [label="Mosquitto MQTT Broker on Docker@Raspi" href="https://elbosso.github.io/mosquitto_mqtt_broker_on_docker_raspi.html"]
+                node_mosquitto_mqtt_broker_on_docker_raspi -> node_verteiltes_whiteboard_docker_container
+node_digisparkblinkstick_ii [label="DigiSparkBlinkStick II" href="https://elbosso.github.io/digisparkblinkstick_ii.html"]
+    node_vnc_desktop_container [label="VNC-Desktop Container" href="https://elbosso.github.io/vnc_desktop_container.html"]
     node_guacamole_on_docker [label="Guacamole on Docker" href="https://elbosso.github.io/guacamole_on_docker.html"]
                 node_guacamole_on_docker -> node_vnc_desktop_container
             node_guacamole_on_docker -> node_mosquitto_mqtt_broker_on_docker_raspi
 node_openfire_on_docker_arm [label="Openfire on Docker@ARM" href="https://elbosso.github.io/openfire_on_docker_arm.html"]
                 node_openfire_on_docker_arm -> node_guacamole_on_docker
 node_digisparkblinkstick [label="DigiSparkBlinkStick" href="https://elbosso.github.io/digisparkblinkstick.html"]
-                node_digisparkblinkstick -> node_mosquitto_mqtt_broker_on_docker_raspi
+                node_digisparkblinkstick -> node_digisparkblinkstick_ii
+            node_digisparkblinkstick -> node_mosquitto_mqtt_broker_on_docker_raspi
 node_erkennung_virtualisierter_umgebungen [label="Erkennung virtualisierter Umgebungen" href="https://elbosso.github.io/erkennung_virtualisierter_umgebungen.html"]
     node_vulfpeck_live [label="Vulfpeck Live" href="https://elbosso.github.io/vulfpeck_live.html"]
     node_paste_gg_docker [label="Paste.gg in Docker" href="https://elbosso.github.io/paste_gg_docker.html"]
