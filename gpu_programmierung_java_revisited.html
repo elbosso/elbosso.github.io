@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<title>GPU-Programmierung in Java revisited</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" /><link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>GPU-Programmierung in Java revisited</h4>
+					<div class="w3-container">
+						<div class="w3-row">
+							<div class="w3-col m8 s12">
+								vorhergehende Artikel in:
+								<a href="tsv_gnuplot_script_export_plugins.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Java</span>
+								</a> <!--/li-->
+								<a href="motp_revisited.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Revisited</span>
+								</a> <!--/li-->
+								<a href="tsv_gnuplot_script_export_plugins.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Komponenten</span>
+								</a> <!--/li-->
+							</div>
+							<div class="w3-col m4" style="text-align: right">
+								<span class="w3-opacity">29.07.2020</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Ich habe vor einiger Zeit darüber berichtet, wie man die GPU einer Graphikkarte auch zur Unterstützung und sogar
+Beschleunigung
+komplexer Berechnungen aus Java-Anwendungen heraus
+<a href="mandelbrot_sets_mittels_shadern_berechnen.html">benutzen kann.</a>
+Es ist sogar möglich, für einfache Berechnungen Graphikkarten, die das von Haus aus nicht beherrschen, dazu zu
+bringen, mit
+<a href="doppelte_genauigkeit_beim_rechnen_shadern.html">doppelter Genauigkeit zu rechnen.</a>
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p>Diese ersten Erfolge haben mich ermutigt, nun auch zu versuchen, diese Berechnungen "ordentlich" durchzuführen. Die ersten Schritte
+auf meinem Weg waren ja eher krude: Ich berechnete ein Mandelbrotfraktal und stellte es mit einem Shader sofort dar - ich konnte aber auf die
+(numerischen) Ergebnisse der Berechnungen in der Java-Anwendung nicht zurückgreifen. Es war also klar, dass weitere Experimente
+folgen mussten.
+</p><p>
+Nachdem in der letzten Woche einige Tage Regenwetter zu verzeichnen waren, habe ich das Projekt noch einmal hervorgeholt.
+Da ich natürlicherweise faul bin überlegte ich zunächt, ob es nicht möglich wäre, alles etwas einfacher zu gestalten.
+Ich habe mich von vornherein auf
+<a href="https://www.khronos.org/opencl/">OpenCL</a>
+festgelegt und gegen
+<a href="https://developer.nvidia.com/cuda-zone">CUDA</a>
+entschieden. Trotz allem wollte ich eine einfache Möglichkeit
+haben, aus Java heraus die entsprechenden Programme auf die GPU zu laden und auszuführen, sowie den Transfer von Daten zwischen dem
+Arbeitsspeicher  der CPU und der GPU so schmerzfrei wie möglich zu gestalten.
+</p><p>
+Daher war zunächst erst einmal eine Internet-Recherche anberaumt. Und siehe da: Ich wurde fündig. Eine
+<a href="https://github.com/Syncleus/aparapi">Bibliothek,</a>
+die
+meine kühnsten Erwartungen übertraf trat in Gestalt von
+<a href="http://aparapi.com/">A Parallel API (aparapi)</a> in mein Leben. Dank einiger
+<a href="https://git.qoto.org/aparapi/aparapi-examples">Beispiele</a> feierte ich
+beinahe sofort erste Erfolge.
+</p><p>
+Das Beste daran: man schreibt puren Java-Code, der durch die Bibliothek selber zur Laufzeit in kompilierten OpenCL-Code
+verwandelt wird, der anschließend auf der Graphikkarte ausgeführt wird. Auch wenn man die Bibliothek benutzt bleibt die
+Anwendung portabel - Auf Systemen ohne Beschleuniger-Karte wird der Code einfach mit mehreren Threads parallel auf der CPU
+ausgeführt - ein Verhalten, das man allerdings abschalten kann...
+</p><p>
+Ich habe damit erfolgreich erste Experimente mit (womit auch sonst?) dem
+<a href="mandelbrot_sets_mittels_shadern_berechnen.html">Mandelbrot-Fraktal</a>
+ausgeführt.
+</p><p>
+Ich habe im Zuge dessen auch
+<a href="eine_ganz_alte_bibliothek_bildverarbeitung.html">an meiner alten Bildverarbeitungsbibliothek</a>
+weitergearbeitet und jede Menge Bugs entfernt, neue Features (Diskrete Fourier-Transformation)
+hinzugefügt und wollte auf dieser Basis mit der GPU verschiedene Funktionen beschleunigen.
+Die Bugfixes und die neuen Features sind noch nicht in das entsprechende
+<a href="https://github.com/elbosso/EB_Image">Repository</a>
+eingeflossen.
+</p><p>
+Es stellte sich heraus, dass meine Anstrengungen für die Optimierung der Bildverarbeitungsalgorithmen
+Früchte getragen hatte: Die Variante mit Graphikkartennutzung war langsamer als die Abarbeitung auf der CPU -
+selbst bei Benutzung nur eines Threads. Es ist angedacht, zu einem späteren Zeitpunkt
+exemplarisch zu Testzwecken einige Algorithmen auf
+Multithreading umzustellen.
+</p><p>
+Die Tatsache, dass die GPU langsamer war als die CPU schreibe ich dem Fakt zu, dass die für die eigentliche Berechnung
+zur Rotation eines Bildes mit bilinearer Filterung der Auflösung <span class="mdcode">800x600</span> Pixel benötigte Zeit neben der zum Kopieren der
+Bilddaten in den Speicher der GPU und dem Kopieren des Resultats zurück in den der CPU zu vernachlässigen ist.
+</p><p>
+Zum Abschluss daher hier nochmal meine Messergebnisse (die erste Zahl weicht jeweils deutlich ab, weil hier der Jit noch nicht zum Zuge kam,
+bzw. der OpenCL-Code erst noch kompiliert werden musste...
+</p><p>
+<pre>
+Ohne Graphikkarte auf Core-i 550:
+00:00:00.142466
+00:00:00.029809
+00:00:00.031769
+00:00:00.037841
+00:00:00.035090
+</pre>
+</p><p>
+<pre>
+Mit Graphikkarte auf Core-i 550:
+00:00:01.804669
+00:00:00.159230
+00:00:00.150285
+00:00:00.166760
+00:00:00.171283
+</pre>
+</p><p>
+<pre>
+Ohne Grafikkarte auf Core-i 2100
+00:00:00.065103
+00:00:00.028241
+00:00:00.034993
+00:00:00.020167
+00:00:00.019394
+</pre>
+</p>				</div>
+
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git(lab|hub).html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Revisited.html"><span class="w3-tag w3-black w3-margin-bottom">Revisited</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							TSV und Gnuplot-Script Export durch Plugins</span><br>
+						<span class="smallabstract"><p>Es ist nun bereits über ein Jahr her, dass
+neue Plugins
+für die
+sQLshell
+vorgestellt wurden - daher ist es nun wieder einmal an der Zeit...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tsv_gnuplot_script_export_plugins.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Mosquitto MQTT Broker on Docker@Raspi</span><br>
+						<span class="smallabstract"><p>Nachdem ich in letzter Zeit wieder verstärkt neue Dienste in meinen
+Docker-Zoo
+integriert habe, habe ich nach Fertigstellung der ersten Version meiner Interpretation des
+BlinkStick
+einen weiteren Dienst "containerisiert"
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mosquitto_mqtt_broker_on_docker_raspi.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							DigiSparkBlinkStick II</span><br>
+						<span class="smallabstract"><p>Ich habe vor kurzem
+darüber berichtet,
+wie ich meinen eigenen BlinkStick realisiert habe
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digisparkblinkstick_ii.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							TSV und Gnuplot-Script Export durch Plugins</span><br>
+							<span class="smallabstract"><p>Es ist nun bereits über ein Jahr her, dass
+neue Plugins
+für die
+sQLshell
+vorgestellt wurden - daher ist es nun wieder einmal an der Zeit...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tsv_gnuplot_script_export_plugins.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Mosquitto MQTT Broker on Docker@Raspi</span><br>
+							<span class="smallabstract"><p>Nachdem ich in letzter Zeit wieder verstärkt neue Dienste in meinen
+Docker-Zoo
+integriert habe, habe ich nach Fertigstellung der ersten Version meiner Interpretation des
+BlinkStick
+einen weiteren Dienst "containerisiert"
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mosquitto_mqtt_broker_on_docker_raspi.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							DigiSparkBlinkStick II</span><br>
+							<span class="smallabstract"><p>Ich habe vor kurzem
+darüber berichtet,
+wie ich meinen eigenen BlinkStick realisiert habe
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digisparkblinkstick_ii.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
