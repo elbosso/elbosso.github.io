@@ -36,6 +36,10 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_hannah_fry___roger_penrose [label="Hannah Fry & Roger Penrose" href="https://elbosso.github.io/hannah_fry___roger_penrose.html"]
+    node_generierung_gnuplot_skripten_influxdb [label="Generierung von Gnuplot-Skripten für InfluxDB" href="https://elbosso.github.io/generierung_gnuplot_skripten_influxdb.html"]
+    node_wetterstation_test [label="Wetterstation in Test" href="https://elbosso.github.io/wetterstation_test.html"]
+                node_wetterstation_test -> node_einbinden_wettervorhersagedaten_grafana
 node_meta_plugin_neue_version [label="Meta-Plugin neue Version" href="https://elbosso.github.io/meta_plugin_neue_version.html"]
     node_wetterstation___vorueberlegungen [label="Wetterstation - Vorüberlegungen" href="https://elbosso.github.io/wetterstation___vorueberlegungen.html"]
                 node_wetterstation___vorueberlegungen -> node_wetterstation_test
@@ -86,7 +90,8 @@ node_xpra_docker [label="Xpra und Docker" href="https://elbosso.github.io/xpra_d
             node_xpra_docker -> node_docker_auf_raspberry_pi_model_3b_
 node_tresenlesen___frank_jochen__schausaufen_betonung [label="Tresenlesen - Frank und Jochen, Schausaufen mit Betonung" href="https://elbosso.github.io/tresenlesen___frank_jochen__schausaufen_betonung.html"]
     node_testdaten_xml_schema_generieren [label="Testdaten für ein XML Schema generieren" href="https://elbosso.github.io/testdaten_xml_schema_generieren.html"]
-    node_s_mime_email_crypto [label="S/MIME Email Crypto" href="https://elbosso.github.io/s_mime_email_crypto.html"]
+                node_testdaten_xml_schema_generieren -> node_json_builder_generator_framework
+node_s_mime_email_crypto [label="S/MIME Email Crypto" href="https://elbosso.github.io/s_mime_email_crypto.html"]
     node_bill_withers__stevie_wonder__john_legend___lean_on_me [label="Bill Withers, Stevie Wonder, John Legend - Lean On Me" href="https://elbosso.github.io/bill_withers__stevie_wonder__john_legend___lean_on_me.html"]
     node_8tb_raid5_raspberry_pi [label="8TB Raid5 mit Raspberry Pi" href="https://elbosso.github.io/8tb_raid5_raspberry_pi.html"]
                 node_8tb_raid5_raspberry_pi -> node_raspberry_schnellem_massenspeicher
@@ -221,7 +226,8 @@ node_tpedit_erstellt_interaktive_formulare [label="TPEdit erstellt interaktive F
             node_lxc_netzwerk_degrader -> node_multi_user_webdav__docker__github
             node_lxc_netzwerk_degrader -> node_automatisches_setup_eines_netzwerklabors
 node_anpassung_gnu_screen [label="Anpassung von Gnu Screen" href="https://elbosso.github.io/anpassung_gnu_screen.html"]
-    node_i18neditor_github_projekt [label="I18NEditor als GitHub-Projekt" href="https://elbosso.github.io/i18neditor_github_projekt.html"]
+                node_anpassung_gnu_screen -> node_laptop_recycling_revisited
+node_i18neditor_github_projekt [label="I18NEditor als GitHub-Projekt" href="https://elbosso.github.io/i18neditor_github_projekt.html"]
                 node_i18neditor_github_projekt -> node_inkonsistenz_api_awt
             node_i18neditor_github_projekt -> node_fork_material_design_icons_google
 node_diy_ebook_reader_iii [label="DIY EBook-Reader III" href="https://elbosso.github.io/diy_ebook_reader_iii.html"]

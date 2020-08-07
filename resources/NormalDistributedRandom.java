@@ -52,6 +52,13 @@ public class NormalDistributedRandom extends de.elbosso.util.beans.EventHandling
 //		func.setScale(java.lang.Math.sqrt(2*wantedSigma));
 	}
 
+	public NormalDistributedRandom(double mue, double wantedSigma)
+	{
+		this();
+		setMue(mue);
+		setWantedSigma(wantedSigma);
+	}
+
 	public void setMue(double mue)
 	{
 		double old=getMue();
