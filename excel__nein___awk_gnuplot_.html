@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<title>Excel? Nein - AWK und Gnuplot!</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" /><link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<div class="w3-row">
+						<div class="w3-col m9 s12">
+							<h4>Excel? Nein - AWK und Gnuplot!</h4>
+							<div class="w3-container">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										vorhergehende Artikel in:
+										<a href="mosquitto_mqtt_broker_on_docker_raspi.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
+										</a> <!--/li-->
+									</div>
+									<div class="w3-col m4" style="text-align: right">
+										<span class="w3-opacity">16.08.2020</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col m3"><p style="text-align: right">
+							<img style="max-width:128px;" src="https://img.youtube.com/vi/jJ02kEETw70/default.jpg">
+						</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Nachdem ich neulich ein Video zum Thema AWK gefunden hatte habe ich gedacht - da geht noch mehr
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p><iframe
+	class="center"
+	style="width:100%;max-width:450px;height:450px"
+	src="https://www.youtube.com/embed/jJ02kEETw70"
+	frameborder="0"
+	allowfullscreen>
+</iframe>
+<a href="https://www.youtube.com/watch?v=jJ02kEETw70">@youtube.com</a>
+</p><p>
+Es ging dabei darum, dass man LibreOffice Calc oder ähnliche Programme nicht benötigt wenn man ein Linux-Terminal hat.
+Ausgehend von Garys Beispielen habe ich mir eine schnelle Liste von Anforderungen aufgestellt, die ich hier mal
+mit Syntaxbeispielen zu Lösung darstellen möchte.
+</p><p>
+<h1>Beispiel-Setup</h1>
+</p><p>
+Ich bin von einer ähnlichen Datenquelle wie Gary ausgegangen - ein einfaches Dateisystem-Listing
+mittels <span class="mdcode">ls -l</span> sorgte für Input. Ich musste die erste Zeile noch abschneiden damit ich sauber mit tabellarischen Daten arbeiten konnte -
+dafür sorgte <span class="mdcode">tail -n +2`.
+</p><p>
+Als erstes wird das Feld mit der Dateigröße in jeder Zeile der Ausgabe ausgegeben:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk '{print $5}'
+</pre>
+</p><p>
+Die Anzahl der Zeilen kann man mittels <span class="mdcode">wc</span> ermitteln:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| wc -l
+</pre>
+</p><p>
+Das funktioniert aber auch mit AWK:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk 'END{print NR}'
+</pre>
+</p><p>
+Man kann die extrahierten Daten jeder Zeile durch eine vorangestellte Zeilennummer ergänzen:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk '{print NR":"$5}'
+</pre>
+</p><p>
+<h1>Statistik</h1>
+</p><p>
+Nun ein wenig Statistik: Die Berechnung des Durchschnitts (Mittelwerts) der Daten in Spalte 5 erfolgt so:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk 'BEGIN{sum=0.0}{sum+=$5}END{printf("Average: %f\n",sum/NR)}'
+</pre>
+</p><p>
+Variablen werden von AWK immer auf <span class="mdcode">0</span> initialisiert - daher kann man im vorigen Statement die <span class="mdcode">BEGIN</span> Klausel auch weglassen. Es ist
+auch möglich, Variablen auf der Kommandozeile zu vereinbaren und dem Skript zu  übergeben:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 '{sum+=$N}END{printf("Average: %f\n",sum/NR)}'
+</pre>
+</p><p>
+Wir berechnen zusätzlich die Standardabweichung:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 \
+'{sum+=$N;sumsq+=$N^2}END{printf("Average: %f Std deviation: %f\n",sum/NR,sqrt((sumsq-sum^2/NR)/NR))}'
+</pre>
+</p><p>
+Dieses Mal wird der Median bestimmt:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk \
+'{a[i++]=$1}END{x=int((i+1)/2);if (x &lt; (i+1)/2) y=(a[x-1]+a[x])/2; else y=a[x-1]; printf("Median: %f\n",y)}'
+</pre>
+</p><p>
+Möchte man erfahren, ab welchem Wert ein bestimmter Prozentsatz der Eingaben jeweils unterhalb dieses Wertes liegen (Percentile), kann man das ebenfalls mittels AWK herausfinden:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 \
+'{print $N}'|sort -n| awk '{s[NR-1]=$N} END{for(i=0.1;i&lt;=1.0;i+=0.1){printf("%d %f\n",i*100,s[int(NR*i-0.5)])}}'
+</pre>
+</p><p>
+Man kann mittels AWK auch Histogramme erzeugen:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk -v DELTA=150000 \
+'BEGIN{delta = (DELTA == "" ? 10000 : DELTA)} \
+{bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)} \
+END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf("%0.1f %0.1f %d\n"), beg, end, cnt[bucketNr];beg = end;}}'>hist.dat
+</pre>
+</p><p>
+<h1>Gnuplotting</h1>
+</p><p>
+In diesem Fall sollten wir uns auf den interessanten Teil des Histogrammes beschränken - das zeigt auch gleich, dass man mehrere
+Variablen auf der Kommandozeile vereinbaren kann:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk -v DELTA=1000 -v MAX=15001  \
+'BEGIN{delta = (DELTA == "" ? 10000 : DELTA)} \
+{if($0&lt;15001){bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)}} \
+END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf "%0.1f %0.1f %d\n", beg, end, cnt[bucketNr];beg = end;}}'>hist.dat
+</pre>
+</p><p>
+Man kann dieses Histogramm direkt mit Gnuplot im Terminal darstellen - die Größe des Plots passt sich automatisch der Größe des Terminals an...
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk -v DELTA=1000 -v MAX=15001  \
+'BEGIN{delta = (DELTA == "" ? 10000 : DELTA)} \
+{if($0&lt;MAX){bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)}} \
+END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf "%0.1f %0.1f %d\n", beg, end, cnt[bucketNr];beg = end;}}' \
+|gnuplot -p -e "set terminal dumb size $(tput cols), $(tput lines) enhanced; set autoscale;set style data histogram;set style fill solid;plot '-' using 3:xtic(1)"
+</pre>
+</p><p>
+<h1>Bedingungen</h1>
+</p><p>
+Es ist möglich, nur bestimmte Zellen in der Berechnung zu benutzen - Man kann zum Beispiel anhand regulärer Ausdrücke bestimmte Zeilen ausschließen:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 \
+'{if($9 ~ /^m/){sum+=$N;sumsq+=$N^2;count++}} \
+END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
+</pre>
+</p><p>
+Es ist dabei auch möglich, die Groß- und Kleinschreibung zu ignorieren:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 \
+'{IGNORECASE = 1;if($9 ~ /^m/){sum+=$N;sumsq+=$N^2;count++}} \
+END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
+</pre>
+</p><p>
+Eine alternative Schreibweise dafür:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 \
+'IGNORECASE = 1 &amp;&amp; $9 ~ /^m/{sum+=$N;sumsq+=$N^2;count++} \
+END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
+</pre>
+</p><p>
+Es ist natürlich auch möglich, die in der Berechnung zu berücksichtigenden Zeilen einfach über ihre Zeilennummern zu bestimmen:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 \
+'{if(NR >9 &amp;&amp; NR&lt;21){sum+=$N;sumsq+=$N^2;count++}} \
+END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
+</pre>
+</p><p>
+Eine alternative Schreibweise dafür:
+</p><p>
+<pre>
+ls -l /usr/bin |tail -n +2| awk -v N=5 \
+'(NR >9 &amp;&amp; NR&lt;21){sum+=$N;sumsq+=$N^2;count++} \
+END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
+</pre>
+</p><p>
+Es ist sogar möglich, Werte über den Vergleich von Daten (Zeitpunkten) zu filtern:
+</p><p>
+<pre>
+ls -lt --time-style=long-iso /usr/bin|awk -v date=2020-06-09 'date&lt;$6{print $8}'
+</pre>
+</p><p>
+<h1>Funktionen</h1>
+</p><p>
+Es gibt auch Möglichkeiten, Funktionen zu definieren - während <span class="mdcode">int(n)</span> einfach nur die Nachkommastellen abschneidet, kann man in AWK eine korrekte Rundungsfunktion wie folgt definieren:
+</p><p>
+<pre>
+func round(n)
+{
+  return int(n+0.5)
+}
+</pre>
+</p><p>
+Eine Funktion für die nächstgrößere ganze Zahl ist ebenfalls sehr einfach zu schaffen:
+</p><p>
+<pre>
+function ceil(n)
+{
+  return n%1 ? int(n)+1 : n
+}
+</pre>
+</p><p>
+<h1>Cheat-Sheet</h1>
+</p><p>
+Wer möchte, kann sich das hier angehängte Cheat-Sheet, das ich aus einem
+<a href="https://de.overleaf.com/latex/examples/python-cheat-sheet/kxzvswnbgqrx">Template</a>
+erstellt habe auch ausdrucken...
+</p><p>
+<dl>
+<a href="resources/license.txt">
+<dt><img src="images/mime/Oxygen480-mimetypes-signature_48.png"></dt><dd>Lizenz</dd>
+</a>
+<a href="resources/awkspreadsheet_cheatsheet.tex">
+<dt><img src="images/mime/Oxygen480-mimetypes-text-x-bibtex_48.png"></dt><dd>TeX-Sourcecode</dd>
+</a>
+<a href="resources/awkspreadsheet_cheatsheet.pdf">
+<dt><img src="images/mime/Oxygen480-mimetypes-application-pdf_48.png"></dt><dd>Cheat-Sheet</dd>
+</a>
+</dl>
+</p>				</div>
+
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git(lab|hub).html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Bildverarbeitung in Java multi-threaded</span><br>
+						<span class="smallabstract"><p>Ich habe vor einiger Zeit darüber berichtet, dass ich eine
+alte Bibliothek zur Bildverarbeitung
+von C++ nach Java portiert habe.
+Ich habe sie inzwischen poliert und um neue Features ergänzt...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bildverarbeitung_java_multi_threaded.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Verteiltes Whiteboard als Docker-Container</span><br>
+						<span class="smallabstract"><p>Ich habe in loser Folge über neue Exponate im
+Docker-Zoo
+geschrieben. Heute ist wieder ein neues hinzugekommen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="verteiltes_whiteboard_docker_container.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Hannah Fry & Roger Penrose</span><br>
+						<span class="smallabstract"><p>Wieder mal zwei Videotips - für Roger Penrose hab ich hier nur mal ein Beispiel angeführt: von dem lohnt sich eigentlich jedes.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="hannah_fry___roger_penrose.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Bildverarbeitung in Java multi-threaded</span><br>
+							<span class="smallabstract"><p>Ich habe vor einiger Zeit darüber berichtet, dass ich eine
+alte Bibliothek zur Bildverarbeitung
+von C++ nach Java portiert habe.
+Ich habe sie inzwischen poliert und um neue Features ergänzt...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bildverarbeitung_java_multi_threaded.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Verteiltes Whiteboard als Docker-Container</span><br>
+							<span class="smallabstract"><p>Ich habe in loser Folge über neue Exponate im
+Docker-Zoo
+geschrieben. Heute ist wieder ein neues hinzugekommen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="verteiltes_whiteboard_docker_container.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Hannah Fry & Roger Penrose</span><br>
+							<span class="smallabstract"><p>Wieder mal zwei Videotips - für Roger Penrose hab ich hier nur mal ein Beispiel angeführt: von dem lohnt sich eigentlich jedes.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="hannah_fry___roger_penrose.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>

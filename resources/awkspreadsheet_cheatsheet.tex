@@ -1,0 +1,275 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AWK as Excel-Ersatz --- Cheat Sheet
+% baposter Landscape Poster
+% LaTeX Template
+% Version 1.0 (11/06/13)
+% baposter Class Created by:
+% Brian Amberg (baposter@brian-amberg.de)
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% Edited by Jürgen Key
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------
+
+\documentclass[landscape,a0paper,fontscale=0.285]{baposter} % Adjust the font scale/size here
+\title{Awk als Excel-Ersatz Cheat Sheet}
+\usepackage[german]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx} % Required for including images
+\graphicspath{{figures/}} % Directory in which figures are stored
+
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{tabu}
+
+\usepackage{mathtools}
+%\usepackage{amsmath} % For typesetting math
+\usepackage{amssymb} % Adds new symbols to be used in math mode
+
+\usepackage{booktabs} % Top and bottom rules for tables
+\usepackage{enumitem} % Used to reduce itemize/enumerate spacing
+\usepackage{palatino} % Use the Palatino font
+\usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures
+
+\usepackage{multicol} % Required for multiple columns
+\setlength{\columnsep}{1.5em} % Slightly increase the space between columns
+\setlength{\columnseprule}{0mm} % No horizontal rule between columns
+
+\usepackage{tikz} % Required for flow chart
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{shapes,arrows} % Tikz libraries required for the flow chart in the template
+
+\newcommand{\compresslist}{ % Define a command to reduce spacing within itemize/enumerate environments, this is used right after \begin{itemize} or \begin{enumerate}
+\setlength{\itemsep}{1pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+}
+
+%https://tex.stackexchange.com/questions/19004/how-to-format-an-inline-source-code
+%https://tex.stackexchange.com/questions/145416/how-to-have-straight-single-quotes-in-lstlistings
+\usepackage{textcomp}
+
+\usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{gray}{0.9}
+
+\lstset{
+    showstringspaces=false,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color[grey]{0.6},
+    stringstyle=\color[RGB]{255,150,75},
+    upquote=true
+}
+
+%%\newcommand{\inlinecode}[2]{\colorbox{lightgray}{\lstinline[language=#1]$#2$}}
+\newcommand{\inlinecode}[2]{\lstinline[language=#1]$#2$}
+
+\definecolor{lightblue}{rgb}{0.145,0.6666,1} % Defines the color used for content box headers
+
+\begin{document}
+
+\begin{poster}
+{
+headerborder=closed, % Adds a border around the header of content boxes
+colspacing=0.8em, % Column spacing
+bgColorOne=white, % Background color for the gradient on the left side of the poster
+bgColorTwo=white, % Background color for the gradient on the right side of the poster
+borderColor=lightblue, % Border color
+headerColorOne=black, % Background color for the header in the content boxes (left side)
+headerColorTwo=lightblue, % Background color for the header in the content boxes (right side)
+headerFontColor=white, % Text color for the header text in the content boxes
+boxColorOne=white, % Background color of the content boxes
+textborder=roundedleft, % Format of the border around content boxes, can be: none, bars, coils, triangles, rectangle, rounded, roundedsmall, roundedright or faded
+eyecatcher=true, % Set to false for ignoring the left logo in the title and move the title left
+headerheight=0.1\textheight, % Height of the header
+headershape=roundedright, % Specify the rounded corner in the content box headers, can be: rectangle, small-rounded, roundedright, roundedleft or rounded
+headerfont=\Large\bf\textsc, % Large, bold and sans serif font in the headers of content boxes
+%textfont={\setlength{\parindent}{1.5em}}, % Uncomment for paragraph indentation
+linewidth=2pt % Width of the border lines around content boxes
+}
+%----------------------------------------------------------------
+%    Title
+%----------------------------------------------------------------
+{\bf\textsc{Awk as Excel-Ersatz Cheat Sheet}\vspace{0.5em}} % Poster title
+{\textsc{\{ Awk \ \ als \ \ Excel-Ersatz \ \ --- \ \ Cheat \ \ Sheet\} \hspace{12pt}}}
+{Jürgen Key \\ https://elbosso.github.io/excel\_\_nein\_\_\_awk\_gnuplot\_.html\#content \hspace{12pt}}
+
+
+%------------------------------------------------
+% Example setup
+%------------------------------------------------
+\headerbox{Example setup}{name=objectives,column=0,row=0,span=4}{
+
+%--------------------------------------
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Make test data (cut off first lines with ls garbage)}}
+
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2} %\linebreak
+%\inlinecode{Java}{String s = "Hello, World!";}
+
+%--------------------------------------
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Number of lines using wc}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| wc -l}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Number of lines using awk}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk 'END\{print NR\}'}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Numbered lines}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk '\{print NR":"\$5\}'}
+}
+
+%------------------------------------------------
+% Some statistics
+%------------------------------------------------
+\headerbox{Some statistics}{name=objectives1,below=objectives,column=0,span=4}{
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Average (mean) for column 5}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk 'BEGIN\{sum=0.0\}\{sum+=\$5\}END\{printf("Average: \%f\\n",sum/NR)\}'}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Variables are initialized to $0$ - so average of column $N$ with $n=5$}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '\{sum+=\$N\}END\{printf("Average: \%f\\n",sum/NR)\}'}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Standard deviation}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '\{sum+=\$N;sumsq+=\$N\^2\}END\{printf("Average: \%f Std deviation: \%f\\n",sum/NR,sqrt((sumsq-sum\^2/NR)/NR))\}'
+}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Median}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '\{print \$N\}'|sort -n| awk '\{a\[i++\]=\$1\}' \\}\linebreak
+\inlinecode{Bash}{'END\{x=int((i+1)/2);if (x < (i+1)/2) y=(a\[x-1\]+a\[x\])/2; else y=a\[x-1\]; printf("Median: \%f\\n",y)\}'}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Percentiles}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5  \\}\linebreak
+\inlinecode{Bash}{'\{print \$N\}'|sort -n| awk '\{s\[NR-1\]=\$N\} END\{for(i=0.1;i<=1.0;i+=0.1)\{printf("\%d \%f\\n",i*100,s\[int(NR*i-0.5)\])\}\}'}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Histogram}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '\{print \$N\}'|sort -n| awk -v DELTA=150000 \\}\linebreak
+\inlinecode{Bash}{'BEGIN\{delta = (DELTA == "" ? 10000 : DELTA)\}' \\}\linebreak
+\inlinecode{Bash}{'\{bucketNr = int((\$0+delta) / delta);cnt\[bucketNr\]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)\}' \\}\linebreak
+\inlinecode{Bash}{'END\{for (bucketNr=1; bucketNr<=numBuckets; bucketNr++) \{end = beg + delta;printf("\%0.1f \%0.1f \%d\\n"), beg, end, cnt\[bucketNr\];beg = end;\}\}'>hist.dat
+}
+}
+
+%------------------------------------------------
+% Functions
+%------------------------------------------------
+\headerbox{Functions}{name=objectives4,column=0,below=objectives1,span=4}{
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Function for rounding}}
+\inlinecode{Bash}{func round(n)}\linebreak
+\inlinecode{Bash}{\{}\linebreak
+\inlinecode{Bash}{\ \ return int(n+0.5)}\linebreak
+\inlinecode{Bash}{\}}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Function for ceiling}}
+\inlinecode{Bash}{func ceil(n)}\linebreak
+\inlinecode{Bash}{\{}\linebreak
+\inlinecode{Bash}{\ \ return n\%1 ? int(n)+1 : n}\linebreak
+\inlinecode{Bash}{\}}
+
+%-----------------------------------
+}
+
+\end{poster}
+\newpage
+
+\begin{poster}
+{
+headerborder=closed, % Adds a border around the header of content boxes
+colspacing=0.8em, % Column spacing
+bgColorOne=white, % Background color for the gradient on the left side of the poster
+bgColorTwo=white, % Background color for the gradient on the right side of the poster
+borderColor=lightblue, % Border color
+headerColorOne=black, % Background color for the header in the content boxes (left side)
+headerColorTwo=lightblue, % Background color for the header in the content boxes (right side)
+headerFontColor=white, % Text color for the header text in the content boxes
+boxColorOne=white, % Background color of the content boxes
+textborder=roundedleft, % Format of the border around content boxes, can be: none, bars, coils, triangles, rectangle, rounded, roundedsmall, roundedright or faded
+eyecatcher=true, % Set to false for ignoring the left logo in the title and move the title left
+headerheight=0.1\textheight, % Height of the header
+headershape=roundedright, % Specify the rounded corner in the content box headers, can be: rectangle, small-rounded, roundedright, roundedleft or rounded
+headerfont=\Large\bf\textsc, % Large, bold and sans serif font in the headers of content boxes
+%textfont={\setlength{\parindent}{1.5em}}, % Uncomment for paragraph indentation
+linewidth=2pt % Width of the border lines around content boxes
+}
+%----------------------------------------------------------------
+%	Title
+%----------------------------------------------------------------
+{\bf\textsc{Awk as Excel-Ersatz Cheat Sheet}\vspace{0.5em}} % Poster title
+{\textsc{\{ Awk \ \ als \ \ Excel-Ersatz \ \ --- \ \ Cheat \ \ Sheet\} \hspace{12pt}}}
+{Jürgen Key \\ https://elbosso.github.io/excel\_\_nein\_\_\_awk\_gnuplot\_.html\#content \hspace{12pt}}
+
+%------------------------------------------------
+% Gnuplotting
+%------------------------------------------------
+\headerbox{Gnuplotting}{name=objectives2,column=0,span=4}{
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Only create histogram for the interesting part - note that there are now more than one variable on the command line}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '\{print \$N\}'|sort -n| awk -v DELTA=1000 -v MAX=MAX \\}\linebreak
+\inlinecode{Bash}{'BEGIN\{delta = (DELTA == "" ? 10000 : DELTA)\} ' \\}\linebreak
+\inlinecode{Bash}{'\{if(\$0<15001)\{bucketNr = int((\$0+delta) / delta);cnt\[bucketNr\]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)\}\}' \\}\linebreak
+\inlinecode{Bash}{'END\{for (bucketNr=1; bucketNr<=numBuckets; bucketNr++) \{end = beg + delta;printf "\%0.1f \%0.1f \%d\\n", beg, end, cnt\[bucketNr\];beg = end;\}\}'>hist.dat}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Gnuplot}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '\{print \$N\}'|sort -n| awk -v DELTA=1000 -v MAX=MAX \\}\linebreak
+\inlinecode{Bash}{'BEGIN\{delta = (DELTA == "" ? 10000 : DELTA)\} ' \\}\linebreak
+\inlinecode{Bash}{'\{if(\$0<15001)\{bucketNr = int((\$0+delta) / delta);cnt\[bucketNr\]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)\}\}' \\}\linebreak
+\inlinecode{Bash}{'END\{for (bucketNr=1; bucketNr<=numBuckets; bucketNr++) \{end = beg + delta;printf "\%0.1f \%0.1f \%d\\n", beg, end, cnt\[bucketNr\];beg = end;\}\}'| \\}\linebreak
+\inlinecode{Bash}{gnuplot -p -e "set terminal dumb size \$(tput cols), \$(tput lines) enhanced; set autoscale;set style data histogram;set style fill solid;\"\\}\linebreak
+\inlinecode{Bash}{\"plot '-' using 3:xtic(1)"}
+
+}
+
+
+%------------------------------------------------
+% Conditionals
+%------------------------------------------------
+\headerbox{Conditionals}{name=objectives3,column=0,below=objectives2,span=4}{
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Only use certain lines in computation using regular expressions as criterion}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '\{if(\$9 ~ /^m/)\{sum+=\$N;sumsq+=\$N^2;count++\}\}' \\}\linebreak
+\inlinecode{Bash}{'END\{printf("Average: \%f Std deviation: \%f Count: \%d\\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)\}'
+}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Only use certain lines in computation using \bf{case insensitive} regular expressions as criterion}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '\{IGNORECASE = 1;if(\$9 ~ /^m/)\{sum+=\$N;sumsq+=\$N^2;count++\}\}' \\}\linebreak
+\inlinecode{Bash}{'END\{printf("Average: \%f Std deviation: \%f Count: \%d\\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)\}'
+}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Alternatively}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 'IGNORECASE = 1 && \$9 ~ /^m/\{sum+=\$N;sumsq+=\$N^2;count++\}' \\}\linebreak
+\inlinecode{Bash}{'END\{printf("Average: \%f Std deviation: \%f Count: \%d\\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)\}'
+}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Only use certain lines in computation depending on the line numbers}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '\{if(NR >9 && NR<21)\{sum+=\$N;sumsq+=\$N^2;count++\}\}' \\}\linebreak
+\inlinecode{Bash}{'END\{printf("Average: \%f Std deviation: \%f Count: \%d\\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)\}'}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Alternatively}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '(NR >9 && NR<21)\{sum+=\$N;sumsq+=\$N^2;count++\}' \\}\linebreak
+\inlinecode{Bash}{'END\{printf("Average: \%f Std deviation: \%f Count: \%d\\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)\}'}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Only use certain lines in computation using timestamps as criterion}}
+\inlinecode{Bash}{ls -lt --time-style=long-iso /usr/bin|awk -v date=2020-06-09 'date<\$6\{print \$8\}'}
+}
+
+%----------------------------------------------------------------
+%	REFERENCES  {name=objectives,column=0,row=0}
+%----------------------------------------------------------------
+%\headerbox{bb}{name=references,column=1,row=0}{}
+%----------------------------------------------------------------
+%	FUTURE RESEARCH
+%----------------------------------------------------------------
+%\headerbox{aa}{name=futureresearch,column=1,row=0}{}
+%----------------------------------------------------------------
+%	CONTACT INFORMATION
+%----------------------------------------------------------------
+%\headerbox{Contact Information}{name=contact,column=2,span=2,row=0}{}
+%----------------------------------------------------------------
+\end{poster}
+\end{document}
