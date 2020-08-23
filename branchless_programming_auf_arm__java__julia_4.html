@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<title>LLVM auf x86</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" /><link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>LLVM auf x86</h4>
+					<div class="w3-container">
+						<div class="w3-row">
+							<div class="w3-col m8 s12">
+								vorhergehende Artikel in:
+								<a href="bildverarbeitung_java_multi_threaded.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Java</span>
+								</a> <!--/li-->
+								<a href="excel__nein___awk_gnuplot_.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
+								</a> <!--/li-->
+								<a href="hannah_fry___roger_penrose.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Video</span>
+								</a> <!--/li-->
+								<a href="bildverarbeitung_java_multi_threaded.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Numerik</span>
+								</a> <!--/li-->
+								<a href="2fa_google_software_update_lahmgelegt.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">C und C++</span>
+								</a> <!--/li-->
+							</div>
+							<div class="w3-col m4" style="text-align: right">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="contentdiv">
+<p><a href="https://llvm.org/docs/GettingStarted.html">LLVM (bzw. Clang)</a>
+und GCC gleichen sich dahingehend, dass man optimierten Code vergleichen sollte, da sich aus unoptimiertem bezüglich
+des untersuchten Themas keine Aussagen ableiten lassen. Sie unterscheiden sich allerdings im Ergebnis: Während bei GCC noch die
+"normale" Variante in Maschinencode transformiert wurde, der kürzer war als der der branchless Variante ist dieser Unterschied
+bei Clang nicht mehr gegeben: für beide Varianten wird exakt der gleiche Code erzeugt:
+<pre>
+max:                                    # @max
+        .cfi_startproc
+# %bb.0:
+        cmpl    %esi, %edi
+        cmovgel %edi, %esi
+        movl    %esi, %eax
+        retq
+</p><p>
+max1:                                   # @max1
+        .cfi_startproc
+# %bb.0:
+        cmpl    %esi, %edi
+        cmovgel %edi, %esi
+        movl    %esi, %eax
+        retq
+</pre>
+</p><p>
+Mit diesem Ergebnis war ich natürlich sehr gespannt auf das für das nicht-triviale Beispiel - hier zunächst die
+"normale Variante":
+<pre>
+toUpper:                                # @toUpper
+        .cfi_startproc
+# %bb.0:
+        movb    (%rdi), %al
+        testb   %al, %al
+        je      .LBB2_5
+# %bb.1:
+        addq    $1, %rdi
+        .p2align        4, 0x90
+.LBB2_2:                                # =>This Inner Loop Header: Depth=1
+        movl    %eax, %ecx
+        addb    $-97, %cl
+        cmpb    $25, %cl
+        ja      .LBB2_4
+# %bb.3:                                #   in Loop: Header=BB2_2 Depth=1
+        addb    $-32, %al
+        movb    %al, -1(%rdi)
+.LBB2_4:                                #   in Loop: Header=BB2_2 Depth=1
+        movzbl  (%rdi), %eax
+        addq    $1, %rdi
+        testb   %al, %al
+        jne     .LBB2_2
+.LBB2_5:
+        retq
+</pre>
+Und zum Vergleich die branchless-Variante:
+<pre>
+toUpper1:                               # @toUpper1
+        .cfi_startproc
+# %bb.0:
+        movb    (%rdi), %al
+        testb   %al, %al
+        je      .LBB3_3
+# %bb.1:
+        addq    $1, %rdi
+        .p2align        4, 0x90
+.LBB3_2:                                # =>This Inner Loop Header: Depth=1
+        movl    %eax, %ecx
+        addb    $-97, %cl
+        cmpb    $26, %cl
+        setb    %cl
+        shlb    $5, %cl
+        subb    %cl, %al
+        movb    %al, -1(%rdi)
+        movzbl  (%rdi), %eax
+        addq    $1, %rdi
+        testb   %al, %al
+        jne     .LBB3_2
+.LBB3_3:
+        retq
+</pre>
+Hier erkennt man deutliche Unterschiede - wie bei GCC ist es so, dass der Code der branchless-Variante nicht nur weniger
+bedingte Sprünge enthält, sondern auch an sich kompakter ist, was auch hier auf deutliche Performance-Vorteile der branchless-Variante
+schließen lässt. Interessant ist der Fakt, dass der durch Clang erzeugte Code von der Anzahl der Maschinenbefehle her etwas länger als der
+von GCC erzeugte ist.
+</p>				</div>
+				<div class="w3-container w3-padding" id="nextPage">
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+							<p></p>
+						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="branchless_programming_auf_arm__java__julia_5.html" title="LLVM auf ARM">weiterlesen...</a>
+							</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git(lab|hub).html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							When Someone Requests a Jimi Hendrix Song</span><br>
+						<span class="smallabstract"><p>Er hier ist mir schon einige Male mit interessanten Videos aufgefallen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="when_someone_requests_a_jimi_hendrix_song.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Excel? Nein - AWK und Gnuplot!</span><br>
+						<span class="smallabstract"><p>Nachdem ich neulich ein Video zum Thema AWK gefunden hatte habe ich gedacht - da geht noch mehr
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="excel__nein___awk_gnuplot_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Bildverarbeitung in Java multi-threaded</span><br>
+						<span class="smallabstract"><p>Ich habe vor einiger Zeit darüber berichtet, dass ich eine
+alte Bibliothek zur Bildverarbeitung
+von C++ nach Java portiert habe.
+Ich habe sie inzwischen poliert und um neue Features ergänzt...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bildverarbeitung_java_multi_threaded.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							When Someone Requests a Jimi Hendrix Song</span><br>
+							<span class="smallabstract"><p>Er hier ist mir schon einige Male mit interessanten Videos aufgefallen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="when_someone_requests_a_jimi_hendrix_song.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Excel? Nein - AWK und Gnuplot!</span><br>
+							<span class="smallabstract"><p>Nachdem ich neulich ein Video zum Thema AWK gefunden hatte habe ich gedacht - da geht noch mehr
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="excel__nein___awk_gnuplot_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Bildverarbeitung in Java multi-threaded</span><br>
+							<span class="smallabstract"><p>Ich habe vor einiger Zeit darüber berichtet, dass ich eine
+alte Bibliothek zur Bildverarbeitung
+von C++ nach Java portiert habe.
+Ich habe sie inzwischen poliert und um neue Features ergänzt...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bildverarbeitung_java_multi_threaded.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
