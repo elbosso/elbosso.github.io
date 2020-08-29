@@ -36,7 +36,12 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_when_someone_requests_a_jimi_hendrix_song [label="When Someone Requests a Jimi Hendrix Song" href="https://elbosso.github.io/when_someone_requests_a_jimi_hendrix_song.html"]
+node_wireviz_docker_container [label="WireViz als Docker-Container" href="https://elbosso.github.io/wireviz_docker_container.html"]
+                node_wireviz_docker_container -> node_pluto_jl_docker_container
+            node_wireviz_docker_container -> node_tex_gitlab
+            node_wireviz_docker_container -> node_dokumentenmanagement_docker
+node_einbinden_wettervorhersagedaten_grafana [label="Einbinden von Wettervorhersagedaten in Grafana" href="https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana.html"]
+    node_when_someone_requests_a_jimi_hendrix_song [label="When Someone Requests a Jimi Hendrix Song" href="https://elbosso.github.io/when_someone_requests_a_jimi_hendrix_song.html"]
     node_branchless_programming_auf_arm__java__julia [label="Branchless Programming auf Arm, Java, Julia" href="https://elbosso.github.io/branchless_programming_auf_arm__java__julia.html"]
     node_excel__nein___awk_gnuplot_ [label="Excel? Nein - AWK und Gnuplot!" href="https://elbosso.github.io/excel__nein___awk_gnuplot_.html"]
     node_bildverarbeitung_java_multi_threaded [label="Bildverarbeitung in Java multi-threaded" href="https://elbosso.github.io/bildverarbeitung_java_multi_threaded.html"]
@@ -97,7 +102,8 @@ node_xpra_docker [label="Xpra und Docker" href="https://elbosso.github.io/xpra_d
             node_xpra_docker -> node_docker_auf_raspberry_pi_model_3b_
 node_tresenlesen___frank_jochen__schausaufen_betonung [label="Tresenlesen - Frank und Jochen, Schausaufen mit Betonung" href="https://elbosso.github.io/tresenlesen___frank_jochen__schausaufen_betonung.html"]
     node_testdaten_xml_schema_generieren [label="Testdaten für ein XML Schema generieren" href="https://elbosso.github.io/testdaten_xml_schema_generieren.html"]
-                node_testdaten_xml_schema_generieren -> node_json_builder_generator_framework
+                node_testdaten_xml_schema_generieren -> node_generator_framework_jmeter_integriert
+            node_testdaten_xml_schema_generieren -> node_json_builder_generator_framework
 node_s_mime_email_crypto [label="S/MIME Email Crypto" href="https://elbosso.github.io/s_mime_email_crypto.html"]
     node_bill_withers__stevie_wonder__john_legend___lean_on_me [label="Bill Withers, Stevie Wonder, John Legend - Lean On Me" href="https://elbosso.github.io/bill_withers__stevie_wonder__john_legend___lean_on_me.html"]
     node_8tb_raid5_raspberry_pi [label="8TB Raid5 mit Raspberry Pi" href="https://elbosso.github.io/8tb_raid5_raspberry_pi.html"]
