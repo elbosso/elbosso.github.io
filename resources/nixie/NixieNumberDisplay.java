@@ -1,4 +1,7 @@
 package de.elbosso.ui.components;
+
+import de.elbosso.util.generator.generalpurpose.RandomColor;
+
 /*
 Copyright (c) 2013-2020.
 
@@ -69,9 +72,13 @@ public class NixieNumberDisplay extends NumberDisplay
 		if(factor<0.1)
 			throw new java.lang.IllegalArgumentException("factor must not be smaller than 0.1!");
 		nixieNumbers=new NixieNumber[len];
+		int w=0;
+		int h=0;
 		for(int i=0;i<len;++i)
 		{
 			nixieNumbers[i]=new NixieNumber(c,factor);
+			w+=nixieNumbers[i].getPreferredSize().width;
+			h=h>nixieNumbers[i].getPreferredSize().height?h:nixieNumbers[i].getPreferredSize().height;
 			gridbag.addLayoutComponent(nixieNumbers[i], constraints);
 			add(nixieNumbers[i]);
 			constraints.gridx=constraints.gridx+1;
@@ -81,6 +88,11 @@ public class NixieNumberDisplay extends NumberDisplay
 		l=new javax.swing.JLabel();
 		gridbag.addLayoutComponent(l, constraints);
 		add(l);
+//		System.out.println("§ "+w+" "+h);
+		java.awt.Dimension dim=new java.awt.Dimension(w,h);
+		setPreferredSize(dim);
+		setMinimumSize(dim);
+		setSize(dim);
 	}
 
 	public float getFactor()
@@ -117,9 +129,11 @@ public class NixieNumberDisplay extends NumberDisplay
 	public static void main(java.lang.String[] args) throws InterruptedException
 	{
 //		java.util.Random rand=new java.util.Random(System.currentTimeMillis());
+		RandomColor randomColor=new RandomColor(System.currentTimeMillis());
 		javax.swing.JFrame f=new javax.swing.JFrame();
 		NixieNumberDisplay nixieNumberDisplay=new NixieNumberDisplay(5, .62f);
 		nixieNumberDisplay.setBackground(java.awt.Color.DARK_GRAY);
+		nixieNumberDisplay.setColor(randomColor.next());
 		nixieNumberDisplay.setOpaque(true);
 		nixieNumberDisplay.setLeadingZeroes(true);
 		f.getContentPane().add(nixieNumberDisplay);
@@ -132,6 +146,8 @@ public class NixieNumberDisplay extends NumberDisplay
 		{
 			try{
 			nixieNumberDisplay.setValue(++i);//rand.nextInt(120000));
+//				if(i%100==0)
+//					System.out.println(nixieNumberDisplay.getPreferredSize());
 			}catch(java.lang.IllegalArgumentException exp){}
 			java.lang.Thread.currentThread().sleep(3l);
 		}			

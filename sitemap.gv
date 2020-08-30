@@ -36,7 +36,8 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_wireviz_docker_container [label="WireViz als Docker-Container" href="https://elbosso.github.io/wireviz_docker_container.html"]
+node_nullpointer_fontconfig_alpine_java_docker [label="NullPointer in FontConfig in Alpine-Java-Docker" href="https://elbosso.github.io/nullpointer_fontconfig_alpine_java_docker.html"]
+    node_wireviz_docker_container [label="WireViz als Docker-Container" href="https://elbosso.github.io/wireviz_docker_container.html"]
                 node_wireviz_docker_container -> node_pluto_jl_docker_container
             node_wireviz_docker_container -> node_tex_gitlab
             node_wireviz_docker_container -> node_dokumentenmanagement_docker
@@ -229,7 +230,8 @@ node_testdatengeneratoren_microservices_docker [label="Testdatengeneratoren als 
                 node_testdatengeneratoren_microservices_docker -> node_vaadin_swing_ersatz
             node_testdatengeneratoren_microservices_docker -> node_testdatengeneratoren_microservices_docker_ueberarbeitet
 node_testdatengeneratoren_microservices_docker_ueberarbeitet [label="Testdatengeneratoren als Microservices mit Docker überarbeitet" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker_ueberarbeitet.html"]
-                node_testdatengeneratoren_microservices_docker_ueberarbeitet -> node_dynamische_gitlab_badges_iv
+                node_testdatengeneratoren_microservices_docker_ueberarbeitet -> node_nullpointer_fontconfig_alpine_java_docker
+            node_testdatengeneratoren_microservices_docker_ueberarbeitet -> node_dynamische_gitlab_badges_iv
             node_testdatengeneratoren_microservices_docker_ueberarbeitet -> node_testdaten_xml_schema_generieren
 node_tpedit_erstellt_interaktive_formulare [label="TPEdit erstellt interaktive Formulare" href="https://elbosso.github.io/tpedit_erstellt_interaktive_formulare.html"]
     node_beanshell_debugger___neue_version [label="BeanShell Debugger - neue Version" href="https://elbosso.github.io/beanshell_debugger___neue_version.html"]

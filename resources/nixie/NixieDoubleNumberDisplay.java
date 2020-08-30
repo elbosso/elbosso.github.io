@@ -77,27 +77,37 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		constraints.gridx=constraints.gridx+1;
 		constraints.fill=constraints.NONE;
 		constraints.weightx=0;
+		int w=0;
+		int h=0;
 		if(factor<0.1)
 			throw new java.lang.IllegalArgumentException("factor must not be smaller than 0.1!");
 		nixieNumbers=new NixieNumber[len+fraclen+1];
 		sign=new NixieSymbol(c,factor);
+		w+=sign.getPreferredSize().width;
+		h=h>sign.getPreferredSize().height?h:sign.getPreferredSize().height;
 		gridbag.addLayoutComponent(sign, constraints);
 		add(sign);
 		constraints.gridx=constraints.gridx+1;
 		for(int i=0;i<len;++i)
 		{
 			nixieNumbers[i]=new NixieNumber(c,factor);
+			w+=nixieNumbers[i].getPreferredSize().width;
+			h=h>nixieNumbers[i].getPreferredSize().height?h:nixieNumbers[i].getPreferredSize().height;
 			gridbag.addLayoutComponent(nixieNumbers[i], constraints);
 			add(nixieNumbers[i]);
 			constraints.gridx=constraints.gridx+1;
 		}
 		decimalPoint=new NixieSymbol(c,factor);
+		w+=decimalPoint.getPreferredSize().width;
+		h=h>decimalPoint.getPreferredSize().height?h:decimalPoint.getPreferredSize().height;
 		gridbag.addLayoutComponent(decimalPoint, constraints);
 		add(decimalPoint);
 		constraints.gridx=constraints.gridx+1;
 		for(int i=len+1;i<len+fraclen+1;++i)
 		{
 			nixieNumbers[i]=new NixieNumber(c,factor);
+			w+=nixieNumbers[i].getPreferredSize().width;
+			h=h>nixieNumbers[i].getPreferredSize().height?h:nixieNumbers[i].getPreferredSize().height;
 			gridbag.addLayoutComponent(nixieNumbers[i], constraints);
 			add(nixieNumbers[i]);
 			constraints.gridx=constraints.gridx+1;
@@ -107,6 +117,11 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		l=new javax.swing.JLabel();
 		gridbag.addLayoutComponent(l, constraints);
 		add(l);
+//		System.out.println("§ "+w+" "+h);
+		java.awt.Dimension dim=new java.awt.Dimension(w,h);
+		setPreferredSize(dim);
+		setMinimumSize(dim);
+		setSize(dim);
 	}
 	public void setValue(double value)
 	{
@@ -186,6 +201,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 			p.add(nixieNumberDisplay);
 			double v=rand.nextDouble()*24000-12000;
 			nixieNumberDisplay.setValue(v);
+//			System.out.println("\" "+nixieNumberDisplay.getPreferredSize());
 		}
 		NixieDoubleNumberDisplay nixieNumberDisplay=new NixieDoubleNumberDisplay(Color.WHITE,5,3, .62f);
 		nixieNumberDisplay.setBackground(java.awt.Color.DARK_GRAY);
@@ -214,7 +230,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 			g.dispose();
 			javax.imageio.ImageIO.write(bufferedImage,"png",new java.io.File(de.elbosso.util.Utilities.getTempDir()+"/nnd.png"));
 
-/*		p.add(nixieNumberDisplay);
+		p.add(nixieNumberDisplay);
 		f.setContentPane(p);
 		nixieNumberDisplay.setValue(0);
 		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
@@ -225,12 +241,12 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		while(true)
 		{
 			try{
-				double v=rand.nextDouble()*24000-12000;
+				v=rand.nextDouble()*24000-12000;
 			nixieNumberDisplay.setValue(v);
 			}catch(java.lang.IllegalArgumentException exp){exp.printStackTrace();}
 			java.lang.Thread.currentThread().sleep(300l);
 		}			
-*/	}
+	}
 
 	public void switchOff()
 	{
