@@ -36,10 +36,11 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_tex_gitlab [label="TeX in Gitlab" href="https://elbosso.github.io/tex_gitlab.html"]
+node_proxmox_experimente [label="Proxmox-Experimente" href="https://elbosso.github.io/proxmox_experimente.html"]
+    node_soft_hsm_java [label="Soft-HSM und Java" href="https://elbosso.github.io/soft_hsm_java.html"]
+    node_tex_gitlab [label="TeX in Gitlab" href="https://elbosso.github.io/tex_gitlab.html"]
                 node_tex_gitlab -> node_rendern_tex_formeln
-node_soft_hsm_java [label="Soft-HSM und Java" href="https://elbosso.github.io/soft_hsm_java.html"]
-    node_ebcms [label="EBCMS" href="https://elbosso.github.io/ebcms.html"]
+node_ebcms [label="EBCMS" href="https://elbosso.github.io/ebcms.html"]
                 node_ebcms -> node_aenderungen_datumsformat_java
             node_ebcms -> node_aenderungen_datumsformat_java___schon_wieder_
             node_ebcms -> node_sitemap_mittels_graphviz
@@ -52,7 +53,8 @@ node_nullpointer_fontconfig_alpine_java_docker [label="NullPointer in FontConfig
             node_wireviz_docker_container -> node_tex_gitlab
             node_wireviz_docker_container -> node_dokumentenmanagement_docker
 node_einbinden_wettervorhersagedaten_grafana [label="Einbinden von Wettervorhersagedaten in Grafana" href="https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana.html"]
-    node_when_someone_requests_a_jimi_hendrix_song [label="When Someone Requests a Jimi Hendrix Song" href="https://elbosso.github.io/when_someone_requests_a_jimi_hendrix_song.html"]
+                node_einbinden_wettervorhersagedaten_grafana -> node_proxmox_experimente
+node_when_someone_requests_a_jimi_hendrix_song [label="When Someone Requests a Jimi Hendrix Song" href="https://elbosso.github.io/when_someone_requests_a_jimi_hendrix_song.html"]
     node_branchless_programming_auf_arm__java__julia [label="Branchless Programming auf Arm, Java, Julia" href="https://elbosso.github.io/branchless_programming_auf_arm__java__julia.html"]
     node_excel__nein___awk_gnuplot_ [label="Excel? Nein - AWK und Gnuplot!" href="https://elbosso.github.io/excel__nein___awk_gnuplot_.html"]
     node_bildverarbeitung_java_multi_threaded [label="Bildverarbeitung in Java multi-threaded" href="https://elbosso.github.io/bildverarbeitung_java_multi_threaded.html"]
@@ -447,7 +449,8 @@ node_weihnachts_flashmobs [label="Weihnachts-Flashmobs" href="https://elbosso.gi
                 node_links_influxdb__grafana -> node_dwb__grafana
             node_links_influxdb__grafana -> node_fritzbox__monitoring__tr064
 node_oled_status_display_time_server [label="Oled Status Display für Time-Server" href="https://elbosso.github.io/oled_status_display_time_server.html"]
-                node_oled_status_display_time_server -> node_esp8266_zigbee
+                node_oled_status_display_time_server -> node_proxmox_experimente
+            node_oled_status_display_time_server -> node_esp8266_zigbee
             node_oled_status_display_time_server -> node_raspi_backup_rsync
 node_raspi_backup_rsync [label="Raspi Backup mit rsync" href="https://elbosso.github.io/raspi_backup_rsync.html"]
                 node_raspi_backup_rsync -> node_mqtt___raspi___grafana
