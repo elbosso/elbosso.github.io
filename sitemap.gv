@@ -36,6 +36,10 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_generator_framework_jmeter_integriert [label="Generator-Framework in JMeter integriert" href="https://elbosso.github.io/generator_framework_jmeter_integriert.html"]
+    node_rendern_tex_formeln [label="Rendern von TeX-Formeln" href="https://elbosso.github.io/rendern_tex_formeln.html"]
+    node_synchronisierung_lorenz_systemen [label="Synchronisierung von Lorenz-Systemen" href="https://elbosso.github.io/synchronisierung_lorenz_systemen.html"]
+                node_synchronisierung_lorenz_systemen -> node_synchronisierung_lorenz_systemen_ii
 node_wiremock_http_s__echo_docker_container [label="Wiremock und HTTP(s)-Echo als Docker-Container" href="https://elbosso.github.io/wiremock_http_s__echo_docker_container.html"]
                 node_wiremock_http_s__echo_docker_container -> node_generator_framework_jmeter_integriert
 node_docker_ressourcen_managen_cgroups [label="Docker-Ressourcen managen mit cgroups" href="https://elbosso.github.io/docker_ressourcen_managen_cgroups.html"]
@@ -126,7 +130,8 @@ node_raspberry_schnellem_massenspeicher [label="Raspberry mit schnellem Massensp
 node_fehlersuche_ressourcenleaks [label="Fehlersuche bei Ressourcenleaks" href="https://elbosso.github.io/fehlersuche_ressourcenleaks.html"]
     node_unit_tests_javas_collections [label="Unit-Tests für Javas Collections" href="https://elbosso.github.io/unit_tests_javas_collections.html"]
     node_bifurkationen_lorenz_system [label="Bifurkationen im Lorenz-System" href="https://elbosso.github.io/bifurkationen_lorenz_system.html"]
-                node_bifurkationen_lorenz_system -> node_einbinden_wettervorhersagedaten_grafana
+                node_bifurkationen_lorenz_system -> node_synchronisierung_lorenz_systemen
+            node_bifurkationen_lorenz_system -> node_einbinden_wettervorhersagedaten_grafana
             node_bifurkationen_lorenz_system -> node_pluto_jl_docker_container
 node_xpra_docker [label="Xpra und Docker" href="https://elbosso.github.io/xpra_docker.html"]
                 node_xpra_docker -> node_vnc_desktop_container
@@ -222,7 +227,8 @@ node_docker_multi_stage_builds_go [label="Docker Multi-Stage-Builds für Go" hre
 node_motp_revisited [label="mOTP revisited" href="https://elbosso.github.io/motp_revisited.html"]
     node_2020_links_i [label="2020 Links I" href="https://elbosso.github.io/2020_links_i.html"]
     node_vorhaben_2020 [label="Vorhaben 2020" href="https://elbosso.github.io/vorhaben_2020.html"]
-                node_vorhaben_2020 -> node_oauth_otp
+                node_vorhaben_2020 -> node_synchronisierung_lorenz_systemen
+            node_vorhaben_2020 -> node_oauth_otp
 node_erweiterung_ini4j [label="Erweiterung von ini4j" href="https://elbosso.github.io/erweiterung_ini4j.html"]
     node_36c3___nachlese [label="36c3 - Nachlese" href="https://elbosso.github.io/36c3___nachlese.html"]
     node_36c3___meine_favoriten_zweiter_teil [label="36c3 - Meine Favoriten zweiter Teil" href="https://elbosso.github.io/36c3___meine_favoriten_zweiter_teil.html"]
