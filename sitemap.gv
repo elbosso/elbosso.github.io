@@ -36,7 +36,10 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_synchronisierung_lorenz_systemen_ii [label="Synchronisierung von Lorenz-Systemen II" href="https://elbosso.github.io/synchronisierung_lorenz_systemen_ii.html"]
+node_synchronisierung_lorenz_systemen_iii [label="Synchronisierung von Lorenz-Systemen III" href="https://elbosso.github.io/synchronisierung_lorenz_systemen_iii.html"]
+                node_synchronisierung_lorenz_systemen_iii -> node_synchronisierung_roessler_systemen
+node_ueberwachung_festplattenstatus_grafana [label="Überwachung Festplattenstatus mit Grafana" href="https://elbosso.github.io/ueberwachung_festplattenstatus_grafana.html"]
+    node_synchronisierung_lorenz_systemen_ii [label="Synchronisierung von Lorenz-Systemen II" href="https://elbosso.github.io/synchronisierung_lorenz_systemen_ii.html"]
                 node_synchronisierung_lorenz_systemen_ii -> node_synchronisierung_lorenz_systemen_iii
             node_synchronisierung_lorenz_systemen_ii -> node_synchronisierung_roessler_systemen
 node_fuzzy_java_maps [label="Fuzzy Java Maps" href="https://elbosso.github.io/fuzzy_java_maps.html"]
