@@ -36,10 +36,14 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_synchronisierung_lorenz_systemen_iii [label="Synchronisierung von Lorenz-Systemen III" href="https://elbosso.github.io/synchronisierung_lorenz_systemen_iii.html"]
+node_synchronisierung_roessler_systemen [label="Synchronisierung von Roessler-Systemen" href="https://elbosso.github.io/synchronisierung_roessler_systemen.html"]
+    node_links___verschiedenes [label="Links - Verschiedenes" href="https://elbosso.github.io/links___verschiedenes.html"]
+    node_synchronisierung_lorenz_systemen_iii [label="Synchronisierung von Lorenz-Systemen III" href="https://elbosso.github.io/synchronisierung_lorenz_systemen_iii.html"]
                 node_synchronisierung_lorenz_systemen_iii -> node_synchronisierung_roessler_systemen
 node_ueberwachung_festplattenstatus_grafana [label="Überwachung Festplattenstatus mit Grafana" href="https://elbosso.github.io/ueberwachung_festplattenstatus_grafana.html"]
-    node_synchronisierung_lorenz_systemen_ii [label="Synchronisierung von Lorenz-Systemen II" href="https://elbosso.github.io/synchronisierung_lorenz_systemen_ii.html"]
+                node_ueberwachung_festplattenstatus_grafana -> node_guenstiges_arm64_board_raspi_formfaktor
+            node_ueberwachung_festplattenstatus_grafana -> node_spezielle_telegraf_anpassungen_rock64
+node_synchronisierung_lorenz_systemen_ii [label="Synchronisierung von Lorenz-Systemen II" href="https://elbosso.github.io/synchronisierung_lorenz_systemen_ii.html"]
                 node_synchronisierung_lorenz_systemen_ii -> node_synchronisierung_lorenz_systemen_iii
             node_synchronisierung_lorenz_systemen_ii -> node_synchronisierung_roessler_systemen
 node_fuzzy_java_maps [label="Fuzzy Java Maps" href="https://elbosso.github.io/fuzzy_java_maps.html"]
@@ -132,7 +136,9 @@ node_walter_lewin___for_the_love_of_physics [label="Walter Lewin - For the Love 
     node_sean_carroll___the_biggest_ideas_the_universe [label="Sean Carroll - The Biggest Ideas in the Universe" href="https://elbosso.github.io/sean_carroll___the_biggest_ideas_the_universe.html"]
                 node_sean_carroll___the_biggest_ideas_the_universe -> node_walter_lewin___for_the_love_of_physics
 node_raspberry_schnellem_massenspeicher [label="Raspberry mit schnellem Massenspeicher" href="https://elbosso.github.io/raspberry_schnellem_massenspeicher.html"]
-                node_raspberry_schnellem_massenspeicher -> node_docker_auf_raspberry_pi_model_3b_
+                node_raspberry_schnellem_massenspeicher -> node_guenstiges_arm64_board_raspi_formfaktor
+            node_raspberry_schnellem_massenspeicher -> node_raspi_booten_uebers_netz_pxe_nfs
+            node_raspberry_schnellem_massenspeicher -> node_docker_auf_raspberry_pi_model_3b_
             node_raspberry_schnellem_massenspeicher -> node_mosquitto_mqtt_broker_on_docker_raspi
 node_fehlersuche_ressourcenleaks [label="Fehlersuche bei Ressourcenleaks" href="https://elbosso.github.io/fehlersuche_ressourcenleaks.html"]
     node_unit_tests_javas_collections [label="Unit-Tests für Javas Collections" href="https://elbosso.github.io/unit_tests_javas_collections.html"]
@@ -232,7 +238,8 @@ node_expect_dialog_ca_version_2_0_0 [label="Expect-Dialog-CA Version 2.0.0" href
 node_docker_multi_stage_builds_go [label="Docker Multi-Stage-Builds für Go" href="https://elbosso.github.io/docker_multi_stage_builds_go.html"]
                 node_docker_multi_stage_builds_go -> node_jupyter_self_hosted
 node_motp_revisited [label="mOTP revisited" href="https://elbosso.github.io/motp_revisited.html"]
-    node_2020_links_i [label="2020 Links I" href="https://elbosso.github.io/2020_links_i.html"]
+                node_motp_revisited -> node_spezielle_telegraf_anpassungen_rock64
+node_2020_links_i [label="2020 Links I" href="https://elbosso.github.io/2020_links_i.html"]
     node_vorhaben_2020 [label="Vorhaben 2020" href="https://elbosso.github.io/vorhaben_2020.html"]
                 node_vorhaben_2020 -> node_synchronisierung_lorenz_systemen
             node_vorhaben_2020 -> node_oauth_otp
