@@ -34,7 +34,7 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.elbosso.dataflowframework.modules.convert.algorithms.functions;
 
-@javax.annotation.Generated(value="de.elbosso.dataflowframework.processors.OneDFunctionProcessor", date="2020-10-14T18:07:49.529Z")
+@javax.annotation.Generated(value="de.elbosso.dataflowframework.processors.OneDFunctionProcessor", date="2020-11-09T12:58:55.44Z")
 public class SigmoidModule extends de.netsysit.dataflowframework.modules.ThreadingBeanContextChildModuleBase
 {
 	static
