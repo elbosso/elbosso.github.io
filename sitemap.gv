@@ -36,10 +36,14 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_synchronisierung_aizawa_systemen [label="Synchronisierung von Aizawa-Systemen" href="https://elbosso.github.io/synchronisierung_aizawa_systemen.html"]
+    node_raspi_zero_w_nas_usb_stick [label="Raspi Zero W als NAS-USB-Stick" href="https://elbosso.github.io/raspi_zero_w_nas_usb_stick.html"]
+                node_raspi_zero_w_nas_usb_stick -> node_guenstiges_arm64_board_raspi_formfaktor
 node_openapi_schema_testdaten_generator [label="OpenApi-Schema Testdaten-Generator" href="https://elbosso.github.io/openapi_schema_testdaten_generator.html"]
     node_d_bus_service_python [label="D-Bus-Service mit Python" href="https://elbosso.github.io/d_bus_service_python.html"]
     node_synchronisierung_roessler_systemen [label="Synchronisierung von Roessler-Systemen" href="https://elbosso.github.io/synchronisierung_roessler_systemen.html"]
-    node_links___verschiedenes [label="Links - Verschiedenes" href="https://elbosso.github.io/links___verschiedenes.html"]
+                node_synchronisierung_roessler_systemen -> node_synchronisierung_aizawa_systemen
+node_links___verschiedenes [label="Links - Verschiedenes" href="https://elbosso.github.io/links___verschiedenes.html"]
     node_synchronisierung_lorenz_systemen_iii [label="Synchronisierung von Lorenz-Systemen III" href="https://elbosso.github.io/synchronisierung_lorenz_systemen_iii.html"]
                 node_synchronisierung_lorenz_systemen_iii -> node_synchronisierung_roessler_systemen
 node_ueberwachung_festplattenstatus_grafana [label="Überwachung Festplattenstatus mit Grafana" href="https://elbosso.github.io/ueberwachung_festplattenstatus_grafana.html"]
@@ -170,7 +174,8 @@ node_etherpad_docker_container [label="Etherpad als Docker-Container" href="http
                 node_etherpad_docker_container -> node_xpra_docker
 node_john_rich___shuttin__detroit_down [label="John Rich - Shuttin' Detroit Down" href="https://elbosso.github.io/john_rich___shuttin__detroit_down.html"]
     node_aizawa_system [label="Aizawa-System" href="https://elbosso.github.io/aizawa_system.html"]
-    node_ticketsysteme_sind_lebende_wesen [label="Ticketsysteme sind lebende Wesen" href="https://elbosso.github.io/ticketsysteme_sind_lebende_wesen.html"]
+                node_aizawa_system -> node_synchronisierung_aizawa_systemen
+node_ticketsysteme_sind_lebende_wesen [label="Ticketsysteme sind lebende Wesen" href="https://elbosso.github.io/ticketsysteme_sind_lebende_wesen.html"]
     node_beth_hart___as_long_as_i_have_a_song [label="Beth Hart - As Long As I Have A Song" href="https://elbosso.github.io/beth_hart___as_long_as_i_have_a_song.html"]
     node_ronnie_dunn___cost_of_livin_ [label="Ronnie Dunn - Cost Of Livin'" href="https://elbosso.github.io/ronnie_dunn___cost_of_livin_.html"]
     node_magnetisches_pendel [label="Magnetisches Pendel" href="https://elbosso.github.io/magnetisches_pendel.html"]
