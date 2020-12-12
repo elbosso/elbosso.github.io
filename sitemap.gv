@@ -36,7 +36,11 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_automatisches_erzeugen_issues_gitlab [label="Automatisches Erzeugen von Issues in GitLab" href="https://elbosso.github.io/automatisches_erzeugen_issues_gitlab.html"]
+node_guenstiges_arm64_board_raspi_formfaktor [label="Günstiges Arm64-Board mit Raspi-Formfaktor" href="https://elbosso.github.io/guenstiges_arm64_board_raspi_formfaktor.html"]
+                node_guenstiges_arm64_board_raspi_formfaktor -> node_pxe_boot_rock64
+            node_guenstiges_arm64_board_raspi_formfaktor -> node_raspi_booten_uebers_netz_pxe_nfs
+node_installation_ubuntu_20_04_auf_raid_0 [label="Installation von Ubuntu 20.04 auf Raid-0" href="https://elbosso.github.io/installation_ubuntu_20_04_auf_raid_0.html"]
+    node_automatisches_erzeugen_issues_gitlab [label="Automatisches Erzeugen von Issues in GitLab" href="https://elbosso.github.io/automatisches_erzeugen_issues_gitlab.html"]
     node_links___verschiedenes_ii [label="Links - Verschiedenes II" href="https://elbosso.github.io/links___verschiedenes_ii.html"]
     node_synchronisierung_aizawa_systemen [label="Synchronisierung von Aizawa-Systemen" href="https://elbosso.github.io/synchronisierung_aizawa_systemen.html"]
     node_raspi_zero_w_nas_usb_stick [label="Raspi Zero W als NAS-USB-Stick" href="https://elbosso.github.io/raspi_zero_w_nas_usb_stick.html"]
@@ -65,12 +69,15 @@ node_docker_ressourcen_managen_cgroups [label="Docker-Ressourcen managen mit cgr
                 node_docker_ressourcen_managen_cgroups -> node_wiremock_http_s__echo_docker_container
 node_druckvorlagen_spezielle_papiere [label="Druckvorlagen für spezielle Papiere" href="https://elbosso.github.io/druckvorlagen_spezielle_papiere.html"]
     node_netboot_pxe_server_lxc_container [label="Netboot-PXE-Server als LXC-Container" href="https://elbosso.github.io/netboot_pxe_server_lxc_container.html"]
-    node_pluto_jl_docker_container [label="Pluto.jl als Docker-Container" href="https://elbosso.github.io/pluto_jl_docker_container.html"]
+                node_netboot_pxe_server_lxc_container -> node_raspi_booten_uebers_netz_pxe_nfs
+            node_netboot_pxe_server_lxc_container -> node_installation_ubuntu_20_04_auf_raid_0
+node_pluto_jl_docker_container [label="Pluto.jl als Docker-Container" href="https://elbosso.github.io/pluto_jl_docker_container.html"]
                 node_pluto_jl_docker_container -> node_docker_ressourcen_managen_cgroups
 node_mathe__css_videoempfehlungen [label="Mathe- und CSS-Videoempfehlungen" href="https://elbosso.github.io/mathe__css_videoempfehlungen.html"]
     node_json_builder_generator_framework [label="Json-Builder im Generator-Framework" href="https://elbosso.github.io/json_builder_generator_framework.html"]
                 node_json_builder_generator_framework -> node_generator_framework_jmeter_integriert
             node_json_builder_generator_framework -> node_openapi_schema_testdaten_generator
+            node_json_builder_generator_framework -> node_neue_generatoren_json__ical_vcard
 node_inkrementelles_backup_snapshots_rsync [label="Inkrementelles Backup mit Snapshots und rsync" href="https://elbosso.github.io/inkrementelles_backup_snapshots_rsync.html"]
     node_dokumentenmanagement_docker [label="Dokumentenmanagement mit Docker" href="https://elbosso.github.io/dokumentenmanagement_docker.html"]
                 node_dokumentenmanagement_docker -> node_inkrementelles_backup_snapshots_rsync
@@ -295,6 +302,7 @@ node_testdatengeneratoren_microservices_docker_ueberarbeitet [label="Testdatenge
                 node_testdatengeneratoren_microservices_docker_ueberarbeitet -> node_nullpointer_fontconfig_alpine_java_docker
             node_testdatengeneratoren_microservices_docker_ueberarbeitet -> node_dynamische_gitlab_badges_iv
             node_testdatengeneratoren_microservices_docker_ueberarbeitet -> node_testdaten_xml_schema_generieren
+            node_testdatengeneratoren_microservices_docker_ueberarbeitet -> node_neue_generatoren_json__ical_vcard
 node_tpedit_erstellt_interaktive_formulare [label="TPEdit erstellt interaktive Formulare" href="https://elbosso.github.io/tpedit_erstellt_interaktive_formulare.html"]
     node_beanshell_debugger___neue_version [label="BeanShell Debugger - neue Version" href="https://elbosso.github.io/beanshell_debugger___neue_version.html"]
     node_ci_cd_shellcheck [label="CI/CD mit shellcheck" href="https://elbosso.github.io/ci_cd_shellcheck.html"]
@@ -302,6 +310,7 @@ node_tpedit_erstellt_interaktive_formulare [label="TPEdit erstellt interaktive F
                 node_lxc_netzwerk_degrader -> node_ci_cd_shellcheck
             node_lxc_netzwerk_degrader -> node_multi_user_webdav__docker__github
             node_lxc_netzwerk_degrader -> node_automatisches_setup_eines_netzwerklabors
+            node_lxc_netzwerk_degrader -> node_hardware_netzwerk_degrader
 node_anpassung_gnu_screen [label="Anpassung von Gnu Screen" href="https://elbosso.github.io/anpassung_gnu_screen.html"]
                 node_anpassung_gnu_screen -> node_laptop_recycling_revisited
 node_i18neditor_github_projekt [label="I18NEditor als GitHub-Projekt" href="https://elbosso.github.io/i18neditor_github_projekt.html"]
