@@ -36,7 +36,10 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_guenstiges_arm64_board_raspi_formfaktor [label="Günstiges Arm64-Board mit Raspi-Formfaktor" href="https://elbosso.github.io/guenstiges_arm64_board_raspi_formfaktor.html"]
+node_raspi_booten_uebers_netz_pxe_nfs [label="Raspi booten übers Netz mit PXE und NFS" href="https://elbosso.github.io/raspi_booten_uebers_netz_pxe_nfs.html"]
+                node_raspi_booten_uebers_netz_pxe_nfs -> node_pxe_boot_rock64
+node_excel__nein___awk_gnuplot_ [label="Excel? Nein - AWK und Gnuplot!" href="https://elbosso.github.io/excel__nein___awk_gnuplot_.html"]
+    node_guenstiges_arm64_board_raspi_formfaktor [label="Günstiges Arm64-Board mit Raspi-Formfaktor" href="https://elbosso.github.io/guenstiges_arm64_board_raspi_formfaktor.html"]
                 node_guenstiges_arm64_board_raspi_formfaktor -> node_pxe_boot_rock64
             node_guenstiges_arm64_board_raspi_formfaktor -> node_raspi_booten_uebers_netz_pxe_nfs
 node_installation_ubuntu_20_04_auf_raid_0 [label="Installation von Ubuntu 20.04 auf Raid-0" href="https://elbosso.github.io/installation_ubuntu_20_04_auf_raid_0.html"]
@@ -104,7 +107,6 @@ node_einbinden_wettervorhersagedaten_grafana [label="Einbinden von Wettervorhers
             node_einbinden_wettervorhersagedaten_grafana -> node_ueberwachung_festplattenstatus_grafana
 node_when_someone_requests_a_jimi_hendrix_song [label="When Someone Requests a Jimi Hendrix Song" href="https://elbosso.github.io/when_someone_requests_a_jimi_hendrix_song.html"]
     node_branchless_programming_auf_arm__java__julia [label="Branchless Programming auf Arm, Java, Julia" href="https://elbosso.github.io/branchless_programming_auf_arm__java__julia.html"]
-    node_excel__nein___awk_gnuplot_ [label="Excel? Nein - AWK und Gnuplot!" href="https://elbosso.github.io/excel__nein___awk_gnuplot_.html"]
     node_bildverarbeitung_java_multi_threaded [label="Bildverarbeitung in Java multi-threaded" href="https://elbosso.github.io/bildverarbeitung_java_multi_threaded.html"]
     node_verteiltes_whiteboard_docker_container [label="Verteiltes Whiteboard als Docker-Container" href="https://elbosso.github.io/verteiltes_whiteboard_docker_container.html"]
                 node_verteiltes_whiteboard_docker_container -> node_wireviz_docker_container
@@ -120,7 +122,8 @@ node_gpu_programmierung_java_revisited [label="GPU-Programmierung in Java revisi
 node_tsv_gnuplot_script_export_plugins [label="TSV und Gnuplot-Script Export durch Plugins" href="https://elbosso.github.io/tsv_gnuplot_script_export_plugins.html"]
                 node_tsv_gnuplot_script_export_plugins -> node_generierung_gnuplot_skripten_influxdb
 node_mosquitto_mqtt_broker_on_docker_raspi [label="Mosquitto MQTT Broker on Docker@Raspi" href="https://elbosso.github.io/mosquitto_mqtt_broker_on_docker_raspi.html"]
-                node_mosquitto_mqtt_broker_on_docker_raspi -> node_verteiltes_whiteboard_docker_container
+                node_mosquitto_mqtt_broker_on_docker_raspi -> node_neues_github_projekt__duckylights
+            node_mosquitto_mqtt_broker_on_docker_raspi -> node_verteiltes_whiteboard_docker_container
 node_digisparkblinkstick_ii [label="DigiSparkBlinkStick II" href="https://elbosso.github.io/digisparkblinkstick_ii.html"]
     node_vnc_desktop_container [label="VNC-Desktop Container" href="https://elbosso.github.io/vnc_desktop_container.html"]
     node_guacamole_on_docker [label="Guacamole on Docker" href="https://elbosso.github.io/guacamole_on_docker.html"]

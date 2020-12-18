@@ -248,14 +248,24 @@ linewidth=2pt % Width of the border lines around content boxes
 
 \colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Only use certain lines in computation depending on the line numbers}}
 \inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '\{if(NR >9 && NR<21)\{sum+=\$N;sumsq+=\$N^2;count++\}\}' \\}\linebreak
-\inlinecode{Bash}{'END\{printf("Average: \%f Std deviation: \%f Count: \%d\\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)\}'}
+\inlinecode{Bash}{'END\{printf("Average: \%f Std deviation: \%f Count: \%d\\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)\}'
+}
 
 \colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Alternatively}}
 \inlinecode{Bash}{ls -l /usr/bin |tail -n +2| awk -v N=5 '(NR >9 && NR<21)\{sum+=\$N;sumsq+=\$N^2;count++\}' \\}\linebreak
-\inlinecode{Bash}{'END\{printf("Average: \%f Std deviation: \%f Count: \%d\\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)\}'}
+\inlinecode{Bash}{'END\{printf("Average: \%f Std deviation: \%f Count: \%d\\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)\}'
+}
 
 \colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Only use certain lines in computation using timestamps as criterion}}
-\inlinecode{Bash}{ls -lt --time-style=long-iso /usr/bin|awk -v date=2020-06-09 'date<\$6\{print \$8\}'}
+\inlinecode{Bash}{ls -lt --time-style=long-iso /usr/bin|awk -v date=2020-06-09 'date<\$6\{print \$8\}'
+}
+
+\colorbox[HTML]{CCFFFF}{\makebox[\textwidth-2\fboxsep][l]{\bf - Colorize cells depending on their value}}
+\inlinecode{Bash}{ls -l /usr/bin |tail -n +2| \\}\linebreak
+\inlinecode{Bash}{awk '\{if(\$5>999999)print NR"\\t"\$1"\\t"\$2"\\t"\$3"\\t"\$4"\\t\\033[1;31m"\$5"\\033[0m"; \\}\linebreak
+\inlinecode{Bash}{else print NR"\\t"\$1"\\t"\$2"\\t"\$3"\\t"\$4"\\t"\$5;\}'
+}
+
 }
 
 %----------------------------------------------------------------
