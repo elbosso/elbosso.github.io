@@ -36,10 +36,13 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_derangement_java_implementiert [label="Derangement in Java implementiert" href="https://elbosso.github.io/derangement_java_implementiert.html"]
+                node_derangement_java_implementiert -> node_derangement___theoretische_betrachtungen
 node_raspi_booten_uebers_netz_pxe_nfs [label="Raspi booten übers Netz mit PXE und NFS" href="https://elbosso.github.io/raspi_booten_uebers_netz_pxe_nfs.html"]
                 node_raspi_booten_uebers_netz_pxe_nfs -> node_pxe_boot_rock64
 node_excel__nein___awk_gnuplot_ [label="Excel? Nein - AWK und Gnuplot!" href="https://elbosso.github.io/excel__nein___awk_gnuplot_.html"]
-    node_guenstiges_arm64_board_raspi_formfaktor [label="Günstiges Arm64-Board mit Raspi-Formfaktor" href="https://elbosso.github.io/guenstiges_arm64_board_raspi_formfaktor.html"]
+                node_excel__nein___awk_gnuplot_ -> node_renderer_generierte_dungeons_ansi_steuercodes
+node_guenstiges_arm64_board_raspi_formfaktor [label="Günstiges Arm64-Board mit Raspi-Formfaktor" href="https://elbosso.github.io/guenstiges_arm64_board_raspi_formfaktor.html"]
                 node_guenstiges_arm64_board_raspi_formfaktor -> node_pxe_boot_rock64
             node_guenstiges_arm64_board_raspi_formfaktor -> node_raspi_booten_uebers_netz_pxe_nfs
 node_installation_ubuntu_20_04_auf_raid_0 [label="Installation von Ubuntu 20.04 auf Raid-0" href="https://elbosso.github.io/installation_ubuntu_20_04_auf_raid_0.html"]
@@ -798,6 +801,7 @@ node_material_design_anyone_ [label="Material Design anyone?" href="https://elbo
 node_22_sarcastic_zen_phrases [label="22 Sarcastic Zen Phrases" href="https://elbosso.github.io/22_sarcastic_zen_phrases.html"]
     node_dungeon_generator [label="Dungeon-Generator" href="https://elbosso.github.io/dungeon_generator.html"]
                 node_dungeon_generator -> node_neue_datengeneratoren_ii
+            node_dungeon_generator -> node_renderer_generierte_dungeons_ansi_steuercodes
             node_dungeon_generator -> node_monte_carlo_dungeon
 node_neue_interaktionsmetapher_dwb_ [label="Neue Interaktionsmetapher in dWb+" href="https://elbosso.github.io/neue_interaktionsmetapher_dwb_.html"]
     node_verbesserungen_moduleworkspace_i [label="Verbesserungen ModuleWorkspace I" href="https://elbosso.github.io/verbesserungen_moduleworkspace_i.html"]
