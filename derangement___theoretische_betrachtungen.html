@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Erste Julia-Implementierung</title>
+<title>Derangement - theoretische Betrachtungen</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -45,87 +45,88 @@ and is wrapped around the whole page content, except for the footer in this exam
 			<a name="content"></a>
 			<div class="w3-card w3-margin">
 				<div class="w3-container w3-padding">
-					<h4>Erste Julia-Implementierung</h4>
-					<div class="w3-container">
-						<div class="w3-row">
-							<div class="w3-col m8 s12">
-								vorhergehende Artikel in:
-								<a href="monitoring_app_android_opensource.html#content">
-									<span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span>
-								</a> <!--/li-->
-								<a href="oracle_jdbc_treiber_eigenarten.html#content">
-									<span class="w3-tag w3-black w3-margin-bottom">Rants</span>
-								</a> <!--/li-->
+					<div class="w3-row">
+						<div class="w3-col m9 s12">
+							<h4>Derangement - theoretische Betrachtungen</h4>
+							<div class="w3-container">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										vorhergehende Artikel in:
+										<a href="derangement_java_implementiert.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Java</span>
+										</a> <!--/li-->
+										<a href="derangement_java_implementiert.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Komponenten</span>
+										</a> <!--/li-->
+									</div>
+									<div class="w3-col m4" style="text-align: right">
+										<span class="w3-opacity">23.12.2020</span>
+									</div>
+								</div>
 							</div>
-							<div class="w3-col m4" style="text-align: right">
-								<span class="w3-opacity">07.03.2017</span>
-							</div>
+						</div>
+						<div class="w3-col m3"><p style="text-align: right">
+							<img style="max-width:128px;" src="https://img.youtube.com/vi/5kC5k5QBqcc/default.jpg">
+						</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="w3-card-4 w3-margin w3-white">
 				<div class="w3-container w3-padding" id="abstract">
-<p>Nach längerer Pause meines Projektes zum Lernen neuer Sprachen wurde über den Jahreswechsel ausgegraben und ich fand
-endlich mal die Zeit, meine ersten Versuche mit Julia zu unternehmen
+<p>Ich habe bereits über meine Implementierung eines
+<a href="derangement_java_implementiert.html">Derangement</a>
+berichtet - hier noch einige theoretische Nachbetrachtungen...
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
-<p>Im
-<a href="neuronale_netzwerke_unterschiedlichen_technologien.html">Projekt</a>
-stand ja immer noch die Sprache Julia auf dem Plan. Die erste Implementierung (Neural Gas) ist
-<a href="https://github.com/elbosso/nn_multi_lang/tree/master/julia">ins Repository gewandert</a> - dank
-der guten <a href="http://docs.julialang.org/en/release-0.4/stdlib/sort/">Dokumentation</a> und - speziell von mir
-immer noch benötigter -
-<a href="https://learnxinyminutes.com/docs/julia/">Einstiegshilfen</a>.
+<p><iframe
+	class="center"
+	style="width:100%;max-width:450px;height:450px"
+	src="https://www.youtube.com/embed/5kC5k5QBqcc"
+	frameborder="0"
+	allowfullscreen>
+</iframe>
+<a href="https://www.youtube.com/watch?v=5kC5k5QBqcc">@youtube.com</a>
 </p><p>
-Die Visualisierung geschieht mittels
-<a href="https://gist.github.com/gizmaa/7214002">PyPlot</a> - hier ein Beispiel für die Initialisierung
-der einzelnen Neuronen bei Benutzung zweidimensionaler Gewichtsvektoren:
-<img src="images/juliang_initial.png" style="max-width:662px;"
-alt="Screenshot"
-class="center" width="400px">
-<span class="imgdesc">
-Gewichtsvektoren nach Initialisierung
-</span>
-Und hier das Ergebnis nach 10000 Lernschritten - idealerweise sollte sich in jedem der 25 Kästchen jeweils ein blauer Bubbel
-im Zentrum befinden. Das wurde nicht ideal erreicht, aber man kann durchaus sehen, dass die Implementierung tut, was sie soll.
-<img src="images/juliang_10000.png" style="max-width:663px;"
-alt="Screenshot"
-class="center" width="400px">
-<span class="imgdesc">
-Gewichtsvektoren nach Initialisierung
-</span>
+Hannah Fry hat in diesem Video über Derangements erzählt und benutzte dazu das Secret-Santa-Spiel.
+Dabei geht es darum, dass zu Weihnachten in einer geschlossenen Gruppe jeder einem anderen Gruppenmitglied ein Geschenk
+schenken soll, wobei Schenkender und Beschenkter zufällig bestimmt weren sollen und Schenkender und beschenkter nicht gleich
+sein dürfen. Außerdem soll die Beziehung  nur dem jeweils Schenkenden bekannt sein.
+</p><p>
+Sie lässt nebenher fallen, dass
+die triviale Variante der Bestimmung der Tupel Schenkender-Beschenkter (Alle Namen kommen in einen Hut und reihum zieht jeder einen Zettel -
+ist es der eigene Name, muss der Zettel zurückgelegt und ein neuer gezogen werden; zieht der Letzte seinen eigenen Namen, so muss neu begonnen werden)
+aus mehreren Gründen ungünstig ist: unter anderem fällt
+hier der Begriff "Geheimhaltung". Er wird in dem Video nicht weiter ausgeführt, daher habe ich mich mal darangemacht, herauszufinden wann die
+Geheimhaltung verletzt wird.
+</p><p>
+Es stellt sich heraus, dass es unabhängig von der Teilnehmeranzahl immer einen möglichen Verlauf gibt, nach dem jedes Tupel
+Schenkender-Beschenkter bekannt ist - ich demonstriere das am Beispiel von 5 Teilnehmern A, B, C, D und E.
+Im Beispiel tritt der unwahrscheinliche - aber nicht unmögliche! - Fall auf, dass zunächst jeder der Teilnehmer den Zettel mit dem eigenen
+Namen zieht, diesen zurücklegt und einen anderen zieht. Sobald E als letzter an der Reihe ist bestehen zwei Möglichkeiten: Er
+zieht den Zettel mit seinem Namen - dann muss das Spiel wiederholt werden und ist damit uninteressant. Zieht er aber einen Zettel,
+auf dem <span class="mdbold">nicht</span> sein Name steht, weiß er automatisch <span class="mdbold">in jedem einzelnen Fall</span> wer Schenkender und Beschenkter ist.
+</p><p>
+Die Erklärung dafür lautet wie folgt: Nachdem A einen Zettel in der Hand hält, weiß  E, dass A noch im Topf war. Weil B ebenfalls
+zwei Versuche braucht, weiß E, dass A nicht B gezogen haben kann. Mit derselben Argumentation kann A aber auch C und D nicht gezogen haben .
+und da E nicht seinen Namen in Händen hält muss A <span class="mdbold">ihn selbst</span> als zu Beschenkenden gezogen haben!
+</p><p>
+Betrachten wir nun B: Wir wissen nun, dass B nicht E gezogen haben kann, sich selbst kann er den Regeln entsprechend
+auch nicht wählen und wir wissen, dass er C und D ebenfalls nicht gezogen haben kann, denn beide waren nach B an der Reihe und
+haben sich selbst noch im Topf vorgefunden. Damit haben wir für B also E, B, C und D ausgeschlossen - bleibt noch <span class="mdbold">A!</span> Damit haben wir zwei der Tupel
+geknackt.
+</p><p>
+Betrachtet man C, kann man analog argumentieren: A und E kann man ausschließen, denn die wurden bereits B und A zugeordnet.
+C fällt weg, da diese Zuordnung nach den Regeln verboten ist - da wir wissen, dass D sich selbst noch im Topf vorfand kann man auch D
+ausschließen und damit bleibt lediglich <span class="mdbold">B</span> übrig.
+</p><p>
+Analog D: Hier fallen die bereits zugeordneten E, A und B weg. D entfällt wegen der Regeln. Damit bleibt für D nur <span class="mdbold">C.</span>
+</p><p>
+Nun stellen wir fest, dass für E nur <span class="mdbold">A</span> als zu Beschenkender in Frage kommt.
+</p><p>
+Und so haben wir bewiesen, dass in dem sehr speziellen Fall, dass jeder bis auf den letzten Teilnehmer im ersten Versuch seinen Namen
+aus dem Topf zieht <span class="mdbold">jeder</span> lückenlos schlussfolgern kann, wer Schenkender und Beschenkter ist!
 </p>				</div>
-				<div class="w3-container w3-padding" id="referers">
-				<h3>
-					Artikel, die hierher verlinken
-				</h3>
-					<div class="w3-row">
-					<div class="w3-col m8 s12">
-						<h4>
-							Growing Cell Structures - Grenzen
-						</h4>
-					</div>
-					<div class="w3-col m4"><p style="text-align: right">
-						<span class="w3-opacity">12.03.2017</span>
-					</p>
-					</div>
-					</div>
-					<div class="w3-row">
-						<div class="w3-col m8 s12">
-							<p><p>Nachdem ich mich über den Jahreswechsel wieder einmal
-verstärkt
-mit meinem Projekt des Lernens verschiedener Programmiersprachen mittels
-komplexerer Beispiele gewidmet habe, gewann ich dabei - für mich - neue Einsichten:
-</p></p>
-						</div>
-						<div class="w3-col m4">
-							<p style="text-align: right">
-								<a class="w3-button w3-padding-large w3-white w3-border" href="growing_cell_structures___grenzen.html#content">Öffnen</a>
-							</p>
-						</div>
-					</div>
-				</div>
 
 			</div>
 			<!-- END BLOG ENTRY -->
@@ -151,13 +152,13 @@ komplexerer Beispiele gewidmet habe, gewann ich dabei - für mich - neue Einsich
 						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
 						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
 						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
-						<a href="tag_Git(lab|hub).html"><span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Git(lab|hub).html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
 						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
 						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
 						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
-						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
 						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
-						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a>
 						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
 						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
 						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
@@ -166,7 +167,7 @@ komplexerer Beispiele gewidmet habe, gewann ich dabei - für mich - neue Einsich
 						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
 						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
 						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
-						<a href="tag_Rants.html"><span class="w3-tag w3-black w3-margin-bottom">Rants</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
 						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
 						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
 						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
@@ -207,17 +208,6 @@ komplexerer Beispiele gewidmet habe, gewann ich dabei - für mich - neue Einsich
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Derangement - theoretische Betrachtungen</span><br>
-						<span class="smallabstract"><p>Ich habe bereits über meine Implementierung eines
-Derangement
-berichtet - hier noch einige theoretische Nachbetrachtungen...
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="derangement___theoretische_betrachtungen.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
 							Hippopotamus for Christmas - Lauren Tyler Scott</span><br>
 						<span class="smallabstract"><p>Frohe Weihnachten!
 </p></span>
@@ -238,6 +228,18 @@ Daten an die Influx-DB meldet und mit
 Grafana überwacht werden kann:
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="spezielle_telegraf_anpassungen_rock64.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							PXE Boot für Rock64</span><br>
+						<span class="smallabstract"><p>Ich wollte nach den Erfolgen, den ich mit dem Boot eines
+Raspberry Pi via PXE
+erzielt hatte auch das Rock64-Board auf diese Weise betreiben - Dieser Artikel erzählt die Geschichte
+meines Scheiterns...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pxe_boot_rock64.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -273,17 +275,6 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Derangement - theoretische Betrachtungen</span><br>
-							<span class="smallabstract"><p>Ich habe bereits über meine Implementierung eines
-Derangement
-berichtet - hier noch einige theoretische Nachbetrachtungen...
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="derangement___theoretische_betrachtungen.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
 							Hippopotamus for Christmas - Lauren Tyler Scott</span><br>
 							<span class="smallabstract"><p>Frohe Weihnachten!
 </p></span>
@@ -304,6 +295,18 @@ Daten an die Influx-DB meldet und mit
 Grafana überwacht werden kann:
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="spezielle_telegraf_anpassungen_rock64.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							PXE Boot für Rock64</span><br>
+							<span class="smallabstract"><p>Ich wollte nach den Erfolgen, den ich mit dem Boot eines
+Raspberry Pi via PXE
+erzielt hatte auch das Rock64-Board auf diese Weise betreiben - Dieser Artikel erzählt die Geschichte
+meines Scheiterns...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pxe_boot_rock64.html#content">
  Weiterlesen...
 								</a>
 						</li>
