@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  Die untenstehende Lizenz berührt nicht die Rechte des Autors der zugrundeliegenden Software
  http://www.jug-muenster.de/swing-apollo-space-program-mission-timer-280/
 
-Copyright (c) 2013-2020.
+Copyright (c) 2013-2021.
 
 Juergen Key. Alle Rechte vorbehalten.
 

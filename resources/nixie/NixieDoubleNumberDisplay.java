@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /*
-Copyright (c) 2013-2020.
+Copyright (c) 2013-2021.
 
 Juergen Key. Alle Rechte vorbehalten.
 

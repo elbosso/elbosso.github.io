@@ -3,7 +3,7 @@ package de.elbosso.ui.components;
 import de.elbosso.util.generator.generalpurpose.RandomColor;
 
 /*
-Copyright (c) 2013-2020.
+Copyright (c) 2013-2021.
 
 Juergen Key. Alle Rechte vorbehalten.
 
