@@ -36,6 +36,11 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_neue_generatoren_json__ical_vcard [label="Neue Generatoren für JSON, iCal und vCard" href="https://elbosso.github.io/neue_generatoren_json__ical_vcard.html"]
+                node_neue_generatoren_json__ical_vcard -> node_generator_microservices_mastodon_bot
+node_neues_plugin_datamodel2jpa [label="Neues Plugin DataModel2JPA" href="https://elbosso.github.io/neues_plugin_datamodel2jpa.html"]
+                node_neues_plugin_datamodel2jpa -> node_sqlshell_version_7_1pre6_build_8896
+            node_neues_plugin_datamodel2jpa -> node_exportieren_eines_reports_textformat
 node_rc3___meine_favoriten_bisher [label="rc3 - Meine Favoriten bisher" href="https://elbosso.github.io/rc3___meine_favoriten_bisher.html"]
     node_erste_versuche_lora_ttn [label="Erste Versuche mit LoRa und TTN" href="https://elbosso.github.io/erste_versuche_lora_ttn.html"]
     node_derangement___theoretische_betrachtungen [label="Derangement - theoretische Betrachtungen" href="https://elbosso.github.io/derangement___theoretische_betrachtungen.html"]
@@ -182,6 +187,7 @@ node_tresenlesen___frank_jochen__schausaufen_betonung [label="Tresenlesen - Fran
                 node_testdaten_xml_schema_generieren -> node_generator_framework_jmeter_integriert
             node_testdaten_xml_schema_generieren -> node_openapi_schema_testdaten_generator
             node_testdaten_xml_schema_generieren -> node_json_builder_generator_framework
+            node_testdaten_xml_schema_generieren -> node_testdaten_xml_schema_generieren___v1_0_0
 node_s_mime_email_crypto [label="S/MIME Email Crypto" href="https://elbosso.github.io/s_mime_email_crypto.html"]
     node_bill_withers__stevie_wonder__john_legend___lean_on_me [label="Bill Withers, Stevie Wonder, John Legend - Lean On Me" href="https://elbosso.github.io/bill_withers__stevie_wonder__john_legend___lean_on_me.html"]
     node_8tb_raid5_raspberry_pi [label="8TB Raid5 mit Raspberry Pi" href="https://elbosso.github.io/8tb_raid5_raspberry_pi.html"]
@@ -310,7 +316,8 @@ node_vaadin_swing_ersatz [label="Vaadin als Swing-Ersatz" href="https://elbosso.
                 node_sqlshell_echtzeitdatenbanken -> node_syntax_highlighting_influxdb_java_anwendungen
             node_sqlshell_echtzeitdatenbanken -> node_viewpanel_sqlshell_zeitreihendatenbanken
 node_testdatengeneratoren_microservices_docker [label="Testdatengeneratoren als Microservices mit Docker" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker.html"]
-                node_testdatengeneratoren_microservices_docker -> node_vaadin_swing_ersatz
+                node_testdatengeneratoren_microservices_docker -> node_generator_microservices_mastodon_bot
+            node_testdatengeneratoren_microservices_docker -> node_vaadin_swing_ersatz
             node_testdatengeneratoren_microservices_docker -> node_testdatengeneratoren_microservices_docker_ueberarbeitet
 node_testdatengeneratoren_microservices_docker_ueberarbeitet [label="Testdatengeneratoren als Microservices mit Docker überarbeitet" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker_ueberarbeitet.html"]
                 node_testdatengeneratoren_microservices_docker_ueberarbeitet -> node_nullpointer_fontconfig_alpine_java_docker
