@@ -36,7 +36,8 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_rc3___meine_favoriten_zweiter_teil [label="rc3 - Meine Favoriten zweiter Teil" href="https://elbosso.github.io/rc3___meine_favoriten_zweiter_teil.html"]
+node_gemischte_gefuehle_re__openwebstart [label="Gemischte Gefühle re: OpenWebStart" href="https://elbosso.github.io/gemischte_gefuehle_re__openwebstart.html"]
+    node_rc3___meine_favoriten_zweiter_teil [label="rc3 - Meine Favoriten zweiter Teil" href="https://elbosso.github.io/rc3___meine_favoriten_zweiter_teil.html"]
     node_neue_generatoren_json__ical_vcard [label="Neue Generatoren für JSON, iCal und vCard" href="https://elbosso.github.io/neue_generatoren_json__ical_vcard.html"]
                 node_neue_generatoren_json__ical_vcard -> node_generator_microservices_mastodon_bot
 node_neues_plugin_datamodel2jpa [label="Neues Plugin DataModel2JPA" href="https://elbosso.github.io/neues_plugin_datamodel2jpa.html"]
@@ -48,7 +49,8 @@ node_erste_versuche_lora_ttn [label="Erste Versuche mit LoRa und TTN" href="http
     node_derangement___theoretische_betrachtungen [label="Derangement - theoretische Betrachtungen" href="https://elbosso.github.io/derangement___theoretische_betrachtungen.html"]
     node_hippopotamus_for_christmas___lauren_tyler_scott [label="Hippopotamus for Christmas - Lauren Tyler Scott" href="https://elbosso.github.io/hippopotamus_for_christmas___lauren_tyler_scott.html"]
     node_spezielle_telegraf_anpassungen_rock64 [label="Spezielle Telegraf-Anpassungen für Rock64" href="https://elbosso.github.io/spezielle_telegraf_anpassungen_rock64.html"]
-    node_pxe_boot_rock64 [label="PXE Boot für Rock64" href="https://elbosso.github.io/pxe_boot_rock64.html"]
+                node_spezielle_telegraf_anpassungen_rock64 -> node_dns_fallback_ohne_ip_adress_sharing
+node_pxe_boot_rock64 [label="PXE Boot für Rock64" href="https://elbosso.github.io/pxe_boot_rock64.html"]
                 node_pxe_boot_rock64 -> node_spezielle_telegraf_anpassungen_rock64
 node_derangement_java_implementiert [label="Derangement in Java implementiert" href="https://elbosso.github.io/derangement_java_implementiert.html"]
                 node_derangement_java_implementiert -> node_derangement___theoretische_betrachtungen
@@ -307,7 +309,8 @@ node_biometrie_ist_tot [label="Biometrie ist tot" href="https://elbosso.github.i
                 node_automatisches_setup_eines_netzwerklabors -> node_vpn_netzwerklabor
             node_automatisches_setup_eines_netzwerklabors -> node_vorhaben_2020
 node_dnssec_faehiger_resolver_auf_dem_pi [label="DNSSEC fähiger Resolver auf dem Pi" href="https://elbosso.github.io/dnssec_faehiger_resolver_auf_dem_pi.html"]
-                node_dnssec_faehiger_resolver_auf_dem_pi -> node_lxc_bootstrap_gui_container
+                node_dnssec_faehiger_resolver_auf_dem_pi -> node_dns_fallback_ohne_ip_adress_sharing
+            node_dnssec_faehiger_resolver_auf_dem_pi -> node_lxc_bootstrap_gui_container
             node_dnssec_faehiger_resolver_auf_dem_pi -> node_raspberry_schnellem_massenspeicher
 node_multi_user_webdav__docker__github [label="Multi-User-WebDAV, Docker, GitHub" href="https://elbosso.github.io/multi_user_webdav__docker__github.html"]
     node_ci_cd_grafana [label="CI/CD mit Grafana" href="https://elbosso.github.io/ci_cd_grafana.html"]
