@@ -35,6 +35,8 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 package de.elbosso.scratch.util;
 
 import de.elbosso.util.Utilities;
+import de.elbosso.util.lang.collections.DoublyLinkedListHead;
+import de.elbosso.util.lang.collections.DoublyLinkedListPart;
 import de.netsysit.util.StopWatch;
 import org.apache.log4j.Level;
 
@@ -94,13 +96,38 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		}
 		return l;
 	}
+	private DoublyLinkedListHead<String> createDoublyLinkedStringList()
+	{
+		de.netsysit.util.generator.RandomNumberSequence<Integer> counter=new de.netsysit.util.generator.generalpurpose.RandomIntSequence();
+		counter.setMin(49999);
+		counter.setMax(50000);
+		int howmany=counter.next();
+		de.netsysit.util.generator.semantics.PlacesSequence seq=new de.netsysit.util.generator.semantics.PlacesSequence();
+		seq.setAllowsNull(false);
+		DoublyLinkedListHead<java.lang.String> l=new DoublyLinkedListHead();
+		for(int i=0;i<howmany;++i)
+		{
+			l.add(seq.next());
+		}
+		return l;
+	}
 	private void iterListLazy(java.util.List<java.lang.String> l)
 	{
 		java.lang.StringBuffer sb=new java.lang.StringBuffer();
 		StopWatch sw=new StopWatch(true);
-		for (String string : l)
+		for (java.util.Iterator<java.lang.String> iter=l.listIterator();iter.hasNext();)
 		{
-			sb.append(string);
+			sb.append(iter.next());
+		}
+		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+	}
+	private void iterListLazy(DoublyLinkedListHead<String> l)
+	{
+		java.lang.StringBuffer sb=new java.lang.StringBuffer();
+		StopWatch sw=new StopWatch(true);
+		for (java.util.Iterator<DoublyLinkedListPart<java.lang.String>> iter=l.internalIterator();iter.hasNext();)
+		{
+			sb.append(iter.next().getContent());
 		}
 		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
 	}
@@ -125,7 +152,17 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		}
 		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
 	}
-	
+	private void iterList(DoublyLinkedListHead<java.lang.String> l)
+	{
+		java.lang.StringBuffer sb=new java.lang.StringBuffer();
+		StopWatch sw=new StopWatch(true);
+		for (DoublyLinkedListPart<java.lang.String> part: l.getInternalCollection())
+		{
+			sb.append(part.getContent());
+		}
+		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+	}
+
 	public static void main(java.lang.String[] args)
 	{
 		Utilities.configureBasicStdoutLogging(Level.TRACE);
@@ -135,12 +172,31 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 //			bcac.calcCast();
 //			bcac.calcMult();
 //		}
-		java.util.List<java.lang.String> l=bcac.createStringList();
+/*		java.util.List<java.lang.String> l=bcac.createStringList();
 		for(int i=0;i<10;++i)
 		{
 			bcac.iterListLazy(l);
 			bcac.iterListVar(l);
 			bcac.iterList(l);
 		}
+*/
+		DoublyLinkedListHead<java.lang.String> l=bcac.createDoublyLinkedStringList();
+		for(int i=0;i<10;++i)
+		{
+//			bcac.iterListLazy(l);
+			bcac.iterList(l);
+		}
+		System.out.println("--");
+		for(int i=0;i<100;++i)
+		{
+//			bcac.iterListLazy(l);
+			bcac.iterList(l);
+		}
+		for(int i=0;i<100;++i)
+		{
+			bcac.iterListLazy(l);
+//			bcac.iterList(l);
+		}
+
 	}
 }

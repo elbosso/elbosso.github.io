@@ -36,6 +36,8 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_exportieren_eines_reports_textformat [label="Exportieren eines Reports im Textformat" href="https://elbosso.github.io/exportieren_eines_reports_textformat.html"]
+                node_exportieren_eines_reports_textformat -> node_zterm_github_fork
 node_renderer_generierte_dungeons_ansi_steuercodes [label="Renderer für generierte Dungeons mit Ansi-Steuercodes" href="https://elbosso.github.io/renderer_generierte_dungeons_ansi_steuercodes.html"]
                 node_renderer_generierte_dungeons_ansi_steuercodes -> node_zterm_github_fork
             node_renderer_generierte_dungeons_ansi_steuercodes -> node_generator_microservices_mastodon_bot
@@ -84,6 +86,7 @@ node_openapi_schema_testdaten_generator [label="OpenApi-Schema Testdaten-Generat
 node_links___verschiedenes [label="Links - Verschiedenes" href="https://elbosso.github.io/links___verschiedenes.html"]
     node_synchronisierung_lorenz_systemen_iii [label="Synchronisierung von Lorenz-Systemen III" href="https://elbosso.github.io/synchronisierung_lorenz_systemen_iii.html"]
                 node_synchronisierung_lorenz_systemen_iii -> node_synchronisierung_roessler_systemen
+            node_synchronisierung_lorenz_systemen_iii -> node_synchronisierung_aizawa_systemen
 node_ueberwachung_festplattenstatus_grafana [label="Überwachung Festplattenstatus mit Grafana" href="https://elbosso.github.io/ueberwachung_festplattenstatus_grafana.html"]
                 node_ueberwachung_festplattenstatus_grafana -> node_guenstiges_arm64_board_raspi_formfaktor
             node_ueberwachung_festplattenstatus_grafana -> node_spezielle_telegraf_anpassungen_rock64
@@ -187,7 +190,8 @@ node_raspberry_schnellem_massenspeicher [label="Raspberry mit schnellem Massensp
             node_raspberry_schnellem_massenspeicher -> node_mosquitto_mqtt_broker_on_docker_raspi
 node_fehlersuche_ressourcenleaks [label="Fehlersuche bei Ressourcenleaks" href="https://elbosso.github.io/fehlersuche_ressourcenleaks.html"]
     node_unit_tests_javas_collections [label="Unit-Tests für Javas Collections" href="https://elbosso.github.io/unit_tests_javas_collections.html"]
-    node_bifurkationen_lorenz_system [label="Bifurkationen im Lorenz-System" href="https://elbosso.github.io/bifurkationen_lorenz_system.html"]
+                node_unit_tests_javas_collections -> node_java_collections_slices
+node_bifurkationen_lorenz_system [label="Bifurkationen im Lorenz-System" href="https://elbosso.github.io/bifurkationen_lorenz_system.html"]
                 node_bifurkationen_lorenz_system -> node_synchronisierung_lorenz_systemen
             node_bifurkationen_lorenz_system -> node_einbinden_wettervorhersagedaten_grafana
             node_bifurkationen_lorenz_system -> node_pluto_jl_docker_container
@@ -973,6 +977,7 @@ node_koans [label="Koans" href="https://elbosso.github.io/koans.html"]
     node_billy_gibbons___la_grange [label="Billy Gibbons - La Grange" href="https://elbosso.github.io/billy_gibbons___la_grange.html"]
     node_vergleichende_bytecode_analyse [label="Vergleichende Bytecode-Analyse" href="https://elbosso.github.io/vergleichende_bytecode_analyse.html"]
                 node_vergleichende_bytecode_analyse -> node_lambda_expressions_vs__anon__inner_classes
+            node_vergleichende_bytecode_analyse -> node_java_collections_slices
 node_ausbreitung_wasser_kuenstlichen_landschaften [label="Ausbreitung von Wasser in künstlichen Landschaften" href="https://elbosso.github.io/ausbreitung_wasser_kuenstlichen_landschaften.html"]
                 node_ausbreitung_wasser_kuenstlichen_landschaften -> node_planetengenerator_vs__landschaftsgenerator
 node_neuronale_netzwerke_unterschiedlichen_technologien [label="Neuronale Netzwerke in unterschiedlichen Technologien" href="https://elbosso.github.io/neuronale_netzwerke_unterschiedlichen_technologien.html"]
