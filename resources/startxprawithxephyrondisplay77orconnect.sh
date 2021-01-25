@@ -53,6 +53,8 @@ cat <<EOM >/tmp/start_xpra_remote.sh
   done
   echo "trying openbox"
   DISPLAY=:78 xterm &
+#  DISPLAY=:78 cairo-dock &
+#  DISPLAY=:78 plank&
 #just install a minimal lightweight window manager i thought...
 #turns out that full-fledged web browssers (firefox as well as chromium-browser) 
 #open ghost windows that dont get redrawn and can not be closed except for
@@ -60,6 +62,8 @@ cat <<EOM >/tmp/start_xpra_remote.sh
 # is not so big a problem because those windows open iconified there...
 # The browsers mentioned above were not the real problem - the script
 #start_xpra_remote running amok was it!
+#  DISPLAY=:78 metacity &
+#  DISPLAY=:78 mutter &
   DISPLAY=:78 blackbox &
 #  DISPLAY=:78 openbox &
 #  DISPLAY=:78 fluxbox &
