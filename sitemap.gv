@@ -37,7 +37,8 @@ rankdir=LR
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
 node_arxiv_papers_januar_2021 [label="Arxiv Papers Januar 2021" href="https://elbosso.github.io/arxiv_papers_januar_2021.html"]
-    node_neues_github_projekt__s3storagefrontend [label="neues GitHub-Projekt: s3storagefrontend" href="https://elbosso.github.io/neues_github_projekt__s3storagefrontend.html"]
+                node_arxiv_papers_januar_2021 -> node_generator_beliebige_tex_formeln
+node_neues_github_projekt__s3storagefrontend [label="neues GitHub-Projekt: s3storagefrontend" href="https://elbosso.github.io/neues_github_projekt__s3storagefrontend.html"]
     node_zterm_github_fork [label="ZTerm als GitHub-Fork" href="https://elbosso.github.io/zterm_github_fork.html"]
     node_exportieren_eines_reports_textformat [label="Exportieren eines Reports im Textformat" href="https://elbosso.github.io/exportieren_eines_reports_textformat.html"]
                 node_exportieren_eines_reports_textformat -> node_zterm_github_fork
@@ -103,7 +104,8 @@ node_fuzzy_java_maps [label="Fuzzy Java Maps" href="https://elbosso.github.io/fu
     node_synchronisierung_lorenz_systemen [label="Synchronisierung von Lorenz-Systemen" href="https://elbosso.github.io/synchronisierung_lorenz_systemen.html"]
                 node_synchronisierung_lorenz_systemen -> node_synchronisierung_lorenz_systemen_ii
 node_wiremock_http_s__echo_docker_container [label="Wiremock und HTTP(s)-Echo als Docker-Container" href="https://elbosso.github.io/wiremock_http_s__echo_docker_container.html"]
-                node_wiremock_http_s__echo_docker_container -> node_generator_framework_jmeter_integriert
+                node_wiremock_http_s__echo_docker_container -> node_wiremock_links
+            node_wiremock_http_s__echo_docker_container -> node_generator_framework_jmeter_integriert
 node_docker_ressourcen_managen_cgroups [label="Docker-Ressourcen managen mit cgroups" href="https://elbosso.github.io/docker_ressourcen_managen_cgroups.html"]
                 node_docker_ressourcen_managen_cgroups -> node_wiremock_http_s__echo_docker_container
 node_druckvorlagen_spezielle_papiere [label="Druckvorlagen für spezielle Papiere" href="https://elbosso.github.io/druckvorlagen_spezielle_papiere.html"]
