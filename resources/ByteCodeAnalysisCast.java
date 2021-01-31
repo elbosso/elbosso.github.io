@@ -142,6 +142,47 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		}
 		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
 	}
+	private void iterListVarSideEffect(java.util.List<java.lang.String> l)
+	{
+		java.lang.StringBuffer sb=new java.lang.StringBuffer();
+		StopWatch sw=new StopWatch(true);
+		for(int i=0;i<l.size();++i)
+		{
+			sb.append(l.get(i));
+		}
+		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+	}
+	private void iterArray(java.lang.String[] l)
+	{
+		java.lang.StringBuffer sb=new java.lang.StringBuffer();
+		StopWatch sw=new StopWatch(true);
+		for(String s:l)
+		{
+			sb.append(s);
+		}
+		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+	}
+	private void iterArrayVar(java.lang.String[] l)
+	{
+		java.lang.StringBuffer sb=new java.lang.StringBuffer();
+		int size=l.length;
+		StopWatch sw=new StopWatch(true);
+		for(int i=0;i<size;++i)
+		{
+			sb.append(l[i]);
+		}
+		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+	}
+	private void iterArrayVarSideEffect(java.lang.String[] l)
+	{
+		java.lang.StringBuffer sb=new java.lang.StringBuffer();
+		StopWatch sw=new StopWatch(true);
+		for(int i=0;i<l.length;++i)
+		{
+			sb.append(l[i]);
+		}
+		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+	}
 	private void iterList(java.util.List<java.lang.String> l)
 	{
 		java.lang.StringBuffer sb=new java.lang.StringBuffer();
@@ -181,21 +222,28 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		}
 */
 		DoublyLinkedListHead<java.lang.String> l=bcac.createDoublyLinkedStringList();
-		for(int i=0;i<10;++i)
+/*		for(int i=0;i<100;++i)
 		{
 //			bcac.iterListLazy(l);
-			bcac.iterList(l);
+			bcac.iterListVar(l);
+//			bcac.iterArrayVar(l.toArray(new String[0]));
+		}
+*/		System.out.println("--");
+		for(int i=0;i<100;++i)
+		{
+//			bcac.iterListLazy(l);
+//			bcac.iterListVar(l);
+//			bcac.iterArrayVar(l.toArray(new String[0]));
+			bcac.iterArray(l.toArray(new String[0]));
 		}
 		System.out.println("--");
+		//cat /tmp/data.dat|grep -F 'iterListLazy.'|rev|cut -d '.' -f 1|rev >/tmp/iterListLazy.dat
 		for(int i=0;i<100;++i)
 		{
 //			bcac.iterListLazy(l);
 			bcac.iterList(l);
-		}
-		for(int i=0;i<100;++i)
-		{
-			bcac.iterListLazy(l);
-//			bcac.iterList(l);
+//			bcac.iterListVarSideEffect(l);
+//			bcac.iterArrayVarSideEffect(l.toArray(new String[0]));
 		}
 
 	}
