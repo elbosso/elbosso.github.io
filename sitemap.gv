@@ -525,6 +525,7 @@ node_elektronisches_fahrtenbuch_ebmap4d [label="Elektronisches Fahrtenbuch in EB
                 node_elektronisches_fahrtenbuch_ebmap4d -> node_vorhaben_2019
             node_elektronisches_fahrtenbuch_ebmap4d -> node_esp_link_gps_logger
             node_elektronisches_fahrtenbuch_ebmap4d -> node_week_rollover_gps
+            node_elektronisches_fahrtenbuch_ebmap4d -> node_geojson_stadtplan_generator
 node_ode_an_freude [label="Ode an die Freude" href="https://elbosso.github.io/ode_an_freude.html"]
     node_dwb__grafana [label="dWb+ und Grafana" href="https://elbosso.github.io/dwb__grafana.html"]
                 node_dwb__grafana -> node_fritzbox__monitoring__tr064
