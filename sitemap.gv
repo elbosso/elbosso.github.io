@@ -36,6 +36,9 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_xbrowsersync_docker [label="xBrowserSync in Docker" href="https://elbosso.github.io/xbrowsersync_docker.html"]
+    node_dungeon_generator_rechteck_update [label="Dungeon-Generator Rechteck-Update" href="https://elbosso.github.io/dungeon_generator_rechteck_update.html"]
+                node_dungeon_generator_rechteck_update -> node_generator_beliebige_tex_formeln
 node_s3storagefrontend_version_1_3_0 [label="s3storagefrontend Version 1.3.0" href="https://elbosso.github.io/s3storagefrontend_version_1_3_0.html"]
     node_github_linkdump_2021_i [label="GitHub Linkdump 2021 I" href="https://elbosso.github.io/github_linkdump_2021_i.html"]
     node_spielen_perspektive___ellipsen [label="Spielen mit Perspektive - Ellipsen" href="https://elbosso.github.io/spielen_perspektive___ellipsen.html"]
@@ -113,6 +116,7 @@ node_excel__nein___awk_gnuplot_ [label="Excel? Nein - AWK und Gnuplot!" href="ht
                 node_excel__nein___awk_gnuplot_ -> node_renderer_generierte_dungeons_ansi_steuercodes
 node_guenstiges_arm64_board_raspi_formfaktor [label="Günstiges Arm64-Board mit Raspi-Formfaktor" href="https://elbosso.github.io/guenstiges_arm64_board_raspi_formfaktor.html"]
                 node_guenstiges_arm64_board_raspi_formfaktor -> node_pxe_boot_rock64
+            node_guenstiges_arm64_board_raspi_formfaktor -> node_xbrowsersync_docker
             node_guenstiges_arm64_board_raspi_formfaktor -> node_raspi_booten_uebers_netz_pxe_nfs
 node_installation_ubuntu_20_04_auf_raid_0 [label="Installation von Ubuntu 20.04 auf Raid-0" href="https://elbosso.github.io/installation_ubuntu_20_04_auf_raid_0.html"]
     node_automatisches_erzeugen_issues_gitlab [label="Automatisches Erzeugen von Issues in GitLab" href="https://elbosso.github.io/automatisches_erzeugen_issues_gitlab.html"]
@@ -142,6 +146,7 @@ node_fuzzy_java_maps [label="Fuzzy Java Maps" href="https://elbosso.github.io/fu
 node_wiremock_http_s__echo_docker_container [label="Wiremock und HTTP(s)-Echo als Docker-Container" href="https://elbosso.github.io/wiremock_http_s__echo_docker_container.html"]
                 node_wiremock_http_s__echo_docker_container -> node_wiremock_links
             node_wiremock_http_s__echo_docker_container -> node_generator_framework_jmeter_integriert
+            node_wiremock_http_s__echo_docker_container -> node_xbrowsersync_docker
 node_docker_ressourcen_managen_cgroups [label="Docker-Ressourcen managen mit cgroups" href="https://elbosso.github.io/docker_ressourcen_managen_cgroups.html"]
                 node_docker_ressourcen_managen_cgroups -> node_wiremock_http_s__echo_docker_container
 node_druckvorlagen_spezielle_papiere [label="Druckvorlagen für spezielle Papiere" href="https://elbosso.github.io/druckvorlagen_spezielle_papiere.html"]

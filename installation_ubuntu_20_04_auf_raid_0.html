@@ -120,7 +120,7 @@ Dazu wird zunächst erst einmal der ganz normale Installationsvorgang gestartet.
 bei der Frage nach dem Ziel-Datenträger der Installation ankommt (Ich habe die Installation in einer KVM-Session dokumentiert, der ich zu diesem Zweck 2
 virtuelle 20 GB-Festplatten spendiert hatte). Hier wählt man dann <span class="mdbold">Custom storage layout:</span>
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_001.png"
+<img src="images/ubuntufocalraid0/screenshot_001.png" style="max-width:1040px;"
 alt="Screenshot"
 class="center">
 Bildbeschreibung
@@ -132,7 +132,7 @@ Datenträgern wirklich nicht mehr benötigt!</span>
 Auf dem nächsten Bildschirm sieht man dann alle gefundenen Platten - sind sie fabrikneu, kann man sofort loslegen. Falls nicht,
 ist zunächst für jede Platte <span class="mdbold">(nicht Partition!)</span> <span class="mditalics">Reformat</span> zu wählen, um die bereits vorhandenen Partitionen zu entfernen:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_002.png"
+<img src="images/ubuntufocalraid0/screenshot_002.png" style="max-width:1040px;"
 alt="Screenshot"
 class="center">
 Start mit unformatierten Datenträgern
@@ -141,7 +141,7 @@ Start mit unformatierten Datenträgern
 Anschließend beginnt man mit dem Anlegen der Partitionen, aus denen später das Raid gebaut werden soll. In meinem Beispiel nehme ich
 als Größe <span class="mdbold">19 Gb.</span> Wichtig ist hier als Format <span class="mditalics">Leave unformatted</span> zu verwenden:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_003.png"
+<img src="images/ubuntufocalraid0/screenshot_003.png" style="max-width:1040px;"
 alt="Screenshot"
 class="center">
 Partitionen für Raid-0-Verbund erstellen
@@ -153,7 +153,7 @@ und könnte entsprechende Partitionen nicht benutzen!
 </p><p>
 Vor der Erstellung des Raid sieht die Festplattenkonfiguration also so aus:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_004.png"
+<img src="images/ubuntufocalraid0/screenshot_004.png" style="max-width:1040px;"
 alt="Screenshot"
 class="center">
 Festplattenkonfiguration vor Raid-Erstellung
@@ -161,7 +161,7 @@ Festplattenkonfiguration vor Raid-Erstellung
 </p><p>
 Nun wählt man <span class="mditalics">Create software raid (md)</span> aus und erstellt einen Raid-0-Verbund wie folgt:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_005.png"
+<img src="images/ubuntufocalraid0/screenshot_005.png" style="max-width:1040px;"
 alt="Screenshot"
 class="center">
 Raid-0-Verbund erstellen
@@ -169,7 +169,7 @@ Raid-0-Verbund erstellen
 </p><p>
 Diesen muss man nun noch formatieren und einem Mount-Point zuweisen (in unserem Fall ist das /):
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_006.png"
+<img src="images/ubuntufocalraid0/screenshot_006.png" style="max-width:1040px;"
 alt="Screenshot"
 class="center">
 Partition auf Raid-0 für /
@@ -177,7 +177,7 @@ Partition auf Raid-0 für /
 </p><p>
 Jetzt fehlt nur noch die boot-Partition, die wir auf der ersten Platte im bisher ungenutzten Bereich anlegen:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_007.png"
+<img src="images/ubuntufocalraid0/screenshot_007.png" style="max-width:1040px;"
 alt="Screenshot"
 class="center">
 boot-Partition anlegen
@@ -185,7 +185,7 @@ boot-Partition anlegen
 </p><p>
 Damit ist die Konfiguration der Datenträger abgeschlossen und die eigentliche Installation kann gestartet werden:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_008.png"
+<img src="images/ubuntufocalraid0/screenshot_008.png" style="max-width:1040px;"
 alt="Screenshot"
 class="center">
 Mit Installation fortfahren
@@ -194,7 +194,7 @@ Mit Installation fortfahren
 Nachdem man das System zum ersten Mal gebootet hat, kann man wie bereits unter der Version 18.04 mit den oben angegebenen
 Kommandos eine Desktop-Umgebung installieren:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_010.png"
+<img src="images/ubuntufocalraid0/screenshot_010.png" style="max-width:444px;"
 alt="Screenshot"
 class="center">
 Das Ergebnis
@@ -234,18 +234,15 @@ Das Ergebnis
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Synology-NAS als Festplattenrekorder</p>
+							Launcher für einfache Bearbeitung von Multimedia-Dateien mit avconv</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">19.03.2016</span>
+							<span class="w3-opacity">27.03.2016</span>
 						</p>
-						<span class="smallabstract"><p>Nachdem ich eigentlich recht zufrieden mit meinem 
-Synology-NAS
-bin, hat mich neulich wieder dieses Nerd-Jucken erwischt: Wir können einfach nichts in Ruhe lassen,
-das funktioniert.
-Daher nahm ich mir vor, mein Haus mit der Möglichkeit auszustatten, zeitgesteuerte Fernsehmitschnitte
-anzufertigen - natürlich ohne den Kauf eines entsprechenden fertigen Geräts...
+						<span class="smallabstract"><p>Vor vielen Jahren war ich Besitzer eines Amiga. Zu dieser Zeit wurden Programme durch Doppelklick gestartet und die Reminiszenzen
+an die gute alte Zeit brachten mich dazu, folgende Frage zu stellen: Ist es möglich, Launcher für Linux zu bauen, die nicht nur Anwendungen starten, sondern 
+per Drag'n'Drop auf sie fallengelassene Dateien als Argumente an die Anwendung weiterreichen?
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="synology_nas_festplattenrekorder.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="launcher_einfache_bearbeitung_multimedia_dateien_avconv.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -308,33 +305,33 @@ anzufertigen - natürlich ohne den Kauf eines entsprechenden fertigen Geräts...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							s3storagefrontend Version 1.3.0</span><br>
+							xBrowserSync in Docker</span><br>
+						<span class="smallabstract"><p>Nachdem ich schon längere Zeit nicht mehr über neue
+Dienste in meinem
+Docker-Zoo
+berichtet habe, habe ich in der vergangenen Woche wieder einmal einen Neuzugang begrüßen dürfen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="xbrowsersync_docker.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Dungeon-Generator Rechteck-Update</span><br>
+						<span class="smallabstract"><p>Der
+Dungeon-Generator hat weitere neue Features bekommen.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dungeon_generator_rechteck_update.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							s3storagefrontend Version 1.3.0</span><br>
 						<span class="smallabstract"><p>Das
 S3 Storage Frontend
 ist in einer neuen Version erschienen.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="s3storagefrontend_version_1_3_0.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							GitHub Linkdump 2021 I</span><br>
-						<span class="smallabstract"><p>Ein Linkdump zum Thema GitHub
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="github_linkdump_2021_i.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Spielen mit Perspektive - Ellipsen</span><br>
-						<span class="smallabstract"><p>Nach meinen
-letzten zaghaften
-Versuchen, per Computer dekorative Dinge zu schaffen habe ich mich ein wenig weiter in die Mathematik eingegraben und
-überlegt, ob ich statt der Rechtecke auch andere Formen in dieser Weise darstellen könnte...
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="spielen_perspektive___ellipsen.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -370,33 +367,33 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							s3storagefrontend Version 1.3.0</span><br>
+							xBrowserSync in Docker</span><br>
+							<span class="smallabstract"><p>Nachdem ich schon längere Zeit nicht mehr über neue
+Dienste in meinem
+Docker-Zoo
+berichtet habe, habe ich in der vergangenen Woche wieder einmal einen Neuzugang begrüßen dürfen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="xbrowsersync_docker.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Dungeon-Generator Rechteck-Update</span><br>
+							<span class="smallabstract"><p>Der
+Dungeon-Generator hat weitere neue Features bekommen.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dungeon_generator_rechteck_update.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							s3storagefrontend Version 1.3.0</span><br>
 							<span class="smallabstract"><p>Das
 S3 Storage Frontend
 ist in einer neuen Version erschienen.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="s3storagefrontend_version_1_3_0.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							GitHub Linkdump 2021 I</span><br>
-							<span class="smallabstract"><p>Ein Linkdump zum Thema GitHub
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="github_linkdump_2021_i.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Spielen mit Perspektive - Ellipsen</span><br>
-							<span class="smallabstract"><p>Nach meinen
-letzten zaghaften
-Versuchen, per Computer dekorative Dinge zu schaffen habe ich mich ein wenig weiter in die Mathematik eingegraben und
-überlegt, ob ich statt der Rechtecke auch andere Formen in dieser Weise darstellen könnte...
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="spielen_perspektive___ellipsen.html#content">
  Weiterlesen...
 								</a>
 						</li>
