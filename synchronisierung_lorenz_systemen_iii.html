@@ -94,40 +94,37 @@ treibendem und getriebenen System reagieren
 				<div class="w3-container w3-padding" id="contentdiv">
 <p>Ich nutze für das synchronisierende System dazu wieder den Parametersatz, mit dem sich eine Synchronisierung des
 Lorenz-Systems über alle drei zustandsvariablen realisieren ließ:
-</p><p>
-<img class="formula" src="images/tex/12070365511.png" alt="\sigma_1=10\;\; \rho_1=28\;\; \beta_1=0.9
+</p></p><p><img class="formula" src="images/tex/12070365511.png" alt="\sigma_1=10\;\; \rho_1=28\;\; \beta_1=0.9
 " title="\sigma_1=10\;\; \rho_1=28\;\; \beta_1=0.9
 ">
 </p><p>
 Für das zu synchronisierende System variierte ich diese um ein Millionstel:
-</p><p>
-<img class="formula" src="images/tex/12070365512.png" alt="\sigma_2=10*1.000001\;\; \rho_2=28*1.000001\;\; \beta_2=0.9*1.000001
+</p></p><p><img class="formula" src="images/tex/12070365512.png" alt="\sigma_2=10*1.000001\;\; \rho_2=28*1.000001\;\; \beta_2=0.9*1.000001
 " title="\sigma_2=10*1.000001\;\; \rho_2=28*1.000001\;\; \beta_2=0.9*1.000001
 ">
 </p><p>
-Anschließend konnte ich feststellen, dass die Systeme sich über die Zustandsvariable <span class="mdcode">z</span> nicht mehr synchronisieren ließen, die
+Anschließend konnte ich feststellen, dass die Systeme sich über die Zustandsvariable `z` nicht mehr synchronisieren ließen, die
 Synchronisierung über die anderen beiden Zustandsvariablen funktionierte noch:
 </p><p>
 <img src="images/lorenz_driven_x_factor_1.000001.png" style="max-width:1024px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
-Synchronisierung bei Variierung aller Parameter um ein Millionstel am Beispiel der Synchronisierung über <span class="mdcode">x</span>
+Synchronisierung bei Variierung aller Parameter um ein Millionstel am Beispiel der Synchronisierung über `x`
 </span>
 </p><p>
 <img src="images/lorenz_driven_z_factor_1.000001.png" style="max-width:1024px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
-Fehlgeschlagene Synchronisierung bei Variierung aller Parameter um ein Millionstel am Beispiel der Synchronisierung über <span class="mdcode">z</span>
+Fehlgeschlagene Synchronisierung bei Variierung aller Parameter um ein Millionstel am Beispiel der Synchronisierung über `z`
 </span>
 </p><p>
-Interessant war jetzt, ob bei einer stärkeren Abweichung auch die Synchronisierung über <span class="mdcode">x</span> und <span class="mdcode">y</span> aufhören
-würde, zu funktionieren. Erstaunlicherweise gelingt die Synchronisierung bis zu einer Abweichung in <span class="mdbold">allen
-drei Parametern</span> um <span class="mdbold">10 Prozent!</span> Beispielhaft habe ich hier das Systemverhalten für den folgenden Parametersatz und die
-Synchronisierung über <span class="mdcode">x</span> dargestellt:
-</p><p>
-<img class="formula" src="images/tex/12070365513.png" alt="\sigma_2=10*1.1\;\; \rho_2=28*1.1\;\; \beta_2=0.9*1.1
+Interessant war jetzt, ob bei einer stärkeren Abweichung auch die Synchronisierung über `x` und `y` aufhören
+würde, zu funktionieren. Erstaunlicherweise gelingt die Synchronisierung bis zu einer Abweichung in *allen
+drei Parametern* um *10 Prozent!* Beispielhaft habe ich hier das Systemverhalten für den folgenden Parametersatz und die
+Synchronisierung über `x` dargestellt:
+</p></p><p><img class="formula" src="images/tex/12070365513.png" alt="\sigma_2=10*1.1\;\; \rho_2=28*1.1\;\; \beta_2=0.9*1.1
 " title="\sigma_2=10*1.1\;\; \rho_2=28*1.1\;\; \beta_2=0.9*1.1
 ">
 </p><p>
@@ -243,15 +240,16 @@ Roessler-System.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Launcher für einfache Bearbeitung von Multimedia-Dateien mit avconv</p>
+							Methoden mit mehreren Parametern als Eingang in dWb+</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">27.03.2016</span>
+							<span class="w3-opacity">03.04.2016</span>
 						</p>
-						<span class="smallabstract"><p>Vor vielen Jahren war ich Besitzer eines Amiga. Zu dieser Zeit wurden Programme durch Doppelklick gestartet und die Reminiszenzen
-an die gute alte Zeit brachten mich dazu, folgende Frage zu stellen: Ist es möglich, Launcher für Linux zu bauen, die nicht nur Anwendungen starten, sondern 
-per Drag'n'Drop auf sie fallengelassene Dateien als Argumente an die Anwendung weiterreichen?
+						<span class="smallabstract"><p>Bereits in einem früheren 
+Beitrag
+wurde die Unterstützung von getakteten Modulen diskutiert. In diesem Zusammenhang habe ich 
+über die Möglichkeit der Nutzung von Methoden mit mehr als einem Parameter als Eingänge für Module nachgedacht...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="launcher_einfache_bearbeitung_multimedia_dateien_avconv.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="methoden_mehreren_parametern_eingang_dwb_.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -314,33 +312,40 @@ per Drag'n'Drop auf sie fallengelassene Dateien als Argumente an die Anwendung w
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							xBrowserSync in Docker</span><br>
+							Generator für beliebige TeX-Formeln</span><br>
+						<span class="smallabstract"><p>Meine
+Funde
+neulich auf dem Arxiv-Preprint-Server
+haben mich auf folgende Idee gebracht: Es gab in der Vergangenheit diverse Papers, die komplett durch eine sogenannte "AI"
+erstellt wurden und es trotz der Tatsache, dass sie keinen einzigen sinnvolen Gedanken enthielten durch den Peer-review-Prozess
+geschafft haben und veröffentlich wurden. Das betrifft aber nur Text - was, wenn man in einem solchen
+generierten
+Produkt auch einige
+kompliziert aussehenden Formeln benötigt?
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generator_beliebige_tex_formeln.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Wiremock Links</span><br>
+						<span class="smallabstract"><p>Hier mal einige Links zu den Themen
+Wiremock
+und Spring
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="wiremock_links.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							xBrowserSync in Docker</span><br>
 						<span class="smallabstract"><p>Nachdem ich schon längere Zeit nicht mehr über neue
 Dienste in meinem
 Docker-Zoo
 berichtet habe, habe ich in der vergangenen Woche wieder einmal einen Neuzugang begrüßen dürfen...
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="xbrowsersync_docker.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Dungeon-Generator Rechteck-Update</span><br>
-						<span class="smallabstract"><p>Der
-Dungeon-Generator hat weitere neue Features bekommen.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dungeon_generator_rechteck_update.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							s3storagefrontend Version 1.3.0</span><br>
-						<span class="smallabstract"><p>Das
-S3 Storage Frontend
-ist in einer neuen Version erschienen.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="s3storagefrontend_version_1_3_0.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -376,33 +381,40 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							xBrowserSync in Docker</span><br>
+							Generator für beliebige TeX-Formeln</span><br>
+							<span class="smallabstract"><p>Meine
+Funde
+neulich auf dem Arxiv-Preprint-Server
+haben mich auf folgende Idee gebracht: Es gab in der Vergangenheit diverse Papers, die komplett durch eine sogenannte "AI"
+erstellt wurden und es trotz der Tatsache, dass sie keinen einzigen sinnvolen Gedanken enthielten durch den Peer-review-Prozess
+geschafft haben und veröffentlich wurden. Das betrifft aber nur Text - was, wenn man in einem solchen
+generierten
+Produkt auch einige
+kompliziert aussehenden Formeln benötigt?
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generator_beliebige_tex_formeln.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Wiremock Links</span><br>
+							<span class="smallabstract"><p>Hier mal einige Links zu den Themen
+Wiremock
+und Spring
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="wiremock_links.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							xBrowserSync in Docker</span><br>
 							<span class="smallabstract"><p>Nachdem ich schon längere Zeit nicht mehr über neue
 Dienste in meinem
 Docker-Zoo
 berichtet habe, habe ich in der vergangenen Woche wieder einmal einen Neuzugang begrüßen dürfen...
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="xbrowsersync_docker.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Dungeon-Generator Rechteck-Update</span><br>
-							<span class="smallabstract"><p>Der
-Dungeon-Generator hat weitere neue Features bekommen.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dungeon_generator_rechteck_update.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							s3storagefrontend Version 1.3.0</span><br>
-							<span class="smallabstract"><p>Das
-S3 Storage Frontend
-ist in einer neuen Version erschienen.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="s3storagefrontend_version_1_3_0.html#content">
  Weiterlesen...
 								</a>
 						</li>

@@ -102,24 +102,24 @@ durch hatte, habe ich ein Experiment nachvollziehen wollen, zu dem die Idee von 
 <p>Ich habe zunächst das traditionelle
 <a href="bifurkationen_lorenz_system.html">Lorenz-System</a>
 mit
-<img class="formula" src="images/tex/-988481301.png" alt="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
+</p></p><p><img class="formula" src="images/tex/-988481301.png" alt="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
 " title="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
 ">
 benutzt. Dieses System löste ich numerisch mit je zwei unterschiedlichen Startbedingungen für eine gewisse Zeit bevor
 ich ein der beiden Systeme mit einer der Zustandsvariablen des anderen Systems beaufschlagte. Ich benutzte dazu den Parametersatz
-<img class="formula" src="images/tex/-988481302.png" alt="\sigma=10\;\; \rho=28\;\; \beta=8\over 3
+</p></p><p><img class="formula" src="images/tex/-988481302.png" alt="\sigma=10\;\; \rho=28\;\; \beta=8\over 3
 " title="\sigma=10\;\; \rho=28\;\; \beta=8\over 3
 ">
 Am Beispiel der Übertragung der
-Zustandsvariable <span class="mdcode">x</span> sieht das wie folgt aus:
+Zustandsvariable `x` sieht das wie folgt aus:
 </p><p>
-<span class="mdbold">Driver:</span>
-<img class="formula" src="images/tex/-988481303.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
+*Driver:*
+</p></p><p><img class="formula" src="images/tex/-988481303.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 ">
 </p><p>
-<span class="mdbold">Driven:</span>
-<img class="formula" src="images/tex/-988481304.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_2-x_1)\hfill\cr \dot y_2&=&x_1(\rho -z_2)-y_2\hfill\cr \dot z_2&=&x_1y_2-\beta z_2\hfill\end{matrix}
+*Driven:*
+</p></p><p><img class="formula" src="images/tex/-988481304.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_2-x_1)\hfill\cr \dot y_2&=&x_1(\rho -z_2)-y_2\hfill\cr \dot z_2&=&x_1y_2-\beta z_2\hfill\end{matrix}
 " title="\begin{matrix}\dot x_2&=&\sigma (y_2-x_1)\hfill\cr \dot y_2&=&x_1(\rho -z_2)-y_2\hfill\cr \dot z_2&=&x_1y_2-\beta z_2\hfill\end{matrix}
 ">
 </p><p>
@@ -128,7 +128,7 @@ Man erkennt deutlich, dass die Zustände und damit die aktuelle Position im Zust
 In der zweiten Zeile ist das Verhalten beider Systeme um diesen Zeitraum herum dargestellt. Man erkennt noch Unterschiede in Lage und
 Form der Trajektorie - schaut man sich jedoch die Position am Ende des dargestellten Ausschnitts an, kann man bereits erahnen, dass
 die Unterschiede immer kleiner werden. In der letzten Zeile schließlich erkennt man keine Unterschiede mehr zwischen beiden Trajektorien -
-<span class="mdbold">Das zweite System wurde mit dem ersten nur durch die Übertragung einer Statusvariablen synchronisiert!</span>
+*Das zweite System wurde mit dem ersten nur durch die Übertragung einer Statusvariablen synchronisiert!*
 </p><p>
 <img src="images/lorenz_driven_x.png" style="max-width:1024px;"
 alt="Screenshot"
@@ -137,15 +137,15 @@ class="center">
 Untersuchung des Verhaltens zweier Lorenz-Systeme bei Übertragung einer Statusvariablen (x)
 </span>
 </p><p>
-Bei Übertragung der Statusvariablen <span class="mdcode">y</span> erkennt man exakt dasselbe Verhalten:
+Bei Übertragung der Statusvariablen `y` erkennt man exakt dasselbe Verhalten:
 </p><p>
-<span class="mdbold">Driver:</span>
-<img class="formula" src="images/tex/-988481305.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
+*Driver:*
+</p></p><p><img class="formula" src="images/tex/-988481305.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 ">
 </p><p>
-<span class="mdbold">Driven:</span>
-<img class="formula" src="images/tex/-988481306.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_1-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_2)-y_1\hfill\cr \dot z_2&=&x_2y_1-\beta z_2\hfill\end{matrix}
+*Driven:*
+</p></p><p><img class="formula" src="images/tex/-988481306.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_1-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_2)-y_1\hfill\cr \dot z_2&=&x_2y_1-\beta z_2\hfill\end{matrix}
 " title="\begin{matrix}\dot x_2&=&\sigma (y_1-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_2)-y_1\hfill\cr \dot z_2&=&x_2y_1-\beta z_2\hfill\end{matrix}
 ">
 </p><p>
@@ -157,16 +157,16 @@ Untersuchung des Verhaltens zweier Lorenz-Systeme bei Übertragung einer Statusv
 </span>
 </p><p>
 Wie Strogatz et. al. bereits in ihren ursprünglichen Veröffentlichungen feststellten, gelingt die Synchronisation nicht mittels
-der Übertragung der Statusvariablen <span class="mdcode">z:</span> Man erreicht zwar eine qualitative Annäherung der Trajektorien, allerdings weichen sie
+der Übertragung der Statusvariablen `z:` Man erreicht zwar eine qualitative Annäherung der Trajektorien, allerdings weichen sie
 qualitativ (man beachte die Skalenbeschriftungen!) stark voneinander ab.
 </p><p>
-<span class="mdbold">Driver:</span>
-<img class="formula" src="images/tex/-988481307.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
+*Driver:*
+</p></p><p><img class="formula" src="images/tex/-988481307.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 ">
 </p><p>
-<span class="mdbold">Driven:</span>
-<img class="formula" src="images/tex/-988481308.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_2-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_1)-y_2\hfill\cr \dot z_2&=&x_2y_2-\beta z_1\hfill\end{matrix}
+*Driven:*
+</p></p><p><img class="formula" src="images/tex/-988481308.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_2-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_1)-y_2\hfill\cr \dot z_2&=&x_2y_2-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_2&=&\sigma (y_2-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_1)-y_2\hfill\cr \dot z_2&=&x_2y_2-\beta z_1\hfill\end{matrix}
 ">
 </p><p>
@@ -178,8 +178,7 @@ Untersuchung des Verhaltens zweier Lorenz-Systeme bei Übertragung einer Statusv
 </span>
 </p><p>
 Ich habe die Untersuchung  für verschiedene Parameter wiederholt:
-</p><p>
-<img class="formula" src="images/tex/-988481309.png" alt="\beta \in \{0.9,8.0/3.0,3.4\}
+</p></p><p><img class="formula" src="images/tex/-988481309.png" alt="\beta \in \{0.9,8.0/3.0,3.4\}
 " title="\beta \in \{0.9,8.0/3.0,3.4\}
 ">
 </p><p>
@@ -471,15 +470,16 @@ bei geeigneter Parameterwahl auch über die Zustandsvariable z möglich ist.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Launcher für einfache Bearbeitung von Multimedia-Dateien mit avconv</p>
+							Methoden mit mehreren Parametern als Eingang in dWb+</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">27.03.2016</span>
+							<span class="w3-opacity">03.04.2016</span>
 						</p>
-						<span class="smallabstract"><p>Vor vielen Jahren war ich Besitzer eines Amiga. Zu dieser Zeit wurden Programme durch Doppelklick gestartet und die Reminiszenzen
-an die gute alte Zeit brachten mich dazu, folgende Frage zu stellen: Ist es möglich, Launcher für Linux zu bauen, die nicht nur Anwendungen starten, sondern 
-per Drag'n'Drop auf sie fallengelassene Dateien als Argumente an die Anwendung weiterreichen?
+						<span class="smallabstract"><p>Bereits in einem früheren 
+Beitrag
+wurde die Unterstützung von getakteten Modulen diskutiert. In diesem Zusammenhang habe ich 
+über die Möglichkeit der Nutzung von Methoden mit mehr als einem Parameter als Eingänge für Module nachgedacht...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="launcher_einfache_bearbeitung_multimedia_dateien_avconv.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="methoden_mehreren_parametern_eingang_dwb_.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -542,33 +542,40 @@ per Drag'n'Drop auf sie fallengelassene Dateien als Argumente an die Anwendung w
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							xBrowserSync in Docker</span><br>
+							Generator für beliebige TeX-Formeln</span><br>
+						<span class="smallabstract"><p>Meine
+Funde
+neulich auf dem Arxiv-Preprint-Server
+haben mich auf folgende Idee gebracht: Es gab in der Vergangenheit diverse Papers, die komplett durch eine sogenannte "AI"
+erstellt wurden und es trotz der Tatsache, dass sie keinen einzigen sinnvolen Gedanken enthielten durch den Peer-review-Prozess
+geschafft haben und veröffentlich wurden. Das betrifft aber nur Text - was, wenn man in einem solchen
+generierten
+Produkt auch einige
+kompliziert aussehenden Formeln benötigt?
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generator_beliebige_tex_formeln.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Wiremock Links</span><br>
+						<span class="smallabstract"><p>Hier mal einige Links zu den Themen
+Wiremock
+und Spring
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="wiremock_links.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							xBrowserSync in Docker</span><br>
 						<span class="smallabstract"><p>Nachdem ich schon längere Zeit nicht mehr über neue
 Dienste in meinem
 Docker-Zoo
 berichtet habe, habe ich in der vergangenen Woche wieder einmal einen Neuzugang begrüßen dürfen...
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="xbrowsersync_docker.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Dungeon-Generator Rechteck-Update</span><br>
-						<span class="smallabstract"><p>Der
-Dungeon-Generator hat weitere neue Features bekommen.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dungeon_generator_rechteck_update.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							s3storagefrontend Version 1.3.0</span><br>
-						<span class="smallabstract"><p>Das
-S3 Storage Frontend
-ist in einer neuen Version erschienen.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="s3storagefrontend_version_1_3_0.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -604,33 +611,40 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							xBrowserSync in Docker</span><br>
+							Generator für beliebige TeX-Formeln</span><br>
+							<span class="smallabstract"><p>Meine
+Funde
+neulich auf dem Arxiv-Preprint-Server
+haben mich auf folgende Idee gebracht: Es gab in der Vergangenheit diverse Papers, die komplett durch eine sogenannte "AI"
+erstellt wurden und es trotz der Tatsache, dass sie keinen einzigen sinnvolen Gedanken enthielten durch den Peer-review-Prozess
+geschafft haben und veröffentlich wurden. Das betrifft aber nur Text - was, wenn man in einem solchen
+generierten
+Produkt auch einige
+kompliziert aussehenden Formeln benötigt?
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generator_beliebige_tex_formeln.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Wiremock Links</span><br>
+							<span class="smallabstract"><p>Hier mal einige Links zu den Themen
+Wiremock
+und Spring
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="wiremock_links.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							xBrowserSync in Docker</span><br>
 							<span class="smallabstract"><p>Nachdem ich schon längere Zeit nicht mehr über neue
 Dienste in meinem
 Docker-Zoo
 berichtet habe, habe ich in der vergangenen Woche wieder einmal einen Neuzugang begrüßen dürfen...
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="xbrowsersync_docker.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Dungeon-Generator Rechteck-Update</span><br>
-							<span class="smallabstract"><p>Der
-Dungeon-Generator hat weitere neue Features bekommen.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dungeon_generator_rechteck_update.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							s3storagefrontend Version 1.3.0</span><br>
-							<span class="smallabstract"><p>Das
-S3 Storage Frontend
-ist in einer neuen Version erschienen.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="s3storagefrontend_version_1_3_0.html#content">
  Weiterlesen...
 								</a>
 						</li>

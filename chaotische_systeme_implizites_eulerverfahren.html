@@ -103,36 +103,36 @@ nichts anderes als Differenzenverfahren oder - anders gesagt - wird die Lösung 
 auf die eine oder andere Weise den Anstieg der Funktion in einem Punkt und nimmt an, dass die Funktion in einem hinreichend
 kleinen Intervall hinreichend linear verläuft. Dann berechnet man den Wert der Funktion am Ende des Intervalls aus dem
 Wert am Anfang des Intervalls über den Anstieg (keine Angst - unten gibts Bilder...):
-<img class="formula" src="images/tex/-17676547641.png" alt="x_t+h=x_t+h\dot x_t
+</p></p><p><img class="formula" src="images/tex/-17676547641.png" alt="x_t+h=x_t+h\dot x_t
 " title="x_t+h=x_t+h\dot x_t
 ">
 Das ist die traditionelle Eulerformel für die numerische Lösung von Differentialgleichungssystemen. Wie bereits
 <a href="implizites_eulerverfahren.html">hier</a>
 beschrieben hat dieses Verfahren (wie alle expliziten Verfahren) diverse Nachteile, die man mit der Benutzung des
 impliziten Verfahrens umgehen kann:
-<img class="formula" src="images/tex/-17676547642.png" alt="x_t+h=x_t+h\dot x_{t+h}
+</p></p><p><img class="formula" src="images/tex/-17676547642.png" alt="x_t+h=x_t+h\dot x_{t+h}
 " title="x_t+h=x_t+h\dot x_{t+h}
 ">
 </p><p>
 Mein erster Versuch, chaotische Systeme mittels impliziter Verfahren zu behandeln, beschäftigte sich natürlich mit dem altbekannten
 <a href="https://en.wikipedia.org/wiki/Lorenz_system">Lorenz-Attractor</a>:
-<img class="formula" src="images/tex/-17676547643.png" alt="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
+</p></p><p><img class="formula" src="images/tex/-17676547643.png" alt="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
 " title="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
 ">
 mit
-<img class="formula" src="images/tex/-17676547644.png" alt="\sigma=10\;\; \rho=28\;\; \beta={8\over 3}
+</p></p><p><img class="formula" src="images/tex/-17676547644.png" alt="\sigma=10\;\; \rho=28\;\; \beta={8\over 3}
 " title="\sigma=10\;\; \rho=28\;\; \beta={8\over 3}
 ">
 Daraus folgt für die Behandlung mit dem impliziten Eulerverfahren und einer Schrittweite (oder Intervallänge) h:
-<img class="formula" src="images/tex/-17676547645.png" alt="\begin{matrix}x_{t+h}&=&x_t+h\dot x_{t+h}\hfill\cr y_{t+h}&=&y_t+h\dot y_{t+h}\hfill\cr z_{t+h}&=&z_t+h\dot z_{t+h}\hfill\end{matrix}
+</p></p><p><img class="formula" src="images/tex/-17676547645.png" alt="\begin{matrix}x_{t+h}&=&x_t+h\dot x_{t+h}\hfill\cr y_{t+h}&=&y_t+h\dot y_{t+h}\hfill\cr z_{t+h}&=&z_t+h\dot z_{t+h}\hfill\end{matrix}
 " title="\begin{matrix}x_{t+h}&=&x_t+h\dot x_{t+h}\hfill\cr y_{t+h}&=&y_t+h\dot y_{t+h}\hfill\cr z_{t+h}&=&z_t+h\dot z_{t+h}\hfill\end{matrix}
 ">
 und eingesetzt:
-<img class="formula" src="images/tex/-17676547646.png" alt="\begin{matrix}0&=&x_t+h\sigma y_{t+h}+(1+h\sigma)x_{t+h}\hfill\cr 0&=&y_t+h\sigma x_{t+h}-hz_{t+h}x_{t+h}-(1+h)y_{t+h}\hfill\cr 0&=&z_t+hx_{t+h}y_{t+h}-(1+h\beta)z_{t+h}\hfill\end{matrix}
+</p></p><p><img class="formula" src="images/tex/-17676547646.png" alt="\begin{matrix}0&=&x_t+h\sigma y_{t+h}+(1+h\sigma)x_{t+h}\hfill\cr 0&=&y_t+h\sigma x_{t+h}-hz_{t+h}x_{t+h}-(1+h)y_{t+h}\hfill\cr 0&=&z_t+hx_{t+h}y_{t+h}-(1+h\beta)z_{t+h}\hfill\end{matrix}
 " title="\begin{matrix}0&=&x_t+h\sigma y_{t+h}+(1+h\sigma)x_{t+h}\hfill\cr 0&=&y_t+h\sigma x_{t+h}-hz_{t+h}x_{t+h}-(1+h)y_{t+h}\hfill\cr 0&=&z_t+hx_{t+h}y_{t+h}-(1+h\beta)z_{t+h}\hfill\end{matrix}
 ">
 Und wegen der Übersichtlichkeit:
-<img class="formula" src="images/tex/-17676547647.png" alt="\begin{matrix}0&=&a+by_{t+h}+cx_{t+h}\hfill\cr 0&=&d+ex_{t+h}-hz_{t+h}x_{t+h}-gy_{t+h}\hfill\cr 0&=&i+hx_{t+h}y_{t+h}-jz_{t+h}\hfill\end{matrix}
+</p></p><p><img class="formula" src="images/tex/-17676547647.png" alt="\begin{matrix}0&=&a+by_{t+h}+cx_{t+h}\hfill\cr 0&=&d+ex_{t+h}-hz_{t+h}x_{t+h}-gy_{t+h}\hfill\cr 0&=&i+hx_{t+h}y_{t+h}-jz_{t+h}\hfill\end{matrix}
 " title="\begin{matrix}0&=&a+by_{t+h}+cx_{t+h}\hfill\cr 0&=&d+ex_{t+h}-hz_{t+h}x_{t+h}-gy_{t+h}\hfill\cr 0&=&i+hx_{t+h}y_{t+h}-jz_{t+h}\hfill\end{matrix}
 ">
 Löst man dieses Gleichungssystem - und ich gebe zu, dass ich mich außerstande sah und Hilfe bei
@@ -151,7 +151,7 @@ c*g)*(a*h*y + c*i))/(c*(h**2*x*(b*y + c*x) - j*(b*(e - h*z) - c*g))))}
 >>>
 </pre>
 Eindrucksvoll und dennoch verwirrend - daher habe ich es hier nochmal aufbereitet:
-<img class="formula" src="images/tex/-17676547648.png" alt="\begin{matrix}x_{t+h}&=&{{agj + ah^2x_t^2 + bdj - bhix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr y_{t+h}&=&{{aej - ah^2x_ty_t - ahjz_t + cdj - chix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr z_{t+h}&=&{{h(a(e - hz_t) + cd)(by_t + cx_t) - (b(e - hz_t) - cg)(ahy_t + ci)}\over{c(h^2x_t(by_t + cx_t) - j(b(e - hz_t) - cg))}}\hfill\end{matrix}
+</p></p><p><img class="formula" src="images/tex/-17676547648.png" alt="\begin{matrix}x_{t+h}&=&{{agj + ah^2x_t^2 + bdj - bhix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr y_{t+h}&=&{{aej - ah^2x_ty_t - ahjz_t + cdj - chix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr z_{t+h}&=&{{h(a(e - hz_t) + cd)(by_t + cx_t) - (b(e - hz_t) - cg)(ahy_t + ci)}\over{c(h^2x_t(by_t + cx_t) - j(b(e - hz_t) - cg))}}\hfill\end{matrix}
 " title="\begin{matrix}x_{t+h}&=&{{agj + ah^2x_t^2 + bdj - bhix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr y_{t+h}&=&{{aej - ah^2x_ty_t - ahjz_t + cdj - chix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr z_{t+h}&=&{{h(a(e - hz_t) + cd)(by_t + cx_t) - (b(e - hz_t) - cg)(ahy_t + ci)}\over{c(h^2x_t(by_t + cx_t) - j(b(e - hz_t) - cg))}}\hfill\end{matrix}
 ">
 </p><p>
@@ -315,15 +315,16 @@ hatte, habe ich mir gleich noch eines vorgenommen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Launcher für einfache Bearbeitung von Multimedia-Dateien mit avconv</p>
+							Methoden mit mehreren Parametern als Eingang in dWb+</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">27.03.2016</span>
+							<span class="w3-opacity">03.04.2016</span>
 						</p>
-						<span class="smallabstract"><p>Vor vielen Jahren war ich Besitzer eines Amiga. Zu dieser Zeit wurden Programme durch Doppelklick gestartet und die Reminiszenzen
-an die gute alte Zeit brachten mich dazu, folgende Frage zu stellen: Ist es möglich, Launcher für Linux zu bauen, die nicht nur Anwendungen starten, sondern 
-per Drag'n'Drop auf sie fallengelassene Dateien als Argumente an die Anwendung weiterreichen?
+						<span class="smallabstract"><p>Bereits in einem früheren 
+Beitrag
+wurde die Unterstützung von getakteten Modulen diskutiert. In diesem Zusammenhang habe ich 
+über die Möglichkeit der Nutzung von Methoden mit mehr als einem Parameter als Eingänge für Module nachgedacht...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="launcher_einfache_bearbeitung_multimedia_dateien_avconv.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="methoden_mehreren_parametern_eingang_dwb_.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -386,33 +387,40 @@ per Drag'n'Drop auf sie fallengelassene Dateien als Argumente an die Anwendung w
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							xBrowserSync in Docker</span><br>
+							Generator für beliebige TeX-Formeln</span><br>
+						<span class="smallabstract"><p>Meine
+Funde
+neulich auf dem Arxiv-Preprint-Server
+haben mich auf folgende Idee gebracht: Es gab in der Vergangenheit diverse Papers, die komplett durch eine sogenannte "AI"
+erstellt wurden und es trotz der Tatsache, dass sie keinen einzigen sinnvolen Gedanken enthielten durch den Peer-review-Prozess
+geschafft haben und veröffentlich wurden. Das betrifft aber nur Text - was, wenn man in einem solchen
+generierten
+Produkt auch einige
+kompliziert aussehenden Formeln benötigt?
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generator_beliebige_tex_formeln.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Wiremock Links</span><br>
+						<span class="smallabstract"><p>Hier mal einige Links zu den Themen
+Wiremock
+und Spring
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="wiremock_links.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							xBrowserSync in Docker</span><br>
 						<span class="smallabstract"><p>Nachdem ich schon längere Zeit nicht mehr über neue
 Dienste in meinem
 Docker-Zoo
 berichtet habe, habe ich in der vergangenen Woche wieder einmal einen Neuzugang begrüßen dürfen...
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="xbrowsersync_docker.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Dungeon-Generator Rechteck-Update</span><br>
-						<span class="smallabstract"><p>Der
-Dungeon-Generator hat weitere neue Features bekommen.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dungeon_generator_rechteck_update.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							s3storagefrontend Version 1.3.0</span><br>
-						<span class="smallabstract"><p>Das
-S3 Storage Frontend
-ist in einer neuen Version erschienen.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="s3storagefrontend_version_1_3_0.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -448,33 +456,40 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							xBrowserSync in Docker</span><br>
+							Generator für beliebige TeX-Formeln</span><br>
+							<span class="smallabstract"><p>Meine
+Funde
+neulich auf dem Arxiv-Preprint-Server
+haben mich auf folgende Idee gebracht: Es gab in der Vergangenheit diverse Papers, die komplett durch eine sogenannte "AI"
+erstellt wurden und es trotz der Tatsache, dass sie keinen einzigen sinnvolen Gedanken enthielten durch den Peer-review-Prozess
+geschafft haben und veröffentlich wurden. Das betrifft aber nur Text - was, wenn man in einem solchen
+generierten
+Produkt auch einige
+kompliziert aussehenden Formeln benötigt?
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generator_beliebige_tex_formeln.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Wiremock Links</span><br>
+							<span class="smallabstract"><p>Hier mal einige Links zu den Themen
+Wiremock
+und Spring
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="wiremock_links.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							xBrowserSync in Docker</span><br>
 							<span class="smallabstract"><p>Nachdem ich schon längere Zeit nicht mehr über neue
 Dienste in meinem
 Docker-Zoo
 berichtet habe, habe ich in der vergangenen Woche wieder einmal einen Neuzugang begrüßen dürfen...
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="xbrowsersync_docker.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Dungeon-Generator Rechteck-Update</span><br>
-							<span class="smallabstract"><p>Der
-Dungeon-Generator hat weitere neue Features bekommen.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dungeon_generator_rechteck_update.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							s3storagefrontend Version 1.3.0</span><br>
-							<span class="smallabstract"><p>Das
-S3 Storage Frontend
-ist in einer neuen Version erschienen.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="s3storagefrontend_version_1_3_0.html#content">
  Weiterlesen...
 								</a>
 						</li>

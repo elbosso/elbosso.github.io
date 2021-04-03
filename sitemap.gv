@@ -36,7 +36,10 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_xbrowsersync_docker [label="xBrowserSync in Docker" href="https://elbosso.github.io/xbrowsersync_docker.html"]
+node_generator_beliebige_tex_formeln [label="Generator für beliebige TeX-Formeln" href="https://elbosso.github.io/generator_beliebige_tex_formeln.html"]
+                node_generator_beliebige_tex_formeln -> node_geojson_stadtplan_generator
+node_wiremock_links [label="Wiremock Links" href="https://elbosso.github.io/wiremock_links.html"]
+    node_xbrowsersync_docker [label="xBrowserSync in Docker" href="https://elbosso.github.io/xbrowsersync_docker.html"]
     node_dungeon_generator_rechteck_update [label="Dungeon-Generator Rechteck-Update" href="https://elbosso.github.io/dungeon_generator_rechteck_update.html"]
                 node_dungeon_generator_rechteck_update -> node_generator_beliebige_tex_formeln
 node_s3storagefrontend_version_1_3_0 [label="s3storagefrontend Version 1.3.0" href="https://elbosso.github.io/s3storagefrontend_version_1_3_0.html"]
@@ -569,6 +572,7 @@ node_terry_miles [label="Terry Miles" href="https://elbosso.github.io/terry_mile
             node_lyapunov_koeffizienten -> node_fermi_pasta_ulam_tsingou_experiment
 node_lambda_expressions_vs__anon__inner_classes [label="Lambda Expressions vs. anon. Inner Classes" href="https://elbosso.github.io/lambda_expressions_vs__anon__inner_classes.html"]
                 node_lambda_expressions_vs__anon__inner_classes -> node_atomicinteger_vs__integer
+            node_lambda_expressions_vs__anon__inner_classes -> node_exception_handling_functional_java
             node_lambda_expressions_vs__anon__inner_classes -> node_seiteneffekt_freie_programmiersprachen
 node_one_note_samba_stecey_kent [label="One Note Samba Stecey Kent" href="https://elbosso.github.io/one_note_samba_stecey_kent.html"]
     node_35c3___meine_favoriten_zweiter_teil [label="35c3 - Meine Favoriten zweiter Teil" href="https://elbosso.github.io/35c3___meine_favoriten_zweiter_teil.html"]
