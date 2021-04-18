@@ -54,7 +54,9 @@ and is wrapped around the whole page content, except for the footer in this exam
 							   href="papers_maerz_2021.html#content">vorhergehender Artikel</a>
 						</div>
 						<div class="w3-col m6" style="text-align: right">
-							&nbsp;
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
+							   href="linux_linkdump_2021_i.html#content">nächster Artikel
+							</a>
 						</div>
 					</div>
 					<div class="w3-row">
@@ -118,7 +120,7 @@ Ausgangspunkt der Generierung ist die Erzeugung eines Gitters - aktuell wird ein
 ein kreisförmiges (Wheel-and-spokes) Gitter unterstützt. Die Verbindungen der Knoten im Gitter stellen die Grundlage für
 die späteren Straßen im stasdtplan dar:
 </p><p>
-<img src="images/geojson_map_generator/grid.png"
+<img src="images/geojson_map_generator/grid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -128,7 +130,7 @@ Ausgangspunkt: Gitter
 Anschließend werden die Gitterpunkte zufällig verschoben um dem ganzen einen "organischen" oder "gewachsenen" Eindruck zu
 geben:
 </p><p>
-<img src="images/geojson_map_generator/randomizedgrid.png"
+<img src="images/geojson_map_generator/randomizedgrid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -141,7 +143,7 @@ nicht in Teile zerfällt und jeder Knoten im Graphenm nach wie vor von jedem and
 Daraufhin werden die Polygone im Gitter identifiziert und in einer internen Datenstruktur für die spätere Verwendung
 gespeichert. Die Polygone entsprechen den Häuserblocks im späteren Stadtplan:
 </p><p>
-<img src="images/geojson_map_generator/polygons.png"
+<img src="images/geojson_map_generator/polygons.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -153,7 +155,7 @@ Verfahrens, das ich direkt einer der angegebenen
 <a href="https://www.cs.auckland.ac.nz/~roboteam/documents/RandomMapGenerator.pdf">Arbeiten</a>
 entnommen habe. Die Wichtigkeit der Straßen wird durch die Dicke der Linien in der Visualisierung dargestellt:
 </p><p>
-<img src="images/geojson_map_generator/commutegrid.png"
+<img src="images/geojson_map_generator/commutegrid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -163,7 +165,7 @@ Straßen werden in drei Klassen unterteilt
 Diese Arbeit "begradigt" später die besonders wichtigen Straßen noch ein wenig - ein Arbeitsschritt, der in meiner Implementierung zwar
 vorgesehen, jedoch noch nicht implementiert wurde:
 </p><p>
-<img src="images/geojson_map_generator/smoothedgrid.png"
+<img src="images/geojson_map_generator/smoothedgrid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -174,7 +176,7 @@ An dieser Stelle würden mehrere Polygone, die nun nicht mehr durch Straßen get
 unter Umständen konkave Polygone entstehen. Deren Behandlung - beispielsweise durch Triangulation ist noch nicht implementiert,
 so dass solche Polygone entfernt werden. Dieser Schritt ist optional - wird er ausgeführt, sieht das Ergebnis beispielsweise so aus:
 </p><p>
-<img src="images/geojson_map_generator/polygonsgrid.png"
+<img src="images/geojson_map_generator/polygonsgrid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -183,7 +185,7 @@ optional: Entfernen weiterer Polygone
 </p><p>
 Anschließend werden die Polygone partitioniert, was dem "Errichten" von Gebäuden auf den einzelnen Häuserblocks entspricht:
 </p><p>
-<img src="images/geojson_map_generator/partitionedgrid.png"
+<img src="images/geojson_map_generator/partitionedgrid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -193,7 +195,7 @@ Partitionieren der Polygone - Errichten von Gebäuden
 Daran schließt sich der vorerst letzte Schritt der Generierung an: die Straßen höherer Ordnung (Hauptstraßen und Magistralen)
 werden zu Straßenzügen zusammengefasst - in der Visualisierung erkennt man das an der gleichen Färbung von Straßenabschnitten:
 </p><p>
-<img src="images/geojson_map_generator/connectedRoads.png"
+<img src="images/geojson_map_generator/connectedRoads.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -203,7 +205,7 @@ Zusammenfassung von Straßenabschnitten wichtiger Straßen
 Hier noch kurz ein Beispiel für das Ergebnis des beschriebenen Vorgehens wenn ein rundes Gitter als Ausgangspunkt
 gewählt wurde:
 </p><p>
-<img src="images/geojson_map_generator/wheel_and_spokes_connectedRoads.png"
+<img src="images/geojson_map_generator/wheel_and_spokes_connectedRoads.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -221,7 +223,7 @@ von
 (Beispiele)
 importiert werden:
 </p><p>
-<img src="images/geojson_map_generator/geojson_rendered_with_geoman.png"
+<img src="images/geojson_map_generator/geojson_rendered_with_geoman.png" style="max-width:584px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -262,15 +264,18 @@ Visualisierung eines entstandenen GeoJson-Datensatzes
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Windows X ist eine Frechheit</p>
+							Verbindungen im ModuleWorkspace editierbar</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">10.04.2016</span>
+							<span class="w3-opacity">18.04.2016</span>
 						</p>
-						<span class="smallabstract"><p>Oft liest man im Netz, wie man sich von der Datenkrake Windows X schützen kann. Manchmal 
-liest man, dass Microsoft nur das macht, was alle anderen auch tun und die Frage,
-warum das bei Microsoft alle so aufregt und bei den Konkurrenten niemanden. Meine Sicht auf diese Dinge:
+						<span class="smallabstract"><p>Die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+- wurde um die Möglichkeit erweitert, das Layout von Verbindungen zwischen Modulen
+feiner bestimmen zu können.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="windows_x_ist_eine_frechheit.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="verbindungen_moduleworkspace_editierbar.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -333,36 +338,31 @@ warum das bei Microsoft alle so aufregt und bei den Konkurrenten niemanden. Mein
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Papers März 2021</span><br>
+							Entgoogle das Intenet!</span><br>
+						<span class="smallabstract"><p>Ich habe eine weitere interessante Ressource als Ausgangspunkt für ein offeneres, unabhängigeres und freieres Internet
+ohne datenkraken gefunden
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="entgoogle_intenet_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Linux Linkdump 2021 I</span><br>
+						<span class="smallabstract"><p>Ein Linkdump rund um Linux (Container, Virtualisierung,...)
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linux_linkdump_2021_i.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Papers März 2021</span><br>
 						<span class="smallabstract"><p>Etwas verspätet dieses Mal - aber wie auch schon im
 - wie schon
 Februar
 - stelle ich hier wieder einige Papers vor.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="papers_maerz_2021.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Seiteneffekt-freie Programmiersprachen</span><br>
-						<span class="smallabstract"><p>Ich habe mich hier verschiedentlich darüber ausgelassen, was
-Syntactic sugar
-in Java bedeutet und was man beachten sollte, um mit einigen
-einfachen Mitteln
-die Performanz von Java-Anwendungen zu steigern.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="seiteneffekt_freie_programmiersprachen.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Screencasts mit Java und JMF</span><br>
-						<span class="smallabstract"><p>Ich hatte bereits vor längerer Zeit einmal
-beschrieben,
-wie man auf einfache Art und Weise Screencast-Videos mit ffmpeg bzw. avconf
-anfertigen kann.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="screencasts_java_jmf.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -398,36 +398,31 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Papers März 2021</span><br>
+							Entgoogle das Intenet!</span><br>
+							<span class="smallabstract"><p>Ich habe eine weitere interessante Ressource als Ausgangspunkt für ein offeneres, unabhängigeres und freieres Internet
+ohne datenkraken gefunden
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="entgoogle_intenet_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Linux Linkdump 2021 I</span><br>
+							<span class="smallabstract"><p>Ein Linkdump rund um Linux (Container, Virtualisierung,...)
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linux_linkdump_2021_i.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Papers März 2021</span><br>
 							<span class="smallabstract"><p>Etwas verspätet dieses Mal - aber wie auch schon im
 - wie schon
 Februar
 - stelle ich hier wieder einige Papers vor.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="papers_maerz_2021.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Seiteneffekt-freie Programmiersprachen</span><br>
-							<span class="smallabstract"><p>Ich habe mich hier verschiedentlich darüber ausgelassen, was
-Syntactic sugar
-in Java bedeutet und was man beachten sollte, um mit einigen
-einfachen Mitteln
-die Performanz von Java-Anwendungen zu steigern.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="seiteneffekt_freie_programmiersprachen.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Screencasts mit Java und JMF</span><br>
-							<span class="smallabstract"><p>Ich hatte bereits vor längerer Zeit einmal
-beschrieben,
-wie man auf einfache Art und Weise Screencast-Videos mit ffmpeg bzw. avconf
-anfertigen kann.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="screencasts_java_jmf.html#content">
  Weiterlesen...
 								</a>
 						</li>
