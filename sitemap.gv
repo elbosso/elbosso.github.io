@@ -36,17 +36,20 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_asciiart_animationen [label="Asciiart Animationen" href="https://elbosso.github.io/asciiart_animationen.html"]
+node_exception_handling_functional_java [label="Exception-Handling in functional Java" href="https://elbosso.github.io/exception_handling_functional_java.html"]
+    node_papers_linkdump_2021_i [label="Papers  Linkdump 2021 I" href="https://elbosso.github.io/papers_linkdump_2021_i.html"]
+    node_asciiart_animationen [label="Asciiart Animationen" href="https://elbosso.github.io/asciiart_animationen.html"]
     node_algorithmen_linkdump_2021_i [label="Algorithmen Linkdump 2021 I" href="https://elbosso.github.io/algorithmen_linkdump_2021_i.html"]
     node_raspi_linkdump_2021_i [label="Raspi Linkdump 2021 I" href="https://elbosso.github.io/raspi_linkdump_2021_i.html"]
-    node_entgoogle_intenet_ [label="Entgoogle das Intenet!" href="https://elbosso.github.io/entgoogle_intenet_.html"]
+    node_entgoogle_internet_ [label="Entgoogle das Internet!" href="https://elbosso.github.io/entgoogle_internet_.html"]
     node_linux_linkdump_2021_i [label="Linux Linkdump 2021 I" href="https://elbosso.github.io/linux_linkdump_2021_i.html"]
     node_geojson_stadtplan_generator [label="GeoJson Stadtplan-Generator" href="https://elbosso.github.io/geojson_stadtplan_generator.html"]
     node_papers_maerz_2021 [label="Papers März 2021" href="https://elbosso.github.io/papers_maerz_2021.html"]
     node_seiteneffekt_freie_programmiersprachen [label="Seiteneffekt-freie Programmiersprachen" href="https://elbosso.github.io/seiteneffekt_freie_programmiersprachen.html"]
     node_screencasts_java_jmf [label="Screencasts mit Java und JMF" href="https://elbosso.github.io/screencasts_java_jmf.html"]
     node_generator_beliebige_tex_formeln [label="Generator für beliebige TeX-Formeln" href="https://elbosso.github.io/generator_beliebige_tex_formeln.html"]
-                node_generator_beliebige_tex_formeln -> node_geojson_stadtplan_generator
+                node_generator_beliebige_tex_formeln -> node_keycloak_docker_javalin
+            node_generator_beliebige_tex_formeln -> node_geojson_stadtplan_generator
 node_wiremock_links [label="Wiremock Links" href="https://elbosso.github.io/wiremock_links.html"]
     node_xbrowsersync_docker [label="xBrowserSync in Docker" href="https://elbosso.github.io/xbrowsersync_docker.html"]
     node_dungeon_generator_rechteck_update [label="Dungeon-Generator Rechteck-Update" href="https://elbosso.github.io/dungeon_generator_rechteck_update.html"]
@@ -157,10 +160,10 @@ node_fuzzy_java_maps [label="Fuzzy Java Maps" href="https://elbosso.github.io/fu
     node_synchronisierung_lorenz_systemen [label="Synchronisierung von Lorenz-Systemen" href="https://elbosso.github.io/synchronisierung_lorenz_systemen.html"]
                 node_synchronisierung_lorenz_systemen -> node_synchronisierung_lorenz_systemen_ii
 node_wiremock_http_s__echo_docker_container [label="Wiremock und HTTP(s)-Echo als Docker-Container" href="https://elbosso.github.io/wiremock_http_s__echo_docker_container.html"]
-                node_wiremock_http_s__echo_docker_container -> node_wiremock_links
+                node_wiremock_http_s__echo_docker_container -> node_entgoogle_internet_
+            node_wiremock_http_s__echo_docker_container -> node_wiremock_links
             node_wiremock_http_s__echo_docker_container -> node_generator_framework_jmeter_integriert
             node_wiremock_http_s__echo_docker_container -> node_xbrowsersync_docker
-            node_wiremock_http_s__echo_docker_container -> node_entgoogle_intenet_
 node_docker_ressourcen_managen_cgroups [label="Docker-Ressourcen managen mit cgroups" href="https://elbosso.github.io/docker_ressourcen_managen_cgroups.html"]
                 node_docker_ressourcen_managen_cgroups -> node_wiremock_http_s__echo_docker_container
 node_druckvorlagen_spezielle_papiere [label="Druckvorlagen für spezielle Papiere" href="https://elbosso.github.io/druckvorlagen_spezielle_papiere.html"]
@@ -228,7 +231,9 @@ node_the_interrupters_perform_all_acoustic_set_live [label="The Interrupters Per
     node_erweiterung_gitlab_metriken_grafana [label="Erweiterung der Gitlab-Metriken in Grafana" href="https://elbosso.github.io/erweiterung_gitlab_metriken_grafana.html"]
     node_docker_images_armhf [label="Docker Images für armhf" href="https://elbosso.github.io/docker_images_armhf.html"]
     node_tcp_routing_traefik_2_x [label="TCP Routing in Traefik 2.x" href="https://elbosso.github.io/tcp_routing_traefik_2_x.html"]
-                node_tcp_routing_traefik_2_x -> node_guacamole_on_docker
+                node_tcp_routing_traefik_2_x -> node_keycloak__otp__fido
+            node_tcp_routing_traefik_2_x -> node_guacamole_on_docker
+            node_tcp_routing_traefik_2_x -> node_traefik_https
             node_tcp_routing_traefik_2_x -> node_wireviz_docker_container
             node_tcp_routing_traefik_2_x -> node_dokumentenmanagement_docker
 node_docker_auf_raspberry_pi_model_3b_ [label="Docker auf Raspberry Pi Model 3B+" href="https://elbosso.github.io/docker_auf_raspberry_pi_model_3b_.html"]
@@ -838,7 +843,8 @@ node_implementierung_rfc_1751 [label="Implementierung RFC 1751" href="https://el
     node_etwas_leichtes_zwischendurch_i [label="Etwas leichtes für zwischendurch I" href="https://elbosso.github.io/etwas_leichtes_zwischendurch_i.html"]
     node_the_unlicense [label="The Unlicense" href="https://elbosso.github.io/the_unlicense.html"]
     node_rfc_6238_jaas [label="RFC 6238 und JAAS" href="https://elbosso.github.io/rfc_6238_jaas.html"]
-    node_monte_carlo_dungeon [label="Monte Carlo im Dungeon" href="https://elbosso.github.io/monte_carlo_dungeon.html"]
+                node_rfc_6238_jaas -> node_keycloak__otp__fido
+node_monte_carlo_dungeon [label="Monte Carlo im Dungeon" href="https://elbosso.github.io/monte_carlo_dungeon.html"]
                 node_monte_carlo_dungeon -> node_visualisierung_hoehenfeldern_mittels_voxeln
 node_biometrie_willenserklaerung [label="Biometrie und Willenserklärung" href="https://elbosso.github.io/biometrie_willenserklaerung.html"]
     node_schnellere_mathematik_bit_schieben [label="Schnellere Mathematik durch Bit-Schieben" href="https://elbosso.github.io/schnellere_mathematik_bit_schieben.html"]
