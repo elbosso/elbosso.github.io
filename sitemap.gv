@@ -37,6 +37,11 @@ rankdir=LR
     Videos [label="Videos" href="https://elbosso.github.io/videos.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_keycloak__otp__fido [label="Keycloak, OTP, FIDO" href="https://elbosso.github.io/keycloak__otp__fido.html"]
+                node_keycloak__otp__fido -> node_planka__keycloak__openldap_docker_zoo
+            node_keycloak__otp__fido -> node_keycloak_ldap
+node_traefik_https [label="Traefik und HTTPS" href="https://elbosso.github.io/traefik_https.html"]
+                node_traefik_https -> node_nginx_reverse_proxy_docker_container
 node_traceroute_visualisierung_mittels_geojson [label="Traceroute Visualisierung mittels GeoJSON" href="https://elbosso.github.io/traceroute_visualisierung_mittels_geojson.html"]
     node_keycloak_docker_javalin [label="Keycloak Docker und Javalin" href="https://elbosso.github.io/keycloak_docker_javalin.html"]
                 node_keycloak_docker_javalin -> node_planka__keycloak__openldap_docker_zoo
@@ -108,7 +113,8 @@ node_generator_microservices_mastodon_bot [label="Generator-Microservices Mastod
     node_tex_virus [label="TeX Virus" href="https://elbosso.github.io/tex_virus.html"]
                 node_tex_virus -> node_xml_ungueltige_zeichen
 node_storage_server_konfiguration_i [label="Storage Server Konfiguration I" href="https://elbosso.github.io/storage_server_konfiguration_i.html"]
-    node_arxiv_papers_januar_2021 [label="Arxiv Papers Januar 2021" href="https://elbosso.github.io/arxiv_papers_januar_2021.html"]
+                node_storage_server_konfiguration_i -> node_monitoring_raid_rebuild_grafana
+node_arxiv_papers_januar_2021 [label="Arxiv Papers Januar 2021" href="https://elbosso.github.io/arxiv_papers_januar_2021.html"]
                 node_arxiv_papers_januar_2021 -> node_papers_februar_2021
             node_arxiv_papers_januar_2021 -> node_generator_beliebige_tex_formeln
 node_neues_github_projekt__s3storagefrontend [label="neues GitHub-Projekt: s3storagefrontend" href="https://elbosso.github.io/neues_github_projekt__s3storagefrontend.html"]
@@ -141,6 +147,7 @@ node_erste_versuche_lora_ttn [label="Erste Versuche mit LoRa und TTN" href="http
     node_hippopotamus_for_christmas___lauren_tyler_scott [label="Hippopotamus for Christmas - Lauren Tyler Scott" href="https://elbosso.github.io/hippopotamus_for_christmas___lauren_tyler_scott.html"]
     node_spezielle_telegraf_anpassungen_rock64 [label="Spezielle Telegraf-Anpassungen für Rock64" href="https://elbosso.github.io/spezielle_telegraf_anpassungen_rock64.html"]
                 node_spezielle_telegraf_anpassungen_rock64 -> node_dns_fallback_ohne_ip_adress_sharing
+            node_spezielle_telegraf_anpassungen_rock64 -> node_monitoring_raid_rebuild_grafana
 node_pxe_boot_rock64 [label="PXE Boot für Rock64" href="https://elbosso.github.io/pxe_boot_rock64.html"]
                 node_pxe_boot_rock64 -> node_spezielle_telegraf_anpassungen_rock64
 node_derangement_java_implementiert [label="Derangement in Java implementiert" href="https://elbosso.github.io/derangement_java_implementiert.html"]
@@ -402,6 +409,7 @@ node_vpn_netzwerklabor [label="VPN im Netzwerklabor" href="https://elbosso.githu
 node_biometrie_ist_tot [label="Biometrie ist tot" href="https://elbosso.github.io/biometrie_ist_tot.html"]
     node_automatisches_setup_eines_netzwerklabors [label="Automatisches Setup eines Netzwerklabors" href="https://elbosso.github.io/automatisches_setup_eines_netzwerklabors.html"]
                 node_automatisches_setup_eines_netzwerklabors -> node_vpn_netzwerklabor
+            node_automatisches_setup_eines_netzwerklabors -> node_pihole_bug_installation
             node_automatisches_setup_eines_netzwerklabors -> node_vorhaben_2020
 node_dnssec_faehiger_resolver_auf_dem_pi [label="DNSSEC fähiger Resolver auf dem Pi" href="https://elbosso.github.io/dnssec_faehiger_resolver_auf_dem_pi.html"]
                 node_dnssec_faehiger_resolver_auf_dem_pi -> node_dns_fallback_ohne_ip_adress_sharing
@@ -662,6 +670,7 @@ node_rechtevergabe_java [label="Rechtevergabe in Java" href="https://elbosso.git
     node_update_tileserver_auf_18_04 [label="Update Tileserver auf 18.04" href="https://elbosso.github.io/update_tileserver_auf_18_04.html"]
                 node_update_tileserver_auf_18_04 -> node_layers_ueber_java_service_provider_infrastructure
             node_update_tileserver_auf_18_04 -> node_pam_nfc_ubuntu_18_04
+            node_update_tileserver_auf_18_04 -> node_pihole_bug_installation
 node_ads_b_tracks_google_earth [label="ADS-B Tracks in Google Earth" href="https://elbosso.github.io/ads_b_tracks_google_earth.html"]
                 node_ads_b_tracks_google_earth -> node_eigene_firmware_sonoff_s20
             node_ads_b_tracks_google_earth -> node_raspberry_schnellem_massenspeicher
