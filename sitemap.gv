@@ -37,7 +37,8 @@ rankdir=LR
     Videos [label="Videos" href="https://elbosso.github.io/videos.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_elektronik_linkdump_2021_ii [label="Elektronik Linkdump 2021 II" href="https://elbosso.github.io/elektronik_linkdump_2021_ii.html"]
+node_uefa_regenbogensymbol [label="Die UEFA und das Regenbogensymbol" href="https://elbosso.github.io/uefa_regenbogensymbol.html"]
+    node_elektronik_linkdump_2021_ii [label="Elektronik Linkdump 2021 II" href="https://elbosso.github.io/elektronik_linkdump_2021_ii.html"]
     node_keycloak__otp__fido [label="Keycloak, OTP, FIDO" href="https://elbosso.github.io/keycloak__otp__fido.html"]
                 node_keycloak__otp__fido -> node_planka__keycloak__openldap_docker_zoo
             node_keycloak__otp__fido -> node_keycloak_ldap
@@ -915,7 +916,8 @@ node_modul_wrapper [label="Modul-Wrapper" href="https://elbosso.github.io/modul_
                 node_modul_wrapper -> node_modul_wrapper_implementiert
             node_modul_wrapper -> node_influxdb_wrapper_dwb_
 node_geistheiler_compagnons [label="Geistheiler und Compagnons" href="https://elbosso.github.io/geistheiler_compagnons.html"]
-    node_fruehjahr_2017_meinem_garten [label="Frühjahr 2017 in meinem Garten" href="https://elbosso.github.io/fruehjahr_2017_meinem_garten.html"]
+                node_geistheiler_compagnons -> node_uefa_regenbogensymbol
+node_fruehjahr_2017_meinem_garten [label="Frühjahr 2017 in meinem Garten" href="https://elbosso.github.io/fruehjahr_2017_meinem_garten.html"]
                 node_fruehjahr_2017_meinem_garten -> node_garten_fruehjahr_2018
 node_ads_b_empfaenger_selber_gemacht [label="ADS-B-Empfänger selber gemacht" href="https://elbosso.github.io/ads_b_empfaenger_selber_gemacht.html"]
                 node_ads_b_empfaenger_selber_gemacht -> node_raspberry_pi_ads_b_receiver
