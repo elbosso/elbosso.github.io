@@ -37,7 +37,9 @@ rankdir=LR
     Videos [label="Videos" href="https://elbosso.github.io/videos.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_uefa_regenbogensymbol [label="Die UEFA und das Regenbogensymbol" href="https://elbosso.github.io/uefa_regenbogensymbol.html"]
+node_falsches_encoding_xml_dateien [label="Falsches Encoding in XML-Dateien" href="https://elbosso.github.io/falsches_encoding_xml_dateien.html"]
+    node_java_lisp [label="Java und Lisp" href="https://elbosso.github.io/java_lisp.html"]
+    node_uefa_regenbogensymbol [label="Die UEFA und das Regenbogensymbol" href="https://elbosso.github.io/uefa_regenbogensymbol.html"]
     node_elektronik_linkdump_2021_ii [label="Elektronik Linkdump 2021 II" href="https://elbosso.github.io/elektronik_linkdump_2021_ii.html"]
     node_keycloak__otp__fido [label="Keycloak, OTP, FIDO" href="https://elbosso.github.io/keycloak__otp__fido.html"]
                 node_keycloak__otp__fido -> node_planka__keycloak__openldap_docker_zoo
@@ -45,7 +47,8 @@ node_uefa_regenbogensymbol [label="Die UEFA und das Regenbogensymbol" href="http
 node_traefik_https [label="Traefik und HTTPS" href="https://elbosso.github.io/traefik_https.html"]
                 node_traefik_https -> node_nginx_reverse_proxy_docker_container
 node_traceroute_visualisierung_mittels_geojson [label="Traceroute Visualisierung mittels GeoJSON" href="https://elbosso.github.io/traceroute_visualisierung_mittels_geojson.html"]
-    node_keycloak_docker_javalin [label="Keycloak Docker und Javalin" href="https://elbosso.github.io/keycloak_docker_javalin.html"]
+                node_traceroute_visualisierung_mittels_geojson -> node_beliebige_aeuszere_form_generierte_stadtplaene
+node_keycloak_docker_javalin [label="Keycloak Docker und Javalin" href="https://elbosso.github.io/keycloak_docker_javalin.html"]
                 node_keycloak_docker_javalin -> node_planka__keycloak__openldap_docker_zoo
             node_keycloak_docker_javalin -> node_keycloak__otp__fido
 node_sqlshell_support_ldap [label="sQLshell Support für LDAP" href="https://elbosso.github.io/sqlshell_support_ldap.html"]
@@ -68,6 +71,7 @@ node_gnuplot_statistik [label="Gnuplot und Statistik" href="https://elbosso.gith
                 node_linux_linkdump_2021_i -> node_linux_linkdump_2021_ii
 node_geojson_stadtplan_generator [label="GeoJson Stadtplan-Generator" href="https://elbosso.github.io/geojson_stadtplan_generator.html"]
                 node_geojson_stadtplan_generator -> node_generator_ldif_dateien_test_verzeichnisdiensten
+            node_geojson_stadtplan_generator -> node_beliebige_aeuszere_form_generierte_stadtplaene
 node_papers_maerz_2021 [label="Papers März 2021" href="https://elbosso.github.io/papers_maerz_2021.html"]
     node_seiteneffekt_freie_programmiersprachen [label="Seiteneffekt-freie Programmiersprachen" href="https://elbosso.github.io/seiteneffekt_freie_programmiersprachen.html"]
     node_screencasts_java_jmf [label="Screencasts mit Java und JMF" href="https://elbosso.github.io/screencasts_java_jmf.html"]
@@ -77,7 +81,8 @@ node_papers_maerz_2021 [label="Papers März 2021" href="https://elbosso.github.i
 node_wiremock_links [label="Wiremock Links" href="https://elbosso.github.io/wiremock_links.html"]
     node_xbrowsersync_docker [label="xBrowserSync in Docker" href="https://elbosso.github.io/xbrowsersync_docker.html"]
     node_dungeon_generator_rechteck_update [label="Dungeon-Generator Rechteck-Update" href="https://elbosso.github.io/dungeon_generator_rechteck_update.html"]
-                node_dungeon_generator_rechteck_update -> node_generator_beliebige_tex_formeln
+                node_dungeon_generator_rechteck_update -> node_beliebige_aeuszere_form_generierte_stadtplaene
+            node_dungeon_generator_rechteck_update -> node_generator_beliebige_tex_formeln
 node_s3storagefrontend_version_1_3_0 [label="s3storagefrontend Version 1.3.0" href="https://elbosso.github.io/s3storagefrontend_version_1_3_0.html"]
     node_github_linkdump_2021_i [label="GitHub Linkdump 2021 I" href="https://elbosso.github.io/github_linkdump_2021_i.html"]
     node_spielen_perspektive___ellipsen [label="Spielen mit Perspektive - Ellipsen" href="https://elbosso.github.io/spielen_perspektive___ellipsen.html"]
@@ -708,7 +713,8 @@ node_gedanken_zeit__ntp__gps_diy [label="Gedanken zu Zeit, NTP, GPS und DIY" hre
             node_e_paper_tuerschild_esp8266 -> node_max7119_ntp_uhr
 node_blackhat_2018_keynote [label="Blackhat 2018 Keynote" href="https://elbosso.github.io/blackhat_2018_keynote.html"]
     node_mehrere_tile_layer_aus_einem_server [label="Mehrere Tile-Layer aus einem Server" href="https://elbosso.github.io/mehrere_tile_layer_aus_einem_server.html"]
-                node_mehrere_tile_layer_aus_einem_server -> node_lxc_bootstrap_gui_container
+                node_mehrere_tile_layer_aus_einem_server -> node_geojson_ebmap4d
+            node_mehrere_tile_layer_aus_einem_server -> node_lxc_bootstrap_gui_container
             node_mehrere_tile_layer_aus_einem_server -> node_update_tileserver_auf_18_04
 node_e_paper_tuerschild [label="E-Paper Türschild" href="https://elbosso.github.io/e_paper_tuerschild.html"]
                 node_e_paper_tuerschild -> node_e_paper_tuerschild_esp8266
@@ -1583,8 +1589,8 @@ node_daylight [label="DayLight" href="https://elbosso.github.io/daylight.html"]
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
                 node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-                node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
-            node_ebmap4d -> node_ortsbezuege_dwb_
+                node_ebmap4d -> node_ortsbezuege_dwb_
+            node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
             node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
@@ -1593,6 +1599,7 @@ node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
             node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
+            node_ebmap4d -> node_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_hillshading_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_satelliten_layer

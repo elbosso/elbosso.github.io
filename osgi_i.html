@@ -138,11 +138,11 @@ sein bester Freund zu sein: Ich konnte Bundles laden und sah, dass ein dem einen
 Auf dem Wege dahin mussten zwar auch einige Permissions freigegeben werden, aber es war nicht so wie zitiert: AllPermission
 wurde nicht benötigt. Der Weg war auch so beschwerlich wie immer - Verfasser von Frameworks und Libraries dokumentieren nicht,
 welche Permissions ihr Code braucht, daher: Übersetzen, Testen, Exception analysieren, Policy anpassen, von vorn...
-<pre>
+</p></p><pre>
 permission java.net.NetPermission "specifyStreamHandler";
 permission org.osgi.framework.AdminPermission "(id=*)", "*";
 permission org.osgi.framework.ServicePermission "sample.service.HelloService", "register";
-</pre> 
+</p><p></pre> 
 Nun wollte ich aber auch in einem anderen Bundle diesen Service konsumieren. Hier kam ich unsanft zum Halt: Was ich auch
 tat: der Service blieb beim Lookup verschollen. In meiner Verzweiflung nahm ich beide Bundles und warf sie in die
 Laufzeitumgebung des Projektes 
@@ -152,9 +152,9 @@ Konnte es so sein, dass hier wieder eine fehlende SecurityPermission schuld war?
 Diesmal haben die Autoren meinen düsteren Alltag auflockern wollen, indem sie die SecurityException einfach verschlucken
 und den Entwickler im Dunkeln lassen. Letztlich haben sie alles erklärt: Wenn man dem Code AllPermissions gibt, funktioniert er.
 Also erweiterte ich noch auf
-<pre>
+</p></p><pre>
 permission org.osgi.framework.ServicePermission "sample.service.HelloService", "get";
-</pre>
+</p><p></pre>
 und siehe da - es funktionierte
 <h1>Integration in dWb+</h1>
 Zur Integration in 
@@ -249,14 +249,19 @@ entstanden
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -320,32 +325,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -381,32 +382,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

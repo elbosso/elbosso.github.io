@@ -98,7 +98,7 @@ An dieser Stelle bekam ich seltsame Ideen: Würde diese Idee des Branchless Prog
 die keinen direkten Maschinencode produzieren sondern einen zur Laufzeit interpretierten Bytecode - beispielsweise Java?
 </p><p>
 Ich portierte dazu den Code zunächst nach Java, was folgendes ergab:
-<pre>
+</p></p><pre>
 	int max(int a, int b)
 	{
 		if(a>b)
@@ -131,9 +131,9 @@ Ich portierte dazu den Code zunächst nach Java, was folgendes ergab:
 			buf[i]=(byte)(pointedAt-(32*a));
 		}
 	}
-</pre>
+</p><p></pre>
 Anschließend verglich ich den Bytecode beider Beispiele - zunächst den für max:
-<pre>
+</p></p><pre>
   int max(int, int);
     Code:
        0: iload_1
@@ -170,10 +170,10 @@ Anschließend verglich ich den Bytecode beider Beispiele - zunächst den für ma
       25: imul
       26: iadd
       27: ireturn
-</pre>
+</p><p></pre>
 Schon von der schieren Länge her scheint es kaum möglich, dass die branchless Variante hier einen Performance-Vorteil hat. Schauen
 wir uns noch den Bytecode der etwas komplexeren Variante an:
-<pre>
+</p></p><pre>
   public void toUpper(byte[]);
     Code:
        0: iconst_0
@@ -245,13 +245,12 @@ wir uns noch den Bytecode der etwas komplexeren Variante an:
       44: iinc          2, 1
       47: goto          2
       50: return
-</p><p>
-</pre>
+</p><p></pre>
 Auch hier scheint es unmöglich, dass sich die Performance in der branchless-Variante steigert, da bereits der Bytecode
 dieser Variante deutlich länger ist. Ich habe dennoch Benchmarks durchgeführt und die haben zu einem für mich erstaunlichen Ergebnis
 geführt, das ich hier nicht vorenthalten möchte. Dazu habe ich jede Implementierung in einer Schleife oft wiederholen lassen und
 diesen Test jeweils 10 Mal wiederholt - hier zunächst die Ergebnisse für max:
-<pre>
+</p></p><pre>
 00:00:00.020834
 00:00:00.019635
 00:00:00.019565
@@ -273,11 +272,11 @@ diesen Test jeweils 10 Mal wiederholt - hier zunächst die Ergebnisse für max:
 00:00:00.021784
 00:00:00.021579
 00:00:00.021609
-</pre>
+</p><p></pre>
 Man sieht, dass die branchless-Variante zwar - wie erwartet - langsamer ist aber überraschenderweise scheint die Streuung der Ergebnisse
 deutlich geringer zu sein als in der "normalen" Variante. Dieses Ergebnis brachte mich dazu, das nicht-triviale Beispiel mit derselben Methode
 nochmals zu untersuchen - mit folgenden Ergebnissen:
-<pre>
+</p></p><pre>
 00:00:00.350852
 00:00:00.319269
 00:00:00.325429
@@ -299,7 +298,7 @@ nochmals zu untersuchen - mit folgenden Ergebnissen:
 00:00:00.357167
 00:00:00.355692
 00:00:00.352458
-</pre>
+</p><p></pre>
 Auch hier zeigt sich eine sehr viel geringere Schwankungsbreite der Ergebnisse in der branchless-Variante, die aber wieder insgesamt gesehen
 deutlich länger benötigt als die "normale" Variante. Damit scheint es so zu sein, dass aus Performance-Sicht die Erstellung von
 branchless-Varianten von Algorithmen in Java den Aufwand nicht rechtfertigt, allerdings die Anzahl bedingter Sprünge im Bytecode
@@ -363,14 +362,19 @@ die Streuung von Benchmarkergebnissen deutlich erhöht.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -434,32 +438,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -495,32 +495,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

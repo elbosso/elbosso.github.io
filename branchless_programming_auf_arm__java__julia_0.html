@@ -99,7 +99,7 @@ nicht alles gesagt oder dass ich einiges überhört habe - die im Video gezeigte
 mit GCC nicht, wenn man nicht die Optimierungen aktiviert.
 </p><p>
 Der Code des Beispiels
-<pre>
+</p></p><pre>
 int max(int a, int b)
 {
     if(a>b)
@@ -107,9 +107,9 @@ int max(int a, int b)
     else
         return b;
 }
-</pre>
-Sieht bei einer Übersetzung mittels `gcc -S te.c` so aus:
-<pre>
+</p><p></pre>
+Sieht bei einer Übersetzung mittels <span class="mdcode">gcc -S te.c</span> so aus:
+</p></p><pre>
 max:
 .LFB0:
         .cfi_startproc
@@ -132,10 +132,10 @@ max:
         .cfi_def_cfa 7, 8
         ret
         .cfi_endproc
-</pre>
-Erst wenn man die Optimierungen aktiviert - wie zum Beipiel mittels `gcc -S -O5 te.c` erhält man die im Video angesprochene
+</p><p></pre>
+Erst wenn man die Optimierungen aktiviert - wie zum Beipiel mittels <span class="mdcode">gcc -S -O5 te.c</span> erhält man die im Video angesprochene
 Version ohne Sprünge:
-<pre>
+</p></p><pre>
 max:
 .LFB23:
         .cfi_startproc
@@ -144,17 +144,17 @@ max:
         cmovge  %edi, %eax
         ret
         .cfi_endproc
-</pre>
+</p><p></pre>
 In diesem Fall zeigt sich auch die Bestätigung der im Video bereits gemachten Aussage: In trivialen Fällen bringt es nichts,
 selbst zu versuchen, Sprünge zu verhindern - etwa mit diesem (dem Video entnommenen) Code:
-<pre>
+</p></p><pre>
 int max1(int a, int b)
 {
     return a*(a>b)+b*(a&lt;=b);
 }
-</pre>
+</p><p></pre>
 Der erzeugt nämlich optimiert etwas längeren und damit ineffizienteren Maschinencode:
-<pre>
+</p></p><pre>
 max1:
 .LFB24:
         .cfi_startproc
@@ -170,11 +170,11 @@ max1:
         leal    (%rdx,%rsi), %eax
         ret
         .cfi_endproc
-</pre>
+</p><p></pre>
 </p><p>
 Wie sieht es aber für komplexere Beispiele aus? Ich habe (ebenfalls dem Video nachempfunden) auch ein etwas komplexeres Beispiel untersucht.
 Der C-Quelltext für beide Varianten sieht wie folgt aus:
-<pre>
+</p></p><pre>
 int toUpper(char *buf)
 {
     char *pointer=buf;
@@ -199,9 +199,9 @@ int toUpper1(char *buf)
         ++pointer;
     }
 }
-</pre>
-Der dazu korrespondierende Maschinencode - ebenfalls wider mit `-O5` übersetzt ergibt sich zu:
-<pre>
+</p><p></pre>
+Der dazu korrespondierende Maschinencode - ebenfalls wider mit <span class="mdcode">-O5</span> übersetzt ergibt sich zu:
+</p></p><pre>
 toUpper:
 .LFB25:
         .cfi_startproc
@@ -248,7 +248,7 @@ toUpper1:
         jne     .L13
         rep ret
         .cfi_endproc
-</pre>
+</p><p></pre>
 Hier kann man mehrere Dinge erkennen:
 <ul>
 <li>Die Branchless-Methode kommt nicht ganz ohne Sprünge aus - schließlich ist eine Schleife enthalten. Das könnte man nur durch Loop Unrolling
@@ -316,14 +316,19 @@ die Performance der Lösung etwas höher ist.</li>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -387,32 +392,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -448,32 +449,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

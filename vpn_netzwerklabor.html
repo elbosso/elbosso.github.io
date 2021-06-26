@@ -131,21 +131,21 @@ Dazu müssen zunächst die Konfigurationen, Skripte und Host-Definitionen auf de
 verteilt werden. Ich zeige hier im Folgenden kurz die entsprechenden Dateien für die Konfiguration des Routers von intnet1
 an:
 Konfiguration <span class="mditalics">tinc.conf</span>
-<pre>
+</p></p><pre>
 Name = intnet1
 ConnectTo = intnet2
-</pre>
+</p><p></pre>
 Host <span class="mditalics">hosts/intnet1</span>
-<pre>
+</p></p><pre>
 Address = 10.100.0.1
 Subnet = 172.16.0.1/32
 Subnet = 10.100.1.0/24
 -----BEGIN RSA PUBLIC KEY-----
 ...
 -----END RSA PUBLIC KEY-----
-</pre>
+</p><p></pre>
 Host <span class="mditalics">hosts/intnet2</span>
-<pre>
+</p></p><pre>
 Address = 10.100.0.2
 Subnet = 172.16.0.2/32
 Subnet = 10.100.2.0/24
@@ -153,9 +153,9 @@ Subnet = 10.100.2.0/24
 -----BEGIN RSA PUBLIC KEY-----
 ...
 -----END RSA PUBLIC KEY-----
-</pre>
+</p><p></pre>
 Skript <span class="mditalics">tinc.up</span>
-<pre>
+</p></p><pre>
 #!/bin/bash
 </p><p>
 ip link set $INTERFACE up
@@ -163,42 +163,42 @@ ip addr add 172.16.0.1/24 dev $INTERFACE
 </p><p>
 ip route add 10.100.1.0/24 dev $INTERFACE      # intnet1
 ip route add 10.100.2.0/24 dev $INTERFACE      # intnet2
-</pre>
+</p><p></pre>
 Damit funktionierte aber das VPN leider noch nicht, da es das benötigte Device innerhalb meiner LXC-Container nicht gab.
 <h1>LXC-Spezifika</h1>
 Dafür mussten spezielle Vorbereitungen an den LXC-Containern vorgenommen werden - ich zeige diese Vorbereitungen
 wiederum exemplarisch an <span class="mdcode">router1</span> für <span class="mdcode">intnet1:</span>
 Konfiguration <span class="mditalics">/var/lib/lxc/router1/config</span>
-<pre>
+</p></p><pre>
 ...
 lxc.autodev = 1
 lxc.hook.autodev = /var/lib/lxc/router1/autodev
 lxc.pty.max = 1024
 </p><p>
 lxc.cgroup.devices.allow = c 10:200 rwm
-</pre>
+</p><p></pre>
 Die in der Konfiguration referenzierte Datei <span class="mditalics">/var/lib/lxc/router1/autodev</span>
-<pre>
+</p></p><pre>
 #!/bin/bash
 </p><p>
 cd ${LXC_ROOTFS_MOUNT}/dev
 mkdir net
 mknod net/tun c 10 200
 chmod 0666 net/tun
-</pre>
+</p><p></pre>
 Damit konnte ich den VPN-Tunnel aufbauen und per IP-Adresse auf Rechner im jeweils anderen Subnetz zugreifen.
 <h1>DNS</h1>
 Eigentlich war aber das Fernziel, per DNS auf die Rechner im eigenen Standort und im entfernten Standort zugreifen
 zu können. Dazu musste die Konfiguration des DNSMasq-Dienstes
 <span class="mditalics">/etc/dnsmasq.conf</span> auf beiden Routern angepasst werden. Zunächst musste ein weiteres
 Interface hinzugefügt werden (Beispiele aus der Konfiguration von <span class="mdcode">router2</span> in <span class="mdcode">intnet2`:
-<pre>
+</p></p><pre>
 interface=firma
-</pre>
+</p><p></pre>
 Anschließend musste noch der Nameserver für die jeweils andere Domain bekannt gemacht werden:
-<pre>
+</p></p><pre>
 server=/intnet1.lab/172.16.0.1
-</pre>
+</p><p></pre>
 Ich habe die Quellen, aus denen ich diese Informationen zusammengetragen habe unten als Link-Sammlung angehängt
 <h1>Links</h1>
 </p>				</div>
@@ -320,14 +320,19 @@ Ich habe die Quellen, aus denen ich diese Informationen zusammengetragen habe un
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -391,32 +396,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -452,32 +453,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

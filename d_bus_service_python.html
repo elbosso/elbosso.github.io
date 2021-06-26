@@ -100,19 +100,17 @@ Interessant war für mich, dass man die Möglichkeit hat, einen solchen Service 
 gewisse Vorkehrungen, kann man das D-Bus-System dazu bewegen, dass es den betreffenden Service startet wenn man die erste Anfrage an
 ihn richtet. Nach meinen Erkenntnissen funktioniert das nur mit Session-Services, nicht mit System-Services. Alles was man tun muss, ist
 eine Service-Datei zu schreiben - beispielsweise <span class="mditalics">/usr/share/dbus-1/services/test.service</span>
-</p><p>
-<pre>
+</p></p><pre>
 [D-BUS Service]
 Name=de.elbosso.Time
 Exec=/home/elbosso/time-dbus.py
-</pre>
+</p><p></pre>
 </p><p>
 Liegt die Python-Datei im angegebenen Pfad und ist sie ausführbar, startet sie das D-Bus-System sobald die erste Anfrage
 für diesen Service eingeht. Normalerweise enden D-Bus-Services nie (bzw. automatisch mit Ende der Session) - also habe ich noch
 eine weitere Operation hinzugefügt, die den Service beendet. Damit haben wir das Grundgerüst für einen Service, der über D-Bus
 gestartet wird und auch darüber beendet werden kann:
-</p><p>
-<pre>
+</p></p><pre>
 #!/usr/bin/python3
 </p><p>
 import dbus
@@ -120,7 +118,7 @@ import dbus.service
 import time
 </p><p>
 class Time(dbus.service.Object):
-    def <span class="mditalics">_init__(self):
+    def __init__(self):
         #self.bus = dbus.SystemBus()
         self.bus = dbus.SessionBus()
         name = dbus.service.BusName('de.elbosso.Time', bus=self.bus)
@@ -143,7 +141,7 @@ class Time(dbus.service.Object):
         loop.quit()
         return 'I quit!'
 </p><p>
-if <span class="mditalics">_name_</span> == '__main__':
+if __name__ == '__main__':
     import dbus.mainloop.glib
     from gi.repository import GLib
 </p><p>
@@ -152,13 +150,12 @@ if <span class="mditalics">_name_</span> == '__main__':
     loop = GLib.MainLoop()
     object = Time()
     loop.run()
-</pre>
+</p><p></pre>
 </p><p>
 Es ist möglich, in solchen Services polkit zu nutzen um für sensible Bereiche eine gültige Authentifizierung zu verlangen.
 Dazu muss man den Service selbst als <span class="mdbold">root</span> starten. Weiterhin muss eine entsprechende Konfiguration für polkit vorliegen -
 zum Beispiel <span class="mditalics">/usr/share/polkit-1/actions/de.elbosso.Time.policy</span>
-</p><p>
-<pre>
+</p></p><pre>
 &lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;!DOCTYPE policyconfig PUBLIC
  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
@@ -179,11 +176,10 @@ zum Beispiel <span class="mditalics">/usr/share/polkit-1/actions/de.elbosso.Time
     &lt;/defaults>
   &lt;/action>
 &lt;/policyconfig>
-</pre>
+</p><p></pre>
 </p><p>
 Weiterhin benötigt ein D-Bus-Service, der von <span class="mdbold">root</span> gestartet werden soll eine Konfiguration - etwa <span class="mditalics">/etc/dbus-1/system.d/de.elbosso.Time.conf
-</p><p>
-<pre>
+</p></p><pre>
 &lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
 "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
@@ -200,13 +196,12 @@ Weiterhin benötigt ein D-Bus-Service, der von <span class="mdbold">root</span> 
     &lt;allow send_interface="de.elbosso.Time"/>
   &lt;/policy>
 &lt;/busconfig>
-</pre>
+</p><p></pre>
 </p><p>
 Der Python-Code muss jetzt noch ein wenig angepasst werden - zunächst muss der System- und nicht der Session-Bus genutzt werden und
 dann muss natürlich der Service auch für mindestens eine Operation auch nach der Autorisierung fragen. Ich habe mich dafür entschieden,
 dass das Beenden des Service über eine D-Bus-Operation zwar weiterhin verfügbar ist, jedoch nur nach Autorisierung auch ausgeführt wird:
-</p><p>
-<pre>
+</p></p><pre>
 #!/usr/bin/python3
 </p><p>
 import dbus
@@ -214,7 +209,7 @@ import dbus.service
 import time
 </p><p>
 class Time(dbus.service.Object):
-    def <span class="mditalics">_init__(self):
+    def __init__(self):
         #self.bus = dbus.SystemBus()
         self.bus = dbus.SessionBus()
         name = dbus.service.BusName('de.elbosso.Time', bus=self.bus)
@@ -238,7 +233,7 @@ class Time(dbus.service.Object):
         loop.quit()
         return 'I quit!'
 </p><p>
-    def <span class="mditalics">check_polkit_privilege(self, sender, conn, privilege):
+    def _check_polkit_privilege(self, sender, conn, privilege):
         # Get Peer PID
         if self.dbus_info is None:
             # Get DBus Interface and get info thru that
@@ -261,7 +256,7 @@ class Time(dbus.service.Object):
                                   "start-time": dbus.UInt64(0, variant_level=1)}),
                 privilege, {"AllowUserInteraction": "true"}, dbus.UInt32(1), "", timeout=600)
             print(auth_response)
-            (is_auth, <span class="mditalics">, details) = auth_response
+            (is_auth, _, details) = auth_response
         except dbus.DBusException as e:
             if e._dbus_error_name == "org.freedesktop.DBus.Error.ServiceUnknown":
                 # polkitd timeout, retry
@@ -279,7 +274,7 @@ class Time(dbus.service.Object):
         print("Successful authorization!")
         return True
 </p><p>
-if <span class="mditalics">_name_</span> == '__main__':
+if __name__ == '__main__':
     import dbus.mainloop.glib
     from gi.repository import GLib
 </p><p>
@@ -288,21 +283,19 @@ if <span class="mditalics">_name_</span> == '__main__':
     loop = GLib.MainLoop()
     object = Time()
     loop.run()
-</pre>
+</p><p></pre>
 </p><p>
 Testen kann man den Service jeweils mittels folgender Kommandos beim Start über den Session-Bus:
-</p><p>
-<pre>
+</p></p><pre>
 dbus-send --session --print-reply --dest="de.elbosso.Time" /Time de.elbosso.Time.CurrentTime
 dbus-send --session --print-reply --dest="de.elbosso.Time" /Time de.elbosso.Time.Quit
-</pre>
+</p><p></pre>
 </p><p>
 Und beim Start über den System-Bus:
-</p><p>
-<pre>
+</p></p><pre>
 dbus-send --system --print-reply --dest="de.elbosso.Time" /Time de.elbosso.Time.CurrentTime
 dbus-send --system --print-reply --dest="de.elbosso.Time" /Time de.elbosso.Time.Quit
-</pre>
+</p><p></pre>
 </p>				</div>
 				<div class="w3-container w3-padding" id="links">
 					<hr/>
@@ -411,14 +404,19 @@ dbus-send --system --print-reply --dest="de.elbosso.Time" /Time de.elbosso.Time.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -482,32 +480,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -543,32 +537,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

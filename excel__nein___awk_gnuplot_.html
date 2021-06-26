@@ -127,163 +127,143 @@ mittels <span class="mdcode">ls -l</span> sorgte für Input. Ich musste die erst
 dafür sorgte <span class="mdcode">tail -n +2`.
 </p><p>
 Als erstes wird das Feld mit der Dateigröße in jeder Zeile der Ausgabe ausgegeben:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk '{print $5}'
-</pre>
+</p><p></pre>
 </p><p>
 Die Anzahl der Zeilen kann man mittels <span class="mdcode">wc</span> ermitteln:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| wc -l
-</pre>
+</p><p></pre>
 </p><p>
 Das funktioniert aber auch mit AWK:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk 'END{print NR}'
-</pre>
+</p><p></pre>
 </p><p>
 Man kann die extrahierten Daten jeder Zeile durch eine vorangestellte Zeilennummer ergänzen:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk '{print NR":"$5}'
-</pre>
+</p><p></pre>
 </p><p>
 <h1>Statistik</h1>
 </p><p>
 Nun ein wenig Statistik: Die Berechnung des Durchschnitts (Mittelwerts) der Daten in Spalte 5 erfolgt so:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk 'BEGIN{sum=0.0}{sum+=$5}END{printf("Average: %f\n",sum/NR)}'
-</pre>
+</p><p></pre>
 </p><p>
 Variablen werden von AWK immer auf <span class="mdcode">0</span> initialisiert - daher kann man im vorigen Statement die <span class="mdcode">BEGIN</span> Klausel auch weglassen. Es ist
 auch möglich, Variablen auf der Kommandozeile zu vereinbaren und dem Skript zu  übergeben:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 '{sum+=$N}END{printf("Average: %f\n",sum/NR)}'
-</pre>
+</p><p></pre>
 </p><p>
 Wir berechnen zusätzlich die Standardabweichung:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '{sum+=$N;sumsq+=$N^2}END{printf("Average: %f Std deviation: %f\n",sum/NR,sqrt((sumsq-sum^2/NR)/NR))}'
-</pre>
+</p><p></pre>
 </p><p>
 Dieses Mal wird der Median bestimmt:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk \
 '{a[i++]=$1}END{x=int((i+1)/2);if (x &lt; (i+1)/2) y=(a[x-1]+a[x])/2; else y=a[x-1]; printf("Median: %f\n",y)}'
-</pre>
+</p><p></pre>
 </p><p>
 Möchte man erfahren, ab welchem Wert ein bestimmter Prozentsatz der Eingaben jeweils unterhalb dieses Wertes liegen (Percentile), kann man das ebenfalls mittels AWK herausfinden:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '{print $N}'|sort -n| awk '{s[NR-1]=$N} END{for(i=0.1;i&lt;=1.0;i+=0.1){printf("%d %f\n",i*100,s[int(NR*i-0.5)])}}'
-</pre>
+</p><p></pre>
 </p><p>
 Man kann mittels AWK auch Histogramme erzeugen:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk -v DELTA=150000 \
 'BEGIN{delta = (DELTA == "" ? 10000 : DELTA)} \
 {bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)} \
 END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf("%0.1f %0.1f %d\n"), beg, end, cnt[bucketNr];beg = end;}}'>hist.dat
-</pre>
+</p><p></pre>
 </p><p>
 <h1>Gnuplotting</h1>
 </p><p>
 In diesem Fall sollten wir uns auf den interessanten Teil des Histogrammes beschränken - das zeigt auch gleich, dass man mehrere
 Variablen auf der Kommandozeile vereinbaren kann:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk -v DELTA=1000 -v MAX=15001  \
 'BEGIN{delta = (DELTA == "" ? 10000 : DELTA)} \
 {if($0&lt;15001){bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)}} \
 END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf "%0.1f %0.1f %d\n", beg, end, cnt[bucketNr];beg = end;}}'>hist.dat
-</pre>
+</p><p></pre>
 </p><p>
 Man kann dieses Histogramm direkt mit Gnuplot im Terminal darstellen - die Größe des Plots passt sich automatisch der Größe des Terminals an...
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk -v DELTA=1000 -v MAX=15001  \
 'BEGIN{delta = (DELTA == "" ? 10000 : DELTA)} \
 {if($0&lt;MAX){bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)}} \
 END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf "%0.1f %0.1f %d\n", beg, end, cnt[bucketNr];beg = end;}}' \
 |gnuplot -p -e "set terminal dumb size $(tput cols), $(tput lines) enhanced; set autoscale;set style data histogram;set style fill solid;plot '-' using 3:xtic(1)"
-</pre>
+</p><p></pre>
 </p><p>
 <h1>Bedingungen</h1>
 </p><p>
 Es ist möglich, nur bestimmte Zellen in der Berechnung zu benutzen - Man kann zum Beispiel anhand regulärer Ausdrücke bestimmte Zeilen ausschließen:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '{if($9 ~ /^m/){sum+=$N;sumsq+=$N^2;count++}} \
 END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
-</pre>
+</p><p></pre>
 </p><p>
 Es ist dabei auch möglich, die Groß- und Kleinschreibung zu ignorieren:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '{IGNORECASE = 1;if($9 ~ /^m/){sum+=$N;sumsq+=$N^2;count++}} \
 END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
-</pre>
+</p><p></pre>
 </p><p>
 Eine alternative Schreibweise dafür:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 'IGNORECASE = 1 &amp;&amp; $9 ~ /^m/{sum+=$N;sumsq+=$N^2;count++} \
 END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
-</pre>
+</p><p></pre>
 </p><p>
 Es ist natürlich auch möglich, die in der Berechnung zu berücksichtigenden Zeilen einfach über ihre Zeilennummern zu bestimmen:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '{if(NR >9 &amp;&amp; NR&lt;21){sum+=$N;sumsq+=$N^2;count++}} \
 END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
-</pre>
+</p><p></pre>
 </p><p>
 Eine alternative Schreibweise dafür:
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '(NR >9 &amp;&amp; NR&lt;21){sum+=$N;sumsq+=$N^2;count++} \
 END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
-</pre>
+</p><p></pre>
 </p><p>
 Es ist sogar möglich, Werte über den Vergleich von Daten (Zeitpunkten) zu filtern:
-</p><p>
-<pre>
+</p></p><pre>
 ls -lt --time-style=long-iso /usr/bin|awk -v date=2020-06-09 'date&lt;$6{print $8}'
-</pre>
+</p><p></pre>
 </p><p>
 <h1>Funktionen</h1>
 </p><p>
 Es gibt auch Möglichkeiten, Funktionen zu definieren - während <span class="mdcode">int(n)</span> einfach nur die Nachkommastellen abschneidet, kann man in AWK eine korrekte Rundungsfunktion wie folgt definieren:
-</p><p>
-<pre>
+</p></p><pre>
 func round(n)
 {
   return int(n+0.5)
 }
-</pre>
+</p><p></pre>
 </p><p>
 Eine Funktion für die nächstgrößere ganze Zahl ist ebenfalls sehr einfach zu schaffen:
-</p><p>
-<pre>
+</p></p><pre>
 function ceil(n)
 {
   return n%1 ? int(n)+1 : n
 }
-</pre>
+</p><p></pre>
 </p><p>
 <h1>Cheat-Sheet</h1>
 </p><p>
@@ -306,12 +286,11 @@ Dateisystemlistings mittels
 Hier wird die Spalte mit der Dateigröße in Bytes farblich hervorgehoben, wenn der jeweilige Wert
 größer als eine festgelegte Schwelle ist. Das Beispiel funktioniert nur in Terminals, die Farben darstellen und ANSI-Escape-Sequenzen
 interpretieren können - beispielsweise <span class="mdcode">xterm.</span>
-</p><p>
-<pre>
+</p></p><pre>
 ls -l /usr/bin |tail -n +2| \
 awk '{if($5>999999)print NR"\t"$1"\t"$2"\t"$3"\t"$4"\t\033[1;31m"$5"\033[0m"; \
 else print NR"\t"$1"\t"$2"\t"$3"\t"$4"\t"$5;}'
-</pre>
+</p><p></pre>
 </p><p>
 Das Cheat-Sheet wurde natürlich entsprechend erweitert...
 </div>
@@ -418,14 +397,19 @@ regelbasiert mittels Ansi-Escape-Sequenzen unterschiedlich einzufärben, hat mic
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -489,32 +473,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -550,32 +530,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

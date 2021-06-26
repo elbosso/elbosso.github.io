@@ -103,10 +103,10 @@ bis
 818 Byte reichte - insgesamt kamen alle Bilder auf eine Gesamtgröße von
 573902 Byte. Zur Feststellung dieser Werte wurden folgende Statements in der
 <a href="sQLshell.html">sQLshell ausgeführt:</a>
-<pre>
-SELECT <span class="mdbold">,octet_length(___6284997236799771785___.data) from <span class="mditalics">__6284997236799771785___;
-SELECT sum(octet_length(___6284997236799771785___.data)) from <span class="mditalics">__6284997236799771785___;
-</pre>
+</p></p><pre>
+SELECT *,octet_length(___6284997236799771785___.data) from ___6284997236799771785___;
+SELECT sum(octet_length(___6284997236799771785___.data)) from ___6284997236799771785___;
+</p></pre>
 Die Größe der Relationen lässt sich mit folgendem Statement ermitteln:<pre>
 SELECT nspname || '.' || relname AS "relation",
     pg_size_pretty(pg_relation_size(C.oid)) AS "size"
@@ -115,10 +115,10 @@ SELECT nspname || '.' || relname AS "relation",
   WHERE nspname NOT IN ('pg_catalog', 'information_schema')
   ORDER BY pg_relation_size(C.oid) DESC
   LIMIT 20;
-</pre>
+</p><p></pre>
 Für die Testtabelle kam ich dabei auf 32 KByte - offensichtlich sind darin die Binärdaten nicht enthalten - 
 die Größe inklusive der Binärdaten lässt sich mit folgendem Statement feststellen:
-<pre>
+</p></p><pre>
 SELECT
     table_name,
     pg_size_pretty(table_size) AS table_size,
@@ -136,7 +136,7 @@ FROM (
     ) AS all_tables
     ORDER BY total_size DESC
 ) AS pretty_sizes
-</pre>
+</p><p></pre>
 Als Ergebnis ergab sich dabei eine Größe für die Experimentaltabelle von
 696 kB.
 </p><p>
@@ -157,9 +157,9 @@ Anschließend wurde dasselbe Bild wieder hinzugefügt, aber diesmal das Bild in 
 octet_length wie erwartet auf 109234 - die	
 table_size dagegen erhöht sich sogar noch ein wenig - auf 3960 kB.
 Die database size verringert sich ebenfalls nicht - sie bleibt bei 12MB.
-<pre>
+</p></p><pre>
 SELECT pg_size_pretty(pg_database_size('jdbctest'))
-</pre>
+</p><p></pre>
 Dieser Wert wird mit dem oben stehenden Statement ermittelt - er sinkt erst nach Löschen der Zeile wieder auf
 8 MB.
 Es scheint also so zu sein, dass der einmal allozierte Speicher für eine Zeile alloziert bleibt,
@@ -174,27 +174,27 @@ wenn ein neues Bild in der betreffenden Zeile gespeichert wird.
 </p><p>
 Wie verhalten sich ähnliche Tests bei Large Objects?
 Eine Übersicht über alle LargeObjects in der Datenbank erhält man mittels
-<pre>
+</p></p><pre>
 select DISTINCT lo.loid from pg_largeobject lo;
-</pre>
+</p><p></pre>
 Im Test ergab das initial 4 oids (ich hatte bereits ein wenig experimentiert).
 Das folgende Statement zeigt nicht die Anzahl der Large Objects an:
-<pre>
+</p></p><pre>
 select count(lo.loid) from pg_largeobject lo;
-</pre>
+</p><p></pre>
 Das ergab allerdings eine Anzahl von 291. Wenn man allerdings das Resultat von 
-<pre>
+</p></p><pre>
 select lo.loid,length(lo.data) from pg_largeobject lo
-</pre>
+</p><p></pre>
 anschaut, sieht man viele Einträge - fast alle haben eine Länge von 2048 Bytes. Und
 das Ergebnis der Ausführung des Statements 
-<pre>
+</p></p><pre>
 select sum(length(lo.data)) from pg_largeobject lo; 
-</pre>
+</p><p></pre>
 stimmt aber mit dem Ergebnis von
-<pre>
+</p></p><pre>
 select count(lo.data) from pg_largeobject lo;
-</pre>
+</p><p></pre>
 multipliziert mit 2048 ungefähr überein. Daran sieht man, dass die LOs auf Chunks von 2K Größe aufgeteilt werden.
 Nunmehr wurde das bereits benutzte große Beispielbild als LO in die Datenbank eingefügt.
 </p><p>
@@ -207,10 +207,9 @@ Die Größe der Los betrug in Summe length(lo.data): 4223032.
 Damit waren die Ergebnisse konsistent. (Achtung: diese Werte werden erst nach Commit der Transaktion 
 aktualisiert - LO-Operationen sind nur erlaubt, wenn Autocommit deaktiviert ist!)
 Auch bei LOs scheint zu gelten: Das überschreiben mit dem kleineren Bild verringert die Größen nicht.
-</p><p>
-<pre>
+</p></p><pre>
 select sum(length(lo.data)) from pg_largeobject lo; 
-</pre>
+</p><p></pre>
 </p>				</div>
 				<div class="w3-container w3-padding" id="referers">
 				<h3>
@@ -287,14 +286,19 @@ zu berichten: Der SQL-Texteditor versteht neue syntaktische Konstrukte.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -358,32 +362,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -419,32 +419,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

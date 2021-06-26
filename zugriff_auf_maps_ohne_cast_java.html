@@ -121,16 +121,16 @@ aber das ist Geschmackssache, beziehungsweise durch einfache Maßnahmen nachrüs
  
 Collections im Zusammenspiel mit Generics erlauben es, ohne Cast auf Elemente gleichen Typs zuzugreifen – für den Anwendungsfall,
 daß Elemente verschiedenen Typs in einer Collection gespeichert werden, hilft das nicht weiter. Als Veranschaulichung sei folgendes Beispiel gegeben:
-<pre>
+</p></p><pre>
 java.util.Map m=new java.util.HashMap();
 m.put("double",java.lang.Double.valueOf(3.1415));
 m.put("int",java.lang.Integer.valueOf(1234));
 m.put("string","huhu");
-</pre>
+</p><p></pre>
 Der Zugriff auf die einzelnen Elemente muß normalerweise über einen Cast erfolgen.
  
 Man könnte dafür natürlich eine JavaBean erzeugen und verwenden, die in diesem Fall wie folgt aussehen könnte:
-<pre>
+</p></p><pre>
 public class Bean
 {
 	private double d;
@@ -161,34 +161,33 @@ public class Bean
 		s=o;
 	}
 }
-</pre>
+</p><p></pre>
 Falls es aber aus irgendwelchen Gründen keine Option ist, eine solche Bean-Klasse einzusetzen, ist es extrem hinderlich,
 deswegen extra jedesmal beim Zugriff auf eines der Elemente einen Cast schreiben zu müssen. Wenn beim Zugriff
 auf die Elemente über ihren Namen der Typ bekannt ist,
 lässt sich einfach ein weiteres Generics-Feature zur Lösung heranziehen: eine generische Methode. Diese sähe dann wie folgt aus:
-<pre>
+</p></p><pre>
 public &lt;T> T fetch(java.lang.String key,Class&lt;T> cls)
 {
 	Object o;
 	o=m.get(key);
 	return cls.cast(o);
 }
-</pre>
+</p><p></pre>
 Damit kann man dann zum Beispiel folgende Zugriffe realisieren (das Beispiel oben wird fortgeführt):
-<pre>
+</p></p><pre>
 java.lang.Double d1=fetch("double", java.lang.Double.class);
-</pre>
+</p><p></pre>
 Für Fundamentaldatentypen (oder jeden anderen, oft benötigten Klassentyp) kann man noch Abkürzungen wie folgt definieren:
-<pre>
+</p></p><pre>
 public int fetchInt(java.lang.String key)
 {
 	return fetch(key, java.lang.Integer.class).intValue();
 }
-</pre>
+</p><p></pre>
 </p><p>
-
 <h3><a name="48">Aktualisierung vom 22. November 2017</a></h3><div class="update">Hier eine möglöiche vollständige Implementierung dieser Idee:
-<pre>
+</p></p><pre>
 public class TypeSafeHashMap&lt;T,V> extends java.util.HashMap&lt;T,V>
 {
 	public TypeSafeHashMap(int initialCapacity, float loadFactor)
@@ -216,12 +215,12 @@ public class TypeSafeHashMap&lt;T,V> extends java.util.HashMap&lt;T,V>
 		o=get(key);
 		return cls.cast(o);
 	}
-/</span>	public int fetchInt(T key)
+/*	public int fetchInt(T key)
 	{
 		return fetch(key, Integer.class).intValue();
 	}
-<span class="mdbold">/
-/</span>	public static void main(java.lang.String[] args)
+*/
+/*	public static void main(java.lang.String[] args)
 	{
 		TypeSafeHashMap&lt;String,Number> tsmap=new TypeSafeHashMap();
 		tsmap.put("1",Integer.valueOf(1));
@@ -229,8 +228,8 @@ public class TypeSafeHashMap&lt;T,V> extends java.util.HashMap&lt;T,V>
 		Integer a=tsmap.fetch("1", java.lang.Integer.class).intValue();
 		JComponent b=tsmap.fetch("1", JPanel.class);
 	}
-<span class="mdbold">/}
-</pre>
+*/}
+</p><p></pre>
 </div>
 </p>				</div>
 				<div class="w3-container w3-padding" id="referers">
@@ -356,14 +355,19 @@ das Redux-Konzept in Java zu implementieren
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -427,32 +431,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -488,32 +488,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

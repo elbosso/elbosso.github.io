@@ -97,7 +97,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 <a href="http://blog.leahhanson.us/post/julia/julia-introspects.html">Julia,</a>
 können wir mittels Introspection ansehen, was für Code LLVM aus unseren Beispielen zaubert. Dazu definieren wir zunächst wieder die zwei Varianten
 unseres max-Beispiels:
-<pre>
+</p></p><pre>
 function max(a,b)
     if(a>b)
         return a
@@ -108,9 +108,9 @@ end
 function max1(a,b)
     return a*(a>b)+b*(a&lt;=b)
 end
-</pre>
-Mittels `code_native(max,(Int,Int))` bzw `code_native(max1,(Int,Int))` können wir uns nun ansehen, was LLVM für Code daraus produziert - zunächst wieder die "normale" Variante:
-<pre>
+</p><p></pre>
+Mittels <span class="mdcode">code_native(max,(Int,Int))</span> bzw <span class="mdcode">code_native(max1,(Int,Int))</span> können wir uns nun ansehen, was LLVM für Code daraus produziert - zunächst wieder die "normale" Variante:
+</p></p><pre>
 code_native(max,(Int,Int))
         .text
 Filename: promotion.jl
@@ -123,9 +123,9 @@ Source line: 239
         movq    %rdi, %rax
         popq    %rbp
         ret
-</pre>
+</p><p></pre>
 Und die branchless-Variante:
-<pre>
+</p></p><pre>
 code_native(max1,(Int,Int))
         .text
 Filename: none
@@ -142,10 +142,10 @@ Source line: 2
         addq    %rcx, %rax
         popq    %rbp
         ret
-</pre>
+</p><p></pre>
 Hier zeigt sich wieder, was wir bereits mit GCC auf x86 und ARM festgestellt haben: Triviale Beispiele behandelt der Compiler
 effektiver als es unser Code aus der Manufaktur kann. Wie sieht es aber mit dem nicht mehr so trivialen Beispiel aus?
-<pre>
+</p></p><pre>
 function nontriv(a)
     for i in 1:length(a)
         pointedAt=a[i]
@@ -162,13 +162,13 @@ function nontriv1(a)
         a[i]=pointedAt-(32*x)
     end
 end
-</pre>
+</p><p></pre>
 </p><p>
-Hier zeigt sich bei Aufruf von `code_native(nontriv,(Tuple{Array{Int,1}}))` zunächst erst einmal, dass es offenbar doch keine
+Hier zeigt sich bei Aufruf von <span class="mdcode">code_native(nontriv,(Tuple{Array{Int,1}}))</span> zunächst erst einmal, dass es offenbar doch keine
 gute Idee war, die beiden Compiler mittels Abkürzung über Julias Introspect-Mechanismus vergleichen zu wollen: Dieser Mechanismus
 zeigt nicht einfach nur den Maschinencode, sondern tut offenbar noch mehr - anders ist nicht zu erklären, dass verschiedene Quelltext-Zeilen
 mehr als einmal im Ergebnis auftauchen:
-<pre>
+</p></p><pre>
 code_native(nontriv,(Tuple{Array{Int,1}}))
         .text
 Filename: none
@@ -227,11 +227,11 @@ Source line: 3
         movabsq $jl_bounds_error_ints, %rax
         movl    $1, %edx
         callq   *%rax
-</pre>
-Auch der Aufruf von `code_native(nontriv1,(Tuple{Array{Int,1}}))` zeigt dieses Verhalten: Manche Quelltextzeilen tauchen mehrfach auf.
-Insgesamt ist das Ergebnis länger als für _nontriv,_ allerdings hat das wahrscheinlich keine Aussagekraft. Daher wurde es wohl oder übel
+</p><p></pre>
+Auch der Aufruf von <span class="mdcode">code_native(nontriv1,(Tuple{Array{Int,1}}))</span> zeigt dieses Verhalten: Manche Quelltextzeilen tauchen mehrfach auf.
+Insgesamt ist das Ergebnis länger als für <span class="mditalics">nontriv,</span> allerdings hat das wahrscheinlich keine Aussagekraft. Daher wurde es wohl oder übel
 notwendig, LLVM zu installieren und es auf den C-Quelltext anzusetzen...
-<pre>
+</p></p><pre>
 code_native(nontriv1,(Tuple{Array{Int,1}}))
         .text
 Filename: none
@@ -306,7 +306,7 @@ Source line: 5
         movabsq $jl_bounds_error_ints, %rax
         movl    $1, %edx
         callq   *%rax
-</pre>
+</p><p></pre>
 </p>				</div>
 				<div class="w3-container w3-padding" id="nextPage">
 					<div class="w3-row">
@@ -366,14 +366,19 @@ Source line: 5
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -437,32 +442,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -498,32 +499,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

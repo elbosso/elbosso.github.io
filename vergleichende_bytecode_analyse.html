@@ -118,30 +118,30 @@ was ich in diesem Artikel geschrieben habe durch meine Analysen falsifiziert wur
 </p><p>
 Den Quelltext der Klasse, mit der ich die Benchmarks durchführte, ist an unten in diesem Artikel angehängt.
 Die Bytecodes sieht man, indem man das Kommando
-<pre>
+</p></p><pre>
 javap -c -private 
-</pre>
+</p><p></pre>
 auf die kompilierte Klasse anwendet.
 <h1>Cast gegen implizite Konvertierung</h1>
 Ich untersuchte die verschiedenen Möglichkeiten, ints zu doubles zu machen bei Berechnungen:
 In Java würde folgendes Konstrukt
-<pre>
+</p></p><pre>
 int a=1;
 int b=3;
 double result=a/b;
-</pre>
+</p><p></pre>
 zu einem Wert von 0.0 für die Variable result führen, da die Rechte Seite zuerst ausgewertet und dann der Double-Variable zugewiesen wird.
 Wer als Resultat 0.3333333 sehen möchte, muss dafür sorgen, dass a und b bei der Auswertung der rechten Seite
 als Double-Zahlen angesehen werden. Das kann man auf vewrschiedenen Wegen erreichen: einmal
 kann man beide Zahlen vor der Auswertung mit 1.0 multiplizieren - das entstehende Zwischenergebnis
 ist dann eine Double-Zahl und damit ist der gesamte Ausdruck auf der rechten Seite ebenfalls eine:
-<pre>
+</p></p><pre>
 double result=(a*1.0)/(b*1.0);
-</pre>
+</p><p></pre>
 Die zweite Möglichkeit ist ein expliziter Cast:
-<pre>
+</p></p><pre>
 double result=(double)a/(double)b;
-</pre>
+</p><p></pre>
 </p><p>
 In der Auswertung der Benchmarks unterschieden sich beide Lösungen nicht voneinander - mal war die eine marginal schneller, mal
 die andere. Ein klarer Fall von Syntactic sugar.
@@ -149,21 +149,21 @@ die andere. Ein klarer Fall von Syntactic sugar.
 Die zweite Sache, die mich interessierte war die Frage, ob sich bei den unterschiedlichen Arten, über eine Liste zu iterieren
 Unterschiede ergäben. Ich hatte zunächst nur im Sinn, zu kontrollieren, ob sich Unterschiede in der Ausführungszeit ergeben,
 wenn man faul ist und
-<pre>
+</p></p><pre>
 for(int i=0;i&lt;l.size();++i)
-</pre>
+</p><p></pre>
 statt
-<pre>
+</p></p><pre>
 int size=l.size();
 for(int i=0;i&lt;size;++i)
-</pre>
+</p><p></pre>
 schreibt.
 Wenig überraschend ergab sich ein leichter Vorteil für Lösung zwei: Die Funktion wird tatsächlich bei jedem Schleifendurchlauf
 ausgewertet, was für das etwas schlechtere Laufzeitverhalten sorgt. Nachdem ich damit fertig war,
 wollte ich wieder eine Bestätigung des "syntactic sugar"-Vorurteils haben und probierte:
-<pre>
+</p></p><pre>
 for (String string : l)
-</pre>
+</p><p></pre>
 Ich fiel fast vom Stuhl: Wo meine beiden ersten Versuche um die 6 Sekunden brauchten, brauchte diese
 Variante unter ansonsten identischen Voraussetzungen um die 10 Millisekunden!! Das ist ein Speedup von fast 1000!!!
 Jetzt ist es denke ich an der Zeit, meinen Code auf die Benutzung der Funktion size() zu untersuchen und überall da, wo
@@ -297,14 +297,19 @@ jeweils drei benachbarten Elementen (Element und sein Nachfolger/Vorgänger)
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -368,32 +373,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -429,32 +430,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

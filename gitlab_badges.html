@@ -126,10 +126,9 @@ einzubauen. Das funktionierte tatsächlich so, wie
 <a href="https://docs.gitlab.com/ee/user/project/pipelines/settings.html#pipeline-status-badge">in der Dokumentation</a>
 angegeben - Bei mir sieht die
 URL zum Zugriff auf den Badge also so aus:
-</p><p>
-<pre>
+</p></p><pre>
 http://&lt;gitlab-host>/%{project_path}/badges/%{default_branch}/pipeline.svg
-</pre>
+</p><p></pre>
 </p><p>
 Der nächste Schritt war es, eigene Badges zu erzeugen und sie in den Settings zu registrieren. Ich wollte
 zunächst mit einem statischen Badge beginnen - dynamische Inhalte sollten dann den Abschluss und die Krönung meiner Forschungen
@@ -142,8 +141,7 @@ Nachdem das geklärt war - wie erzeugt man nun im CI/CD-Prozess einen Badge, der
 Ich habe hier mal das Beispiel abgebildet, das den in der
 <a href="https://github.com/jongracecox/anybadge">anybadge</a>-Dokumentation gezeigten Badge erstellt,
 so dass ich ihn in Gitlab als Project-Badge nutzen kann. Dazu ist folgener Job in die Pipeline aufzunehmen:
-</p><p>
-<pre>
+</p></p><pre>
 badges_before:
     stage: start
     script:
@@ -152,37 +150,34 @@ badges_before:
     artifacts:
         paths:
         - badges/*.svg
-</pre>
+</p><p></pre>
 </p><p>
 Auf diese Weise entsteht ein Badge, der dann in den Settings wie folgt eingetragen werden kann:
-</p><p>
-<pre>
+</p></p><pre>
 http://&lt;gitlab-host>/%{project_path}/-/jobs/artifacts/%{default_branch}/raw/badges/pylint_%{default_branch}.svg?job=badges_before
-</pre>
+</p><p></pre>
 </p><p>
 Wichtig ist hier vor allem der Name des Jobs am Ende!
 Nun da das geklärt ist - zum bereits angekündigten Sahnehäubchen: Dem dynamischen Erzeugen von Badges. Dies geschah wieder
 in zwei Schritten: Schritt eins umfasste die Extraktion von Daten aus Dateien im Repository - das sah bei mir zum Beispiel
 wie folgt aus:
-</p><p>
-<pre>
+</p></p><pre>
 badges_before:
     stage: start
     script:
         - mkdir -p badges
-        - anybadge -m "%s" -l sQLshell -v <span class="mdcode">more de/elbosso/db/prg/version.properties |grep version.program.number|cut -d '=' -f2</span> -f badges/sQLshell_${CI_COMMIT_REF_NAME}.svg 2=red 4=orange 8=yellow 10=green
+        - anybadge -m "%s" -l sQLshell -v `more de/elbosso/db/prg/version.properties |grep version.program.number|cut -d '=' -f2` -f badges/sQLshell_${CI_COMMIT_REF_NAME}.svg 2=red 4=orange 8=yellow 10=green
     artifacts:
         paths:
         - badges/*.svg
-</pre>
+</p><p></pre>
 </p><p>
 So erhalte ich einen Badge mit der aktuellen Version der
 <a href="sQLshell.html">sQLshell,</a>
 den ich dann meinen Project-Badges wie folgt hinzufügen kann:
-</p><p>
-<pre>
+</p></p><pre>
 http://&lt;gitlab-host>/%{project_path}/-/jobs/artifacts/%{default_branch}/raw/badges/sQLshell_%{default_branch}.svg?job=badges_after
-</pre>
+</p><p></pre>
 </p><p>
 Im zweiten und letzten Schritt setzte ich dem Ganzen noch die Krone auf - jetzt wollte ich es wissen und wirklich
 die gleiche Funktionalität wie bei Github erreichen: Ich wollte über die
@@ -191,31 +186,28 @@ Informationen extrahieren und diese mittels Project-Badges visualisieren. Als Th
 Anzahl der offenen/geschlossenen Issues aus. Dieses Thema konnte ich leider nicht mehr in .gitlab-ci.yml umsetzen -
 da scheint entweder der YAML-Parser einen Bug zu haben oder ich den YAML-Parser noch nicht verstanden zu haben.
 Also erstellte ich ein Script, das letztlich den darzustellenden Wert ermittelt - im Beispiel open_issues.sh:
-</p><p>
-<pre>
+</p></p><pre>
 #!/bin/bash
 curl -i --header "Private-Token: xxxx-xxxx-xxxxxxxxxx" "http://&lt;gitlab-host>/api/v4/projects/1/issues?state=opened&amp;scope=all" 2>/dev/null|grep "X-Total:"|cut -d ':' -f 2
-</pre>
+</p><p></pre>
 </p><p>
 Wichtig dabei ist hier der korrekte Wert für die Project-ID (bei mir: 1) und der eigene für das Access-Token. Dieses
 Skript kann ich dann wie oben gesehen in .gitlab-ci.yml verwenden um den Badge zu erzeugen:
-</p><p>
-<pre>
+</p></p><pre>
 badges_before:
     stage: start
     script:
         - mkdir -p badges
-        - anybadge -m "%d" -l "open issues" -v <span class="mdcode">/bin/bash ci/open_issues.sh</span> -f badges/open_issues_${CI_COMMIT_REF_NAME}.svg 2=red 4=orange 8=yellow 10=green
+        - anybadge -m "%d" -l "open issues" -v `/bin/bash ci/open_issues.sh` -f badges/open_issues_${CI_COMMIT_REF_NAME}.svg 2=red 4=orange 8=yellow 10=green
     artifacts:
         paths:
         - badges/*.svg
-</pre>
+</p><p></pre>
 </p><p>
 Damit erhalte ich einen Badge, den ich dann wiederum als Project-Badge deklarieren kann:
-</p><p>
-<pre>
+</p></p><pre>
 http://&lt;gitlab-host>/%{project_path}/-/jobs/artifacts/%{default_branch}/raw/badges/open_issues_%{default_branch}.svg?job=badges_before
-</pre>
+</p><p></pre>
 </p>				</div>
 				<div class="w3-container w3-padding" id="links">
 					<hr/>
@@ -503,14 +495,19 @@ stellte mich die gefundene Lösung noch nicht endgültig zufrieden - bis jetzt..
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -574,32 +571,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -635,32 +628,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

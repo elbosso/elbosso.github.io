@@ -117,10 +117,9 @@ bereits beschrieben unf gezeigt, warum man aus Laufzeitsicht nicht mit einem
 Index über eine Liste iterieren sollte, sondern immer mittels eines Iterators.
 </p><p>
 Ist man aber doch gezwungen, mit einem Index zu arbeiten, sieht das oft so soder so ähnlich aus:
-</p><p>
-<pre>
+</p></p><pre>
 for(int i=0;i&lt;l.size();++i)
-</pre>
+</p><p></pre>
 </p><p>
 Das ist schlecht, da der Compiler den Aufruf von <span class="mdcode">l.size</span> nicht automatisch herauszieht und einer
 lokalen Variablen zuweist - auch die VM tut das nicht während der Ausführung - weil dioe Methode
@@ -133,11 +132,10 @@ aufgerufen wird.
 </p><p>
 Ist der Entwickler sich sicher, dass die Methode während der Iteration keine Seiteneffekte hat und sich das Ergebnis nicht ändert,
 kann er von Hand folgendes alternative  Konstrukt benutzen:
-</p><p>
-<pre>
+</p></p><pre>
 int howmany=l.size();
 for(int i=0;i&lt;howmany;++i)
-</pre>
+</p><p></pre>
 </p><p>
 Die Frage ist - Sollte er es tun? Damit wird der code länger und unübersichtlicher. Wiegen das die Vorteile auf?
 Zur Beantwortung dieser Frage habe ich einige Benchmarks erstellt - einen, der beide Ansätze auf Listen vergleicht und einen,
@@ -156,16 +154,14 @@ abhängen dürfte - es ist nicht ausgeschlossen, dass es Implementierungen gibt,
 von <span class="mdcode">O(1)</span> hat. Aber auch da ist es so, dass der Aufruf jedesmal geschieht und damit Performanz-Einbußen einhergehen.
 </p><p>
 Ich habe in Intellij sofort nach den Performanzfressern gesucht und sie ersetzt - Das Suchmuster dafür war:
-</p><p>
-<pre>
+</p></p><pre>
 ([ \\t]*?)(for\s*?\(.*?;.*?&lt;\s*?)(.*?\.size\(\))(\s*?;.*)
-</pre>
+</p><p></pre>
 </p><p>
 Das Ersetzungsmuster war:
-</p><p>
-<pre>
+</p></p><pre>
 $1int howmany=$3;\n$1$2howmany$4
-</pre>
+</p><p></pre>
 </p><p>
 Ich musste danach nur an wenigen Stellen manuell nacharbeiten - und meine CI/CD Pipeline im Gitlab hat mir bestätigt,
 dass meine Änderungen korrekt waren...
@@ -185,8 +181,7 @@ dafür liegt höchstwahrscheinlich im kürzeren Bytecode zum Zugriff auf ein Mem
 Variable.
 </p><p>
 Damit lag ich falsch: der Bytecode für die Variante mit expliziter Variable ist sogar kürzer
-</p><p>
-<pre>
+</p></p><pre>
       24: iload         5
       26: iload_3
       27: if_icmpge     45
@@ -198,12 +193,11 @@ Damit lag ich falsch: der Bytecode für die Variante mit expliziter Variable ist
       38: pop
       39: iinc          5, 1
       42: goto          24
-</pre>
+</p><p></pre>
 </p><p>
 als der für den direkten Zugriff auf length in jedem Durchlauf (der Wert von length wird durch den Compiler selbsttätig
 in eine lokale Variable ausgelagert)
-</p><p>
-<pre>
+</p></p><pre>
       28: iload         6
       30: iload         5
       32: if_icmpge     55
@@ -217,7 +211,7 @@ in eine lokale Variable ausgelagert)
       48: pop
       49: iinc          6, 1
       52: goto          28
-</pre>
+</p><p></pre>
 </p><p>
 Neugierig war ich als mir folgender Gedanke kam - wie schlägt sich eigentlich die Performanz beim Iterieren mittels foreach wenn man
 einmal über die Liste iteriert und einmal über ein mittels <span class="mdcode">toArray(T[])</span> aus der Liste erzeugtes Array? Das muste natürlich ebenfalls getestet
@@ -281,14 +275,19 @@ wieder auffrist.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -352,32 +351,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -413,32 +408,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>

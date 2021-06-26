@@ -114,43 +114,43 @@ eine Root-Shell in der Hinterhand haben, um etwaige Probleme beheben zu können!
 </p><p>
 Zur Einrichtung auf einem beliebigen Host/VM/Container erzeuge ich mir zunächst ein
 <a href="https://wiki.archlinux.org/index.php/Pam_oath">Secret:</a>
-<pre>
+</p></p><pre>
 head -10 /dev/urandom | sha512sum | cut -b 1-30
-</pre>
+</p><p></pre>
 </p><p>
 Es müssen auch einige Pakete installiert werden - unter Ubuntu 18.04 (und wahrscheinlich jeder Menge anderer
 Debian-Derivate) sieht das wie folgt aus:
-<pre>
+</p></p><pre>
 apt-get install libpam-oath oathtool
-</pre>
+</p><p></pre>
 </p><p>
 Ich trage dann - entweder in <span class="mditalics">common-auth</span> oder <span class="mditalics">sudo-auth</span> - die
 <a href="https://www.nongnu.org/oath-toolkit/pam_oath.html">Konfiguration</a>
 für das neue Modul ein:
-<pre>
+</p></p><pre>
 auth    [success=2 default=ignore]      pam_oath.so usersfile=/etc/users.oath
-</pre>
+</p><p></pre>
 </p><p>
 <span class="mdbold">Die Zahl hinter 'success' überspringt die angegebene Zahl an alternativen Möglichkeiten zur Authentifizierung,
 die eventuell dahinter im Config-File noch konfiguriert sind - sie muss auf die tatsächlichen Gegebenheiten angepasst werden!</span>
 Nun muss die Datei <span class="mditalics">/etc/users.oath</span> angelegt werden - als <span class="mdbold">secret</span> benutzen wir das oben erzeugte:
-<pre>
+</p></p><pre>
 # Option User Prefix Seed
 HOTP/T30/6 &lt;user> - &lt;secret>
-</pre>
+</p><p></pre>
 </p><p>
 Nicht vergessen, die Rechte korrekt zu setzen!
-<pre>
+</p></p><pre>
 chmod 600 /etc/users.oath
 chown root /etc/users.oath
-</pre>
+</p><p></pre>
 </p><p>
 Nun kann man beginnen zu testen - falls nicht alles sofort funktioniert, kann man auch den
 <a href="https://www.nongnu.org/oath-toolkit/pam_oath.html">Debug-Modus</a>
 aktivieren - sollte man im Produktivbetrieb natürlich deaktivieren. Ein erstes Token kann man sich wie folgt erzeugen:
-<pre>
+</p></p><pre>
 oathtool --verbose --totp &lt;secret>
-</pre>
+</p><p></pre>
 </p><p>
 Dieser Aufruf hat außer der Erstellung eines Tokens noch einen weiteren nützlichen Nebeneffekt: er zeigt unser Secret
 als <span class="mdbold">Base32</span> an - ein Modus, den manche Token erzeugende Apps benötigen.
@@ -165,9 +165,9 @@ Beide funktionieren gut - beim Modus ist TOTP auszuwählen.
 hat vielleicht den leichten Vorteil, dass man einen
 <a href="https://natanael.arndt.xyz/2018/02/27/totp">QR-Code</a>
 einscannen kann, dessen Inhalt folgendem Muster folgen muss:
-<pre>
+</p></p><pre>
 otpauth://totp/&lt;profile name>?secret=&lt;secret>
-</pre>
+</p><p></pre>
 </p><p>
 Dabei ist zu beachten, dass der Profilname beliebig gewählt werden kann und beim Secret die Base32-Variante angegeben werden muss!
 </p><p>
@@ -175,14 +175,14 @@ Solche QR-Codes kann man mit allen möglichen Werkzeugen erstellen - es ist soga
 ist das Tool
 <a href="https://segno.readthedocs.io/en/stable/index.html">segno.</a>
 die Installation erfolgt mittels
-<pre>
+</p></p><pre>
 pip3 install segno
-</pre>
+</p><p></pre>
 </p><p>
 Benutzt wird es zum Beispiel wie folgt:
-<pre>
+</p></p><pre>
 segno --border=1 -e L 'otpauth://totp/&lt;profile name>?secret=&lt;secret>'
-</pre>
+</p><p></pre>
 </p>				</div>
 				<div class="w3-container w3-padding" id="referers">
 				<h3>
@@ -264,14 +264,19 @@ Grafana überwacht werden kann:
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Instrumentieren von Java-Code durch Java-Agenten</p>
+							ModuleWorkspace Roadmap II</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">25.06.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Sammlung von Links zum Thema Instrumentierung von Java-Code zum Zeitpunkt des Ladens
-der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen... 
+						<span class="smallabstract"><p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="instrumentieren_java_code_java_agenten.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="moduleworkspace_roadmap_ii.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -335,32 +340,28 @@ der jeweiligen Klassen im Speziellen und zum Thema JavaAgent im Allgemeinen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+						<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-						<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+						<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-						<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+						<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -396,32 +397,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Die UEFA und das Regenbogensymbol</span><br>
-							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
+							Falsches Encoding in XML-Dateien</span><br>
+							<span class="smallabstract"><p>Neulich kam während des Zutaten-für-Kuchen-Verdienens eine interessante Frage aus, die ich hier näher beleuchten möchte:
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="falsches_encoding_xml_dateien.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Elektronik Linkdump 2021 II</span><br>
-							<span class="smallabstract"><p>Ein
-weiterer
-Linkdump zum Thema Elektronik und Basteln, DIY,...
+							Java und Lisp</span><br>
+							<span class="smallabstract"><p>Inspiriert durch ein Video habe ich mich nun endlich einmal hingesetzt und mit Lisp beschäftigt.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2021_ii.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="java_lisp.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Keycloak, OTP, FIDO</span><br>
-							<span class="smallabstract"><p>Ich berichtete neulich über die Installation und erste Tests von
-Keycloak.
-Nun bin ich tiefer eingetaucht und habe die diversen Möglichkeiten untersucht, die Authentifizierung mittels zweiten
-Faktors sicherer zu machen.
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Die UEFA und das Regenbogensymbol</span><br>
+							<span class="smallabstract"><p>Oh mann - UEFA, FIFA und die "Menschenrechte"
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="keycloak__otp__fido.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="uefa_regenbogensymbol.html#content">
  Weiterlesen...
 								</a>
 						</li>
