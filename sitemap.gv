@@ -37,6 +37,11 @@ rankdir=LR
     Videos [label="Videos" href="https://elbosso.github.io/videos.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_planka__keycloak__openldap_docker_zoo [label="Planka, Keycloak, OpenLDAP im Docker-Zoo" href="https://elbosso.github.io/planka__keycloak__openldap_docker_zoo.html"]
+                node_planka__keycloak__openldap_docker_zoo -> node_nginx_reverse_proxy_docker_container
+            node_planka__keycloak__openldap_docker_zoo -> node_keycloak_ldap
+node_datamodel2html_plugin [label="DataModel2HTML-Plugin" href="https://elbosso.github.io/datamodel2html_plugin.html"]
+                node_datamodel2html_plugin -> node_tsv_gnuplot_script_export_plugins
 node_falsches_encoding_xml_dateien [label="Falsches Encoding in XML-Dateien" href="https://elbosso.github.io/falsches_encoding_xml_dateien.html"]
     node_java_lisp [label="Java und Lisp" href="https://elbosso.github.io/java_lisp.html"]
     node_uefa_regenbogensymbol [label="Die UEFA und das Regenbogensymbol" href="https://elbosso.github.io/uefa_regenbogensymbol.html"]
@@ -129,6 +134,7 @@ node_neues_github_projekt__s3storagefrontend [label="neues GitHub-Projekt: s3sto
 node_zterm_github_fork [label="ZTerm als GitHub-Fork" href="https://elbosso.github.io/zterm_github_fork.html"]
     node_exportieren_eines_reports_textformat [label="Exportieren eines Reports im Textformat" href="https://elbosso.github.io/exportieren_eines_reports_textformat.html"]
                 node_exportieren_eines_reports_textformat -> node_zterm_github_fork
+            node_exportieren_eines_reports_textformat -> node_sqlshell_reporting_apache_drill
 node_renderer_generierte_dungeons_ansi_steuercodes [label="Renderer für generierte Dungeons mit Ansi-Steuercodes" href="https://elbosso.github.io/renderer_generierte_dungeons_ansi_steuercodes.html"]
                 node_renderer_generierte_dungeons_ansi_steuercodes -> node_zterm_github_fork
             node_renderer_generierte_dungeons_ansi_steuercodes -> node_generator_microservices_mastodon_bot
@@ -511,8 +517,6 @@ node_procol_harum___a_whiter_shade_of_pale [label="Procol Harum - A Whiter Shade
     node_swing_inspector [label="Swing Inspector" href="https://elbosso.github.io/swing_inspector.html"]
     node_diy_ebook_reader [label="DIY EBook-Reader" href="https://elbosso.github.io/diy_ebook_reader.html"]
                 node_diy_ebook_reader -> node_diy_ebook_reader_ii
-node_datamodel2html_plugin [label="DataModel2HTML-Plugin" href="https://elbosso.github.io/datamodel2html_plugin.html"]
-                node_datamodel2html_plugin -> node_tsv_gnuplot_script_export_plugins
 node_garten_fruehjahr_2019 [label="Garten im Frühjahr 2019" href="https://elbosso.github.io/garten_fruehjahr_2019.html"]
     node_sqlshell_unterstuetzt_comment [label="sQLshell unterstützt COMMENT" href="https://elbosso.github.io/sqlshell_unterstuetzt_comment.html"]
                 node_sqlshell_unterstuetzt_comment -> node_aviator___websockets
@@ -1423,7 +1427,8 @@ node_aenderung_netzwerkkonfiguration_linux_update [label="Änderung der Netzwerk
             node_whiteboards_verteilten_kreativ -> node_kanban_boards___eine_uebersicht
 node_multitouch_emulator_linux [label="Multitouch Emulator für Linux" href="https://elbosso.github.io/multitouch_emulator_linux.html"]
     node_verbesserte_dokumentation_datenmodelle_sqlshell [label="Verbesserte Dokumentation für Datenmodelle in der sQLshell" href="https://elbosso.github.io/verbesserte_dokumentation_datenmodelle_sqlshell.html"]
-    node_odata_metadatenextraktion [label="OData Metadatenextraktion" href="https://elbosso.github.io/odata_metadatenextraktion.html"]
+                node_verbesserte_dokumentation_datenmodelle_sqlshell -> node_sqlshell_reporting_apache_drill
+node_odata_metadatenextraktion [label="OData Metadatenextraktion" href="https://elbosso.github.io/odata_metadatenextraktion.html"]
                 node_odata_metadatenextraktion -> node_verbesserte_dokumentation_datenmodelle_sqlshell
             node_odata_metadatenextraktion -> node_odata_content_browser
 node_odata_jdbc_sqlshell [label="OData per JDBC in der sQLshell" href="https://elbosso.github.io/odata_jdbc_sqlshell.html"]
@@ -1589,9 +1594,9 @@ node_daylight [label="DayLight" href="https://elbosso.github.io/daylight.html"]
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
                 node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-                node_ebmap4d -> node_ortsbezuege_dwb_
+                node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
-            node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
+            node_ebmap4d -> node_ortsbezuege_dwb_
             node_ebmap4d -> node_ebmap4d___geojson
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure

@@ -6,19 +6,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></head>
-<body class="w3-light-grey">
+<body class="w3-light-grey w3-small">
 <div class="w3-content" style="max-width:1400px">
     <!-- Header -->
     <header class="w3-container w3-center w3-padding-32">
-		<div class="w3-col m8 s12 w3-center w3-padding-32">
-        <h1><b>product</b></h1>
-<p>*</p>
-		</div>
-		<div class="w3-col m4">
-			<p style="text-align: center">
-				<a href="https://elbosso.github.io/sQLshell.html"><img style="max-width:128px;" src="https://elbosso.github.io/images/medium/sQLshell_logo.png"/></a><br/>
-Tue Mar 05 16:43:29 CET 2019
-			</p>
+	  	<div class="w3-row">
+	  		<div class="w3-col m4">
+	  		<object data="public.product.svg"></object>
+	  		</div>
+			<div class="w3-col m4 s12 w3-center w3-padding-32">
+		    <h1><b>product</b></h1>
+				<p>*</p>
+			</div>
+			<div class="w3-col m4">
+				<p style="text-align: center">
+					<a href="https://elbosso.github.io/sQLshell.html"><img style="max-width:128px;" src="https://elbosso.github.io/images/medium/sQLshell_logo.png"/></a><br/>
+					Fri Jul 02 18:19:40 CEST 2021
+				</p>
+			</div>
 		</div>
     </header>
    	<div class="w3-row">
@@ -31,6 +36,72 @@ Tue Mar 05 16:43:29 CET 2019
 			</div>
 		</div>
 	</div>
+
+
+
+	<div class="w3-row">
+    	<header class="w3-container w3-center w3-padding-32">
+			<h2><a name="references">References</a></h2>
+		</header>
+		<div class="w3-row">
+			<div class="w3-col l6 m12 s12">
+				<div class="w3-card-4 w3-margin w3-white">
+					<div class="w3-container">
+					<h3>Exported Keys</h3>
+					 <p><table class="w3-table-all"> 
+					  <thead>
+						  <tr class="w3-light-grey">
+							<th>Column</th>
+							<th>Constraint</th>
+							<th>Table</th>
+							<th>Column</th>
+						  </tr>
+						</thead> 
+<tr>
+<td><a href="#id">id</a></td>
+<td>
+				<a href="public.orderitem.html#productid">fk_orderite_reference_product</a>
+</td><td>
+										<a href="public.orderitem.html#references">orderitem</a>
+</td><td>
+										<a href="public.orderitem.html#productid">productid</a>
+</td>
+
+</tr>
+				</table></p>
+					</div>
+				</div>
+			</div>
+			<div class="w3-col l6 m12 s12">
+				<div class="w3-card-4 w3-margin w3-white">
+					<div class="w3-container">
+				<h3>Foreign Keys</h3>
+				 <p><table class="w3-table-all"> 
+				  <thead>
+					  <tr class="w3-light-grey">
+						<th>Column</th>
+						<th>Constraint</th>
+						<th>Table</th>
+						<th>Column</th>
+					  </tr>
+					</thead> 
+<tr>
+<td><a href="#supplierid">supplierid</a></td>
+<td>
+				<a href="public.supplier.html#id">fk_product_reference_supplier</a>
+</td><td>
+										<a href="public.supplier.html#references">supplier</a>
+</td><td>
+										<a href="public.supplier.html#id">id</a>
+</td>
+
+</tr>
+				</table></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="w3-row">
     	<header class="w3-container w3-center w3-padding-32">
 			<h2>Columns</h2>
@@ -40,22 +111,31 @@ Tue Mar 05 16:43:29 CET 2019
 				<div class="w3-container">
 					<h3><a name="id"><b>id</b></a></h3>
 					<div class="w3-row">
-						<div class="w3-col m12 s12">
+						<div class="w3-col l4 m6 s12">
 							<dl>
 								<dt><span class="w3-tag w3-round w3-red">Primary Key</span></dt><dd></dd>
 								<dt><span class="w3-tag w3-round w3-aqua">Automatic values</span></dt><dd></dd>
-								<dt>Type</dt><dd>INTEGER</dd>
+								<dt>Type</dt><dd><span class="w3-tag w3-round w3-pale-blue">INTEGER</span></dd>
 								<dt>Length</dt><dd>10</dd>
 								<dt>Decimals</dt><dd>0</dd>
 								<dt>Default Value</dt><dd>nextval('product_id_seq'::regclass)</dd>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
 								<dt><span class="w3-tag w3-round w3-pink">Exports</span></dt>
 								<dd>
 									<dl>
 										<dt>Schema</dt><dd>public</dd>
-										<dt>Table</dt><dd><a href="public.orderitem.html">orderitem</a></dd>
+										<dt>Constraint Name</dt><dd><span class="w3-tag w3-round w3-pale-blue"><a href="public.orderitem.html#productid">fk_orderite_reference_product</a></span></dd>
+										<dt>Table</dt><dd><a href="public.orderitem.html#references">orderitem</a></dd>
 										<dt>Column</dt><dd><a href="public.orderitem.html#productid">productid</a></dd>
 									</dl>
 								</dd>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
 							</dl>
 						</div>
 					</div>
@@ -65,12 +145,19 @@ Tue Mar 05 16:43:29 CET 2019
 				<div class="w3-container">
 					<h3><a name="productname"><b>productname</b></a></h3>
 					<div class="w3-row">
-						<div class="w3-col m12 s12">
+						<div class="w3-col l4 m6 s12">
 							<dl>
-								<dt>Type</dt><dd>VARCHAR</dd>
+								<dt>Type</dt><dd><span class="w3-tag w3-round w3-pale-blue">VARCHAR</span></dd>
 								<dt>Length</dt><dd>50</dd>
 								<dt>Decimals</dt><dd>0</dd>
-								<dt>Default Value</dt><dd></dd>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
 							</dl>
 						</div>
 					</div>
@@ -80,17 +167,25 @@ Tue Mar 05 16:43:29 CET 2019
 				<div class="w3-container">
 					<h3><a name="supplierid"><b>supplierid</b></a></h3>
 					<div class="w3-row">
-						<div class="w3-col m12 s12">
+						<div class="w3-col l4 m6 s12">
 							<dl>
-								<dt>Type</dt><dd>INTEGER</dd>
+								<dt>Type</dt><dd><span class="w3-tag w3-round w3-pale-blue">INTEGER</span></dd>
 								<dt>Length</dt><dd>10</dd>
 								<dt>Decimals</dt><dd>0</dd>
-								<dt>Default Value</dt><dd></dd>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
 								<dt><span class="w3-tag w3-round w3-indigo">References (Foreign Key)</span></dt>
 								<dd>
 									<dl>
 										<dt>Schema</dt><dd>public</dd>
-										<dt>Table</dt><dd><a href="public.supplier.html">supplier</a></dd>
+										<dt>Constraint Name</dt><dd><span class="w3-tag w3-round w3-pale-blue"><a href="public.supplier.html#id">fk_product_reference_supplier</a></span></dd>
+										<dt>Table</dt><dd><a href="public.supplier.html#references">supplier</a></dd>
 										<dt>Column</dt><dd><a href="public.supplier.html#id">id</a></dd>
 									</dl>
 								</dd>
@@ -103,13 +198,21 @@ Tue Mar 05 16:43:29 CET 2019
 				<div class="w3-container">
 					<h3><a name="unitprice"><b>unitprice</b></a></h3>
 					<div class="w3-row">
-						<div class="w3-col m12 s12">
+						<div class="w3-col l4 m6 s12">
 							<dl>
 								<dt><span class="w3-tag w3-round w3-green">Nullable</span></dt><dd></dd>
-								<dt>Type</dt><dd>NUMERIC</dd>
+								<dt>Type</dt><dd><span class="w3-tag w3-round w3-pale-blue">NUMERIC</span></dd>
 								<dt>Length</dt><dd>12</dd>
 								<dt>Decimals</dt><dd>2</dd>
 								<dt>Default Value</dt><dd>0</dd>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
 							</dl>
 						</div>
 					</div>
@@ -119,13 +222,20 @@ Tue Mar 05 16:43:29 CET 2019
 				<div class="w3-container">
 					<h3><a name="package"><b>package</b></a></h3>
 					<div class="w3-row">
-						<div class="w3-col m12 s12">
+						<div class="w3-col l4 m6 s12">
 							<dl>
 								<dt><span class="w3-tag w3-round w3-green">Nullable</span></dt><dd></dd>
-								<dt>Type</dt><dd>VARCHAR</dd>
+								<dt>Type</dt><dd><span class="w3-tag w3-round w3-pale-blue">VARCHAR</span></dd>
 								<dt>Length</dt><dd>30</dd>
 								<dt>Decimals</dt><dd>0</dd>
-								<dt>Default Value</dt><dd></dd>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
 							</dl>
 						</div>
 					</div>
@@ -135,18 +245,68 @@ Tue Mar 05 16:43:29 CET 2019
 				<div class="w3-container">
 					<h3><a name="isdiscontinued"><b>isdiscontinued</b></a></h3>
 					<div class="w3-row">
-						<div class="w3-col m12 s12">
+						<div class="w3-col l4 m6 s12">
 							<dl>
-								<dt>Type</dt><dd>BIT</dd>
+								<dt>Type</dt><dd><span class="w3-tag w3-round w3-pale-blue">BIT</span></dd>
 								<dt>Length</dt><dd>1</dd>
 								<dt>Decimals</dt><dd>0</dd>
 								<dt>Default Value</dt><dd>false</dd>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
+							</dl>			
+						</div>
+						<div class="w3-col l4 m6 s12">
+							<dl>
 							</dl>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="w3-row">
+    	<header class="w3-container w3-center w3-padding-32">
+			<h2>Indices</h2>
+		</header>
+			<div class="w3-col l12 s12">
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container">
+					<h3><b>indexproductname</b></h3>
+					<div class="w3-row">
+						<div class="w3-col m12 s12">
+							<ul>
+								<li><a href="#productname">productname</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container">
+					<h3><b>pk_product</b></h3>
+					<div class="w3-row">
+						<div class="w3-col m12 s12">
+							<ul>
+								<li><a href="#id">id</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container">
+					<h3><b>indexproductsupplierid</b></h3>
+					<div class="w3-row">
+						<div class="w3-col m12 s12">
+							<ul>
+								<li><a href="#supplierid">supplierid</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 	</div>
 </div>
 <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">

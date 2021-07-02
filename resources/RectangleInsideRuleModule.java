@@ -34,7 +34,7 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.elbosso.dataflowframework.modules.filter.rules.util.validator.rules;
 
-@javax.annotation.Generated(value="de.elbosso.dataflowframework.processors.ValidatorProcessor", date="2021-06-26T13:54:02.486Z")
+@javax.annotation.Generated(value="de.elbosso.dataflowframework.processors.ValidatorProcessor", date="2021-06-29T12:31:26.773Z")
 public class RectangleInsideRuleModule extends de.netsysit.dataflowframework.modules.ThreadingBeanContextChildModuleBase
 {
 	static
