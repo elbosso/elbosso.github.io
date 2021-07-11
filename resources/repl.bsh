@@ -1,0 +1,44 @@
+sQLshellStartREPL()
+{
+			import bsh.util.*;
+			global.sQLshellBeanShellREPLFrame=new javax.swing.JFrame();
+			JConsole console = new JConsole();
+			global.sQLshellBeanShellREPLFrame.setContentPane(console);
+			interpreter = new Interpreter( console );
+			interpreter.set("sQLshellAPI",sQLshellAPI);
+//			t=new Thread(interpreter);
+//			t.start();
+			synchronizer=de.netsysit.db.prg.ThreadManager.getSharedInstance().execute(interpreter);
+			interpreter.setExitOnEOF(false);
+			global.sQLshellBeanShellREPLFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			global.sQLshellBeanShellREPLFrame.setSize(600,200);
+			global.sQLshellBeanShellREPLFrame.setVisible(true);
+			global.sQLshellBeanShellREPLFrame.addWindowListener(new WindowAdapter()
+			{
+				public void windowClosing(WindowEvent e)
+				{
+//					System.out.println("windowClosing");
+//					t.interrupt();
+//					synchronizer.interrupt();
+					e.getWindow().setVisible(false);
+//					e.getWindow().dispose();
+//					System.out.println(t.getState());
+//					System.out.println(synchronizer.getState());
+				}
+			});
+//			System.out.println(global.sQLshellBeanShellREPLFrame);
+}
+//System.out.println(global.sQLshellBeanShellREPLFrame==null);
+//System.out.println(global.sQLshellBeanShellREPLFrame);
+if(global.sQLshellBeanShellREPLFrame==void)
+{
+//	System.out.println("creating!");
+	sQLshellStartREPL();
+}
+else
+{
+//	System.out.println("reusing!");
+	global.sQLshellBeanShellREPLFrame.setVisible(true);
+}
+//System.out.println(global.sQLshellBeanShellREPLFrame);
+
