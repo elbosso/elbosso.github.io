@@ -37,14 +37,17 @@ rankdir=LR
     Videos [label="Videos" href="https://elbosso.github.io/videos.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_java_bug__jpopupmenu_modale_dialoge [label="Java-Bug: JPopupMenu und modale Dialoge" href="https://elbosso.github.io/java_bug__jpopupmenu_modale_dialoge.html"]
+node_hexaflexagon [label="Hexaflexagon" href="https://elbosso.github.io/hexaflexagon.html"]
+    node_monitoring_raid_rebuild_grafana [label="Monitoring Raid Rebuild mit Grafana" href="https://elbosso.github.io/monitoring_raid_rebuild_grafana.html"]
+    node_java_bug__jpopupmenu_modale_dialoge [label="Java-Bug: JPopupMenu und modale Dialoge" href="https://elbosso.github.io/java_bug__jpopupmenu_modale_dialoge.html"]
     node_sqlshell_support_ldap_ii [label="sQLshell Support für LDAP II" href="https://elbosso.github.io/sqlshell_support_ldap_ii.html"]
                 node_sqlshell_support_ldap_ii -> node_sqlshell_reporting_apache_drill
 node_generator_ldif_dateien_test_verzeichnisdiensten [label="Generator für LDIF Dateien zum Test von Verzeichnisdiensten" href="https://elbosso.github.io/generator_ldif_dateien_test_verzeichnisdiensten.html"]
     node_keycloak_ldap [label="Keycloak und LDAP" href="https://elbosso.github.io/keycloak_ldap.html"]
                 node_keycloak_ldap -> node_generator_ldif_dateien_test_verzeichnisdiensten
 node_nginx_reverse_proxy_docker_container [label="Nginx als reverse Proxy für Docker-Container" href="https://elbosso.github.io/nginx_reverse_proxy_docker_container.html"]
-                node_nginx_reverse_proxy_docker_container -> node_pihole_bug_installation
+                node_nginx_reverse_proxy_docker_container -> node_lufi_docker_zoo
+            node_nginx_reverse_proxy_docker_container -> node_pihole_bug_installation
 node_linux_linkdump_2021_ii [label="Linux Linkdump 2021 II" href="https://elbosso.github.io/linux_linkdump_2021_ii.html"]
     node_planka__keycloak__openldap_docker_zoo [label="Planka, Keycloak, OpenLDAP im Docker-Zoo" href="https://elbosso.github.io/planka__keycloak__openldap_docker_zoo.html"]
                 node_planka__keycloak__openldap_docker_zoo -> node_nginx_reverse_proxy_docker_container
@@ -188,7 +191,8 @@ node_installation_ubuntu_20_04_auf_raid_0 [label="Installation von Ubuntu 20.04 
     node_automatisches_erzeugen_issues_gitlab [label="Automatisches Erzeugen von Issues in GitLab" href="https://elbosso.github.io/automatisches_erzeugen_issues_gitlab.html"]
     node_links___verschiedenes_ii [label="Links - Verschiedenes II" href="https://elbosso.github.io/links___verschiedenes_ii.html"]
     node_synchronisierung_aizawa_systemen [label="Synchronisierung von Aizawa-Systemen" href="https://elbosso.github.io/synchronisierung_aizawa_systemen.html"]
-    node_raspi_zero_w_nas_usb_stick [label="Raspi Zero W als NAS-USB-Stick" href="https://elbosso.github.io/raspi_zero_w_nas_usb_stick.html"]
+                node_synchronisierung_aizawa_systemen -> node_fraktale_auf_kommandozeile
+node_raspi_zero_w_nas_usb_stick [label="Raspi Zero W als NAS-USB-Stick" href="https://elbosso.github.io/raspi_zero_w_nas_usb_stick.html"]
                 node_raspi_zero_w_nas_usb_stick -> node_guenstiges_arm64_board_raspi_formfaktor
 node_openapi_schema_testdaten_generator [label="OpenApi-Schema Testdaten-Generator" href="https://elbosso.github.io/openapi_schema_testdaten_generator.html"]
                 node_openapi_schema_testdaten_generator -> node_generator_ldif_dateien_test_verzeichnisdiensten
@@ -880,7 +884,8 @@ node_gc_minimierung_java [label="GC-Minimierung in Java" href="https://elbosso.g
             node_gc_minimierung_java -> node_lambda_expressions_vs__anon__inner_classes
 node_panasonic_fernbedienung___geplante_obsoleszenz_ [label="Panasonic Fernbedienung - geplante Obsoleszenz?" href="https://elbosso.github.io/panasonic_fernbedienung___geplante_obsoleszenz_.html"]
     node_visualisierung_hoehenfeldern_mittels_voxeln [label="Visualisierung von Höhenfeldern mittels Voxeln" href="https://elbosso.github.io/visualisierung_hoehenfeldern_mittels_voxeln.html"]
-    node_nahtlos_wiederholbare_rausch_kacheln [label="Nahtlos wiederholbare Rausch-Kacheln" href="https://elbosso.github.io/nahtlos_wiederholbare_rausch_kacheln.html"]
+                node_visualisierung_hoehenfeldern_mittels_voxeln -> node_isometrische_darstellung_generierte_lanschaften
+node_nahtlos_wiederholbare_rausch_kacheln [label="Nahtlos wiederholbare Rausch-Kacheln" href="https://elbosso.github.io/nahtlos_wiederholbare_rausch_kacheln.html"]
                 node_nahtlos_wiederholbare_rausch_kacheln -> node_visualisierung_hoehenfeldern_mittels_voxeln
 node_trac_reorganisation [label="Trac Reorganisation" href="https://elbosso.github.io/trac_reorganisation.html"]
     node_aenderungen_datumsformat_java [label="Änderungen im Datumsformat von Java" href="https://elbosso.github.io/aenderungen_datumsformat_java.html"]
@@ -1581,7 +1586,8 @@ node_prism_moeglicher_ausblick [label="PRISM und ein möglicher Ausblick" href="
                 node_prism_moeglicher_ausblick -> node_google_glass_nutzer_nerven
 node_idioten_straszenverkehr [label="Idioten im Straßenverkehr" href="https://elbosso.github.io/idioten_straszenverkehr.html"]
     node_java3d_bug_groszen_trianglestrips [label="Java3D Bug in großen TriangleStrips" href="https://elbosso.github.io/java3d_bug_groszen_trianglestrips.html"]
-    node_prism_moeglichen_folgen [label="PRISM und seine möglichen Folgen" href="https://elbosso.github.io/prism_moeglichen_folgen.html"]
+                node_java3d_bug_groszen_trianglestrips -> node_isometrische_darstellung_generierte_lanschaften
+node_prism_moeglichen_folgen [label="PRISM und seine möglichen Folgen" href="https://elbosso.github.io/prism_moeglichen_folgen.html"]
     node_ebmap4d_bitmap_layer [label="EBMap4D Bitmap-Layer" href="https://elbosso.github.io/ebmap4d_bitmap_layer.html"]
     node_terminplaner_mittels_shell_skript [label="Terminplaner mittels Shell-Skript" href="https://elbosso.github.io/terminplaner_mittels_shell_skript.html"]
                 node_terminplaner_mittels_shell_skript -> node_todo_txt
@@ -1604,11 +1610,10 @@ node_daylight [label="DayLight" href="https://elbosso.github.io/daylight.html"]
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
                 node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-                node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
+                node_ebmap4d -> node_ortsbezuege_dwb_
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
-            node_ebmap4d -> node_ortsbezuege_dwb_
+            node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
-            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
             node_ebmap4d -> node_tile_server_openstreetmap
@@ -1616,6 +1621,7 @@ node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
             node_ebmap4d -> node_geojson_ebmap4d
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_hillshading_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_satelliten_layer
@@ -1642,6 +1648,7 @@ node_fbmlandscapes [label="FbmLandscapes" href="https://elbosso.github.io/fbmlan
             node_fbmlandscapes -> node_java3d_bug_groszen_trianglestrips
             node_fbmlandscapes -> node_hoehenlinien_fbmlandscapes
             node_fbmlandscapes -> node_alternative_eingabegeraete_linux_mittels_uinput
+            node_fbmlandscapes -> node_isometrische_darstellung_generierte_lanschaften
             node_fbmlandscapes -> node_ebmap4d_bitmap_layer
 node_jogdial [label="JogDial" href="https://elbosso.github.io/jogdial.html"]
                 node_jogdial -> node_integration_java__amp__ffmpeg
