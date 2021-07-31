@@ -122,14 +122,14 @@ ich ein der beiden Systeme mit einer der Zustandsvariablen des anderen Systems b
 " title="\sigma=10\;\; \rho=28\;\; \beta=8\over 3
 ">
 Am Beispiel der Übertragung der
-Zustandsvariable `x` sieht das wie folgt aus:
+Zustandsvariable <span class="mdcode">x</span> sieht das wie folgt aus:
 </p><p>
-*Driver:*
+<span class="mdbold">Driver:</span>
 </p></p><p><img class="formula" src="images/tex/-988481303.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 ">
 </p><p>
-*Driven:*
+<span class="mdbold">Driven:</span>
 </p></p><p><img class="formula" src="images/tex/-988481304.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_2-x_1)\hfill\cr \dot y_2&=&x_1(\rho -z_2)-y_2\hfill\cr \dot z_2&=&x_1y_2-\beta z_2\hfill\end{matrix}
 " title="\begin{matrix}\dot x_2&=&\sigma (y_2-x_1)\hfill\cr \dot y_2&=&x_1(\rho -z_2)-y_2\hfill\cr \dot z_2&=&x_1y_2-\beta z_2\hfill\end{matrix}
 ">
@@ -139,7 +139,7 @@ Man erkennt deutlich, dass die Zustände und damit die aktuelle Position im Zust
 In der zweiten Zeile ist das Verhalten beider Systeme um diesen Zeitraum herum dargestellt. Man erkennt noch Unterschiede in Lage und
 Form der Trajektorie - schaut man sich jedoch die Position am Ende des dargestellten Ausschnitts an, kann man bereits erahnen, dass
 die Unterschiede immer kleiner werden. In der letzten Zeile schließlich erkennt man keine Unterschiede mehr zwischen beiden Trajektorien -
-*Das zweite System wurde mit dem ersten nur durch die Übertragung einer Statusvariablen synchronisiert!*
+<span class="mdbold">Das zweite System wurde mit dem ersten nur durch die Übertragung einer Statusvariablen synchronisiert!</span>
 </p><p>
 <img src="images/lorenz_driven_x.png" style="max-width:1024px;"
 alt="Screenshot"
@@ -148,14 +148,14 @@ class="center">
 Untersuchung des Verhaltens zweier Lorenz-Systeme bei Übertragung einer Statusvariablen (x)
 </span>
 </p><p>
-Bei Übertragung der Statusvariablen `y` erkennt man exakt dasselbe Verhalten:
+Bei Übertragung der Statusvariablen <span class="mdcode">y</span> erkennt man exakt dasselbe Verhalten:
 </p><p>
-*Driver:*
+<span class="mdbold">Driver:</span>
 </p></p><p><img class="formula" src="images/tex/-988481305.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 ">
 </p><p>
-*Driven:*
+<span class="mdbold">Driven:</span>
 </p></p><p><img class="formula" src="images/tex/-988481306.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_1-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_2)-y_1\hfill\cr \dot z_2&=&x_2y_1-\beta z_2\hfill\end{matrix}
 " title="\begin{matrix}\dot x_2&=&\sigma (y_1-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_2)-y_1\hfill\cr \dot z_2&=&x_2y_1-\beta z_2\hfill\end{matrix}
 ">
@@ -168,15 +168,15 @@ Untersuchung des Verhaltens zweier Lorenz-Systeme bei Übertragung einer Statusv
 </span>
 </p><p>
 Wie Strogatz et. al. bereits in ihren ursprünglichen Veröffentlichungen feststellten, gelingt die Synchronisation nicht mittels
-der Übertragung der Statusvariablen `z:` Man erreicht zwar eine qualitative Annäherung der Trajektorien, allerdings weichen sie
+der Übertragung der Statusvariablen <span class="mdcode">z:</span> Man erreicht zwar eine qualitative Annäherung der Trajektorien, allerdings weichen sie
 qualitativ (man beachte die Skalenbeschriftungen!) stark voneinander ab.
 </p><p>
-*Driver:*
+<span class="mdbold">Driver:</span>
 </p></p><p><img class="formula" src="images/tex/-988481307.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 ">
 </p><p>
-*Driven:*
+<span class="mdbold">Driven:</span>
 </p></p><p><img class="formula" src="images/tex/-988481308.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_2-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_1)-y_2\hfill\cr \dot z_2&=&x_2y_2-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_2&=&\sigma (y_2-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_1)-y_2\hfill\cr \dot z_2&=&x_2y_2-\beta z_1\hfill\end{matrix}
 ">
@@ -493,17 +493,15 @@ bei geeigneter Parameterwahl auch über die Zustandsvariable z möglich ist.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							DOT-Export aus dWb+</p>
+							Sicherheitsproblem bei Tess4J</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">24.07.2016</span>
+							<span class="w3-opacity">02.08.2016</span>
 						</p>
-						<span class="smallabstract"><p>Bereits seit längerem war ein Feature in
+						<span class="smallabstract"><p>Ich fand ein Sicherheitsproblem als ich versuchte, OCR-Funktionalität in
 dWb+
-in der Beta-Phase, das es unkompliziert erlaubt, Workspaces in
-beliebige andere Formate zu exportieren. Während dieser Tests wurden verschiedene
-Formate als Testsubjekt herangezogen - unter anderem DOT.
+zu integrieren
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dot_export_aus_dwb_.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="sicherheitsproblem_tess4j.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -567,7 +565,28 @@ Formate als Testsubjekt herangezogen - unter anderem DOT.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Beliebige äußere Form für generierte Stadtpläne</span><br>
+							GeoJSON in EBMap4D</span><br>
+						<span class="smallabstract"><p>Ich habe die Anwendung
+EBMap4D
+einer Generalüberholung unterzogen und neue Features hinzugefügt...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="geojson_ebmap4d.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Erweiterte Collatz-Vermutung (?)</span><br>
+						<span class="smallabstract"><p>Ich bin beim Surfen im Internet über verschiedenste Videos zum Thema der Collatz-Vermutung gestoßen - ich habe auch
+bereits den einen oder anderen Artikel zu diesem Thema gelesen. Neulich hatte ich aber eine Idee, die ich unbedingt ausprobieren wollte,
+weil ich davon - oder von etwas ähnlichem - bisher weder gehört noch gelesen habe
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erweiterte_collatz_vermutung____.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Beliebige äußere Form für generierte Stadtpläne</span><br>
 						<span class="smallabstract"><p>Ich habe den neulich vorgestellten
 Generator für beliebige Stadtpläne,
 der als Ausgabeformat unter anderem
@@ -575,30 +594,6 @@ GeoJson
 unterstützt ein wenig erweitert
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="beliebige_aeuszere_form_generierte_stadtplaene.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							PiHole-Bug bei Installation</span><br>
-						<span class="smallabstract"><p>Ich trage mich aktuell mit dem Gedanken, analog zu meinen Skripts zur Einrichtung von
-Kartenservern
-oder
-Netzwerkinfrastruktur
-einen kleinen Server komplett unattended einrichten zu können, der PiHole, DNSSEC und einen
-autonomen root-Resolver integriert.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pihole_bug_installation.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Hexaflexagon</span><br>
-						<span class="smallabstract"><p>Durch ein Video-Interview mit John Conway - dem Erfinder des Game Of Life -
-wurde ich auf das Hexaflexagon aufmerksam,,,
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="hexaflexagon.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -634,7 +629,28 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Beliebige äußere Form für generierte Stadtpläne</span><br>
+							GeoJSON in EBMap4D</span><br>
+							<span class="smallabstract"><p>Ich habe die Anwendung
+EBMap4D
+einer Generalüberholung unterzogen und neue Features hinzugefügt...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="geojson_ebmap4d.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							Erweiterte Collatz-Vermutung (?)</span><br>
+							<span class="smallabstract"><p>Ich bin beim Surfen im Internet über verschiedenste Videos zum Thema der Collatz-Vermutung gestoßen - ich habe auch
+bereits den einen oder anderen Artikel zu diesem Thema gelesen. Neulich hatte ich aber eine Idee, die ich unbedingt ausprobieren wollte,
+weil ich davon - oder von etwas ähnlichem - bisher weder gehört noch gelesen habe
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erweiterte_collatz_vermutung____.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Beliebige äußere Form für generierte Stadtpläne</span><br>
 							<span class="smallabstract"><p>Ich habe den neulich vorgestellten
 Generator für beliebige Stadtpläne,
 der als Ausgabeformat unter anderem
@@ -642,30 +658,6 @@ GeoJson
 unterstützt ein wenig erweitert
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="beliebige_aeuszere_form_generierte_stadtplaene.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							PiHole-Bug bei Installation</span><br>
-							<span class="smallabstract"><p>Ich trage mich aktuell mit dem Gedanken, analog zu meinen Skripts zur Einrichtung von
-Kartenservern
-oder
-Netzwerkinfrastruktur
-einen kleinen Server komplett unattended einrichten zu können, der PiHole, DNSSEC und einen
-autonomen root-Resolver integriert.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pihole_bug_installation.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Hexaflexagon</span><br>
-							<span class="smallabstract"><p>Durch ein Video-Interview mit John Conway - dem Erfinder des Game Of Life -
-wurde ich auf das Hexaflexagon aufmerksam,,,
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="hexaflexagon.html#content">
  Weiterlesen...
 								</a>
 						</li>

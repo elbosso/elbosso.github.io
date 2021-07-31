@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+<head>
+<title>Erweiterte Collatz-Vermutung (?)</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta property="og:title" content="Erweiterte Collatz-Vermutung (?)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://elbosso.github.io/erweiterte_collatz_vermutung____" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="elbosso.github.io" />
+<meta property="og:description" content="Ich bin beim Surfen im Internet über verschiedenste Videos zum Thema der Collatz-Vermutung gestoßen - ich habe auch
+bereits den einen oder anderen Artikel zu diesem Thema gelesen. Neulich hatte ich aber eine Idee, die ich unbedingt ausprobieren wollte,
+weil ich davon - oder von etwas ähnlichem - bisher weder gehört noch gelesen habe
+" />
+<meta property="article:published_time" content="2021-07-31">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" />
+<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<div class="w3-row">
+						<div class="w3-col m6 s12">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract"
+							   href="beliebige_aeuszere_form_generierte_stadtplaene.html#content">vorhergehender Artikel</a>
+						</div>
+						<div class="w3-col m6" style="text-align: right">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
+							   href="geojson_ebmap4d.html#content">nächster Artikel
+							</a>
+						</div>
+					</div>
+					<h4>Erweiterte Collatz-Vermutung (?)</h4>
+					<div class="w3-container">
+						<div class="w3-row">
+							<div class="w3-col m8 s12">
+								vorhergehende Artikel in:
+								<a href="synchronisierung_lorenz_systemen.html#content">
+									<span class="w3-tag w3-black w3-margin-bottom">Numerik</span>
+								</a> <!--/li-->
+							</div>
+							<div class="w3-col m4" style="text-align: right">
+								<span class="w3-opacity">31.07.2021</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Ich bin beim Surfen im Internet über verschiedenste Videos zum Thema der Collatz-Vermutung gestoßen - ich habe auch
+bereits den einen oder anderen Artikel zu diesem Thema gelesen. Neulich hatte ich aber eine Idee, die ich unbedingt ausprobieren wollte,
+weil ich davon - oder von etwas ähnlichem - bisher weder gehört noch gelesen habe
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p>Es geht bei der Vermutung darum, dass die Abbildung <span class="mdcode">der</span> natürlichen Zahlen auf sich selbst nach folgender Vorschrift
+</p></p><p><img class="formula" src="images/tex/9224295771.png" alt="C:{N}\to{N}\quad C(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+1 & \text{wenn }n\text{ gerade ist.}\end{cases}
+" title="C:{N}\to{N}\quad C(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+1 & \text{wenn }n\text{ gerade ist.}\end{cases}
+">
+</p><p>
+einen zusammenhängenden Graphen mit einem Zyklus <span class="mdcode">1, 4, 2</span> ergibt. Das bedeutet anders gesagt, dass egal welchen Startwert man
+nimmt nach endlich vielen Iterationen die Zahl <span class="mdcode">1</span> ereicht wird. Diese Vermutung, die
+<a href="https://de.wikipedia.org/wiki/Collatz-Problem">Collatz</a>
+wohl 1950 mündlich verbreitete und die bis heute weder bewiesen, noch widerlegt wurde finde ich wie viele andere
+Probleme der Zahlentheorie besonders deswegen interessant, da man sie extrem einfach formulieren kann - dennoch
+ist sie offenbar für die Mathematiker eine extrem harte Nuss.
+</p><p>
+Ich möchte hier einschieben, dass ich nicht der Meinung bin, dass ich sie aufgelöst hätte, oder dass ich auch nur einen besonders
+interessanten Aspekt hinzugefügt habe. Die Tatsache, dass ich keine Erwähnung meiner Idee bisher gefunden habe, kann verschiedene
+Ursachen haben - ohne Anspruch auf Vollständigkeit wären da etwa:
+<ul>
+<li>Ich habe einfach nicht die richtige Quelle gefunden</li>
+<li>Meine Idee ist aus mathematischer Sicht auf das Problem so trivial, dass sich eine Untersuchung nicht lohnt</li>
+<li>...</li>
+<li>Es ist wirklich noch niemand auf diese Idee gekommen</li>
+</ul>
+</p><p>
+Ich halte die vierte Möglichkeit für mit Abstand am unwahrscheinlichsten - dennoch...:
+</p><p>
+Die Berechnungsvorschrift im Fall, dass <span class="mdcode">n</span> ungerade ist garantiert, dass im nächsten Schritt <span class="mdcode">n</span> wieder gerade ist:
+</p></p><p><img class="formula" src="images/tex/9224295772.png" alt="\begin{split}n_{i+1}&=3n_i+1\quad\text{ mit }n_i=2m+1\\n_{i+1}&=3(2m+1)+1\\n_{i+1}&=6m+3+1\\n_{i+1}&=6m+4\\n_{i+1}&=2(3m+2)\quad\text{Damit ist }n_{i+1}\text{ eine gerade Zahl!}\end{split}
+" title="\begin{split}n_{i+1}&=3n_i+1\quad\text{ mit }n_i=2m+1\\n_{i+1}&=3(2m+1)+1\\n_{i+1}&=6m+3+1\\n_{i+1}&=6m+4\\n_{i+1}&=2(3m+2)\quad\text{Damit ist }n_{i+1}\text{ eine gerade Zahl!}\end{split}
+">
+</p><p>
+Meine Idee war nun, die Berechnungsvorschrift für den nächsten Wert von <span class="mdcode">n</span> falls <span class="mdcode">n</span> ungerade ist durch einen parametrisierbaren
+Summenterm zu ergänzen, der bei <span class="mdcode">m=0</span> wieder die der urprünglichen Collatz-Vermutung ergibt:
+</p></p><p><img class="formula" src="images/tex/9224295773.png" alt="C^</span>:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ gerade ist.}\end{cases}
+" title="C^</span>:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ gerade ist.}\end{cases}
+">
+</p><p>
+Dazu schrieb ich ein kleines Programm, mit dem man die ersten <span class="mdcode">p</span> Zahlen daraufhin untersuchen kann, ob es darin mehrere Zyklen gibt -
+denn das würde ja für einen spezifischen Parameter <span class="mdcode">m</span> die Vermutung wiederlegen wie man sich leicht überlegen kann, wenn man die Vorschrift
+als gerichteten Graphen versteht...
+</p><p>
+Ich berechnete das Mapping zunächst für die Werte von 1 bis 4 für <span class="mdcode">m</span>. Ich hatte dabei keine Illusionen, dass sich irgendetwas
+überraschendes ergeben würde. Interessanterweise wurde ich aber doch überrascht: Es stellte sich heraus, dass bereits in meinem doch
+sehr eingeschränkten Suchraum bei <span class="mdcode">m=2</span> die Vermutung, dass es sich um einen zusammenhängenden Graphen handelt gleich mehrfach widerlegt werden konnte:
+die untenstehende Graphik zeigt augenscheinliche 4 Kreise. Ein gerichteter zusammenhängender Graph lässt sich aus unzusammenhängenden Teilgraphen
+nur dann konstruieren, wenn man eine Kante hinzufügen kann, die aus einem der Knoten in Teilgraph <span class="mdcode">A</span> kommend diesen mit einem Knoten
+im Teilgraphen <span class="mdcode">B</span> verbindet. Da es sich hierbei jedoch um eine eindeutige Abbildung handelt, kann aus einem Knoten immer nur maximal eine Kante
+entspringen und in einem Teilgraphen mit einem Kreis entspringt bereits aus jedem Knoten eine Kante.
+</p><p>
+<img src="images/extendedcollatz_m4.svg"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Graph für das Ergebnis der Erweiterung der Collatz-Abbildung mit Parameterwert m=2
+</span>
+</p><p>
+Daraufhin weitete ich meine Suche aus und prüfte die werte von <span class="mdcode">m</span> im Bereich von <span class="mdcode">1</span> bis <span class="mdcode">19</span>.
+Dabei prüfte ich die Zahlen von <span class="mdcode">4</span> bis <span class="mdcode">10000000</span> mit jeweils maximal <span class="mdcode">10000</span> Iterationen. Die Parameterwerte für <span class="mdcode">m</span> mit der
+Anzahl der gefundenen Zyklen sind in der nachfolgenden Tabelle aufgeführt, wobei diejenigen, für die ich bisher
+nur einen Zyklus gefunden habe und die daher Kandidaten für eine erweiterte Collatz-Vermutung sein könnten hervorgehoben habe:
+</p><p>
+<table class="center">
+<tr><th>m</th><th>Gefundene Zyklen</th></tr>
+<tr><td class="center mdbold mditalics">0</td><td class="center mdbold mditalics">1</td></tr>
+<tr><td class="center mdbold mditalics">1</td><td class="center mdbold mditalics">1</td></tr>
+<tr><td class="center">2</td><td class="center">6</td></tr>
+<tr><td class="center">3</td><td class="center">2</td></tr>
+<tr><td class="center mdbold mditalics">4</td><td class="center mdbold mditalics">1</td></tr>
+<tr><td class="center">5</td><td class="center">3</td></tr>
+<tr><td class="center">6</td><td class="center">10</td></tr>
+<tr><td class="center">7</td><td class="center">6</td></tr>
+<tr><td class="center">8</td><td class="center">3</td></tr>
+<tr><td class="center">9</td><td class="center">2</td></tr>
+<tr><td class="center">10</td><td class="center">2</td></tr>
+<tr><td class="center">11</td><td class="center">4</td></tr>
+<tr><td class="center">12</td><td class="center">8</td></tr>
+<tr><td class="center mdbold mditalics">13</td><td class="center mdbold mditalics">1</td></tr>
+<tr><td class="center">14</td><td class="center">5</td></tr>
+<tr><td class="center">15</td><td class="center">2</td></tr>
+<tr><td class="center">16</td><td class="center">3</td></tr>
+<tr><td class="center">17</td><td class="center">9</td></tr>
+<tr><td class="center">18</td><td class="center">4</td></tr>
+<tr><td class="center">19</td><td class="center">10</td></tr>
+</table>
+</p><p>
+Darüber hinaus ist vielleicht die Tatsache noch interessant, dass es so zu sein scheint, dass für jeden Parameter <span class="mdcode">m</span> ein
+Zyklus aus genau drei Knoten auftaucht, dessen Mitglieder sich auf einfache Art berechnen lassen:
+</p></p><p><img class="formula" src="images/tex/9224295774.png" alt="\begin{split}z_{0}&=2m+1\\z_{1}&=C(z_{0})\\z_{2}&=C(z_{1})\end{split}
+" title="\begin{split}z_{0}&=2m+1\\z_{1}&=C(z_{0})\\z_{2}&=C(z_{1})\end{split}
+">
+</p><p>
+Der Code des Java-Programms, mit dem ich die Prüfungen vollzogen habe ist hier unten eingefügt:
+</p></p><pre>
+/*
+ * Copyright (c) 2021.
+ *
+ * Juergen Key. Alle Rechte vorbehalten.
+ *
+ * Weiterverbreitung und Verwendung in nichtkompilierter oder kompilierter Form,
+ * mit oder ohne Veraenderung, sind unter den folgenden Bedingungen zulaessig:
+ *
+ *    1. Weiterverbreitete nichtkompilierte Exemplare muessen das obige Copyright,
+ * die Liste der Bedingungen und den folgenden Haftungsausschluss im Quelltext
+ * enthalten.
+ *    2. Weiterverbreitete kompilierte Exemplare muessen das obige Copyright,
+ * die Liste der Bedingungen und den folgenden Haftungsausschluss in der
+ * Dokumentation und/oder anderen Materialien, die mit dem Exemplar verbreitet
+ * werden, enthalten.
+ *    3. Weder der Name des Autors noch die Namen der Beitragsleistenden
+ * duerfen zum Kennzeichnen oder Bewerben von Produkten, die von dieser Software
+ * abgeleitet wurden, ohne spezielle vorherige schriftliche Genehmigung verwendet
+ * werden.
+ *
+ * DIESE SOFTWARE WIRD VOM AUTOR UND DEN BEITRAGSLEISTENDEN OHNE
+ * JEGLICHE SPEZIELLE ODER IMPLIZIERTE GARANTIEN ZUR VERFUEGUNG GESTELLT, DIE
+ * UNTER ANDEREM EINSCHLIESSEN: DIE IMPLIZIERTE GARANTIE DER VERWENDBARKEIT DER
+ * SOFTWARE FUER EINEN BESTIMMTEN ZWECK. AUF KEINEN FALL IST DER AUTOR
+ * ODER DIE BEITRAGSLEISTENDEN FUER IRGENDWELCHE DIREKTEN, INDIREKTEN,
+ * ZUFAELLIGEN, SPEZIELLEN, BEISPIELHAFTEN ODER FOLGENDEN SCHAEDEN (UNTER ANDEREM
+ * VERSCHAFFEN VON ERSATZGUETERN ODER -DIENSTLEISTUNGEN; EINSCHRAENKUNG DER
+ * NUTZUNGSFAEHIGKEIT; VERLUST VON NUTZUNGSFAEHIGKEIT; DATEN; PROFIT ODER
+ * GESCHAEFTSUNTERBRECHUNG), WIE AUCH IMMER VERURSACHT UND UNTER WELCHER
+ * VERPFLICHTUNG AUCH IMMER, OB IN VERTRAG, STRIKTER VERPFLICHTUNG ODER
+ * UNERLAUBTE HANDLUNG (INKLUSIVE FAHRLAESSIGKEIT) VERANTWORTLICH, AUF WELCHEM
+ * WEG SIE AUCH IMMER DURCH DIE BENUTZUNG DIESER SOFTWARE ENTSTANDEN SIND, SOGAR,
+ * WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
+ *
+ */
+</p><p>
+package de.elbosso.scratch.algorithms.graph;
+</p><p>
+import java.io.FileNotFoundException;
+</p><p>
+/**
+ * This class can be used to look for cycles in the graph obtained by iterating the (extended) collatz map.
+ * The original collatz map is
+ * &lt;pre>
+ *     C(n)=n/2 if n is even
+ *     C(n)=3n+1 if n is odd
+ * &lt;/pre>
+ * The variant here takes on a parameter m so that
+ * &lt;pre>
+ *     C(n)=n/2 if n is even
+ *     C(n)=3n+2m+1 if n is odd
+ * &lt;/pre>
+ * Note that the computation uses Javas type long - this has to be kept in mind when determining the parameters...
+ * If the algorithm seems to find cycles with negative numbers in it, the parameter was choosen so that there happened
+ * an overflow!
+ */
+public class Collatz
+{
+	private final long m;
+	private final long startingNumber;
+	private final long endingNumber;
+	private final long maxIterations;
+	private final boolean findAll;
+</p><p>
+	/**
+	 * Tries to find the number of cycles when computing the map for the Collatz conjecture
+	 * @param m parameter for computing the map
+	 * @param startingNumber the search for cycles in the graph is started at this number
+	 * @param endingNumber the search for cycles in the map stops before this number. Be aware that this number is small enough
+	 *                     so that at least 3n+2m+1 fits into Javas type long!
+	 *                     If the algorithm seems to find cycles with negative numbers in it,
+	 *                     the parameter was choosen so that there happened an overflow!
+	 * @param maxIterations for each number betwenn startingNumber (inclusive) and
+	 *                      endingNumber(exclusive) maximal this number of iterations of the map
+	 *                      are computed looking for cycles
+	 * @param findAll if false, the search is stopped after finding a second cycle
+	 */
+	public Collatz(long m, long startingNumber, long endingNumber, long maxIterations,boolean findAll)
+	{
+		this.m = m;
+		this.startingNumber = startingNumber;
+		this.endingNumber = endingNumber;
+		this.maxIterations = maxIterations;
+		this.findAll=findAll;
+	}
+</p><p>
+	public static void main(java.lang.String[] args)throws FileNotFoundException
+	{
+		long startingNumber=4;
+		long endingNumber=10000000l;
+		long maxIterations=10000;
+		boolean findAll=true;
+		boolean digDeeper=false;
+		long digDeeperFactorEndingNumber=10;
+		long digDeeperFactorMaxIterations=10;
+		for(long m=0;m&lt;20;++m)
+		{
+			System.out.print("m= "+m+" Suspicion is: ["+((2*m+1))+", "+((2*m+1)*2)+", "+((2*m+1)*4)+"] - cyclecount: ");
+			long cyclecount=new Collatz(m,startingNumber,endingNumber,maxIterations,findAll).run();
+			System.out.println(cyclecount);
+			if((digDeeper)&amp;&amp;((m>0)&amp;&amp;(cyclecount&lt;2)))
+			{
+				System.out.println("Digging deeper at m= "+m);
+				cyclecount = new Collatz(m, startingNumber,endingNumber*digDeeperFactorEndingNumber,maxIterations*digDeeperFactorMaxIterations,findAll).run();
+			}
+		}
+	}
+	public long run() throws FileNotFoundException
+	{
+		java.util.Set&lt;java.lang.Long> alreadySeen=new java.util.HashSet();
+		java.io.PrintWriter pw=new java.io.PrintWriter("/tmp/graph"+m+".gv");
+		java.io.PrintWriter pw1=new java.io.PrintWriter("/tmp/lengths"+m+".dat");
+		pw.println("digraph G {\nlayout=neato");
+		long cyclecount=0;
+		long maxIter=0;
+		long i=startingNumber%2==0?startingNumber-1:startingNumber;
+		if(i&lt;0)
+			i=1;
+		for(;i&lt;endingNumber;i+=2)
+		{
+			java.util.Set&lt;java.lang.Long> alreadySeenThisRun=new java.util.HashSet();
+			java.lang.Long currentValue=java.lang.Long.valueOf(i);
+			if(alreadySeen.contains(currentValue)==false)
+			{
+				alreadySeen.add(currentValue);
+				alreadySeenThisRun.add(currentValue);
+				long j=0;
+				for(;j&lt;maxIterations;++j)
+				{
+					pw.print(currentValue);
+					pw.print(" -> ");
+					currentValue=collatz(currentValue);
+					pw.println(currentValue);
+					if(alreadySeen.contains(currentValue)==false)
+					{
+						alreadySeen.add(currentValue);
+						alreadySeenThisRun.add(currentValue);
+					}
+					else
+					{
+						if(alreadySeenThisRun.contains(currentValue)==true)
+						{
+							System.out.println("new cycle found at " + currentValue+": "+alreadySeenThisRun);
+							++cyclecount;
+						}
+						if(j>maxIter)
+							maxIter=j;
+						break;
+					}
+				}
+				pw1.println(i+"\t"+j);
+			}
+			if((findAll==false)&amp;&amp;(cyclecount>1))
+				break;
+		}
+		pw.println("}");
+		pw1.close();
+		pw.close();
+		System.out.println("Maximum iterations needed to find a cycle: "+maxIter);
+		return cyclecount;
+	}
+</p><p>
+	private Long collatz(Long currentValue)
+	{
+		long n=currentValue.longValue();
+		return java.lang.Long.valueOf(n%2==0?n/2:3*n+2*m+1);
+	}
+}
+</p><p></pre>
+</p>				</div>
+				<div class="w3-container w3-padding" id="commentsgithub">
+					<p>
+						<a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Erweiterte Collatz-Vermutung (?)&body=[Erweiterte Collatz-Vermutung (?)](https://elbosso.github.io/erweiterte_collatz_vermutung____)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+						<a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Erweiterte Collatz-Vermutung (?)"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+					</p>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgitlab">
+					<p>
+						<a target="_blank" class="imgleft" href="https://gitlab.com/sgjfsf/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Erweiterte Collatz-Vermutung (?)&issue[description]=[Erweiterte Collatz-Vermutung (?)](https://elbosso.github.io/erweiterte_collatz_vermutung____)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+						<a target="_blank" class="imgright" href="https://gitlab.com/sgjfsf/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Erweiterte Collatz-Vermutung (?)"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+					</p>
+				</div>
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="https://gitlab.com/sgjfsf" target="_blank"><img src="images/icons/gitlab-icon-rgb.png"  width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a>
+						<a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+						<a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Artikel von "backThen" -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Vor 5 Jahren hier im Blog</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+						<p class="w3-large">
+							Sicherheitsproblem bei Tess4J</p>
+						<p class="w3-small" style="text-align: right">
+							<span class="w3-opacity">02.08.2016</span>
+						</p>
+						<span class="smallabstract"><p>Ich fand ein Sicherheitsproblem als ich versuchte, OCR-Funktionalität in
+dWb+
+zu integrieren
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="sicherheitsproblem_tess4j.html#content">
+							Weiterlesen...
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-black w3-margin-bottom">Numerik</span></a>
+						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="videos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Videos</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							GeoJSON in EBMap4D</span><br>
+						<span class="smallabstract"><p>Ich habe die Anwendung
+EBMap4D
+einer Generalüberholung unterzogen und neue Features hinzugefügt...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="geojson_ebmap4d.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Beliebige äußere Form für generierte Stadtpläne</span><br>
+						<span class="smallabstract"><p>Ich habe den neulich vorgestellten
+Generator für beliebige Stadtpläne,
+der als Ausgabeformat unter anderem
+GeoJson
+unterstützt ein wenig erweitert
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="beliebige_aeuszere_form_generierte_stadtplaene.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							PiHole-Bug bei Installation</span><br>
+						<span class="smallabstract"><p>Ich trage mich aktuell mit dem Gedanken, analog zu meinen Skripts zur Einrichtung von
+Kartenservern
+oder
+Netzwerkinfrastruktur
+einen kleinen Server komplett unattended einrichten zu können, der PiHole, DNSSEC und einen
+autonomen root-Resolver integriert.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pihole_bug_installation.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
+							GeoJSON in EBMap4D</span><br>
+							<span class="smallabstract"><p>Ich habe die Anwendung
+EBMap4D
+einer Generalüberholung unterzogen und neue Features hinzugefügt...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="geojson_ebmap4d.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Beliebige äußere Form für generierte Stadtpläne</span><br>
+							<span class="smallabstract"><p>Ich habe den neulich vorgestellten
+Generator für beliebige Stadtpläne,
+der als Ausgabeformat unter anderem
+GeoJson
+unterstützt ein wenig erweitert
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="beliebige_aeuszere_form_generierte_stadtplaene.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							PiHole-Bug bei Installation</span><br>
+							<span class="smallabstract"><p>Ich trage mich aktuell mit dem Gedanken, analog zu meinen Skripts zur Einrichtung von
+Kartenservern
+oder
+Netzwerkinfrastruktur
+einen kleinen Server komplett unattended einrichten zu können, der PiHole, DNSSEC und einen
+autonomen root-Resolver integriert.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pihole_bug_installation.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
