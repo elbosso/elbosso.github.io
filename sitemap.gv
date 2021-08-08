@@ -37,7 +37,8 @@ rankdir=LR
     Videos [label="Videos" href="https://elbosso.github.io/videos.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_geojson_ebmap4d [label="GeoJSON in EBMap4D" href="https://elbosso.github.io/geojson_ebmap4d.html"]
+node_sqlshell_reporting_apache_drill [label="sQLshell Reporting für Apache Drill" href="https://elbosso.github.io/sqlshell_reporting_apache_drill.html"]
+    node_geojson_ebmap4d [label="GeoJSON in EBMap4D" href="https://elbosso.github.io/geojson_ebmap4d.html"]
                 node_geojson_ebmap4d -> node_styles_geojson_ebmap4d
 node_erweiterte_collatz_vermutung____ [label="Erweiterte Collatz-Vermutung (?)" href="https://elbosso.github.io/erweiterte_collatz_vermutung____.html"]
     node_beliebige_aeuszere_form_generierte_stadtplaene [label="Beliebige äußere Form für generierte Stadtpläne" href="https://elbosso.github.io/beliebige_aeuszere_form_generierte_stadtplaene.html"]
@@ -1616,15 +1617,15 @@ node_daylight [label="DayLight" href="https://elbosso.github.io/daylight.html"]
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
                 node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-                node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
+                node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
             node_ebmap4d -> node_ortsbezuege_dwb_
+            node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
-            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
             node_ebmap4d -> node_tile_server_openstreetmap
-            node_ebmap4d -> node_ebmap4d_bitmap_layer
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
             node_ebmap4d -> node_geojson_ebmap4d
