@@ -106,17 +106,17 @@ and is wrapped around the whole page content, except for the footer in this exam
 					<h5>Updates</h5>
 					<ul>
 						<li>
-							<a href="#66">
+							<a href="#67">
 								3. März 2016
 							</a>
 						</li>
 						<li>
-							<a href="#67">
+							<a href="#68">
 								26. April 2016
 							</a>
 						</li>
 						<li>
-							<a href="#68">
+							<a href="#69">
 								11. Januar 2017
 							</a>
 						</li>
@@ -139,16 +139,16 @@ werden mittels einer OpenSource Firewall-Lösung implementiert. Es ist möglich,
 die Verbindungen zwischen LAN und WAN künstlich realen Gegebenheiten anzupassen (Geschwindigkeit drosseln,
 Ping-Zeiten erhöhen,...). Im WAN sind diverse Server untergebracht, wie etwa Webserver, DNS u.ä.
 </p><p>
-<h3><a name="66">Aktualisierung vom 3. März 2016</a></h3><div class="update">Ich habe das Netzwerklabor um eine Testumgebung für die Einrichtung eines 
+<h3><a name="67">Aktualisierung vom 3. März 2016</a></h3><div class="update">Ich habe das Netzwerklabor um eine Testumgebung für die Einrichtung eines 
 <a href="https://10mi2.wordpress.com/2015/01/14/using-ssh-through-a-bastion-host-transparently/">Bastion</a>
 -
 <a href="http://blog.scottlowe.org/2015/12/24/running-ansible-through-ssh-bastion-host/">Hosts</a>
  erweitert. 
 Die Abbildung spiegelt diese Erweiterung bereits wider.
 </div>
-<h3><a name="67">Aktualisierung vom 26. April 2016</a></h3><div class="update">Das Netzwerklabor wurde auf eine neue Grundlage gestellt - aktuell: Ubuntu 16.06, VirtualBox 5.0.18
+<h3><a name="68">Aktualisierung vom 26. April 2016</a></h3><div class="update">Das Netzwerklabor wurde auf eine neue Grundlage gestellt - aktuell: Ubuntu 16.06, VirtualBox 5.0.18
 </div>
-<h3><a name="68">Aktualisierung vom 11. Januar 2017</a></h3><div class="update">Dank
+<h3><a name="69">Aktualisierung vom 11. Januar 2017</a></h3><div class="update">Dank
 <a href="http://moi.vonos.net/linux/email-postfix-config/">mehrerer,</a>
 qualitativ
 <a href="http://www.postfix.org/SASL_README.html">durchaus</a>
@@ -369,16 +369,16 @@ in andere Netzwerksegmente verschoben werden.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Permissions zum Zugriff auf JBoss-EJBs</p>
+							BeanShell Debugger</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">06.08.2016</span>
+							<span class="w3-opacity">12.08.2016</span>
 						</p>
-						<span class="smallabstract"><p>Ich habe bereits darüber berichtet, dass die remote Nutzung von Queues
-auf einem JBoss-Server nicht einfach ist, wenn man einen
-SecurityManager
-benutzen möchte. Hier der Nachtrag zum Thema remot Nutzung von EJBs im selben Szenario...
+						<span class="smallabstract"><p>In einem Kundenprojekt, das wir zur Zeit im Rahmen des Jobs bearbeiten, existiert
+ein Legacy-Framework, das aus den üblichen Gründen nicht abgeschafft werden kann.
+Dieses Framework setzt kräftig auf BeanShell. Das brachte mich dazu, eine Debug-Funktionalität
+für BeanShell-Skripte zu schaffen.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="permissions_zugriff_auf_jboss_ejbs.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="beanshell_debugger.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -442,7 +442,27 @@ benutzen möchte. Hier der Nachtrag zum Thema remot Nutzung von EJBs im selben S
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							sQLshell Reporting für Apache Drill</span><br>
+							JFileChooser & Antivirus - oh my!</span><br>
+						<span class="smallabstract"><p>Ich setze die
+sQLshell
+auch in dem Job ein, dem ich zum Zwecke des Bezahlens der Kuchen-Zutaten nachgehe.
+Auf den vom aktuellen Kunden gestellten Laptops hatte ich damit seltsame Performanceprobleme...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="jfilechooser___antivirus___oh_my_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Automatisches Erzeugen von Issues in GitLab</span><br>
+						<span class="smallabstract"><p>Ich habe sogar schon mal ein Issue bei Gitlab eingestellt deswegen, wurde aber abgewiesen
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="automatisches_erzeugen_issues_gitlab.html#58">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							sQLshell Reporting für Apache Drill</span><br>
 						<span class="smallabstract"><p>Ähnlich
 LDAP
 wurde die
@@ -451,26 +471,6 @@ mit Unterstützung für ein weiteres System ausgestattet, das keine
 klassische relationale Datenbank ist:
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="sqlshell_reporting_apache_drill.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							GeoJSON in EBMap4D</span><br>
-						<span class="smallabstract"><p>Ich habe die Anwendung
-EBMap4D
-einer Generalüberholung unterzogen und neue Features hinzugefügt...
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="geojson_ebmap4d.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Erweiterte Collatz-Vermutung (?)</span><br>
-						<span class="smallabstract"><p>Ich bin beim Surfen im Internet über verschiedenste Videos zum Thema der Collatz-Vermutung gestoßen - ich habe auch
-bereits den einen oder anderen Artikel zu diesem Thema gelesen. Neulich hatte ich aber eine Idee, die ich unbedingt ausprobieren wollte,
-weil ich davon - oder von etwas ähnlichem - bisher weder gehört noch gelesen habe
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erweiterte_collatz_vermutung____.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -506,7 +506,27 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							sQLshell Reporting für Apache Drill</span><br>
+							JFileChooser & Antivirus - oh my!</span><br>
+							<span class="smallabstract"><p>Ich setze die
+sQLshell
+auch in dem Job ein, dem ich zum Zwecke des Bezahlens der Kuchen-Zutaten nachgehe.
+Auf den vom aktuellen Kunden gestellten Laptops hatte ich damit seltsame Performanceprobleme...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="jfilechooser___antivirus___oh_my_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Automatisches Erzeugen von Issues in GitLab</span><br>
+							<span class="smallabstract"><p>Ich habe sogar schon mal ein Issue bei Gitlab eingestellt deswegen, wurde aber abgewiesen
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="automatisches_erzeugen_issues_gitlab.html#58">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							sQLshell Reporting für Apache Drill</span><br>
 							<span class="smallabstract"><p>Ähnlich
 LDAP
 wurde die
@@ -515,26 +535,6 @@ mit Unterstützung für ein weiteres System ausgestattet, das keine
 klassische relationale Datenbank ist:
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="sqlshell_reporting_apache_drill.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							GeoJSON in EBMap4D</span><br>
-							<span class="smallabstract"><p>Ich habe die Anwendung
-EBMap4D
-einer Generalüberholung unterzogen und neue Features hinzugefügt...
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="geojson_ebmap4d.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Erweiterte Collatz-Vermutung (?)</span><br>
-							<span class="smallabstract"><p>Ich bin beim Surfen im Internet über verschiedenste Videos zum Thema der Collatz-Vermutung gestoßen - ich habe auch
-bereits den einen oder anderen Artikel zu diesem Thema gelesen. Neulich hatte ich aber eine Idee, die ich unbedingt ausprobieren wollte,
-weil ich davon - oder von etwas ähnlichem - bisher weder gehört noch gelesen habe
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erweiterte_collatz_vermutung____.html#content">
  Weiterlesen...
 								</a>
 						</li>

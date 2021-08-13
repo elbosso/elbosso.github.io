@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="elbosso.github.io" />
 <meta property="og:description" content="Ich habe sogar schon mal ein Issue bei Gitlab eingestellt deswegen, wurde aber abgewiesen
 " />
-<meta property="article:published_time" content="2020-12-02">
+<meta property="article:published_time" content="2021-08-13">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 <link rel="stylesheet" type="text/css" href="css/stylew3.css" />
 <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
@@ -60,11 +60,11 @@ and is wrapped around the whole page content, except for the footer in this exam
 					<div class="w3-row">
 						<div class="w3-col m6 s12">
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract"
-							   href="links___verschiedenes_ii.html#content">vorhergehender Artikel</a>
+							   href="sqlshell_reporting_apache_drill.html#content">vorhergehender Artikel</a>
 						</div>
 						<div class="w3-col m6" style="text-align: right">
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
-							   href="installation_ubuntu_20_04_auf_raid_0.html#content">nächster Artikel
+							   href="jfilechooser___antivirus___oh_my_.html#content">nächster Artikel
 							</a>
 						</div>
 					</div>
@@ -75,15 +75,15 @@ and is wrapped around the whole page content, except for the footer in this exam
 								<div class="w3-row">
 									<div class="w3-col m8 s12">
 										vorhergehende Artikel in:
-										<a href="links___verschiedenes_ii.html#content">
+										<a href="pihole_bug_installation.html#content">
 											<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
 										</a> <!--/li-->
-										<a href="wireviz_docker_container.html#content">
+										<a href="sqlshell_support_ldap_ii.html#content">
 											<span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span>
 										</a> <!--/li-->
 									</div>
 									<div class="w3-col m4" style="text-align: right">
-										<span class="w3-opacity">02.12.2020</span>
+										<span class="w3-opacity">13.08.2021</span>
 									</div>
 								</div>
 							</div>
@@ -96,6 +96,16 @@ and is wrapped around the whole page content, except for the footer in this exam
 				</div>
 			</div>
 			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="updates">
+					<h5>Updates</h5>
+					<ul>
+						<li>
+							<a href="#58">
+								13. August 2021
+							</a>
+						</li>
+					</ul>
+				</div>
 				<div class="w3-container w3-padding" id="abstract">
 <p>Ich habe sogar schon mal ein Issue bei Gitlab eingestellt deswegen, wurde aber abgewiesen
 </p>				</div>
@@ -115,6 +125,29 @@ zu schreiben, das sich hervorragend mit
 oder
 <a href="https://www.computerhope.com/unix/uat.htm">At</a>
 benutzen lässt (natürlich auch einfach interaktiv), um Issues in GitLab zu öffnen. Das Skript ist unten angehängt.
+</p><p>
+<dl>
+<dt><img src="images/mime/Oxygen480-mimetypes-signature_48.png"></dt><dd><a href="resources/license.txt">Lizenz</a></dd>
+<dt><img src="images/mime/Oxygen480-mimetypes-text-shell_48.png"></dt><dd><a href="resources/openGitlabIssue.sh">script</a></dd>
+</dl>
+</p><p>
+<h3><a name="58">Aktualisierung vom 13. August 2021</a></h3><div class="update">Ich habe das Skript überarbeitet - es bietet jetzt Möglichkeiten, ein Fertigstellungsdatum ebenso wie einen
+Milestone anzugeben und einen Bearbeiter zuzuweisen. Damit könnte ein Aufruf des Skripts für die Erzeugung
+eines Tickets, das in 10 Tagen fertigzustellen ist etwa so aussehen:
+</p></p><pre>
+/openGitlabIssue.sh -h gitlab.host.lab -p 6 -m 1 -a 2 \
+-t "Some summary" -d "Some description" -x some-personal-access-token  \
+-l "bug,improvement,To Do" -u $(date -d "+10 days" +%Y-%m-%d)
+</p><p></pre>
+</p><p>
+Es ist außerdem möglich, das AccessToken über eine Umgebungsvariable zu setzen - im einfachsten Fall könnte der Aufruf damit wie folgt aussehen:
+</p></p><pre>
+GITLAB_ACCESS_TOKEN=some-personal-access-token /openGitlabIssue.sh \
+-h gitlab.host.lab -p 6 -m 1 -a 2 \
+-t "Some summary" -d "Some description" \
+-l "bug,improvement,To Do" -u $(date -d "+10 days" +%Y-%m-%d)
+</p><p></pre>
+</div>
 </p>				</div>
 				<div class="w3-container w3-padding" id="commentsgithub">
 					<p>
@@ -162,16 +195,16 @@ benutzen lässt (natürlich auch einfach interaktiv), um Issues in GitLab zu öf
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Permissions zum Zugriff auf JBoss-EJBs</p>
+							BeanShell Debugger</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">06.08.2016</span>
+							<span class="w3-opacity">12.08.2016</span>
 						</p>
-						<span class="smallabstract"><p>Ich habe bereits darüber berichtet, dass die remote Nutzung von Queues
-auf einem JBoss-Server nicht einfach ist, wenn man einen
-SecurityManager
-benutzen möchte. Hier der Nachtrag zum Thema remot Nutzung von EJBs im selben Szenario...
+						<span class="smallabstract"><p>In einem Kundenprojekt, das wir zur Zeit im Rahmen des Jobs bearbeiten, existiert
+ein Legacy-Framework, das aus den üblichen Gründen nicht abgeschafft werden kann.
+Dieses Framework setzt kräftig auf BeanShell. Das brachte mich dazu, eine Debug-Funktionalität
+für BeanShell-Skripte zu schaffen.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="permissions_zugriff_auf_jboss_ejbs.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="beanshell_debugger.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -235,7 +268,18 @@ benutzen möchte. Hier der Nachtrag zum Thema remot Nutzung von EJBs im selben S
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							sQLshell Reporting für Apache Drill</span><br>
+							JFileChooser & Antivirus - oh my!</span><br>
+						<span class="smallabstract"><p>Ich setze die
+sQLshell
+auch in dem Job ein, dem ich zum Zwecke des Bezahlens der Kuchen-Zutaten nachgehe.
+Auf den vom aktuellen Kunden gestellten Laptops hatte ich damit seltsame Performanceprobleme...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="jfilechooser___antivirus___oh_my_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							sQLshell Reporting für Apache Drill</span><br>
 						<span class="smallabstract"><p>Ähnlich
 LDAP
 wurde die
@@ -254,16 +298,6 @@ EBMap4D
 einer Generalüberholung unterzogen und neue Features hinzugefügt...
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="geojson_ebmap4d.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Erweiterte Collatz-Vermutung (?)</span><br>
-						<span class="smallabstract"><p>Ich bin beim Surfen im Internet über verschiedenste Videos zum Thema der Collatz-Vermutung gestoßen - ich habe auch
-bereits den einen oder anderen Artikel zu diesem Thema gelesen. Neulich hatte ich aber eine Idee, die ich unbedingt ausprobieren wollte,
-weil ich davon - oder von etwas ähnlichem - bisher weder gehört noch gelesen habe
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erweiterte_collatz_vermutung____.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -299,7 +333,18 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							sQLshell Reporting für Apache Drill</span><br>
+							JFileChooser & Antivirus - oh my!</span><br>
+							<span class="smallabstract"><p>Ich setze die
+sQLshell
+auch in dem Job ein, dem ich zum Zwecke des Bezahlens der Kuchen-Zutaten nachgehe.
+Auf den vom aktuellen Kunden gestellten Laptops hatte ich damit seltsame Performanceprobleme...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="jfilechooser___antivirus___oh_my_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							sQLshell Reporting für Apache Drill</span><br>
 							<span class="smallabstract"><p>Ähnlich
 LDAP
 wurde die
@@ -318,16 +363,6 @@ EBMap4D
 einer Generalüberholung unterzogen und neue Features hinzugefügt...
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="geojson_ebmap4d.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Erweiterte Collatz-Vermutung (?)</span><br>
-							<span class="smallabstract"><p>Ich bin beim Surfen im Internet über verschiedenste Videos zum Thema der Collatz-Vermutung gestoßen - ich habe auch
-bereits den einen oder anderen Artikel zu diesem Thema gelesen. Neulich hatte ich aber eine Idee, die ich unbedingt ausprobieren wollte,
-weil ich davon - oder von etwas ähnlichem - bisher weder gehört noch gelesen habe
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erweiterte_collatz_vermutung____.html#content">
  Weiterlesen...
 								</a>
 						</li>
