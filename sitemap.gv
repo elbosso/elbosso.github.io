@@ -37,7 +37,10 @@ rankdir=LR
     Videos [label="Videos" href="https://elbosso.github.io/videos.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_jfilechooser___antivirus___oh_my_ [label="JFileChooser & Antivirus - oh my!" href="https://elbosso.github.io/jfilechooser___antivirus___oh_my_.html"]
+node_beanshell_repl_plugin_sqlshell [label="BeanShell REPL Plugin für sQLshell" href="https://elbosso.github.io/beanshell_repl_plugin_sqlshell.html"]
+                node_beanshell_repl_plugin_sqlshell -> node_sqlshell_plugin_suche_nach_fremdschluesselbeziehungen
+node_sqlshell_plugin_suche_nach_fremdschluesselbeziehungen [label="sQLshell-Plugin für Suche nach Fremdschlüsselbeziehungen" href="https://elbosso.github.io/sqlshell_plugin_suche_nach_fremdschluesselbeziehungen.html"]
+    node_jfilechooser___antivirus___oh_my_ [label="JFileChooser & Antivirus - oh my!" href="https://elbosso.github.io/jfilechooser___antivirus___oh_my_.html"]
     node_automatisches_erzeugen_issues_gitlab [label="Automatisches Erzeugen von Issues in GitLab" href="https://elbosso.github.io/automatisches_erzeugen_issues_gitlab.html"]
     node_sqlshell_reporting_apache_drill [label="sQLshell Reporting für Apache Drill" href="https://elbosso.github.io/sqlshell_reporting_apache_drill.html"]
     node_geojson_ebmap4d [label="GeoJSON in EBMap4D" href="https://elbosso.github.io/geojson_ebmap4d.html"]
@@ -182,6 +185,7 @@ node_erste_versuche_lora_ttn [label="Erste Versuche mit LoRa und TTN" href="http
     node_hippopotamus_for_christmas___lauren_tyler_scott [label="Hippopotamus for Christmas - Lauren Tyler Scott" href="https://elbosso.github.io/hippopotamus_for_christmas___lauren_tyler_scott.html"]
     node_spezielle_telegraf_anpassungen_rock64 [label="Spezielle Telegraf-Anpassungen für Rock64" href="https://elbosso.github.io/spezielle_telegraf_anpassungen_rock64.html"]
                 node_spezielle_telegraf_anpassungen_rock64 -> node_dns_fallback_ohne_ip_adress_sharing
+            node_spezielle_telegraf_anpassungen_rock64 -> node_xpra__firefox_1gb_arm_rechner
             node_spezielle_telegraf_anpassungen_rock64 -> node_monitoring_raid_rebuild_grafana
 node_pxe_boot_rock64 [label="PXE Boot für Rock64" href="https://elbosso.github.io/pxe_boot_rock64.html"]
                 node_pxe_boot_rock64 -> node_spezielle_telegraf_anpassungen_rock64
@@ -263,7 +267,8 @@ node_when_someone_requests_a_jimi_hendrix_song [label="When Someone Requests a J
 node_hannah_fry___roger_penrose [label="Hannah Fry & Roger Penrose" href="https://elbosso.github.io/hannah_fry___roger_penrose.html"]
     node_generierung_gnuplot_skripten_influxdb [label="Generierung von Gnuplot-Skripten für InfluxDB" href="https://elbosso.github.io/generierung_gnuplot_skripten_influxdb.html"]
     node_wetterstation_test [label="Wetterstation in Test" href="https://elbosso.github.io/wetterstation_test.html"]
-                node_wetterstation_test -> node_einbinden_wettervorhersagedaten_grafana
+                node_wetterstation_test -> node_xpra__firefox_1gb_arm_rechner
+            node_wetterstation_test -> node_einbinden_wettervorhersagedaten_grafana
 node_meta_plugin_neue_version [label="Meta-Plugin neue Version" href="https://elbosso.github.io/meta_plugin_neue_version.html"]
     node_wetterstation___vorueberlegungen [label="Wetterstation - Vorüberlegungen" href="https://elbosso.github.io/wetterstation___vorueberlegungen.html"]
                 node_wetterstation___vorueberlegungen -> node_wetterstation_test
@@ -320,6 +325,7 @@ node_bifurkationen_lorenz_system [label="Bifurkationen im Lorenz-System" href="h
 node_xpra_docker [label="Xpra und Docker" href="https://elbosso.github.io/xpra_docker.html"]
                 node_xpra_docker -> node_vnc_desktop_container
             node_xpra_docker -> node_docker_auf_raspberry_pi_model_3b_
+            node_xpra_docker -> node_xpra__firefox_1gb_arm_rechner
 node_tresenlesen___frank_jochen__schausaufen_betonung [label="Tresenlesen - Frank und Jochen, Schausaufen mit Betonung" href="https://elbosso.github.io/tresenlesen___frank_jochen__schausaufen_betonung.html"]
     node_testdaten_xml_schema_generieren [label="Testdaten für ein XML Schema generieren" href="https://elbosso.github.io/testdaten_xml_schema_generieren.html"]
                 node_testdaten_xml_schema_generieren -> node_generator_framework_jmeter_integriert
@@ -478,6 +484,7 @@ node_tpedit_erstellt_interaktive_formulare [label="TPEdit erstellt interaktive F
             node_lxc_netzwerk_degrader -> node_hardware_netzwerk_degrader
 node_anpassung_gnu_screen [label="Anpassung von Gnu Screen" href="https://elbosso.github.io/anpassung_gnu_screen.html"]
                 node_anpassung_gnu_screen -> node_laptop_recycling_revisited
+            node_anpassung_gnu_screen -> node_xpra__firefox_1gb_arm_rechner
 node_i18neditor_github_projekt [label="I18NEditor als GitHub-Projekt" href="https://elbosso.github.io/i18neditor_github_projekt.html"]
                 node_i18neditor_github_projekt -> node_inkonsistenz_api_awt
             node_i18neditor_github_projekt -> node_fork_material_design_icons_google
@@ -1619,17 +1626,17 @@ node_daylight [label="DayLight" href="https://elbosso.github.io/daylight.html"]
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
                 node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-                node_ebmap4d -> node_ebmap4d_bitmap_layer
+                node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
             node_ebmap4d -> node_ortsbezuege_dwb_
-            node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
             node_ebmap4d -> node_tile_server_openstreetmap
-            node_ebmap4d -> node_styles_geojson_ebmap4d
+            node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_hillshading_server_openstreetmap_lxc_ii

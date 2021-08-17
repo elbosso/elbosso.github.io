@@ -67,6 +67,7 @@ cat <<EOM >/tmp/start_xpra_remote.sh
   DISPLAY=:78 blackbox &
 #  DISPLAY=:78 openbox &
 #  DISPLAY=:78 fluxbox &
+  DISPLAY=:78 setxkbmap -model pc105 -layout de -variant ,nodeadkeys,
 EOM
   scp /tmp/start_xpra_remote.sh "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER":/tmp
   ssh "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER" '/bin/bash /tmp/start_xpra_remote.sh > /dev/null &2>1'
