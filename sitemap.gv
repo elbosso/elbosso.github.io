@@ -37,6 +37,9 @@ rankdir=LR
     Videos [label="Videos" href="https://elbosso.github.io/videos.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_styles_geojson_ebmap4d [label="Styles für GeoJSON in EBMap4D" href="https://elbosso.github.io/styles_geojson_ebmap4d.html"]
+    node_lufi_docker_zoo [label="LuFi im Docker-Zoo" href="https://elbosso.github.io/lufi_docker_zoo.html"]
+                node_lufi_docker_zoo -> node_fraktale_auf_kommandozeile
 node_beanshell_repl_plugin_sqlshell [label="BeanShell REPL Plugin für sQLshell" href="https://elbosso.github.io/beanshell_repl_plugin_sqlshell.html"]
                 node_beanshell_repl_plugin_sqlshell -> node_sqlshell_plugin_suche_nach_fremdschluesselbeziehungen
 node_sqlshell_plugin_suche_nach_fremdschluesselbeziehungen [label="sQLshell-Plugin für Suche nach Fremdschlüsselbeziehungen" href="https://elbosso.github.io/sqlshell_plugin_suche_nach_fremdschluesselbeziehungen.html"]
@@ -85,7 +88,8 @@ node_sqlshell_support_ldap [label="sQLshell Support für LDAP" href="https://elb
 node_gnuplot_statistik [label="Gnuplot und Statistik" href="https://elbosso.github.io/gnuplot_statistik.html"]
     node_bpf [label="BPF" href="https://elbosso.github.io/bpf.html"]
     node_erweiterung_des_distinguished_name_x509_zertifikate [label="Erweiterung des Distinguished Name für x509-Zertifikate" href="https://elbosso.github.io/erweiterung_des_distinguished_name_x509_zertifikate.html"]
-                node_erweiterung_des_distinguished_name_x509_zertifikate -> node_zertifikatsgueltigkeit_ueberwachen_grafana
+                node_erweiterung_des_distinguished_name_x509_zertifikate -> node_datei_verschluesseln_luks_dmcrypt
+            node_erweiterung_des_distinguished_name_x509_zertifikate -> node_zertifikatsgueltigkeit_ueberwachen_grafana
 node_migration_zwischen_github__gitlab__gitea [label="Migration zwischen Github, Gitlab, Gitea" href="https://elbosso.github.io/migration_zwischen_github__gitlab__gitea.html"]
     node_linux_conf_au_videos [label="linux.conf.au Videos" href="https://elbosso.github.io/linux_conf_au_videos.html"]
     node_demonstration_beispiele_nutzung_eines_rfc3161_servers_aus_java_heraus [label="Demonstration und Beispiele für die Nutzung eines RFC3161-Servers aus Java heraus" href="https://elbosso.github.io/demonstration_beispiele_nutzung_eines_rfc3161_servers_aus_java_heraus.html"]
@@ -186,6 +190,7 @@ node_erste_versuche_lora_ttn [label="Erste Versuche mit LoRa und TTN" href="http
     node_spezielle_telegraf_anpassungen_rock64 [label="Spezielle Telegraf-Anpassungen für Rock64" href="https://elbosso.github.io/spezielle_telegraf_anpassungen_rock64.html"]
                 node_spezielle_telegraf_anpassungen_rock64 -> node_dns_fallback_ohne_ip_adress_sharing
             node_spezielle_telegraf_anpassungen_rock64 -> node_xpra__firefox_1gb_arm_rechner
+            node_spezielle_telegraf_anpassungen_rock64 -> node_lufi_docker_zoo
             node_spezielle_telegraf_anpassungen_rock64 -> node_monitoring_raid_rebuild_grafana
 node_pxe_boot_rock64 [label="PXE Boot für Rock64" href="https://elbosso.github.io/pxe_boot_rock64.html"]
                 node_pxe_boot_rock64 -> node_spezielle_telegraf_anpassungen_rock64
@@ -1626,9 +1631,10 @@ node_daylight [label="DayLight" href="https://elbosso.github.io/daylight.html"]
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
                 node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-                node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
+                node_ebmap4d -> node_ortsbezuege_dwb_
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
-            node_ebmap4d -> node_ortsbezuege_dwb_
+            node_ebmap4d -> node_styles_geojson_ebmap4d
+            node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
@@ -1636,7 +1642,6 @@ node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
             node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
-            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_hillshading_server_openstreetmap_lxc_ii
