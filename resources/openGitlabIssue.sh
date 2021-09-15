@@ -75,7 +75,7 @@ done
 
 if [ -z "${HOST+x}" ]; then echo "Error: host is unset" && exit 2; fi
 if [ -z "${PRIVATETOKEN+x}" ]; then 
-if ! [ -z "${GITLAB_ACCESS_TOKEN+x}" ]; then 
+if [ -n "${GITLAB_ACCESS_TOKEN+x}" ]; then 
 PRIVATETOKEN=$GITLAB_ACCESS_TOKEN
 else
 echo "Error: token is unset" && exit 2; 
@@ -87,28 +87,28 @@ if [ -z "${PROJECTID+x}" ]; then echo "Error: projectid is unset" && exit 2; fi
 LABELS=$( rawurlencode "$LABELS,automatic" )
 TITLE=$( rawurlencode "$TITLE" )
 DESCRIPTION=$( rawurlencode "$DESCRIPTION" )
-CURL_OPTIONS="-k --silent --location"
+CURL_OPTIONS=(-k --silent --location)
 
-ISSUEID=$(curl $CURL_OPTIONS --request POST --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues?title=$TITLE&labels=$LABELS&description=$DESCRIPTION"|jq .iid)
+ISSUEID=$(curl "${CURL_OPTIONS[@]}" --request POST --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues?title=$TITLE&labels=$LABELS&description=$DESCRIPTION"|jq .iid)
 
-if ! [ -z "${ASSIGNEE_ID+x}" ]; then
-curl $CURL_OPTIONS --request PUT --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues/$ISSUEID?assignee_id=$ASSIGNEE_ID" >/dev/null
+if [ -n "${ASSIGNEE_ID+x}" ]; then
+curl "${CURL_OPTIONS[@]}" --request PUT --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues/$ISSUEID?assignee_id=$ASSIGNEE_ID" >/dev/null
 fi
 
-if ! [ -z "${DUE_DATE+x}" ]; then
-curl $CURL_OPTIONS --request PUT --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues/$ISSUEID?due_date=$DUE_DATE" >/dev/null
+if [ -n "${DUE_DATE+x}" ]; then
+curl "${CURL_OPTIONS[@]}" --request PUT --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues/$ISSUEID?due_date=$DUE_DATE" >/dev/null
 fi
 
-if ! [ -z "${MILESTONE_ID+x}" ]; then
-curl $CURL_OPTIONS --request PUT --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues/$ISSUEID?milestone_id=$MILESTONE_ID" >/dev/null
+if [ -n "${MILESTONE_ID+x}" ]; then
+curl "${CURL_OPTIONS[@]}" --request PUT --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues/$ISSUEID?milestone_id=$MILESTONE_ID" >/dev/null
 fi
 
-ISSUEURL=$(curl $CURL_OPTIONS --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues/$ISSUEID"|jq .web_url)
+ISSUEURL=$(curl "${CURL_OPTIONS[@]}" --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues/$ISSUEID"|jq .web_url)
 
 COMMENT="Created automatically at "$(LC_ALL=de_DE.utf8 date)
 COMMENT=$( rawurlencode "$COMMENT" )
 
-curl $CURL_OPTIONS --request POST --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues/$ISSUEID/notes?body=$COMMENT" >/dev/null
+curl "${CURL_OPTIONS[@]}" --request POST --header "PRIVATE-TOKEN: $PRIVATETOKEN" "http://$HOST/api/v4/projects/$PROJECTID/issues/$ISSUEID/notes?body=$COMMENT" >/dev/null
 
 echo "created $ISSUEURL"
 
