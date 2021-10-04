@@ -100,14 +100,14 @@ and is wrapped around the whole page content, except for the footer in this exam
 			<div class="w3-card-4 w3-margin w3-white">
 				<div class="w3-container w3-padding" id="abstract">
 <p>Nachdem ich kürzlich bereits über meinen Zeitvertreib mit der
-<a href="${serviceProvider.urlForArticle($target)}.html">Collatz-Vermutung</a>
+<a href="erweiterte_collatz_vermutung____.html">Collatz-Vermutung</a>
 berichtet habe folgen hier nun einige Details meiner Implementierung
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
 <p>Ich änderte die Formulierung des Problems ja ein wenig ab, indem ich einen weiteren Summenterm einführte, der beim Setzen
 des Parameters <span class="mdcode">m=0</span> wieder die ursprüngliche Collatz-Vermutung ergibt:
-</p></p><p><img class="formula" src="images/tex/-44245311.png" alt="C^</span>:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ gerade ist.}\end{cases}
-" title="C^</span>:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ gerade ist.}\end{cases}
+</p></p><p><img class="formula" src="images/tex/-44245311.png" alt="C^</span>:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
+" title="C^</span>:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
 ">
 </p><p>
 Ich wollte dann für verschiedene Werte von <span class="mdcode">m</span> herausbekommen, ob sich diese Familie von Abbildungen
@@ -128,7 +128,7 @@ und ab diesem Wert von <span class="mdcode">n</span> bereits untersucht wortden 
 <span class="mdcode">100000000</span> zu untersuchenden Startwerten nicht mehr in den Arbeitsspeicher passte.
 </p><p>
 Meine Idee war, die bereits besuchten Zahlenwerte anders zu repräsentieren. Die erste Variante, die ich untersuchte war die
-eines <span class="mdbold">spärlichen</span> Set: Wenn man sich die Zahlenwerte von <span class="mdcode">0</span> bie <span class="mdcode">1000</span> und zusätzlich den Wert <span class="mdcode">1003</span> in einem normalen Set
+eines <span class="mdbold">spärlichen</span> Set: Wenn man sich die Zahlenwerte von <span class="mdcode">0</span> bis <span class="mdcode">1000</span> und zusätzlich den Wert <span class="mdcode">1003</span> in einem normalen Set
 merken soll, hat das die Größe 1001. Wenn man aber ein Set konstruieren würde, das zusammenhängende Zahlenbereiche als Intervalle speichert,
 würde man im oben genannten Beispiel nur 2 Elemente benötigen: eines, das das Intervall <span class="mdcode">[1..1000]</span> beschreibt und eines für das
 Intervall <span class="mdcode">[1003..1003]</span>. Ich erstellte also eine Klasse, die dieses Verhalten implementiert.
@@ -155,7 +155,7 @@ weil die reale Kapazität durch den zur Verfügung stehenden Arbeitsspeicher beg
 Mit dieser neuen Variante gab es Licht und Schatten - die Laufzeit der Implementierung sank unter die der naiven Lösung mit Set
 von vorher <span class="mdcode">00:00:00.055965</span> auf <span class="mdcode">00:00:03.191843</span> für <span class="mdcode">10000</span> zu testende Zahlen. Leider tauchte aber sehr schnell die Meldung
 <span class="mdcode">java.lang.OutOfMemoryError</span> für eine größere Menge zu testender Zahlen auf. Eine Untersuchung und damit einhergehende Überlegungen
-zeigten schnell folgende Ursache auf: Die Regel für ungerade Zahlen zweimal aufeinanderfolgend angewendetvergrößert einen Wert von n
+zeigten schnell folgende Ursache auf: Die Regel für ungerade Zahlen zweimal aufeinanderfolgend angewendet vergrößert einen Wert von n
 um eine Größenordnung. Oberhalb von 2 Millionen bedeutet das einen sehr schnellen Anstieg der Größe eines BitSets, das alle Werte
 dazwischen abdecken soll: für einen Wert von 2 Millionen reicht ein BitSet dieser Größe aus, für eines das alle Werte von 0 bis
 20 Millionen abdecken soll, benötigt man schon 10 der maximalen Größe. Bei meinen Berechnungen sah ich aber Werte in der Größenordnung
