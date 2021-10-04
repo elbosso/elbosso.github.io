@@ -51,6 +51,51 @@ and is wrapped around the whole page content, except for the footer in this exam
                 <div class="w3-container">
                     <div class="w3-row">
                         <div class="w3-col m8 s12">
+                            <h3>                                <b>SSH und MFA</b></h3>
+                            <div class="w3-row">
+                                <div class="w3-col m8 s12">
+                                    <p>
+                                        <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
+                                        <a href="tag_Virtualisierung.html"><span class="w3-tag w3-black w3-margin-bottom">Virtualisierung</span></a>
+                                        <a href="tag_Security.html"><span class="w3-tag w3-black w3-margin-bottom">Security</span></a>
+                                    </p>
+                                </div>
+                                <div class="w3-col m4"><p style="text-align: right">
+                                    <span class="w3-opacity">23.06.2019</span>
+                                </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w3-col m4"><p style="text-align: right">
+                                <img style="max-width:128px;" src="images/asciiart_tux_t.png">
+                        </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w3-container">
+                    <p><p>Ein kleiner Auffrischer zum Wochenende
+</p></p>
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
+                            <p/>
+                        </div>
+                        <div class="w3-col m4">
+                            <p style="text-align: right">
+                                        <a class="w3-button w3-padding-large w3-white w3-border" href="ssh_mfa.html#content">
+                                    Weiterlesen
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- Blog entry -->
+            <div class="w3-card-4 w3-margin w3-white">
+                <div class="w3-container">
+                    <div class="w3-row">
+                        <div class="w3-col m8 s12">
                             <h3>                                <b>Raspi als VPN-Endpunkt</b></h3>
                             <div class="w3-row">
                                 <div class="w3-col m8 s12">
@@ -234,54 +279,6 @@ sogar die BIOS-Batterie inzwischen leer war...
             <!-- Blog entry -->
             <div class="w3-card-4 w3-margin w3-white">
                 <div class="w3-container">
-                    <div class="w3-row">
-                        <div class="w3-col m8 s12">
-                            <h3>                                <b>Xpra und Xephyr mit OpenBox a la SysV init</b></h3>
-                            <div class="w3-row">
-                                <div class="w3-col m8 s12">
-                                    <p>
-                                        <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
-                                    </p>
-                                </div>
-                                <div class="w3-col m4"><p style="text-align: right">
-                                    <span class="w3-opacity">01.05.2019</span>
-                                </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w3-col m4"><p style="text-align: right">
-                                <img style="max-width:128px;" src="images/asciiart_tux_t.png">
-                        </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w3-container">
-                    <p><p>Ich habe ein Script geschrieben, das 
-xpra
-startet und - a la SysV init - stoppt. Es erledigt auch gleich den Start 
-von 
-Xephyr mit OpenBox
-als Window Manager.
-</p></p>
-                    <div class="w3-row">
-                        <div class="w3-col m8 s12">
-                            <p/>
-                        </div>
-                        <div class="w3-col m4">
-                            <p style="text-align: right">
-                                        <a class="w3-button w3-padding-large w3-white w3-border" href="xpra_xephyr_openbox_a_la_sysv_init.html#content">
-                                    Weiterlesen
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <!-- Blog entry -->
-            <div class="w3-card-4 w3-margin w3-white">
-                <div class="w3-container">
                     <h3>                        <b>Ältere Artikel</b></h3>
                     <div class="w3-row">
                         <div class="w3-col m8 s12">
@@ -298,7 +295,7 @@ als Window Manager.
                 </div>
 
                 <div class="w3-container">
-                    <p><p>Hier geht es zum Archiv der Artikel, die vor dem 01.04.2019 verfasst wurden:<ul><li class="single">esp-link und GPS-Logger</li><li class="single">Telegraf Inputs mit unterschiedlicher Frequenz</li><li class="single">...</li></ul></p></p>
+                    <p><p>Hier geht es zum Archiv der Artikel, die vor dem 01.04.2019 verfasst wurden:<ul><li class="single">Xpra und Xephyr mit OpenBox a la SysV init</li><li class="single">esp-link und GPS-Logger</li><li class="single">...</li></ul></p></p>
                     <div class="w3-row">
                         <div class="w3-col m8 s12">
                             <p/>
@@ -347,17 +344,18 @@ als Window Manager.
                 <ul class="w3-ul w3-white">
                     <li class="w3-padding-16">
                         <p class="w3-large">
-                            SVN + Trac Authentifizierung mittels PAM</p>
+                            PAM + Bluetooth, Yubi und NFC</p>
                         <p class="w3-small" style="text-align: right">
-                            <span class="w3-opacity">30.09.2016</span>
+                            <span class="w3-opacity">02.10.2016</span>
                         </p>
-                        <span class="smallabstract"><p>Ich habe versucht, die Authentifizierung für SVN und Trac auf PAM
-umzustellen - ein (hoffentlich - erster Schritt für die Einführung  
-der in meinen geplanten
-Weiterbildungsprojekten für dieses Jahr
-aufgeführten 2-Faktor Authentifizierung am Apachen
+                        <span class="smallabstract"><p>Nach meinen diversen 
+Experimenten mit PAM
+und 
+der Authentifizierung am System
+habe ich nunmehr verschiedene weitere Möglichkeiten untersucht, Hardware-Token
+als Hilfsmittel einzubeziehen.
 </p></span>
-                        <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="svn___trac_authentifizierung_mittels_pam.html#content">
+                        <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pam___bluetooth__yubi_nfc.html#content">
                             Weiterlesen...
                         </a>
                     </li>
