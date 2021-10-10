@@ -37,7 +37,8 @@ rankdir=LR
     Videos [label="Videos" href="https://elbosso.github.io/videos.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
-node_crl_next_update_telegraf_ueberwachen [label="CRL next update mit Telegraf überwachen" href="https://elbosso.github.io/crl_next_update_telegraf_ueberwachen.html"]
+node_datei_verschluesseln_luks_dmcrypt [label="Datei verschlüsseln mit LUKS/dmcrypt" href="https://elbosso.github.io/datei_verschluesseln_luks_dmcrypt.html"]
+    node_crl_next_update_telegraf_ueberwachen [label="CRL next update mit Telegraf überwachen" href="https://elbosso.github.io/crl_next_update_telegraf_ueberwachen.html"]
     node_xpra__firefox_1gb_arm_rechner [label="XPra, Firefox und ein 1Gb-Arm-Rechner" href="https://elbosso.github.io/xpra__firefox_1gb_arm_rechner.html"]
     node_zertifikatsgueltigkeit_ueberwachen_grafana [label="Zertifikatsgültigkeit überwachen mit Grafana" href="https://elbosso.github.io/zertifikatsgueltigkeit_ueberwachen_grafana.html"]
                 node_zertifikatsgueltigkeit_ueberwachen_grafana -> node_crl_next_update_telegraf_ueberwachen
@@ -1662,9 +1663,9 @@ node_daylight [label="DayLight" href="https://elbosso.github.io/daylight.html"]
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
                 node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-                node_ebmap4d -> node_ortsbezuege_dwb_
+                node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
-            node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
+            node_ebmap4d -> node_ortsbezuege_dwb_
             node_ebmap4d -> node_ebmap4d___geojson
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
