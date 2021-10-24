@@ -39,7 +39,8 @@ rankdir=LR
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
 node_lex__yacc_co_ [label="Lex, Yacc und Co." href="https://elbosso.github.io/lex__yacc_co_.html"]
     node_konverter___warc____graphviz [label="Konverter : WARC -> GraphViz" href="https://elbosso.github.io/konverter___warc____graphviz.html"]
-    node_precision_time_protocol [label="Precision Time Protocol" href="https://elbosso.github.io/precision_time_protocol.html"]
+                node_konverter___warc____graphviz -> node_erzeugen_kompakter_textboxen
+node_precision_time_protocol [label="Precision Time Protocol" href="https://elbosso.github.io/precision_time_protocol.html"]
     node_eigener_sache__erdoes_distanz [label="In eigener Sache: Erdös-Distanz" href="https://elbosso.github.io/eigener_sache__erdoes_distanz.html"]
     node_datei_verschluesseln_luks_dmcrypt [label="Datei verschlüsseln mit LUKS/dmcrypt" href="https://elbosso.github.io/datei_verschluesseln_luks_dmcrypt.html"]
     node_crl_next_update_telegraf_ueberwachen [label="CRL next update mit Telegraf überwachen" href="https://elbosso.github.io/crl_next_update_telegraf_ueberwachen.html"]
@@ -124,7 +125,8 @@ node_migration_zwischen_github__gitlab__gitea [label="Migration zwischen Github,
     node_exception_handling_functional_java [label="Exception-Handling in functional Java" href="https://elbosso.github.io/exception_handling_functional_java.html"]
     node_papers_linkdump_2021_i [label="Papers  Linkdump 2021 I" href="https://elbosso.github.io/papers_linkdump_2021_i.html"]
     node_asciiart_animationen [label="Asciiart Animationen" href="https://elbosso.github.io/asciiart_animationen.html"]
-    node_algorithmen_linkdump_2021_i [label="Algorithmen Linkdump 2021 I" href="https://elbosso.github.io/algorithmen_linkdump_2021_i.html"]
+                node_asciiart_animationen -> node_asciinema_markdown
+node_algorithmen_linkdump_2021_i [label="Algorithmen Linkdump 2021 I" href="https://elbosso.github.io/algorithmen_linkdump_2021_i.html"]
     node_raspi_linkdump_2021_i [label="Raspi Linkdump 2021 I" href="https://elbosso.github.io/raspi_linkdump_2021_i.html"]
     node_entgoogle_internet_ [label="Entgoogle das Internet!" href="https://elbosso.github.io/entgoogle_internet_.html"]
     node_linux_linkdump_2021_i [label="Linux Linkdump 2021 I" href="https://elbosso.github.io/linux_linkdump_2021_i.html"]
@@ -155,6 +157,7 @@ node_ebcms [label="EBCMS" href="https://elbosso.github.io/ebcms.html"]
             node_ebcms -> node_sitemap_mittels_graphviz
             node_ebcms -> node_reader_mode_enabled
             node_ebcms -> node_rendern_tex_formeln
+            node_ebcms -> node_asciinema_markdown
             node_ebcms -> node_ant_erweitern_mittels_javascript
 node_android_geraet_second_screen_unter_linux [label="Android-Gerät als Second Screen unter Linux" href="https://elbosso.github.io/android_geraet_second_screen_unter_linux.html"]
     node_a_rattlin__bog [label="A rattlin' bog" href="https://elbosso.github.io/a_rattlin__bog.html"]
@@ -1678,6 +1681,7 @@ node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
             node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
             node_ebmap4d -> node_tile_server_openstreetmap
@@ -1685,7 +1689,6 @@ node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
             node_ebmap4d -> node_geojson_ebmap4d
-            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_hillshading_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_satelliten_layer
