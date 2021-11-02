@@ -110,7 +110,7 @@ meines Docker-Zoos gekümmert habe ist nun eine weitere Anwendung hinzugekommen.
 <p>Inspiriert von
 <a href="https://framagit.org/fiat-tux/hat-softwares/lufi">diesem Projekt</a>
 habe ich mich entschieden, selbst eine entsprechende Instanz zu hosten.
-Da das Projekt leider kein eigenes Docker-Image bzw. <span class="mdcode">docker-compose.yml</span> zur
+Da das Projekt leider kein eigenes Docker-Image bzw. `docker-compose.yml` zur
 Verfügung stellt, bin ich im Internet auf die Jagd gegangen und habe mehrere Projekte
 gefunden, von denen ich letztlich eines
 <a href="https://github.com/dahlo/docker-lufi">geforkt</a>
@@ -120,22 +120,22 @@ Ich habe hauptsächlich deshalb das Proejkt geforkt und nicht direkt benutzt, we
 den Verdacht hatte, dass die fertigen Images des Projektes nicht für mein mit inzwischen sehr
 ans Herz gewachsene
 <a href="spezielle_telegraf_anpassungen_rock64.html">Rock64-Board</a>
-beziehungsweise seine Architektur <span class="mdcode">(aarch64)</span> verfügbar sein würde und ich daher
-das  <span class="mdcode">docker-compose.yml</span> gleich so abwandeln wollte, dass ein <span class="mdcode">docker-compose up</span> beziehungsweise
-<span class="mdcode">docker-compose build</span> gleich ein entsprechendes Image bauen würde.
+beziehungsweise seine Architektur `(aarch64)` verfügbar sein würde und ich daher
+das  `docker-compose.yml` gleich so abwandeln wollte, dass ein `docker-compose up` beziehungsweise
+`docker-compose build` gleich ein entsprechendes Image bauen würde.
 </p><p>
 Man kann das Verhalten des Systems über zahlreicher Umgebungsvariablen beeinflussen (Näheres dazu in der Readme meines
 <a href="https://github.com/elbosso/docker-lufi">Forks).</a>
 </p><p>
 Eine Sache - auf die mich erst ein geschätzter Kollege aufmerksam machen musste - ist nicht ganz so intuitiv gelöst:
 Möchte man die Instanz ins Internet stellen, so scheint es ratsam, dafür eine Authentifizierung vor die Seite zum Hochladen zu stellen.
-Dies ist nicht über das aktuelle <span class="mdcode">docker-compose.yml</span> erreichbar. Eine einfache Variante, dies zu erreichen, ist vor dem
-ersten Start die Datei <span class="mdcode">lufi.conf.template</span> zu editieren - dort kann man entsprechende Authentifizierung per <span class="mdbold">htpasswd</span>
-oder <span class="mdbold">LDAP</span> aktivieren. Im Fall von htpasswd ist es am einfachsten, die entsprechende Konfigurationsdatei auf dem Host
-zu erzeugen und das <span class="mdcode">Dockerfile</span> ein wenig um die Anweisung des Kopierens diesere Datei in den Container zu erweitern -
-ähnlich, wie es bereits mit <span class="mdcode">lufi.conf.template</span> geschieht.
+Dies ist nicht über das aktuelle `docker-compose.yml` erreichbar. Eine einfache Variante, dies zu erreichen, ist vor dem
+ersten Start die Datei `lufi.conf.template` zu editieren - dort kann man entsprechende Authentifizierung per *htpasswd*
+oder *LDAP* aktivieren. Im Fall von htpasswd ist es am einfachsten, die entsprechende Konfigurationsdatei auf dem Host
+zu erzeugen und das `Dockerfile` ein wenig um die Anweisung des Kopierens diesere Datei in den Container zu erweitern -
+ähnlich, wie es bereits mit `lufi.conf.template` geschieht.
 </p><p>
-Generell ist es eine gute Idee, sich vor dem ersten Bauen des Image mit der Datei  <span class="mdcode">lufi.conf.template</span> zu beschäftigen -
+Generell ist es eine gute Idee, sich vor dem ersten Bauen des Image mit der Datei  `lufi.conf.template` zu beschäftigen -
 man findet darin vielleicht noch einige weitere nützliche, derzeit nicht über Docker-Umgebungsvariablen steuerbare
 Konfigurationseigenschaften, die man den eigenen Vorlieben entsprechend anpassen möchte.
 </p>				</div>
@@ -215,13 +215,16 @@ Repository gehostet ist und fand ein weiteres interessantes Projekt, das mich wi
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Save a horse, ride a cowboy - Big & Rich</p>
+							Monitoring App für Android OpenSource</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">24.10.2016</span>
+							<span class="w3-opacity">06.11.2016</span>
 						</p>
-						<span class="smallabstract"><p>Zwei coole Typen, die sich nicht so recht ernst nehmen können...
+						<span class="smallabstract"><p>Die Anwendung, die mit der 
+Bash-Lösung zur Serverüberwachung
+zusammen dafür sorgt, dass das Personal mittels SMS über Probleme informiert wird
+ist nunmehr als Open Source verfügbar
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="save_a_horse__ride_a_cowboy___big___rich.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="monitoring_app_android_opensource.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -284,30 +287,31 @@ Repository gehostet ist und fand ein weiteres interessantes Projekt, das mich wi
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							AWK Linksammlung</span><br>
+							<span class="w3-large">							pam_nfc und Ubuntu 20.04</span><br>
+						<span class="smallabstract"><p>Ich habe bereits verschiedentlich über alternative Möglichkeiten zur
+2-Faktor-Authentifizierung
+unter Linux mittels pam berichtet.
+Inzwischen stelle ich fest, dass es jedes Mal, wenn ich ein Betriebssystem-Upgrade durchführe zu Problemen mit pam_nfc kommt
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pam_nfc_ubuntu_20_04.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten</span><br>
+						<span class="smallabstract"><p>Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="gps__nmea__tracks_gnuplot_animationen_verarbeiten.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							AWK Linksammlung</span><br>
 						<span class="smallabstract"><p>Ich habe bereits darüber berichtet, dass man in vielen Fällen
 AWK
 den Vorzug vor Excel und ähnlichem geben kann (und sollte!) - hier nun einige weitere Inspirationen dahingehend
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="awk_linksammlung.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Repository Wechsel zu Repsy</span><br>
-						<span class="smallabstract"><p>Ich habe mich entschlossen, meine diversen Artefakte nicht mehr weiter über GitHub Pages anzubieten.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="repository_wechsel_repsy.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Lex, Yacc und Co.</span><br>
-						<span class="smallabstract"><p>Hier aus (nicht mehr ganz so) aktuellem Anlass eine Liste mit Ressourcen zum Thema Parsergeneratoren und allem, was so damit zusammenhängt...
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lex__yacc_co_.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -342,30 +346,31 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							AWK Linksammlung</span><br>
+							<span class="w3-large">							pam_nfc und Ubuntu 20.04</span><br>
+							<span class="smallabstract"><p>Ich habe bereits verschiedentlich über alternative Möglichkeiten zur
+2-Faktor-Authentifizierung
+unter Linux mittels pam berichtet.
+Inzwischen stelle ich fest, dass es jedes Mal, wenn ich ein Betriebssystem-Upgrade durchführe zu Problemen mit pam_nfc kommt
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pam_nfc_ubuntu_20_04.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten</span><br>
+							<span class="smallabstract"><p>Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="gps__nmea__tracks_gnuplot_animationen_verarbeiten.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							AWK Linksammlung</span><br>
 							<span class="smallabstract"><p>Ich habe bereits darüber berichtet, dass man in vielen Fällen
 AWK
 den Vorzug vor Excel und ähnlichem geben kann (und sollte!) - hier nun einige weitere Inspirationen dahingehend
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="awk_linksammlung.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Repository Wechsel zu Repsy</span><br>
-							<span class="smallabstract"><p>Ich habe mich entschlossen, meine diversen Artefakte nicht mehr weiter über GitHub Pages anzubieten.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="repository_wechsel_repsy.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Lex, Yacc und Co.</span><br>
-							<span class="smallabstract"><p>Hier aus (nicht mehr ganz so) aktuellem Anlass eine Liste mit Ressourcen zum Thema Parsergeneratoren und allem, was so damit zusammenhängt...
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lex__yacc_co_.html#content">
  Weiterlesen...
 								</a>
 						</li>

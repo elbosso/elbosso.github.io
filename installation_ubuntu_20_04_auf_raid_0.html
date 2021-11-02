@@ -137,50 +137,50 @@ weiter verwenden zu können...
 Daher versuchte ich die Erfahrungen aus Ubuntu 18.04 auf den Live-Server-Installer der aktuellen LTS-Version 20.04 anzuwenden.
 Dazu wird zunächst erst einmal der ganz normale Installationsvorgang gestartet. Nun werden alle Fragen wie gehabt beantwortet bis man
 bei der Frage nach dem Ziel-Datenträger der Installation ankommt (Ich habe die Installation in einer KVM-Session dokumentiert, der ich zu diesem Zweck 2
-virtuelle 20 GB-Festplatten spendiert hatte). Hier wählt man dann <span class="mdbold">Custom storage layout:</span>
+virtuelle 20 GB-Festplatten spendiert hatte). Hier wählt man dann *Custom storage layout:*
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_001.png" style="max-width:1040px;"
+<img src="images/ubuntufocalraid0/screenshot_001.png"
 alt="Screenshot"
 class="center">
 Bildbeschreibung
 </span>
 </p><p>
-<span class="mdbold">An dieser Stelle die obligatorische Warnung, nochmals in sich zu gehen und zu erforschen, ob man die Daten auf den angeschlossenen
-Datenträgern wirklich nicht mehr benötigt!</span>
+*An dieser Stelle die obligatorische Warnung, nochmals in sich zu gehen und zu erforschen, ob man die Daten auf den angeschlossenen
+Datenträgern wirklich nicht mehr benötigt!*
 </p><p>
 Auf dem nächsten Bildschirm sieht man dann alle gefundenen Platten - sind sie fabrikneu, kann man sofort loslegen. Falls nicht,
-ist zunächst für jede Platte <span class="mdbold">(nicht Partition!)</span> <span class="mditalics">Reformat</span> zu wählen, um die bereits vorhandenen Partitionen zu entfernen:
+ist zunächst für jede Platte *(nicht Partition!)* _Reformat_ zu wählen, um die bereits vorhandenen Partitionen zu entfernen:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_002.png" style="max-width:1040px;"
+<img src="images/ubuntufocalraid0/screenshot_002.png"
 alt="Screenshot"
 class="center">
 Start mit unformatierten Datenträgern
 </span>
 </p><p>
 Anschließend beginnt man mit dem Anlegen der Partitionen, aus denen später das Raid gebaut werden soll. In meinem Beispiel nehme ich
-als Größe <span class="mdbold">19 Gb.</span> Wichtig ist hier als Format <span class="mditalics">Leave unformatted</span> zu verwenden:
+als Größe *19 Gb.* Wichtig ist hier als Format _Leave unformatted_ zu verwenden:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_003.png" style="max-width:1040px;"
+<img src="images/ubuntufocalraid0/screenshot_003.png"
 alt="Screenshot"
 class="center">
 Partitionen für Raid-0-Verbund erstellen
 </span>
 </p><p>
 Das muss auf allen Festplatten gechehen, die zum Raid-Verbund gehören sollen - bei mir also auf den beiden virtuellen Festplatten.
-Es darf nicht der gesamte Platz benutzt werden, weil eine extra <span class="mditalics">boot-Partition</span> benötigt wird: im Bootprozess weiß Ubuntu noch nichts von Raid
+Es darf nicht der gesamte Platz benutzt werden, weil eine extra _boot-Partition_ benötigt wird: im Bootprozess weiß Ubuntu noch nichts von Raid
 und könnte entsprechende Partitionen nicht benutzen!
 </p><p>
 Vor der Erstellung des Raid sieht die Festplattenkonfiguration also so aus:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_004.png" style="max-width:1040px;"
+<img src="images/ubuntufocalraid0/screenshot_004.png"
 alt="Screenshot"
 class="center">
 Festplattenkonfiguration vor Raid-Erstellung
 </span>
 </p><p>
-Nun wählt man <span class="mditalics">Create software raid (md)</span> aus und erstellt einen Raid-0-Verbund wie folgt:
+Nun wählt man _Create software raid (md)_ aus und erstellt einen Raid-0-Verbund wie folgt:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_005.png" style="max-width:1040px;"
+<img src="images/ubuntufocalraid0/screenshot_005.png"
 alt="Screenshot"
 class="center">
 Raid-0-Verbund erstellen
@@ -188,7 +188,7 @@ Raid-0-Verbund erstellen
 </p><p>
 Diesen muss man nun noch formatieren und einem Mount-Point zuweisen (in unserem Fall ist das /):
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_006.png" style="max-width:1040px;"
+<img src="images/ubuntufocalraid0/screenshot_006.png"
 alt="Screenshot"
 class="center">
 Partition auf Raid-0 für /
@@ -196,7 +196,7 @@ Partition auf Raid-0 für /
 </p><p>
 Jetzt fehlt nur noch die boot-Partition, die wir auf der ersten Platte im bisher ungenutzten Bereich anlegen:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_007.png" style="max-width:1040px;"
+<img src="images/ubuntufocalraid0/screenshot_007.png"
 alt="Screenshot"
 class="center">
 boot-Partition anlegen
@@ -204,7 +204,7 @@ boot-Partition anlegen
 </p><p>
 Damit ist die Konfiguration der Datenträger abgeschlossen und die eigentliche Installation kann gestartet werden:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_008.png" style="max-width:1040px;"
+<img src="images/ubuntufocalraid0/screenshot_008.png"
 alt="Screenshot"
 class="center">
 Mit Installation fortfahren
@@ -213,7 +213,7 @@ Mit Installation fortfahren
 Nachdem man das System zum ersten Mal gebootet hat, kann man wie bereits unter der Version 18.04 mit den oben angegebenen
 Kommandos eine Desktop-Umgebung installieren:
 </p><p>
-<img src="images/ubuntufocalraid0/screenshot_010.png" style="max-width:444px;"
+<img src="images/ubuntufocalraid0/screenshot_010.png"
 alt="Screenshot"
 class="center">
 Das Ergebnis
@@ -265,13 +265,16 @@ Das Ergebnis
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Save a horse, ride a cowboy - Big & Rich</p>
+							Monitoring App für Android OpenSource</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">24.10.2016</span>
+							<span class="w3-opacity">06.11.2016</span>
 						</p>
-						<span class="smallabstract"><p>Zwei coole Typen, die sich nicht so recht ernst nehmen können...
+						<span class="smallabstract"><p>Die Anwendung, die mit der 
+Bash-Lösung zur Serverüberwachung
+zusammen dafür sorgt, dass das Personal mittels SMS über Probleme informiert wird
+ist nunmehr als Open Source verfügbar
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="save_a_horse__ride_a_cowboy___big___rich.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="monitoring_app_android_opensource.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -334,30 +337,31 @@ Das Ergebnis
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							AWK Linksammlung</span><br>
+							<span class="w3-large">							pam_nfc und Ubuntu 20.04</span><br>
+						<span class="smallabstract"><p>Ich habe bereits verschiedentlich über alternative Möglichkeiten zur
+2-Faktor-Authentifizierung
+unter Linux mittels pam berichtet.
+Inzwischen stelle ich fest, dass es jedes Mal, wenn ich ein Betriebssystem-Upgrade durchführe zu Problemen mit pam_nfc kommt
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pam_nfc_ubuntu_20_04.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten</span><br>
+						<span class="smallabstract"><p>Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="gps__nmea__tracks_gnuplot_animationen_verarbeiten.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							AWK Linksammlung</span><br>
 						<span class="smallabstract"><p>Ich habe bereits darüber berichtet, dass man in vielen Fällen
 AWK
 den Vorzug vor Excel und ähnlichem geben kann (und sollte!) - hier nun einige weitere Inspirationen dahingehend
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="awk_linksammlung.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Repository Wechsel zu Repsy</span><br>
-						<span class="smallabstract"><p>Ich habe mich entschlossen, meine diversen Artefakte nicht mehr weiter über GitHub Pages anzubieten.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="repository_wechsel_repsy.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Lex, Yacc und Co.</span><br>
-						<span class="smallabstract"><p>Hier aus (nicht mehr ganz so) aktuellem Anlass eine Liste mit Ressourcen zum Thema Parsergeneratoren und allem, was so damit zusammenhängt...
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lex__yacc_co_.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -392,30 +396,31 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							AWK Linksammlung</span><br>
+							<span class="w3-large">							pam_nfc und Ubuntu 20.04</span><br>
+							<span class="smallabstract"><p>Ich habe bereits verschiedentlich über alternative Möglichkeiten zur
+2-Faktor-Authentifizierung
+unter Linux mittels pam berichtet.
+Inzwischen stelle ich fest, dass es jedes Mal, wenn ich ein Betriebssystem-Upgrade durchführe zu Problemen mit pam_nfc kommt
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pam_nfc_ubuntu_20_04.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten</span><br>
+							<span class="smallabstract"><p>Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="gps__nmea__tracks_gnuplot_animationen_verarbeiten.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							AWK Linksammlung</span><br>
 							<span class="smallabstract"><p>Ich habe bereits darüber berichtet, dass man in vielen Fällen
 AWK
 den Vorzug vor Excel und ähnlichem geben kann (und sollte!) - hier nun einige weitere Inspirationen dahingehend
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="awk_linksammlung.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Neu" src="images/page_new_48.png">
-							Repository Wechsel zu Repsy</span><br>
-							<span class="smallabstract"><p>Ich habe mich entschlossen, meine diversen Artefakte nicht mehr weiter über GitHub Pages anzubieten.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="repository_wechsel_repsy.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Lex, Yacc und Co.</span><br>
-							<span class="smallabstract"><p>Hier aus (nicht mehr ganz so) aktuellem Anlass eine Liste mit Ressourcen zum Thema Parsergeneratoren und allem, was so damit zusammenhängt...
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="lex__yacc_co_.html#content">
  Weiterlesen...
 								</a>
 						</li>
