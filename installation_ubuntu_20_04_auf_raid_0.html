@@ -137,7 +137,7 @@ weiter verwenden zu können...
 Daher versuchte ich die Erfahrungen aus Ubuntu 18.04 auf den Live-Server-Installer der aktuellen LTS-Version 20.04 anzuwenden.
 Dazu wird zunächst erst einmal der ganz normale Installationsvorgang gestartet. Nun werden alle Fragen wie gehabt beantwortet bis man
 bei der Frage nach dem Ziel-Datenträger der Installation ankommt (Ich habe die Installation in einer KVM-Session dokumentiert, der ich zu diesem Zweck 2
-virtuelle 20 GB-Festplatten spendiert hatte). Hier wählt man dann *Custom storage layout:*
+virtuelle 20 GB-Festplatten spendiert hatte). Hier wählt man dann <span class="mdbold">Custom storage layout:</span>
 </p><p>
 <img src="images/ubuntufocalraid0/screenshot_001.png" style="max-width:1040px;"
 alt="Screenshot"
@@ -145,11 +145,11 @@ class="center">
 Bildbeschreibung
 </span>
 </p><p>
-*An dieser Stelle die obligatorische Warnung, nochmals in sich zu gehen und zu erforschen, ob man die Daten auf den angeschlossenen
-Datenträgern wirklich nicht mehr benötigt!*
+<span class="mdbold">An dieser Stelle die obligatorische Warnung, nochmals in sich zu gehen und zu erforschen, ob man die Daten auf den angeschlossenen
+Datenträgern wirklich nicht mehr benötigt!</span>
 </p><p>
 Auf dem nächsten Bildschirm sieht man dann alle gefundenen Platten - sind sie fabrikneu, kann man sofort loslegen. Falls nicht,
-ist zunächst für jede Platte *(nicht Partition!)* _Reformat_ zu wählen, um die bereits vorhandenen Partitionen zu entfernen:
+ist zunächst für jede Platte <span class="mdbold">(nicht Partition!)</span> <span class="mditalics">Reformat</span> zu wählen, um die bereits vorhandenen Partitionen zu entfernen:
 </p><p>
 <img src="images/ubuntufocalraid0/screenshot_002.png" style="max-width:1040px;"
 alt="Screenshot"
@@ -158,7 +158,7 @@ Start mit unformatierten Datenträgern
 </span>
 </p><p>
 Anschließend beginnt man mit dem Anlegen der Partitionen, aus denen später das Raid gebaut werden soll. In meinem Beispiel nehme ich
-als Größe *19 Gb.* Wichtig ist hier als Format _Leave unformatted_ zu verwenden:
+als Größe <span class="mdbold">19 Gb.</span> Wichtig ist hier als Format <span class="mditalics">Leave unformatted</span> zu verwenden:
 </p><p>
 <img src="images/ubuntufocalraid0/screenshot_003.png" style="max-width:1040px;"
 alt="Screenshot"
@@ -167,7 +167,7 @@ Partitionen für Raid-0-Verbund erstellen
 </span>
 </p><p>
 Das muss auf allen Festplatten gechehen, die zum Raid-Verbund gehören sollen - bei mir also auf den beiden virtuellen Festplatten.
-Es darf nicht der gesamte Platz benutzt werden, weil eine extra _boot-Partition_ benötigt wird: im Bootprozess weiß Ubuntu noch nichts von Raid
+Es darf nicht der gesamte Platz benutzt werden, weil eine extra <span class="mditalics">boot-Partition</span> benötigt wird: im Bootprozess weiß Ubuntu noch nichts von Raid
 und könnte entsprechende Partitionen nicht benutzen!
 </p><p>
 Vor der Erstellung des Raid sieht die Festplattenkonfiguration also so aus:
@@ -178,7 +178,7 @@ class="center">
 Festplattenkonfiguration vor Raid-Erstellung
 </span>
 </p><p>
-Nun wählt man _Create software raid (md)_ aus und erstellt einen Raid-0-Verbund wie folgt:
+Nun wählt man <span class="mditalics">Create software raid (md)</span> aus und erstellt einen Raid-0-Verbund wie folgt:
 </p><p>
 <img src="images/ubuntufocalraid0/screenshot_005.png" style="max-width:1040px;"
 alt="Screenshot"
@@ -265,16 +265,13 @@ Das Ergebnis
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Monitoring App für Android OpenSource</p>
+							Amazons Dash-Buttons und NFC</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">06.11.2016</span>
+							<span class="w3-opacity">11.11.2016</span>
 						</p>
-						<span class="smallabstract"><p>Die Anwendung, die mit der 
-Bash-Lösung zur Serverüberwachung
-zusammen dafür sorgt, dass das Personal mittels SMS über Probleme informiert wird
-ist nunmehr als Open Source verfügbar
+						<span class="smallabstract"><p>Eine kurze Abhandlung, warum Amazon-Dash-Buttons in Deutschland für mich zu spät kommen.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="monitoring_app_android_opensource.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="amazons_dash_buttons_nfc.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -337,38 +334,32 @@ ist nunmehr als Open Source verfügbar
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
+						<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
+Trojan Source: Invisible Vulnerabilities
+gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
+auf Ideen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Was bedeutet das Vorhängeschloss im Browser?</span><br>
+						<span class="smallabstract"><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+es aber soweit!
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="was_bedeutet_vorhaengeschloss_browser_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							DigiSpark custom Keyboard</span><br>
 						<span class="smallabstract"><p>Ich wurde neulich von einem Kollegen überrascht, der sich ein Streamdeck angeschafft hatte. Nachdem ich im Urlaub wieder ein wenig mit dem
 DigiSpark
 herumgespielt hatte, hatte ich eine Idee - ich baue mir so etwas selbst!
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digispark_custom_keyboard.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Dokumentation wird Open Source</span><br>
-						<span class="smallabstract"><p>Ich habe im Zuge der Aktualisierung der Dokumentation für meinen
-Static Site Generator
-dessen Dokumentation wie auch die für
-dWb+
-und
-Aviator
-unter der bekannten Lizenz als Open Source auf Gitlab zur Verfügung gestellt.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dokumentation_wird_open_source.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							EBCMS</span><br>
-						<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
-Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
-ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
-und was eigenes geschaffen!
-</p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#27">
  Weiterlesen...
 							</a>
 					</li>
@@ -403,38 +394,32 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
+							<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
+Trojan Source: Invisible Vulnerabilities
+gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
+auf Ideen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Was bedeutet das Vorhängeschloss im Browser?</span><br>
+							<span class="smallabstract"><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+es aber soweit!
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="was_bedeutet_vorhaengeschloss_browser_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							DigiSpark custom Keyboard</span><br>
 							<span class="smallabstract"><p>Ich wurde neulich von einem Kollegen überrascht, der sich ein Streamdeck angeschafft hatte. Nachdem ich im Urlaub wieder ein wenig mit dem
 DigiSpark
 herumgespielt hatte, hatte ich eine Idee - ich baue mir so etwas selbst!
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digispark_custom_keyboard.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Dokumentation wird Open Source</span><br>
-							<span class="smallabstract"><p>Ich habe im Zuge der Aktualisierung der Dokumentation für meinen
-Static Site Generator
-dessen Dokumentation wie auch die für
-dWb+
-und
-Aviator
-unter der bekannten Lizenz als Open Source auf Gitlab zur Verfügung gestellt.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dokumentation_wird_open_source.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							EBCMS</span><br>
-							<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
-Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
-ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
-und was eigenes geschaffen!
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#27">
  Weiterlesen...
 								</a>
 						</li>

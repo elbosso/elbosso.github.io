@@ -162,8 +162,8 @@ der noch folgenden zu diesem Kommando gehörenden Zeichen.
 Neu hinzugekommen ist, dass ich die Möglichkeit vorgesehen habe, ein per I2C angeschlossenes
 LCD-Display zur Textausgabe zu nutzen:
 </p></p><pre>
- * ?11C0123456789 - obere Zeile I2C-LCD  (C*0*) mit Text füllen (max 16 Zeichen)
- * ?18C11234567890123456 - untere Zeile I2C-LCD (C*1*) mit Text füllen (max 16 Zeichen)
+ * ?11C0123456789 - obere Zeile I2C-LCD  (C*0</span>) mit Text füllen (max 16 Zeichen)
+ * ?18C11234567890123456 - untere Zeile I2C-LCD (C*1</span>) mit Text füllen (max 16 Zeichen)
 </p><p></pre>
 Die erste Stelle hinter dem Buchstaben C sagt aus, ob die Ausgabe auf der oberen oder unteren Zeile
 erfolgen soll (ich gehe hier von einem 16x2 LCD aus).
@@ -171,8 +171,8 @@ erfolgen soll (ich gehe hier von einem 16x2 LCD aus).
 Weiterhin habe ich die Möglichkeit hinzugefügt, 2 numerische Werte über eine 
 BarGraph-Anzeige zu visualisieren (Erlaubte Werte zwischen einschließlich 0 und 1023):
 </p></p><pre>
- * ?6B00600 - Bargraph in der oberen Zeile I2C-LCD (B*0*) auf rund 2/3 stellen (erlaubte Werte: 0-1023)
- * ?6B10300 - Bargraph in der unteren Zeile I2C-LCD (B*1*) auf rund 1/3 stellen (erlaubte Werte: 0-1023)
+ * ?6B00600 - Bargraph in der oberen Zeile I2C-LCD (B*0</span>) auf rund 2/3 stellen (erlaubte Werte: 0-1023)
+ * ?6B10300 - Bargraph in der unteren Zeile I2C-LCD (B*1</span>) auf rund 1/3 stellen (erlaubte Werte: 0-1023)
 </p><p></pre>
 Auch hier gibt die Zahl hinter dem B an, ob die obere oder die untere Zeile zur
 Darstellung benutzt werden soll. Das Ergebnis könnte dann zum Beispiel so aussehen:
@@ -242,16 +242,13 @@ gestalten.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Monitoring App für Android OpenSource</p>
+							Amazons Dash-Buttons und NFC</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">06.11.2016</span>
+							<span class="w3-opacity">11.11.2016</span>
 						</p>
-						<span class="smallabstract"><p>Die Anwendung, die mit der 
-Bash-Lösung zur Serverüberwachung
-zusammen dafür sorgt, dass das Personal mittels SMS über Probleme informiert wird
-ist nunmehr als Open Source verfügbar
+						<span class="smallabstract"><p>Eine kurze Abhandlung, warum Amazon-Dash-Buttons in Deutschland für mich zu spät kommen.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="monitoring_app_android_opensource.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="amazons_dash_buttons_nfc.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -314,38 +311,32 @@ ist nunmehr als Open Source verfügbar
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
+						<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
+Trojan Source: Invisible Vulnerabilities
+gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
+auf Ideen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Was bedeutet das Vorhängeschloss im Browser?</span><br>
+						<span class="smallabstract"><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+es aber soweit!
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="was_bedeutet_vorhaengeschloss_browser_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							DigiSpark custom Keyboard</span><br>
 						<span class="smallabstract"><p>Ich wurde neulich von einem Kollegen überrascht, der sich ein Streamdeck angeschafft hatte. Nachdem ich im Urlaub wieder ein wenig mit dem
 DigiSpark
 herumgespielt hatte, hatte ich eine Idee - ich baue mir so etwas selbst!
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digispark_custom_keyboard.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Dokumentation wird Open Source</span><br>
-						<span class="smallabstract"><p>Ich habe im Zuge der Aktualisierung der Dokumentation für meinen
-Static Site Generator
-dessen Dokumentation wie auch die für
-dWb+
-und
-Aviator
-unter der bekannten Lizenz als Open Source auf Gitlab zur Verfügung gestellt.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dokumentation_wird_open_source.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							EBCMS</span><br>
-						<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
-Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
-ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
-und was eigenes geschaffen!
-</p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#27">
  Weiterlesen...
 							</a>
 					</li>
@@ -380,38 +371,32 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
+							<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
+Trojan Source: Invisible Vulnerabilities
+gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
+auf Ideen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Was bedeutet das Vorhängeschloss im Browser?</span><br>
+							<span class="smallabstract"><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+es aber soweit!
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="was_bedeutet_vorhaengeschloss_browser_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							DigiSpark custom Keyboard</span><br>
 							<span class="smallabstract"><p>Ich wurde neulich von einem Kollegen überrascht, der sich ein Streamdeck angeschafft hatte. Nachdem ich im Urlaub wieder ein wenig mit dem
 DigiSpark
 herumgespielt hatte, hatte ich eine Idee - ich baue mir so etwas selbst!
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digispark_custom_keyboard.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Dokumentation wird Open Source</span><br>
-							<span class="smallabstract"><p>Ich habe im Zuge der Aktualisierung der Dokumentation für meinen
-Static Site Generator
-dessen Dokumentation wie auch die für
-dWb+
-und
-Aviator
-unter der bekannten Lizenz als Open Source auf Gitlab zur Verfügung gestellt.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dokumentation_wird_open_source.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							EBCMS</span><br>
-							<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
-Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
-ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
-und was eigenes geschaffen!
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#27">
  Weiterlesen...
 								</a>
 						</li>

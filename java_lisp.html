@@ -151,32 +151,32 @@ Nach dem Ausbessern dieses Fehlers ergab sich folgendes Skript:
 		(cond ((null binding) (cons (cons var input) bindings))
 			((equal input (cdr binding)) bindings))))
 </p><p>
-(defun match* (pattern input &amp;optional (bindings '((dummy . dummy))))
+(defun match</span> (pattern input &amp;optional (bindings '((dummy . dummy))))
 	(cond ((null bindings) nil)
 		((variable-p pattern) (match-variable pattern input bindings))
 		((eql pattern input) bindings)
 		((and (consp pattern) (consp input))
-		(match* (rest pattern) (rest input)
-			(match* (first pattern) (first input) bindings)))))
+		(match</span> (rest pattern) (rest input)
+			(match</span> (first pattern) (first input) bindings)))))
 </p><p>
 (defun match (pattern input)
-	(let ((result (match* pattern input)))
+	(let ((result (match</span> pattern input)))
 		(and result (or (butlast result) t))))
 </p><p>
 (defun apply-rule (input rules)
 	(loop for (pattern replacement) in rules
-		for bindings = (match* pattern input)
+		for bindings = (match</span> pattern input)
 			thereis (and bindings (sublis bindings replacement))))
 </p><p>
-;;(defparameter *rules* nil)
+;;(defparameter <span class="mdbold">rules</span> nil)
 </p><p>
-(defun transform (expr &amp;optional (*rules* *rules*)) (transform* expr))
+(defun transform (expr &amp;optional (<span class="mdbold">rules</span> *rules*)) (transform</span> expr))
 </p><p>
-(defun transform* (expr)
-	(if (atom expr) expr (transform-expr (mapcar #'transform* expr))))
+(defun transform</span> (expr)
+	(if (atom expr) expr (transform-expr (mapcar #'transform</span> expr))))
 </p><p>
 (defun transform-expr (expr)
-	(cond ((transform* (apply-rule expr *rules*)))
+	(cond ((transform</span> (apply-rule expr <span class="mdbold">rules</span>)))
 		((evaluable expr) (eval expr))
 		(t expr)))
 </p><p>
@@ -185,50 +185,50 @@ Nach dem Ausbessern dieses Fehlers ergab sich folgendes Skript:
 		(or (member (first expr) '(+ - * /))
 			(and (eq (first expr) 'expt) (integerp (third expr))))))
 </p><p>
-(defparameter *simple-diff-rules*
+(defparameter <span class="mdbold">simple-diff-rules</span>
 	'(((D x x) 1)
 		((D (+ u v) x) (+ (D u x) (D v x)))
-		((D (* u v) x) (+ (* (D u x) v) (* u (D v x))))
-		((D (/ v) x) (- (/ (D v x) (* v v))))
+		((D (</span> u v) x) (+ (</span> (D u x) v) (</span> u (D v x))))
+		((D (/ v) x) (- (/ (D v x) (</span> v v))))
 		((D u x) 0)
-		;;((D (sin u) x) (* (cos u) (D u x)))
-		;;((D (exp u) x) (* (exp u) (D u x)))
-		;;((D (log u) x) (* (/ u) (D u x)))
+		;;((D (sin u) x) (</span> (cos u) (D u x)))
+		;;((D (exp u) x) (</span> (exp u) (D u x)))
+		;;((D (log u) x) (</span> (/ u) (D u x)))
 		))
 </p><p>
-(defparameter *chain-diff-rules*
+(defparameter <span class="mdbold">chain-diff-rules</span>
 	(loop for (in out) in '(((exp u) (exp u)) ((log u) (/ u))
 		((sin u) (cos u)) ((cos u) (- (sin u))))
-		collect `((D ,in x) (* ,out (D u x)))))
+		collect <span class="mdcode">((D ,in x) (</span> ,out (D u x)))))
 </p><p>
-(defparameter *diff-rules*
-	(append (butlast *simple-diff-rules*)
-		*chain-diff-rules*
-		(last *simple-diff-rules*)))
+(defparameter <span class="mdbold">diff-rules</span>
+	(append (butlast <span class="mdbold">simple-diff-rules</span>)
+		<span class="mdbold">chain-diff-rules</span>
+		(last <span class="mdbold">simple-diff-rules</span>)))
 </p><p>
-(defparameter *input-rules*
+(defparameter <span class="mdbold">input-rules</span>
 	'(((+ x y z . w) (+ x (+ y z . w)))
-	((* x y z . w) (* x (* y z . w)))
-	((- x y) (+ x (* -1 y)))
-	((/ x y) (* x (/ y)))
+	((</span> x y z . w) (</span> x (</span> y z . w)))
+	((- x y) (+ x (</span> -1 y)))
+	((/ x y) (</span> x (/ y)))
 	((^ x y) (expt x y))
-	((expt x y) (exp (* y (log x))))
+	((expt x y) (exp (</span> y (log x))))
 	((log a b) (/ (log a) (log b)))
 	((sqrt x) (^ x (/ 1 2)))
 	((tan x) (/ (sin x) (cos x)))))
 </p><p>
-(defparameter *simplification-rules*
+(defparameter <span class="mdbold">simplification-rules</span>
   '(((+ 0 x) x) ((+ x 0) x)
-    ((* x 1) x) ((* 1 x) x)
-    ((* 1 x . w) (* x . w))
-    ((* x 0) 0) ((* 0 x) 0)
-    ((* (/ x) x . w) (* 1 . w))
-    ((* x (* y z . w)) (* x y z . w))
-    ((exp (* a (log b))) (expt b a))))
+    ((</span> x 1) x) ((</span> 1 x) x)
+    ((</span> 1 x . w) (</span> x . w))
+    ((</span> x 0) 0) ((</span> 0 x) 0)
+    ((</span> (/ x) x . w) (</span> 1 . w))
+    ((</span> x (</span> y z . w)) (</span> x y z . w))
+    ((exp (</span> a (log b))) (expt b a))))
 </p><p>
 (defun doit (expr)
-	(transform (transform (transform expr *input-rules*)
-		*diff-rules*) *simplification-rules*))
+	(transform (transform (transform expr <span class="mdbold">input-rules</span>)
+		<span class="mdbold">diff-rules</span>) *simplification-rules</span>))
 </p><p></pre>
 </p><p>
 Nachdem damit zunächt das Video nachvollzogen war, wollte ich die Verbindung mit Java vollziehen: Das Ziel war, eine Implementierung
@@ -240,7 +240,7 @@ einer Lisp-Variante, die
 <a href="https://jcp.org/en/jsr/detail?id=223">JSR 223: Scripting for the JavaTM Platform</a>
 umsetzt:
 </p></p><pre>
-import javax.script.*;
+import javax.script.</span>;
 import java.io.IOException;
 import java.util.UUID;
 </p><p>
@@ -276,7 +276,7 @@ class Function extends de.elbosso.util.lang.OneDFunction
         {
             double value = ((java.lang.Number) lispEngine.eval(
             "(float (transform (subst " + input + " '" +
-            variable + " " + uuid + ") '(((* /) * /))))")).doubleValue();
+            variable + " " + uuid + ") '(((</span> /) * /))))")).doubleValue();
             return value;
         }
         catch(Exception exp)
@@ -337,16 +337,13 @@ Ableitung dieser Funktion.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Monitoring App für Android OpenSource</p>
+							Amazons Dash-Buttons und NFC</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">06.11.2016</span>
+							<span class="w3-opacity">11.11.2016</span>
 						</p>
-						<span class="smallabstract"><p>Die Anwendung, die mit der 
-Bash-Lösung zur Serverüberwachung
-zusammen dafür sorgt, dass das Personal mittels SMS über Probleme informiert wird
-ist nunmehr als Open Source verfügbar
+						<span class="smallabstract"><p>Eine kurze Abhandlung, warum Amazon-Dash-Buttons in Deutschland für mich zu spät kommen.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="monitoring_app_android_opensource.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="amazons_dash_buttons_nfc.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -409,38 +406,32 @@ ist nunmehr als Open Source verfügbar
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
+						<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
+Trojan Source: Invisible Vulnerabilities
+gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
+auf Ideen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Was bedeutet das Vorhängeschloss im Browser?</span><br>
+						<span class="smallabstract"><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+es aber soweit!
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="was_bedeutet_vorhaengeschloss_browser_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							DigiSpark custom Keyboard</span><br>
 						<span class="smallabstract"><p>Ich wurde neulich von einem Kollegen überrascht, der sich ein Streamdeck angeschafft hatte. Nachdem ich im Urlaub wieder ein wenig mit dem
 DigiSpark
 herumgespielt hatte, hatte ich eine Idee - ich baue mir so etwas selbst!
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digispark_custom_keyboard.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Dokumentation wird Open Source</span><br>
-						<span class="smallabstract"><p>Ich habe im Zuge der Aktualisierung der Dokumentation für meinen
-Static Site Generator
-dessen Dokumentation wie auch die für
-dWb+
-und
-Aviator
-unter der bekannten Lizenz als Open Source auf Gitlab zur Verfügung gestellt.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dokumentation_wird_open_source.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							EBCMS</span><br>
-						<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
-Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
-ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
-und was eigenes geschaffen!
-</p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#27">
  Weiterlesen...
 							</a>
 					</li>
@@ -475,38 +466,32 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
+							<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
+Trojan Source: Invisible Vulnerabilities
+gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
+auf Ideen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Was bedeutet das Vorhängeschloss im Browser?</span><br>
+							<span class="smallabstract"><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+es aber soweit!
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="was_bedeutet_vorhaengeschloss_browser_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							DigiSpark custom Keyboard</span><br>
 							<span class="smallabstract"><p>Ich wurde neulich von einem Kollegen überrascht, der sich ein Streamdeck angeschafft hatte. Nachdem ich im Urlaub wieder ein wenig mit dem
 DigiSpark
 herumgespielt hatte, hatte ich eine Idee - ich baue mir so etwas selbst!
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digispark_custom_keyboard.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Dokumentation wird Open Source</span><br>
-							<span class="smallabstract"><p>Ich habe im Zuge der Aktualisierung der Dokumentation für meinen
-Static Site Generator
-dessen Dokumentation wie auch die für
-dWb+
-und
-Aviator
-unter der bekannten Lizenz als Open Source auf Gitlab zur Verfügung gestellt.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dokumentation_wird_open_source.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							EBCMS</span><br>
-							<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
-Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
-ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
-und was eigenes geschaffen!
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#27">
  Weiterlesen...
 								</a>
 						</li>

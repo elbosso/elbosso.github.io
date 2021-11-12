@@ -110,7 +110,7 @@ meines Docker-Zoos gekümmert habe ist nun eine weitere Anwendung hinzugekommen.
 <p>Inspiriert von
 <a href="https://framagit.org/fiat-tux/hat-softwares/lufi">diesem Projekt</a>
 habe ich mich entschieden, selbst eine entsprechende Instanz zu hosten.
-Da das Projekt leider kein eigenes Docker-Image bzw. `docker-compose.yml` zur
+Da das Projekt leider kein eigenes Docker-Image bzw. <span class="mdcode">docker-compose.yml</span> zur
 Verfügung stellt, bin ich im Internet auf die Jagd gegangen und habe mehrere Projekte
 gefunden, von denen ich letztlich eines
 <a href="https://github.com/dahlo/docker-lufi">geforkt</a>
@@ -120,22 +120,22 @@ Ich habe hauptsächlich deshalb das Proejkt geforkt und nicht direkt benutzt, we
 den Verdacht hatte, dass die fertigen Images des Projektes nicht für mein mit inzwischen sehr
 ans Herz gewachsene
 <a href="spezielle_telegraf_anpassungen_rock64.html">Rock64-Board</a>
-beziehungsweise seine Architektur `(aarch64)` verfügbar sein würde und ich daher
-das  `docker-compose.yml` gleich so abwandeln wollte, dass ein `docker-compose up` beziehungsweise
-`docker-compose build` gleich ein entsprechendes Image bauen würde.
+beziehungsweise seine Architektur <span class="mdcode">(aarch64)</span> verfügbar sein würde und ich daher
+das  <span class="mdcode">docker-compose.yml</span> gleich so abwandeln wollte, dass ein <span class="mdcode">docker-compose up</span> beziehungsweise
+<span class="mdcode">docker-compose build</span> gleich ein entsprechendes Image bauen würde.
 </p><p>
 Man kann das Verhalten des Systems über zahlreicher Umgebungsvariablen beeinflussen (Näheres dazu in der Readme meines
 <a href="https://github.com/elbosso/docker-lufi">Forks).</a>
 </p><p>
 Eine Sache - auf die mich erst ein geschätzter Kollege aufmerksam machen musste - ist nicht ganz so intuitiv gelöst:
 Möchte man die Instanz ins Internet stellen, so scheint es ratsam, dafür eine Authentifizierung vor die Seite zum Hochladen zu stellen.
-Dies ist nicht über das aktuelle `docker-compose.yml` erreichbar. Eine einfache Variante, dies zu erreichen, ist vor dem
-ersten Start die Datei `lufi.conf.template` zu editieren - dort kann man entsprechende Authentifizierung per *htpasswd*
-oder *LDAP* aktivieren. Im Fall von htpasswd ist es am einfachsten, die entsprechende Konfigurationsdatei auf dem Host
-zu erzeugen und das `Dockerfile` ein wenig um die Anweisung des Kopierens diesere Datei in den Container zu erweitern -
-ähnlich, wie es bereits mit `lufi.conf.template` geschieht.
+Dies ist nicht über das aktuelle <span class="mdcode">docker-compose.yml</span> erreichbar. Eine einfache Variante, dies zu erreichen, ist vor dem
+ersten Start die Datei <span class="mdcode">lufi.conf.template</span> zu editieren - dort kann man entsprechende Authentifizierung per <span class="mdbold">htpasswd</span>
+oder <span class="mdbold">LDAP</span> aktivieren. Im Fall von htpasswd ist es am einfachsten, die entsprechende Konfigurationsdatei auf dem Host
+zu erzeugen und das <span class="mdcode">Dockerfile</span> ein wenig um die Anweisung des Kopierens diesere Datei in den Container zu erweitern -
+ähnlich, wie es bereits mit <span class="mdcode">lufi.conf.template</span> geschieht.
 </p><p>
-Generell ist es eine gute Idee, sich vor dem ersten Bauen des Image mit der Datei  `lufi.conf.template` zu beschäftigen -
+Generell ist es eine gute Idee, sich vor dem ersten Bauen des Image mit der Datei  <span class="mdcode">lufi.conf.template</span> zu beschäftigen -
 man findet darin vielleicht noch einige weitere nützliche, derzeit nicht über Docker-Umgebungsvariablen steuerbare
 Konfigurationseigenschaften, die man den eigenen Vorlieben entsprechend anpassen möchte.
 </p>				</div>
@@ -215,16 +215,13 @@ Repository gehostet ist und fand ein weiteres interessantes Projekt, das mich wi
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Monitoring App für Android OpenSource</p>
+							Amazons Dash-Buttons und NFC</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">06.11.2016</span>
+							<span class="w3-opacity">11.11.2016</span>
 						</p>
-						<span class="smallabstract"><p>Die Anwendung, die mit der 
-Bash-Lösung zur Serverüberwachung
-zusammen dafür sorgt, dass das Personal mittels SMS über Probleme informiert wird
-ist nunmehr als Open Source verfügbar
+						<span class="smallabstract"><p>Eine kurze Abhandlung, warum Amazon-Dash-Buttons in Deutschland für mich zu spät kommen.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="monitoring_app_android_opensource.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="amazons_dash_buttons_nfc.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -287,38 +284,32 @@ ist nunmehr als Open Source verfügbar
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
+						<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
+Trojan Source: Invisible Vulnerabilities
+gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
+auf Ideen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Was bedeutet das Vorhängeschloss im Browser?</span><br>
+						<span class="smallabstract"><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+es aber soweit!
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="was_bedeutet_vorhaengeschloss_browser_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							DigiSpark custom Keyboard</span><br>
 						<span class="smallabstract"><p>Ich wurde neulich von einem Kollegen überrascht, der sich ein Streamdeck angeschafft hatte. Nachdem ich im Urlaub wieder ein wenig mit dem
 DigiSpark
 herumgespielt hatte, hatte ich eine Idee - ich baue mir so etwas selbst!
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digispark_custom_keyboard.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Dokumentation wird Open Source</span><br>
-						<span class="smallabstract"><p>Ich habe im Zuge der Aktualisierung der Dokumentation für meinen
-Static Site Generator
-dessen Dokumentation wie auch die für
-dWb+
-und
-Aviator
-unter der bekannten Lizenz als Open Source auf Gitlab zur Verfügung gestellt.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dokumentation_wird_open_source.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							EBCMS</span><br>
-						<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
-Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
-ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
-und was eigenes geschaffen!
-</p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#27">
  Weiterlesen...
 							</a>
 					</li>
@@ -353,38 +344,32 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
+							<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
+Trojan Source: Invisible Vulnerabilities
+gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
+auf Ideen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Was bedeutet das Vorhängeschloss im Browser?</span><br>
+							<span class="smallabstract"><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+es aber soweit!
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="was_bedeutet_vorhaengeschloss_browser_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							DigiSpark custom Keyboard</span><br>
 							<span class="smallabstract"><p>Ich wurde neulich von einem Kollegen überrascht, der sich ein Streamdeck angeschafft hatte. Nachdem ich im Urlaub wieder ein wenig mit dem
 DigiSpark
 herumgespielt hatte, hatte ich eine Idee - ich baue mir so etwas selbst!
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digispark_custom_keyboard.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Dokumentation wird Open Source</span><br>
-							<span class="smallabstract"><p>Ich habe im Zuge der Aktualisierung der Dokumentation für meinen
-Static Site Generator
-dessen Dokumentation wie auch die für
-dWb+
-und
-Aviator
-unter der bekannten Lizenz als Open Source auf Gitlab zur Verfügung gestellt.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dokumentation_wird_open_source.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							EBCMS</span><br>
-							<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
-Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
-ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
-und was eigenes geschaffen!
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#27">
  Weiterlesen...
 								</a>
 						</li>

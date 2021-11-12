@@ -106,41 +106,41 @@ berichtet habe folgen hier nun einige Details meiner Implementierung
 				<div class="w3-container w3-padding" id="contentdiv">
 <p>Ich änderte die Formulierung des Problems ja ein wenig ab, indem ich einen weiteren Summenterm einführte, der beim Setzen
 des Parameters <span class="mdcode">m=0</span> wieder die ursprüngliche Collatz-Vermutung ergibt:
-</p></p><p><img class="formula" src="images/tex/-44245311.png" alt="C^*:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
-" title="C^*:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
+</p></p><p><img class="formula" src="images/tex/-44245311.png" alt="C^</span>:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
+" title="C^</span>:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
 ">
 </p><p>
-Ich wollte dann für verschiedene Werte von `m` herausbekommen, ob sich diese Familie von Abbildungen
+Ich wollte dann für verschiedene Werte von <span class="mdcode">m</span> herausbekommen, ob sich diese Familie von Abbildungen
 genauso verhält wie die originale Collatz-Vermutung. Ich stellte überraschend schnell fest, dass
-die Abbildung für viele Parameterwerte von `m` bereits bei niedrigen `n` Gegenbeispiele produziert und damit
-die Vermutumg für diese Parameterwerte widerlegt werden kann. Die einzigen Werte für `m`, für die ich
-bei der Berechnung mit Startwerten von `n<10000000` (wie für die originale Collatz-Vermutung) keine Gegenbeispiele
-finden konnte waren `0,1,4` und `13`.
+die Abbildung für viele Parameterwerte von <span class="mdcode">m</span> bereits bei niedrigen <span class="mdcode">n</span> Gegenbeispiele produziert und damit
+die Vermutumg für diese Parameterwerte widerlegt werden kann. Die einzigen Werte für <span class="mdcode">m</span>, für die ich
+bei der Berechnung mit Startwerten von <span class="mdcode">n<10000000</span> (wie für die originale Collatz-Vermutung) keine Gegenbeispiele
+finden konnte waren <span class="mdcode">0,1,4</span> und <span class="mdcode">13</span>.
 </p><p>
 Ich wollte daher für diese Werte ein wenig weiter rechnen. Dabei machte mir Java - bzw. die eingebauten Datentypen aber einen Strich durch die
 Rechnung: Ich hatte mir ein
 <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TreeSet.html">Set</a>
 von
 <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Long.html">Long</a>
-gebaut, um mir zu merken, welche Werte von `n` ich bereits besucht hatte - wenn während der Iteration der Abbildung
-ein `n` auftauchte, das bereits in der Map anthalten war, konnte ich abbrechen, weil der Pfad deterministisch ist
-und ab diesem Wert von `n` bereits untersucht wortden war. Allerdings wurde die Map so groß, dass sie bei
-`100000000` zu untersuchenden Startwerten nicht mehr in den Arbeitsspeicher passte.
+gebaut, um mir zu merken, welche Werte von <span class="mdcode">n</span> ich bereits besucht hatte - wenn während der Iteration der Abbildung
+ein <span class="mdcode">n</span> auftauchte, das bereits in der Map anthalten war, konnte ich abbrechen, weil der Pfad deterministisch ist
+und ab diesem Wert von <span class="mdcode">n</span> bereits untersucht wortden war. Allerdings wurde die Map so groß, dass sie bei
+<span class="mdcode">100000000</span> zu untersuchenden Startwerten nicht mehr in den Arbeitsspeicher passte.
 </p><p>
 Meine Idee war, die bereits besuchten Zahlenwerte anders zu repräsentieren. Die erste Variante, die ich untersuchte war die
-eines *spärlichen* Set: Wenn man sich die Zahlenwerte von `0` bis `1000` und zusätzlich den Wert `1003` in einem normalen Set
+eines <span class="mdbold">spärlichen</span> Set: Wenn man sich die Zahlenwerte von <span class="mdcode">0</span> bis <span class="mdcode">1000</span> und zusätzlich den Wert <span class="mdcode">1003</span> in einem normalen Set
 merken soll, hat das die Größe 1001. Wenn man aber ein Set konstruieren würde, das zusammenhängende Zahlenbereiche als Intervalle speichert,
-würde man im oben genannten Beispiel nur 2 Elemente benötigen: eines, das das Intervall `[1..1000]` beschreibt und eines für das
-Intervall `[1003..1003]`. Ich erstellte also eine Klasse, die dieses Verhalten implementiert.
+würde man im oben genannten Beispiel nur 2 Elemente benötigen: eines, das das Intervall <span class="mdcode">[1..1000]</span> beschreibt und eines für das
+Intervall <span class="mdcode">[1003..1003]</span>. Ich erstellte also eine Klasse, die dieses Verhalten implementiert.
 </p><p>
 Nachdem die funktionale Korrektheit nachgewiesen war analysierte ich die Performance - und war bestürzt: Wo die naive Implementierung mit einem Set
-eine Laufzeit von `00:00:00.055965` für `10000` zu testende Zahlen benötigte, verbrauchte meine eigene Implementierung
-`00:00:07.454402`. Nachdem ich mich
+eine Laufzeit von <span class="mdcode">00:00:00.055965</span> für <span class="mdcode">10000</span> zu testende Zahlen benötigte, verbrauchte meine eigene Implementierung
+<span class="mdcode">00:00:07.454402</span>. Nachdem ich mich
 ein wenig mit der Theorie von Collections und der Komplexität von Algorithmen, die damit arbeiten beschäftigt hatte und die
-Implementierung verbessert hatte konnte ich die Laufzeit auf `00:00:02.681505` drücken.
+Implementierung verbessert hatte konnte ich die Laufzeit auf <span class="mdcode">00:00:02.681505</span> drücken.
 </p><p>
-Anschließend wollte ich wissen, wie gut dies skaliert - die naive Implementierung verbrauchte bei nun `1000000` zu testenden Zahlen
-`00:00:01.479704`, meine Implementierung brauchte so lange, dass ich den Versuch nach mehreren Minuten abbrach. Was war der Grund für
+Anschließend wollte ich wissen, wie gut dies skaliert - die naive Implementierung verbrauchte bei nun <span class="mdcode">1000000</span> zu testenden Zahlen
+<span class="mdcode">00:00:01.479704</span>, meine Implementierung brauchte so lange, dass ich den Versuch nach mehreren Minuten abbrach. Was war der Grund für
 dieses schlechte Laufzeitverhalten? Ich werde diese Frage weiter unten auflösen...
 </p><p>
 Als nächstes überlegte ich mir,
@@ -148,27 +148,27 @@ Als nächstes überlegte ich mir,
 für die Speicherung bereits besuchter Zahlen zu nutzen - so lassen sich in 64 Bit die Informationen zu 64 Zahlen darüber
 speichern, welche bereits besucht worden ist. Ich konnte die Java-Klasse nicht direkt benutzen, da ein BitSet von der Größe her auf
 <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Integer.html#MAX_VALUE">java.lang.Integer.MAX_VALUE</a>
-beschränkt ist. Daher baute ich mir eine eigene Implementierung, die im Prinzip `Integer.MAX_VALUE*Integer.MAX_VALUE`
+beschränkt ist. Daher baute ich mir eine eigene Implementierung, die im Prinzip <span class="mdcode">Integer.MAX_VALUE*Integer.MAX_VALUE</span>
 Bit verwalten könnte. "Im Prinzip" deswegen,
 weil die reale Kapazität durch den zur Verfügung stehenden Arbeitsspeicher begrenzt wird.
 </p><p>
 Mit dieser neuen Variante gab es Licht und Schatten - die Laufzeit der Implementierung sank unter die der naiven Lösung mit Set
-von vorher `00:00:00.055965` auf `00:00:03.191843` für `10000` zu testende Zahlen. Leider tauchte aber sehr schnell die Meldung
-`java.lang.OutOfMemoryError` für eine größere Menge zu testender Zahlen auf. Eine Untersuchung und damit einhergehende Überlegungen
+von vorher <span class="mdcode">00:00:00.055965</span> auf <span class="mdcode">00:00:03.191843</span> für <span class="mdcode">10000</span> zu testende Zahlen. Leider tauchte aber sehr schnell die Meldung
+<span class="mdcode">java.lang.OutOfMemoryError</span> für eine größere Menge zu testender Zahlen auf. Eine Untersuchung und damit einhergehende Überlegungen
 zeigten schnell folgende Ursache auf: Die Regel für ungerade Zahlen zweimal aufeinanderfolgend angewendet vergrößert einen Wert von n
 um eine Größenordnung. Oberhalb von 2 Millionen bedeutet das einen sehr schnellen Anstieg der Größe eines BitSets, das alle Werte
 dazwischen abdecken soll: für einen Wert von 2 Millionen reicht ein BitSet dieser Größe aus, für eines das alle Werte von 0 bis
 20 Millionen abdecken soll, benötigt man schon 10 der maximalen Größe. Bei meinen Berechnungen sah ich aber Werte in der Größenordnung
-von `672.974.151.236` bei der Untersuchung der ersten `1000000` Startwerte. Das zeigt auch die Ursache der beeindruckend schlechten Performanz der
+von <span class="mdcode">672.974.151.236</span> bei der Untersuchung der ersten <span class="mdcode">1000000</span> Startwerte. Das zeigt auch die Ursache der beeindruckend schlechten Performanz der
 ersten alternativen Implementierung mit Speicherung besetzter Intervalle statt der einzelnen Zahlenwerte: Der Bereich der
 Werte ist dermaßen spärlich besetzt, dass quasi nur noch einwertige Intervalle ab einem bestimmen Wert existieren, so dass
 diese Optimierung ab einem gewissen Wert nichts mehr bringt.
 </p><p>
-Ich entschloss mich daher, die Map zur Speicherung bereits besuchter Werte nur noch bis zu einer Grenze von `60.000.000`
+Ich entschloss mich daher, die Map zur Speicherung bereits besuchter Werte nur noch bis zu einer Grenze von <span class="mdcode">60.000.000</span>
 Werten zu führen - für jeden Wert über dieser Grenze berechnete ich so lange, bis die maximale Anzahl von Iterationen
-für den jeweiligen Startwert erreicht - oder eine Iteration einen Wert unterhalb von `60.000.000` ereicht wurde, der bereits einmal
-besucht wurde. Damit konnte ich den Bereich der Startwerte von `1` bis `100000000` untersuchen und stellte fest, dass die Vermutung
-für die Parameterwerte `0,1,4` und `13` in diesem Bereich keine Gegenbeispiele lieferte.
+für den jeweiligen Startwert erreicht - oder eine Iteration einen Wert unterhalb von <span class="mdcode">60.000.000</span> ereicht wurde, der bereits einmal
+besucht wurde. Damit konnte ich den Bereich der Startwerte von <span class="mdcode">1</span> bis <span class="mdcode">100000000</span> untersuchen und stellte fest, dass die Vermutung
+für die Parameterwerte <span class="mdcode">0,1,4</span> und <span class="mdcode">13</span> in diesem Bereich keine Gegenbeispiele lieferte.
 </p>				</div>
 				<div class="w3-container w3-padding" id="commentsgithub">
 					<p>
@@ -216,16 +216,13 @@ für die Parameterwerte `0,1,4` und `13` in diesem Bereich keine Gegenbeispiele 
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Monitoring App für Android OpenSource</p>
+							Amazons Dash-Buttons und NFC</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">06.11.2016</span>
+							<span class="w3-opacity">11.11.2016</span>
 						</p>
-						<span class="smallabstract"><p>Die Anwendung, die mit der 
-Bash-Lösung zur Serverüberwachung
-zusammen dafür sorgt, dass das Personal mittels SMS über Probleme informiert wird
-ist nunmehr als Open Source verfügbar
+						<span class="smallabstract"><p>Eine kurze Abhandlung, warum Amazon-Dash-Buttons in Deutschland für mich zu spät kommen.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="monitoring_app_android_opensource.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="amazons_dash_buttons_nfc.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -288,38 +285,32 @@ ist nunmehr als Open Source verfügbar
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
+						<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
+Trojan Source: Invisible Vulnerabilities
+gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
+auf Ideen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Was bedeutet das Vorhängeschloss im Browser?</span><br>
+						<span class="smallabstract"><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+es aber soweit!
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="was_bedeutet_vorhaengeschloss_browser_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							DigiSpark custom Keyboard</span><br>
 						<span class="smallabstract"><p>Ich wurde neulich von einem Kollegen überrascht, der sich ein Streamdeck angeschafft hatte. Nachdem ich im Urlaub wieder ein wenig mit dem
 DigiSpark
 herumgespielt hatte, hatte ich eine Idee - ich baue mir so etwas selbst!
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digispark_custom_keyboard.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Dokumentation wird Open Source</span><br>
-						<span class="smallabstract"><p>Ich habe im Zuge der Aktualisierung der Dokumentation für meinen
-Static Site Generator
-dessen Dokumentation wie auch die für
-dWb+
-und
-Aviator
-unter der bekannten Lizenz als Open Source auf Gitlab zur Verfügung gestellt.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dokumentation_wird_open_source.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							EBCMS</span><br>
-						<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
-Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
-ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
-und was eigenes geschaffen!
-</p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#27">
  Weiterlesen...
 							</a>
 					</li>
@@ -354,38 +345,32 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
+							<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
+Trojan Source: Invisible Vulnerabilities
+gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
+auf Ideen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Was bedeutet das Vorhängeschloss im Browser?</span><br>
+							<span class="smallabstract"><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+es aber soweit!
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="was_bedeutet_vorhaengeschloss_browser_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							DigiSpark custom Keyboard</span><br>
 							<span class="smallabstract"><p>Ich wurde neulich von einem Kollegen überrascht, der sich ein Streamdeck angeschafft hatte. Nachdem ich im Urlaub wieder ein wenig mit dem
 DigiSpark
 herumgespielt hatte, hatte ich eine Idee - ich baue mir so etwas selbst!
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="digispark_custom_keyboard.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Dokumentation wird Open Source</span><br>
-							<span class="smallabstract"><p>Ich habe im Zuge der Aktualisierung der Dokumentation für meinen
-Static Site Generator
-dessen Dokumentation wie auch die für
-dWb+
-und
-Aviator
-unter der bekannten Lizenz als Open Source auf Gitlab zur Verfügung gestellt.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dokumentation_wird_open_source.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							EBCMS</span><br>
-							<span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. 
-Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß
-ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett
-und was eigenes geschaffen!
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#27">
  Weiterlesen...
 								</a>
 						</li>
