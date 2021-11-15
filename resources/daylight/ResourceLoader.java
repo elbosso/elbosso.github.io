@@ -15,6 +15,7 @@ import java.net.URL;
 /*#LICENCE#*/
 public class ResourceLoader extends java.lang.Object
 {
+	private final static org.apache.log4j.Logger EXCEPTION_LOGGER=org.apache.log4j.Logger.getLogger("ExceptionCatcher");
 	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(ResourceLoader.class);
 	private final static java.util.regex.Pattern pat1=java.util.regex.Pattern.compile("([^\\!].*?)_(\\d*?)([^\\d]*?)\\.png");
 	private final static java.util.regex.Pattern pat2=java.util.regex.Pattern.compile("(.*?)_(\\d*?)([^\\d]*?)\\.png");
@@ -232,10 +233,10 @@ public class ResourceLoader extends java.lang.Object
 			java.io.InputStream is=de.netsysit.util.ResourceLoader.getResource("de/netsysit/ressources/data/icon_trans.properties").openStream();
 			props.load(is);
 			is.close();
-		}catch(java.lang.Throwable exp){exp.printStackTrace();}
+		}catch(java.lang.Throwable exp){EXCEPTION_LOGGER.error(exp.getMessage(),exp);}
 		try{
 			fallBack=getResource("de/netsysit/ressources/gfx/symbols/ex_red.gif");
-		}catch(java.lang.Throwable exp){exp.printStackTrace();}
+		}catch(java.lang.Throwable exp){EXCEPTION_LOGGER.error(exp.getMessage(),exp);}
 		if(fallBack==null)
 		{
 			try{
@@ -525,7 +526,7 @@ public class ResourceLoader extends java.lang.Object
 				}
 			} catch (java.lang.Throwable t)
 			{
-				//				t.printStackTrace();
+				//				EXCEPTION_LOGGER.error(t.getMessage(),t);
 				rv = ResourceLoader.class.getClassLoader().getResource(arg);
 			}
 			if(rv!=null)
@@ -561,7 +562,7 @@ public class ResourceLoader extends java.lang.Object
 				}
 			} catch (java.lang.Throwable t)
 			{
-				//			t.printStackTrace();
+				//			EXCEPTION_LOGGER.error(t.getMessage(),t);
 				rv = ResourceLoader.class.getClassLoader().getResource(arg);
 			}
 			if(rv!=null)
