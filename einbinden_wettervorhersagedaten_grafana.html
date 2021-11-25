@@ -14,7 +14,7 @@
 berichtete
 folgt nun eine Idee zur "Verbesserung" des Wetterberichts...
 " />
-<meta property="article:published_time" content="2020-08-29">
+<meta property="article:published_time" content="2021-11-20">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 <link rel="stylesheet" type="text/css" href="css/stylew3.css" />
 <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
@@ -62,11 +62,11 @@ and is wrapped around the whole page content, except for the footer in this exam
 					<div class="w3-row">
 						<div class="w3-col m6 s12">
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract"
-							   href="when_someone_requests_a_jimi_hendrix_song.html#content">vorhergehender Artikel</a>
+							   href="fork_beanshell_wegen_trojan_source.html#content">vorhergehender Artikel</a>
 						</div>
 						<div class="w3-col m6" style="text-align: right">
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
-							   href="wireviz_docker_container.html#content">nächster Artikel
+							   href="reveal_js_praesentationen_gitlab_github_pages.html#content">nächster Artikel
 							</a>
 						</div>
 					</div>
@@ -77,18 +77,18 @@ and is wrapped around the whole page content, except for the footer in this exam
 								<div class="w3-row">
 									<div class="w3-col m8 s12">
 										vorhergehende Artikel in:
-										<a href="generierung_gnuplot_skripten_influxdb.html#content">
+										<a href="crl_next_update_telegraf_ueberwachen.html#content">
 											<span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span>
 										</a> <!--/li-->
-										<a href="tcp_routing_traefik_2_x.html#content">
+										<a href="trojan_source_sql_postgres.html#content">
 											<span class="w3-tag w3-black w3-margin-bottom">Datenbanken</span>
 										</a> <!--/li-->
-										<a href="bifurkationen_lorenz_system.html#content">
+										<a href="generator_microservices_mastodon_bot.html#content">
 											<span class="w3-tag w3-black w3-margin-bottom">Python</span>
 										</a> <!--/li-->
 									</div>
 									<div class="w3-col m4" style="text-align: right">
-										<span class="w3-opacity">29.08.2020</span>
+										<span class="w3-opacity">20.11.2021</span>
 									</div>
 								</div>
 							</div>
@@ -101,6 +101,16 @@ and is wrapped around the whole page content, except for the footer in this exam
 				</div>
 			</div>
 			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="updates">
+					<h5>Updates</h5>
+					<ul>
+						<li>
+							<a href="#93">
+								20. November 2021
+							</a>
+						</li>
+					</ul>
+				</div>
 				<div class="w3-container w3-padding" id="abstract">
 <p>Nachdem ich hier bereits über Tests meiner ESP-Wetterstation
 <a href="wetterstation_test.html">berichtete</a>
@@ -108,7 +118,7 @@ folgt nun eine Idee zur "Verbesserung" des Wetterberichts...
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
 <p>Schön wäre es, wenn man die durch die Wetterstation gemessenen und die vorhergesagten Daten auf einfache
-art vergleichen könnte. Der minimale Nutzen wäre, über die Wetterfrösche schimpfen zu können, wenn sie wieder einmal
+Art vergleichen könnte. Der minimale Nutzen wäre, über die Wetterfrösche schimpfen zu können, wenn sie wieder einmal
 danebengelegen haben obwohl man heute ja wissen sollte, dass Wettervorhersagen
 <a href="bifurkationen_lorenz_system.html">prinzipiell unmöglich sind.</a>
 </p><p>
@@ -132,30 +142,72 @@ die Struktur der Daten klarzumachen,
 entschied mich aber dagegen. Ich schrieb ein kleines Python-Script, das für mich die Aufbereitung der Daten übernimmt und sie
 in eine
 <a href="https://www.influxdata.com/">InfluxDB</a>
-schreibt:
+schreibt. Voraussetzung für die Funktion des Skripts ist die Installation des Python-Moduls <span class="mdcode">influxdb</span>, was über den Befehl
+</p></p><pre>
+pip3 install influxdb
+</p><p></pre>
+</p><p>
+geschehen kann - man beachte, dass hier unbedingt <span class="mdbold">pip3</span> benutzt werden muss und nicht <span class="mdbold">pip</span>, da das Skript Python
+in der Version 3 voraussetzt. Würde man hier <span class="mdcode">pip</span> benutzen, würde das Modul für Python in der Version <span class="mdbold">2</span>
+installiert und Python <span class="mdbold">3</span> würde sich weiterhin beschweren, dass es das Modul
+nicht finden kann!
 </p></p><pre>
 #!/usr/bin/env python3
 from influxdb import InfluxDBClient
 import requests
 import json
 import datetime
+import socket
 </p><p>
-client = InfluxDBClient(host='&lt;your influxdb host>', port=&lt;your port>, username='your user name', password='&lt;your password>')
+#host of the influxdb used to store the data
+influxhost=''
+#port of the influxdb used to store the data
+influxport=
+#username for accessing the influxdb used to store the data
+influxusername''
+#password for accessing the influxdb used to store the data
+influxpassword=''
+#name of the influxdb database used to store the data
+monitoringdbname=''
+#user agent (python requests standard user agent is blocked by the api
+useragent='Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'
+#latitude of the location the forecast is wanted for (german: Breitengrad)
+latitude=
+#longitude of the location the forecast is wanted for (german: Längengrad)
+longitude=
+#API url
+url='https://api.met.no/weatherapi/locationforecast/2.0/.json?lat={latitude}&amp;lon={longitude}'.format(latitude=latitude,longitude=longitude)
+#name of the location the forecast is wanted for (german: Längengrad)
+locality=""
+#value for the host tag when writing to the influxdb
+monitoringhost=socket.getfqdn()
+#if you want the ip address rather than the hosts name, do
+#monitoringhost=socket.gethostbyname(socket.getfqdn())
+</p><p>
+client = InfluxDBClient(host=influxhost, port=influxport)
+#if influx requires authentication, use the following line instead of the one above:
+#client = InfluxDBClient(host=influxhost, port=influxport,username=influxusername, password=influxpasword)
 </p><p>
 databases = client.get_list_database()
 </p><p>
 databaseAlreadyThere =False
 </p><p>
 for item in databases:
-    if item['name'] == '&lt;your db name>':
+    if item['name'] == monitoringdbname:
         databaseAlreadyThere = True
 </p><p>
 if databaseAlreadyThere == False:
-    client.create_database('&lt;your db name>')
+    client.create_database(monitoringdbname)
 </p><p>
-client.switch_database('&lt;your db name>')
+client.switch_database(monitoringdbname)
 </p><p>
-response = requests.get('https://api.met.no/weatherapi/locationforecast/2.0/.json?lat=&lt;your latitude>&amp;lon=&lt;your longitude>')
+headers = {
+    'User-Agent': useragent
+}
+</p><p>
+#print(url)
+response = requests.get(url, headers=headers)
+#print(response.content)
 data = json.loads(response.content.decode('utf-8'))
 timeseries=data['properties']['timeseries']
 lon=data['geometry']['coordinates'][0]
@@ -174,11 +226,11 @@ for timeserie in timeseries:
     jb={}
     jb["measurement"]="WeatherForecast"
     tags={}
-    tags["Server"]="192.168.10.2"
+    tags["Server"]=monitoringhost
     tags["Longitude"]=lon
     tags["Latitude"]=lat
     tags["Height"]=height
-    tags["Location"]="Rudolstadt"
+    tags["Location"]=locality
     jb["tags"]=tags
     jb["time"]=timeserie['time']
     jb["fields"]=stats
@@ -886,6 +938,12 @@ Wettervorhersage
   "version": 6
 }
 </p><p></pre>
+</p><p>
+<h3><a name="93">Aktualisierung vom 20. November 2021</a></h3><div class="update">Das Skript wurde überarbeitet: die Api erlaubt Requests nicht mehr wenn der User-Agent im Header bestimmte Werte aufweist - darunter
+den, den das Python-Modul <span class="mdcode">requests</span> standardmäßig nutzt - daher wird jetzt der User-Agent eines Firefox-Browsers gesendet.
+Darüber hinaus wurden alle Parameter an den Beginn des Skripts verlagert und kommentiert. Weiterhin wurde ein Absatz zur
+Installation des Python-Moduls <span class="mdcode">influxdb</span> hinzugefügt.
+</div>
 </p>				</div>
 				<div class="w3-container w3-padding" id="referers">
 				<h3>
@@ -987,15 +1045,18 @@ bereits seit einiger Zeit betrieben - Zeit alse, selber einiger Erfahrungen zu s
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							CircuitBreakers in Modulen</p>
+							Notifikationen mittels Apache und libnotify</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">19.11.2016</span>
 						</p>
-						<span class="smallabstract"><p>Eine Möglichkeit, die 
-Infrastruktur zum Fehlermanagement
-zu ergänzen.
+						<span class="smallabstract"><p>Wie bereits in einem früheren 
+Artikel
+beschrieben ist es möglich, Notifications am Linux-Desktop (Gnome) 
+abzufangen und abhängig vom Inhalt die verschiedensten Aktionen 
+auszulösen. Ich suchte nun nach einer Möglichkeit, solche Notifications
+auch remote auslösen zu können.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="circuitbreakers_modulen.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="notifikationen_mittels_apache_libnotify.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -1058,6 +1119,19 @@ zu ergänzen.
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Reveal.JS Präsentationen als Gitlab/Github Pages</span><br>
+						<span class="smallabstract"><p>Ich hatte neulich die Idee, Präsentationen zu erstellen, die als Repository auf
+Gitlab
+und/oder
+Github
+gehostet werden können und dort auch
+live als HTML5 für jeden interessierten zu betrachten wären.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="reveal_js_praesentationen_gitlab_github_pages.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							Fork der BeanShell wegen Trojan Source</span><br>
 						<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
 Fork
@@ -1084,17 +1158,6 @@ dWb+
 dadurch verwundbar wären.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source__dwb__sqlshell.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
-						<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
-Trojan Source: Invisible Vulnerabilities
-gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
-auf Ideen...
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -1129,6 +1192,19 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Reveal.JS Präsentationen als Gitlab/Github Pages</span><br>
+							<span class="smallabstract"><p>Ich hatte neulich die Idee, Präsentationen zu erstellen, die als Repository auf
+Gitlab
+und/oder
+Github
+gehostet werden können und dort auch
+live als HTML5 für jeden interessierten zu betrachten wären.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="reveal_js_praesentationen_gitlab_github_pages.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							Fork der BeanShell wegen Trojan Source</span><br>
 							<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
 Fork
@@ -1155,17 +1231,6 @@ dWb+
 dadurch verwundbar wären.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source__dwb__sqlshell.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Trojan Source mit SQL und Postgres</span><br>
-							<span class="smallabstract"><p>Nachdem ich das hochinteressante Paper
-Trojan Source: Invisible Vulnerabilities
-gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich einsehbar) auf Ideen...
-auf Ideen...
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source_sql_postgres.html#content">
  Weiterlesen...
 								</a>
 						</li>
