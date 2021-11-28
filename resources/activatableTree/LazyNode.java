@@ -63,11 +63,13 @@ public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 //		this.tree=tree;
 		if(parent instanceof LazyNode)
 		{
+//			System.out.println("1111");
 			LazyNode lazyParent=(LazyNode)parent;
 			this.stopClass=lazyParent.getStopClass();
 //			this.tree=lazyParent.getTree();
 			this.treeModel=lazyParent.getTreeModel();
 		}
+//		System.out.println(treeModel);
 	}
 	protected javax.swing.tree.DefaultTreeModel produceTreeModel()
 	{
@@ -174,6 +176,7 @@ public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 	//Implementation of interface javax.swing.tree.TreeNode
 	public java.util.Enumeration children()
 	{
+//		System.out.println("++++++++++++++");
 		return java.util.Collections.enumeration(java.util.Arrays.asList(getChildren()));
 	}
 	public String toString()
