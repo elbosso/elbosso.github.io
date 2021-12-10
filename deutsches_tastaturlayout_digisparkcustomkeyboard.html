@@ -66,7 +66,9 @@ and is wrapped around the whole page content, except for the footer in this exam
 							   href="generative_art__mastodon_bitbot.html#content">vorhergehender Artikel</a>
 						</div>
 						<div class="w3-col m6" style="text-align: right">
-							&nbsp;
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
+							   href="trojan_sql.html#content">nächster Artikel
+							</a>
 						</div>
 					</div>
 					<div class="w3-row">
@@ -125,10 +127,10 @@ Auch um dieses Problem zu adressieren benötigte ich wieder sehr lange - letztli
 dieser Zeichen liegen sämtlich <span class="mdbold">über</span> <span class="mdcode">127</span> - im Quelltext der Bibliothek wurde das Mapping von ASCII auf KeyCodes
 über ein großes Switch-Statement abgewickelt, dessen Signatur und Baginn wie folgt aussehen:
 </p></p><pre>
-void ASCII_to_keycode(uint8_t ascii, uint8_t ledState, uint8_t</span> modifier, uint8_t</span> keycode)
+void ASCII_to_keycode(uint8_t ascii, uint8_t ledState, uint8_t* modifier, uint8_t* keycode)
 {
-	<span class="mdbold">keycode = 0x00;
-	<span class="mdbold">modifier = 0x00;
+	*keycode = 0x00;
+	*modifier = 0x00;
 </p><p>
 	// see scancode.doc appendix C
 </p><p>
@@ -142,8 +144,8 @@ void ASCII_to_keycode(uint8_t ascii, uint8_t ledState, uint8_t</span> modifier, 
 		switch (ascii) // convert ascii to keycode according to documentation
 		{
 			case '!':
-				<span class="mdbold">modifier = <span class="mditalics">BV(1); // hold shift
-				<span class="mdbold">keycode = 30;
+				*modifier = _BV(1); // hold shift
+				*keycode = 30;
 				break;
 </p><p></pre>
 </p><p>
@@ -153,7 +155,7 @@ größer als <span class="mdcode">127</span> aber das leftmost Bit - und damit d
 nie <span class="mdcode">true</span> liefern. Gefixt habe ich das mit einer entsprechenden Anpassung des Vergleichs, wie hier exemplarisch illustriert:
 </p></p><pre>
 			case (uint8_t)'Ü':
-				<span class="mdbold">keycode = 0x2F;
+				*keycode = 0x2F;
 				break;
 </p><p></pre>
 </p><p>
@@ -185,7 +187,7 @@ void method(uint8_t ascii)
 	}
 }
 </p><p>
-int main(int argc, char*</span> argv)
+int main(int argc, char** argv)
 {
 	printf("huhu\n");
 	method('a');
@@ -244,14 +246,15 @@ uint8_test.c:13:3: warning: case label value is less than minimum value for type
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							FX-Komponente als Java-Version</p>
+							Band from TV</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">02.12.2016</span>
+							<span class="w3-opacity">09.12.2016</span>
 						</p>
-						<span class="smallabstract"><p>Ich wurde wieder einmal bei einer meiner Inspirationsquellen fündig und versuchte, die dort 
-vorgestellte Komponente mit Java-Mitteln nachzuvollziehen.
+						<span class="smallabstract"><p>Nachdem ich ihn in Blackadder gesehen hatte wusste ich, dass er ein guter Schauspieler
+ist - danach konnte ich aber wann immer ich ihn sah ein Lächeln nicht mehr unterdrücken.
+Das er auch Musik macht, erfuhr ich erst vor ungefähr einem Jahr.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fx_komponente_java_version.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="band_from_tv.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -314,6 +317,20 @@ vorgestellte Komponente mit Java-Mitteln nachzuvollziehen.
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Trojan SQL</span><br>
+						<span class="smallabstract"><p>Ich habe bereits über
+Ideen
+geschrieben, die
+TrojanSource-Vulnerability
+in anderen Kontexten zu untersuchen - ein Vorkommnis in dem Job, mit dem ich mir das Geld für Kuchen verdiene hat
+mich jetzt angestachelt, diese Untersuchung tatsächlich umfangreich und gründlich durchzuführen.
+Dieser Beitrag wurde zum CCC End-of-year event 2021 eingereicht und abgelehnt.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_sql.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							Generative Art: Mastodon-BitBot</span><br>
 						<span class="smallabstract"><p>Ich stieß auf meinen Streifzügen durch meine Bubble neulich wieder auf einen interessanten Bot und einen sehr interessanten Eintrag, den
 dieser gerade generiert hatte:
@@ -331,18 +348,6 @@ sQLshell
 vorgestellt, das eine neue Möglichkeit bietet Datenmodelle zu dokumentieren/analysieren.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vc2html_plugin.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							JAAS & 2FA</span><br>
-						<span class="smallabstract"><p>Ich habe an dieser Stelle bereits früher über Möglichkeiten der Nutzung von Einmalpasswörtern entsprechend RFC
-RFC 6238 in Java-Anwendungen
-berichtet.
-Nun wollte ich untersuchen, ob sich 2-Faktor-Authentifizierung in das Framework
-Java Authentication and Authorization Service (JAAS) integrieren lasen würde.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="jaas___2fa.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -377,6 +382,20 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Trojan SQL</span><br>
+							<span class="smallabstract"><p>Ich habe bereits über
+Ideen
+geschrieben, die
+TrojanSource-Vulnerability
+in anderen Kontexten zu untersuchen - ein Vorkommnis in dem Job, mit dem ich mir das Geld für Kuchen verdiene hat
+mich jetzt angestachelt, diese Untersuchung tatsächlich umfangreich und gründlich durchzuführen.
+Dieser Beitrag wurde zum CCC End-of-year event 2021 eingereicht und abgelehnt.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_sql.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							Generative Art: Mastodon-BitBot</span><br>
 							<span class="smallabstract"><p>Ich stieß auf meinen Streifzügen durch meine Bubble neulich wieder auf einen interessanten Bot und einen sehr interessanten Eintrag, den
 dieser gerade generiert hatte:
@@ -394,18 +413,6 @@ sQLshell
 vorgestellt, das eine neue Möglichkeit bietet Datenmodelle zu dokumentieren/analysieren.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vc2html_plugin.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							JAAS & 2FA</span><br>
-							<span class="smallabstract"><p>Ich habe an dieser Stelle bereits früher über Möglichkeiten der Nutzung von Einmalpasswörtern entsprechend RFC
-RFC 6238 in Java-Anwendungen
-berichtet.
-Nun wollte ich untersuchen, ob sich 2-Faktor-Authentifizierung in das Framework
-Java Authentication and Authorization Service (JAAS) integrieren lasen würde.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="jaas___2fa.html#content">
  Weiterlesen...
 								</a>
 						</li>

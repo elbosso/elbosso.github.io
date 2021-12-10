@@ -151,32 +151,32 @@ Nach dem Ausbessern dieses Fehlers ergab sich folgendes Skript:
 		(cond ((null binding) (cons (cons var input) bindings))
 			((equal input (cdr binding)) bindings))))
 </p><p>
-(defun match</span> (pattern input &amp;optional (bindings '((dummy . dummy))))
+(defun match* (pattern input &amp;optional (bindings '((dummy . dummy))))
 	(cond ((null bindings) nil)
 		((variable-p pattern) (match-variable pattern input bindings))
 		((eql pattern input) bindings)
 		((and (consp pattern) (consp input))
-		(match</span> (rest pattern) (rest input)
-			(match</span> (first pattern) (first input) bindings)))))
+		(match* (rest pattern) (rest input)
+			(match* (first pattern) (first input) bindings)))))
 </p><p>
 (defun match (pattern input)
-	(let ((result (match</span> pattern input)))
+	(let ((result (match* pattern input)))
 		(and result (or (butlast result) t))))
 </p><p>
 (defun apply-rule (input rules)
 	(loop for (pattern replacement) in rules
-		for bindings = (match</span> pattern input)
+		for bindings = (match* pattern input)
 			thereis (and bindings (sublis bindings replacement))))
 </p><p>
-;;(defparameter <span class="mdbold">rules</span> nil)
+;;(defparameter *rules* nil)
 </p><p>
-(defun transform (expr &amp;optional (<span class="mdbold">rules</span> *rules*)) (transform</span> expr))
+(defun transform (expr &amp;optional (*rules* *rules*)) (transform* expr))
 </p><p>
-(defun transform</span> (expr)
-	(if (atom expr) expr (transform-expr (mapcar #'transform</span> expr))))
+(defun transform* (expr)
+	(if (atom expr) expr (transform-expr (mapcar #'transform* expr))))
 </p><p>
 (defun transform-expr (expr)
-	(cond ((transform</span> (apply-rule expr <span class="mdbold">rules</span>)))
+	(cond ((transform* (apply-rule expr *rules*)))
 		((evaluable expr) (eval expr))
 		(t expr)))
 </p><p>
@@ -185,50 +185,50 @@ Nach dem Ausbessern dieses Fehlers ergab sich folgendes Skript:
 		(or (member (first expr) '(+ - * /))
 			(and (eq (first expr) 'expt) (integerp (third expr))))))
 </p><p>
-(defparameter <span class="mdbold">simple-diff-rules</span>
+(defparameter *simple-diff-rules*
 	'(((D x x) 1)
 		((D (+ u v) x) (+ (D u x) (D v x)))
-		((D (</span> u v) x) (+ (</span> (D u x) v) (</span> u (D v x))))
-		((D (/ v) x) (- (/ (D v x) (</span> v v))))
+		((D (* u v) x) (+ (* (D u x) v) (* u (D v x))))
+		((D (/ v) x) (- (/ (D v x) (* v v))))
 		((D u x) 0)
-		;;((D (sin u) x) (</span> (cos u) (D u x)))
-		;;((D (exp u) x) (</span> (exp u) (D u x)))
-		;;((D (log u) x) (</span> (/ u) (D u x)))
+		;;((D (sin u) x) (* (cos u) (D u x)))
+		;;((D (exp u) x) (* (exp u) (D u x)))
+		;;((D (log u) x) (* (/ u) (D u x)))
 		))
 </p><p>
-(defparameter <span class="mdbold">chain-diff-rules</span>
+(defparameter *chain-diff-rules*
 	(loop for (in out) in '(((exp u) (exp u)) ((log u) (/ u))
 		((sin u) (cos u)) ((cos u) (- (sin u))))
-		collect <span class="mdcode">((D ,in x) (</span> ,out (D u x)))))
+		collect `((D ,in x) (* ,out (D u x)))))
 </p><p>
-(defparameter <span class="mdbold">diff-rules</span>
-	(append (butlast <span class="mdbold">simple-diff-rules</span>)
-		<span class="mdbold">chain-diff-rules</span>
-		(last <span class="mdbold">simple-diff-rules</span>)))
+(defparameter *diff-rules*
+	(append (butlast *simple-diff-rules*)
+		*chain-diff-rules*
+		(last *simple-diff-rules*)))
 </p><p>
-(defparameter <span class="mdbold">input-rules</span>
+(defparameter *input-rules*
 	'(((+ x y z . w) (+ x (+ y z . w)))
-	((</span> x y z . w) (</span> x (</span> y z . w)))
-	((- x y) (+ x (</span> -1 y)))
-	((/ x y) (</span> x (/ y)))
+	((* x y z . w) (* x (* y z . w)))
+	((- x y) (+ x (* -1 y)))
+	((/ x y) (* x (/ y)))
 	((^ x y) (expt x y))
-	((expt x y) (exp (</span> y (log x))))
+	((expt x y) (exp (* y (log x))))
 	((log a b) (/ (log a) (log b)))
 	((sqrt x) (^ x (/ 1 2)))
 	((tan x) (/ (sin x) (cos x)))))
 </p><p>
-(defparameter <span class="mdbold">simplification-rules</span>
+(defparameter *simplification-rules*
   '(((+ 0 x) x) ((+ x 0) x)
-    ((</span> x 1) x) ((</span> 1 x) x)
-    ((</span> 1 x . w) (</span> x . w))
-    ((</span> x 0) 0) ((</span> 0 x) 0)
-    ((</span> (/ x) x . w) (</span> 1 . w))
-    ((</span> x (</span> y z . w)) (</span> x y z . w))
-    ((exp (</span> a (log b))) (expt b a))))
+    ((* x 1) x) ((* 1 x) x)
+    ((* 1 x . w) (* x . w))
+    ((* x 0) 0) ((* 0 x) 0)
+    ((* (/ x) x . w) (* 1 . w))
+    ((* x (* y z . w)) (* x y z . w))
+    ((exp (* a (log b))) (expt b a))))
 </p><p>
 (defun doit (expr)
-	(transform (transform (transform expr <span class="mdbold">input-rules</span>)
-		<span class="mdbold">diff-rules</span>) *simplification-rules</span>))
+	(transform (transform (transform expr *input-rules*)
+		*diff-rules*) *simplification-rules*))
 </p><p></pre>
 </p><p>
 Nachdem damit zunächt das Video nachvollzogen war, wollte ich die Verbindung mit Java vollziehen: Das Ziel war, eine Implementierung
@@ -240,7 +240,7 @@ einer Lisp-Variante, die
 <a href="https://jcp.org/en/jsr/detail?id=223">JSR 223: Scripting for the JavaTM Platform</a>
 umsetzt:
 </p></p><pre>
-import javax.script.</span>;
+import javax.script.*;
 import java.io.IOException;
 import java.util.UUID;
 </p><p>
@@ -276,7 +276,7 @@ class Function extends de.elbosso.util.lang.OneDFunction
         {
             double value = ((java.lang.Number) lispEngine.eval(
             "(float (transform (subst " + input + " '" +
-            variable + " " + uuid + ") '(((</span> /) * /))))")).doubleValue();
+            variable + " " + uuid + ") '(((* /) * /))))")).doubleValue();
             return value;
         }
         catch(Exception exp)
@@ -337,14 +337,15 @@ Ableitung dieser Funktion.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							FX-Komponente als Java-Version</p>
+							Band from TV</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">02.12.2016</span>
+							<span class="w3-opacity">09.12.2016</span>
 						</p>
-						<span class="smallabstract"><p>Ich wurde wieder einmal bei einer meiner Inspirationsquellen fündig und versuchte, die dort 
-vorgestellte Komponente mit Java-Mitteln nachzuvollziehen.
+						<span class="smallabstract"><p>Nachdem ich ihn in Blackadder gesehen hatte wusste ich, dass er ein guter Schauspieler
+ist - danach konnte ich aber wann immer ich ihn sah ein Lächeln nicht mehr unterdrücken.
+Das er auch Musik macht, erfuhr ich erst vor ungefähr einem Jahr.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fx_komponente_java_version.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="band_from_tv.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -407,6 +408,20 @@ vorgestellte Komponente mit Java-Mitteln nachzuvollziehen.
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Trojan SQL</span><br>
+						<span class="smallabstract"><p>Ich habe bereits über
+Ideen
+geschrieben, die
+TrojanSource-Vulnerability
+in anderen Kontexten zu untersuchen - ein Vorkommnis in dem Job, mit dem ich mir das Geld für Kuchen verdiene hat
+mich jetzt angestachelt, diese Untersuchung tatsächlich umfangreich und gründlich durchzuführen.
+Dieser Beitrag wurde zum CCC End-of-year event 2021 eingereicht und abgelehnt.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_sql.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							Deutsches Tastaturlayout für DigiSparkCustomKeyboard</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich über die
 Hardware und die Motivation
@@ -423,18 +438,6 @@ Das erwies sich nicht als so einfach, wie ich gehofft hatte...
 dieser gerade generiert hatte:
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generative_art__mastodon_bitbot.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							VC2HTML-Plugin</span><br>
-						<span class="smallabstract"><p>Wie bereits in einem
-früheren Artikel zum Thema sQLshell-Plugins
-wird hier wieder ein neues Plugin für die
-sQLshell
-vorgestellt, das eine neue Möglichkeit bietet Datenmodelle zu dokumentieren/analysieren.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vc2html_plugin.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -469,6 +472,20 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Trojan SQL</span><br>
+							<span class="smallabstract"><p>Ich habe bereits über
+Ideen
+geschrieben, die
+TrojanSource-Vulnerability
+in anderen Kontexten zu untersuchen - ein Vorkommnis in dem Job, mit dem ich mir das Geld für Kuchen verdiene hat
+mich jetzt angestachelt, diese Untersuchung tatsächlich umfangreich und gründlich durchzuführen.
+Dieser Beitrag wurde zum CCC End-of-year event 2021 eingereicht und abgelehnt.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_sql.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							Deutsches Tastaturlayout für DigiSparkCustomKeyboard</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich über die
 Hardware und die Motivation
@@ -485,18 +502,6 @@ Das erwies sich nicht als so einfach, wie ich gehofft hatte...
 dieser gerade generiert hatte:
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generative_art__mastodon_bitbot.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							VC2HTML-Plugin</span><br>
-							<span class="smallabstract"><p>Wie bereits in einem
-früheren Artikel zum Thema sQLshell-Plugins
-wird hier wieder ein neues Plugin für die
-sQLshell
-vorgestellt, das eine neue Möglichkeit bietet Datenmodelle zu dokumentieren/analysieren.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vc2html_plugin.html#content">
  Weiterlesen...
 								</a>
 						</li>
