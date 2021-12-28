@@ -7,7 +7,7 @@
 <meta property="og:title" content="The Ultimate RISC" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://elbosso.github.io/the_ultimate_risc" />
-<meta property="og:image" content="https://elbosso.github.io/images/small/muttizettel.png"/>
+<meta property="og:image" content="https://elbosso.github.io/images/small/ultimaterisc_logo.png"/>
 <meta property="og:locale" content="de_DE" />
 <meta property="og:site_name" content="elbosso.github.io" />
 <meta property="og:description" content="Ich habe in meinem diesjährigen Urlaub ein Projekt umgesetzt, das ich eigentlich anders geplant hatte - ich
@@ -76,6 +76,9 @@ and is wrapped around the whole page content, except for the footer in this exam
 								<div class="w3-row">
 									<div class="w3-col m8 s12">
 										vorhergehende Artikel in:
+										<a href="isometrische_darstellung_generierte_landschaften.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Java</span>
+										</a> <!--/li-->
 										<a href="literatur_zur_beweisfesten_langzeitarchivierung.html#content">
 											<span class="w3-tag w3-black w3-margin-bottom">Links</span>
 										</a> <!--/li-->
@@ -93,7 +96,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 							</div>
 						</div>
 						<div class="w3-col m3"><p style="text-align: right">
-							<img style="max-width:128px;" src="images/small/muttizettel.png">
+							<img style="max-width:128px;" src="images/small/ultimaterisc_logo.png">
 						</p>
 						</div>
 					</div>
@@ -143,7 +146,7 @@ Teilschritten beschrieben ist:
 <li>schreibe operand nach Adresse in temp</li>
 </ol>
 </p><p>
-Zwei Kunstgriffe, um daraus eine vollwertige turin-vollständige CPU zu bauen werden in dem Original-Artikel noch benannt:
+Zwei Kunstgriffe, um daraus eine vollwertige turing-vollständige CPU zu bauen werden in dem Original-Artikel noch benannt:
 Es wird eine einfache Arithmetik-Logik-Einheit an einer bestimmten Adresse im Arbeitsspeicher eingeblendet, so dass
 ein Schreiben an (oder Lesen aus) eine der ALU-Adressen bestimmte Rechenoperationen auslöst. Weiterhin ist der Programmzähler
 keine extra Baugruppe, sondern wird an einer bestimmten Adresse im Arbeitsspeicher gehalten. Dadurch ist es Code, der auf dieser CPU
@@ -319,6 +322,30 @@ auf GitLab veröffentlicht: In dem Projekt sind sowohl der Simulator als auch de
 			</div><hr>
 
 			<!-- Artikel von "backThen" -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Vor 5 Jahren hier im Blog</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+						<p class="w3-large">
+							Multi-Agenten-Systeme in dWb+</p>
+						<p class="w3-small" style="text-align: right">
+							<span class="w3-opacity">31.12.2016</span>
+						</p>
+						<span class="smallabstract"><p>Ein Anwendungsszenario für 
+dWb+,
+das bisher noch keine größere Beachtung gefunden hat - auch in der Dokumentation! - 
+ist die Modellierung von Multi-Agenten-Systemen. Ich werde hier zunächst auf einige
+grundlegende Überlegungen dazu eingehen und später über erste Ergebnisse 
+informieren
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="multi_agenten_systeme_dwb_.html#content">
+							Weiterlesen...
+						</a>
+					</li>
+				</ul>
+			</div>
 
 			<!-- Labels / tags -->
 			<div class="w3-card w3-margin">
@@ -341,7 +368,7 @@ auf GitLab veröffentlicht: In dem Projekt sind sowohl der Simulator als auch de
 						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
 						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
 						<a href="tag_Hardware.html"><span class="w3-tag w3-black w3-margin-bottom">Hardware</span></a>
-						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
 						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
 						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
 						<a href="tag_Links.html"><span class="w3-tag w3-black w3-margin-bottom">Links</span></a>
@@ -375,35 +402,43 @@ auf GitLab veröffentlicht: In dem Projekt sind sowohl der Simulator als auch de
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
-							<span class="w3-large">							Asciinema in Markdown</span><br>
-						<span class="smallabstract"><p>Mein
-Static Site Generator
-kann ja bereits seit einiger Zeit mit Asciinema-Dateien umgehen und diese einbinden - ich war aber auf der Suche, diese Einbindung
-auch in Gitlab und/oder Github nutzen zu können...
+							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
+						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
+dWb+
+und
+EBCMS
+sowie für das Framework dmcc, das beispielsweise im
+Aviator
+und auch in
+dWb+
+zum Einsatz kommt auf Gitlab
+veröffentlicht
+habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
+die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="asciinema_markdown.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Erzeugen kompakter Textboxen</span><br>
-						<span class="smallabstract"><p>In einem Text Zeilenumbrüche einzufügen, um eine bestimmte Zeilenlänge nicht zu überschreiten ist trivial. Ebenso trivial ist
-es, einen Text so umzubrechen,  dass eine bestimmte Zeilenanzahl nicht überschritten wird - Wie bricht man aber die Zeilen automatisch um, wenn
-die resultierenden Textblöcke besonders kompakt sein sollen - also weder zu lange, noch zu viele Zeilen aufweisen sollen?
+							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
+						<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
+Custom Keyboard
+selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
+der Bastellösung mit dem Digispark wegkommen
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erzeugen_kompakter_textboxen.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Schaltung DigiSparkCustomKeyboard</span><br>
-						<span class="smallabstract"><p>Nachdem ich neulich über
-den Prototypen und
-einige Probleme bei der Umsetzung des deutschen
-Tastatur-Mappings
-berichtete habe ich nun damit begonnen, die Schaltung dafür zu entwerfen.
+							<span class="w3-large">							Mein Open Source Manifest</span><br>
+						<span class="smallabstract"><p>Im Zuge des großen
+Log4J-Problems
+ist ja viel - auch viel dämliches -
+im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="schaltung_digisparkcustomkeyboard.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -438,35 +473,43 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
-							<span class="w3-large">							Asciinema in Markdown</span><br>
-							<span class="smallabstract"><p>Mein
-Static Site Generator
-kann ja bereits seit einiger Zeit mit Asciinema-Dateien umgehen und diese einbinden - ich war aber auf der Suche, diese Einbindung
-auch in Gitlab und/oder Github nutzen zu können...
+							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
+							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
+dWb+
+und
+EBCMS
+sowie für das Framework dmcc, das beispielsweise im
+Aviator
+und auch in
+dWb+
+zum Einsatz kommt auf Gitlab
+veröffentlicht
+habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
+die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="asciinema_markdown.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Erzeugen kompakter Textboxen</span><br>
-							<span class="smallabstract"><p>In einem Text Zeilenumbrüche einzufügen, um eine bestimmte Zeilenlänge nicht zu überschreiten ist trivial. Ebenso trivial ist
-es, einen Text so umzubrechen,  dass eine bestimmte Zeilenanzahl nicht überschritten wird - Wie bricht man aber die Zeilen automatisch um, wenn
-die resultierenden Textblöcke besonders kompakt sein sollen - also weder zu lange, noch zu viele Zeilen aufweisen sollen?
+							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
+							<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
+Custom Keyboard
+selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
+der Bastellösung mit dem Digispark wegkommen
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erzeugen_kompakter_textboxen.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Schaltung DigiSparkCustomKeyboard</span><br>
-							<span class="smallabstract"><p>Nachdem ich neulich über
-den Prototypen und
-einige Probleme bei der Umsetzung des deutschen
-Tastatur-Mappings
-berichtete habe ich nun damit begonnen, die Schaltung dafür zu entwerfen.
+							<span class="w3-large">							Mein Open Source Manifest</span><br>
+							<span class="smallabstract"><p>Im Zuge des großen
+Log4J-Problems
+ist ja viel - auch viel dämliches -
+im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="schaltung_digisparkcustomkeyboard.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

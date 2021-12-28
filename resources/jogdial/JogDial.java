@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 
 /*
-Copyright (c) 2013-2021.
+Copyright (c) 2013-2022.
 
 Juergen Key. Alle Rechte vorbehalten.
 
