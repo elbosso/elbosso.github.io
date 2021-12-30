@@ -115,7 +115,7 @@ Eine Definition für einen solchen Tatbestand könnte die folgende DDL-Anweisung
 (Ich habe hier ein
 <a href="https://technet.microsoft.com/de-de/library/ms186243(v=sql.105).aspx">Beispiel</a>
 ein wenig verallgemeinert):
-</p></p><pre>
+</p><pre>
 CREATE TABLE MyEmployees
 (
 EmployeeID integer,
@@ -126,9 +126,9 @@ DeptID integer,
 ManagerID int,
 PRIMARY KEY (EmployeeID));
 ALTER TABLE JDBCTESTUSER.MYEMPLOYEES ADD  FOREIGN KEY (MANAGERID) REFERENCES MYEMPLOYEES (EMPLOYEEID);
-</p><p></pre>
+<p></pre>
 Zum Testen fügen wir noch einige Datensätze in diese Tabelle ein:
-</p></p><pre>
+</p><pre>
 INSERT INTO MyEmployees VALUES (1, 'Ke', 'Sánchez', 'Chief Executive Officer',16,NULL);
 INSERT INTO MyEmployees VALUES (273, 'Bria', 'Welcker', 'Vice President of Sales',3,1);
 INSERT INTO MyEmployees VALUES (274, 'Stephe', 'Jiang', 'North American Sales Manager',3,273);
@@ -138,7 +138,7 @@ INSERT INTO MyEmployees VALUES (285, 'Syed', 'Abbas', 'Pacific Sales Manager',3,
 INSERT INTO MyEmployees VALUES (286, 'Lyn', 'Tsoflias', 'Sales Representative',3,285);
 INSERT INTO MyEmployees VALUES (16,  'David','Bradley', 'Marketing Manager', 4, 273);
 INSERT INTO MyEmployees VALUES (23,  'Mary', 'Gibso', 'Marketing Specialist', 4, 16);
-</p><p></pre>
+<p></pre>
 Damit ergibt sich dann der Inhalt der Tabelle (mit zwei verborgenen Spalten) in der sQLshell wie folgt:
   <img src="images/sQLshell/recursive_queries_conten_view.png"
 alt="Screenshot"
@@ -169,7 +169,7 @@ Erstellung einer rekursiven Abfrage mittels des
 </span>
 </p><p>
 Die daraus generierte Abfrage lautet wie folgt:
-</p></p><pre>
+</p><pre>
 SELECT MYEMPLOYEES1.FIRSTNAME AS MYEMPLOYEES_1_FIRSTNAME,
   MYEMPLOYEES1.LASTNAME AS MYEMPLOYEES_1_LASTNAME,
   MYEMPLOYEES2.FIRSTNAME AS MYEMPLOYEES_2_FIRSTNAME,
@@ -177,7 +177,7 @@ SELECT MYEMPLOYEES1.FIRSTNAME AS MYEMPLOYEES_1_FIRSTNAME,
 FROM JDBCTESTUSER.MYEMPLOYEES AS MYEMPLOYEES1
  LEFT JOIN JDBCTESTUSER.MYEMPLOYEES AS MYEMPLOYEES2
 ON MYEMPLOYEES1.MANAGERID=MYEMPLOYEES2.EMPLOYEEID;
-</p><p></pre>
+</pre><p>
 Das Ergebnis dieser Abfrage ist im folgenden Screenshot dargestellt - links sieht man Vor- und Nachname des jeweiligen Angestellten und
 rechts den seines Managers:
   <img src="images/sQLshell/recursive_queries_vc_result.png"
@@ -344,6 +344,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -356,7 +366,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -370,17 +380,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -415,6 +414,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -427,7 +436,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -441,17 +450,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

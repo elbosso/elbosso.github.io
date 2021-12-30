@@ -100,17 +100,17 @@ Interessant war für mich, dass man die Möglichkeit hat, einen solchen Service 
 gewisse Vorkehrungen, kann man das D-Bus-System dazu bewegen, dass es den betreffenden Service startet wenn man die erste Anfrage an
 ihn richtet. Nach meinen Erkenntnissen funktioniert das nur mit Session-Services, nicht mit System-Services. Alles was man tun muss, ist
 eine Service-Datei zu schreiben - beispielsweise <span class="mditalics">/usr/share/dbus-1/services/test.service</span>
-</p></p><pre>
+</p><pre>
 [D-BUS Service]
 Name=de.elbosso.Time
 Exec=/home/elbosso/time-dbus.py
-</p><p></pre>
+<p></pre>
 </p><p>
 Liegt die Python-Datei im angegebenen Pfad und ist sie ausführbar, startet sie das D-Bus-System sobald die erste Anfrage
 für diesen Service eingeht. Normalerweise enden D-Bus-Services nie (bzw. automatisch mit Ende der Session) - also habe ich noch
 eine weitere Operation hinzugefügt, die den Service beendet. Damit haben wir das Grundgerüst für einen Service, der über D-Bus
 gestartet wird und auch darüber beendet werden kann:
-</p></p><pre>
+</p><pre>
 #!/usr/bin/python3
 </p><p>
 import dbus
@@ -150,12 +150,12 @@ if __name__ == '__main__':
     loop = GLib.MainLoop()
     object = Time()
     loop.run()
-</p><p></pre>
+<p></pre>
 </p><p>
 Es ist möglich, in solchen Services polkit zu nutzen um für sensible Bereiche eine gültige Authentifizierung zu verlangen.
 Dazu muss man den Service selbst als <span class="mdbold">root</span> starten. Weiterhin muss eine entsprechende Konfiguration für polkit vorliegen -
 zum Beispiel <span class="mditalics">/usr/share/polkit-1/actions/de.elbosso.Time.policy</span>
-</p></p><pre>
+</p><pre>
 &lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;!DOCTYPE policyconfig PUBLIC
  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
@@ -176,10 +176,10 @@ zum Beispiel <span class="mditalics">/usr/share/polkit-1/actions/de.elbosso.Time
     &lt;/defaults>
   &lt;/action>
 &lt;/policyconfig>
-</p><p></pre>
+<p></pre>
 </p><p>
 Weiterhin benötigt ein D-Bus-Service, der von <span class="mdbold">root</span> gestartet werden soll eine Konfiguration - etwa <span class="mditalics">/etc/dbus-1/system.d/de.elbosso.Time.conf
-</p></p><pre>
+</p><pre>
 &lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
 "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
@@ -196,12 +196,12 @@ Weiterhin benötigt ein D-Bus-Service, der von <span class="mdbold">root</span> 
     &lt;allow send_interface="de.elbosso.Time"/>
   &lt;/policy>
 &lt;/busconfig>
-</p><p></pre>
+<p></pre>
 </p><p>
 Der Python-Code muss jetzt noch ein wenig angepasst werden - zunächst muss der System- und nicht der Session-Bus genutzt werden und
 dann muss natürlich der Service auch für mindestens eine Operation auch nach der Autorisierung fragen. Ich habe mich dafür entschieden,
 dass das Beenden des Service über eine D-Bus-Operation zwar weiterhin verfügbar ist, jedoch nur nach Autorisierung auch ausgeführt wird:
-</p></p><pre>
+</p><pre>
 #!/usr/bin/python3
 </p><p>
 import dbus
@@ -283,20 +283,21 @@ if __name__ == '__main__':
     loop = GLib.MainLoop()
     object = Time()
     loop.run()
-</p><p></pre>
+<p></pre>
 </p><p>
 Testen kann man den Service jeweils mittels folgender Kommandos beim Start über den Session-Bus:
-</p></p><pre>
+</p><pre>
 dbus-send --session --print-reply --dest="de.elbosso.Time" /Time de.elbosso.Time.CurrentTime
 dbus-send --session --print-reply --dest="de.elbosso.Time" /Time de.elbosso.Time.Quit
-</p><p></pre>
+<p></pre>
 </p><p>
 Und beim Start über den System-Bus:
-</p></p><pre>
+</p><pre>
 dbus-send --system --print-reply --dest="de.elbosso.Time" /Time de.elbosso.Time.CurrentTime
 dbus-send --system --print-reply --dest="de.elbosso.Time" /Time de.elbosso.Time.Quit
-</p><p></pre>
-</p>				</div>
+<p></pre>
+</p><p>
+aaa				</div>
 				<div class="w3-container w3-padding" id="links">
 					<hr/>
 					<h3>
@@ -477,6 +478,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -489,7 +500,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -503,17 +514,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -548,6 +548,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -560,7 +570,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -574,17 +584,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

@@ -131,53 +131,53 @@ definierten fachlichen Tabellen.
 Ich probierte die nachfolgend dokumentierten Schritte in einer PostgreSQL-Datenbank der Version
 9 aus. Zunächst benötigte ich eine Tabelle im physischen Datenmodell, die Informationen 
 zu den Tabellen im virtuellen Datenmodell zu halten. Bei mir sah diese Tabelle wie folgt aus:
-</p></p><pre>
+</p><pre>
 CREATE TABLE public.tablespec (
  id serial NOT NULL,
  name VARCHAR(255) , PRIMARY KEY (id));
-</p><p></pre>
+<p></pre>
 Daran schloss sich die Erzeugung der Tabelle im physischen Datenmodell an, die die Spezifikationen
 der  einzelnen Spalten des virtuellen Datenmodells speichern sollte:
-</p></p><pre>
+</p><pre>
 CREATE TABLE public.columnspec (
  id serial NOT NULL,
  name VARCHAR(255) ,
  tablespecref INTEGER REFERENCES tablespec (id) ,
  PRIMARY KEY (id));
-</p><p></pre>
+<p></pre>
 Schließlich fehlte noch die Tabelle, die die Daten aufnimmt, die in den Tabellen des virtuellen Datenmodells
 gespeichert werden sollten. Diese Tabelle ist wie folgt organisiert: jeder Spaltenwert in einer virtuellen
 Tabelle wird in einer Zeile dieser Tabelle gespeichert. Diese physische Tabelle enthält für jeden der im
 virtuellen Datenmodell unterstützten datentypen eine Spalte. Im Beispiel sind das zwei:
 Integer und String.
-</p></p><pre>
+</p><pre>
 CREATE TABLE public.rowcontents (
  id serial NOT NULL,
  logicalrow INTEGER NOT NULL,
  colspecref INTEGER REFERENCES columnspec (id) ,
  stringval VARCHAR(255) ,
  intval INTEGER , PRIMARY KEY (id));
-</p><p></pre> 
+<p></pre> 
 Die Spalte logicalrow spielt hierbei die Rolle der Rownumber in traditionellen 
 Datenbanksystemen und legt zusammen mit colspecref fest, welche der Datensätze in dieser Tabelle zur gleichen
 Zeile im virtuellen Datenmodell gehören:
-</p></p><pre>
+</p><pre>
 CREATE UNIQUE INDEX tablefirstrows_idx ON rowcontents (colspecref, logicalrow);
-</p><p></pre>
+<p></pre>
 Interessanterweise lässt sich ein UNIQUE-Constraint im virtuellen Datenmodell sehr einfach 
 über folgendes Statement realisieren:
-</p></p><pre>
+</p><pre>
 CREATE UNIQUE INDEX my_partial_ix ON rowcontents (intval) WHERE (colspecref = 6);
-</p><p></pre>
+<p></pre>
 Wie kann man dieses virtuelle Datenmodell mittels traditioneller Werkzeuge nutzen?
 Ein Select-Statement, das den Inhalt der virtuellen Zeilen einer virtuellen Tabelle
 abfragt, lässt sich wie folgt realisieren:
-</p></p><pre>
+</p><pre>
 select A.intval,B.stringval from (select
 logicalrow,intval from rowcontents where colspecref=2) AS A
 left join (select logicalrow,stringval from rowcontents where
 colspecref=1);
-</p><p></pre>
+</pre><p>
 Solche Abfragen können als Grundlage der Definition von normalen Datenbank-Views 
 dienen. Damit kann man auf die Inhalte der virtuellen Tabellen mit Standard-Reporting-Werkzeugen zugreifen.
 </p><p>
@@ -307,6 +307,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -319,7 +329,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -333,17 +343,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -378,6 +377,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -390,7 +399,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -404,17 +413,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

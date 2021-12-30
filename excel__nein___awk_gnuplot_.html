@@ -97,7 +97,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 					<h5>Updates</h5>
 					<ul>
 						<li>
-							<a href="#61">
+							<a href="#60">
 								17. Dezember 2020
 							</a>
 						</li>
@@ -127,143 +127,143 @@ mittels <span class="mdcode">ls -l</span> sorgte für Input. Ich musste die erst
 dafür sorgte <span class="mdcode">tail -n +2</span>.
 </p><p>
 Als erstes wird das Feld mit der Dateigröße in jeder Zeile der Ausgabe ausgegeben:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk '{print $5}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Die Anzahl der Zeilen kann man mittels <span class="mdcode">wc</span> ermitteln:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| wc -l
-</p><p></pre>
+<p></pre>
 </p><p>
 Das funktioniert aber auch mit AWK:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk 'END{print NR}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Man kann die extrahierten Daten jeder Zeile durch eine vorangestellte Zeilennummer ergänzen:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk '{print NR":"$5}'
-</p><p></pre>
+<p></pre>
 </p><p>
 <h1>Statistik</h1>
 </p><p>
 Nun ein wenig Statistik: Die Berechnung des Durchschnitts (Mittelwerts) der Daten in Spalte 5 erfolgt so:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk 'BEGIN{sum=0.0}{sum+=$5}END{printf("Average: %f\n",sum/NR)}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Variablen werden von AWK immer auf <span class="mdcode">0</span> initialisiert - daher kann man im vorigen Statement die <span class="mdcode">BEGIN</span> Klausel auch weglassen. Es ist
 auch möglich, Variablen auf der Kommandozeile zu vereinbaren und dem Skript zu  übergeben:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 '{sum+=$N}END{printf("Average: %f\n",sum/NR)}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Wir berechnen zusätzlich die Standardabweichung:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '{sum+=$N;sumsq+=$N^2}END{printf("Average: %f Std deviation: %f\n",sum/NR,sqrt((sumsq-sum^2/NR)/NR))}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Dieses Mal wird der Median bestimmt:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk \
 '{a[i++]=$1}END{x=int((i+1)/2);if (x &lt; (i+1)/2) y=(a[x-1]+a[x])/2; else y=a[x-1]; printf("Median: %f\n",y)}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Möchte man erfahren, ab welchem Wert ein bestimmter Prozentsatz der Eingaben jeweils unterhalb dieses Wertes liegen (Percentile), kann man das ebenfalls mittels AWK herausfinden:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '{print $N}'|sort -n| awk '{s[NR-1]=$N} END{for(i=0.1;i&lt;=1.0;i+=0.1){printf("%d %f\n",i*100,s[int(NR*i-0.5)])}}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Man kann mittels AWK auch Histogramme erzeugen:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk -v DELTA=150000 \
 'BEGIN{delta = (DELTA == "" ? 10000 : DELTA)} \
 {bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)} \
 END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf("%0.1f %0.1f %d\n"), beg, end, cnt[bucketNr];beg = end;}}'>hist.dat
-</p><p></pre>
+<p></pre>
 </p><p>
 <h1>Gnuplotting</h1>
 </p><p>
 In diesem Fall sollten wir uns auf den interessanten Teil des Histogrammes beschränken - das zeigt auch gleich, dass man mehrere
 Variablen auf der Kommandozeile vereinbaren kann:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk -v DELTA=1000 -v MAX=15001  \
 'BEGIN{delta = (DELTA == "" ? 10000 : DELTA)} \
 {if($0&lt;15001){bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)}} \
 END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf "%0.1f %0.1f %d\n", beg, end, cnt[bucketNr];beg = end;}}'>hist.dat
-</p><p></pre>
+<p></pre>
 </p><p>
 Man kann dieses Histogramm direkt mit Gnuplot im Terminal darstellen - die Größe des Plots passt sich automatisch der Größe des Terminals an...
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 '{print $N}'|sort -n| awk -v DELTA=1000 -v MAX=15001  \
 'BEGIN{delta = (DELTA == "" ? 10000 : DELTA)} \
 {if($0&lt;MAX){bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets > bucketNr ? numBuckets : bucketNr)}} \
 END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf "%0.1f %0.1f %d\n", beg, end, cnt[bucketNr];beg = end;}}' \
 |gnuplot -p -e "set terminal dumb size $(tput cols), $(tput lines) enhanced; set autoscale;set style data histogram;set style fill solid;plot '-' using 3:xtic(1)"
-</p><p></pre>
+<p></pre>
 </p><p>
 <h1>Bedingungen</h1>
 </p><p>
 Es ist möglich, nur bestimmte Zellen in der Berechnung zu benutzen - Man kann zum Beispiel anhand regulärer Ausdrücke bestimmte Zeilen ausschließen:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '{if($9 ~ /^m/){sum+=$N;sumsq+=$N^2;count++}} \
 END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Es ist dabei auch möglich, die Groß- und Kleinschreibung zu ignorieren:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '{IGNORECASE = 1;if($9 ~ /^m/){sum+=$N;sumsq+=$N^2;count++}} \
 END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Eine alternative Schreibweise dafür:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 'IGNORECASE = 1 &amp;&amp; $9 ~ /^m/{sum+=$N;sumsq+=$N^2;count++} \
 END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Es ist natürlich auch möglich, die in der Berechnung zu berücksichtigenden Zeilen einfach über ihre Zeilennummern zu bestimmen:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '{if(NR >9 &amp;&amp; NR&lt;21){sum+=$N;sumsq+=$N^2;count++}} \
 END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Eine alternative Schreibweise dafür:
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| awk -v N=5 \
 '(NR >9 &amp;&amp; NR&lt;21){sum+=$N;sumsq+=$N^2;count++} \
 END{printf("Average: %f Std deviation: %f Count: %d\n",sum/count,sqrt((sumsq-sum^2/count)/count),count)}'
-</p><p></pre>
+<p></pre>
 </p><p>
 Es ist sogar möglich, Werte über den Vergleich von Daten (Zeitpunkten) zu filtern:
-</p></p><pre>
+</p><pre>
 ls -lt --time-style=long-iso /usr/bin|awk -v date=2020-06-09 'date&lt;$6{print $8}'
-</p><p></pre>
+<p></pre>
 </p><p>
 <h1>Funktionen</h1>
 </p><p>
 Es gibt auch Möglichkeiten, Funktionen zu definieren - während <span class="mdcode">int(n)</span> einfach nur die Nachkommastellen abschneidet, kann man in AWK eine korrekte Rundungsfunktion wie folgt definieren:
-</p></p><pre>
+</p><pre>
 func round(n)
 {
   return int(n+0.5)
 }
-</p><p></pre>
+<p></pre>
 </p><p>
 Eine Funktion für die nächstgrößere ganze Zahl ist ebenfalls sehr einfach zu schaffen:
-</p></p><pre>
+</p><pre>
 function ceil(n)
 {
   return n%1 ? int(n)+1 : n
 }
-</p><p></pre>
+<p></pre>
 </p><p>
 <h1>Cheat-Sheet</h1>
 </p><p>
@@ -280,18 +280,17 @@ erstellt habe auch ausdrucken...
 <dt><img src="images/mime/Oxygen480-mimetypes-application-pdf_48.png"></dt><dd><a href="resources/awkspreadsheet_cheatsheet.pdf">Cheat-Sheet</a></dd>
 </dl>
 </p><p>
-<h3><a name="61">Aktualisierung vom 17. Dezember 2020</a></h3><div class="update">Eine weitere Idee ist das Einfärben einzelner Abschnitte (Zellen) in einer Datei - wieder am Beispiel eines
+<h3><a name="60">Aktualisierung vom 17. Dezember 2020</a></h3><div class="update">Eine weitere Idee ist das Einfärben einzelner Abschnitte (Zellen) in einer Datei - wieder am Beispiel eines
 Dateisystemlistings mittels
 <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI-Escape-Codes.</a>
 Hier wird die Spalte mit der Dateigröße in Bytes farblich hervorgehoben, wenn der jeweilige Wert
 größer als eine festgelegte Schwelle ist. Das Beispiel funktioniert nur in Terminals, die Farben darstellen und ANSI-Escape-Sequenzen
 interpretieren können - beispielsweise <span class="mdcode">xterm.</span>
-</p></p><pre>
+</p><pre>
 ls -l /usr/bin |tail -n +2| \
 awk '{if($5>999999)print NR"\t"$1"\t"$2"\t"$3"\t"$4"\t\033[1;31m"$5"\033[0m"; \
 else print NR"\t"$1"\t"$2"\t"$3"\t"$4"\t"$5;}'
-</p><p></pre>
-</p><p>
+</pre><p>
 Das Cheat-Sheet wurde natürlich entsprechend erweitert...
 </div>
 </p>				</div>
@@ -312,9 +311,8 @@ Das Cheat-Sheet wurde natürlich entsprechend erweitert...
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht...
-</p></p>
-						</div>
+<p>Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht...
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="gps__nmea__tracks_gnuplot_animationen_verarbeiten.html#content">Öffnen</a>
@@ -334,11 +332,10 @@ Das Cheat-Sheet wurde natürlich entsprechend erweitert...
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe bereits darüber berichtet, dass man in vielen Fällen
+<p>Ich habe bereits darüber berichtet, dass man in vielen Fällen
 AWK
 den Vorzug vor Excel und ähnlichem geben kann (und sollte!) - hier nun einige weitere Inspirationen dahingehend
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="awk_linksammlung.html#content">Öffnen</a>
@@ -358,13 +355,12 @@ den Vorzug vor Excel und ähnlichem geben kann (und sollte!) - hier nun einige w
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich bin neulich bei Mastodon über eine Anfrage gestolpert, wie man online schnell eine graphische Darstellung statistischer Daten mit
+<p>Ich bin neulich bei Mastodon über eine Anfrage gestolpert, wie man online schnell eine graphische Darstellung statistischer Daten mit
 Mittelwert usw. anfertigen könnte. Ich gab dazu einige Suchparameter ergänzt um den Schlüsselbegriff
 "Gnuplot"
 ein und
 fand sofort einen Artikel, der erklärte, wie man das angefragte Szenario mittels Gnuplot umsetzen könnte.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="gnuplot_statistik.html#content">Öffnen</a>
@@ -384,12 +380,11 @@ fand sofort einen Artikel, der erklärte, wie man das angefragte Szenario mittel
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Nachdem ich
+<p>Nachdem ich
 neulich
 mein AWK-Kochbuch um ein neues Rezept erweitert habe mit dem es möglich ist, einzelne Felder einer Datei
 regelbasiert mittels Ansi-Escape-Sequenzen unterschiedlich einzufärben, hat mich der Ansi-Steuercode-Virus wieder voll erwischt...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="renderer_generierte_dungeons_ansi_steuercodes.html#content">Öffnen</a>
@@ -516,6 +511,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -528,7 +533,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -542,17 +547,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -587,6 +581,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -599,7 +603,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -613,17 +617,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

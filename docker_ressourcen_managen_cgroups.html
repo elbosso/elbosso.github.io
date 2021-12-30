@@ -111,7 +111,7 @@ Swarm-Mode von Docker benötigen um wirksam zu werden.
 </p><p>
 Zum Test habe ich mich im Internet inspirieren lassen und ein kleines
 Dockerfile geschrieben:
-</p></p><pre>
+</p><pre>
 FROM ubuntu:latest
 </p><p>
 RUN apt-get update &amp;&amp; apt-get install -y stress
@@ -119,13 +119,13 @@ RUN apt-get update &amp;&amp; apt-get install -y stress
 #CMD stress -i $IOS
 #CMD stress -c $CPUS
 CMD stress -m $MEMS --vm-bytes ${VM_BYTES}M
-</p><p></pre>
+<p></pre>
 </p><p>
 Das aktuelle <span class="mdcode">CMD</span> dient zum Test ob die Einschränkung des benutzten Arbeitsspeichers korrekt funktioniert - da erste auskommentieret <span class="mdcode">CMD</span> kann
 dazu benutzt werden, die Begrenzung des Rechenzeitverbrauchs zu testen.
 </p><p>
 Diesen Docker-Container startete ich anschließend mit folgender <span class="mditalics">docker-compose.yml</span> Datei:
-</p></p><pre>
+</p><pre>
 version: '2.2'
 </p><p>
 services:
@@ -150,8 +150,7 @@ services:
     cpus: 2
     cpuset: '0-3'
     mem_limit: 5000000000
-</p><p></pre>
-</p><p>
+</pre><p>
 Und ich konnte feststellen, dass die Ressourcenbeschränkungen für Rechenzeit und Arbeitsspeicher tatsächlich über die Einträge
 in <span class="mditalics">docker-compose.yml</span> steuerbar waren (Ändert man <span class="mdcode">mem_limit</span> zum Beispiel auf <span class="mdcode">3000000000</span>, wird <span class="mditalics">stress</span> sich sofort beenden, weil
 es den gewünschten und über <span class="mdcode">VM_BYTES</span> eingestellten Bereich von 4096 MegaByte nicht allokieren kann).
@@ -173,11 +172,10 @@ es den gewünschten und über <span class="mdcode">VM_BYTES</span> eingestellten
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Wieder zwei Neuzugänge in meinem
+<p>Wieder zwei Neuzugänge in meinem
 Docker-Zoo:
 dieses Mal handelt es sich um zwei Services zur Unterstützung von Software-Tests.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="wiremock_http_s__echo_docker_container.html#content">Öffnen</a>
@@ -304,6 +302,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -316,7 +324,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -330,17 +338,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -375,6 +372,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -387,7 +394,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -401,17 +408,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

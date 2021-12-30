@@ -121,19 +121,19 @@ ADS-B-Receiver benutzen...
 festgelegte Einschränkung, dass das System in einem Container laufen sollte - dazu musste
 das System auf dem Host davon überzeugt werden, das Gerät an den Container durchzureichen.
 Ich schaffte das mittels folgender Zeilen in der Konfigurationsdatei des Containers:
-</p></p><pre>
+</p><pre>
 # RTL-SDR device
 lxc.cgroup.devices.allow = c 189:* rwm
 lxc.mount.entry = /dev/bus/usb/001 dev/bus/usb/001 none bind,optional,create=dir
 lxc.mount.entry = /dev/rtl_sdr dev/rtl_sdr none bind,optional,create=file
-</p><p></pre>
+<p></pre>
 </p><p>
 Dabei ist speziell die Major/minor number gegebenenfalls anzupassen und auch der Name
 des USB-Buses - das folgende Kommando kann dabei helfen:
-</p></p><pre>
+</p><pre>
 #auf dem Host!
 ls -lisah /sys/dev/*|grep usb
-</p><p></pre>
+<p></pre>
 </p><p>
 Das vollständige Skript zur Einrichtung des Systems ist in folgendem
 <a href="https://gist.github.com/elbosso/eb9e08fa2bbd235769f18ef68da1440a">Gist</a>
@@ -142,11 +142,11 @@ zu finden.
 Wichtig hierbei war, dass ich auf dem Host-System die Benutzung des Sticks als
 DVB-Receiver verbieten musste (Linux und speziell Ubuntu machens dem Nutzer leicht - ich
 bin aber einer der wenigen, der den Haupteinsatzzweck des Sticks nicht benötigt - daher...)
-</p></p><pre>
+</p><pre>
 #auf dem Host!
 sudo printf 'blacklist dvb_usb_rtl28xxu\nblacklist \
 rtl2832\nblacklist rtl2830' > /etc/modprobe.d/nortl.conf
-</p><p></pre>
+<p></pre>
 </p><p>
 Das Skript installiert einige Dinge, die für die reine Funktionalität als ADS-B-Receiver nicht unbedingt benötigt werden:
 wget und mono-complete werden für die Installation des
@@ -185,7 +185,8 @@ Natürlich sind auch noch andere Wege denkbar: Der Virtual Radar Server beispiel
 Flugbewegungen als json über das Web-Frontend an.
 </p><p>
 Hier nun noch einige Links, die mir bei der Inbetriebnahme geholfen haben:
-</p>				</div>
+</p><p>
+aaa				</div>
 				<div class="w3-container w3-padding" id="links">
 					<hr/>
 					<h3>
@@ -286,10 +287,9 @@ Hier nun noch einige Links, die mir bei der Inbetriebnahme geholfen haben:
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe herausfinden wollen, ob es mir mit ein paar zu Hause herumliegenden Teilen möglich wäre,
+<p>Ich habe herausfinden wollen, ob es mir mit ein paar zu Hause herumliegenden Teilen möglich wäre,
 eine Satellitenuhr zu bauen, die ich dann im Heimnetz als NTP-Server einsetzen könnte.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="ntp_server_raspi_em406a.html#content">Öffnen</a>
@@ -309,9 +309,8 @@ eine Satellitenuhr zu bauen, die ich dann im Heimnetz als NTP-Server einsetzen k
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Vorbereitung zum Einstieg in ernsthafte und langfristige Beobachtung von Luftverkehrsmitteln hat begonnen
-</p></p>
-						</div>
+<p>Vorbereitung zum Einstieg in ernsthafte und langfristige Beobachtung von Luftverkehrsmitteln hat begonnen
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="ads_b_langzeittest.html#content">Öffnen</a>
@@ -331,9 +330,8 @@ eine Satellitenuhr zu bauen, die ich dann im Heimnetz als NTP-Server einsetzen k
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Weitere Gedanken zu ADS-B Daten und deren Nutzung
-</p></p>
-						</div>
+<p>Weitere Gedanken zu ADS-B Daten und deren Nutzung
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="ads_b_zeitreihendatenbanken.html#content">Öffnen</a>
@@ -353,14 +351,13 @@ eine Satellitenuhr zu bauen, die ich dann im Heimnetz als NTP-Server einsetzen k
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Nachdem ich vor einiger Zeit
+<p>Nachdem ich vor einiger Zeit
 zwei Appender für Log4J 1.x
 vorgestellt habe, habe ich - motiviert durch meine Experimente mit
 Raspi und ADS-B
 - einen weiteren verfasst - diesmal zum Schreiben der Daten in eine
 Zeitreihendatenbank.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="influxdb_appender_log4j_1_x.html#content">Öffnen</a>
@@ -487,6 +484,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -499,7 +506,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -513,17 +520,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -558,6 +554,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -570,7 +576,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -584,17 +590,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

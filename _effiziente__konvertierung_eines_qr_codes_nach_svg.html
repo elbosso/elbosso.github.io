@@ -115,7 +115,7 @@ erstellt, muss man die auch für Bitmap-Formate erst umwandeln.
 Man könnte dieses Bitmap-Bild dann nehmen und in einen GraphicsContext rendern, der von 
 <a href="https://xmlgraphics.apache.org/batik/">Batik</a> zur Verfügung
 gestellt wird - damit erhält man dann eine SVG-Graphik:
-</p></p><pre>
+</p><pre>
 try
 {
 	org.w3c.dom.DOMImplementation domImpl = org.apache.batik.dom.svg.SVGDOMImplementation.getDOMImplementation();
@@ -145,7 +145,7 @@ catch (java.lang.Throwable t)
 {
 	t.printStackTrace();
 }
-</p><p></pre>
+<p></pre>
 Das bedeutet aber, dass die Bilddaten als Rasterimage in das SVG eingebunden werden - und sie 
 damit nicht mehr verlustfrei skaliert werden können. Daher kann man den Zwischenschritt der Erzeugung
 der Bitmap überspringen und direkt in den GraphicsContext zeichnen.
@@ -159,7 +159,7 @@ Java hat viele Bibliotheken an Bord - daher dachte ich mir: Das muss doch mit Bo
 Siehe da - es geht: Man kann herausfinden, ob zwei 
 <a href="http://docs.oracle.com/javase/8/docs/api/java/awt/geom/Area.html">Areas</a> sich überlappen und falls dem so ist,
 beide vereinigen:
-</p></p><pre>
+</p><pre>
 //com.google.zxing.common.BitMatrix bitMatrix=...;
 java.util.LinkedList&lt;java.util.List&lt;java.awt.Shape>> shapes = new java.util.LinkedList();
 for (int i = 0; i &lt; dimension.width; i++)
@@ -232,11 +232,11 @@ for (int i = 0; i &lt; end; ++i)
 	}
 	shapes.addAll(old);
 }
-</p><p></pre>
+<p></pre>
 Wenn man die Erzeugung des Polygons ein wenig geschickt anstellt, findet man heraus, dass
 damit tatsächlich eine sehr viel kompaktere Möglichkeit der Darstellung verlustfrei skalierbarer QR-Codes 
 herauskommt.
-</p></p><pre>
+</p><pre>
 private java.awt.Shape createShape(double x, double y, double l)
 {
 	double e = 0.001;
@@ -248,7 +248,7 @@ private java.awt.Shape createShape(double x, double y, double l)
 	p.closePath();
 	return p;
 }
-</p><p></pre>
+</pre><p>
 Hier zwei Beispiele: Beide repräsentieren denselben QR-Code, eine davon ist unkomprimiert und eine
 zeigt die Möglichkeiten, wenn zusammenhängende Polygone vereinigt werden.
 </p><p>
@@ -275,10 +275,9 @@ zeigt die Möglichkeiten, wenn zusammenhängende Polygone vereinigt werden.
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Einige neue Generatoren wurden für das
+<p>Einige neue Generatoren wurden für das
 Framework zur Erzeugung von Testdaten geschaffen.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="neue_datengeneratoren_iii.html#content">Öffnen</a>
@@ -298,15 +297,14 @@ Framework zur Erzeugung von Testdaten geschaffen.
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Wie bereits in
+<p>Wie bereits in
 mehreren
 vorhergehenden
 Artikeln
 beschrieben, beschäftige ich mich hin und wieder mit QR-Codes. 
 Nun habe ich die Möglichkeit, solche Codes in beliebige Bilder einzubetten,
 in einer interaktiven Anwendung einfacher zugänglich gemacht...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="interaktive_anwendung_zur_einbettung_qr_codes.html#content">Öffnen</a>
@@ -433,6 +431,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -445,7 +453,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -459,17 +467,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -504,6 +501,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -516,7 +523,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -530,17 +537,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

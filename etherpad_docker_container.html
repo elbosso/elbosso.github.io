@@ -112,7 +112,7 @@ hinzugefügt - nunmehr noch einen weiteren...
 <a href="neue_dienste_docker_zoo.html">Zoo</a>
 aufgenommen. Das nachfolgende Docker-File sorgt bei mir dafür, dass sich
 Etherpad hinter Traefik als Dienst im Netzwerklabor einrichtet und von allen Endgeräten ausnutzbar ist:
-</p></p><pre>
+</p><pre>
 version: "3.1"
 services:
   etherpad:
@@ -162,10 +162,10 @@ secrets:
     file: ./crypto/javax.persistence.jdbc.password_FILE
   ADMIN_PASSWORD_FILE:
     file: ./crypto/ADMIN_PASSWORD_FILE
-</p><p></pre>
+<p></pre>
 </p><p>
 Das entsprechende Environment für <span class="mdbold">etherpad</span> sieht wie folgt aus:
-</p></p><pre>
+</p><pre>
 DB_TYPE=postgres
 DB_HOST=etherpad_db
 DB_PORT=5432
@@ -174,7 +174,7 @@ DB_USER=etherpad
 NODE_ENV=production
 ADMIN_PASSWORD=&lt;change_me>
 &lt;USER>_PASSWORD=&lt;change_me>
-</p><p></pre>
+<p></pre>
 </p><p>
 Der Nutzername für den nichtprivilegierten Nutzer ist außerdem in den <span class="mditalics">settings.json</span> anzupassen, die über
 ein Volume in den Container gemounted werden müssen. Die Passwörter für beide Nutzer müssen im Environment
@@ -184,11 +184,10 @@ Natürlich ist es möglich, weitere unprivilegierte Nutzer anzulegen.
 Es ist in der vorliegenden Konfiguration aber auch einfach möglich, das System ohne Authentifizierung zu nutzen...
 </p><p>
 Das entsprechende Environment für <span class="mdbold">etherpad_db</span> sieht wie folgt aus:
-</p></p><pre>
+</p><pre>
 POSTGRES_USER=etherpad
 POSTGRES_DB=etherpad
-</p><p></pre>
-</p>				</div>
+</pre>				</div>
 				<div class="w3-container w3-padding" id="referers">
 				<h3>
 					Artikel, die hierher verlinken
@@ -206,14 +205,13 @@ POSTGRES_DB=etherpad
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich berichtete neulich über weiteren Zuwachs in meinem
+<p>Ich berichtete neulich über weiteren Zuwachs in meinem
 Docker-Zoo.
 Ich habe hier auch verschiedentlich über
 xpra
 berichtet - das Gnu-Screen-Äquivalent für X11.
 Nun habe ich versucht beides zu verbinden
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="xpra_docker.html#content">Öffnen</a>
@@ -340,6 +338,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -352,7 +360,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -366,17 +374,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -411,6 +408,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -423,7 +430,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -437,17 +444,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

@@ -126,23 +126,23 @@ werden nicht in InfluxDB geschrieben und beim Test sieht man, dass die neuen Wer
 </p><p>
 Wie habe ich überhaupt die neuen Performance-Counter gefunden, die ich überwachen wollte? Nun, ich habe folgenden Code
 ausgeführt (Powershell), der die im System verfügbaren auflistet und mir dann interessante herausgesucht:
-</p></p><pre>
+</p><pre>
 Get-Counter -List "*" | Select-Object Paths,PathsWithInstances | ConvertTo-Json
-</p><p></pre>
+<p></pre>
 </p><p>
 Ich habe auch die Counter von der Powershell aus ausgelesen - das funktionierte prima:
-</p></p><pre>
+</p><pre>
 Get-Counter "\Arbeitsspeicher\Verfügbare Bytes"
-</p><p></pre>
+<p></pre>
 </p><p>
 Mit der entsprechenden Konfiguration in Telegraf:
-</p></p><pre>
+</p><pre>
 [[inputs.win_perf_counters.object]]
 ObjectName= "Arbeitsspeicher"
 Counter = ["Verfügbare Bytes"]
 Instances = ["------"]
 Measurement = "win_mem"
-</p><p></pre>
+<p></pre>
 </p><p>
 War aber wieder kein Wert auszulesen. Ich sah mir irgendwann den
 <a href="https://github.com/influxdata/telegraf/blob/master/plugins/inputs/win_perf_counters/win_perf_counters.go">Quellcode</a>
@@ -153,7 +153,7 @@ aber als Stolperstein, dass keine einfache Methode existiert, herauszufinden, wi
 </p><p>
 Glücklicherweise hatte ich bei meinen Powershell-Experimenten Namen gesehen, bei denen ich mir sicher war, dass ich
 die englische Entsprechung erraten könnte - sie waren System\Prozesse und System\Threads. Damit hatte ich drei Testfälle:
-</p></p><pre>
+</p><pre>
   [[inputs.win_perf_counters.object]]
     # Example query where the Instance portion must be removed to get data back,
     # such as from the Paging File object.
@@ -163,10 +163,10 @@ die englische Entsprechung erraten könnte - sie waren System\Prozesse und Syste
     ]
     Instances = ["------"]
     Measurement = "win_sys"
-</p><p></pre>
+<p></pre>
 </p><p>
 Das funktionierte - glücklicherweise war die Übersetzugn nicht so weit gegangen, das Konzept "Fäden" zu nennen...
-</p></p><pre>
+</p><pre>
   [[inputs.win_perf_counters.object]]
     # Example query where the Instance portion must be removed to get data back,
     # such as from the Paging File object.
@@ -176,10 +176,10 @@ Das funktionierte - glücklicherweise war die Übersetzugn nicht so weit gegange
     ]
     Instances = ["------"]
     Measurement = "win_sys"
-</p><p></pre>
+<p></pre>
 </p><p>
 Das funktionierte nicht - in der Powershell konnte ich mittels dieses Namens aber den Counter auslesen
-</p></p><pre>
+</p><pre>
   [[inputs.win_perf_counters.object]]
     # Example query where the Instance portion must be removed to get data back,
     # such as from the Paging File object.
@@ -189,8 +189,7 @@ Das funktionierte nicht - in der Powershell konnte ich mittels dieses Namens abe
     ]
     Instances = ["------"]
     Measurement = "win_sys"
-</p><p></pre>
-</p><p>
+</pre><p>
 Das funktionierte dann wieder. Jetzt schien also alles wirklich darauf hinauszulaufen, dass ich die mich interessierenden
 Performance Counter identifizieren und dann die korrepondierenden Namen in englicher Sprache herausfinden musste, um
 Telegraf dann korrekt zu konfigurieren. Bevor jetzt jemand sagt: "Das ist doch Open Source - stell doch einfach ein Issue ein!" -
@@ -327,6 +326,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -339,7 +348,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -353,17 +362,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -398,6 +396,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -410,7 +418,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -424,17 +432,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

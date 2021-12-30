@@ -121,7 +121,7 @@ Grafana überwacht werden kann:
 und die <span class="mditalics">telegraf.conf</span> entsprechend erweitert:
 </p><p>
 cpufreqs.sh
-</p></p><pre>
+</p><pre>
 #!/bin/bash
 </p><p>
 HOST=$(hostname)
@@ -133,10 +133,10 @@ do
 echo "cpu_freq,host=${HOST},dev=core$counter frequency=$(cpufreq-info -f $counter)"
 ((counter++))
 done
-</p><p></pre>
+<p></pre>
 </p><p>
 voltages.sh
-</p></p><pre>
+</p><pre>
 #!/bin/bash
 </p><p>
 HOST=$(hostname)
@@ -150,10 +150,10 @@ echo "voltages,host=${HOST},dev=$(cat /sys/class/regulator/regulator.$counter/na
 fi
 ((counter++))
 done
-</p><p></pre>
+<p></pre>
 </p><p>
 telegraf.conf
-</p></p><pre>
+</p><pre>
 [[inputs.file]]
   files = ["/sys/class/thermal/thermal_zone0/temp"]
   name_override = "cpu_temperature"
@@ -169,8 +169,7 @@ telegraf.conf
   commands = [ "/bin/bash /opt/telegraf/cpufreqs.sh" ]
   timeout = "10s"
   data_format = "influx"
-</p><p></pre>
-</p>				</div>
+</pre>				</div>
 				<div class="w3-container w3-padding" id="referers">
 				<h3>
 					Artikel, die hierher verlinken
@@ -188,13 +187,12 @@ telegraf.conf
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe hier schon verschiedentlich über
+<p>Ich habe hier schon verschiedentlich über
 Xpra
 berichtet und darüber, warum ich es für eine gute Idee halte so etwas wie
 Gnu Screen
 auch für graphische Anwendungen zu haben.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="xpra__firefox_1gb_arm_rechner.html#content">Öffnen</a>
@@ -214,11 +212,10 @@ auch für graphische Anwendungen zu haben.
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Nachdem ich mich in den letzten Artikeln hauptsächlich um die
+<p>Nachdem ich mich in den letzten Artikeln hauptsächlich um die
 Infrastruktur
 meines Docker-Zoos gekümmert habe ist nun eine weitere Anwendung hinzugekommen...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="lufi_docker_zoo.html#content">Öffnen</a>
@@ -238,14 +235,13 @@ meines Docker-Zoos gekümmert habe ist nun eine weitere Anwendung hinzugekommen.
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Nachdem eins meiner
+<p>Nachdem eins meiner
 Raids
 neulich einen Check durchführen wollte habe ich überlegt, ob man den Fortschritt dabei (oder
 bei einem Rebuild) mittels Telegraf in
 Grafana
 abbilden könnte.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="monitoring_raid_rebuild_grafana.html#content">Öffnen</a>
@@ -265,10 +261,9 @@ abbilden könnte.
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich fasse zunächst mal das Szenario zusammen: DNS komt über DHCP und der DHCP-Server ist nicht in der Lage (oder
+<p>Ich fasse zunächst mal das Szenario zusammen: DNS komt über DHCP und der DHCP-Server ist nicht in der Lage (oder
 kann nicht so konfiguriert werden) ein oder mehrere DNS Fallbacks mitzuschicken
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="dns_fallback_ohne_ip_adress_sharing.html#content">Öffnen</a>
@@ -395,6 +390,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -407,7 +412,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -421,17 +426,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -466,6 +460,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -478,7 +482,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -492,17 +496,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

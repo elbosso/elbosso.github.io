@@ -97,7 +97,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 <a href="http://blog.leahhanson.us/post/julia/julia-introspects.html">Julia,</a>
 können wir mittels Introspection ansehen, was für Code LLVM aus unseren Beispielen zaubert. Dazu definieren wir zunächst wieder die zwei Varianten
 unseres max-Beispiels:
-</p></p><pre>
+</p><pre>
 function max(a,b)
     if(a>b)
         return a
@@ -108,9 +108,9 @@ end
 function max1(a,b)
     return a*(a>b)+b*(a&lt;=b)
 end
-</p><p></pre>
+<p></pre>
 Mittels <span class="mdcode">code_native(max,(Int,Int))</span> bzw <span class="mdcode">code_native(max1,(Int,Int))</span> können wir uns nun ansehen, was LLVM für Code daraus produziert - zunächst wieder die "normale" Variante:
-</p></p><pre>
+</p><pre>
 code_native(max,(Int,Int))
         .text
 Filename: promotion.jl
@@ -123,9 +123,9 @@ Source line: 239
         movq    %rdi, %rax
         popq    %rbp
         ret
-</p><p></pre>
+<p></pre>
 Und die branchless-Variante:
-</p></p><pre>
+</p><pre>
 code_native(max1,(Int,Int))
         .text
 Filename: none
@@ -142,10 +142,10 @@ Source line: 2
         addq    %rcx, %rax
         popq    %rbp
         ret
-</p><p></pre>
+<p></pre>
 Hier zeigt sich wieder, was wir bereits mit GCC auf x86 und ARM festgestellt haben: Triviale Beispiele behandelt der Compiler
 effektiver als es unser Code aus der Manufaktur kann. Wie sieht es aber mit dem nicht mehr so trivialen Beispiel aus?
-</p></p><pre>
+</p><pre>
 function nontriv(a)
     for i in 1:length(a)
         pointedAt=a[i]
@@ -162,13 +162,13 @@ function nontriv1(a)
         a[i]=pointedAt-(32*x)
     end
 end
-</p><p></pre>
+<p></pre>
 </p><p>
 Hier zeigt sich bei Aufruf von <span class="mdcode">code_native(nontriv,(Tuple{Array{Int,1}}))</span> zunächst erst einmal, dass es offenbar doch keine
 gute Idee war, die beiden Compiler mittels Abkürzung über Julias Introspect-Mechanismus vergleichen zu wollen: Dieser Mechanismus
 zeigt nicht einfach nur den Maschinencode, sondern tut offenbar noch mehr - anders ist nicht zu erklären, dass verschiedene Quelltext-Zeilen
 mehr als einmal im Ergebnis auftauchen:
-</p></p><pre>
+</p><pre>
 code_native(nontriv,(Tuple{Array{Int,1}}))
         .text
 Filename: none
@@ -227,11 +227,11 @@ Source line: 3
         movabsq $jl_bounds_error_ints, %rax
         movl    $1, %edx
         callq   *%rax
-</p><p></pre>
+<p></pre>
 Auch der Aufruf von <span class="mdcode">code_native(nontriv1,(Tuple{Array{Int,1}}))</span> zeigt dieses Verhalten: Manche Quelltextzeilen tauchen mehrfach auf.
 Insgesamt ist das Ergebnis länger als für <span class="mditalics">nontriv,</span> allerdings hat das wahrscheinlich keine Aussagekraft. Daher wurde es wohl oder übel
 notwendig, LLVM zu installieren und es auf den C-Quelltext anzusetzen...
-</p></p><pre>
+</p><pre>
 code_native(nontriv1,(Tuple{Array{Int,1}}))
         .text
 Filename: none
@@ -306,8 +306,9 @@ Source line: 5
         movabsq $jl_bounds_error_ints, %rax
         movl    $1, %edx
         callq   *%rax
-</p><p></pre>
-</p>				</div>
+<p></pre>
+</p><p>
+				</div>
 				<div class="w3-container w3-padding" id="nextPage">
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
@@ -439,6 +440,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -451,7 +462,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -465,17 +476,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -510,6 +510,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -522,7 +532,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -536,17 +546,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

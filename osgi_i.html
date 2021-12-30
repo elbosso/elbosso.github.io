@@ -138,11 +138,11 @@ sein bester Freund zu sein: Ich konnte Bundles laden und sah, dass ein dem einen
 Auf dem Wege dahin mussten zwar auch einige Permissions freigegeben werden, aber es war nicht so wie zitiert: AllPermission
 wurde nicht benötigt. Der Weg war auch so beschwerlich wie immer - Verfasser von Frameworks und Libraries dokumentieren nicht,
 welche Permissions ihr Code braucht, daher: Übersetzen, Testen, Exception analysieren, Policy anpassen, von vorn...
-</p></p><pre>
+</p><pre>
 permission java.net.NetPermission "specifyStreamHandler";
 permission org.osgi.framework.AdminPermission "(id=*)", "*";
 permission org.osgi.framework.ServicePermission "sample.service.HelloService", "register";
-</p><p></pre> 
+<p></pre> 
 Nun wollte ich aber auch in einem anderen Bundle diesen Service konsumieren. Hier kam ich unsanft zum Halt: Was ich auch
 tat: der Service blieb beim Lookup verschollen. In meiner Verzweiflung nahm ich beide Bundles und warf sie in die
 Laufzeitumgebung des Projektes 
@@ -152,9 +152,9 @@ Konnte es so sein, dass hier wieder eine fehlende SecurityPermission schuld war?
 Diesmal haben die Autoren meinen düsteren Alltag auflockern wollen, indem sie die SecurityException einfach verschlucken
 und den Entwickler im Dunkeln lassen. Letztlich haben sie alles erklärt: Wenn man dem Code AllPermissions gibt, funktioniert er.
 Also erweiterte ich noch auf
-</p></p><pre>
+</p><pre>
 permission org.osgi.framework.ServicePermission "sample.service.HelloService", "get";
-</p><p></pre>
+</pre><p>
 und siehe da - es funktionierte
 <h1>Integration in dWb+</h1>
 Zur Integration in 
@@ -187,15 +187,14 @@ integrieren</li>
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Wie in einem 
+<p>Wie in einem 
 vorhergehenden Artikel
 bereits angekündigt habe ich mich
 in letzter Zeit ein wenig mit dem Themengebiet OSGI beschäftigt.
 Daraus ist jetzt ein Plugin für 
 dWb+
 entstanden
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="osgi_plugin_dwb_.html#content">Öffnen</a>
@@ -322,6 +321,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -334,7 +343,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -348,17 +357,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -393,6 +391,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -405,7 +413,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -419,17 +427,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

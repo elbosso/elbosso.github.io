@@ -118,30 +118,30 @@ was ich in diesem Artikel geschrieben habe durch meine Analysen falsifiziert wur
 </p><p>
 Den Quelltext der Klasse, mit der ich die Benchmarks durchführte, ist an unten in diesem Artikel angehängt.
 Die Bytecodes sieht man, indem man das Kommando
-</p></p><pre>
+</p><pre>
 javap -c -private 
-</p><p></pre>
+<p></pre>
 auf die kompilierte Klasse anwendet.
 <h1>Cast gegen implizite Konvertierung</h1>
 Ich untersuchte die verschiedenen Möglichkeiten, ints zu doubles zu machen bei Berechnungen:
 In Java würde folgendes Konstrukt
-</p></p><pre>
+</p><pre>
 int a=1;
 int b=3;
 double result=a/b;
-</p><p></pre>
+<p></pre>
 zu einem Wert von 0.0 für die Variable result führen, da die Rechte Seite zuerst ausgewertet und dann der Double-Variable zugewiesen wird.
 Wer als Resultat 0.3333333 sehen möchte, muss dafür sorgen, dass a und b bei der Auswertung der rechten Seite
 als Double-Zahlen angesehen werden. Das kann man auf vewrschiedenen Wegen erreichen: einmal
 kann man beide Zahlen vor der Auswertung mit 1.0 multiplizieren - das entstehende Zwischenergebnis
 ist dann eine Double-Zahl und damit ist der gesamte Ausdruck auf der rechten Seite ebenfalls eine:
-</p></p><pre>
+</p><pre>
 double result=(a*1.0)/(b*1.0);
-</p><p></pre>
+<p></pre>
 Die zweite Möglichkeit ist ein expliziter Cast:
-</p></p><pre>
+</p><pre>
 double result=(double)a/(double)b;
-</p><p></pre>
+<p></pre>
 </p><p>
 In der Auswertung der Benchmarks unterschieden sich beide Lösungen nicht voneinander - mal war die eine marginal schneller, mal
 die andere. Ein klarer Fall von Syntactic sugar.
@@ -149,21 +149,21 @@ die andere. Ein klarer Fall von Syntactic sugar.
 Die zweite Sache, die mich interessierte war die Frage, ob sich bei den unterschiedlichen Arten, über eine Liste zu iterieren
 Unterschiede ergäben. Ich hatte zunächst nur im Sinn, zu kontrollieren, ob sich Unterschiede in der Ausführungszeit ergeben,
 wenn man faul ist und
-</p></p><pre>
+</p><pre>
 for(int i=0;i&lt;l.size();++i)
-</p><p></pre>
+<p></pre>
 statt
-</p></p><pre>
+</p><pre>
 int size=l.size();
 for(int i=0;i&lt;size;++i)
-</p><p></pre>
+<p></pre>
 schreibt.
 Wenig überraschend ergab sich ein leichter Vorteil für Lösung zwei: Die Funktion wird tatsächlich bei jedem Schleifendurchlauf
 ausgewertet, was für das etwas schlechtere Laufzeitverhalten sorgt. Nachdem ich damit fertig war,
 wollte ich wieder eine Bestätigung des "syntactic sugar"-Vorurteils haben und probierte:
-</p></p><pre>
+</p><pre>
 for (String string : l)
-</p><p></pre>
+</pre><p>
 Ich fiel fast vom Stuhl: Wo meine beiden ersten Versuche um die 6 Sekunden brauchten, brauchte diese
 Variante unter ansonsten identischen Voraussetzungen um die 10 Millisekunden!! Das ist ein Speedup von fast 1000!!!
 Jetzt ist es denke ich an der Zeit, meinen Code auf die Benutzung der Funktion size() zu untersuchen und überall da, wo
@@ -191,13 +191,12 @@ anhand dieser Funktion iteriert wird, Änderungen einzuführen...
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe mich hier verschiedentlich darüber ausgelassen, was
+<p>Ich habe mich hier verschiedentlich darüber ausgelassen, was
 Syntactic sugar
 in Java bedeutet und was man beachten sollte, um mit einigen
 einfachen Mitteln
 die Performanz von Java-Anwendungen zu steigern.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="seiteneffekt_freie_programmiersprachen.html#content">Öffnen</a>
@@ -217,10 +216,9 @@ die Performanz von Java-Anwendungen zu steigern.
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich hatte neulich einen Fall, in dem ich nicht nur über die Elemente einer Liste iterieren wollte, sondern über einen Satz von
+<p>Ich hatte neulich einen Fall, in dem ich nicht nur über die Elemente einer Liste iterieren wollte, sondern über einen Satz von
 jeweils drei benachbarten Elementen (Element und sein Nachfolger/Vorgänger)
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="java_collections_slices.html#content">Öffnen</a>
@@ -240,10 +238,9 @@ jeweils drei benachbarten Elementen (Element und sein Nachfolger/Vorgänger)
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Angefangen hat alles mit der Information, dass ein Meetup hier in der Nähe zum Thema
+<p>Angefangen hat alles mit der Information, dass ein Meetup hier in der Nähe zum Thema
 "Java upside down: funktionale Programmierung in Java mit Vavr"
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="lambda_expressions_vs__anon__inner_classes.html#content">Öffnen</a>
@@ -370,6 +367,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -382,7 +389,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -396,17 +403,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -441,6 +437,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -453,7 +459,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -467,17 +473,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

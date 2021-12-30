@@ -125,17 +125,17 @@ die Konfigurationen aufgenommen: Eine namens <span class="mditalics">match_O_pol
 deren <span class="mdcode">Distinguished Name</span> den gleiche <span class="mditalics">organizationName</span> enthält, wie der Distinguished Name der
 CA selbst - darüber hinaus fordert diese Policy, dass die Felder <span class="mditalics">countryName</span> und <span class="mditalics">commonName</span>
 nicht leer sein dürfen:
-</p></p><pre>
+</p><pre>
 countryName             = supplied
 stateOrProvinceName     = optional
 localityName            = optional
 organizationName        = match
 organizationalUnitName  = optional
 commonName              = supplied
-</p><p></pre>
+<p></pre>
 Die zweite Policy stellt minimale Anforderungen: sie heißt <span class="mditalics">minimal_pol</span> und fordert lediglich,
 dass das Feld <span class="mditalics">commonName</span> nicht leer sein darf:
-</p></p><pre>
+</p><pre>
 domainComponent         = optional
 countryName             = optional
 stateOrProvinceName     = optional
@@ -144,7 +144,7 @@ organizationName        = optional
 organizationalUnitName  = optional
 commonName              = supplied
 emailAddress            = optional
-</p><p></pre>
+<p></pre>
 Man kann nach diesem Muster weitre Policies definieren, diese vorgefertigten ändern oder
 gänzlich löschen - wichtig ist nur, dass es mindestens eine Policy gibt und der Name in der Konfiguration mit <span class="mdbold">_pol</span>
 endet.
@@ -161,7 +161,7 @@ und die minimale und maximale
 Länge für jede einzelne Komponente des DN vorzugeben. Für S\Mime CSRs sieht ein Ausschnitt
 im entsprechenden Abschnitt der Konfiguration
 zum Beispiel so aus:
-</p></p><p><pre>
+</p><p><pre>
 [ smime_dn ]
 countryName             = "1. Country Name (2 letters) (eg, US)       "
 countryName_default = "DE"
@@ -173,14 +173,13 @@ Und schließlich noch die Name Constraints - auch wenn sie im praktischen Betrie
 möchte man sie vielleicht doch definieren. Das geschieht, indem man die entsprechende
 Extension beim Signieren eines CA-Zertifikats definiert. Einige Beispiele dafür sind hier
 aufgelistet.
-</p></p><pre>#[[
+</p><pre>#[[
 nameConstraints=permitted;email:.somedomain.com
 nameConstraints=excluded;email:.com
-</p><p></pre>
+<p></pre>
 Weitere Informationen zu diesem Thema findet man in den unten aufgeführten Links.
-</p>
-</p><p>]]#</pre>
-</p>				</div>
+</p><p>
+]]#</pre>				</div>
 				<div class="w3-container w3-padding" id="links">
 					<hr/>
 					<h3>
@@ -350,6 +349,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -362,7 +371,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -376,17 +385,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -421,6 +419,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -433,7 +441,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -447,17 +455,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

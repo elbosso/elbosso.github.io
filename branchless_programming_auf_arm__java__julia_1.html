@@ -98,24 +98,24 @@ OK - so weit war auch der ursprüngliche Verfassers gekommen und so weit decken 
 Prozessorarchitektur nutzen - zum Beispiel ARM? Ich habe dazu die oben bereits eingeführten Funktionen wieder als C-Quelltext mit
 GCC auf einem Raspberry Pi 3B+ mit denselben Kommandozeilenschaltern übersetzt und präsentiere hier zunächst die Ergebnisse für die einfache
 Methode max - zuerst ohne branchless:
-</p></p><pre>
+</p><pre>
 max:
         cmp     r0, r1
         movlt   r0, r1
         bx      lr
-</p><p></pre>
+<p></pre>
 Vergleicht man dies mit dem Ergebnis der Übersetzung der branchless-Variante:
-</p></p><pre>
+</p><pre>
 max1:
         cmp     r0, r1
         movle   r0, #0
         movgt   r1, #0
         add     r0, r0, r1
         bx      lr
-</p><p></pre>
+<p></pre>
 Erkennt man auch hier, dass in trivialen Fällen der Compiler eine bessere Arbeit verrichtet als der Programmierer. Wie sieht es nun in dem
 nicht mehr ganz so trivialen Fall toUpper aus? Zunächst wieder die "normale" Variante:
-</p></p><pre>
+</p><pre>
 toUpper:
         ldrb    r3, [r0]        @ zero_extendqisi2
         cmp     r3, #0
@@ -139,9 +139,9 @@ toUpper:
         cmp     r3, #0
         bne     .L8
         bx      lr
-</p><p></pre>
+<p></pre>
 Und nun die branchless Variante:
-</p></p><pre>
+</p><pre>
 toUpper1:
         ldrb    r3, [r0]        @ zero_extendqisi2
         cmp     r3, #0
@@ -157,11 +157,12 @@ toUpper1:
         cmp     r3, #0
         bne     .L19
         bx      lr
-</p><p></pre>
+<p></pre>
 Hier treffen die Aussagen, die bereits für die x86-Architektur gemacht wurden voll zu: Zum einen ist der Code kürzer und außerdem
 mit wesentlich weniger bedingten Sprüngen durchsetzt - daher besteht der Verdacht, dass es sich lohnen kann, diesen zusätzlichen Aufwand
 auch für Programme auf ARM-Prozessoren an performancekritischen Stellen zu treiben.
-</p>				</div>
+</p><p>
+				</div>
 				<div class="w3-container w3-padding" id="nextPage">
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
@@ -293,6 +294,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -305,7 +316,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -319,17 +330,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -364,6 +364,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -376,7 +386,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -390,17 +400,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

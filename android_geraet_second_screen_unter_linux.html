@@ -145,12 +145,12 @@ das bei mir aber nicht!</span> Statt dessen musste ich lange suchen, bis ich auf
 stieß, der den Inhalt der Datei anders beschreibt -
 </p><p>
 Beispielsweise mittels
-</p></p><pre>
+</p><pre>
 joe /usr/share/X11/xorg.conf.d/20-virtual.conf
-</p><p></pre>
+<p></pre>
 </p><p>
 erstellt man die Datei folgenden Inhalts:
-</p></p><pre>
+</p><pre>
 Section "Device"
         Identifier      "Configured Video Device"
     Driver "intel"
@@ -166,27 +166,27 @@ Section "Screen"
         Monitor         "Configured Monitor"
         Device          "Configured Video Device"
 EndSection
-</p><p></pre>
+<p></pre>
 </p><p>
 Anschließend holt man sich eine passende Modeline für die gewünschte Auflösung
-</p></p><pre>
+</p><pre>
 cvt 1280 752
-</p><p></pre>
+<p></pre>
 </p><p>
 macht sie dem System bekannt:
-</p></p><pre>
+</p><pre>
 xrandr --newmode "1280x752_60.00"   77.75  1280 1344 1472 1664  752 755 765 781 -hsync +vsync
-</p><p></pre>
+<p></pre>
 </p><p>
 ordnet sie dem Display zu:
-</p></p><pre>
+</p><pre>
 xrandr --addmode VIRTUAL1 1280x752_60.00
-</p><p></pre>
+<p></pre>
 </p><p>
 und kann anschließend vnc starten:
-</p></p><pre>
+</p><pre>
 x11vnc -display :0 -clip 1280x752+3840+0 -usepw -xrandr -forever -nonc -noxdamage -repeat
-</p><p></pre>
+<p></pre>
 </p><p>
 Interessant dabei ist, dass das virtuelle Display anschließend auch in den Einstellungen auftaucht und seine Position relativ zu den
 tatsächlich vorhandenen dort auch angepasst werden kann (wichtig für den Übergang der Maus zwischen den Geräten).
@@ -195,7 +195,8 @@ Abschließend sei noch hinzugefügt, dass man bei Benutzung eines USB-Kabels zur
 kein Netzwerk benötigt, sondern die Übertragung des Bildes über das USB-Kabel erfolgen kann. Und natürlich ist dieses
 Vorgehen nicht auf Android-Geräte beschränkt: Jedes Gerät mit einem Bildschirm, auf dem ein VNC-Viewer existiert und das
 einen Bildschirm besitzt kann auf diese Weise nachgenutzt werden: PCs, Apples, iPads,...
-</p>				</div>
+</p><p>
+aaa				</div>
 				<div class="w3-container w3-padding" id="links">
 					<hr/>
 					<h3>
@@ -376,6 +377,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -388,7 +399,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -402,17 +413,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -447,6 +447,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -459,7 +469,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -473,17 +483,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

@@ -104,49 +104,49 @@ installiert und konfiguriert. Die alten Festplatten konstituierten zwei Software
 zusammengesteckten Server sofort erkannt wurden und daher von mir weiterverwendet wurden. Als Grundlage der weiteren Arbeiten
 wurden die beiden Raid-Verbünde
 in eine Volume Group zusammengeführt:
-</p></p><pre>
+</p><pre>
 vgcreate vg_storage /dev/md0 /dev/md7
-</p><p></pre>
+<p></pre>
 Darauf aufbauend habe ich zunächst zwei Logical Volumes erstellt - eine für administrative Zwecke und eine zweite als Speichermedium,
 das im Netz für Nutzer zur Verfügung stehen sollte:
-</p></p><pre>
+</p><pre>
 lvcreate -L 1T vg_storage -n lv_attic
 lvcreate -L 1T vg_storage -n lv_services
-</p><p></pre>
+<p></pre>
 Anschließend legte ich entsprechende Verzeichnisse an:
-</p></p><pre>
+</p><pre>
 mkdir /storage
 mkdir /storage/attic
 mkdir /storage/services
-</p><p></pre>
+<p></pre>
 Im nächsten Schritt wurde die <span class="mditalics">/etc/fstab</span> um entsprechend benötigte Einträge ergänzt:
-</p></p><pre>
+</p><pre>
 /dev/vg_storage/lv_attic        /storage/attic/    ext4    defaults        0       0
 /dev/vg_storage/lv_services     /storage/services/    ext4    defaults        0       0
-</p><p></pre>
+<p></pre>
 Nunmehr installierte ich zunächst die entsprechenden Pakete um den im Netz verfügbaren Speicher für Windows-Nutzer (Samba)
 und Linux-Nutzer (SFTP) zur Verfügung stellen zu können. Anschließend legte ich zunächst entsprechende Nutzergruppen an:
-</p></p><pre>
+</p><pre>
 groupadd sftp_users
 groupadd samba_users
-</p><p></pre>
+<p></pre>
 Nutzer legte ich zu Testzwecken wie folgt an:
-</p></p><pre>
+</p><pre>
 useradd sftpuser -s /sbin/nologin -M
 useradd sambauser -s /sbin/nologin -M
-</p><p></pre>
+<p></pre>
 Diese Nutzer ordnete ich ihren entsprechenden Grupoen zu:
-</p></p><pre>
+</p><pre>
 usermod -a -G sftp_users sftpuser
 usermod -a -G sftp_users sambauser
-</p><p></pre>
+<p></pre>
 Diese Nutzer benötigten jeweils ein Systempasswort und ein Sambapasswort; beide werden wie folgt zugeordnet (am Beispiel von sambauser):
-</p></p><pre>
+</p><pre>
 passwd sambauser
 smbpasswd -a sambauser
-</p><p></pre>
+<p></pre>
 Nun mussten benötigte Verzeichnisse angelegt und mit den entsprechenden Nutzerrechten versehen werden:
-</p></p><pre>
+</p><pre>
 mkdir /storage/services/sftpuser
 mkdir /storage/services/public
 mkdir /storage/services/sambauser
@@ -157,9 +157,9 @@ chown nobody:nogroup /storage/services/public/
 chown sambauser:sambauser /storage/services/sanbauser/
 chown root:samba_users /storage/services/sambausers_shared
 chmod 775 /storage/services/sambausers_shared
-</p><p></pre>
+<p></pre>
 Nun konnte an die Konfiguration der Services gegangen werden - zuerst wurde <span class="mditalics">/etc/ssh/sshd_config</span> wie folgt  ergänzt:
-</p></p><pre>
+</p><pre>
 ####################### SFTP configuration ##################
 Match Group sftp_users
         ChrootDirectory /storage/services/
@@ -167,9 +167,9 @@ Match Group sftp_users
         X11Forwarding no
         AllowTcpForwarding no
         PasswordAuthentication yes
-</p><p></pre>
+<p></pre>
 Anschließend wurden folgende Share-Definitionen in <span class="mditalics">/etc/samba/smb.conf</span> hinzugefügt:
-</p></p><pre>
+</p><pre>
 [samba_users_shared]
     comment           = Place for sharing for all members of user group sambausers
     path              = /storage/services/samba_users_shared
@@ -197,13 +197,14 @@ Anschließend wurden folgende Share-Definitionen in <span class="mditalics">/etc
     force user = nobody
     create mask = 0775
     directory mask = 0775
-</p><p></pre>
+<p></pre>
 </p><p>
 Nach Neustart von Samba und sshd waren die entsprechenden Verzeichnisse und Shares von Windows und Linux aus erreich- und benutzbar.
 Weitere Nutzer können nach den angegebenen Mustern problemlos hinzugefügt werden.
 </p><p>
 Ich habe hier verschiedene Links angefügt, die als Hintergrund und weiterführende Lektüre zu diesem Thema dienen können:
-</p>				</div>
+</p><p>
+aaa				</div>
 				<div class="w3-container w3-padding" id="links">
 					<hr/>
 					<h3>
@@ -337,14 +338,13 @@ Ich habe hier verschiedene Links angefügt, die als Hintergrund und weiterführe
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Nachdem eins meiner
+<p>Nachdem eins meiner
 Raids
 neulich einen Check durchführen wollte habe ich überlegt, ob man den Fortschritt dabei (oder
 bei einem Rebuild) mittels Telegraf in
 Grafana
 abbilden könnte.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="monitoring_raid_rebuild_grafana.html#content">Öffnen</a>
@@ -471,6 +471,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -483,7 +493,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -497,17 +507,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -542,6 +541,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -554,7 +563,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -568,17 +577,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

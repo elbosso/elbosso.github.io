@@ -114,7 +114,7 @@ die hier gezeigten Konfigurationen lassen TLS außen vor.
 <h1>Traefik</h1>
 <h2>v1.x</h2>
 <h3>docker-compose.yml</h3>
-</p></p><pre>
+</p><pre>
 version: '3'
 </p><p>
 services:
@@ -142,9 +142,9 @@ services:
 networks:
   traefik_proxy:
     external: true
-</p><p></pre>
+<p></pre>
 <h3>traefik.toml</h3>
-</p></p><pre>
+</p><pre>
 logLevel = "INFO"
   defaultEntryPoints = ["http", "https"]
 </p><p>
@@ -162,10 +162,10 @@ logLevel = "INFO"
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
-</p><p></pre>
+<p></pre>
 <h2>v2.x</h2>
 <h3>docker-compose.xml</h3>
-</p></p><pre>
+</p><pre>
 version: '3'
 </p><p>
 services:
@@ -193,9 +193,9 @@ networks:
   traefik_proxy:
     external:
       name: traefik_proxy
-</p><p></pre>
+<p></pre>
 <h3>traefik.yml</h3>
-</p></p><pre>
+</p><pre>
 api:
   dashboard: true
 </p><p>
@@ -209,26 +209,25 @@ providers:
   docker:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
-</p><p></pre>
+<p></pre>
 <h1>Service-Container</h1>
 <h2>v1.x</h2>
-</p></p><pre>
+</p><pre>
     labels:
       - "traefik.backend=staticnginx"
       - "traefik.enable=true"
       - "traefik.frontend.rule=Host:staticnginx.docker.lab"
       - "traefik.port=80"
       - "traefik.docker.network=traefik_proxy"
-</p><p></pre>
+<p></pre>
 <h2>v2.x</h2>
-</p></p><pre>
+</p><pre>
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.staticnginx.rule=Host(`staticnginx.docker.lab`)"
       - "traefik.http.services.staticnginx.loadbalancer.server.port=80"
       - "traefik.docker.network=traefik_proxy"
-</p><p></pre>
-</p>				</div>
+</pre>				</div>
 				<div class="w3-container w3-padding" id="referers">
 				<h3>
 					Artikel, die hierher verlinken
@@ -246,11 +245,10 @@ providers:
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich hatte mich bereits for Einsatz von Traefik im Heimlabor für die Möglichkeit interessiert, mehrere virtualisierte
+<p>Ich hatte mich bereits for Einsatz von Traefik im Heimlabor für die Möglichkeit interessiert, mehrere virtualisierte
 Container den gleichen Dienst auf dem gleichen Port anbieten zu lassen und eine Art Applikationsrouter über den
 Namen, den der Client zum Verbindungsaufbau nutzt die Verbindung zur jeweiligen Instanz "routen" zu lassen...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="tcp_routing_traefik_2_x.html#content">Öffnen</a>
@@ -270,13 +268,12 @@ Namen, den der Client zum Verbindungsaufbau nutzt die Verbindung zur jeweiligen 
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Nachdem ich
+<p>Nachdem ich
 neulich
 über neues in meinem Docker-Zoo berichtete und
 überneulich
 eine Idee zur Aufwertung und Beschleunigung meines Raspberry erfolgreich in die Tat umsetzte, war der nächste Schritt klar...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="docker_auf_raspberry_pi_model_3b_.html#content">Öffnen</a>
@@ -403,6 +400,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -415,7 +422,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -429,17 +436,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -474,6 +470,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -486,7 +492,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -500,17 +506,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

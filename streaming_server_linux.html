@@ -134,15 +134,15 @@ per
 aufgezeichneter Transportströme.
 </p><p>
 Ich testete dieses Verfahren mit zwei Intel-CPUs, die auf den Befehl
-</p></p><pre>
+</p><pre>
 cat /proc/cpuinfo  | grep "model name" | head -1
-</p><p></pre>
+<p></pre>
 </p><p>
 die folgenden Ausgaben lieferten:
-</p></p><pre>
+</p><pre>
 model name	: Intel(R) Core(TM) i3-2100 CPU @ 3.10GHz
 model name      : Intel(R) Core(TM) i3-6100T CPU @ 3.20GHz
-</p><p></pre>
+<p></pre>
 </p><p>
 Der erste, bereits etwas ältere schaffte bei der Umrechnung des
 <a href="http://bbb3d.renderfarming.net/download.html">Testvideos</a>
@@ -151,9 +151,9 @@ der neuere bereits auf eine Faktor von 5.22 kam. Als reine Softwarevariante konn
 von weit unter 1 nicht glänzen.
 </p><p>
 Das zum Test benutzte Kommando war
-</p></p><pre>
+</p><pre>
 ffmpeg -init_hw_device vaapi=foo:/dev/dri/renderD128 -hwaccel vaapi -hwaccel_output_format vaapi -hwaccel_device foo -i bbb_sunflower_1080p_30fps_normal.mp4 -filter_hw_device foo -vf 'format=nv12|vaapi,hwupload' -c:v h264_vaapi -preset slow -crf 20 -tune film -acodec mp3 output_hw.mp4
-</p><p></pre>
+<p></pre>
 </p><p>
 Damit war das Prinzip und ein erster Prototyp geschaffen. Allerdings musste für einen
 angestrebten Abschluss des Projektes beides in Einklang gebracht werden, Dabei erwies sich ffserver als
@@ -165,17 +165,18 @@ und ffmpeg. Damit war ich in der Lage, einen Streaming-Server aufzubauen, der ko
 und bei der Transkodierung den Server nicht einmal annähernd auslastete. Die Konfiguration von nginx
 übernahm ich ungeändert aus den diversen Beispielen im Internet, das von mir angepasste und benutzte Kommando
 zur Speisung mittels ffmpeg lautete:
-</p></p><pre>
+</p><pre>
 sudo ffmpeg  -init_hw_device vaapi=foo:/dev/dri/renderD128 -hwaccel vaapi -hwaccel_output_format vaapi -hwaccel_device foo -i "input" -filter_hw_device foo -vf 'format=nv12|vaapi,hwupload,scale_vaapi=w=640:h=390' -c:v h264_vaapi -preset veryfast -maxrate 1984k -bufsize 3968k -crf 10 -tune zerolatency -g 60 -c:a aac -b:a 128k -ar 44100 -f flv rtmp://localhost/show/stream
-</p><p></pre>
+<p></pre>
 </p><p>
 für die Auflösung vergleichbar mit der mit ffserver erreichten und
-</p></p><pre>
+</p><pre>
 sudo ffmpeg  -init_hw_device vaapi=foo:/dev/dri/renderD128 -hwaccel vaapi -hwaccel_output_format vaapi -hwaccel_device foo -i "input" -filter_hw_device foo -vf 'format=nv12|vaapi,hwupload,scale_vaapi=w=1280:h=720' -c:v h264_vaapi -preset veryfast -maxrate 1984k -bufsize 3968k -crf 10 -tune zerolatency -g 60 -c:a aac -b:a 128k -ar 44100 -f flv rtmp://localhost/show/stream
-</p><p></pre>
+<p></pre>
 </p><p>
 für volles 720p.
-</p>				</div>
+</p><p>
+aaa				</div>
 				<div class="w3-container w3-padding" id="links">
 					<hr/>
 					<h3>
@@ -400,6 +401,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -412,7 +423,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -426,17 +437,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -471,6 +471,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -483,7 +493,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -497,17 +507,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

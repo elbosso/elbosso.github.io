@@ -121,16 +121,16 @@ aber das ist Geschmackssache, beziehungsweise durch einfache Maßnahmen nachrüs
  
 Collections im Zusammenspiel mit Generics erlauben es, ohne Cast auf Elemente gleichen Typs zuzugreifen – für den Anwendungsfall,
 daß Elemente verschiedenen Typs in einer Collection gespeichert werden, hilft das nicht weiter. Als Veranschaulichung sei folgendes Beispiel gegeben:
-</p></p><pre>
+</p><pre>
 java.util.Map m=new java.util.HashMap();
 m.put("double",java.lang.Double.valueOf(3.1415));
 m.put("int",java.lang.Integer.valueOf(1234));
 m.put("string","huhu");
-</p><p></pre>
+<p></pre>
 Der Zugriff auf die einzelnen Elemente muß normalerweise über einen Cast erfolgen.
  
 Man könnte dafür natürlich eine JavaBean erzeugen und verwenden, die in diesem Fall wie folgt aussehen könnte:
-</p></p><pre>
+</p><pre>
 public class Bean
 {
 	private double d;
@@ -161,33 +161,33 @@ public class Bean
 		s=o;
 	}
 }
-</p><p></pre>
+<p></pre>
 Falls es aber aus irgendwelchen Gründen keine Option ist, eine solche Bean-Klasse einzusetzen, ist es extrem hinderlich,
 deswegen extra jedesmal beim Zugriff auf eines der Elemente einen Cast schreiben zu müssen. Wenn beim Zugriff
 auf die Elemente über ihren Namen der Typ bekannt ist,
 lässt sich einfach ein weiteres Generics-Feature zur Lösung heranziehen: eine generische Methode. Diese sähe dann wie folgt aus:
-</p></p><pre>
+</p><pre>
 public &lt;T> T fetch(java.lang.String key,Class&lt;T> cls)
 {
 	Object o;
 	o=m.get(key);
 	return cls.cast(o);
 }
-</p><p></pre>
+<p></pre>
 Damit kann man dann zum Beispiel folgende Zugriffe realisieren (das Beispiel oben wird fortgeführt):
-</p></p><pre>
+</p><pre>
 java.lang.Double d1=fetch("double", java.lang.Double.class);
-</p><p></pre>
+<p></pre>
 Für Fundamentaldatentypen (oder jeden anderen, oft benötigten Klassentyp) kann man noch Abkürzungen wie folgt definieren:
-</p></p><pre>
+</p><pre>
 public int fetchInt(java.lang.String key)
 {
 	return fetch(key, java.lang.Integer.class).intValue();
 }
-</p><p></pre>
+<p></pre>
 </p><p>
 <h3><a name="52">Aktualisierung vom 22. November 2017</a></h3><div class="update">Hier eine möglöiche vollständige Implementierung dieser Idee:
-</p></p><pre>
+</p><pre>
 public class TypeSafeHashMap&lt;T,V> extends java.util.HashMap&lt;T,V>
 {
 	public TypeSafeHashMap(int initialCapacity, float loadFactor)
@@ -229,7 +229,7 @@ public class TypeSafeHashMap&lt;T,V> extends java.util.HashMap&lt;T,V>
 		JComponent b=tsmap.fetch("1", JPanel.class);
 	}
 */}
-</p><p></pre>
+</pre><p>
 </div>
 </p>				</div>
 				<div class="w3-container w3-padding" id="referers">
@@ -249,10 +249,9 @@ public class TypeSafeHashMap&lt;T,V> extends java.util.HashMap&lt;T,V>
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Auf meinen Fahrten von und zur Arbeit schweife ich hin und wieder gedanklich ein wenig ab.
+<p>Auf meinen Fahrten von und zur Arbeit schweife ich hin und wieder gedanklich ein wenig ab.
 Hier das Ergebnis meiner jüngsten Gedankenexpedition...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="gc_minimierung_java.html#content">Öffnen</a>
@@ -272,13 +271,12 @@ Hier das Ergebnis meiner jüngsten Gedankenexpedition...
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Im Job haben wir an einer Ausschreibung teilgenommen, die eine Java-Anwendung
+<p>Im Job haben wir an einer Ausschreibung teilgenommen, die eine Java-Anwendung
 fordert, in der die Anwender neue Objekte definieren können sollen. Normalerweise 
 würde das bedeuten, neue Tabellen in einer relationalen Datenbank anzulegen - leider
 würde das aber auch die Nutzung eines OR-Mappers, bzw. von Container
 Managed Persistence ausschließen.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="dbms_software.html#content">Öffnen</a>
@@ -298,10 +296,9 @@ Managed Persistence ausschließen.
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Nachdem ich bei Heise einen Artikel darüber gelesen hatte, wollte ich versuchen,
+<p>Nachdem ich bei Heise einen Artikel darüber gelesen hatte, wollte ich versuchen,
 das Redux-Konzept in Java zu implementieren
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="redux_java.html#content">Öffnen</a>
@@ -428,6 +425,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -440,7 +447,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -454,17 +461,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -499,6 +495,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -511,7 +517,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -525,17 +531,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

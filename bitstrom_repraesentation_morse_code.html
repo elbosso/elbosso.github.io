@@ -107,65 +107,65 @@ Wir legen des weiteren fest, dass wir nur den Grundzeichenvorrat berücksichtige
 die verschiedenen Länderspezifischen Erweiterungen lassen wir weg.
 </p><p>
 Die Länge des Bitstroms für die jeweilige Kodierung wird mittels der beiden Worte 
-</p></p><pre>
+</p><pre>
 PARIS: .--. .- .-. .. ...
-</p><p></pre>
+<p></pre>
 und
-</p></p><pre>
+</p><pre>
 OSCAR: --- ... -.-. .- .-.
-</p><p></pre>
+<p></pre>
 <a href="http://morsecode.scphillips.com/translator.html">veranschaulicht</a>
 ("." ist dabei ein "dit" und "-" ein "dah").
 <h1>Triviale Kodierung</h1>
 Hierzu kodieren wir einfach die Töne mittels Einsen und die Pausen mittels Nullen - das bedeutet:
-</p></p><pre>
+</p><pre>
 dit - 1
 dah - 111
 Pause zwischen Tönen - 0
 Pause zwischen Buchstaben - 000
 Pause zwischen Worten - 0000000
-</p><p></pre>
+<p></pre>
 Diese Kodierung ist durch einen Transcoder besonders einfach in Töne oder Signale zur Übertragung umzusetzen. Sie geht allerdings auch
 sehr verschwenderisch mit der Kapazität des Übertragungskanals um.
 Das länste darzustellende Zeichen kommt dadurch auf eine Länge von 19 Bit. 
 Das kürzeste darzustellende Zeichen kommt auf genau ein Bit. Da die Symbole so
 gewählt wurden, dass die am häufigsten benutzten durch kürzere Symbolgruppen dargestellt
 werden, liegt der tatsächliche Aufwand an Bits pro Zeichen für eine gesamte Botschaft irgendwo dazwischen.
-</p></p><pre>
+</p><pre>
 PARIS: 10111011101000101110001011101000101000101010 (44 Bit)
 OSCAR: 111011101110001010100011101011101000101110001011101 (51 Bit)
-</p><p></pre>
+<p></pre>
 <h1>Triviale Kodierung trivial komprimiert</h1>
 Diese Kodierung könnte man auf einfache Art und Weise ein wenig mehr in Richtung Datensparsamkeit trimmen:
-</p></p><pre>
+</p><pre>
 dit - 1
 dah - 11
 Pause zwischen Tönen - 0
 Pause zwischen Buchstaben - 00
 Pause zwischen Worten - 000
-</p><p></pre>
+<p></pre>
 Das verkürzt die Länge des längsten darzustellenden Buchstabens auf 14 Bit.
 Damit ist aber das Ende der Fahnenstange noch lange nicht erreicht.
-</p></p><pre>
+</p><pre>
 PARIS: 101101101001011001011010010100101010 (36 Bit)
 OSCAR: 1101101100101010011010110100101100101101 (40 Bit)
-</p><p></pre>
+<p></pre>
 <h1>Kodierung mit impliziten Symbolen</h1>
 Im Internet fand ich eine Idee, die Pausen zwischen den Tönen und den Buchstaben implizit zu kodieren:
 ein Zeichen wird dabei immer 8 Bit breit wie folgt dargestellt:
-</p></p><pre>
+</p><pre>
 lllttttt
 l kodiert die Länge der Symbolgruppe (Anzahl der "dits" und "dahs")
 t kodiert die "dits" und "dahs": 1 bedeutet "dit" und 0 bedeutet "dah"
-</p><p></pre>
+<p></pre>
 Damit ist ein Buchstabe nur noch 8 Bit lang. Die Pausen zwischen Tönen und zwischen Buchstaben müssen 
 nicht mehr explizit kodiert werden. Die Pause zwischen Worten kann durch eine spezielle Länge 
 kodiert werden: wir müssen nur 5 verschiedene Längen kodieren können, könnten aber mit den drei zur Verfügung
 stehenden l-Bits 8 verschiedene Muster kodieren: Wir erklären eines der nicht benötigten zum Marker für Wortgrenzen.
-</p></p><pre>
+</p><pre>
 PARIS: 1001001001010000011101000101100001111100 (40 Bit)
 OSCAR: 0110000001111100100010100101000001110100 (40 Bit)
-</p><p></pre>
+<p></pre>
 <h1>Lauflängen-Kodierung mit impliziten Symbolen</h1>
 Man sieht fast sofort eine Möglichkeit, die Kodiereffizienz zu steigern: Wenn man jedes Symbol 
 nicht mehr auf eine Länge von 8 Bit festlegt, sondern so lang macht, wie es tatsächlich gebraucht wird, spart man
@@ -173,27 +173,27 @@ einige Bits ein - das bedeutet, dass das Symbol für "e" nur noch vier Bytes ein
 die ersten drei Bit 
 für die Anzahl an Tönen: 001 bedeutet 1 und "dit": 1 bedeutet "dit". Dadurch, dass häufigere Zeichen durch kürzere Symbolfolgen kodiert werden,
 erreicht man eine deutliche Absenkung der Bits pro Zeichen für eine gesamte Message auf deutlich unter 8.
-</p></p><pre>
+</p><pre>
 PARIS: 10010010101001110101011011111 (29 Bit)
 OSCAR: 011000011111100010101010011101 (30 Bit)
-</p><p></pre>
+<p></pre>
 <h1>Lauflängen-Kodierung mit variabel langen Längenangaben</h1>
 Die Überschrift klingt erst einmal seltsam. Es geht dabei ganz einfach gesagt darum, dass die 
 Zeichen, deren Symbolfolge sowieso schon kurz ist, noch ein Bit verlieren: Beginnt die Längenangabe mit einer "0",
 ist das Feld, das die Länge kodiert, nur zwei Bit lang, ansonsten drei. Das bedeutet folgendes für die Längen:
-</p></p><pre>
+</p><pre>
 00 - 1 Bit
 01 - 2 Bit
 100 - 3 Bit
 101 - 4 Bit
 110 - 5 Bit
-</p><p></pre>
+<p></pre>
 Das spezielle Längenfeld "111" würde auch bei dieser Methode wieder die Wortgrenze markieren. 
 Damit senkt man die Anzahl der Bits pro Zeichen für eine gesamte Message nochmals deutlich ab.
-</p></p><pre>
+</p><pre>
 PARIS: 101100101101001010111100111 (27 Bit)
 OSCAR: 10000010011110101010110100101 (29 Bit)
-</p><p></pre>
+</pre><p>
 <h1>Fazit</h1>
 Wie man sehr schön sieht, muss man in der Informatik wie in allen anderen Lebensbereichen immer Kompromisse machen - 
 hier ist es der klassische "Komplexität vs. Speicherbedarf": Je weniger Bits benötigt werden, desto komplexer 
@@ -324,6 +324,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -336,7 +346,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -350,17 +360,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -395,6 +394,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -407,7 +416,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -421,17 +430,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

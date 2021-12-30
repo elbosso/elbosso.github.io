@@ -134,52 +134,50 @@ Dieses Skript ist unten als Anhang angefügt.
 Hier noch einige nützliche Kommandos zur Arbeit mit VirtualBoxen:
 </p><p>
 Liefert Namen und UUIDs
-</p></p><pre>
+</p><pre>
 VBoxManage list vms 2>/dev/null
-</p><p></pre>
+<p></pre>
 Liefert Angaben über VMs
-</p></p><pre>
+</p><pre>
 VBoxManage list vms --long 2>/dev/null
-</p><p></pre>
+<p></pre>
 Listet alle internen Netzwerke auf, die aktuell benutzt werden
-</p></p><pre>
+</p><pre>
 VBoxManage list vms --long 2>/dev/null|grep NIC|cut -d, -f 2 |grep "Internal Network"|cut -d\' -f2 |sort|uniq
-</p><p></pre>
+<p></pre>
 Listet alle bridged Interfaces auf, die aktuell benutzt werden
-</p></p><pre>
+</p><pre>
 (1) VBoxManage list vms --long 2>/dev/null|grep NIC|cut -d, -f 2 |grep "Bridged Interface"|cut -d\' -f2 |sort|uniq
-</p><p></pre>
+<p></pre>
 Listet die Namen aller Bridges auf, die zur Zeit im System eingerichtet sind
-</p></p><pre>
+</p><pre>
 (2) brctl show |cut -d$'\t' -f1|grep .|tail -n +2  
-</p><p></pre>
+<p></pre>
 Angenommen Ergebnis von (1) und (2) wird in /tmp/int und /tmp/brdg umgeleitet, dann liefert 
-</p></p><pre>
+</p><pre>
 comm -12 &lt;(sort /tmp/int) &lt;(sort /tmp/brdg)
-</p><p></pre>
+<p></pre>
 eine Liste alle System-Bridges, die VirtualBox derzeit benutzt und
-</p></p><pre>
+</p><pre>
 comm -23 &lt;(sort /tmp/int) &lt;(sort /tmp/brdg) 
-</p><p></pre>
+<p></pre>
 liefert eine Liste aller phys. Interfaces, die VirtualBox derzeit benutzt.
 Liefert eine Liste aller phys. Interfaces, die einer Bridge zugeordnet sind
-</p></p><pre>
+</p><pre>
 brctl show br0|rev|cut -d$'\t' -f 1|rev|tail -n +2 - 
-</p><p></pre>
+<p></pre>
 Listet alle Bridged Interfaces auf, die derzeit in VirtualBox bekannt sind (müssen nicht benutzt sein!)
-</p></p><pre>
+</p><pre>
 VBoxManage list bridgedifs|grep -e "^Name" 
-</p><p></pre>
+<p></pre>
 Listet alle internen Netzwerke auf, die derzeit in VirtualBox bekannt sind (müssen nicht benutzt sein!)
-</p></p><pre>
+</p><pre>
 VBoxManage list intnets 
-</p><p></pre>
+<p></pre>
 Zeigt den Adapter, der an dem angegebenen internen Netzwerk angeschlossen ist - oder nichts
-</p></p><pre>
+</p><pre>
 VBoxManage showvminfo "private1" |grep NIC|grep -v disabled |grep "Internal Network 'intranet192'" 
-</p><p></pre>
-</p><p>
-
+</pre><p>
 <dl>
 <dt><img src="images/mime/Oxygen480-mimetypes-signature_48.png"></dt><dd><a href="resources/license.txt">Lizenz</a></dd>
 <dt><img src="images/mime/Oxygen480-mimetypes-text-shell_48.png"></dt><dd><a href="resources/vbox.sh">vbox.sh</a></dd>
@@ -304,6 +302,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -316,7 +324,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -330,17 +338,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -375,6 +372,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -387,7 +394,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -401,17 +408,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

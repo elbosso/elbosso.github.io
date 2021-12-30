@@ -151,9 +151,9 @@ ergeben:
 Mit dem bereits angesprochenen
 <a href="https://hub.docker.com/r/rroemhild/test-openldap/">Docker-Container</a>
 als Datenbasis ergibt die Abfrage
-</p></p><pre>
+</p><pre>
 SELECT * FROM subTreeScope;dc=planetexpress,dc=com
-</p><p></pre>
+<p></pre>
 </p><p>
 <img src="images/sQLshell/sQLshell_ldap_001.png" style="max-width:941px;"
 alt="Screenshot"
@@ -163,9 +163,9 @@ Ergebnis für SELECT * FROM subTreeScope;dc=planetexpress,dc=com
 </span>
 </p><p>
 Man kann auch einen anderen Subtree wählen:
-</p></p><pre>
+</p><pre>
 SELECT * FROM subTreeScope;ou=people,dc=planetexpress,dc=com
-</p><p></pre>
+<p></pre>
 </p><p>
 <img src="images/sQLshell/sQLshell_ldap_002.png" style="max-width:774px;"
 alt="Screenshot"
@@ -175,9 +175,9 @@ Ergebnis für SELECT * FROM subTreeScope;ou=people,dc=planetexpress,dc=com
 </span>
 </p><p>
 Where-Klauseln sind möglich:
-</p></p><pre>
+</p><pre>
 SELECT * FROM subTreeScope;ou=people,dc=planetexpress,dc=com WHERE ou=Intern
-</p><p></pre>
+<p></pre>
 </p><p>
 <img src="images/sQLshell/sQLshell_ldap_003.png" style="max-width:861px;"
 alt="Screenshot"
@@ -187,9 +187,9 @@ Ergebnis für SELECT * FROM subTreeScope;ou=people,dc=planetexpress,dc=com WHERE
 </span>
 </p><p>
 Mittels Where-Klauseln ist auch die Suche nach spezifischen ObjectClasses möglich:
-</p></p><pre>
+</p><pre>
 SELECT * FROM subTreeScope;ou=people,dc=planetexpress,dc=com WHERE objectClass=group
-</p><p></pre>
+<p></pre>
 </p><p>
 <img src="images/sQLshell/sQLshell_ldap_004.png" style="max-width:1000px;"
 alt="Screenshot"
@@ -199,10 +199,9 @@ Ergebnis für SELECT * FROM subTreeScope;ou=people,dc=planetexpress,dc=com WHERE
 </span>
 </p><p>
 Auch die Benutzung von Overlays in WHERE-Klauseln ist möglich:
-</p></p><pre>
+</p><pre>
 SELECT * FROM subTreeScope;dc=planetexpress,dc=com WHERE memberOf=cn=admin_staff,ou=people,dc=planetexpress,dc=com
-</p><p></pre>
-</p><p>
+</pre><p>
 <img src="images/sQLshell/sQLshell_ldap_005.png" style="max-width:1019px;"
 alt="Screenshot"
 class="center">
@@ -227,14 +226,13 @@ Ergebnis für SELECT * FROM subTreeScope;dc=planetexpress,dc=com WHERE memberOf=
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich hatte hier in letzter Zeit verschiedentlich auf einen
+<p>Ich hatte hier in letzter Zeit verschiedentlich auf einen
 Docker-Container
 hingewiesen, der es erlaubt, schnell einfache LDAP-Tests durchzuführen.
 Ich habe das Repository inzwischen
 geforkt
 und einige weitere Beispieldatensätze aus dem Internet eingefügt - das reichte mir aber noch nicht...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="generator_ldif_dateien_test_verzeichnisdiensten.html#content">Öffnen</a>
@@ -254,11 +252,10 @@ und einige weitere Beispieldatensätze aus dem Internet eingefügt - das reichte
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe hier vor kurzem bereits über die Integration von LDAP in die
+<p>Ich habe hier vor kurzem bereits über die Integration von LDAP in die
 sQLshell
 berichtet. Diese wurde nun weiter verbessert.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="sqlshell_support_ldap_ii.html#content">Öffnen</a>
@@ -385,6 +382,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -397,7 +404,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -411,17 +418,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -456,6 +452,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -468,7 +474,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -482,17 +488,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

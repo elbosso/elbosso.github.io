@@ -114,7 +114,7 @@ eine neue Version der Webseite online stellen.
 Wer beschreibt mein Erstaunen als mein CMS alle Seiten mit neuen Erzeugungsdaten versah obwohl
 deutlich das originale bereits drin stand. Das Programm konnte das alte Datumsformat nicht mehr parsen und schuld daran war die
 Umstellung auf Java8. Ein kleines Testprogramm demonstriert das:
-</p></p><pre>
+</p><pre>
 public class DateBug extends java.lang.Object
 {
 	public static void main(java.lang.String[] args) throws java.text.ParseException
@@ -129,22 +129,21 @@ public class DateBug extends java.lang.Object
 		System.out.println("Formatted Date: "+rssf.format(cal.getTime()));
 	}
 }
-</p><p></pre>
+<p></pre>
 </p><p>
 Dieses Programm mit unterschiedlichen Java-Versionen ausgeführt lieferte folgende Ergebnisse:
-</p></p><pre>
+</p><pre>
 Java Version 1.7.0_25
 SimpleDateFormat pattern; EEE, dd MMM yyyy H:m:s
 Formatted Date: Di., 14 Mrz 2017 19:4:14
-</p><p></pre>
+<p></pre>
 </p><p>
 für Java7 und
-</p></p><pre>
+</p><pre>
 Java Version 1.8.0_144
 SimpleDateFormat pattern; EEE, dd MMM yyyy H:m:s
 Formatted Date: Di., 14 Mär 2017 19:13:14
-</p><p></pre>
-</p><p>
+</pre><p>
 für Java8. Man bemerke den Unterschied im Monat. Hat man nun ein solches Datum mit Java7 erstellt, kann Java8 dieses nicht mehr parsen.
 </p><p>
 Ich bin mir dessen bewusst, dass ich wahrscheinlich der einzige bin, der das deutsche Datumsformat benutzt,
@@ -168,14 +167,13 @@ für mich ein Bug und kein Feature!
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe bereits über einen
+<p>Ich habe bereits über einen
 Bug in Java9 berichtet,
 der mich ziemlich überrascht hat. Wer aber beschreibt meine Überraschung, dass
 der Bug, der mich beim Umstieg von Java7 auf Java8 bereits
 angespuckt hat,
 wieder Speichel gesammelt hat?
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="aenderungen_datumsformat_java___schon_wieder_.html#content">Öffnen</a>
@@ -302,6 +300,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -314,7 +322,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -328,17 +336,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -373,6 +370,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -385,7 +392,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -399,17 +406,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

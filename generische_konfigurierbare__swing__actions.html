@@ -116,14 +116,14 @@ Dadurch wird die Kette zu einer aus drei Gliedern: die Instanz, die die Action n
 über Änderungen an der Konfigurationsinstanz beeinflussen.
 </p><p>
 Das Interface selbst ist zunächst einmal nur ein Marker-Interface:
-</p></p><pre>
+</p><pre>
 public interface Configuration
 {
 	
 }
-</p><p></pre>
+<p></pre>
 Dazu habe ich eine generische Basisklasse geschrieben, die wie folgt aussieht:
-</p></p><pre>
+</p><pre>
 public abstract class ConfigurableActionBase&lt;T extends Configuration> extends javax.swing.AbstractAction
 {
 	private final T conf;
@@ -151,10 +151,10 @@ public abstract class ConfigurableActionBase&lt;T extends Configuration> extends
 		return conf;
 	}
 }
-</p><p></pre>
+<p></pre>
 Damit hat man in abgeleiteten Klassen einen typsicheren Zugriff auf die Konfiguration erreicht.
 Eine abgeleitete Action-Klasse könnte dann zum Beispiel so aussehen:
-</p></p><pre>
+</p><pre>
 public class ConfigurableAction extends ConfigurableActionBase&lt;ConfigurableAction.Configuration>
 {
 	public ConfigurableAction(Configuration conf)
@@ -174,13 +174,13 @@ public class ConfigurableAction extends ConfigurableActionBase&lt;ConfigurableAc
 		System.out.println(getConfiguration().isEnabled()?"enabled":"disabled");
 	}
 }
-</p><p></pre>
+<p></pre>
 Man beachte das Inner-Interface, das das Marker-Interface erweitert. Der zweite Konstruktor
 dient der Bequemlichkeit: Wenn die Konfiguration über eine eigene Implementationsklasse erfolgt,
 muss die Klasse, die die Action benutzen möchte, diese Instanz nicht implizit erzeugen, sondern kann einfach den 
 diesen Konstruktor benutzen, durch den eine Default-Implementations-Instanz erstellt wird, auf die wiederum
 mit der entsprechenden Getter-Methode zugegriffen werden kann. Im Beispiel könnte diese Default-Implementation wie folgt aussehen:
-</p></p><pre>
+</p><pre>
 public class ConfImpl implements ConfigurableAction.Configuration
 {
 	private boolean enabled;
@@ -196,8 +196,7 @@ public class ConfImpl implements ConfigurableAction.Configuration
 		this.enabled = enabled;
 	}	
 }
-</p><p></pre>
-</p>				</div>
+</pre>				</div>
 				<div class="w3-container w3-padding" id="referers">
 				<h3>
 					Artikel, die hierher verlinken
@@ -215,11 +214,10 @@ public class ConfImpl implements ConfigurableAction.Configuration
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Eine einfache Rule-Engine - zusammengesetzt auf Basis von 
+<p>Eine einfache Rule-Engine - zusammengesetzt auf Basis von 
 dWb+
 und einigen weiteren Komponenten.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="dwb__rule_engine.html#content">Öffnen</a>
@@ -346,6 +344,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -358,7 +366,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -372,17 +380,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -417,6 +414,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -429,7 +436,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -443,17 +450,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

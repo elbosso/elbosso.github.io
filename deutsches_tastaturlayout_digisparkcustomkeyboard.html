@@ -126,7 +126,7 @@ Auch um dieses Problem zu adressieren benötigte ich wieder sehr lange - letztli
 <a href="https://www.asciitable.com/">ASCII-Codes</a>
 dieser Zeichen liegen sämtlich <span class="mdbold">über</span> <span class="mdcode">127</span> - im Quelltext der Bibliothek wurde das Mapping von ASCII auf KeyCodes
 über ein großes Switch-Statement abgewickelt, dessen Signatur und Baginn wie folgt aussehen:
-</p></p><pre>
+</p><pre>
 void ASCII_to_keycode(uint8_t ascii, uint8_t ledState, uint8_t* modifier, uint8_t* keycode)
 {
 	*keycode = 0x00;
@@ -147,22 +147,22 @@ void ASCII_to_keycode(uint8_t ascii, uint8_t ledState, uint8_t* modifier, uint8_
 				*modifier = _BV(1); // hold shift
 				*keycode = 30;
 				break;
-</p><p></pre>
+<p></pre>
 </p><p>
 Wichtig ist hier der Vergleich mit Zeichen-Literalen - Zeichen-Literale sind vom Typ <span class="mdcode">char</span> während das übergebene Zeichen im
 Parameter <span class="mdcode">ascii</span> vom Typ <span class="mdcode">uint8_t</span> ist, was ein <span class="mdcode">typedef</span> ist, der auf <span class="mdcode">unsigned char</span> abbildet. Da bei ASCII-Zeichen mit Codes
 größer als <span class="mdcode">127</span> aber das leftmost Bit - und damit das Vorzeichen-Bit gesetzt ist, kann dieser Vergleich bei solchen Zeichen
 nie <span class="mdcode">true</span> liefern. Gefixt habe ich das mit einer entsprechenden Anpassung des Vergleichs, wie hier exemplarisch illustriert:
-</p></p><pre>
+</p><pre>
 			case (uint8_t)'Ü':
 				*keycode = 0x2F;
 				break;
-</p><p></pre>
+<p></pre>
 </p><p>
 Der Grund dafür ist die Unzulänglichkeit der Arduino (in diesem Fall) gewesen: Die Quelltexte werden als ASCII gespeichert und
 die IDE bzw. der Compiler wirft keine entsprechende Warnung aus - probiert man das zum Beispiel mit GCC mit folgendem Quelltext
 (als ISO-8859-15 gespeichert - als UTF-8 würde GCC hier ganz andere Probleme melden...):
-</p></p><pre>
+</p><pre>
 #include &lt;stdio.h>
 #include &lt;stdint.h>
 </p><p>
@@ -193,13 +193,12 @@ int main(int argc, char** argv)
 	method('a');
 	method('ü');
 }
-</p><p></pre>
+<p></pre>
 </p><p>
 wird man bereits bei der Kompilierung mittels folgender Fehlermeldung auf das Problem hingewiesen:
-</p></p><pre>
+</p><pre>
 uint8_test.c:13:3: warning: case label value is less than minimum value for type
-</p><p></pre>
-</p>				</div>
+</pre>				</div>
 				<div class="w3-container w3-padding" id="referers">
 				<h3>
 					Artikel, die hierher verlinken
@@ -217,13 +216,12 @@ uint8_test.c:13:3: warning: case label value is less than minimum value for type
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Nachdem ich neulich über
+<p>Nachdem ich neulich über
 den Prototypen und
 einige Probleme bei der Umsetzung des deutschen
 Tastatur-Mappings
 berichtete habe ich nun damit begonnen, die Schaltung dafür zu entwerfen.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="schaltung_digisparkcustomkeyboard.html#content">Öffnen</a>
@@ -350,6 +348,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -362,7 +370,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -376,17 +384,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -421,6 +418,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -433,7 +440,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -447,17 +454,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

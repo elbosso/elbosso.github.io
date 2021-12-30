@@ -145,7 +145,7 @@ benutze ich ein Wildcard-Zertifikat für die jeweilige Domain - erstellt natürl
 <a href="https://github.com/elbosso/expect-dialog-ca">Lösung zur Verwaltung von PKIs.</a>
 </p><p>
 Das <span class="mdcode">docker-compose</span> File für den reverse Proxy ist sehr einfach:
-</p></p><pre>
+</p><pre>
 version: '3'
 </p><p>
 services:
@@ -166,19 +166,19 @@ networks:
   reverse_nginx:
     external:
       name: reverse_nginx
-</p><p></pre>
+<p></pre>
 </p><p>
 Die übergreifenden Konfigurationen sind wie im
 <a href="https://www.freecodecamp.org/news/docker-nginx-letsencrypt-easy-secure-reverse-proxy-40165ba3aee2/">Artikel</a>
 beschrieben ungeändert  übernommen - lediglich an <span class="mdcode">ssl.conf</span> musste ich einige Änderungen vornehmen - eine, weil der Artikel
 bereits ein wenig in die Jahre gekommen ist:
-</p></p><pre>
+</p><pre>
 ssl_protocols               TLSv1 TLSv1.1 TLSv1.2;
-</p><p></pre>
+<p></pre>
 musste ich durch
-</p></p><pre>
+</p><pre>
 ssl_protocols               TLSv1.2 TLSv1.3;
-</p><p></pre>
+<p></pre>
 ersetzen, weil Firefox mit den alten TLS-Versionen
 <a href="https://www.thesslstore.com/blog/ssl_error_rx_record_too_long/">nicht mehr zusamenarbeiten</a>
 mochte.
@@ -188,7 +188,7 @@ Optionen <span class="mdcode">ssl_stapling</span> und <span class="mdcode">ssl_s
 </p><p>
 Mit der folgenden Beispielkonfiguration für Keycloak konnte ich dann die Beispielanwendung für OpenID-Authentifizierung
 erfolgreich testen:
-</p></p><pre>
+</p><pre>
 upstream keycloakserver {
   server        keycloakserver:8080;
 }
@@ -205,8 +205,9 @@ server {
     include     common_location.conf;
   }
 }
-</p><p></pre>
-</p>				</div>
+<p></pre>
+</p><p>
+aaa				</div>
 				<div class="w3-container w3-padding" id="links">
 					<hr/>
 					<h3>
@@ -285,10 +286,9 @@ server {
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+<p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
 es aber soweit!
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="was_bedeutet_vorhaengeschloss_browser_.html#content">Öffnen</a>
@@ -308,11 +308,10 @@ es aber soweit!
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Nachdem ich mich in den letzten Artikeln hauptsächlich um die
+<p>Nachdem ich mich in den letzten Artikeln hauptsächlich um die
 Infrastruktur
 meines Docker-Zoos gekümmert habe ist nun eine weitere Anwendung hinzugekommen...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="lufi_docker_zoo.html#content">Öffnen</a>
@@ -332,14 +331,13 @@ meines Docker-Zoos gekümmert habe ist nun eine weitere Anwendung hinzugekommen.
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich trage mich aktuell mit dem Gedanken, analog zu meinen Skripts zur Einrichtung von
+<p>Ich trage mich aktuell mit dem Gedanken, analog zu meinen Skripts zur Einrichtung von
 Kartenservern
 oder
 Netzwerkinfrastruktur
 einen kleinen Server komplett unattended einrichten zu können, der PiHole, DNSSEC und einen
 autonomen root-Resolver integriert.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="pihole_bug_installation.html#content">Öffnen</a>
@@ -466,6 +464,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -478,7 +486,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -492,17 +500,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -537,6 +534,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -549,7 +556,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -563,17 +570,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

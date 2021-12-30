@@ -103,10 +103,10 @@ bis
 818 Byte reichte - insgesamt kamen alle Bilder auf eine Gesamtgröße von
 573902 Byte. Zur Feststellung dieser Werte wurden folgende Statements in der
 <a href="sQLshell.html">sQLshell ausgeführt:</a>
-</p></p><pre>
+</p><pre>
 SELECT *,octet_length(___6284997236799771785___.data) from ___6284997236799771785___;
 SELECT sum(octet_length(___6284997236799771785___.data)) from ___6284997236799771785___;
-</p></pre>
+</pre>
 Die Größe der Relationen lässt sich mit folgendem Statement ermitteln:<pre>
 SELECT nspname || '.' || relname AS "relation",
     pg_size_pretty(pg_relation_size(C.oid)) AS "size"
@@ -115,10 +115,10 @@ SELECT nspname || '.' || relname AS "relation",
   WHERE nspname NOT IN ('pg_catalog', 'information_schema')
   ORDER BY pg_relation_size(C.oid) DESC
   LIMIT 20;
-</p><p></pre>
+<p></pre>
 Für die Testtabelle kam ich dabei auf 32 KByte - offensichtlich sind darin die Binärdaten nicht enthalten - 
 die Größe inklusive der Binärdaten lässt sich mit folgendem Statement feststellen:
-</p></p><pre>
+</p><pre>
 SELECT
     table_name,
     pg_size_pretty(table_size) AS table_size,
@@ -136,7 +136,7 @@ FROM (
     ) AS all_tables
     ORDER BY total_size DESC
 ) AS pretty_sizes
-</p><p></pre>
+<p></pre>
 Als Ergebnis ergab sich dabei eine Größe für die Experimentaltabelle von
 696 kB.
 </p><p>
@@ -157,9 +157,9 @@ Anschließend wurde dasselbe Bild wieder hinzugefügt, aber diesmal das Bild in 
 octet_length wie erwartet auf 109234 - die	
 table_size dagegen erhöht sich sogar noch ein wenig - auf 3960 kB.
 Die database size verringert sich ebenfalls nicht - sie bleibt bei 12MB.
-</p></p><pre>
+</p><pre>
 SELECT pg_size_pretty(pg_database_size('jdbctest'))
-</p><p></pre>
+<p></pre>
 Dieser Wert wird mit dem oben stehenden Statement ermittelt - er sinkt erst nach Löschen der Zeile wieder auf
 8 MB.
 Es scheint also so zu sein, dass der einmal allozierte Speicher für eine Zeile alloziert bleibt,
@@ -174,27 +174,27 @@ wenn ein neues Bild in der betreffenden Zeile gespeichert wird.
 </p><p>
 Wie verhalten sich ähnliche Tests bei Large Objects?
 Eine Übersicht über alle LargeObjects in der Datenbank erhält man mittels
-</p></p><pre>
+</p><pre>
 select DISTINCT lo.loid from pg_largeobject lo;
-</p><p></pre>
+<p></pre>
 Im Test ergab das initial 4 oids (ich hatte bereits ein wenig experimentiert).
 Das folgende Statement zeigt nicht die Anzahl der Large Objects an:
-</p></p><pre>
+</p><pre>
 select count(lo.loid) from pg_largeobject lo;
-</p><p></pre>
+<p></pre>
 Das ergab allerdings eine Anzahl von 291. Wenn man allerdings das Resultat von 
-</p></p><pre>
+</p><pre>
 select lo.loid,length(lo.data) from pg_largeobject lo
-</p><p></pre>
+<p></pre>
 anschaut, sieht man viele Einträge - fast alle haben eine Länge von 2048 Bytes. Und
 das Ergebnis der Ausführung des Statements 
-</p></p><pre>
+</p><pre>
 select sum(length(lo.data)) from pg_largeobject lo; 
-</p><p></pre>
+<p></pre>
 stimmt aber mit dem Ergebnis von
-</p></p><pre>
+</p><pre>
 select count(lo.data) from pg_largeobject lo;
-</p><p></pre>
+<p></pre>
 multipliziert mit 2048 ungefähr überein. Daran sieht man, dass die LOs auf Chunks von 2K Größe aufgeteilt werden.
 Nunmehr wurde das bereits benutzte große Beispielbild als LO in die Datenbank eingefügt.
 </p><p>
@@ -207,10 +207,9 @@ Die Größe der Los betrug in Summe length(lo.data): 4223032.
 Damit waren die Ergebnisse konsistent. (Achtung: diese Werte werden erst nach Commit der Transaktion 
 aktualisiert - LO-Operationen sind nur erlaubt, wenn Autocommit deaktiviert ist!)
 Auch bei LOs scheint zu gelten: Das überschreiben mit dem kleineren Bild verringert die Größen nicht.
-</p></p><pre>
+</p><pre>
 select sum(length(lo.data)) from pg_largeobject lo; 
-</p><p></pre>
-</p>				</div>
+</pre>				</div>
 				<div class="w3-container w3-padding" id="referers">
 				<h3>
 					Artikel, die hierher verlinken
@@ -228,11 +227,10 @@ select sum(length(lo.data)) from pg_largeobject lo;
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Nach längerer Zeit gibt es wieder etwas über neue Features der
+<p>Nach längerer Zeit gibt es wieder etwas über neue Features der
 sQLshell
 zu berichten: Der SQL-Texteditor versteht neue syntaktische Konstrukte.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="syntaxerweiterungen_den_sql_editor_sqlshell.html#content">Öffnen</a>
@@ -359,6 +357,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -371,7 +379,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -385,17 +393,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -430,6 +427,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -442,7 +449,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -456,17 +463,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

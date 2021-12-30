@@ -112,16 +112,16 @@ Hier gleich eine Warnung: Was ich hier beschreibe, macht den Rechner unter Umst�
 bitte nur mit äußerster Vorsicht benutzen!
 </p><p>
 Zunächst wird eine Netzwerkschnittstelle geöffnet, über die es möglich ist, Notifications zu senden:
-</p></p><pre>
+</p><pre>
 socat -u tcp4-listen:12000,reuseaddr,fork,bind=127.0.0.1 exec:$HOME/.local/bin/notify-remote.sh 2> /dev/null
-</p><p></pre>
+<p></pre>
 Mit dem Kommando
-</p></p><pre>
+</p><pre>
 echo -e 'Topic\nMessage\ndocument-open\n\n' | nc 127.0.0.1 12000
-</p><p></pre>
+<p></pre>
 kann man nun bereits Notifications aus Shell-Skripten heraus senden, wenn das socat übergebene
 Skript den folgenden Inhalt hat:
-</p></p><pre>
+</p><pre>
 #!/bin/sh
 delay="5000"
 </p><p>
@@ -136,7 +136,7 @@ echo $icon>/tmp/icon
 if [ "$line" = "" ] &amp;&amp; [ "$summary" != "" ]; then
   [ -x "$(which notify-send)" ] &amp;&amp; notify-send -u critical -t "$delay" -i "$icon
 fi
-</p><p></pre>
+<p></pre>
 Dadurch wird zum Beispiel folgende Notification angezeigt:
 <img src="images/notify_send_apache.png"  style="max-width:435px;"
 alt="Screenshot" 
@@ -151,7 +151,7 @@ direkt aufruft. Kombiniert man diese Mechanik aber noch mit ein wenig
 kommt eine Lösung heraus, mittels derer man ( es wird vorausgesetzt, dass 
 Apache auf dem Rechner, auf dem die Notifications angezeigt werden sollen installiert ist)
 durch simples wget oder curl Notifications erscheinen lassen kann:
-</p></p><pre>
+</p><pre>
 #!/bin/bash
 </p><p>
 echo "Content-type: text/html"
@@ -174,12 +174,12 @@ echo "$ICON"
 echo "&lt;/dd>&lt;/dl>&lt;/p>"
 echo "&lt;/body>&lt;/html>" 
 echo -e $TOPIC'\n'$MESSAGE'\n'$ICON'\n\n' | nc 127.0.0.1 12000
-</p><p></pre>
+<p></pre>
 Ein Beispiel für die oben gezeigte Notification sähe dann etwa so aus:
-</p></p><pre>
+</p><pre>
 wget "http://localhost/cgi-bin/notify.cgi?topic=Topic&amp;message=Message&amp;icon=document-open"
-</p><p></pre>
-</p>				</div>
+<p></pre>
+aaa				</div>
 				<div class="w3-container w3-padding" id="links">
 					<hr/>
 					<h3>
@@ -360,6 +360,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -372,7 +382,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -386,17 +396,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -431,6 +430,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -443,7 +452,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -457,17 +466,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

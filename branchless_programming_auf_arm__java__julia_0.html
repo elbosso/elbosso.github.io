@@ -99,7 +99,7 @@ nicht alles gesagt oder dass ich einiges überhört habe - die im Video gezeigte
 mit GCC nicht, wenn man nicht die Optimierungen aktiviert.
 </p><p>
 Der Code des Beispiels
-</p></p><pre>
+</p><pre>
 int max(int a, int b)
 {
     if(a>b)
@@ -107,9 +107,9 @@ int max(int a, int b)
     else
         return b;
 }
-</p><p></pre>
+<p></pre>
 Sieht bei einer Übersetzung mittels <span class="mdcode">gcc -S te.c</span> so aus:
-</p></p><pre>
+</p><pre>
 max:
 .LFB0:
         .cfi_startproc
@@ -132,10 +132,10 @@ max:
         .cfi_def_cfa 7, 8
         ret
         .cfi_endproc
-</p><p></pre>
+<p></pre>
 Erst wenn man die Optimierungen aktiviert - wie zum Beipiel mittels <span class="mdcode">gcc -S -O5 te.c</span> erhält man die im Video angesprochene
 Version ohne Sprünge:
-</p></p><pre>
+</p><pre>
 max:
 .LFB23:
         .cfi_startproc
@@ -144,17 +144,17 @@ max:
         cmovge  %edi, %eax
         ret
         .cfi_endproc
-</p><p></pre>
+<p></pre>
 In diesem Fall zeigt sich auch die Bestätigung der im Video bereits gemachten Aussage: In trivialen Fällen bringt es nichts,
 selbst zu versuchen, Sprünge zu verhindern - etwa mit diesem (dem Video entnommenen) Code:
-</p></p><pre>
+</p><pre>
 int max1(int a, int b)
 {
     return a*(a>b)+b*(a&lt;=b);
 }
-</p><p></pre>
+<p></pre>
 Der erzeugt nämlich optimiert etwas längeren und damit ineffizienteren Maschinencode:
-</p></p><pre>
+</p><pre>
 max1:
 .LFB24:
         .cfi_startproc
@@ -170,11 +170,11 @@ max1:
         leal    (%rdx,%rsi), %eax
         ret
         .cfi_endproc
-</p><p></pre>
+<p></pre>
 </p><p>
 Wie sieht es aber für komplexere Beispiele aus? Ich habe (ebenfalls dem Video nachempfunden) auch ein etwas komplexeres Beispiel untersucht.
 Der C-Quelltext für beide Varianten sieht wie folgt aus:
-</p></p><pre>
+</p><pre>
 int toUpper(char *buf)
 {
     char *pointer=buf;
@@ -199,9 +199,9 @@ int toUpper1(char *buf)
         ++pointer;
     }
 }
-</p><p></pre>
+<p></pre>
 Der dazu korrespondierende Maschinencode - ebenfalls wider mit <span class="mdcode">-O5</span> übersetzt ergibt sich zu:
-</p></p><pre>
+</p><pre>
 toUpper:
 .LFB25:
         .cfi_startproc
@@ -248,7 +248,7 @@ toUpper1:
         jne     .L13
         rep ret
         .cfi_endproc
-</p><p></pre>
+<p></pre>
 Hier kann man mehrere Dinge erkennen:
 <ul>
 <li>Die Branchless-Methode kommt nicht ganz ohne Sprünge aus - schließlich ist eine Schleife enthalten. Das könnte man nur durch Loop Unrolling
@@ -257,7 +257,8 @@ verhindern - allerdings kann das die Nebenwirkung haben, damit den Cache explodi
 die Performance der Lösung etwas höher ist.</li>
 <li>Die Branchless-Variante ist von der anzahl der Meschinenbefehle her sogar etwas kürzer, was nochmals auf eine Performance.Steigerung hoffen lässt.</li>
 </ul>
-</p>				</div>
+</p><p>
+				</div>
 				<div class="w3-container w3-padding" id="nextPage">
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
@@ -389,6 +390,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -401,7 +412,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -415,17 +426,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -460,6 +460,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -472,7 +482,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -486,17 +496,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

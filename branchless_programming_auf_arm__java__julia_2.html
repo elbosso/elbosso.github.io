@@ -98,7 +98,7 @@ An dieser Stelle bekam ich seltsame Ideen: Würde diese Idee des Branchless Prog
 die keinen direkten Maschinencode produzieren sondern einen zur Laufzeit interpretierten Bytecode - beispielsweise Java?
 </p><p>
 Ich portierte dazu den Code zunächst nach Java, was folgendes ergab:
-</p></p><pre>
+</p><pre>
 	int max(int a, int b)
 	{
 		if(a>b)
@@ -131,9 +131,9 @@ Ich portierte dazu den Code zunächst nach Java, was folgendes ergab:
 			buf[i]=(byte)(pointedAt-(32*a));
 		}
 	}
-</p><p></pre>
+<p></pre>
 Anschließend verglich ich den Bytecode beider Beispiele - zunächst den für max:
-</p></p><pre>
+</p><pre>
   int max(int, int);
     Code:
        0: iload_1
@@ -170,10 +170,10 @@ Anschließend verglich ich den Bytecode beider Beispiele - zunächst den für ma
       25: imul
       26: iadd
       27: ireturn
-</p><p></pre>
+<p></pre>
 Schon von der schieren Länge her scheint es kaum möglich, dass die branchless Variante hier einen Performance-Vorteil hat. Schauen
 wir uns noch den Bytecode der etwas komplexeren Variante an:
-</p></p><pre>
+</p><pre>
   public void toUpper(byte[]);
     Code:
        0: iconst_0
@@ -245,12 +245,13 @@ wir uns noch den Bytecode der etwas komplexeren Variante an:
       44: iinc          2, 1
       47: goto          2
       50: return
-</p><p></pre>
+</p><p>
+<p></pre>
 Auch hier scheint es unmöglich, dass sich die Performance in der branchless-Variante steigert, da bereits der Bytecode
 dieser Variante deutlich länger ist. Ich habe dennoch Benchmarks durchgeführt und die haben zu einem für mich erstaunlichen Ergebnis
 geführt, das ich hier nicht vorenthalten möchte. Dazu habe ich jede Implementierung in einer Schleife oft wiederholen lassen und
 diesen Test jeweils 10 Mal wiederholt - hier zunächst die Ergebnisse für max:
-</p></p><pre>
+</p><pre>
 00:00:00.020834
 00:00:00.019635
 00:00:00.019565
@@ -272,11 +273,11 @@ diesen Test jeweils 10 Mal wiederholt - hier zunächst die Ergebnisse für max:
 00:00:00.021784
 00:00:00.021579
 00:00:00.021609
-</p><p></pre>
+<p></pre>
 Man sieht, dass die branchless-Variante zwar - wie erwartet - langsamer ist aber überraschenderweise scheint die Streuung der Ergebnisse
 deutlich geringer zu sein als in der "normalen" Variante. Dieses Ergebnis brachte mich dazu, das nicht-triviale Beispiel mit derselben Methode
 nochmals zu untersuchen - mit folgenden Ergebnissen:
-</p></p><pre>
+</p><pre>
 00:00:00.350852
 00:00:00.319269
 00:00:00.325429
@@ -298,12 +299,13 @@ nochmals zu untersuchen - mit folgenden Ergebnissen:
 00:00:00.357167
 00:00:00.355692
 00:00:00.352458
-</p><p></pre>
+<p></pre>
 Auch hier zeigt sich eine sehr viel geringere Schwankungsbreite der Ergebnisse in der branchless-Variante, die aber wieder insgesamt gesehen
 deutlich länger benötigt als die "normale" Variante. Damit scheint es so zu sein, dass aus Performance-Sicht die Erstellung von
 branchless-Varianten von Algorithmen in Java den Aufwand nicht rechtfertigt, allerdings die Anzahl bedingter Sprünge im Bytecode
 die Streuung von Benchmarkergebnissen deutlich erhöht.
-</p>				</div>
+</p><p>
+				</div>
 				<div class="w3-container w3-padding" id="nextPage">
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
@@ -435,6 +437,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -447,7 +459,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -461,17 +473,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -506,6 +507,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -518,7 +529,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -532,17 +543,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

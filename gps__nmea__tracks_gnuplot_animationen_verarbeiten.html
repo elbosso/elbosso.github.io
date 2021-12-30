@@ -127,9 +127,9 @@ in ein etwas Gnuplot-freundlicheres
 - vor allem, was die
 <a href="https://stackoverflow.com/questions/60870354/error-need-full-using-spec-for-x-time-data">Zeit</a>
 anging:
-</p></p><pre>
+</p><pre>
 gawk -F "," '$1=="$GPRMC" &amp;&amp; $3 != "V" {print substr($10,1,2)"/"substr($10,3,2)"/"substr($10,5,2)"-"substr($2,1,2)":"substr($2,3,2)":"substr($2,5,2)"\t"$10"\t"$2"\t"$8}' input_nmea.TXT>gpl.dat
-</p><p></pre>
+<p></pre>
 </p><p>
 Danach konnte ich daran gehen, das Gnuplot-Skript zu entwerfen - die Grundidee war, dass ich
 die Gesamtdaten des Tracks darstellen wollte und darüber überlagert die Daten <span class="mdbold">bis zu</span> einem
@@ -161,7 +161,7 @@ Variiert man den Zeitpunkt zwischen
 <a href="https://entorb.net/wickie/Gnuplot#Finding_Min_and_Max_for_X_and_Y">Beginn und Ende des Tracks</a>
 und speichert die jeweils gerenderten Abbildungen, kann man darauf eine Animation erstellen.
 Dazu kam das folgende Gnuplot-Skript zum Einsatz:
-</p></p><pre>
+</p><pre>
 stats "gpl.dat" using 4 name "A"
 </p><p>
 set xdata time
@@ -187,7 +187,7 @@ set output filename
 #Visualisierung Variante 2
 plot 'gpl.dat' using 1:4 w lines title "",'gpl.dat' u ($0 == ii  ? timecolumn(1) : 1/0):4 w p pt 7 ps 2 title ""
 }
-</p><p></pre>
+<p></pre>
 </p><p>
 Dabei wurde die Höhe des Diagramms noch ein wenig angepasst, um dem Hintergrund (zum Beispiel Live-Kamerabild)
 mehr Geltung verschaffen zu können. Die endgültige Größe und Position des Diagramms kann ebenso wie die Größe des erzeugten Bildes und das Styling
@@ -195,10 +195,9 @@ des Diagramms in weiten Grenzen angepasst werden - mir ging es lediglich um die 
 </p><p>
 Zum Schluss kann man - zum Beispiel mittels <span class="mdcode">ffmpeg</span> - die Einzelbilder zu einer Animation zusammenfassen, indem man
 ein Kommando wie dieses hier ausführt:
-</p></p><pre>
+</p><pre>
 ffmpeg -r:v 1 -start_number 50704 -i "tmp/gnuplotanim/%05d.png" -codec:v libx264 movie.mp4
-</p><p></pre>
-</p><p>
+</pre><p>
 Dieses Kommando erzeugt eine Animation in Echtzeit: sie dauert exakt so lange, wie die Aufzeichnung des Tracks gedauert hat
 und eignet sich daher sehr gut als Overlay des Live-Kamerabilds. Das wird dadurch erreicht, dass mittels <span class="mdcode">-r 1</span> eine Framerate von einem Bild pro Sekunde
 vorgegeben wurde - der Originaltrack wurde mit einem Datenpunkt jede Sekunde aufgezeichnet.
@@ -329,6 +328,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -341,7 +350,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -355,17 +364,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -400,6 +398,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -412,7 +420,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -426,17 +434,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

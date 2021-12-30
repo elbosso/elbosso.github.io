@@ -127,15 +127,15 @@ Weiterhin wurde erste Tests zur Verwendung des Projektes für Cross-Zertifizieru
 </p><p>
 Erstellt man zwei PKI - je eine für Domain A und Domain B - wie hier dargestellt, so vertraut user1 einer EMail von user2 nicht,
 da dessen Zertifikat +ber keine von user1 als vertrauenswürdig eingestufte Wurzel verfügt.
-</p></p><p><img class="center" src="images/plantuml/-697664440.png" style="max-width:1508px;"">
+</p><p><img class="center" src="images/plantuml/-697664440.png" style="max-width:1508px;"">
 </p><p>
 Dieses Bild zeigt die Vertrauensketten, die user1 und user2 kennen - sie liegen jeweils in der eigenen Domain.
-</p></p><p><img class="center" src="images/plantuml/-357319978.png" style="max-width:736px;"">
+</p><p><img class="center" src="images/plantuml/-357319978.png" style="max-width:736px;"">
 </p><p>
 Beide könnten nun überein kommen, den Wurzelzertifikaten der jeweils anderen Domain das Vertrauen auszusprechen.
 Dann sind aber beide auf die Integrität und Vertrauenswürdigkeit der jeweils anderen Root CA angewiesen. Besser ist es,
 wenn dieses gegenseitige Vertrauen entkoppelt wird wie in der nächsten Abbildung dargestellt:
-</p></p><p><img class="center" src="images/plantuml/-1749614903.png" style="max-width:1508px;"">
+</p><p><img class="center" src="images/plantuml/-1749614903.png" style="max-width:1508px;"">
 </p><p>
 Dadurch, dass in Domain A eine CA eingerichtet wurde, die das Zertifikat der Identity CA B beglaubigt, entsteht
 eine Vertrauenskette, die user1 nutzen kann, um Zertifikate der Identity CA B zu prüfen - er muss dazu jetzt nicht mehr
@@ -144,7 +144,7 @@ diese Kopplung wieder aufheben - er benötigt dazu nicht die Unterstützung der 
 er den Verdacht hat, dass Domain B kompromittiert worden ist. Dazu muss er einfach das Zertifikat, das durch die Bridge cA
 für Identity CA B asusgestellt wurde widerrufen. Die untenstehende Abbildung zeigt die zwei bekannten Vertrauensketten und
 die durch die Bridge CA zusätzlich hinzugekommene:
-</p></p><p><img class="center" src="images/plantuml/1797325221.png" style="max-width:1077px;"">
+</p>aaa<p><img class="center" src="images/plantuml/1797325221.png" style="max-width:1077px;"">
 </p><p>
 Die Administration der Domain B kann sich entscheiden, dasselbe Vorgehen spiegelbildlich ebenfalls auszuführen -
 damit wird auch die Herkunft des Begriffes Cross Certification plausibel: Würde man diese zusätzliche Vertrauenskette ebenfalls noch
@@ -167,10 +167,9 @@ in die Darstellung integrieren, würden sich die zwei kreuzen.
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
+<p>Ich habe immer wieder Anlauf genommen, mir das Folgende mal von der Seele zu schreiben und es immer wieder aufgeschoben - jetzt ist
 es aber soweit!
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="was_bedeutet_vorhaengeschloss_browser_.html#content">Öffnen</a>
@@ -190,12 +189,11 @@ es aber soweit!
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe hier bereits öfter über die Einrichtung und Konfiguration von
+<p>Ich habe hier bereits öfter über die Einrichtung und Konfiguration von
 PKI bzw. CS
 gesprochen. Beides benötigt für die sensiblen Daten nicht wirklich viel Platz - allerdings wäre es schön,
 wenn diese Daten besonders geschützt wären...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="datei_verschluesseln_luks_dmcrypt.html#content">Öffnen</a>
@@ -215,9 +213,8 @@ wenn diese Daten besonders geschützt wären...
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe ausprobiert, die verbleibende Lebenszeit von X.509-Zertifikaten per Telegraf, Influx und Grafana zu überwachen
-</p></p>
-						</div>
+<p>Ich habe ausprobiert, die verbleibende Lebenszeit von X.509-Zertifikaten per Telegraf, Influx und Grafana zu überwachen
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="zertifikatsgueltigkeit_ueberwachen_grafana.html#content">Öffnen</a>
@@ -344,6 +341,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -356,7 +363,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -370,17 +377,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -415,6 +411,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -427,7 +433,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -441,17 +447,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

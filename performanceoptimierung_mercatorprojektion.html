@@ -124,9 +124,9 @@ dieses Dreieckes eingefärbt.
 Zunächst einige Randbedingungen: Die Erzeugung der Benchmark-Planeten lief bis in die 6. Rekursionsebene. Daraus
 resultieren 81920 Dreiecke. Die Mercatorprojektion wurde als Bild mit einer Auflösung von 800 Pixel * 600 Pixel erzeugt.
 In einem Single-Thread Durchlauf ohne irgendwelche Optimierungen wurde eine Generierung in rund 28 Sekunden absolviert.
-</p></p><pre>
+</p><pre>
 ray tracing took 00:28:32.358739
-</p><p></pre>
+<p></pre>
 Da hierbei der Computer nur zu 25% ausgelastet war, war die nächste Optimierung klar: Alle Kerne wurden genutzt.
 Die Tests ergaben, dass bereits 4 Threads (einer pro Kern) für die Rückprojektion ausreichten, die
 Auslastung des Rechners auf 99% zu heben. Wir ich bereits im Hauptseminar lernte, macht es keinen Sinn, Raytracing
@@ -134,38 +134,37 @@ mit General-Purpose-CPUs auf Pixelebene
 zu parallelisieren. Daher wurden Worker erstellt, die jeweils eine Zeile der Projektion zu berechnen hatten und vier
 Threads, die diese insgesamt 600 Worker abarbeiten mussten. Dadurch wurde eine Beschleunigung erreicht, die jedoch
 nur marginal ausfiel: nunmehr brauchte die Erzeugung der Projektion nur noch rund 20 Sekunden:
-</p></p><pre>
+</p><pre>
 ray tracing took 00:20:14.845007
-</p><p></pre>
+<p></pre>
 Das reichte mir noch nicht. Da die Suche bisher in einem großen unsortierten Heuhaufen von Dreiecken operierte, versuchte
 ich vor dem eigentlichen Check auf Durchdringung eines Dreiecks durch den Strahl - eine Aufgabe, die mit vielen komplexen
  Operationen (Trigonometrie, Quadratwurzeln,...) verbunden ist - die Anzahl der zu testenden Dreiecke zuu reduzieren. Ich teilte dazu
  den Raum in Oktanten ein und testete vor jedem Durchdringungstest zunächst, ob der Strahl in den Oktanten zeigte,
  in dem das fragliche Dreieck lag. Diese Optimierung lieferte drastisch bessere Ergebnisse - die Berechnung wurde nun in
 erwas mehr als 11 Sekunden erledigt:
-</p></p><pre>
+</p><pre>
 ray tracing took 00:11:23.174519
-</p><p></pre>
+<p></pre>
 Die Berechnung des Oktanten für die Dreiecke wurde aus dem Code für den Durchdringungscheck ausgelagert - jetzt berechnete
  ich den Oktanten für jedes Dreieck vor Beginn der Projektion. Dadurch erreichte ich eine nochmalige Verbesserung auf rund 10 Sekunden:
-</p></p><pre>
+</p><pre>
 ray tracing took 00:10:14.295899
-</p><p></pre>
+<p></pre>
 Bis zu diesem Zeitpunkt mussten sich die einzelnen Worker beim Übertragen der Farben in das Zielbild immer noch synchronisieren - Daher
 erzeugte ich nun ein Zielbild für jeden Worker, deren Inhalte ich nach Abschluss der Berechnung "übereinanderkopierte",
 woraus erst das eigentliche Zielbild entstand. Das machte den Prozess der Erzeugung nochmals geringfügig schneller und ich
 erreichte das erste Mal eine Zeit von unter 10 Sekunden:
-</p></p><pre>
+</p><pre>
 ray tracing took 00:09:44.255353
-</p><p></pre>
+<p></pre>
 An diesem Punkt bemerkte ich einen fatalen Fehler in der Bestimmung der Oktanten der dazu führte, dass ich bisher die
 Dreiecke nicht in 8, sondern nur in zwei Untermengen aufgeteilt hatte. Dieser Fehler wurde beseitigt und die Separierung
 der Dreiecke nochmals erweitert: Nunmehr benutzte ich statt 8 Oktanten 16 Bereiche (wie nennt man das eigentlich?) und dadurch wurde
 der vorerst letzte Quantensprung in der Performance erreicht:
-</p></p><pre>
+</p><pre>
 ray tracing took 00:02:56.765160
-</p><p></pre>
-</p>				</div>
+</pre>				</div>
 				<div class="w3-container w3-padding" id="commentsgithub">
 					<p>
 						<a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Performanceoptimierung Mercatorprojektion&body=[Performanceoptimierung Mercatorprojektion](https://elbosso.github.io/performanceoptimierung_mercatorprojektion)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
@@ -285,6 +284,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -297,7 +306,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -311,17 +320,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -356,6 +354,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -368,7 +376,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -382,17 +390,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

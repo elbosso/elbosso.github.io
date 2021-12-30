@@ -113,9 +113,9 @@ zu ändern und bekam für jede der im Raid befindlichen Platten eine Fehlermeldu
 </p><p>
 Ich stieß im Internet auf die Idee, statt <span class="mdcode">hdparm</span> einen service namens <span class="mdcode">hd-idle</span> zu nutzen. Nach Installation und Konfiguration
 mittels
-</p></p><pre>
+</p><pre>
 HD_IDLE_OPTS="-i 0 -a /dev/sdb -i 600 -a /dev/sdc -i 600 -a /dev/sdd -i 600 -a /dev/sde -i 600 -l /var/log/hd-idle.log"
-</p><p></pre>
+<p></pre>
 </p><p>
 funktionierte es tatsächlich wieder: Nach 10 Minuten ohne Beschäftigung wechselten die Platten in den Standby-Modus.
 </p><p>
@@ -126,7 +126,7 @@ Ich wollte aber an Telegraf/InfluxDB/Grafana festhalten und nicht irgendetwas da
 läuft aber nicht unter dem Nutzer <span class="mdcode">root</span>.
 Also teilte ich die Funktionalität auf: Ich schrieb ein Skript, das der Nutzer <span class="mdcode">root</span> per
 Cron ausführt - Dieses Skript schreibt den Status aller überwachten Festplatten in temporäre Dateien:
-</p></p><pre>
+</p><pre>
 #!/bin/bash
 </p><p>
 mkdir -p /tmp/diskstats
@@ -158,7 +158,7 @@ if [ "$sdestat" = "standby" ]; then
 else
         echo -n "1" >"/tmp/diskstats/sde"
 fi
-</p><p></pre>
+<p></pre>
 </p><p>
 <span class="mdbold">Wichtig ist hier, die Pfade zu den Programmen explizit anzugeben: Das Skript soll von Cron aufgerufen werden und
 erbt den extrem eingeschränkten Suchpfad <span class="mdcode">PATH</span> von Cron!</span>
@@ -166,7 +166,7 @@ erbt den extrem eingeschränkten Suchpfad <span class="mdcode">PATH</span> von C
 Ein anderes Skript, das ich dann über das
 <a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec">exec-Plugin</a>
 von Telegraf einband liest diese temporären Dateien aus und schreibt die Werte in die InfluxDB:
-</p></p><pre>
+</p><pre>
 #!/bin/bash
 </p><p>
 HOST=$(hostname)
@@ -179,16 +179,15 @@ sdd=$(cat /tmp/diskstats/sdd)
 echo "diskstat,host=${HOST},dev=/dev/sdd state=${sdd}i"
 sde=$(cat /tmp/diskstats/sde)
 echo "diskstat,host=${HOST},dev=/dev/sde state=${sde}i"
-</p><p></pre>
+<p></pre>
 </p><p>
 Eingebunden wird das Skript in Telegraf zum Beispiel so:
-</p></p><pre>
+</p><pre>
 [[inputs.exec]]
   commands = [ "/bin/bash /opt/telegraf/diskstat.sh" ]
   timeout = "10s"
   data_format = "influx"
-</p><p></pre>
-</p><p>
+</pre><p>
 Da die Werte nun in der InfluxDB stehen, kann ich den Status
 anschließend mittels Grafana visualisieren:
 </p><p>
@@ -216,7 +215,7 @@ Grafana zeigt den Status der vier Festplatten im Raid an
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Obwohl mein
+<p>Obwohl mein
 letztes Vorhaben
 mit dem Rock64 kläglich gescheitert ist habe ich ihn in mein Netzwerklabor eingebaut - und das bedeutet, dass die
 2-Faktor-Authentifizierung
@@ -224,8 +223,7 @@ aktiviert ist und das System mittels
 Telegraf
 Daten an die Influx-DB meldet und mit
 Grafana überwacht werden kann:
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="spezielle_telegraf_anpassungen_rock64.html#content">Öffnen</a>
@@ -245,12 +243,11 @@ Grafana überwacht werden kann:
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe ein neues Gerät in meinem Hardware-Zoo: Nachdem ich bereits einigeErfahrungen mit
+<p>Ich habe ein neues Gerät in meinem Hardware-Zoo: Nachdem ich bereits einigeErfahrungen mit
 Raspis
 sammeln konnte, machte mich ein Kollege neulich auf eine günstige Variante aufmerksam, Erfahrungen mit
 ARM64 zu sammeln...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="guenstiges_arm64_board_raspi_formfaktor.html#content">Öffnen</a>
@@ -377,6 +374,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -389,7 +396,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -403,17 +410,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -448,6 +444,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -460,7 +466,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -474,17 +480,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

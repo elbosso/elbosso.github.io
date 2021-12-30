@@ -114,43 +114,43 @@ eine Root-Shell in der Hinterhand haben, um etwaige Probleme beheben zu können!
 </p><p>
 Zur Einrichtung auf einem beliebigen Host/VM/Container erzeuge ich mir zunächst ein
 <a href="https://wiki.archlinux.org/index.php/Pam_oath">Secret:</a>
-</p></p><pre>
+</p><pre>
 head -10 /dev/urandom | sha512sum | cut -b 1-30
-</p><p></pre>
+<p></pre>
 </p><p>
 Es müssen auch einige Pakete installiert werden - unter Ubuntu 18.04 (und wahrscheinlich jeder Menge anderer
 Debian-Derivate) sieht das wie folgt aus:
-</p></p><pre>
+</p><pre>
 apt-get install libpam-oath oathtool
-</p><p></pre>
+<p></pre>
 </p><p>
 Ich trage dann - entweder in <span class="mditalics">common-auth</span> oder <span class="mditalics">sudo-auth</span> - die
 <a href="https://www.nongnu.org/oath-toolkit/pam_oath.html">Konfiguration</a>
 für das neue Modul ein:
-</p></p><pre>
+</p><pre>
 auth    [success=2 default=ignore]      pam_oath.so usersfile=/etc/users.oath
-</p><p></pre>
+<p></pre>
 </p><p>
 <span class="mdbold">Die Zahl hinter 'success' überspringt die angegebene Zahl an alternativen Möglichkeiten zur Authentifizierung,
 die eventuell dahinter im Config-File noch konfiguriert sind - sie muss auf die tatsächlichen Gegebenheiten angepasst werden!</span>
 Nun muss die Datei <span class="mditalics">/etc/users.oath</span> angelegt werden - als <span class="mdbold">secret</span> benutzen wir das oben erzeugte:
-</p></p><pre>
+</p><pre>
 # Option User Prefix Seed
 HOTP/T30/6 &lt;user> - &lt;secret>
-</p><p></pre>
+<p></pre>
 </p><p>
 Nicht vergessen, die Rechte korrekt zu setzen!
-</p></p><pre>
+</p><pre>
 chmod 600 /etc/users.oath
 chown root /etc/users.oath
-</p><p></pre>
+<p></pre>
 </p><p>
 Nun kann man beginnen zu testen - falls nicht alles sofort funktioniert, kann man auch den
 <a href="https://www.nongnu.org/oath-toolkit/pam_oath.html">Debug-Modus</a>
 aktivieren - sollte man im Produktivbetrieb natürlich deaktivieren. Ein erstes Token kann man sich wie folgt erzeugen:
-</p></p><pre>
+</p><pre>
 oathtool --verbose --totp &lt;secret>
-</p><p></pre>
+<p></pre>
 </p><p>
 Dieser Aufruf hat außer der Erstellung eines Tokens noch einen weiteren nützlichen Nebeneffekt: er zeigt unser Secret
 als <span class="mdbold">Base32</span> an - ein Modus, den manche Token erzeugende Apps benötigen.
@@ -165,9 +165,9 @@ Beide funktionieren gut - beim Modus ist TOTP auszuwählen.
 hat vielleicht den leichten Vorteil, dass man einen
 <a href="https://natanael.arndt.xyz/2018/02/27/totp">QR-Code</a>
 einscannen kann, dessen Inhalt folgendem Muster folgen muss:
-</p></p><pre>
+</p><pre>
 otpauth://totp/&lt;profile name>?secret=&lt;secret>
-</p><p></pre>
+<p></pre>
 </p><p>
 Dabei ist zu beachten, dass der Profilname beliebig gewählt werden kann und beim Secret die Base32-Variante angegeben werden muss!
 </p><p>
@@ -175,15 +175,14 @@ Solche QR-Codes kann man mit allen möglichen Werkzeugen erstellen - es ist soga
 ist das Tool
 <a href="https://segno.readthedocs.io/en/stable/index.html">segno.</a>
 die Installation erfolgt mittels
-</p></p><pre>
+</p><pre>
 pip3 install segno
-</p><p></pre>
+<p></pre>
 </p><p>
 Benutzt wird es zum Beispiel wie folgt:
-</p></p><pre>
+</p><pre>
 segno --border=1 -e L 'otpauth://totp/&lt;profile name>?secret=&lt;secret>'
-</p><p></pre>
-</p>				</div>
+</pre>				</div>
 				<div class="w3-container w3-padding" id="referers">
 				<h3>
 					Artikel, die hierher verlinken
@@ -201,12 +200,11 @@ segno --border=1 -e L 'otpauth://totp/&lt;profile name>?secret=&lt;secret>'
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich habe bereits verschiedentlich über alternative Möglichkeiten zur
+<p>Ich habe bereits verschiedentlich über alternative Möglichkeiten zur
 2-Faktor-Authentifizierung
 unter Linux mittels pam berichtet.
 Inzwischen stelle ich fest, dass es jedes Mal, wenn ich ein Betriebssystem-Upgrade durchführe zu Problemen mit pam_nfc kommt
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="pam_nfc_ubuntu_20_04.html#content">Öffnen</a>
@@ -226,7 +224,7 @@ Inzwischen stelle ich fest, dass es jedes Mal, wenn ich ein Betriebssystem-Upgra
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Obwohl mein
+<p>Obwohl mein
 letztes Vorhaben
 mit dem Rock64 kläglich gescheitert ist habe ich ihn in mein Netzwerklabor eingebaut - und das bedeutet, dass die
 2-Faktor-Authentifizierung
@@ -234,8 +232,7 @@ aktiviert ist und das System mittels
 Telegraf
 Daten an die Influx-DB meldet und mit
 Grafana überwacht werden kann:
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="spezielle_telegraf_anpassungen_rock64.html#content">Öffnen</a>
@@ -362,6 +359,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -374,7 +381,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -388,17 +395,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -433,6 +429,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -445,7 +451,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -459,17 +465,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

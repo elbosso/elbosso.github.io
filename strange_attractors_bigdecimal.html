@@ -117,7 +117,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 					<h5>Updates</h5>
 					<ul>
 						<li>
-							<a href="#103">
+							<a href="#101">
 								26. Februar 2020
 							</a>
 						</li>
@@ -159,33 +159,33 @@ Wert von 100 Nachkommastellen bei der Benutzung von BigDecimal gearbeitet.
 </p><p>
 Ein weiterer Beleg für die unzureichende Qualität bei der Berechnung mathematischer Probleme mit dem Datentyp double - nicht nur
 mittels Java - zeigt sich bei der Berechnung der Differentialgleichung erster Ordung
-</p></p><p><img class="formula" src="images/tex/-20288391301.png" alt="\dot x=(ku-ax)/t;
+</p><p><img class="formula" src="images/tex/-20288391301.png" alt="\dot x=(ku-ax)/t;
 " title="\dot x=(ku-ax)/t;
 ">
 </p><p>
 mit
-</p></p><p><img class="formula" src="images/tex/-20288391302.png" alt="\begin{matrix}k&=&1\hfill\cr a&=&1\hfill\cr t&=&1\hfill\end{matrix}
+</p><p><img class="formula" src="images/tex/-20288391302.png" alt="\begin{matrix}k&=&1\hfill\cr a&=&1\hfill\cr t&=&1\hfill\end{matrix}
 " title="\begin{matrix}k&=&1\hfill\cr a&=&1\hfill\cr t&=&1\hfill\end{matrix}
 ">
 </p><p>
 und dem Anfangswert
-</p></p><p><img class="formula" src="images/tex/-20288391303.png" alt="x_0=0
+</p><p><img class="formula" src="images/tex/-20288391303.png" alt="x_0=0
 " title="x_0=0
 ">
 </p><p>
 Hier sollte sich der Zustand (der Wert von x) asymptotisch dem Wert der Störung u annähern. Setzt man zum Beispiel
-</p></p><p><img class="formula" src="images/tex/-20288391304.png" alt="u=1
+</p><p><img class="formula" src="images/tex/-20288391304.png" alt="u=1
 " title="u=1
 ">
 </p><p>
 so sollte sich bei numerischer Lösung des Gleichungssystems der Wert von x langsam dem Wert 1 nähern. Behandelt man die Differentialgleichung
 aber mit dem Eulerverfahren mit einer festen Schrittweite von
-</p></p><p><img class="formula" src="images/tex/-20288391305.png" alt="h=0.1
+</p><p><img class="formula" src="images/tex/-20288391305.png" alt="h=0.1
 " title="h=0.1
 ">
 </p><p>
 so ändert sich der Wert von x ab Schritt 333 nicht mehr - er bleibt bei
-</p></p><p><img class="formula" src="images/tex/-20288391306.png" alt="x_{333}=0.9999999999999996
+</p><p><img class="formula" src="images/tex/-20288391306.png" alt="x_{333}=0.9999999999999996
 " title="x_{333}=0.9999999999999996
 ">
 </p><p>
@@ -195,14 +195,15 @@ ist die gesamte Berechnung am diesem Schritt falsch.
 </p><p>
 Zum Vergleich noch die Werte an dieser Stelle bei der Berechnung mittels des Typs BigDecimal mit 100 Nachkommastellen
 (zur Darstellung schneide ich hier jeweils nach 20 Nachkommastellen ab):
-</p></p><p><img class="formula" src="images/tex/-20288391307.png" alt="\begin{matrix}x_{333}&=&0.99999999999999942089\hfill\cr x_{334}&=&0.99999999999999947880\hfill\cr x_{335}&=&0.99999999999999953092\hfill\end{matrix}
+</p><p><img class="formula" src="images/tex/-20288391307.png" alt="\begin{matrix}x_{333}&=&0.99999999999999942089\hfill\cr x_{334}&=&0.99999999999999947880\hfill\cr x_{335}&=&0.99999999999999953092\hfill\end{matrix}
 " title="\begin{matrix}x_{333}&=&0.99999999999999942089\hfill\cr x_{334}&=&0.99999999999999947880\hfill\cr x_{335}&=&0.99999999999999953092\hfill\end{matrix}
 ">
 </p><p>
 Man sieht deutlich, dass die Berechnung nach dem 333. Schritt wegen der größeren Präzision weitergeht und auch den doch schon
 beachtlichen Fehler in Schritt 333.
 </p><p>
-<h3><a name="103">Aktualisierung vom 26. Februar 2020</a></h3><div class="update">Das Verhalten dieses Systems kann nun auch interaktiv mittels Jupyter erforscht werden: Mein Projekt auf GitHub
+aaa<p>
+<h3><a name="101">Aktualisierung vom 26. Februar 2020</a></h3><div class="update">Das Verhalten dieses Systems kann nun auch interaktiv mittels Jupyter erforscht werden: Mein Projekt auf GitHub
 zum Thema
 <a href="https://github.com/elbosso/nonlinear_chaotic_systems">Nichtlineare dynamische Systeme</a>
 enthält dazu ein
@@ -305,11 +306,10 @@ gestartet werden kann.
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich wollte nach
+<p>Ich wollte nach
 längerer Zeit
 wieder einmal in die Welt chaoticher Systeme eintauchen und habe mich dazu mit zwei Systemen beschäftigt...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="van_der_pol__chua_systeme.html#content">Öffnen</a>
@@ -329,14 +329,13 @@ wieder einmal in die Welt chaoticher Systeme eintauchen und habe mich dazu mit z
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich berichtete hier bereits von den durch die Einschränkungen der Fließkomma-Arithmetik-Implementierungen in modernen
+<p>Ich berichtete hier bereits von den durch die Einschränkungen der Fließkomma-Arithmetik-Implementierungen in modernen
 Computersystemen zu beachtenden Ungenauigkeiten in numerischen Computersimulationen am
 Beispiel nichtlinearer dynamischer Systeme.
 Nach meinen ersten Versuchen der
 Shaderprogrammierung
 habe ich eine weitere Methode untersucht, dieser Ungenauigkeiten mit vertretbarem Aufwand Herr zu werden...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="doppelte_genauigkeit_java.html#content">Öffnen</a>
@@ -356,13 +355,12 @@ habe ich eine weitere Methode untersucht, dieser Ungenauigkeiten mit vertretbare
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Das letzte Mal, als ich über Vor- und Nachteile der Durchführung mathematischer Berechnungen
+<p>Das letzte Mal, als ich über Vor- und Nachteile der Durchführung mathematischer Berechnungen
 mit verschiedenen Datentypen
 schrieb,
 vernachlässigte ich einen Aspekt, dessen Einfluss und Wichtigkeit
 von der benutzten Programmiersprache und konkreten Implementierung abhängt:
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="gc_beliebige_praezision_java.html#content">Öffnen</a>
@@ -489,6 +487,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -501,7 +509,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -515,17 +523,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -560,6 +557,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -572,7 +579,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -586,17 +593,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

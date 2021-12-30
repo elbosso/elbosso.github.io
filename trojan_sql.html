@@ -125,14 +125,14 @@ als Kommentar wahrgenommen wird in Wirklichkeit durch das Zielsystem als Code in
 </p><p>
 Mein Ansatz war, durch einen Kommentar eine WHERE-Klausel in einem SQL-Statement unwirksam zu machen - ganz ähnlich
 den berühmten SQL-Injection-Angriffen und doch anders. Das Ziel war also, dass ein Reviewer das SQL-Fragment wie folgt wahrnimmt:
-</p></p><pre>
+</p><pre>
 select * from example where name&lt;>'John' -- this is a comment
-</p><p></pre>
+<p></pre>
 </p><p>
 während der Computer (die Datenbank) das folgende Statement ausführt:
-</p></p><pre>
+</p><pre>
 select * from example where name&lt;>'John -- this is a comment'
-</p><p></pre>
+<p></pre>
 </p><p>
 Dafür müssen zwei Ziele erreicht werden:
 <ol><li>Der Reviewer muss anderen Text sehen, als die Datenbank verarbeitet</li><li>Die Anreicherung mit Unicode-Control-Characters darf bei der Ausführung der manipulieren Statements nicht zu Syntaxfehlern führen</li></ol>
@@ -200,7 +200,7 @@ Github Kommentar an einem Issue
 Ich reichte daraufhin einen
 Bugreport
 ein, der jedoch mit folgender Begründung abgelehnt wurde:
-</p></p><pre>
+</p><pre>
 Specifically, the danger presented by the Trojan Source vulnerability
 is source code that executes code that does something other than what
 it displays. Code snippets inside issue comments do not get executed
@@ -208,8 +208,7 @@ and therefore do not present a direct security risk. If the code
 inside of an issue comment is ever included in the source code by
 adding it to a file inside of GitHub, then the warning message will
 be displayed.
-</p><p></pre>
-</p><p>
+</pre><p>
 Überflüssig zu erwähnen, dass ich die dadurch entstehende Bedrohung als durchaus real ansehe. Ich denke da zum Beispiel an
 die beliebten Phishing-Mails, die den Einfruck erwecken, als stammten sie vom Chef - wenn es jemand schafft, einen
 Github-Account zu kapern und dann legitim erscheinende Kommentare zu hinterlassen wie etwa "Kannst Du das folgende SQL bitte im
@@ -485,6 +484,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -497,7 +506,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -511,17 +520,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -556,6 +554,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -568,7 +576,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -582,17 +590,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

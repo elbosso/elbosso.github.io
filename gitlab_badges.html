@@ -126,9 +126,9 @@ einzubauen. Das funktionierte tatsächlich so, wie
 <a href="https://docs.gitlab.com/ee/user/project/pipelines/settings.html#pipeline-status-badge">in der Dokumentation</a>
 angegeben - Bei mir sieht die
 URL zum Zugriff auf den Badge also so aus:
-</p></p><pre>
+</p><pre>
 http://&lt;gitlab-host>/%{project_path}/badges/%{default_branch}/pipeline.svg
-</p><p></pre>
+<p></pre>
 </p><p>
 Der nächste Schritt war es, eigene Badges zu erzeugen und sie in den Settings zu registrieren. Ich wollte
 zunächst mit einem statischen Badge beginnen - dynamische Inhalte sollten dann den Abschluss und die Krönung meiner Forschungen
@@ -141,7 +141,7 @@ Nachdem das geklärt war - wie erzeugt man nun im CI/CD-Prozess einen Badge, der
 Ich habe hier mal das Beispiel abgebildet, das den in der
 <a href="https://github.com/jongracecox/anybadge">anybadge</a>-Dokumentation gezeigten Badge erstellt,
 so dass ich ihn in Gitlab als Project-Badge nutzen kann. Dazu ist folgener Job in die Pipeline aufzunehmen:
-</p></p><pre>
+</p><pre>
 badges_before:
     stage: start
     script:
@@ -150,18 +150,18 @@ badges_before:
     artifacts:
         paths:
         - badges/*.svg
-</p><p></pre>
+<p></pre>
 </p><p>
 Auf diese Weise entsteht ein Badge, der dann in den Settings wie folgt eingetragen werden kann:
-</p></p><pre>
+</p><pre>
 http://&lt;gitlab-host>/%{project_path}/-/jobs/artifacts/%{default_branch}/raw/badges/pylint_%{default_branch}.svg?job=badges_before
-</p><p></pre>
+<p></pre>
 </p><p>
 Wichtig ist hier vor allem der Name des Jobs am Ende!
 Nun da das geklärt ist - zum bereits angekündigten Sahnehäubchen: Dem dynamischen Erzeugen von Badges. Dies geschah wieder
 in zwei Schritten: Schritt eins umfasste die Extraktion von Daten aus Dateien im Repository - das sah bei mir zum Beispiel
 wie folgt aus:
-</p></p><pre>
+</p><pre>
 badges_before:
     stage: start
     script:
@@ -170,14 +170,14 @@ badges_before:
     artifacts:
         paths:
         - badges/*.svg
-</p><p></pre>
+<p></pre>
 </p><p>
 So erhalte ich einen Badge mit der aktuellen Version der
 <a href="sQLshell.html">sQLshell,</a>
 den ich dann meinen Project-Badges wie folgt hinzufügen kann:
-</p></p><pre>
+</p><pre>
 http://&lt;gitlab-host>/%{project_path}/-/jobs/artifacts/%{default_branch}/raw/badges/sQLshell_%{default_branch}.svg?job=badges_after
-</p><p></pre>
+<p></pre>
 </p><p>
 Im zweiten und letzten Schritt setzte ich dem Ganzen noch die Krone auf - jetzt wollte ich es wissen und wirklich
 die gleiche Funktionalität wie bei Github erreichen: Ich wollte über die
@@ -186,14 +186,14 @@ Informationen extrahieren und diese mittels Project-Badges visualisieren. Als Th
 Anzahl der offenen/geschlossenen Issues aus. Dieses Thema konnte ich leider nicht mehr in .gitlab-ci.yml umsetzen -
 da scheint entweder der YAML-Parser einen Bug zu haben oder ich den YAML-Parser noch nicht verstanden zu haben.
 Also erstellte ich ein Script, das letztlich den darzustellenden Wert ermittelt - im Beispiel open_issues.sh:
-</p></p><pre>
+</p><pre>
 #!/bin/bash
 curl -i --header "Private-Token: xxxx-xxxx-xxxxxxxxxx" "http://&lt;gitlab-host>/api/v4/projects/1/issues?state=opened&amp;scope=all" 2>/dev/null|grep "X-Total:"|cut -d ':' -f 2
-</p><p></pre>
+<p></pre>
 </p><p>
 Wichtig dabei ist hier der korrekte Wert für die Project-ID (bei mir: 1) und der eigene für das Access-Token. Dieses
 Skript kann ich dann wie oben gesehen in .gitlab-ci.yml verwenden um den Badge zu erzeugen:
-</p></p><pre>
+</p><pre>
 badges_before:
     stage: start
     script:
@@ -202,13 +202,14 @@ badges_before:
     artifacts:
         paths:
         - badges/*.svg
-</p><p></pre>
+<p></pre>
 </p><p>
 Damit erhalte ich einen Badge, den ich dann wiederum als Project-Badge deklarieren kann:
-</p></p><pre>
+</p><pre>
 http://&lt;gitlab-host>/%{project_path}/-/jobs/artifacts/%{default_branch}/raw/badges/open_issues_%{default_branch}.svg?job=badges_before
-</p><p></pre>
-</p>				</div>
+<p></pre>
+</p><p>
+aaa				</div>
 				<div class="w3-container w3-padding" id="links">
 					<hr/>
 					<h3>
@@ -386,12 +387,11 @@ http://&lt;gitlab-host>/%{project_path}/-/jobs/artifacts/%{default_branch}/raw/b
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Die in den vorhergegangenen
+<p>Die in den vorhergegangenen
 Artikeln
 beschriebene Idee, Badges für Gitlab zu erzeugen mündete nun endlich in ein
 Github-Projekt...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="dynamische_gitlab_badges_iv.html#content">Öffnen</a>
@@ -411,12 +411,11 @@ Github-Projekt...
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>In einem
+<p>In einem
 früheren Artikel
 habe ich eine Möglichkeit vorgestellt, echt dynamische Badges für Gitlab zu erstellen. diese
 Herangehensweise hat aber einen großen Nachteil
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="dynamische_gitlab_badges_ii.html#content">Öffnen</a>
@@ -436,12 +435,11 @@ Herangehensweise hat aber einen großen Nachteil
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>In einem
+<p>In einem
 früheren Artikel
 untersuchte ich bereits verschiedene Möglichkeiten, Badges in Gitlab zu erzeugen - allerdings
 stellte mich die gefundene Lösung noch nicht endgültig zufrieden - bis jetzt...
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="dynamische_gitlab_badges.html#content">Öffnen</a>
@@ -568,6 +566,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -580,7 +588,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -594,17 +602,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -639,6 +636,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -651,7 +658,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -665,17 +672,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>

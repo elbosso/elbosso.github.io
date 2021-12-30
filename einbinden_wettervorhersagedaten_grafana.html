@@ -143,15 +143,15 @@ entschied mich aber dagegen. Ich schrieb ein kleines Python-Script, das für mic
 in eine
 <a href="https://www.influxdata.com/">InfluxDB</a>
 schreibt. Voraussetzung für die Funktion des Skripts ist die Installation des Python-Moduls <span class="mdcode">influxdb</span>, was über den Befehl
-</p></p><pre>
+</p><pre>
 pip3 install influxdb
-</p><p></pre>
+<p></pre>
 </p><p>
 geschehen kann - man beachte, dass hier unbedingt <span class="mdbold">pip3</span> benutzt werden muss und nicht <span class="mdbold">pip</span>, da das Skript Python
 in der Version 3 voraussetzt. Würde man hier <span class="mdcode">pip</span> benutzen, würde das Modul für Python in der Version <span class="mdbold">2</span>
 installiert und Python <span class="mdbold">3</span> würde sich weiterhin beschweren, dass es das Modul
 nicht finden kann!
-</p></p><pre>
+</p><pre>
 #!/usr/bin/env python3
 from influxdb import InfluxDBClient
 import requests
@@ -236,7 +236,8 @@ for timeserie in timeseries:
     jb["fields"]=stats
     json_body.append(jb)
     client.write_points(json_body)
-</p><p></pre>
+</p><p>
+<p></pre>
 </p><p>
 Führt man dieses Skript - zum Beispiel per Cron - stündlich aus, werden jeweils akuelle Vorhersagedaten in die
 Datenbank geschrieben, wobei InfluxDB von selbst Daten für Zeitpunkte, für die von früheren Vorhersagen bereits
@@ -253,7 +254,7 @@ class="center">
 <span class="imgdesc">
 Wettervorhersage
 </span>
-</p></p><pre>
+</p><pre>
 {
   "annotations": {
     "list": [
@@ -937,8 +938,7 @@ Wettervorhersage
   "uid": "OPvZAazRz",
   "version": 6
 }
-</p><p></pre>
-</p><p>
+</pre><p>
 <h3><a name="93">Aktualisierung vom 20. November 2021</a></h3><div class="update">Das Skript wurde überarbeitet: die Api erlaubt Requests nicht mehr wenn der User-Agent im Header bestimmte Werte aufweist - darunter
 den, den das Python-Modul <span class="mdcode">requests</span> standardmäßig nutzt - daher wird jetzt der User-Agent eines Firefox-Browsers gesendet.
 Darüber hinaus wurden alle Parameter an den Beginn des Skripts verlagert und kommentiert. Weiterhin wurde ein Absatz zur
@@ -962,12 +962,11 @@ Installation des Python-Moduls <span class="mdcode">influxdb</span> hinzugefügt
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Ich hatte nach dem Update meines
+<p>Ich hatte nach dem Update meines
 Raid
 mit größeren Platten festgestellt, dass der automatische Standby
 nach einiger Zeit Nicht-Benutzung nicht mehr funktionierte.
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="ueberwachung_festplattenstatus_grafana.html#content">Öffnen</a>
@@ -987,11 +986,10 @@ nach einiger Zeit Nicht-Benutzung nicht mehr funktionierte.
 					</div>
 					<div class="w3-row">
 						<div class="w3-col m8 s12">
-							<p><p>Seit ich davon gehört habe war ich neugierig auf Proxmox und wie das Versprechen von Hochverfügbarkeit
+<p>Seit ich davon gehört habe war ich neugierig auf Proxmox und wie das Versprechen von Hochverfügbarkeit
 damit umgesetzt werden kann. In der Firma, in der ich arbeite wird dieses System auf einem experimentellen Blech-Cluster
 bereits seit einiger Zeit betrieben - Zeit alse, selber einiger Erfahrungen zu sammeln
-</p></p>
-						</div>
+</p>						</div>
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="proxmox_experimente.html#content">Öffnen</a>
@@ -1118,6 +1116,16 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+						<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 						<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -1130,7 +1138,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -1144,17 +1152,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-						<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -1189,6 +1186,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
+							<span class="smallabstract"><p>Durch
+Fefe
+auf Musik aufmerksam gemacht zu werden - das hätte ich auch nie geglaubt. Aber...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="man_of_constant_sorrow___home_free.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							CI/CD Pipelines für DocBook-Dokumentationen</span><br>
 							<span class="smallabstract"><p>Nachdem ich neulich die Handbücher für die Anwendungen
 dWb+
@@ -1201,7 +1208,7 @@ dWb+
 zum Einsatz kommt auf Gitlab
 veröffentlicht
 habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, dass
-die aktualle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
+die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
  Weiterlesen...
@@ -1215,17 +1222,6 @@ selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begon
 der Bastellösung mit dem Digispark wegkommen
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Mein Open Source Manifest</span><br>
-							<span class="smallabstract"><p>Im Zuge des großen
-Log4J-Problems
-ist ja viel - auch viel dämliches -
-im Zusammenhang mit OpenSource-Projekten und ihrem Stellenwert verzapft worden
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mein_open_source_manifest.html#content">
  Weiterlesen...
 								</a>
 						</li>
