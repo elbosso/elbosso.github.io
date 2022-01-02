@@ -93,7 +93,7 @@ weil ich davon - oder von etwas ähnlichem - bisher weder gehört noch gelesen h
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
 <p>Es geht bei der Vermutung darum, dass die Abbildung <span class="mdcode">der</span> natürlichen Zahlen auf sich selbst nach folgender Vorschrift
-</p><p><img class="formula" src="images/tex/9224295771.png" alt="C:{N}\to{N}\quad C(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
+</p><p><img class="formula" src="images/tex/9224295771_130.png" alt="C:{N}\to{N}\quad C(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
 " title="C:{N}\to{N}\quad C(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
 ">
 </p><p>
@@ -117,13 +117,13 @@ Ursachen haben - ohne Anspruch auf Vollständigkeit wären da etwa:
 Ich halte die vierte Möglichkeit für mit Abstand am unwahrscheinlichsten - dennoch...:
 </p><p>
 Die Berechnungsvorschrift im Fall, dass <span class="mdcode">n</span> ungerade ist garantiert, dass im nächsten Schritt <span class="mdcode">n</span> wieder gerade ist:
-</p><p><img class="formula" src="images/tex/9224295772.png" alt="\begin{split}n_{i+1}&=3n_i+1\quad\text{ mit }n_i=2m+1\\n_{i+1}&=3(2m+1)+1\\n_{i+1}&=6m+3+1\\n_{i+1}&=6m+4\\n_{i+1}&=2(3m+2)\quad\text{Damit ist }n_{i+1}\text{ eine gerade Zahl!}\end{split}
+</p><p><img class="formula" src="images/tex/9224295772_130.png" alt="\begin{split}n_{i+1}&=3n_i+1\quad\text{ mit }n_i=2m+1\\n_{i+1}&=3(2m+1)+1\\n_{i+1}&=6m+3+1\\n_{i+1}&=6m+4\\n_{i+1}&=2(3m+2)\quad\text{Damit ist }n_{i+1}\text{ eine gerade Zahl!}\end{split}
 " title="\begin{split}n_{i+1}&=3n_i+1\quad\text{ mit }n_i=2m+1\\n_{i+1}&=3(2m+1)+1\\n_{i+1}&=6m+3+1\\n_{i+1}&=6m+4\\n_{i+1}&=2(3m+2)\quad\text{Damit ist }n_{i+1}\text{ eine gerade Zahl!}\end{split}
 ">
 </p><p>
 Meine Idee war nun, die Berechnungsvorschrift für den nächsten Wert von <span class="mdcode">n</span> falls <span class="mdcode">n</span> ungerade ist durch einen parametrisierbaren
 Summenterm zu ergänzen, der bei <span class="mdcode">m=0</span> wieder die der urprünglichen Collatz-Vermutung ergibt:
-</p><p><img class="formula" src="images/tex/9224295773.png" alt="C^</span>:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
+</p><p><img class="formula" src="images/tex/9224295773_130.png" alt="C^</span>:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
 " title="C^</span>:{N}\to{N}\quad C^*(n)=\begin{cases}n/2 & \text{wenn }n\text{ gerade ist,}\\3n+2m+1 & \text{wenn }n\text{ ungerade ist.}\end{cases}
 ">
 </p><p>
@@ -177,7 +177,7 @@ nur einen Zyklus gefunden habe und die daher Kandidaten für eine erweiterte Col
 </p><p>
 Darüber hinaus ist vielleicht die Tatsache noch interessant, dass es so zu sein scheint, dass für jeden Parameter <span class="mdcode">m</span> ein
 Zyklus aus genau drei Knoten auftaucht, dessen Mitglieder sich auf einfache Art berechnen lassen:
-</p><p><img class="formula" src="images/tex/9224295774.png" alt="\begin{split}z_{0}&=2m+1\\z_{1}&=C(z_{0})\\z_{2}&=C(z_{1})\end{split}
+</p><p><img class="formula" src="images/tex/9224295774_130.png" alt="\begin{split}z_{0}&=2m+1\\z_{1}&=C(z_{0})\\z_{2}&=C(z_{1})\end{split}
 " title="\begin{split}z_{0}&=2m+1\\z_{1}&=C(z_{0})\\z_{2}&=C(z_{1})\end{split}
 ">
 </p><p>
@@ -426,18 +426,13 @@ berichtet habe folgen hier nun einige Details meiner Implementierung
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Multi-Agenten-Systeme in dWb+</p>
+							Before the deluge Joan Baez</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">31.12.2016</span>
 						</p>
-						<span class="smallabstract"><p>Ein Anwendungsszenario für 
-dWb+,
-das bisher noch keine größere Beachtung gefunden hat - auch in der Dokumentation! - 
-ist die Modellierung von Multi-Agenten-Systemen. Ich werde hier zunächst auf einige
-grundlegende Überlegungen dazu eingehen und später über erste Ergebnisse 
-informieren
+						<span class="smallabstract"><p>An ihrem 75. Geburtstag lud Joan Baez illustre Gäste zum gemeinsamen Musizieren ein - unter anderem Jackson Browne
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="multi_agenten_systeme_dwb_.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="before_the_deluge_joan_baez.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -499,6 +494,23 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Fork der BeanShell wegen Trojan Source</span><br>
+						<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
+Fork
+des originalen
+Repository,
+in dem ich die Komponente zur Darstellung der Konsole gegen die ausgetauscht habe,
+die in der
+sQLshell
+in den Plugins MDIJavaEditor und MDISqlEditor
+zum Einsatz kommt - dadurch wird wenigstens durch das Syntax-Highlighting auf problematische Stellen im Code hingewiesen.
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fork_beanshell_wegen_trojan_source.html#107">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
 						<span class="smallabstract"><p>Durch
 Fefe
@@ -524,17 +536,6 @@ habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, da
 die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
-						<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
-Custom Keyboard
-selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
-der Bastellösung mit dem Digispark wegkommen
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -569,6 +570,23 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Fork der BeanShell wegen Trojan Source</span><br>
+							<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
+Fork
+des originalen
+Repository,
+in dem ich die Komponente zur Darstellung der Konsole gegen die ausgetauscht habe,
+die in der
+sQLshell
+in den Plugins MDIJavaEditor und MDISqlEditor
+zum Einsatz kommt - dadurch wird wenigstens durch das Syntax-Highlighting auf problematische Stellen im Code hingewiesen.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fork_beanshell_wegen_trojan_source.html#107">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
 							<span class="smallabstract"><p>Durch
 Fefe
@@ -594,17 +612,6 @@ habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, da
 die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
-							<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
-Custom Keyboard
-selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
-der Bastellösung mit dem Digispark wegkommen
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 								</a>
 						</li>

@@ -97,7 +97,7 @@ gelesen hatte kam ich durch einen Post auf Mastodon (leider nicht öffentlich ei
 auf Ideen...
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
-aaa<p>Der Mastodon-Post zeigte eine Tabelle in psql, die eine Spalte beinhaltete, deren Name ein Kätzchen war (Unicode-Emoji).
+<p>Der Mastodon-Post zeigte eine Tabelle in psql, die eine Spalte beinhaltete, deren Name ein Kätzchen war (Unicode-Emoji).
 Der sorgte dafür, dass sämtliche Projekte einen Platz auf meiner Liste nach unten rutschten, denn ich wollte nun wissen,
 ob das in dem Paper vorgestellte Verfahren auch dazu benutzt werden könnte, schadhaften SQL-Code vor einem Reviewer zu verstecken.
 </p><p>
@@ -109,7 +109,7 @@ dass eine Software, die diese Codes interpretiert stattdessen <span class="mdcod
 </p><p>
 Hier ein Beispiel dafür in Gedit 2.36.2 unter Ubuntu Focal Fossa:
 </p><p>
-<img src="images/trojangedit.png" style="max-width:299px;"
+<img src="images/trojangedit.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -121,7 +121,7 @@ Ich freue mich sagen zu können, dass auch die
 sich hier nicht hereinlegen lässt (und damit auch den Anwender nicht hereinlegt) -
 sie zeigt an, dass im SQL weitere Zeichen enthalten sind:
 </p><p>
-<img src="images/trojansQLshell.png" style="max-width:280px;"
+<img src="images/trojansQLshell.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -131,7 +131,7 @@ SQL-Script in sQLshell
 Intellij Idea stellt die Goldrandlösung dar: solche Codes werden nicht nur nicht interpretiiert, sondern stattdessen
 als Pseudo-Zeichen dargestellt:
 </p><p>
-<img src="images/trojanidea.png" style="max-width:420px;"
+<img src="images/trojanidea.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -142,7 +142,7 @@ Nachdem ich mir also verschiedene Editoren und IDEs zum Umgang mit diesen spezia
 ich herausbekommen, wie sich eine Datenbank verhält, wenn sie ein mit solchen Zeichen versehenes Statement vorgesetzt bekommt.
 Meine ersten Tests führte ich mit einer etwas veralteten Version Postgres durch:
 </p><p>
-<img src="images/trojanpostgresversion.png" style="max-width:568px;"
+<img src="images/trojanpostgresversion.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -153,7 +153,7 @@ Ich benutzte zur Interaktion damit zunächst <span class="mdcode">psql</span> in
 Interessant fand ich dabei zunächst, dass in diesen Terminals die Steuercodes im Statement nicht angezeigt und auch <span class="mdbold">nicht
 interpretiert</span> wurden - Man hätte meinen können, dass dieses Statement überhaupt keine Steuerzeichen enthielt:
 </p><p>
-<img src="images/trojancrt.png" style="max-width:357px;"
+<img src="images/trojancrt.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -163,7 +163,7 @@ SQL-Script in CoolRetroTerm
 Jetzt wurde ich natürlich neugierig, ob sich das Statement absetzen lassen würde - es funktionierte. Und bei der Abfrage der Tabellenstruktur
 in <span class="mdcode">psql</span> mittels <span class="mdcode">\d bidi</span> erhielt ich daraufhin folgendes Ergebnis:
 </p><p>
-<img src="images/trojanpsqlstructure.png" style="max-width:769px;"
+<img src="images/trojanpsqlstructure.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -172,7 +172,7 @@ Tabellenstruktur mittels psql in CoolRetroTerm
 </p><p>
 Ein entsprechendes <span class="mdcode">Select</span> schlug aber fehl:
 </p><p>
-<img src="images/trojanpsqlselect.png" style="max-width:442px;"
+<img src="images/trojanpsqlselect.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -185,7 +185,7 @@ kopiert hat - nicht existiert? Was ist denn hier passiert? Die Erklärung wird o
 Datenbank-Werkzeugen ansieht - zum Beispiel in der
 <a href="sQLshell.html">sQLshell:</a>
 </p><p>
-<img src="images/trojansQLshellstructure.png" style="max-width:422px;"
+<img src="images/trojansQLshellstructure.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -199,7 +199,7 @@ Postgres ist auch konsistent: Wenn die Tabelle mittels <span class="mdcode">pg_d
 Unicode-Encoding, in dem - mit Gedit betrachtet - wieder der Name <span class="mdcode">NameSpalten</span> auftaucht, da alle Zeichen exportiert wurden
 und diese natürlich wieder interpretiert werden:
 </p><p>
-<img src="images/trojanpgdumpgedit.png" style="max-width:598px;"
+<img src="images/trojanpgdumpgedit.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -290,18 +290,13 @@ Dieser Beitrag wurde zum CCC End-of-year event 2021 eingereicht und abgelehnt.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Multi-Agenten-Systeme in dWb+</p>
+							Before the deluge Joan Baez</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">31.12.2016</span>
 						</p>
-						<span class="smallabstract"><p>Ein Anwendungsszenario für 
-dWb+,
-das bisher noch keine größere Beachtung gefunden hat - auch in der Dokumentation! - 
-ist die Modellierung von Multi-Agenten-Systemen. Ich werde hier zunächst auf einige
-grundlegende Überlegungen dazu eingehen und später über erste Ergebnisse 
-informieren
+						<span class="smallabstract"><p>An ihrem 75. Geburtstag lud Joan Baez illustre Gäste zum gemeinsamen Musizieren ein - unter anderem Jackson Browne
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="multi_agenten_systeme_dwb_.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="before_the_deluge_joan_baez.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -363,6 +358,23 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Fork der BeanShell wegen Trojan Source</span><br>
+						<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
+Fork
+des originalen
+Repository,
+in dem ich die Komponente zur Darstellung der Konsole gegen die ausgetauscht habe,
+die in der
+sQLshell
+in den Plugins MDIJavaEditor und MDISqlEditor
+zum Einsatz kommt - dadurch wird wenigstens durch das Syntax-Highlighting auf problematische Stellen im Code hingewiesen.
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fork_beanshell_wegen_trojan_source.html#107">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
 						<span class="smallabstract"><p>Durch
 Fefe
@@ -388,17 +400,6 @@ habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, da
 die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
-						<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
-Custom Keyboard
-selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
-der Bastellösung mit dem Digispark wegkommen
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -433,6 +434,23 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Fork der BeanShell wegen Trojan Source</span><br>
+							<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
+Fork
+des originalen
+Repository,
+in dem ich die Komponente zur Darstellung der Konsole gegen die ausgetauscht habe,
+die in der
+sQLshell
+in den Plugins MDIJavaEditor und MDISqlEditor
+zum Einsatz kommt - dadurch wird wenigstens durch das Syntax-Highlighting auf problematische Stellen im Code hingewiesen.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fork_beanshell_wegen_trojan_source.html#107">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
 							<span class="smallabstract"><p>Durch
 Fefe
@@ -458,17 +476,6 @@ habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, da
 die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
-							<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
-Custom Keyboard
-selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
-der Bastellösung mit dem Digispark wegkommen
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 								</a>
 						</li>

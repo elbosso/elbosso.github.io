@@ -113,7 +113,7 @@ eines urbanen Gebietes,
 sozusagen ein Stadtplan sein.
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
-aaa<p>Ich habe die Inspiration dafür aus dem letzten
+<p>Ich habe die Inspiration dafür aus dem letzten
 <a href="wang_tiling_implementiert_optimiert.html">Mindfuck-Vortrag</a>
 und aus
 <a href="https://www.cs.auckland.ac.nz/~roboteam/documents/RandomMapGenerator.pdf">diversen</a>
@@ -134,7 +134,7 @@ Ausgangspunkt der Generierung ist die Erzeugung eines Gitters - aktuell wird ein
 ein kreisförmiges (Wheel-and-spokes) Gitter unterstützt. Die Verbindungen der Knoten im Gitter stellen die Grundlage für
 die späteren Straßen im stasdtplan dar:
 </p><p>
-<img src="images/geojson_map_generator/grid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/grid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -144,7 +144,7 @@ Ausgangspunkt: Gitter
 Anschließend werden die Gitterpunkte zufällig verschoben um dem ganzen einen "organischen" oder "gewachsenen" Eindruck zu
 geben:
 </p><p>
-<img src="images/geojson_map_generator/randomizedgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/randomizedgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -157,7 +157,7 @@ nicht in Teile zerfällt und jeder Knoten im Graphenm nach wie vor von jedem and
 Daraufhin werden die Polygone im Gitter identifiziert und in einer internen Datenstruktur für die spätere Verwendung
 gespeichert. Die Polygone entsprechen den Häuserblocks im späteren Stadtplan:
 </p><p>
-<img src="images/geojson_map_generator/polygons.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/polygons.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -169,7 +169,7 @@ Verfahrens, das ich direkt einer der angegebenen
 <a href="https://www.cs.auckland.ac.nz/~roboteam/documents/RandomMapGenerator.pdf">Arbeiten</a>
 entnommen habe. Die Wichtigkeit der Straßen wird durch die Dicke der Linien in der Visualisierung dargestellt:
 </p><p>
-<img src="images/geojson_map_generator/commutegrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/commutegrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -179,7 +179,7 @@ Straßen werden in drei Klassen unterteilt
 Diese Arbeit "begradigt" später die besonders wichtigen Straßen noch ein wenig - ein Arbeitsschritt, der in meiner Implementierung zwar
 vorgesehen, jedoch noch nicht implementiert wurde:
 </p><p>
-<img src="images/geojson_map_generator/smoothedgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/smoothedgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -190,7 +190,7 @@ An dieser Stelle würden mehrere Polygone, die nun nicht mehr durch Straßen get
 unter Umständen konkave Polygone entstehen. Deren Behandlung - beispielsweise durch Triangulation ist noch nicht implementiert,
 so dass solche Polygone entfernt werden. Dieser Schritt ist optional - wird er ausgeführt, sieht das Ergebnis beispielsweise so aus:
 </p><p>
-<img src="images/geojson_map_generator/polygonsgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/polygonsgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -199,7 +199,7 @@ optional: Entfernen weiterer Polygone
 </p><p>
 Anschließend werden die Polygone partitioniert, was dem "Errichten" von Gebäuden auf den einzelnen Häuserblocks entspricht:
 </p><p>
-<img src="images/geojson_map_generator/partitionedgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/partitionedgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -209,7 +209,7 @@ Partitionieren der Polygone - Errichten von Gebäuden
 Daran schließt sich der vorerst letzte Schritt der Generierung an: die Straßen höherer Ordnung (Hauptstraßen und Magistralen)
 werden zu Straßenzügen zusammengefasst - in der Visualisierung erkennt man das an der gleichen Färbung von Straßenabschnitten:
 </p><p>
-<img src="images/geojson_map_generator/connectedRoads.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/connectedRoads.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -219,7 +219,7 @@ Zusammenfassung von Straßenabschnitten wichtiger Straßen
 Hier noch kurz ein Beispiel für das Ergebnis des beschriebenen Vorgehens wenn ein rundes Gitter als Ausgangspunkt
 gewählt wurde:
 </p><p>
-<img src="images/geojson_map_generator/wheel_and_spokes_connectedRoads.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/wheel_and_spokes_connectedRoads.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -237,7 +237,7 @@ von
 (Beispiele)
 importiert werden:
 </p><p>
-<img src="images/geojson_map_generator/geojson_rendered_with_geoman.png" style="max-width:584px;"
+<img src="images/geojson_map_generator/geojson_rendered_with_geoman.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -346,18 +346,13 @@ und einige weitere Beispieldatensätze aus dem Internet eingefügt - das reichte
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Multi-Agenten-Systeme in dWb+</p>
+							Before the deluge Joan Baez</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">31.12.2016</span>
 						</p>
-						<span class="smallabstract"><p>Ein Anwendungsszenario für 
-dWb+,
-das bisher noch keine größere Beachtung gefunden hat - auch in der Dokumentation! - 
-ist die Modellierung von Multi-Agenten-Systemen. Ich werde hier zunächst auf einige
-grundlegende Überlegungen dazu eingehen und später über erste Ergebnisse 
-informieren
+						<span class="smallabstract"><p>An ihrem 75. Geburtstag lud Joan Baez illustre Gäste zum gemeinsamen Musizieren ein - unter anderem Jackson Browne
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="multi_agenten_systeme_dwb_.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="before_the_deluge_joan_baez.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -419,6 +414,23 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Fork der BeanShell wegen Trojan Source</span><br>
+						<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
+Fork
+des originalen
+Repository,
+in dem ich die Komponente zur Darstellung der Konsole gegen die ausgetauscht habe,
+die in der
+sQLshell
+in den Plugins MDIJavaEditor und MDISqlEditor
+zum Einsatz kommt - dadurch wird wenigstens durch das Syntax-Highlighting auf problematische Stellen im Code hingewiesen.
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fork_beanshell_wegen_trojan_source.html#107">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
 						<span class="smallabstract"><p>Durch
 Fefe
@@ -444,17 +456,6 @@ habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, da
 die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
-						<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
-Custom Keyboard
-selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
-der Bastellösung mit dem Digispark wegkommen
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -489,6 +490,23 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Fork der BeanShell wegen Trojan Source</span><br>
+							<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
+Fork
+des originalen
+Repository,
+in dem ich die Komponente zur Darstellung der Konsole gegen die ausgetauscht habe,
+die in der
+sQLshell
+in den Plugins MDIJavaEditor und MDISqlEditor
+zum Einsatz kommt - dadurch wird wenigstens durch das Syntax-Highlighting auf problematische Stellen im Code hingewiesen.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fork_beanshell_wegen_trojan_source.html#107">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
 							<span class="smallabstract"><p>Durch
 Fefe
@@ -514,17 +532,6 @@ habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, da
 die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
-							<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
-Custom Keyboard
-selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
-der Bastellösung mit dem Digispark wegkommen
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 								</a>
 						</li>

@@ -114,7 +114,7 @@ die Daten zur besseren Auswertung in eine InfluxDB gepackt, um sie mit
 <a href="telegraf_inputs_unterschiedlicher_frequenz.html">Grafana untersuchen zu können.</a>
 </p>				</div>
 				<div class="w3-container w3-padding" id="contentdiv">
-aaa<p>Am Freitag, dem 22.02.2019 habe ich das Experiment gestartet und folgendes festgestellt: Zunächst ist es sehr einfach gewesen,
+<p>Am Freitag, dem 22.02.2019 habe ich das Experiment gestartet und folgendes festgestellt: Zunächst ist es sehr einfach gewesen,
 die Daten aus dem Certstream in InfluxDB zu übernehmen. Zu diesem Zweck habe ich das
 <a href="https://github.com/x0rz/phishing_catcher">Repository</a> zunächst
 <a href="https://github.com/elbosso/phishing_catcher">geforkt</a> und die
@@ -123,7 +123,7 @@ entsprechend notwendigen Änderungen daran vorgenommen. Dieses Experiment führt
 durch.
 </p><p>
 <a href="images/certstream/raspiload.png" rel="lightbox[screenshots]">
-<img src="images/certstream/raspiload.png" style="max-width:1340px;"
+<img src="images/certstream/raspiload.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -137,7 +137,7 @@ root-CA für die meisten Zertifikate in einem bestimmten Zeitraum mit den höchs
 CA in einem bestimmten Zeitraum die meisten Zertifikate mit den höchsten Scoring-Werten  ausstellte.
 </p><p>
 <a href="images/certstream/cascores.png" rel="lightbox[screenshots]">
-<img src="images/certstream/cascores.png" style="max-width:1337px;"
+<img src="images/certstream/cascores.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -154,7 +154,7 @@ Aber das nur am Rande...
 Nachdem das Experiment einige Zeit gelaufen war bemerkte ich eine plötzliche Häufung besonders hoch bewerteter neu ausgestellter Zertifikate:
 </p><p>
 <a href="images/certstream/higherfrequencyhigherscores.png" rel="lightbox[screenshots]">
-<img src="images/certstream/higherfrequencyhigherscores.png" style="max-width:1342px;"
+<img src="images/certstream/higherfrequencyhigherscores.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -165,7 +165,7 @@ Häufigkeit von Zertifikaten mit Scores über 45
 Das interessierte mich und ich zoomte an der Stelle mit großer Häufung in die Daten hinein:
 </p><p>
 <a href="images/certstream/zoomin.png" rel="lightbox[screenshots]">
-<img src="images/certstream/zoomin.png" style="max-width:1336px;"
+<img src="images/certstream/zoomin.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -179,7 +179,7 @@ wie viele Zertifikate jeweils pro 15 Minuten ausgestellt wurden, die für eine D
 hier durch den neuen türkisen Graphen dargestellt:
 </p><p>
 <a href="images/certstream/netflixcerts.png" rel="lightbox[screenshots]">
-<img src="images/certstream/netflixcerts.png" style="max-width:1344px;"
+<img src="images/certstream/netflixcerts.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -336,18 +336,13 @@ Raspberry Pi darstellte.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Multi-Agenten-Systeme in dWb+</p>
+							Before the deluge Joan Baez</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">31.12.2016</span>
 						</p>
-						<span class="smallabstract"><p>Ein Anwendungsszenario für 
-dWb+,
-das bisher noch keine größere Beachtung gefunden hat - auch in der Dokumentation! - 
-ist die Modellierung von Multi-Agenten-Systemen. Ich werde hier zunächst auf einige
-grundlegende Überlegungen dazu eingehen und später über erste Ergebnisse 
-informieren
+						<span class="smallabstract"><p>An ihrem 75. Geburtstag lud Joan Baez illustre Gäste zum gemeinsamen Musizieren ein - unter anderem Jackson Browne
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="multi_agenten_systeme_dwb_.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="before_the_deluge_joan_baez.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -409,6 +404,23 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Fork der BeanShell wegen Trojan Source</span><br>
+						<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
+Fork
+des originalen
+Repository,
+in dem ich die Komponente zur Darstellung der Konsole gegen die ausgetauscht habe,
+die in der
+sQLshell
+in den Plugins MDIJavaEditor und MDISqlEditor
+zum Einsatz kommt - dadurch wird wenigstens durch das Syntax-Highlighting auf problematische Stellen im Code hingewiesen.
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fork_beanshell_wegen_trojan_source.html#107">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
 						<span class="smallabstract"><p>Durch
 Fefe
@@ -434,17 +446,6 @@ habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, da
 die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
-						<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
-Custom Keyboard
-selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
-der Bastellösung mit dem Digispark wegkommen
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -479,6 +480,23 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Fork der BeanShell wegen Trojan Source</span><br>
+							<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
+Fork
+des originalen
+Repository,
+in dem ich die Komponente zur Darstellung der Konsole gegen die ausgetauscht habe,
+die in der
+sQLshell
+in den Plugins MDIJavaEditor und MDISqlEditor
+zum Einsatz kommt - dadurch wird wenigstens durch das Syntax-Highlighting auf problematische Stellen im Code hingewiesen.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fork_beanshell_wegen_trojan_source.html#107">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
 							<span class="smallabstract"><p>Durch
 Fefe
@@ -504,17 +522,6 @@ habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, da
 die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
-							<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
-Custom Keyboard
-selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
-der Bastellösung mit dem Digispark wegkommen
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 								</a>
 						</li>

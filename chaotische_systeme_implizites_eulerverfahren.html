@@ -116,36 +116,36 @@ nichts anderes als Differenzenverfahren oder - anders gesagt - wird die Lösung 
 auf die eine oder andere Weise den Anstieg der Funktion in einem Punkt und nimmt an, dass die Funktion in einem hinreichend
 kleinen Intervall hinreichend linear verläuft. Dann berechnet man den Wert der Funktion am Ende des Intervalls aus dem
 Wert am Anfang des Intervalls über den Anstieg (keine Angst - unten gibts Bilder...):
-</p><p><img class="formula" src="images/tex/-17676547641.png" alt="x_t+h=x_t+h\dot x_t
+</p><p><img class="formula" src="images/tex/-17676547641_130.png" alt="x_t+h=x_t+h\dot x_t
 " title="x_t+h=x_t+h\dot x_t
 ">
 Das ist die traditionelle Eulerformel für die numerische Lösung von Differentialgleichungssystemen. Wie bereits
 <a href="implizites_eulerverfahren.html">hier</a>
 beschrieben hat dieses Verfahren (wie alle expliziten Verfahren) diverse Nachteile, die man mit der Benutzung des
 impliziten Verfahrens umgehen kann:
-</p><p><img class="formula" src="images/tex/-17676547642.png" alt="x_t+h=x_t+h\dot x_{t+h}
+</p><p><img class="formula" src="images/tex/-17676547642_130.png" alt="x_t+h=x_t+h\dot x_{t+h}
 " title="x_t+h=x_t+h\dot x_{t+h}
 ">
 </p><p>
 Mein erster Versuch, chaotische Systeme mittels impliziter Verfahren zu behandeln, beschäftigte sich natürlich mit dem altbekannten
 <a href="https://en.wikipedia.org/wiki/Lorenz_system">Lorenz-Attractor</a>:
-</p><p><img class="formula" src="images/tex/-17676547643.png" alt="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
+</p><p><img class="formula" src="images/tex/-17676547643_130.png" alt="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
 " title="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
 ">
 mit
-</p><p><img class="formula" src="images/tex/-17676547644.png" alt="\sigma=10\;\; \rho=28\;\; \beta={8\over 3}
+</p><p><img class="formula" src="images/tex/-17676547644_130.png" alt="\sigma=10\;\; \rho=28\;\; \beta={8\over 3}
 " title="\sigma=10\;\; \rho=28\;\; \beta={8\over 3}
 ">
 Daraus folgt für die Behandlung mit dem impliziten Eulerverfahren und einer Schrittweite (oder Intervallänge) h:
-</p><p><img class="formula" src="images/tex/-17676547645.png" alt="\begin{matrix}x_{t+h}&=&x_t+h\dot x_{t+h}\hfill\cr y_{t+h}&=&y_t+h\dot y_{t+h}\hfill\cr z_{t+h}&=&z_t+h\dot z_{t+h}\hfill\end{matrix}
+</p><p><img class="formula" src="images/tex/-17676547645_130.png" alt="\begin{matrix}x_{t+h}&=&x_t+h\dot x_{t+h}\hfill\cr y_{t+h}&=&y_t+h\dot y_{t+h}\hfill\cr z_{t+h}&=&z_t+h\dot z_{t+h}\hfill\end{matrix}
 " title="\begin{matrix}x_{t+h}&=&x_t+h\dot x_{t+h}\hfill\cr y_{t+h}&=&y_t+h\dot y_{t+h}\hfill\cr z_{t+h}&=&z_t+h\dot z_{t+h}\hfill\end{matrix}
 ">
 und eingesetzt:
-</p><p><img class="formula" src="images/tex/-17676547646.png" alt="\begin{matrix}0&=&x_t+h\sigma y_{t+h}+(1+h\sigma)x_{t+h}\hfill\cr 0&=&y_t+h\sigma x_{t+h}-hz_{t+h}x_{t+h}-(1+h)y_{t+h}\hfill\cr 0&=&z_t+hx_{t+h}y_{t+h}-(1+h\beta)z_{t+h}\hfill\end{matrix}
+</p><p><img class="formula" src="images/tex/-17676547646_130.png" alt="\begin{matrix}0&=&x_t+h\sigma y_{t+h}+(1+h\sigma)x_{t+h}\hfill\cr 0&=&y_t+h\sigma x_{t+h}-hz_{t+h}x_{t+h}-(1+h)y_{t+h}\hfill\cr 0&=&z_t+hx_{t+h}y_{t+h}-(1+h\beta)z_{t+h}\hfill\end{matrix}
 " title="\begin{matrix}0&=&x_t+h\sigma y_{t+h}+(1+h\sigma)x_{t+h}\hfill\cr 0&=&y_t+h\sigma x_{t+h}-hz_{t+h}x_{t+h}-(1+h)y_{t+h}\hfill\cr 0&=&z_t+hx_{t+h}y_{t+h}-(1+h\beta)z_{t+h}\hfill\end{matrix}
 ">
 Und wegen der Übersichtlichkeit:
-</p><p><img class="formula" src="images/tex/-17676547647.png" alt="\begin{matrix}0&=&a+by_{t+h}+cx_{t+h}\hfill\cr 0&=&d+ex_{t+h}-hz_{t+h}x_{t+h}-gy_{t+h}\hfill\cr 0&=&i+hx_{t+h}y_{t+h}-jz_{t+h}\hfill\end{matrix}
+</p><p><img class="formula" src="images/tex/-17676547647_130.png" alt="\begin{matrix}0&=&a+by_{t+h}+cx_{t+h}\hfill\cr 0&=&d+ex_{t+h}-hz_{t+h}x_{t+h}-gy_{t+h}\hfill\cr 0&=&i+hx_{t+h}y_{t+h}-jz_{t+h}\hfill\end{matrix}
 " title="\begin{matrix}0&=&a+by_{t+h}+cx_{t+h}\hfill\cr 0&=&d+ex_{t+h}-hz_{t+h}x_{t+h}-gy_{t+h}\hfill\cr 0&=&i+hx_{t+h}y_{t+h}-jz_{t+h}\hfill\end{matrix}
 ">
 Löst man dieses Gleichungssystem - und ich gebe zu, dass ich mich außerstande sah und Hilfe bei
@@ -164,7 +164,7 @@ c*g)*(a*h*y + c*i))/(c*(h**2*x*(b*y + c*x) - j*(b*(e - h*z) - c*g))))}
 >>>
 <p></pre>
 Eindrucksvoll und dennoch verwirrend - daher habe ich es hier nochmal aufbereitet:
-</p><p><img class="formula" src="images/tex/-17676547648.png" alt="\begin{matrix}x_{t+h}&=&{{agj + ah^2x_t^2 + bdj - bhix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr y_{t+h}&=&{{aej - ah^2x_ty_t - ahjz_t + cdj - chix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr z_{t+h}&=&{{h(a(e - hz_t) + cd)(by_t + cx_t) - (b(e - hz_t) - cg)(ahy_t + ci)}\over{c(h^2x_t(by_t + cx_t) - j(b(e - hz_t) - cg))}}\hfill\end{matrix}
+</p><p><img class="formula" src="images/tex/-17676547648_130.png" alt="\begin{matrix}x_{t+h}&=&{{agj + ah^2x_t^2 + bdj - bhix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr y_{t+h}&=&{{aej - ah^2x_ty_t - ahjz_t + cdj - chix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr z_{t+h}&=&{{h(a(e - hz_t) + cd)(by_t + cx_t) - (b(e - hz_t) - cg)(ahy_t + ci)}\over{c(h^2x_t(by_t + cx_t) - j(b(e - hz_t) - cg))}}\hfill\end{matrix}
 " title="\begin{matrix}x_{t+h}&=&{{agj + ah^2x_t^2 + bdj - bhix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr y_{t+h}&=&{{aej - ah^2x_ty_t - ahjz_t + cdj - chix_t}\over{-bej + bh^2x_ty_t + bhjz_t + cgj + ch^2x_t^2}}\hfill\cr z_{t+h}&=&{{h(a(e - hz_t) + cd)(by_t + cx_t) - (b(e - hz_t) - cg)(ahy_t + ci)}\over{c(h^2x_t(by_t + cx_t) - j(b(e - hz_t) - cg))}}\hfill\end{matrix}
 ">
 </p><p>
@@ -181,7 +181,7 @@ Das letzte Bild stellt das Ergebnis des impliziten Verfahrens mit einer Schrittw
 die Lösung qualitativ noch sehr nahe am Original liegt. Damit ist einmal mehr bewiesen, dass man sich für die numerische
 Lösung von Differentialgleichungssystemen der Mühe unterziehen sollte, das implizite Eulerverfahren zumindest in Betracht zu ziehen.
 </p><p>
-aaa				</div>
+				</div>
 				<div class="w3-container w3-padding" id="screenshots">
 					<hr/>
 					<h3>
@@ -340,18 +340,13 @@ hatte, habe ich mir gleich noch eines vorgenommen...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Multi-Agenten-Systeme in dWb+</p>
+							Before the deluge Joan Baez</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">31.12.2016</span>
 						</p>
-						<span class="smallabstract"><p>Ein Anwendungsszenario für 
-dWb+,
-das bisher noch keine größere Beachtung gefunden hat - auch in der Dokumentation! - 
-ist die Modellierung von Multi-Agenten-Systemen. Ich werde hier zunächst auf einige
-grundlegende Überlegungen dazu eingehen und später über erste Ergebnisse 
-informieren
+						<span class="smallabstract"><p>An ihrem 75. Geburtstag lud Joan Baez illustre Gäste zum gemeinsamen Musizieren ein - unter anderem Jackson Browne
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="multi_agenten_systeme_dwb_.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="before_the_deluge_joan_baez.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -413,6 +408,23 @@ informieren
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Fork der BeanShell wegen Trojan Source</span><br>
+						<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
+Fork
+des originalen
+Repository,
+in dem ich die Komponente zur Darstellung der Konsole gegen die ausgetauscht habe,
+die in der
+sQLshell
+in den Plugins MDIJavaEditor und MDISqlEditor
+zum Einsatz kommt - dadurch wird wenigstens durch das Syntax-Highlighting auf problematische Stellen im Code hingewiesen.
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fork_beanshell_wegen_trojan_source.html#107">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
 						<span class="smallabstract"><p>Durch
 Fefe
@@ -438,17 +450,6 @@ habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, da
 die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
-						<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
-Custom Keyboard
-selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
-der Bastellösung mit dem Digispark wegkommen
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -483,6 +484,23 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Fork der BeanShell wegen Trojan Source</span><br>
+							<span class="smallabstract"><p>Es gibt inzwischen einen von mir erstellten
+Fork
+des originalen
+Repository,
+in dem ich die Komponente zur Darstellung der Konsole gegen die ausgetauscht habe,
+die in der
+sQLshell
+in den Plugins MDIJavaEditor und MDISqlEditor
+zum Einsatz kommt - dadurch wird wenigstens durch das Syntax-Highlighting auf problematische Stellen im Code hingewiesen.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="fork_beanshell_wegen_trojan_source.html#107">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							Man of constant sorrow - Home Free</span><br>
 							<span class="smallabstract"><p>Durch
 Fefe
@@ -508,17 +526,6 @@ habe, habe ich entsprechende CI/CD Pipelines eingerichtet, die dafür sorgen, da
 die aktuelle Version der jeweiligen Handbücher immer als PDF und EPUB abgerufen werden kann.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ci_cd_pipelines_docbook_dokumentationen.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							ATTiny85 und Micronucleus Bootloader</span><br>
-							<span class="smallabstract"><p>Nachdem ich festgestellt habe, dass es auch mir möglich ist, ein einfaches
-Custom Keyboard
-selbst zu bauen und bereits mit dem Entwurf einer entsprechenden Schaltung begonnen hatte, wollte ich von
-der Bastellösung mit dem Digispark wegkommen
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="attiny85_micronucleus_bootloader.html#content">
  Weiterlesen...
 								</a>
 						</li>
