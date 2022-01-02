@@ -105,27 +105,27 @@ and is wrapped around the whole page content, except for the footer in this exam
 					<h5>Updates</h5>
 					<ul>
 						<li>
-							<a href="#21">
+							<a href="#20">
 								27. April 2014
 							</a>
 						</li>
 						<li>
-							<a href="#22">
+							<a href="#21">
 								30. Juli 2014
 							</a>
 						</li>
 						<li>
-							<a href="#23">
+							<a href="#22">
 								10. Februar 2016
 							</a>
 						</li>
 						<li>
-							<a href="#24">
+							<a href="#23">
 								11. März 2016
 							</a>
 						</li>
 						<li>
-							<a href="#25">
+							<a href="#24">
 								4. November 2021
 							</a>
 						</li>
@@ -167,12 +167,12 @@ Hier der aktuelle Stand des Benutzer- wie auch des Programmierhandbuches...
 <dl>
 <dt><img src="images/mime/Oxygen480-mimetypes-application-pdf_48.png"></dt><dd><a href="https://elbosso.gitlab.io/dwbdocumentation/handbook.pdf">Handbuch</a></dd>
 </dl>
-<h3><a name="21">Aktualisierung vom 27. April 2014</a></h3><div class="update">Seit heute existiert das Benutzer- und auch das Programmierhandbuch als EPUB-Version:
+<h3><a name="20">Aktualisierung vom 27. April 2014</a></h3><div class="update">Seit heute existiert das Benutzer- und auch das Programmierhandbuch als EPUB-Version:
 <dl>
 <dt><img src="images/mime/50px-Oxygen480-mimetypes-application-epub+zip.svg.png"></dt><dd><a href="https://elbosso.gitlab.io/dwbdocumentation/handbook.epub">Handbuch</a></dd>
 </dl>
 </div>
-<h3><a name="22">Aktualisierung vom 30. Juli 2014</a></h3><div class="update">dWb+ erlaubt es Nutzern in der neuesten Version, Module, deren Verarbeitung in
+<h3><a name="21">Aktualisierung vom 30. Juli 2014</a></h3><div class="update">dWb+ erlaubt es Nutzern in der neuesten Version, Module, deren Verarbeitung in
 einen eigenen Thread ausgelagert sind, sozu erstellen, daß ihre Strategie
 zum Umgang mit eintreffenden Daten, während die Bearbeitung der letzten Daten noch nicht 
 abgeschlossen ist, zur Laufzeit umkonfiguriert werden kann. 
@@ -180,13 +180,13 @@ abgeschlossen ist, zur Laufzeit umkonfiguriert werden kann.
 Wie das genau funktioniert, ist in der Dokumentation
 beschrieben.
 </div>
-<h3><a name="23">Aktualisierung vom 10. Februar 2016</a></h3><div class="update">Das Handbuch wurde erweitert um einen Abschnitt, in dem Grundlegendes zur Datenflussprogrammierung
+<h3><a name="22">Aktualisierung vom 10. Februar 2016</a></h3><div class="update">Das Handbuch wurde erweitert um einen Abschnitt, in dem Grundlegendes zur Datenflussprogrammierung
 erläutert und ausgehend davon auf einige Spezifika der Umsetzung und Architektur des Systems eingegangen wird.
 </div>
-<h3><a name="24">Aktualisierung vom 11. März 2016</a></h3><div class="update">Das Handbuch wurde stark überarbeitet - an vielen Stellen wurden Detailverbesserungen eingebracht und zur einfacheren Nachvollziehbarkeit
+<h3><a name="23">Aktualisierung vom 11. März 2016</a></h3><div class="update">Das Handbuch wurde stark überarbeitet - an vielen Stellen wurden Detailverbesserungen eingebracht und zur einfacheren Nachvollziehbarkeit
 der Beispiele wurden POM-Dateien eingefügt, die da Aufsetzen eigener Projekte mit dem Build-System Maven vereinfachen sollen.
 </div>
-<h3><a name="25">Aktualisierung vom 4. November 2021</a></h3><div class="update">Das Handbuch wurde überarbeitet - es steht jetzt als OpenSource unter
+<h3><a name="24">Aktualisierung vom 4. November 2021</a></h3><div class="update">Das Handbuch wurde überarbeitet - es steht jetzt als OpenSource unter
 <a href="https://gitlab.com/elbosso/dwbdocumentation">Gitlab</a>
 zur Verfügung und das Buildsystem dafür wurde von Ant nach Maven gewechselt.
 </div>
@@ -469,6 +469,35 @@ habe ich jetzt doch wieder angefangen, mich damit zu beschäftigen...
 					<div class="w3-row">
 					<div class="w3-col m8 s12">
 						<h4>
+							Aviator + Websockets
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">15.06.2019</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>Nachdem ich in den letzten Wochen und Monaten meine Zeit und Energie in
+die
+sQLshell
+gesteckt habe - was sowohl Bugfixing als auch neue Features betraf -
+habe ich nun endlich die Zeit gefunden, ein bereits lange überfälliges Feature an
+dWb+
+und speziell am
+aviator
+zu implementieren.
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="aviator___websockets.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
 							MQTT + Raspi + Grafana
 						</h4>
 					</div>
@@ -627,6 +656,30 @@ habe, habe ich nun den nächsten Schritt in Angriff genommen: Continuous Integra
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="java9_umstellung.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
+							Maven-Archetype für dWb+ Module
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">16.04.2018</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>Nachdem ich bereits ein GitHub-Repository für die
+Beispiele aus dem Kochbuch für
+dWb+ veröffentlicht habe, folgt nun hier ein Archetype
+zur entwicklung eigener Module
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="maven_archetype_dwb__module.html#content">Öffnen</a>
 							</p>
 						</div>
 					</div>
@@ -1144,33 +1197,6 @@ informieren
 					<div class="w3-row">
 					<div class="w3-col m8 s12">
 						<h4>
-							OSGI-Plugin für dWb+
-						</h4>
-					</div>
-					<div class="w3-col m4"><p style="text-align: right">
-						<span class="w3-opacity">24.10.2016</span>
-					</p>
-					</div>
-					</div>
-					<div class="w3-row">
-						<div class="w3-col m8 s12">
-<p>Wie in einem 
-vorhergehenden Artikel
-bereits angekündigt habe ich mich
-in letzter Zeit ein wenig mit dem Themengebiet OSGI beschäftigt.
-Daraus ist jetzt ein Plugin für 
-dWb+
-entstanden
-</p>						</div>
-						<div class="w3-col m4">
-							<p style="text-align: right">
-								<a class="w3-button w3-padding-large w3-white w3-border" href="osgi_plugin_dwb_.html#content">Öffnen</a>
-							</p>
-						</div>
-					</div>
-					<div class="w3-row">
-					<div class="w3-col m8 s12">
-						<h4>
 							OSGI I
 						</h4>
 					</div>
@@ -1344,31 +1370,6 @@ zu sein:
 					<div class="w3-row">
 					<div class="w3-col m8 s12">
 						<h4>
-							DOT-Export aus dWb+
-						</h4>
-					</div>
-					<div class="w3-col m4"><p style="text-align: right">
-						<span class="w3-opacity">24.07.2016</span>
-					</p>
-					</div>
-					</div>
-					<div class="w3-row">
-						<div class="w3-col m8 s12">
-<p>Bereits seit längerem war ein Feature in
-dWb+
-in der Beta-Phase, das es unkompliziert erlaubt, Workspaces in
-beliebige andere Formate zu exportieren. Während dieser Tests wurden verschiedene
-Formate als Testsubjekt herangezogen - unter anderem DOT.
-</p>						</div>
-						<div class="w3-col m4">
-							<p style="text-align: right">
-								<a class="w3-button w3-padding-large w3-white w3-border" href="dot_export_aus_dwb_.html#content">Öffnen</a>
-							</p>
-						</div>
-					</div>
-					<div class="w3-row">
-					<div class="w3-col m8 s12">
-						<h4>
 							EJBs als Module in dWb+
 						</h4>
 					</div>
@@ -1414,6 +1415,56 @@ einzusetzen, habe ich diesen Mechanismus auch auf andere bereits bestehende Komp
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="annotation_processor_zur_generierung_modulen_ii.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
+							ModuleWorkspace Roadmap II
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">25.06.2016</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>Dieses Mal ist es noch keine konkrete Roadmap, sondern nur einige Vorüberlegungen:
+die ModuleWorkspace-Komponente - unter anderem verwendet in der 
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+erlaubt es zur Zeit nicht, bestehende Verbindungen zu verlegen, also an einen anderen Aus- oder Eingang 
+zu koppeln - das könnte sich bald ändern...
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="moduleworkspace_roadmap_ii.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
+							Trigger für Visualisierung
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">18.06.2016</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>Die Visualisierungskomponenten in 
+dWb+
+wurden überarbeitet und durch neue Aspekte ergänzt
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="trigger_visualisierung.html#content">Öffnen</a>
 							</p>
 						</div>
 					</div>
@@ -2186,6 +2237,35 @@ dWb+
 					<div class="w3-row">
 					<div class="w3-col m8 s12">
 						<h4>
+							Javascript-Schnittstellen in dWb+
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">31.01.2015</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>In einem früheren 
+Artikel
+wurden verschiedene Gedankenexperimente durchgespielt, die alle unter einem Motto standen:
+Wie lässt sich für Anwender von 
+dWb+
+am unkompliziertesten die Erstellung spezifischer Schnittstellenmodule
+realisieren? Nach dem
+ersten
+nun hier der zweite konkrete Vorschlag dazu:
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="javascript_schnittstellen_dwb_.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
 							Schnittstellenmodule automatisch erstellen (JAXB)
 						</h4>
 					</div>
@@ -2332,6 +2412,36 @@ verursacht wurde. Hier stelle ich das dafür verwendete Hilfsmittel vor.
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="debuggen_securitymanager_problemen.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
+							Integration von dWb+ in bestehende IT-Systemlandschaften
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">06.12.2014</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>Nachdem 
+dWb+
+mit einer weiteren Schnittstelle zur 
+Enterprise Integration
+ausgestattet wurde, ist es nunmehr höchste Zeit, die verschiedenen Schnittstellen 
+zu beleuchten, die es bereits jetzt gestatten, 
+dWb+
+und damit auch den 
+Aviator
+in bestehende Systemlandschaften zu integrieren
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="integration_dwb__bestehende_it_systemlandschaften.html#content">Öffnen</a>
 							</p>
 						</div>
 					</div>
@@ -2708,31 +2818,6 @@ geht es diesmal um verteiltes Rechnen.
 					<div class="w3-row">
 					<div class="w3-col m8 s12">
 						<h4>
-							Ortsbezüge in dWb+
-						</h4>
-					</div>
-					<div class="w3-col m4"><p style="text-align: right">
-						<span class="w3-opacity">27.10.2013</span>
-					</p>
-					</div>
-					</div>
-					<div class="w3-row">
-						<div class="w3-col m8 s12">
-<p>Die neuen Funktionalitäten in der Anwendung
-EBMap4D
-wurden ebenfalls in 
-dWb+
- integriert
-</p>						</div>
-						<div class="w3-col m4">
-							<p style="text-align: right">
-								<a class="w3-button w3-padding-large w3-white w3-border" href="ortsbezuege_dwb_.html#content">Öffnen</a>
-							</p>
-						</div>
-					</div>
-					<div class="w3-row">
-					<div class="w3-col m8 s12">
-						<h4>
 							Fehler und Warnungen in dWb+
 						</h4>
 					</div>
@@ -2775,6 +2860,30 @@ Prototyping. Nach reiflicher Überlegung wird mittels BeanShell nachgebessert
 						<div class="w3-col m4">
 							<p style="text-align: right">
 								<a class="w3-button w3-padding-large w3-white w3-border" href="beanshell_module_dwb_.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
+							dWb+ Integration mit Cron, HTML
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">11.08.2013</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>Die Anwendung 
+dWb+
+wird gerade in Richtung auf einfache Integration mit anderen IT-Systemkomponenten
+weiterentwickelt. Zwei neue Module in diese Richtung werden hier vorgestellt. 
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="dwb__integration_cron__html.html#content">Öffnen</a>
 							</p>
 						</div>
 					</div>
