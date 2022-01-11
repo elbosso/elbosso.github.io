@@ -6,9 +6,11 @@ import org.apache.log4j.Level;
 
 import javax.accessibility.AccessibleContext;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.beans.Transient;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -234,6 +236,10 @@ public class ResourceLoader extends java.lang.Object
 			props.load(is);
 			is.close();
 		}catch(java.lang.Throwable exp){EXCEPTION_LOGGER.error(exp.getMessage(),exp);}
+		manageFallback();
+	}
+	static void manageFallback()
+	{
 		try{
 			fallBack=getResource("de/netsysit/ressources/gfx/symbols/ex_red.gif");
 		}catch(java.lang.Throwable exp){EXCEPTION_LOGGER.error(exp.getMessage(),exp);}
@@ -326,6 +332,8 @@ public class ResourceLoader extends java.lang.Object
 			is.close();
 			f=conf;
 		}
+		resourceCache.clear();
+		manageFallback();
 	}
 	public static synchronized void writeConfiguration(java.io.File conf) throws java.io.IOException
 	{
@@ -418,10 +426,12 @@ public class ResourceLoader extends java.lang.Object
 							java.lang.String prefix = null;
 							java.lang.String suffix = null;
 							java.util.regex.Matcher m = pat1.matcher(replacement);
+							java.lang.String osizeString=null;
 							if (m.matches())
 							{
 								prefix = m.group(1);
 								suffix = m.group(3);
+								osizeString=m.group(2);
 								int osize = java.lang.Integer.parseInt(m.group(2));
 								if (osize == 48)
 									ps = size.getPixelSize();
@@ -440,6 +450,10 @@ public class ResourceLoader extends java.lang.Object
 								for (int size : ps)
 								{
 									java.lang.String constructedReplacement = prefix + "_" + size + suffix + ".png";
+									if(prefix.contains(osizeString))
+									{
+										constructedReplacement=(prefix.replace(osizeString,java.lang.Integer.toString(size))) + "_" + size + suffix + ".png";
+									}
 									if (CLASS_LOGGER.isTraceEnabled())
 										CLASS_LOGGER.trace("trying " + constructedReplacement);
 									rv = ResourceLoader.class.getClassLoader().getResource(constructedReplacement);
@@ -570,7 +584,7 @@ public class ResourceLoader extends java.lang.Object
 		}
 		return rv;
 	}
-	public static void main(java.lang.String[] args)
+	public static void main(java.lang.String[] args) throws IOException
 	{
 		Utilities.configureBasicStdoutLogging(org.apache.log4j.Level.ALL);
 		de.netsysit.util.ResourceLoader.setSize(IconSize.small);
@@ -578,6 +592,55 @@ public class ResourceLoader extends java.lang.Object
 		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());
 		javax.swing.ImageIcon i2=de.netsysit.util.ResourceLoader.getIcon("de/netsysit/ressources/gfx/ca/Makro expandieren_48.png");
 		CLASS_LOGGER.trace(i2.getIconWidth()+" "+i2.getIconHeight());
+		i1=de.netsysit.util.ResourceLoader.getIcon("toolbarButtonGraphics/general/New24.gif");
+		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());
+		i1=de.netsysit.util.ResourceLoader.getIcon("toolbarButtonGraphics/general/Open24.gif");
+		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());
+		java.util.Properties iconFallbacks = new java.util.Properties();
+		java.io.InputStream is=de.netsysit.util.ResourceLoader.getResource("de/elbosso/ressources/data/icon_trans_material.properties").openStream();
+		iconFallbacks.load(is);
+		is.close();
+		de.netsysit.util.ResourceLoader.configure(iconFallbacks);
+		javax.swing.JToolBar tb=new javax.swing.JToolBar();
+		i1=de.netsysit.util.ResourceLoader.getIcon("de/netsysit/ressources/gfx/ca/Makro expandieren_48.png");
+		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());
+		i1=de.netsysit.util.ResourceLoader.getIcon("toolbarButtonGraphics/general/New24.gif");
+		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());
+		javax.swing.Action act=new javax.swing.AbstractAction(null,i1)
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+
+			}
+		};
+		tb.add(act);
+		i1=de.netsysit.util.ResourceLoader.getIcon("toolbarButtonGraphics/general/Open24.gif");
+		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());
+		act=new javax.swing.AbstractAction(null,i1)
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+
+			}
+		};
+		tb.add(act);
+		i1=de.netsysit.util.ResourceLoader.getIcon("de/netsysit/ressources/gfx/symbols/ex_red.gif");
+		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());
+		act=new javax.swing.AbstractAction(null,i1)
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+
+			}
+		};
+		tb.add(act);
+		javax.swing.JFrame f=new javax.swing.JFrame();
+		f.setContentPane(tb);
+		f.pack();
+		f.setVisible(true);
 	}
 }
 
