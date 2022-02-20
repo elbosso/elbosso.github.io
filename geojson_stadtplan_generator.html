@@ -134,7 +134,7 @@ Ausgangspunkt der Generierung ist die Erzeugung eines Gitters - aktuell wird ein
 ein kreisförmiges (Wheel-and-spokes) Gitter unterstützt. Die Verbindungen der Knoten im Gitter stellen die Grundlage für
 die späteren Straßen im stasdtplan dar:
 </p><p>
-<img src="images/geojson_map_generator/grid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/grid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -144,7 +144,7 @@ Ausgangspunkt: Gitter
 Anschließend werden die Gitterpunkte zufällig verschoben um dem ganzen einen "organischen" oder "gewachsenen" Eindruck zu
 geben:
 </p><p>
-<img src="images/geojson_map_generator/randomizedgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/randomizedgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -157,7 +157,7 @@ nicht in Teile zerfällt und jeder Knoten im Graphenm nach wie vor von jedem and
 Daraufhin werden die Polygone im Gitter identifiziert und in einer internen Datenstruktur für die spätere Verwendung
 gespeichert. Die Polygone entsprechen den Häuserblocks im späteren Stadtplan:
 </p><p>
-<img src="images/geojson_map_generator/polygons.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/polygons.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -169,7 +169,7 @@ Verfahrens, das ich direkt einer der angegebenen
 <a href="https://www.cs.auckland.ac.nz/~roboteam/documents/RandomMapGenerator.pdf">Arbeiten</a>
 entnommen habe. Die Wichtigkeit der Straßen wird durch die Dicke der Linien in der Visualisierung dargestellt:
 </p><p>
-<img src="images/geojson_map_generator/commutegrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/commutegrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -179,7 +179,7 @@ Straßen werden in drei Klassen unterteilt
 Diese Arbeit "begradigt" später die besonders wichtigen Straßen noch ein wenig - ein Arbeitsschritt, der in meiner Implementierung zwar
 vorgesehen, jedoch noch nicht implementiert wurde:
 </p><p>
-<img src="images/geojson_map_generator/smoothedgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/smoothedgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -190,7 +190,7 @@ An dieser Stelle würden mehrere Polygone, die nun nicht mehr durch Straßen get
 unter Umständen konkave Polygone entstehen. Deren Behandlung - beispielsweise durch Triangulation ist noch nicht implementiert,
 so dass solche Polygone entfernt werden. Dieser Schritt ist optional - wird er ausgeführt, sieht das Ergebnis beispielsweise so aus:
 </p><p>
-<img src="images/geojson_map_generator/polygonsgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/polygonsgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -199,7 +199,7 @@ optional: Entfernen weiterer Polygone
 </p><p>
 Anschließend werden die Polygone partitioniert, was dem "Errichten" von Gebäuden auf den einzelnen Häuserblocks entspricht:
 </p><p>
-<img src="images/geojson_map_generator/partitionedgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/partitionedgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -209,7 +209,7 @@ Partitionieren der Polygone - Errichten von Gebäuden
 Daran schließt sich der vorerst letzte Schritt der Generierung an: die Straßen höherer Ordnung (Hauptstraßen und Magistralen)
 werden zu Straßenzügen zusammengefasst - in der Visualisierung erkennt man das an der gleichen Färbung von Straßenabschnitten:
 </p><p>
-<img src="images/geojson_map_generator/connectedRoads.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/connectedRoads.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -219,7 +219,7 @@ Zusammenfassung von Straßenabschnitten wichtiger Straßen
 Hier noch kurz ein Beispiel für das Ergebnis des beschriebenen Vorgehens wenn ein rundes Gitter als Ausgangspunkt
 gewählt wurde:
 </p><p>
-<img src="images/geojson_map_generator/wheel_and_spokes_connectedRoads.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/wheel_and_spokes_connectedRoads.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -237,7 +237,7 @@ von
 (Beispiele)
 importiert werden:
 </p><p>
-<img src="images/geojson_map_generator/geojson_rendered_with_geoman.png" style="max-width:584px;"
+<img src="images/geojson_map_generator/geojson_rendered_with_geoman.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -346,18 +346,16 @@ und einige weitere Beispieldatensätze aus dem Internet eingefügt - das reichte
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Arduino und XBee für Serverüberwachung</p>
+							Widgets auf Modulen in dWb+</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">15.02.2017</span>
+							<span class="w3-opacity">24.02.2017</span>
 						</p>
-						<span class="smallabstract"><p>Nach meinen diversen Berichten über den Stand der 
-Komponenten zur Serverüberwachung
-schrieb ich neulich über Versuche, 
-Arduinos und XBees einzubinden
-- das 
-Projekt wurde erfolgreich abgeschlossen!
+						<span class="smallabstract"><p>Ich habe mich lange dagegen gesträubt, aber nun über den Jahreswechsel endlich nachgegeben - es besteht
+nun die Möglichkeit, Widgets direkt auf Module in
+dWb+
+zu packen
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="arduino_xbee_serverueberwachung.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="widgets_auf_modulen_dwb_.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -421,6 +419,29 @@ Projekt wurde erfolgreich abgeschlossen!
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Redundante Netzwerkschnittstellen für Laptops</span><br>
+						<span class="smallabstract"><p>Ich hatte in eine meiner letzten
+Linksammlungen
+mehrere Links zum Thema "Netzwerkbonding" aufgenommen -ich wollte mich einmal
+damit beschäftigen, jedoch eigentlichaus einem ganz anderen Grund...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="redundante_netzwerkschnittstellen_laptops.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							The Ultimate RISC - Projektupdate I</span><br>
+						<span class="smallabstract"><p>Nachdem ich die ersten Beispielprogramme mit meinem
+Makro-Assembler
+für den
+Ultimate RISC
+geschrieben hatte, wurde mir klar, dass es sehr mühsam wäre, weitere Experimente ohne GUI zu machen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="the_ultimate_risc___projektupdate_i.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
 							Überwachung Festplattenstatus mit Grafana</span><br>
 						<span class="smallabstract"><p>Ich hatte nach dem Update meines
@@ -429,28 +450,6 @@ mit größeren Platten festgestellt, dass der automatische Standby
 nach einiger Zeit Nicht-Benutzung nicht mehr funktionierte.
 </p></span>
 						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ueberwachung_festplattenstatus_grafana.html#62">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Karten aus Voronoi-Netzwerken</span><br>
-						<span class="smallabstract"><p>Ich habe bereits vor einiger Zeit über Methoden zur Erzeugung von Karten - etwa
-Stadtplänen
-oder
-Labyrinthen
-zum Beispiel für Computerspiele berichtet.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="karten_aus_voronoi_netzwerken.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Semiotic Standard: the icons from Alien</span><br>
-						<span class="smallabstract"><p>Hin und wieder kommt es vor, daß ich feststelle, daß mir Icons für Knöpfe in meinen Programmen fehlen.
-Meistens kann ich mir dann damit helfen, daß ich aus dem umfangreichen Fundus, der sich bereits im Laufe der Zeit bei mir angesammelt hat,
-Teile auswähle und neu kombiniere. Manchmal finde ich aber auch nur interessante Icon-Sammlungen - so wie dieses Mal...
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="semiotic_standard__the_icons_from_alien.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -485,6 +484,29 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Redundante Netzwerkschnittstellen für Laptops</span><br>
+							<span class="smallabstract"><p>Ich hatte in eine meiner letzten
+Linksammlungen
+mehrere Links zum Thema "Netzwerkbonding" aufgenommen -ich wollte mich einmal
+damit beschäftigen, jedoch eigentlichaus einem ganz anderen Grund...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="redundante_netzwerkschnittstellen_laptops.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							The Ultimate RISC - Projektupdate I</span><br>
+							<span class="smallabstract"><p>Nachdem ich die ersten Beispielprogramme mit meinem
+Makro-Assembler
+für den
+Ultimate RISC
+geschrieben hatte, wurde mir klar, dass es sehr mühsam wäre, weitere Experimente ohne GUI zu machen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="the_ultimate_risc___projektupdate_i.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
 							Überwachung Festplattenstatus mit Grafana</span><br>
 							<span class="smallabstract"><p>Ich hatte nach dem Update meines
@@ -493,28 +515,6 @@ mit größeren Platten festgestellt, dass der automatische Standby
 nach einiger Zeit Nicht-Benutzung nicht mehr funktionierte.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ueberwachung_festplattenstatus_grafana.html#62">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Karten aus Voronoi-Netzwerken</span><br>
-							<span class="smallabstract"><p>Ich habe bereits vor einiger Zeit über Methoden zur Erzeugung von Karten - etwa
-Stadtplänen
-oder
-Labyrinthen
-zum Beispiel für Computerspiele berichtet.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="karten_aus_voronoi_netzwerken.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Semiotic Standard: the icons from Alien</span><br>
-							<span class="smallabstract"><p>Hin und wieder kommt es vor, daß ich feststelle, daß mir Icons für Knöpfe in meinen Programmen fehlen.
-Meistens kann ich mir dann damit helfen, daß ich aus dem umfangreichen Fundus, der sich bereits im Laufe der Zeit bei mir angesammelt hat,
-Teile auswähle und neu kombiniere. Manchmal finde ich aber auch nur interessante Icon-Sammlungen - so wie dieses Mal...
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="semiotic_standard__the_icons_from_alien.html#content">
  Weiterlesen...
 								</a>
 						</li>
