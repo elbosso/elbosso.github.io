@@ -38,7 +38,7 @@ import java.io.IOException;
 
 public class Files
 {
-	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(Files.class);
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(Files.class);
 	public static void main(java.lang.String[] args) throws IOException, InterruptedException
 	{
 		byte[] bo = new byte[100];
@@ -48,7 +48,7 @@ public class Files
 		};
 		Process p = Runtime.getRuntime().exec(cmd);
 		p.getInputStream().read(bo);
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(new String(bo));
+		CLASS_LOGGER.trace(new String(bo));
 		String[] cmda =
 		{
 			System.getProperty("user.home")+java.io.File.separator+"script.sh", new String(bo).replace('\n', ' ').trim()
@@ -56,7 +56,7 @@ public class Files
 		p = Runtime.getRuntime().exec(cmda);
 		bo = new byte[100];
 		p.getInputStream().read(bo);
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
+		CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
 		p.waitFor();
 		if (System.currentTimeMillis() > 0)
 		{
@@ -66,14 +66,14 @@ public class Files
 			p = Runtime.getRuntime().exec(cmda);
 			bo = new byte[100];
 			p.getInputStream().read(bo);
-			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
+			CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
 			p.waitFor();
 			pw.close();
 			fos.close();
 			p = Runtime.getRuntime().exec(cmda);
 			bo = new byte[100];
 			p.getInputStream().read(bo);
-			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
+			CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
 			p.waitFor();
 		}
 		if (System.currentTimeMillis() > 0)
@@ -84,13 +84,13 @@ public class Files
 			p = Runtime.getRuntime().exec(cmda);
 			bo = new byte[100];
 			p.getInputStream().read(bo);
-			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
+			CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
 			p.waitFor();
 		}
 		p = Runtime.getRuntime().exec(cmda);
 		bo = new byte[100];
 		p.getInputStream().read(bo);
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
+		CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
 		p.waitFor();
 
 		while (true)

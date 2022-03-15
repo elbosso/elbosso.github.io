@@ -22,7 +22,6 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 {
 	private final java.beans.PropertyChangeSupport pcs;
 
-
 	/**
 	 * The constructor doesnt really do anything
 	 */
@@ -115,7 +114,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, boolean oldvalue, boolean newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Boolean.valueOf(oldvalue), java.lang.Boolean.valueOf(newvalue)));
+			send(new java.beans.PropertyChangeEvent(getEventSource(), name, java.lang.Boolean.valueOf(oldvalue), java.lang.Boolean.valueOf(newvalue)));
 	}
 
 
@@ -130,7 +129,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, byte oldvalue, byte newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Byte.valueOf(oldvalue), java.lang.Byte.valueOf(newvalue)));
+			send(new java.beans.PropertyChangeEvent(getEventSource(), name, java.lang.Byte.valueOf(oldvalue), java.lang.Byte.valueOf(newvalue)));
 	}
 
 
@@ -145,7 +144,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, short oldvalue, short newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Short.valueOf(oldvalue), java.lang.Short.valueOf(newvalue)));
+			send(new java.beans.PropertyChangeEvent(getEventSource(), name, java.lang.Short.valueOf(oldvalue), java.lang.Short.valueOf(newvalue)));
 	}
 
 
@@ -160,7 +159,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, int oldvalue, int newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Integer.valueOf(oldvalue), java.lang.Integer.valueOf(newvalue)));
+			send(new java.beans.PropertyChangeEvent(getEventSource(), name, java.lang.Integer.valueOf(oldvalue), java.lang.Integer.valueOf(newvalue)));
 	}
 
 
@@ -175,7 +174,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, double oldvalue, double newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Double.valueOf(oldvalue), java.lang.Double.valueOf(newvalue)));
+			send(new java.beans.PropertyChangeEvent(getEventSource(), name, java.lang.Double.valueOf(oldvalue), java.lang.Double.valueOf(newvalue)));
 	}
 
 
@@ -190,7 +189,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, float oldvalue, float newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Float.valueOf(oldvalue), java.lang.Float.valueOf(newvalue)));
+			send(new java.beans.PropertyChangeEvent(getEventSource(), name, java.lang.Float.valueOf(oldvalue), java.lang.Float.valueOf(newvalue)));
 	}
 
 
@@ -205,7 +204,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, long oldvalue, long newvalue)
     {
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, java.lang.Long.valueOf(oldvalue), java.lang.Long.valueOf(newvalue)));
+			send(new java.beans.PropertyChangeEvent(getEventSource(), name, java.lang.Long.valueOf(oldvalue), java.lang.Long.valueOf(newvalue)));
 	}
 
 
@@ -222,11 +221,17 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 //		if(name.equals("inAndOuts"))
 //			new java.lang.Throwable().printStackTrace();
 		if(pcs.hasListeners(name))
-			send(new java.beans.PropertyChangeEvent(this, name, oldvalue, newvalue));
+			send(new java.beans.PropertyChangeEvent(getEventSource(), name, oldvalue, newvalue));
 	}
 
 	public void send(java.beans.PropertyChangeEvent evt)
 	{
 		pcs.firePropertyChange(evt);
 	}
+
+	protected Object getEventSource()
+	{
+		return this;
+	}
+
 }

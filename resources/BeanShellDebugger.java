@@ -64,7 +64,7 @@ package de.elbosso.util;
  */
 public class BeanShellDebugger extends java.lang.Object
 {
-	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(BeanShellDebugger.class);
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(BeanShellDebugger.class);
 
 	private static final java.util.Set<java.lang.String> hidden=new java.util.HashSet();
 	static

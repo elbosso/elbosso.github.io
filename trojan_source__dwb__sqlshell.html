@@ -128,14 +128,14 @@ man entsprechende Versuche der Manipulation mit eingestreutwen BiDi-Unicodes erk
 Screenshot zeigt, dass diese Codes in der sQLshell als Pseudozeichen dargestellt und <span class="mdbold">nicht</span> interpretiert werden.
 Man vergleiche auch mit dem nächsten Screenshot, der denselbemn Inhalt in Gedit zeigt:
 </p><p>
-<img src="images/trojansQLshell.png"
+<img src="images/trojansQLshell.png" style="max-width:280px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
 SQL-Script in sQLshell
 </span>
 </p><p>
-<img src="images/trojangedit.png"
+<img src="images/trojangedit.png" style="max-width:299px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -155,7 +155,7 @@ unterstützen.
 Wie man im nächsten Screenshot sieht, werden die eingestreuten Control-Characters hier zwar nicht als Pseudozeichen hervorgehoben,
 allerdings arbeitet zumindest das Syntax-Highlighting korrekt und markiert die gesamte Zeile <span class="mdbold">5</span> als auskommentiert.
 </p><p>
-<img src="images/trojanmdijava.png"
+<img src="images/trojanmdijava.png" style="max-width:453px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -171,7 +171,7 @@ Hier wird die Beanshell-Konsole in die Anwendung eingebunden, um schnell per Bea
 absenden zu können. Diese Konsole arbeitet ohne jegliches Syntax-Highlighting und der problematisache Code ist - da
 auch die Control-Characters komplett unsichtbar bleiben - nicht als problematisch erkennbar:
 </p><p>
-<img src="images/trojanbshconsole.png"
+<img src="images/trojanbshconsole.png" style="max-width:434px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -183,7 +183,7 @@ Daran ändert auch die Verwendung der aktuellsten auf GitHub verfügbaren
 nichts, wie man im folgenden Screenshot
 erkennen kann:
 </p><p>
-<img src="images/trojanbshconsole3_0_0_SNAPSHOT.png"
+<img src="images/trojanbshconsole3_0_0_SNAPSHOT.png" style="max-width:436px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -302,14 +302,18 @@ zum Einsatz kommt - dadurch wird wenigstens durch das Syntax-Highlighting auf pr
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Erste Julia-Implementierung</p>
+							Verbesserungen ModuleWorkspace I</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">07.03.2017</span>
+							<span class="w3-opacity">18.03.2017</span>
 						</p>
-						<span class="smallabstract"><p>Nach längerer Pause meines Projektes zum Lernen neuer Sprachen wurde über den Jahreswechsel ausgegraben und ich fand
-endlich mal die Zeit, meine ersten Versuche mit Julia zu unternehmen
+						<span class="smallabstract"><p>In der Zeit über Weihnachten haben sich einige Verbesserungen in
+der ModuleWorkspace-Komponente - unter anderem verwendet in der
+sQLshell
+und im Rapid-Prototyping-Werkzeug
+dWb+
+ergeben, die die allgemeine Benutzbarkeit verbessern:
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erste_julia_implementierung.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="verbesserungen_moduleworkspace_i.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -373,38 +377,34 @@ endlich mal die Zeit, meine ersten Versuche mit Julia zu unternehmen
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
-							<span class="w3-large">							InputStreamIterable</span><br>
-						<span class="smallabstract"><p>Für das Projekt
-ultimaterisc
-benötigte ich eine Möglichkeit, einen Include-Mechanismus für die Assembler-Source-Dateien
-zur Verfügung zu stellen.
+							<span class="w3-large">							Static Site Generator für Docbook</span><br>
+						<span class="smallabstract"><p>Mein eigener
+Static Site Generator
+hat jetzt einen Modus, der es gestattet, die Inhalte nicht nur als HTML-Seiten für die Publikation mittels
+eines HTTP-Servers zu erzeugen, sondern auch als Docbook zur Erzeugung eines PDF-Dokumentes oder E-Book im Format EPUB.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="inputstreamiterable.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="static_site_generator_docbook.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Neue Features für AugmentedJEditTextArea</span><br>
-						<span class="smallabstract"><p>Ich schrieb hier bereits über meine eigene Variation einer
-Textkomponente mit Syntaxhighlighting für Java.
-Durch
-Trojan Source
-und meine Fortschritte im Projekt
-The ultimate RISC
-bin ich dort nochmal eingestiegen und habe einige Features hinzugefügt:
+							<span class="w3-large">							Trojan Source - Nachschlag</span><br>
+						<span class="smallabstract"><p>Ich habe weitere interessante Fakten zu der Trojan Source Attacke des letzten Jahres ausgegraben...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_features_augmentedjedittextarea.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source___nachschlag.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Redundante Netzwerkschnittstellen für Laptops</span><br>
-						<span class="smallabstract"><p>Ich hatte in eine meiner letzten
-Linksammlungen
-mehrere Links zum Thema "Netzwerkbonding" aufgenommen -ich wollte mich einmal
-damit beschäftigen, jedoch eigentlichaus einem ganz anderen Grund...
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Karten aus Voronoi-Netzwerken</span><br>
+						<span class="smallabstract"><p>Ich habe bereits vor einiger Zeit über Methoden zur Erzeugung von Karten - etwa
+Stadtplänen
+oder
+Labyrinthen
+zum Beispiel für Computerspiele berichtet.
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="redundante_netzwerkschnittstellen_laptops.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="karten_aus_voronoi_netzwerken.html#101">
  Weiterlesen...
 							</a>
 					</li>
@@ -439,38 +439,34 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
-							<span class="w3-large">							InputStreamIterable</span><br>
-							<span class="smallabstract"><p>Für das Projekt
-ultimaterisc
-benötigte ich eine Möglichkeit, einen Include-Mechanismus für die Assembler-Source-Dateien
-zur Verfügung zu stellen.
+							<span class="w3-large">							Static Site Generator für Docbook</span><br>
+							<span class="smallabstract"><p>Mein eigener
+Static Site Generator
+hat jetzt einen Modus, der es gestattet, die Inhalte nicht nur als HTML-Seiten für die Publikation mittels
+eines HTTP-Servers zu erzeugen, sondern auch als Docbook zur Erzeugung eines PDF-Dokumentes oder E-Book im Format EPUB.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="inputstreamiterable.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="static_site_generator_docbook.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Neue Features für AugmentedJEditTextArea</span><br>
-							<span class="smallabstract"><p>Ich schrieb hier bereits über meine eigene Variation einer
-Textkomponente mit Syntaxhighlighting für Java.
-Durch
-Trojan Source
-und meine Fortschritte im Projekt
-The ultimate RISC
-bin ich dort nochmal eingestiegen und habe einige Features hinzugefügt:
+							<span class="w3-large">							Trojan Source - Nachschlag</span><br>
+							<span class="smallabstract"><p>Ich habe weitere interessante Fakten zu der Trojan Source Attacke des letzten Jahres ausgegraben...
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_features_augmentedjedittextarea.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source___nachschlag.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Redundante Netzwerkschnittstellen für Laptops</span><br>
-							<span class="smallabstract"><p>Ich hatte in eine meiner letzten
-Linksammlungen
-mehrere Links zum Thema "Netzwerkbonding" aufgenommen -ich wollte mich einmal
-damit beschäftigen, jedoch eigentlichaus einem ganz anderen Grund...
+							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
+							Karten aus Voronoi-Netzwerken</span><br>
+							<span class="smallabstract"><p>Ich habe bereits vor einiger Zeit über Methoden zur Erzeugung von Karten - etwa
+Stadtplänen
+oder
+Labyrinthen
+zum Beispiel für Computerspiele berichtet.
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="redundante_netzwerkschnittstellen_laptops.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="karten_aus_voronoi_netzwerken.html#101">
  Weiterlesen...
 								</a>
 						</li>

@@ -43,7 +43,7 @@ import javax.swing.tree.MutableTreeNode;
 public abstract class ActivityToggleNode<T> extends de.netsysit.model.tree.LazyNode implements
 		java.beans.PropertyChangeListener
 {
-	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(ActivityToggleNode.class);
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(ActivityToggleNode.class);
 	private de.elbosso.util.lang.ActivityToggle<T> userObject;
 
 	public ActivityToggleNode(de.elbosso.util.lang.ActivityToggle<T> userObject,ActivityToggleNode parent)
@@ -54,7 +54,7 @@ public abstract class ActivityToggleNode<T> extends de.netsysit.model.tree.LazyN
 	
 	public void propertyChange(PropertyChangeEvent evt)
 	{
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(userObject+" propertyChange");
+		CLASS_LOGGER.trace(userObject+" propertyChange");
 		reevaluateChildren();
 	}
 
@@ -74,7 +74,7 @@ public abstract class ActivityToggleNode<T> extends de.netsysit.model.tree.LazyN
 		userObject.setActive(state);
 		if(state!=old)
 		{
-			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("changed :"+isActive()+userObject.isActive());
+			CLASS_LOGGER.trace("changed :"+isActive()+userObject.isActive());
 		}
 	}
 	public boolean isActive()

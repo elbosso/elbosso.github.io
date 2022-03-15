@@ -42,7 +42,7 @@ package de.elbosso.ui.renderer.tree;
  */
 public class ActivatableTreeCellRenderer implements javax.swing.tree.TreeCellRenderer
 {
-	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(ActivatableTreeCellRenderer.class);
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(ActivatableTreeCellRenderer.class);
 	private javax.swing.JCheckBox leafRenderer;
 	private javax.swing.JPanel leafRendererContainer;
 	private javax.swing.tree.DefaultTreeCellRenderer nonLeafRenderer;
@@ -111,20 +111,20 @@ public class ActivatableTreeCellRenderer implements javax.swing.tree.TreeCellRen
 					}
 				}
 				returnValue = leafRenderer;
-				if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(4);
+				CLASS_LOGGER.trace("4");
 			}
 			else
 			{
 				returnValue = nonLeafRenderer.getTreeCellRendererComponent(tree, value, selected, expanded,
 						leaf, row, hasFocus);
-				if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(1);
+				CLASS_LOGGER.trace("1");
 			}
 		}
 		else
 		{
 			returnValue = nonLeafRenderer.getTreeCellRendererComponent(tree, value, selected, expanded,
 					leaf, row, hasFocus);
-				if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(2);
+				CLASS_LOGGER.trace("2");
 		}
 		return returnValue;
 	}

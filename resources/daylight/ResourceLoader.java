@@ -2,7 +2,7 @@ package de.netsysit.util;
 //$Id$
 
 import de.elbosso.util.Utilities;
-import org.apache.log4j.Level;
+import ch.qos.logback.classic.Level;
 
 import javax.accessibility.AccessibleContext;
 import java.awt.*;
@@ -17,8 +17,8 @@ import java.net.URL;
 /*#LICENCE#*/
 public class ResourceLoader extends java.lang.Object
 {
-	private final static org.apache.log4j.Logger EXCEPTION_LOGGER=org.apache.log4j.Logger.getLogger("ExceptionCatcher");
-	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(ResourceLoader.class);
+	private final static org.slf4j.Logger EXCEPTION_LOGGER =org.slf4j.LoggerFactory.getLogger("ExceptionCatcher");
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(ResourceLoader.class);
 	private final static java.util.regex.Pattern pat1=java.util.regex.Pattern.compile("([^\\!].*?)_(\\d*?)([^\\d]*?)\\.png");
 	private final static java.util.regex.Pattern pat2=java.util.regex.Pattern.compile("(.*?)_(\\d*?)([^\\d]*?)\\.png");
 	private static java.util.Properties props=new java.util.Properties();
@@ -232,7 +232,7 @@ public class ResourceLoader extends java.lang.Object
 	{
 		setSize(IconSize.medium);
 		try{
-			java.io.InputStream is=de.netsysit.util.ResourceLoader.getResource("de/netsysit/ressources/data/icon_trans.properties").openStream();
+			java.io.InputStream is=ResourceLoader.class.getClassLoader().getResource("de/netsysit/ressources/data/icon_trans.properties").openStream();
 			props.load(is);
 			is.close();
 		}catch(java.lang.Throwable exp){EXCEPTION_LOGGER.error(exp.getMessage(),exp);}
@@ -241,7 +241,7 @@ public class ResourceLoader extends java.lang.Object
 	static void manageFallback()
 	{
 		try{
-			fallBack=getResource("de/netsysit/ressources/gfx/symbols/ex_red.gif");
+			fallBack=ResourceLoader.class.getClassLoader().getResource("de/netsysit/ressources/gfx/symbols/ex_red.gif");
 		}catch(java.lang.Throwable exp){EXCEPTION_LOGGER.error(exp.getMessage(),exp);}
 		if(fallBack==null)
 		{
@@ -258,6 +258,7 @@ public class ResourceLoader extends java.lang.Object
 				fallBack=f.toURI().toURL();
 			}catch(java.lang.Throwable exp)
 			{
+				exp.printStackTrace();
 				CLASS_LOGGER.warn(exp.getMessage(),exp);
 				try{
 					java.awt.image.BufferedImage bi=new java.awt.image.BufferedImage(getSize().getPixelSize()[0],getSize().getPixelSize()[0], BufferedImage.TYPE_INT_ARGB);
@@ -267,6 +268,7 @@ public class ResourceLoader extends java.lang.Object
 					fallBack=f.toURI().toURL();
 				}catch(java.lang.Throwable ex)
 				{
+					exp.printStackTrace();
 					CLASS_LOGGER.warn(ex.getMessage(), ex);
 				}
 			}
@@ -349,7 +351,7 @@ public class ResourceLoader extends java.lang.Object
 		java.net.URL rv=getResource(arg);
 		if(rv==null)
 		{
-			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("getImgResource "+arg);
+			CLASS_LOGGER.trace("getImgResource "+arg);
 			rv=fallBack;
 		}
 		return rv;
@@ -359,7 +361,7 @@ public class ResourceLoader extends java.lang.Object
 		java.net.URL rv=getResourceUnaltered(arg);
 		if(rv==null)
 		{
-			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("getImgResourceUnaltered "+arg);
+			CLASS_LOGGER.trace("getImgResourceUnaltered "+arg);
 			rv=fallBack;
 		}
 		return rv;
@@ -383,14 +385,14 @@ public class ResourceLoader extends java.lang.Object
 				catch (java.net.MalformedURLException exp)
 				{
 					rv = null;
-					if (CLASS_LOGGER.isEnabledFor(Level.WARN))
+					
 						CLASS_LOGGER.warn(exp.getMessage(),exp);
 				}
 			}
 		}
 		if((rv==null)&&(classpathFallback==true))
 		{
-			if(CLASS_LOGGER.isEnabledFor(Level.WARN))CLASS_LOGGER.warn("found no docker secret named "+arg+" - searching instead on CLASSPATH!");
+			CLASS_LOGGER.warn("found no docker secret named "+arg+" - searching instead on CLASSPATH!");
 			rv = getResource(arg);
 		}
 		return rv;
@@ -401,13 +403,13 @@ public class ResourceLoader extends java.lang.Object
 		if(resourceCache.containsKey(arg))
 		{
 			rv = resourceCache.get(arg);
-			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("found in cache: "+arg+" - "+rv);
+			CLASS_LOGGER.trace("found in cache: "+arg+" - "+rv);
 		}
 		else
 		{
 			try
 			{
-				if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("requested resource " + arg);
+				 CLASS_LOGGER.trace("requested resource " + arg);
 				if (props.containsKey(arg))
 				{
 					int[] ps = null;
@@ -416,12 +418,12 @@ public class ResourceLoader extends java.lang.Object
 					{
 						if (replacement.startsWith("#"))
 						{
-							if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("found url in props " + replacement);
+							 CLASS_LOGGER.trace("found url in props " + replacement);
 							rv = new java.net.URL(replacement.substring(1));
 						}
 						else
 						{
-							if (CLASS_LOGGER.isTraceEnabled())
+							
 								CLASS_LOGGER.trace("replacement in props " + replacement);
 							java.lang.String prefix = null;
 							java.lang.String suffix = null;
@@ -437,7 +439,7 @@ public class ResourceLoader extends java.lang.Object
 									ps = size.getPixelSize();
 								else
 									ps = size.getSmallerPixelSize();
-								if (CLASS_LOGGER.isTraceEnabled())
+								
 									CLASS_LOGGER.trace("prefix#suffix#osize#ps " + prefix + "#" + suffix + "#" + osize + "#" + ps.length);
 							}
 							else
@@ -454,7 +456,7 @@ public class ResourceLoader extends java.lang.Object
 									{
 										constructedReplacement=(prefix.replace(osizeString,java.lang.Integer.toString(size))) + "_" + size + suffix + ".png";
 									}
-									if (CLASS_LOGGER.isTraceEnabled())
+									
 										CLASS_LOGGER.trace("trying " + constructedReplacement);
 									rv = ResourceLoader.class.getClassLoader().getResource(constructedReplacement);
 									if (rv != null)
@@ -463,12 +465,12 @@ public class ResourceLoader extends java.lang.Object
 							}
 							if (rv == null)
 							{
-								if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + replacement);
+								 CLASS_LOGGER.trace("trying " + replacement);
 								rv = ResourceLoader.class.getClassLoader().getResource(replacement);
 							}
 							if (rv == null)
 							{
-								if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("trying " + arg);
+								 CLASS_LOGGER.trace("trying " + arg);
 								rv = ResourceLoader.class.getClassLoader().getResource(arg);
 							}
 						}
@@ -486,7 +488,7 @@ public class ResourceLoader extends java.lang.Object
 					java.lang.String replacement = arg;
 					if (replacement.startsWith("#"))
 					{
-						if (CLASS_LOGGER.isTraceEnabled()) CLASS_LOGGER.trace("found url in props " + replacement);
+						 CLASS_LOGGER.trace("found url in props " + replacement);
 						rv = new java.net.URL(replacement.substring(1));
 					}
 					else
@@ -554,7 +556,7 @@ public class ResourceLoader extends java.lang.Object
 		if(resourceCacheUnaltered.containsKey(arg))
 		{
 			rv = resourceCacheUnaltered.get(arg);
-			if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("found in cache: "+arg+" - "+rv);
+			CLASS_LOGGER.trace("found in cache: "+arg+" - "+rv);
 		}
 		else
 		{
@@ -586,7 +588,7 @@ public class ResourceLoader extends java.lang.Object
 	}
 	public static void main(java.lang.String[] args) throws IOException
 	{
-		Utilities.configureBasicStdoutLogging(org.apache.log4j.Level.ALL);
+		Utilities.configureBasicStdoutLogging(ch.qos.logback.classic.Level.ALL);
 		de.netsysit.util.ResourceLoader.setSize(IconSize.small);
 		javax.swing.ImageIcon i1=de.netsysit.util.ResourceLoader.getIcon("de/netsysit/ressources/gfx/ca/Makro expandieren_48.png");
 		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());

@@ -38,11 +38,11 @@ import de.elbosso.util.Utilities;
 import de.elbosso.util.lang.collections.DoublyLinkedListHead;
 import de.elbosso.util.lang.collections.DoublyLinkedListPart;
 import de.netsysit.util.StopWatch;
-import org.apache.log4j.Level;
+import ch.qos.logback.classic.Level;
 
 public class ByteCodeAnalysisCast extends java.lang.Object
 {
-	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(ByteCodeAnalysisCast.class);
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(ByteCodeAnalysisCast.class);
 	private java.util.Random rand=new java.util.Random(System.currentTimeMillis());
 
 	public ByteCodeAnalysisCast()
@@ -62,8 +62,8 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 			double d=(a*1.0)/(b*1.0);
 			sum+=d;
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sum);
+		CLASS_LOGGER.trace(java.util.Objects.toString(sw));
+		CLASS_LOGGER.trace(""+sum);
 	}
 	private void calcCast()
 	{
@@ -78,8 +78,8 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 			double d=(double)a/(double)b;
 			sum+=d;
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sum);
+		CLASS_LOGGER.trace(java.util.Objects.toString(sw));
+		CLASS_LOGGER.trace(""+sum);
 	}
 	private java.util.List<java.lang.String> createStringList()
 	{
@@ -119,7 +119,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(iter.next());
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+		CLASS_LOGGER.trace(java.util.Objects.toString(sw));
 	}
 	private void iterListLazy(DoublyLinkedListHead<String> l)
 	{
@@ -129,7 +129,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(iter.next().getContent());
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+		CLASS_LOGGER.trace(java.util.Objects.toString(sw));
 	}
 	private void iterListVar(java.util.List<java.lang.String> l)
 	{
@@ -140,7 +140,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(l.get(i));
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+		CLASS_LOGGER.trace(java.util.Objects.toString(sw));
 	}
 	private void iterListVarSideEffect(java.util.List<java.lang.String> l)
 	{
@@ -150,7 +150,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(l.get(i));
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+		CLASS_LOGGER.trace(java.util.Objects.toString(sw));
 	}
 	private void iterArray(java.lang.String[] l)
 	{
@@ -160,7 +160,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(s);
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+		CLASS_LOGGER.trace(java.util.Objects.toString(sw));
 	}
 	private void iterArrayVar(java.lang.String[] l)
 	{
@@ -171,7 +171,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(l[i]);
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+		CLASS_LOGGER.trace(java.util.Objects.toString(sw));
 	}
 	private void iterArrayVarSideEffect(java.lang.String[] l)
 	{
@@ -181,7 +181,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(l[i]);
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+		CLASS_LOGGER.trace(java.util.Objects.toString(sw));
 	}
 	private void iterList(java.util.List<java.lang.String> l)
 	{
@@ -191,7 +191,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(string);
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+		CLASS_LOGGER.trace(java.util.Objects.toString(sw));
 	}
 	private void iterList(DoublyLinkedListHead<java.lang.String> l)
 	{
@@ -201,7 +201,7 @@ public class ByteCodeAnalysisCast extends java.lang.Object
 		{
 			sb.append(part.getContent());
 		}
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(sw.toString());
+		CLASS_LOGGER.trace(java.util.Objects.toString(sw));
 	}
 
 	public static void main(java.lang.String[] args)

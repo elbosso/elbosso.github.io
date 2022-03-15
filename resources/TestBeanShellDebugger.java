@@ -46,7 +46,7 @@ import bsh.EvalError;
 
 public class TestBeanShellDebugger
 {
-	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(TestBeanShellDebugger.class);
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(TestBeanShellDebugger.class);
 	private static final String DEBUG_ON = "global.___eb_debug_on___=true;";
 
 	@org.junit.Rule

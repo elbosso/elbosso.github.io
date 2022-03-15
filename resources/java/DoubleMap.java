@@ -38,11 +38,11 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
  */
 public class DoubleMap
 {
-	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(DoubleMap.class);
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(DoubleMap.class);
 	public static void main(java.lang.String[] args)
 	{
 		Utilities.sopln("huhu");
-		Utilities.configureBasicStdoutLogging(org.apache.log4j.Level.TRACE);
+		Utilities.configureBasicStdoutLogging(ch.qos.logback.classic.Level.TRACE);
 		double machEps = 1.0;
 
 		do
@@ -51,13 +51,13 @@ public class DoubleMap
 			Utilities.sopln(machEps);
 		}
 		while ((double) (1.0 + (machEps / 2.0)) != 1.0);
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("machine Epsilon (double)= "+machEps);
+		CLASS_LOGGER.trace("machine Epsilon (double)= "+machEps);
 		machEps /= 2.0;
 		Double a = java.lang.Double.valueOf(1);
 		Double b = java.lang.Double.valueOf(a.doubleValue() + machEps);
 		java.util.Set<Double> doubles = new java.util.HashSet();
 		doubles.add(a);
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(doubles.contains(b));
+		CLASS_LOGGER.trace(""+doubles.contains(b));
 		java.math.BigDecimal machEpsBD = new java.math.BigDecimal(1.0);
 		java.math.BigDecimal sum=null;
 		int loop=0;
@@ -74,6 +74,6 @@ public class DoubleMap
 			sum=java.math.BigDecimal.ONE.add(machEpsBD.divide(java.math.BigDecimal.ONE.add(java.math.BigDecimal.ONE)));
 		}
 		while (sum.equals(java.math.BigDecimal.ONE)==false);
-		if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace("machine Epsilon (BigDecimal)= "+machEpsBD);
+		CLASS_LOGGER.trace("machine Epsilon (BigDecimal)= "+machEpsBD);
 	}
 }

@@ -42,7 +42,7 @@ import java.util.Vector;
 
 public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 {
-	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(LazyNode.class);
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(LazyNode.class);
 	private java.lang.String client;
 	protected Object[] children;
 	private javax.swing.tree.TreeNode parent;

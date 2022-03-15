@@ -55,7 +55,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
  */
 public class ActivatableTreeCellEditor extends de.netsysit.model.tree.AbstractCellEditor implements javax.swing.tree.TreeCellEditor
 {
-	private final static org.apache.log4j.Logger CLASS_LOGGER = org.apache.log4j.Logger.getLogger(ActivatableTreeCellEditor.class);
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(ActivatableTreeCellEditor.class);
 	private final ActivatableTreeCellRenderer renderer = new ActivatableTreeCellRenderer();
 //	private javax.swing.event.ChangeEvent changeEvent = null;
 	protected javax.swing.JTree tree;
@@ -124,7 +124,7 @@ public class ActivatableTreeCellEditor extends de.netsysit.model.tree.AbstractCe
 				if (stopCellEditing())
 				{
 					at.setActive(((javax.swing.JCheckBox) itemEvent.getSource()).isSelected());
-					if(CLASS_LOGGER.isTraceEnabled())CLASS_LOGGER.trace(at);
+					CLASS_LOGGER.trace(java.util.Objects.toString(at));
 					((javax.swing.JCheckBox) itemEvent.getSource()).removeActionListener(manager);
 					fireEditingStopped();
 					tree.repaint();
