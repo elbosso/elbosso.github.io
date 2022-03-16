@@ -137,7 +137,7 @@ auf vorhandene Algorithmen.
 Ich möchte das Vorgehen an einigen Illustrationen dokumentieren - Gehen wir zunächst von einigen zufällig generierten zweidimensionalen
 Punkten aus, die die Zentren der zu erzeugenden Voronoi-Polygone darstellen sollen:
 </p><p>
-<img src="images/voronoi/points.png" style="max-width:800px;"
+<img src="images/voronoi/points.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -150,7 +150,7 @@ die
 <a href="https://en.wikipedia.org/wiki/Delaunay_triangulation">Delauney Triangulation</a>
 berechnet - das Ergebnis ist ein Netzwerk von Dreiecken wie hier dargestellt:
 </p><p>
-<img src="images/voronoi/triangles.png" style="max-width:800px;"
+<img src="images/voronoi/triangles.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -159,7 +159,7 @@ Ergebnis der Delauney Triangulation
 </p><p>
 Für jedes der im Netzwerk enthaltenen Dreiecke wird anschließend der Umkreis bestimmt:
 </p><p>
-<img src="images/voronoi/circles.png" style="max-width:800px;"
+<img src="images/voronoi/circles.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -169,7 +169,7 @@ Umkreise der durch die Delauney Triangulation gewonnenen Dreiecke
 Die Mittelpunkte dieser Umkreise können miteinander verbunden werden - Dadurch ergeben sich Liniensegmente, die
 genau den Begrenzungen der gesuchten Voronoi-Polygone entsprechen:
 </p><p>
-<img src="images/voronoi/voronoi_edges_1.png" style="max-width:800px;"
+<img src="images/voronoi/voronoi_edges_1.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -180,7 +180,7 @@ Man sieht aber leicht, dass durch dieses Verfahren nicht <span class="mdbold">al
 Daher habe ich folgende Ergänzungen zum Algorithmus hinzugefügt: Zunächst werden die Außenkanten des als Graph aufgefassten
 Delauney Triangulationsergebnisses gesucht:
 </p><p>
-<img src="images/voronoi/outline.png" style="max-width:800px;"
+<img src="images/voronoi/outline.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -189,7 +189,7 @@ Außenkanten des Graphen aus der Delauney Triangulation
 </p><p>
 Anschließend werden darauf die Mittelsenkrechten konstruiert:
 </p><p>
-<img src="images/voronoi/bisectors.png" style="max-width:800px;"
+<img src="images/voronoi/bisectors.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -201,7 +201,7 @@ der Voronoi-Polygone aufgenommen. Schließlich werden aus den Schnittpunkten die
 weitere zusätzliche Begrenzungen für Voronoi-Polygone am Rand entlang aufgenommen - im nachfolgenden Bild sind
 diese dick und rot markiert:
 </p><p>
-<img src="images/voronoi/voronoi_edges_2.png" style="max-width:800px;"
+<img src="images/voronoi/voronoi_edges_2.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -211,7 +211,7 @@ Himzufügen fehlender Begrenzungen für Voronoi-Polygone
 Damit hat man eine geschlossene Darstellung aller Kanten aller enthaltenen Voronoi-Polygone und kann die Polygone
 selbst konstruieren:
 </p><p>
-<img src="images/voronoi/polygons.png" style="max-width:800px;"
+<img src="images/voronoi/polygons.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -350,6 +350,16 @@ ergeben, die die allgemeine Benutzbarkeit verbessern:
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							LinkCollections 2022 III</span><br>
+						<span class="smallabstract"><p>Nach der
+letzten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2022_iii.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							Static Site Generator für Docbook</span><br>
 						<span class="smallabstract"><p>Mein eigener
 Static Site Generator
@@ -365,17 +375,6 @@ eines HTTP-Servers zu erzeugen, sondern auch als Docbook zur Erzeugung eines PDF
 						<span class="smallabstract"><p>Ich habe weitere interessante Fakten zu der Trojan Source Attacke des letzten Jahres ausgegraben...
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source___nachschlag.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							InputStreamIterable</span><br>
-						<span class="smallabstract"><p>Für das Projekt
-ultimaterisc
-benötigte ich eine Möglichkeit, einen Include-Mechanismus für die Assembler-Source-Dateien
-zur Verfügung zu stellen.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="inputstreamiterable.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -410,6 +409,16 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							LinkCollections 2022 III</span><br>
+							<span class="smallabstract"><p>Nach der
+letzten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2022_iii.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							Static Site Generator für Docbook</span><br>
 							<span class="smallabstract"><p>Mein eigener
 Static Site Generator
@@ -425,17 +434,6 @@ eines HTTP-Servers zu erzeugen, sondern auch als Docbook zur Erzeugung eines PDF
 							<span class="smallabstract"><p>Ich habe weitere interessante Fakten zu der Trojan Source Attacke des letzten Jahres ausgegraben...
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source___nachschlag.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							InputStreamIterable</span><br>
-							<span class="smallabstract"><p>Für das Projekt
-ultimaterisc
-benötigte ich eine Möglichkeit, einen Include-Mechanismus für die Assembler-Source-Dateien
-zur Verfügung zu stellen.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="inputstreamiterable.html#content">
  Weiterlesen...
 								</a>
 						</li>
