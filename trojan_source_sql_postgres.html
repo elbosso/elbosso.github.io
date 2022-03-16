@@ -112,7 +112,7 @@ dass eine Software, die diese Codes interpretiert stattdessen <span class="mdcod
 </p><p>
 Hier ein Beispiel dafür in Gedit 2.36.2 unter Ubuntu Focal Fossa:
 </p><p>
-<img src="images/trojangedit.png"
+<img src="images/trojangedit.png" style="max-width:299px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -124,7 +124,7 @@ Ich freue mich sagen zu können, dass auch die
 sich hier nicht hereinlegen lässt (und damit auch den Anwender nicht hereinlegt) -
 sie zeigt an, dass im SQL weitere Zeichen enthalten sind:
 </p><p>
-<img src="images/trojansQLshell.png"
+<img src="images/trojansQLshell.png" style="max-width:280px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -134,7 +134,7 @@ SQL-Script in sQLshell
 Intellij Idea stellt die Goldrandlösung dar: solche Codes werden nicht nur nicht interpretiiert, sondern stattdessen
 als Pseudo-Zeichen dargestellt:
 </p><p>
-<img src="images/trojanidea.png"
+<img src="images/trojanidea.png" style="max-width:420px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -145,7 +145,7 @@ Nachdem ich mir also verschiedene Editoren und IDEs zum Umgang mit diesen spezia
 ich herausbekommen, wie sich eine Datenbank verhält, wenn sie ein mit solchen Zeichen versehenes Statement vorgesetzt bekommt.
 Meine ersten Tests führte ich mit einer etwas veralteten Version Postgres durch:
 </p><p>
-<img src="images/trojanpostgresversion.png"
+<img src="images/trojanpostgresversion.png" style="max-width:568px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -156,7 +156,7 @@ Ich benutzte zur Interaktion damit zunächst <span class="mdcode">psql</span> in
 Interessant fand ich dabei zunächst, dass in diesen Terminals die Steuercodes im Statement nicht angezeigt und auch <span class="mdbold">nicht
 interpretiert</span> wurden - Man hätte meinen können, dass dieses Statement überhaupt keine Steuerzeichen enthielt:
 </p><p>
-<img src="images/trojancrt.png"
+<img src="images/trojancrt.png" style="max-width:357px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -166,7 +166,7 @@ SQL-Script in CoolRetroTerm
 Jetzt wurde ich natürlich neugierig, ob sich das Statement absetzen lassen würde - es funktionierte. Und bei der Abfrage der Tabellenstruktur
 in <span class="mdcode">psql</span> mittels <span class="mdcode">\d bidi</span> erhielt ich daraufhin folgendes Ergebnis:
 </p><p>
-<img src="images/trojanpsqlstructure.png"
+<img src="images/trojanpsqlstructure.png" style="max-width:769px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -175,7 +175,7 @@ Tabellenstruktur mittels psql in CoolRetroTerm
 </p><p>
 Ein entsprechendes <span class="mdcode">Select</span> schlug aber fehl:
 </p><p>
-<img src="images/trojanpsqlselect.png"
+<img src="images/trojanpsqlselect.png" style="max-width:442px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -188,7 +188,7 @@ kopiert hat - nicht existiert? Was ist denn hier passiert? Die Erklärung wird o
 Datenbank-Werkzeugen ansieht - zum Beispiel in der
 <a href="sQLshell.html">sQLshell:</a>
 </p><p>
-<img src="images/trojansQLshellstructure.png"
+<img src="images/trojansQLshellstructure.png" style="max-width:422px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -202,7 +202,7 @@ Postgres ist auch konsistent: Wenn die Tabelle mittels <span class="mdcode">pg_d
 Unicode-Encoding, in dem - mit Gedit betrachtet - wieder der Name <span class="mdcode">NameSpalten</span> auftaucht, da alle Zeichen exportiert wurden
 und diese natürlich wieder interpretiert werden:
 </p><p>
-<img src="images/trojanpgdumpgedit.png"
+<img src="images/trojanpgdumpgedit.png" style="max-width:598px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
