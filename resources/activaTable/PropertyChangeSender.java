@@ -35,6 +35,8 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.netsysit.util.beans;
 
+import de.elbosso.util.lang.annotations.Event;
+
 public interface PropertyChangeSender
 {
 	/**
@@ -56,4 +58,20 @@ public interface PropertyChangeSender
 	 * Listener nicht für die spezifizierte Property registriert war, hat diese Methode ebenfalls keine Auswirkungen.
 	 */
 	public void removePropertyChangeListener(String name,java.beans.PropertyChangeListener l);
+	/**
+	 *  This method registers listeners for PropertyChangeEvents.
+	 *
+	 * @param  l     The listener interested in changes in the named property.
+	 */
+
+	public void addPropertyChangeListener( java.beans.PropertyChangeListener l);
+
+
+	/**
+	 *  This method deregisters listeners from PropertyChangeEvents.
+	 *
+	 * @param  l     The listener to be deregistered.
+	 */
+	public void removePropertyChangeListener(java.beans.PropertyChangeListener l);
+
 }
