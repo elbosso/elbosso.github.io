@@ -113,24 +113,24 @@ durch hatte, habe ich ein Experiment nachvollziehen wollen, zu dem die Idee von 
 <p>Ich habe zunächst das traditionelle
 <a href="bifurkationen_lorenz_system.html">Lorenz-System</a>
 mit
-</p><p><img class="formula" src="images/tex/-988481301_130.png" alt="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:164px;"src="images/tex/-988481301_130.png" alt="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
 " title="\begin{matrix}\dot x&=&\sigma (y-x)\hfill\cr \dot y&=&x(\rho -z)-y\hfill\cr \dot z&=&xy-\beta z\hfill\end{matrix}
 ">
 benutzt. Dieses System löste ich numerisch mit je zwei unterschiedlichen Startbedingungen für eine gewisse Zeit bevor
 ich ein der beiden Systeme mit einer der Zustandsvariablen des anderen Systems beaufschlagte. Ich benutzte dazu den Parametersatz
-</p><p><img class="formula" src="images/tex/-988481302_130.png" alt="\sigma=10\;\; \rho=28\;\; \beta=8\over 3
+</p><p><img class="formula" style="max-width:180px;"src="images/tex/-988481302_130.png" alt="\sigma=10\;\; \rho=28\;\; \beta=8\over 3
 " title="\sigma=10\;\; \rho=28\;\; \beta=8\over 3
 ">
 Am Beispiel der Übertragung der
 Zustandsvariable <span class="mdcode">x</span> sieht das wie folgt aus:
 </p><p>
 <span class="mdbold">Driver:</span>
-</p><p><img class="formula" src="images/tex/-988481303_130.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:187px;"src="images/tex/-988481303_130.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 ">
 </p><p>
 <span class="mdbold">Driven:</span>
-</p><p><img class="formula" src="images/tex/-988481304_130.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_2-x_1)\hfill\cr \dot y_2&=&x_1(\rho -z_2)-y_2\hfill\cr \dot z_2&=&x_1y_2-\beta z_2\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:194px;"src="images/tex/-988481304_130.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_2-x_1)\hfill\cr \dot y_2&=&x_1(\rho -z_2)-y_2\hfill\cr \dot z_2&=&x_1y_2-\beta z_2\hfill\end{matrix}
 " title="\begin{matrix}\dot x_2&=&\sigma (y_2-x_1)\hfill\cr \dot y_2&=&x_1(\rho -z_2)-y_2\hfill\cr \dot z_2&=&x_1y_2-\beta z_2\hfill\end{matrix}
 ">
 </p><p>
@@ -151,12 +151,12 @@ Untersuchung des Verhaltens zweier Lorenz-Systeme bei Übertragung einer Statusv
 Bei Übertragung der Statusvariablen <span class="mdcode">y</span> erkennt man exakt dasselbe Verhalten:
 </p><p>
 <span class="mdbold">Driver:</span>
-</p><p><img class="formula" src="images/tex/-988481305_130.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:187px;"src="images/tex/-988481305_130.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 ">
 </p><p>
 <span class="mdbold">Driven:</span>
-</p><p><img class="formula" src="images/tex/-988481306_130.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_1-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_2)-y_1\hfill\cr \dot z_2&=&x_2y_1-\beta z_2\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:194px;"src="images/tex/-988481306_130.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_1-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_2)-y_1\hfill\cr \dot z_2&=&x_2y_1-\beta z_2\hfill\end{matrix}
 " title="\begin{matrix}\dot x_2&=&\sigma (y_1-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_2)-y_1\hfill\cr \dot z_2&=&x_2y_1-\beta z_2\hfill\end{matrix}
 ">
 </p><p>
@@ -172,12 +172,12 @@ der Übertragung der Statusvariablen <span class="mdcode">z:</span> Man erreicht
 qualitativ (man beachte die Skalenbeschriftungen!) stark voneinander ab.
 </p><p>
 <span class="mdbold">Driver:</span>
-</p><p><img class="formula" src="images/tex/-988481307_130.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:187px;"src="images/tex/-988481307_130.png" alt="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_1&=&\sigma (y_1-x_1)\hfill\cr \dot y_1&=&x_1(\rho -z_1)-y\hfill\cr \dot z_1&=&x_1y_1-\beta z_1\hfill\end{matrix}
 ">
 </p><p>
 <span class="mdbold">Driven:</span>
-</p><p><img class="formula" src="images/tex/-988481308_130.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_2-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_1)-y_2\hfill\cr \dot z_2&=&x_2y_2-\beta z_1\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:194px;"src="images/tex/-988481308_130.png" alt="\begin{matrix}\dot x_2&=&\sigma (y_2-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_1)-y_2\hfill\cr \dot z_2&=&x_2y_2-\beta z_1\hfill\end{matrix}
 " title="\begin{matrix}\dot x_2&=&\sigma (y_2-x_2)\hfill\cr \dot y_2&=&x_2(\rho -z_1)-y_2\hfill\cr \dot z_2&=&x_2y_2-\beta z_1\hfill\end{matrix}
 ">
 </p><p>
@@ -189,7 +189,7 @@ Untersuchung des Verhaltens zweier Lorenz-Systeme bei Übertragung einer Statusv
 </span>
 </p><p>
 Ich habe die Untersuchung  für verschiedene Parameter wiederholt:
-</p><p><img class="formula" src="images/tex/-988481309_130.png" alt="\beta \in \{0.9,8.0/3.0,3.4\}
+</p><p><img class="formula" style="max-width:175px;"src="images/tex/-988481309_130.png" alt="\beta \in \{0.9,8.0/3.0,3.4\}
 " title="\beta \in \{0.9,8.0/3.0,3.4\}
 ">
 </p><p>

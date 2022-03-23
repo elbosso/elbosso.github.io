@@ -133,23 +133,23 @@ hatte, habe ich mir gleich noch eines vorgenommen...
 <p>Der
 <a href="https://en.wikipedia.org/wiki/R%C3%B6ssler_attractor">Rössler-Attractor</a>
 stellt sich wie folgt dar:
-</p><p><img class="formula" src="images/tex/-357309461_130.png" alt="\begin{matrix}\dot x&=&-y-z\hfill\cr\dot y&=&x+\alpha z\hfill\cr\dot z&=&\beta+zx+\gamma z\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:161px;"src="images/tex/-357309461_130.png" alt="\begin{matrix}\dot x&=&-y-z\hfill\cr\dot y&=&x+\alpha z\hfill\cr\dot z&=&\beta+zx+\gamma z\hfill\end{matrix}
 " title="\begin{matrix}\dot x&=&-y-z\hfill\cr\dot y&=&x+\alpha z\hfill\cr\dot z&=&\beta+zx+\gamma z\hfill\end{matrix}
 ">
 mit
-</p><p><img class="formula" src="images/tex/-357309462_130.png" alt="\alpha=0.2\;\; \beta=0.2\;\; \gamma=5.7
+</p><p><img class="formula" style="max-width:201px;"src="images/tex/-357309462_130.png" alt="\alpha=0.2\;\; \beta=0.2\;\; \gamma=5.7
 " title="\alpha=0.2\;\; \beta=0.2\;\; \gamma=5.7
 ">
 Daraus folgt für die Behandlung mit dem impliziten Eulerverfahren und einer Schrittweite (oder Intervallänge) h:
-</p><p><img class="formula" src="images/tex/-357309463_130.png" alt="\begin{matrix}x_{t+h}&=&x_t+h\dot x_{t+h}\hfill\cr y_{t+h}&=&y_t+h\dot y_{t+h}\hfill\cr z_{t+h}&=&z_t+h\dot z_{t+h}\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:178px;"src="images/tex/-357309463_130.png" alt="\begin{matrix}x_{t+h}&=&x_t+h\dot x_{t+h}\hfill\cr y_{t+h}&=&y_t+h\dot y_{t+h}\hfill\cr z_{t+h}&=&z_t+h\dot z_{t+h}\hfill\end{matrix}
 " title="\begin{matrix}x_{t+h}&=&x_t+h\dot x_{t+h}\hfill\cr y_{t+h}&=&y_t+h\dot y_{t+h}\hfill\cr z_{t+h}&=&z_t+h\dot z_{t+h}\hfill\end{matrix}
 ">
 und eingesetzt:
-</p><p><img class="formula" src="images/tex/-357309464_130.png" alt="\begin{matrix}0&=&x_t-hy_{t+h}-hz_{t+h}-x_{t+h}\hfill\cr 0&=&y_t+hx_{t+h}+h\alpha y_{t+h}-y_{t+h}\hfill\cr 0&=&z_t+h\beta+hz_{t+h}x_{t+h}-h\gamma z_{t+h}-z_{t+h}\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:360px;"src="images/tex/-357309464_130.png" alt="\begin{matrix}0&=&x_t-hy_{t+h}-hz_{t+h}-x_{t+h}\hfill\cr 0&=&y_t+hx_{t+h}+h\alpha y_{t+h}-y_{t+h}\hfill\cr 0&=&z_t+h\beta+hz_{t+h}x_{t+h}-h\gamma z_{t+h}-z_{t+h}\hfill\end{matrix}
 " title="\begin{matrix}0&=&x_t-hy_{t+h}-hz_{t+h}-x_{t+h}\hfill\cr 0&=&y_t+hx_{t+h}+h\alpha y_{t+h}-y_{t+h}\hfill\cr 0&=&z_t+h\beta+hz_{t+h}x_{t+h}-h\gamma z_{t+h}-z_{t+h}\hfill\end{matrix}
 ">
 Und wegen der Übersichtlichkeit:
-</p><p><img class="formula" src="images/tex/-357309465_130.png" alt="\begin{matrix}0&=&a-hy_{t+h}-hz_{t+h}-x_{t+h}\hfill\cr 0&=&b+hx_{t+h}+c y_{t+h}-y_{t+h}\hfill\cr 0&=&d+e+hz_{t+h}x_{t+h}-f z_{t+h}-z_{t+h}\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:332px;"src="images/tex/-357309465_130.png" alt="\begin{matrix}0&=&a-hy_{t+h}-hz_{t+h}-x_{t+h}\hfill\cr 0&=&b+hx_{t+h}+c y_{t+h}-y_{t+h}\hfill\cr 0&=&d+e+hz_{t+h}x_{t+h}-f z_{t+h}-z_{t+h}\hfill\end{matrix}
 " title="\begin{matrix}0&=&a-hy_{t+h}-hz_{t+h}-x_{t+h}\hfill\cr 0&=&b+hx_{t+h}+c y_{t+h}-y_{t+h}\hfill\cr 0&=&d+e+hz_{t+h}x_{t+h}-f z_{t+h}-z_{t+h}\hfill\end{matrix}
 ">
 Löst man dieses Gleichungssystem - und ich gebe zu, dass ich mich außerstande sah und Hilfe bei
@@ -173,7 +173,7 @@ h**3*x + h**2*z + h**2 - h*x + 1), (h**2*z*(a*h + b) -
 >>>
 <p></pre>
 Eindrucksvoll und dennoch verwirrend - daher habe ich es hier nochmal aufbereitet:
-</p><p><img class="formula" src="images/tex/-357309466_130.png" alt="\begin{matrix}x_{t+h}&=&{{h(c - 1)(h^2z_t(ah + b) - (-c + h^2 + 1)(ahz_t + d + e)) + (a(-c + h^2 + 1) - h(ah + b))(h^2z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))}\over{(h^4z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))(-c + h^2 + 1)}}\hfill\cr y_{t+h}&=&{{afh - ah^2x_t + ah + bf + bh^2z_t - bhx_t + b - dh^2 - eh^2}\over{-cf - ch^2z_t + chx_t - c + fh^2 + f - h^3x_t + h^2z_t + h^2 - hx_t + 1)}}\hfill\cr z_{t+h}&=&{{h^2z_t(ah + b) - (-c + h^2 + 1)(ahz_t + d + e)}\over{(h^4z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))}}\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:628px;"src="images/tex/-357309466_130.png" alt="\begin{matrix}x_{t+h}&=&{{h(c - 1)(h^2z_t(ah + b) - (-c + h^2 + 1)(ahz_t + d + e)) + (a(-c + h^2 + 1) - h(ah + b))(h^2z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))}\over{(h^4z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))(-c + h^2 + 1)}}\hfill\cr y_{t+h}&=&{{afh - ah^2x_t + ah + bf + bh^2z_t - bhx_t + b - dh^2 - eh^2}\over{-cf - ch^2z_t + chx_t - c + fh^2 + f - h^3x_t + h^2z_t + h^2 - hx_t + 1)}}\hfill\cr z_{t+h}&=&{{h^2z_t(ah + b) - (-c + h^2 + 1)(ahz_t + d + e)}\over{(h^4z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))}}\hfill\end{matrix}
 " title="\begin{matrix}x_{t+h}&=&{{h(c - 1)(h^2z_t(ah + b) - (-c + h^2 + 1)(ahz_t + d + e)) + (a(-c + h^2 + 1) - h(ah + b))(h^2z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))}\over{(h^4z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))(-c + h^2 + 1)}}\hfill\cr y_{t+h}&=&{{afh - ah^2x_t + ah + bf + bh^2z_t - bhx_t + b - dh^2 - eh^2}\over{-cf - ch^2z_t + chx_t - c + fh^2 + f - h^3x_t + h^2z_t + h^2 - hx_t + 1)}}\hfill\cr z_{t+h}&=&{{h^2z_t(ah + b) - (-c + h^2 + 1)(ahz_t + d + e)}\over{(h^4z_t - (-c + h^2 + 1)(f + h^2z_t - hx_t + 1))}}\hfill\end{matrix}
 ">
 </p><p>

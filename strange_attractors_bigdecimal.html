@@ -159,33 +159,33 @@ Wert von 100 Nachkommastellen bei der Benutzung von BigDecimal gearbeitet.
 </p><p>
 Ein weiterer Beleg für die unzureichende Qualität bei der Berechnung mathematischer Probleme mit dem Datentyp double - nicht nur
 mittels Java - zeigt sich bei der Berechnung der Differentialgleichung erster Ordung
-</p><p><img class="formula" src="images/tex/-20288391301_130.png" alt="\dot x=(ku-ax)/t;
+</p><p><img class="formula" style="max-width:138px;"src="images/tex/-20288391301_130.png" alt="\dot x=(ku-ax)/t;
 " title="\dot x=(ku-ax)/t;
 ">
 </p><p>
 mit
-</p><p><img class="formula" src="images/tex/-20288391302_130.png" alt="\begin{matrix}k&=&1\hfill\cr a&=&1\hfill\cr t&=&1\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:76px;"src="images/tex/-20288391302_130.png" alt="\begin{matrix}k&=&1\hfill\cr a&=&1\hfill\cr t&=&1\hfill\end{matrix}
 " title="\begin{matrix}k&=&1\hfill\cr a&=&1\hfill\cr t&=&1\hfill\end{matrix}
 ">
 </p><p>
 und dem Anfangswert
-</p><p><img class="formula" src="images/tex/-20288391303_130.png" alt="x_0=0
+</p><p><img class="formula" style="max-width:59px;"src="images/tex/-20288391303_130.png" alt="x_0=0
 " title="x_0=0
 ">
 </p><p>
 Hier sollte sich der Zustand (der Wert von x) asymptotisch dem Wert der Störung u annähern. Setzt man zum Beispiel
-</p><p><img class="formula" src="images/tex/-20288391304_130.png" alt="u=1
+</p><p><img class="formula" style="max-width:50px;"src="images/tex/-20288391304_130.png" alt="u=1
 " title="u=1
 ">
 </p><p>
 so sollte sich bei numerischer Lösung des Gleichungssystems der Wert von x langsam dem Wert 1 nähern. Behandelt man die Differentialgleichung
 aber mit dem Eulerverfahren mit einer festen Schrittweite von
-</p><p><img class="formula" src="images/tex/-20288391305_130.png" alt="h=0.1
+</p><p><img class="formula" style="max-width:65px;"src="images/tex/-20288391305_130.png" alt="h=0.1
 " title="h=0.1
 ">
 </p><p>
 so ändert sich der Wert von x ab Schritt 333 nicht mehr - er bleibt bei
-</p><p><img class="formula" src="images/tex/-20288391306_130.png" alt="x_{333}=0.9999999999999996
+</p><p><img class="formula" style="max-width:222px;"src="images/tex/-20288391306_130.png" alt="x_{333}=0.9999999999999996
 " title="x_{333}=0.9999999999999996
 ">
 </p><p>
@@ -195,7 +195,7 @@ ist die gesamte Berechnung am diesem Schritt falsch.
 </p><p>
 Zum Vergleich noch die Werte an dieser Stelle bei der Berechnung mittels des Typs BigDecimal mit 100 Nachkommastellen
 (zur Darstellung schneide ich hier jeweils nach 20 Nachkommastellen ab):
-</p><p><img class="formula" src="images/tex/-20288391307_130.png" alt="\begin{matrix}x_{333}&=&0.99999999999999942089\hfill\cr x_{334}&=&0.99999999999999947880\hfill\cr x_{335}&=&0.99999999999999953092\hfill\end{matrix}
+</p><p><img class="formula" style="max-width:284px;"src="images/tex/-20288391307_130.png" alt="\begin{matrix}x_{333}&=&0.99999999999999942089\hfill\cr x_{334}&=&0.99999999999999947880\hfill\cr x_{335}&=&0.99999999999999953092\hfill\end{matrix}
 " title="\begin{matrix}x_{333}&=&0.99999999999999942089\hfill\cr x_{334}&=&0.99999999999999947880\hfill\cr x_{335}&=&0.99999999999999953092\hfill\end{matrix}
 ">
 </p><p>

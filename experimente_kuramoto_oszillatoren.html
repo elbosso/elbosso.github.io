@@ -114,7 +114,7 @@ fassen. Bei meinen Versuchen stellte sich heraus, dass man mit den richtigen Par
 Synchronisierung erreichen kann - näheres dazu weiter unten...
 </p><p>
 Ich begann mit dem ursprünglichen Standard-Modell
-</p><p><img class="formula" src="images/tex/12959151961_130.png" alt="{{d\theta_{i}}\over{dt}}=\omega_{i}+{{K}\over{N}}\sum^{N}_{j=1}sin(\theta_{j}-\theta_{i})\quad i=1...N
+</p><p><img class="formula" style="max-width:332px;"src="images/tex/12959151961_130.png" alt="{{d\theta_{i}}\over{dt}}=\omega_{i}+{{K}\over{N}}\sum^{N}_{j=1}sin(\theta_{j}-\theta_{i})\quad i=1...N
 " title="{{d\theta_{i}}\over{dt}}=\omega_{i}+{{K}\over{N}}\sum^{N}_{j=1}sin(\theta_{j}-\theta_{i})\quad i=1...N
 ">
 </p><p>
@@ -123,7 +123,7 @@ Kopplungskonstante modulierten Einflüsse aller anderen Oszillatoren im System.
 </p><p>
 Anschließend modifizierte ich die Gleichung so, dass die Einflüsse der anderen Oszillatoren nur noch regional und nicht mehr
 global wirksam wurden:
-</p><p><img class="formula" src="images/tex/12959151962_130.png" alt="{{d\theta_{i}}\over{dt}}=\omega_{i}+{{K}\over{2R+1}}\sum^{R}_{j=-R}sin(\theta_{i+j}-\theta_{i})\quad i=1...N
+</p><p><img class="formula" style="max-width:399px;"src="images/tex/12959151962_130.png" alt="{{d\theta_{i}}\over{dt}}=\omega_{i}+{{K}\over{2R+1}}\sum^{R}_{j=-R}sin(\theta_{i+j}-\theta_{i})\quad i=1...N
 " title="{{d\theta_{i}}\over{dt}}=\omega_{i}+{{K}\over{2R+1}}\sum^{R}_{j=-R}sin(\theta_{i+j}-\theta_{i})\quad i=1...N
 ">
 </p><p>
@@ -131,12 +131,12 @@ Dabei ist zu beachten, dass die eindimensionale Anordung von Oszillatoren als <s
 Oszillatoren am rechten und linken Rand weniger Einflüsse von ihren Nachbarn wirken.
 </p><p>
 Diese "Box"-Nachbarschaft variierte ich anschließend noch ein wenig wie folgt:
-</p><p><img class="formula" src="images/tex/12959151963_130.png" alt="{{d\theta_{i}}\over{dt}}=\omega_{i}+{{K}\over{W}}\sum^{N}_{j=1}w_{ij}sin(\theta_{j}-\theta_{i})\quad i=1...N
+</p><p><img class="formula" style="max-width:360px;"src="images/tex/12959151963_130.png" alt="{{d\theta_{i}}\over{dt}}=\omega_{i}+{{K}\over{W}}\sum^{N}_{j=1}w_{ij}sin(\theta_{j}-\theta_{i})\quad i=1...N
 " title="{{d\theta_{i}}\over{dt}}=\omega_{i}+{{K}\over{W}}\sum^{N}_{j=1}w_{ij}sin(\theta_{j}-\theta_{i})\quad i=1...N
 ">
 </p><p>
 Wobei galt:
-</p><p><img class="formula" src="images/tex/12959151964_130.png" alt="W=\sum^{N}_{j=1}w_{ij}
+</p><p><img class="formula" style="max-width:105px;"src="images/tex/12959151964_130.png" alt="W=\sum^{N}_{j=1}w_{ij}
 " title="W=\sum^{N}_{j=1}w_{ij}
 ">
 </p><p>
@@ -144,12 +144,12 @@ Und die Gewichte selber durch entsprechende Funktionen über den Abstand der bei
 wieder wurde hier von der Topologie eines Rings für die Kopplung der Oszillatoren ausgegangen.
 </p><p>
 Als Funktionen für die Gewichte wurden die (vereinfachte) Gauss-Verteilung
-</p><p><img class="formula" src="images/tex/12959151965_130.png" alt="\omega_{ij}={{1}\over{\sqrt{2\pi\sigma^2}}}e^{-{{(j-i)^{2}}\over{2\sigma^{2}}}}
+</p><p><img class="formula" style="max-width:175px;"src="images/tex/12959151965_130.png" alt="\omega_{ij}={{1}\over{\sqrt{2\pi\sigma^2}}}e^{-{{(j-i)^{2}}\over{2\sigma^{2}}}}
 " title="\omega_{ij}={{1}\over{\sqrt{2\pi\sigma^2}}}e^{-{{(j-i)^{2}}\over{2\sigma^{2}}}}
 ">
 </p><p>
 und das Ricker-Wavelet betrachtet:
-</p><p><img class="formula" src="images/tex/12959151966_130.png" alt="\omega_{ij}={{2}\over{\sqrt{3\sigma}\pi^{1/4}}}\left(1-\left({{j-i}\over{\sigma}}\right)^2\right)e^{-{{(j-i)^2}\over{2\sigma^{2}}}}
+</p><p><img class="formula" style="max-width:331px;"src="images/tex/12959151966_130.png" alt="\omega_{ij}={{2}\over{\sqrt{3\sigma}\pi^{1/4}}}\left(1-\left({{j-i}\over{\sigma}}\right)^2\right)e^{-{{(j-i)^2}\over{2\sigma^{2}}}}
 " title="\omega_{ij}={{2}\over{\sqrt{3\sigma}\pi^{1/4}}}\left(1-\left({{j-i}\over{\sigma}}\right)^2\right)e^{-{{(j-i)^2}\over{2\sigma^{2}}}}
 ">
 </p><p>
