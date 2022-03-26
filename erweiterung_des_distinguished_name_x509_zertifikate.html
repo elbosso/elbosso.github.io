@@ -127,15 +127,12 @@ Weiterhin wurde erste Tests zur Verwendung des Projektes für Cross-Zertifizieru
 </p><p>
 Erstellt man zwei PKI - je eine für Domain A und Domain B - wie hier dargestellt, so vertraut user1 einer EMail von user2 nicht,
 da dessen Zertifikat +ber keine von user1 als vertrauenswürdig eingestufte Wurzel verfügt.
-</p><p><img class="center" src="images/plantuml/-697664440.png" style="max-width:1508px;"/>
 </p><p>
 Dieses Bild zeigt die Vertrauensketten, die user1 und user2 kennen - sie liegen jeweils in der eigenen Domain.
-</p><p><img class="center" src="images/plantuml/-357319978.png" style="max-width:736px;"/>
 </p><p>
 Beide könnten nun überein kommen, den Wurzelzertifikaten der jeweils anderen Domain das Vertrauen auszusprechen.
 Dann sind aber beide auf die Integrität und Vertrauenswürdigkeit der jeweils anderen Root CA angewiesen. Besser ist es,
 wenn dieses gegenseitige Vertrauen entkoppelt wird wie in der nächsten Abbildung dargestellt:
-</p><p><img class="center" src="images/plantuml/-1749614903.png" style="max-width:1508px;"/>
 </p><p>
 Dadurch, dass in Domain A eine CA eingerichtet wurde, die das Zertifikat der Identity CA B beglaubigt, entsteht
 eine Vertrauenskette, die user1 nutzen kann, um Zertifikate der Identity CA B zu prüfen - er muss dazu jetzt nicht mehr
@@ -144,7 +141,6 @@ diese Kopplung wieder aufheben - er benötigt dazu nicht die Unterstützung der 
 er den Verdacht hat, dass Domain B kompromittiert worden ist. Dazu muss er einfach das Zertifikat, das durch die Bridge cA
 für Identity CA B asusgestellt wurde widerrufen. Die untenstehende Abbildung zeigt die zwei bekannten Vertrauensketten und
 die durch die Bridge CA zusätzlich hinzugekommene:
-</p><p><img class="center" src="images/plantuml/1797325221.png" style="max-width:1077px;"/>
 </p><p>
 Die Administration der Domain B kann sich entscheiden, dasselbe Vorgehen spiegelbildlich ebenfalls auszuführen -
 damit wird auch die Herkunft des Begriffes Cross Certification plausibel: Würde man diese zusätzliche Vertrauenskette ebenfalls noch
@@ -268,17 +264,15 @@ wenn diese Daten besonders geschützt wären...
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							Neue Interaktionsmetapher in dWb+</p>
+							Dungeon-Generator</p>
 						<p class="w3-small" style="text-align: right">
 							<span class="w3-opacity">26.03.2017</span>
 						</p>
-						<span class="smallabstract"><p>Da ich - wie ich neulich in einer Kommunikation mit einem geschätzten Kollegen zum erstenmal
-explizit realisierte -
-dWb+
-schon länger pflege als es die Herstellerfirma anderer Produkte überhaupt gibt, bin ich dennoch nicht
-zu stolz, neue Ideen einfließen zu lassen...
+						<span class="smallabstract"><p>Ich beschäftige mich immer mal wieder mit ausgewählten Problemen im Zusammenhang mit
+Spielen
+oder der Generierung von Testdaten. In diesem Zusammenhang habe ich einen kleinen Dungeon-Generator erstellt.
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_interaktionsmetapher_dwb_.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="dungeon_generator.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -342,6 +336,31 @@ zu stolz, neue Ideen einfließen zu lassen...
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
+							<span class="w3-large">							Swap zweier Variablen ohne zusätzliche Variable</span><br>
+						<span class="smallabstract"><p>Ich bin neulich über einen Artikel
+gestolpert
+der erklärte,
+wie man in Programmen die Werte zweier Variablen vertauschen kann, ohne dazu
+eine extra Variable zur Zwischenspeicherung zu benötigen.
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="swap_zweier_variablen_ohne_zusaetzliche_variable.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">							Generic Methoden vs. Casting in Java</span><br>
+						<span class="smallabstract"><p>Ich habe hier
+immer
+mal
+wieder
+über das Spannungsfeld zwischen Syntactic Sugar und sinnvollen Spracherweiterungen ganz speziell
+mit Blick auf Java ausgelassen - neulich hatte ich eine weitere Frage, die sich nur im Experiment klären ließ...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generic_methoden_vs__casting_java.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
 							<span class="w3-large">							Experimente mit Kuramoto Oszillatoren</span><br>
 						<span class="smallabstract"><p>Angeregt durch einen
 Artikel auf Arxiv
@@ -350,27 +369,6 @@ Kuramoto Oszillatoren
 im Internet - so viele, dass ich auch damit experimentieren wollte.
 </p></span>
 							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="experimente_kuramoto_oszillatoren.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							LinkCollections 2022 III</span><br>
-						<span class="smallabstract"><p>Nach der
-letzten
-losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2022_iii.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">							Static Site Generator für Docbook</span><br>
-						<span class="smallabstract"><p>Mein eigener
-Static Site Generator
-hat jetzt einen Modus, der es gestattet, die Inhalte nicht nur als HTML-Seiten für die Publikation mittels
-eines HTTP-Servers zu erzeugen, sondern auch als Docbook zur Erzeugung eines PDF-Dokumentes oder E-Book im Format EPUB.
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="static_site_generator_docbook.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -405,6 +403,31 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
+							<span class="w3-large">							Swap zweier Variablen ohne zusätzliche Variable</span><br>
+							<span class="smallabstract"><p>Ich bin neulich über einen Artikel
+gestolpert
+der erklärte,
+wie man in Programmen die Werte zweier Variablen vertauschen kann, ohne dazu
+eine extra Variable zur Zwischenspeicherung zu benötigen.
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="swap_zweier_variablen_ohne_zusaetzliche_variable.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">							Generic Methoden vs. Casting in Java</span><br>
+							<span class="smallabstract"><p>Ich habe hier
+immer
+mal
+wieder
+über das Spannungsfeld zwischen Syntactic Sugar und sinnvollen Spracherweiterungen ganz speziell
+mit Blick auf Java ausgelassen - neulich hatte ich eine weitere Frage, die sich nur im Experiment klären ließ...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generic_methoden_vs__casting_java.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
 							<span class="w3-large">							Experimente mit Kuramoto Oszillatoren</span><br>
 							<span class="smallabstract"><p>Angeregt durch einen
 Artikel auf Arxiv
@@ -413,27 +436,6 @@ Kuramoto Oszillatoren
 im Internet - so viele, dass ich auch damit experimentieren wollte.
 </p></span>
 								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="experimente_kuramoto_oszillatoren.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							LinkCollections 2022 III</span><br>
-							<span class="smallabstract"><p>Nach der
-letzten
-losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2022_iii.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">							Static Site Generator für Docbook</span><br>
-							<span class="smallabstract"><p>Mein eigener
-Static Site Generator
-hat jetzt einen Modus, der es gestattet, die Inhalte nicht nur als HTML-Seiten für die Publikation mittels
-eines HTTP-Servers zu erzeugen, sondern auch als Docbook zur Erzeugung eines PDF-Dokumentes oder E-Book im Format EPUB.
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="static_site_generator_docbook.html#content">
  Weiterlesen...
 								</a>
 						</li>
