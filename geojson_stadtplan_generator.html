@@ -134,7 +134,7 @@ Ausgangspunkt der Generierung ist die Erzeugung eines Gitters - aktuell wird ein
 ein kreisförmiges (Wheel-and-spokes) Gitter unterstützt. Die Verbindungen der Knoten im Gitter stellen die Grundlage für
 die späteren Straßen im stasdtplan dar:
 </p><p>
-<img src="images/geojson_map_generator/grid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/grid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -144,7 +144,7 @@ Ausgangspunkt: Gitter
 Anschließend werden die Gitterpunkte zufällig verschoben um dem ganzen einen "organischen" oder "gewachsenen" Eindruck zu
 geben:
 </p><p>
-<img src="images/geojson_map_generator/randomizedgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/randomizedgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -157,7 +157,7 @@ nicht in Teile zerfällt und jeder Knoten im Graphenm nach wie vor von jedem and
 Daraufhin werden die Polygone im Gitter identifiziert und in einer internen Datenstruktur für die spätere Verwendung
 gespeichert. Die Polygone entsprechen den Häuserblocks im späteren Stadtplan:
 </p><p>
-<img src="images/geojson_map_generator/polygons.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/polygons.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -169,7 +169,7 @@ Verfahrens, das ich direkt einer der angegebenen
 <a href="https://www.cs.auckland.ac.nz/~roboteam/documents/RandomMapGenerator.pdf">Arbeiten</a>
 entnommen habe. Die Wichtigkeit der Straßen wird durch die Dicke der Linien in der Visualisierung dargestellt:
 </p><p>
-<img src="images/geojson_map_generator/commutegrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/commutegrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -179,7 +179,7 @@ Straßen werden in drei Klassen unterteilt
 Diese Arbeit "begradigt" später die besonders wichtigen Straßen noch ein wenig - ein Arbeitsschritt, der in meiner Implementierung zwar
 vorgesehen, jedoch noch nicht implementiert wurde:
 </p><p>
-<img src="images/geojson_map_generator/smoothedgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/smoothedgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -190,7 +190,7 @@ An dieser Stelle würden mehrere Polygone, die nun nicht mehr durch Straßen get
 unter Umständen konkave Polygone entstehen. Deren Behandlung - beispielsweise durch Triangulation ist noch nicht implementiert,
 so dass solche Polygone entfernt werden. Dieser Schritt ist optional - wird er ausgeführt, sieht das Ergebnis beispielsweise so aus:
 </p><p>
-<img src="images/geojson_map_generator/polygonsgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/polygonsgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -199,7 +199,7 @@ optional: Entfernen weiterer Polygone
 </p><p>
 Anschließend werden die Polygone partitioniert, was dem "Errichten" von Gebäuden auf den einzelnen Häuserblocks entspricht:
 </p><p>
-<img src="images/geojson_map_generator/partitionedgrid.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/partitionedgrid.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -209,7 +209,7 @@ Partitionieren der Polygone - Errichten von Gebäuden
 Daran schließt sich der vorerst letzte Schritt der Generierung an: die Straßen höherer Ordnung (Hauptstraßen und Magistralen)
 werden zu Straßenzügen zusammengefasst - in der Visualisierung erkennt man das an der gleichen Färbung von Straßenabschnitten:
 </p><p>
-<img src="images/geojson_map_generator/connectedRoads.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/connectedRoads.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -219,7 +219,7 @@ Zusammenfassung von Straßenabschnitten wichtiger Straßen
 Hier noch kurz ein Beispiel für das Ergebnis des beschriebenen Vorgehens wenn ein rundes Gitter als Ausgangspunkt
 gewählt wurde:
 </p><p>
-<img src="images/geojson_map_generator/wheel_and_spokes_connectedRoads.png" style="max-width:1000px;"
+<img src="images/geojson_map_generator/wheel_and_spokes_connectedRoads.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -237,7 +237,7 @@ von
 (Beispiele)
 importiert werden:
 </p><p>
-<img src="images/geojson_map_generator/geojson_rendered_with_geoman.png" style="max-width:584px;"
+<img src="images/geojson_map_generator/geojson_rendered_with_geoman.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">

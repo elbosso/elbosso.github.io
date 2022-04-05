@@ -142,7 +142,7 @@ Zur Beantwortung dieser Frage habe ich einige Benchmarks erstellt - einen, der b
 der beide Ansätze für Arrays vergleicht - es könnte ja sein, dass der Java-Compiler <span class="mdcode">length</span> als Member eines Arrays anders behandelt
 und in eine lokale Variable herauszieht. Zunächst die Ergebnisse des Benchmarks mit Listen:
 </p><p>
-<img src="images/listvssideeffectlist.png" style="max-width:1280px;"
+<img src="images/listvssideeffectlist.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -168,7 +168,7 @@ dass meine Änderungen korrekt waren...
 </p><p>
 Wie schlägt sich nun das Iterieren über ein Array in dieser Beziehung? Sehen wirs uns an...
 </p><p>
-<img src="images/arrayvssideeffectarray.png" style="max-width:1280px;"
+<img src="images/arrayvssideeffectarray.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -216,7 +216,7 @@ Neugierig war ich als mir folgender Gedanke kam - wie schlägt sich eigentlich d
 einmal über die Liste iteriert und einmal über ein mittels <span class="mdcode">toArray(T[])</span> aus der Liste erzeugtes Array? Das muste natürlich ebenfalls getestet
 werden:
 </p><p>
-<img src="images/arrayforeachvslistforeach.png" style="max-width:1280px;"
+<img src="images/arrayforeachvslistforeach.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">

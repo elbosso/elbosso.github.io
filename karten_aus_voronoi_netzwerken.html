@@ -104,7 +104,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 					<h5>Updates</h5>
 					<ul>
 						<li>
-							<a href="#102">
+							<a href="#104">
 								15. März 2022
 							</a>
 						</li>
@@ -137,7 +137,7 @@ auf vorhandene Algorithmen.
 Ich möchte das Vorgehen an einigen Illustrationen dokumentieren - Gehen wir zunächst von einigen zufällig generierten zweidimensionalen
 Punkten aus, die die Zentren der zu erzeugenden Voronoi-Polygone darstellen sollen:
 </p><p>
-<img src="images/voronoi/points.png" style="max-width:800px;"
+<img src="images/voronoi/points.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -150,7 +150,7 @@ die
 <a href="https://en.wikipedia.org/wiki/Delaunay_triangulation">Delauney Triangulation</a>
 berechnet - das Ergebnis ist ein Netzwerk von Dreiecken wie hier dargestellt:
 </p><p>
-<img src="images/voronoi/triangles.png" style="max-width:800px;"
+<img src="images/voronoi/triangles.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -159,7 +159,7 @@ Ergebnis der Delauney Triangulation
 </p><p>
 Für jedes der im Netzwerk enthaltenen Dreiecke wird anschließend der Umkreis bestimmt:
 </p><p>
-<img src="images/voronoi/circles.png" style="max-width:800px;"
+<img src="images/voronoi/circles.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -169,7 +169,7 @@ Umkreise der durch die Delauney Triangulation gewonnenen Dreiecke
 Die Mittelpunkte dieser Umkreise können miteinander verbunden werden - Dadurch ergeben sich Liniensegmente, die
 genau den Begrenzungen der gesuchten Voronoi-Polygone entsprechen:
 </p><p>
-<img src="images/voronoi/voronoi_edges_1.png" style="max-width:800px;"
+<img src="images/voronoi/voronoi_edges_1.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -180,7 +180,7 @@ Man sieht aber leicht, dass durch dieses Verfahren nicht <span class="mdbold">al
 Daher habe ich folgende Ergänzungen zum Algorithmus hinzugefügt: Zunächst werden die Außenkanten des als Graph aufgefassten
 Delauney Triangulationsergebnisses gesucht:
 </p><p>
-<img src="images/voronoi/outline.png" style="max-width:800px;"
+<img src="images/voronoi/outline.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -189,7 +189,7 @@ Außenkanten des Graphen aus der Delauney Triangulation
 </p><p>
 Anschließend werden darauf die Mittelsenkrechten konstruiert:
 </p><p>
-<img src="images/voronoi/bisectors.png" style="max-width:800px;"
+<img src="images/voronoi/bisectors.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -201,7 +201,7 @@ der Voronoi-Polygone aufgenommen. Schließlich werden aus den Schnittpunkten die
 weitere zusätzliche Begrenzungen für Voronoi-Polygone am Rand entlang aufgenommen - im nachfolgenden Bild sind
 diese dick und rot markiert:
 </p><p>
-<img src="images/voronoi/voronoi_edges_2.png" style="max-width:800px;"
+<img src="images/voronoi/voronoi_edges_2.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -211,7 +211,7 @@ Himzufügen fehlender Begrenzungen für Voronoi-Polygone
 Damit hat man eine geschlossene Darstellung aller Kanten aller enthaltenen Voronoi-Polygone und kann die Polygone
 selbst konstruieren:
 </p><p>
-<img src="images/voronoi/polygons.png" style="max-width:800px;"
+<img src="images/voronoi/polygons.png"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -225,7 +225,7 @@ tritt ein, wenn die Punkte den gesamten Eingangsraum nicht vollständig überdec
 Hälften der Mittelsenkrechten angepasst werden - es darf nicht mehr allein auf der Entfernung des Mittelpunkts von den Grenzen
 des Eingangsraumes abhängen.
 </p><p>
-<h3><a name="102">Aktualisierung vom 15. März 2022</a></h3><div class="update">Der zweite der genannten Sonderfälle - die nicht vollständige Überdeckung des Eingangsraumes durch die Punkte - wurde inzwischen in
+<h3><a name="104">Aktualisierung vom 15. März 2022</a></h3><div class="update">Der zweite der genannten Sonderfälle - die nicht vollständige Überdeckung des Eingangsraumes durch die Punkte - wurde inzwischen in
 der Implementierung adressiert!
 </div>
 </p>				</div>
