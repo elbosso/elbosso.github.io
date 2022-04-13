@@ -134,7 +134,7 @@ Ausgangspunkt der Generierung ist die Erzeugung eines Gitters - aktuell wird ein
 ein kreisförmiges (Wheel-and-spokes) Gitter unterstützt. Die Verbindungen der Knoten im Gitter stellen die Grundlage für
 die späteren Straßen im stasdtplan dar:
 </p><p>
-<img src="images/geojson_map_generator/grid.png"
+<img src="images/geojson_map_generator/grid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -144,7 +144,7 @@ Ausgangspunkt: Gitter
 Anschließend werden die Gitterpunkte zufällig verschoben um dem ganzen einen "organischen" oder "gewachsenen" Eindruck zu
 geben:
 </p><p>
-<img src="images/geojson_map_generator/randomizedgrid.png"
+<img src="images/geojson_map_generator/randomizedgrid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -157,7 +157,7 @@ nicht in Teile zerfällt und jeder Knoten im Graphenm nach wie vor von jedem and
 Daraufhin werden die Polygone im Gitter identifiziert und in einer internen Datenstruktur für die spätere Verwendung
 gespeichert. Die Polygone entsprechen den Häuserblocks im späteren Stadtplan:
 </p><p>
-<img src="images/geojson_map_generator/polygons.png"
+<img src="images/geojson_map_generator/polygons.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -169,7 +169,7 @@ Verfahrens, das ich direkt einer der angegebenen
 <a href="https://www.cs.auckland.ac.nz/~roboteam/documents/RandomMapGenerator.pdf">Arbeiten</a>
 entnommen habe. Die Wichtigkeit der Straßen wird durch die Dicke der Linien in der Visualisierung dargestellt:
 </p><p>
-<img src="images/geojson_map_generator/commutegrid.png"
+<img src="images/geojson_map_generator/commutegrid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -179,7 +179,7 @@ Straßen werden in drei Klassen unterteilt
 Diese Arbeit "begradigt" später die besonders wichtigen Straßen noch ein wenig - ein Arbeitsschritt, der in meiner Implementierung zwar
 vorgesehen, jedoch noch nicht implementiert wurde:
 </p><p>
-<img src="images/geojson_map_generator/smoothedgrid.png"
+<img src="images/geojson_map_generator/smoothedgrid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -190,7 +190,7 @@ An dieser Stelle würden mehrere Polygone, die nun nicht mehr durch Straßen get
 unter Umständen konkave Polygone entstehen. Deren Behandlung - beispielsweise durch Triangulation ist noch nicht implementiert,
 so dass solche Polygone entfernt werden. Dieser Schritt ist optional - wird er ausgeführt, sieht das Ergebnis beispielsweise so aus:
 </p><p>
-<img src="images/geojson_map_generator/polygonsgrid.png"
+<img src="images/geojson_map_generator/polygonsgrid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -199,7 +199,7 @@ optional: Entfernen weiterer Polygone
 </p><p>
 Anschließend werden die Polygone partitioniert, was dem "Errichten" von Gebäuden auf den einzelnen Häuserblocks entspricht:
 </p><p>
-<img src="images/geojson_map_generator/partitionedgrid.png"
+<img src="images/geojson_map_generator/partitionedgrid.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -209,7 +209,7 @@ Partitionieren der Polygone - Errichten von Gebäuden
 Daran schließt sich der vorerst letzte Schritt der Generierung an: die Straßen höherer Ordnung (Hauptstraßen und Magistralen)
 werden zu Straßenzügen zusammengefasst - in der Visualisierung erkennt man das an der gleichen Färbung von Straßenabschnitten:
 </p><p>
-<img src="images/geojson_map_generator/connectedRoads.png"
+<img src="images/geojson_map_generator/connectedRoads.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -219,7 +219,7 @@ Zusammenfassung von Straßenabschnitten wichtiger Straßen
 Hier noch kurz ein Beispiel für das Ergebnis des beschriebenen Vorgehens wenn ein rundes Gitter als Ausgangspunkt
 gewählt wurde:
 </p><p>
-<img src="images/geojson_map_generator/wheel_and_spokes_connectedRoads.png"
+<img src="images/geojson_map_generator/wheel_and_spokes_connectedRoads.png" style="max-width:1000px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -237,7 +237,7 @@ von
 (Beispiele)
 importiert werden:
 </p><p>
-<img src="images/geojson_map_generator/geojson_rendered_with_geoman.png"
+<img src="images/geojson_map_generator/geojson_rendered_with_geoman.png" style="max-width:584px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -346,13 +346,13 @@ und einige weitere Beispieldatensätze aus dem Internet eingefügt - das reichte
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							22 Sarcastic Zen Phrases</p>
+							Integration CloudMQTT & dWb+</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">08.04.2017</span>
+							<span class="w3-opacity">13.04.2017</span>
 						</p>
-						<span class="smallabstract"><p>Eine schöne Variation auf Motivational Quotes oder Zen-Sinnsprüche
+						<span class="smallabstract"><p>Ich stieß bei einer Recherche auf das Portal CloudMQTT - das musste ausprobiert werden!
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="22_sarcastic_zen_phrases.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="integration_cloudmqtt___dwb_.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -416,41 +416,32 @@ und einige weitere Beispieldatensätze aus dem Internet eingefügt - das reichte
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
-							<span class="w3-large">							M-zu-N-Beziehungen und JPA</span><br>
-						<span class="smallabstract"><p>Ich habe bereits darüber
-berichtet,
-dass die sQLshell ein neues Plugin anbietet, das
-aus bestehenden Datenmodellen in Datenbanken
-JPA-Entityklassen
-generieren kann.
+							<span class="w3-large">							Elektronik Linkdump 2022 I</span><br>
+						<span class="smallabstract"><p>Ein
+weiterer
+Linkdump zum Thema Elektronik und Basteln, DIY,...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="m_zu_n_beziehungen_jpa.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2022_i.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Verbesserung der GridView-Komponente für Datenbankanwendungen</span><br>
-						<span class="smallabstract"><p>Ich hatte bereits
-verschiedentlich
-über die Versuche geschrieben, die GUI- und Interaktionsmetaphern zur Arbeit mit relationalen Datenbanken,
-die zum Beispiel in der
-sQLshell
-zum Einsatz kamen auch auf Zeitreihendatenbanken auzuwenden.
+							<span class="w3-large">							Writefreely im Docker-Zoo angekommen</span><br>
+						<span class="smallabstract"><p>Ich habe wieder einen neuen Container in meinen
+Docker-Zoo
+integriert...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="verbesserung_gridview_komponente_datenbankanwendungen.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="writefreely_docker_zoo_angekommen.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							VC2HTML-Plugin</span><br>
-						<span class="smallabstract"><p>Wie bereits in einem
-früheren Artikel zum Thema sQLshell-Plugins
-wird hier wieder ein neues Plugin für die
-sQLshell
-vorgestellt, das eine neue Möglichkeit bietet Datenmodelle zu dokumentieren/analysieren.
+							<span class="w3-large">							OsterProjekt 2022 - Tesseract OCR</span><br>
+						<span class="smallabstract"><p>Nachdem ich schon eine ganze Weile auf dieser Idee saß, habe ich mich entschlossen, sie
+als Projekt in meiner Woche Osterurlaub in Angriff zu nehmen - als Ausgleich zwischen
+den diversen Arbeiten zur Inbetriebnahme meiner neuen Küche...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vc2html_plugin.html#110">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="osterprojekt_2022___tesseract_ocr.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -485,41 +476,32 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
-							<span class="w3-large">							M-zu-N-Beziehungen und JPA</span><br>
-							<span class="smallabstract"><p>Ich habe bereits darüber
-berichtet,
-dass die sQLshell ein neues Plugin anbietet, das
-aus bestehenden Datenmodellen in Datenbanken
-JPA-Entityklassen
-generieren kann.
+							<span class="w3-large">							Elektronik Linkdump 2022 I</span><br>
+							<span class="smallabstract"><p>Ein
+weiterer
+Linkdump zum Thema Elektronik und Basteln, DIY,...
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="m_zu_n_beziehungen_jpa.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2022_i.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Verbesserung der GridView-Komponente für Datenbankanwendungen</span><br>
-							<span class="smallabstract"><p>Ich hatte bereits
-verschiedentlich
-über die Versuche geschrieben, die GUI- und Interaktionsmetaphern zur Arbeit mit relationalen Datenbanken,
-die zum Beispiel in der
-sQLshell
-zum Einsatz kamen auch auf Zeitreihendatenbanken auzuwenden.
+							<span class="w3-large">							Writefreely im Docker-Zoo angekommen</span><br>
+							<span class="smallabstract"><p>Ich habe wieder einen neuen Container in meinen
+Docker-Zoo
+integriert...
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="verbesserung_gridview_komponente_datenbankanwendungen.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="writefreely_docker_zoo_angekommen.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							VC2HTML-Plugin</span><br>
-							<span class="smallabstract"><p>Wie bereits in einem
-früheren Artikel zum Thema sQLshell-Plugins
-wird hier wieder ein neues Plugin für die
-sQLshell
-vorgestellt, das eine neue Möglichkeit bietet Datenmodelle zu dokumentieren/analysieren.
+							<span class="w3-large">							OsterProjekt 2022 - Tesseract OCR</span><br>
+							<span class="smallabstract"><p>Nachdem ich schon eine ganze Weile auf dieser Idee saß, habe ich mich entschlossen, sie
+als Projekt in meiner Woche Osterurlaub in Angriff zu nehmen - als Ausgleich zwischen
+den diversen Arbeiten zur Inbetriebnahme meiner neuen Küche...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vc2html_plugin.html#110">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="osterprojekt_2022___tesseract_ocr.html#content">
  Weiterlesen...
 								</a>
 						</li>

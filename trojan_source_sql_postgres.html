@@ -112,7 +112,7 @@ dass eine Software, die diese Codes interpretiert stattdessen <span class="mdcod
 </p><p>
 Hier ein Beispiel dafür in Gedit 2.36.2 unter Ubuntu Focal Fossa:
 </p><p>
-<img src="images/trojangedit.png"
+<img src="images/trojangedit.png" style="max-width:299px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -124,7 +124,7 @@ Ich freue mich sagen zu können, dass auch die
 sich hier nicht hereinlegen lässt (und damit auch den Anwender nicht hereinlegt) -
 sie zeigt an, dass im SQL weitere Zeichen enthalten sind:
 </p><p>
-<img src="images/trojansQLshell.png"
+<img src="images/trojansQLshell.png" style="max-width:280px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -134,7 +134,7 @@ SQL-Script in sQLshell
 Intellij Idea stellt die Goldrandlösung dar: solche Codes werden nicht nur nicht interpretiiert, sondern stattdessen
 als Pseudo-Zeichen dargestellt:
 </p><p>
-<img src="images/trojanidea.png"
+<img src="images/trojanidea.png" style="max-width:420px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -145,7 +145,7 @@ Nachdem ich mir also verschiedene Editoren und IDEs zum Umgang mit diesen spezia
 ich herausbekommen, wie sich eine Datenbank verhält, wenn sie ein mit solchen Zeichen versehenes Statement vorgesetzt bekommt.
 Meine ersten Tests führte ich mit einer etwas veralteten Version Postgres durch:
 </p><p>
-<img src="images/trojanpostgresversion.png"
+<img src="images/trojanpostgresversion.png" style="max-width:568px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -156,7 +156,7 @@ Ich benutzte zur Interaktion damit zunächst <span class="mdcode">psql</span> in
 Interessant fand ich dabei zunächst, dass in diesen Terminals die Steuercodes im Statement nicht angezeigt und auch <span class="mdbold">nicht
 interpretiert</span> wurden - Man hätte meinen können, dass dieses Statement überhaupt keine Steuerzeichen enthielt:
 </p><p>
-<img src="images/trojancrt.png"
+<img src="images/trojancrt.png" style="max-width:357px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -166,7 +166,7 @@ SQL-Script in CoolRetroTerm
 Jetzt wurde ich natürlich neugierig, ob sich das Statement absetzen lassen würde - es funktionierte. Und bei der Abfrage der Tabellenstruktur
 in <span class="mdcode">psql</span> mittels <span class="mdcode">\d bidi</span> erhielt ich daraufhin folgendes Ergebnis:
 </p><p>
-<img src="images/trojanpsqlstructure.png"
+<img src="images/trojanpsqlstructure.png" style="max-width:769px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -175,7 +175,7 @@ Tabellenstruktur mittels psql in CoolRetroTerm
 </p><p>
 Ein entsprechendes <span class="mdcode">Select</span> schlug aber fehl:
 </p><p>
-<img src="images/trojanpsqlselect.png"
+<img src="images/trojanpsqlselect.png" style="max-width:442px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -188,7 +188,7 @@ kopiert hat - nicht existiert? Was ist denn hier passiert? Die Erklärung wird o
 Datenbank-Werkzeugen ansieht - zum Beispiel in der
 <a href="sQLshell.html">sQLshell:</a>
 </p><p>
-<img src="images/trojansQLshellstructure.png"
+<img src="images/trojansQLshellstructure.png" style="max-width:422px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -202,7 +202,7 @@ Postgres ist auch konsistent: Wenn die Tabelle mittels <span class="mdcode">pg_d
 Unicode-Encoding, in dem - mit Gedit betrachtet - wieder der Name <span class="mdcode">NameSpalten</span> auftaucht, da alle Zeichen exportiert wurden
 und diese natürlich wieder interpretiert werden:
 </p><p>
-<img src="images/trojanpgdumpgedit.png"
+<img src="images/trojanpgdumpgedit.png" style="max-width:598px;"
 alt="Screenshot"
 class="center">
 <span class="imgdesc">
@@ -293,13 +293,13 @@ Dieser Beitrag wurde zum CCC End-of-year event 2021 eingereicht und abgelehnt.
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
 						<p class="w3-large">
-							22 Sarcastic Zen Phrases</p>
+							Integration CloudMQTT & dWb+</p>
 						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">08.04.2017</span>
+							<span class="w3-opacity">13.04.2017</span>
 						</p>
-						<span class="smallabstract"><p>Eine schöne Variation auf Motivational Quotes oder Zen-Sinnsprüche
+						<span class="smallabstract"><p>Ich stieß bei einer Recherche auf das Portal CloudMQTT - das musste ausprobiert werden!
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="22_sarcastic_zen_phrases.html#content">
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="integration_cloudmqtt___dwb_.html#content">
 							Weiterlesen...
 						</a>
 					</li>
@@ -363,41 +363,32 @@ Dieser Beitrag wurde zum CCC End-of-year event 2021 eingereicht und abgelehnt.
 				</div>
 				<ul class="w3-ul w3-white">
 					<li class="w3-padding-16">
-							<span class="w3-large">							M-zu-N-Beziehungen und JPA</span><br>
-						<span class="smallabstract"><p>Ich habe bereits darüber
-berichtet,
-dass die sQLshell ein neues Plugin anbietet, das
-aus bestehenden Datenmodellen in Datenbanken
-JPA-Entityklassen
-generieren kann.
+							<span class="w3-large">							Elektronik Linkdump 2022 I</span><br>
+						<span class="smallabstract"><p>Ein
+weiterer
+Linkdump zum Thema Elektronik und Basteln, DIY,...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="m_zu_n_beziehungen_jpa.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2022_i.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">							Verbesserung der GridView-Komponente für Datenbankanwendungen</span><br>
-						<span class="smallabstract"><p>Ich hatte bereits
-verschiedentlich
-über die Versuche geschrieben, die GUI- und Interaktionsmetaphern zur Arbeit mit relationalen Datenbanken,
-die zum Beispiel in der
-sQLshell
-zum Einsatz kamen auch auf Zeitreihendatenbanken auzuwenden.
+							<span class="w3-large">							Writefreely im Docker-Zoo angekommen</span><br>
+						<span class="smallabstract"><p>Ich habe wieder einen neuen Container in meinen
+Docker-Zoo
+integriert...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="verbesserung_gridview_komponente_datenbankanwendungen.html#content">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="writefreely_docker_zoo_angekommen.html#content">
  Weiterlesen...
 							</a>
 					</li>
 					<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							VC2HTML-Plugin</span><br>
-						<span class="smallabstract"><p>Wie bereits in einem
-früheren Artikel zum Thema sQLshell-Plugins
-wird hier wieder ein neues Plugin für die
-sQLshell
-vorgestellt, das eine neue Möglichkeit bietet Datenmodelle zu dokumentieren/analysieren.
+							<span class="w3-large">							OsterProjekt 2022 - Tesseract OCR</span><br>
+						<span class="smallabstract"><p>Nachdem ich schon eine ganze Weile auf dieser Idee saß, habe ich mich entschlossen, sie
+als Projekt in meiner Woche Osterurlaub in Angriff zu nehmen - als Ausgleich zwischen
+den diversen Arbeiten zur Inbetriebnahme meiner neuen Küche...
 </p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vc2html_plugin.html#110">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="osterprojekt_2022___tesseract_ocr.html#content">
  Weiterlesen...
 							</a>
 					</li>
@@ -432,41 +423,32 @@ abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHx
 					</div>
 					<ul class="w3-ul w3-white">
 						<li class="w3-padding-16">
-							<span class="w3-large">							M-zu-N-Beziehungen und JPA</span><br>
-							<span class="smallabstract"><p>Ich habe bereits darüber
-berichtet,
-dass die sQLshell ein neues Plugin anbietet, das
-aus bestehenden Datenmodellen in Datenbanken
-JPA-Entityklassen
-generieren kann.
+							<span class="w3-large">							Elektronik Linkdump 2022 I</span><br>
+							<span class="smallabstract"><p>Ein
+weiterer
+Linkdump zum Thema Elektronik und Basteln, DIY,...
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="m_zu_n_beziehungen_jpa.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="elektronik_linkdump_2022_i.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">							Verbesserung der GridView-Komponente für Datenbankanwendungen</span><br>
-							<span class="smallabstract"><p>Ich hatte bereits
-verschiedentlich
-über die Versuche geschrieben, die GUI- und Interaktionsmetaphern zur Arbeit mit relationalen Datenbanken,
-die zum Beispiel in der
-sQLshell
-zum Einsatz kamen auch auf Zeitreihendatenbanken auzuwenden.
+							<span class="w3-large">							Writefreely im Docker-Zoo angekommen</span><br>
+							<span class="smallabstract"><p>Ich habe wieder einen neuen Container in meinen
+Docker-Zoo
+integriert...
 </p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="verbesserung_gridview_komponente_datenbankanwendungen.html#content">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="writefreely_docker_zoo_angekommen.html#content">
  Weiterlesen...
 								</a>
 						</li>
 						<li class="w3-padding-16">
-							<span class="w3-large">								<img class="initial" title="Aktualisiert" src="images/page_updated_48.png">
-							VC2HTML-Plugin</span><br>
-							<span class="smallabstract"><p>Wie bereits in einem
-früheren Artikel zum Thema sQLshell-Plugins
-wird hier wieder ein neues Plugin für die
-sQLshell
-vorgestellt, das eine neue Möglichkeit bietet Datenmodelle zu dokumentieren/analysieren.
+							<span class="w3-large">							OsterProjekt 2022 - Tesseract OCR</span><br>
+							<span class="smallabstract"><p>Nachdem ich schon eine ganze Weile auf dieser Idee saß, habe ich mich entschlossen, sie
+als Projekt in meiner Woche Osterurlaub in Angriff zu nehmen - als Ausgleich zwischen
+den diversen Arbeiten zur Inbetriebnahme meiner neuen Küche...
 </p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vc2html_plugin.html#110">
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="osterprojekt_2022___tesseract_ocr.html#content">
  Weiterlesen...
 								</a>
 						</li>
