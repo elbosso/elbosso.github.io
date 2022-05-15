@@ -42,7 +42,7 @@ public class DoubleMap
 	public static void main(java.lang.String[] args)
 	{
 		Utilities.sopln("huhu");
-		Utilities.configureBasicStdoutLogging(ch.qos.logback.classic.Level.TRACE);
+		Utilities.configureBasicStdoutLogging(org.slf4j.event.Level.TRACE);
 		double machEps = 1.0;
 
 		do

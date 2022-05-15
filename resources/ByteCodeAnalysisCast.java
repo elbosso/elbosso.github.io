@@ -38,7 +38,7 @@ import de.elbosso.util.Utilities;
 import de.elbosso.util.lang.collections.DoublyLinkedListHead;
 import de.elbosso.util.lang.collections.DoublyLinkedListPart;
 import de.netsysit.util.StopWatch;
-import ch.qos.logback.classic.Level;
+import org.slf4j.event.Level;
 
 public class ByteCodeAnalysisCast extends java.lang.Object
 {

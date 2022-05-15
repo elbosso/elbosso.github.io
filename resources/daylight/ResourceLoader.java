@@ -2,7 +2,7 @@ package de.netsysit.util;
 //$Id$
 
 import de.elbosso.util.Utilities;
-import ch.qos.logback.classic.Level;
+import org.slf4j.event.Level;
 
 import javax.accessibility.AccessibleContext;
 import java.awt.*;
@@ -588,7 +588,7 @@ public class ResourceLoader extends java.lang.Object
 	}
 	public static void main(java.lang.String[] args) throws IOException
 	{
-		Utilities.configureBasicStdoutLogging(ch.qos.logback.classic.Level.ALL);
+		Utilities.configureBasicStdoutLogging(org.slf4j.event.Level.TRACE);
 		de.netsysit.util.ResourceLoader.setSize(IconSize.small);
 		javax.swing.ImageIcon i1=de.netsysit.util.ResourceLoader.getIcon("de/netsysit/ressources/gfx/ca/Makro expandieren_48.png");
 		CLASS_LOGGER.trace(i1.getIconWidth()+" "+i1.getIconHeight());
