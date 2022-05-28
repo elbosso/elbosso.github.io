@@ -177,7 +177,8 @@ public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 	public java.util.Enumeration children()
 	{
 //		System.out.println("++++++++++++++");
-		return java.util.Collections.enumeration(java.util.Arrays.asList(getChildren()));
+		Object[] gc=getChildren();
+		return java.util.Collections.enumeration(java.util.Arrays.asList(gc!=null?gc:new Object[0]));
 	}
 	public String toString()
 	{
