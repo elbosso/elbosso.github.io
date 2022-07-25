@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>CRL next update mit Telegraf überwachen</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="CRL next update mit Telegraf überwachen"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/crl_next_update_telegraf_ueberwachen"/> <meta property="og:image" content="https://elbosso.github.io/images/asciiart_tux.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Nachdem ich neulich bereits darüber berichtete, wie man die Gültigkeit von Serverzertifikaten mittels Telegraf und Grafana überwachen kann habe ich mich nun eines weiteren Aspekts in diesem Zusammenhang angenommen. "/> <meta property="article:published_time" content="2022-06-27"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>CRL next update mit Telegraf überwachen</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="CRL next update mit Telegraf überwachen"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/crl_next_update_telegraf_ueberwachen"/> <meta property="og:image" content="https://elbosso.github.io/images/asciiart_tux.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Nachdem ich neulich bereits darüber berichtete, wie man die Gültigkeit von Serverzertifikaten mittels Telegraf und Grafana überwachen kann habe ich mich nun eines weiteren Aspekts in diesem Zusammenhang angenommen. "/> <meta property="article:published_time" content="2022-06-27"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -17,184 +17,182 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="grafana_terminal.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="sqlshell_version_7_4_bringt_virtuelle_fremdschluesselbeziehungen.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>CRL next update mit Telegraf überwachen</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="was_bedeutet_vorhaengeschloss_browser_.html#content"> <span class="w3-tag w3-black w3-margin-bottom">PKI-X.509-CA</span> </a> <a href="grafana_terminal.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> <a href="grafana_terminal.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="netzwerk_garten.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Security</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">27.06.2022</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/asciiart_tux_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="updates"> <h5>Updates</h5> <ul> <li> <a href="#112"> 27. Juni 2022 </a> </li> </ul> </div> <div class="w3-container w3-padding" id="abstract"> <p>Nachdem ich neulich bereits darüber berichtete, wie man die <a href="zertifikatsgueltigkeit_ueberwachen_grafana.html">Gültigkeit von Serverzertifikaten</a> mittels Telegraf und Grafana überwachen kann habe ich mich nun eines weiteren Aspekts in diesem Zusammenhang angenommen. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Für die Gültigkeit bzw. Lebensdauer von x509-Zertifikaten hat telegraf ein Plugin an Bord, das man nur noch <a href="zertifikatsgueltigkeit_ueberwachen_grafana.html">aktivieren</a> muss. </p><p> Aber es gibt noch ein weiteres Konzept, das man im Auge behalten sollte - und dafür existiert leider kein Telegraf-Plugin: Es handelt sich dabei um die Lebenszeit von Certificate Revocation Lists (CRLs). Möchte man die Gültigkeit von Zertifikaten umfänglich verifizieren, muss man auch prüfen, ob diese Zertifikate durch die ausstellende Certificate Authority (CA) außerplanmäßig für ungültig erklärt wurden. Das geschieht entweder durch Analyse der CRL der CA oder - falls von der CA angeboten - durch eine Abfrage über das Online Certificate Status Protocol (OCSP). </p><p> CRLs sind Listen für ungültig erklärter (oder zurückgezogener) Zertifikate. Diese Listen werden nicht oft neu erstellt - eigentlich ist es nur nötig, die Liste neu zu erstellen, wenn ein weiteres Zertifikat auf die Liste gesetzt wurde. Dennoch ist es eine gute Praxis, die CRL zyklisch zu erneuern. Daher haben CRLs auch ein Attribut <span class="mdbold">next update</span>, das Auskunft über den spätesten nächsten Aktualisierungszeitpunkt erteilt. </p><p> Ist dieser Zeitpunkt überschritten, wenn in der CRL nach einem Zertifikat gesucht wird, um dessen Gültigkeit zu prüfen, schlägt diese Gültigkeitsprüfung fehl - als PKI oder CA sollte man also darauf achten, die CRLs rechtzeitig zu erneuern. Dazu existieren natürlich selbstredend entsprechende administrative Mechanismen - es ist trotzdem gut, dies mittels geeigneter unabhängiger Monitoring-Lösungen zu überwachen. </p><p> Ich habe dazu ein Bash-Skript geschrieben, das man per Cron zyklisch ausführen kann: Es erwartet als Argument eine URL zum Herunterladen der CRL und schreibt die gewonnenen Erkenntnisse (CN, Issuer-DN und verbleibende Zeit bis zum nächsten Update in Sekunden) in eine Influx-Datenbank: </p><pre>
-#!/bin/bash
-declare -a StringArray=("https://elbosso.github.io/x509/Dama11_Component_CA-ca.crl" \
-"https://elbosso.github.io/x509/Dama11_Identity_CA-ca.crl" \
-"https://elbosso.github.io/x509/Dama11_Intermediary_CA-ca.crl" \
-"https://elbosso.github.io/x509/Dama11_Intermediary_Test_CA-ca.crl" \
-"https://elbosso.github.io/x509/Dama11_Root_CA-ca.crl" \
-"https://elbosso.github.io/x509/Dama11_Software_CA-ca.crl" \
-"https://elbosso.github.io/x509/test_component-ca.crl" \
+</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="grafana_terminal.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="sqlshell_version_7_4_bringt_virtuelle_fremdschluesselbeziehungen.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>CRL next update mit Telegraf überwachen</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="was_bedeutet_vorhaengeschloss_browser_.html#content"> <span class="w3-tag w3-black w3-margin-bottom">PKI-X.509-CA</span> </a> <a href="grafana_terminal.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> <a href="grafana_terminal.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="netzwerk_garten.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Security</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">27.06.2022</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/asciiart_tux_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="updates"> <h5>Updates</h5> <ul> <li> <a href="#113"> 27. Juni 2022 </a> </li> </ul> </div> <div class="w3-container w3-padding" id="abstract"> <p>Nachdem ich neulich bereits darüber berichtete, wie man die <a href="zertifikatsgueltigkeit_ueberwachen_grafana.html">Gültigkeit von Serverzertifikaten</a> mittels Telegraf und Grafana überwachen kann habe ich mich nun eines weiteren Aspekts in diesem Zusammenhang angenommen. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Für die Gültigkeit bzw. Lebensdauer von x509-Zertifikaten hat telegraf ein Plugin an Bord, das man nur noch <a href="zertifikatsgueltigkeit_ueberwachen_grafana.html">aktivieren</a> muss. </p><p> Aber es gibt noch ein weiteres Konzept, das man im Auge behalten sollte - und dafür existiert leider kein Telegraf-Plugin: Es handelt sich dabei um die Lebenszeit von Certificate Revocation Lists (CRLs). Möchte man die Gültigkeit von Zertifikaten umfänglich verifizieren, muss man auch prüfen, ob diese Zertifikate durch die ausstellende Certificate Authority (CA) außerplanmäßig für ungültig erklärt wurden. Das geschieht entweder durch Analyse der CRL der CA oder - falls von der CA angeboten - durch eine Abfrage über das Online Certificate Status Protocol (OCSP). </p><p> CRLs sind Listen für ungültig erklärter (oder zurückgezogener) Zertifikate. Diese Listen werden nicht oft neu erstellt - eigentlich ist es nur nötig, die Liste neu zu erstellen, wenn ein weiteres Zertifikat auf die Liste gesetzt wurde. Dennoch ist es eine gute Praxis, die CRL zyklisch zu erneuern. Daher haben CRLs auch ein Attribut <span class="mdbold">next update</span>, das Auskunft über den spätesten nächsten Aktualisierungszeitpunkt erteilt. </p><p> Ist dieser Zeitpunkt überschritten, wenn in der CRL nach einem Zertifikat gesucht wird, um dessen Gültigkeit zu prüfen, schlägt diese Gültigkeitsprüfung fehl - als PKI oder CA sollte man also darauf achten, die CRLs rechtzeitig zu erneuern. Dazu existieren natürlich selbstredend entsprechende administrative Mechanismen - es ist trotzdem gut, dies mittels geeigneter unabhängiger Monitoring-Lösungen zu überwachen. </p><p> Ich habe dazu ein Bash-Skript geschrieben, das man per Cron zyklisch ausführen kann: Es erwartet als Argument eine URL zum Herunterladen der CRL und schreibt die gewonnenen Erkenntnisse (CN, Issuer-DN und verbleibende Zeit bis zum nächsten Update in Sekunden) in eine Influx-Datenbank: </p><div class="highlight"><pre><span></span>#!/bin/bash
+declare -a StringArray=(&quot;https://elbosso.github.io/x509/Dama11_Component_CA-ca.crl&quot; \
+&quot;https://elbosso.github.io/x509/Dama11_Identity_CA-ca.crl&quot; \
+&quot;https://elbosso.github.io/x509/Dama11_Intermediary_CA-ca.crl&quot; \
+&quot;https://elbosso.github.io/x509/Dama11_Intermediary_Test_CA-ca.crl&quot; \
+&quot;https://elbosso.github.io/x509/Dama11_Root_CA-ca.crl&quot; \
+&quot;https://elbosso.github.io/x509/Dama11_Software_CA-ca.crl&quot; \
+&quot;https://elbosso.github.io/x509/test_component-ca.crl&quot; \
 )
 </p><p>
-for val in ${StringArray[@]}; do
-/usr/bin/wget $val -O /tmp/ca_under_test
+for val in <span class="cp">${</span><span class="n">StringArray</span><span class="p">[</span><span class="err">@</span><span class="p">]</span><span class="cp">}</span>; do
+/usr/bin/wget <span class="nv">$val</span> -O /tmp/ca_under_test
 </p><p>
-CRLENDOFLIFE=$(/usr/bin/openssl crl -in /tmp/ca_under_test -nextupdate -noout|cut -d '=' -f 2)
-DATEFUTURE=$(date --date="$CRLENDOFLIFE" "+%s")
-DATENOW=$(date "+%s")
-SECONDSDIFF=$(($DATEFUTURE - $DATENOW))
+CRLENDOFLIFE=$(/usr/bin/openssl crl -in /tmp/ca_under_test -nextupdate -noout|cut -d &#39;=&#39; -f 2)
+DATEFUTURE=$(date --date=&quot;<span class="nv">$CRLENDOFLIFE</span>&quot; &quot;+%s&quot;)
+DATENOW=$(date &quot;+%s&quot;)
+SECONDSDIFF=$((<span class="nv">$DATEFUTURE</span> - <span class="nv">$DATENOW</span>))
 ISSUER=$(/usr/bin/openssl crl -in /tmp/ca_under_test -issuer -noout)
-CN=$(echo $ISSUER|/usr/bin/sed 's/.*CN =\(.*\)\,*.*/\1/g'|xargs|cut -d ',' -f 1)
-ISSUER=$(echo $ISSUER|xargs)
-echo "$val"
-echo "$SECONDSDIFF"
-echo "$ISSUER"
-echo "$CN"
+CN=$(echo <span class="nv">$ISSUER</span>|/usr/bin/sed &#39;s/.*CN =\(.*\)\,*.*/\1/g&#39;|xargs|cut -d &#39;,&#39; -f 1)
+ISSUER=$(echo <span class="nv">$ISSUER</span>|xargs)
+echo &quot;<span class="nv">$val</span>&quot;
+echo &quot;<span class="nv">$SECONDSDIFF</span>&quot;
+echo &quot;<span class="nv">$ISSUER</span>&quot;
+echo &quot;<span class="nv">$CN</span>&quot;
 #Quoting for InfluxDB
-CN=$(echo $CN|/usr/bin/sed 's/ /\\ /g'|/usr/bin/sed 's/,/\\,/g'|/usr/bin/sed 's/=/\\=/g')
-ISSUER=$(echo $ISSUER|xargs|/usr/bin/sed 's/ /\\ /g'|/usr/bin/sed 's/,/\\,/g'|/usr/bin/sed 's/=/\\=/g')
+CN=$(echo <span class="nv">$CN</span>|/usr/bin/sed &#39;s/ /\\ /g&#39;|/usr/bin/sed &#39;s/,/\\,/g&#39;|/usr/bin/sed &#39;s/=/\\=/g&#39;)
+ISSUER=$(echo <span class="nv">$ISSUER</span>|xargs|/usr/bin/sed &#39;s/ /\\ /g&#39;|/usr/bin/sed &#39;s/,/\\,/g&#39;|/usr/bin/sed &#39;s/=/\\=/g&#39;)
 </p><p>
-/usr/bin/curl -i -XPOST 'http://192.168.10.2:8086/write?db=monitoring' \
---data-binary "crllifetime,host=$HOSTNAME,cn=$CN,issuer=$ISSUER value=${SECONDSDIFF}"
+/usr/bin/curl -i -XPOST &#39;http://192.168.10.2:8086/write?db=monitoring&#39; \
+--data-binary &quot;crllifetime,host=<span class="nv">$HOSTNAME</span>,cn=<span class="nv">$CN</span>,issuer=<span class="nv">$ISSUER</span> value=<span class="cp">${</span><span class="n">SECONDSDIFF</span><span class="cp">}</span>&quot;
 </p><p>
 done
-<p></pre> </p><p> Diese Informationen kann man dann zum Beispiel mittels Grafana sichtbar machen - etwa mit diesem heftig von <a href="https://grafana.com/grafana/dashboards/13683">hier</a> inspirierten Dashboard: </p><pre>
-{
-  "annotations": {
-    "list": [
+</pre></div> </p><p> Diese Informationen kann man dann zum Beispiel mittels Grafana sichtbar machen - etwa mit diesem heftig von <a href="https://grafana.com/grafana/dashboards/13683">hier</a> inspirierten Dashboard: </p><div class="highlight"><pre><span></span>{
+  &quot;annotations&quot;: {
+    &quot;list&quot;: [
       {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations &amp; Alerts",
-        "type": "dashboard"
+        &quot;builtIn&quot;: 1,
+        &quot;datasource&quot;: &quot;-- Grafana --&quot;,
+        &quot;enable&quot;: true,
+        &quot;hide&quot;: true,
+        &quot;iconColor&quot;: &quot;rgba(0, 211, 255, 1)&quot;,
+        &quot;name&quot;: &quot;Annotations &amp;amp; Alerts&quot;,
+        &quot;type&quot;: &quot;dashboard&quot;
       }
     ]
   },
-  "description": "A very simple and visual Dashboard to monitor the remaining lifetime of CRLs (x.509).",
-  "editable": true,
-  "gnetId": 13683,
-  "graphTooltip": 0,
-  "id": 44,
-  "iteration": 1629008435516,
-  "links": [],
-  "panels": [
+  &quot;description&quot;: &quot;A very simple and visual Dashboard to monitor the remaining lifetime of CRLs (x.509).&quot;,
+  &quot;editable&quot;: true,
+  &quot;gnetId&quot;: 13683,
+  &quot;graphTooltip&quot;: 0,
+  &quot;id&quot;: 44,
+  &quot;iteration&quot;: 1629008435516,
+  &quot;links&quot;: [],
+  &quot;panels&quot;: [
     {
-      "cacheTimeout": null,
-      "datasource": "InfluxDB monitoring",
-      "description": "SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "decimals": 1,
-          "mappings": [
+      &quot;cacheTimeout&quot;: null,
+      &quot;datasource&quot;: &quot;InfluxDB monitoring&quot;,
+      &quot;description&quot;: &quot;SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green&quot;,
+      &quot;fieldConfig&quot;: {
+        &quot;defaults&quot;: {
+          &quot;custom&quot;: {},
+          &quot;decimals&quot;: 1,
+          &quot;mappings&quot;: [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              &quot;id&quot;: 0,
+              &quot;op&quot;: &quot;=&quot;,
+              &quot;text&quot;: &quot;N/A&quot;,
+              &quot;type&quot;: 1,
+              &quot;value&quot;: &quot;null&quot;
             }
           ],
-          "max": 0,
-          "min": 0,
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          &quot;max&quot;: 0,
+          &quot;min&quot;: 0,
+          &quot;nullValueMode&quot;: &quot;connected&quot;,
+          &quot;thresholds&quot;: {
+            &quot;mode&quot;: &quot;absolute&quot;,
+            &quot;steps&quot;: [
               {
-                "color": "semi-dark-red",
-                "value": null
+                &quot;color&quot;: &quot;semi-dark-red&quot;,
+                &quot;value&quot;: null
               },
               {
-                "color": "semi-dark-orange",
-                "value": 14
+                &quot;color&quot;: &quot;semi-dark-orange&quot;,
+                &quot;value&quot;: 14
               },
               {
-                "color": "semi-dark-green",
-                "value": 30
+                &quot;color&quot;: &quot;semi-dark-green&quot;,
+                &quot;value&quot;: 30
               }
             ]
           },
-          "unit": "days"
+          &quot;unit&quot;: &quot;days&quot;
         },
-        "overrides": [
+        &quot;overrides&quot;: [
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.last.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.last.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "EXP"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;EXP&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.issuer_common_name.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.issuer_common_name.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "CA"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;CA&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-blue",
-                  "mode": "fixed"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;fixedColor&quot;: &quot;dark-blue&quot;,
+                  &quot;mode&quot;: &quot;fixed&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.verification_code.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.verification_code.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               },
               {
-                "id": "mappings",
-                "value": [
+                &quot;id&quot;: &quot;mappings&quot;,
+                &quot;value&quot;: [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Chain OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
+                    &quot;from&quot;: &quot;&quot;,
+                    &quot;id&quot;: 1,
+                    &quot;text&quot;: &quot;Chain OK&quot;,
+                    &quot;to&quot;: &quot;&quot;,
+                    &quot;type&quot;: 1,
+                    &quot;value&quot;: &quot;0&quot;
                   },
                   {
-                    "from": "1",
-                    "id": 2,
-                    "text": "Chain ERR",
-                    "to": "999999",
-                    "type": 2,
-                    "value": "1"
+                    &quot;from&quot;: &quot;1&quot;,
+                    &quot;id&quot;: 2,
+                    &quot;text&quot;: &quot;Chain ERR&quot;,
+                    &quot;to&quot;: &quot;999999&quot;,
+                    &quot;type&quot;: 2,
+                    &quot;value&quot;: &quot;1&quot;
                   }
                 ]
               },
               {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
+                &quot;id&quot;: &quot;thresholds&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;absolute&quot;,
+                  &quot;steps&quot;: [
                     {
-                      "color": "semi-dark-green",
-                      "value": null
+                      &quot;color&quot;: &quot;semi-dark-green&quot;,
+                      &quot;value&quot;: null
                     },
                     {
-                      "color": "dark-red",
-                      "value": 1
+                      &quot;color&quot;: &quot;dark-red&quot;,
+                      &quot;value&quot;: 1
                     }
                   ]
                 }
@@ -203,230 +201,230 @@ done
           }
         ]
       },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 0,
-        "y": 0
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 4,
+        &quot;w&quot;: 4,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 0
       },
-      "id": 2,
-      "links": [],
-      "maxPerRow": 8,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "last"
+      &quot;id&quot;: 2,
+      &quot;links&quot;: [],
+      &quot;maxPerRow&quot;: 8,
+      &quot;options&quot;: {
+        &quot;colorMode&quot;: &quot;background&quot;,
+        &quot;graphMode&quot;: &quot;none&quot;,
+        &quot;justifyMode&quot;: &quot;auto&quot;,
+        &quot;orientation&quot;: &quot;horizontal&quot;,
+        &quot;reduceOptions&quot;: {
+          &quot;calcs&quot;: [
+            &quot;last&quot;
           ],
-          "fields": "",
-          "values": false
+          &quot;fields&quot;: &quot;&quot;,
+          &quot;values&quot;: false
         },
-        "textMode": "value"
+        &quot;textMode&quot;: &quot;value&quot;
       },
-      "pluginVersion": "7.3.3",
-      "repeat": "ssl_name",
-      "repeatDirection": "h",
-      "scopedVars": {
-        "ssl_name": {
-          "selected": false,
-          "text": "Dama 11 Lab Software CA",
-          "value": "Dama 11 Lab Software CA"
+      &quot;pluginVersion&quot;: &quot;7.3.3&quot;,
+      &quot;repeat&quot;: &quot;ssl_name&quot;,
+      &quot;repeatDirection&quot;: &quot;h&quot;,
+      &quot;scopedVars&quot;: {
+        &quot;ssl_name&quot;: {
+          &quot;selected&quot;: false,
+          &quot;text&quot;: &quot;Dama 11 Lab Software CA&quot;,
+          &quot;value&quot;: &quot;Dama 11 Lab Software CA&quot;
         }
       },
-      "targets": [
+      &quot;targets&quot;: [
         {
-          "groupBy": [
+          &quot;groupBy&quot;: [
             {
-              "params": [
-                "$__interval"
+              &quot;params&quot;: [
+                &quot;$__interval&quot;
               ],
-              "type": "time"
+              &quot;type&quot;: &quot;time&quot;
             },
             {
-              "params": [
-                "san"
+              &quot;params&quot;: [
+                &quot;san&quot;
               ],
-              "type": "tag"
+              &quot;type&quot;: &quot;tag&quot;
             },
             {
-              "params": [
-                "none"
+              &quot;params&quot;: [
+                &quot;none&quot;
               ],
-              "type": "fill"
+              &quot;type&quot;: &quot;fill&quot;
             }
           ],
-          "measurement": "x509_cert",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT last(\"value\") /60/60/24,cn FROM \"crllifetime\" WHERE (\"cn\" =~ /^$ssl_name$/ AND \"issuer\" !~ /^$/) AND $timeFilter GROUP BY time($__interval), \"cn\" fill(none)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;measurement&quot;: &quot;x509_cert&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;query&quot;: &quot;SELECT last(\&quot;value\&quot;) /60/60/24,cn FROM \&quot;crllifetime\&quot; WHERE (\&quot;cn\&quot; =~ /^$ssl_name$/ AND \&quot;issuer\&quot; !~ /^$/) AND $timeFilter GROUP BY time($__interval), \&quot;cn\&quot; fill(none)&quot;,
+          &quot;rawQuery&quot;: true,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "expiry"
+                &quot;params&quot;: [
+                  &quot;expiry&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               },
               {
-                "params": [],
-                "type": "last"
+                &quot;params&quot;: [],
+                &quot;type&quot;: &quot;last&quot;
               },
               {
-                "params": [
-                  "/60/60/24"
+                &quot;params&quot;: [
+                  &quot;/60/60/24&quot;
                 ],
-                "type": "math"
+                &quot;type&quot;: &quot;math&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "source",
-              "operator": "=~",
-              "value": "/^$ssl_name$/"
+              &quot;key&quot;: &quot;source&quot;,
+              &quot;operator&quot;: &quot;=~&quot;,
+              &quot;value&quot;: &quot;/^$ssl_name$/&quot;
             },
             {
-              "condition": "AND",
-              "key": "san",
-              "operator": "!=",
-              "value": "\"\""
+              &quot;condition&quot;: &quot;AND&quot;,
+              &quot;key&quot;: &quot;san&quot;,
+              &quot;operator&quot;: &quot;!=&quot;,
+              &quot;value&quot;: &quot;\&quot;\&quot;&quot;
             }
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "$ssl_name",
-      "type": "stat"
+      &quot;timeFrom&quot;: null,
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;$ssl_name&quot;,
+      &quot;type&quot;: &quot;stat&quot;
     },
     {
-      "cacheTimeout": null,
-      "datasource": "InfluxDB monitoring",
-      "description": "SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "decimals": 1,
-          "mappings": [
+      &quot;cacheTimeout&quot;: null,
+      &quot;datasource&quot;: &quot;InfluxDB monitoring&quot;,
+      &quot;description&quot;: &quot;SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green&quot;,
+      &quot;fieldConfig&quot;: {
+        &quot;defaults&quot;: {
+          &quot;custom&quot;: {},
+          &quot;decimals&quot;: 1,
+          &quot;mappings&quot;: [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              &quot;id&quot;: 0,
+              &quot;op&quot;: &quot;=&quot;,
+              &quot;text&quot;: &quot;N/A&quot;,
+              &quot;type&quot;: 1,
+              &quot;value&quot;: &quot;null&quot;
             }
           ],
-          "max": 0,
-          "min": 0,
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          &quot;max&quot;: 0,
+          &quot;min&quot;: 0,
+          &quot;nullValueMode&quot;: &quot;connected&quot;,
+          &quot;thresholds&quot;: {
+            &quot;mode&quot;: &quot;absolute&quot;,
+            &quot;steps&quot;: [
               {
-                "color": "semi-dark-red",
-                "value": null
+                &quot;color&quot;: &quot;semi-dark-red&quot;,
+                &quot;value&quot;: null
               },
               {
-                "color": "semi-dark-orange",
-                "value": 14
+                &quot;color&quot;: &quot;semi-dark-orange&quot;,
+                &quot;value&quot;: 14
               },
               {
-                "color": "semi-dark-green",
-                "value": 30
+                &quot;color&quot;: &quot;semi-dark-green&quot;,
+                &quot;value&quot;: 30
               }
             ]
           },
-          "unit": "days"
+          &quot;unit&quot;: &quot;days&quot;
         },
-        "overrides": [
+        &quot;overrides&quot;: [
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.last.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.last.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "EXP"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;EXP&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.issuer_common_name.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.issuer_common_name.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "CA"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;CA&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-blue",
-                  "mode": "fixed"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;fixedColor&quot;: &quot;dark-blue&quot;,
+                  &quot;mode&quot;: &quot;fixed&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.verification_code.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.verification_code.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               },
               {
-                "id": "mappings",
-                "value": [
+                &quot;id&quot;: &quot;mappings&quot;,
+                &quot;value&quot;: [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Chain OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
+                    &quot;from&quot;: &quot;&quot;,
+                    &quot;id&quot;: 1,
+                    &quot;text&quot;: &quot;Chain OK&quot;,
+                    &quot;to&quot;: &quot;&quot;,
+                    &quot;type&quot;: 1,
+                    &quot;value&quot;: &quot;0&quot;
                   },
                   {
-                    "from": "1",
-                    "id": 2,
-                    "text": "Chain ERR",
-                    "to": "999999",
-                    "type": 2,
-                    "value": "1"
+                    &quot;from&quot;: &quot;1&quot;,
+                    &quot;id&quot;: 2,
+                    &quot;text&quot;: &quot;Chain ERR&quot;,
+                    &quot;to&quot;: &quot;999999&quot;,
+                    &quot;type&quot;: 2,
+                    &quot;value&quot;: &quot;1&quot;
                   }
                 ]
               },
               {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
+                &quot;id&quot;: &quot;thresholds&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;absolute&quot;,
+                  &quot;steps&quot;: [
                     {
-                      "color": "semi-dark-green",
-                      "value": null
+                      &quot;color&quot;: &quot;semi-dark-green&quot;,
+                      &quot;value&quot;: null
                     },
                     {
-                      "color": "dark-red",
-                      "value": 1
+                      &quot;color&quot;: &quot;dark-red&quot;,
+                      &quot;value&quot;: 1
                     }
                   ]
                 }
@@ -435,231 +433,231 @@ done
           }
         ]
       },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 4,
-        "y": 0
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 4,
+        &quot;w&quot;: 4,
+        &quot;x&quot;: 4,
+        &quot;y&quot;: 0
       },
-      "id": 44,
-      "links": [],
-      "maxPerRow": 8,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "last"
+      &quot;id&quot;: 44,
+      &quot;links&quot;: [],
+      &quot;maxPerRow&quot;: 8,
+      &quot;options&quot;: {
+        &quot;colorMode&quot;: &quot;background&quot;,
+        &quot;graphMode&quot;: &quot;none&quot;,
+        &quot;justifyMode&quot;: &quot;auto&quot;,
+        &quot;orientation&quot;: &quot;horizontal&quot;,
+        &quot;reduceOptions&quot;: {
+          &quot;calcs&quot;: [
+            &quot;last&quot;
           ],
-          "fields": "",
-          "values": false
+          &quot;fields&quot;: &quot;&quot;,
+          &quot;values&quot;: false
         },
-        "textMode": "value"
+        &quot;textMode&quot;: &quot;value&quot;
       },
-      "pluginVersion": "7.3.3",
-      "repeatDirection": "h",
-      "repeatIteration": 1629008435516,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "ssl_name": {
-          "selected": false,
-          "text": "Dama11 Lab Component CA",
-          "value": "Dama11 Lab Component CA"
+      &quot;pluginVersion&quot;: &quot;7.3.3&quot;,
+      &quot;repeatDirection&quot;: &quot;h&quot;,
+      &quot;repeatIteration&quot;: 1629008435516,
+      &quot;repeatPanelId&quot;: 2,
+      &quot;scopedVars&quot;: {
+        &quot;ssl_name&quot;: {
+          &quot;selected&quot;: false,
+          &quot;text&quot;: &quot;Dama11 Lab Component CA&quot;,
+          &quot;value&quot;: &quot;Dama11 Lab Component CA&quot;
         }
       },
-      "targets": [
+      &quot;targets&quot;: [
         {
-          "groupBy": [
+          &quot;groupBy&quot;: [
             {
-              "params": [
-                "$__interval"
+              &quot;params&quot;: [
+                &quot;$__interval&quot;
               ],
-              "type": "time"
+              &quot;type&quot;: &quot;time&quot;
             },
             {
-              "params": [
-                "san"
+              &quot;params&quot;: [
+                &quot;san&quot;
               ],
-              "type": "tag"
+              &quot;type&quot;: &quot;tag&quot;
             },
             {
-              "params": [
-                "none"
+              &quot;params&quot;: [
+                &quot;none&quot;
               ],
-              "type": "fill"
+              &quot;type&quot;: &quot;fill&quot;
             }
           ],
-          "measurement": "x509_cert",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT last(\"value\") /60/60/24,cn FROM \"crllifetime\" WHERE (\"cn\" =~ /^$ssl_name$/ AND \"issuer\" !~ /^$/) AND $timeFilter GROUP BY time($__interval), \"cn\" fill(none)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;measurement&quot;: &quot;x509_cert&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;query&quot;: &quot;SELECT last(\&quot;value\&quot;) /60/60/24,cn FROM \&quot;crllifetime\&quot; WHERE (\&quot;cn\&quot; =~ /^$ssl_name$/ AND \&quot;issuer\&quot; !~ /^$/) AND $timeFilter GROUP BY time($__interval), \&quot;cn\&quot; fill(none)&quot;,
+          &quot;rawQuery&quot;: true,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "expiry"
+                &quot;params&quot;: [
+                  &quot;expiry&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               },
               {
-                "params": [],
-                "type": "last"
+                &quot;params&quot;: [],
+                &quot;type&quot;: &quot;last&quot;
               },
               {
-                "params": [
-                  "/60/60/24"
+                &quot;params&quot;: [
+                  &quot;/60/60/24&quot;
                 ],
-                "type": "math"
+                &quot;type&quot;: &quot;math&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "source",
-              "operator": "=~",
-              "value": "/^$ssl_name$/"
+              &quot;key&quot;: &quot;source&quot;,
+              &quot;operator&quot;: &quot;=~&quot;,
+              &quot;value&quot;: &quot;/^$ssl_name$/&quot;
             },
             {
-              "condition": "AND",
-              "key": "san",
-              "operator": "!=",
-              "value": "\"\""
+              &quot;condition&quot;: &quot;AND&quot;,
+              &quot;key&quot;: &quot;san&quot;,
+              &quot;operator&quot;: &quot;!=&quot;,
+              &quot;value&quot;: &quot;\&quot;\&quot;&quot;
             }
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "$ssl_name",
-      "type": "stat"
+      &quot;timeFrom&quot;: null,
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;$ssl_name&quot;,
+      &quot;type&quot;: &quot;stat&quot;
     },
     {
-      "cacheTimeout": null,
-      "datasource": "InfluxDB monitoring",
-      "description": "SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "decimals": 1,
-          "mappings": [
+      &quot;cacheTimeout&quot;: null,
+      &quot;datasource&quot;: &quot;InfluxDB monitoring&quot;,
+      &quot;description&quot;: &quot;SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green&quot;,
+      &quot;fieldConfig&quot;: {
+        &quot;defaults&quot;: {
+          &quot;custom&quot;: {},
+          &quot;decimals&quot;: 1,
+          &quot;mappings&quot;: [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              &quot;id&quot;: 0,
+              &quot;op&quot;: &quot;=&quot;,
+              &quot;text&quot;: &quot;N/A&quot;,
+              &quot;type&quot;: 1,
+              &quot;value&quot;: &quot;null&quot;
             }
           ],
-          "max": 0,
-          "min": 0,
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          &quot;max&quot;: 0,
+          &quot;min&quot;: 0,
+          &quot;nullValueMode&quot;: &quot;connected&quot;,
+          &quot;thresholds&quot;: {
+            &quot;mode&quot;: &quot;absolute&quot;,
+            &quot;steps&quot;: [
               {
-                "color": "semi-dark-red",
-                "value": null
+                &quot;color&quot;: &quot;semi-dark-red&quot;,
+                &quot;value&quot;: null
               },
               {
-                "color": "semi-dark-orange",
-                "value": 14
+                &quot;color&quot;: &quot;semi-dark-orange&quot;,
+                &quot;value&quot;: 14
               },
               {
-                "color": "semi-dark-green",
-                "value": 30
+                &quot;color&quot;: &quot;semi-dark-green&quot;,
+                &quot;value&quot;: 30
               }
             ]
           },
-          "unit": "days"
+          &quot;unit&quot;: &quot;days&quot;
         },
-        "overrides": [
+        &quot;overrides&quot;: [
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.last.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.last.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "EXP"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;EXP&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.issuer_common_name.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.issuer_common_name.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "CA"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;CA&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-blue",
-                  "mode": "fixed"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;fixedColor&quot;: &quot;dark-blue&quot;,
+                  &quot;mode&quot;: &quot;fixed&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.verification_code.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.verification_code.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               },
               {
-                "id": "mappings",
-                "value": [
+                &quot;id&quot;: &quot;mappings&quot;,
+                &quot;value&quot;: [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Chain OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
+                    &quot;from&quot;: &quot;&quot;,
+                    &quot;id&quot;: 1,
+                    &quot;text&quot;: &quot;Chain OK&quot;,
+                    &quot;to&quot;: &quot;&quot;,
+                    &quot;type&quot;: 1,
+                    &quot;value&quot;: &quot;0&quot;
                   },
                   {
-                    "from": "1",
-                    "id": 2,
-                    "text": "Chain ERR",
-                    "to": "999999",
-                    "type": 2,
-                    "value": "1"
+                    &quot;from&quot;: &quot;1&quot;,
+                    &quot;id&quot;: 2,
+                    &quot;text&quot;: &quot;Chain ERR&quot;,
+                    &quot;to&quot;: &quot;999999&quot;,
+                    &quot;type&quot;: 2,
+                    &quot;value&quot;: &quot;1&quot;
                   }
                 ]
               },
               {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
+                &quot;id&quot;: &quot;thresholds&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;absolute&quot;,
+                  &quot;steps&quot;: [
                     {
-                      "color": "semi-dark-green",
-                      "value": null
+                      &quot;color&quot;: &quot;semi-dark-green&quot;,
+                      &quot;value&quot;: null
                     },
                     {
-                      "color": "dark-red",
-                      "value": 1
+                      &quot;color&quot;: &quot;dark-red&quot;,
+                      &quot;value&quot;: 1
                     }
                   ]
                 }
@@ -668,231 +666,231 @@ done
           }
         ]
       },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 8,
-        "y": 0
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 4,
+        &quot;w&quot;: 4,
+        &quot;x&quot;: 8,
+        &quot;y&quot;: 0
       },
-      "id": 45,
-      "links": [],
-      "maxPerRow": 8,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "last"
+      &quot;id&quot;: 45,
+      &quot;links&quot;: [],
+      &quot;maxPerRow&quot;: 8,
+      &quot;options&quot;: {
+        &quot;colorMode&quot;: &quot;background&quot;,
+        &quot;graphMode&quot;: &quot;none&quot;,
+        &quot;justifyMode&quot;: &quot;auto&quot;,
+        &quot;orientation&quot;: &quot;horizontal&quot;,
+        &quot;reduceOptions&quot;: {
+          &quot;calcs&quot;: [
+            &quot;last&quot;
           ],
-          "fields": "",
-          "values": false
+          &quot;fields&quot;: &quot;&quot;,
+          &quot;values&quot;: false
         },
-        "textMode": "value"
+        &quot;textMode&quot;: &quot;value&quot;
       },
-      "pluginVersion": "7.3.3",
-      "repeatDirection": "h",
-      "repeatIteration": 1629008435516,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "ssl_name": {
-          "selected": false,
-          "text": "Dama11 Lab Identity CA",
-          "value": "Dama11 Lab Identity CA"
+      &quot;pluginVersion&quot;: &quot;7.3.3&quot;,
+      &quot;repeatDirection&quot;: &quot;h&quot;,
+      &quot;repeatIteration&quot;: 1629008435516,
+      &quot;repeatPanelId&quot;: 2,
+      &quot;scopedVars&quot;: {
+        &quot;ssl_name&quot;: {
+          &quot;selected&quot;: false,
+          &quot;text&quot;: &quot;Dama11 Lab Identity CA&quot;,
+          &quot;value&quot;: &quot;Dama11 Lab Identity CA&quot;
         }
       },
-      "targets": [
+      &quot;targets&quot;: [
         {
-          "groupBy": [
+          &quot;groupBy&quot;: [
             {
-              "params": [
-                "$__interval"
+              &quot;params&quot;: [
+                &quot;$__interval&quot;
               ],
-              "type": "time"
+              &quot;type&quot;: &quot;time&quot;
             },
             {
-              "params": [
-                "san"
+              &quot;params&quot;: [
+                &quot;san&quot;
               ],
-              "type": "tag"
+              &quot;type&quot;: &quot;tag&quot;
             },
             {
-              "params": [
-                "none"
+              &quot;params&quot;: [
+                &quot;none&quot;
               ],
-              "type": "fill"
+              &quot;type&quot;: &quot;fill&quot;
             }
           ],
-          "measurement": "x509_cert",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT last(\"value\") /60/60/24,cn FROM \"crllifetime\" WHERE (\"cn\" =~ /^$ssl_name$/ AND \"issuer\" !~ /^$/) AND $timeFilter GROUP BY time($__interval), \"cn\" fill(none)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;measurement&quot;: &quot;x509_cert&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;query&quot;: &quot;SELECT last(\&quot;value\&quot;) /60/60/24,cn FROM \&quot;crllifetime\&quot; WHERE (\&quot;cn\&quot; =~ /^$ssl_name$/ AND \&quot;issuer\&quot; !~ /^$/) AND $timeFilter GROUP BY time($__interval), \&quot;cn\&quot; fill(none)&quot;,
+          &quot;rawQuery&quot;: true,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "expiry"
+                &quot;params&quot;: [
+                  &quot;expiry&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               },
               {
-                "params": [],
-                "type": "last"
+                &quot;params&quot;: [],
+                &quot;type&quot;: &quot;last&quot;
               },
               {
-                "params": [
-                  "/60/60/24"
+                &quot;params&quot;: [
+                  &quot;/60/60/24&quot;
                 ],
-                "type": "math"
+                &quot;type&quot;: &quot;math&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "source",
-              "operator": "=~",
-              "value": "/^$ssl_name$/"
+              &quot;key&quot;: &quot;source&quot;,
+              &quot;operator&quot;: &quot;=~&quot;,
+              &quot;value&quot;: &quot;/^$ssl_name$/&quot;
             },
             {
-              "condition": "AND",
-              "key": "san",
-              "operator": "!=",
-              "value": "\"\""
+              &quot;condition&quot;: &quot;AND&quot;,
+              &quot;key&quot;: &quot;san&quot;,
+              &quot;operator&quot;: &quot;!=&quot;,
+              &quot;value&quot;: &quot;\&quot;\&quot;&quot;
             }
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "$ssl_name",
-      "type": "stat"
+      &quot;timeFrom&quot;: null,
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;$ssl_name&quot;,
+      &quot;type&quot;: &quot;stat&quot;
     },
     {
-      "cacheTimeout": null,
-      "datasource": "InfluxDB monitoring",
-      "description": "SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "decimals": 1,
-          "mappings": [
+      &quot;cacheTimeout&quot;: null,
+      &quot;datasource&quot;: &quot;InfluxDB monitoring&quot;,
+      &quot;description&quot;: &quot;SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green&quot;,
+      &quot;fieldConfig&quot;: {
+        &quot;defaults&quot;: {
+          &quot;custom&quot;: {},
+          &quot;decimals&quot;: 1,
+          &quot;mappings&quot;: [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              &quot;id&quot;: 0,
+              &quot;op&quot;: &quot;=&quot;,
+              &quot;text&quot;: &quot;N/A&quot;,
+              &quot;type&quot;: 1,
+              &quot;value&quot;: &quot;null&quot;
             }
           ],
-          "max": 0,
-          "min": 0,
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          &quot;max&quot;: 0,
+          &quot;min&quot;: 0,
+          &quot;nullValueMode&quot;: &quot;connected&quot;,
+          &quot;thresholds&quot;: {
+            &quot;mode&quot;: &quot;absolute&quot;,
+            &quot;steps&quot;: [
               {
-                "color": "semi-dark-red",
-                "value": null
+                &quot;color&quot;: &quot;semi-dark-red&quot;,
+                &quot;value&quot;: null
               },
               {
-                "color": "semi-dark-orange",
-                "value": 14
+                &quot;color&quot;: &quot;semi-dark-orange&quot;,
+                &quot;value&quot;: 14
               },
               {
-                "color": "semi-dark-green",
-                "value": 30
+                &quot;color&quot;: &quot;semi-dark-green&quot;,
+                &quot;value&quot;: 30
               }
             ]
           },
-          "unit": "days"
+          &quot;unit&quot;: &quot;days&quot;
         },
-        "overrides": [
+        &quot;overrides&quot;: [
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.last.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.last.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "EXP"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;EXP&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.issuer_common_name.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.issuer_common_name.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "CA"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;CA&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-blue",
-                  "mode": "fixed"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;fixedColor&quot;: &quot;dark-blue&quot;,
+                  &quot;mode&quot;: &quot;fixed&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.verification_code.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.verification_code.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               },
               {
-                "id": "mappings",
-                "value": [
+                &quot;id&quot;: &quot;mappings&quot;,
+                &quot;value&quot;: [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Chain OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
+                    &quot;from&quot;: &quot;&quot;,
+                    &quot;id&quot;: 1,
+                    &quot;text&quot;: &quot;Chain OK&quot;,
+                    &quot;to&quot;: &quot;&quot;,
+                    &quot;type&quot;: 1,
+                    &quot;value&quot;: &quot;0&quot;
                   },
                   {
-                    "from": "1",
-                    "id": 2,
-                    "text": "Chain ERR",
-                    "to": "999999",
-                    "type": 2,
-                    "value": "1"
+                    &quot;from&quot;: &quot;1&quot;,
+                    &quot;id&quot;: 2,
+                    &quot;text&quot;: &quot;Chain ERR&quot;,
+                    &quot;to&quot;: &quot;999999&quot;,
+                    &quot;type&quot;: 2,
+                    &quot;value&quot;: &quot;1&quot;
                   }
                 ]
               },
               {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
+                &quot;id&quot;: &quot;thresholds&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;absolute&quot;,
+                  &quot;steps&quot;: [
                     {
-                      "color": "semi-dark-green",
-                      "value": null
+                      &quot;color&quot;: &quot;semi-dark-green&quot;,
+                      &quot;value&quot;: null
                     },
                     {
-                      "color": "dark-red",
-                      "value": 1
+                      &quot;color&quot;: &quot;dark-red&quot;,
+                      &quot;value&quot;: 1
                     }
                   ]
                 }
@@ -901,231 +899,231 @@ done
           }
         ]
       },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 12,
-        "y": 0
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 4,
+        &quot;w&quot;: 4,
+        &quot;x&quot;: 12,
+        &quot;y&quot;: 0
       },
-      "id": 46,
-      "links": [],
-      "maxPerRow": 8,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "last"
+      &quot;id&quot;: 46,
+      &quot;links&quot;: [],
+      &quot;maxPerRow&quot;: 8,
+      &quot;options&quot;: {
+        &quot;colorMode&quot;: &quot;background&quot;,
+        &quot;graphMode&quot;: &quot;none&quot;,
+        &quot;justifyMode&quot;: &quot;auto&quot;,
+        &quot;orientation&quot;: &quot;horizontal&quot;,
+        &quot;reduceOptions&quot;: {
+          &quot;calcs&quot;: [
+            &quot;last&quot;
           ],
-          "fields": "",
-          "values": false
+          &quot;fields&quot;: &quot;&quot;,
+          &quot;values&quot;: false
         },
-        "textMode": "value"
+        &quot;textMode&quot;: &quot;value&quot;
       },
-      "pluginVersion": "7.3.3",
-      "repeatDirection": "h",
-      "repeatIteration": 1629008435516,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "ssl_name": {
-          "selected": false,
-          "text": "Dama11 Lab Intermediary CA",
-          "value": "Dama11 Lab Intermediary CA"
+      &quot;pluginVersion&quot;: &quot;7.3.3&quot;,
+      &quot;repeatDirection&quot;: &quot;h&quot;,
+      &quot;repeatIteration&quot;: 1629008435516,
+      &quot;repeatPanelId&quot;: 2,
+      &quot;scopedVars&quot;: {
+        &quot;ssl_name&quot;: {
+          &quot;selected&quot;: false,
+          &quot;text&quot;: &quot;Dama11 Lab Intermediary CA&quot;,
+          &quot;value&quot;: &quot;Dama11 Lab Intermediary CA&quot;
         }
       },
-      "targets": [
+      &quot;targets&quot;: [
         {
-          "groupBy": [
+          &quot;groupBy&quot;: [
             {
-              "params": [
-                "$__interval"
+              &quot;params&quot;: [
+                &quot;$__interval&quot;
               ],
-              "type": "time"
+              &quot;type&quot;: &quot;time&quot;
             },
             {
-              "params": [
-                "san"
+              &quot;params&quot;: [
+                &quot;san&quot;
               ],
-              "type": "tag"
+              &quot;type&quot;: &quot;tag&quot;
             },
             {
-              "params": [
-                "none"
+              &quot;params&quot;: [
+                &quot;none&quot;
               ],
-              "type": "fill"
+              &quot;type&quot;: &quot;fill&quot;
             }
           ],
-          "measurement": "x509_cert",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT last(\"value\") /60/60/24,cn FROM \"crllifetime\" WHERE (\"cn\" =~ /^$ssl_name$/ AND \"issuer\" !~ /^$/) AND $timeFilter GROUP BY time($__interval), \"cn\" fill(none)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;measurement&quot;: &quot;x509_cert&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;query&quot;: &quot;SELECT last(\&quot;value\&quot;) /60/60/24,cn FROM \&quot;crllifetime\&quot; WHERE (\&quot;cn\&quot; =~ /^$ssl_name$/ AND \&quot;issuer\&quot; !~ /^$/) AND $timeFilter GROUP BY time($__interval), \&quot;cn\&quot; fill(none)&quot;,
+          &quot;rawQuery&quot;: true,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "expiry"
+                &quot;params&quot;: [
+                  &quot;expiry&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               },
               {
-                "params": [],
-                "type": "last"
+                &quot;params&quot;: [],
+                &quot;type&quot;: &quot;last&quot;
               },
               {
-                "params": [
-                  "/60/60/24"
+                &quot;params&quot;: [
+                  &quot;/60/60/24&quot;
                 ],
-                "type": "math"
+                &quot;type&quot;: &quot;math&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "source",
-              "operator": "=~",
-              "value": "/^$ssl_name$/"
+              &quot;key&quot;: &quot;source&quot;,
+              &quot;operator&quot;: &quot;=~&quot;,
+              &quot;value&quot;: &quot;/^$ssl_name$/&quot;
             },
             {
-              "condition": "AND",
-              "key": "san",
-              "operator": "!=",
-              "value": "\"\""
+              &quot;condition&quot;: &quot;AND&quot;,
+              &quot;key&quot;: &quot;san&quot;,
+              &quot;operator&quot;: &quot;!=&quot;,
+              &quot;value&quot;: &quot;\&quot;\&quot;&quot;
             }
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "$ssl_name",
-      "type": "stat"
+      &quot;timeFrom&quot;: null,
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;$ssl_name&quot;,
+      &quot;type&quot;: &quot;stat&quot;
     },
     {
-      "cacheTimeout": null,
-      "datasource": "InfluxDB monitoring",
-      "description": "SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "decimals": 1,
-          "mappings": [
+      &quot;cacheTimeout&quot;: null,
+      &quot;datasource&quot;: &quot;InfluxDB monitoring&quot;,
+      &quot;description&quot;: &quot;SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green&quot;,
+      &quot;fieldConfig&quot;: {
+        &quot;defaults&quot;: {
+          &quot;custom&quot;: {},
+          &quot;decimals&quot;: 1,
+          &quot;mappings&quot;: [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              &quot;id&quot;: 0,
+              &quot;op&quot;: &quot;=&quot;,
+              &quot;text&quot;: &quot;N/A&quot;,
+              &quot;type&quot;: 1,
+              &quot;value&quot;: &quot;null&quot;
             }
           ],
-          "max": 0,
-          "min": 0,
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          &quot;max&quot;: 0,
+          &quot;min&quot;: 0,
+          &quot;nullValueMode&quot;: &quot;connected&quot;,
+          &quot;thresholds&quot;: {
+            &quot;mode&quot;: &quot;absolute&quot;,
+            &quot;steps&quot;: [
               {
-                "color": "semi-dark-red",
-                "value": null
+                &quot;color&quot;: &quot;semi-dark-red&quot;,
+                &quot;value&quot;: null
               },
               {
-                "color": "semi-dark-orange",
-                "value": 14
+                &quot;color&quot;: &quot;semi-dark-orange&quot;,
+                &quot;value&quot;: 14
               },
               {
-                "color": "semi-dark-green",
-                "value": 30
+                &quot;color&quot;: &quot;semi-dark-green&quot;,
+                &quot;value&quot;: 30
               }
             ]
           },
-          "unit": "days"
+          &quot;unit&quot;: &quot;days&quot;
         },
-        "overrides": [
+        &quot;overrides&quot;: [
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.last.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.last.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "EXP"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;EXP&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.issuer_common_name.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.issuer_common_name.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "CA"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;CA&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-blue",
-                  "mode": "fixed"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;fixedColor&quot;: &quot;dark-blue&quot;,
+                  &quot;mode&quot;: &quot;fixed&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.verification_code.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.verification_code.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               },
               {
-                "id": "mappings",
-                "value": [
+                &quot;id&quot;: &quot;mappings&quot;,
+                &quot;value&quot;: [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Chain OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
+                    &quot;from&quot;: &quot;&quot;,
+                    &quot;id&quot;: 1,
+                    &quot;text&quot;: &quot;Chain OK&quot;,
+                    &quot;to&quot;: &quot;&quot;,
+                    &quot;type&quot;: 1,
+                    &quot;value&quot;: &quot;0&quot;
                   },
                   {
-                    "from": "1",
-                    "id": 2,
-                    "text": "Chain ERR",
-                    "to": "999999",
-                    "type": 2,
-                    "value": "1"
+                    &quot;from&quot;: &quot;1&quot;,
+                    &quot;id&quot;: 2,
+                    &quot;text&quot;: &quot;Chain ERR&quot;,
+                    &quot;to&quot;: &quot;999999&quot;,
+                    &quot;type&quot;: 2,
+                    &quot;value&quot;: &quot;1&quot;
                   }
                 ]
               },
               {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
+                &quot;id&quot;: &quot;thresholds&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;absolute&quot;,
+                  &quot;steps&quot;: [
                     {
-                      "color": "semi-dark-green",
-                      "value": null
+                      &quot;color&quot;: &quot;semi-dark-green&quot;,
+                      &quot;value&quot;: null
                     },
                     {
-                      "color": "dark-red",
-                      "value": 1
+                      &quot;color&quot;: &quot;dark-red&quot;,
+                      &quot;value&quot;: 1
                     }
                   ]
                 }
@@ -1134,231 +1132,231 @@ done
           }
         ]
       },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 16,
-        "y": 0
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 4,
+        &quot;w&quot;: 4,
+        &quot;x&quot;: 16,
+        &quot;y&quot;: 0
       },
-      "id": 47,
-      "links": [],
-      "maxPerRow": 8,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "last"
+      &quot;id&quot;: 47,
+      &quot;links&quot;: [],
+      &quot;maxPerRow&quot;: 8,
+      &quot;options&quot;: {
+        &quot;colorMode&quot;: &quot;background&quot;,
+        &quot;graphMode&quot;: &quot;none&quot;,
+        &quot;justifyMode&quot;: &quot;auto&quot;,
+        &quot;orientation&quot;: &quot;horizontal&quot;,
+        &quot;reduceOptions&quot;: {
+          &quot;calcs&quot;: [
+            &quot;last&quot;
           ],
-          "fields": "",
-          "values": false
+          &quot;fields&quot;: &quot;&quot;,
+          &quot;values&quot;: false
         },
-        "textMode": "value"
+        &quot;textMode&quot;: &quot;value&quot;
       },
-      "pluginVersion": "7.3.3",
-      "repeatDirection": "h",
-      "repeatIteration": 1629008435516,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "ssl_name": {
-          "selected": false,
-          "text": "Dama11 Lab Intermediary Test CA",
-          "value": "Dama11 Lab Intermediary Test CA"
+      &quot;pluginVersion&quot;: &quot;7.3.3&quot;,
+      &quot;repeatDirection&quot;: &quot;h&quot;,
+      &quot;repeatIteration&quot;: 1629008435516,
+      &quot;repeatPanelId&quot;: 2,
+      &quot;scopedVars&quot;: {
+        &quot;ssl_name&quot;: {
+          &quot;selected&quot;: false,
+          &quot;text&quot;: &quot;Dama11 Lab Intermediary Test CA&quot;,
+          &quot;value&quot;: &quot;Dama11 Lab Intermediary Test CA&quot;
         }
       },
-      "targets": [
+      &quot;targets&quot;: [
         {
-          "groupBy": [
+          &quot;groupBy&quot;: [
             {
-              "params": [
-                "$__interval"
+              &quot;params&quot;: [
+                &quot;$__interval&quot;
               ],
-              "type": "time"
+              &quot;type&quot;: &quot;time&quot;
             },
             {
-              "params": [
-                "san"
+              &quot;params&quot;: [
+                &quot;san&quot;
               ],
-              "type": "tag"
+              &quot;type&quot;: &quot;tag&quot;
             },
             {
-              "params": [
-                "none"
+              &quot;params&quot;: [
+                &quot;none&quot;
               ],
-              "type": "fill"
+              &quot;type&quot;: &quot;fill&quot;
             }
           ],
-          "measurement": "x509_cert",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT last(\"value\") /60/60/24,cn FROM \"crllifetime\" WHERE (\"cn\" =~ /^$ssl_name$/ AND \"issuer\" !~ /^$/) AND $timeFilter GROUP BY time($__interval), \"cn\" fill(none)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;measurement&quot;: &quot;x509_cert&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;query&quot;: &quot;SELECT last(\&quot;value\&quot;) /60/60/24,cn FROM \&quot;crllifetime\&quot; WHERE (\&quot;cn\&quot; =~ /^$ssl_name$/ AND \&quot;issuer\&quot; !~ /^$/) AND $timeFilter GROUP BY time($__interval), \&quot;cn\&quot; fill(none)&quot;,
+          &quot;rawQuery&quot;: true,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "expiry"
+                &quot;params&quot;: [
+                  &quot;expiry&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               },
               {
-                "params": [],
-                "type": "last"
+                &quot;params&quot;: [],
+                &quot;type&quot;: &quot;last&quot;
               },
               {
-                "params": [
-                  "/60/60/24"
+                &quot;params&quot;: [
+                  &quot;/60/60/24&quot;
                 ],
-                "type": "math"
+                &quot;type&quot;: &quot;math&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "source",
-              "operator": "=~",
-              "value": "/^$ssl_name$/"
+              &quot;key&quot;: &quot;source&quot;,
+              &quot;operator&quot;: &quot;=~&quot;,
+              &quot;value&quot;: &quot;/^$ssl_name$/&quot;
             },
             {
-              "condition": "AND",
-              "key": "san",
-              "operator": "!=",
-              "value": "\"\""
+              &quot;condition&quot;: &quot;AND&quot;,
+              &quot;key&quot;: &quot;san&quot;,
+              &quot;operator&quot;: &quot;!=&quot;,
+              &quot;value&quot;: &quot;\&quot;\&quot;&quot;
             }
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "$ssl_name",
-      "type": "stat"
+      &quot;timeFrom&quot;: null,
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;$ssl_name&quot;,
+      &quot;type&quot;: &quot;stat&quot;
     },
     {
-      "cacheTimeout": null,
-      "datasource": "InfluxDB monitoring",
-      "description": "SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "decimals": 1,
-          "mappings": [
+      &quot;cacheTimeout&quot;: null,
+      &quot;datasource&quot;: &quot;InfluxDB monitoring&quot;,
+      &quot;description&quot;: &quot;SSL Certificate Monitoring Stat. On the Title of the widget you can find the SSL Certificate name, and on the value the current TTL/Expiry date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green&quot;,
+      &quot;fieldConfig&quot;: {
+        &quot;defaults&quot;: {
+          &quot;custom&quot;: {},
+          &quot;decimals&quot;: 1,
+          &quot;mappings&quot;: [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              &quot;id&quot;: 0,
+              &quot;op&quot;: &quot;=&quot;,
+              &quot;text&quot;: &quot;N/A&quot;,
+              &quot;type&quot;: 1,
+              &quot;value&quot;: &quot;null&quot;
             }
           ],
-          "max": 0,
-          "min": 0,
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          &quot;max&quot;: 0,
+          &quot;min&quot;: 0,
+          &quot;nullValueMode&quot;: &quot;connected&quot;,
+          &quot;thresholds&quot;: {
+            &quot;mode&quot;: &quot;absolute&quot;,
+            &quot;steps&quot;: [
               {
-                "color": "semi-dark-red",
-                "value": null
+                &quot;color&quot;: &quot;semi-dark-red&quot;,
+                &quot;value&quot;: null
               },
               {
-                "color": "semi-dark-orange",
-                "value": 14
+                &quot;color&quot;: &quot;semi-dark-orange&quot;,
+                &quot;value&quot;: 14
               },
               {
-                "color": "semi-dark-green",
-                "value": 30
+                &quot;color&quot;: &quot;semi-dark-green&quot;,
+                &quot;value&quot;: 30
               }
             ]
           },
-          "unit": "days"
+          &quot;unit&quot;: &quot;days&quot;
         },
-        "overrides": [
+        &quot;overrides&quot;: [
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.last.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.last.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "EXP"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;EXP&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.issuer_common_name.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.issuer_common_name.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "displayName",
-                "value": "CA"
+                &quot;id&quot;: &quot;displayName&quot;,
+                &quot;value&quot;: &quot;CA&quot;
               },
               {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-blue",
-                  "mode": "fixed"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;fixedColor&quot;: &quot;dark-blue&quot;,
+                  &quot;mode&quot;: &quot;fixed&quot;
                 }
               }
             ]
           },
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/^x509_cert.verification_code.*$/"
+            &quot;matcher&quot;: {
+              &quot;id&quot;: &quot;byRegexp&quot;,
+              &quot;options&quot;: &quot;/^x509_cert.verification_code.*$/&quot;
             },
-            "properties": [
+            &quot;properties&quot;: [
               {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+                &quot;id&quot;: &quot;color&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;thresholds&quot;
                 }
               },
               {
-                "id": "mappings",
-                "value": [
+                &quot;id&quot;: &quot;mappings&quot;,
+                &quot;value&quot;: [
                   {
-                    "from": "",
-                    "id": 1,
-                    "text": "Chain OK",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
+                    &quot;from&quot;: &quot;&quot;,
+                    &quot;id&quot;: 1,
+                    &quot;text&quot;: &quot;Chain OK&quot;,
+                    &quot;to&quot;: &quot;&quot;,
+                    &quot;type&quot;: 1,
+                    &quot;value&quot;: &quot;0&quot;
                   },
                   {
-                    "from": "1",
-                    "id": 2,
-                    "text": "Chain ERR",
-                    "to": "999999",
-                    "type": 2,
-                    "value": "1"
+                    &quot;from&quot;: &quot;1&quot;,
+                    &quot;id&quot;: 2,
+                    &quot;text&quot;: &quot;Chain ERR&quot;,
+                    &quot;to&quot;: &quot;999999&quot;,
+                    &quot;type&quot;: 2,
+                    &quot;value&quot;: &quot;1&quot;
                   }
                 ]
               },
               {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
+                &quot;id&quot;: &quot;thresholds&quot;,
+                &quot;value&quot;: {
+                  &quot;mode&quot;: &quot;absolute&quot;,
+                  &quot;steps&quot;: [
                     {
-                      "color": "semi-dark-green",
-                      "value": null
+                      &quot;color&quot;: &quot;semi-dark-green&quot;,
+                      &quot;value&quot;: null
                     },
                     {
-                      "color": "dark-red",
-                      "value": 1
+                      &quot;color&quot;: &quot;dark-red&quot;,
+                      &quot;value&quot;: 1
                     }
                   ]
                 }
@@ -1367,494 +1365,494 @@ done
           }
         ]
       },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 0
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 4,
+        &quot;w&quot;: 4,
+        &quot;x&quot;: 20,
+        &quot;y&quot;: 0
       },
-      "id": 48,
-      "links": [],
-      "maxPerRow": 8,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "last"
+      &quot;id&quot;: 48,
+      &quot;links&quot;: [],
+      &quot;maxPerRow&quot;: 8,
+      &quot;options&quot;: {
+        &quot;colorMode&quot;: &quot;background&quot;,
+        &quot;graphMode&quot;: &quot;none&quot;,
+        &quot;justifyMode&quot;: &quot;auto&quot;,
+        &quot;orientation&quot;: &quot;horizontal&quot;,
+        &quot;reduceOptions&quot;: {
+          &quot;calcs&quot;: [
+            &quot;last&quot;
           ],
-          "fields": "",
-          "values": false
+          &quot;fields&quot;: &quot;&quot;,
+          &quot;values&quot;: false
         },
-        "textMode": "value"
+        &quot;textMode&quot;: &quot;value&quot;
       },
-      "pluginVersion": "7.3.3",
-      "repeatDirection": "h",
-      "repeatIteration": 1629008435516,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "ssl_name": {
-          "selected": false,
-          "text": "Dama11 Lab Root CA",
-          "value": "Dama11 Lab Root CA"
+      &quot;pluginVersion&quot;: &quot;7.3.3&quot;,
+      &quot;repeatDirection&quot;: &quot;h&quot;,
+      &quot;repeatIteration&quot;: 1629008435516,
+      &quot;repeatPanelId&quot;: 2,
+      &quot;scopedVars&quot;: {
+        &quot;ssl_name&quot;: {
+          &quot;selected&quot;: false,
+          &quot;text&quot;: &quot;Dama11 Lab Root CA&quot;,
+          &quot;value&quot;: &quot;Dama11 Lab Root CA&quot;
         }
       },
-      "targets": [
+      &quot;targets&quot;: [
         {
-          "groupBy": [
+          &quot;groupBy&quot;: [
             {
-              "params": [
-                "$__interval"
+              &quot;params&quot;: [
+                &quot;$__interval&quot;
               ],
-              "type": "time"
+              &quot;type&quot;: &quot;time&quot;
             },
             {
-              "params": [
-                "san"
+              &quot;params&quot;: [
+                &quot;san&quot;
               ],
-              "type": "tag"
+              &quot;type&quot;: &quot;tag&quot;
             },
             {
-              "params": [
-                "none"
+              &quot;params&quot;: [
+                &quot;none&quot;
               ],
-              "type": "fill"
+              &quot;type&quot;: &quot;fill&quot;
             }
           ],
-          "measurement": "x509_cert",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT last(\"value\") /60/60/24,cn FROM \"crllifetime\" WHERE (\"cn\" =~ /^$ssl_name$/ AND \"issuer\" !~ /^$/) AND $timeFilter GROUP BY time($__interval), \"cn\" fill(none)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;measurement&quot;: &quot;x509_cert&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;query&quot;: &quot;SELECT last(\&quot;value\&quot;) /60/60/24,cn FROM \&quot;crllifetime\&quot; WHERE (\&quot;cn\&quot; =~ /^$ssl_name$/ AND \&quot;issuer\&quot; !~ /^$/) AND $timeFilter GROUP BY time($__interval), \&quot;cn\&quot; fill(none)&quot;,
+          &quot;rawQuery&quot;: true,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "expiry"
+                &quot;params&quot;: [
+                  &quot;expiry&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               },
               {
-                "params": [],
-                "type": "last"
+                &quot;params&quot;: [],
+                &quot;type&quot;: &quot;last&quot;
               },
               {
-                "params": [
-                  "/60/60/24"
+                &quot;params&quot;: [
+                  &quot;/60/60/24&quot;
                 ],
-                "type": "math"
+                &quot;type&quot;: &quot;math&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "source",
-              "operator": "=~",
-              "value": "/^$ssl_name$/"
+              &quot;key&quot;: &quot;source&quot;,
+              &quot;operator&quot;: &quot;=~&quot;,
+              &quot;value&quot;: &quot;/^$ssl_name$/&quot;
             },
             {
-              "condition": "AND",
-              "key": "san",
-              "operator": "!=",
-              "value": "\"\""
+              &quot;condition&quot;: &quot;AND&quot;,
+              &quot;key&quot;: &quot;san&quot;,
+              &quot;operator&quot;: &quot;!=&quot;,
+              &quot;value&quot;: &quot;\&quot;\&quot;&quot;
             }
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "$ssl_name",
-      "type": "stat"
+      &quot;timeFrom&quot;: null,
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;$ssl_name&quot;,
+      &quot;type&quot;: &quot;stat&quot;
     },
     {
-      "columns": [
+      &quot;columns&quot;: [
         {
-          "text": "Current",
-          "value": "current"
+          &quot;text&quot;: &quot;Current&quot;,
+          &quot;value&quot;: &quot;current&quot;
         }
       ],
-      "datasource": "InfluxDB monitoring",
-      "description": "SSL Certificate Monitoring Table. On the first column you can find the SSL x509 Certificate name, and on the second column the TTL/Expirty Date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
+      &quot;datasource&quot;: &quot;InfluxDB monitoring&quot;,
+      &quot;description&quot;: &quot;SSL Certificate Monitoring Table. On the first column you can find the SSL x509 Certificate name, and on the second column the TTL/Expirty Date in days.\n\nThresholds are:\n* From 0 days to 14, Red\n* From 15 days to 30, Orange\n* From 31 days onward, Green&quot;,
+      &quot;fieldConfig&quot;: {
+        &quot;defaults&quot;: {
+          &quot;custom&quot;: {}
         },
-        "overrides": []
+        &quot;overrides&quot;: []
       },
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 10,
-        "w": 24,
-        "x": 0,
-        "y": 4
+      &quot;fontSize&quot;: &quot;100%&quot;,
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 10,
+        &quot;w&quot;: 24,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 4
       },
-      "id": 9,
-      "pageSize": null,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
+      &quot;id&quot;: 9,
+      &quot;pageSize&quot;: null,
+      &quot;showHeader&quot;: true,
+      &quot;sort&quot;: {
+        &quot;col&quot;: 0,
+        &quot;desc&quot;: true
       },
-      "styles": [
+      &quot;styles&quot;: [
         {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
+          &quot;alias&quot;: &quot;&quot;,
+          &quot;align&quot;: &quot;auto&quot;,
+          &quot;colorMode&quot;: null,
+          &quot;colors&quot;: [
+            &quot;rgba(245, 54, 54, 0.9)&quot;,
+            &quot;rgba(237, 129, 40, 0.89)&quot;,
+            &quot;rgba(50, 172, 45, 0.97)&quot;
           ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "mappingType": 1,
-          "pattern": "Time",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "SSL Expiry in",
-          "align": "left",
-          "colorMode": "row",
-          "colors": [
-            "#E02F44",
-            "#FF780A",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "Current",
-          "thresholds": [
-            "14",
-            "30"
-          ],
-          "type": "number",
-          "unit": "d"
+          &quot;dateFormat&quot;: &quot;YYYY-MM-DD HH:mm:ss&quot;,
+          &quot;decimals&quot;: 2,
+          &quot;link&quot;: false,
+          &quot;mappingType&quot;: 1,
+          &quot;pattern&quot;: &quot;Time&quot;,
+          &quot;thresholds&quot;: [],
+          &quot;type&quot;: &quot;hidden&quot;,
+          &quot;unit&quot;: &quot;short&quot;
         },
         {
-          "alias": "Canonical Name",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
+          &quot;alias&quot;: &quot;SSL Expiry in&quot;,
+          &quot;align&quot;: &quot;left&quot;,
+          &quot;colorMode&quot;: &quot;row&quot;,
+          &quot;colors&quot;: [
+            &quot;#E02F44&quot;,
+            &quot;#FF780A&quot;,
+            &quot;rgba(50, 172, 45, 0.97)&quot;
           ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "mappingType": 1,
-          "pattern": "Metric",
-          "preserveFormat": true,
-          "sanitize": true,
-          "thresholds": [
-            ""
+          &quot;decimals&quot;: 2,
+          &quot;pattern&quot;: &quot;Current&quot;,
+          &quot;thresholds&quot;: [
+            &quot;14&quot;,
+            &quot;30&quot;
           ],
-          "type": "string",
-          "unit": "short",
-          "valueMaps": []
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;d&quot;
+        },
+        {
+          &quot;alias&quot;: &quot;Canonical Name&quot;,
+          &quot;align&quot;: &quot;auto&quot;,
+          &quot;colorMode&quot;: null,
+          &quot;colors&quot;: [
+            &quot;rgba(245, 54, 54, 0.9)&quot;,
+            &quot;rgba(237, 129, 40, 0.89)&quot;,
+            &quot;rgba(50, 172, 45, 0.97)&quot;
+          ],
+          &quot;dateFormat&quot;: &quot;YYYY-MM-DD HH:mm:ss&quot;,
+          &quot;decimals&quot;: 2,
+          &quot;link&quot;: false,
+          &quot;mappingType&quot;: 1,
+          &quot;pattern&quot;: &quot;Metric&quot;,
+          &quot;preserveFormat&quot;: true,
+          &quot;sanitize&quot;: true,
+          &quot;thresholds&quot;: [
+            &quot;&quot;
+          ],
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;unit&quot;: &quot;short&quot;,
+          &quot;valueMaps&quot;: []
         }
       ],
-      "targets": [
+      &quot;targets&quot;: [
         {
-          "alias": "$tag_cn",
-          "groupBy": [
+          &quot;alias&quot;: &quot;$tag_cn&quot;,
+          &quot;groupBy&quot;: [
             {
-              "params": [
-                "$__interval"
+              &quot;params&quot;: [
+                &quot;$__interval&quot;
               ],
-              "type": "time"
+              &quot;type&quot;: &quot;time&quot;
             },
             {
-              "params": [
-                "null"
+              &quot;params&quot;: [
+                &quot;null&quot;
               ],
-              "type": "fill"
+              &quot;type&quot;: &quot;fill&quot;
             }
           ],
-          "measurement": "crllifetime",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT (value / 60 / 60 / 24) as \"value\" FROM \"crllifetime\" WHERE (\"cn\" =~ /^$ssl_name$/ and \"issuer\" !~ /^$/) AND $timeFilter GROUP BY  \"cn\"  ",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;measurement&quot;: &quot;crllifetime&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;query&quot;: &quot;SELECT (value / 60 / 60 / 24) as \&quot;value\&quot; FROM \&quot;crllifetime\&quot; WHERE (\&quot;cn\&quot; =~ /^$ssl_name$/ and \&quot;issuer\&quot; !~ /^$/) AND $timeFilter GROUP BY  \&quot;cn\&quot;  &quot;,
+          &quot;rawQuery&quot;: true,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "value"
+                &quot;params&quot;: [
+                  &quot;value&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               },
               {
-                "params": [],
-                "type": "last"
+                &quot;params&quot;: [],
+                &quot;type&quot;: &quot;last&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "cn",
-              "operator": "=~",
-              "value": "/^$ssl_name$/"
+              &quot;key&quot;: &quot;cn&quot;,
+              &quot;operator&quot;: &quot;=~&quot;,
+              &quot;value&quot;: &quot;/^$ssl_name$/&quot;
             }
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "transform": "timeseries_aggregations",
-      "transparent": true,
-      "type": "table-old"
+      &quot;timeFrom&quot;: null,
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;&quot;,
+      &quot;transform&quot;: &quot;timeseries_aggregations&quot;,
+      &quot;transparent&quot;: true,
+      &quot;type&quot;: &quot;table-old&quot;
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
+      &quot;alert&quot;: {
+        &quot;alertRuleTags&quot;: {},
+        &quot;conditions&quot;: [
           {
-            "evaluator": {
-              "params": [
+            &quot;evaluator&quot;: {
+              &quot;params&quot;: [
                 10
               ],
-              "type": "lt"
+              &quot;type&quot;: &quot;lt&quot;
             },
-            "operator": {
-              "type": "and"
+            &quot;operator&quot;: {
+              &quot;type&quot;: &quot;and&quot;
             },
-            "query": {
-              "params": [
-                "A",
-                "1h",
-                "now"
+            &quot;query&quot;: {
+              &quot;params&quot;: [
+                &quot;A&quot;,
+                &quot;1h&quot;,
+                &quot;now&quot;
               ]
             },
-            "reducer": {
-              "params": [],
-              "type": "last"
+            &quot;reducer&quot;: {
+              &quot;params&quot;: [],
+              &quot;type&quot;: &quot;last&quot;
             },
-            "type": "query"
+            &quot;type&quot;: &quot;query&quot;
           }
         ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "SSL Certificate is about to expire in &lt;10d",
-        "name": "Cert Aging",
-        "noDataState": "no_data",
-        "notifications": [
+        &quot;executionErrorState&quot;: &quot;alerting&quot;,
+        &quot;for&quot;: &quot;5m&quot;,
+        &quot;frequency&quot;: &quot;1m&quot;,
+        &quot;handler&quot;: 1,
+        &quot;message&quot;: &quot;SSL Certificate is about to expire in &amp;lt;10d&quot;,
+        &quot;name&quot;: &quot;Cert Aging&quot;,
+        &quot;noDataState&quot;: &quot;no_data&quot;,
+        &quot;notifications&quot;: [
           {
-            "uid": "000000002"
+            &quot;uid&quot;: &quot;000000002&quot;
           }
         ]
       },
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "InfluxDB monitoring",
-      "description": "This Graph is primarily for implementing the Alerting.",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
+      &quot;aliasColors&quot;: {},
+      &quot;bars&quot;: false,
+      &quot;dashLength&quot;: 10,
+      &quot;dashes&quot;: false,
+      &quot;datasource&quot;: &quot;InfluxDB monitoring&quot;,
+      &quot;description&quot;: &quot;This Graph is primarily for implementing the Alerting.&quot;,
+      &quot;fieldConfig&quot;: {
+        &quot;defaults&quot;: {
+          &quot;custom&quot;: {}
         },
-        "overrides": []
+        &quot;overrides&quot;: []
       },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 14
+      &quot;fill&quot;: 0,
+      &quot;fillGradient&quot;: 0,
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 8,
+        &quot;w&quot;: 24,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 14
       },
-      "hiddenSeries": false,
-      "id": 43,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
+      &quot;hiddenSeries&quot;: false,
+      &quot;id&quot;: 43,
+      &quot;legend&quot;: {
+        &quot;avg&quot;: false,
+        &quot;current&quot;: false,
+        &quot;max&quot;: false,
+        &quot;min&quot;: false,
+        &quot;show&quot;: true,
+        &quot;total&quot;: false,
+        &quot;values&quot;: false
       },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
+      &quot;lines&quot;: true,
+      &quot;linewidth&quot;: 1,
+      &quot;nullPointMode&quot;: &quot;null&quot;,
+      &quot;options&quot;: {
+        &quot;alertThreshold&quot;: true
       },
-      "percentage": false,
-      "pluginVersion": "7.3.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
+      &quot;percentage&quot;: false,
+      &quot;pluginVersion&quot;: &quot;7.3.3&quot;,
+      &quot;pointradius&quot;: 2,
+      &quot;points&quot;: false,
+      &quot;renderer&quot;: &quot;flot&quot;,
+      &quot;seriesOverrides&quot;: [],
+      &quot;spaceLength&quot;: 10,
+      &quot;stack&quot;: false,
+      &quot;steppedLine&quot;: false,
+      &quot;targets&quot;: [
         {
-          "alias": "$tag_cn",
-          "groupBy": [
+          &quot;alias&quot;: &quot;$tag_cn&quot;,
+          &quot;groupBy&quot;: [
             {
-              "params": [
-                "$__interval"
+              &quot;params&quot;: [
+                &quot;$__interval&quot;
               ],
-              "type": "time"
+              &quot;type&quot;: &quot;time&quot;
             },
             {
-              "params": [
-                "null"
+              &quot;params&quot;: [
+                &quot;null&quot;
               ],
-              "type": "fill"
+              &quot;type&quot;: &quot;fill&quot;
             }
           ],
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT (value / 60 / 60 / 24) as \"value\" FROM \"crllifetime\" WHERE $timeFilter GROUP BY cn",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;query&quot;: &quot;SELECT (value / 60 / 60 / 24) as \&quot;value\&quot; FROM \&quot;crllifetime\&quot; WHERE $timeFilter GROUP BY cn&quot;,
+          &quot;rawQuery&quot;: true,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "value"
+                &quot;params&quot;: [
+                  &quot;value&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               },
               {
-                "params": [],
-                "type": "mean"
+                &quot;params&quot;: [],
+                &quot;type&quot;: &quot;mean&quot;
               }
             ]
           ],
-          "tags": []
+          &quot;tags&quot;: []
         }
       ],
-      "thresholds": [
+      &quot;thresholds&quot;: [
         {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "lt",
-          "value": 10
+          &quot;colorMode&quot;: &quot;critical&quot;,
+          &quot;fill&quot;: true,
+          &quot;line&quot;: true,
+          &quot;op&quot;: &quot;lt&quot;,
+          &quot;value&quot;: 10
         }
       ],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Certificate life left",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
+      &quot;timeFrom&quot;: null,
+      &quot;timeRegions&quot;: [],
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;Certificate life left&quot;,
+      &quot;tooltip&quot;: {
+        &quot;shared&quot;: true,
+        &quot;sort&quot;: 0,
+        &quot;value_type&quot;: &quot;individual&quot;
       },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
+      &quot;type&quot;: &quot;graph&quot;,
+      &quot;xaxis&quot;: {
+        &quot;buckets&quot;: null,
+        &quot;mode&quot;: &quot;time&quot;,
+        &quot;name&quot;: null,
+        &quot;show&quot;: true,
+        &quot;values&quot;: []
       },
-      "yaxes": [
+      &quot;yaxes&quot;: [
         {
-          "format": "d",
-          "label": null,
-          "logBase": 2,
-          "max": null,
-          "min": "0",
-          "show": true
+          &quot;format&quot;: &quot;d&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 2,
+          &quot;max&quot;: null,
+          &quot;min&quot;: &quot;0&quot;,
+          &quot;show&quot;: true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          &quot;format&quot;: &quot;short&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: null,
+          &quot;min&quot;: null,
+          &quot;show&quot;: true
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
+      &quot;yaxis&quot;: {
+        &quot;align&quot;: false,
+        &quot;alignLevel&quot;: null
       }
     }
   ],
-  "refresh": "1d",
-  "schemaVersion": 26,
-  "style": "dark",
-  "tags": [],
-  "templating": {
-    "list": [
+  &quot;refresh&quot;: &quot;1d&quot;,
+  &quot;schemaVersion&quot;: 26,
+  &quot;style&quot;: &quot;dark&quot;,
+  &quot;tags&quot;: [],
+  &quot;templating&quot;: {
+    &quot;list&quot;: [
       {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "tags": [],
-          "text": [
-            "All"
+        &quot;allValue&quot;: null,
+        &quot;current&quot;: {
+          &quot;selected&quot;: true,
+          &quot;tags&quot;: [],
+          &quot;text&quot;: [
+            &quot;All&quot;
           ],
-          "value": [
-            "$__all"
+          &quot;value&quot;: [
+            &quot;$__all&quot;
           ]
         },
-        "datasource": "InfluxDB monitoring",
-        "definition": "",
-        "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "CN",
-        "multi": true,
-        "name": "ssl_name",
-        "options": [],
-        "query": "SHOW TAG VALUES FROM crllifetime WITH KEY=cn",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        &quot;datasource&quot;: &quot;InfluxDB monitoring&quot;,
+        &quot;definition&quot;: &quot;&quot;,
+        &quot;error&quot;: null,
+        &quot;hide&quot;: 0,
+        &quot;includeAll&quot;: true,
+        &quot;label&quot;: &quot;CN&quot;,
+        &quot;multi&quot;: true,
+        &quot;name&quot;: &quot;ssl_name&quot;,
+        &quot;options&quot;: [],
+        &quot;query&quot;: &quot;SHOW TAG VALUES FROM crllifetime WITH KEY=cn&quot;,
+        &quot;refresh&quot;: 1,
+        &quot;regex&quot;: &quot;&quot;,
+        &quot;skipUrlSync&quot;: false,
+        &quot;sort&quot;: 0,
+        &quot;tagValuesQuery&quot;: &quot;&quot;,
+        &quot;tags&quot;: [],
+        &quot;tagsQuery&quot;: &quot;&quot;,
+        &quot;type&quot;: &quot;query&quot;,
+        &quot;useTags&quot;: false
       }
     ]
   },
-  "time": {
-    "from": "now-6h",
-    "to": "now"
+  &quot;time&quot;: {
+    &quot;from&quot;: &quot;now-6h&quot;,
+    &quot;to&quot;: &quot;now&quot;
   },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
+  &quot;timepicker&quot;: {
+    &quot;refresh_intervals&quot;: [
+      &quot;5s&quot;,
+      &quot;10s&quot;,
+      &quot;30s&quot;,
+      &quot;1m&quot;,
+      &quot;5m&quot;,
+      &quot;15m&quot;,
+      &quot;30m&quot;,
+      &quot;1h&quot;,
+      &quot;2h&quot;,
+      &quot;1d&quot;
     ]
   },
-  "timezone": "",
-  "title": "Better SSL Monitoring (CRLs)",
-  "uid": "xMhQ94kRz",
-  "version": 5
+  &quot;timezone&quot;: &quot;&quot;,
+  &quot;title&quot;: &quot;Better SSL Monitoring (CRLs)&quot;,
+  &quot;uid&quot;: &quot;xMhQ94kRz&quot;,
+  &quot;version&quot;: 5
 }
-</pre><p> <h3><a name="112">Aktualisierung vom 27. Juni 2022</a></h3><div class="update">Skript aktualisiert und erweitert. </div> </p> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20CRL next update mit Telegraf überwachen&body=[CRL next update mit Telegraf überwachen](https://elbosso.github.io/crl_next_update_telegraf_ueberwachen)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=CRL next update mit Telegraf überwachen"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20CRL next update mit Telegraf überwachen&issue[description]=[CRL next update mit Telegraf überwachen](https://elbosso.github.io/crl_next_update_telegraf_ueberwachen)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=CRL next update mit Telegraf überwachen"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Nixie-Röhren mit frei wählbarer Farbe</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">23.07.2017</span> </p> <span class="smallabstract"><p>Ich habe meine alte Komponente zur "retro"-Anzeige von Zahlenwerten überholt und ihr die Möglichkeit gegeben, verschiedene Farben darzustellen - damit könnte man zum Beispiel auf das Überschreiten von Schwellwerten reagieren... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="nixie_roehren_frei_waehlbarer_farbe.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-black w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-black w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2022 VII</span><br> <span class="smallabstract"><p>Nach der letzten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2022_vii.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Debian 11 auf Rock64</span><br> <span class="smallabstract"><p>Nachdem bei mir ein rock64 freigeworden war und ich mir überlegt habe, was ich damit anfangen könnte kam die Idee eines Kubernetes-Trainingsclusters wieder einmal zum Vorschein - dazu wäre es aber gut, zunächst erst einmal eine aktuelle Basisinstallation zu haben... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="debian_11_auf_rock64.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Präsentationen zu KI / ML und Vertrauen (PKI)</span><br> <span class="smallabstract"><p>Ich habe meine eigenen Ideen zur unkomplizierten Erstellung von Präsentationen genutzt, um zwei Vorträge zu gestalten. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="praesentationen_ki___ml_vertrauen__pki_.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</pre></div> <p> <h3><a name="113">Aktualisierung vom 27. Juni 2022</a></h3><div class="update">Skript aktualisiert und erweitert. </div> </p> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20CRL next update mit Telegraf überwachen&body=[CRL next update mit Telegraf überwachen](https://elbosso.github.io/crl_next_update_telegraf_ueberwachen)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=CRL next update mit Telegraf überwachen"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20CRL next update mit Telegraf überwachen&issue[description]=[CRL next update mit Telegraf überwachen](https://elbosso.github.io/crl_next_update_telegraf_ueberwachen)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=CRL next update mit Telegraf überwachen"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Nixie-Röhren mit frei wählbarer Farbe</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">23.07.2017</span> </p> <span class="smallabstract"><p>Ich habe meine alte Komponente zur "retro"-Anzeige von Zahlenwerten überholt und ihr die Möglichkeit gegeben, verschiedene Farben darzustellen - damit könnte man zum Beispiel auf das Überschreiten von Schwellwerten reagieren... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="nixie_roehren_frei_waehlbarer_farbe.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-black w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-black w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> <img class="initial" title="Aktualisiert" src="images/page_updated_48.png"> EBCMS</span><br> <span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett und was eigenes geschaffen! </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#40"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Tail -f ist eine schlechte Idee</span><br> <span class="smallabstract"><p>In meinem $dayjob musste ich vor einigen Monaten einmal einen Bug untersuchen. Das hat eine (für mich) überraschenende Tatsache ans Licht gebracht und mich wieder daran erinnert, was ich zum Thema Forensik gelernt habe: Man braucht Zeit und Ruhe, um das Problem und die hinterlassenen Zeichen gründlich zu untersuchen und so zum Kern des Problems vorzudringen. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tail__f_ist_eine_schlechte_idee.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2022 VII</span><br> <span class="smallabstract"><p>Nach der letzten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2022_vii.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->

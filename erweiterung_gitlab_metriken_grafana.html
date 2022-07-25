@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>Erweiterung der Gitlab-Metriken in Grafana</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="Erweiterung der Gitlab-Metriken in Grafana"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/erweiterung_gitlab_metriken_grafana"/> <meta property="og:image" content="https://elbosso.github.io/images/gitlabmetricsingrafana.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Ich habe meine Idee zur Visualisierung bestimmter Metriken aus Gitlab auf einem Grafana-Dashboard ausgebaut - ich erfasse nicht mehr nur in einem Projekt die offenen Issues pro Komponente sondern nun auch die offenen Issues auf Projektebene. "/> <meta property="article:published_time" content="2020-07-03"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>Erweiterung der Gitlab-Metriken in Grafana</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="Erweiterung der Gitlab-Metriken in Grafana"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/erweiterung_gitlab_metriken_grafana"/> <meta property="og:image" content="https://elbosso.github.io/images/gitlabmetricsingrafana.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Ich habe meine Idee zur Visualisierung bestimmter Metriken aus Gitlab auf einem Grafana-Dashboard ausgebaut - ich erfasse nicht mehr nur in einem Projekt die offenen Issues pro Komponente sondern nun auch die offenen Issues auf Projektebene. "/> <meta property="article:published_time" content="2020-07-03"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -17,367 +17,366 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="docker_images_armhf.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="the_interrupters_perform_all_acoustic_set_live.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Erweiterung der Gitlab-Metriken in Grafana</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="docker_images_armhf.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> <a href="docker_auf_raspberry_pi_model_3b_.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="docker_images_armhf.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">03.07.2020</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/gitlabmetricsingrafana_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Ich habe meine Idee zur <a href="gitlab_metriken_grafana.html">Visualisierung bestimmter Metriken aus Gitlab auf einem Grafana-Dashboard</a> ausgebaut - ich erfasse nicht mehr nur in einem Projekt die offenen Issues pro Komponente sondern nun auch die offenen Issues auf Projektebene. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Daher habe ich das bereits aus dem <a href="https://gist.github.com/elbosso/40cb21b275f8ee9a155b47954b376b1f">Gist</a> etwas <a href="https://gist.github.com/elbosso/a5cfd424ece7ea79db5abeffc223b9d9">variiert</a> und das Dashboard ergänzt: </p><pre>
-{
-  "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations &amp; Alerts",
-        "type": "dashboard"
-      }
-    ]
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "id": 13,
-  "iteration": 1589035932265,
-  "links": [],
-  "panels": [
-    {
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 7,
-      "title": "Issues by Project",
-      "type": "row"
-    },
-    {
-      "cacheTimeout": null,
-      "gridPos": {
-        "h": 4,
-        "w": 24,
-        "x": 0,
-        "y": 1
-      },
-      "id": 5,
-      "interval": "",
-      "links": [
-        {
-          "dashboard": "http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=geo",
-          "title": "list $projectName Issues",
-          "type": "absolute",
-          "url": "http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=$component"
-        }
-      ],
-      "options": {
-        "fieldOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "defaults": {
-            "max": 20,
-            "min": 0
-          },
-          "mappings": [],
-          "override": {},
-          "thresholds": [
-            {
-              "color": "rgb(43, 43, 43)",
-              "index": 0,
-              "value": null
-            },
-            {
-              "color": "green",
-              "index": 1,
-              "value": 1
-            },
-            {
-              "color": "#EAB839",
-              "index": 2,
-              "value": 4
-            },
-            {
-              "color": "red",
-              "index": 3,
-              "value": 10
-            }
-          ],
-          "values": false
-        },
-        "orientation": "auto",
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "6.2.2",
-      "repeat": "projectName",
-      "repeatDirection": "h",
-      "scopedVars": {
-        "projectName": {
-          "selected": true,
-          "text": "website",
-          "value": "website"
-        }
-      },
-      "targets": [
-        {
-          "alias": "$projectName",
-          "groupBy": [],
-          "measurement": "openIssues",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "count"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "host",
-              "operator": "=",
-              "value": "gitlab"
-            },
-            {
-              "condition": "AND",
-              "key": "projectName",
-              "operator": "=~",
-              "value": "/^$projectName$/"
-            }
-          ]
-        }
-      ],
-      "title": "$projectName",
-      "type": "gauge"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 5
-      },
-      "id": 4,
-      "panels": [],
-      "title": "Issues in Project java-class_src by component",
-      "type": "row"
-    },
-    {
-      "cacheTimeout": null,
-      "gridPos": {
-        "h": 4,
-        "w": 24,
-        "x": 0,
-        "y": 6
-      },
-      "id": 2,
-      "links": [
-        {
-          "dashboard": "http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=geo",
-          "title": "list $component Issues",
-          "type": "absolute",
-          "url": "http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=$component"
-        }
-      ],
-      "options": {
-        "fieldOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "defaults": {
-            "max": 20,
-            "min": 0
-          },
-          "mappings": [],
-          "override": {},
-          "thresholds": [
-            {
-              "color": "rgb(43, 43, 43)",
-              "index": 0,
-              "value": null
-            },
-            {
-              "color": "green",
-              "index": 1,
-              "value": 1
-            },
-            {
-              "color": "#EAB839",
-              "index": 2,
-              "value": 4
-            },
-            {
-              "color": "red",
-              "index": 3,
-              "value": 10
-            }
-          ],
-          "values": false
-        },
-        "orientation": "auto",
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "6.2.2",
-      "repeat": "component",
-      "repeatDirection": "h",
-      "scopedVars": {
-        "component": {
-          "selected": true,
-          "text": "Bug",
-          "value": "Bug"
-        }
-      },
-      "targets": [
-        {
-          "alias": "$component",
-          "groupBy": [],
-          "measurement": "openIssues",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "count"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "host",
-              "operator": "=",
-              "value": "gitlab"
-            },
-            {
-              "condition": "AND",
-              "key": "component",
-              "operator": "=~",
-              "value": "/^$component$/"
-            }
-          ]
-        }
-      ],
-      "title": "$component",
-      "type": "gauge"
-    }
-  ],
-  "refresh": "1m",
-  "schemaVersion": 18,
-  "style": "dark",
-  "tags": [],
-  "templating": {
-    "list": [
-      {
-        "allValue": null,
-        "current": {
-          "tags": [],
-          "text": "Bug",
-          "value": [
-            "Bug"
-          ]
-        },
-        "datasource": "InfluxDB monitoring",
-        "definition": "SHOW TAG VALUES WITH KEY = \"component\"",
-        "hide": 0,
-        "includeAll": true,
-        "label": null,
-        "multi": true,
-        "name": "component",
-        "options": [],
-        "query": "SHOW TAG VALUES WITH KEY = \"component\"",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "tags": [],
-          "text": "website",
-          "value": [
-            "website"
-          ]
-        },
-        "datasource": "InfluxDB monitoring",
-        "definition": "SHOW TAG VALUES WITH KEY = \"projectName\"",
-        "hide": 0,
-        "includeAll": true,
-        "label": null,
-        "multi": true,
-        "name": "projectName",
-        "options": [],
-        "query": "SHOW TAG VALUES WITH KEY = \"projectName\"",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      }
-    ]
-  },
-  "time": {
-    "from": "now-6h",
-    "to": "now"
-  },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
-  },
-  "timezone": "",
-  "title": "Gitlab Overview Open Issues",
-  "uid": "EhwYwVkgk",
-  "version": 26
-}
-</pre> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Erweiterung der Gitlab-Metriken in Grafana&body=[Erweiterung der Gitlab-Metriken in Grafana](https://elbosso.github.io/erweiterung_gitlab_metriken_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Erweiterung der Gitlab-Metriken in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Erweiterung der Gitlab-Metriken in Grafana&issue[description]=[Erweiterung der Gitlab-Metriken in Grafana](https://elbosso.github.io/erweiterung_gitlab_metriken_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Erweiterung der Gitlab-Metriken in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Nixie-Röhren mit frei wählbarer Farbe</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">23.07.2017</span> </p> <span class="smallabstract"><p>Ich habe meine alte Komponente zur "retro"-Anzeige von Zahlenwerten überholt und ihr die Möglichkeit gegeben, verschiedene Farben darzustellen - damit könnte man zum Beispiel auf das Überschreiten von Schwellwerten reagieren... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="nixie_roehren_frei_waehlbarer_farbe.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2022 VII</span><br> <span class="smallabstract"><p>Nach der letzten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2022_vii.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Debian 11 auf Rock64</span><br> <span class="smallabstract"><p>Nachdem bei mir ein rock64 freigeworden war und ich mir überlegt habe, was ich damit anfangen könnte kam die Idee eines Kubernetes-Trainingsclusters wieder einmal zum Vorschein - dazu wäre es aber gut, zunächst erst einmal eine aktuelle Basisinstallation zu haben... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="debian_11_auf_rock64.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Präsentationen zu KI / ML und Vertrauen (PKI)</span><br> <span class="smallabstract"><p>Ich habe meine eigenen Ideen zur unkomplizierten Erstellung von Präsentationen genutzt, um zwei Vorträge zu gestalten. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="praesentationen_ki___ml_vertrauen__pki_.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="docker_images_armhf.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="the_interrupters_perform_all_acoustic_set_live.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Erweiterung der Gitlab-Metriken in Grafana</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="docker_images_armhf.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> <a href="docker_auf_raspberry_pi_model_3b_.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="docker_images_armhf.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">03.07.2020</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/gitlabmetricsingrafana_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Ich habe meine Idee zur <a href="gitlab_metriken_grafana.html">Visualisierung bestimmter Metriken aus Gitlab auf einem Grafana-Dashboard</a> ausgebaut - ich erfasse nicht mehr nur in einem Projekt die offenen Issues pro Komponente sondern nun auch die offenen Issues auf Projektebene. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Daher habe ich das bereits aus dem <a href="https://gist.github.com/elbosso/40cb21b275f8ee9a155b47954b376b1f">Gist</a> etwas <a href="https://gist.github.com/elbosso/a5cfd424ece7ea79db5abeffc223b9d9">variiert</a> und das Dashboard ergänzt: </p><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="err">&quot;annotations&quot;:</span> <span class="err">{</span>
+    <span class="err">&quot;list&quot;:</span> <span class="cp">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;builtIn&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;datasource&quot;</span><span class="p">:</span> <span class="s2">&quot;-- Grafana --&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;enable&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s2">&quot;hide&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s2">&quot;iconColor&quot;</span><span class="p">:</span> <span class="s2">&quot;rgba(0, 211, 255, 1)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Annotations &amp;amp; Alerts&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;dashboard&quot;</span>
+      <span class="p">}</span>
+    <span class="cp">]</span>
+  <span class="p">}</span><span class="o">,</span>
+  <span class="s2">&quot;editable&quot;</span><span class="o">:</span> <span class="nt">true</span><span class="o">,</span>
+  <span class="s2">&quot;gnetId&quot;</span><span class="o">:</span> <span class="nt">null</span><span class="o">,</span>
+  <span class="s2">&quot;graphTooltip&quot;</span><span class="o">:</span> <span class="nt">0</span><span class="o">,</span>
+  <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="nt">13</span><span class="o">,</span>
+  <span class="s2">&quot;iteration&quot;</span><span class="o">:</span> <span class="nt">1589035932265</span><span class="o">,</span>
+  <span class="s2">&quot;links&quot;</span><span class="o">:</span> <span class="cp">[]</span><span class="o">,</span>
+  <span class="s2">&quot;panels&quot;</span><span class="o">:</span> <span class="cp">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;gridPos&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+        <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Issues by Project&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;row&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;cacheTimeout&quot;</span><span class="p">:</span> <span class="kt">null</span><span class="p">,</span>
+      <span class="s2">&quot;gridPos&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+        <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">&quot;interval&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="err">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;dashboard&quot;</span><span class="p">:</span> <span class="s2">&quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;amp;utf8=%E2%9C%93&amp;amp;state=opened&amp;amp;label_name[]=geo&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;list $projectName Issues&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;absolute&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;amp;utf8=%E2%9C%93&amp;amp;state=opened&amp;amp;label_name[]=$component&quot;</span>
+        <span class="p">}</span>
+      <span class="cp">]</span><span class="o">,</span>
+      <span class="s2">&quot;options&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="err">&quot;fieldOptions&quot;:</span> <span class="err">{</span>
+          <span class="err">&quot;calcs&quot;:</span> <span class="cp">[</span>
+            <span class="s2">&quot;mean&quot;</span>
+          <span class="cp">]</span><span class="err">,</span>
+          <span class="err">&quot;defaults&quot;:</span> <span class="err">{</span>
+            <span class="err">&quot;max&quot;:</span> <span class="err">20,</span>
+            <span class="err">&quot;min&quot;:</span> <span class="err">0</span>
+          <span class="p">}</span><span class="o">,</span>
+          <span class="s2">&quot;mappings&quot;</span><span class="o">:</span> <span class="cp">[]</span><span class="o">,</span>
+          <span class="s2">&quot;override&quot;</span><span class="o">:</span> <span class="p">{}</span><span class="o">,</span>
+          <span class="s2">&quot;thresholds&quot;</span><span class="o">:</span> <span class="cp">[</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;rgb(43, 43, 43)&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="kt">null</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">1</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#EAB839&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">4</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">10</span>
+            <span class="p">}</span>
+          <span class="cp">]</span><span class="o">,</span>
+          <span class="s2">&quot;values&quot;</span><span class="o">:</span> <span class="nt">false</span>
+        <span class="err">}</span><span class="o">,</span>
+        <span class="s2">&quot;orientation&quot;</span><span class="o">:</span> <span class="s2">&quot;auto&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;showThresholdLabels&quot;</span><span class="o">:</span> <span class="nt">false</span><span class="o">,</span>
+        <span class="s2">&quot;showThresholdMarkers&quot;</span><span class="o">:</span> <span class="nt">true</span>
+      <span class="err">}</span><span class="o">,</span>
+      <span class="s2">&quot;pluginVersion&quot;</span><span class="o">:</span> <span class="s2">&quot;6.2.2&quot;</span><span class="o">,</span>
+      <span class="s2">&quot;repeat&quot;</span><span class="o">:</span> <span class="s2">&quot;projectName&quot;</span><span class="o">,</span>
+      <span class="s2">&quot;repeatDirection&quot;</span><span class="o">:</span> <span class="s2">&quot;h&quot;</span><span class="o">,</span>
+      <span class="s2">&quot;scopedVars&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="err">&quot;projectName&quot;:</span> <span class="err">{</span>
+          <span class="err">&quot;selected&quot;:</span> <span class="err">true,</span>
+          <span class="err">&quot;text&quot;:</span> <span class="err">&quot;website&quot;,</span>
+          <span class="err">&quot;value&quot;:</span> <span class="err">&quot;website&quot;</span>
+        <span class="p">}</span>
+      <span class="err">}</span><span class="o">,</span>
+      <span class="s2">&quot;targets&quot;</span><span class="o">:</span> <span class="cp">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;$projectName&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;groupBy&quot;</span><span class="p">:</span> <span class="err">[</span><span class="cp">]</span><span class="o">,</span>
+          <span class="s2">&quot;measurement&quot;</span><span class="o">:</span> <span class="s2">&quot;openIssues&quot;</span><span class="o">,</span>
+          <span class="s2">&quot;orderByTime&quot;</span><span class="o">:</span> <span class="s2">&quot;ASC&quot;</span><span class="o">,</span>
+          <span class="s2">&quot;policy&quot;</span><span class="o">:</span> <span class="s2">&quot;default&quot;</span><span class="o">,</span>
+          <span class="s2">&quot;refId&quot;</span><span class="o">:</span> <span class="s2">&quot;A&quot;</span><span class="o">,</span>
+          <span class="s2">&quot;resultFormat&quot;</span><span class="o">:</span> <span class="s2">&quot;time_series&quot;</span><span class="o">,</span>
+          <span class="s2">&quot;select&quot;</span><span class="o">:</span> <span class="cp">[</span>
+            <span class="err">[</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="err">[</span>
+                  <span class="s2">&quot;count&quot;</span>
+                <span class="cp">]</span><span class="o">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;field&quot;</span>
+              <span class="err">}</span><span class="o">,</span>
+              <span class="p">{</span>
+                <span class="err">&quot;params&quot;:</span> <span class="cp">[]</span><span class="err">,</span>
+                <span class="err">&quot;type&quot;:</span> <span class="err">&quot;last&quot;</span>
+              <span class="p">}</span>
+            <span class="o">]</span>
+          <span class="o">],</span>
+          <span class="s2">&quot;tags&quot;</span><span class="o">:</span> <span class="cp">[</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;operator&quot;</span><span class="p">:</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;gitlab&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;condition&quot;</span><span class="p">:</span> <span class="s2">&quot;AND&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;projectName&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;operator&quot;</span><span class="p">:</span> <span class="s2">&quot;=~&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;/^$projectName$/&quot;</span>
+            <span class="p">}</span>
+          <span class="cp">]</span>
+        <span class="err">}</span>
+      <span class="o">],</span>
+      <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="s2">&quot;$projectName&quot;</span><span class="o">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;gauge&quot;</span>
+    <span class="err">}</span><span class="o">,</span>
+    <span class="p">{</span>
+      <span class="err">&quot;collapsed&quot;:</span> <span class="err">false,</span>
+      <span class="err">&quot;gridPos&quot;:</span> <span class="err">{</span>
+        <span class="err">&quot;h&quot;:</span> <span class="err">1,</span>
+        <span class="err">&quot;w&quot;:</span> <span class="err">24,</span>
+        <span class="err">&quot;x&quot;:</span> <span class="err">0,</span>
+        <span class="err">&quot;y&quot;:</span> <span class="err">5</span>
+      <span class="p">}</span><span class="o">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="nt">4</span><span class="o">,</span>
+      <span class="s2">&quot;panels&quot;</span><span class="o">:</span> <span class="cp">[]</span><span class="o">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="s2">&quot;Issues in Project java-class_src by component&quot;</span><span class="o">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;row&quot;</span>
+    <span class="err">}</span><span class="o">,</span>
+    <span class="p">{</span>
+      <span class="err">&quot;cacheTimeout&quot;:</span> <span class="err">null,</span>
+      <span class="err">&quot;gridPos&quot;:</span> <span class="err">{</span>
+        <span class="err">&quot;h&quot;:</span> <span class="err">4,</span>
+        <span class="err">&quot;w&quot;:</span> <span class="err">24,</span>
+        <span class="err">&quot;x&quot;:</span> <span class="err">0,</span>
+        <span class="err">&quot;y&quot;:</span> <span class="err">6</span>
+      <span class="p">}</span><span class="o">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="nt">2</span><span class="o">,</span>
+      <span class="s2">&quot;links&quot;</span><span class="o">:</span> <span class="cp">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;dashboard&quot;</span><span class="p">:</span> <span class="s2">&quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;amp;utf8=%E2%9C%93&amp;amp;state=opened&amp;amp;label_name[]=geo&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;list $component Issues&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;absolute&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;amp;utf8=%E2%9C%93&amp;amp;state=opened&amp;amp;label_name[]=$component&quot;</span>
+        <span class="p">}</span>
+      <span class="cp">]</span><span class="o">,</span>
+      <span class="s2">&quot;options&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="err">&quot;fieldOptions&quot;:</span> <span class="err">{</span>
+          <span class="err">&quot;calcs&quot;:</span> <span class="cp">[</span>
+            <span class="s2">&quot;mean&quot;</span>
+          <span class="cp">]</span><span class="err">,</span>
+          <span class="err">&quot;defaults&quot;:</span> <span class="err">{</span>
+            <span class="err">&quot;max&quot;:</span> <span class="err">20,</span>
+            <span class="err">&quot;min&quot;:</span> <span class="err">0</span>
+          <span class="p">}</span><span class="o">,</span>
+          <span class="s2">&quot;mappings&quot;</span><span class="o">:</span> <span class="cp">[]</span><span class="o">,</span>
+          <span class="s2">&quot;override&quot;</span><span class="o">:</span> <span class="p">{}</span><span class="o">,</span>
+          <span class="s2">&quot;thresholds&quot;</span><span class="o">:</span> <span class="cp">[</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;rgb(43, 43, 43)&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="kt">null</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">1</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#EAB839&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">4</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">10</span>
+            <span class="p">}</span>
+          <span class="cp">]</span><span class="o">,</span>
+          <span class="s2">&quot;values&quot;</span><span class="o">:</span> <span class="nt">false</span>
+        <span class="err">}</span><span class="o">,</span>
+        <span class="s2">&quot;orientation&quot;</span><span class="o">:</span> <span class="s2">&quot;auto&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;showThresholdLabels&quot;</span><span class="o">:</span> <span class="nt">false</span><span class="o">,</span>
+        <span class="s2">&quot;showThresholdMarkers&quot;</span><span class="o">:</span> <span class="nt">true</span>
+      <span class="err">}</span><span class="o">,</span>
+      <span class="s2">&quot;pluginVersion&quot;</span><span class="o">:</span> <span class="s2">&quot;6.2.2&quot;</span><span class="o">,</span>
+      <span class="s2">&quot;repeat&quot;</span><span class="o">:</span> <span class="s2">&quot;component&quot;</span><span class="o">,</span>
+      <span class="s2">&quot;repeatDirection&quot;</span><span class="o">:</span> <span class="s2">&quot;h&quot;</span><span class="o">,</span>
+      <span class="s2">&quot;scopedVars&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="err">&quot;component&quot;:</span> <span class="err">{</span>
+          <span class="err">&quot;selected&quot;:</span> <span class="err">true,</span>
+          <span class="err">&quot;text&quot;:</span> <span class="err">&quot;Bug&quot;,</span>
+          <span class="err">&quot;value&quot;:</span> <span class="err">&quot;Bug&quot;</span>
+        <span class="p">}</span>
+      <span class="err">}</span><span class="o">,</span>
+      <span class="s2">&quot;targets&quot;</span><span class="o">:</span> <span class="cp">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;$component&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;groupBy&quot;</span><span class="p">:</span> <span class="err">[</span><span class="cp">]</span><span class="o">,</span>
+          <span class="s2">&quot;measurement&quot;</span><span class="o">:</span> <span class="s2">&quot;openIssues&quot;</span><span class="o">,</span>
+          <span class="s2">&quot;orderByTime&quot;</span><span class="o">:</span> <span class="s2">&quot;ASC&quot;</span><span class="o">,</span>
+          <span class="s2">&quot;policy&quot;</span><span class="o">:</span> <span class="s2">&quot;default&quot;</span><span class="o">,</span>
+          <span class="s2">&quot;refId&quot;</span><span class="o">:</span> <span class="s2">&quot;A&quot;</span><span class="o">,</span>
+          <span class="s2">&quot;resultFormat&quot;</span><span class="o">:</span> <span class="s2">&quot;time_series&quot;</span><span class="o">,</span>
+          <span class="s2">&quot;select&quot;</span><span class="o">:</span> <span class="cp">[</span>
+            <span class="err">[</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="err">[</span>
+                  <span class="s2">&quot;count&quot;</span>
+                <span class="cp">]</span><span class="o">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;field&quot;</span>
+              <span class="err">}</span><span class="o">,</span>
+              <span class="p">{</span>
+                <span class="err">&quot;params&quot;:</span> <span class="cp">[]</span><span class="err">,</span>
+                <span class="err">&quot;type&quot;:</span> <span class="err">&quot;last&quot;</span>
+              <span class="p">}</span>
+            <span class="o">]</span>
+          <span class="o">],</span>
+          <span class="s2">&quot;tags&quot;</span><span class="o">:</span> <span class="cp">[</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;operator&quot;</span><span class="p">:</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;gitlab&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;condition&quot;</span><span class="p">:</span> <span class="s2">&quot;AND&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;component&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;operator&quot;</span><span class="p">:</span> <span class="s2">&quot;=~&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;/^$component$/&quot;</span>
+            <span class="p">}</span>
+          <span class="cp">]</span>
+        <span class="err">}</span>
+      <span class="o">],</span>
+      <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="s2">&quot;$component&quot;</span><span class="o">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;gauge&quot;</span>
+    <span class="err">}</span>
+  <span class="o">],</span>
+  <span class="s2">&quot;refresh&quot;</span><span class="o">:</span> <span class="s2">&quot;1m&quot;</span><span class="o">,</span>
+  <span class="s2">&quot;schemaVersion&quot;</span><span class="o">:</span> <span class="nt">18</span><span class="o">,</span>
+  <span class="s2">&quot;style&quot;</span><span class="o">:</span> <span class="s2">&quot;dark&quot;</span><span class="o">,</span>
+  <span class="s2">&quot;tags&quot;</span><span class="o">:</span> <span class="cp">[]</span><span class="o">,</span>
+  <span class="s2">&quot;templating&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="err">&quot;list&quot;:</span> <span class="cp">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;allValue&quot;</span><span class="p">:</span> <span class="kt">null</span><span class="p">,</span>
+        <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="err">[</span><span class="cp">]</span><span class="err">,</span>
+          <span class="err">&quot;text&quot;:</span> <span class="err">&quot;Bug&quot;,</span>
+          <span class="err">&quot;value&quot;:</span> <span class="cp">[</span>
+            <span class="s2">&quot;Bug&quot;</span>
+          <span class="cp">]</span>
+        <span class="p">}</span><span class="o">,</span>
+        <span class="s2">&quot;datasource&quot;</span><span class="o">:</span> <span class="s2">&quot;InfluxDB monitoring&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;definition&quot;</span><span class="o">:</span> <span class="s2">&quot;SHOW TAG VALUES WITH KEY = \&quot;component\&quot;&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;hide&quot;</span><span class="o">:</span> <span class="nt">0</span><span class="o">,</span>
+        <span class="s2">&quot;includeAll&quot;</span><span class="o">:</span> <span class="nt">true</span><span class="o">,</span>
+        <span class="s2">&quot;label&quot;</span><span class="o">:</span> <span class="nt">null</span><span class="o">,</span>
+        <span class="s2">&quot;multi&quot;</span><span class="o">:</span> <span class="nt">true</span><span class="o">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;component&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;options&quot;</span><span class="o">:</span> <span class="cp">[]</span><span class="o">,</span>
+        <span class="s2">&quot;query&quot;</span><span class="o">:</span> <span class="s2">&quot;SHOW TAG VALUES WITH KEY = \&quot;component\&quot;&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;refresh&quot;</span><span class="o">:</span> <span class="nt">1</span><span class="o">,</span>
+        <span class="s2">&quot;regex&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;skipUrlSync&quot;</span><span class="o">:</span> <span class="nt">false</span><span class="o">,</span>
+        <span class="s2">&quot;sort&quot;</span><span class="o">:</span> <span class="nt">0</span><span class="o">,</span>
+        <span class="s2">&quot;tagValuesQuery&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;tags&quot;</span><span class="o">:</span> <span class="cp">[]</span><span class="o">,</span>
+        <span class="s2">&quot;tagsQuery&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;query&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;useTags&quot;</span><span class="o">:</span> <span class="nt">false</span>
+      <span class="err">}</span><span class="o">,</span>
+      <span class="p">{</span>
+        <span class="err">&quot;allValue&quot;:</span> <span class="err">null,</span>
+        <span class="err">&quot;current&quot;:</span> <span class="err">{</span>
+          <span class="err">&quot;tags&quot;:</span> <span class="cp">[]</span><span class="err">,</span>
+          <span class="err">&quot;text&quot;:</span> <span class="err">&quot;website&quot;,</span>
+          <span class="err">&quot;value&quot;:</span> <span class="cp">[</span>
+            <span class="s2">&quot;website&quot;</span>
+          <span class="cp">]</span>
+        <span class="p">}</span><span class="o">,</span>
+        <span class="s2">&quot;datasource&quot;</span><span class="o">:</span> <span class="s2">&quot;InfluxDB monitoring&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;definition&quot;</span><span class="o">:</span> <span class="s2">&quot;SHOW TAG VALUES WITH KEY = \&quot;projectName\&quot;&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;hide&quot;</span><span class="o">:</span> <span class="nt">0</span><span class="o">,</span>
+        <span class="s2">&quot;includeAll&quot;</span><span class="o">:</span> <span class="nt">true</span><span class="o">,</span>
+        <span class="s2">&quot;label&quot;</span><span class="o">:</span> <span class="nt">null</span><span class="o">,</span>
+        <span class="s2">&quot;multi&quot;</span><span class="o">:</span> <span class="nt">true</span><span class="o">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;projectName&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;options&quot;</span><span class="o">:</span> <span class="cp">[]</span><span class="o">,</span>
+        <span class="s2">&quot;query&quot;</span><span class="o">:</span> <span class="s2">&quot;SHOW TAG VALUES WITH KEY = \&quot;projectName\&quot;&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;refresh&quot;</span><span class="o">:</span> <span class="nt">1</span><span class="o">,</span>
+        <span class="s2">&quot;regex&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;skipUrlSync&quot;</span><span class="o">:</span> <span class="nt">false</span><span class="o">,</span>
+        <span class="s2">&quot;sort&quot;</span><span class="o">:</span> <span class="nt">0</span><span class="o">,</span>
+        <span class="s2">&quot;tagValuesQuery&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;tags&quot;</span><span class="o">:</span> <span class="cp">[]</span><span class="o">,</span>
+        <span class="s2">&quot;tagsQuery&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;query&quot;</span><span class="o">,</span>
+        <span class="s2">&quot;useTags&quot;</span><span class="o">:</span> <span class="nt">false</span>
+      <span class="err">}</span>
+    <span class="o">]</span>
+  <span class="err">}</span><span class="o">,</span>
+  <span class="s2">&quot;time&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="err">&quot;from&quot;:</span> <span class="err">&quot;now-6h&quot;,</span>
+    <span class="err">&quot;to&quot;:</span> <span class="err">&quot;now&quot;</span>
+  <span class="p">}</span><span class="o">,</span>
+  <span class="s2">&quot;timepicker&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="err">&quot;refresh_intervals&quot;:</span> <span class="cp">[</span>
+      <span class="s2">&quot;5s&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;10s&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;30s&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;1m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;5m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;15m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;30m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;1h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;2h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;1d&quot;</span>
+    <span class="cp">]</span><span class="err">,</span>
+    <span class="err">&quot;time_options&quot;:</span> <span class="cp">[</span>
+      <span class="s2">&quot;5m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;15m&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;1h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;6h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;12h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;24h&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;2d&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;7d&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;30d&quot;</span>
+    <span class="cp">]</span>
+  <span class="p">}</span><span class="o">,</span>
+  <span class="s2">&quot;timezone&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="o">,</span>
+  <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="s2">&quot;Gitlab Overview Open Issues&quot;</span><span class="o">,</span>
+  <span class="s2">&quot;uid&quot;</span><span class="o">:</span> <span class="s2">&quot;EhwYwVkgk&quot;</span><span class="o">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="o">:</span> <span class="nt">26</span>
+<span class="err">}</span>
+</pre></div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Erweiterung der Gitlab-Metriken in Grafana&body=[Erweiterung der Gitlab-Metriken in Grafana](https://elbosso.github.io/erweiterung_gitlab_metriken_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Erweiterung der Gitlab-Metriken in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Erweiterung der Gitlab-Metriken in Grafana&issue[description]=[Erweiterung der Gitlab-Metriken in Grafana](https://elbosso.github.io/erweiterung_gitlab_metriken_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Erweiterung der Gitlab-Metriken in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Nixie-Röhren mit frei wählbarer Farbe</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">23.07.2017</span> </p> <span class="smallabstract"><p>Ich habe meine alte Komponente zur "retro"-Anzeige von Zahlenwerten überholt und ihr die Möglichkeit gegeben, verschiedene Farben darzustellen - damit könnte man zum Beispiel auf das Überschreiten von Schwellwerten reagieren... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="nixie_roehren_frei_waehlbarer_farbe.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> <img class="initial" title="Aktualisiert" src="images/page_updated_48.png"> EBCMS</span><br> <span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett und was eigenes geschaffen! </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#40"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Tail -f ist eine schlechte Idee</span><br> <span class="smallabstract"><p>In meinem $dayjob musste ich vor einigen Monaten einmal einen Bug untersuchen. Das hat eine (für mich) überraschenende Tatsache ans Licht gebracht und mich wieder daran erinnert, was ich zum Thema Forensik gelernt habe: Man braucht Zeit und Ruhe, um das Problem und die hinterlassenen Zeichen gründlich zu untersuchen und so zum Kern des Problems vorzudringen. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tail__f_ist_eine_schlechte_idee.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2022 VII</span><br> <span class="smallabstract"><p>Nach der letzten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2022_vii.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->

@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>Einbinden von Wettervorhersagedaten in Grafana</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="Einbinden von Wettervorhersagedaten in Grafana"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana"/> <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Weather-few-clouds.svg/240px-Weather-few-clouds.svg.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Nachdem ich hier bereits über Tests meiner ESP-Wetterstation berichtete folgt nun eine Idee zur "Verbesserung" des Wetterberichts... "/> <meta property="article:published_time" content="2021-11-20"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>Einbinden von Wettervorhersagedaten in Grafana</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="Einbinden von Wettervorhersagedaten in Grafana"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana"/> <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Weather-few-clouds.svg/240px-Weather-few-clouds.svg.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Nachdem ich hier bereits über Tests meiner ESP-Wetterstation berichtete folgt nun eine Idee zur "Verbesserung" des Wetterberichts... "/> <meta property="article:published_time" content="2021-11-20"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -17,779 +17,775 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source__dwb__sqlshell.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="reveal_js_praesentationen_gitlab_github_pages.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Einbinden von Wettervorhersagedaten in Grafana</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="zertifikatsgueltigkeit_ueberwachen_grafana.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="trojan_source_sql_postgres.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Datenbanken</span> </a> <a href="generator_microservices_mastodon_bot.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Python</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">20.11.2021</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Weather-few-clouds.svg/240px-Weather-few-clouds.svg.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="updates"> <h5>Updates</h5> <ul> <li> <a href="#96"> 20. November 2021 </a> </li> </ul> </div> <div class="w3-container w3-padding" id="abstract"> <p>Nachdem ich hier bereits über Tests meiner ESP-Wetterstation <a href="wetterstation_test.html">berichtete</a> folgt nun eine Idee zur "Verbesserung" des Wetterberichts... </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Schön wäre es, wenn man die durch die Wetterstation gemessenen und die vorhergesagten Daten auf einfache Art vergleichen könnte. Der minimale Nutzen wäre, über die Wetterfrösche schimpfen zu können, wenn sie wieder einmal danebengelegen haben obwohl man heute ja wissen sollte, dass Wettervorhersagen <a href="bifurkationen_lorenz_system.html">prinzipiell unmöglich sind.</a> </p><p> Der größte Nutzen wäre beim Vergleich der Vorhersagen mit dem aktuell gemessenen systematische Fehler zu identifizieren - zum Beispiel, dass der vorhergesagte Temperaturwert immer um ungefähr 2 Grad niedriger liegt als der tatsächliche. Damit könnte man eine persönliche, korrigierte Vorhersage erstellen. </p><p> Diese Daten zu gewinnen ist sehr einfach: Man findet im Netz eine ganze Reihe von <a href="https://github.com/elbosso/public-apis">öffentlichen APIS,</a> die man einfach nutzen kann. Mein <a href="https://api.met.no/weatherapi">Mittel der Wahl - ich benutze <a href="https://api.met.no/weatherapi/locationforecast/2.0/documentation">locationforecast</a> in der Version 2.0. </p><p> Dieser Service liefert die Daten als <a href="https://json.org">JSON.</a> Ich überlegte kurz, ob ich versuchen sollte, <a href="https://www.influxdata.com/time-series-platform/telegraf/">Telegraf</a> die Struktur der Daten klarzumachen, entschied mich aber dagegen. Ich schrieb ein kleines Python-Script, das für mich die Aufbereitung der Daten übernimmt und sie in eine <a href="https://www.influxdata.com/">InfluxDB</a> schreibt. Voraussetzung für die Funktion des Skripts ist die Installation des Python-Moduls <span class="mdcode">influxdb</span>, was über den Befehl </p><pre>
-pip3 install influxdb
-<p></pre> </p><p> geschehen kann - man beachte, dass hier unbedingt <span class="mdbold">pip3</span> benutzt werden muss und nicht <span class="mdbold">pip</span>, da das Skript Python in der Version 3 voraussetzt. Würde man hier <span class="mdcode">pip</span> benutzen, würde das Modul für Python in der Version <span class="mdbold">2</span> installiert und Python <span class="mdbold">3</span> würde sich weiterhin beschweren, dass es das Modul nicht finden kann! </p><pre>
-#!/usr/bin/env python3
-from influxdb import InfluxDBClient
-import requests
-import json
-import datetime
-import socket
+</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source__dwb__sqlshell.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="reveal_js_praesentationen_gitlab_github_pages.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Einbinden von Wettervorhersagedaten in Grafana</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="zertifikatsgueltigkeit_ueberwachen_grafana.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="trojan_source_sql_postgres.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Datenbanken</span> </a> <a href="generator_microservices_mastodon_bot.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Python</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">20.11.2021</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Weather-few-clouds.svg/240px-Weather-few-clouds.svg.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="updates"> <h5>Updates</h5> <ul> <li> <a href="#100"> 20. November 2021 </a> </li> </ul> </div> <div class="w3-container w3-padding" id="abstract"> <p>Nachdem ich hier bereits über Tests meiner ESP-Wetterstation <a href="wetterstation_test.html">berichtete</a> folgt nun eine Idee zur "Verbesserung" des Wetterberichts... </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Schön wäre es, wenn man die durch die Wetterstation gemessenen und die vorhergesagten Daten auf einfache Art vergleichen könnte. Der minimale Nutzen wäre, über die Wetterfrösche schimpfen zu können, wenn sie wieder einmal danebengelegen haben obwohl man heute ja wissen sollte, dass Wettervorhersagen <a href="bifurkationen_lorenz_system.html">prinzipiell unmöglich sind.</a> </p><p> Der größte Nutzen wäre beim Vergleich der Vorhersagen mit dem aktuell gemessenen systematische Fehler zu identifizieren - zum Beispiel, dass der vorhergesagte Temperaturwert immer um ungefähr 2 Grad niedriger liegt als der tatsächliche. Damit könnte man eine persönliche, korrigierte Vorhersage erstellen. </p><p> Diese Daten zu gewinnen ist sehr einfach: Man findet im Netz eine ganze Reihe von <a href="https://github.com/elbosso/public-apis">öffentlichen APIS,</a> die man einfach nutzen kann. Mein <a href="https://api.met.no/weatherapi">Mittel der Wahl - ich benutze <a href="https://api.met.no/weatherapi/locationforecast/2.0/documentation">locationforecast</a> in der Version 2.0. </p><p> Dieser Service liefert die Daten als <a href="https://json.org">JSON.</a> Ich überlegte kurz, ob ich versuchen sollte, <a href="https://www.influxdata.com/time-series-platform/telegraf/">Telegraf</a> die Struktur der Daten klarzumachen, entschied mich aber dagegen. Ich schrieb ein kleines Python-Script, das für mich die Aufbereitung der Daten übernimmt und sie in eine <a href="https://www.influxdata.com/">InfluxDB</a> schreibt. Voraussetzung für die Funktion des Skripts ist die Installation des Python-Moduls <span class="mdcode">influxdb</span>, was über den Befehl </p><div class="highlight"><pre><span></span>pip3 install influxdb
+</pre></div> </p><p> geschehen kann - man beachte, dass hier unbedingt <span class="mdbold">pip3</span> benutzt werden muss und nicht <span class="mdbold">pip</span>, da das Skript Python in der Version 3 voraussetzt. Würde man hier <span class="mdcode">pip</span> benutzen, würde das Modul für Python in der Version <span class="mdbold">2</span> installiert und Python <span class="mdbold">3</span> würde sich weiterhin beschweren, dass es das Modul nicht finden kann! </p><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">from</span> <span class="nn">influxdb</span> <span class="kn">import</span> <span class="n">InfluxDBClient</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">socket</span>
 </p><p>
-#host of the influxdb used to store the data
-influxhost=''
-#port of the influxdb used to store the data
-influxport=
-#username for accessing the influxdb used to store the data
-influxusername''
-#password for accessing the influxdb used to store the data
-influxpassword=''
-#name of the influxdb database used to store the data
-monitoringdbname=''
-#user agent (python requests standard user agent is blocked by the api
-useragent='Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'
-#latitude of the location the forecast is wanted for (german: Breitengrad)
-latitude=
-#longitude of the location the forecast is wanted for (german: Längengrad)
-longitude=
-#API url
-url='https://api.met.no/weatherapi/locationforecast/2.0/.json?lat={latitude}&amp;lon={longitude}'.format(latitude=latitude,longitude=longitude)
-#name of the location the forecast is wanted for (german: Längengrad)
-locality=""
-#value for the host tag when writing to the influxdb
-monitoringhost=socket.getfqdn()
-#if you want the ip address rather than the hosts name, do
-#monitoringhost=socket.gethostbyname(socket.getfqdn())
+<span class="c1"># host of the influxdb used to store the data</span>
+<span class="n">influxhost</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+<span class="c1"># port of the influxdb used to store the data</span>
+<span class="n">influxport</span><span class="o">=</span>
+<span class="c1"># username for accessing the influxdb used to store the data</span>
+<span class="n">influxusername</span><span class="s1">&#39;&#39;</span>
+<span class="c1"># password for accessing the influxdb used to store the data</span>
+<span class="n">influxpassword</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+<span class="c1"># name of the influxdb database used to store the data</span>
+<span class="n">monitoringdbname</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+<span class="c1"># user agent (python requests standard user agent is blocked by the api</span>
+<span class="n">useragent</span><span class="o">=</span><span class="s1">&#39;Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0&#39;</span>
+<span class="c1"># latitude of the location the forecast is wanted for (german: Breitengrad)</span>
+<span class="n">latitude</span><span class="o">=</span>
+<span class="c1"># longitude of the location the forecast is wanted for (german: Längengrad)</span>
+<span class="n">longitude</span><span class="o">=</span>
+<span class="c1"># API url</span>
+<span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://api.met.no/weatherapi/locationforecast/2.0/.json?lat={latitude}&amp;amp;lon={longitude}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="n">latitude</span><span class="p">,</span><span class="n">longitude</span><span class="o">=</span><span class="n">longitude</span><span class="p">)</span>
+<span class="c1"># name of the location the forecast is wanted for (german: Längengrad)</span>
+<span class="n">locality</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="c1"># value for the host tag when writing to the influxdb</span>
+<span class="n">monitoringhost</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="n">getfqdn</span><span class="p">()</span>
+<span class="c1"># if you want the ip address rather than the hosts name, do</span>
+<span class="c1"># monitoringhost=socket.gethostbyname(socket.getfqdn())</span>
 </p><p>
-client = InfluxDBClient(host=influxhost, port=influxport)
-#if influx requires authentication, use the following line instead of the one above:
-#client = InfluxDBClient(host=influxhost, port=influxport,username=influxusername, password=influxpasword)
+<span class="n">client</span> <span class="o">=</span> <span class="n">InfluxDBClient</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">influxhost</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">influxport</span><span class="p">)</span>
+<span class="c1"># if influx requires authentication, use the following line instead of the one above:</span>
+<span class="c1"># client = InfluxDBClient(host=influxhost, port=influxport,username=influxusername, password=influxpasword)</span>
 </p><p>
-databases = client.get_list_database()
+<span class="n">databases</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_list_database</span><span class="p">()</span>
 </p><p>
-databaseAlreadyThere =False
+<span class="n">databaseAlreadyThere</span> <span class="o">=</span><span class="bp">False</span>
 </p><p>
-for item in databases:
-    if item['name'] == monitoringdbname:
-        databaseAlreadyThere = True
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">databases</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">monitoringdbname</span><span class="p">:</span>
+        <span class="n">databaseAlreadyThere</span> <span class="o">=</span> <span class="bp">True</span>
 </p><p>
-if databaseAlreadyThere == False:
-    client.create_database(monitoringdbname)
+<span class="k">if</span> <span class="n">databaseAlreadyThere</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">create_database</span><span class="p">(</span><span class="n">monitoringdbname</span><span class="p">)</span>
 </p><p>
-client.switch_database(monitoringdbname)
+<span class="n">client</span><span class="o">.</span><span class="n">switch_database</span><span class="p">(</span><span class="n">monitoringdbname</span><span class="p">)</span>
 </p><p>
-headers = {
-    'User-Agent': useragent
-}
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">useragent</span>
+<span class="p">}</span>
 </p><p>
-#print(url)
-response = requests.get(url, headers=headers)
-#print(response.content)
-data = json.loads(response.content.decode('utf-8'))
-timeseries=data['properties']['timeseries']
-lon=data['geometry']['coordinates'][0]
-lat=data['geometry']['coordinates'][1]
-height=str(float(data['geometry']['coordinates'][2])*0.3048)
-json_bodies=[]
-for timeserie in timeseries:
-    stats = {}
-    data=timeserie['data']['instant']['details']
-    for x in data:
-        if isinstance(data[x],dict)==False:
-            stats[x] = data[x]
-    if 'next_1_hours' in timeserie['data'].keys():
-        stats['precipitation_amount']=timeserie['data']['next_1_hours']['details']['precipitation_amount']
-    json_body = []
-    jb={}
-    jb["measurement"]="WeatherForecast"
-    tags={}
-    tags["Server"]=monitoringhost
-    tags["Longitude"]=lon
-    tags["Latitude"]=lat
-    tags["Height"]=height
-    tags["Location"]=locality
-    jb["tags"]=tags
-    jb["time"]=timeserie['time']
-    jb["fields"]=stats
-    json_body.append(jb)
-    client.write_points(json_body)
-</p><p>
-<p></pre> </p><p> Führt man dieses Skript - zum Beispiel per Cron - stündlich aus, werden jeweils akuelle Vorhersagedaten in die Datenbank geschrieben, wobei InfluxDB von selbst Daten für Zeitpunkte, für die von früheren Vorhersagen bereits Informationen vorhanden sind mit den aktuelleren <a href="https://v2.docs.influxdata.com/v2.0/write-data/best-practices/duplicate-points/">überschreibt.</a> </p><p> Nun füge man noch ein wenig <a href="https://grafana.com/">Grafana-Magie</a> hinzu und erstellt sich in wenigen Minuten das erste Dashboard zur Anzeige des Wetters der nächsten 48 Stunden: </p><p> <img src="images/wetherforecastgrafana.png" style="max-width:688px;" alt="Screenshot" class="center"> <span class="imgdesc"> Wettervorhersage </span> </p><pre>
-{
-  "annotations": {
-    "list": [
+<span class="c1"># print(url)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="c1"># print(response.content)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<span class="n">timeseries</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;timeseries&#39;</span><span class="p">]</span>
+<span class="n">lon</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="s1">&#39;coordinates&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lat</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="s1">&#39;coordinates&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">height</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="s1">&#39;coordinates&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="mf">0.3048</span><span class="p">)</span>
+<span class="n">json_bodies</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">timeserie</span> <span class="ow">in</span> <span class="n">timeseries</span><span class="p">:</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">timeserie</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;instant&#39;</span><span class="p">][</span><span class="s1">&#39;details&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="nb">dict</span><span class="p">)</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+            <span class="n">stats</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s1">&#39;next_1_hours&#39;</span> <span class="ow">in</span> <span class="n">timeserie</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;precipitation_amount&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timeserie</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;next_1_hours&#39;</span><span class="p">][</span><span class="s1">&#39;details&#39;</span><span class="p">][</span><span class="s1">&#39;precipitation_amount&#39;</span><span class="p">]</span>
+    <span class="n">json_body</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">jb</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">jb</span><span class="p">[</span><span class="s2">&quot;measurement&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;WeatherForecast&quot;</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">tags</span><span class="p">[</span><span class="s2">&quot;Server&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">monitoringhost</span>
+    <span class="n">tags</span><span class="p">[</span><span class="s2">&quot;Longitude&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">lon</span>
+    <span class="n">tags</span><span class="p">[</span><span class="s2">&quot;Latitude&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">lat</span>
+    <span class="n">tags</span><span class="p">[</span><span class="s2">&quot;Height&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">height</span>
+    <span class="n">tags</span><span class="p">[</span><span class="s2">&quot;Location&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">locality</span>
+    <span class="n">jb</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">tags</span>
+    <span class="n">jb</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">timeserie</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
+    <span class="n">jb</span><span class="p">[</span><span class="s2">&quot;fields&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">stats</span>
+    <span class="n">json_body</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jb</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">write_points</span><span class="p">(</span><span class="n">json_body</span><span class="p">)</span>
+</pre></div> </p><p> Führt man dieses Skript - zum Beispiel per Cron - stündlich aus, werden jeweils akuelle Vorhersagedaten in die Datenbank geschrieben, wobei InfluxDB von selbst Daten für Zeitpunkte, für die von früheren Vorhersagen bereits Informationen vorhanden sind mit den aktuelleren <a href="https://v2.docs.influxdata.com/v2.0/write-data/best-practices/duplicate-points/">überschreibt.</a> </p><p> Nun füge man noch ein wenig <a href="https://grafana.com/">Grafana-Magie</a> hinzu und erstellt sich in wenigen Minuten das erste Dashboard zur Anzeige des Wetters der nächsten 48 Stunden: </p><p> <img src="images/wetherforecastgrafana.png" style="max-width:688px;" alt="Screenshot" class="center"> <span class="imgdesc"> Wettervorhersage </span> </p><div class="highlight"><pre><span></span>{
+  &quot;annotations&quot;: {
+    &quot;list&quot;: [
       {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations &amp; Alerts",
-        "type": "dashboard"
+        &quot;builtIn&quot;: 1,
+        &quot;datasource&quot;: &quot;-- Grafana --&quot;,
+        &quot;enable&quot;: true,
+        &quot;hide&quot;: true,
+        &quot;iconColor&quot;: &quot;rgba(0, 211, 255, 1)&quot;,
+        &quot;name&quot;: &quot;Annotations &amp;amp; Alerts&quot;,
+        &quot;type&quot;: &quot;dashboard&quot;
       }
     ]
   },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "id": 30,
-  "links": [],
-  "panels": [
+  &quot;editable&quot;: true,
+  &quot;gnetId&quot;: null,
+  &quot;graphTooltip&quot;: 0,
+  &quot;id&quot;: 30,
+  &quot;links&quot;: [],
+  &quot;panels&quot;: [
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 0
+      &quot;aliasColors&quot;: {},
+      &quot;bars&quot;: false,
+      &quot;dashLength&quot;: 10,
+      &quot;dashes&quot;: false,
+      &quot;fill&quot;: 1,
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 9,
+        &quot;w&quot;: 12,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 0
       },
-      "id": 2,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
+      &quot;id&quot;: 2,
+      &quot;legend&quot;: {
+        &quot;avg&quot;: false,
+        &quot;current&quot;: false,
+        &quot;max&quot;: false,
+        &quot;min&quot;: false,
+        &quot;show&quot;: true,
+        &quot;total&quot;: false,
+        &quot;values&quot;: false
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
+      &quot;lines&quot;: true,
+      &quot;linewidth&quot;: 1,
+      &quot;links&quot;: [],
+      &quot;nullPointMode&quot;: &quot;null&quot;,
+      &quot;options&quot;: {},
+      &quot;percentage&quot;: false,
+      &quot;pointradius&quot;: 2,
+      &quot;points&quot;: false,
+      &quot;renderer&quot;: &quot;flot&quot;,
+      &quot;seriesOverrides&quot;: [],
+      &quot;spaceLength&quot;: 10,
+      &quot;stack&quot;: false,
+      &quot;steppedLine&quot;: false,
+      &quot;targets&quot;: [
         {
-          "groupBy": [],
-          "measurement": "WeatherForecast",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;groupBy&quot;: [],
+          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "air_temperature"
+                &quot;params&quot;: [
+                  &quot;air_temperature&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "Location",
-              "operator": "=",
-              "value": "Rudolstadt"
+              &quot;key&quot;: &quot;Location&quot;,
+              &quot;operator&quot;: &quot;=&quot;,
+              &quot;value&quot;: &quot;Rudolstadt&quot;
             }
           ]
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Air Temperature",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
+      &quot;thresholds&quot;: [],
+      &quot;timeFrom&quot;: null,
+      &quot;timeRegions&quot;: [],
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;Air Temperature&quot;,
+      &quot;tooltip&quot;: {
+        &quot;shared&quot;: true,
+        &quot;sort&quot;: 0,
+        &quot;value_type&quot;: &quot;individual&quot;
       },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
+      &quot;type&quot;: &quot;graph&quot;,
+      &quot;xaxis&quot;: {
+        &quot;buckets&quot;: null,
+        &quot;mode&quot;: &quot;time&quot;,
+        &quot;name&quot;: null,
+        &quot;show&quot;: true,
+        &quot;values&quot;: []
       },
-      "yaxes": [
+      &quot;yaxes&quot;: [
         {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          &quot;format&quot;: &quot;celsius&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: null,
+          &quot;min&quot;: null,
+          &quot;show&quot;: true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          &quot;format&quot;: &quot;short&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: null,
+          &quot;min&quot;: null,
+          &quot;show&quot;: true
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
+      &quot;yaxis&quot;: {
+        &quot;align&quot;: false,
+        &quot;alignLevel&quot;: null
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 0
+      &quot;aliasColors&quot;: {},
+      &quot;bars&quot;: false,
+      &quot;dashLength&quot;: 10,
+      &quot;dashes&quot;: false,
+      &quot;fill&quot;: 1,
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 9,
+        &quot;w&quot;: 12,
+        &quot;x&quot;: 12,
+        &quot;y&quot;: 0
       },
-      "id": 7,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
+      &quot;id&quot;: 7,
+      &quot;legend&quot;: {
+        &quot;avg&quot;: false,
+        &quot;current&quot;: false,
+        &quot;max&quot;: false,
+        &quot;min&quot;: false,
+        &quot;show&quot;: true,
+        &quot;total&quot;: false,
+        &quot;values&quot;: false
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
+      &quot;lines&quot;: true,
+      &quot;linewidth&quot;: 1,
+      &quot;links&quot;: [],
+      &quot;nullPointMode&quot;: &quot;null&quot;,
+      &quot;options&quot;: {},
+      &quot;percentage&quot;: false,
+      &quot;pointradius&quot;: 2,
+      &quot;points&quot;: false,
+      &quot;renderer&quot;: &quot;flot&quot;,
+      &quot;seriesOverrides&quot;: [],
+      &quot;spaceLength&quot;: 10,
+      &quot;stack&quot;: false,
+      &quot;steppedLine&quot;: false,
+      &quot;targets&quot;: [
         {
-          "groupBy": [],
-          "measurement": "WeatherForecast",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;groupBy&quot;: [],
+          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "precipitation_amount"
+                &quot;params&quot;: [
+                  &quot;precipitation_amount&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "Location",
-              "operator": "=",
-              "value": "Rudolstadt"
+              &quot;key&quot;: &quot;Location&quot;,
+              &quot;operator&quot;: &quot;=&quot;,
+              &quot;value&quot;: &quot;Rudolstadt&quot;
             }
           ]
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Precipitation",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
+      &quot;thresholds&quot;: [],
+      &quot;timeFrom&quot;: null,
+      &quot;timeRegions&quot;: [],
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;Precipitation&quot;,
+      &quot;tooltip&quot;: {
+        &quot;shared&quot;: true,
+        &quot;sort&quot;: 0,
+        &quot;value_type&quot;: &quot;individual&quot;
       },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
+      &quot;type&quot;: &quot;graph&quot;,
+      &quot;xaxis&quot;: {
+        &quot;buckets&quot;: null,
+        &quot;mode&quot;: &quot;time&quot;,
+        &quot;name&quot;: null,
+        &quot;show&quot;: true,
+        &quot;values&quot;: []
       },
-      "yaxes": [
+      &quot;yaxes&quot;: [
         {
-          "format": "lengthmm",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          &quot;format&quot;: &quot;lengthmm&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: null,
+          &quot;min&quot;: null,
+          &quot;show&quot;: true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          &quot;format&quot;: &quot;short&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: null,
+          &quot;min&quot;: null,
+          &quot;show&quot;: true
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
+      &quot;yaxis&quot;: {
+        &quot;align&quot;: false,
+        &quot;alignLevel&quot;: null
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 9
+      &quot;aliasColors&quot;: {},
+      &quot;bars&quot;: false,
+      &quot;dashLength&quot;: 10,
+      &quot;dashes&quot;: false,
+      &quot;fill&quot;: 1,
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 9,
+        &quot;w&quot;: 12,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 9
       },
-      "id": 4,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
+      &quot;id&quot;: 4,
+      &quot;legend&quot;: {
+        &quot;avg&quot;: false,
+        &quot;current&quot;: false,
+        &quot;max&quot;: false,
+        &quot;min&quot;: false,
+        &quot;show&quot;: true,
+        &quot;total&quot;: false,
+        &quot;values&quot;: false
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
+      &quot;lines&quot;: true,
+      &quot;linewidth&quot;: 1,
+      &quot;links&quot;: [],
+      &quot;nullPointMode&quot;: &quot;null&quot;,
+      &quot;options&quot;: {},
+      &quot;percentage&quot;: false,
+      &quot;pointradius&quot;: 2,
+      &quot;points&quot;: false,
+      &quot;renderer&quot;: &quot;flot&quot;,
+      &quot;seriesOverrides&quot;: [],
+      &quot;spaceLength&quot;: 10,
+      &quot;stack&quot;: false,
+      &quot;steppedLine&quot;: false,
+      &quot;targets&quot;: [
         {
-          "groupBy": [],
-          "measurement": "WeatherForecast",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;groupBy&quot;: [],
+          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "cloud_area_fraction"
+                &quot;params&quot;: [
+                  &quot;cloud_area_fraction&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "Location",
-              "operator": "=",
-              "value": "Rudolstadt"
+              &quot;key&quot;: &quot;Location&quot;,
+              &quot;operator&quot;: &quot;=&quot;,
+              &quot;value&quot;: &quot;Rudolstadt&quot;
             }
           ]
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Cloudiness",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
+      &quot;thresholds&quot;: [],
+      &quot;timeFrom&quot;: null,
+      &quot;timeRegions&quot;: [],
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;Cloudiness&quot;,
+      &quot;tooltip&quot;: {
+        &quot;shared&quot;: true,
+        &quot;sort&quot;: 0,
+        &quot;value_type&quot;: &quot;individual&quot;
       },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
+      &quot;type&quot;: &quot;graph&quot;,
+      &quot;xaxis&quot;: {
+        &quot;buckets&quot;: null,
+        &quot;mode&quot;: &quot;time&quot;,
+        &quot;name&quot;: null,
+        &quot;show&quot;: true,
+        &quot;values&quot;: []
       },
-      "yaxes": [
+      &quot;yaxes&quot;: [
         {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
+          &quot;decimals&quot;: null,
+          &quot;format&quot;: &quot;percent&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: &quot;100&quot;,
+          &quot;min&quot;: &quot;0&quot;,
+          &quot;show&quot;: true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          &quot;format&quot;: &quot;short&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: null,
+          &quot;min&quot;: null,
+          &quot;show&quot;: true
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
+      &quot;yaxis&quot;: {
+        &quot;align&quot;: false,
+        &quot;alignLevel&quot;: null
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 9
+      &quot;aliasColors&quot;: {},
+      &quot;bars&quot;: false,
+      &quot;dashLength&quot;: 10,
+      &quot;dashes&quot;: false,
+      &quot;fill&quot;: 1,
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 9,
+        &quot;w&quot;: 12,
+        &quot;x&quot;: 12,
+        &quot;y&quot;: 9
       },
-      "id": 3,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
+      &quot;id&quot;: 3,
+      &quot;legend&quot;: {
+        &quot;avg&quot;: false,
+        &quot;current&quot;: false,
+        &quot;max&quot;: false,
+        &quot;min&quot;: false,
+        &quot;show&quot;: true,
+        &quot;total&quot;: false,
+        &quot;values&quot;: false
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
+      &quot;lines&quot;: true,
+      &quot;linewidth&quot;: 1,
+      &quot;links&quot;: [],
+      &quot;nullPointMode&quot;: &quot;null&quot;,
+      &quot;options&quot;: {},
+      &quot;percentage&quot;: false,
+      &quot;pointradius&quot;: 2,
+      &quot;points&quot;: false,
+      &quot;renderer&quot;: &quot;flot&quot;,
+      &quot;seriesOverrides&quot;: [],
+      &quot;spaceLength&quot;: 10,
+      &quot;stack&quot;: false,
+      &quot;steppedLine&quot;: false,
+      &quot;targets&quot;: [
         {
-          "groupBy": [],
-          "measurement": "WeatherForecast",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;groupBy&quot;: [],
+          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "air_pressure_at_sea_level"
+                &quot;params&quot;: [
+                  &quot;air_pressure_at_sea_level&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "Location",
-              "operator": "=",
-              "value": "Rudolstadt"
+              &quot;key&quot;: &quot;Location&quot;,
+              &quot;operator&quot;: &quot;=&quot;,
+              &quot;value&quot;: &quot;Rudolstadt&quot;
             }
           ]
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Air Pressure At Sea Level",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
+      &quot;thresholds&quot;: [],
+      &quot;timeFrom&quot;: null,
+      &quot;timeRegions&quot;: [],
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;Air Pressure At Sea Level&quot;,
+      &quot;tooltip&quot;: {
+        &quot;shared&quot;: true,
+        &quot;sort&quot;: 0,
+        &quot;value_type&quot;: &quot;individual&quot;
       },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
+      &quot;type&quot;: &quot;graph&quot;,
+      &quot;xaxis&quot;: {
+        &quot;buckets&quot;: null,
+        &quot;mode&quot;: &quot;time&quot;,
+        &quot;name&quot;: null,
+        &quot;show&quot;: true,
+        &quot;values&quot;: []
       },
-      "yaxes": [
+      &quot;yaxes&quot;: [
         {
-          "decimals": null,
-          "format": "pressurehpa",
-          "label": null,
-          "logBase": 1,
-          "max": "1061",
-          "min": "954",
-          "show": true
+          &quot;decimals&quot;: null,
+          &quot;format&quot;: &quot;pressurehpa&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: &quot;1061&quot;,
+          &quot;min&quot;: &quot;954&quot;,
+          &quot;show&quot;: true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          &quot;format&quot;: &quot;short&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: null,
+          &quot;min&quot;: null,
+          &quot;show&quot;: true
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
+      &quot;yaxis&quot;: {
+        &quot;align&quot;: false,
+        &quot;alignLevel&quot;: null
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 18
+      &quot;aliasColors&quot;: {},
+      &quot;bars&quot;: false,
+      &quot;dashLength&quot;: 10,
+      &quot;dashes&quot;: false,
+      &quot;fill&quot;: 1,
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 9,
+        &quot;w&quot;: 12,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 18
       },
-      "id": 6,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
+      &quot;id&quot;: 6,
+      &quot;legend&quot;: {
+        &quot;avg&quot;: false,
+        &quot;current&quot;: false,
+        &quot;max&quot;: false,
+        &quot;min&quot;: false,
+        &quot;show&quot;: true,
+        &quot;total&quot;: false,
+        &quot;values&quot;: false
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
+      &quot;lines&quot;: true,
+      &quot;linewidth&quot;: 1,
+      &quot;links&quot;: [],
+      &quot;nullPointMode&quot;: &quot;null&quot;,
+      &quot;options&quot;: {},
+      &quot;percentage&quot;: false,
+      &quot;pointradius&quot;: 2,
+      &quot;points&quot;: false,
+      &quot;renderer&quot;: &quot;flot&quot;,
+      &quot;seriesOverrides&quot;: [],
+      &quot;spaceLength&quot;: 10,
+      &quot;stack&quot;: false,
+      &quot;steppedLine&quot;: false,
+      &quot;targets&quot;: [
         {
-          "groupBy": [],
-          "measurement": "WeatherForecast",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;groupBy&quot;: [],
+          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "relative_humidity"
+                &quot;params&quot;: [
+                  &quot;relative_humidity&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "Location",
-              "operator": "=",
-              "value": "Rudolstadt"
+              &quot;key&quot;: &quot;Location&quot;,
+              &quot;operator&quot;: &quot;=&quot;,
+              &quot;value&quot;: &quot;Rudolstadt&quot;
             }
           ]
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Relative Humidity",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
+      &quot;thresholds&quot;: [],
+      &quot;timeFrom&quot;: null,
+      &quot;timeRegions&quot;: [],
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;Relative Humidity&quot;,
+      &quot;tooltip&quot;: {
+        &quot;shared&quot;: true,
+        &quot;sort&quot;: 0,
+        &quot;value_type&quot;: &quot;individual&quot;
       },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
+      &quot;type&quot;: &quot;graph&quot;,
+      &quot;xaxis&quot;: {
+        &quot;buckets&quot;: null,
+        &quot;mode&quot;: &quot;time&quot;,
+        &quot;name&quot;: null,
+        &quot;show&quot;: true,
+        &quot;values&quot;: []
       },
-      "yaxes": [
+      &quot;yaxes&quot;: [
         {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
+          &quot;decimals&quot;: null,
+          &quot;format&quot;: &quot;percent&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: &quot;100&quot;,
+          &quot;min&quot;: &quot;0&quot;,
+          &quot;show&quot;: true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          &quot;format&quot;: &quot;short&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: null,
+          &quot;min&quot;: null,
+          &quot;show&quot;: true
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
+      &quot;yaxis&quot;: {
+        &quot;align&quot;: false,
+        &quot;alignLevel&quot;: null
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 18
+      &quot;aliasColors&quot;: {},
+      &quot;bars&quot;: false,
+      &quot;dashLength&quot;: 10,
+      &quot;dashes&quot;: false,
+      &quot;fill&quot;: 1,
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 9,
+        &quot;w&quot;: 12,
+        &quot;x&quot;: 12,
+        &quot;y&quot;: 18
       },
-      "id": 5,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
+      &quot;id&quot;: 5,
+      &quot;legend&quot;: {
+        &quot;avg&quot;: false,
+        &quot;current&quot;: false,
+        &quot;max&quot;: false,
+        &quot;min&quot;: false,
+        &quot;show&quot;: true,
+        &quot;total&quot;: false,
+        &quot;values&quot;: false
       },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
+      &quot;lines&quot;: true,
+      &quot;linewidth&quot;: 1,
+      &quot;links&quot;: [],
+      &quot;nullPointMode&quot;: &quot;null&quot;,
+      &quot;options&quot;: {},
+      &quot;percentage&quot;: false,
+      &quot;pointradius&quot;: 2,
+      &quot;points&quot;: false,
+      &quot;renderer&quot;: &quot;flot&quot;,
+      &quot;seriesOverrides&quot;: [],
+      &quot;spaceLength&quot;: 10,
+      &quot;stack&quot;: false,
+      &quot;steppedLine&quot;: false,
+      &quot;targets&quot;: [
         {
-          "groupBy": [],
-          "measurement": "WeatherForecast",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
+          &quot;groupBy&quot;: [],
+          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
             [
               {
-                "params": [
-                  "dew_point_temperature"
+                &quot;params&quot;: [
+                  &quot;dew_point_temperature&quot;
                 ],
-                "type": "field"
+                &quot;type&quot;: &quot;field&quot;
               }
             ]
           ],
-          "tags": [
+          &quot;tags&quot;: [
             {
-              "key": "Location",
-              "operator": "=",
-              "value": "Rudolstadt"
+              &quot;key&quot;: &quot;Location&quot;,
+              &quot;operator&quot;: &quot;=&quot;,
+              &quot;value&quot;: &quot;Rudolstadt&quot;
             }
           ]
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Dewpoint Temperature",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
+      &quot;thresholds&quot;: [],
+      &quot;timeFrom&quot;: null,
+      &quot;timeRegions&quot;: [],
+      &quot;timeShift&quot;: null,
+      &quot;title&quot;: &quot;Dewpoint Temperature&quot;,
+      &quot;tooltip&quot;: {
+        &quot;shared&quot;: true,
+        &quot;sort&quot;: 0,
+        &quot;value_type&quot;: &quot;individual&quot;
       },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
+      &quot;type&quot;: &quot;graph&quot;,
+      &quot;xaxis&quot;: {
+        &quot;buckets&quot;: null,
+        &quot;mode&quot;: &quot;time&quot;,
+        &quot;name&quot;: null,
+        &quot;show&quot;: true,
+        &quot;values&quot;: []
       },
-      "yaxes": [
+      &quot;yaxes&quot;: [
         {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          &quot;format&quot;: &quot;celsius&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: null,
+          &quot;min&quot;: null,
+          &quot;show&quot;: true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          &quot;format&quot;: &quot;short&quot;,
+          &quot;label&quot;: null,
+          &quot;logBase&quot;: 1,
+          &quot;max&quot;: null,
+          &quot;min&quot;: null,
+          &quot;show&quot;: true
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
+      &quot;yaxis&quot;: {
+        &quot;align&quot;: false,
+        &quot;alignLevel&quot;: null
       }
     }
   ],
-  "refresh": "30m",
-  "schemaVersion": 18,
-  "style": "dark",
-  "tags": [],
-  "templating": {
-    "list": []
+  &quot;refresh&quot;: &quot;30m&quot;,
+  &quot;schemaVersion&quot;: 18,
+  &quot;style&quot;: &quot;dark&quot;,
+  &quot;tags&quot;: [],
+  &quot;templating&quot;: {
+    &quot;list&quot;: []
   },
-  "time": {
-    "from": "now",
-    "to": "now+48h"
+  &quot;time&quot;: {
+    &quot;from&quot;: &quot;now&quot;,
+    &quot;to&quot;: &quot;now+48h&quot;
   },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
+  &quot;timepicker&quot;: {
+    &quot;refresh_intervals&quot;: [
+      &quot;5s&quot;,
+      &quot;10s&quot;,
+      &quot;30s&quot;,
+      &quot;1m&quot;,
+      &quot;5m&quot;,
+      &quot;15m&quot;,
+      &quot;30m&quot;,
+      &quot;1h&quot;,
+      &quot;2h&quot;,
+      &quot;1d&quot;
     ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
+    &quot;time_options&quot;: [
+      &quot;5m&quot;,
+      &quot;15m&quot;,
+      &quot;1h&quot;,
+      &quot;6h&quot;,
+      &quot;12h&quot;,
+      &quot;24h&quot;,
+      &quot;2d&quot;,
+      &quot;7d&quot;,
+      &quot;30d&quot;
     ]
   },
-  "timezone": "",
-  "title": "Weather Forecast",
-  "uid": "OPvZAazRz",
-  "version": 6
+  &quot;timezone&quot;: &quot;&quot;,
+  &quot;title&quot;: &quot;Weather Forecast&quot;,
+  &quot;uid&quot;: &quot;OPvZAazRz&quot;,
+  &quot;version&quot;: 6
 }
-</pre><p> <h3><a name="96">Aktualisierung vom 20. November 2021</a></h3><div class="update">Das Skript wurde überarbeitet: die Api erlaubt Requests nicht mehr wenn der User-Agent im Header bestimmte Werte aufweist - darunter den, den das Python-Modul <span class="mdcode">requests</span> standardmäßig nutzt - daher wird jetzt der User-Agent eines Firefox-Browsers gesendet. Darüber hinaus wurden alle Parameter an den Beginn des Skripts verlagert und kommentiert. Weiterhin wurde ein Absatz zur Installation des Python-Moduls <span class="mdcode">influxdb</span> hinzugefügt. </div> </p> </div> <div class="w3-container w3-padding" id="referers"> <h3> Artikel, die hierher verlinken </h3> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Überwachung Festplattenstatus mit Grafana </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">15.02.2022</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich hatte nach dem Update meines Raid mit größeren Platten festgestellt, dass der automatische Standby nach einiger Zeit Nicht-Benutzung nicht mehr funktionierte. </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="ueberwachung_festplattenstatus_grafana.html#content">Öffnen</a> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Proxmox-Experimente </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">05.09.2020</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Seit ich davon gehört habe war ich neugierig auf Proxmox und wie das Versprechen von Hochverfügbarkeit damit umgesetzt werden kann. In der Firma, in der ich arbeite wird dieses System auf einem experimentellen Blech-Cluster bereits seit einiger Zeit betrieben - Zeit alse, selber einiger Erfahrungen zu sammeln </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="proxmox_experimente.html#content">Öffnen</a> </p> </div> </div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Einbinden von Wettervorhersagedaten in Grafana&body=[Einbinden von Wettervorhersagedaten in Grafana](https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Einbinden von Wettervorhersagedaten in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Einbinden von Wettervorhersagedaten in Grafana&issue[description]=[Einbinden von Wettervorhersagedaten in Grafana](https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Einbinden von Wettervorhersagedaten in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Nixie-Röhren mit frei wählbarer Farbe</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">23.07.2017</span> </p> <span class="smallabstract"><p>Ich habe meine alte Komponente zur "retro"-Anzeige von Zahlenwerten überholt und ihr die Möglichkeit gegeben, verschiedene Farben darzustellen - damit könnte man zum Beispiel auf das Überschreiten von Schwellwerten reagieren... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="nixie_roehren_frei_waehlbarer_farbe.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-black w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-black w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2022 VII</span><br> <span class="smallabstract"><p>Nach der letzten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2022_vii.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Debian 11 auf Rock64</span><br> <span class="smallabstract"><p>Nachdem bei mir ein rock64 freigeworden war und ich mir überlegt habe, was ich damit anfangen könnte kam die Idee eines Kubernetes-Trainingsclusters wieder einmal zum Vorschein - dazu wäre es aber gut, zunächst erst einmal eine aktuelle Basisinstallation zu haben... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="debian_11_auf_rock64.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Präsentationen zu KI / ML und Vertrauen (PKI)</span><br> <span class="smallabstract"><p>Ich habe meine eigenen Ideen zur unkomplizierten Erstellung von Präsentationen genutzt, um zwei Vorträge zu gestalten. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="praesentationen_ki___ml_vertrauen__pki_.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</pre></div> <p> <h3><a name="100">Aktualisierung vom 20. November 2021</a></h3><div class="update">Das Skript wurde überarbeitet: die Api erlaubt Requests nicht mehr wenn der User-Agent im Header bestimmte Werte aufweist - darunter den, den das Python-Modul <span class="mdcode">requests</span> standardmäßig nutzt - daher wird jetzt der User-Agent eines Firefox-Browsers gesendet. Darüber hinaus wurden alle Parameter an den Beginn des Skripts verlagert und kommentiert. Weiterhin wurde ein Absatz zur Installation des Python-Moduls <span class="mdcode">influxdb</span> hinzugefügt. </div> </p> </div> <div class="w3-container w3-padding" id="referers"> <h3> Artikel, die hierher verlinken </h3> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Überwachung Festplattenstatus mit Grafana </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">15.02.2022</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich hatte nach dem Update meines Raid mit größeren Platten festgestellt, dass der automatische Standby nach einiger Zeit Nicht-Benutzung nicht mehr funktionierte. </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="ueberwachung_festplattenstatus_grafana.html#content">Öffnen</a> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Proxmox-Experimente </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">05.09.2020</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Seit ich davon gehört habe war ich neugierig auf Proxmox und wie das Versprechen von Hochverfügbarkeit damit umgesetzt werden kann. In der Firma, in der ich arbeite wird dieses System auf einem experimentellen Blech-Cluster bereits seit einiger Zeit betrieben - Zeit alse, selber einiger Erfahrungen zu sammeln </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="proxmox_experimente.html#content">Öffnen</a> </p> </div> </div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Einbinden von Wettervorhersagedaten in Grafana&body=[Einbinden von Wettervorhersagedaten in Grafana](https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Einbinden von Wettervorhersagedaten in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Einbinden von Wettervorhersagedaten in Grafana&issue[description]=[Einbinden von Wettervorhersagedaten in Grafana](https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Einbinden von Wettervorhersagedaten in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Nixie-Röhren mit frei wählbarer Farbe</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">23.07.2017</span> </p> <span class="smallabstract"><p>Ich habe meine alte Komponente zur "retro"-Anzeige von Zahlenwerten überholt und ihr die Möglichkeit gegeben, verschiedene Farben darzustellen - damit könnte man zum Beispiel auf das Überschreiten von Schwellwerten reagieren... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="nixie_roehren_frei_waehlbarer_farbe.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-black w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-black w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> <img class="initial" title="Aktualisiert" src="images/page_updated_48.png"> EBCMS</span><br> <span class="smallabstract"><p>Ich habe nach einer Möglichkeit gesucht, meine eigene Webseite zu gestalten. Nach einiger Überlegung und ein paar Versuchen mußte ich feststellen, daß ich mich mit keiner der ausprobierten Varianten glücklich fühlte - also ran ans Zeichenbrett und was eigenes geschaffen! </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ebcms.html#40"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Tail -f ist eine schlechte Idee</span><br> <span class="smallabstract"><p>In meinem $dayjob musste ich vor einigen Monaten einmal einen Bug untersuchen. Das hat eine (für mich) überraschenende Tatsache ans Licht gebracht und mich wieder daran erinnert, was ich zum Thema Forensik gelernt habe: Man braucht Zeit und Ruhe, um das Problem und die hinterlassenen Zeichen gründlich zu untersuchen und so zum Kern des Problems vorzudringen. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tail__f_ist_eine_schlechte_idee.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2022 VII</span><br> <span class="smallabstract"><p>Nach der letzten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2022_vii.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
