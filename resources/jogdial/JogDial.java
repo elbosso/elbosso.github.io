@@ -1,5 +1,6 @@
 package de.netsysit.ui.components;
 
+import de.elbosso.util.NumberFormatStringifier;
 import de.netsysit.ui.roundinstrument.ConicalGradientPaint;
 import de.netsysit.util.lang.MiniMax;
 import java.awt.event.FocusEvent;
@@ -42,6 +43,8 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
  */
 public class JogDial extends javax.swing.JComponent implements
 		java.beans.PropertyChangeListener
+	,java.awt.event.MouseMotionListener
+	,java.awt.event.MouseListener
 {
 	final float[] CONE_FRACTIONS =
 	{
@@ -106,6 +109,8 @@ public class JogDial extends javax.swing.JComponent implements
 	private float[] largeFractions;
 	private java.awt.Color[] largeColors;
 	private java.awt.Color[] smallColors;
+	private boolean insideFlag;
+	private de.elbosso.util.NumberFormatStringifier numberFormatStringifier;//=new de.elbosso.util.NumberFormatStringifier(new java.text.DecimalFormat("#.##"));
 
 	public JogDial(double min, double max, double oneround)
 	{
@@ -163,113 +168,16 @@ public class JogDial extends javax.swing.JComponent implements
 			this.miniMax.addPropertyChangeListener(this);
 		oldfracture=-1;
 		computeValues();
-		addMouseMotionListener(new java.awt.event.MouseMotionListener() {
-
-			public void mouseDragged(MouseEvent e)
-			{
-				double sangle=computeSinAngle(e);
-				dragstarted=true;
-				if(dragging)
-				{
-					if(setFracture(sangle/(java.lang.Math.PI*2.0)))
-					{
-						actualdialvalue=sangle+java.lang.Math.PI*0.5+dragoffset;
-					}
-				}
-				else
-				{
-					
-//				if((dragging==false)&&(dragstarted==false))
-				{
-					if((inside==false)&&(miniMax!=null))
-					{
-						double frac=(double)(getBounds().height-e.getPoint().y)/(double)getBounds().height;
-						if(frac<0.0)
-							frac=0.0;
-						else if(frac>1.0)
-							frac=1.0;
-						setValue(getMiniMax().getSpan()*frac+getMiniMax().getMin());
-					}
-				}
-				}
-			}
-
-			public void mouseMoved(MouseEvent e)
-			{
-			}
-
-		});
-		addMouseListener(new java.awt.event.MouseListener() {
-
-			public void mouseClicked(MouseEvent e)
-			{
-			}
-
-			public void mousePressed(MouseEvent e)
-			{
-				draginitiated=true;
-				computeSinAngle(e);
-				if((miniMax!=null)&&((inside==false)&&(dragging==false)))
-				{
-					double frac=(double)(getBounds().height-e.getPoint().y)/(double)getBounds().height;
-					if(frac<0.0)
-						frac=0.0;
-					else if(frac>1.0)
-						frac=1.0;
-					setValue(getMiniMax().getSpan()*frac+getMiniMax().getMin());
-				}
-				repaint();
-			}
-
-			public void mouseReleased(MouseEvent e)
-			{
-				if((dragging==false)&&(dragstarted==false))
-				{
-					if(inside)
-					{
-
-
-						if(e.getPoint().y>getBounds().height/2)
-						{
-							double intermediate=getValue()-JogDial.this.oneround;
-							if((miniMax!=null)&&(intermediate<getMiniMax().getMin()))
-								intermediate=getMiniMax().getMin();
-							setValue(intermediate);
-						}
-						else
-						{
-							double intermediate=getValue()+JogDial.this.oneround;
-							if((miniMax!=null)&&(intermediate>getMiniMax().getMax()))
-								intermediate=getMiniMax().getMax();
-							setValue(intermediate);
-						}
-					}
-					else if(miniMax!=null)
-					{
-						double frac=(double)(getBounds().height-e.getPoint().y)/(double)getBounds().height;
-						if(frac<0.0)
-							frac=0.0;
-						else if(frac>1.0)
-							frac=1.0;
-						setValue(getMiniMax().getSpan()*frac+getMiniMax().getMin());
-					}
-				}
-				draginitiated=false;
-				dragging=false;
-				dragstarted=false;
-				repaint();
-			}
-
-			public void mouseEntered(MouseEvent e)
-			{
-			}
-
-			public void mouseExited(MouseEvent e)
-			{
-			}
-		});
+		addMouseMotionListener(this);
+		addMouseListener(this);
 		pcs=new java.beans.PropertyChangeSupport(this);
 	}
+
+	public void setNumberFormatStringifier(NumberFormatStringifier numberFormatStringifier)
+	{
+		this.numberFormatStringifier = numberFormatStringifier;
+	}
+
 	private double computeSinAngle(MouseEvent e)
 	{
 		int dim=(getSize().width<getSize().height?getSize().width:getSize().height)-2*GAP;
@@ -661,5 +569,139 @@ public class JogDial extends javax.swing.JComponent implements
 	{
 		if(evt.getSource()==miniMax)
 			setValue(getValue());
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e)
+	{
+		double sangle=computeSinAngle(e);
+		dragstarted=true;
+		if(dragging)
+		{
+			if(setFracture(sangle/(java.lang.Math.PI*2.0)))
+			{
+				actualdialvalue=sangle+java.lang.Math.PI*0.5+dragoffset;
+			}
+		}
+		else
+		{
+
+//				if((dragging==false)&&(dragstarted==false))
+			{
+				if((inside==false)&&(miniMax!=null))
+				{
+					double frac=(double)(getBounds().height-e.getPoint().y)/(double)getBounds().height;
+					if(frac<0.0)
+						frac=0.0;
+					else if(frac>1.0)
+						frac=1.0;
+					setValue(getMiniMax().getSpan()*frac+getMiniMax().getMin());
+				}
+			}
+		}
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e)
+	{
+		if((miniMax!=null)&&((insideFlag==true)&&(dragging==false)))
+		{
+			double frac = (double) (getBounds().height - e.getPoint().y) / (double) getBounds().height;
+			if (frac < 0.0)
+				frac = 0.0;
+			else if (frac > 1.0)
+				frac = 1.0;
+			if(numberFormatStringifier==null)
+			{
+				if(getMiniMax().getSpan()!=0.0)
+				{
+					double meas = getMiniMax().getSpan() / 100;
+					int cs = (int) java.lang.Math.abs(java.lang.Math.min(0, java.lang.Math.log10(meas))) + 3;
+					java.lang.String fmtString = ("#.") + "#".repeat(cs);
+					java.lang.String ttt = new java.text.DecimalFormat(fmtString).format(getMiniMax().getSpan() * frac + getMiniMax().getMin());
+					setToolTipText(ttt);
+				}
+			}
+			else
+			{
+				java.lang.String ttt = numberFormatStringifier.toString(getMiniMax().getSpan() * frac + getMiniMax().getMin());
+				setToolTipText(ttt);
+			}
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{
+		draginitiated=true;
+		computeSinAngle(e);
+		if((miniMax!=null)&&((inside==false)&&(dragging==false)))
+		{
+			double frac=(double)(getBounds().height-e.getPoint().y)/(double)getBounds().height;
+			if(frac<0.0)
+				frac=0.0;
+			else if(frac>1.0)
+				frac=1.0;
+			setValue(getMiniMax().getSpan()*frac+getMiniMax().getMin());
+		}
+		repaint();
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{
+		if((dragging==false)&&(dragstarted==false))
+		{
+			if(inside)
+			{
+
+
+				if(e.getPoint().y>getBounds().height/2)
+				{
+					double intermediate=getValue()-JogDial.this.oneround;
+					if((miniMax!=null)&&(intermediate<getMiniMax().getMin()))
+						intermediate=getMiniMax().getMin();
+					setValue(intermediate);
+				}
+				else
+				{
+					double intermediate=getValue()+JogDial.this.oneround;
+					if((miniMax!=null)&&(intermediate>getMiniMax().getMax()))
+						intermediate=getMiniMax().getMax();
+					setValue(intermediate);
+				}
+			}
+			else if(miniMax!=null)
+			{
+				double frac=(double)(getBounds().height-e.getPoint().y)/(double)getBounds().height;
+				if(frac<0.0)
+					frac=0.0;
+				else if(frac>1.0)
+					frac=1.0;
+				setValue(getMiniMax().getSpan()*frac+getMiniMax().getMin());
+			}
+		}
+		draginitiated=false;
+		dragging=false;
+		dragstarted=false;
+		repaint();
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{
+		insideFlag=true;
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e)
+	{
+		insideFlag=false;
 	}
 }
