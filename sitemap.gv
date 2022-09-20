@@ -38,6 +38,11 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_mailhog_docker_zoo [label="MailHog im Docker-Zoo" href="https://elbosso.github.io/mailhog_docker_zoo.html"]
+            node_mailhog_docker_zoo -> node_rustdesk_docker_zoo
+            node_mailhog_docker_zoo -> node_visual_studio_code_browser
+node_openproject_docker_container [label="OpenProject als Docker-Container" href="https://elbosso.github.io/openproject_docker_container.html"]
+            node_openproject_docker_container -> node_mailhog_docker_zoo
 node_xsl_transformation_jaxb__und_python_ [label="XSL-Transformation für JAXB (und Python)" href="https://elbosso.github.io/xsl_transformation_jaxb__und_python_.html"]
 node_bessere_xpath_suche_xml_editor [label="Bessere XPath-Suche im XML-Editor" href="https://elbosso.github.io/bessere_xpath_suche_xml_editor.html"]
 node_beanshell_3_0_0_snapshot_fork_sofort_aktualisieren_ [label="BeanShell 3.0.0-SNAPSHOT Fork sofort aktualisieren!" href="https://elbosso.github.io/beanshell_3_0_0_snapshot_fork_sofort_aktualisieren_.html"]
@@ -649,6 +654,7 @@ node_fraktal_selberbauen [label="Fraktal zum Selberbauen" href="https://elbosso.
 node_python__data_science__jupyter [label="Python, Data Science, Jupyter" href="https://elbosso.github.io/python__data_science__jupyter.html"]
 node_applikationsmonitoring_influxdb [label="Applikationsmonitoring mit InfluxDB" href="https://elbosso.github.io/applikationsmonitoring_influxdb.html"]
             node_applikationsmonitoring_influxdb -> node_raspberry_schnellem_massenspeicher
+            node_applikationsmonitoring_influxdb -> node_timestamping_server___release_version_1_3_0
 node_upgrade_klay_auf_elk_js [label="Upgrade von Klay auf Elk.js" href="https://elbosso.github.io/upgrade_klay_auf_elk_js.html"]
 node_linksammlung_chaos_fraktale_1 [label="Linksammlung Chaos und Fraktale 1" href="https://elbosso.github.io/linksammlung_chaos_fraktale_1.html"]
 node_timestamping_server_projekt___update [label="Timestamping Server Projekt - Update" href="https://elbosso.github.io/timestamping_server_projekt___update.html"]
@@ -809,7 +815,6 @@ node_certstream___ressourcenverbrauch [label="Certstream - Ressourcenverbrauch" 
             node_certstream___ressourcenverbrauch -> node_grafana__alarmierung_xmpp
 node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian May, Kerry Ellis & Vittorio Grigolo: Bohemian Rhapsody" href="https://elbosso.github.io/brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody.html"]
 node_mandelbrot_sets_mittels_shadern_berechnen [label="Mandelbrot-Sets mittels Shadern berechnen" href="https://elbosso.github.io/mandelbrot_sets_mittels_shadern_berechnen.html"]
-            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_java
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_julia_mengen_shadern_umgesetzt
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_faehrnisse_des_buildprozesses_unter_windows
@@ -1062,6 +1067,7 @@ node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" 
 node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
             node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
             node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
+            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_visualisierung_strange_attractors_java3d
             node_implizites_eulerverfahren -> node_mathematik_beliebiger_praezision_java
 node_eine_ganz_alte_bibliothek_bildverarbeitung [label="Eine ganz alte Bibliothek für Bildverarbeitung" href="https://elbosso.github.io/eine_ganz_alte_bibliothek_bildverarbeitung.html"]
@@ -1857,8 +1863,8 @@ node_java_bibliotheken_android [label="Java-Bibliotheken für Android" href="htt
             node_java_bibliotheken_android -> node_jtidy_android_portiert
 node_tile_identifizierung_tracks [label="Tile-Identifizierung für Tracks" href="https://elbosso.github.io/tile_identifizierung_tracks.html"]
 node_screen_for_x [label="screen for X" href="https://elbosso.github.io/screen_for_x.html"]
-            node_screen_for_x -> node_xpra_xephyr_openbox_a_la_sysv_init
             node_screen_for_x -> node_screen_for_x_synology_nas
+            node_screen_for_x -> node_xpra_xephyr_openbox_a_la_sysv_init
             node_screen_for_x -> node_alte_rechner_zukunftsfaehig____
 node_wlan_erweiterung_pt3110 [label="WLan Erweiterung für PT3110" href="https://elbosso.github.io/wlan_erweiterung_pt3110.html"]
             node_wlan_erweiterung_pt3110 -> node_virtual_router_manager_ap
@@ -1906,9 +1912,9 @@ node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
             node_ebmap4d -> node_tile_server_openstreetmap
             node_ebmap4d -> node_ebmap4d_bitmap_layer
-            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_hillshading_server_openstreetmap_lxc_ii
