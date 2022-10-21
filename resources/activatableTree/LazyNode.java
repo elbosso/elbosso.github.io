@@ -43,6 +43,7 @@ import java.util.Vector;
 public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 {
 	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(LazyNode.class);
+	public static final char PATHCOMPONENTSEPARATOR='/';
 	private java.lang.String client;
 	protected Object[] children;
 	private javax.swing.tree.TreeNode parent;
@@ -254,11 +255,15 @@ t.printStackTrace();
 	}
 	public java.lang.String getPathAsString()
 	{
+		return getPathAsStringRelativeTo(null);
+	}
+	public java.lang.String getPathAsStringRelativeTo(javax.swing.tree.TreeNode root)
+	{
 		java.lang.String rv="";
 		javax.swing.tree.TreeNode parent=getParent();
-		if((parent!=null)&&(LazyNode.class.isAssignableFrom(parent.getClass())))
-			rv+=((LazyNode)parent).getPathAsString();
-		rv+="/"+toString();
+		if((parent!=root)&&(LazyNode.class.isAssignableFrom(parent.getClass())))
+			rv+=((LazyNode)parent).getPathAsStringRelativeTo(root);
+		rv+=PATHCOMPONENTSEPARATOR+toString();
 		return rv;
 	}
 }
