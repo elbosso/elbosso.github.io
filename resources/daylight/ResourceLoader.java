@@ -258,8 +258,7 @@ public class ResourceLoader extends java.lang.Object
 				fallBack=f.toURI().toURL();
 			}catch(java.lang.Throwable exp)
 			{
-				exp.printStackTrace();
-				CLASS_LOGGER.warn(exp.getMessage(),exp);
+				EXCEPTION_LOGGER.warn(exp.getMessage(),exp);
 				try{
 					java.awt.image.BufferedImage bi=new java.awt.image.BufferedImage(getSize().getPixelSize()[0],getSize().getPixelSize()[0], BufferedImage.TYPE_INT_ARGB);
 					java.io.File f=java.io.File.createTempFile("fallbackicon", "png");
@@ -268,8 +267,7 @@ public class ResourceLoader extends java.lang.Object
 					fallBack=f.toURI().toURL();
 				}catch(java.lang.Throwable ex)
 				{
-					exp.printStackTrace();
-					CLASS_LOGGER.warn(ex.getMessage(), ex);
+					EXCEPTION_LOGGER.warn(ex.getMessage(), ex);
 				}
 			}
 		}

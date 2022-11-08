@@ -43,6 +43,7 @@ import java.util.Vector;
 public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 {
 	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(LazyNode.class);
+	private final static org.slf4j.Logger EXCEPTION_LOGGER =org.slf4j.LoggerFactory.getLogger("ExceptionCatcher");
 	public static final char PATHCOMPONENTSEPARATOR='/';
 	private java.lang.String client;
 	protected Object[] children;
@@ -227,7 +228,7 @@ t.printStackTrace();
 			}
 			catch (java.lang.Exception exp)
 			{
-				exp.printStackTrace();
+				EXCEPTION_LOGGER.warn(exp.getMessage(),exp);
 				children=new LazyNode[0];
 			}
 		}

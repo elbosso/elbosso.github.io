@@ -40,6 +40,8 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
  */
 public class NixieDoubleNumberDisplay extends NumberDisplay 
 {
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(NixieDoubleNumberDisplay.class);
+	private final static org.slf4j.Logger EXCEPTION_LOGGER =org.slf4j.LoggerFactory.getLogger("ExceptionCatcher");
 	private NixieNumber[] nixieNumbers;
 	private NixieSymbol decimalPoint;
 	private NixieSymbol sign;
@@ -243,7 +245,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 			try{
 				v=rand.nextDouble()*24000-12000;
 			nixieNumberDisplay.setValue(v);
-			}catch(java.lang.IllegalArgumentException exp){exp.printStackTrace();}
+			}catch(java.lang.IllegalArgumentException exp){EXCEPTION_LOGGER.warn(exp.getMessage(),exp);}
 			java.lang.Thread.currentThread().sleep(300l);
 		}			
 	}

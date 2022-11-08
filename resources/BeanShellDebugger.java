@@ -58,6 +58,8 @@ print(c.toString());
  */
 package de.elbosso.util;
 
+import de.elbosso.util.geo.CombiningLayerManager;
+
 /**
  *
  * @author elbosso
@@ -65,6 +67,7 @@ package de.elbosso.util;
 public class BeanShellDebugger extends java.lang.Object
 {
 	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(BeanShellDebugger.class);
+	private final static org.slf4j.Logger EXCEPTION_LOGGER =org.slf4j.LoggerFactory.getLogger("ExceptionCatcher");
 
 	private static final java.util.Set<java.lang.String> hidden=new java.util.HashSet();
 	static
@@ -103,7 +106,7 @@ public class BeanShellDebugger extends java.lang.Object
 						}
 						catch(java.io.IOException exp)
 						{
-							
+							EXCEPTION_LOGGER.warn(exp.getMessage(),exp);
 						}
 					}
 				});
@@ -127,14 +130,14 @@ public class BeanShellDebugger extends java.lang.Object
 				}
 				catch (Exception ex)
 				{
-					ex.printStackTrace();
+					EXCEPTION_LOGGER.warn(ex.getMessage(),ex);
 				}
 				f.setVisible(false);
 				f.dispose();
 			}
 			else
 			{
-//				System.out.println(key+" "+visitor);
+//				CLASS_LOGGER.debug(key+" "+visitor);
 				if(key.equals("_uncaughtExceptionCaught"))
 				{
 					CLASS_LOGGER.debug("Exception caught!");
@@ -177,8 +180,8 @@ public class BeanShellDebugger extends java.lang.Object
 	private static void instrument(bsh.Interpreter inter) throws bsh.EvalError
 	{
 		java.lang.String statements="invoke(String methodName, Object [] arguments){"
-//				+ "System.out.println(\"invoke \"+methodName+\" \"+(___eb_debug_on___!=null?___eb_debug_on___:false));"
-//				+ "System.out.println(\"invoke \"+global.___eb_debug_on___);"
+//				+ "CLASS_LOGGER.debug(\"invoke \"+methodName+\" \"+(___eb_debug_on___!=null?___eb_debug_on___:false));"
+//				+ "CLASS_LOGGER.debug(\"invoke \"+global.___eb_debug_on___);"
 				+ "if((___eb_debug_on___!=void)&&((___eb_debug_on___==true)||(___eb_debug_on___.equals(\"console\"))))"
 				+ "{"
 				+ "cs=this.callstack.copy();"

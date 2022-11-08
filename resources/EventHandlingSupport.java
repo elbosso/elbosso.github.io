@@ -219,7 +219,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	public void send(java.lang.String name, java.lang.Object oldvalue, java.lang.Object newvalue)
     {
 //		if(name.equals("inAndOuts"))
-//			new java.lang.Throwable().printStackTrace();
+//			new de.elbosso.util.lang.StacktraceProvider().printStackTrace();
 		if(pcs.hasListeners(name))
 			send(new java.beans.PropertyChangeEvent(getEventSource(), name, oldvalue, newvalue));
 	}

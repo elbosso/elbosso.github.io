@@ -34,6 +34,7 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.elbosso.util.threads;
 
+import de.elbosso.util.generator.semantics.TexEquationGenerator;
 import de.netsysit.util.threads.Synchronizer;
 import de.netsysit.util.threads.ThreadManager;
 
@@ -43,6 +44,8 @@ import de.netsysit.util.threads.ThreadManager;
  */
 public class ParallelSequentialManager extends java.lang.Object
 {
+	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(ParallelSequentialManager.class);
+	private final static org.slf4j.Logger EXCEPTION_LOGGER =org.slf4j.LoggerFactory.getLogger("ExceptionCatcher");
 	private de.netsysit.util.beans.context.service.BackgroundExecutor threadManager;
 	private de.netsysit.util.threads.ThreadManager sequentializer;
 
@@ -83,7 +86,7 @@ public class ParallelSequentialManager extends java.lang.Object
 			}
 			catch (InterruptedException ex)
 			{
-				ex.printStackTrace();
+				EXCEPTION_LOGGER.warn(ex.getMessage(),ex);
 			}
 			runnable.run();
 		}
