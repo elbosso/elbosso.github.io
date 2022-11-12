@@ -133,7 +133,7 @@ public class JogDial extends javax.swing.JComponent implements
 		smallFractions=new float[9];
 		largeColors=new java.awt.Color[9];
 		smallColors=new java.awt.Color[9];
-		java.util.Random r=new java.util.Random(System.currentTimeMillis()+hashCode());
+		java.util.Random r=new java.util.Random(java.time.Clock.systemDefaultZone().millis()+hashCode());
 		for(int i=1;i<largeFractions.length;++i)
 		{
 			largeFractions[i]=r.nextFloat();

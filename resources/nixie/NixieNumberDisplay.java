@@ -88,7 +88,7 @@ public class NixieNumberDisplay extends NumberDisplay
 		l=new javax.swing.JLabel();
 		gridbag.addLayoutComponent(l, constraints);
 		add(l);
-//		System.out.println("§ "+w+" "+h);
+//		CLASS_LOGGER.debug("§ "+w+" "+h);
 		java.awt.Dimension dim=new java.awt.Dimension(w,h);
 		setPreferredSize(dim);
 		setMinimumSize(dim);
@@ -128,8 +128,8 @@ public class NixieNumberDisplay extends NumberDisplay
 	}
 	public static void main(java.lang.String[] args) throws InterruptedException
 	{
-//		java.util.Random rand=new java.util.Random(System.currentTimeMillis());
-		RandomColor randomColor=new RandomColor(System.currentTimeMillis());
+//		java.util.Random rand=new java.util.Random(java.time.Clock.systemDefaultZone().millis());
+		RandomColor randomColor=new RandomColor(java.time.Clock.systemDefaultZone().millis());
 		javax.swing.JFrame f=new javax.swing.JFrame();
 		NixieNumberDisplay nixieNumberDisplay=new NixieNumberDisplay(5, .62f);
 		nixieNumberDisplay.setBackground(java.awt.Color.DARK_GRAY);
@@ -147,7 +147,7 @@ public class NixieNumberDisplay extends NumberDisplay
 			try{
 			nixieNumberDisplay.setValue(++i);//rand.nextInt(120000));
 //				if(i%100==0)
-//					System.out.println(nixieNumberDisplay.getPreferredSize());
+//					CLASS_LOGGER.debug(nixieNumberDisplay.getPreferredSize());
 			}catch(java.lang.IllegalArgumentException exp){}
 			java.lang.Thread.currentThread().sleep(3l);
 		}			

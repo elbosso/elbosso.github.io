@@ -43,7 +43,7 @@ public class NormalDistributedRandom extends de.elbosso.util.beans.EventHandling
 		}
 		catch (java.security.NoSuchAlgorithmException ex)
 		{
-			random=new java.util.Random(System.currentTimeMillis());
+			random=new java.util.Random(java.time.Clock.systemDefaultZone().millis());
 		}
 		func.setArgScale(2.0);
 		func.setArgOffset(-1.0);

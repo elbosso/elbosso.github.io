@@ -299,7 +299,7 @@ public class SevenSegmentDoubleNumberDisplay extends NumberDisplay
 
 	public static void main(java.lang.String[] args) throws InterruptedException
 	{
-		java.util.Random rand=new java.util.Random(System.currentTimeMillis());
+		java.util.Random rand=new java.util.Random(java.time.Clock.systemDefaultZone().millis());
 		javax.swing.JFrame f=new javax.swing.JFrame();
 		SevenSegmentDoubleNumberDisplay nixieNumberDisplay=new SevenSegmentDoubleNumberDisplay(5,3, .7f);
 		nixieNumberDisplay.setBackground(java.awt.Color.DARK_GRAY);

@@ -119,7 +119,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		l=new javax.swing.JLabel();
 		gridbag.addLayoutComponent(l, constraints);
 		add(l);
-//		System.out.println("§ "+w+" "+h);
+//		CLASS_LOGGER.debug("§ "+w+" "+h);
 		java.awt.Dimension dim=new java.awt.Dimension(w,h);
 		setPreferredSize(dim);
 		setMinimumSize(dim);
@@ -190,7 +190,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 	}
 	public static void main(java.lang.String[] args) throws InterruptedException, IOException
 	{
-		java.util.Random rand=new java.util.Random(System.currentTimeMillis());
+		java.util.Random rand=new java.util.Random(java.time.Clock.systemDefaultZone().millis());
 		javax.swing.JFrame f=new javax.swing.JFrame();
 		de.netsysit.util.generator.Sequence<java.awt.Color> seq=new de.elbosso.util.generator.generalpurpose.RandomColor();
 		javax.swing.JPanel p=new javax.swing.JPanel(new java.awt.GridLayout(0,1));
@@ -203,7 +203,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 			p.add(nixieNumberDisplay);
 			double v=rand.nextDouble()*24000-12000;
 			nixieNumberDisplay.setValue(v);
-//			System.out.println("\" "+nixieNumberDisplay.getPreferredSize());
+//			CLASS_LOGGER.debug("\" "+nixieNumberDisplay.getPreferredSize());
 		}
 		NixieDoubleNumberDisplay nixieNumberDisplay=new NixieDoubleNumberDisplay(Color.WHITE,5,3, .62f);
 		nixieNumberDisplay.setBackground(java.awt.Color.DARK_GRAY);
@@ -218,7 +218,7 @@ public class NixieDoubleNumberDisplay extends NumberDisplay
 		miniMax=new de.netsysit.util.lang.MiniMax(10000, Double.MAX_VALUE);
 		nixieNumberDisplay.register(Color.RED,miniMax);
 			java.awt.Dimension dim=nixieNumberDisplay.getPreferredSize();
-			System.out.println(dim);
+			CLASS_LOGGER.debug("dim: {}",dim);
 			//if we wouldnt do that -width and height of nnd would be 0 and that would mean that JComponent doesnt even start to paint anything
 			nixieNumberDisplay.setSize(dim);
 		nixieNumberDisplay.invalidate();

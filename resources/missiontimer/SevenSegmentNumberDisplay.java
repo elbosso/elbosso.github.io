@@ -264,7 +264,7 @@ public class SevenSegmentNumberDisplay extends NumberDisplay
 
 	public static void main(java.lang.String[] args) throws InterruptedException
 	{
-		java.util.Random rand=new java.util.Random(System.currentTimeMillis());
+		java.util.Random rand=new java.util.Random(java.time.Clock.systemDefaultZone().millis());
 		javax.swing.JFrame f=new javax.swing.JFrame();
 		SevenSegmentNumberDisplay nixieNumberDisplay=new SevenSegmentNumberDisplay(5, .7f);
 		nixieNumberDisplay.setBackground(java.awt.Color.DARK_GRAY);

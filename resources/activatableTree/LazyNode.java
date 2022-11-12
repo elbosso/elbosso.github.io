@@ -218,7 +218,7 @@ public abstract class LazyNode extends javax.swing.tree.DefaultMutableTreeNode
 									}
 								} catch (java.lang.Throwable t)
 								{
-t.printStackTrace();
+									EXCEPTION_LOGGER.warn(t.getMessage(),t);
 								}
 							}
 						};

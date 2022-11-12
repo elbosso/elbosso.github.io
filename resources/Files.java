@@ -58,7 +58,7 @@ public class Files
 		p.getInputStream().read(bo);
 		CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
 		p.waitFor();
-		if (System.currentTimeMillis() > 0)
+		if (java.time.Clock.systemDefaultZone().millis() > 0)
 		{
 			java.io.FileOutputStream fos = new java.io.FileOutputStream(de.elbosso.util.Utilities.getTempDir()+"/console");
 			java.io.PrintWriter pw = new java.io.PrintWriter(fos);
@@ -76,7 +76,7 @@ public class Files
 			CLASS_LOGGER.trace(new String(bo));// + " " + new String(bo).length());
 			p.waitFor();
 		}
-		if (System.currentTimeMillis() > 0)
+		if (java.time.Clock.systemDefaultZone().millis() > 0)
 		{
 			java.io.FileOutputStream fos = new java.io.FileOutputStream(de.elbosso.util.Utilities.getTempDir()+"/console");
 			java.io.PrintWriter pw = new java.io.PrintWriter(fos);

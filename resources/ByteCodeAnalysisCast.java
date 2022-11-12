@@ -43,7 +43,7 @@ import org.slf4j.event.Level;
 public class ByteCodeAnalysisCast extends java.lang.Object
 {
 	private final static org.slf4j.Logger CLASS_LOGGER =org.slf4j.LoggerFactory.getLogger(ByteCodeAnalysisCast.class);
-	private java.util.Random rand=new java.util.Random(System.currentTimeMillis());
+	private java.util.Random rand=new java.util.Random(java.time.Clock.systemDefaultZone().millis());
 
 	public ByteCodeAnalysisCast()
 	{
