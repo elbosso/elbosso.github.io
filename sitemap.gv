@@ -39,6 +39,7 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_nerd_dictation_tests [label="Nerd-Dictation Tests" href="https://elbosso.github.io/nerd_dictation_tests.html"]
 node_struktur_pkis_re__archivzeitstempel [label="Struktur von PKIs re: Archivzeitstempel" href="https://elbosso.github.io/struktur_pkis_re__archivzeitstempel.html"]
             node_struktur_pkis_re__archivzeitstempel -> node_security_qa_kotlin_bibliotheken_java
 node_security_qa_kotlin_bibliotheken_java [label="Security QA mit Kotlin-Bibliotheken und Java" href="https://elbosso.github.io/security_qa_kotlin_bibliotheken_java.html"]
@@ -479,6 +480,7 @@ node_excel__nein___awk_gnuplot_ [label="Excel? Nein - AWK und Gnuplot!" href="ht
             node_excel__nein___awk_gnuplot_ -> node_gnuplot_statistik
 node_guenstiges_arm64_board_raspi_formfaktor [label="Günstiges Arm64-Board mit Raspi-Formfaktor" href="https://elbosso.github.io/guenstiges_arm64_board_raspi_formfaktor.html"]
             node_guenstiges_arm64_board_raspi_formfaktor -> node_pxe_boot_rock64
+            node_guenstiges_arm64_board_raspi_formfaktor -> node_tvheadend_build_auf_arm
             node_guenstiges_arm64_board_raspi_formfaktor -> node_xbrowsersync_docker
             node_guenstiges_arm64_board_raspi_formfaktor -> node_raspi_booten_uebers_netz_pxe_nfs
 node_installation_ubuntu_20_04_auf_raid_0 [label="Installation von Ubuntu 20.04 auf Raid-0" href="https://elbosso.github.io/installation_ubuntu_20_04_auf_raid_0.html"]
@@ -646,8 +648,8 @@ node_lxc_netzwerk_router [label="LXC Netzwerk Router" href="https://elbosso.gith
             node_lxc_netzwerk_router -> node_docker_ci_cd
             node_lxc_netzwerk_router -> node_umzug_netzwerklabor_abgeschlossen
             node_lxc_netzwerk_router -> node_lxc_netzwerk_degrader
-            node_lxc_netzwerk_router -> node_automatisches_setup_eines_netzwerklabors
             node_lxc_netzwerk_router -> node_ci_cd_shellcheck
+            node_lxc_netzwerk_router -> node_automatisches_setup_eines_netzwerklabors
             node_lxc_netzwerk_router -> node_performanceprobleme_kvm_windows
 node_van_der_pol__chua_systeme [label="Van-der-Pol- und Chua-Systeme" href="https://elbosso.github.io/van_der_pol__chua_systeme.html"]
             node_van_der_pol__chua_systeme -> node_fraktal_selberbauen
@@ -765,9 +767,9 @@ node_tpedit_erstellt_interaktive_formulare [label="TPEdit erstellt interaktive F
 node_beanshell_debugger___neue_version [label="BeanShell Debugger - neue Version" href="https://elbosso.github.io/beanshell_debugger___neue_version.html"]
 node_ci_cd_shellcheck [label="CI/CD mit shellcheck" href="https://elbosso.github.io/ci_cd_shellcheck.html"]
 node_lxc_netzwerk_degrader [label="LXC Netzwerk Degrader" href="https://elbosso.github.io/lxc_netzwerk_degrader.html"]
+            node_lxc_netzwerk_degrader -> node_ci_cd_shellcheck
             node_lxc_netzwerk_degrader -> node_multi_user_webdav__docker__github
             node_lxc_netzwerk_degrader -> node_automatisches_setup_eines_netzwerklabors
-            node_lxc_netzwerk_degrader -> node_ci_cd_shellcheck
             node_lxc_netzwerk_degrader -> node_hardware_netzwerk_degrader
 node_anpassung_gnu_screen [label="Anpassung von Gnu Screen" href="https://elbosso.github.io/anpassung_gnu_screen.html"]
             node_anpassung_gnu_screen -> node_laptop_recycling_revisited
@@ -844,8 +846,8 @@ node_certstream___ressourcenverbrauch [label="Certstream - Ressourcenverbrauch" 
             node_certstream___ressourcenverbrauch -> node_grafana__alarmierung_xmpp
 node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian May, Kerry Ellis & Vittorio Grigolo: Bohemian Rhapsody" href="https://elbosso.github.io/brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody.html"]
 node_mandelbrot_sets_mittels_shadern_berechnen [label="Mandelbrot-Sets mittels Shadern berechnen" href="https://elbosso.github.io/mandelbrot_sets_mittels_shadern_berechnen.html"]
-            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_java
+            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_julia_mengen_shadern_umgesetzt
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_faehrnisse_des_buildprozesses_unter_windows
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_gpu_programmierung_java_revisited
@@ -1096,7 +1098,6 @@ node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" 
             node_linux_wifi_accesspoint_aus_raspi -> node_raspberry_pi_ads_b_receiver
 node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
             node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
-            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
             node_implizites_eulerverfahren -> node_visualisierung_strange_attractors_java3d
             node_implizites_eulerverfahren -> node_mathematik_beliebiger_praezision_java
@@ -1156,8 +1157,8 @@ node_kochbuch_beispiele_auf_github [label="Kochbuch-Beispiele auf GitHub" href="
 node_sqlshell_integriert_ldap_jdbc_bridge [label="sQLshell integriert LDAP-JDBC-Bridge" href="https://elbosso.github.io/sqlshell_integriert_ldap_jdbc_bridge.html"]
 node_beaninfo_generierung_via_annotations [label="BeanInfo-Generierung via Annotations" href="https://elbosso.github.io/beaninfo_generierung_via_annotations.html"]
             node_beaninfo_generierung_via_annotations -> node_maven_archetype_dwb__module
-            node_beaninfo_generierung_via_annotations -> node_beaninfo_runtime_annotations
             node_beaninfo_generierung_via_annotations -> node_github_repository_beaninfo_generator
+            node_beaninfo_generierung_via_annotations -> node_beaninfo_runtime_annotations
 node_34c3___meine_favoriten [label="34c3 - Meine Favoriten" href="https://elbosso.github.io/34c3___meine_favoriten.html"]
             node_34c3___meine_favoriten -> node_log4j_plugin_jconsole_visualvm
             node_34c3___meine_favoriten -> node_35c3___meine_favoriten_bisher
@@ -1826,8 +1827,8 @@ node_sqlshell_plugins_sind_zurueck_ [label="sQLshell-Plugins sind zurück!" href
 node_trac___eine_beispielkonfiguration [label="Trac - eine Beispielkonfiguration" href="https://elbosso.github.io/trac___eine_beispielkonfiguration.html"]
             node_trac___eine_beispielkonfiguration -> node_trac_0_12_changelogmacro
 node_spieleengine_ii [label="Spieleengine II" href="https://elbosso.github.io/spieleengine_ii.html"]
-            node_spieleengine_ii -> node_spieleengine_iii
             node_spieleengine_ii -> node_spieleengine_v
+            node_spieleengine_ii -> node_spieleengine_iii
 node_remote_conky__amp__python [label="Remote Conky &amp; Python" href="https://elbosso.github.io/remote_conky__amp__python.html"]
 node_remote_conky__amp__dwb_ [label="Remote Conky &amp; dWb+" href="https://elbosso.github.io/remote_conky__amp__dwb_.html"]
 node_icons_videobearbeitung [label="Icons für Videobearbeitung" href="https://elbosso.github.io/icons_videobearbeitung.html"]
@@ -1888,8 +1889,8 @@ node_beanshell_module_dwb_ [label="BeanShell-Module in dWb+" href="https://elbos
 node_virtual_router_manager_ap [label="Virtual Router Manager als AP" href="https://elbosso.github.io/virtual_router_manager_ap.html"]
 node_groupedjtable [label="GroupedJTable" href="https://elbosso.github.io/groupedjtable.html"]
 node_java_bibliotheken_android [label="Java-Bibliotheken für Android" href="https://elbosso.github.io/java_bibliotheken_android.html"]
-            node_java_bibliotheken_android -> node_ganymed_ssh2_android
             node_java_bibliotheken_android -> node_jtidy_android_portiert
+            node_java_bibliotheken_android -> node_ganymed_ssh2_android
 node_tile_identifizierung_tracks [label="Tile-Identifizierung für Tracks" href="https://elbosso.github.io/tile_identifizierung_tracks.html"]
 node_screen_for_x [label="screen for X" href="https://elbosso.github.io/screen_for_x.html"]
             node_screen_for_x -> node_screen_for_x_synology_nas
@@ -1935,13 +1936,13 @@ node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
             node_ebmap4d -> node_ortsbezuege_dwb_
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
             node_ebmap4d -> node_tile_server_openstreetmap
             node_ebmap4d -> node_ebmap4d_bitmap_layer
-            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
             node_ebmap4d -> node_geojson_ebmap4d
