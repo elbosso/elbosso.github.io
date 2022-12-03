@@ -39,13 +39,18 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_datentypen_custom_extensions_x509_zertifikaten [label="Datentypen für Custom Extensions von X509-Zertifikaten" href="https://elbosso.github.io/datentypen_custom_extensions_x509_zertifikaten.html"]
+            node_datentypen_custom_extensions_x509_zertifikaten -> node_attribute_custom_extensions_x_509v3_zertifikaten
+node_archunit___alle__es_noch_nicht_kennen___ [label="Archunit - für alle, die es noch nicht kennen..." href="https://elbosso.github.io/archunit___alle__es_noch_nicht_kennen___.html"]
 node_nerd_dictation_tests [label="Nerd-Dictation Tests" href="https://elbosso.github.io/nerd_dictation_tests.html"]
 node_struktur_pkis_re__archivzeitstempel [label="Struktur von PKIs re: Archivzeitstempel" href="https://elbosso.github.io/struktur_pkis_re__archivzeitstempel.html"]
             node_struktur_pkis_re__archivzeitstempel -> node_security_qa_kotlin_bibliotheken_java
+            node_struktur_pkis_re__archivzeitstempel -> node_git_beweisfestes_langzeitarchiv___
 node_security_qa_kotlin_bibliotheken_java [label="Security QA mit Kotlin-Bibliotheken und Java" href="https://elbosso.github.io/security_qa_kotlin_bibliotheken_java.html"]
 node_filestash_docker_zoo [label="Filestash im Docker-Zoo" href="https://elbosso.github.io/filestash_docker_zoo.html"]
 node_timestamping_server___release_version_1_3_0 [label="Timestamping Server - Release Version 1.3.0" href="https://elbosso.github.io/timestamping_server___release_version_1_3_0.html"]
             node_timestamping_server___release_version_1_3_0 -> node_struktur_pkis_re__archivzeitstempel
+            node_timestamping_server___release_version_1_3_0 -> node_git_beweisfestes_langzeitarchiv___
 node_epochdateformat_java [label="EpochDateFormat.java" href="https://elbosso.github.io/epochdateformat_java.html"]
 node__funktionale__programmierung_dwb_ [label="\"Funktionale\" Programmierung in dWb+" href="https://elbosso.github.io/_funktionale__programmierung_dwb_.html"]
 node_tail__f_ist_eine_schlechte_idee [label="Tail -f ist eine schlechte Idee" href="https://elbosso.github.io/tail__f_ist_eine_schlechte_idee.html"]
@@ -125,6 +130,7 @@ node_linkcollections_2022_vii [label="LinkCollections 2022 VII" href="https://el
             node_linkcollections_2022_vii -> node_linkcollections_2022_viii
 node_debian_11_auf_rock64 [label="Debian 11 auf Rock64" href="https://elbosso.github.io/debian_11_auf_rock64.html"]
             node_debian_11_auf_rock64 -> node_kubernetes_rock64
+            node_debian_11_auf_rock64 -> node_beschleunigung_scp_trotz_verhaeltnismaeszig_schwacher_hardware
 node_praesentationen_ki___ml_vertrauen__pki_ [label="Präsentationen zu KI / ML und Vertrauen (PKI)" href="https://elbosso.github.io/praesentationen_ki___ml_vertrauen__pki_.html"]
             node_praesentationen_ki___ml_vertrauen__pki_ -> node_sicherheit_beim_fernzugang_ssh
 node_neuer_konkurrent_gitlab__github_gitea___ [label="Neuer Konkurrent für Gitlab, Github und Gitea(?)" href="https://elbosso.github.io/neuer_konkurrent_gitlab__github_gitea___.html"]
@@ -483,6 +489,7 @@ node_guenstiges_arm64_board_raspi_formfaktor [label="Günstiges Arm64-Board mit 
             node_guenstiges_arm64_board_raspi_formfaktor -> node_tvheadend_build_auf_arm
             node_guenstiges_arm64_board_raspi_formfaktor -> node_xbrowsersync_docker
             node_guenstiges_arm64_board_raspi_formfaktor -> node_raspi_booten_uebers_netz_pxe_nfs
+            node_guenstiges_arm64_board_raspi_formfaktor -> node_beschleunigung_scp_trotz_verhaeltnismaeszig_schwacher_hardware
 node_installation_ubuntu_20_04_auf_raid_0 [label="Installation von Ubuntu 20.04 auf Raid-0" href="https://elbosso.github.io/installation_ubuntu_20_04_auf_raid_0.html"]
 node_links___verschiedenes_ii [label="Links - Verschiedenes II" href="https://elbosso.github.io/links___verschiedenes_ii.html"]
 node_synchronisierung_aizawa_systemen [label="Synchronisierung von Aizawa-Systemen" href="https://elbosso.github.io/synchronisierung_aizawa_systemen.html"]
@@ -618,6 +625,7 @@ node_testdaten_xml_schema_generieren [label="Testdaten für ein XML Schema gener
 node_s_mime_email_crypto [label="S/MIME Email Crypto" href="https://elbosso.github.io/s_mime_email_crypto.html"]
 node_bill_withers__stevie_wonder__john_legend___lean_on_me [label="Bill Withers, Stevie Wonder, John Legend - Lean On Me" href="https://elbosso.github.io/bill_withers__stevie_wonder__john_legend___lean_on_me.html"]
 node_8tb_raid5_raspberry_pi [label="8TB Raid5 mit Raspberry Pi" href="https://elbosso.github.io/8tb_raid5_raspberry_pi.html"]
+            node_8tb_raid5_raspberry_pi -> node_beschleunigung_scp_trotz_verhaeltnismaeszig_schwacher_hardware
             node_8tb_raid5_raspberry_pi -> node_raspberry_schnellem_massenspeicher
             node_8tb_raid5_raspberry_pi -> node_ueberwachung_festplattenstatus_grafana
 node_blind_signatures__java__openssl [label="Blind Signatures, Java, OpenSSL" href="https://elbosso.github.io/blind_signatures__java__openssl.html"]
@@ -1097,9 +1105,9 @@ node_garten_fruehjahr_2018 [label="Garten im Frühjahr 2018" href="https://elbos
 node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" href="https://elbosso.github.io/linux_wifi_accesspoint_aus_raspi.html"]
             node_linux_wifi_accesspoint_aus_raspi -> node_raspberry_pi_ads_b_receiver
 node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
-            node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
-            node_implizites_eulerverfahren -> node_visualisierung_strange_attractors_java3d
+            node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
+            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_mathematik_beliebiger_praezision_java
 node_eine_ganz_alte_bibliothek_bildverarbeitung [label="Eine ganz alte Bibliothek für Bildverarbeitung" href="https://elbosso.github.io/eine_ganz_alte_bibliothek_bildverarbeitung.html"]
             node_eine_ganz_alte_bibliothek_bildverarbeitung -> node_gpu_programmierung_java_revisited
@@ -1143,6 +1151,7 @@ node_batik_java9_modulsystem_____9760_ [label="Batik und Java9 Modulsystem = &#9
 node_java_bug_modulsystem_nutzung_jaas [label="Java-Bug in Modulsystem bei Nutzung von JAAS" href="https://elbosso.github.io/java_bug_modulsystem_nutzung_jaas.html"]
             node_java_bug_modulsystem_nutzung_jaas -> node_java9_umstellung
             node_java_bug_modulsystem_nutzung_jaas -> node_aenderungen_datumsformat_java___schon_wieder_
+            node_java_bug_modulsystem_nutzung_jaas -> node_batik_java9_modulsystem_____9760_
             node_java_bug_modulsystem_nutzung_jaas -> node_rechtevergabe_java
 node_beaninfo_runtime_annotations [label="BeanInfo durch Runtime-Annotations" href="https://elbosso.github.io/beaninfo_runtime_annotations.html"]
             node_beaninfo_runtime_annotations -> node_beaninfo_runtime_annotations__gist_
@@ -1157,8 +1166,8 @@ node_kochbuch_beispiele_auf_github [label="Kochbuch-Beispiele auf GitHub" href="
 node_sqlshell_integriert_ldap_jdbc_bridge [label="sQLshell integriert LDAP-JDBC-Bridge" href="https://elbosso.github.io/sqlshell_integriert_ldap_jdbc_bridge.html"]
 node_beaninfo_generierung_via_annotations [label="BeanInfo-Generierung via Annotations" href="https://elbosso.github.io/beaninfo_generierung_via_annotations.html"]
             node_beaninfo_generierung_via_annotations -> node_maven_archetype_dwb__module
-            node_beaninfo_generierung_via_annotations -> node_github_repository_beaninfo_generator
             node_beaninfo_generierung_via_annotations -> node_beaninfo_runtime_annotations
+            node_beaninfo_generierung_via_annotations -> node_github_repository_beaninfo_generator
 node_34c3___meine_favoriten [label="34c3 - Meine Favoriten" href="https://elbosso.github.io/34c3___meine_favoriten.html"]
             node_34c3___meine_favoriten -> node_log4j_plugin_jconsole_visualvm
             node_34c3___meine_favoriten -> node_35c3___meine_favoriten_bisher
@@ -1827,8 +1836,8 @@ node_sqlshell_plugins_sind_zurueck_ [label="sQLshell-Plugins sind zurück!" href
 node_trac___eine_beispielkonfiguration [label="Trac - eine Beispielkonfiguration" href="https://elbosso.github.io/trac___eine_beispielkonfiguration.html"]
             node_trac___eine_beispielkonfiguration -> node_trac_0_12_changelogmacro
 node_spieleengine_ii [label="Spieleengine II" href="https://elbosso.github.io/spieleengine_ii.html"]
-            node_spieleengine_ii -> node_spieleengine_v
             node_spieleengine_ii -> node_spieleengine_iii
+            node_spieleengine_ii -> node_spieleengine_v
 node_remote_conky__amp__python [label="Remote Conky &amp; Python" href="https://elbosso.github.io/remote_conky__amp__python.html"]
 node_remote_conky__amp__dwb_ [label="Remote Conky &amp; dWb+" href="https://elbosso.github.io/remote_conky__amp__dwb_.html"]
 node_icons_videobearbeitung [label="Icons für Videobearbeitung" href="https://elbosso.github.io/icons_videobearbeitung.html"]
@@ -1889,8 +1898,8 @@ node_beanshell_module_dwb_ [label="BeanShell-Module in dWb+" href="https://elbos
 node_virtual_router_manager_ap [label="Virtual Router Manager als AP" href="https://elbosso.github.io/virtual_router_manager_ap.html"]
 node_groupedjtable [label="GroupedJTable" href="https://elbosso.github.io/groupedjtable.html"]
 node_java_bibliotheken_android [label="Java-Bibliotheken für Android" href="https://elbosso.github.io/java_bibliotheken_android.html"]
-            node_java_bibliotheken_android -> node_jtidy_android_portiert
             node_java_bibliotheken_android -> node_ganymed_ssh2_android
+            node_java_bibliotheken_android -> node_jtidy_android_portiert
 node_tile_identifizierung_tracks [label="Tile-Identifizierung für Tracks" href="https://elbosso.github.io/tile_identifizierung_tracks.html"]
 node_screen_for_x [label="screen for X" href="https://elbosso.github.io/screen_for_x.html"]
             node_screen_for_x -> node_screen_for_x_synology_nas
@@ -1934,16 +1943,16 @@ node_fbmlandscapes___java3d [label="FbmLandscapes + Java3D" href="https://elboss
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
             node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
+            node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
             node_ebmap4d -> node_ortsbezuege_dwb_
-            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
-            node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
             node_ebmap4d -> node_tile_server_openstreetmap
             node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
             node_ebmap4d -> node_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
