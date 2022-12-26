@@ -57,7 +57,7 @@ javax.swing.table.TableModel
 	{
 		tablemodellistenerlist.remove(l);
 	}
-	protected void fireTableChanged() 
+	public void fireTableChanged()
 	{	
 		if(tablemodellistenerlist.isEmpty()==false)
 		{

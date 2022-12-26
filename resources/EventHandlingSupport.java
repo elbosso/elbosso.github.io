@@ -81,6 +81,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	 */
 
 	@Event(
+			value="propertyChange",
 		inDefaultEventSet = true
 		)
 	public void addPropertyChangeListener( java.beans.PropertyChangeListener l)
@@ -95,6 +96,7 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 	 * @param  l     The listener to be deregistered.
 	 */
 	@Event(
+			value="propertyChange",
 		inDefaultEventSet = true
 		)
 	public void removePropertyChangeListener(java.beans.PropertyChangeListener l)
