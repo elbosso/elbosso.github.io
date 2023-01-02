@@ -4,7 +4,7 @@ package de.elbosso.ui.components;
  Die untenstehende Lizenz berührt nicht die Rechte des Autors der zugrundeliegenden Software
  http://www.jug-muenster.de/swing-apollo-space-program-mission-timer-280/
  
-Copyright (c) 2013-2022.
+Copyright (c) 2013-2023.
 
 Juergen Key. Alle Rechte vorbehalten.
 

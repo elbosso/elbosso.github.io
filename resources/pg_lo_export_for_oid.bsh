@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012-2022.
+Copyright (c) 2012-2023.
 
 Juergen Key. Alle Rechte vorbehalten.
 
