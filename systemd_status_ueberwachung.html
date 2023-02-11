@@ -1,0 +1,755 @@
+<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>SystemD Status Überwachung</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="SystemD Status Überwachung"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/systemd_status_ueberwachung"/> <meta property="og:image" content="https://elbosso.github.io/images/systemdserviceunitsingrafana.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Ich habe neulich eine alte Idee wieder hervorgeholt und ein wenig aufpoliert. Wer Server - oder generell Rechner - mit einer Vielzahl von SystemD-Service-Units am Start hat und bereits einige Aspekte davon per Telegraf, Influx und Grafana überwacht könnte daraus vielleicht ebenfalls Nutzen ziehen: "/> <meta property="article:published_time" content="2023-02-11"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ende_tvheadend_auf_arm__bei_mir_.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> &nbsp; </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>SystemD Status Überwachung</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="ende_tvheadend_auf_arm__bei_mir_.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> <a href="grafana_backup_via_api.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="nerd_dictation_tests.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Python</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">11.02.2023</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/systemdserviceunitsingrafana_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Ich habe neulich eine alte Idee wieder hervorgeholt und ein wenig aufpoliert. Wer Server - oder generell Rechner - mit einer Vielzahl von SystemD-Service-Units am Start hat und bereits einige Aspekte davon per Telegraf, Influx und Grafana überwacht könnte daraus vielleicht ebenfalls Nutzen ziehen: </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Ich habe dafür ein kleines Python-Skript geschrieben, das den Status von SystemD-Service-Units ausliest. Voraussetzung ist Python in der Version 3 und die Library <span class="mdcode">parsedatetime</span> - eventuell zu installieren mitels <span class="mdcode">pip3 install parsedatetime</span> </p><div class="highlight"><pre><span></span><span class="ch">#! /usr/bin/env python</span>
+</p><p>
+<span class="c1"># Getting SystemD services status and uptime</span>
+<span class="c1"># Alexey Nizhegolenko 2018</span>
+</p><p>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">configparser</span>
+<span class="kn">import</span> <span class="nn">parsedatetime</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</p><p>
+<span class="k">def</span> <span class="nf">service_stat</span><span class="p">(</span><span class="n">service</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;systemctl&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">service</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span> <span class="c1"># NOQA</span>
+    <span class="n">output</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+</p><p>
+    <span class="n">service_regx</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;Loaded:.*\/([^ ]*);&quot;</span>
+    <span class="n">status_regx</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;Active:(.*) since (.*);(.*)&quot;</span>
+    <span class="n">status_regx_fail</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;Active:(.*) ([^ ]+) since (.*);(.*)&quot;</span>
+</p><p>
+    <span class="n">service_status</span> <span class="o">=</span> <span class="p">{}</span>
+</p><p>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+        <span class="c1"># Match string like: name.service - Some Application Decription</span>
+        <span class="n">service_search</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">service_regx</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">service_search</span><span class="p">:</span>
+            <span class="n">service_status</span><span class="p">[</span><span class="s1">&#39;service&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">service_search</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="c1"># Match string like: Active: inactive (dead) since Wed 2018-09-19 10:57:30 EEST; 4min 26s ago  # NOQA</span>
+        <span class="n">status_search</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">status_regx</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="n">status_search_f</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">status_regx_fail</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</p><p>
+        <span class="k">if</span> <span class="n">status_search</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="n">status_search</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">status_fail</span> <span class="o">=</span> <span class="n">status_search_f</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;active (running)&#39;</span><span class="p">:</span>
+                <span class="n">service_status</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;inactive (dead)&#39;</span><span class="p">:</span>
+                <span class="n">service_status</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+            <span class="k">elif</span> <span class="n">status_fail</span> <span class="o">==</span> <span class="s1">&#39;failed&#39;</span><span class="p">:</span>
+                <span class="n">service_status</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">service_status</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</p><p>
+            <span class="c1"># Get and convert &quot;since&quot; date in to seconds</span>
+            <span class="n">since_date</span> <span class="o">=</span> <span class="n">status_search</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">cal</span> <span class="o">=</span> <span class="n">parsedatetime</span><span class="o">.</span><span class="n">Calendar</span><span class="p">()</span>
+            <span class="n">time_struct</span><span class="p">,</span> <span class="n">parse_status</span> <span class="o">=</span> <span class="n">cal</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">since_date</span><span class="p">)</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="p">(</span><span class="o">*</span><span class="n">time_struct</span><span class="p">[:</span><span class="mi">6</span><span class="p">])</span>
+            <span class="n">seconds</span> <span class="o">=</span> <span class="n">delta</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+            <span class="n">service_status</span><span class="p">[</span><span class="s1">&#39;status_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+            <span class="k">break</span>
+</p><p>
+    <span class="k">return</span> <span class="n">service_status</span>
+</p><p>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</p><p>
+    <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</p><p>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;LC_ALL&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span>
+</p><p>
+        <span class="c1"># Getting params from config</span>
+        <span class="n">pwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/services_settings.ini&#39;</span> <span class="o">%</span> <span class="n">pwd</span><span class="p">)</span>
+</p><p>
+        <span class="n">services</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SERVICES&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</p><p>
+        <span class="c1"># Run loop with service63s</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">services</span><span class="p">:</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">service_stat</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+</p><p>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">main</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;clear&#39;</span><span class="p">)</span>
+</pre></div> </p><p> Das Skript benötigt noch eine Information dazu, welche der vielen Service-Units genau überwacht werden sollen. Eine Liste der möglichen Kandidaten kann man mittels <span class="mdcode"></span> erhalten, die benötigte ini-Datei könnte dann zum Beispiel wie folgt aussehen: </p><div class="highlight"><pre><span></span><span class="k">[SERVICES]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">atd.service blinkstickmqtt.service cron.service hd-idle.service hddtemp.service iscsid.service libvirtd.service</span>
+</pre></div> </p><p> Diese Daten werden durch das Skript so aufbereitet, dass sie über Telegraf erfasst werden können - dazu benütigt man lediglich die Definition eines <span class="mdcode">exex-input</span> wie im folgenden Beispiel: </p><div class="highlight"><pre><span></span>[[inputs.exec]]
+  commands = [ &quot;python /opt/telegraf/service.py&quot; ]
+  name_override = &quot;services_stats&quot;
+  timeout = &quot;10s&quot;
+  tag_keys = [&quot;service&quot;]
+  data_format = &quot;json&quot;
+</pre></div> </p><p> Zusammen mit dem entsprechenden Grafana-Dashboard kann man dann eine Visualisierung wie zum Beispiel diese hier erstellen (JSON des Dashboards für den Import am Ende dieses Artikels... </p><p> <img src="images/systemdserviceunitsingrafana.png" style="max-width:1637px;" alt="Screenshot" class="center"> <span class="imgdesc"> Beispiel-Dashboard zur Überwachung von SystemD-Service-Units </span> </p><div class="highlight"><pre><span></span>{
+  &quot;annotations&quot;: {
+    &quot;list&quot;: [
+      {
+        &quot;builtIn&quot;: 1,
+        &quot;datasource&quot;: {
+          &quot;type&quot;: &quot;datasource&quot;,
+          &quot;uid&quot;: &quot;grafana&quot;
+        },
+        &quot;enable&quot;: true,
+        &quot;hide&quot;: true,
+        &quot;iconColor&quot;: &quot;rgba(0, 211, 255, 1)&quot;,
+        &quot;name&quot;: &quot;Annotations &amp; Alerts&quot;,
+        &quot;target&quot;: {
+          &quot;limit&quot;: 100,
+          &quot;matchAny&quot;: false,
+          &quot;tags&quot;: [],
+          &quot;type&quot;: &quot;dashboard&quot;
+        },
+        &quot;type&quot;: &quot;dashboard&quot;
+      }
+    ]
+  },
+  &quot;description&quot;: &quot;SystemD services status dashboard for the python script for Telegraf exec plugin.&quot;,
+  &quot;editable&quot;: true,
+  &quot;fiscalYearStartMonth&quot;: 0,
+  &quot;gnetId&quot;: 8348,
+  &quot;graphTooltip&quot;: 0,
+  &quot;id&quot;: 71,
+  &quot;links&quot;: [],
+  &quot;liveNow&quot;: false,
+  &quot;panels&quot;: [
+    {
+      &quot;collapsed&quot;: false,
+      &quot;datasource&quot;: {
+        &quot;type&quot;: &quot;influxdb&quot;,
+        &quot;uid&quot;: &quot;000000001&quot;
+      },
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 1,
+        &quot;w&quot;: 24,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 0
+      },
+      &quot;id&quot;: 6,
+      &quot;panels&quot;: [],
+      &quot;repeat&quot;: &quot;host&quot;,
+      &quot;repeatDirection&quot;: &quot;h&quot;,
+      &quot;targets&quot;: [
+        {
+          &quot;datasource&quot;: {
+            &quot;type&quot;: &quot;influxdb&quot;,
+            &quot;uid&quot;: &quot;000000001&quot;
+          },
+          &quot;refId&quot;: &quot;A&quot;
+        }
+      ],
+      &quot;title&quot;: &quot;Status $host&quot;,
+      &quot;type&quot;: &quot;row&quot;
+    },
+    {
+      &quot;datasource&quot;: {
+        &quot;type&quot;: &quot;influxdb&quot;,
+        &quot;uid&quot;: &quot;000000001&quot;
+      },
+      &quot;fieldConfig&quot;: {
+        &quot;defaults&quot;: {
+          &quot;color&quot;: {
+            &quot;mode&quot;: &quot;thresholds&quot;
+          },
+          &quot;mappings&quot;: [
+            {
+              &quot;options&quot;: {
+                &quot;0&quot;: {
+                  &quot;index&quot;: 0,
+                  &quot;text&quot;: &quot;N/A&quot;
+                },
+                &quot;1&quot;: {
+                  &quot;index&quot;: 1,
+                  &quot;text&quot;: &quot;UP&quot;
+                },
+                &quot;3&quot;: {
+                  &quot;index&quot;: 2,
+                  &quot;text&quot;: &quot;Down&quot;
+                },
+                &quot;4&quot;: {
+                  &quot;index&quot;: 3,
+                  &quot;text&quot;: &quot;FAIL&quot;
+                }
+              },
+              &quot;type&quot;: &quot;value&quot;
+            },
+            {
+              &quot;options&quot;: {
+                &quot;match&quot;: &quot;null&quot;,
+                &quot;result&quot;: {
+                  &quot;color&quot;: &quot;dark-red&quot;,
+                  &quot;index&quot;: 4
+                }
+              },
+              &quot;type&quot;: &quot;special&quot;
+            }
+          ],
+          &quot;thresholds&quot;: {
+            &quot;mode&quot;: &quot;absolute&quot;,
+            &quot;steps&quot;: [
+              {
+                &quot;color&quot;: &quot;rgb(0, 0, 0)&quot;,
+                &quot;value&quot;: null
+              },
+              {
+                &quot;color&quot;: &quot;#508642&quot;,
+                &quot;value&quot;: 1
+              },
+              {
+                &quot;color&quot;: &quot;#bf1b00&quot;,
+                &quot;value&quot;: 3
+              }
+            ]
+          },
+          &quot;unit&quot;: &quot;none&quot;
+        },
+        &quot;overrides&quot;: []
+      },
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 3,
+        &quot;w&quot;: 3,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 1
+      },
+      &quot;id&quot;: 2,
+      &quot;links&quot;: [],
+      &quot;maxDataPoints&quot;: 100,
+      &quot;maxPerRow&quot;: 8,
+      &quot;options&quot;: {
+        &quot;colorMode&quot;: &quot;background&quot;,
+        &quot;graphMode&quot;: &quot;none&quot;,
+        &quot;justifyMode&quot;: &quot;auto&quot;,
+        &quot;orientation&quot;: &quot;horizontal&quot;,
+        &quot;reduceOptions&quot;: {
+          &quot;calcs&quot;: [
+            &quot;lastNotNull&quot;
+          ],
+          &quot;fields&quot;: &quot;&quot;,
+          &quot;values&quot;: false
+        },
+        &quot;textMode&quot;: &quot;auto&quot;
+      },
+      &quot;pluginVersion&quot;: &quot;9.3.2&quot;,
+      &quot;repeat&quot;: &quot;service&quot;,
+      &quot;repeatDirection&quot;: &quot;h&quot;,
+      &quot;targets&quot;: [
+        {
+          &quot;alias&quot;: &quot;$service&quot;,
+          &quot;datasource&quot;: {
+            &quot;type&quot;: &quot;influxdb&quot;,
+            &quot;uid&quot;: &quot;000000001&quot;
+          },
+          &quot;groupBy&quot;: [],
+          &quot;measurement&quot;: &quot;services_stats&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
+            [
+              {
+                &quot;params&quot;: [
+                  &quot;status&quot;
+                ],
+                &quot;type&quot;: &quot;field&quot;
+              }
+            ]
+          ],
+          &quot;tags&quot;: [
+            {
+              &quot;key&quot;: &quot;host&quot;,
+              &quot;operator&quot;: &quot;=~&quot;,
+              &quot;value&quot;: &quot;/^$host$/&quot;
+            },
+            {
+              &quot;condition&quot;: &quot;AND&quot;,
+              &quot;key&quot;: &quot;service&quot;,
+              &quot;operator&quot;: &quot;=~&quot;,
+              &quot;value&quot;: &quot;/^$service$/&quot;
+            }
+          ]
+        }
+      ],
+      &quot;title&quot;: &quot;$service&quot;,
+      &quot;type&quot;: &quot;stat&quot;
+    },
+    {
+      &quot;collapsed&quot;: true,
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 1,
+        &quot;w&quot;: 24,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 7
+      },
+      &quot;id&quot;: 60,
+      &quot;panels&quot;: [],
+      &quot;title&quot;: &quot;Status time $host&quot;,
+      &quot;type&quot;: &quot;row&quot;
+    },
+    {
+      &quot;datasource&quot;: {
+        &quot;type&quot;: &quot;influxdb&quot;,
+        &quot;uid&quot;: &quot;000000001&quot;
+      },
+      &quot;fieldConfig&quot;: {
+        &quot;defaults&quot;: {
+          &quot;color&quot;: {
+            &quot;mode&quot;: &quot;thresholds&quot;
+          },
+          &quot;decimals&quot;: 1,
+          &quot;mappings&quot;: [
+            {
+              &quot;options&quot;: {
+                &quot;match&quot;: &quot;null&quot;,
+                &quot;result&quot;: {
+                  &quot;text&quot;: &quot;N/A&quot;
+                }
+              },
+              &quot;type&quot;: &quot;special&quot;
+            }
+          ],
+          &quot;thresholds&quot;: {
+            &quot;mode&quot;: &quot;absolute&quot;,
+            &quot;steps&quot;: [
+              {
+                &quot;color&quot;: &quot;green&quot;,
+                &quot;value&quot;: null
+              },
+              {
+                &quot;color&quot;: &quot;red&quot;,
+                &quot;value&quot;: 80
+              }
+            ]
+          },
+          &quot;unit&quot;: &quot;s&quot;
+        },
+        &quot;overrides&quot;: []
+      },
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 3,
+        &quot;w&quot;: 3,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 8
+      },
+      &quot;id&quot;: 4,
+      &quot;links&quot;: [],
+      &quot;maxDataPoints&quot;: 100,
+      &quot;maxPerRow&quot;: 8,
+      &quot;options&quot;: {
+        &quot;colorMode&quot;: &quot;none&quot;,
+        &quot;graphMode&quot;: &quot;none&quot;,
+        &quot;justifyMode&quot;: &quot;auto&quot;,
+        &quot;orientation&quot;: &quot;horizontal&quot;,
+        &quot;reduceOptions&quot;: {
+          &quot;calcs&quot;: [
+            &quot;lastNotNull&quot;
+          ],
+          &quot;fields&quot;: &quot;&quot;,
+          &quot;values&quot;: false
+        },
+        &quot;textMode&quot;: &quot;auto&quot;
+      },
+      &quot;pluginVersion&quot;: &quot;9.3.2&quot;,
+      &quot;repeat&quot;: &quot;service&quot;,
+      &quot;repeatDirection&quot;: &quot;h&quot;,
+      &quot;targets&quot;: [
+        {
+          &quot;datasource&quot;: {
+            &quot;type&quot;: &quot;influxdb&quot;,
+            &quot;uid&quot;: &quot;000000001&quot;
+          },
+          &quot;groupBy&quot;: [],
+          &quot;measurement&quot;: &quot;services_stats&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
+            [
+              {
+                &quot;params&quot;: [
+                  &quot;status_time&quot;
+                ],
+                &quot;type&quot;: &quot;field&quot;
+              },
+              {
+                &quot;params&quot;: [],
+                &quot;type&quot;: &quot;last&quot;
+              }
+            ]
+          ],
+          &quot;tags&quot;: [
+            {
+              &quot;key&quot;: &quot;host&quot;,
+              &quot;operator&quot;: &quot;=~&quot;,
+              &quot;value&quot;: &quot;/^$host$/&quot;
+            },
+            {
+              &quot;condition&quot;: &quot;AND&quot;,
+              &quot;key&quot;: &quot;service&quot;,
+              &quot;operator&quot;: &quot;=~&quot;,
+              &quot;value&quot;: &quot;/^$service$/&quot;
+            }
+          ]
+        }
+      ],
+      &quot;title&quot;: &quot;$service&quot;,
+      &quot;type&quot;: &quot;stat&quot;
+    },
+    {
+      &quot;collapsed&quot;: false,
+      &quot;datasource&quot;: {
+        &quot;type&quot;: &quot;influxdb&quot;,
+        &quot;uid&quot;: &quot;000000001&quot;
+      },
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 1,
+        &quot;w&quot;: 24,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 14
+      },
+      &quot;id&quot;: 28,
+      &quot;panels&quot;: [],
+      &quot;targets&quot;: [
+        {
+          &quot;datasource&quot;: {
+            &quot;type&quot;: &quot;influxdb&quot;,
+            &quot;uid&quot;: &quot;000000001&quot;
+          },
+          &quot;refId&quot;: &quot;A&quot;
+        }
+      ],
+      &quot;title&quot;: &quot;Status table $host&quot;,
+      &quot;type&quot;: &quot;row&quot;
+    },
+    {
+      &quot;activePatternIndex&quot;: 1,
+      &quot;datasource&quot;: {
+        &quot;type&quot;: &quot;influxdb&quot;,
+        &quot;uid&quot;: &quot;000000001&quot;
+      },
+      &quot;debug_mode&quot;: false,
+      &quot;defaultPattern&quot;: {
+        &quot;bgColors&quot;: &quot;green|orange|red&quot;,
+        &quot;col_name&quot;: &quot;Value&quot;,
+        &quot;decimals&quot;: 2,
+        &quot;delimiter&quot;: &quot;.&quot;,
+        &quot;enable_bgColor&quot;: false,
+        &quot;enable_time_based_thresholds&quot;: false,
+        &quot;enable_transform&quot;: false,
+        &quot;filter&quot;: {
+          &quot;value_above&quot;: &quot;&quot;,
+          &quot;value_below&quot;: &quot;&quot;
+        },
+        &quot;format&quot;: &quot;none&quot;,
+        &quot;null_color&quot;: &quot;darkred&quot;,
+        &quot;null_value&quot;: &quot;No data&quot;,
+        &quot;row_name&quot;: &quot;_series_&quot;,
+        &quot;thresholds&quot;: &quot;70,90&quot;,
+        &quot;time_based_thresholds&quot;: [],
+        &quot;transform_values&quot;: &quot;_value_|_value_|_value_&quot;,
+        &quot;valueName&quot;: &quot;avg&quot;
+      },
+      &quot;default_title_for_rows&quot;: &quot;Metric&quot;,
+      &quot;gridPos&quot;: {
+        &quot;h&quot;: 11,
+        &quot;w&quot;: 24,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 15
+      },
+      &quot;id&quot;: 32,
+      &quot;links&quot;: [],
+      &quot;nullPointMode&quot;: &quot;connected&quot;,
+      &quot;patterns&quot;: [
+        {
+          &quot;bgColors&quot;: &quot;black|green|red&quot;,
+          &quot;col_name&quot;: &quot;_1_&quot;,
+          &quot;decimals&quot;: 2,
+          &quot;delimiter&quot;: &quot;.&quot;,
+          &quot;enable_bgColor&quot;: true,
+          &quot;enable_time_based_thresholds&quot;: false,
+          &quot;enable_transform&quot;: true,
+          &quot;filter&quot;: {
+            &quot;value_above&quot;: &quot;&quot;,
+            &quot;value_below&quot;: &quot;&quot;
+          },
+          &quot;format&quot;: &quot;none&quot;,
+          &quot;name&quot;: &quot;state&quot;,
+          &quot;null_color&quot;: &quot;darkred&quot;,
+          &quot;null_value&quot;: &quot;No data&quot;,
+          &quot;pattern&quot;: &quot;Influx.status_enum.*$&quot;,
+          &quot;row_name&quot;: &quot;_2_&quot;,
+          &quot;thresholds&quot;: &quot;1,3&quot;,
+          &quot;time_based_thresholds&quot;: [],
+          &quot;transform_values&quot;: &quot;N/A|UP|?|DOWN|FAIL&quot;,
+          &quot;valueName&quot;: &quot;current&quot;
+        },
+        {
+          &quot;bgColors&quot;: &quot;black|green|red&quot;,
+          &quot;col_name&quot;: &quot;_1_&quot;,
+          &quot;decimals&quot;: 2,
+          &quot;delimiter&quot;: &quot;.&quot;,
+          &quot;enable_bgColor&quot;: false,
+          &quot;enable_time_based_thresholds&quot;: false,
+          &quot;enable_transform&quot;: false,
+          &quot;filter&quot;: {
+            &quot;value_above&quot;: &quot;&quot;,
+            &quot;value_below&quot;: &quot;&quot;
+          },
+          &quot;format&quot;: &quot;s&quot;,
+          &quot;name&quot;: &quot;time&quot;,
+          &quot;null_color&quot;: &quot;darkred&quot;,
+          &quot;null_value&quot;: &quot;No data&quot;,
+          &quot;pattern&quot;: &quot;Influx.status_time.*$&quot;,
+          &quot;row_name&quot;: &quot;_2_&quot;,
+          &quot;thresholds&quot;: &quot;1,3&quot;,
+          &quot;time_based_thresholds&quot;: [],
+          &quot;transform_values&quot;: &quot;N/A|UP|?|DOWN|FAIL&quot;,
+          &quot;valueName&quot;: &quot;current&quot;
+        }
+      ],
+      &quot;plugin_title&quot;: &quot;Boom Table&quot;,
+      &quot;row_col_wrapper&quot;: &quot;_&quot;,
+      &quot;sorting_props&quot;: {
+        &quot;col_index&quot;: -1,
+        &quot;direction&quot;: &quot;desc&quot;
+      },
+      &quot;targets&quot;: [
+        {
+          &quot;alias&quot;: &quot;Influx.status_enum.$tag_service&quot;,
+          &quot;datasource&quot;: {
+            &quot;type&quot;: &quot;influxdb&quot;,
+            &quot;uid&quot;: &quot;000000001&quot;
+          },
+          &quot;groupBy&quot;: [
+            {
+              &quot;params&quot;: [
+                &quot;$__interval&quot;
+              ],
+              &quot;type&quot;: &quot;time&quot;
+            },
+            {
+              &quot;params&quot;: [
+                &quot;service&quot;
+              ],
+              &quot;type&quot;: &quot;tag&quot;
+            }
+          ],
+          &quot;measurement&quot;: &quot;services_stats&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;query&quot;: &quot;SELECT \&quot;status\&quot; FROM \&quot;services_stats\&quot; WHERE (\&quot;host\&quot; = &#39;klapauzius&#39; AND \&quot;service\&quot; = &#39;nfs-kernel-server&#39;) AND $timeFilter&quot;,
+          &quot;rawQuery&quot;: false,
+          &quot;refId&quot;: &quot;K&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
+            [
+              {
+                &quot;params&quot;: [
+                  &quot;status&quot;
+                ],
+                &quot;type&quot;: &quot;field&quot;
+              },
+              {
+                &quot;params&quot;: [],
+                &quot;type&quot;: &quot;last&quot;
+              }
+            ]
+          ],
+          &quot;tags&quot;: [
+            {
+              &quot;key&quot;: &quot;host&quot;,
+              &quot;operator&quot;: &quot;=&quot;,
+              &quot;value&quot;: &quot;klapauzius&quot;
+            }
+          ]
+        },
+        {
+          &quot;alias&quot;: &quot;Influx.status_time.$tag_service&quot;,
+          &quot;datasource&quot;: {
+            &quot;type&quot;: &quot;influxdb&quot;,
+            &quot;uid&quot;: &quot;000000001&quot;
+          },
+          &quot;groupBy&quot;: [
+            {
+              &quot;params&quot;: [
+                &quot;$__interval&quot;
+              ],
+              &quot;type&quot;: &quot;time&quot;
+            },
+            {
+              &quot;params&quot;: [
+                &quot;service&quot;
+              ],
+              &quot;type&quot;: &quot;tag&quot;
+            }
+          ],
+          &quot;measurement&quot;: &quot;services_stats&quot;,
+          &quot;orderByTime&quot;: &quot;ASC&quot;,
+          &quot;policy&quot;: &quot;default&quot;,
+          &quot;query&quot;: &quot;SELECT \&quot;status\&quot; FROM \&quot;services_stats\&quot; WHERE (\&quot;host\&quot; = &#39;klapauzius&#39; AND \&quot;service\&quot; = &#39;nfs-kernel-server&#39;) AND $timeFilter&quot;,
+          &quot;rawQuery&quot;: false,
+          &quot;refId&quot;: &quot;A&quot;,
+          &quot;resultFormat&quot;: &quot;time_series&quot;,
+          &quot;select&quot;: [
+            [
+              {
+                &quot;params&quot;: [
+                  &quot;status_time&quot;
+                ],
+                &quot;type&quot;: &quot;field&quot;
+              },
+              {
+                &quot;params&quot;: [],
+                &quot;type&quot;: &quot;last&quot;
+              }
+            ]
+          ],
+          &quot;tags&quot;: [
+            {
+              &quot;key&quot;: &quot;host&quot;,
+              &quot;operator&quot;: &quot;=&quot;,
+              &quot;value&quot;: &quot;klapauzius&quot;
+            }
+          ]
+        }
+      ],
+      &quot;title&quot;: &quot;Services&quot;,
+      &quot;type&quot;: &quot;yesoreyeram-boomtable-panel&quot;
+    }
+  ],
+  &quot;refresh&quot;: &quot;30s&quot;,
+  &quot;schemaVersion&quot;: 37,
+  &quot;style&quot;: &quot;dark&quot;,
+  &quot;tags&quot;: [],
+  &quot;templating&quot;: {
+    &quot;list&quot;: [
+      {
+        &quot;current&quot;: {
+          &quot;selected&quot;: false,
+          &quot;text&quot;: &quot;nanopineo3&quot;,
+          &quot;value&quot;: &quot;nanopineo3&quot;
+        },
+        &quot;datasource&quot;: {
+          &quot;type&quot;: &quot;influxdb&quot;,
+          &quot;uid&quot;: &quot;000000001&quot;
+        },
+        &quot;definition&quot;: &quot;SHOW TAG VALUES FROM \&quot;services_stats\&quot; WITH KEY = \&quot;host\&quot;&quot;,
+        &quot;hide&quot;: 0,
+        &quot;includeAll&quot;: false,
+        &quot;multi&quot;: false,
+        &quot;name&quot;: &quot;host&quot;,
+        &quot;options&quot;: [],
+        &quot;query&quot;: &quot;SHOW TAG VALUES FROM \&quot;services_stats\&quot; WITH KEY = \&quot;host\&quot;&quot;,
+        &quot;refresh&quot;: 1,
+        &quot;regex&quot;: &quot;&quot;,
+        &quot;skipUrlSync&quot;: false,
+        &quot;sort&quot;: 0,
+        &quot;tagValuesQuery&quot;: &quot;&quot;,
+        &quot;tagsQuery&quot;: &quot;&quot;,
+        &quot;type&quot;: &quot;query&quot;,
+        &quot;useTags&quot;: false
+      },
+      {
+        &quot;current&quot;: {
+          &quot;selected&quot;: true,
+          &quot;text&quot;: [
+            &quot;All&quot;
+          ],
+          &quot;value&quot;: [
+            &quot;$__all&quot;
+          ]
+        },
+        &quot;datasource&quot;: {
+          &quot;type&quot;: &quot;influxdb&quot;,
+          &quot;uid&quot;: &quot;000000001&quot;
+        },
+        &quot;definition&quot;: &quot;SHOW TAG VALUES FROM \&quot;services_stats\&quot; WITH KEY = \&quot;service\&quot;  WHERE host = &#39;$host&#39; &quot;,
+        &quot;hide&quot;: 0,
+        &quot;includeAll&quot;: true,
+        &quot;multi&quot;: true,
+        &quot;name&quot;: &quot;service&quot;,
+        &quot;options&quot;: [],
+        &quot;query&quot;: &quot;SHOW TAG VALUES FROM \&quot;services_stats\&quot; WITH KEY = \&quot;service\&quot;  WHERE host = &#39;$host&#39; &quot;,
+        &quot;refresh&quot;: 1,
+        &quot;regex&quot;: &quot;&quot;,
+        &quot;skipUrlSync&quot;: false,
+        &quot;sort&quot;: 0,
+        &quot;tagValuesQuery&quot;: &quot;&quot;,
+        &quot;tagsQuery&quot;: &quot;&quot;,
+        &quot;type&quot;: &quot;query&quot;,
+        &quot;useTags&quot;: false
+      }
+    ]
+  },
+  &quot;time&quot;: {
+    &quot;from&quot;: &quot;now-1h&quot;,
+    &quot;to&quot;: &quot;now&quot;
+  },
+  &quot;timepicker&quot;: {
+    &quot;refresh_intervals&quot;: [
+      &quot;5s&quot;,
+      &quot;10s&quot;,
+      &quot;30s&quot;,
+      &quot;1m&quot;,
+      &quot;5m&quot;,
+      &quot;15m&quot;,
+      &quot;30m&quot;,
+      &quot;1h&quot;,
+      &quot;2h&quot;,
+      &quot;1d&quot;
+    ],
+    &quot;time_options&quot;: [
+      &quot;5m&quot;,
+      &quot;15m&quot;,
+      &quot;1h&quot;,
+      &quot;6h&quot;,
+      &quot;12h&quot;,
+      &quot;24h&quot;,
+      &quot;2d&quot;,
+      &quot;7d&quot;,
+      &quot;30d&quot;
+    ]
+  },
+  &quot;timezone&quot;: &quot;&quot;,
+  &quot;title&quot;: &quot;SytemD Services Status&quot;,
+  &quot;uid&quot;: &quot;6wtmoQJmk&quot;,
+  &quot;version&quot;: 12,
+  &quot;weekStart&quot;: &quot;&quot;
+}
+</pre></div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20SystemD Status Überwachung&body=[SystemD Status Überwachung](https://elbosso.github.io/systemd_status_ueberwachung)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=SystemD Status Überwachung"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20SystemD Status Überwachung&issue[description]=[SystemD Status Überwachung](https://elbosso.github.io/systemd_status_ueberwachung)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=SystemD Status Überwachung"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> BeanInfo durch Runtime-Annotations</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">12.02.2018</span> </p> <span class="smallabstract"><p>Wie bereits in einem früheren Artikel ausgeführt wollte ich untersuchen, ob es möglich wäre, BeanInfos per Annotations bereitzustellen, die über eine Fassade direkt zur Laufzeit ermittelt werden könnten, ohne explizite BeanInfo-Klassen zu benötigen </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="beaninfo_runtime_annotations.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-black w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> Das Ende von TVHeadend auf ARM (bei mir)</span><br> <span class="smallabstract"><p>Ich hatte vor kurzem über meine Versuche berichtet, TVHeadend auf einem (stromsparenderern) ARM-Board zum Laufen zu bringen. Das habe ich aus diversen Gründen aufgegeben, die ich hier darlegen möchte... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="ende_tvheadend_auf_arm__bei_mir_.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Github hat keine Ahnung von Crypto und Sicherheit</span><br> <span class="smallabstract"><p>Morgen - am 1.2.2023 - soll mein neuer $dayjob anfgangen - und damit die Quelle, aus der ich die Mittel beziehe, weiterhin meine Kuchenzutaten bezahlen zu können. Das wird irgendwas mit Sicherheit sein. Und am Tag davor hat sich - wer eigentlich genau? - überlegt: "Komm, lass ihn uns nochmal so richtig auf Betriebstemperatur überkochen!". Aber - der Reihe nach... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="github_hat_keine_ahnung_crypto_sicherheit.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Aktualisierung TileServer - Restrukturierung</span><br> <span class="smallabstract"><p>Ich habe meinen Tile-Server für OpenStreetMap-Daten aktualisiert </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="aktualisierung_tileserver___restrukturierung.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script> <noscript>Der Verfasser</noscript></h4> <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p> <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p> <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p> <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man <a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a> finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p> </div> </div><hr> </div> </div><br> </div> <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top"> <a href="me.html"> <script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script> <noscript>Der Verfasser</noscript> , Damaschke 11, Rudolstadt, <script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script> <noscript>jkey&#64;arcor&#46;de</noscript> </a> <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p> </footer> </body> </html>
