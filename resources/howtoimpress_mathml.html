@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wie man Eindruck schindet - MathML-Variante</title>
+  </head>
+  <body>
+  	<h1>Wie man Eindruck schindet - MathML-Variante</h1>
+  	<p>Ausgehend von der (viel zu einfachen) Formel</p>
+    <p>
+    <math display="block">
+    <mn>1</mn>
+	<mo>+</mo>
+	<mn>1</mn>
+	<mo>=</mo>
+	<mn>2</mn>
+    </math>
+      	<p>kann man zunächst die linke Seite mittels </p>
+    <math display="block">
+    <mi>ln</mi><mo>(</mo><mi>e</mi><mo>)</mo><mo>=</mo><mn>1</mn>
+    </math>
+      	<p>und</p>
+    <math display="block">
+    <msup><mi>sin</mi><mn>2</mn></msup><mi>x</mi><mo>+</mo><msup><mi>cos</mi><mn>2</mn></msup><mi>x</mi><mo>=</mo><mn>1</mn>
+    </math>
+      	<p>etwas komplizieren. Die rechte Seite wird entsprechend durch </p>
+    <math display="block">
+    <mn>2</mn><mo>=</mo><munderover><mo>&sum;</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow>&infin;</mrow></munderover><mfrac>
+			<mn>1</mn>
+			<mrow><msup><mn>2</mn><mi>n</mi></msup></mrow>
+		</mfrac>
+    </math>
+      	<p>ersetzt. Damit ergibt sich unsere Formel nach Einsetzen nun zu: </p>
+    <math display="block">
+    <mi>ln</mi><mo>(</mo><mi>e</mi><mo>)</mo>
+    <mo>+</mo><mo>(</mo>
+    <msup><mi>sin</mi><mn>2</mn></msup><mi>x</mi><mo>+</mo><msup><mi>cos</mi><mn>2</mn></msup><mi>x</mi>
+	<mo>)</mo><mo>=</mo>
+    </mo><munderover><mo>&sum;</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow>&infin;</mrow></munderover><mfrac>
+			<mn>1</mn>
+			<mrow><msup><mn>2</mn><mi>n</mi></msup></mrow>
+		</mfrac>
+    </math>
+  	<p>Hier darf man aber nicht aufhören! Das ist immer noch ohne Grenzwertberechnungen und damit zu trivial. Mit folgenden Umformungen</p>
+    <math display="block">
+    <mi>e</mi>
+    <mo>=</mo>
+    <munderover><mi>lim</mi><mrow>z -> &infin;</mrow><mrow></mrow></munderover>
+    <msup><mrow><mo>(</mo><mn>1</mn><mo>+</mo><mfrac>
+			<mn>1</mn>
+			<mi>z</mi>
+		</mfrac><mo>)</mo></mrow><mn>2</mn></msup>
+    </math>
+      	<p>und</p>
+    <math display="block">
+	<mn>1</mn>
+	<mo>=</mo>
+    <mi>cosh</mi><mo>(</mo><mi>y</mi><mo>)</mo>
+    <msqrt><mn>1</mn><mo>-</mo><msup><mi>tanh</mi><mn>2</mn></msup><mi>y</mi></msqrt>
+    </math>
+  	<p>wird daraus: </p>
+    <math display="block">
+    <mi>ln</mi><mo>[</mo>
+    <munderover><mi>lim</mi><mrow>z -> &infin;</mrow><mrow></mrow></munderover>
+    <msup><mrow><mo>(</mo><mn>1</mn><mo>+</mo><mfrac>
+			<mn>1</mn>
+			<mi>z</mi>
+		</mfrac><mo>)</mo></mrow><mn>2</mn></msup>
+    <mo>]</mo>
+    <mo>+</mo><mo>(</mo>
+    <msup><mi>sin</mi><mn>2</mn></msup><mi>x</mi><mo>+</mo><msup><mi>cos</mi><mn>2</mn></msup><mi>x</mi>
+	<mo>)</mo><mo>=</mo>
+    </mo><munderover><mo>&sum;</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow>&infin;</mrow></munderover><mfrac>
+			<mrow>
+    <mi>cosh</mi><mo>(</mo><mi>y</mi><mo>)</mo>
+    <msqrt><mn>1</mn><mo>-</mo><msup><mi>tanh</mi><mn>2</mn></msup><mi>y</mi></msqrt>
+			</mrow>
+			<mrow><msup><mn>2</mn><mi>n</mi></msup></mrow>
+		</mfrac>
+    </math>
+    <p>Damit endet der ursprüngliche Screenshot - ich habe bescheiden noch eine weitere Umformung aus der <a href="http://www.falk-net.de/ingo/fhma/mathematik/docus/ma_formelsammlung.pdf">Formelsammlung</a> vorzuschlagen, die den allzu trivialen Sinus-Term reduziert: </p>
+    <math display="block">
+    <msup><mi>sin</mi><mn>2</mn></msup><mi>x</mi>
+    <mo>=</mo>
+    <mfrac>
+    <mrow><mn>1</mn><mo>-</mo><msup><mi>cos</mi><mn>2</mn></msup><mi>x</mi></mrow>
+			<mn>2</mn>
+		</mfrac>
+    </math>
+    <p>Damit ende ich mit der Gesamtformel als: </p>
+    <math display="block">
+    <mi>ln</mi><mo>[</mo>
+    <munderover><mi>lim</mi><mrow>z -> &infin;</mrow><mrow></mrow></munderover>
+    <msup><mrow><mo>(</mo><mn>1</mn><mo>+</mo><mfrac>
+			<mn>1</mn>
+			<mi>z</mi>
+		</mfrac><mo>)</mo></mrow><mn>2</mn></msup>
+    <mo>]</mo>
+    <mo>+</mo><mo>(</mo>
+    <mfrac>
+    <mrow><mn>1</mn><mo>-</mo><msup><mi>cos</mi><mn>2</mn></msup><mi>x</mi></mrow>
+			<mn>2</mn>
+		</mfrac>
+    <mo>+</mo><msup><mi>cos</mi><mn>2</mn></msup><mi>x</mi>
+	<mo>)</mo><mo>=</mo>
+    </mo><munderover><mo>&sum;</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mrow>&infin;</mrow></munderover><mfrac>
+			<mrow>
+    <mi>cosh</mi><mo>(</mo><mi>y</mi><mo>)</mo>
+    <msqrt><mn>1</mn><mo>-</mo><msup><mi>tanh</mi><mn>2</mn></msup><mi>y</mi></msqrt>
+			</mrow>
+			<mrow><msup><mn>2</mn><mi>n</mi></msup></mrow>
+		</mfrac>
+    </math>
+    </p>
+  </body>
+</html>
+
