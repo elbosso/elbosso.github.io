@@ -1,4 +1,23 @@
-<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>Excel? Nein - AWK und Gnuplot!</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="Excel? Nein - AWK und Gnuplot!"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/excel__nein___awk_gnuplot_"/> <meta property="og:image" content="https://img.youtube.com/vi/jJ02kEETw70/default.jpg"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Nachdem ich neulich ein Video zum Thema AWK gefunden hatte habe ich gedacht - da geht noch mehr "/> <meta property="article:published_time" content="2020-12-17"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+<head>
+<title>Excel? Nein - AWK und Gnuplot!</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta property="og:title" content="Excel? Nein - AWK und Gnuplot!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://elbosso.github.io/excel__nein___awk_gnuplot_" />
+<meta property="og:image" content="https://img.youtube.com/vi/jJ02kEETw70/default.jpg"/>
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="elbosso.github.io" />
+<meta property="og:description" content="Nachdem ich neulich ein Video zum Thema AWK gefunden hatte habe ich gedacht - da geht noch mehr
+" />
+<meta property="article:published_time" content="2020-12-17">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" />
+<link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css" />
+<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -17,68 +36,591 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="guenstiges_arm64_board_raspi_formfaktor.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="raspi_booten_uebers_netz_pxe_nfs.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Excel? Nein - AWK und Gnuplot!</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="guenstiges_arm64_board_raspi_formfaktor.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">17.12.2020</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="https://img.youtube.com/vi/jJ02kEETw70/default.jpg"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="updates"> <h5>Updates</h5> <ul> <li> <a href="#66"> 17. Dezember 2020 </a> </li> </ul> </div> <div class="w3-container w3-padding" id="abstract"> <p>Nachdem ich neulich ein Video zum Thema AWK gefunden hatte habe ich gedacht - da geht noch mehr </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p><iframe class="center" style="width:100%;max-width:450px;height:450px" src="https://www.youtube.com/embed/jJ02kEETw70" frameborder="0" allowfullscreen> </iframe> <a href="https://www.youtube.com/watch?v=jJ02kEETw70">@youtube.com</a> </p><p> Es ging dabei darum, dass man LibreOffice Calc oder ähnliche Programme nicht benötigt wenn man ein Linux-Terminal hat. Ausgehend von Garys Beispielen habe ich mir eine schnelle Liste von Anforderungen aufgestellt, die ich hier mal mit Syntaxbeispielen zu Lösung darstellen möchte. </p><p> <h1>Beispiel-Setup</h1> </p><p> Ich bin von einer ähnlichen Datenquelle wie Gary ausgegangen - ein einfaches Dateisystem-Listing mittels <span class="mdcode">ls -l</span> sorgte für Input. Ich musste die erste Zeile noch abschneiden damit ich sauber mit tabellarischen Daten arbeiten konnte - dafür sorgte <span class="mdcode">tail -n +2</span>. </p><p> Als erstes wird das Feld mit der Dateigröße in jeder Zeile der Ausgabe ausgegeben: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk &#39;{print $5}&#39;
-</pre></div> </p><p> Die Anzahl der Zeilen kann man mittels <span class="mdcode">wc</span> ermitteln: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| wc -l
-</pre></div> </p><p> Das funktioniert aber auch mit AWK: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk &#39;END{print NR}&#39;
-</pre></div> </p><p> Man kann die extrahierten Daten jeder Zeile durch eine vorangestellte Zeilennummer ergänzen: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk &#39;{print NR&quot;:&quot;$5}&#39;
-</pre></div> </p><p> <h1>Statistik</h1> </p><p> Nun ein wenig Statistik: Die Berechnung des Durchschnitts (Mittelwerts) der Daten in Spalte 5 erfolgt so: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk &#39;BEGIN{sum=0.0}{sum+=$5}END{printf(&quot;Average: %f\n&quot;,sum/NR)}&#39;
-</pre></div> </p><p> Variablen werden von AWK immer auf <span class="mdcode">0</span> initialisiert - daher kann man im vorigen Statement die <span class="mdcode">BEGIN</span> Klausel auch weglassen. Es ist auch möglich, Variablen auf der Kommandozeile zu vereinbaren und dem Skript zu übergeben: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 &#39;{sum+=$N}END{printf(&quot;Average: %f\n&quot;,sum/NR)}&#39;
-</pre></div> </p><p> Wir berechnen zusätzlich die Standardabweichung: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
+</script>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<div class="w3-row">
+						<div class="w3-col m6 s12">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract"
+							   href="guenstiges_arm64_board_raspi_formfaktor.html#content">vorhergehender Artikel</a>
+						</div>
+						<div class="w3-col m6" style="text-align: right">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
+							   href="raspi_booten_uebers_netz_pxe_nfs.html#content">nächster Artikel
+							</a>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m9 s12">
+							<h4>Excel? Nein - AWK und Gnuplot!</h4>
+							<div class="w3-container">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										vorhergehende Artikel in:
+										<a href="guenstiges_arm64_board_raspi_formfaktor.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
+										</a> <!--/li-->
+									</div>
+									<div class="w3-col m4" style="text-align: right">
+										<span class="w3-opacity">17.12.2020</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col m3"><p style="text-align: right">
+							<img style="max-width:128px;" src="https://img.youtube.com/vi/jJ02kEETw70/default.jpg">
+						</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="updates">
+					<h5>Updates</h5>
+					<ul>
+						<li>
+							<a href="#66">
+								17. Dezember 2020
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="w3-container w3-padding" id="abstract">
+<p>Nachdem ich neulich ein Video zum Thema AWK gefunden hatte habe ich gedacht - da geht noch mehr
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p><iframe
+	class="center"
+	style="width:100%;max-width:450px;height:450px"
+	src="https://www.youtube.com/embed/jJ02kEETw70"
+	frameborder="0"
+	allowfullscreen>
+</iframe>
+<a href="https://www.youtube.com/watch?v=jJ02kEETw70">@youtube.com</a>
+</p><p>
+Es ging dabei darum, dass man LibreOffice Calc oder ähnliche Programme nicht benötigt wenn man ein Linux-Terminal hat.
+Ausgehend von Garys Beispielen habe ich mir eine schnelle Liste von Anforderungen aufgestellt, die ich hier mal
+mit Syntaxbeispielen zu Lösung darstellen möchte.
+</p><p>
+<h1>Beispiel-Setup</h1>
+</p><p>
+Ich bin von einer ähnlichen Datenquelle wie Gary ausgegangen - ein einfaches Dateisystem-Listing
+mittels <span class="mdcode">ls -l</span> sorgte für Input. Ich musste die erste Zeile noch abschneiden damit ich sauber mit tabellarischen Daten arbeiten konnte -
+dafür sorgte <span class="mdcode">tail -n +2</span>.
+</p><p>
+Als erstes wird das Feld mit der Dateigröße in jeder Zeile der Ausgabe ausgegeben:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk &#39;{print $5}&#39;
+</pre></div>
+</p><p>
+Die Anzahl der Zeilen kann man mittels <span class="mdcode">wc</span> ermitteln:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| wc -l
+</pre></div>
+</p><p>
+Das funktioniert aber auch mit AWK:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk &#39;END{print NR}&#39;
+</pre></div>
+</p><p>
+Man kann die extrahierten Daten jeder Zeile durch eine vorangestellte Zeilennummer ergänzen:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk &#39;{print NR&quot;:&quot;$5}&#39;
+</pre></div>
+</p><p>
+<h1>Statistik</h1>
+</p><p>
+Nun ein wenig Statistik: Die Berechnung des Durchschnitts (Mittelwerts) der Daten in Spalte 5 erfolgt so:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk &#39;BEGIN{sum=0.0}{sum+=$5}END{printf(&quot;Average: %f\n&quot;,sum/NR)}&#39;
+</pre></div>
+</p><p>
+Variablen werden von AWK immer auf <span class="mdcode">0</span> initialisiert - daher kann man im vorigen Statement die <span class="mdcode">BEGIN</span> Klausel auch weglassen. Es ist
+auch möglich, Variablen auf der Kommandozeile zu vereinbaren und dem Skript zu  übergeben:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 &#39;{sum+=$N}END{printf(&quot;Average: %f\n&quot;,sum/NR)}&#39;
+</pre></div>
+</p><p>
+Wir berechnen zusätzlich die Standardabweichung:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
 &#39;{sum+=$N;sumsq+=$N^2}END{printf(&quot;Average: %f Std deviation: %f\n&quot;,sum/NR,sqrt((sumsq-sum^2/NR)/NR))}&#39;
-</pre></div> </p><p> Dieses Mal wird der Median bestimmt: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 &#39;{print $N}&#39;|sort -n| awk \
+</pre></div>
+</p><p>
+Dieses Mal wird der Median bestimmt:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 &#39;{print $N}&#39;|sort -n| awk \
 &#39;{a[i++]=$1}END{x=int((i+1)/2);if (x &lt; (i+1)/2) y=(a[x-1]+a[x])/2; else y=a[x-1]; printf(&quot;Median: %f\n&quot;,y)}&#39;
-</pre></div> </p><p> Möchte man erfahren, ab welchem Wert ein bestimmter Prozentsatz der Eingaben jeweils unterhalb dieses Wertes liegen (Percentile), kann man das ebenfalls mittels AWK herausfinden: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
+</pre></div>
+</p><p>
+Möchte man erfahren, ab welchem Wert ein bestimmter Prozentsatz der Eingaben jeweils unterhalb dieses Wertes liegen (Percentile), kann man das ebenfalls mittels AWK herausfinden:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
 &#39;{print $N}&#39;|sort -n| awk &#39;{s[NR-1]=$N} END{for(i=0.1;i&lt;=1.0;i+=0.1){printf(&quot;%d %f\n&quot;,i*100,s[int(NR*i-0.5)])}}&#39;
-</pre></div> </p><p> Man kann mittels AWK auch Histogramme erzeugen: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 &#39;{print $N}&#39;|sort -n| awk -v DELTA=150000 \
+</pre></div>
+</p><p>
+Man kann mittels AWK auch Histogramme erzeugen:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 &#39;{print $N}&#39;|sort -n| awk -v DELTA=150000 \
 &#39;BEGIN{delta = (DELTA == &quot;&quot; ? 10000 : DELTA)} \
 {bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets &gt; bucketNr ? numBuckets : bucketNr)} \
 END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf(&quot;%0.1f %0.1f %d\n&quot;), beg, end, cnt[bucketNr];beg = end;}}&#39;&gt;hist.dat
-</pre></div> </p><p> <h1>Gnuplotting</h1> </p><p> In diesem Fall sollten wir uns auf den interessanten Teil des Histogrammes beschränken - das zeigt auch gleich, dass man mehrere Variablen auf der Kommandozeile vereinbaren kann: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 &#39;{print $N}&#39;|sort -n| awk -v DELTA=1000 -v MAX=15001  \
+</pre></div>
+</p><p>
+<h1>Gnuplotting</h1>
+</p><p>
+In diesem Fall sollten wir uns auf den interessanten Teil des Histogrammes beschränken - das zeigt auch gleich, dass man mehrere
+Variablen auf der Kommandozeile vereinbaren kann:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 &#39;{print $N}&#39;|sort -n| awk -v DELTA=1000 -v MAX=15001  \
 &#39;BEGIN{delta = (DELTA == &quot;&quot; ? 10000 : DELTA)} \
 {if($0&lt;15001){bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets &gt; bucketNr ? numBuckets : bucketNr)}} \
 END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf &quot;%0.1f %0.1f %d\n&quot;, beg, end, cnt[bucketNr];beg = end;}}&#39;&gt;hist.dat
-</pre></div> </p><p> Man kann dieses Histogramm direkt mit Gnuplot im Terminal darstellen - die Größe des Plots passt sich automatisch der Größe des Terminals an... </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 &#39;{print $N}&#39;|sort -n| awk -v DELTA=1000 -v MAX=15001  \
+</pre></div>
+</p><p>
+Man kann dieses Histogramm direkt mit Gnuplot im Terminal darstellen - die Größe des Plots passt sich automatisch der Größe des Terminals an...
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 &#39;{print $N}&#39;|sort -n| awk -v DELTA=1000 -v MAX=15001  \
 &#39;BEGIN{delta = (DELTA == &quot;&quot; ? 10000 : DELTA)} \
 {if($0&lt;MAX){bucketNr = int(($0+delta) / delta);cnt[bucketNr]++;numBuckets = (numBuckets &gt; bucketNr ? numBuckets : bucketNr)}} \
 END{for (bucketNr=1; bucketNr&lt;=numBuckets; bucketNr++) {end = beg + delta;printf &quot;%0.1f %0.1f %d\n&quot;, beg, end, cnt[bucketNr];beg = end;}}&#39; \
 |gnuplot -p -e &quot;set terminal dumb size $(tput cols), $(tput lines) enhanced; set autoscale;set style data histogram;set style fill solid;plot &#39;-&#39; using 3:xtic(1)&quot;
-</pre></div> </p><p> <h1>Bedingungen</h1> </p><p> Es ist möglich, nur bestimmte Zellen in der Berechnung zu benutzen - Man kann zum Beispiel anhand regulärer Ausdrücke bestimmte Zeilen ausschließen: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
+</pre></div>
+</p><p>
+<h1>Bedingungen</h1>
+</p><p>
+Es ist möglich, nur bestimmte Zellen in der Berechnung zu benutzen - Man kann zum Beispiel anhand regulärer Ausdrücke bestimmte Zeilen ausschließen:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
 &#39;{if($9 ~ /^m/){sum+=$N;sumsq+=$N^2;count++}} \
 END{printf(&quot;Average: %f Std deviation: %f Count: %d\n&quot;,sum/count,sqrt((sumsq-sum^2/count)/count),count)}&#39;
-</pre></div> </p><p> Es ist dabei auch möglich, die Groß- und Kleinschreibung zu ignorieren: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
+</pre></div>
+</p><p>
+Es ist dabei auch möglich, die Groß- und Kleinschreibung zu ignorieren:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
 &#39;{IGNORECASE = 1;if($9 ~ /^m/){sum+=$N;sumsq+=$N^2;count++}} \
 END{printf(&quot;Average: %f Std deviation: %f Count: %d\n&quot;,sum/count,sqrt((sumsq-sum^2/count)/count),count)}&#39;
-</pre></div> </p><p> Eine alternative Schreibweise dafür: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
+</pre></div>
+</p><p>
+Eine alternative Schreibweise dafür:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
 &#39;IGNORECASE = 1 &amp;&amp; $9 ~ /^m/{sum+=$N;sumsq+=$N^2;count++} \
 END{printf(&quot;Average: %f Std deviation: %f Count: %d\n&quot;,sum/count,sqrt((sumsq-sum^2/count)/count),count)}&#39;
-</pre></div> </p><p> Es ist natürlich auch möglich, die in der Berechnung zu berücksichtigenden Zeilen einfach über ihre Zeilennummern zu bestimmen: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
+</pre></div>
+</p><p>
+Es ist natürlich auch möglich, die in der Berechnung zu berücksichtigenden Zeilen einfach über ihre Zeilennummern zu bestimmen:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
 &#39;{if(NR &gt;9 &amp;&amp; NR&lt;21){sum+=$N;sumsq+=$N^2;count++}} \
 END{printf(&quot;Average: %f Std deviation: %f Count: %d\n&quot;,sum/count,sqrt((sumsq-sum^2/count)/count),count)}&#39;
-</pre></div> </p><p> Eine alternative Schreibweise dafür: </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
+</pre></div>
+</p><p>
+Eine alternative Schreibweise dafür:
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| awk -v N=5 \
 &#39;(NR &gt;9 &amp;&amp; NR&lt;21){sum+=$N;sumsq+=$N^2;count++} \
 END{printf(&quot;Average: %f Std deviation: %f Count: %d\n&quot;,sum/count,sqrt((sumsq-sum^2/count)/count),count)}&#39;
-</pre></div> </p><p> Es ist sogar möglich, Werte über den Vergleich von Daten (Zeitpunkten) zu filtern: </p><div class="highlight"><pre><span></span>ls -lt --time-style=long-iso /usr/bin|awk -v date=2020-06-09 &#39;date&lt;$6{print $8}&#39;
-</pre></div> </p><p> <h1>Funktionen</h1> </p><p> Es gibt auch Möglichkeiten, Funktionen zu definieren - während <span class="mdcode">int(n)</span> einfach nur die Nachkommastellen abschneidet, kann man in AWK eine korrekte Rundungsfunktion wie folgt definieren: </p><div class="highlight"><pre><span></span>func round(n)
+</pre></div>
+</p><p>
+Es ist sogar möglich, Werte über den Vergleich von Daten (Zeitpunkten) zu filtern:
+</p><div class="highlight"><pre><span></span>ls -lt --time-style=long-iso /usr/bin|awk -v date=2020-06-09 &#39;date&lt;$6{print $8}&#39;
+</pre></div>
+</p><p>
+<h1>Funktionen</h1>
+</p><p>
+Es gibt auch Möglichkeiten, Funktionen zu definieren - während <span class="mdcode">int(n)</span> einfach nur die Nachkommastellen abschneidet, kann man in AWK eine korrekte Rundungsfunktion wie folgt definieren:
+</p><div class="highlight"><pre><span></span>func round(n)
 {
   return int(n+0.5)
 }
-</pre></div> </p><p> Eine Funktion für die nächstgrößere ganze Zahl ist ebenfalls sehr einfach zu schaffen: </p><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">ceil</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+</pre></div>
+</p><p>
+Eine Funktion für die nächstgrößere ganze Zahl ist ebenfalls sehr einfach zu schaffen:
+</p><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">ceil</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="k">return</span> <span class="nx">n</span><span class="o">%</span><span class="mi">1</span> <span class="o">?</span> <span class="kr">int</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span><span class="o">+</span><span class="nx">1</span> : <span class="kt">n</span>
 <span class="p">}</span>
-</pre></div> </p><p> <h1>Cheat-Sheet</h1> </p><p> Wer möchte, kann sich das hier angehängte Cheat-Sheet, das ich aus einem <a href="https://de.overleaf.com/latex/examples/python-cheat-sheet/kxzvswnbgqrx">Template</a> erstellt habe auch ausdrucken... </p><p> <dl> <dt><img src="images/mime/Oxygen480-mimetypes-signature_48.png"></dt><dd><a href="resources/license.txt">Lizenz</a></dd> </p><p> <dt><img src="images/mime/Oxygen480-mimetypes-text-x-bibtex_48.png"></dt><dd><a href="resources/awkspreadsheet_cheatsheet.tex">TeX-Sourcecode</a> </dd> </p><p> <dt><img src="images/mime/Oxygen480-mimetypes-application-pdf_48.png"></dt><dd><a href="resources/awkspreadsheet_cheatsheet.pdf">Cheat-Sheet</a></dd> </dl> </p><p> <h3><a name="66">Aktualisierung vom 17. Dezember 2020</a></h3><div class="update">Eine weitere Idee ist das Einfärben einzelner Abschnitte (Zellen) in einer Datei - wieder am Beispiel eines Dateisystemlistings mittels <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI-Escape-Codes.</a> Hier wird die Spalte mit der Dateigröße in Bytes farblich hervorgehoben, wenn der jeweilige Wert größer als eine festgelegte Schwelle ist. Das Beispiel funktioniert nur in Terminals, die Farben darstellen und ANSI-Escape-Sequenzen interpretieren können - beispielsweise <span class="mdcode">xterm.</span> </p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| \
+</pre></div>
+</p><p>
+<h1>Cheat-Sheet</h1>
+</p><p>
+Wer möchte, kann sich das hier angehängte Cheat-Sheet, das ich aus einem
+<a href="https://de.overleaf.com/latex/examples/python-cheat-sheet/kxzvswnbgqrx">Template</a>
+erstellt habe auch ausdrucken...
+</p><p>
+<dl>
+<dt><img src="images/mime/Oxygen480-mimetypes-signature_48.png"></dt><dd><a href="resources/license.txt">Lizenz</a></dd>
+</p><p>
+<dt><img src="images/mime/Oxygen480-mimetypes-text-x-bibtex_48.png"></dt><dd><a href="resources/awkspreadsheet_cheatsheet.tex">TeX-Sourcecode</a>
+</dd>
+</p><p>
+<dt><img src="images/mime/Oxygen480-mimetypes-application-pdf_48.png"></dt><dd><a href="resources/awkspreadsheet_cheatsheet.pdf">Cheat-Sheet</a></dd>
+</dl>
+</p><p>
+<h3><a name="66">Aktualisierung vom 17. Dezember 2020</a></h3><div class="update">Eine weitere Idee ist das Einfärben einzelner Abschnitte (Zellen) in einer Datei - wieder am Beispiel eines
+Dateisystemlistings mittels
+<a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI-Escape-Codes.</a>
+Hier wird die Spalte mit der Dateigröße in Bytes farblich hervorgehoben, wenn der jeweilige Wert
+größer als eine festgelegte Schwelle ist. Das Beispiel funktioniert nur in Terminals, die Farben darstellen und ANSI-Escape-Sequenzen
+interpretieren können - beispielsweise <span class="mdcode">xterm.</span>
+</p><div class="highlight"><pre><span></span>ls -l /usr/bin |tail -n +2| \
 awk &#39;{if($5&gt;999999)print NR&quot;\t&quot;$1&quot;\t&quot;$2&quot;\t&quot;$3&quot;\t&quot;$4&quot;\t\033[1;31m&quot;$5&quot;\033[0m&quot;; \
 else print NR&quot;\t&quot;$1&quot;\t&quot;$2&quot;\t&quot;$3&quot;\t&quot;$4&quot;\t&quot;$5;}&#39;
-</pre></div> <p> Das Cheat-Sheet wurde natürlich entsprechend erweitert... </div> </p> </div> <div class="w3-container w3-padding" id="referers"> <h3> Artikel, die hierher verlinken </h3> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">02.11.2021</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht... </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="gps__nmea__tracks_gnuplot_animationen_verarbeiten.html#content">Öffnen</a> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> AWK Linksammlung </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">29.10.2021</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich habe bereits darüber berichtet, dass man in vielen Fällen AWK den Vorzug vor Excel und ähnlichem geben kann (und sollte!) - hier nun einige weitere Inspirationen dahingehend </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="awk_linksammlung.html#content">Öffnen</a> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Gnuplot und Statistik </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">26.05.2021</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich bin neulich bei Mastodon über eine Anfrage gestolpert, wie man online schnell eine graphische Darstellung statistischer Daten mit Mittelwert usw. anfertigen könnte. Ich gab dazu einige Suchparameter ergänzt um den Schlüsselbegriff "Gnuplot" ein und fand sofort einen Artikel, der erklärte, wie man das angefragte Szenario mittels Gnuplot umsetzen könnte. </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="gnuplot_statistik.html#content">Öffnen</a> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Renderer für generierte Dungeons mit Ansi-Steuercodes </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">15.01.2021</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Nachdem ich neulich mein AWK-Kochbuch um ein neues Rezept erweitert habe mit dem es möglich ist, einzelne Felder einer Datei regelbasiert mittels Ansi-Escape-Sequenzen unterschiedlich einzufärben, hat mich der Ansi-Steuercode-Virus wieder voll erwischt... </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="renderer_generierte_dungeons_ansi_steuercodes.html#content">Öffnen</a> </p> </div> </div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Excel? Nein - AWK und Gnuplot!&body=[Excel? Nein - AWK und Gnuplot!](https://elbosso.github.io/excel__nein___awk_gnuplot_)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Excel? Nein - AWK und Gnuplot!"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Excel? Nein - AWK und Gnuplot!&issue[description]=[Excel? Nein - AWK und Gnuplot!](https://elbosso.github.io/excel__nein___awk_gnuplot_)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Excel? Nein - AWK und Gnuplot!"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2023 II</span><br> <span class="smallabstract"><p>Nach der ersten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_ii.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> MITMProxy im Docker-Zoo</span><br> <span class="smallabstract"><p>Es ist wieder mal ein neuer Container in meinem Docker-Zoo eingezogen </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mitmproxy_docker_zoo.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Closing Time - Tom Waits</span><br> <span class="smallabstract"><p>Ich habe neulich festgestellt, dass ich Tom Waits bisher immer völlig falsch eingeschätzt habe, da ich nur noch sein Spätwerk der 80er und 90er kannte. Neulich bin ich jedoch auf seine erste Platte gestoßen, von der ich hier mal nur zwei Beispiele verlinke: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="closing_time___tom_waits.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</pre></div>
+<p>
+Das Cheat-Sheet wurde natürlich entsprechend erweitert...
+</div>
+</p>				</div>
+				<div class="w3-container w3-padding" id="referers">
+				<h3>
+					Artikel, die hierher verlinken
+				</h3>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
+							GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">02.11.2021</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht...
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="gps__nmea__tracks_gnuplot_animationen_verarbeiten.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
+							AWK Linksammlung
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">29.10.2021</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>Ich habe bereits darüber berichtet, dass man in vielen Fällen
+AWK
+den Vorzug vor Excel und ähnlichem geben kann (und sollte!) - hier nun einige weitere Inspirationen dahingehend
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="awk_linksammlung.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
+							Gnuplot und Statistik
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">26.05.2021</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>Ich bin neulich bei Mastodon über eine Anfrage gestolpert, wie man online schnell eine graphische Darstellung statistischer Daten mit
+Mittelwert usw. anfertigen könnte. Ich gab dazu einige Suchparameter ergänzt um den Schlüsselbegriff
+"Gnuplot"
+ein und
+fand sofort einen Artikel, der erklärte, wie man das angefragte Szenario mittels Gnuplot umsetzen könnte.
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="gnuplot_statistik.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
+							Renderer für generierte Dungeons mit Ansi-Steuercodes
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">15.01.2021</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>Nachdem ich
+neulich
+mein AWK-Kochbuch um ein neues Rezept erweitert habe mit dem es möglich ist, einzelne Felder einer Datei
+regelbasiert mittels Ansi-Escape-Sequenzen unterschiedlich einzufärben, hat mich der Ansi-Steuercode-Virus wieder voll erwischt...
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="renderer_generierte_dungeons_ansi_steuercodes.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgithub">
+					<p>
+						<a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Excel? Nein - AWK und Gnuplot!&body=[Excel? Nein - AWK und Gnuplot!](https://elbosso.github.io/excel__nein___awk_gnuplot_)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+						<a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Excel? Nein - AWK und Gnuplot!"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+					</p>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgitlab">
+					<p>
+						<a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Excel? Nein - AWK und Gnuplot!&issue[description]=[Excel? Nein - AWK und Gnuplot!](https://elbosso.github.io/excel__nein___awk_gnuplot_)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+						<a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Excel? Nein - AWK und Gnuplot!"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+					</p>
+				</div>
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png"  width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a>
+						<a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+						<a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Artikel von "backThen" -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Vor 5 Jahren hier im Blog</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+						<p class="w3-large">
+							Maven-Archetype für dWb+ Module</p>
+						<p class="w3-small" style="text-align: right">
+							<span class="w3-opacity">16.04.2018</span>
+						</p>
+						<span class="smallabstract"><p>Nachdem ich bereits ein GitHub-Repository für die
+Beispiele aus dem Kochbuch für
+dWb+ veröffentlicht habe, folgt nun hier ein Archetype
+zur entwicklung eigener Module
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="maven_archetype_dwb__module.html#content">
+							Weiterlesen...
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
+						<a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 III</span><br>
+						<span class="smallabstract"><p>Nach der
+letzten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_iii.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Biometrie - schlecht oder gut?</span><br>
+						<span class="smallabstract"><p>Ich habe in meinem
+Vortrag
+zum Thema Vertrauen Biometrie nur ganz am Rande gestreift - aufmerksamen Zuhörern ist
+vielleicht dennoch nicht entgangen, dass sich mein Blick darauf ain klein wenig geändert hat. Und das kam so...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="biometrie___schlecht_gut_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 II</span><br>
+						<span class="smallabstract"><p>Nach der
+ersten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_ii.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript></h4> <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p> <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p> <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p> <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man <a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a> finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p> </div> </div><hr> </div> </div><br> </div> <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top"> <a href="me.html"> <script>
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a>
+						finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 III</span><br>
+							<span class="smallabstract"><p>Nach der
+letzten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_iii.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Biometrie - schlecht oder gut?</span><br>
+							<span class="smallabstract"><p>Ich habe in meinem
+Vortrag
+zum Thema Vertrauen Biometrie nur ganz am Rande gestreift - aufmerksamen Zuhörern ist
+vielleicht dennoch nicht entgangen, dass sich mein Blick darauf ain klein wenig geändert hat. Und das kam so...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="biometrie___schlecht_gut_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 II</span><br>
+							<span class="smallabstract"><p>Nach der
+ersten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_ii.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript> , Damaschke 11, Rudolstadt, <script>
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
 		<!--
 abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
 -->
-		</script> <noscript>jkey&#64;arcor&#46;de</noscript> , PEN: 1.3.6.1.4.1.59452 </a> <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p> </footer> </body> </html>
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+		, PEN: 1.3.6.1.4.1.59452
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>

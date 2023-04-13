@@ -1,4 +1,28 @@
-<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>Conky & InfluxDB</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="Conky & InfluxDB"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/conky___influxdb"/> <meta property="og:image" content="https://elbosso.github.io/images/asciiart_tux.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Nachdem ich hier schon länger nichts mehr über Conky berichtet habe, aber immer noch ein großer Fan bin habe ich nun versucht, Conky mit InfluxDB zu verbinden. "/> <meta property="article:published_time" content="2019-06-29"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+<head>
+<title>Conky & InfluxDB</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta property="og:title" content="Conky & InfluxDB" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://elbosso.github.io/conky___influxdb" />
+<meta property="og:image" content="https://elbosso.github.io/images/asciiart_tux.png"/>
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="elbosso.github.io" />
+<meta property="og:description" content="Nachdem ich hier schon länger nichts mehr über
+Conky
+berichtet habe, aber immer noch ein großer Fan bin habe ich nun versucht, Conky
+mit
+InfluxDB
+zu verbinden.
+" />
+<meta property="article:published_time" content="2019-06-29">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" />
+<link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css" />
+<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -17,19 +41,396 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="daten_inline_gnuplot_scripts.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="repo_auf_github__telegraf_.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Conky & InfluxDB</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="daten_inline_gnuplot_scripts.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> <a href="certstream___ressourcenverbrauch.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="swing_inspector.html#content"> <span class="w3-tag w3-black w3-margin-bottom">GUI</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">29.06.2019</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/asciiart_tux_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Nachdem ich hier schon länger nichts mehr über <a href="icons_conky.html">Conky</a> berichtet habe, aber immer noch ein großer Fan bin habe ich nun versucht, Conky mit <a href="certstream__influxdb__grafana_netflix.html">InfluxDB</a> zu verbinden. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Nachdem für <a href="http://conky.sourceforge.net/variables.html">Conky</a> die seltsamsten Erweiterungen gebaut werden und eine nicht müde werdende Community immer neue <a href="https://www.google.com/search?hs=vN6&channel=fs&q=conky+themes&tbm=isch&source=univ&client=ubuntu&sa=X&ved=2ahUKEwi70ZzK2dThAhXGKVAKHVe-BqAQsAR6BAgJEAE&biw=1413&bih=917">Themes</a> entwickelt werden habe ich überlegt, ob es nicht möglich wäre, mittels der <a href="https://docs.influxdata.com/influxdb/v1.7/guides/querying_data/">HTTP-Api</a> von InfluxDB Informationen aus der InfluyDB zu holen und sie dann mittels Conky darzustellen. </p><p> Obwohl ich mir Mühe gegeben habe und wenigstens ein paar <a href="https://stackoverflow.com/questions/42628888/get-https-page-content-with-lua">Links</a> gesucht <a href="http://regex.info/blog/lua/json">habe,</a> von denen ich lernen wollte, wie ich das mittels <a href="https://www.lua.org/">Lua</a> realisieren könnte - offenbar dem Mittel der Wahl wenn es um spezifische <a href="https://github.com/brndnmtthws/conky/wiki/Lua">Erweiterungen von Conky</a> geht - habe ich rasch festgestellt, dass ich mich dann nicht nur aus meiner Komfortzone hinausbewegen würde, sondern in meine Leidenszone hinein. </p><p> Also habe ich etwas genommen, bei dem ich ein wenig weiß, was ich tue und bei dem fast immer das Ergebnis rauskommt, das ich möchte (manchmal kommen noch weitere Ergebnisse, die ich nicht möchte, aber wenigstens kann ich die dann benutzen, um noch etwas zu lernen): Linux und Bash-Scripting. Conky erlaubt es nämlich, einfache Bash-Scripte oder sogar Shell-One-Liner zu schreiben, deren Ergebnis Conky dann darstellt. Hier ist ein solches Beispiel dargestellt, um aus der InfluxDB die aktuelle Prozessortemperatur meines Systems zu holen: </p><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">s</span> <span class="o">-</span><span class="n">G</span> <span class="s1">&#39;http://influxdb.host.name:8086/query?pretty=true&#39;</span> <span class="o">--</span><span class="n">data</span><span class="o">-</span><span class="n">urlencode</span> <span class="s2">&quot;db=monitoring&quot;</span> <span class="o">--</span><span class="n">data</span><span class="o">-</span><span class="n">urlencode</span> \
+</script>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<div class="w3-row">
+						<div class="w3-col m6 s12">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract"
+							   href="daten_inline_gnuplot_scripts.html#content">vorhergehender Artikel</a>
+						</div>
+						<div class="w3-col m6" style="text-align: right">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
+							   href="repo_auf_github__telegraf_.html#content">nächster Artikel
+							</a>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m9 s12">
+							<h4>Conky & InfluxDB</h4>
+							<div class="w3-container">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										vorhergehende Artikel in:
+										<a href="daten_inline_gnuplot_scripts.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
+										</a> <!--/li-->
+										<a href="certstream___ressourcenverbrauch.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span>
+										</a> <!--/li-->
+										<a href="swing_inspector.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">GUI</span>
+										</a> <!--/li-->
+									</div>
+									<div class="w3-col m4" style="text-align: right">
+										<span class="w3-opacity">29.06.2019</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col m3"><p style="text-align: right">
+							<img style="max-width:128px;" src="images/asciiart_tux_t.png">
+						</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Nachdem ich hier schon länger nichts mehr über
+<a href="icons_conky.html">Conky</a>
+berichtet habe, aber immer noch ein großer Fan bin habe ich nun versucht, Conky
+mit
+<a href="certstream__influxdb__grafana_netflix.html">InfluxDB</a>
+zu verbinden.
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p>Nachdem für
+<a href="http://conky.sourceforge.net/variables.html">Conky</a> die seltsamsten Erweiterungen gebaut werden und
+eine nicht müde werdende Community immer neue
+<a href="https://www.google.com/search?hs=vN6&channel=fs&q=conky+themes&tbm=isch&source=univ&client=ubuntu&sa=X&ved=2ahUKEwi70ZzK2dThAhXGKVAKHVe-BqAQsAR6BAgJEAE&biw=1413&bih=917">Themes</a>
+entwickelt werden habe ich überlegt, ob es nicht möglich wäre,
+mittels der
+<a href="https://docs.influxdata.com/influxdb/v1.7/guides/querying_data/">HTTP-Api</a>
+von InfluxDB Informationen aus der InfluyDB zu holen und sie dann mittels Conky darzustellen.
+</p><p>
+Obwohl ich mir Mühe gegeben habe und wenigstens ein paar
+<a href="https://stackoverflow.com/questions/42628888/get-https-page-content-with-lua">Links</a>
+gesucht
+<a href="http://regex.info/blog/lua/json">habe,</a>
+von denen ich lernen wollte, wie ich das mittels
+<a href="https://www.lua.org/">Lua</a>
+realisieren könnte - offenbar dem Mittel der Wahl wenn es um spezifische
+<a href="https://github.com/brndnmtthws/conky/wiki/Lua">Erweiterungen von Conky</a>
+geht - habe ich rasch festgestellt, dass ich mich dann nicht nur aus meiner
+Komfortzone hinausbewegen würde, sondern in meine Leidenszone hinein.
+</p><p>
+Also habe ich etwas genommen, bei dem ich ein wenig weiß, was ich tue und bei dem fast immer
+das Ergebnis rauskommt, das ich möchte (manchmal kommen noch weitere Ergebnisse, die ich nicht möchte, aber wenigstens
+kann ich die dann benutzen, um noch etwas zu lernen): Linux und Bash-Scripting.
+Conky erlaubt es nämlich, einfache Bash-Scripte oder sogar Shell-One-Liner zu schreiben, deren Ergebnis Conky dann darstellt.
+Hier ist ein solches Beispiel dargestellt, um aus der InfluxDB die aktuelle Prozessortemperatur meines Systems zu holen:
+</p><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">s</span> <span class="o">-</span><span class="n">G</span> <span class="s1">&#39;http://influxdb.host.name:8086/query?pretty=true&#39;</span> <span class="o">--</span><span class="n">data</span><span class="o">-</span><span class="n">urlencode</span> <span class="s2">&quot;db=monitoring&quot;</span> <span class="o">--</span><span class="n">data</span><span class="o">-</span><span class="n">urlencode</span> \
 <span class="s2">&quot;q=SELECT </span><span class="se">\&quot;</span><span class="s2">temp_input</span><span class="se">\&quot;</span><span class="s2"> FROM </span><span class="se">\&quot;</span><span class="s2">sensors</span><span class="se">\&quot;</span><span class="s2"> WHERE </span><span class="se">\&quot;</span><span class="s2">host</span><span class="se">\&quot;</span><span class="s2">=&#39;hostname&#39; AND </span><span class="se">\&quot;</span><span class="s2">chip</span><span class="se">\&quot;</span><span class="s2">=&#39;coretemp-isa-0000&#39; ORDER BY time DESC LIMIT 1&quot;</span> \
 <span class="o">|</span><span class="n">python3</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import sys, json; print(json.load(sys.stdin)[&#39;results&#39;][0][&#39;series&#39;][0][&#39;values&#39;][0][1])&quot;</span>
-</pre></div> <p> Diesen Schnipsel einfach mit $exec (Conky-Variable) kombinieren und schon hat man die Informationen, die man darstellen möchte. Das Schöne daran: Man muss dafür nicht mal ein graphisches System oder einen Browser bemühen: Da Conky auch ein <a href="rechnerueberwachung_conky.html">Textinterface</a> hat, kann man die Informationen aus InfluxDB auch in einer <a href="gnu_screen_sitzung_wenig_aufgepeppt.html">Screen-Session</a> im Auge behalten! </p> </div> <div class="w3-container w3-padding" id="referers"> <h3> Artikel, die hierher verlinken </h3> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Grafana: Alarmierung mit XMPP </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">01.09.2019</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Nachdem bei mir im "Home-Lab" Grafana kombiniert mit Influxdb prächtig funktioniert, habe ich mir über das Thema Alarmierung Gedanken gemacht... </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="grafana__alarmierung_xmpp.html#content">Öffnen</a> </p> </div> </div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Conky & InfluxDB&body=[Conky & InfluxDB](https://elbosso.github.io/conky___influxdb)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Conky & InfluxDB"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Conky & InfluxDB&issue[description]=[Conky & InfluxDB](https://elbosso.github.io/conky___influxdb)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Conky & InfluxDB"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-black w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2023 II</span><br> <span class="smallabstract"><p>Nach der ersten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_ii.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> MITMProxy im Docker-Zoo</span><br> <span class="smallabstract"><p>Es ist wieder mal ein neuer Container in meinem Docker-Zoo eingezogen </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mitmproxy_docker_zoo.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Closing Time - Tom Waits</span><br> <span class="smallabstract"><p>Ich habe neulich festgestellt, dass ich Tom Waits bisher immer völlig falsch eingeschätzt habe, da ich nur noch sein Spätwerk der 80er und 90er kannte. Neulich bin ich jedoch auf seine erste Platte gestoßen, von der ich hier mal nur zwei Beispiele verlinke: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="closing_time___tom_waits.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</pre></div>
+<p>
+Diesen Schnipsel einfach mit $exec (Conky-Variable) kombinieren und schon hat man die Informationen, die man darstellen möchte. Das
+Schöne daran: Man muss dafür nicht mal ein graphisches System oder einen Browser bemühen:
+Da Conky auch ein
+<a href="rechnerueberwachung_conky.html">Textinterface</a>
+hat, kann man die Informationen aus InfluxDB auch in einer
+<a href="gnu_screen_sitzung_wenig_aufgepeppt.html">Screen-Session</a>
+im Auge behalten!
+</p>				</div>
+				<div class="w3-container w3-padding" id="referers">
+				<h3>
+					Artikel, die hierher verlinken
+				</h3>
+					<div class="w3-row">
+					<div class="w3-col m8 s12">
+						<h4>
+							Grafana: Alarmierung mit XMPP
+						</h4>
+					</div>
+					<div class="w3-col m4"><p style="text-align: right">
+						<span class="w3-opacity">01.09.2019</span>
+					</p>
+					</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m8 s12">
+<p>Nachdem bei mir im "Home-Lab"
+Grafana
+kombiniert mit
+Influxdb
+prächtig funktioniert, habe ich mir über
+das Thema Alarmierung Gedanken gemacht...
+</p>						</div>
+						<div class="w3-col m4">
+							<p style="text-align: right">
+								<a class="w3-button w3-padding-large w3-white w3-border" href="grafana__alarmierung_xmpp.html#content">Öffnen</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgithub">
+					<p>
+						<a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Conky & InfluxDB&body=[Conky & InfluxDB](https://elbosso.github.io/conky___influxdb)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+						<a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Conky & InfluxDB"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+					</p>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgitlab">
+					<p>
+						<a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Conky & InfluxDB&issue[description]=[Conky & InfluxDB](https://elbosso.github.io/conky___influxdb)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+						<a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Conky & InfluxDB"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+					</p>
+				</div>
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png"  width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a>
+						<a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+						<a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Artikel von "backThen" -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Vor 5 Jahren hier im Blog</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+						<p class="w3-large">
+							Maven-Archetype für dWb+ Module</p>
+						<p class="w3-small" style="text-align: right">
+							<span class="w3-opacity">16.04.2018</span>
+						</p>
+						<span class="smallabstract"><p>Nachdem ich bereits ein GitHub-Repository für die
+Beispiele aus dem Kochbuch für
+dWb+ veröffentlicht habe, folgt nun hier ein Archetype
+zur entwicklung eigener Module
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="maven_archetype_dwb__module.html#content">
+							Weiterlesen...
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-black w3-margin-bottom">GUI</span></a>
+						<a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
+						<a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 III</span><br>
+						<span class="smallabstract"><p>Nach der
+letzten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_iii.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Biometrie - schlecht oder gut?</span><br>
+						<span class="smallabstract"><p>Ich habe in meinem
+Vortrag
+zum Thema Vertrauen Biometrie nur ganz am Rande gestreift - aufmerksamen Zuhörern ist
+vielleicht dennoch nicht entgangen, dass sich mein Blick darauf ain klein wenig geändert hat. Und das kam so...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="biometrie___schlecht_gut_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 II</span><br>
+						<span class="smallabstract"><p>Nach der
+ersten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_ii.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript></h4> <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p> <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p> <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p> <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man <a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a> finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p> </div> </div><hr> </div> </div><br> </div> <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top"> <a href="me.html"> <script>
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a>
+						finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 III</span><br>
+							<span class="smallabstract"><p>Nach der
+letzten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_iii.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Biometrie - schlecht oder gut?</span><br>
+							<span class="smallabstract"><p>Ich habe in meinem
+Vortrag
+zum Thema Vertrauen Biometrie nur ganz am Rande gestreift - aufmerksamen Zuhörern ist
+vielleicht dennoch nicht entgangen, dass sich mein Blick darauf ain klein wenig geändert hat. Und das kam so...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="biometrie___schlecht_gut_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 II</span><br>
+							<span class="smallabstract"><p>Nach der
+ersten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_ii.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript> , Damaschke 11, Rudolstadt, <script>
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
 		<!--
 abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
 -->
-		</script> <noscript>jkey&#64;arcor&#46;de</noscript> , PEN: 1.3.6.1.4.1.59452 </a> <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p> </footer> </body> </html>
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+		, PEN: 1.3.6.1.4.1.59452
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
