@@ -28,6 +28,8 @@ public class ResourceLoader extends java.lang.Object
 	private static java.util.Map<java.lang.String, java.net.URL> resourceCache=new java.util.HashMap();
 	private static java.util.Map<java.lang.String, java.net.URL> resourceCacheUnaltered=new java.util.HashMap();
 	private static java.io.File dockerSecretRoot=new java.io.File("/run/secrets/");
+	private static java.io.File destinationDir;
+	private static boolean storeLoadedImages;
 
 	public static InputStream getResourceAsStream(String s)
 	{
@@ -237,6 +239,16 @@ public class ResourceLoader extends java.lang.Object
 			is.close();
 		}catch(java.lang.Throwable exp){EXCEPTION_LOGGER.error(exp.getMessage(),exp);}
 		manageFallback();
+		storeLoadedImages=false;
+		java.lang.String destinationDirName=System.getProperty(ResourceLoader.class.getName()+".destinationDirName");
+		if(destinationDirName!=null)
+		{
+			destinationDir=new java.io.File(destinationDirName);
+			if (destinationDir.exists() == false)
+				destinationDir.mkdirs();
+			if ((destinationDir.exists()) && (destinationDir.isDirectory()))
+				storeLoadedImages = true;
+		}
 	}
 	static void manageFallback()
 	{
@@ -344,6 +356,25 @@ public class ResourceLoader extends java.lang.Object
 			os.close();
 		}
 	}
+	private static void saveAsPNG(java.net.URL url)
+	{
+		if(url!=null)
+		{
+			if(storeLoadedImages)
+			{
+				try
+				{
+					java.awt.image.BufferedImage bimg = javax.imageio.ImageIO.read(url);
+					java.io.File destinationFile = new java.io.File(destinationDir, url.getPath().substring(url.getPath().lastIndexOf('/') + 1));
+					javax.imageio.ImageIO.write(bimg, "png", destinationFile);
+				}
+				catch(java.io.IOException exp)
+				{
+					EXCEPTION_LOGGER.warn(exp.getMessage(),exp);
+				}
+			}
+		}
+	}
 	public static synchronized java.net.URL getImgResource(java.lang.String arg)
 	{
 		java.net.URL rv=getResource(arg);
@@ -352,6 +383,8 @@ public class ResourceLoader extends java.lang.Object
 			CLASS_LOGGER.trace("getImgResource "+arg);
 			rv=fallBack;
 		}
+		else
+			saveAsPNG(rv);
 		return rv;
 	}
 	public static synchronized java.net.URL getImgResourceUnaltered(java.lang.String arg)
@@ -362,6 +395,8 @@ public class ResourceLoader extends java.lang.Object
 			CLASS_LOGGER.trace("getImgResourceUnaltered "+arg);
 			rv=fallBack;
 		}
+		else
+			saveAsPNG(rv);
 		return rv;
 	}
 	public static synchronized java.net.URL getDockerSecretResource(java.lang.String arg)
