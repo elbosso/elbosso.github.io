@@ -17,135 +17,135 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_features_augmentedjedittextarea.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="karten_aus_voronoi_netzwerken.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>InputStreamIterable</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="the_ultimate_risc___projektupdate_i.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Java</span> </a> <a href="augmentedjedittextarea.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Komponenten</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">06.03.2022</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Für das Projekt <a href="null.html">ultimaterisc</a> benötigte ich eine Möglichkeit, einen Include-Mechanismus für die Assembler-Source-Dateien zur Verfügung zu stellen. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Ich realisierte diesen so, dass ich ein <span class="mdcode">Iterable</span> schuf, das wie ein <span class="mdcode">BufferedReader</span> funktioniert: Man übergibt ein Array von <span class="mdcode">InputStreams</span> bei der Instantiierung und kann die neue Instanz dann wie ein normales Iterable über ein String-Array einsetzen - zum Beispiel in <span class="mdcode">foreach</span> -Schleifen. </p><p> Die Implementierung iteriert im Hintergrund über die einzelnen Zeilen eines jeden übergebenen <span class="mdcode">InputStream</span> - sie funktioniert also wie eine Zusammenfassung mehrerer <span class="mdcode">BufferedReader</span>, die für einen jeden übergebenen <span class="mdcode">InputStream</span> mit jeweils einem <span class="mdcode">InputStreamReader</span> als Mittler erzeugt worden wären. </p><p> Der Quelltext der Implementierung: </p><div class="highlight"><pre><span></span>/*
- * Copyright (c) 2022.
- *
- * Juergen Key. Alle Rechte vorbehalten.
- *
- * Weiterverbreitung und Verwendung in nichtkompilierter oder kompilierter Form,
- * mit oder ohne Veraenderung, sind unter den folgenden Bedingungen zulaessig:
- *
- *    1. Weiterverbreitete nichtkompilierte Exemplare muessen das obige Copyright,
- * die Liste der Bedingungen und den folgenden Haftungsausschluss im Quelltext
- * enthalten.
- *    2. Weiterverbreitete kompilierte Exemplare muessen das obige Copyright,
- * die Liste der Bedingungen und den folgenden Haftungsausschluss in der
- * Dokumentation und/oder anderen Materialien, die mit dem Exemplar verbreitet
- * werden, enthalten.
- *    3. Weder der Name des Autors noch die Namen der Beitragsleistenden
- * duerfen zum Kennzeichnen oder Bewerben von Produkten, die von dieser Software
- * abgeleitet wurden, ohne spezielle vorherige schriftliche Genehmigung verwendet
- * werden.
- *
- * DIESE SOFTWARE WIRD VOM AUTOR UND DEN BEITRAGSLEISTENDEN OHNE
- * JEGLICHE SPEZIELLE ODER IMPLIZIERTE GARANTIEN ZUR VERFUEGUNG GESTELLT, DIE
- * UNTER ANDEREM EINSCHLIESSEN: DIE IMPLIZIERTE GARANTIE DER VERWENDBARKEIT DER
- * SOFTWARE FUER EINEN BESTIMMTEN ZWECK. AUF KEINEN FALL IST DER AUTOR
- * ODER DIE BEITRAGSLEISTENDEN FUER IRGENDWELCHE DIREKTEN, INDIREKTEN,
- * ZUFAELLIGEN, SPEZIELLEN, BEISPIELHAFTEN ODER FOLGENDEN SCHAEDEN (UNTER ANDEREM
- * VERSCHAFFEN VON ERSATZGUETERN ODER -DIENSTLEISTUNGEN; EINSCHRAENKUNG DER
- * NUTZUNGSFAEHIGKEIT; VERLUST VON NUTZUNGSFAEHIGKEIT; DATEN; PROFIT ODER
- * GESCHAEFTSUNTERBRECHUNG), WIE AUCH IMMER VERURSACHT UND UNTER WELCHER
- * VERPFLICHTUNG AUCH IMMER, OB IN VERTRAG, STRIKTER VERPFLICHTUNG ODER
- * UNERLAUBTE HANDLUNG (INKLUSIVE FAHRLAESSIGKEIT) VERANTWORTLICH, AUF WELCHEM
- * WEG SIE AUCH IMMER DURCH DIE BENUTZUNG DIESER SOFTWARE ENTSTANDEN SIND, SOGAR,
- * WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
- *
- */
+</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_features_augmentedjedittextarea.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="karten_aus_voronoi_netzwerken.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>InputStreamIterable</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="the_ultimate_risc___projektupdate_i.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Java</span> </a> <a href="augmentedjedittextarea.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Komponenten</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">06.03.2022</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Für das Projekt <a href="null.html">ultimaterisc</a> benötigte ich eine Möglichkeit, einen Include-Mechanismus für die Assembler-Source-Dateien zur Verfügung zu stellen. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Ich realisierte diesen so, dass ich ein <span class="mdcode">Iterable</span> schuf, das wie ein <span class="mdcode">BufferedReader</span> funktioniert: Man übergibt ein Array von <span class="mdcode">InputStreams</span> bei der Instantiierung und kann die neue Instanz dann wie ein normales Iterable über ein String-Array einsetzen - zum Beispiel in <span class="mdcode">foreach</span> -Schleifen. </p><p> Die Implementierung iteriert im Hintergrund über die einzelnen Zeilen eines jeden übergebenen <span class="mdcode">InputStream</span> - sie funktioniert also wie eine Zusammenfassung mehrerer <span class="mdcode">BufferedReader</span>, die für einen jeden übergebenen <span class="mdcode">InputStream</span> mit jeweils einem <span class="mdcode">InputStreamReader</span> als Mittler erzeugt worden wären. </p><p> Der Quelltext der Implementierung: </p><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2022.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Juergen Key. Alle Rechte vorbehalten.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Weiterverbreitung und Verwendung in nichtkompilierter oder kompilierter Form,</span>
+<span class="cm"> * mit oder ohne Veraenderung, sind unter den folgenden Bedingungen zulaessig:</span>
+<span class="cm"> *</span>
+<span class="cm"> *    1. Weiterverbreitete nichtkompilierte Exemplare muessen das obige Copyright,</span>
+<span class="cm"> * die Liste der Bedingungen und den folgenden Haftungsausschluss im Quelltext</span>
+<span class="cm"> * enthalten.</span>
+<span class="cm"> *    2. Weiterverbreitete kompilierte Exemplare muessen das obige Copyright,</span>
+<span class="cm"> * die Liste der Bedingungen und den folgenden Haftungsausschluss in der</span>
+<span class="cm"> * Dokumentation und/oder anderen Materialien, die mit dem Exemplar verbreitet</span>
+<span class="cm"> * werden, enthalten.</span>
+<span class="cm"> *    3. Weder der Name des Autors noch die Namen der Beitragsleistenden</span>
+<span class="cm"> * duerfen zum Kennzeichnen oder Bewerben von Produkten, die von dieser Software</span>
+<span class="cm"> * abgeleitet wurden, ohne spezielle vorherige schriftliche Genehmigung verwendet</span>
+<span class="cm"> * werden.</span>
+<span class="cm"> *</span>
+<span class="cm"> * DIESE SOFTWARE WIRD VOM AUTOR UND DEN BEITRAGSLEISTENDEN OHNE</span>
+<span class="cm"> * JEGLICHE SPEZIELLE ODER IMPLIZIERTE GARANTIEN ZUR VERFUEGUNG GESTELLT, DIE</span>
+<span class="cm"> * UNTER ANDEREM EINSCHLIESSEN: DIE IMPLIZIERTE GARANTIE DER VERWENDBARKEIT DER</span>
+<span class="cm"> * SOFTWARE FUER EINEN BESTIMMTEN ZWECK. AUF KEINEN FALL IST DER AUTOR</span>
+<span class="cm"> * ODER DIE BEITRAGSLEISTENDEN FUER IRGENDWELCHE DIREKTEN, INDIREKTEN,</span>
+<span class="cm"> * ZUFAELLIGEN, SPEZIELLEN, BEISPIELHAFTEN ODER FOLGENDEN SCHAEDEN (UNTER ANDEREM</span>
+<span class="cm"> * VERSCHAFFEN VON ERSATZGUETERN ODER -DIENSTLEISTUNGEN; EINSCHRAENKUNG DER</span>
+<span class="cm"> * NUTZUNGSFAEHIGKEIT; VERLUST VON NUTZUNGSFAEHIGKEIT; DATEN; PROFIT ODER</span>
+<span class="cm"> * GESCHAEFTSUNTERBRECHUNG), WIE AUCH IMMER VERURSACHT UND UNTER WELCHER</span>
+<span class="cm"> * VERPFLICHTUNG AUCH IMMER, OB IN VERTRAG, STRIKTER VERPFLICHTUNG ODER</span>
+<span class="cm"> * UNERLAUBTE HANDLUNG (INKLUSIVE FAHRLAESSIGKEIT) VERANTWORTLICH, AUF WELCHEM</span>
+<span class="cm"> * WEG SIE AUCH IMMER DURCH DIE BENUTZUNG DIESER SOFTWARE ENTSTANDEN SIND, SOGAR,</span>
+<span class="cm"> * WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span><span class="w"></span>
 
-package de.elbosso.util.lang.collections;
+<span class="n">package</span><span class="w"> </span><span class="n">de</span><span class="p">.</span><span class="n">elbosso</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">lang</span><span class="p">.</span><span class="n">collections</span><span class="p">;</span><span class="w"></span>
 
-import java.io.IOException;
-import java.io.InputStream;
+<span class="n">import</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">IOException</span><span class="p">;</span><span class="w"></span>
+<span class="n">import</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">InputStream</span><span class="p">;</span><span class="w"></span>
 
-public class InputStreamArrayReader extends Object implements Iterable&lt;String&gt;
-{
-	private final InputStream[] inputs;
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="n">InputStreamArrayReader</span><span class="w"> </span><span class="n">extends</span><span class="w"> </span><span class="k">Object</span><span class="w"> </span><span class="n">implements</span><span class="w"> </span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">	</span><span class="n">private</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="n">InputStream</span><span class="err">[]</span><span class="w"> </span><span class="n">inputs</span><span class="p">;</span><span class="w"></span>
 
-	public InputStreamArrayReader(InputStream[] inputs)
-	{
-		super();
-		this.inputs = inputs;
-	}
+<span class="w">	</span><span class="k">public</span><span class="w"> </span><span class="n">InputStreamArrayReader</span><span class="p">(</span><span class="n">InputStream</span><span class="err">[]</span><span class="w"> </span><span class="n">inputs</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="err">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">super</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="n">this</span><span class="p">.</span><span class="n">inputs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inputs</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="err">}</span><span class="w"></span>
 
-	@Override
-	public java.util.Iterator&lt;String&gt; iterator()
-	{
-		return new Iterator(inputs);
-	}
+<span class="w">	</span><span class="nv">@Override</span><span class="w"></span>
+<span class="w">	</span><span class="k">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">iterator</span><span class="p">()</span><span class="w"></span>
+<span class="w">	</span><span class="err">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Iterator</span><span class="p">(</span><span class="n">inputs</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="err">}</span><span class="w"></span>
 
-	class Iterator extends Object implements java.util.Iterator&lt;String&gt;
-	{
-		private final InputStream[] inputs;
-		private int loop=0;
-		private java.io.InputStreamReader isr;
-		private java.io.BufferedReader br;
-		private String line;
-		private boolean wasRead;
+<span class="w">	</span><span class="k">class</span><span class="w"> </span><span class="n">Iterator</span><span class="w"> </span><span class="n">extends</span><span class="w"> </span><span class="k">Object</span><span class="w"> </span><span class="n">implements</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">	</span><span class="err">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">private</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="n">InputStream</span><span class="err">[]</span><span class="w"> </span><span class="n">inputs</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="n">private</span><span class="w"> </span><span class="nc">int</span><span class="w"> </span><span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="n">private</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">InputStreamReader</span><span class="w"> </span><span class="n">isr</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="n">private</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">br</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="n">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="n">private</span><span class="w"> </span><span class="k">boolean</span><span class="w"> </span><span class="n">wasRead</span><span class="p">;</span><span class="w"></span>
 
-		Iterator(InputStream[] inputs)
-		{
-			super();
-			this.inputs = inputs;
-			isr=new java.io.InputStreamReader(inputs[loop]);
-			br=new java.io.BufferedReader(isr);
-			wasRead=true;
-		}
+<span class="w">		</span><span class="n">Iterator</span><span class="p">(</span><span class="n">InputStream</span><span class="err">[]</span><span class="w"> </span><span class="n">inputs</span><span class="p">)</span><span class="w"></span>
+<span class="w">		</span><span class="err">{</span><span class="w"></span>
+<span class="w">			</span><span class="n">super</span><span class="p">();</span><span class="w"></span>
+<span class="w">			</span><span class="n">this</span><span class="p">.</span><span class="n">inputs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inputs</span><span class="p">;</span><span class="w"></span>
+<span class="w">			</span><span class="n">isr</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">InputStreamReader</span><span class="p">(</span><span class="n">inputs</span><span class="o">[</span><span class="n">loop</span><span class="o">]</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="n">br</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">BufferedReader</span><span class="p">(</span><span class="n">isr</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="n">wasRead</span><span class="o">=</span><span class="k">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="err">}</span><span class="w"></span>
 
-		@Override
-		public boolean hasNext()
-		{
-			if(wasRead==true)
-			{
-				try
-				{
-					manage();
-					wasRead = false;
-				}
-				catch(IOException exp)
-				{
-					throw new RuntimeException(exp);
-				}
-			}
-			return line!=null;
-		}
+<span class="w">		</span><span class="nv">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="k">public</span><span class="w"> </span><span class="k">boolean</span><span class="w"> </span><span class="n">hasNext</span><span class="p">()</span><span class="w"></span>
+<span class="w">		</span><span class="err">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">if</span><span class="p">(</span><span class="n">wasRead</span><span class="o">==</span><span class="k">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">			</span><span class="err">{</span><span class="w"></span>
+<span class="w">				</span><span class="k">try</span><span class="w"></span>
+<span class="w">				</span><span class="err">{</span><span class="w"></span>
+<span class="w">					</span><span class="n">manage</span><span class="p">();</span><span class="w"></span>
+<span class="w">					</span><span class="n">wasRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">				</span><span class="err">}</span><span class="w"></span>
+<span class="w">				</span><span class="k">catch</span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="nf">exp</span><span class="p">)</span><span class="w"></span>
+<span class="w">				</span><span class="err">{</span><span class="w"></span>
+<span class="w">					</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="nf">exp</span><span class="p">);</span><span class="w"></span>
+<span class="w">				</span><span class="err">}</span><span class="w"></span>
+<span class="w">			</span><span class="err">}</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">line</span><span class="o">!=</span><span class="k">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="err">}</span><span class="w"></span>
 
-		@Override
-		public String next()
-		{
-			if(wasRead==true)
-			{
-				try
-				{
-					manage();
-					wasRead = false;
-				}
-				catch(IOException exp)
-				{
-					throw new RuntimeException(exp);
-				}
-			}
-			wasRead=true;
-			return line;
-		}
-		private void manage() throws IOException
-		{
-			line=br.readLine();
-			while(line==null)
-			{
-				br.close();
-				isr.close();
-				++loop;
-				if(loop&gt;=inputs.length)
-					break;
-				isr=new java.io.InputStreamReader(inputs[loop]);
-				br=new java.io.BufferedReader(isr);
-				line=br.readLine();
-			}
-		}
-	}
-}
-</pre></div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20InputStreamIterable&body=[InputStreamIterable](https://elbosso.github.io/inputstreamiterable)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=InputStreamIterable"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20InputStreamIterable&issue[description]=[InputStreamIterable](https://elbosso.github.io/inputstreamiterable)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=InputStreamIterable"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Partikelsystem mit "innerer" Energie</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">29.07.2018</span> </p> <span class="smallabstract"><p>Nachdem es schon ein wenig länger her ist, dass ich hier ein Video veröffentlicht habe, hat mich wieder einmal jemand inspiriert... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="partikelsystem__innerer__energie.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> TagManager auf GitHub</span><br> <span class="smallabstract"><p>Nachdem ich vor einiger Zeit über die Komponente zur Verwaltung von Tags für (Bild-)Dateien berichtet habe ist es nun an der Zeit, die Information über die Veröffentlichung einer entsprechenden darauf basierenden Anwendung nachzureichen. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tagmanager_auf_github.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> SpaceTraders Swing GUI</span><br> <span class="smallabstract"><p>Ich habe neulich einen Link gefunden, hinter dem sich eine (für mich) neue Art von Computerspiel verbarg: Es handelt sich hier um ein Multiplayer Spiel, für das zunächst einmal nur die API existiert </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="spacetraders_swing_gui.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Bug in Javas ImageIO</span><br> <span class="smallabstract"><p>Nachdem in letzter Zeit die Diskussion - bedingt durch die Unterstützung von Apple - um JPEG XL wieder aufgeflammt ist, begann ich mich dafür zu interessieren. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bug_javas_imageio.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+<span class="w">		</span><span class="nv">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="k">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="k">next</span><span class="p">()</span><span class="w"></span>
+<span class="w">		</span><span class="err">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">if</span><span class="p">(</span><span class="n">wasRead</span><span class="o">==</span><span class="k">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">			</span><span class="err">{</span><span class="w"></span>
+<span class="w">				</span><span class="k">try</span><span class="w"></span>
+<span class="w">				</span><span class="err">{</span><span class="w"></span>
+<span class="w">					</span><span class="n">manage</span><span class="p">();</span><span class="w"></span>
+<span class="w">					</span><span class="n">wasRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">				</span><span class="err">}</span><span class="w"></span>
+<span class="w">				</span><span class="k">catch</span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="nf">exp</span><span class="p">)</span><span class="w"></span>
+<span class="w">				</span><span class="err">{</span><span class="w"></span>
+<span class="w">					</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="nf">exp</span><span class="p">);</span><span class="w"></span>
+<span class="w">				</span><span class="err">}</span><span class="w"></span>
+<span class="w">			</span><span class="err">}</span><span class="w"></span>
+<span class="w">			</span><span class="n">wasRead</span><span class="o">=</span><span class="k">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">line</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="err">}</span><span class="w"></span>
+<span class="w">		</span><span class="n">private</span><span class="w"> </span><span class="n">void</span><span class="w"> </span><span class="n">manage</span><span class="p">()</span><span class="w"> </span><span class="n">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"></span>
+<span class="w">		</span><span class="err">{</span><span class="w"></span>
+<span class="w">			</span><span class="n">line</span><span class="o">=</span><span class="n">br</span><span class="p">.</span><span class="n">readLine</span><span class="p">();</span><span class="w"></span>
+<span class="w">			</span><span class="k">while</span><span class="p">(</span><span class="n">line</span><span class="o">==</span><span class="k">null</span><span class="p">)</span><span class="w"></span>
+<span class="w">			</span><span class="err">{</span><span class="w"></span>
+<span class="w">				</span><span class="n">br</span><span class="p">.</span><span class="k">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">				</span><span class="n">isr</span><span class="p">.</span><span class="k">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">				</span><span class="o">++</span><span class="n">loop</span><span class="p">;</span><span class="w"></span>
+<span class="w">				</span><span class="k">if</span><span class="p">(</span><span class="n">loop</span><span class="o">&gt;=</span><span class="n">inputs</span><span class="p">.</span><span class="n">length</span><span class="p">)</span><span class="w"></span>
+<span class="w">					</span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">				</span><span class="n">isr</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">InputStreamReader</span><span class="p">(</span><span class="n">inputs</span><span class="o">[</span><span class="n">loop</span><span class="o">]</span><span class="p">);</span><span class="w"></span>
+<span class="w">				</span><span class="n">br</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">BufferedReader</span><span class="p">(</span><span class="n">isr</span><span class="p">);</span><span class="w"></span>
+<span class="w">				</span><span class="n">line</span><span class="o">=</span><span class="n">br</span><span class="p">.</span><span class="n">readLine</span><span class="p">();</span><span class="w"></span>
+<span class="w">			</span><span class="err">}</span><span class="w"></span>
+<span class="w">		</span><span class="err">}</span><span class="w"></span>
+<span class="w">	</span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20InputStreamIterable&body=[InputStreamIterable](https://elbosso.github.io/inputstreamiterable)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=InputStreamIterable"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20InputStreamIterable&issue[description]=[InputStreamIterable](https://elbosso.github.io/inputstreamiterable)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=InputStreamIterable"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> PiHole</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">12.08.2018</span> </p> <span class="smallabstract"><p>Raspberry Pi als Ad- und Malware-Blocker </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pihole.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> Brücke zwischen Gnuplot und sQLshell</span><br> <span class="smallabstract"><p>Ich habe ein neues Plugin für die sQLshell geschrieben, das Gnuplot noch enger in die Anwendung integriert: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bruecke_zwischen_gnuplot_sqlshell.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Aktueller Stand meiner vim-Konfiguration</span><br> <span class="smallabstract"><p>Ich habe bereits vor einiger Zeit ein Repository veröffentlicht, das diverse Dot-Dateien beinhaltet. Unter anderem findet man dort auch eine vim-Konfiguration. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="aktueller_stand_meiner_vim_konfiguration.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Veganer Käse</span><br> <span class="smallabstract"><p>Heute nur ein kurzer, werbungsinduzierter Rant... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="veganer_kaese.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->

@@ -17,366 +17,366 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="docker_images_armhf.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="the_interrupters_perform_all_acoustic_set_live.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Erweiterung der Gitlab-Metriken in Grafana</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="docker_images_armhf.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> <a href="docker_auf_raspberry_pi_model_3b_.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="docker_images_armhf.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">03.07.2020</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/gitlabmetricsingrafana_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Ich habe meine Idee zur <a href="gitlab_metriken_grafana.html">Visualisierung bestimmter Metriken aus Gitlab auf einem Grafana-Dashboard</a> ausgebaut - ich erfasse nicht mehr nur in einem Projekt die offenen Issues pro Komponente sondern nun auch die offenen Issues auf Projektebene. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Daher habe ich das bereits aus dem <a href="https://gist.github.com/elbosso/40cb21b275f8ee9a155b47954b376b1f">Gist</a> etwas <a href="https://gist.github.com/elbosso/a5cfd424ece7ea79db5abeffc223b9d9">variiert</a> und das Dashboard ergänzt: </p><div class="highlight"><pre><span></span>{
-  &quot;annotations&quot;: {
-    &quot;list&quot;: [
-      {
-        &quot;builtIn&quot;: 1,
-        &quot;datasource&quot;: &quot;-- Grafana --&quot;,
-        &quot;enable&quot;: true,
-        &quot;hide&quot;: true,
-        &quot;iconColor&quot;: &quot;rgba(0, 211, 255, 1)&quot;,
-        &quot;name&quot;: &quot;Annotations &amp; Alerts&quot;,
-        &quot;type&quot;: &quot;dashboard&quot;
-      }
-    ]
-  },
-  &quot;editable&quot;: true,
-  &quot;gnetId&quot;: null,
-  &quot;graphTooltip&quot;: 0,
-  &quot;id&quot;: 13,
-  &quot;iteration&quot;: 1589035932265,
-  &quot;links&quot;: [],
-  &quot;panels&quot;: [
-    {
-      &quot;gridPos&quot;: {
-        &quot;h&quot;: 1,
-        &quot;w&quot;: 24,
-        &quot;x&quot;: 0,
-        &quot;y&quot;: 0
-      },
-      &quot;id&quot;: 7,
-      &quot;title&quot;: &quot;Issues by Project&quot;,
-      &quot;type&quot;: &quot;row&quot;
-    },
-    {
-      &quot;cacheTimeout&quot;: null,
-      &quot;gridPos&quot;: {
-        &quot;h&quot;: 4,
-        &quot;w&quot;: 24,
-        &quot;x&quot;: 0,
-        &quot;y&quot;: 1
-      },
-      &quot;id&quot;: 5,
-      &quot;interval&quot;: &quot;&quot;,
-      &quot;links&quot;: [
-        {
-          &quot;dashboard&quot;: &quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=geo&quot;,
-          &quot;title&quot;: &quot;list $projectName Issues&quot;,
-          &quot;type&quot;: &quot;absolute&quot;,
-          &quot;url&quot;: &quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=$component&quot;
-        }
-      ],
-      &quot;options&quot;: {
-        &quot;fieldOptions&quot;: {
-          &quot;calcs&quot;: [
-            &quot;mean&quot;
-          ],
-          &quot;defaults&quot;: {
-            &quot;max&quot;: 20,
-            &quot;min&quot;: 0
-          },
-          &quot;mappings&quot;: [],
-          &quot;override&quot;: {},
-          &quot;thresholds&quot;: [
-            {
-              &quot;color&quot;: &quot;rgb(43, 43, 43)&quot;,
-              &quot;index&quot;: 0,
-              &quot;value&quot;: null
-            },
-            {
-              &quot;color&quot;: &quot;green&quot;,
-              &quot;index&quot;: 1,
-              &quot;value&quot;: 1
-            },
-            {
-              &quot;color&quot;: &quot;#EAB839&quot;,
-              &quot;index&quot;: 2,
-              &quot;value&quot;: 4
-            },
-            {
-              &quot;color&quot;: &quot;red&quot;,
-              &quot;index&quot;: 3,
-              &quot;value&quot;: 10
-            }
-          ],
-          &quot;values&quot;: false
-        },
-        &quot;orientation&quot;: &quot;auto&quot;,
-        &quot;showThresholdLabels&quot;: false,
-        &quot;showThresholdMarkers&quot;: true
-      },
-      &quot;pluginVersion&quot;: &quot;6.2.2&quot;,
-      &quot;repeat&quot;: &quot;projectName&quot;,
-      &quot;repeatDirection&quot;: &quot;h&quot;,
-      &quot;scopedVars&quot;: {
-        &quot;projectName&quot;: {
-          &quot;selected&quot;: true,
-          &quot;text&quot;: &quot;website&quot;,
-          &quot;value&quot;: &quot;website&quot;
-        }
-      },
-      &quot;targets&quot;: [
-        {
-          &quot;alias&quot;: &quot;$projectName&quot;,
-          &quot;groupBy&quot;: [],
-          &quot;measurement&quot;: &quot;openIssues&quot;,
-          &quot;orderByTime&quot;: &quot;ASC&quot;,
-          &quot;policy&quot;: &quot;default&quot;,
-          &quot;refId&quot;: &quot;A&quot;,
-          &quot;resultFormat&quot;: &quot;time_series&quot;,
-          &quot;select&quot;: [
-            [
-              {
-                &quot;params&quot;: [
-                  &quot;count&quot;
-                ],
-                &quot;type&quot;: &quot;field&quot;
-              },
-              {
-                &quot;params&quot;: [],
-                &quot;type&quot;: &quot;last&quot;
-              }
-            ]
-          ],
-          &quot;tags&quot;: [
-            {
-              &quot;key&quot;: &quot;host&quot;,
-              &quot;operator&quot;: &quot;=&quot;,
-              &quot;value&quot;: &quot;gitlab&quot;
-            },
-            {
-              &quot;condition&quot;: &quot;AND&quot;,
-              &quot;key&quot;: &quot;projectName&quot;,
-              &quot;operator&quot;: &quot;=~&quot;,
-              &quot;value&quot;: &quot;/^$projectName$/&quot;
-            }
-          ]
-        }
-      ],
-      &quot;title&quot;: &quot;$projectName&quot;,
-      &quot;type&quot;: &quot;gauge&quot;
-    },
-    {
-      &quot;collapsed&quot;: false,
-      &quot;gridPos&quot;: {
-        &quot;h&quot;: 1,
-        &quot;w&quot;: 24,
-        &quot;x&quot;: 0,
-        &quot;y&quot;: 5
-      },
-      &quot;id&quot;: 4,
-      &quot;panels&quot;: [],
-      &quot;title&quot;: &quot;Issues in Project java-class_src by component&quot;,
-      &quot;type&quot;: &quot;row&quot;
-    },
-    {
-      &quot;cacheTimeout&quot;: null,
-      &quot;gridPos&quot;: {
-        &quot;h&quot;: 4,
-        &quot;w&quot;: 24,
-        &quot;x&quot;: 0,
-        &quot;y&quot;: 6
-      },
-      &quot;id&quot;: 2,
-      &quot;links&quot;: [
-        {
-          &quot;dashboard&quot;: &quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=geo&quot;,
-          &quot;title&quot;: &quot;list $component Issues&quot;,
-          &quot;type&quot;: &quot;absolute&quot;,
-          &quot;url&quot;: &quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=$component&quot;
-        }
-      ],
-      &quot;options&quot;: {
-        &quot;fieldOptions&quot;: {
-          &quot;calcs&quot;: [
-            &quot;mean&quot;
-          ],
-          &quot;defaults&quot;: {
-            &quot;max&quot;: 20,
-            &quot;min&quot;: 0
-          },
-          &quot;mappings&quot;: [],
-          &quot;override&quot;: {},
-          &quot;thresholds&quot;: [
-            {
-              &quot;color&quot;: &quot;rgb(43, 43, 43)&quot;,
-              &quot;index&quot;: 0,
-              &quot;value&quot;: null
-            },
-            {
-              &quot;color&quot;: &quot;green&quot;,
-              &quot;index&quot;: 1,
-              &quot;value&quot;: 1
-            },
-            {
-              &quot;color&quot;: &quot;#EAB839&quot;,
-              &quot;index&quot;: 2,
-              &quot;value&quot;: 4
-            },
-            {
-              &quot;color&quot;: &quot;red&quot;,
-              &quot;index&quot;: 3,
-              &quot;value&quot;: 10
-            }
-          ],
-          &quot;values&quot;: false
-        },
-        &quot;orientation&quot;: &quot;auto&quot;,
-        &quot;showThresholdLabels&quot;: false,
-        &quot;showThresholdMarkers&quot;: true
-      },
-      &quot;pluginVersion&quot;: &quot;6.2.2&quot;,
-      &quot;repeat&quot;: &quot;component&quot;,
-      &quot;repeatDirection&quot;: &quot;h&quot;,
-      &quot;scopedVars&quot;: {
-        &quot;component&quot;: {
-          &quot;selected&quot;: true,
-          &quot;text&quot;: &quot;Bug&quot;,
-          &quot;value&quot;: &quot;Bug&quot;
-        }
-      },
-      &quot;targets&quot;: [
-        {
-          &quot;alias&quot;: &quot;$component&quot;,
-          &quot;groupBy&quot;: [],
-          &quot;measurement&quot;: &quot;openIssues&quot;,
-          &quot;orderByTime&quot;: &quot;ASC&quot;,
-          &quot;policy&quot;: &quot;default&quot;,
-          &quot;refId&quot;: &quot;A&quot;,
-          &quot;resultFormat&quot;: &quot;time_series&quot;,
-          &quot;select&quot;: [
-            [
-              {
-                &quot;params&quot;: [
-                  &quot;count&quot;
-                ],
-                &quot;type&quot;: &quot;field&quot;
-              },
-              {
-                &quot;params&quot;: [],
-                &quot;type&quot;: &quot;last&quot;
-              }
-            ]
-          ],
-          &quot;tags&quot;: [
-            {
-              &quot;key&quot;: &quot;host&quot;,
-              &quot;operator&quot;: &quot;=&quot;,
-              &quot;value&quot;: &quot;gitlab&quot;
-            },
-            {
-              &quot;condition&quot;: &quot;AND&quot;,
-              &quot;key&quot;: &quot;component&quot;,
-              &quot;operator&quot;: &quot;=~&quot;,
-              &quot;value&quot;: &quot;/^$component$/&quot;
-            }
-          ]
-        }
-      ],
-      &quot;title&quot;: &quot;$component&quot;,
-      &quot;type&quot;: &quot;gauge&quot;
-    }
-  ],
-  &quot;refresh&quot;: &quot;1m&quot;,
-  &quot;schemaVersion&quot;: 18,
-  &quot;style&quot;: &quot;dark&quot;,
-  &quot;tags&quot;: [],
-  &quot;templating&quot;: {
-    &quot;list&quot;: [
-      {
-        &quot;allValue&quot;: null,
-        &quot;current&quot;: {
-          &quot;tags&quot;: [],
-          &quot;text&quot;: &quot;Bug&quot;,
-          &quot;value&quot;: [
-            &quot;Bug&quot;
-          ]
-        },
-        &quot;datasource&quot;: &quot;InfluxDB monitoring&quot;,
-        &quot;definition&quot;: &quot;SHOW TAG VALUES WITH KEY = \&quot;component\&quot;&quot;,
-        &quot;hide&quot;: 0,
-        &quot;includeAll&quot;: true,
-        &quot;label&quot;: null,
-        &quot;multi&quot;: true,
-        &quot;name&quot;: &quot;component&quot;,
-        &quot;options&quot;: [],
-        &quot;query&quot;: &quot;SHOW TAG VALUES WITH KEY = \&quot;component\&quot;&quot;,
-        &quot;refresh&quot;: 1,
-        &quot;regex&quot;: &quot;&quot;,
-        &quot;skipUrlSync&quot;: false,
-        &quot;sort&quot;: 0,
-        &quot;tagValuesQuery&quot;: &quot;&quot;,
-        &quot;tags&quot;: [],
-        &quot;tagsQuery&quot;: &quot;&quot;,
-        &quot;type&quot;: &quot;query&quot;,
-        &quot;useTags&quot;: false
-      },
-      {
-        &quot;allValue&quot;: null,
-        &quot;current&quot;: {
-          &quot;tags&quot;: [],
-          &quot;text&quot;: &quot;website&quot;,
-          &quot;value&quot;: [
-            &quot;website&quot;
-          ]
-        },
-        &quot;datasource&quot;: &quot;InfluxDB monitoring&quot;,
-        &quot;definition&quot;: &quot;SHOW TAG VALUES WITH KEY = \&quot;projectName\&quot;&quot;,
-        &quot;hide&quot;: 0,
-        &quot;includeAll&quot;: true,
-        &quot;label&quot;: null,
-        &quot;multi&quot;: true,
-        &quot;name&quot;: &quot;projectName&quot;,
-        &quot;options&quot;: [],
-        &quot;query&quot;: &quot;SHOW TAG VALUES WITH KEY = \&quot;projectName\&quot;&quot;,
-        &quot;refresh&quot;: 1,
-        &quot;regex&quot;: &quot;&quot;,
-        &quot;skipUrlSync&quot;: false,
-        &quot;sort&quot;: 0,
-        &quot;tagValuesQuery&quot;: &quot;&quot;,
-        &quot;tags&quot;: [],
-        &quot;tagsQuery&quot;: &quot;&quot;,
-        &quot;type&quot;: &quot;query&quot;,
-        &quot;useTags&quot;: false
-      }
-    ]
-  },
-  &quot;time&quot;: {
-    &quot;from&quot;: &quot;now-6h&quot;,
-    &quot;to&quot;: &quot;now&quot;
-  },
-  &quot;timepicker&quot;: {
-    &quot;refresh_intervals&quot;: [
-      &quot;5s&quot;,
-      &quot;10s&quot;,
-      &quot;30s&quot;,
-      &quot;1m&quot;,
-      &quot;5m&quot;,
-      &quot;15m&quot;,
-      &quot;30m&quot;,
-      &quot;1h&quot;,
-      &quot;2h&quot;,
-      &quot;1d&quot;
-    ],
-    &quot;time_options&quot;: [
-      &quot;5m&quot;,
-      &quot;15m&quot;,
-      &quot;1h&quot;,
-      &quot;6h&quot;,
-      &quot;12h&quot;,
-      &quot;24h&quot;,
-      &quot;2d&quot;,
-      &quot;7d&quot;,
-      &quot;30d&quot;
-    ]
-  },
-  &quot;timezone&quot;: &quot;&quot;,
-  &quot;title&quot;: &quot;Gitlab Overview Open Issues&quot;,
-  &quot;uid&quot;: &quot;EhwYwVkgk&quot;,
-  &quot;version&quot;: 26
-}
-</pre></div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Erweiterung der Gitlab-Metriken in Grafana&body=[Erweiterung der Gitlab-Metriken in Grafana](https://elbosso.github.io/erweiterung_gitlab_metriken_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Erweiterung der Gitlab-Metriken in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Erweiterung der Gitlab-Metriken in Grafana&issue[description]=[Erweiterung der Gitlab-Metriken in Grafana](https://elbosso.github.io/erweiterung_gitlab_metriken_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Erweiterung der Gitlab-Metriken in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Partikelsystem mit "innerer" Energie</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">29.07.2018</span> </p> <span class="smallabstract"><p>Nachdem es schon ein wenig länger her ist, dass ich hier ein Video veröffentlicht habe, hat mich wieder einmal jemand inspiriert... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="partikelsystem__innerer__energie.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> TagManager auf GitHub</span><br> <span class="smallabstract"><p>Nachdem ich vor einiger Zeit über die Komponente zur Verwaltung von Tags für (Bild-)Dateien berichtet habe ist es nun an der Zeit, die Information über die Veröffentlichung einer entsprechenden darauf basierenden Anwendung nachzureichen. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tagmanager_auf_github.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> SpaceTraders Swing GUI</span><br> <span class="smallabstract"><p>Ich habe neulich einen Link gefunden, hinter dem sich eine (für mich) neue Art von Computerspiel verbarg: Es handelt sich hier um ein Multiplayer Spiel, für das zunächst einmal nur die API existiert </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="spacetraders_swing_gui.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Bug in Javas ImageIO</span><br> <span class="smallabstract"><p>Nachdem in letzter Zeit die Diskussion - bedingt durch die Unterstützung von Apple - um JPEG XL wieder aufgeflammt ist, begann ich mich dafür zu interessieren. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bug_javas_imageio.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="docker_images_armhf.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="the_interrupters_perform_all_acoustic_set_live.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Erweiterung der Gitlab-Metriken in Grafana</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="docker_images_armhf.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> <a href="docker_auf_raspberry_pi_model_3b_.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="docker_images_armhf.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">03.07.2020</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/gitlabmetricsingrafana_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Ich habe meine Idee zur <a href="gitlab_metriken_grafana.html">Visualisierung bestimmter Metriken aus Gitlab auf einem Grafana-Dashboard</a> ausgebaut - ich erfasse nicht mehr nur in einem Projekt die offenen Issues pro Komponente sondern nun auch die offenen Issues auf Projektebene. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Daher habe ich das bereits aus dem <a href="https://gist.github.com/elbosso/40cb21b275f8ee9a155b47954b376b1f">Gist</a> etwas <a href="https://gist.github.com/elbosso/a5cfd424ece7ea79db5abeffc223b9d9">variiert</a> und das Dashboard ergänzt: </p><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;annotations&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;list&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;builtIn&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;datasource&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;-- Grafana --&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;enable&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;hide&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;iconColor&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;rgba(0, 211, 255, 1)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;Annotations &amp; Alerts&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;dashboard&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;editable&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;gnetId&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;graphTooltip&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">13</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;iteration&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">1589035932265</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;links&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;panels&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;gridPos&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;h&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;w&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">24</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;x&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;y&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">7</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;title&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;Issues by Project&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;row&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;cacheTimeout&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;gridPos&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;h&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">4</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;w&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">24</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;x&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;y&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">5</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;interval&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;links&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;dashboard&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=geo&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;title&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;list $projectName Issues&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;absolute&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;url&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=$component&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;options&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;fieldOptions&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;calcs&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;mean&quot;</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;defaults&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;max&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">20</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;min&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="w"></span>
+<span class="w">          </span><span class="p">},</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;mappings&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;override&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;thresholds&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;color&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;rgb(43, 43, 43)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;index&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">null</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;color&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;index&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;color&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;#EAB839&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;index&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">4</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;color&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;index&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">3</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">10</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;values&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;orientation&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;auto&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;showThresholdLabels&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;showThresholdMarkers&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;pluginVersion&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;6.2.2&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;repeat&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;projectName&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;repeatDirection&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;scopedVars&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;projectName&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;selected&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;text&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;website&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;website&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;targets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;alias&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;$projectName&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;groupBy&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;measurement&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;openIssues&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;orderByTime&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;ASC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;policy&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;refId&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;resultFormat&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;time_series&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;select&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">[</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="s">&quot;params&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                  </span><span class="s">&quot;count&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="p">],</span><span class="w"></span>
+<span class="w">                </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;field&quot;</span><span class="w"></span>
+<span class="w">              </span><span class="p">},</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="s">&quot;params&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">                </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;last&quot;</span><span class="w"></span>
+<span class="w">              </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">]</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;key&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;host&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;operator&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;=&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;gitlab&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;condition&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;AND&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;key&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;projectName&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;operator&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;=~&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;/^$projectName$/&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;title&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;$projectName&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;gauge&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;collapsed&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;gridPos&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;h&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;w&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">24</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;x&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;y&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">5</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">4</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;panels&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;title&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;Issues in Project java-class_src by component&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;row&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;cacheTimeout&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;gridPos&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;h&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">4</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;w&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">24</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;x&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;y&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">6</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;links&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;dashboard&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=geo&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;title&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;list $component Issues&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;absolute&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;url&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;http://gitlab.fritz.box/elbosso/java-class_src/issues?scope=all&amp;utf8=%E2%9C%93&amp;state=opened&amp;label_name[]=$component&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;options&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;fieldOptions&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;calcs&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;mean&quot;</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;defaults&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;max&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">20</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;min&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="w"></span>
+<span class="w">          </span><span class="p">},</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;mappings&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;override&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;thresholds&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;color&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;rgb(43, 43, 43)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;index&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">null</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;color&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;index&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;color&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;#EAB839&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;index&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">4</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;color&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;index&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">3</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">10</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;values&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;orientation&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;auto&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;showThresholdLabels&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;showThresholdMarkers&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;pluginVersion&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;6.2.2&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;repeat&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;component&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;repeatDirection&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;scopedVars&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;component&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;selected&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;text&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;Bug&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;Bug&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;targets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;alias&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;$component&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;groupBy&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;measurement&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;openIssues&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;orderByTime&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;ASC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;policy&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;refId&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;resultFormat&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;time_series&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;select&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">[</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="s">&quot;params&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                  </span><span class="s">&quot;count&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="p">],</span><span class="w"></span>
+<span class="w">                </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;field&quot;</span><span class="w"></span>
+<span class="w">              </span><span class="p">},</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="s">&quot;params&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">                </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;last&quot;</span><span class="w"></span>
+<span class="w">              </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">]</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;key&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;host&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;operator&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;=&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;gitlab&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;condition&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;AND&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;key&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;component&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;operator&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;=~&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;/^$component$/&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;title&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;$component&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;gauge&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;refresh&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;1m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;schemaVersion&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">18</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;style&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;dark&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;templating&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;list&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;allValue&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;current&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;text&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;Bug&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;Bug&quot;</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;datasource&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;InfluxDB monitoring&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;definition&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;SHOW TAG VALUES WITH KEY = </span><span class="se">\&quot;</span><span class="s">component</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;hide&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;includeAll&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;label&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;multi&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;component&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;options&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;query&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;SHOW TAG VALUES WITH KEY = </span><span class="se">\&quot;</span><span class="s">component</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;refresh&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;regex&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;skipUrlSync&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;sort&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;tagValuesQuery&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;tagsQuery&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;query&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;useTags&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;allValue&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;current&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;text&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;website&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;website&quot;</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;datasource&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;InfluxDB monitoring&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;definition&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;SHOW TAG VALUES WITH KEY = </span><span class="se">\&quot;</span><span class="s">projectName</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;hide&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;includeAll&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;label&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;multi&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;projectName&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;options&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;query&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;SHOW TAG VALUES WITH KEY = </span><span class="se">\&quot;</span><span class="s">projectName</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;refresh&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;regex&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;skipUrlSync&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;sort&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;tagValuesQuery&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;tags&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;tagsQuery&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;query&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;useTags&quot;</span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;time&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;from&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;now-6h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;to&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;now&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;timepicker&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;refresh_intervals&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;5s&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;10s&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;30s&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;1m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;5m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;15m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;30m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;1h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;2h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;1d&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;time_options&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;5m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;15m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;1h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;6h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;12h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;24h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;2d&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;7d&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;30d&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;timezone&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;title&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;Gitlab Overview Open Issues&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;uid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;EhwYwVkgk&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;version&quot;</span><span class="o">:</span><span class="w"> </span><span class="mh">26</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Erweiterung der Gitlab-Metriken in Grafana&body=[Erweiterung der Gitlab-Metriken in Grafana](https://elbosso.github.io/erweiterung_gitlab_metriken_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Erweiterung der Gitlab-Metriken in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Erweiterung der Gitlab-Metriken in Grafana&issue[description]=[Erweiterung der Gitlab-Metriken in Grafana](https://elbosso.github.io/erweiterung_gitlab_metriken_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Erweiterung der Gitlab-Metriken in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> PiHole</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">12.08.2018</span> </p> <span class="smallabstract"><p>Raspberry Pi als Ad- und Malware-Blocker </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pihole.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-black w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> Brücke zwischen Gnuplot und sQLshell</span><br> <span class="smallabstract"><p>Ich habe ein neues Plugin für die sQLshell geschrieben, das Gnuplot noch enger in die Anwendung integriert: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bruecke_zwischen_gnuplot_sqlshell.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Aktueller Stand meiner vim-Konfiguration</span><br> <span class="smallabstract"><p>Ich habe bereits vor einiger Zeit ein Repository veröffentlicht, das diverse Dot-Dateien beinhaltet. Unter anderem findet man dort auch eine vim-Konfiguration. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="aktueller_stand_meiner_vim_konfiguration.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Veganer Käse</span><br> <span class="smallabstract"><p>Heute nur ein kurzer, werbungsinduzierter Rant... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="veganer_kaese.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->

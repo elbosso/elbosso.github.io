@@ -17,192 +17,192 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="diy_ebook_reader_ii.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="ssh_mfa.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Warten auf Jupiter Hell...</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="certstream__influxdb__grafana_netflix.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Rants</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">22.06.2019</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/jkey.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Ich warte nun schon sehr lange auf den Nachfolger - aber der Vorgänger macht immer noch Spaß! </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Nachdem ich schon fast dachte, dass sich meine letzte <a href="https://drl.chaosforge.org/">Neuentdeckung in Sachen Spiele</a> langweilig wird, habe ich nun mit dem ausklingenden Winter eine der Challenges probiert: Angel of 100. </p><p> Ich darf sagen, dass mir schon lange kein Spiel mehr so viel Spaß gemacht hat - vor allem weil man mehr Erfahrungspunkte sammeln kann und daher das Rollenspiel-Element deutlich in den Vordergrund tritt. </p><p> Jetzt warte ich aber wirklich voller Ungeduld auf den <a href="https://jupiterhell.com/">Nachfolger...</a> </p><div class="highlight"><pre><span></span>--------------------------------------------------------------
- DoomRL (0.9.9.7) roguelike post-mortem character dump
---------------------------------------------------------------
+</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="diy_ebook_reader_ii.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="ssh_mfa.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Warten auf Jupiter Hell...</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="certstream__influxdb__grafana_netflix.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Rants</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">22.06.2019</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/jkey.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Ich warte nun schon sehr lange auf den Nachfolger - aber der Vorgänger macht immer noch Spaß! </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Nachdem ich schon fast dachte, dass sich meine letzte <a href="https://drl.chaosforge.org/">Neuentdeckung in Sachen Spiele</a> langweilig wird, habe ich nun mit dem ausklingenden Winter eine der Challenges probiert: Angel of 100. </p><p> Ich darf sagen, dass mir schon lange kein Spiel mehr so viel Spaß gemacht hat - vor allem weil man mehr Erfahrungspunkte sammeln kann und daher das Rollenspiel-Element deutlich in den Vordergrund tritt. </p><p> Jetzt warte ich aber wirklich voller Ungeduld auf den <a href="https://jupiterhell.com/">Nachfolger...</a> </p><div class="highlight"><pre><span></span><span class="o">--------------------------------------------------------------</span><span class="w"></span>
+<span class="w"> </span><span class="n">DoomRL</span><span class="w"> </span><span class="p">(</span><span class="mf">0.9.9.7</span><span class="p">)</span><span class="w"> </span><span class="n">roguelike</span><span class="w"> </span><span class="n">post</span><span class="o">-</span><span class="n">mortem</span><span class="w"> </span><span class="k">character</span><span class="w"> </span><span class="k">dump</span><span class="w"></span>
+<span class="o">--------------------------------------------------------------</span><span class="w"></span>
 
- LA BOSSA, level 21 Imp Sergeant Major Marine,
- completed 100 levels of torture on level 100 of Hell.
- He survived 501574 turns and scored 659858 points.
- He played for 5 hours, 25 minutes and 46 seconds.
- He didn&#39;t like it too rough.
+<span class="w"> </span><span class="n">LA</span><span class="w"> </span><span class="n">BOSSA</span><span class="p">,</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="n">Imp</span><span class="w"> </span><span class="n">Sergeant</span><span class="w"> </span><span class="n">Major</span><span class="w"> </span><span class="n">Marine</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">completed</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">torture</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">Hell</span><span class="p">.</span><span class="w"></span>
+<span class="w"> </span><span class="n">He</span><span class="w"> </span><span class="n">survived</span><span class="w"> </span><span class="mi">501574</span><span class="w"> </span><span class="n">turns</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">scored</span><span class="w"> </span><span class="mi">659858</span><span class="w"> </span><span class="n">points</span><span class="p">.</span><span class="w"></span>
+<span class="w"> </span><span class="n">He</span><span class="w"> </span><span class="n">played</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="n">hours</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="w"> </span><span class="n">minutes</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="mi">46</span><span class="w"> </span><span class="n">seconds</span><span class="p">.</span><span class="w"></span>
+<span class="w"> </span><span class="n">He</span><span class="w"> </span><span class="n">didn</span><span class="s1">&#39;t like it too rough.</span>
 
- He killed 1626 out of 1669 hellspawn. (97%)
- He held his right to remain violent.
- He was an Angel of 100!
+<span class="s1"> He killed 1626 out of 1669 hellspawn. (97%)</span>
+<span class="s1"> He held his right to remain violent.</span>
+<span class="s1"> He was an Angel of 100!</span>
 
- He saved himself 83 times.
+<span class="s1"> He saved himself 83 times.</span>
 
--- Special levels --------------------------------------------
+<span class="s1">-- Special levels --------------------------------------------</span>
 
-  Levels generated : 0
-  Levels visited   : 0
-  Levels completed : 0
+<span class="s1">  Levels generated : 0</span>
+<span class="s1">  Levels visited   : 0</span>
+<span class="s1">  Levels completed : 0</span>
 
--- Awards ----------------------------------------------------
+<span class="s1">-- Awards ----------------------------------------------------</span>
 
-  UAC Star (bronze cluster)
-  Experience Medal
-  Centurial Gold Badge
+<span class="s1">  UAC Star (bronze cluster)</span>
+<span class="s1">  Experience Medal</span>
+<span class="s1">  Centurial Gold Badge</span>
 
--- Graveyard -------------------------------------------------
+<span class="s1">-- Graveyard -------------------------------------------------</span>
 
-    .........#.#===..../..|....#........./.........#.......  .........#.=====...#......./...........................  .=......./.=====..&quot;  ........../#=.==...#^.==.../........%..........=  =..........#=.=....=======.#........./........./==.....  =........./  ..............#....+=#====.........../..........=......  ..==.........%#....#=====.......X....#=...}.==.=.......  .=..=./......./....#.==..............=.......==...&quot;....  .=====........#0...#=  .=====........#}\../..........%....==/.%.....#.........  ..===.  ........./.......===..............==./.................  %........#/.....====............==.===......../  ..  .........#.#......=.............=======................  ./.......#.#......./............=====/...............0.    
--- Statistics ------------------------------------------------
+<span class="s1">  <span class="s1">  .........#.#===..../..|....#........./.........#.......<span class="s1">  .........#.=====...#......./...........................<span class="s1">  .=......./.=====..&quot;<span class="s1">  ........../#=.==...#^.==.../........%..........=<span class="s1">  =..........#=.=....=======.#........./........./==.....<span class="s1">  =........./<span class="s1">  ..............#....+=#====.........../..........=......<span class="s1">  ..==.........%#....#=====.......X....#=...}.==.=.......<span class="s1">  .=..=./......./....#.==..............=.......==...&quot;....<span class="s1">  .=====........#0...#=<span class="s1">  .=====........#}\../..........%....==/.%.....#.........<span class="s1">  ..===.<span class="s1">  ........./.......===..............==./.................<span class="s1">  %........#/.....====............==.===......../<span class="s1">  ..<span class="s1">  .........#.#......=.............=======................<span class="s1">  ./.......#.#......./............=====/...............0.<span class="s1">  <span class="s1">  
+<span class="s1">-- Statistics ------------------------------------------------</span>
 
-  Health 99/90   Experience 413482/21
-  ToHit Ranged +4  ToHit Melee +6  ToDmg Ranged +0  ToDmg Melee +3
+<span class="s1">  Health 99/90   Experience 413482/21</span>
+<span class="s1">  ToHit Ranged +4  ToHit Melee +6  ToDmg Ranged +0  ToDmg Melee +3</span>
 
--- Traits ----------------------------------------------------
+<span class="s1">-- Traits ----------------------------------------------------</span>
 
-  Class : Marine
+<span class="s1">  Class : Marine</span>
 
-    Ironman          (Level 3)
-    Finesse          (Level 3)
-    Tough as nails   (Level 3)
-    Reloader         (Level 2)
-    Eagle Eye        (Level 2)
-    Brute            (Level 1)
-    Intuition        (Level 2)
-    Whizkid          (Level 2)
-    Badass           (Level 1)
-    Shottyman        (Level 1)
-    Survivalist      (Level 1)
+<span class="s1">    Ironman          (Level 3)</span>
+<span class="s1">    Finesse          (Level 3)</span>
+<span class="s1">    Tough as nails   (Level 3)</span>
+<span class="s1">    Reloader         (Level 2)</span>
+<span class="s1">    Eagle Eye        (Level 2)</span>
+<span class="s1">    Brute            (Level 1)</span>
+<span class="s1">    Intuition        (Level 2)</span>
+<span class="s1">    Whizkid          (Level 2)</span>
+<span class="s1">    Badass           (Level 1)</span>
+<span class="s1">    Shottyman        (Level 1)</span>
+<span class="s1">    Survivalist      (Level 1)</span>
 
-  Rel-&gt;Rel-&gt;SM-&gt;Iro-&gt;Iro-&gt;Iro-&gt;Bad-&gt;TaN-&gt;TaN-&gt;MSv-&gt;Fin-&gt;Fin-&gt;WK-&gt;WK-&gt;EE-&gt;TaN-&gt;Fin-&gt;EE-&gt;Int-&gt;Int-&gt;Bru-&gt;
+<span class="s1">  Rel-&gt;Rel-&gt;SM-&gt;Iro-&gt;Iro-&gt;Iro-&gt;Bad-&gt;TaN-&gt;TaN-&gt;MSv-&gt;Fin-&gt;Fin-&gt;WK-&gt;WK-&gt;EE-&gt;TaN-&gt;Fin-&gt;EE-&gt;Int-&gt;Int-&gt;Bru-&gt;</span>
 
--- Equipment -------------------------------------------------
+<span class="s1">-- Equipment -------------------------------------------------</span>
 
-    [a] [ Armor      ]   Shielded Armor [2]
-    [b] [ Weapon     ]   Butcher&#39;s Cleaver (5d6)
-    [c] [ Boots      ]   lava phaseshift boots [4] (T)
-    [d] [ Prepared   ]   nothing
+<span class="s1">    [a] [ Armor      ]   Shielded Armor [2]</span>
+<span class="s1">    [b] [ Weapon     ]   Butcher&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">Cleaver</span><span class="w"> </span><span class="p">(</span><span class="mi">5</span><span class="n">d6</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">c</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n"> Boots      </span><span class="o">]</span><span class="w">   </span><span class="n">lava</span><span class="w"> </span><span class="n">phaseshift</span><span class="w"> </span><span class="n">boots</span><span class="w"> </span><span class="o">[</span><span class="n">4</span><span class="o">]</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">d</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n"> Prepared   </span><span class="o">]</span><span class="w">   </span><span class="n">nothing</span><span class="w"></span>
 
--- Inventory -------------------------------------------------
+<span class="o">--</span><span class="w"> </span><span class="n">Inventory</span><span class="w"> </span><span class="o">-------------------------------------------------</span><span class="w"></span>
 
-    [a] plasma rifle (1d10)x6 [68/68] (B2P3)
-    [b] high power laser rifle (1d9)x5 [24/34] (B1)
-    [c] missile launcher (6d8) [0/8] (B3P2)
-    [d] BFG 9000 (12d6) [46/220] (B3P2)
-    [e] Jackhammer (8d3)x3 [9/9]
-    [f] BFG 10K (6d4)x5 [50/50]
-    [g] nanofiber onyx armor [1]
-    [h] shotgun shell (x50)
-    [i] shotgun shell (x50)
-    [j] shotgun shell (x5)
-    [k] large med-pack
-    [l] Nyarlaptotep&#39;s Boots [6/6] (100%)
-    [m] shell box (x63)
-    [n] shell box (x100)
-    [o] shell box (x100)
-    [p] power battery (x120)
+<span class="w">    </span><span class="o">[</span><span class="n">a</span><span class="o">]</span><span class="w"> </span><span class="n">plasma</span><span class="w"> </span><span class="n">rifle</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="n">d10</span><span class="p">)</span><span class="n">x6</span><span class="w"> </span><span class="o">[</span><span class="n">68/68</span><span class="o">]</span><span class="w"> </span><span class="p">(</span><span class="n">B2P3</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">b</span><span class="o">]</span><span class="w"> </span><span class="n">high</span><span class="w"> </span><span class="nf">power</span><span class="w"> </span><span class="n">laser</span><span class="w"> </span><span class="n">rifle</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="n">d9</span><span class="p">)</span><span class="n">x5</span><span class="w"> </span><span class="o">[</span><span class="n">24/34</span><span class="o">]</span><span class="w"> </span><span class="p">(</span><span class="n">B1</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">c</span><span class="o">]</span><span class="w"> </span><span class="n">missile</span><span class="w"> </span><span class="n">launcher</span><span class="w"> </span><span class="p">(</span><span class="mi">6</span><span class="n">d8</span><span class="p">)</span><span class="w"> </span><span class="o">[</span><span class="n">0/8</span><span class="o">]</span><span class="w"> </span><span class="p">(</span><span class="n">B3P2</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">d</span><span class="o">]</span><span class="w"> </span><span class="n">BFG</span><span class="w"> </span><span class="mi">9000</span><span class="w"> </span><span class="p">(</span><span class="mi">12</span><span class="n">d6</span><span class="p">)</span><span class="w"> </span><span class="o">[</span><span class="n">46/220</span><span class="o">]</span><span class="w"> </span><span class="p">(</span><span class="n">B3P2</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">e</span><span class="o">]</span><span class="w"> </span><span class="n">Jackhammer</span><span class="w"> </span><span class="p">(</span><span class="mi">8</span><span class="n">d3</span><span class="p">)</span><span class="n">x3</span><span class="w"> </span><span class="o">[</span><span class="n">9/9</span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">f</span><span class="o">]</span><span class="w"> </span><span class="n">BFG</span><span class="w"> </span><span class="mi">10</span><span class="n">K</span><span class="w"> </span><span class="p">(</span><span class="mi">6</span><span class="n">d4</span><span class="p">)</span><span class="n">x5</span><span class="w"> </span><span class="o">[</span><span class="n">50/50</span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">g</span><span class="o">]</span><span class="w"> </span><span class="n">nanofiber</span><span class="w"> </span><span class="n">onyx</span><span class="w"> </span><span class="n">armor</span><span class="w"> </span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">h</span><span class="o">]</span><span class="w"> </span><span class="n">shotgun</span><span class="w"> </span><span class="n">shell</span><span class="w"> </span><span class="p">(</span><span class="n">x50</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="n">shotgun</span><span class="w"> </span><span class="n">shell</span><span class="w"> </span><span class="p">(</span><span class="n">x50</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="w"> </span><span class="n">shotgun</span><span class="w"> </span><span class="n">shell</span><span class="w"> </span><span class="p">(</span><span class="n">x5</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="w"> </span><span class="k">large</span><span class="w"> </span><span class="n">med</span><span class="o">-</span><span class="n">pack</span><span class="w"></span>
+<span class="w">    </span><span class="o">[</span><span class="n">l</span><span class="o">]</span><span class="w"> </span><span class="n">Nyarlaptotep</span><span class="s1">&#39;s Boots [6/6] (100%)</span>
+<span class="s1">    [m] shell box (x63)</span>
+<span class="s1">    [n] shell box (x100)</span>
+<span class="s1">    [o] shell box (x100)</span>
+<span class="s1">    [p] power battery (x120)</span>
 
--- Resistances -----------------------------------------------
+<span class="s1">-- Resistances -----------------------------------------------</span>
 
-    Bullet     - internal 0%    torso 90%   feet 0%
-    Melee      - internal 0%    torso 90%   feet 0%
-    Shrapnel   - internal 0%    torso 90%   feet 0%
-    Fire       - internal 0%    torso 0%    feet 100%
+<span class="s1">    Bullet     - internal 0%    torso 90%   feet 0%</span>
+<span class="s1">    Melee      - internal 0%    torso 90%   feet 0%</span>
+<span class="s1">    Shrapnel   - internal 0%    torso 90%   feet 0%</span>
+<span class="s1">    Fire       - internal 0%    torso 0%    feet 100%</span>
 
--- Kills -----------------------------------------------------
+<span class="s1">-- Kills -----------------------------------------------------</span>
 
-    141 former humans
-    169 former sergeants
-    190 former captains
-    62 imps
-    43 demons
-    88 lost souls
-    38 cacodemons
-    75 hell knights
-    226 barons of hell
-    86 arachnotrons
-    9 former commandos
-    6 pain elementals
-    75 revenants
-    114 mancubi
-    143 arch-viles
-    9 nightmare imps
-    31 nightmare cacodemons
-    55 nightmare demons
-    21 nightmare arachnotrons
-    3 nightmare arch-viles
-    1 elite former human
-    5 elite former sergeants
-    4 elite former captains
-    2 elite former commandos
-    20 bruiser brothers
-    8 shamblers
-    2 lava elemental
+<span class="s1">    141 former humans</span>
+<span class="s1">    169 former sergeants</span>
+<span class="s1">    190 former captains</span>
+<span class="s1">    62 imps</span>
+<span class="s1">    43 demons</span>
+<span class="s1">    88 lost souls</span>
+<span class="s1">    38 cacodemons</span>
+<span class="s1">    75 hell knights</span>
+<span class="s1">    226 barons of hell</span>
+<span class="s1">    86 arachnotrons</span>
+<span class="s1">    9 former commandos</span>
+<span class="s1">    6 pain elementals</span>
+<span class="s1">    75 revenants</span>
+<span class="s1">    114 mancubi</span>
+<span class="s1">    143 arch-viles</span>
+<span class="s1">    9 nightmare imps</span>
+<span class="s1">    31 nightmare cacodemons</span>
+<span class="s1">    55 nightmare demons</span>
+<span class="s1">    21 nightmare arachnotrons</span>
+<span class="s1">    3 nightmare arch-viles</span>
+<span class="s1">    1 elite former human</span>
+<span class="s1">    5 elite former sergeants</span>
+<span class="s1">    4 elite former captains</span>
+<span class="s1">    2 elite former commandos</span>
+<span class="s1">    20 bruiser brothers</span>
+<span class="s1">    8 shamblers</span>
+<span class="s1">    2 lava elemental</span>
 
--- History ---------------------------------------------------
+<span class="s1">-- History ---------------------------------------------------</span>
 
-  On level 19 he assembled a nanofiber armor!
-  On level 19 he found the Jackhammer!
-  On level 26 he stumbled into a complex full of revenants!
-  On level 26 he found the Nyarlaptotep&#39;s Boots!
-  On level 27 he found the Revenant&#39;s Launcher!
-  On level 29 he was bombarded!
-  He sounded the alarm on level 30!
-  On level 31, hell froze over!
-  On level 38 he found the Necroarmor!
-  On level 42 he stumbled into a complex full of arch-viles!
-  On level 42 he was bombarded!
-  Level 46 blasted him with an unholy atmosphere!
-  He sounded the alarm on level 48!
-  Entering level 48 he was almost dead...
-  On level 50 he assembled a lava boots!
-  On level 52 he ran for his life from acid!
-  On level 55 he stumbled into a nightmare cacodemon cave!
-  He sounded the alarm on level 56!
-  On level 61 he stumbled into a nightmare cacodemon cave!
-  Level 62 was a hard nut to crack!
-  On level 63 he stumbled into a complex full of arch-viles!
-  Level 63 was a hard nut to crack!
-  On level 64 he found the Acid Spitter!
-  He sounded the alarm on level 66!
-  On level 74 he ran for his life from acid!
-  On level 75 he encountered an armed nuke!
-  On level 75 he found the BFG 10K!
-  On level 79 he encountered an armed nuke!
-  On level 84 he stumbled into a nightmare arachnotron cave!
-  On level 87 he found the Shielded Armor!
-  On level 89 he was bombarded!
-  Level 92 blasted him with an unholy atmosphere!
-  On level 94 he assembled a high power weapon!
-  On level 94 he found the Butcher&#39;s Cleaver!
-  Level 95 was a hard nut to crack!
-  On level 99 he stumbled into a nightmare demon cave!
-  On level 100 he finally completed 100 levels of torture.
+<span class="s1">  On level 19 he assembled a nanofiber armor!</span>
+<span class="s1">  On level 19 he found the Jackhammer!</span>
+<span class="s1">  On level 26 he stumbled into a complex full of revenants!</span>
+<span class="s1">  On level 26 he found the Nyarlaptotep&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">Boots</span><span class="err">!</span><span class="w"></span>
+<span class="w">  </span><span class="k">On</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="mi">27</span><span class="w"> </span><span class="n">he</span><span class="w"> </span><span class="k">found</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Revenant</span><span class="s1">&#39;s Launcher!</span>
+<span class="s1">  On level 29 he was bombarded!</span>
+<span class="s1">  He sounded the alarm on level 30!</span>
+<span class="s1">  On level 31, hell froze over!</span>
+<span class="s1">  On level 38 he found the Necroarmor!</span>
+<span class="s1">  On level 42 he stumbled into a complex full of arch-viles!</span>
+<span class="s1">  On level 42 he was bombarded!</span>
+<span class="s1">  Level 46 blasted him with an unholy atmosphere!</span>
+<span class="s1">  He sounded the alarm on level 48!</span>
+<span class="s1">  Entering level 48 he was almost dead...</span>
+<span class="s1">  On level 50 he assembled a lava boots!</span>
+<span class="s1">  On level 52 he ran for his life from acid!</span>
+<span class="s1">  On level 55 he stumbled into a nightmare cacodemon cave!</span>
+<span class="s1">  He sounded the alarm on level 56!</span>
+<span class="s1">  On level 61 he stumbled into a nightmare cacodemon cave!</span>
+<span class="s1">  Level 62 was a hard nut to crack!</span>
+<span class="s1">  On level 63 he stumbled into a complex full of arch-viles!</span>
+<span class="s1">  Level 63 was a hard nut to crack!</span>
+<span class="s1">  On level 64 he found the Acid Spitter!</span>
+<span class="s1">  He sounded the alarm on level 66!</span>
+<span class="s1">  On level 74 he ran for his life from acid!</span>
+<span class="s1">  On level 75 he encountered an armed nuke!</span>
+<span class="s1">  On level 75 he found the BFG 10K!</span>
+<span class="s1">  On level 79 he encountered an armed nuke!</span>
+<span class="s1">  On level 84 he stumbled into a nightmare arachnotron cave!</span>
+<span class="s1">  On level 87 he found the Shielded Armor!</span>
+<span class="s1">  On level 89 he was bombarded!</span>
+<span class="s1">  Level 92 blasted him with an unholy atmosphere!</span>
+<span class="s1">  On level 94 he assembled a high power weapon!</span>
+<span class="s1">  On level 94 he found the Butcher&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">Cleaver</span><span class="err">!</span><span class="w"></span>
+<span class="w">  </span><span class="k">Level</span><span class="w"> </span><span class="mi">95</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">hard</span><span class="w"> </span><span class="n">nut</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">crack</span><span class="err">!</span><span class="w"></span>
+<span class="w">  </span><span class="k">On</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="mi">99</span><span class="w"> </span><span class="n">he</span><span class="w"> </span><span class="n">stumbled</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">nightmare</span><span class="w"> </span><span class="n">demon</span><span class="w"> </span><span class="n">cave</span><span class="err">!</span><span class="w"></span>
+<span class="w">  </span><span class="k">On</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="n">he</span><span class="w"> </span><span class="n">finally</span><span class="w"> </span><span class="n">completed</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">torture</span><span class="p">.</span><span class="w"></span>
 
--- Messages --------------------------------------------------
+<span class="o">--</span><span class="w"> </span><span class="n">Messages</span><span class="w"> </span><span class="o">--------------------------------------------------</span><span class="w"></span>
 
- Melee attack -- Choose direction... You hit the hell knight. The hell knight
- hits you.
- Melee attack -- Choose direction... You hit the hell knight. The hell knight
- uses a large med-pack. The hell knight looks a lot healthier!
- Melee attack -- Choose direction... You hit the hell knight.
- Melee attack -- Choose direction... You hit the hell knight.
- Melee attack -- Choose direction... You hit the hell knight. The hell knight
- dies. You feel relatively safe now. Next!
- There is a Small Health Globe lying here.
- You feel better.
- There is a technical mod pack lying here.
- There are stairs leading downward here.
- You did it! You completed 100 levels of DoomRL! You&#39;re the champion! Press
- &lt;Enter&gt;...
+<span class="w"> </span><span class="n">Melee</span><span class="w"> </span><span class="n">attack</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nf">Choose</span><span class="w"> </span><span class="n">direction</span><span class="p">...</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">hit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">hell</span><span class="w"> </span><span class="n">knight</span><span class="p">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">hell</span><span class="w"> </span><span class="n">knight</span><span class="w"></span>
+<span class="w"> </span><span class="n">hits</span><span class="w"> </span><span class="n">you</span><span class="p">.</span><span class="w"></span>
+<span class="w"> </span><span class="n">Melee</span><span class="w"> </span><span class="n">attack</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nf">Choose</span><span class="w"> </span><span class="n">direction</span><span class="p">...</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">hit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">hell</span><span class="w"> </span><span class="n">knight</span><span class="p">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">hell</span><span class="w"> </span><span class="n">knight</span><span class="w"></span>
+<span class="w"> </span><span class="n">uses</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">large</span><span class="w"> </span><span class="n">med</span><span class="o">-</span><span class="n">pack</span><span class="p">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">hell</span><span class="w"> </span><span class="n">knight</span><span class="w"> </span><span class="n">looks</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">lot</span><span class="w"> </span><span class="n">healthier</span><span class="err">!</span><span class="w"></span>
+<span class="w"> </span><span class="n">Melee</span><span class="w"> </span><span class="n">attack</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nf">Choose</span><span class="w"> </span><span class="n">direction</span><span class="p">...</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">hit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">hell</span><span class="w"> </span><span class="n">knight</span><span class="p">.</span><span class="w"></span>
+<span class="w"> </span><span class="n">Melee</span><span class="w"> </span><span class="n">attack</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nf">Choose</span><span class="w"> </span><span class="n">direction</span><span class="p">...</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">hit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">hell</span><span class="w"> </span><span class="n">knight</span><span class="p">.</span><span class="w"></span>
+<span class="w"> </span><span class="n">Melee</span><span class="w"> </span><span class="n">attack</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nf">Choose</span><span class="w"> </span><span class="n">direction</span><span class="p">...</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">hit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">hell</span><span class="w"> </span><span class="n">knight</span><span class="p">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">hell</span><span class="w"> </span><span class="n">knight</span><span class="w"></span>
+<span class="w"> </span><span class="n">dies</span><span class="p">.</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">feel</span><span class="w"> </span><span class="n">relatively</span><span class="w"> </span><span class="n">safe</span><span class="w"> </span><span class="n">now</span><span class="p">.</span><span class="w"> </span><span class="k">Next</span><span class="err">!</span><span class="w"></span>
+<span class="w"> </span><span class="n">There</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Small</span><span class="w"> </span><span class="n">Health</span><span class="w"> </span><span class="n">Globe</span><span class="w"> </span><span class="n">lying</span><span class="w"> </span><span class="n">here</span><span class="p">.</span><span class="w"></span>
+<span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">feel</span><span class="w"> </span><span class="n">better</span><span class="p">.</span><span class="w"></span>
+<span class="w"> </span><span class="n">There</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">technical</span><span class="w"> </span><span class="k">mod</span><span class="w"> </span><span class="n">pack</span><span class="w"> </span><span class="n">lying</span><span class="w"> </span><span class="n">here</span><span class="p">.</span><span class="w"></span>
+<span class="w"> </span><span class="n">There</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="n">stairs</span><span class="w"> </span><span class="k">leading</span><span class="w"> </span><span class="n">downward</span><span class="w"> </span><span class="n">here</span><span class="p">.</span><span class="w"></span>
+<span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">did</span><span class="w"> </span><span class="n">it</span><span class="err">!</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">completed</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">DoomRL</span><span class="err">!</span><span class="w"> </span><span class="n">You</span><span class="s1">&#39;re the champion! Press</span>
+<span class="s1"> &lt;Enter&gt;...</span>
 
--- General ---------------------------------------------------
+<span class="s1">-- General ---------------------------------------------------</span>
 
- 449 brave souls have ventured into Phobos:
- 396 of those were killed.
- 4 didn&#39;t read the thermonuclear bomb manual.
- And 34 couldn&#39;t handle the stress and committed a stupid suicide.
+<span class="s1"> 449 brave souls have ventured into Phobos:</span>
+<span class="s1"> 396 of those were killed.</span>
+<span class="s1"> 4 didn&#39;</span><span class="n">t</span><span class="w"> </span><span class="k">read</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">thermonuclear</span><span class="w"> </span><span class="n">bomb</span><span class="w"> </span><span class="n">manual</span><span class="p">.</span><span class="w"></span>
+<span class="w"> </span><span class="ow">And</span><span class="w"> </span><span class="mi">34</span><span class="w"> </span><span class="n">couldn</span><span class="err">&#39;</span><span class="n">t</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">stress</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">committed</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">stupid</span><span class="w"> </span><span class="n">suicide</span><span class="p">.</span><span class="w"></span>
 
- 15 souls destroyed the Mastermind...
- 15 killed the bitch and survived.
+<span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="n">souls</span><span class="w"> </span><span class="n">destroyed</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Mastermind</span><span class="p">...</span><span class="w"></span>
+<span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="n">killed</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">bitch</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">survived</span><span class="p">.</span><span class="w"></span>
 
---------------------------------------------------------------
-</pre></div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Warten auf Jupiter Hell...&body=[Warten auf Jupiter Hell...](https://elbosso.github.io/warten_auf_jupiter_hell___)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Warten auf Jupiter Hell..."><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Warten auf Jupiter Hell...&issue[description]=[Warten auf Jupiter Hell...](https://elbosso.github.io/warten_auf_jupiter_hell___)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Warten auf Jupiter Hell..."><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Partikelsystem mit "innerer" Energie</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">29.07.2018</span> </p> <span class="smallabstract"><p>Nachdem es schon ein wenig länger her ist, dass ich hier ein Video veröffentlicht habe, hat mich wieder einmal jemand inspiriert... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="partikelsystem__innerer__energie.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-black w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> TagManager auf GitHub</span><br> <span class="smallabstract"><p>Nachdem ich vor einiger Zeit über die Komponente zur Verwaltung von Tags für (Bild-)Dateien berichtet habe ist es nun an der Zeit, die Information über die Veröffentlichung einer entsprechenden darauf basierenden Anwendung nachzureichen. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tagmanager_auf_github.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> SpaceTraders Swing GUI</span><br> <span class="smallabstract"><p>Ich habe neulich einen Link gefunden, hinter dem sich eine (für mich) neue Art von Computerspiel verbarg: Es handelt sich hier um ein Multiplayer Spiel, für das zunächst einmal nur die API existiert </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="spacetraders_swing_gui.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Bug in Javas ImageIO</span><br> <span class="smallabstract"><p>Nachdem in letzter Zeit die Diskussion - bedingt durch die Unterstützung von Apple - um JPEG XL wieder aufgeflammt ist, begann ich mich dafür zu interessieren. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bug_javas_imageio.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+<span class="c1">--------------------------------------------------------------</span>
+</pre></div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Warten auf Jupiter Hell...&body=[Warten auf Jupiter Hell...](https://elbosso.github.io/warten_auf_jupiter_hell___)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Warten auf Jupiter Hell..."><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Warten auf Jupiter Hell...&issue[description]=[Warten auf Jupiter Hell...](https://elbosso.github.io/warten_auf_jupiter_hell___)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Warten auf Jupiter Hell..."><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> PiHole</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">12.08.2018</span> </p> <span class="smallabstract"><p>Raspberry Pi als Ad- und Malware-Blocker </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pihole.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-black w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> Brücke zwischen Gnuplot und sQLshell</span><br> <span class="smallabstract"><p>Ich habe ein neues Plugin für die sQLshell geschrieben, das Gnuplot noch enger in die Anwendung integriert: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bruecke_zwischen_gnuplot_sqlshell.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Aktueller Stand meiner vim-Konfiguration</span><br> <span class="smallabstract"><p>Ich habe bereits vor einiger Zeit ein Repository veröffentlicht, das diverse Dot-Dateien beinhaltet. Unter anderem findet man dort auch eine vim-Konfiguration. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="aktueller_stand_meiner_vim_konfiguration.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Veganer Käse</span><br> <span class="smallabstract"><p>Heute nur ein kurzer, werbungsinduzierter Rant... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="veganer_kaese.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->

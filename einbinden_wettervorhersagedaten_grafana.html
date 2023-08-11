@@ -17,7 +17,7 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source__dwb__sqlshell.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="reveal_js_praesentationen_gitlab_github_pages.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Einbinden von Wettervorhersagedaten in Grafana</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="zertifikatsgueltigkeit_ueberwachen_grafana.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="trojan_source_sql_postgres.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Datenbanken</span> </a> <a href="generator_microservices_mastodon_bot.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Python</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">20.11.2021</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Weather-few-clouds.svg/240px-Weather-few-clouds.svg.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="updates"> <h5>Updates</h5> <ul> <li> <a href="#101"> 20. November 2021 </a> </li> </ul> </div> <div class="w3-container w3-padding" id="abstract"> <p>Nachdem ich hier bereits über Tests meiner ESP-Wetterstation <a href="wetterstation_test.html">berichtete</a> folgt nun eine Idee zur "Verbesserung" des Wetterberichts... </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Schön wäre es, wenn man die durch die Wetterstation gemessenen und die vorhergesagten Daten auf einfache Art vergleichen könnte. Der minimale Nutzen wäre, über die Wetterfrösche schimpfen zu können, wenn sie wieder einmal danebengelegen haben obwohl man heute ja wissen sollte, dass Wettervorhersagen <a href="bifurkationen_lorenz_system.html">prinzipiell unmöglich sind.</a> </p><p> Der größte Nutzen wäre beim Vergleich der Vorhersagen mit dem aktuell gemessenen systematische Fehler zu identifizieren - zum Beispiel, dass der vorhergesagte Temperaturwert immer um ungefähr 2 Grad niedriger liegt als der tatsächliche. Damit könnte man eine persönliche, korrigierte Vorhersage erstellen. </p><p> Diese Daten zu gewinnen ist sehr einfach: Man findet im Netz eine ganze Reihe von <a href="https://github.com/elbosso/public-apis">öffentlichen APIS,</a> die man einfach nutzen kann. Mein <a href="https://api.met.no/weatherapi">Mittel der Wahl - ich benutze <a href="https://api.met.no/weatherapi/locationforecast/2.0/documentation">locationforecast</a> in der Version 2.0. </p><p> Dieser Service liefert die Daten als <a href="https://json.org">JSON.</a> Ich überlegte kurz, ob ich versuchen sollte, <a href="https://www.influxdata.com/time-series-platform/telegraf/">Telegraf</a> die Struktur der Daten klarzumachen, entschied mich aber dagegen. Ich schrieb ein kleines Python-Script, das für mich die Aufbereitung der Daten übernimmt und sie in eine <a href="https://www.influxdata.com/">InfluxDB</a> schreibt. Voraussetzung für die Funktion des Skripts ist die Installation des Python-Moduls <span class="mdcode">influxdb</span>, was über den Befehl </p><div class="highlight"><pre><span></span>pip3 install influxdb
+</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="trojan_source__dwb__sqlshell.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="reveal_js_praesentationen_gitlab_github_pages.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Einbinden von Wettervorhersagedaten in Grafana</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="zertifikatsgueltigkeit_ueberwachen_grafana.html#content"> <span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span> </a> <a href="trojan_source_sql_postgres.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Datenbanken</span> </a> <a href="generator_microservices_mastodon_bot.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Python</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">20.11.2021</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Weather-few-clouds.svg/240px-Weather-few-clouds.svg.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="updates"> <h5>Updates</h5> <ul> <li> <a href="#102"> 20. November 2021 </a> </li> </ul> </div> <div class="w3-container w3-padding" id="abstract"> <p>Nachdem ich hier bereits über Tests meiner ESP-Wetterstation <a href="wetterstation_test.html">berichtete</a> folgt nun eine Idee zur "Verbesserung" des Wetterberichts... </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Schön wäre es, wenn man die durch die Wetterstation gemessenen und die vorhergesagten Daten auf einfache Art vergleichen könnte. Der minimale Nutzen wäre, über die Wetterfrösche schimpfen zu können, wenn sie wieder einmal danebengelegen haben obwohl man heute ja wissen sollte, dass Wettervorhersagen <a href="bifurkationen_lorenz_system.html">prinzipiell unmöglich sind.</a> </p><p> Der größte Nutzen wäre beim Vergleich der Vorhersagen mit dem aktuell gemessenen systematische Fehler zu identifizieren - zum Beispiel, dass der vorhergesagte Temperaturwert immer um ungefähr 2 Grad niedriger liegt als der tatsächliche. Damit könnte man eine persönliche, korrigierte Vorhersage erstellen. </p><p> Diese Daten zu gewinnen ist sehr einfach: Man findet im Netz eine ganze Reihe von <a href="https://github.com/elbosso/public-apis">öffentlichen APIS,</a> die man einfach nutzen kann. Mein <a href="https://api.met.no/weatherapi">Mittel der Wahl - ich benutze <a href="https://api.met.no/weatherapi/locationforecast/2.0/documentation">locationforecast</a> in der Version 2.0. </p><p> Dieser Service liefert die Daten als <a href="https://json.org">JSON.</a> Ich überlegte kurz, ob ich versuchen sollte, <a href="https://www.influxdata.com/time-series-platform/telegraf/">Telegraf</a> die Struktur der Daten klarzumachen, entschied mich aber dagegen. Ich schrieb ein kleines Python-Script, das für mich die Aufbereitung der Daten übernimmt und sie in eine <a href="https://www.influxdata.com/">InfluxDB</a> schreibt. Voraussetzung für die Funktion des Skripts ist die Installation des Python-Moduls <span class="mdcode">influxdb</span>, was über den Befehl </p><div class="highlight"><pre><span></span>pip3 install influxdb
 </pre></div> </p><p> geschehen kann - man beachte, dass hier unbedingt <span class="mdbold">pip3</span> benutzt werden muss und nicht <span class="mdbold">pip</span>, da das Skript Python in der Version 3 voraussetzt. Würde man hier <span class="mdcode">pip</span> benutzen, würde das Modul für Python in der Version <span class="mdbold">2</span> installiert und Python <span class="mdbold">3</span> würde sich weiterhin beschweren, dass es das Modul nicht finden kann! </p><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="kn">from</span> <span class="nn">influxdb</span> <span class="kn">import</span> <span class="n">InfluxDBClient</span>
 <span class="kn">import</span> <span class="nn">requests</span>
@@ -42,7 +42,7 @@ document.write(link)
 <span class="c1"># longitude of the location the forecast is wanted for (german: Längengrad)</span>
 <span class="n">longitude</span><span class="o">=</span>
 <span class="c1"># API url</span>
-<span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://api.met.no/weatherapi/locationforecast/2.0/.json?lat={latitude}&amp;lon={longitude}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="n">latitude</span><span class="p">,</span><span class="n">longitude</span><span class="o">=</span><span class="n">longitude</span><span class="p">)</span>
+<span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://api.met.no/weatherapi/locationforecast/2.0/.json?lat=</span><span class="si">{latitude}</span><span class="s1">&amp;lon=</span><span class="si">{longitude}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="n">latitude</span><span class="p">,</span><span class="n">longitude</span><span class="o">=</span><span class="n">longitude</span><span class="p">)</span>
 <span class="c1"># name of the location the forecast is wanted for (german: Längengrad)</span>
 <span class="n">locality</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 <span class="c1"># value for the host tag when writing to the influxdb</span>
@@ -56,13 +56,13 @@ document.write(link)
 </p><p>
 <span class="n">databases</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_list_database</span><span class="p">()</span>
 </p><p>
-<span class="n">databaseAlreadyThere</span> <span class="o">=</span><span class="bp">False</span>
+<span class="n">databaseAlreadyThere</span> <span class="o">=</span><span class="kc">False</span>
 </p><p>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">databases</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">monitoringdbname</span><span class="p">:</span>
-        <span class="n">databaseAlreadyThere</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">databaseAlreadyThere</span> <span class="o">=</span> <span class="kc">True</span>
 </p><p>
-<span class="k">if</span> <span class="n">databaseAlreadyThere</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">databaseAlreadyThere</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
     <span class="n">client</span><span class="o">.</span><span class="n">create_database</span><span class="p">(</span><span class="n">monitoringdbname</span><span class="p">)</span>
 </p><p>
 <span class="n">client</span><span class="o">.</span><span class="n">switch_database</span><span class="p">(</span><span class="n">monitoringdbname</span><span class="p">)</span>
@@ -84,7 +84,7 @@ document.write(link)
     <span class="n">stats</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">data</span><span class="o">=</span><span class="n">timeserie</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;instant&#39;</span><span class="p">][</span><span class="s1">&#39;details&#39;</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="nb">dict</span><span class="p">)</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="nb">dict</span><span class="p">)</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span>
             <span class="n">stats</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
     <span class="k">if</span> <span class="s1">&#39;next_1_hours&#39;</span> <span class="ow">in</span> <span class="n">timeserie</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;precipitation_amount&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timeserie</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;next_1_hours&#39;</span><span class="p">][</span><span class="s1">&#39;details&#39;</span><span class="p">][</span><span class="s1">&#39;precipitation_amount&#39;</span><span class="p">]</span>
@@ -102,690 +102,690 @@ document.write(link)
     <span class="n">jb</span><span class="p">[</span><span class="s2">&quot;fields&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">stats</span>
     <span class="n">json_body</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jb</span><span class="p">)</span>
     <span class="n">client</span><span class="o">.</span><span class="n">write_points</span><span class="p">(</span><span class="n">json_body</span><span class="p">)</span>
-</pre></div> </p><p> Führt man dieses Skript - zum Beispiel per Cron - stündlich aus, werden jeweils akuelle Vorhersagedaten in die Datenbank geschrieben, wobei InfluxDB von selbst Daten für Zeitpunkte, für die von früheren Vorhersagen bereits Informationen vorhanden sind mit den aktuelleren <a href="https://v2.docs.influxdata.com/v2.0/write-data/best-practices/duplicate-points/">überschreibt.</a> </p><p> Nun füge man noch ein wenig <a href="https://grafana.com/">Grafana-Magie</a> hinzu und erstellt sich in wenigen Minuten das erste Dashboard zur Anzeige des Wetters der nächsten 48 Stunden: </p><p> <img src="images/wetherforecastgrafana.png" style="max-width:688px;" alt="Screenshot" class="center"> <span class="imgdesc"> Wettervorhersage </span> </p><div class="highlight"><pre><span></span>{
-  &quot;annotations&quot;: {
-    &quot;list&quot;: [
-      {
-        &quot;builtIn&quot;: 1,
-        &quot;datasource&quot;: &quot;-- Grafana --&quot;,
-        &quot;enable&quot;: true,
-        &quot;hide&quot;: true,
-        &quot;iconColor&quot;: &quot;rgba(0, 211, 255, 1)&quot;,
-        &quot;name&quot;: &quot;Annotations &amp; Alerts&quot;,
-        &quot;type&quot;: &quot;dashboard&quot;
-      }
-    ]
-  },
-  &quot;editable&quot;: true,
-  &quot;gnetId&quot;: null,
-  &quot;graphTooltip&quot;: 0,
-  &quot;id&quot;: 30,
-  &quot;links&quot;: [],
-  &quot;panels&quot;: [
-    {
-      &quot;aliasColors&quot;: {},
-      &quot;bars&quot;: false,
-      &quot;dashLength&quot;: 10,
-      &quot;dashes&quot;: false,
-      &quot;fill&quot;: 1,
-      &quot;gridPos&quot;: {
-        &quot;h&quot;: 9,
-        &quot;w&quot;: 12,
-        &quot;x&quot;: 0,
-        &quot;y&quot;: 0
-      },
-      &quot;id&quot;: 2,
-      &quot;legend&quot;: {
-        &quot;avg&quot;: false,
-        &quot;current&quot;: false,
-        &quot;max&quot;: false,
-        &quot;min&quot;: false,
-        &quot;show&quot;: true,
-        &quot;total&quot;: false,
-        &quot;values&quot;: false
-      },
-      &quot;lines&quot;: true,
-      &quot;linewidth&quot;: 1,
-      &quot;links&quot;: [],
-      &quot;nullPointMode&quot;: &quot;null&quot;,
-      &quot;options&quot;: {},
-      &quot;percentage&quot;: false,
-      &quot;pointradius&quot;: 2,
-      &quot;points&quot;: false,
-      &quot;renderer&quot;: &quot;flot&quot;,
-      &quot;seriesOverrides&quot;: [],
-      &quot;spaceLength&quot;: 10,
-      &quot;stack&quot;: false,
-      &quot;steppedLine&quot;: false,
-      &quot;targets&quot;: [
-        {
-          &quot;groupBy&quot;: [],
-          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
-          &quot;orderByTime&quot;: &quot;ASC&quot;,
-          &quot;policy&quot;: &quot;default&quot;,
-          &quot;refId&quot;: &quot;A&quot;,
-          &quot;resultFormat&quot;: &quot;time_series&quot;,
-          &quot;select&quot;: [
-            [
-              {
-                &quot;params&quot;: [
-                  &quot;air_temperature&quot;
-                ],
-                &quot;type&quot;: &quot;field&quot;
-              }
-            ]
-          ],
-          &quot;tags&quot;: [
-            {
-              &quot;key&quot;: &quot;Location&quot;,
-              &quot;operator&quot;: &quot;=&quot;,
-              &quot;value&quot;: &quot;Rudolstadt&quot;
-            }
-          ]
-        }
-      ],
-      &quot;thresholds&quot;: [],
-      &quot;timeFrom&quot;: null,
-      &quot;timeRegions&quot;: [],
-      &quot;timeShift&quot;: null,
-      &quot;title&quot;: &quot;Air Temperature&quot;,
-      &quot;tooltip&quot;: {
-        &quot;shared&quot;: true,
-        &quot;sort&quot;: 0,
-        &quot;value_type&quot;: &quot;individual&quot;
-      },
-      &quot;type&quot;: &quot;graph&quot;,
-      &quot;xaxis&quot;: {
-        &quot;buckets&quot;: null,
-        &quot;mode&quot;: &quot;time&quot;,
-        &quot;name&quot;: null,
-        &quot;show&quot;: true,
-        &quot;values&quot;: []
-      },
-      &quot;yaxes&quot;: [
-        {
-          &quot;format&quot;: &quot;celsius&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: null,
-          &quot;min&quot;: null,
-          &quot;show&quot;: true
-        },
-        {
-          &quot;format&quot;: &quot;short&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: null,
-          &quot;min&quot;: null,
-          &quot;show&quot;: true
-        }
-      ],
-      &quot;yaxis&quot;: {
-        &quot;align&quot;: false,
-        &quot;alignLevel&quot;: null
-      }
-    },
-    {
-      &quot;aliasColors&quot;: {},
-      &quot;bars&quot;: false,
-      &quot;dashLength&quot;: 10,
-      &quot;dashes&quot;: false,
-      &quot;fill&quot;: 1,
-      &quot;gridPos&quot;: {
-        &quot;h&quot;: 9,
-        &quot;w&quot;: 12,
-        &quot;x&quot;: 12,
-        &quot;y&quot;: 0
-      },
-      &quot;id&quot;: 7,
-      &quot;legend&quot;: {
-        &quot;avg&quot;: false,
-        &quot;current&quot;: false,
-        &quot;max&quot;: false,
-        &quot;min&quot;: false,
-        &quot;show&quot;: true,
-        &quot;total&quot;: false,
-        &quot;values&quot;: false
-      },
-      &quot;lines&quot;: true,
-      &quot;linewidth&quot;: 1,
-      &quot;links&quot;: [],
-      &quot;nullPointMode&quot;: &quot;null&quot;,
-      &quot;options&quot;: {},
-      &quot;percentage&quot;: false,
-      &quot;pointradius&quot;: 2,
-      &quot;points&quot;: false,
-      &quot;renderer&quot;: &quot;flot&quot;,
-      &quot;seriesOverrides&quot;: [],
-      &quot;spaceLength&quot;: 10,
-      &quot;stack&quot;: false,
-      &quot;steppedLine&quot;: false,
-      &quot;targets&quot;: [
-        {
-          &quot;groupBy&quot;: [],
-          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
-          &quot;orderByTime&quot;: &quot;ASC&quot;,
-          &quot;policy&quot;: &quot;default&quot;,
-          &quot;refId&quot;: &quot;A&quot;,
-          &quot;resultFormat&quot;: &quot;time_series&quot;,
-          &quot;select&quot;: [
-            [
-              {
-                &quot;params&quot;: [
-                  &quot;precipitation_amount&quot;
-                ],
-                &quot;type&quot;: &quot;field&quot;
-              }
-            ]
-          ],
-          &quot;tags&quot;: [
-            {
-              &quot;key&quot;: &quot;Location&quot;,
-              &quot;operator&quot;: &quot;=&quot;,
-              &quot;value&quot;: &quot;Rudolstadt&quot;
-            }
-          ]
-        }
-      ],
-      &quot;thresholds&quot;: [],
-      &quot;timeFrom&quot;: null,
-      &quot;timeRegions&quot;: [],
-      &quot;timeShift&quot;: null,
-      &quot;title&quot;: &quot;Precipitation&quot;,
-      &quot;tooltip&quot;: {
-        &quot;shared&quot;: true,
-        &quot;sort&quot;: 0,
-        &quot;value_type&quot;: &quot;individual&quot;
-      },
-      &quot;type&quot;: &quot;graph&quot;,
-      &quot;xaxis&quot;: {
-        &quot;buckets&quot;: null,
-        &quot;mode&quot;: &quot;time&quot;,
-        &quot;name&quot;: null,
-        &quot;show&quot;: true,
-        &quot;values&quot;: []
-      },
-      &quot;yaxes&quot;: [
-        {
-          &quot;format&quot;: &quot;lengthmm&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: null,
-          &quot;min&quot;: null,
-          &quot;show&quot;: true
-        },
-        {
-          &quot;format&quot;: &quot;short&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: null,
-          &quot;min&quot;: null,
-          &quot;show&quot;: true
-        }
-      ],
-      &quot;yaxis&quot;: {
-        &quot;align&quot;: false,
-        &quot;alignLevel&quot;: null
-      }
-    },
-    {
-      &quot;aliasColors&quot;: {},
-      &quot;bars&quot;: false,
-      &quot;dashLength&quot;: 10,
-      &quot;dashes&quot;: false,
-      &quot;fill&quot;: 1,
-      &quot;gridPos&quot;: {
-        &quot;h&quot;: 9,
-        &quot;w&quot;: 12,
-        &quot;x&quot;: 0,
-        &quot;y&quot;: 9
-      },
-      &quot;id&quot;: 4,
-      &quot;legend&quot;: {
-        &quot;avg&quot;: false,
-        &quot;current&quot;: false,
-        &quot;max&quot;: false,
-        &quot;min&quot;: false,
-        &quot;show&quot;: true,
-        &quot;total&quot;: false,
-        &quot;values&quot;: false
-      },
-      &quot;lines&quot;: true,
-      &quot;linewidth&quot;: 1,
-      &quot;links&quot;: [],
-      &quot;nullPointMode&quot;: &quot;null&quot;,
-      &quot;options&quot;: {},
-      &quot;percentage&quot;: false,
-      &quot;pointradius&quot;: 2,
-      &quot;points&quot;: false,
-      &quot;renderer&quot;: &quot;flot&quot;,
-      &quot;seriesOverrides&quot;: [],
-      &quot;spaceLength&quot;: 10,
-      &quot;stack&quot;: false,
-      &quot;steppedLine&quot;: false,
-      &quot;targets&quot;: [
-        {
-          &quot;groupBy&quot;: [],
-          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
-          &quot;orderByTime&quot;: &quot;ASC&quot;,
-          &quot;policy&quot;: &quot;default&quot;,
-          &quot;refId&quot;: &quot;A&quot;,
-          &quot;resultFormat&quot;: &quot;time_series&quot;,
-          &quot;select&quot;: [
-            [
-              {
-                &quot;params&quot;: [
-                  &quot;cloud_area_fraction&quot;
-                ],
-                &quot;type&quot;: &quot;field&quot;
-              }
-            ]
-          ],
-          &quot;tags&quot;: [
-            {
-              &quot;key&quot;: &quot;Location&quot;,
-              &quot;operator&quot;: &quot;=&quot;,
-              &quot;value&quot;: &quot;Rudolstadt&quot;
-            }
-          ]
-        }
-      ],
-      &quot;thresholds&quot;: [],
-      &quot;timeFrom&quot;: null,
-      &quot;timeRegions&quot;: [],
-      &quot;timeShift&quot;: null,
-      &quot;title&quot;: &quot;Cloudiness&quot;,
-      &quot;tooltip&quot;: {
-        &quot;shared&quot;: true,
-        &quot;sort&quot;: 0,
-        &quot;value_type&quot;: &quot;individual&quot;
-      },
-      &quot;type&quot;: &quot;graph&quot;,
-      &quot;xaxis&quot;: {
-        &quot;buckets&quot;: null,
-        &quot;mode&quot;: &quot;time&quot;,
-        &quot;name&quot;: null,
-        &quot;show&quot;: true,
-        &quot;values&quot;: []
-      },
-      &quot;yaxes&quot;: [
-        {
-          &quot;decimals&quot;: null,
-          &quot;format&quot;: &quot;percent&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: &quot;100&quot;,
-          &quot;min&quot;: &quot;0&quot;,
-          &quot;show&quot;: true
-        },
-        {
-          &quot;format&quot;: &quot;short&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: null,
-          &quot;min&quot;: null,
-          &quot;show&quot;: true
-        }
-      ],
-      &quot;yaxis&quot;: {
-        &quot;align&quot;: false,
-        &quot;alignLevel&quot;: null
-      }
-    },
-    {
-      &quot;aliasColors&quot;: {},
-      &quot;bars&quot;: false,
-      &quot;dashLength&quot;: 10,
-      &quot;dashes&quot;: false,
-      &quot;fill&quot;: 1,
-      &quot;gridPos&quot;: {
-        &quot;h&quot;: 9,
-        &quot;w&quot;: 12,
-        &quot;x&quot;: 12,
-        &quot;y&quot;: 9
-      },
-      &quot;id&quot;: 3,
-      &quot;legend&quot;: {
-        &quot;avg&quot;: false,
-        &quot;current&quot;: false,
-        &quot;max&quot;: false,
-        &quot;min&quot;: false,
-        &quot;show&quot;: true,
-        &quot;total&quot;: false,
-        &quot;values&quot;: false
-      },
-      &quot;lines&quot;: true,
-      &quot;linewidth&quot;: 1,
-      &quot;links&quot;: [],
-      &quot;nullPointMode&quot;: &quot;null&quot;,
-      &quot;options&quot;: {},
-      &quot;percentage&quot;: false,
-      &quot;pointradius&quot;: 2,
-      &quot;points&quot;: false,
-      &quot;renderer&quot;: &quot;flot&quot;,
-      &quot;seriesOverrides&quot;: [],
-      &quot;spaceLength&quot;: 10,
-      &quot;stack&quot;: false,
-      &quot;steppedLine&quot;: false,
-      &quot;targets&quot;: [
-        {
-          &quot;groupBy&quot;: [],
-          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
-          &quot;orderByTime&quot;: &quot;ASC&quot;,
-          &quot;policy&quot;: &quot;default&quot;,
-          &quot;refId&quot;: &quot;A&quot;,
-          &quot;resultFormat&quot;: &quot;time_series&quot;,
-          &quot;select&quot;: [
-            [
-              {
-                &quot;params&quot;: [
-                  &quot;air_pressure_at_sea_level&quot;
-                ],
-                &quot;type&quot;: &quot;field&quot;
-              }
-            ]
-          ],
-          &quot;tags&quot;: [
-            {
-              &quot;key&quot;: &quot;Location&quot;,
-              &quot;operator&quot;: &quot;=&quot;,
-              &quot;value&quot;: &quot;Rudolstadt&quot;
-            }
-          ]
-        }
-      ],
-      &quot;thresholds&quot;: [],
-      &quot;timeFrom&quot;: null,
-      &quot;timeRegions&quot;: [],
-      &quot;timeShift&quot;: null,
-      &quot;title&quot;: &quot;Air Pressure At Sea Level&quot;,
-      &quot;tooltip&quot;: {
-        &quot;shared&quot;: true,
-        &quot;sort&quot;: 0,
-        &quot;value_type&quot;: &quot;individual&quot;
-      },
-      &quot;type&quot;: &quot;graph&quot;,
-      &quot;xaxis&quot;: {
-        &quot;buckets&quot;: null,
-        &quot;mode&quot;: &quot;time&quot;,
-        &quot;name&quot;: null,
-        &quot;show&quot;: true,
-        &quot;values&quot;: []
-      },
-      &quot;yaxes&quot;: [
-        {
-          &quot;decimals&quot;: null,
-          &quot;format&quot;: &quot;pressurehpa&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: &quot;1061&quot;,
-          &quot;min&quot;: &quot;954&quot;,
-          &quot;show&quot;: true
-        },
-        {
-          &quot;format&quot;: &quot;short&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: null,
-          &quot;min&quot;: null,
-          &quot;show&quot;: true
-        }
-      ],
-      &quot;yaxis&quot;: {
-        &quot;align&quot;: false,
-        &quot;alignLevel&quot;: null
-      }
-    },
-    {
-      &quot;aliasColors&quot;: {},
-      &quot;bars&quot;: false,
-      &quot;dashLength&quot;: 10,
-      &quot;dashes&quot;: false,
-      &quot;fill&quot;: 1,
-      &quot;gridPos&quot;: {
-        &quot;h&quot;: 9,
-        &quot;w&quot;: 12,
-        &quot;x&quot;: 0,
-        &quot;y&quot;: 18
-      },
-      &quot;id&quot;: 6,
-      &quot;legend&quot;: {
-        &quot;avg&quot;: false,
-        &quot;current&quot;: false,
-        &quot;max&quot;: false,
-        &quot;min&quot;: false,
-        &quot;show&quot;: true,
-        &quot;total&quot;: false,
-        &quot;values&quot;: false
-      },
-      &quot;lines&quot;: true,
-      &quot;linewidth&quot;: 1,
-      &quot;links&quot;: [],
-      &quot;nullPointMode&quot;: &quot;null&quot;,
-      &quot;options&quot;: {},
-      &quot;percentage&quot;: false,
-      &quot;pointradius&quot;: 2,
-      &quot;points&quot;: false,
-      &quot;renderer&quot;: &quot;flot&quot;,
-      &quot;seriesOverrides&quot;: [],
-      &quot;spaceLength&quot;: 10,
-      &quot;stack&quot;: false,
-      &quot;steppedLine&quot;: false,
-      &quot;targets&quot;: [
-        {
-          &quot;groupBy&quot;: [],
-          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
-          &quot;orderByTime&quot;: &quot;ASC&quot;,
-          &quot;policy&quot;: &quot;default&quot;,
-          &quot;refId&quot;: &quot;A&quot;,
-          &quot;resultFormat&quot;: &quot;time_series&quot;,
-          &quot;select&quot;: [
-            [
-              {
-                &quot;params&quot;: [
-                  &quot;relative_humidity&quot;
-                ],
-                &quot;type&quot;: &quot;field&quot;
-              }
-            ]
-          ],
-          &quot;tags&quot;: [
-            {
-              &quot;key&quot;: &quot;Location&quot;,
-              &quot;operator&quot;: &quot;=&quot;,
-              &quot;value&quot;: &quot;Rudolstadt&quot;
-            }
-          ]
-        }
-      ],
-      &quot;thresholds&quot;: [],
-      &quot;timeFrom&quot;: null,
-      &quot;timeRegions&quot;: [],
-      &quot;timeShift&quot;: null,
-      &quot;title&quot;: &quot;Relative Humidity&quot;,
-      &quot;tooltip&quot;: {
-        &quot;shared&quot;: true,
-        &quot;sort&quot;: 0,
-        &quot;value_type&quot;: &quot;individual&quot;
-      },
-      &quot;type&quot;: &quot;graph&quot;,
-      &quot;xaxis&quot;: {
-        &quot;buckets&quot;: null,
-        &quot;mode&quot;: &quot;time&quot;,
-        &quot;name&quot;: null,
-        &quot;show&quot;: true,
-        &quot;values&quot;: []
-      },
-      &quot;yaxes&quot;: [
-        {
-          &quot;decimals&quot;: null,
-          &quot;format&quot;: &quot;percent&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: &quot;100&quot;,
-          &quot;min&quot;: &quot;0&quot;,
-          &quot;show&quot;: true
-        },
-        {
-          &quot;format&quot;: &quot;short&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: null,
-          &quot;min&quot;: null,
-          &quot;show&quot;: true
-        }
-      ],
-      &quot;yaxis&quot;: {
-        &quot;align&quot;: false,
-        &quot;alignLevel&quot;: null
-      }
-    },
-    {
-      &quot;aliasColors&quot;: {},
-      &quot;bars&quot;: false,
-      &quot;dashLength&quot;: 10,
-      &quot;dashes&quot;: false,
-      &quot;fill&quot;: 1,
-      &quot;gridPos&quot;: {
-        &quot;h&quot;: 9,
-        &quot;w&quot;: 12,
-        &quot;x&quot;: 12,
-        &quot;y&quot;: 18
-      },
-      &quot;id&quot;: 5,
-      &quot;legend&quot;: {
-        &quot;avg&quot;: false,
-        &quot;current&quot;: false,
-        &quot;max&quot;: false,
-        &quot;min&quot;: false,
-        &quot;show&quot;: true,
-        &quot;total&quot;: false,
-        &quot;values&quot;: false
-      },
-      &quot;lines&quot;: true,
-      &quot;linewidth&quot;: 1,
-      &quot;links&quot;: [],
-      &quot;nullPointMode&quot;: &quot;null&quot;,
-      &quot;options&quot;: {},
-      &quot;percentage&quot;: false,
-      &quot;pointradius&quot;: 2,
-      &quot;points&quot;: false,
-      &quot;renderer&quot;: &quot;flot&quot;,
-      &quot;seriesOverrides&quot;: [],
-      &quot;spaceLength&quot;: 10,
-      &quot;stack&quot;: false,
-      &quot;steppedLine&quot;: false,
-      &quot;targets&quot;: [
-        {
-          &quot;groupBy&quot;: [],
-          &quot;measurement&quot;: &quot;WeatherForecast&quot;,
-          &quot;orderByTime&quot;: &quot;ASC&quot;,
-          &quot;policy&quot;: &quot;default&quot;,
-          &quot;refId&quot;: &quot;A&quot;,
-          &quot;resultFormat&quot;: &quot;time_series&quot;,
-          &quot;select&quot;: [
-            [
-              {
-                &quot;params&quot;: [
-                  &quot;dew_point_temperature&quot;
-                ],
-                &quot;type&quot;: &quot;field&quot;
-              }
-            ]
-          ],
-          &quot;tags&quot;: [
-            {
-              &quot;key&quot;: &quot;Location&quot;,
-              &quot;operator&quot;: &quot;=&quot;,
-              &quot;value&quot;: &quot;Rudolstadt&quot;
-            }
-          ]
-        }
-      ],
-      &quot;thresholds&quot;: [],
-      &quot;timeFrom&quot;: null,
-      &quot;timeRegions&quot;: [],
-      &quot;timeShift&quot;: null,
-      &quot;title&quot;: &quot;Dewpoint Temperature&quot;,
-      &quot;tooltip&quot;: {
-        &quot;shared&quot;: true,
-        &quot;sort&quot;: 0,
-        &quot;value_type&quot;: &quot;individual&quot;
-      },
-      &quot;type&quot;: &quot;graph&quot;,
-      &quot;xaxis&quot;: {
-        &quot;buckets&quot;: null,
-        &quot;mode&quot;: &quot;time&quot;,
-        &quot;name&quot;: null,
-        &quot;show&quot;: true,
-        &quot;values&quot;: []
-      },
-      &quot;yaxes&quot;: [
-        {
-          &quot;format&quot;: &quot;celsius&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: null,
-          &quot;min&quot;: null,
-          &quot;show&quot;: true
-        },
-        {
-          &quot;format&quot;: &quot;short&quot;,
-          &quot;label&quot;: null,
-          &quot;logBase&quot;: 1,
-          &quot;max&quot;: null,
-          &quot;min&quot;: null,
-          &quot;show&quot;: true
-        }
-      ],
-      &quot;yaxis&quot;: {
-        &quot;align&quot;: false,
-        &quot;alignLevel&quot;: null
-      }
-    }
-  ],
-  &quot;refresh&quot;: &quot;30m&quot;,
-  &quot;schemaVersion&quot;: 18,
-  &quot;style&quot;: &quot;dark&quot;,
-  &quot;tags&quot;: [],
-  &quot;templating&quot;: {
-    &quot;list&quot;: []
-  },
-  &quot;time&quot;: {
-    &quot;from&quot;: &quot;now&quot;,
-    &quot;to&quot;: &quot;now+48h&quot;
-  },
-  &quot;timepicker&quot;: {
-    &quot;refresh_intervals&quot;: [
-      &quot;5s&quot;,
-      &quot;10s&quot;,
-      &quot;30s&quot;,
-      &quot;1m&quot;,
-      &quot;5m&quot;,
-      &quot;15m&quot;,
-      &quot;30m&quot;,
-      &quot;1h&quot;,
-      &quot;2h&quot;,
-      &quot;1d&quot;
-    ],
-    &quot;time_options&quot;: [
-      &quot;5m&quot;,
-      &quot;15m&quot;,
-      &quot;1h&quot;,
-      &quot;6h&quot;,
-      &quot;12h&quot;,
-      &quot;24h&quot;,
-      &quot;2d&quot;,
-      &quot;7d&quot;,
-      &quot;30d&quot;
-    ]
-  },
-  &quot;timezone&quot;: &quot;&quot;,
-  &quot;title&quot;: &quot;Weather Forecast&quot;,
-  &quot;uid&quot;: &quot;OPvZAazRz&quot;,
-  &quot;version&quot;: 6
-}
-</pre></div> <p> <h3><a name="101">Aktualisierung vom 20. November 2021</a></h3><div class="update">Das Skript wurde überarbeitet: die Api erlaubt Requests nicht mehr wenn der User-Agent im Header bestimmte Werte aufweist - darunter den, den das Python-Modul <span class="mdcode">requests</span> standardmäßig nutzt - daher wird jetzt der User-Agent eines Firefox-Browsers gesendet. Darüber hinaus wurden alle Parameter an den Beginn des Skripts verlagert und kommentiert. Weiterhin wurde ein Absatz zur Installation des Python-Moduls <span class="mdcode">influxdb</span> hinzugefügt. </div> </p> </div> <div class="w3-container w3-padding" id="referers"> <h3> Artikel, die hierher verlinken </h3> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Wetter, Opendata und Python </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">23.08.2022</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich habe während der Hitzewelle ein kleines Projekt gesucht, um mir drinnen die Zeit zu vertreiben... </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="wetter__opendata_python.html#content">Öffnen</a> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Überwachung Festplattenstatus mit Grafana </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">15.02.2022</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich hatte nach dem Update meines Raid mit größeren Platten festgestellt, dass der automatische Standby nach einiger Zeit Nicht-Benutzung nicht mehr funktionierte. </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="ueberwachung_festplattenstatus_grafana.html#content">Öffnen</a> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Proxmox-Experimente </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">05.09.2020</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Seit ich davon gehört habe war ich neugierig auf Proxmox und wie das Versprechen von Hochverfügbarkeit damit umgesetzt werden kann. In der Firma, in der ich arbeite wird dieses System auf einem experimentellen Blech-Cluster bereits seit einiger Zeit betrieben - Zeit alse, selber einiger Erfahrungen zu sammeln </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="proxmox_experimente.html#content">Öffnen</a> </p> </div> </div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Einbinden von Wettervorhersagedaten in Grafana&body=[Einbinden von Wettervorhersagedaten in Grafana](https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Einbinden von Wettervorhersagedaten in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Einbinden von Wettervorhersagedaten in Grafana&issue[description]=[Einbinden von Wettervorhersagedaten in Grafana](https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Einbinden von Wettervorhersagedaten in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Partikelsystem mit "innerer" Energie</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">29.07.2018</span> </p> <span class="smallabstract"><p>Nachdem es schon ein wenig länger her ist, dass ich hier ein Video veröffentlicht habe, hat mich wieder einmal jemand inspiriert... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="partikelsystem__innerer__energie.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-black w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-black w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> TagManager auf GitHub</span><br> <span class="smallabstract"><p>Nachdem ich vor einiger Zeit über die Komponente zur Verwaltung von Tags für (Bild-)Dateien berichtet habe ist es nun an der Zeit, die Information über die Veröffentlichung einer entsprechenden darauf basierenden Anwendung nachzureichen. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tagmanager_auf_github.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> SpaceTraders Swing GUI</span><br> <span class="smallabstract"><p>Ich habe neulich einen Link gefunden, hinter dem sich eine (für mich) neue Art von Computerspiel verbarg: Es handelt sich hier um ein Multiplayer Spiel, für das zunächst einmal nur die API existiert </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="spacetraders_swing_gui.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Bug in Javas ImageIO</span><br> <span class="smallabstract"><p>Nachdem in letzter Zeit die Diskussion - bedingt durch die Unterstützung von Apple - um JPEG XL wieder aufgeflammt ist, begann ich mich dafür zu interessieren. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bug_javas_imageio.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</pre></div> </p><p> Führt man dieses Skript - zum Beispiel per Cron - stündlich aus, werden jeweils akuelle Vorhersagedaten in die Datenbank geschrieben, wobei InfluxDB von selbst Daten für Zeitpunkte, für die von früheren Vorhersagen bereits Informationen vorhanden sind mit den aktuelleren <a href="https://v2.docs.influxdata.com/v2.0/write-data/best-practices/duplicate-points/">überschreibt.</a> </p><p> Nun füge man noch ein wenig <a href="https://grafana.com/">Grafana-Magie</a> hinzu und erstellt sich in wenigen Minuten das erste Dashboard zur Anzeige des Wetters der nächsten 48 Stunden: </p><p> <img src="images/wetherforecastgrafana.png" style="max-width:688px;" alt="Screenshot" class="center"> <span class="imgdesc"> Wettervorhersage </span> </p><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;annotations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;list&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;builtIn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;datasource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-- Grafana --&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;enable&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;hide&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;iconColor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rgba(0, 211, 255, 1)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Annotations &amp; Alerts&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;editable&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;gnetId&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;graphTooltip&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;links&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;panels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;aliasColors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;bars&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashes&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;fill&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;gridPos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;w&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;legend&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;avg&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;lines&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;linewidth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;links&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;nullPointMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;percentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;pointradius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;points&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;renderer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;flot&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;seriesOverrides&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;spaceLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;stack&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;steppedLine&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;targets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;groupBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;measurement&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WeatherForecast&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;orderByTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ASC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;policy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;refId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;resultFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time_series&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;select&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">[</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                  </span><span class="s2">&quot;air_temperature&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="p">],</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;field&quot;</span><span class="w"></span>
+<span class="w">              </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">]</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Location&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rudolstadt&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;thresholds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeFrom&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeRegions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeShift&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Air Temperature&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;tooltip&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;shared&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;sort&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;value_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;individual&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;graph&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;xaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;buckets&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;celsius&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;short&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;align&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;alignLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;aliasColors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;bars&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashes&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;fill&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;gridPos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;w&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;legend&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;avg&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;lines&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;linewidth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;links&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;nullPointMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;percentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;pointradius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;points&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;renderer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;flot&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;seriesOverrides&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;spaceLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;stack&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;steppedLine&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;targets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;groupBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;measurement&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WeatherForecast&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;orderByTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ASC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;policy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;refId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;resultFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time_series&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;select&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">[</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                  </span><span class="s2">&quot;precipitation_amount&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="p">],</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;field&quot;</span><span class="w"></span>
+<span class="w">              </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">]</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Location&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rudolstadt&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;thresholds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeFrom&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeRegions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeShift&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Precipitation&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;tooltip&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;shared&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;sort&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;value_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;individual&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;graph&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;xaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;buckets&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lengthmm&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;short&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;align&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;alignLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;aliasColors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;bars&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashes&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;fill&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;gridPos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;w&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;legend&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;avg&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;lines&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;linewidth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;links&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;nullPointMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;percentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;pointradius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;points&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;renderer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;flot&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;seriesOverrides&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;spaceLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;stack&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;steppedLine&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;targets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;groupBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;measurement&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WeatherForecast&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;orderByTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ASC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;policy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;refId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;resultFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time_series&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;select&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">[</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                  </span><span class="s2">&quot;cloud_area_fraction&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="p">],</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;field&quot;</span><span class="w"></span>
+<span class="w">              </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">]</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Location&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rudolstadt&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;thresholds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeFrom&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeRegions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeShift&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cloudiness&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;tooltip&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;shared&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;sort&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;value_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;individual&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;graph&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;xaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;buckets&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;decimals&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;short&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;align&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;alignLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;aliasColors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;bars&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashes&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;fill&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;gridPos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;w&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;legend&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;avg&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;lines&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;linewidth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;links&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;nullPointMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;percentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;pointradius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;points&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;renderer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;flot&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;seriesOverrides&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;spaceLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;stack&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;steppedLine&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;targets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;groupBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;measurement&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WeatherForecast&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;orderByTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ASC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;policy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;refId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;resultFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time_series&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;select&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">[</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                  </span><span class="s2">&quot;air_pressure_at_sea_level&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="p">],</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;field&quot;</span><span class="w"></span>
+<span class="w">              </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">]</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Location&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rudolstadt&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;thresholds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeFrom&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeRegions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeShift&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Air Pressure At Sea Level&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;tooltip&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;shared&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;sort&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;value_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;individual&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;graph&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;xaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;buckets&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;decimals&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pressurehpa&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1061&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;954&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;short&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;align&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;alignLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;aliasColors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;bars&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashes&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;fill&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;gridPos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;w&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;legend&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;avg&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;lines&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;linewidth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;links&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;nullPointMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;percentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;pointradius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;points&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;renderer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;flot&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;seriesOverrides&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;spaceLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;stack&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;steppedLine&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;targets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;groupBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;measurement&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WeatherForecast&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;orderByTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ASC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;policy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;refId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;resultFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time_series&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;select&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">[</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                  </span><span class="s2">&quot;relative_humidity&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="p">],</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;field&quot;</span><span class="w"></span>
+<span class="w">              </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">]</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Location&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rudolstadt&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;thresholds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeFrom&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeRegions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeShift&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Relative Humidity&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;tooltip&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;shared&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;sort&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;value_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;individual&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;graph&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;xaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;buckets&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;decimals&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;short&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;align&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;alignLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;aliasColors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;bars&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;dashes&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;fill&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;gridPos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;w&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;legend&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;avg&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;lines&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;linewidth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;links&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;nullPointMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;percentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;pointradius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;points&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;renderer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;flot&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;seriesOverrides&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;spaceLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;stack&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;steppedLine&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;targets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;groupBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;measurement&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WeatherForecast&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;orderByTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ASC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;policy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;refId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;resultFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time_series&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;select&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">[</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                  </span><span class="s2">&quot;dew_point_temperature&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="p">],</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;field&quot;</span><span class="w"></span>
+<span class="w">              </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">]</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Location&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rudolstadt&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;thresholds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeFrom&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeRegions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;timeShift&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dewpoint Temperature&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;tooltip&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;shared&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;sort&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;value_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;individual&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;graph&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;xaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;buckets&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;celsius&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;short&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;logBase&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;show&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;yaxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;align&quot;</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;alignLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;refresh&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;schemaVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;style&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dark&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;templating&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;list&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;from&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;now&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;to&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;now+48h&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;timepicker&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;refresh_intervals&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;5s&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;10s&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;30s&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;1m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;5m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;15m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;30m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;1h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;2h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;1d&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;time_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;5m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;15m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;1h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;6h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;12h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;24h&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;2d&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;7d&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;30d&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Weather Forecast&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;uid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OPvZAazRz&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div> <p> <h3><a name="102">Aktualisierung vom 20. November 2021</a></h3><div class="update">Das Skript wurde überarbeitet: die Api erlaubt Requests nicht mehr wenn der User-Agent im Header bestimmte Werte aufweist - darunter den, den das Python-Modul <span class="mdcode">requests</span> standardmäßig nutzt - daher wird jetzt der User-Agent eines Firefox-Browsers gesendet. Darüber hinaus wurden alle Parameter an den Beginn des Skripts verlagert und kommentiert. Weiterhin wurde ein Absatz zur Installation des Python-Moduls <span class="mdcode">influxdb</span> hinzugefügt. </div> </p> </div> <div class="w3-container w3-padding" id="referers"> <h3> Artikel, die hierher verlinken </h3> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Wetter, Opendata und Python </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">23.08.2022</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich habe während der Hitzewelle ein kleines Projekt gesucht, um mir drinnen die Zeit zu vertreiben... </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="wetter__opendata_python.html#content">Öffnen</a> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Überwachung Festplattenstatus mit Grafana </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">15.02.2022</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich hatte nach dem Update meines Raid mit größeren Platten festgestellt, dass der automatische Standby nach einiger Zeit Nicht-Benutzung nicht mehr funktionierte. </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="ueberwachung_festplattenstatus_grafana.html#content">Öffnen</a> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Proxmox-Experimente </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">05.09.2020</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Seit ich davon gehört habe war ich neugierig auf Proxmox und wie das Versprechen von Hochverfügbarkeit damit umgesetzt werden kann. In der Firma, in der ich arbeite wird dieses System auf einem experimentellen Blech-Cluster bereits seit einiger Zeit betrieben - Zeit alse, selber einiger Erfahrungen zu sammeln </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="proxmox_experimente.html#content">Öffnen</a> </p> </div> </div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Einbinden von Wettervorhersagedaten in Grafana&body=[Einbinden von Wettervorhersagedaten in Grafana](https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Einbinden von Wettervorhersagedaten in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Einbinden von Wettervorhersagedaten in Grafana&issue[description]=[Einbinden von Wettervorhersagedaten in Grafana](https://elbosso.github.io/einbinden_wettervorhersagedaten_grafana)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Einbinden von Wettervorhersagedaten in Grafana"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> PiHole</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">12.08.2018</span> </p> <span class="smallabstract"><p>Raspberry Pi als Ad- und Malware-Blocker </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="pihole.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-black w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-black w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-black w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> Brücke zwischen Gnuplot und sQLshell</span><br> <span class="smallabstract"><p>Ich habe ein neues Plugin für die sQLshell geschrieben, das Gnuplot noch enger in die Anwendung integriert: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="bruecke_zwischen_gnuplot_sqlshell.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Aktueller Stand meiner vim-Konfiguration</span><br> <span class="smallabstract"><p>Ich habe bereits vor einiger Zeit ein Repository veröffentlicht, das diverse Dot-Dateien beinhaltet. Unter anderem findet man dort auch eine vim-Konfiguration. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="aktueller_stand_meiner_vim_konfiguration.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Veganer Käse</span><br> <span class="smallabstract"><p>Heute nur ein kurzer, werbungsinduzierter Rant... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="veganer_kaese.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
