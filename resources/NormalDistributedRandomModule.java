@@ -34,7 +34,7 @@ WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.
 */
 package de.elbosso.dataflowframework.modules.generator.util.generator.generalpurpose;
 
-@javax.annotation.Generated(value="de.elbosso.dataflowframework.processors.GeneratorProcessor", date="2023-08-05T19:29:49.900Z")
+@javax.annotation.Generated(value="de.elbosso.dataflowframework.processors.GeneratorProcessor", date="2023-08-27T12:43:22.941Z")
 public class NormalDistributedRandomModule extends
 de.netsysit.dataflowframework.modules.BeanContextChildModuleBase
 {
