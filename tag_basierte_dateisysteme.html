@@ -1,4 +1,25 @@
-<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>Tag-basierte Dateisysteme</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="Tag-basierte Dateisysteme"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/tag_basierte_dateisysteme"/> <meta property="og:image" content="https://elbosso.github.io/images/asciiart_tux.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Es existiert keine zufriedenstellende Möglichkeit, Dateien über Schlüsselworte recherchierbar zu machen - zumindestens in den von mir so bezeichneten Betriebssystemfamilien Linux und Windows. Ich habe mir eine mögliche alternative Vorgehensweise unter Linux angesehen. "/> <meta property="article:published_time" content="2017-11-22"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+<head>
+<title>Tag-basierte Dateisysteme</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta property="og:title" content="Tag-basierte Dateisysteme" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://elbosso.github.io/tag_basierte_dateisysteme" />
+<meta property="og:image" content="https://elbosso.github.io/images/asciiart_tux.png"/>
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="elbosso.github.io" />
+<meta property="og:description" content="Es existiert keine zufriedenstellende Möglichkeit, Dateien über Schlüsselworte recherchierbar zu machen - zumindestens
+in den von mir so bezeichneten Betriebssystemfamilien Linux und Windows. Ich habe mir eine mögliche alternative Vorgehensweise
+unter Linux angesehen.
+" />
+<meta property="article:published_time" content="2017-11-22">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" />
+<link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css" />
+<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -17,7 +38,132 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="zugriff_auf_maps_ohne_cast_java.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="komponente_zur_verwaltung_tags.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Tag-basierte Dateisysteme</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="trac_reorganisation.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">22.11.2017</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/asciiart_tux_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Es existiert keine zufriedenstellende Möglichkeit, Dateien über Schlüsselworte recherchierbar zu machen - zumindestens in den von mir so bezeichneten Betriebssystemfamilien Linux und Windows. Ich habe mir eine mögliche alternative Vorgehensweise unter Linux angesehen. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p><h1>Motivation</h1> Ich habe zur Zeit Urlaub und verbringe einen Großteil der mir zur Verfügung stehenden Zeit im Garten oder führe kleinere Reparaturen im Haus aus. Die übrige Zeit bilde ich mich weiter oder lese zum Vergnügen. </p><p> In diese Zeit fiel mein Fund einer <a href="https://medium.com/@ageitgey/machine-learning-is-fun-part-3-deep-learning-and-convolutional-neural-networks-f40359318721">mehrteiligen Artikelreihe</a> zum Thema Machine Learning: Dort wird in Teil 3 beschrieben, wie Bildklassifikation heutzutage funktioniert. es gibt <a href="http://www.akiwi.eu/">diverse</a> frei verfügbare <a href="https://imagga.com/solutions/categorization-api.html">Dienste,</a> die eine API bereitstellen, um Bilder klassifizieren zu lassen. Egal, ob man diese Dienste benutzt, oder einen eigenen Dienst aufsetzt, der eine solche Kategorisierung durchführt - Es stellt sich die Frage, was man mit den Ergebnissen tun soll. Denn wenn es nicht so ist, dass man die Kategorisierung für ein Bild live durchführen will, sondern alle Bilder in einem Batch-Durchlauf mit Kategorien versieht - wohin mit den Ergebnissen: man will sie so speichern, dass man transparent und schnell darauf zugreifen und im Idealfall auch darin recherchieren kann. </p><p> Hier würden sich Tags anbieten, die einfach an die geweiligen Bilddateien "geklebt" werden könnten. Diese würden sich auch sehr leicht ergänzen und modifizieren lassen. </p><p> Vor allem möchte man auf die Informationen der Tags oder Kategorien aus verschiedenen Anwendungen heraus zugreifen können. Es ist einfach unhandlich, zur Recherche auf eine dedizierte Anwendung zurückgreifen zu müssen, die dann die Dateinamen der Kandidaten ausspuckt. Diese wiederum muss man in einem Bildbetrachter laden um über die visuelle Inspektion das passendste auszuwählen, welches dann wiederum in die Zielanwendung geladen wird. Ein Workflow, der einen solchen Namen eigentlich nicht verdient... <h1>Dedizierte Anwendungen</h1> Es gibt nur wenige dedizierte Anwendungen, die dieses Dilemma lösen. Manche werden auch nicht mehr weiter gepflegt - ein Beispiel dafür ist der Dateimanager <a href="https://projects.gnome.org/nautilus/screenshots.html">Nautilus,</a> der in früheren Versionen zumindest die Möglichkeit bot, Tags an Dateien zu verwalten. </p><p> Das Bildverwaltungsprogramm <a href="https://wiki.gnome.org/Apps/gthumb">GThumb</a> bietet Möglichkeiten, Tags zu Bilddateien zu verwalten, allerdings ist mir keine Möglichkeit bekannt, auf diese Tags außerhalb der Anwendung zuzugreifen. </p><p> <a href="https://www.tagspaces.org/">TagSpaces</a> sieht vielversprechend aus (unterstützt auf allen großen Plattformen!), bis man die Dateien mit einem anderen Dateimanager betrachtet oder in der Texteingabe ein Verzeichnislisting durchführt: Dann erkennt man nämlich, dass die Tags in den Dateinamen hineingeschrieben werden. Das ermöglicht zwar eine einfache Suche nach Tags - einfach ein entsprechendes Dateinamensmuster angeben! - aber erstens existieren auf manchen Plattformen in manchen Dateisystemen Längenbeschränkungen für Datei- oder Pfadnamen und zweitens werden Dateinamen auf diese Art und Weise sehr schnell unübersichtlich. <h1>Dateisysteme</h1> An dieser Stelle stieß ich auf virtuelle Dateisysteme, die sich dieses Problems annehmen wollen: <a href="https://github.com/oniony/TMSU/wiki">TMSU</a> stellt ein solches nur für die Recherche zur Verfügung, während das Hinzufügen von Tags über ein spezielles Werkzeug erfolgt. </p><p> <a href="http://www.tagsistant.net/">Tagsistant</a> geht noch einen Schritt weiter - hier geschieht auch das Hinzufügen von Tags über das virtuelle Dateisystem. Laut dem <a href="https://github.com/StrumentiResistenti/Tagsistant">Github-Repository</a> hat sich an dem Projekt seit 2014 nichts mehr getan - ich habe es trotzdem versucht und schildere hier mal meine Erkenntnisse: <h1>Tagsistent in-depth</h1> <h2>Installation unter Ubuntu Version 16.04</h2> Das war etwas komplexer als ich angenommen hatte - ich habe dazu das Git-Repository benutzt und musste nach dem Pull zunächst ein wenig Kosmetik betreiben: im Repository liegen einige symbolische Links, deren Ziele auf meinem System nicht vorhanden waren - unter anderem, weil sie sich auf spezifische Versionen diverser Werkzeuge beziehen, die in Ubuntu 16.04 nicht mehr verfügbar sind (Beispiel: automake 1.14) </p><p> Weiterhin musste ich einige weitere Softwarepakete installieren (meines Tests fanden mit sqlite3 als Backend statt - andere Datenbanken, beispielsweise MySQL habe ich noch nicht untersucht). </p><div class="highlight"><pre><span></span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">StrumentiResistenti</span><span class="o">/</span><span class="n">Tagsistant</span><span class="o">.</span><span class="n">git</span><span class="w"> </span><span class="n">tagsistant</span><span class="w"></span>
+</script>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<div class="w3-row">
+						<div class="w3-col m6 s12">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract"
+							   href="zugriff_auf_maps_ohne_cast_java.html#content">vorhergehender Artikel</a>
+						</div>
+						<div class="w3-col m6" style="text-align: right">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
+							   href="komponente_zur_verwaltung_tags.html#content">nächster Artikel
+							</a>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m9 s12">
+							<h4>Tag-basierte Dateisysteme</h4>
+							<div class="w3-container">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										vorhergehende Artikel in:
+										<a href="trac_reorganisation.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
+										</a> <!--/li-->
+									</div>
+									<div class="w3-col m4" style="text-align: right">
+										<span class="w3-opacity">22.11.2017</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col m3"><p style="text-align: right">
+							<img style="max-width:128px;" src="images/asciiart_tux_t.png">
+						</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Es existiert keine zufriedenstellende Möglichkeit, Dateien über Schlüsselworte recherchierbar zu machen - zumindestens
+in den von mir so bezeichneten Betriebssystemfamilien Linux und Windows. Ich habe mir eine mögliche alternative Vorgehensweise
+unter Linux angesehen.
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p><h1>Motivation</h1>
+Ich habe zur Zeit Urlaub und verbringe einen Großteil der mir zur Verfügung stehenden Zeit im Garten oder führe
+kleinere Reparaturen im Haus aus. Die übrige Zeit bilde ich mich weiter oder lese zum Vergnügen.
+</p><p>
+In diese Zeit fiel mein Fund einer
+<a href="https://medium.com/@ageitgey/machine-learning-is-fun-part-3-deep-learning-and-convolutional-neural-networks-f40359318721">mehrteiligen Artikelreihe</a>
+zum Thema Machine Learning: Dort wird in Teil 3 beschrieben, wie Bildklassifikation heutzutage funktioniert.
+es gibt
+<a href="http://www.akiwi.eu/">diverse</a>
+frei verfügbare
+<a href="https://imagga.com/solutions/categorization-api.html">Dienste,</a>
+die eine API bereitstellen, um Bilder klassifizieren zu lassen. Egal, ob man diese Dienste benutzt, oder einen eigenen Dienst aufsetzt,
+der eine solche Kategorisierung durchführt - Es stellt sich die Frage, was man mit den Ergebnissen tun soll. Denn wenn es nicht so
+ist, dass man die Kategorisierung für ein Bild live durchführen will, sondern alle Bilder in einem Batch-Durchlauf
+mit Kategorien versieht - wohin mit den Ergebnissen: man will sie so speichern, dass man transparent und schnell darauf zugreifen
+und im Idealfall auch darin recherchieren kann.
+</p><p>
+Hier würden sich Tags anbieten, die einfach an die geweiligen Bilddateien "geklebt" werden könnten. Diese würden sich auch
+sehr leicht ergänzen und modifizieren lassen.
+</p><p>
+Vor allem möchte man auf die Informationen der Tags oder Kategorien aus verschiedenen Anwendungen heraus zugreifen können.
+Es ist einfach unhandlich, zur Recherche auf eine dedizierte Anwendung zurückgreifen zu müssen, die dann die Dateinamen
+der Kandidaten ausspuckt. Diese wiederum muss man in einem Bildbetrachter laden um über die visuelle Inspektion das passendste
+auszuwählen, welches dann wiederum in die Zielanwendung geladen wird. Ein Workflow, der einen solchen Namen eigentlich nicht verdient...
+<h1>Dedizierte Anwendungen</h1>
+Es gibt nur wenige dedizierte Anwendungen, die dieses Dilemma lösen. Manche werden auch nicht mehr weiter gepflegt -
+ein Beispiel dafür ist der Dateimanager
+<a href="https://projects.gnome.org/nautilus/screenshots.html">Nautilus,</a>
+der in früheren Versionen zumindest die Möglichkeit bot, Tags
+an Dateien zu verwalten.
+</p><p>
+Das Bildverwaltungsprogramm
+<a href="https://wiki.gnome.org/Apps/gthumb">GThumb</a>
+bietet Möglichkeiten, Tags zu Bilddateien zu verwalten, allerdings ist mir keine
+Möglichkeit bekannt, auf diese Tags außerhalb der Anwendung zuzugreifen.
+</p><p>
+<a href="https://www.tagspaces.org/">TagSpaces</a>
+sieht vielversprechend aus (unterstützt auf allen großen Plattformen!), bis man die Dateien mit einem anderen Dateimanager betrachtet oder in der Texteingabe
+ein Verzeichnislisting durchführt: Dann erkennt man nämlich, dass die Tags in den Dateinamen hineingeschrieben werden. Das
+ermöglicht zwar eine einfache Suche nach Tags - einfach ein entsprechendes Dateinamensmuster angeben! - aber erstens existieren
+auf manchen Plattformen in manchen Dateisystemen Längenbeschränkungen für Datei- oder Pfadnamen und zweitens werden Dateinamen
+auf diese Art und Weise sehr schnell unübersichtlich.
+<h1>Dateisysteme</h1>
+An dieser Stelle stieß ich auf virtuelle Dateisysteme, die sich dieses Problems annehmen wollen:
+<a href="https://github.com/oniony/TMSU/wiki">TMSU</a>
+stellt ein solches nur für die Recherche zur Verfügung, während das Hinzufügen von Tags über ein spezielles Werkzeug erfolgt.
+</p><p>
+<a href="http://www.tagsistant.net/">Tagsistant</a>
+geht noch einen Schritt weiter - hier geschieht auch das Hinzufügen von Tags über das virtuelle Dateisystem. Laut
+dem
+<a href="https://github.com/StrumentiResistenti/Tagsistant">Github-Repository</a>
+hat sich an dem Projekt seit 2014 nichts mehr getan - ich habe es trotzdem versucht und schildere hier mal meine Erkenntnisse:
+<h1>Tagsistent in-depth</h1>
+<h2>Installation unter Ubuntu Version 16.04</h2>
+Das war etwas komplexer als ich angenommen hatte - ich habe dazu das Git-Repository benutzt und musste nach
+dem Pull zunächst ein wenig Kosmetik betreiben: im Repository liegen einige symbolische Links, deren Ziele auf meinem
+System nicht vorhanden waren - unter anderem, weil sie sich auf spezifische Versionen diverser Werkzeuge beziehen, die
+in Ubuntu 16.04 nicht mehr verfügbar sind (Beispiel: automake 1.14)
+</p><p>
+Weiterhin musste ich einige weitere Softwarepakete installieren (meines Tests fanden mit sqlite3 als Backend statt - andere
+Datenbanken, beispielsweise MySQL habe ich noch nicht untersucht).
+</p><div class="highlight"><pre><span></span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">StrumentiResistenti</span><span class="o">/</span><span class="n">Tagsistant</span><span class="o">.</span><span class="n">git</span><span class="w"> </span><span class="n">tagsistant</span><span class="w"></span>
 <span class="n">cd</span><span class="w"> </span><span class="n">tagsistant</span><span class="o">/</span><span class="w"></span>
 <span class="n">ln</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">automake</span><span class="o">-</span><span class="mf">1.15</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">automake</span><span class="o">-</span><span class="mf">1.14</span><span class="w"></span>
 <span class="n">ln</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">libtool</span><span class="o">/</span><span class="n">build</span><span class="o">-</span><span class="n">aux</span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">libtool</span><span class="o">/</span><span class="n">config</span><span class="w"></span>
@@ -29,16 +175,357 @@ document.write(link)
 <span class="o">./</span><span class="n">configure</span><span class="w"></span>
 <span class="n">make</span><span class="w"> </span><span class="o">-</span><span class="n">j</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
 <span class="n">make</span><span class="w"> </span><span class="n">install</span><span class="w"></span>
-</pre></div> <p> <h2>Taggen</h2> Das ist so einfach, wie eine Datei in ein <a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=6">Verzeichnis zu kopieren:</a> Jeder Tag existiert im Verzeichnis namens store als Unterverzeichnis - kopiert man eine Datei in eines dieser Verzeichnisse, erhält sie den entsprechenden Tag. Kopiert man die Datei in mehrere dieser Unterverzeichnisse, erhält sie alle diese Tags. <a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=21">Löscht man eine Datei</a> aus einem dieser Verzeichnisse, hat sie das Tag entsprechend nicht mehr. Auch Umbewegen zwischen zwei Verzeichnissen unterhalb von store ist möglich - damit entfernt man ein Tag und ersetzt es durch ein anderes. Allerdings ist hier ein wenig <a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=19">Obacht</a> geboten! </p><p> Neue Tags werden <a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=4">angelegt,</a> indem man ein entsprechendes verzeichnis unterhalb des Unterverzeichnisses namens tags anlegt. </p><p> Tags werden gelöscht, indem man das entsprechende <a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=21">Verzeichnis unterhalb von tags</a> löscht. </p><p> Will man Tagsistent nur fürs Taggen benutzen und die Dateien an einem anderen Ort traditionell in einer Verzeichnisstruktur organisieren, ist auch das möglich: Statt des Kopierens ins virtuelle Dateisystem kann man Dateien auch Tags zuordnen, indem man <a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=10">symbolische Links</a> erstellt. <h2>Achtung!</h2> Hat man Dateien, die den gleichen Namen haben, aber in anderen Pfaden untergebracht sind, kann man auf folgendes Problem stoßen: Nachdem man die erste Datei in eines der Tags-Verzeichnisse kopiert hat, kann man die zweite nicht mit demselben Tag versehen - in dem Tag-Verzeichnis existiert ja bereits eine mit diesem Namen. </p><p> In diesem Fall muss man sich also etwas überlegen... <h2>Benutzen der Lösung als Tags, nicht als Archiv</h2> Wie im vorhergehenden Absatz angedeutet, kann man das virtuelle Dateisystem unter anderem dafür benutzen, die Dateien auch zu archivieren - damit existieren sie nur innerhalb des virtuellen Dateisystems. Man kann es aber auch nur zun Taggen benutzen - die Dateien existieren an einem anderen Ort und das virtuelle Dateisystem enthält nur Verweise: symbolische Links. </p><p> Dies ist die von mir präferierte Variante - allerdings müssen folgende Herausforderungen gemeistert werden: <h3>Namenskollisionen vermeiden</h3> Das kann dadurch erreicht werden, dass als Name des symbolischen Links nicht der Name der Ursprungsdatei benutzt wird, sondern ein kryptographischer Hash über den gesamten Dateinamen - einschließlich des vollständigen Pfades - der Ursprungsdatei (natürlich ergänzt um die korrekte Dateinamensendung). <h3>Ermitteln aller Tags einer Datei</h3> Dies ist wichtig, um später gezielt weitere Tags hinzufügen zu können. Man muss also in der Lage sein, für eine beliebige Datei im Archiv zu ermitteln, welche Tags bereits dafür existieren. Unter der Vorasusetzung, dass die Namen der symbolischen Links im virtuellen Dateisystem wie im vorhergehenden Abschnitt beschrieben erzeugt werden, kann man für eine Datei über die Berechung des Namens des Verweises mit den <a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=14">Mitteln von Tagsistant</a> auf die Liste der dieser Datei zugeordneten Tags zugreifen. <h3>Ermitteln der archivierten Datei</h3> Das ist trivial - dazu muss man nur das Ziel des Verweises ermitteln. Das funktioniert mit puren Bordmitteln - unabhängig von Tagsistant. <h2>Perks</h2> Darüber hinaus existieren weitere Highlights, wie etwa <a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=5">eine komfortable Abfragesprache</a> über Pfade des virtuellen Dateisystems, <a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=16">sogenannte Machine Tags</a> zur hierarchischen Organisation von Tags, <a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=5">Relationen</a> zur Abbildung von Beziehungen zwischen Tags und die Möglichkeit <a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=20">oft benutzte Abfragen als Aliases zu speichern,</a> um nur einige zu nennen. </p> </div> <div class="w3-container w3-padding" id="referers"> <h3> Artikel, die hierher verlinken </h3> <div class="w3-row"> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Komponente zur Verwaltung von Tags </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">26.11.2017</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich habe eine Komponente erstellt, die die GUI für die Verwaltung von Tags darstellen könnte. Damit wäre etwa eine Möglichkeit geschaffen, eine komfortable Anwendung zur Verwaltung Tag-basierter Dateisysteme zu erstellen </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="komponente_zur_verwaltung_tags.html#content">Öffnen</a> </p> </div> </div> </div> </div> </div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Tag-basierte Dateisysteme&body=[Tag-basierte Dateisysteme](https://elbosso.github.io/tag_basierte_dateisysteme)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Tag-basierte Dateisysteme"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Tag-basierte Dateisysteme&issue[description]=[Tag-basierte Dateisysteme](https://elbosso.github.io/tag_basierte_dateisysteme)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Tag-basierte Dateisysteme"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Mehrere Tile-Layer aus einem Server</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">01.09.2018</span> </p> <span class="smallabstract"><p>Ich habe bereits über die Einrichtung von LXC-Containern als TileServer für OpenStreetMap und Server für Hillshading-Tiles berichtet. Nunmehr wurde dieses Konzept ein wenig veredelt </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mehrere_tile_layer_aus_einem_server.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2023 VII</span><br> <span class="smallabstract"><p>Nach der letzten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_vii.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> TLS einfach so im Klartext lesen</span><br> <span class="smallabstract"><p>Ich las neulich einen Artikel, der mich - ich gebe es zu - ein wenig aufgeschreckt hat. Der Artikel beschrieb letztlich, dass man <span class="mdbold">jede</span> verschlüsselte Kommunikation, die auf TLS basiert relativ problemlos im Klartext mitlesen kann - solange sie die TLS-Implementierung dynamisch linkt... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tls_einfach_so_klartext_lesen.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> sQLshell Version 7.7pre2 build 10162</span><br> <span class="smallabstract"><p>Eine neue Version der sQLshell ist verfügbar! </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="sqlshell_version_7_7pre2_build_10162.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</pre></div>
+<p>
+<h2>Taggen</h2>
+Das ist so einfach, wie eine Datei in ein
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=6">Verzeichnis zu kopieren:</a>
+Jeder Tag existiert im Verzeichnis
+namens
+store als Unterverzeichnis - kopiert man eine Datei in eines dieser Verzeichnisse, erhält sie den entsprechenden Tag.
+Kopiert man die Datei in mehrere dieser Unterverzeichnisse, erhält sie alle diese Tags.
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=21">Löscht man eine Datei</a> aus einem
+dieser Verzeichnisse, hat sie das Tag entsprechend nicht mehr. Auch Umbewegen zwischen zwei Verzeichnissen unterhalb
+von store ist möglich - damit entfernt man ein Tag und ersetzt es durch ein anderes. Allerdings ist hier ein wenig
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=19">Obacht</a> geboten!
+</p><p>
+Neue Tags werden
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=4">angelegt,</a>
+indem man ein entsprechendes verzeichnis unterhalb des Unterverzeichnisses namens tags anlegt.
+</p><p>
+Tags werden gelöscht, indem man das entsprechende
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=21">Verzeichnis unterhalb von tags</a>
+löscht.
+</p><p>
+Will man Tagsistent nur fürs Taggen benutzen und die Dateien an einem anderen Ort traditionell in einer Verzeichnisstruktur
+organisieren, ist auch das möglich: Statt des Kopierens ins virtuelle Dateisystem kann man Dateien auch Tags zuordnen, indem man
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=10">symbolische Links</a>
+erstellt.
+<h2>Achtung!</h2>
+Hat man Dateien, die den gleichen Namen haben, aber in anderen Pfaden untergebracht sind, kann man auf folgendes Problem stoßen:
+Nachdem man die erste Datei in eines der Tags-Verzeichnisse kopiert hat, kann man die zweite nicht mit demselben Tag versehen -
+in dem Tag-Verzeichnis existiert ja bereits eine mit diesem Namen.
+</p><p>
+In diesem Fall muss man sich also etwas überlegen...
+<h2>Benutzen der Lösung als Tags, nicht als Archiv</h2>
+Wie im vorhergehenden Absatz angedeutet, kann man das virtuelle Dateisystem unter anderem dafür benutzen, die Dateien auch zu archivieren -
+damit existieren sie nur innerhalb des virtuellen Dateisystems. Man kann es aber auch nur zun Taggen benutzen - die Dateien
+existieren an einem anderen Ort und das virtuelle Dateisystem enthält nur Verweise: symbolische Links.
+</p><p>
+Dies ist die von mir präferierte Variante - allerdings müssen folgende Herausforderungen gemeistert werden:
+<h3>Namenskollisionen vermeiden</h3>
+Das kann dadurch erreicht werden, dass als Name des symbolischen Links nicht der Name der Ursprungsdatei benutzt wird,
+sondern ein kryptographischer Hash über den gesamten Dateinamen - einschließlich des vollständigen Pfades -
+der Ursprungsdatei (natürlich ergänzt um die korrekte Dateinamensendung).
+<h3>Ermitteln aller Tags einer Datei</h3>
+Dies ist wichtig, um später gezielt weitere Tags hinzufügen zu können. Man muss also in der Lage sein,
+für eine beliebige Datei im Archiv zu ermitteln, welche Tags bereits dafür existieren. Unter der Vorasusetzung,
+dass die Namen der symbolischen Links im virtuellen Dateisystem wie im vorhergehenden Abschnitt beschrieben
+erzeugt werden, kann man für eine Datei über die Berechung des Namens des Verweises mit den
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=14">Mitteln von Tagsistant</a>
+auf die Liste der dieser Datei zugeordneten Tags zugreifen.
+<h3>Ermitteln der archivierten Datei</h3>
+Das ist trivial - dazu muss man nur das Ziel des Verweises ermitteln. Das funktioniert mit puren Bordmitteln - unabhängig von
+Tagsistant.
+<h2>Perks</h2>
+Darüber hinaus existieren weitere Highlights, wie etwa
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=5">eine komfortable Abfragesprache</a>
+über Pfade des virtuellen Dateisystems,
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=16">sogenannte Machine Tags</a>
+zur hierarchischen Organisation von Tags,
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=5">Relationen</a>
+zur Abbildung von Beziehungen zwischen Tags und die Möglichkeit
+<a href="http://www.tagsistant.net/documents-about-tagsistant/0-8-1-howto?showall=&start=20">oft benutzte Abfragen als Aliases zu speichern,</a>
+um nur einige zu nennen.
+</p>				</div>
+				<div class="w3-container w3-padding" id="referers">
+				<h3>
+					Artikel, die hierher verlinken
+				</h3>
+					<div class="w3-row">
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+								<div class="w3-col m8 s12">
+									<h4>
+										Komponente zur Verwaltung von Tags
+									</h4>
+								</div>
+								<div class="w3-col m4"><p style="text-align: right">
+									<span class="w3-opacity">26.11.2017</span>
+								</p>
+								</div>
+								</div>
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+<p>Ich habe eine Komponente erstellt, die die GUI für die Verwaltung von Tags darstellen könnte. Damit wäre etwa
+eine Möglichkeit geschaffen, eine komfortable Anwendung zur Verwaltung
+Tag-basierter Dateisysteme
+zu erstellen
+</p>									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="komponente_zur_verwaltung_tags.html#content">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgithub">
+					<p>
+						<a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Tag-basierte Dateisysteme&body=[Tag-basierte Dateisysteme](https://elbosso.github.io/tag_basierte_dateisysteme)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+						<a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Tag-basierte Dateisysteme"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+					</p>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgitlab">
+					<p>
+						<a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Tag-basierte Dateisysteme&issue[description]=[Tag-basierte Dateisysteme](https://elbosso.github.io/tag_basierte_dateisysteme)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+						<a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Tag-basierte Dateisysteme"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+					</p>
+				</div>
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png"  width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a>
+						<a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+						<a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Artikel von "backThen" -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Vor 5 Jahren hier im Blog</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+						<p class="w3-large">
+							E-Paper Türschild mit ESP8266</p>
+						<p class="w3-small" style="text-align: right">
+							<span class="w3-opacity">08.09.2018</span>
+						</p>
+						<span class="smallabstract"><p>Nach meinen ersten Versuchen, das
+E-Paper-Display
+mit einem Raspi anzusteuern habe ich nunmehr den Schritt gewagt und - durch die ersten Erfolge mit der
+WLAN-Steckdose
+unvorsichtig geworden - erste Versuche mit der Ansteuerung durch einen ESP gemacht.
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="e_paper_tuerschild_esp8266.html#content">
+							Weiterlesen...
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
+						<a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Vorlesung "Bullshit-Resistenz" (2023, UDK Berlin) 14. "Sondersitzung: Gendern"</span><br>
+						<span class="smallabstract"><p>Ich mache ja fast jedes Jahr meine eigene Sommeruni - dieses Jahr bin ich über
+den hier verlinkten Vortrag bei einer Vorlesungsreihe aus den Geisteswissenschaften
+hängengeblieben:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vorlesung__bullshit_resistenz___2023__udk_berlin__14___sondersitzung__gendern_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 VII</span><br>
+						<span class="smallabstract"><p>Nach der
+letzten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet
+für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_vii.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							TLS einfach so im Klartext lesen</span><br>
+						<span class="smallabstract"><p>Ich las neulich einen
+Artikel,
+der mich - ich gebe es zu - ein wenig aufgeschreckt hat. Der Artikel beschrieb letztlich, dass
+man <span class="mdbold">jede</span> verschlüsselte Kommunikation, die auf TLS basiert relativ problemlos
+im Klartext mitlesen kann - solange sie die TLS-Implementierung dynamisch linkt...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tls_einfach_so_klartext_lesen.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript></h4> <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p> <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p> <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p> <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man <a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a> finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p> </div> </div><hr> </div> </div><br> </div> <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top"> <a href="me.html"> <script>
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a>
+						finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Vorlesung "Bullshit-Resistenz" (2023, UDK Berlin) 14. "Sondersitzung: Gendern"</span><br>
+							<span class="smallabstract"><p>Ich mache ja fast jedes Jahr meine eigene Sommeruni - dieses Jahr bin ich über
+den hier verlinkten Vortrag bei einer Vorlesungsreihe aus den Geisteswissenschaften
+hängengeblieben:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vorlesung__bullshit_resistenz___2023__udk_berlin__14___sondersitzung__gendern_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 VII</span><br>
+							<span class="smallabstract"><p>Nach der
+letzten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet
+für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_vii.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							TLS einfach so im Klartext lesen</span><br>
+							<span class="smallabstract"><p>Ich las neulich einen
+Artikel,
+der mich - ich gebe es zu - ein wenig aufgeschreckt hat. Der Artikel beschrieb letztlich, dass
+man <span class="mdbold">jede</span> verschlüsselte Kommunikation, die auf TLS basiert relativ problemlos
+im Klartext mitlesen kann - solange sie die TLS-Implementierung dynamisch linkt...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tls_einfach_so_klartext_lesen.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript> , Damaschke 11, Rudolstadt, <script>
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
 		<!--
 abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
 -->
-		</script> <noscript>jkey&#64;arcor&#46;de</noscript> , PEN: 1.3.6.1.4.1.59452 </a> <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p> </footer> </body> </html>
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+		, PEN: 1.3.6.1.4.1.59452
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>

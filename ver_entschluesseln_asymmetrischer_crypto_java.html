@@ -1,4 +1,25 @@
-<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>Ver/Entschlüsseln mit asymmetrischer Crypto und Java</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="Ver/Entschlüsseln mit asymmetrischer Crypto und Java"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/ver_entschluesseln_asymmetrischer_crypto_java"/> <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Als Fingerübung habe ich die beiden in einem der letzten Artikel vorgestellten Verfahren mal in Java implementiert. "/> <meta property="article:published_time" content="2023-06-12"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+<head>
+<title>Ver/Entschlüsseln mit asymmetrischer Crypto und Java</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta property="og:title" content="Ver/Entschlüsseln mit asymmetrischer Crypto und Java" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://elbosso.github.io/ver_entschluesseln_asymmetrischer_crypto_java" />
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"/>
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="elbosso.github.io" />
+<meta property="og:description" content="Als Fingerübung habe ich die beiden in einem der letzten
+Artikel
+vorgestellten Verfahren mal in Java implementiert.
+" />
+<meta property="article:published_time" content="2023-06-12">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" />
+<link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css" />
+<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -17,7 +38,77 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="realtex_88x2_unter_linux.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="linkcollections_2023_iv.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Ver/Entschlüsseln mit asymmetrischer Crypto und Java</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="testdaten_xml_schema_generieren___version_1_1_0.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Java</span> </a> <a href="ver_entschluesseln_asymmetrischer_crypto_openssl.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Security</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">12.06.2023</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Als Fingerübung habe ich die beiden in einem der letzten <a href="ver_entschluesseln_asymmetrischer_crypto_openssl.html">Artikel</a> vorgestellten Verfahren mal in Java implementiert. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Dazu bin ich davon ausgegangen, dass man ein Schlüsselpaar als PEM-Datei vorliegen hat (zum Versenden wird man natürlich nur den öffentlichen Schlüssel haben, aber das ist hier eine Fingerübung!).Das kann man mittels dieser Funktion hier zunächst mal einladen: </p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">KeyPair</span> <span class="nf">readPemKeyPair</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">File</span> <span class="n">file</span><span class="p">,</span> <span class="kt">char</span><span class="o">[]</span> <span class="n">password</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">IOException</span>
+</script>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<div class="w3-row">
+						<div class="w3-col m6 s12">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract"
+							   href="realtex_88x2_unter_linux.html#content">vorhergehender Artikel</a>
+						</div>
+						<div class="w3-col m6" style="text-align: right">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
+							   href="linkcollections_2023_iv.html#content">nächster Artikel
+							</a>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m9 s12">
+							<h4>Ver/Entschlüsseln mit asymmetrischer Crypto und Java</h4>
+							<div class="w3-container">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										vorhergehende Artikel in:
+										<a href="testdaten_xml_schema_generieren___version_1_1_0.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Java</span>
+										</a> <!--/li-->
+										<a href="ver_entschluesseln_asymmetrischer_crypto_openssl.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Security</span>
+										</a> <!--/li-->
+									</div>
+									<div class="w3-col m4" style="text-align: right">
+										<span class="w3-opacity">12.06.2023</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col m3"><p style="text-align: right">
+							<img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png">
+						</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Als Fingerübung habe ich die beiden in einem der letzten
+<a href="ver_entschluesseln_asymmetrischer_crypto_openssl.html">Artikel</a>
+vorgestellten Verfahren mal in Java implementiert.
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p>Dazu bin ich davon ausgegangen, dass man ein Schlüsselpaar als PEM-Datei vorliegen hat (zum Versenden wird man natürlich
+nur den öffentlichen Schlüssel haben, aber das ist hier eine Fingerübung!).Das kann man mittels dieser Funktion hier
+zunächst mal einladen:
+</p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">KeyPair</span> <span class="nf">readPemKeyPair</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">File</span> <span class="n">file</span><span class="p">,</span> <span class="kt">char</span><span class="o">[]</span> <span class="n">password</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">IOException</span>
 <span class="p">{</span>
 	<span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">KeyPair</span> <span class="n">kp</span><span class="p">;</span>
 	<span class="k">try</span> <span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">FileReader</span> <span class="n">keyReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">FileReader</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
@@ -41,7 +132,12 @@ document.write(link)
 	<span class="p">}</span>
 	<span class="k">return</span> <span class="n">kp</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div> <p> Anschließend benutzt man entsprechende Methoden zum Ver- und Entschlüsseln - zunächst mit RSA-Schlüsselpaaren -, wobei das Ergebnis des Verschlüsselns der mit dem öffentlichen Schlüssel verschlüsselte AES-Schlüssel und der mit diesem AES-Schlüssel verschlüsselte eigentliche Klartext ist: </p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">de</span><span class="p">.</span><span class="na">netsysit</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">CryptoContainer</span> <span class="nf">encryptRsaAes</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span> <span class="n">message</span><span class="p">,</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PublicKey</span> <span class="n">publicKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="p">,</span> <span class="n">NoSuchPaddingException</span><span class="p">,</span> <span class="n">NoSuchAlgorithmException</span><span class="p">,</span> <span class="n">InvalidKeyException</span><span class="p">,</span> <span class="n">IllegalBlockSizeException</span><span class="p">,</span> <span class="n">BadPaddingException</span>
+</pre></div>
+<p>
+Anschließend benutzt man entsprechende Methoden zum Ver- und Entschlüsseln - zunächst mit RSA-Schlüsselpaaren -,
+wobei das Ergebnis des Verschlüsselns der mit dem öffentlichen Schlüssel verschlüsselte AES-Schlüssel und der mit diesem AES-Schlüssel
+verschlüsselte eigentliche Klartext ist:
+</p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">de</span><span class="p">.</span><span class="na">netsysit</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">CryptoContainer</span> <span class="nf">encryptRsaAes</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span> <span class="n">message</span><span class="p">,</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PublicKey</span> <span class="n">publicKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="p">,</span> <span class="n">NoSuchPaddingException</span><span class="p">,</span> <span class="n">NoSuchAlgorithmException</span><span class="p">,</span> <span class="n">InvalidKeyException</span><span class="p">,</span> <span class="n">IllegalBlockSizeException</span><span class="p">,</span> <span class="n">BadPaddingException</span>
 <span class="p">{</span>
 	<span class="n">javax</span><span class="p">.</span><span class="na">crypto</span><span class="p">.</span><span class="na">Cipher</span> <span class="n">cipher</span> <span class="o">=</span> <span class="n">javax</span><span class="p">.</span><span class="na">crypto</span><span class="p">.</span><span class="na">Cipher</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;RSA&quot;</span><span class="p">);</span>
 	<span class="n">cipher</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">Cipher</span><span class="p">.</span><span class="na">ENCRYPT_MODE</span><span class="p">,</span> <span class="n">publicKey</span> <span class="p">);</span>
@@ -54,7 +150,11 @@ document.write(link)
 	<span class="n">cryptoContainer</span><span class="p">.</span><span class="na">setEncryptedKey</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="na">doFinal</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="na">getEncoded</span><span class="p">()));</span>
 	<span class="k">return</span> <span class="n">cryptoContainer</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div> <p> Zum Entschlüsseln steht eine ähnliche Methode bereit, die als Input den privaten Schlüssel, den verschlüsselten AES-Schlüssel und die verschlüsselte Botschaft benötigt und den Klartext zurückliefert: </p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">decryptRsaAes</span><span class="p">(</span><span class="n">de</span><span class="p">.</span><span class="na">netsysit</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">CryptoContainer</span> <span class="n">cryptoContainer</span><span class="p">,</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PrivateKey</span> <span class="n">privateKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">IllegalBlockSizeException</span><span class="p">,</span> <span class="n">BadPaddingException</span><span class="p">,</span> <span class="n">InvalidKeyException</span><span class="p">,</span> <span class="n">NoSuchPaddingException</span><span class="p">,</span> <span class="n">NoSuchAlgorithmException</span>
+</pre></div>
+<p>
+Zum Entschlüsseln steht eine ähnliche Methode bereit, die als Input den privaten Schlüssel, den verschlüsselten AES-Schlüssel
+und die verschlüsselte Botschaft benötigt und den Klartext zurückliefert:
+</p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">decryptRsaAes</span><span class="p">(</span><span class="n">de</span><span class="p">.</span><span class="na">netsysit</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">CryptoContainer</span> <span class="n">cryptoContainer</span><span class="p">,</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PrivateKey</span> <span class="n">privateKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">IllegalBlockSizeException</span><span class="p">,</span> <span class="n">BadPaddingException</span><span class="p">,</span> <span class="n">InvalidKeyException</span><span class="p">,</span> <span class="n">NoSuchPaddingException</span><span class="p">,</span> <span class="n">NoSuchAlgorithmException</span>
 <span class="p">{</span>
 	<span class="n">javax</span><span class="p">.</span><span class="na">crypto</span><span class="p">.</span><span class="na">Cipher</span> <span class="n">cipher</span> <span class="o">=</span> <span class="n">javax</span><span class="p">.</span><span class="na">crypto</span><span class="p">.</span><span class="na">Cipher</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;RSA&quot;</span><span class="p">);;</span>
 	<span class="n">cipher</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">javax</span><span class="p">.</span><span class="na">crypto</span><span class="p">.</span><span class="na">Cipher</span><span class="p">.</span><span class="na">DECRYPT_MODE</span><span class="p">,</span><span class="n">privateKey</span> <span class="p">);</span>
@@ -65,7 +165,12 @@ document.write(link)
 	<span class="kt">byte</span><span class="o">[]</span> <span class="n">clear</span><span class="o">=</span><span class="n">dcipher</span><span class="p">.</span><span class="na">doFinal</span><span class="p">(</span><span class="n">cryptoContainer</span><span class="p">.</span><span class="na">getEncryptedData</span><span class="p">());</span>
 	<span class="k">return</span> <span class="k">new</span> <span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="p">(</span><span class="n">clear</span><span class="p">);</span>
 <span class="p">}</span>
-</pre></div> <p> Möchte man statt RSA- EC-Schlüsselpaare einsetzen, sieht das Ganze etwas anders aus. Zum Laden eines solchen Schlüsselpaares kann man die oben bereits gezeigte Methode ebenfalls nutzen. Das Verschlüsseln (ebenfalls mittels AES) funktioniert ein wenig anders - Zunächst muss man ein Shared Secret erzeugen: </p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">javax</span><span class="p">.</span><span class="na">crypto</span><span class="p">.</span><span class="na">SecretKey</span> <span class="nf">generateSharedSecret</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PrivateKey</span> <span class="n">privateKey</span><span class="p">,</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PublicKey</span> <span class="n">publicKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="p">,</span> <span class="n">InvalidKeyException</span>
+</pre></div>
+<p>
+Möchte man statt RSA- EC-Schlüsselpaare einsetzen, sieht das Ganze etwas anders aus. Zum Laden eines solchen Schlüsselpaares
+kann man die oben bereits gezeigte Methode ebenfalls nutzen. Das Verschlüsseln (ebenfalls mittels AES) funktioniert ein wenig anders -
+Zunächst muss man ein Shared Secret erzeugen:
+</p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">javax</span><span class="p">.</span><span class="na">crypto</span><span class="p">.</span><span class="na">SecretKey</span> <span class="nf">generateSharedSecret</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PrivateKey</span> <span class="n">privateKey</span><span class="p">,</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PublicKey</span> <span class="n">publicKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="p">,</span> <span class="n">InvalidKeyException</span>
 <span class="p">{</span>
 	<span class="n">javax</span><span class="p">.</span><span class="na">crypto</span><span class="p">.</span><span class="na">KeyAgreement</span> <span class="n">keyAgreement</span> <span class="o">=</span> <span class="n">javax</span><span class="p">.</span><span class="na">crypto</span><span class="p">.</span><span class="na">KeyAgreement</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;ECDH&quot;</span><span class="p">);</span>
 	<span class="n">keyAgreement</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">privateKey</span><span class="p">);</span>
@@ -74,7 +179,11 @@ document.write(link)
 	<span class="n">javax</span><span class="p">.</span><span class="na">crypto</span><span class="p">.</span><span class="na">SecretKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">keyAgreement</span><span class="p">.</span><span class="na">generateSecret</span><span class="p">(</span><span class="s">&quot;AES&quot;</span><span class="p">);</span>
 	<span class="k">return</span> <span class="n">key</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div> <p> Dazu benötigt man aber noch ein temporäres Schlüsselpaar - zur Erzeugung wird ein Teil des Schlüsselpaares des Empfängers in die Methode hineingegeben: </p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">KeyPair</span> <span class="nf">generateEphemerealKeyPair</span><span class="p">(</span><span class="n">ECKey</span> <span class="n">recvpubKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">InvalidAlgorithmParameterException</span><span class="p">,</span> <span class="n">NoSuchAlgorithmException</span>
+</pre></div>
+<p>
+Dazu benötigt man aber noch ein temporäres Schlüsselpaar - zur Erzeugung wird ein Teil des Schlüsselpaares des Empfängers
+in die Methode hineingegeben:
+</p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">KeyPair</span> <span class="nf">generateEphemerealKeyPair</span><span class="p">(</span><span class="n">ECKey</span> <span class="n">recvpubKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">InvalidAlgorithmParameterException</span><span class="p">,</span> <span class="n">NoSuchAlgorithmException</span>
 <span class="p">{</span>
 	<span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">KeyPairGenerator</span> <span class="n">keyPairGenerator</span> <span class="o">=</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">KeyPairGenerator</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;ECDH&quot;</span><span class="p">);</span>
 </p><p>
@@ -83,7 +192,10 @@ document.write(link)
 </p><p>
 	<span class="k">return</span> <span class="n">keyPair</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div> <p> Nun kann man sich an die eigentliche Verschlüsselung begeben: </p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">de</span><span class="p">.</span><span class="na">netsysit</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">CryptoContainer</span> <span class="nf">encryptEcAES</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span> <span class="n">message</span><span class="p">,</span><span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PublicKey</span>  <span class="n">recvpubKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">InvalidAlgorithmParameterException</span><span class="p">,</span> <span class="n">NoSuchPaddingException</span><span class="p">,</span> <span class="n">NoSuchAlgorithmException</span><span class="p">,</span> <span class="n">InvalidKeyException</span><span class="p">,</span> <span class="n">IllegalBlockSizeException</span><span class="p">,</span> <span class="n">BadPaddingException</span>
+</pre></div>
+<p>
+Nun kann man sich an die eigentliche Verschlüsselung begeben:
+</p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">de</span><span class="p">.</span><span class="na">netsysit</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">CryptoContainer</span> <span class="nf">encryptEcAES</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span> <span class="n">message</span><span class="p">,</span><span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PublicKey</span>  <span class="n">recvpubKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">InvalidAlgorithmParameterException</span><span class="p">,</span> <span class="n">NoSuchPaddingException</span><span class="p">,</span> <span class="n">NoSuchAlgorithmException</span><span class="p">,</span> <span class="n">InvalidKeyException</span><span class="p">,</span> <span class="n">IllegalBlockSizeException</span><span class="p">,</span> <span class="n">BadPaddingException</span>
 <span class="p">{</span>
 	<span class="n">org</span><span class="p">.</span><span class="na">bouncycastle</span><span class="p">.</span><span class="na">jce</span><span class="p">.</span><span class="na">interfaces</span><span class="p">.</span><span class="na">ECKey</span>  <span class="n">ecKey</span><span class="o">=</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="na">bouncycastle</span><span class="p">.</span><span class="na">jce</span><span class="p">.</span><span class="na">interfaces</span><span class="p">.</span><span class="na">ECKey</span><span class="p">)</span><span class="n">recvpubKey</span><span class="p">;</span>
 	<span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">KeyPair</span> <span class="n">ephkeyPair</span><span class="o">=</span><span class="n">generateEphemerealKeyPair</span><span class="p">(</span><span class="n">ecKey</span><span class="p">);</span>
@@ -95,7 +207,13 @@ document.write(link)
 	<span class="n">cryptoContainer</span><span class="p">.</span><span class="na">setEncryptedKey</span><span class="p">(</span><span class="n">ephkeyPair</span><span class="p">.</span><span class="na">getPublic</span><span class="p">().</span><span class="na">getEncoded</span><span class="p">());</span>
 	<span class="k">return</span> <span class="n">cryptoContainer</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div> <p> Neben dem verschlüsselten Klartext ist hier der öffentliche Teil des teporären Schlüsselpaares an den Empfänger zu übersenden, der aus diesem und seinem privaten Schlüssel das Shared Secret rekonstruieren kann, das dann zum Entschlüsseln benutzt wird. Hier verlangt die Methode als Input den privaten Schlüssel, den öffentlichen Teil des temporären Schlüsselpaares und die verschlüsselte Botschaft als Input und liefert wieder den Klartext zurück: </p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span> <span class="nf">decryptEcAES</span><span class="p">(</span><span class="n">de</span><span class="p">.</span><span class="na">netsysit</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">CryptoContainer</span> <span class="n">cryptoContainer</span><span class="p">,</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PrivateKey</span> <span class="n">privateKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="p">,</span> <span class="n">InvalidKeyException</span><span class="p">,</span> <span class="n">NoSuchPaddingException</span><span class="p">,</span> <span class="n">IllegalBlockSizeException</span><span class="p">,</span> <span class="n">BadPaddingException</span><span class="p">,</span> <span class="n">InvalidKeySpecException</span>
+</pre></div>
+<p>
+Neben dem verschlüsselten Klartext ist hier der öffentliche Teil des teporären Schlüsselpaares an den Empfänger zu übersenden, der
+aus diesem und seinem privaten Schlüssel das Shared Secret rekonstruieren kann, das dann zum Entschlüsseln benutzt wird.
+Hier verlangt die Methode als Input den privaten Schlüssel, den öffentlichen Teil des temporären Schlüsselpaares
+und die verschlüsselte Botschaft als Input und liefert wieder den Klartext zurück:
+</p><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span> <span class="nf">decryptEcAES</span><span class="p">(</span><span class="n">de</span><span class="p">.</span><span class="na">netsysit</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">CryptoContainer</span> <span class="n">cryptoContainer</span><span class="p">,</span> <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">PrivateKey</span> <span class="n">privateKey</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="p">,</span> <span class="n">InvalidKeyException</span><span class="p">,</span> <span class="n">NoSuchPaddingException</span><span class="p">,</span> <span class="n">IllegalBlockSizeException</span><span class="p">,</span> <span class="n">BadPaddingException</span><span class="p">,</span> <span class="n">InvalidKeySpecException</span>
 <span class="p">{</span>
 	<span class="kt">byte</span><span class="o">[]</span> <span class="n">raw</span><span class="o">=</span><span class="n">cryptoContainer</span><span class="p">.</span><span class="na">getEncryptedKey</span><span class="p">();</span>
 	<span class="n">KeyFactory</span> <span class="n">kf</span> <span class="o">=</span> <span class="n">KeyFactory</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;EC&quot;</span><span class="p">);</span>
@@ -108,7 +226,10 @@ document.write(link)
 	<span class="kt">byte</span><span class="o">[]</span> <span class="n">clear</span><span class="o">=</span><span class="n">dcipher</span><span class="p">.</span><span class="na">doFinal</span><span class="p">(</span><span class="n">cryptoContainer</span><span class="p">.</span><span class="na">getEncryptedData</span><span class="p">());</span>
 	<span class="k">return</span> <span class="k">new</span> <span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="p">(</span><span class="n">clear</span><span class="p">);</span>
 <span class="p">}</span>
-</pre></div> <p> Zum Ausprobieren kann man Code ähnlich des folgenden benutzen: </p><div class="highlight"><pre><span></span><span class="c1">//RSA</span>
+</pre></div>
+<p>
+Zum Ausprobieren kann man Code ähnlich des folgenden benutzen:
+</p><div class="highlight"><pre><span></span><span class="c1">//RSA</span>
 <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">KeyPair</span> <span class="n">keyPair</span><span class="o">=</span><span class="n">de</span><span class="p">.</span><span class="na">elbosso</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">Utilities</span><span class="p">.</span><span class="na">readPemKeyPair</span><span class="p">(</span><span class="k">new</span> <span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">File</span><span class="p">(</span><span class="s">&quot;/tmp/RSAKeyPair.pem&quot;</span><span class="p">),</span><span class="kc">null</span><span class="p">);</span>
 <span class="n">de</span><span class="p">.</span><span class="na">netsysit</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">CryptoContainer</span> <span class="n">cryptoContainer</span><span class="o">=</span><span class="n">de</span><span class="p">.</span><span class="na">elbosso</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">Utilities</span><span class="p">.</span><span class="na">encryptRsaAes</span><span class="p">(</span><span class="s">&quot;No more secrets!&quot;</span><span class="p">,</span><span class="n">keyPair</span><span class="p">.</span><span class="na">getPublic</span><span class="p">());</span>
 <span class="n">CLASS_LOGGER</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="n">de</span><span class="p">.</span><span class="na">elbosso</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">Utilities</span><span class="p">.</span><span class="na">decryptRsaAes</span><span class="p">(</span><span class="n">cryptoContainer</span><span class="p">,</span><span class="n">keyPair</span><span class="p">.</span><span class="na">getPrivate</span><span class="p">()));</span>
@@ -116,16 +237,264 @@ document.write(link)
 <span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">KeyPair</span> <span class="n">recvkeyPair</span><span class="o">=</span><span class="n">de</span><span class="p">.</span><span class="na">elbosso</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">Utilities</span><span class="p">.</span><span class="na">readPemKeyPair</span><span class="p">(</span><span class="k">new</span> <span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">File</span><span class="p">(</span><span class="s">&quot;/tmp/ECKeyPair.pem&quot;</span><span class="p">),</span><span class="kc">null</span><span class="p">);</span>
 <span class="n">cryptoContainer</span><span class="o">=</span><span class="n">de</span><span class="p">.</span><span class="na">elbosso</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">Utilities</span><span class="p">.</span><span class="na">encryptEcAES</span><span class="p">(</span><span class="s">&quot;No more EC secrets!&quot;</span><span class="p">,</span><span class="n">recvkeyPair</span><span class="p">.</span><span class="na">getPublic</span><span class="p">());</span>
 <span class="n">CLASS_LOGGER</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="n">de</span><span class="p">.</span><span class="na">elbosso</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">Utilities</span><span class="p">.</span><span class="na">decryptEcAES</span><span class="p">(</span><span class="n">cryptoContainer</span><span class="p">,</span><span class="n">recvkeyPair</span><span class="p">.</span><span class="na">getPrivate</span><span class="p">()));</span>
-</pre></div> <p> <span class="mdbold">Und wieder der Hinweis, dass der Sender normalerweise natürlich nicht ein Schlüsselpaar zur Verfügung hat sondern nur den öffentlichen Teil eines solchen!</span> </p> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Ver/Entschlüsseln mit asymmetrischer Crypto und Java&body=[Ver/Entschlüsseln mit asymmetrischer Crypto und Java](https://elbosso.github.io/ver_entschluesseln_asymmetrischer_crypto_java)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Ver/Entschlüsseln mit asymmetrischer Crypto und Java"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Ver/Entschlüsseln mit asymmetrischer Crypto und Java&issue[description]=[Ver/Entschlüsseln mit asymmetrischer Crypto und Java](https://elbosso.github.io/ver_entschluesseln_asymmetrischer_crypto_java)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Ver/Entschlüsseln mit asymmetrischer Crypto und Java"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Mehrere Tile-Layer aus einem Server</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">01.09.2018</span> </p> <span class="smallabstract"><p>Ich habe bereits über die Einrichtung von LXC-Containern als TileServer für OpenStreetMap und Server für Hillshading-Tiles berichtet. Nunmehr wurde dieses Konzept ein wenig veredelt </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="mehrere_tile_layer_aus_einem_server.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-black w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2023 VII</span><br> <span class="smallabstract"><p>Nach der letzten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet für dieses Jahr folgt hier nunmehr die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_vii.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> TLS einfach so im Klartext lesen</span><br> <span class="smallabstract"><p>Ich las neulich einen Artikel, der mich - ich gebe es zu - ein wenig aufgeschreckt hat. Der Artikel beschrieb letztlich, dass man <span class="mdbold">jede</span> verschlüsselte Kommunikation, die auf TLS basiert relativ problemlos im Klartext mitlesen kann - solange sie die TLS-Implementierung dynamisch linkt... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tls_einfach_so_klartext_lesen.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> sQLshell Version 7.7pre2 build 10162</span><br> <span class="smallabstract"><p>Eine neue Version der sQLshell ist verfügbar! </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="sqlshell_version_7_7pre2_build_10162.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</pre></div>
+<p>
+<span class="mdbold">Und wieder der Hinweis, dass der Sender normalerweise natürlich nicht ein Schlüsselpaar zur Verfügung hat sondern nur
+den öffentlichen Teil eines solchen!</span>
+</p>				</div>
+				<div class="w3-container w3-padding" id="commentsgithub">
+					<p>
+						<a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Ver/Entschlüsseln mit asymmetrischer Crypto und Java&body=[Ver/Entschlüsseln mit asymmetrischer Crypto und Java](https://elbosso.github.io/ver_entschluesseln_asymmetrischer_crypto_java)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+						<a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Ver/Entschlüsseln mit asymmetrischer Crypto und Java"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+					</p>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgitlab">
+					<p>
+						<a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Ver/Entschlüsseln mit asymmetrischer Crypto und Java&issue[description]=[Ver/Entschlüsseln mit asymmetrischer Crypto und Java](https://elbosso.github.io/ver_entschluesseln_asymmetrischer_crypto_java)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+						<a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Ver/Entschlüsseln mit asymmetrischer Crypto und Java"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+					</p>
+				</div>
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png"  width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a>
+						<a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+						<a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Artikel von "backThen" -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Vor 5 Jahren hier im Blog</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+						<p class="w3-large">
+							E-Paper Türschild mit ESP8266</p>
+						<p class="w3-small" style="text-align: right">
+							<span class="w3-opacity">08.09.2018</span>
+						</p>
+						<span class="smallabstract"><p>Nach meinen ersten Versuchen, das
+E-Paper-Display
+mit einem Raspi anzusteuern habe ich nunmehr den Schritt gewagt und - durch die ersten Erfolge mit der
+WLAN-Steckdose
+unvorsichtig geworden - erste Versuche mit der Ansteuerung durch einen ESP gemacht.
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="e_paper_tuerschild_esp8266.html#content">
+							Weiterlesen...
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+						<a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-black w3-margin-bottom">Security</span></a>
+						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Vorlesung "Bullshit-Resistenz" (2023, UDK Berlin) 14. "Sondersitzung: Gendern"</span><br>
+						<span class="smallabstract"><p>Ich mache ja fast jedes Jahr meine eigene Sommeruni - dieses Jahr bin ich über
+den hier verlinkten Vortrag bei einer Vorlesungsreihe aus den Geisteswissenschaften
+hängengeblieben:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vorlesung__bullshit_resistenz___2023__udk_berlin__14___sondersitzung__gendern_.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 VII</span><br>
+						<span class="smallabstract"><p>Nach der
+letzten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet
+für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_vii.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							TLS einfach so im Klartext lesen</span><br>
+						<span class="smallabstract"><p>Ich las neulich einen
+Artikel,
+der mich - ich gebe es zu - ein wenig aufgeschreckt hat. Der Artikel beschrieb letztlich, dass
+man <span class="mdbold">jede</span> verschlüsselte Kommunikation, die auf TLS basiert relativ problemlos
+im Klartext mitlesen kann - solange sie die TLS-Implementierung dynamisch linkt...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tls_einfach_so_klartext_lesen.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript></h4> <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p> <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p> <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p> <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man <a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a> finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p> </div> </div><hr> </div> </div><br> </div> <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top"> <a href="me.html"> <script>
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a>
+						finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Vorlesung "Bullshit-Resistenz" (2023, UDK Berlin) 14. "Sondersitzung: Gendern"</span><br>
+							<span class="smallabstract"><p>Ich mache ja fast jedes Jahr meine eigene Sommeruni - dieses Jahr bin ich über
+den hier verlinkten Vortrag bei einer Vorlesungsreihe aus den Geisteswissenschaften
+hängengeblieben:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="vorlesung__bullshit_resistenz___2023__udk_berlin__14___sondersitzung__gendern_.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							LinkCollections 2023 VII</span><br>
+							<span class="smallabstract"><p>Nach der
+letzten
+losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet
+für dieses Jahr folgt hier nunmehr die nächste:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2023_vii.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							TLS einfach so im Klartext lesen</span><br>
+							<span class="smallabstract"><p>Ich las neulich einen
+Artikel,
+der mich - ich gebe es zu - ein wenig aufgeschreckt hat. Der Artikel beschrieb letztlich, dass
+man <span class="mdbold">jede</span> verschlüsselte Kommunikation, die auf TLS basiert relativ problemlos
+im Klartext mitlesen kann - solange sie die TLS-Implementierung dynamisch linkt...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="tls_einfach_so_klartext_lesen.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript> , Damaschke 11, Rudolstadt, <script>
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
 		<!--
 abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
 -->
-		</script> <noscript>jkey&#64;arcor&#46;de</noscript> , PEN: 1.3.6.1.4.1.59452 </a> <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p> </footer> </body> </html>
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+		, PEN: 1.3.6.1.4.1.59452
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
