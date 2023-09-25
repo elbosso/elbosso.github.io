@@ -1,4 +1,23 @@
-<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/gps__nmea__tracks_gnuplot_animationen_verarbeiten"/> <meta property="og:image" content="https://elbosso.github.io/images/fbm/contour3d.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht... "/> <meta property="article:published_time" content="2021-11-02"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+<head>
+<title>GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta property="og:title" content="GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://elbosso.github.io/gps__nmea__tracks_gnuplot_animationen_verarbeiten" />
+<meta property="og:image" content="https://elbosso.github.io/images/fbm/contour3d.png"/>
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="elbosso.github.io" />
+<meta property="og:description" content="Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht...
+" />
+<meta property="article:published_time" content="2021-11-02">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" />
+<link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css" />
+<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -17,8 +36,132 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="awk_linksammlung.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="pam_nfc_ubuntu_20_04.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="isometrische_darstellung_generierte_landschaften.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Geo</span> </a> <a href="awk_linksammlung.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">02.11.2021</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/fbm/contour3d_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht... </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Der <a href="https://darmstadt.social/@holzschuhgiesser/106133625332484310">Post</a> beschrieb die Idee, Live-Video mit einer Darstellung des gefahrenen Höhenprofils und/oder der Darstellung der gefahrenen Geschwindigkeit zu überlagern. </p><p> Ich hatte so etwas vor vielen Jahren einmal mit Java realisiert: Wir hatten damals die Live-Aufnahmen der Dashcam mit GPS-Daten verheiratet: unten links war im Kamerabild eine Miniaturkarte von OpenStreetMap eingeblendet, die immer auf den aktuellen Standort zentriert war, der mittels GPS-Empfänger ausgelesen wurde. </p><p> Dieses Mal wollte ich aber kein Java-Programm schreiben, sondern legte mir andere Werkzeuge auf der Werkbank zurecht: <a href="excel__nein___awk_gnuplot_.html">AWK</a> und <a href="gnuplot_statistik.html">Gnuplot.</a> </p><p> Mit <a href="https://www.unix.com/shell-programming-and-scripting/72343-awk-nmea-strings.html">AWK</a> konvertierte ich einen rohen Mitschnitt von NMEA-Daten aus dem GPS-Receiver (ich nutzte hier die <a href="https://docs.novatel.com/OEM7/Content/Logs/GPRMC.htm">GPRMC-Pakete,</a> das lässt sich natürlich auf alle anderen NMEAS-Botschaften anpassen) zunächst in ein etwas Gnuplot-freundlicheres <a href="http://gnuplot.sourceforge.net/docs_4.2/node274.html">Format</a> - vor allem, was die <a href="https://stackoverflow.com/questions/60870354/error-need-full-using-spec-for-x-time-data">Zeit</a> anging: </p><div class="highlight"><pre><span></span>gawk -F &quot;,&quot; &#39;$1==&quot;$GPRMC&quot; &amp;&amp; $3 != &quot;V&quot; {print substr($10,1,2)&quot;/&quot;substr($10,3,2)&quot;/&quot;substr($10,5,2)&quot;-&quot;substr($2,1,2)&quot;:&quot;substr($2,3,2)&quot;:&quot;substr($2,5,2)&quot;\t&quot;$10&quot;\t&quot;$2&quot;\t&quot;$8}&#39; input_nmea.TXT&gt;gpl.dat
-</pre></div> <p> Danach konnte ich daran gehen, das Gnuplot-Skript zu entwerfen - die Grundidee war, dass ich die Gesamtdaten des Tracks darstellen wollte und darüber überlagert die Daten <span class="mdbold">bis zu</span> einem <a href="https://www.techrepublic.com/blog/linux-and-open-source/how-to-create-conditional-plotting-with-gnuplot/">gewissen Zeitpunkt</a> - dieses Bild hier zeigt einen frühen Entwurf dessen, was ich damit zum Ausdruck bringen wollte: </p><p> <img src="images/ii.png" style="max-width:640px;" alt="Screenshot" class="center"> <span class="imgdesc"> Früher Entwurf </span> </p><p> Kurz danach fiel mir noch eine weitere Möglichkeit der Visualisierung ein - Man könnte doch auch die Gesamtdaten mit einem <a href="http://www.gnuplotting.org/tag/points/">Marker</a> <span class="mdbold">genau zu</span> einem gewissen Zeitpunkt überlagern - dieses Bild aus einer späteren Phase des Entwurfs zeigt diese Variante: </p><p> <img src="images/01000.png" style="max-width:800px;" alt="Screenshot" class="center"> <span class="imgdesc"> Früher Entwurf </span> </p><p> Variiert man den Zeitpunkt zwischen <a href="https://entorb.net/wickie/Gnuplot#Finding_Min_and_Max_for_X_and_Y">Beginn und Ende des Tracks</a> und speichert die jeweils gerenderten Abbildungen, kann man darauf eine Animation erstellen. Dazu kam das folgende Gnuplot-Skript zum Einsatz: </p><div class="highlight"><pre><span></span><span class="nv">stats</span> <span class="s2">&quot;</span><span class="s">gpl.dat</span><span class="s2">&quot;</span> <span class="nv">using</span> <span class="mi">4</span> <span class="nv">name</span> <span class="s2">&quot;</span><span class="s">A</span><span class="s2">&quot;</span>
+</script>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<div class="w3-row">
+						<div class="w3-col m6 s12">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract"
+							   href="awk_linksammlung.html#content">vorhergehender Artikel</a>
+						</div>
+						<div class="w3-col m6" style="text-align: right">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
+							   href="pam_nfc_ubuntu_20_04.html#content">nächster Artikel
+							</a>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m9 s12">
+							<h4>GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten</h4>
+							<div class="w3-container">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										vorhergehende Artikel in:
+										<a href="isometrische_darstellung_generierte_landschaften.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Geo</span>
+										</a> <!--/li-->
+										<a href="awk_linksammlung.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
+										</a> <!--/li-->
+									</div>
+									<div class="w3-col m4" style="text-align: right">
+										<span class="w3-opacity">02.11.2021</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col m3"><p style="text-align: right">
+							<img style="max-width:128px;" src="images/fbm/contour3d_t.png">
+						</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Durch einen Post auf Mastodon wurde ich auf eine Idee gebracht...
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p>Der
+<a href="https://darmstadt.social/@holzschuhgiesser/106133625332484310">Post</a>
+beschrieb die Idee, Live-Video mit einer Darstellung des gefahrenen Höhenprofils und/oder
+der Darstellung der gefahrenen Geschwindigkeit zu überlagern.
+</p><p>
+Ich hatte so etwas vor vielen Jahren einmal mit Java realisiert: Wir hatten damals
+die Live-Aufnahmen der Dashcam mit GPS-Daten verheiratet: unten links war im Kamerabild eine
+Miniaturkarte von OpenStreetMap eingeblendet, die immer auf den aktuellen Standort zentriert
+war, der mittels GPS-Empfänger ausgelesen wurde.
+</p><p>
+Dieses Mal wollte ich aber kein Java-Programm schreiben, sondern legte mir andere Werkzeuge auf der
+Werkbank zurecht:
+<a href="excel__nein___awk_gnuplot_.html">AWK</a>
+und
+<a href="gnuplot_statistik.html">Gnuplot.</a>
+</p><p>
+Mit
+<a href="https://www.unix.com/shell-programming-and-scripting/72343-awk-nmea-strings.html">AWK</a>
+konvertierte ich einen rohen Mitschnitt von NMEA-Daten aus dem GPS-Receiver (ich nutzte hier
+die
+<a href="https://docs.novatel.com/OEM7/Content/Logs/GPRMC.htm">GPRMC-Pakete,</a>
+das lässt sich natürlich auf alle anderen NMEAS-Botschaften anpassen) zunächst
+in ein etwas Gnuplot-freundlicheres
+<a href="http://gnuplot.sourceforge.net/docs_4.2/node274.html">Format</a>
+- vor allem, was die
+<a href="https://stackoverflow.com/questions/60870354/error-need-full-using-spec-for-x-time-data">Zeit</a>
+anging:
+</p><div class="highlight"><pre><span></span>gawk -F &quot;,&quot; &#39;$1==&quot;$GPRMC&quot; &amp;&amp; $3 != &quot;V&quot; {print substr($10,1,2)&quot;/&quot;substr($10,3,2)&quot;/&quot;substr($10,5,2)&quot;-&quot;substr($2,1,2)&quot;:&quot;substr($2,3,2)&quot;:&quot;substr($2,5,2)&quot;\t&quot;$10&quot;\t&quot;$2&quot;\t&quot;$8}&#39; input_nmea.TXT&gt;gpl.dat
+</pre></div>
+<p>
+Danach konnte ich daran gehen, das Gnuplot-Skript zu entwerfen - die Grundidee war, dass ich
+die Gesamtdaten des Tracks darstellen wollte und darüber überlagert die Daten <span class="mdbold">bis zu</span> einem
+<a href="https://www.techrepublic.com/blog/linux-and-open-source/how-to-create-conditional-plotting-with-gnuplot/">gewissen Zeitpunkt</a>
+- dieses Bild
+hier zeigt einen frühen Entwurf dessen, was ich damit zum Ausdruck bringen wollte:
+</p><p>
+<img src="images/ii.png" style="max-width:640px;"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Früher Entwurf
+</span>
+</p><p>
+Kurz danach fiel mir noch eine weitere Möglichkeit der Visualisierung ein - Man könnte doch auch die Gesamtdaten
+mit einem
+<a href="http://www.gnuplotting.org/tag/points/">Marker</a>
+<span class="mdbold">genau zu</span> einem gewissen Zeitpunkt überlagern - dieses Bild aus einer späteren Phase des Entwurfs zeigt
+diese Variante:
+</p><p>
+<img src="images/01000.png" style="max-width:800px;"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Früher Entwurf
+</span>
+</p><p>
+Variiert man den Zeitpunkt zwischen
+<a href="https://entorb.net/wickie/Gnuplot#Finding_Min_and_Max_for_X_and_Y">Beginn und Ende des Tracks</a>
+und speichert die jeweils gerenderten Abbildungen, kann man darauf eine Animation erstellen.
+Dazu kam das folgende Gnuplot-Skript zum Einsatz:
+</p><div class="highlight"><pre><span></span><span class="nv">stats</span> <span class="s2">&quot;</span><span class="s">gpl.dat</span><span class="s2">&quot;</span> <span class="nv">using</span> <span class="mi">4</span> <span class="nv">name</span> <span class="s2">&quot;</span><span class="s">A</span><span class="s2">&quot;</span>
 </p><p>
 <span class="nv">set</span> <span class="nv">xdata</span> <span class="nv">time</span>
 <span class="nv">set</span> <span class="nv">timefmt</span> <span class="s2">&quot;</span><span class="s">%d/%m/%Y-%H:%M:%S</span><span class="s2">&quot;</span>
@@ -43,17 +186,315 @@ document.write(link)
 #<span class="nv">Visualisierung</span> <span class="nv">Variante</span> <span class="mi">2</span>
 <span class="nv">plot</span> <span class="s1">&#39;</span><span class="s">gpl.dat</span><span class="s1">&#39;</span> <span class="nv">using</span> <span class="mi">1</span>:<span class="mi">4</span> <span class="nv">w</span> <span class="nv">lines</span> <span class="nv">title</span> <span class="s2">&quot;&quot;</span>,<span class="s1">&#39;</span><span class="s">gpl.dat</span><span class="s1">&#39;</span> <span class="nv">u</span> <span class="ss">(</span><span class="mh">$0</span> <span class="o">==</span> <span class="nv">ii</span>  ? <span class="nv">timecolumn</span><span class="ss">(</span><span class="mi">1</span><span class="ss">)</span> : <span class="mi">1</span><span class="o">/</span><span class="mi">0</span><span class="ss">)</span>:<span class="mi">4</span> <span class="nv">w</span> <span class="nv">p</span> <span class="nv">pt</span> <span class="mi">7</span> <span class="nv">ps</span> <span class="mi">2</span> <span class="nv">title</span> <span class="s2">&quot;&quot;</span>
 }
-</pre></div> <p> Dabei wurde die Höhe des Diagramms noch ein wenig angepasst, um dem Hintergrund (zum Beispiel Live-Kamerabild) mehr Geltung verschaffen zu können. Die endgültige Größe und Position des Diagramms kann ebenso wie die Größe des erzeugten Bildes und das Styling des Diagramms in weiten Grenzen angepasst werden - mir ging es lediglich um die Mechanik des Ganzen. </p><p> Zum Schluss kann man - zum Beispiel mittels <span class="mdcode">ffmpeg</span> - die Einzelbilder zu einer Animation zusammenfassen, indem man ein Kommando wie dieses hier ausführt: </p><div class="highlight"><pre><span></span>ffmpeg -r:v 1 -start_number 50704 -i &quot;tmp/gnuplotanim/%05d.png&quot; -codec:v libx264 movie.mp4
-</pre></div> <p> Dieses Kommando erzeugt eine Animation in Echtzeit: sie dauert exakt so lange, wie die Aufzeichnung des Tracks gedauert hat und eignet sich daher sehr gut als Overlay des Live-Kamerabilds. Das wird dadurch erreicht, dass mittels <span class="mdcode">-r 1</span> eine Framerate von einem Bild pro Sekunde vorgegeben wurde - der Originaltrack wurde mit einem Datenpunkt jede Sekunde aufgezeichnet. </p><p> Hier ist das Resultat, das FFMpeg für den Beispieltrack nach Behandlung mit AWK und Gnuplot wie beschrieben ausspuckt (funktioniert wahrscheinlich nicht in Firefox...): </p><p> <video width="800" height="600" controls> <source src="resources/nmea_gnuplot_awk_movie.mp4" type="video/mp4"> Your browser does not support the video tag. </video> </p> </div> <div class="w3-container w3-padding" id="referers"> <h3> Artikel, die hierher verlinken </h3> <div class="w3-row"> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Gnuplot Snippets Projekt </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">28.04.2022</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Nachdem ich hin und wieder über verschiede Aspekte von Gnuplot berichtet habe, habe ich mich entschieden, diese über die Jahre gewonnenen Erkenntnisse zu systematisieren und endlich mal davon wegzukommen, immer das letzte Gnuplot Skript zu kopieren und anzupassen. </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="gnuplot_snippets_projekt.html#content">Öffnen</a> </p> </div> </div> </div> </div> </div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten&body=[GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten](https://elbosso.github.io/gps__nmea__tracks_gnuplot_animationen_verarbeiten)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten&issue[description]=[GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten](https://elbosso.github.io/gps__nmea__tracks_gnuplot_animationen_verarbeiten)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Gedanken zu Zeit, NTP, GPS und DIY</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">21.09.2018</span> </p> <span class="smallabstract"><p>Nachdem ich meinen eigenen Atomzeit-GPS-NTP-Server in Betrieb genommen habe, habe ich mir Gedanken gemacht, warum die käuflich zu erwerbenden einen so hohen Anschaffungswiderstand haben. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="gedanken_zeit__ntp__gps_diy.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-black w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> Preisvergleich mit historischen Daten in Grafana</span><br> <span class="smallabstract"><p>Durch diesen Mastodon-Thread aufmerksam geworden, wollte ich da auch unbedingt mitspielen - allerdings habe ich gerade Urlaub und daher wollte ich klein anfangen... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="preisvergleich_historischen_daten_grafana.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Präsentation "Vergleich Analoger und Digitaler Identitäten"</span><br> <span class="smallabstract"><p>Ich habe eine neue Präsentation rund um das Thema digitale Identitäten erstellt. Dieses Mal hat die Präsentation eine Gegenüberstellung analoger und digitaler Identitäten zum Thema </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="praesentation__vergleich_analoger_digitaler_identitaeten_.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Marissa Mulder - Martha</span><br> <span class="smallabstract"><p>Nach dem Original nun ein - wie ich finde - sehr gelungenes Cover: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="marissa_mulder___martha.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</pre></div>
+<p>
+Dabei wurde die Höhe des Diagramms noch ein wenig angepasst, um dem Hintergrund (zum Beispiel Live-Kamerabild)
+mehr Geltung verschaffen zu können. Die endgültige Größe und Position des Diagramms kann ebenso wie die Größe des erzeugten Bildes und das Styling
+des Diagramms in weiten Grenzen angepasst werden - mir ging es lediglich um die Mechanik des Ganzen.
+</p><p>
+Zum Schluss kann man - zum Beispiel mittels <span class="mdcode">ffmpeg</span> - die Einzelbilder zu einer Animation zusammenfassen, indem man
+ein Kommando wie dieses hier ausführt:
+</p><div class="highlight"><pre><span></span>ffmpeg -r:v 1 -start_number 50704 -i &quot;tmp/gnuplotanim/%05d.png&quot; -codec:v libx264 movie.mp4
+</pre></div>
+<p>
+Dieses Kommando erzeugt eine Animation in Echtzeit: sie dauert exakt so lange, wie die Aufzeichnung des Tracks gedauert hat
+und eignet sich daher sehr gut als Overlay des Live-Kamerabilds. Das wird dadurch erreicht, dass mittels <span class="mdcode">-r 1</span> eine Framerate von einem Bild pro Sekunde
+vorgegeben wurde - der Originaltrack wurde mit einem Datenpunkt jede Sekunde aufgezeichnet.
+</p><p>
+Hier ist das Resultat, das FFMpeg für den Beispieltrack nach Behandlung mit AWK und Gnuplot wie beschrieben ausspuckt (funktioniert wahrscheinlich nicht in Firefox...):
+</p><p>
+<video width="800" height="600" controls>
+  <source src="resources/nmea_gnuplot_awk_movie.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+</p>				</div>
+				<div class="w3-container w3-padding" id="referers">
+				<h3>
+					Artikel, die hierher verlinken
+				</h3>
+					<div class="w3-row">
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+								<div class="w3-col m8 s12">
+									<h4>
+										Gnuplot Snippets Projekt
+									</h4>
+								</div>
+								<div class="w3-col m4"><p style="text-align: right">
+									<span class="w3-opacity">28.04.2022</span>
+								</p>
+								</div>
+								</div>
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+<p>Nachdem ich hin und wieder über
+verschiede Aspekte von Gnuplot
+berichtet habe, habe ich mich entschieden, diese über die Jahre gewonnenen Erkenntnisse zu systematisieren und endlich
+mal davon wegzukommen, immer das letzte Gnuplot Skript zu kopieren und anzupassen.
+</p>									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="gnuplot_snippets_projekt.html#content">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgithub">
+					<p>
+						<a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten&body=[GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten](https://elbosso.github.io/gps__nmea__tracks_gnuplot_animationen_verarbeiten)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+						<a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+					</p>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgitlab">
+					<p>
+						<a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten&issue[description]=[GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten](https://elbosso.github.io/gps__nmea__tracks_gnuplot_animationen_verarbeiten)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+						<a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+					</p>
+				</div>
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png"  width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a>
+						<a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+						<a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Artikel von "backThen" -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Vor 5 Jahren hier im Blog</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+						<p class="w3-large">
+							Gedanken zu Zeit, NTP, GPS und DIY</p>
+						<p class="w3-small" style="text-align: right">
+							<span class="w3-opacity">21.09.2018</span>
+						</p>
+						<span class="smallabstract"><p>Nachdem ich meinen eigenen
+Atomzeit-GPS-NTP-Server
+in Betrieb genommen habe, habe ich mir Gedanken gemacht, warum die
+käuflich zu erwerbenden einen so hohen Anschaffungswiderstand haben.
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="gedanken_zeit__ntp__gps_diy.html#content">
+							Weiterlesen...
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-black w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
+						<a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Throttling in Java</span><br>
+						<span class="smallabstract"><p>Während meiner
+Experimente
+mit der
+SpaceTraders API
+stieß ich auf den Auslöser einer weiteren kleinen Fingerübung in Java:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="throttling_java.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Neue Version plantumlinterfaceproxy</span><br>
+						<span class="smallabstract"><p>Ich musste neulich mein Projekt
+plantumlinterfaceproxy
+aktualisieren
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_version_plantumlinterfaceproxy.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Preisvergleich mit historischen Daten in Grafana</span><br>
+						<span class="smallabstract"><p>Durch diesen
+Mastodon-Thread
+aufmerksam geworden, wollte ich da auch unbedingt mitspielen - allerdings habe ich gerade Urlaub und daher
+wollte ich klein anfangen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="preisvergleich_historischen_daten_grafana.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript></h4> <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p> <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p> <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p> <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man <a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a> finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p> </div> </div><hr> </div> </div><br> </div> <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top"> <a href="me.html"> <script>
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a>
+						finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Throttling in Java</span><br>
+							<span class="smallabstract"><p>Während meiner
+Experimente
+mit der
+SpaceTraders API
+stieß ich auf den Auslöser einer weiteren kleinen Fingerübung in Java:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="throttling_java.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Neue Version plantumlinterfaceproxy</span><br>
+							<span class="smallabstract"><p>Ich musste neulich mein Projekt
+plantumlinterfaceproxy
+aktualisieren
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_version_plantumlinterfaceproxy.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Preisvergleich mit historischen Daten in Grafana</span><br>
+							<span class="smallabstract"><p>Durch diesen
+Mastodon-Thread
+aufmerksam geworden, wollte ich da auch unbedingt mitspielen - allerdings habe ich gerade Urlaub und daher
+wollte ich klein anfangen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="preisvergleich_historischen_daten_grafana.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript> , Damaschke 11, Rudolstadt, <script>
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
 		<!--
 abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
 -->
-		</script> <noscript>jkey&#64;arcor&#46;de</noscript> , PEN: 1.3.6.1.4.1.59452 </a> <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p> </footer> </body> </html>
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+		, PEN: 1.3.6.1.4.1.59452
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>

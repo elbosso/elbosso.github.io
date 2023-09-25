@@ -1,4 +1,30 @@
-<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>AutoLayout für ModuleWorkspace</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="AutoLayout für ModuleWorkspace"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/autolayout_moduleworkspace"/> <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Ich wollte schon lange einmal den überfälligen Schritt tun und die ModuleWorkspace-Komponente, auf der unter anderem die sQLshell und dWb+ beruhen um eine Möglichkeit erweitern, die Module und Tabellen automatisch bestmöglich anzuordnen. "/> <meta property="article:published_time" content="2017-03-12"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+<head>
+<title>AutoLayout für ModuleWorkspace</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta property="og:title" content="AutoLayout für ModuleWorkspace" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://elbosso.github.io/autolayout_moduleworkspace" />
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"/>
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="elbosso.github.io" />
+<meta property="og:description" content="Ich wollte schon lange einmal den überfälligen Schritt tun und
+die ModuleWorkspace-Komponente,
+auf der unter anderem die 
+sQLshell
+und
+dWb+
+beruhen um eine Möglichkeit erweitern, die Module und Tabellen automatisch
+bestmöglich anzuordnen.
+" />
+<meta property="article:published_time" content="2017-03-12">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" />
+<link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css" />
+<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -17,16 +43,444 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="erste_julia_implementierung.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="growing_cell_structures___grenzen.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>AutoLayout für ModuleWorkspace</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="dbms_software.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Java</span> </a> <a href="dbms_software.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Komponenten</span> </a> <a href="roundinstrument_noch_mal_aufgewaermt.html#content"> <span class="w3-tag w3-black w3-margin-bottom">GUI</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">12.03.2017</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Ich wollte schon lange einmal den überfälligen Schritt tun und die ModuleWorkspace-Komponente, auf der unter anderem die <a href="sQLshell.html">sQLshell</a> und <a href="dWb.html">dWb+</a> beruhen um eine Möglichkeit erweitern, die Module und Tabellen automatisch bestmöglich anzuordnen. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Bereits vor einigen Monaten riet mir ein Bekannter während der Beschäftigung mit visuellen Programmierumgebungen zur Modellierung von Informationsflüssen doch einfach <a href="https://github.com/OpenKieler">Klay aus dem Projekt OpenKieler</a> einzusetzen, damit ich ein solches automatisches Layout nicht selbst programmieren müssten. </p><p> Ich begann damals sofort, mich damit zu beschäftigen, scheiterte aber vor allem daran, dass sich die Entwickler inzwischen völlig fanatisch in ein unauflösbaren Vendor Lock-In mit Eclipse verbissen hatten. Prinzipiell hätte man das Auto-Layout zwar mit einem Wrapper umgeben auch in andere Java-Ökosysteme integrieren können - aber aus meiner Sicht hätte man mit einem unverhältnismäßigen Aufwand dafür Eclipse praktisch nachbauen müssen. Das war aber etwas, das für mich von vornherein ausschied (Ich bin kein Freund von Eclipse). </p><p> Ich tat mich dann noch ein wenig um - einfach um nicht irgendwann festzustellen, dass es doch eine Open-Source-Komponente gibt, die diese Aufgabe bewältigt, jedoch vollkommen einfach integriert werden kann. </p><p> Und doch kam ich immer wieder zurück zu OpenKieler - das Interface, das hier zur Verfügung gestellt wurde war einfach zu 100 Prozent das, was ich brauchte: Man konnte dem Algorithmus die Größe und Position nicht nur der Knoten im Graphen, sondern auch der Ports in den Knoten vor dem Layout auf den Pixel genau spezifizieren und der Algorithmus nahm diese Angaben und berücksichtigte sie beim Layout. Diese Variante kam ModuleWorkspace sehr entgegen: Dort war ja die Anzahl und Positionierung der Ports durch den zu visualisierenden Sachverhalt (JavaBean, Datenbanktabellen, ...) ebenso vorgegeben, wie die Mosition der Module durch den Anwender. </p><p> Ich scheiterte aber immer wieder an der Eclipse-Integration und an den (für mich?) unauffindbaren Erfahrungsberichten anderer, die die Integration in etwas nicht aus dem Eclipse-Universum stammendes erfolgreich erledigt hatten. </p><p> Eines Tages kam mir plötzlich eine Idee, die in ihrer Einfachheit wiedermal die erstaunte Frage aufkommen ließ, warum ich nicht bereits viel früher dran gedacht hatte: Java hat einen eingebauten Javascript-Interpreter und Klay ist als Javascript-Variante verfügbar. Diese ist hervorragend dokumentiert: der Graph wird in eine JSON-Struktur umgewandelt und an den Layout-Mechanismus gegeben. Dieser wirkt seine Magie und liefert eine transformierte Graphenstruktur ebenfalls als JSON zurück. Diese kann man parsen und die Position der Graphelemente entsprechend der enthaltenen Informationen anpassen. </p><p> Das war natürlich zu einfach, um wahr zu sein: die JavaScript-Variante benötigt ein Browser Environment. Java stellt aber lediglich den Interpreter für die Sprache zur Verfügung. Es existieren einige Links im Netz, die auf eine Implementierung eines Browser Environment hindeuten - allerdings scheinen entsprechende Versuche bereits vor Jahren eingeschlafen zu sein und alle Versionen, die ich fand waren nicht ausreichend, um Klay damit zur Mitarbeit zu bewegen. </p><p> Als ich bereits dachte, dass ich wieder mal in einer Sackgasse gelandet wäre kam mir ein weiterer Gedanke. Ich berichtete hier bereits davon, wie ich <a href="enzo_komponenten_javascript_dwb_.html">JavaFX-Komponenten in Java-Anwendungen integrierte.</a> Warum nicht einfach den JavaFX-Browser als Browser Environment benutzen? Gesagt - getan ... Und siehe da - es funktionierte; man musste dazu den Browser noch nicht einmal anzeigen. Der Anwender merkt absolut nichts davon: Der Code transformiert das Ausgangsdatenmodell in die benötigte JSON-Struktur und baut diese in eine HTML-Seite ein, die dann dem JavaFX-Browser Envorinment übergeben wird. Dieses führt das automatische Layout als JavaScript-Programm aus und liefert das Ergebnis als String zurück, der das geänderte JSON-Fragment beinhaltet. Dieses wird dann wieder auf Java-Seite analysiert, woraufhin die Position der einzelnen Elemente entsprechend der darin gefundenen Informationen angepasst wird. </p><p> Ein erster Versuch fand in der <a href="sQLshell.html">sQLshell</a> mit einem tatsächlich im Produktiveinsatz befindlichen Datenmodell statt - daher kann man auf den Screenshots auch nichts lesen. Angehängt findet man den Screenshot nach dem automatischen Import des Datenmodells, wie ihn die <a href="sQLshell.html">sQLshell</a> anhand der Fremdschlüsselbeziehungen durchführt. Daneben findet man die Anordnung der Tabellen nach dem automatischen Layout. Obwohl hier bisher nur die Positionierungsinformationen für die Tabellen und nicht die für die Fremdschlüsselbeziehungen zu Rate gezogen wurden kann man doch sehen, dass eine Verbesserung erreicht wurde. </p><p> <img src="images/klaylayout.png" alt="Screenshot" class="center"> <span class="imgdesc"> Hierarchisches Layout </span> <h1>erste mögliche Überschrift!</h1> </p> </div> <div class="w3-container w3-padding" id="referers"> <h3> Artikel, die hierher verlinken </h3> <div class="w3-row"> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Upgrade von Klay auf Elk.js </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">08.02.2020</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Vor einiger Zeit berichtete ich darüber, wie ich versucht hatte, die Komponente, auf der unter anderem die sQLshell und dWb+ beruhen um eine Möglichkeit erweitern, die Module und Tabellen automatisch bestmöglich anzuordnen. </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="upgrade_klay_auf_elk_js.html#content">Öffnen</a> </p> </div> </div> </div> </div> </div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20AutoLayout für ModuleWorkspace&body=[AutoLayout für ModuleWorkspace](https://elbosso.github.io/autolayout_moduleworkspace)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=AutoLayout für ModuleWorkspace"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20AutoLayout für ModuleWorkspace&issue[description]=[AutoLayout für ModuleWorkspace](https://elbosso.github.io/autolayout_moduleworkspace)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=AutoLayout für ModuleWorkspace"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Gedanken zu Zeit, NTP, GPS und DIY</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">21.09.2018</span> </p> <span class="smallabstract"><p>Nachdem ich meinen eigenen Atomzeit-GPS-NTP-Server in Betrieb genommen habe, habe ich mir Gedanken gemacht, warum die käuflich zu erwerbenden einen so hohen Anschaffungswiderstand haben. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="gedanken_zeit__ntp__gps_diy.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-black w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> Preisvergleich mit historischen Daten in Grafana</span><br> <span class="smallabstract"><p>Durch diesen Mastodon-Thread aufmerksam geworden, wollte ich da auch unbedingt mitspielen - allerdings habe ich gerade Urlaub und daher wollte ich klein anfangen... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="preisvergleich_historischen_daten_grafana.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Präsentation "Vergleich Analoger und Digitaler Identitäten"</span><br> <span class="smallabstract"><p>Ich habe eine neue Präsentation rund um das Thema digitale Identitäten erstellt. Dieses Mal hat die Präsentation eine Gegenüberstellung analoger und digitaler Identitäten zum Thema </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="praesentation__vergleich_analoger_digitaler_identitaeten_.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Marissa Mulder - Martha</span><br> <span class="smallabstract"><p>Nach dem Original nun ein - wie ich finde - sehr gelungenes Cover: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="marissa_mulder___martha.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</script>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<div class="w3-row">
+						<div class="w3-col m6 s12">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract"
+							   href="erste_julia_implementierung.html#content">vorhergehender Artikel</a>
+						</div>
+						<div class="w3-col m6" style="text-align: right">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
+							   href="growing_cell_structures___grenzen.html#content">nächster Artikel
+							</a>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m9 s12">
+							<h4>AutoLayout für ModuleWorkspace</h4>
+							<div class="w3-container">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										vorhergehende Artikel in:
+										<a href="dbms_software.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Java</span>
+										</a> <!--/li-->
+										<a href="dbms_software.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Komponenten</span>
+										</a> <!--/li-->
+										<a href="roundinstrument_noch_mal_aufgewaermt.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">GUI</span>
+										</a> <!--/li-->
+									</div>
+									<div class="w3-col m4" style="text-align: right">
+										<span class="w3-opacity">12.03.2017</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col m3"><p style="text-align: right">
+							<img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png">
+						</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Ich wollte schon lange einmal den überfälligen Schritt tun und
+die ModuleWorkspace-Komponente,
+auf der unter anderem die 
+<a href="sQLshell.html">sQLshell</a>
+und
+<a href="dWb.html">dWb+</a>
+beruhen um eine Möglichkeit erweitern, die Module und Tabellen automatisch
+bestmöglich anzuordnen.
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p>Bereits vor einigen Monaten riet mir ein Bekannter während der Beschäftigung mit visuellen Programmierumgebungen zur Modellierung
+von Informationsflüssen doch einfach
+<a href="https://github.com/OpenKieler">Klay aus dem Projekt OpenKieler</a>
+einzusetzen, damit ich ein solches automatisches Layout nicht selbst programmieren müssten.
+</p><p>
+Ich begann damals sofort, mich damit zu beschäftigen, scheiterte aber vor allem daran, dass
+sich die Entwickler inzwischen völlig fanatisch in ein unauflösbaren Vendor Lock-In mit
+Eclipse verbissen hatten. Prinzipiell hätte man das Auto-Layout zwar mit einem Wrapper
+umgeben auch in andere Java-Ökosysteme integrieren können - aber aus meiner Sicht hätte man
+mit einem unverhältnismäßigen Aufwand dafür Eclipse praktisch nachbauen müssen. Das
+war aber etwas, das für mich von vornherein ausschied (Ich bin kein Freund von Eclipse).
+</p><p>
+Ich tat mich dann noch ein wenig um - einfach um nicht irgendwann festzustellen, dass es doch eine
+Open-Source-Komponente gibt, die diese Aufgabe bewältigt, jedoch vollkommen einfach integriert werden kann.
+</p><p>
+Und doch kam ich immer wieder zurück zu OpenKieler - das Interface, das hier zur Verfügung gestellt wurde war einfach
+zu 100 Prozent das, was ich brauchte: Man konnte dem Algorithmus die Größe und Position nicht nur der Knoten im 
+Graphen, sondern auch der Ports in den Knoten vor dem Layout auf den Pixel genau spezifizieren und der Algorithmus
+nahm diese Angaben und berücksichtigte sie beim Layout. Diese Variante kam ModuleWorkspace sehr entgegen:
+Dort war ja die Anzahl und Positionierung der Ports durch den zu visualisierenden Sachverhalt (JavaBean, Datenbanktabellen, ...)
+ebenso vorgegeben, wie die Mosition der Module durch den Anwender.
+</p><p>
+Ich scheiterte aber immer wieder an der Eclipse-Integration und an den (für mich?)
+unauffindbaren Erfahrungsberichten anderer, die die Integration in etwas nicht
+aus dem Eclipse-Universum stammendes erfolgreich erledigt hatten.
+</p><p>
+Eines Tages kam mir plötzlich eine Idee, die in ihrer Einfachheit wiedermal die
+erstaunte Frage aufkommen ließ,
+warum ich nicht bereits viel früher dran gedacht hatte: Java hat einen eingebauten 
+Javascript-Interpreter und Klay ist als Javascript-Variante verfügbar. Diese ist hervorragend 
+dokumentiert: der Graph wird in eine JSON-Struktur umgewandelt und an den Layout-Mechanismus
+gegeben. Dieser wirkt seine Magie und liefert eine transformierte Graphenstruktur ebenfalls als JSON
+zurück. Diese kann man parsen und die Position der Graphelemente entsprechend
+der enthaltenen Informationen anpassen.
+</p><p>
+Das war natürlich zu einfach, um wahr zu sein: die JavaScript-Variante benötigt ein Browser Environment.
+Java stellt aber lediglich den Interpreter für die Sprache zur Verfügung. Es existieren einige Links
+im Netz, die auf eine Implementierung eines Browser Environment hindeuten - allerdings scheinen entsprechende
+Versuche bereits vor Jahren eingeschlafen zu sein und alle Versionen, die ich fand waren
+nicht ausreichend, um Klay damit zur Mitarbeit zu bewegen.
+</p><p>
+Als ich bereits dachte, dass ich wieder mal in einer Sackgasse gelandet wäre kam mir ein weiterer
+Gedanke. Ich berichtete hier bereits davon, wie ich 
+<a href="enzo_komponenten_javascript_dwb_.html">JavaFX-Komponenten in Java-Anwendungen integrierte.</a>
+Warum nicht einfach den JavaFX-Browser als Browser Environment benutzen? Gesagt - getan ... Und
+siehe da - es funktionierte; man musste dazu den Browser noch nicht einmal anzeigen. Der Anwender merkt absolut nichts
+davon: Der Code transformiert das Ausgangsdatenmodell in die benötigte JSON-Struktur und
+baut diese
+in eine HTML-Seite ein, die dann dem JavaFX-Browser Envorinment übergeben wird. Dieses
+führt das automatische Layout als JavaScript-Programm aus und liefert das Ergebnis als String
+zurück, der das geänderte JSON-Fragment beinhaltet. Dieses wird dann wieder auf Java-Seite
+analysiert, woraufhin die Position der einzelnen Elemente entsprechend der darin gefundenen Informationen angepasst wird.
+</p><p>
+Ein erster Versuch fand in der
+<a href="sQLshell.html">sQLshell</a>
+mit einem tatsächlich im Produktiveinsatz befindlichen Datenmodell statt - daher kann man auf den Screenshots auch nichts lesen.
+Angehängt findet man den Screenshot nach dem automatischen Import des Datenmodells, wie ihn die 
+<a href="sQLshell.html">sQLshell</a>
+anhand der Fremdschlüsselbeziehungen durchführt. Daneben findet man die Anordnung der Tabellen nach dem automatischen Layout.
+Obwohl hier bisher nur die Positionierungsinformationen für die Tabellen und nicht die für die Fremdschlüsselbeziehungen
+zu Rate gezogen wurden kann man doch sehen, dass eine Verbesserung erreicht wurde.
+</p><p>
+  <img src="images/klaylayout.png"
+alt="Screenshot"
+class="center">
+<span class="imgdesc">
+Hierarchisches Layout
+</span>
+<h1>erste mögliche Überschrift!</h1>
+</p>				</div>
+				<div class="w3-container w3-padding" id="referers">
+				<h3>
+					Artikel, die hierher verlinken
+				</h3>
+					<div class="w3-row">
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+								<div class="w3-col m8 s12">
+									<h4>
+										Upgrade von Klay auf Elk.js
+									</h4>
+								</div>
+								<div class="w3-col m4"><p style="text-align: right">
+									<span class="w3-opacity">08.02.2020</span>
+								</p>
+								</div>
+								</div>
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+<p>Vor einiger Zeit
+berichtete
+ich darüber, wie ich versucht hatte,
+die Komponente,
+auf der unter anderem die
+sQLshell
+und
+dWb+
+beruhen um eine Möglichkeit erweitern, die Module und Tabellen automatisch
+bestmöglich anzuordnen.
+</p>									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="upgrade_klay_auf_elk_js.html#content">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgithub">
+					<p>
+						<a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20AutoLayout für ModuleWorkspace&body=[AutoLayout für ModuleWorkspace](https://elbosso.github.io/autolayout_moduleworkspace)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+						<a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=AutoLayout für ModuleWorkspace"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+					</p>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgitlab">
+					<p>
+						<a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20AutoLayout für ModuleWorkspace&issue[description]=[AutoLayout für ModuleWorkspace](https://elbosso.github.io/autolayout_moduleworkspace)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+						<a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=AutoLayout für ModuleWorkspace"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+					</p>
+				</div>
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png"  width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a>
+						<a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+						<a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Artikel von "backThen" -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Vor 5 Jahren hier im Blog</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+						<p class="w3-large">
+							Gedanken zu Zeit, NTP, GPS und DIY</p>
+						<p class="w3-small" style="text-align: right">
+							<span class="w3-opacity">21.09.2018</span>
+						</p>
+						<span class="smallabstract"><p>Nachdem ich meinen eigenen
+Atomzeit-GPS-NTP-Server
+in Betrieb genommen habe, habe ich mir Gedanken gemacht, warum die
+käuflich zu erwerbenden einen so hohen Anschaffungswiderstand haben.
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="gedanken_zeit__ntp__gps_diy.html#content">
+							Weiterlesen...
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-black w3-margin-bottom">GUI</span></a>
+						<a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
+						<a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
+						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Throttling in Java</span><br>
+						<span class="smallabstract"><p>Während meiner
+Experimente
+mit der
+SpaceTraders API
+stieß ich auf den Auslöser einer weiteren kleinen Fingerübung in Java:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="throttling_java.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Neue Version plantumlinterfaceproxy</span><br>
+						<span class="smallabstract"><p>Ich musste neulich mein Projekt
+plantumlinterfaceproxy
+aktualisieren
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_version_plantumlinterfaceproxy.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Preisvergleich mit historischen Daten in Grafana</span><br>
+						<span class="smallabstract"><p>Durch diesen
+Mastodon-Thread
+aufmerksam geworden, wollte ich da auch unbedingt mitspielen - allerdings habe ich gerade Urlaub und daher
+wollte ich klein anfangen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="preisvergleich_historischen_daten_grafana.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript></h4> <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p> <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p> <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p> <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man <a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a> finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p> </div> </div><hr> </div> </div><br> </div> <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top"> <a href="me.html"> <script>
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a>
+						finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Throttling in Java</span><br>
+							<span class="smallabstract"><p>Während meiner
+Experimente
+mit der
+SpaceTraders API
+stieß ich auf den Auslöser einer weiteren kleinen Fingerübung in Java:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="throttling_java.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Neue Version plantumlinterfaceproxy</span><br>
+							<span class="smallabstract"><p>Ich musste neulich mein Projekt
+plantumlinterfaceproxy
+aktualisieren
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_version_plantumlinterfaceproxy.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Preisvergleich mit historischen Daten in Grafana</span><br>
+							<span class="smallabstract"><p>Durch diesen
+Mastodon-Thread
+aufmerksam geworden, wollte ich da auch unbedingt mitspielen - allerdings habe ich gerade Urlaub und daher
+wollte ich klein anfangen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="preisvergleich_historischen_daten_grafana.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript> , Damaschke 11, Rudolstadt, <script>
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
 		<!--
 abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
 -->
-		</script> <noscript>jkey&#64;arcor&#46;de</noscript> , PEN: 1.3.6.1.4.1.59452 </a> <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p> </footer> </body> </html>
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+		, PEN: 1.3.6.1.4.1.59452
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,4 +1,28 @@
-<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>PAM + Bluetooth, Yubi und NFC</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="PAM + Bluetooth, Yubi und NFC"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/pam___bluetooth__yubi_nfc"/> <meta property="og:image" content="https://elbosso.github.io/images/asciiart_tux.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Nach meinen diversen Experimenten mit PAM und der Authentifizierung am System habe ich nunmehr verschiedene weitere Möglichkeiten untersucht, Hardware-Token als Hilfsmittel einzubeziehen. "/> <meta property="article:published_time" content="2016-10-02"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+<head>
+<title>PAM + Bluetooth, Yubi und NFC</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta property="og:title" content="PAM + Bluetooth, Yubi und NFC" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://elbosso.github.io/pam___bluetooth__yubi_nfc" />
+<meta property="og:image" content="https://elbosso.github.io/images/asciiart_tux.png"/>
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="elbosso.github.io" />
+<meta property="og:description" content="Nach meinen diversen 
+Experimenten mit PAM
+und 
+der Authentifizierung am System
+habe ich nunmehr verschiedene weitere Möglichkeiten untersucht, Hardware-Token
+als Hilfsmittel einzubeziehen.
+" />
+<meta property="article:published_time" content="2016-10-02">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" type="text/css" href="css/stylew3.css" />
+<link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css" />
+<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
+<script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -17,16 +41,1124 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="svn___trac_authentifizierung_mittels_pam.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="dokumentation___linksammlung.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>PAM + Bluetooth, Yubi und NFC</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="svn___trac_authentifizierung_mittels_pam.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Linux</span> </a> <a href="pki_beziehungsweise_ca_selber_bauen.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Security</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">02.10.2016</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/asciiart_tux_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Nach meinen diversen <a href="svn___trac_authentifizierung_mittels_pam.html">Experimenten mit PAM</a> und <a href="vier_augen_prinzip_login_pam.html">der Authentifizierung am System</a> habe ich nunmehr verschiedene weitere Möglichkeiten untersucht, Hardware-Token als Hilfsmittel einzubeziehen. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Ich versuchte, mehrere neue Authentifikationsmechanismen in mein Setup zur Mehrfaktor-Authentifizierung einzubauen. Der erste Schritt dazu war Bluetooth - wann immer ein bekanntes Gerät in der Nähe ist und Bluetooth aktiviert hat, ist die Authentifizierung (bzw. dieser Authentifizierungsschritt - erfolgreich. </p><p> <a href="https://www.yubico.com/products/yubikey-hardware/yubikey-neo/"><img src="https://www.yubico.com/wp-content/uploads/2015/04/YubiKey-NEO-1000-2016-444x444.png" alt="Yubikey NEO" width="100px" class="imgleft"></a> Der zweite Versuch bestand in der Nutzung von Yubi-Tokens. Ich nutzte für meine Untersuchungen den Yubi neo und einen HyperFido. Beide funktionieren hervorragend für diese Zwecke. Ich war besonders neugierig auf die Möglichkeiten, <a href="https://www.hypersecu.com/products/hyperfido"><img src="https://images-na.ssl-images-amazon.com/images/I/61DSbatNHhL._SL1500</span>.jpg" alt="HyperFido" width="100px" class="imgright"></a> den Neo auch zur Authentifizierung für Windows anzuwenden - aber das wird noch auf sich warten lassen: Im Netz findet man dazu zwar Anleitungen, aber so weit ich diese verstehe, kann man sich bei Miskonfiguration sofort aus dem System ausschließen und es existiert keine Möglichkeit, ein Fallback einzurichten: Jede der Anleitungen spricht davon, auf jeden Fall einen zweiten Neo zu konfigurieren und an einem sicheren Platz zu verwahren. Das kommt für mich nicht in Frage - wer hat schon zu Hause eine Windows-Installation zum Spielen und Vergeigen rumliegen. Und die Investition in zwei Yubis ist für mich einfach ums mal auszuprobieren viel zu fett. </p><p> Im Job sehe ich es eher ebenfalls unwahrscheinlich, denn um sich mit Yubis an einer Domäne anzumelden, muss man Löhnware kaufen. Das würde nicht nur die Anschaffung von Yubis bedeuten, sondern auch noch ausführliche Tests: Wir haben derzeit keinen Domänenserver zum Spielen, den müssten wir uns also auch erst aufsetzen. Positiv ist dennoch, dass es eine Evaluierungsversion der Löhnware gibt. Falls unser Management also einwilligen würde, dass wir uns die Zeit nehmen dürfen, könnten wir es ohne größeres finanzielles Risiko ausprobieren. </p><p> Schön fand ich an der Yubi-Lösung auch, dass sie sich nicht sperrt, wenn man mittels Putty und SSH auf einen Linux-Server verbinden möchte. Ich habe das bisher nur mit 2Faktor probiert. Auf meinem Neo könnte ich das GPG-Applet nutzen um dort Schlüssel zu verwalten und diese dann ebenfalls zur Authentifizierung nutzen - aber dazu hatte ich bisher noch keine Zeit; vielleicht wird das ja etwas in den nächsten Wochen... </p><p> Den Neo hatte ich mir angeschafft, weil ich NFC wollte. Eine wunderbare, von mir noch gar nicht so realisierte Möglichkeit möchte ich inzwischen nicht mehr missen: Um meine OTPs aus dem Google-Authenticator zu schützen, musste ich bisher eine recht komplexe Pin für mein Smartphone einrichten, da die Authenticator-App sofort nach Start die nächsten OTPs anzeigt. Mit dem Neo ist das nun nicht mehr möglich: Ich habe alle Geheimnisse auf dem Neo und nur, wenn der ans Smartphone gehalten wird, kommen OTPs heraus. Damit ist es nicht schlimm, wenn ich mein Smartphone verliere oder vergesse, kann ich einen beliebigen Passanten auf der Straße (mit NFC-fähigem Smartphone) bitten, mir zu helfen, ein neues OTP zu generieren. </p><p> Als letztes schließlich habe ich die Authentifizierung mittels NFC kurz angerisssen - ich kann mich also jetzt authentifizieren, indem ich meine Brieftasche auf den Kartenleser lege und mein Passwort eingebe. Auch das meines Wissens aber eine reine Linux-Kiste... Auch das funktionierte gut und wie die beiden anderen Varianten out-of-the-box. </p><p> Schließlich noch ein Wort der Warnung: NFC-Tags lassen sich kopieren und Bluetooth-Geräte werden an ihren MAC-Adressen erkannt. Beides ist nicht sicher - daher sollte man diese beiden Methoden wenn überhaupt nur als zusätzlichen Faktor und nie alleine nutzen!! </p><p> Hier jetzt noch einige Links, die mir geholfen haben, die beschriebenen Untersuchungen durchzuführen... </div> <div class="w3-container w3-padding" id="links"> <hr/> <h3> Links </h3> <div class="w3-row"> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Bluetooth Login and Locking </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="http://tjworld.net/wiki/Linux/Ubuntu/BluetoothLoginAndLocking" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>PAM module for local authenticaction with bluetooth devices </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://apps.ubuntu.com/cat/applications/precise/libpam-blue/" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>How to use pam_blue with lightdm, and unity-greeter? </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="http://askubuntu.com/questions/227872/how-to-use-pam-blue-with-lightdm-and-unity-greeter" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Bluetooth fun (blueproximity + libpam_blue + motion) </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://ubuntuforums.org/showthread.php?t=1176758" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>The Yubico PAM module provides an easy way to integrate the Yubikey into your existing user authentication infrastructure. PAM is used by GNU/Linux, Solaris and Mac OS X for user authentication, and by other specialized applications such as NCSA MyProxy. </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubico-pam/" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Mit Yubikey unter Arch Linux einloggen (Challenge-Response, offline) </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://thomas-leister.de/mit-yubikey-unter-arch-linux-einloggen-offline/" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Adding Yubikey 2-factor authentication to SSH and sudo in Debian </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://mig5.net/content/adding-yubikey-2-factor-authentication-ssh-and-sudo-debian" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Einfaches Multifaktor-Login mit Yubikey und Debian </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://www.tumelum.de/blog/index.php?/archives/164-Einfaches-Multifaktor-Login-mit-Yubikey-und-Debian.html" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>The YubiKey Personalization Tool is a Qt based Cross-Platform utility designed to facilitate re-configuration of YubiKeys on Windows, Linux and Mac platforms. The tool provides a same simple step-by-step approach to make configuration of YubiKeys easy to follow and understand, while still being powerful enough to exploit all functionality both of the YubiKey 1 and YubiKey 2 generation of keys. The tool provides the same functionality and user interface on Windows, Linux and Mac platforms. </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubikey-personalization-gui/" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Configure 2-factor Yubikey authentication for Debian : the easiest way </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="http://uname.pingveno.net/blog/index.php/post/2013/08/06/Configure-2-factor-Yubikey-authentication-for-Debian-%3A-the-easiest-way" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Yubikey : Configure your yubikey with pam </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://wiki.deimos.fr/Yubikey_:_Configure_your_yubikey_with_pam" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>The purpose of this document is to guide readers through the configuration steps to use two factor authentication for SSH using Yubikey. This document assumes that the reader has advanced knowledge and experience in Linux system administration, particularly for how PAM authentication mechanism is configured on a Linux platform. </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubico-pam/Yubikey_and_SSH_via_PAM.html" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Local Authentication Using Challenge Response </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubico-pam/Authentication_Using_Challenge-Response.html" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Protect multiple online accounts with just a press of a button </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://hypersecu.com/products/hyperfido" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>The PAM U2F module provides an easy way to integrate the Yubikey (or other U2F-compliant authenticators) into your existing user authentication infrastructure. PAM is used by GNU/Linux, Solaris and Mac OS X for user authentication. </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/pam-u2f/" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Pluggable Authentication Module which allows to login using NFC targets. </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="http://nfc-tools.org/index.php?title=Pam_nfc" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Host-based Card Emulation </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://developer.android.com/guide/topics/connectivity/nfc/hce.html" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Touchatag is a RFID tag reader from Touchatag. It is a cheap set consisting of an ACR122U USB tag reader and MiFare Ultralight RFID tags. </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://wiki.archlinux.org/index.php/Touchatag_RFID_Reader" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Using the ACS ACR122 NFC card reader under linux </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://choffee.co.uk/posts/2015/01/nfc_reader_acr122_linux/" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Ubuntu 14.04 with ACS ACR122U </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://github.com/inventid/rfid-reader2keyboard/wiki/Ubuntu-14.04-with-ACS-ACR122U" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <p><p>Playing with touchatag reader </p></p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="https://www.hardill.me.uk/wordpress/2012/02/10/playing-with-touchatag-reader/" target="_blank">Öffnen</a> </p> </div> </div> </div> </div> </div> </div> <div class="w3-container w3-padding" id="referers"> <h3> Artikel, die hierher verlinken </h3> <div class="w3-row"> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> pam_nfc und Ubuntu 18.04 </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">02.12.2018</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich habe bereits über einige Stolpersteine beim Umstieg auf Ubuntu 18.04 berichtet - nunmehr bin ich auf einen neuen gestoßen, der den Fork und einen Pull-Request zur Folge hatte </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="pam_nfc_ubuntu_18_04.html#content">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Yubi zur 2FA mit GitLab </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">13.10.2018</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich hatte hier ja schon verschiedentlich über Möglichkeiten des Einsatzes meines Yubi-Key berichtet - nun kam noch eine hinzu... </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="yubi_zur_2fa_gitlab.html#content">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Android als Smartcard (NFC) </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">15.07.2017</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Nachdem ich bereits in der Vergangenheit verschiedene Experimente mit der NFC-Technologie gemacht habe, wollte ich endlich mein großes Ziel erreichen: Ein Smartphone als NFC-Smartcard zu nutzen... </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="android_smartcard__nfc_.html#content">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> NFC-Tags als Trigger in Linux-Scripts </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">02.12.2016</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Nachdem ich meine neue Liebe für NFC entdeckt habe und unter anderem das entsprechende PAM-Modul ausprobiert habe, wollte ich nun versuchen, NFC-Tags in Linux-Skripten als Trigger einzusetzen. </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="nfc_tags_trigger_linux_scripts.html#content">Öffnen</a> </p> </div> </div> </div> </div> <div class="w3-col l12 m12 s12"> <div class="w3-card-2 w3-padding-large w3-margin"> <div class="w3-row"> <div class="w3-col m8 s12"> <h4> Yubi und Windows </h4> </div> <div class="w3-col m4"><p style="text-align: right"> <span class="w3-opacity">24.10.2016</span> </p> </div> </div> <div class="w3-row"> <div class="w3-col m8 s12"> <p>Ich habe meine Tests zum Yubikey nochmals intensiviert und einige neue Informationen gewonnen... </p> </div> <div class="w3-col m4"> <p style="text-align: right"> <a class="w3-button w3-padding-large w3-white w3-border" href="yubi_windows.html#content">Öffnen</a> </p> </div> </div> </div> </div> </div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20PAM + Bluetooth, Yubi und NFC&body=[PAM + Bluetooth, Yubi und NFC](https://elbosso.github.io/pam___bluetooth__yubi_nfc)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=PAM + Bluetooth, Yubi und NFC"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20PAM + Bluetooth, Yubi und NFC&issue[description]=[PAM + Bluetooth, Yubi und NFC](https://elbosso.github.io/pam___bluetooth__yubi_nfc)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=PAM + Bluetooth, Yubi und NFC"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Gedanken zu Zeit, NTP, GPS und DIY</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">21.09.2018</span> </p> <span class="smallabstract"><p>Nachdem ich meinen eigenen Atomzeit-GPS-NTP-Server in Betrieb genommen habe, habe ich mir Gedanken gemacht, warum die käuflich zu erwerbenden einen so hohen Anschaffungswiderstand haben. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="gedanken_zeit__ntp__gps_diy.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-black w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> Preisvergleich mit historischen Daten in Grafana</span><br> <span class="smallabstract"><p>Durch diesen Mastodon-Thread aufmerksam geworden, wollte ich da auch unbedingt mitspielen - allerdings habe ich gerade Urlaub und daher wollte ich klein anfangen... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="preisvergleich_historischen_daten_grafana.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Präsentation "Vergleich Analoger und Digitaler Identitäten"</span><br> <span class="smallabstract"><p>Ich habe eine neue Präsentation rund um das Thema digitale Identitäten erstellt. Dieses Mal hat die Präsentation eine Gegenüberstellung analoger und digitaler Identitäten zum Thema </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="praesentation__vergleich_analoger_digitaler_identitaeten_.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Marissa Mulder - Martha</span><br> <span class="smallabstract"><p>Nach dem Original nun ein - wie ich finde - sehr gelungenes Cover: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="marissa_mulder___martha.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+</script>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+	<!-- Header -->
+	<!--header class="w3-container w3-center w3-padding-32">
+		<h1><b>$title</b></h1>
+	</header-->
+
+	<!-- Grid -->
+	<div class="w3-row">
+
+
+		<!-- Blog entry -->
+		<div class="w3-col l8">
+			<a name="content"></a>
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<div class="w3-row">
+						<div class="w3-col m6 s12">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract"
+							   href="svn___trac_authentifizierung_mittels_pam.html#content">vorhergehender Artikel</a>
+						</div>
+						<div class="w3-col m6" style="text-align: right">
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
+							   href="dokumentation___linksammlung.html#content">nächster Artikel
+							</a>
+						</div>
+					</div>
+					<div class="w3-row">
+						<div class="w3-col m9 s12">
+							<h4>PAM + Bluetooth, Yubi und NFC</h4>
+							<div class="w3-container">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										vorhergehende Artikel in:
+										<a href="svn___trac_authentifizierung_mittels_pam.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Linux</span>
+										</a> <!--/li-->
+										<a href="pki_beziehungsweise_ca_selber_bauen.html#content">
+											<span class="w3-tag w3-black w3-margin-bottom">Security</span>
+										</a> <!--/li-->
+									</div>
+									<div class="w3-col m4" style="text-align: right">
+										<span class="w3-opacity">02.10.2016</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col m3"><p style="text-align: right">
+							<img style="max-width:128px;" src="images/asciiart_tux_t.png">
+						</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w3-card-4 w3-margin w3-white">
+				<div class="w3-container w3-padding" id="abstract">
+<p>Nach meinen diversen 
+<a href="svn___trac_authentifizierung_mittels_pam.html">Experimenten mit PAM</a>
+und 
+<a href="vier_augen_prinzip_login_pam.html">der Authentifizierung am System</a>
+habe ich nunmehr verschiedene weitere Möglichkeiten untersucht, Hardware-Token
+als Hilfsmittel einzubeziehen.
+</p>				</div>
+				<div class="w3-container w3-padding" id="contentdiv">
+<p>Ich versuchte, mehrere neue Authentifikationsmechanismen in mein Setup zur Mehrfaktor-Authentifizierung
+einzubauen. Der erste Schritt dazu war Bluetooth - wann immer ein bekanntes Gerät in der Nähe ist und
+Bluetooth aktiviert hat, ist die Authentifizierung (bzw. dieser Authentifizierungsschritt - erfolgreich.
+</p><p>
+<a href="https://www.yubico.com/products/yubikey-hardware/yubikey-neo/"><img src="https://www.yubico.com/wp-content/uploads/2015/04/YubiKey-NEO-1000-2016-444x444.png" 
+alt="Yubikey NEO" 
+width="100px"
+class="imgleft"></a>
+Der zweite Versuch bestand in der Nutzung von Yubi-Tokens. Ich nutzte für meine Untersuchungen den Yubi neo und
+einen HyperFido. Beide funktionieren hervorragend für diese Zwecke. Ich war besonders neugierig auf die Möglichkeiten, 
+<a href="https://www.hypersecu.com/products/hyperfido"><img src="https://images-na.ssl-images-amazon.com/images/I/61DSbatNHhL._SL1500</span>.jpg" 
+alt="HyperFido" 
+width="100px"
+class="imgright"></a>
+den Neo auch zur Authentifizierung für Windows anzuwenden - aber das wird noch auf sich warten lassen:
+Im Netz findet man dazu zwar Anleitungen, aber so weit ich diese verstehe, kann man sich bei Miskonfiguration
+sofort aus dem System ausschließen und es existiert keine Möglichkeit, ein Fallback einzurichten: Jede der Anleitungen
+spricht davon, auf jeden Fall einen zweiten Neo zu konfigurieren und an einem sicheren Platz zu verwahren. Das kommt
+für mich nicht in Frage - wer hat schon zu Hause eine Windows-Installation zum Spielen und Vergeigen rumliegen.
+Und die Investition in zwei Yubis ist für mich einfach ums mal auszuprobieren viel zu fett. 
+</p><p>
+Im Job sehe ich es eher ebenfalls unwahrscheinlich, denn um sich mit Yubis an einer Domäne anzumelden, muss
+man Löhnware kaufen. Das würde nicht nur die Anschaffung von Yubis bedeuten, sondern auch noch ausführliche Tests: Wir
+haben derzeit keinen Domänenserver zum Spielen, den müssten wir uns also auch erst aufsetzen. Positiv ist dennoch, dass es eine Evaluierungsversion 
+der Löhnware gibt. Falls unser Management also einwilligen würde, dass wir uns die Zeit nehmen dürfen, 
+könnten wir es ohne größeres finanzielles Risiko ausprobieren.
+</p><p>
+Schön fand ich an der Yubi-Lösung auch, dass sie sich nicht sperrt, wenn man mittels Putty und SSH
+auf einen Linux-Server verbinden möchte. Ich habe das bisher nur mit 2Faktor probiert. Auf meinem Neo 
+könnte ich das GPG-Applet nutzen um dort Schlüssel zu verwalten und diese dann ebenfalls zur Authentifizierung 
+nutzen - aber dazu hatte ich bisher noch keine Zeit; vielleicht wird das ja etwas in den nächsten Wochen...
+</p><p>
+Den Neo hatte ich mir angeschafft, weil ich NFC wollte. Eine wunderbare, von mir noch gar nicht so realisierte
+Möglichkeit möchte ich inzwischen nicht mehr missen: Um meine OTPs aus dem Google-Authenticator zu schützen,
+musste ich bisher eine recht komplexe Pin für mein Smartphone einrichten, da die Authenticator-App sofort nach Start
+die nächsten OTPs anzeigt. Mit dem Neo ist das nun nicht mehr möglich: Ich habe alle Geheimnisse auf dem Neo und
+nur, wenn der ans Smartphone gehalten wird, kommen OTPs heraus. Damit ist es nicht schlimm, wenn ich mein Smartphone verliere
+oder vergesse, kann ich einen beliebigen Passanten auf der Straße (mit NFC-fähigem Smartphone) bitten,
+mir zu helfen, ein neues OTP zu generieren.
+</p><p>
+Als letztes schließlich habe ich die Authentifizierung mittels NFC kurz angerisssen - ich kann mich also jetzt 
+authentifizieren, indem ich meine Brieftasche auf den Kartenleser lege und mein Passwort eingebe. Auch das meines
+Wissens aber eine reine Linux-Kiste... Auch das funktionierte gut und wie die beiden anderen Varianten out-of-the-box.
+</p><p>
+Schließlich noch ein Wort der Warnung: NFC-Tags lassen sich kopieren und Bluetooth-Geräte werden an ihren MAC-Adressen erkannt.
+Beides ist nicht sicher - daher sollte man diese beiden Methoden wenn überhaupt nur als zusätzlichen Faktor und nie alleine nutzen!!
+</p><p>
+Hier jetzt noch einige Links, die mir geholfen haben, die beschriebenen Untersuchungen durchzuführen...
+				</div>
+				<div class="w3-container w3-padding" id="links">
+					<hr/>
+					<h3>
+						Links
+					</h3>
+					<div class="w3-row">
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Bluetooth Login and Locking
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="http://tjworld.net/wiki/Linux/Ubuntu/BluetoothLoginAndLocking" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Bluetooth Login and Locking
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="http://tjworld.net/wiki/Linux/Ubuntu/BluetoothLoginAndLocking" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>PAM module for local authenticaction with bluetooth devices
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://apps.ubuntu.com/cat/applications/precise/libpam-blue/" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>PAM module for local authenticaction with bluetooth devices
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://apps.ubuntu.com/cat/applications/precise/libpam-blue/" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>How to use pam_blue with lightdm, and unity-greeter?
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="http://askubuntu.com/questions/227872/how-to-use-pam-blue-with-lightdm-and-unity-greeter" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>How to use pam_blue with lightdm, and unity-greeter?
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="http://askubuntu.com/questions/227872/how-to-use-pam-blue-with-lightdm-and-unity-greeter" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Bluetooth fun (blueproximity + libpam_blue + motion) 
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://ubuntuforums.org/showthread.php?t=1176758" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Bluetooth fun (blueproximity + libpam_blue + motion) 
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://ubuntuforums.org/showthread.php?t=1176758" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>The Yubico PAM module provides an easy way to integrate the Yubikey into your existing user authentication infrastructure. PAM is used by GNU/Linux, Solaris and Mac OS X for user authentication, and by other specialized applications such as NCSA MyProxy.
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubico-pam/" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>The Yubico PAM module provides an easy way to integrate the Yubikey into your existing user authentication infrastructure. PAM is used by GNU/Linux, Solaris and Mac OS X for user authentication, and by other specialized applications such as NCSA MyProxy.
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubico-pam/" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Mit Yubikey unter Arch Linux einloggen (Challenge-Response, offline)
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://thomas-leister.de/mit-yubikey-unter-arch-linux-einloggen-offline/" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Mit Yubikey unter Arch Linux einloggen (Challenge-Response, offline)
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://thomas-leister.de/mit-yubikey-unter-arch-linux-einloggen-offline/" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Adding Yubikey 2-factor authentication to SSH and sudo in Debian
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://mig5.net/content/adding-yubikey-2-factor-authentication-ssh-and-sudo-debian" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Adding Yubikey 2-factor authentication to SSH and sudo in Debian
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://mig5.net/content/adding-yubikey-2-factor-authentication-ssh-and-sudo-debian" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Einfaches Multifaktor-Login mit Yubikey und Debian
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://www.tumelum.de/blog/index.php?/archives/164-Einfaches-Multifaktor-Login-mit-Yubikey-und-Debian.html" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Einfaches Multifaktor-Login mit Yubikey und Debian
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://www.tumelum.de/blog/index.php?/archives/164-Einfaches-Multifaktor-Login-mit-Yubikey-und-Debian.html" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>The YubiKey Personalization Tool is a Qt based Cross-Platform utility designed to facilitate re-configuration of YubiKeys on Windows, Linux and Mac platforms. The tool provides a same simple step-by-step approach to make configuration of YubiKeys easy to follow and understand, while still being powerful enough to exploit all functionality both of the YubiKey 1 and YubiKey 2 generation of keys. The tool provides the same functionality and user interface on Windows, Linux and Mac platforms.
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubikey-personalization-gui/" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>The YubiKey Personalization Tool is a Qt based Cross-Platform utility designed to facilitate re-configuration of YubiKeys on Windows, Linux and Mac platforms. The tool provides a same simple step-by-step approach to make configuration of YubiKeys easy to follow and understand, while still being powerful enough to exploit all functionality both of the YubiKey 1 and YubiKey 2 generation of keys. The tool provides the same functionality and user interface on Windows, Linux and Mac platforms.
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubikey-personalization-gui/" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Configure 2-factor Yubikey authentication for Debian : the easiest way
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="http://uname.pingveno.net/blog/index.php/post/2013/08/06/Configure-2-factor-Yubikey-authentication-for-Debian-%3A-the-easiest-way" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Configure 2-factor Yubikey authentication for Debian : the easiest way
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="http://uname.pingveno.net/blog/index.php/post/2013/08/06/Configure-2-factor-Yubikey-authentication-for-Debian-%3A-the-easiest-way" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Yubikey : Configure your yubikey with pam
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://wiki.deimos.fr/Yubikey_:_Configure_your_yubikey_with_pam" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Yubikey : Configure your yubikey with pam
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://wiki.deimos.fr/Yubikey_:_Configure_your_yubikey_with_pam" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>The purpose of this document is to guide readers through the configuration steps to use two factor authentication for SSH using Yubikey. This document assumes that the reader has advanced knowledge and experience in Linux system administration, particularly for how PAM authentication mechanism is configured on a Linux platform.
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubico-pam/Yubikey_and_SSH_via_PAM.html" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>The purpose of this document is to guide readers through the configuration steps to use two factor authentication for SSH using Yubikey. This document assumes that the reader has advanced knowledge and experience in Linux system administration, particularly for how PAM authentication mechanism is configured on a Linux platform.
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubico-pam/Yubikey_and_SSH_via_PAM.html" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Local Authentication Using Challenge Response
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubico-pam/Authentication_Using_Challenge-Response.html" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Local Authentication Using Challenge Response
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/yubico-pam/Authentication_Using_Challenge-Response.html" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Protect multiple online accounts with just a press of a button
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://hypersecu.com/products/hyperfido" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Protect multiple online accounts with just a press of a button
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://hypersecu.com/products/hyperfido" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>The PAM U2F module provides an easy way to integrate the Yubikey (or other U2F-compliant authenticators) into your existing user authentication infrastructure. PAM is used by GNU/Linux, Solaris and Mac OS X for user authentication.
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/pam-u2f/" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>The PAM U2F module provides an easy way to integrate the Yubikey (or other U2F-compliant authenticators) into your existing user authentication infrastructure. PAM is used by GNU/Linux, Solaris and Mac OS X for user authentication.
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://developers.yubico.com/pam-u2f/" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Pluggable Authentication Module which allows to login using NFC targets. 
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="http://nfc-tools.org/index.php?title=Pam_nfc" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Pluggable Authentication Module which allows to login using NFC targets. 
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="http://nfc-tools.org/index.php?title=Pam_nfc" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Host-based Card Emulation
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://developer.android.com/guide/topics/connectivity/nfc/hce.html" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Host-based Card Emulation
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://developer.android.com/guide/topics/connectivity/nfc/hce.html" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Touchatag is a RFID tag reader from Touchatag. It is a cheap set consisting of an ACR122U USB tag reader and MiFare Ultralight RFID tags. 
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://wiki.archlinux.org/index.php/Touchatag_RFID_Reader" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Touchatag is a RFID tag reader from Touchatag. It is a cheap set consisting of an ACR122U USB tag reader and MiFare Ultralight RFID tags. 
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://wiki.archlinux.org/index.php/Touchatag_RFID_Reader" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Using the ACS ACR122 NFC card reader under linux
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://choffee.co.uk/posts/2015/01/nfc_reader_acr122_linux/" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Using the ACS ACR122 NFC card reader under linux
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://choffee.co.uk/posts/2015/01/nfc_reader_acr122_linux/" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Ubuntu 14.04 with ACS ACR122U
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://github.com/inventid/rfid-reader2keyboard/wiki/Ubuntu-14.04-with-ACS-ACR122U" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Ubuntu 14.04 with ACS ACR122U
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://github.com/inventid/rfid-reader2keyboard/wiki/Ubuntu-14.04-with-ACS-ACR122U" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--div class="w3-card-4">
+
+
+							<div class="w3-container">
+								<p><p>Playing with touchatag reader
+</p></p>
+							</div>
+
+							<footer class="w3-container w3-blue">
+								<h5><a class="w3-button w3-padding-large w3-white w3-border" href="https://www.hardill.me.uk/wordpress/2012/02/10/playing-with-touchatag-reader/" target="_blank">Öffnen</a></h5>
+							</footer>
+
+						</div-->
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+										<p><p>Playing with touchatag reader
+</p></p>
+									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="https://www.hardill.me.uk/wordpress/2012/02/10/playing-with-touchatag-reader/" target="_blank">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-padding" id="referers">
+				<h3>
+					Artikel, die hierher verlinken
+				</h3>
+					<div class="w3-row">
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+								<div class="w3-col m8 s12">
+									<h4>
+										pam_nfc und Ubuntu 18.04
+									</h4>
+								</div>
+								<div class="w3-col m4"><p style="text-align: right">
+									<span class="w3-opacity">02.12.2018</span>
+								</p>
+								</div>
+								</div>
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+<p>Ich habe bereits über einige Stolpersteine beim
+Umstieg auf Ubuntu 18.04
+berichtet - nunmehr bin ich auf einen neuen gestoßen, der
+den Fork und einen Pull-Request zur Folge hatte
+</p>									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="pam_nfc_ubuntu_18_04.html#content">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+								<div class="w3-col m8 s12">
+									<h4>
+										Yubi zur 2FA mit GitLab
+									</h4>
+								</div>
+								<div class="w3-col m4"><p style="text-align: right">
+									<span class="w3-opacity">13.10.2018</span>
+								</p>
+								</div>
+								</div>
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+<p>Ich hatte hier ja schon
+verschiedentlich
+über Möglichkeiten des
+Einsatzes
+meines Yubi-Key berichtet - nun kam noch eine hinzu...
+</p>									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="yubi_zur_2fa_gitlab.html#content">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+								<div class="w3-col m8 s12">
+									<h4>
+										Android als Smartcard (NFC)
+									</h4>
+								</div>
+								<div class="w3-col m4"><p style="text-align: right">
+									<span class="w3-opacity">15.07.2017</span>
+								</p>
+								</div>
+								</div>
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+<p>Nachdem ich bereits in der
+Vergangenheit
+verschiedene
+Experimente
+mit der NFC-Technologie
+gemacht habe,
+wollte ich endlich mein großes Ziel erreichen: Ein
+Smartphone als NFC-Smartcard
+zu nutzen...
+</p>									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="android_smartcard__nfc_.html#content">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+								<div class="w3-col m8 s12">
+									<h4>
+										NFC-Tags als Trigger in Linux-Scripts
+									</h4>
+								</div>
+								<div class="w3-col m4"><p style="text-align: right">
+									<span class="w3-opacity">02.12.2016</span>
+								</p>
+								</div>
+								</div>
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+<p>Nachdem ich meine neue Liebe für NFC entdeckt habe und unter anderem das entsprechende
+PAM-Modul
+ausprobiert habe, wollte ich nun versuchen, NFC-Tags in Linux-Skripten als Trigger einzusetzen.
+</p>									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="nfc_tags_trigger_linux_scripts.html#content">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3-col l12 m12 s12">
+							<div class="w3-card-2 w3-padding-large w3-margin">
+								<div class="w3-row">
+								<div class="w3-col m8 s12">
+									<h4>
+										Yubi und Windows
+									</h4>
+								</div>
+								<div class="w3-col m4"><p style="text-align: right">
+									<span class="w3-opacity">24.10.2016</span>
+								</p>
+								</div>
+								</div>
+								<div class="w3-row">
+									<div class="w3-col m8 s12">
+<p>Ich habe meine Tests zum 
+Yubikey
+nochmals intensiviert und einige neue Informationen gewonnen...
+</p>									</div>
+									<div class="w3-col m4">
+										<p style="text-align: right">
+											<a class="w3-button w3-padding-large w3-white w3-border" href="yubi_windows.html#content">Öffnen</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgithub">
+					<p>
+						<a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20PAM + Bluetooth, Yubi und NFC&body=[PAM + Bluetooth, Yubi und NFC](https://elbosso.github.io/pam___bluetooth__yubi_nfc)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+						<a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=PAM + Bluetooth, Yubi und NFC"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
+					</p>
+				</div>
+				<div class="w3-container w3-padding" id="commentsgitlab">
+					<p>
+						<a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20PAM + Bluetooth, Yubi und NFC&issue[description]=[PAM + Bluetooth, Yubi und NFC](https://elbosso.github.io/pam___bluetooth__yubi_nfc)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+						<a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=PAM + Bluetooth, Yubi und NFC"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
+					</p>
+				</div>
+			</div>
+			<!-- END BLOG ENTRY -->
+		</div>
+
+		<!-- Introduction menu -->
+		<div class="w3-col l4">
+
+			<!-- Shortcuts -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<p style="text-align: center">
+						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
+						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
+						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
+						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
+						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
+						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
+						<a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png"  width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a>
+						<a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
+						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
+						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
+						<a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a>
+					</p>
+				</div>
+			</div><hr>
+
+			<!-- Artikel von "backThen" -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Vor 5 Jahren hier im Blog</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+						<p class="w3-large">
+							Gedanken zu Zeit, NTP, GPS und DIY</p>
+						<p class="w3-small" style="text-align: right">
+							<span class="w3-opacity">21.09.2018</span>
+						</p>
+						<span class="smallabstract"><p>Nachdem ich meinen eigenen
+Atomzeit-GPS-NTP-Server
+in Betrieb genommen habe, habe ich mir Gedanken gemacht, warum die
+käuflich zu erwerbenden einen so hohen Anschaffungswiderstand haben.
+</p></span>
+						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="gedanken_zeit__ntp__gps_diy.html#content">
+							Weiterlesen...
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Labels / tags -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Tags</h4>
+				</div>
+				<div class="w3-container w3-white">
+					<p>
+						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
+						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
+						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
+						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
+						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
+						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
+						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
+						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
+						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
+						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
+						<a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
+						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
+						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
+						<a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a>
+						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
+						<a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a>
+						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
+						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
+						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
+						<a href="tag_Linux.html"><span class="w3-tag w3-black w3-margin-bottom">Linux</span></a>
+						<a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a>
+						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
+						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
+						<a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a>
+						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
+						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
+						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
+						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
+						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
+						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
+						<a href="tag_Security.html"><span class="w3-tag w3-black w3-margin-bottom">Security</span></a>
+						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
+						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
+						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
+						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
+						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
+						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
+						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
+						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
+					</p>
+				</div>
+			</div>
+
+			<!-- Posts -->
+			<div class="w3-card w3-margin">
+				<div class="w3-container w3-padding">
+					<h4>Neueste Artikel</h4>
+				</div>
+				<ul class="w3-ul w3-white">
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Throttling in Java</span><br>
+						<span class="smallabstract"><p>Während meiner
+Experimente
+mit der
+SpaceTraders API
+stieß ich auf den Auslöser einer weiteren kleinen Fingerübung in Java:
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="throttling_java.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Neue Version plantumlinterfaceproxy</span><br>
+						<span class="smallabstract"><p>Ich musste neulich mein Projekt
+plantumlinterfaceproxy
+aktualisieren
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_version_plantumlinterfaceproxy.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+					<li class="w3-padding-16">
+							<span class="w3-large">
+							Preisvergleich mit historischen Daten in Grafana</span><br>
+						<span class="smallabstract"><p>Durch diesen
+Mastodon-Thread
+aufmerksam geworden, wollte ich da auch unbedingt mitspielen - allerdings habe ich gerade Urlaub und daher
+wollte ich klein anfangen...
+</p></span>
+							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="preisvergleich_historischen_daten_grafana.html#content">
+ Weiterlesen...
+							</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- About Card -->
+			<div class="w3-card w3-margin w3-margin-top">
+				<div class="w3-container w3-white">
+					<h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript></h4> <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p> <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p> <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p> <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man <a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a> finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p> </div> </div><hr> </div> </div><br> </div> <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top"> <a href="me.html"> <script>
+		</script>
+						<noscript>Der Verfasser</noscript></h4>
+					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
+					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
+					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
+					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
+						<a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a>
+						finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p>
+				</div>
+			</div><hr>
+
+			<!-- END Introduction Menu -->
+		</div>
+
+					<!-- Posts -->
+			<!--div class="w3-col w3-hide-small l2">
+				<div class="w3-card w3-margin">
+					<div class="w3-container w3-padding">
+						<h4>Neueste Artikel</h4>
+					</div>
+					<ul class="w3-ul w3-white">
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Throttling in Java</span><br>
+							<span class="smallabstract"><p>Während meiner
+Experimente
+mit der
+SpaceTraders API
+stieß ich auf den Auslöser einer weiteren kleinen Fingerübung in Java:
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="throttling_java.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Neue Version plantumlinterfaceproxy</span><br>
+							<span class="smallabstract"><p>Ich musste neulich mein Projekt
+plantumlinterfaceproxy
+aktualisieren
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_version_plantumlinterfaceproxy.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+						<li class="w3-padding-16">
+							<span class="w3-large">
+							Preisvergleich mit historischen Daten in Grafana</span><br>
+							<span class="smallabstract"><p>Durch diesen
+Mastodon-Thread
+aufmerksam geworden, wollte ich da auch unbedingt mitspielen - allerdings habe ich gerade Urlaub und daher
+wollte ich klein anfangen...
+</p></span>
+								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="preisvergleich_historischen_daten_grafana.html#content">
+ Weiterlesen...
+								</a>
+						</li>
+					</ul>
+				</div>
+			</div-->
+
+			<!-- END GRID -->
+	</div><br>
+
+	<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+	<a href="me.html">
+		<script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script> <noscript>Der Verfasser</noscript> , Damaschke 11, Rudolstadt, <script>
+		</script>
+		<noscript>Der Verfasser</noscript>
+
+		, Damaschke 11, Rudolstadt,
+		<script>
 		<!--
 abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
 -->
-		</script> <noscript>jkey&#64;arcor&#46;de</noscript> , PEN: 1.3.6.1.4.1.59452 </a> <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p> </footer> </body> </html>
+		</script>
+		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
+		, PEN: 1.3.6.1.4.1.59452
+	</a>
+	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
