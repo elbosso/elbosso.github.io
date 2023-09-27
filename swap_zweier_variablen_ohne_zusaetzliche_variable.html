@@ -1,27 +1,4 @@
-<!DOCTYPE html>
-<html prefix="og: https://ogp.me/ns#">
-<head>
-<title>Swap zweier Variablen ohne zusätzliche Variable</title>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta property="og:title" content="Swap zweier Variablen ohne zusätzliche Variable" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://elbosso.github.io/swap_zweier_variablen_ohne_zusaetzliche_variable" />
-<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"/>
-<meta property="og:locale" content="de_DE" />
-<meta property="og:site_name" content="elbosso.github.io" />
-<meta property="og:description" content="Ich bin neulich über einen Artikel
-gestolpert
-der erklärte,
-wie man in Programmen die Werte zweier Variablen vertauschen kann, ohne dazu
-eine extra Variable zur Zwischenspeicherung zu benötigen.
-" />
-<meta property="article:published_time" content="2022-03-26">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-<link rel="stylesheet" type="text/css" href="css/stylew3.css" />
-<link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css" />
-<link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/>
-<script type="text/javascript" language="javascript">
+<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>Swap zweier Variablen ohne zusätzliche Variable</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="Swap zweier Variablen ohne zusätzliche Variable"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/swap_zweier_variablen_ohne_zusaetzliche_variable"/> <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Ich bin neulich über einen Artikel gestolpert der erklärte, wie man in Programmen die Werte zweier Variablen vertauschen kann, ohne dazu eine extra Variable zur Zwischenspeicherung zu benötigen. "/> <meta property="article:published_time" content="2022-03-26"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
 <!--
 function abc(coded,key)
 {
@@ -40,136 +17,13 @@ function abc(coded,key)
 document.write(link)
 }
 //-->
-</script>
-</head>
-<body class="w3-light-grey">
-
-<!-- w3-content defines a container for fixed size centered content,
-and is wrapped around the whole page content, except for the footer in this example -->
-<div class="w3-content" style="max-width:1400px">
-
-	<!-- Header -->
-	<!--header class="w3-container w3-center w3-padding-32">
-		<h1><b>$title</b></h1>
-	</header-->
-
-	<!-- Grid -->
-	<div class="w3-row">
-
-
-		<!-- Blog entry -->
-		<div class="w3-col l8">
-			<a name="content"></a>
-			<div class="w3-card w3-margin">
-				<div class="w3-container w3-padding">
-					<div class="w3-row">
-						<div class="w3-col m6 s12">
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract"
-							   href="generic_methoden_vs__casting_java.html#content">vorhergehender Artikel</a>
-						</div>
-						<div class="w3-col m6" style="text-align: right">
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip"
-							   href="datamodel2html_plugin.html#content">nächster Artikel
-							</a>
-						</div>
-					</div>
-					<div class="w3-row">
-						<div class="w3-col m9 s12">
-							<h4>Swap zweier Variablen ohne zusätzliche Variable</h4>
-							<div class="w3-container">
-								<div class="w3-row">
-									<div class="w3-col m8 s12">
-										vorhergehende Artikel in:
-										<a href="generic_methoden_vs__casting_java.html#content">
-											<span class="w3-tag w3-black w3-margin-bottom">Java</span>
-										</a> <!--/li-->
-										<a href="experimente_kuramoto_oszillatoren.html#content">
-											<span class="w3-tag w3-black w3-margin-bottom">Numerik</span>
-										</a> <!--/li-->
-									</div>
-									<div class="w3-col m4" style="text-align: right">
-										<span class="w3-opacity">26.03.2022</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="w3-col m3"><p style="text-align: right">
-							<img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png">
-						</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="w3-card-4 w3-margin w3-white">
-				<div class="w3-container w3-padding" id="abstract">
-<p>Ich bin neulich über einen Artikel
-<a href="https://garrit.xyz/posts/2022-03-24-swapping-numbers-without-temp">gestolpert</a>
-der erklärte,
-wie man in Programmen die Werte zweier Variablen vertauschen kann, ohne dazu
-eine extra Variable zur Zwischenspeicherung zu benötigen.
-</p>				</div>
-				<div class="w3-container w3-padding" id="contentdiv">
-<p>Ich habe in der Vergangenheit bereits über interessante, in der Numerik begründete
-<a href="doppelte_genauigkeit_java.html">Abkürzungen in Programmen</a>
-und den Einfluss verschiedener Programmieransätze auf die
-<a href="generic_methoden_vs__casting_java.html">Komplexität</a>
-entstehenden Codes berichtet.
-</p><p>
-Daher hat mich diese Idee intereressiert. Die naive und intuitive Herangehensweise zum Tausch der Werte zweier Variablen
-<span class="mditalics">a</span> und <span class="mditalics">b</span> ist das bekannte
-</p><div class="highlight"><pre><span></span>latch=a;
+</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generic_methoden_vs__casting_java.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="datamodel2html_plugin.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Swap zweier Variablen ohne zusätzliche Variable</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="generic_methoden_vs__casting_java.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Java</span> </a> <a href="experimente_kuramoto_oszillatoren.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Numerik</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">26.03.2022</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Ich bin neulich über einen Artikel <a href="https://garrit.xyz/posts/2022-03-24-swapping-numbers-without-temp">gestolpert</a> der erklärte, wie man in Programmen die Werte zweier Variablen vertauschen kann, ohne dazu eine extra Variable zur Zwischenspeicherung zu benötigen. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Ich habe in der Vergangenheit bereits über interessante, in der Numerik begründete <a href="doppelte_genauigkeit_java.html">Abkürzungen in Programmen</a> und den Einfluss verschiedener Programmieransätze auf die <a href="generic_methoden_vs__casting_java.html">Komplexität</a> entstehenden Codes berichtet. </p><p> Daher hat mich diese Idee intereressiert. Die naive und intuitive Herangehensweise zum Tausch der Werte zweier Variablen <span class="mditalics">a</span> und <span class="mditalics">b</span> ist das bekannte </p><div class="highlight"><pre><span></span>latch=a;
 a=b;
 b=latch;
-</pre></div>
-<p>
-Dazu benötigt man neben den zwei Variablen, deren Werte man tauschen möchte noch eine weitere als Zwischenspeicher.
-Möchte man die Nutzung einer solchen zusätzlichen Variable verhindern, kann man das erreichen - vorausgesetzt, die beiden Variablen enthalten
-ganzzahlige Werte und sind in der Lage, die Summe und die Differenz der beiden Werte abzubilden, ohne dass es zu einem numerischen
-Überlauf kommt. Dazu geht man wie folgt vor:
-</p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279441_130.png">
-</p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279442_130.png">
-</p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279443_130.png">
-</p><p>
-Setzt man ein erkennt man, dass der Tausch tatsächlich stattgefunden hat - zunächst <span class="mditalics">1</span> in <span class="mditalics">2:</span>
-</p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279444_130.png">
-</p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279445_130.png">
-</p><p>
-Und nun mit <span class="mditalics">5</span> und <span class="mditalics">1</span> in <span class="mditalics">3:</span>
-</p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279446_130.png">
-</p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279447_130.png">
-</p><p>
-Man sieht, dass die beiden Variablen <span class="mditalics">a</span> und <span class="mditalics">b</span> tatsächlich ihre Werte getauscht haben! Nachdem nun demonstriert
-wurde, dass es tatsächlich möglich ist - wie sinnvoll ist das? Abgesehen von der Tatsache, dass ich nur eine
-Notwendigkeit in der Maschinenprogrammierung sehe (Dort kann es ja vorkommen, dass manche Operationen
-nur auf bestimmte Register angewendet werden können und man daher Daten zwischen Registern austauschen muss),
-sehe ich in Hochsprachen dafür absolut keine Notwendigkeit mehr - was die ganze Sache in den Bereich des
-pur akademischen Interesses verlagert.
-</p><p>
-Darüber hinaus ist es so, dass die Rechenzeit dadurch nicht verringert wird, denn die Anzahl der Operationen ist immer noch dieselbe -
-und ob die verbrauchte Rechenzeit bei Load/Store-Instructions und bei Arithmetik-Instructions sich in
-aktuellen Prozessoren wirklich so sehr unterscheidet, möchte ich bezweifeln.
-</p><p>
-Dazu kommt noch, dass sich auf Maschinensprach-Ebene die beiden Varianten unter Umständen nicht mehr so sehr unterscheiden:
-Oft ist es ja so, dass Arithmetik mit einem Spezial-Register - dem sogenannten Akkumulator durchgeführt werden muss.
-Und in diesem Fall bräuchten wir wieder drei "Variablen": Die zwei Register, deren Inhalte getauscht werden sollen und
-den Akkumulator. Man hätte also in einer solchen Architektur nichts gewonnen. In einer Architektur mit echten General-Purpose-Registern
-wie der Motorola 68xxx-Serie würde die Einsparung tatsächlich wie theoretisch erklärt funktionieren - die entsprechenden Maschinenbefehle
-zum Tausch der Werte in den Registern <span class="mditalics">d1</span> (a) und <span class="mditalics">d2</span> (b) würden wie folgt aussehen:
-</p><div class="highlight"><pre><span></span>	add	d2,d1
+</pre></div> <p> Dazu benötigt man neben den zwei Variablen, deren Werte man tauschen möchte noch eine weitere als Zwischenspeicher. Möchte man die Nutzung einer solchen zusätzlichen Variable verhindern, kann man das erreichen - vorausgesetzt, die beiden Variablen enthalten ganzzahlige Werte und sind in der Lage, die Summe und die Differenz der beiden Werte abzubilden, ohne dass es zu einem numerischen Überlauf kommt. Dazu geht man wie folgt vor: </p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279441_130.png"> </p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279442_130.png"> </p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279443_130.png"> </p><p> Setzt man ein erkennt man, dass der Tausch tatsächlich stattgefunden hat - zunächst <span class="mditalics">1</span> in <span class="mditalics">2:</span> </p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279444_130.png"> </p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279445_130.png"> </p><p> Und nun mit <span class="mditalics">5</span> und <span class="mditalics">1</span> in <span class="mditalics">3:</span> </p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279446_130.png"> </p><p><img class="formula" style="max-width:628px;"src="images/tex/12762279447_130.png"> </p><p> Man sieht, dass die beiden Variablen <span class="mditalics">a</span> und <span class="mditalics">b</span> tatsächlich ihre Werte getauscht haben! Nachdem nun demonstriert wurde, dass es tatsächlich möglich ist - wie sinnvoll ist das? Abgesehen von der Tatsache, dass ich nur eine Notwendigkeit in der Maschinenprogrammierung sehe (Dort kann es ja vorkommen, dass manche Operationen nur auf bestimmte Register angewendet werden können und man daher Daten zwischen Registern austauschen muss), sehe ich in Hochsprachen dafür absolut keine Notwendigkeit mehr - was die ganze Sache in den Bereich des pur akademischen Interesses verlagert. </p><p> Darüber hinaus ist es so, dass die Rechenzeit dadurch nicht verringert wird, denn die Anzahl der Operationen ist immer noch dieselbe - und ob die verbrauchte Rechenzeit bei Load/Store-Instructions und bei Arithmetik-Instructions sich in aktuellen Prozessoren wirklich so sehr unterscheidet, möchte ich bezweifeln. </p><p> Dazu kommt noch, dass sich auf Maschinensprach-Ebene die beiden Varianten unter Umständen nicht mehr so sehr unterscheiden: Oft ist es ja so, dass Arithmetik mit einem Spezial-Register - dem sogenannten Akkumulator durchgeführt werden muss. Und in diesem Fall bräuchten wir wieder drei "Variablen": Die zwei Register, deren Inhalte getauscht werden sollen und den Akkumulator. Man hätte also in einer solchen Architektur nichts gewonnen. In einer Architektur mit echten General-Purpose-Registern wie der Motorola 68xxx-Serie würde die Einsparung tatsächlich wie theoretisch erklärt funktionieren - die entsprechenden Maschinenbefehle zum Tausch der Werte in den Registern <span class="mditalics">d1</span> (a) und <span class="mditalics">d2</span> (b) würden wie folgt aussehen: </p><div class="highlight"><pre><span></span>	add	d2,d1
 	sub	d2,d1
 	sub d2,d1
-</pre></div>
-<p>
-Aber auch hier erkennt man: es werden genau wie beim Tausch mit Zwischenvariable drei Operationen gebraucht. Dazu kommt in dieser Architektur
-(wie wahrscheinlich in vielen anderen auch): Bedingt durch die Tatsache, dass manche Operationen nur auf bestimmten Registern
-funktionieren existiert ein dedizierter Maschinenbefehl <span class="mditalics">EXG</span> zum Tausch der Werte zweier Register. Das ist ein weiterer Grund, warum
-man solche wie die oben beschriebene Varianten nicht benutzen sollte: Den traditionellen Tausch mit Zwischenvariable kann ein Compiler
-erkennen und durch Benutzung solch optimierter Maschinenbefehle ersetzen. Die Variante mit der Arithmetik dagegen würde nicht
-davon profitieren.
-</p><p>
-Zum Abschluss nun noch eine Einsicht betreffend einer speziellen Sprache: Java. Hier zeigt sich, dass die "traditionelle" Variante
-deutlich schneller ist - weil der erzeugte Bytecode deutlich kürzer ist:
-</p><div class="highlight"><pre><span></span>	public void a()
+</pre></div> <p> Aber auch hier erkennt man: es werden genau wie beim Tausch mit Zwischenvariable drei Operationen gebraucht. Dazu kommt in dieser Architektur (wie wahrscheinlich in vielen anderen auch): Bedingt durch die Tatsache, dass manche Operationen nur auf bestimmten Registern funktionieren existiert ein dedizierter Maschinenbefehl <span class="mditalics">EXG</span> zum Tausch der Werte zweier Register. Das ist ein weiterer Grund, warum man solche wie die oben beschriebene Varianten nicht benutzen sollte: Den traditionellen Tausch mit Zwischenvariable kann ein Compiler erkennen und durch Benutzung solch optimierter Maschinenbefehle ersetzen. Die Variante mit der Arithmetik dagegen würde nicht davon profitieren. </p><p> Zum Abschluss nun noch eine Einsicht betreffend einer speziellen Sprache: Java. Hier zeigt sich, dass die "traditionelle" Variante deutlich schneller ist - weil der erzeugte Bytecode deutlich kürzer ist: </p><div class="highlight"><pre><span></span>	public void a()
 	{
 		int a=10;
 		int b=5;
@@ -177,10 +31,7 @@ deutlich schneller ist - weil der erzeugte Bytecode deutlich kürzer ist:
 		a=b;
 		b=c;
 	}
-</pre></div>
-<p>
-ergibt:
-</p><div class="highlight"><pre><span></span><span class="n">public</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">a</span><span class="p">();</span><span class="w"></span>
+</pre></div> <p> ergibt: </p><div class="highlight"><pre><span></span><span class="n">public</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">a</span><span class="p">();</span><span class="w"></span>
 <span class="w">   </span><span class="n">Code</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="n">bipush</span><span class="w">        </span><span class="mi">10</span><span class="w"></span>
 <span class="w">      </span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="n">istore_1</span><span class="w"></span>
@@ -193,10 +44,7 @@ ergibt:
 <span class="w">      </span><span class="mi">9</span><span class="p">:</span><span class="w"> </span><span class="n">iload_3</span><span class="w"></span>
 <span class="w">     </span><span class="mi">10</span><span class="p">:</span><span class="w"> </span><span class="n">istore_2</span><span class="w"></span>
 <span class="w">     </span><span class="mi">11</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"></span>
-</pre></div>
-<p>
-während
-</p><div class="highlight"><pre><span></span>	public void b()
+</pre></div> <p> während </p><div class="highlight"><pre><span></span>	public void b()
 	{
 		int a=10;
 		int b=5;
@@ -204,10 +52,7 @@ während
 		b=a-b;
 		a=a-b;
 	}
-</pre></div>
-<p>
-in folgenden Bytecode transformiert wird:
-</p><div class="highlight"><pre><span></span><span class="n">public</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">b</span><span class="p">();</span><span class="w"></span>
+</pre></div> <p> in folgenden Bytecode transformiert wird: </p><div class="highlight"><pre><span></span><span class="n">public</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">b</span><span class="p">();</span><span class="w"></span>
 <span class="w">   </span><span class="n">Code</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="n">bipush</span><span class="w">        </span><span class="mi">10</span><span class="w"></span>
 <span class="w">      </span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="n">istore_1</span><span class="w"></span>
@@ -226,260 +71,16 @@ in folgenden Bytecode transformiert wird:
 <span class="w">     </span><span class="mi">15</span><span class="p">:</span><span class="w"> </span><span class="n">isub</span><span class="w"></span>
 <span class="w">     </span><span class="mi">16</span><span class="p">:</span><span class="w"> </span><span class="n">istore_1</span><span class="w"></span>
 <span class="w">     </span><span class="mi">17</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"></span>
-</pre></div>
-				</div>
-				<div class="w3-container w3-padding" id="commentsgithub">
-					<p>
-						<a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Swap zweier Variablen ohne zusätzliche Variable&body=[Swap zweier Variablen ohne zusätzliche Variable](https://elbosso.github.io/swap_zweier_variablen_ohne_zusaetzliche_variable)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
-						<a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Swap zweier Variablen ohne zusätzliche Variable"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a>
-					</p>
-				</div>
-				<div class="w3-container w3-padding" id="commentsgitlab">
-					<p>
-						<a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Swap zweier Variablen ohne zusätzliche Variable&issue[description]=[Swap zweier Variablen ohne zusätzliche Variable](https://elbosso.github.io/swap_zweier_variablen_ohne_zusaetzliche_variable)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
-						<a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Swap zweier Variablen ohne zusätzliche Variable"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a>
-					</p>
-				</div>
-			</div>
-			<!-- END BLOG ENTRY -->
-		</div>
-
-		<!-- Introduction menu -->
-		<div class="w3-col l4">
-
-			<!-- Shortcuts -->
-			<div class="w3-card w3-margin w3-margin-top">
-				<div class="w3-container w3-white">
-					<p style="text-align: center">
-						<a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a>
-						<a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a>
-						<!--a rel="alternate" type="text/x-opml" href="resources/opml.xml"><img src="images/opml.png" alt="opml" title="opml"></a-->
-						<a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a>
-						<a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a>
-						<a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a>
-						<a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png"  width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a>
-						<a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a>
-						<a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a>
-						<a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a>
-						<a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a>
-					</p>
-				</div>
-			</div><hr>
-
-			<!-- Artikel von "backThen" -->
-			<div class="w3-card w3-margin">
-				<div class="w3-container w3-padding">
-					<h4>Vor 5 Jahren hier im Blog</h4>
-				</div>
-				<ul class="w3-ul w3-white">
-					<li class="w3-padding-16">
-						<p class="w3-large">
-							Gedanken zu Zeit, NTP, GPS und DIY</p>
-						<p class="w3-small" style="text-align: right">
-							<span class="w3-opacity">21.09.2018</span>
-						</p>
-						<span class="smallabstract"><p>Nachdem ich meinen eigenen
-Atomzeit-GPS-NTP-Server
-in Betrieb genommen habe, habe ich mir Gedanken gemacht, warum die
-käuflich zu erwerbenden einen so hohen Anschaffungswiderstand haben.
-</p></span>
-						<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="gedanken_zeit__ntp__gps_diy.html#content">
-							Weiterlesen...
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<!-- Labels / tags -->
-			<div class="w3-card w3-margin">
-				<div class="w3-container w3-padding">
-					<h4>Tags</h4>
-				</div>
-				<div class="w3-container w3-white">
-					<p>
-						<a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a>
-						<a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a>
-						<a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a>
-						<a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a>
-						<a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a>
-						<a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a>
-						<a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a>
-						<a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a>
-						<a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a>
-						<a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a>
-						<a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a>
-						<a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a>
-						<a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a>
-						<a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a>
-						<a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a>
-						<a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a>
-						<a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a>
-						<a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a>
-						<a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a>
-						<a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a>
-						<a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a>
-						<a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a>
-						<a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a>
-						<a href="tag_Numerik.html"><span class="w3-tag w3-black w3-margin-bottom">Numerik</span></a>
-						<a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a>
-						<a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a>
-						<a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a>
-						<a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a>
-						<a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a>
-						<a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a>
-						<a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a>
-						<a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a>
-						<a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a>
-						<a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a>
-						<a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a>
-						<a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a>
-						<a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a>
-						<a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a>
-						<a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a>
-					</p>
-				</div>
-			</div>
-
-			<!-- Posts -->
-			<div class="w3-card w3-margin">
-				<div class="w3-container w3-padding">
-					<h4>Neueste Artikel</h4>
-				</div>
-				<ul class="w3-ul w3-white">
-					<li class="w3-padding-16">
-							<span class="w3-large">
-							Throttling in Java</span><br>
-						<span class="smallabstract"><p>Während meiner
-Experimente
-mit der
-SpaceTraders API
-stieß ich auf den Auslöser einer weiteren kleinen Fingerübung in Java:
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="throttling_java.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">
-							Neue Version plantumlinterfaceproxy</span><br>
-						<span class="smallabstract"><p>Ich musste neulich mein Projekt
-plantumlinterfaceproxy
-aktualisieren
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_version_plantumlinterfaceproxy.html#content">
- Weiterlesen...
-							</a>
-					</li>
-					<li class="w3-padding-16">
-							<span class="w3-large">
-							Preisvergleich mit historischen Daten in Grafana</span><br>
-						<span class="smallabstract"><p>Durch diesen
-Mastodon-Thread
-aufmerksam geworden, wollte ich da auch unbedingt mitspielen - allerdings habe ich gerade Urlaub und daher
-wollte ich klein anfangen...
-</p></span>
-							<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="preisvergleich_historischen_daten_grafana.html#content">
- Weiterlesen...
-							</a>
-					</li>
-				</ul>
-			</div>
-
-			<!-- About Card -->
-			<div class="w3-card w3-margin w3-margin-top">
-				<div class="w3-container w3-white">
-					<h4><script>
+</pre></div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Swap zweier Variablen ohne zusätzliche Variable&body=[Swap zweier Variablen ohne zusätzliche Variable](https://elbosso.github.io/swap_zweier_variablen_ohne_zusaetzliche_variable)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Swap zweier Variablen ohne zusätzliche Variable"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Swap zweier Variablen ohne zusätzliche Variable&issue[description]=[Swap zweier Variablen ohne zusätzliche Variable](https://elbosso.github.io/swap_zweier_variablen_ohne_zusaetzliche_variable)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Swap zweier Variablen ohne zusätzliche Variable"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> 18.04 - Kodi, Tiny-RSS, Nextcloud</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">01.10.2018</span> </p> <span class="smallabstract"><p>Nachdem nun auch Menschen mit Ubuntu 16.04 - also einer LTS-Version - der Umstieg angeboten wird, habe ich es ebenfalls versucht. Dieser Artikel beschreibt den ersten Teil der Erfahrungen, die ich damit machen durfte </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="18_04___kodi__tiny_rss__nextcloud.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-black w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> Supermarktpreisentwicklung in InfluxDB</span><br> <span class="smallabstract"><p>Durch diesen Mastodon-Thread aufmerksam geworden habe ich neulich zunächst erst einmal andere Preise in eine Influx-Zeitreihendatenbank importiert. Nun wollte ich es wissen und versuchte mich ander ursprünglichen Idee der Supermarktpreise... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="supermarktpreisentwicklung_influxdb.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Generator für Stellenanzeigen</span><br> <span class="smallabstract"><p>Ich habe neulich wieder einmal einen neuen Testdatengenerator geschrieben, den ich mit Daten aus der Perrypedia fütterte. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="generator_stellenanzeigen.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> One Moment In Time - Dana Winner</span><br> <span class="smallabstract"><p>Wieder einmal eine Vorstellung, bei der ich sagen muss, dass das Cover nach meiner Meinung besser ist als das Original... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="one_moment_time___dana_winner.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script>
-						<noscript>Der Verfasser</noscript></h4>
-					<p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p>
-					<p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p>
-					<p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p>
-					<p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man
-						<a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a>
-						finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p>
-				</div>
-			</div><hr>
-
-			<!-- END Introduction Menu -->
-		</div>
-
-					<!-- Posts -->
-			<!--div class="w3-col w3-hide-small l2">
-				<div class="w3-card w3-margin">
-					<div class="w3-container w3-padding">
-						<h4>Neueste Artikel</h4>
-					</div>
-					<ul class="w3-ul w3-white">
-						<li class="w3-padding-16">
-							<span class="w3-large">
-							Throttling in Java</span><br>
-							<span class="smallabstract"><p>Während meiner
-Experimente
-mit der
-SpaceTraders API
-stieß ich auf den Auslöser einer weiteren kleinen Fingerübung in Java:
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="throttling_java.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">
-							Neue Version plantumlinterfaceproxy</span><br>
-							<span class="smallabstract"><p>Ich musste neulich mein Projekt
-plantumlinterfaceproxy
-aktualisieren
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="neue_version_plantumlinterfaceproxy.html#content">
- Weiterlesen...
-								</a>
-						</li>
-						<li class="w3-padding-16">
-							<span class="w3-large">
-							Preisvergleich mit historischen Daten in Grafana</span><br>
-							<span class="smallabstract"><p>Durch diesen
-Mastodon-Thread
-aufmerksam geworden, wollte ich da auch unbedingt mitspielen - allerdings habe ich gerade Urlaub und daher
-wollte ich klein anfangen...
-</p></span>
-								<a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="preisvergleich_historischen_daten_grafana.html#content">
- Weiterlesen...
-								</a>
-						</li>
-					</ul>
-				</div>
-			</div-->
-
-			<!-- END GRID -->
-	</div><br>
-
-	<!-- END w3-content -->
-</div>
-
-<!-- Footer -->
-<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
-	<a href="me.html">
-		<script>
+		</script> <noscript>Der Verfasser</noscript></h4> <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p> <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p> <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p> <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man <a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a> finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p> </div> </div><hr> </div> </div><br> </div> <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top"> <a href="me.html"> <script>
 		<!--
 abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
 -->
-		</script>
-		<noscript>Der Verfasser</noscript>
-
-		, Damaschke 11, Rudolstadt,
-		<script>
+		</script> <noscript>Der Verfasser</noscript> , Damaschke 11, Rudolstadt, <script>
 		<!--
 abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
 -->
-		</script>
-		<noscript>jkey<!-- >&#64;&#46; -->&#64;<!-- >@. -->arcor<!-- >@&#46; -->&#46;<!-- >@. -->de</noscript>
-		, PEN: 1.3.6.1.4.1.59452
-	</a>
-	<p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p>
-</footer>
-
-</body>
-</html>
+		</script> <noscript>jkey&#64;arcor&#46;de</noscript> , PEN: 1.3.6.1.4.1.59452 </a> <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p> </footer> </body> </html>
