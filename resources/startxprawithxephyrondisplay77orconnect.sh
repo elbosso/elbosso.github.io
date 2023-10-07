@@ -35,6 +35,8 @@
 
 start() {
   DISPLAY=:0 xmodmap -pke > /tmp/my_xmodmap
+  sed -i '/XF86BrightnessAuto/d' /tmp/my_xmodmap
+  sed -i '/XF86DisplayOff/d' /tmp/my_xmodmap
   scp /tmp/my_xmodmap "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER":/tmp
 if ssh "$XPRA_SSH_USER"@"$XPRA_SSH_SERVER" 'DISPLAY=:78 xmodmap /tmp/my_xmodmap' > /dev/null 2>&1; then
   echo "user $XPRA_SSH_USER can connect to display $DISPLAY"
