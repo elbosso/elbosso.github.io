@@ -1,0 +1,935 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
+<link rel="stylesheet" href="https://elbosso.github.io/css/explain.css">
+</head>
+<body>
+<div style="text-align: center">
+<div style="display: inline-block;margin:auto">
+
+<table>
+    <tr>
+        <th>0,19</th>
+        <th>0</th>
+        <th>0,04</th>
+        <th>175</th>
+        <th>4,02</th>
+    </tr>
+    <tr>
+        <td>execution time (ms)</td>
+        <td>planning time (ms)</td>
+        <td>slowest node (ms)</td>
+        <td>largest node (rows)</td>
+        <td>costliest node</td>
+    </tr>
+</table>
+<hr/>
+
+</div>
+</div>
+
+<div class="tf-tree">
+<ul>
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Plan Width</td><td>36</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>10</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Total Cost</td><td>13.15</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.191</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Limit</td></tr>
+
+<tr><td>Output</td><td>["customer5.id","(sum(orderitem2.unitprice))"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>9</td></tr>
+
+<tr><td>Startup Cost</td><td>13.13</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.194</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Actual Rows</td><td>5</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>LIMIT</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>1,03<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>5</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>11</td></tr>
+
+<tr><td>Sort Key</td><td>["(sum(orderitem2.unitprice)) DESC"]</td></tr>
+
+<tr><td>Total Cost</td><td>13.16</td></tr>
+
+<tr><td>Sort Method</td><td>quicksort</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["customer5.id","(sum(orderitem2.unitprice))"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>9</td></tr>
+
+<tr><td>Startup Cost</td><td>13.13</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.192</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Sort Space Used</td><td>25</td></tr>
+
+<tr><td>Plan Width</td><td>36</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Sort Space Type</td><td>Memory</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.19</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Sort</td></tr>
+
+<tr><td>Actual Rows</td><td>5</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>SORT</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,02<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>12,37<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>5</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+			<div>
+			<span class='text-muted'>by 
+			</span>
+			(sum(orderitem2.unitprice)) DESC
+			</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Group Key</td><td>["customer5.id"]</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>11</td></tr>
+
+<tr><td>Partial Mode</td><td>Simple</td></tr>
+
+<tr><td>Total Cost</td><td>12.94</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["customer5.id","sum(orderitem2.unitprice)"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>6</td></tr>
+
+<tr><td>Startup Cost</td><td>12.8</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.168</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>36</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.164</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Aggregate</td></tr>
+
+<tr><td>Strategy</td><td>Hashed</td></tr>
+
+<tr><td>Actual Rows</td><td>5</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>AGGREGATE</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,01<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>7,22<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>5</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+			<div>
+			<span class='text-muted'>by
+			</span>
+			customer5.id
+			</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Inner</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>22</td></tr>
+
+<tr><td>Inner Unique</td><td>false</td></tr>
+
+<tr><td>Total Cost</td><td>12.69</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["customer5.id","orderitem2.unitprice"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>6</td></tr>
+
+<tr><td>Startup Cost</td><td>7.69</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.154</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>11</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Hash Cond</td><td>(orderitem2.orderid = theorder1.id)</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.105</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Hash Join</td></tr>
+
+<tr><td>Actual Rows</td><td>8</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>HASH JOIN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,02<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>11,86<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>8</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Inner
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>orderitem</td></tr>
+
+<tr><td>Schema</td><td>public</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>202</td></tr>
+
+<tr><td>Total Cost</td><td>4.02</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["orderitem2.unitprice","orderitem2.orderid"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>2</td></tr>
+
+<tr><td>Startup Cost</td><td>0.0</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.043</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>11</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.009</td></tr>
+
+<tr><td>Alias</td><td>orderitem2</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Seq Scan</td></tr>
+
+<tr><td>Actual Rows</td><td>153</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>SEQ SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,04<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class='stats-y'>22,16<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>153</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+public.orderitem
+			(orderitem2)
+    </div>
+
+    <div>
+    <span class='tag'>slowest</span>
+    <span class='tag'>costliest</span>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Hash Buckets</td><td>1024</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Peak Memory Usage</td><td>9</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>18</td></tr>
+
+<tr><td>Total Cost</td><td>7.47</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["theorder1.id","customer5.id"]</td></tr>
+
+<tr><td>Hash Batches</td><td>1</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>4</td></tr>
+
+<tr><td>Startup Cost</td><td>7.47</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.088</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>8</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Original Hash Batches</td><td>1</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.087</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Hash</td></tr>
+
+<tr><td>Original Hash Buckets</td><td>1024</td></tr>
+
+<tr><td>Actual Rows</td><td>9</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>HASH</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>1,55<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>9</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Inner</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>18</td></tr>
+
+<tr><td>Inner Unique</td><td>true</td></tr>
+
+<tr><td>Total Cost</td><td>7.47</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["theorder1.id","customer5.id"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>4</td></tr>
+
+<tr><td>Startup Cost</td><td>3.4</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.085</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>8</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Hash Cond</td><td>(theorder1.customerid = customer5.id)</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.038</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Hash Join</td></tr>
+
+<tr><td>Actual Rows</td><td>9</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>HASH JOIN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,03<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>12,89<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>9</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Inner
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>theorder</td></tr>
+
+<tr><td>Schema</td><td>public</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>162</td></tr>
+
+<tr><td>Total Cost</td><td>3.62</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["theorder1.id","theorder1.customerid"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>2</td></tr>
+
+<tr><td>Startup Cost</td><td>0.0</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.034</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>8</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.006</td></tr>
+
+<tr><td>Alias</td><td>theorder1</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Seq Scan</td></tr>
+
+<tr><td>Actual Rows</td><td>175</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>SEQ SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,03<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>17,53<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>175</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+public.theorder
+			(theorder1)
+    </div>
+
+    <div>
+    <span class='tag'>largest</span>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Hash Buckets</td><td>1024</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Peak Memory Usage</td><td>9</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>11</td></tr>
+
+<tr><td>Total Cost</td><td>3.26</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["customer5.id"]</td></tr>
+
+<tr><td>Hash Batches</td><td>1</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>2</td></tr>
+
+<tr><td>Startup Cost</td><td>3.26</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.026</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>4</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Original Hash Batches</td><td>1</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.026</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Hash</td></tr>
+
+<tr><td>Original Hash Buckets</td><td>1024</td></tr>
+
+<tr><td>Actual Rows</td><td>11</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>HASH</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>2,58<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>11</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>customer</td></tr>
+
+<tr><td>Schema</td><td>public</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>11</td></tr>
+
+<tr><td>Total Cost</td><td>3.26</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["customer5.id"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>2</td></tr>
+
+<tr><td>Startup Cost</td><td>0.0</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.021</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>4</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Rows Removed by Filter</td><td>90</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.007</td></tr>
+
+<tr><td>Filter</td><td>((customer5.lastname)::text ~~ 'B%'::text)</td></tr>
+
+<tr><td>Alias</td><td>customer5</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Seq Scan</td></tr>
+
+<tr><td>Actual Rows</td><td>11</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>SEQ SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,02<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>10,82<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>11</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+public.customer
+			(customer5)
+    </div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul></div>
+
+</body>
+</html>

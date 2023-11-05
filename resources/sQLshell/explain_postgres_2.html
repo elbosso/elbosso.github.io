@@ -1,0 +1,2393 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
+<link rel="stylesheet" href="https://elbosso.github.io/css/explain.css">
+</head>
+<body>
+<div style="text-align: center">
+<div style="display: inline-block;margin:auto">
+
+<table>
+    <tr>
+        <th>2,04</th>
+        <th>0</th>
+        <th>0,69</th>
+        <th>6</th>
+        <th>125,68</th>
+    </tr>
+    <tr>
+        <td>execution time (ms)</td>
+        <td>planning time (ms)</td>
+        <td>slowest node (ms)</td>
+        <td>largest node (rows)</td>
+        <td>costliest node</td>
+    </tr>
+</table>
+<hr/>
+
+</div>
+</div>
+
+<div class="tf-tree">
+<ul>
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Left</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Inner Unique</td><td>false</td></tr>
+
+<tr><td>Total Cost</td><td>166.49</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Join Filter</td><td>(dep.refobjsubid = a.attnum)</td></tr>
+
+<tr><td>Output</td><td>["(current_database())::information_schema.sql_identifier","(nc.nspname)::information_schema.sql_identifier","(c.relname)::information_schema.sql_identifier","(a.attname)::information_schema.sql_identifier","(a.attnum)::information_schema.cardinal_number","(CASE WHEN (a.attgenerated = ''::\"char\") THEN pg_get_expr(ad.adbin, ad.adrelid) ELSE NULL::text END)::information_schema.character_data","(CASE WHEN (a.attnotnull OR ((t.typtype = 'd'::\"char\") AND t.typnotnull)) THEN 'NO'::text ELSE 'YES'::text END)::information_schema.yes_or_no","(CASE WHEN (t.typtype = 'd'::\"char\") THEN CASE WHEN ((bt.typelem <> '0'::oid) AND (bt.typlen = '-1'::integer)) THEN 'ARRAY'::text WHEN (nbt.nspname = 'pg_catalog'::name) THEN format_type(t.typbasetype, NULL::integer) ELSE 'USER-DEFINED'::text END ELSE CASE WHEN ((t.typelem <> '0'::oid) AND (t.typlen = '-1'::integer)) THEN 'ARRAY'::text WHEN (nt.nspname = 'pg_catalog'::name) THEN format_type(a.atttypid, NULL::integer) ELSE 'USER-DEFINED'::text END END)::information_schema.character_data","(information_schema._pg_char_max_length(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*)))::information_schema.cardinal_number","(information_schema._pg_char_octet_length(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*)))::information_schema.cardinal_number","(information_schema._pg_numeric_precision(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*)))::information_schema.cardinal_number","(information_schema._pg_numeric_precision_radix(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*)))::information_schema.cardinal_number","(information_schema._pg_numeric_scale(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*)))::information_schema.cardinal_number","(information_schema._pg_datetime_precision(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*)))::information_schema.cardinal_number","(information_schema._pg_interval_type(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*)))::information_schema.character_data","(NULL::integer)::information_schema.cardinal_number","NULL::information_schema.sql_identifier","NULL::information_schema.sql_identifier","NULL::information_schema.sql_identifier","(CASE WHEN (nco.nspname IS NOT NULL) THEN current_database() ELSE NULL::name END)::information_schema.sql_identifier","(nco.nspname)::information_schema.sql_identifier","(co.collname)::information_schema.sql_identifier","(CASE WHEN (t.typtype = 'd'::\"char\") THEN current_database() ELSE NULL::name END)::information_schema.sql_identifier","(CASE WHEN (t.typtype = 'd'::\"char\") THEN nt.nspname ELSE NULL::name END)::information_schema.sql_identifier","(CASE WHEN (t.typtype = 'd'::\"char\") THEN t.typname ELSE NULL::name END)::information_schema.sql_identifier","(current_database())::information_schema.sql_identifier","(COALESCE(nbt.nspname, nt.nspname))::information_schema.sql_identifier","(COALESCE(bt.typname, t.typname))::information_schema.sql_identifier","NULL::information_schema.sql_identifier","NULL::information_schema.sql_identifier","NULL::information_schema.sql_identifier","(NULL::integer)::information_schema.cardinal_number","(a.attnum)::information_schema.sql_identifier","('NO'::character varying(3))::information_schema.yes_or_no","(CASE WHEN (a.attidentity = ANY ('{a,d}'::\"char\"[])) THEN 'YES'::text ELSE 'NO'::text END)::information_schema.yes_or_no","(CASE a.attidentity WHEN 'a'::\"char\" THEN 'ALWAYS'::text WHEN 'd'::\"char\" THEN 'BY DEFAULT'::text ELSE NULL::text END)::information_schema.character_data","(seq.seqstart)::information_schema.character_data","(seq.seqincrement)::information_schema.character_data","(seq.seqmax)::information_schema.character_data","(seq.seqmin)::information_schema.character_data","(CASE WHEN seq.seqcycle THEN 'YES'::text ELSE 'NO'::text END)::information_schema.yes_or_no","(CASE WHEN (a.attgenerated <> ''::\"char\") THEN 'ALWAYS'::text ELSE 'NEVER'::text END)::information_schema.character_data","(CASE WHEN (a.attgenerated <> ''::\"char\") THEN pg_get_expr(ad.adbin, ad.adrelid) ELSE NULL::text END)::information_schema.character_data","(CASE WHEN ((c.relkind = ANY ('{r,p}'::\"char\"[])) OR ((c.relkind = ANY ('{v,f}'::\"char\"[])) AND pg_column_is_updatable((c.oid)::regclass, a.attnum, false))) THEN 'YES'::text ELSE 'NO'::text END)::information_schema.yes_or_no"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>89</td></tr>
+
+<tr><td>Startup Cost</td><td>154.1</td></tr>
+
+<tr><td>Actual Total Time</td><td>2.043</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Width</td><td>1796</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>34</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>2</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>2.037</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Nested Loop</td></tr>
+
+<tr><td>Rows Removed by Join Filter</td><td>0</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>NESTED LOOP</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,58<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class='stats-y'>28,19<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Left
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Right</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Inner Unique</td><td>false</td></tr>
+
+<tr><td>Total Cost</td><td>153.86</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["t.typtype","t.typnotnull","t.typbasetype","t.typelem","t.typlen","t.*","t.typname","bt.typelem","bt.typlen","bt.typname","nbt.nspname","a.attname","a.attnum","a.attgenerated","a.attnotnull","a.atttypid","a.*","a.attidentity","ad.adbin","ad.adrelid","c.relname","c.relkind","c.oid","nc.nspname","nt.nspname","co.collname","nco.nspname"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>65</td></tr>
+
+<tr><td>Startup Cost</td><td>153.66</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.766</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>1187</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>29</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>2</td></tr>
+
+<tr><td>Merge Cond</td><td>(co.oid = a.attcollation)</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.76</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Merge Join</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>MERGE JOIN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,15<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Right
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Inner</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>740</td></tr>
+
+<tr><td>Inner Unique</td><td>true</td></tr>
+
+<tr><td>Total Cost</td><td>133.71</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Join Filter</td><td>((co.collnamespace = nco.oid) AND ((nco.nspname <> 'pg_catalog'::name) OR (co.collname <> 'default'::name)))</td></tr>
+
+<tr><td>Output</td><td>["co.collname","co.oid","nco.nspname"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>4</td></tr>
+
+<tr><td>Startup Cost</td><td>0.28</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.019</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>132</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.018</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Nested Loop</td></tr>
+
+<tr><td>Rows Removed by Join Filter</td><td>9</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>NESTED LOOP</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,01<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,44<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Inner
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    <span class='tag'>bad estimate</span>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_collation</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Index Name</td><td>pg_collation_oid_index</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>740</td></tr>
+
+<tr><td>Total Cost</td><td>54.38</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["co.oid","co.collname","co.collnamespace","co.collowner","co.collprovider","co.collisdeterministic","co.collencoding","co.collcollate","co.collctype","co.collversion"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>3</td></tr>
+
+<tr><td>Startup Cost</td><td>0.28</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.005</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>72</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Scan Direction</td><td>Forward</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.005</td></tr>
+
+<tr><td>Alias</td><td>co</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Index Scan</td></tr>
+
+<tr><td>Actual Rows</td><td>2</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>INDEX SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,01<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,24<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>2</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_collation
+			(co)
+    </div>
+    <div><span class='text-muted'>using </span>
+    pg_collation_oid_index
+    </div>
+
+    <div>
+    <span class='tag'>bad estimate</span>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>68</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>6</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Total Cost</td><td>1.09</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.004</td></tr>
+
+<tr><td>Actual Loops</td><td>2</td></tr>
+
+<tr><td>Node Type</td><td>Materialize</td></tr>
+
+<tr><td>Output</td><td>["nco.nspname","nco.oid"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>1</td></tr>
+
+<tr><td>Startup Cost</td><td>0.0</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.005</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Actual Rows</td><td>5</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>MATERIALIZE</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>-0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>-0,1<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>5</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_namespace</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>6</td></tr>
+
+<tr><td>Total Cost</td><td>1.06</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["nco.nspname","nco.oid"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>1</td></tr>
+
+<tr><td>Startup Cost</td><td>0.0</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.007</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>68</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.006</td></tr>
+
+<tr><td>Alias</td><td>nco</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Seq Scan</td></tr>
+
+<tr><td>Actual Rows</td><td>6</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>SEQ SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,01<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,34<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>6</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_namespace
+			(nco)
+    </div>
+
+    <div>
+    <span class='tag'>largest</span>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Sort Key</td><td>["a.attcollation"]</td></tr>
+
+<tr><td>Total Cost</td><td>153.39</td></tr>
+
+<tr><td>Sort Method</td><td>quicksort</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["t.typtype","t.typnotnull","t.typbasetype","t.typelem","t.typlen","t.*","t.typname","bt.typelem","bt.typlen","bt.typname","nbt.nspname","a.attname","a.attnum","a.attgenerated","a.attnotnull","a.atttypid","a.*","a.attidentity","a.attcollation","ad.adbin","ad.adrelid","c.relname","c.relkind","c.oid","nc.nspname","nt.nspname"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>61</td></tr>
+
+<tr><td>Startup Cost</td><td>153.39</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.744</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Sort Space Used</td><td>26</td></tr>
+
+<tr><td>Plan Width</td><td>1063</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Sort Space Type</td><td>Memory</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>29</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>2</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.74</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Sort</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>SORT</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,01<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,29<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+			<div>
+			<span class='text-muted'>by 
+			</span>
+			a.attcollation
+			</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Inner</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Inner Unique</td><td>true</td></tr>
+
+<tr><td>Total Cost</td><td>153.38</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Join Filter</td><td>(t.typnamespace = nt.oid)</td></tr>
+
+<tr><td>Output</td><td>["t.typtype","t.typnotnull","t.typbasetype","t.typelem","t.typlen","t.*","t.typname","bt.typelem","bt.typlen","bt.typname","nbt.nspname","a.attname","a.attnum","a.attgenerated","a.attnotnull","a.atttypid","a.*","a.attidentity","a.attcollation","ad.adbin","ad.adrelid","c.relname","c.relkind","c.oid","nc.nspname","nt.nspname"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>61</td></tr>
+
+<tr><td>Startup Cost</td><td>1.1</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.738</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>1063</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>29</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>2</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.689</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Nested Loop</td></tr>
+
+<tr><td>Rows Removed by Join Filter</td><td>3</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>NESTED LOOP</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,1<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Inner
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Inner</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Inner Unique</td><td>true</td></tr>
+
+<tr><td>Total Cost</td><td>152.24</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Join Filter</td><td>(c.relnamespace = nc.oid)</td></tr>
+
+<tr><td>Output</td><td>["t.typtype","t.typnotnull","t.typbasetype","t.typelem","t.typlen","t.*","t.typname","t.typnamespace","bt.typelem","bt.typlen","bt.typname","nbt.nspname","a.attname","a.attnum","a.attgenerated","a.attnotnull","a.atttypid","a.*","a.attidentity","a.attcollation","ad.adbin","ad.adrelid","c.relname","c.relkind","c.oid","nc.nspname"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>60</td></tr>
+
+<tr><td>Startup Cost</td><td>1.1</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.735</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>1003</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>29</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>2</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.686</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Nested Loop</td></tr>
+
+<tr><td>Rows Removed by Join Filter</td><td>2</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>NESTED LOOP</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,1<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Inner
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Inner</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Inner Unique</td><td>true</td></tr>
+
+<tr><td>Total Cost</td><td>151.12</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["t.typtype","t.typnotnull","t.typbasetype","t.typelem","t.typlen","t.*","t.typname","t.typnamespace","bt.typelem","bt.typlen","bt.typname","nbt.nspname","a.attname","a.attnum","a.attgenerated","a.attnotnull","a.atttypid","a.*","a.attidentity","a.attcollation","ad.adbin","ad.adrelid","c.relname","c.relkind","c.oid","c.relnamespace"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>53</td></tr>
+
+<tr><td>Startup Cost</td><td>1.1</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.717</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>943</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>29</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>2</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.669</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Nested Loop</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>NESTED LOOP</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,1<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Inner
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Left</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Inner Unique</td><td>true</td></tr>
+
+<tr><td>Total Cost</td><td>142.81</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["t.typtype","t.typnotnull","t.typbasetype","t.typelem","t.typlen","t.*","t.typname","t.typnamespace","bt.typelem","bt.typlen","bt.typname","nbt.nspname","a.attname","a.attnum","a.attgenerated","a.attnotnull","a.atttypid","a.*","a.attidentity","a.attrelid","a.attcollation","ad.adbin","ad.adrelid"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>50</td></tr>
+
+<tr><td>Startup Cost</td><td>0.83</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.709</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>874</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>29</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>2</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.662</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Nested Loop</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>NESTED LOOP</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,1<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Left
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Left</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Inner Unique</td><td>false</td></tr>
+
+<tr><td>Total Cost</td><td>134.62</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Join Filter</td><td>(t.typtype = 'd'::"char")</td></tr>
+
+<tr><td>Output</td><td>["t.typtype","t.typnotnull","t.typbasetype","t.typelem","t.typlen","t.*","t.typname","t.typnamespace","bt.typelem","bt.typlen","bt.typname","nbt.nspname","a.attname","a.attnum","a.attgenerated","a.attnotnull","a.atttypid","a.*","a.attidentity","a.attrelid","a.attcollation"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>49</td></tr>
+
+<tr><td>Startup Cost</td><td>0.68</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.706</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>838</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>29</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>2</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.659</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Nested Loop</td></tr>
+
+<tr><td>Rows Removed by Join Filter</td><td>0</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>NESTED LOOP</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,1<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Left
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Inner</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Inner Unique</td><td>true</td></tr>
+
+<tr><td>Total Cost</td><td>134.0</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["a.attname","a.attnum","a.attgenerated","a.attnotnull","a.atttypid","a.*","a.attidentity","a.attrelid","a.attcollation","t.typtype","t.typnotnull","t.typbasetype","t.typelem","t.typlen","t.*","t.typname","t.typnamespace"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>47</td></tr>
+
+<tr><td>Startup Cost</td><td>0.27</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.702</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>704</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>29</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>2</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.655</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Nested Loop</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>NESTED LOOP</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,15<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Inner
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_attribute</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Total Cost</td><td>125.68</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["a.attname","a.attnum","a.attgenerated","a.attnotnull","a.atttypid","a.*","a.attidentity","a.attrelid","a.attcollation"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>44</td></tr>
+
+<tr><td>Startup Cost</td><td>0.0</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.692</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>344</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>29</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>2</td></tr>
+
+<tr><td>Rows Removed by Filter</td><td>3511</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.646</td></tr>
+
+<tr><td>Filter</td><td>((NOT a.attisdropped) AND (a.attnum > 0) AND (a.attname = 'jsonb'::name))</td></tr>
+
+<tr><td>Alias</td><td>a</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Seq Scan</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>SEQ SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,69<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class='stats-r'>33,87<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_attribute
+			(a)
+    </div>
+
+    <div>
+    <span class='tag'>slowest</span>
+    <span class='tag'>costliest</span>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_type</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Index Name</td><td>pg_type_oid_index</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Total Cost</td><td>8.29</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["t.typtype","t.typnotnull","t.typbasetype","t.typelem","t.typlen","t.*","t.typname","t.typnamespace","t.oid"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>3</td></tr>
+
+<tr><td>Startup Cost</td><td>0.27</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.007</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>364</td></tr>
+
+<tr><td>Rows Removed by Index Recheck</td><td>0</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Scan Direction</td><td>Forward</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.007</td></tr>
+
+<tr><td>Alias</td><td>t</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Index Scan</td></tr>
+
+<tr><td>Index Cond</td><td>(t.oid = a.atttypid)</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>INDEX SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,01<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,34<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_type
+			(t)
+    </div>
+    <div><span class='text-muted'>using </span>
+    pg_type_oid_index
+    </div>
+    <div><span class='text-muted'>with </span>
+			(t.oid = a.atttypid)
+	</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+</ul>
+
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Inner</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Inner Unique</td><td>true</td></tr>
+
+<tr><td>Total Cost</td><td>0.61</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["bt.typelem","bt.typlen","bt.typname","bt.oid","nbt.nspname"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>2</td></tr>
+
+<tr><td>Startup Cost</td><td>0.41</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.002</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>138</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.002</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Nested Loop</td></tr>
+
+<tr><td>Actual Rows</td><td>0</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>NESTED LOOP</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Inner
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_type</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Index Name</td><td>pg_type_oid_index</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Total Cost</td><td>0.42</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["bt.oid","bt.typname","bt.typnamespace","bt.typowner","bt.typlen","bt.typbyval","bt.typtype","bt.typcategory","bt.typispreferred","bt.typisdefined","bt.typdelim","bt.typrelid","bt.typelem","bt.typarray","bt.typinput","bt.typoutput","bt.typreceive","bt.typsend","bt.typmodin","bt.typmodout","bt.typanalyze","bt.typalign","bt.typstorage","bt.typnotnull","bt.typbasetype","bt.typtypmod","bt.typndims","bt.typcollation","bt.typdefaultbin","bt.typdefault","bt.typacl"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>2</td></tr>
+
+<tr><td>Startup Cost</td><td>0.27</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.002</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>78</td></tr>
+
+<tr><td>Rows Removed by Index Recheck</td><td>0</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Scan Direction</td><td>Forward</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.002</td></tr>
+
+<tr><td>Alias</td><td>bt</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Index Scan</td></tr>
+
+<tr><td>Index Cond</td><td>(bt.oid = t.typbasetype)</td></tr>
+
+<tr><td>Actual Rows</td><td>0</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>INDEX SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,1<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_type
+			(bt)
+    </div>
+    <div><span class='text-muted'>using </span>
+    pg_type_oid_index
+    </div>
+    <div><span class='text-muted'>with </span>
+			(bt.oid = t.typbasetype)
+	</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_namespace</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Index Name</td><td>pg_namespace_oid_index</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Total Cost</td><td>0.17</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["nbt.oid","nbt.nspname","nbt.nspowner","nbt.nspacl"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Startup Cost</td><td>0.13</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.0</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>68</td></tr>
+
+<tr><td>Rows Removed by Index Recheck</td><td>0</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Scan Direction</td><td>Forward</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.0</td></tr>
+
+<tr><td>Alias</td><td>nbt</td></tr>
+
+<tr><td>Actual Loops</td><td>0</td></tr>
+
+<tr><td>Node Type</td><td>Index Scan</td></tr>
+
+<tr><td>Index Cond</td><td>(nbt.oid = bt.typnamespace)</td></tr>
+
+<tr><td>Actual Rows</td><td>0</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>INDEX SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_namespace
+			(nbt)
+    </div>
+    <div><span class='text-muted'>using </span>
+    pg_namespace_oid_index
+    </div>
+    <div><span class='text-muted'>with </span>
+			(nbt.oid = bt.typnamespace)
+	</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_attrdef</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Index Name</td><td>pg_attrdef_adrelid_adnum_index</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Total Cost</td><td>8.17</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["ad.oid","ad.adrelid","ad.adnum","ad.adbin"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>1</td></tr>
+
+<tr><td>Startup Cost</td><td>0.15</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.001</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>38</td></tr>
+
+<tr><td>Rows Removed by Index Recheck</td><td>0</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Scan Direction</td><td>Forward</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.001</td></tr>
+
+<tr><td>Alias</td><td>ad</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Index Scan</td></tr>
+
+<tr><td>Index Cond</td><td>((ad.adrelid = a.attrelid) AND (ad.adnum = a.attnum))</td></tr>
+
+<tr><td>Actual Rows</td><td>0</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>INDEX SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,05<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_attrdef
+			(ad)
+    </div>
+    <div><span class='text-muted'>using </span>
+    pg_attrdef_adrelid_adnum_index
+    </div>
+    <div><span class='text-muted'>with </span>
+			((ad.adrelid = a.attrelid) 
+			<span class='text-muted'>...</span>
+	</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+</ul>
+
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_class</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Index Name</td><td>pg_class_oid_index</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Total Cost</td><td>8.3</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["c.oid","c.relname","c.relnamespace","c.reltype","c.reloftype","c.relowner","c.relam","c.relfilenode","c.reltablespace","c.relpages","c.reltuples","c.relallvisible","c.reltoastrelid","c.relhasindex","c.relisshared","c.relpersistence","c.relkind","c.relnatts","c.relchecks","c.relhasrules","c.relhastriggers","c.relhassubclass","c.relrowsecurity","c.relforcerowsecurity","c.relispopulated","c.relreplident","c.relispartition","c.relrewrite","c.relfrozenxid","c.relminmxid","c.relacl","c.reloptions","c.relpartbound"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>3</td></tr>
+
+<tr><td>Startup Cost</td><td>0.27</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.006</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>77</td></tr>
+
+<tr><td>Rows Removed by Index Recheck</td><td>0</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Rows Removed by Filter</td><td>0</td></tr>
+
+<tr><td>Scan Direction</td><td>Forward</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.006</td></tr>
+
+<tr><td>Filter</td><td>((c.relkind = ANY ('{r,v,f,p}'::"char"[])) AND (pg_has_role(c.relowner, 'USAGE'::text) OR has_column_privilege(c.oid, a.attnum, 'SELECT, INSERT, UPDATE, REFERENCES'::text)))</td></tr>
+
+<tr><td>Alias</td><td>c</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Index Scan</td></tr>
+
+<tr><td>Index Cond</td><td>(c.oid = a.attrelid)</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>INDEX SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,01<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,29<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_class
+			(c)
+    </div>
+    <div><span class='text-muted'>using </span>
+    pg_class_oid_index
+    </div>
+    <div><span class='text-muted'>with </span>
+			(c.oid = a.attrelid)
+	</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+</ul>
+
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_namespace</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>4</td></tr>
+
+<tr><td>Total Cost</td><td>1.07</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["nc.oid","nc.nspname","nc.nspowner","nc.nspacl"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>7</td></tr>
+
+<tr><td>Startup Cost</td><td>0.0</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.016</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>68</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Rows Removed by Filter</td><td>2</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.013</td></tr>
+
+<tr><td>Filter</td><td>(NOT pg_is_other_temp_schema(nc.oid))</td></tr>
+
+<tr><td>Alias</td><td>nc</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Seq Scan</td></tr>
+
+<tr><td>Actual Rows</td><td>3</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>SEQ SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,02<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,78<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>3</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_namespace
+			(nc)
+    </div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+</ul>
+
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_namespace</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>6</td></tr>
+
+<tr><td>Total Cost</td><td>1.06</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["nt.oid","nt.nspname","nt.nspowner","nt.nspacl"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>1</td></tr>
+
+<tr><td>Startup Cost</td><td>0.0</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.001</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>68</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.001</td></tr>
+
+<tr><td>Alias</td><td>nt</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Seq Scan</td></tr>
+
+<tr><td>Actual Rows</td><td>4</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>SEQ SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,05<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>4</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_namespace
+			(nt)
+    </div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Join Type</td><td>Inner</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Inner Unique</td><td>true</td></tr>
+
+<tr><td>Total Cost</td><td>7.2</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["dep.refobjid","dep.refobjsubid","seq.seqstart","seq.seqincrement","seq.seqmax","seq.seqmin","seq.seqcycle"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Startup Cost</td><td>0.44</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.701</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>41</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>5</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.7</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Nested Loop</td></tr>
+
+<tr><td>Actual Rows</td><td>0</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>NESTED LOOP</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,15<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		Inner
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_depend</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Index Name</td><td>pg_depend_reference_index</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Total Cost</td><td>2.45</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["dep.classid","dep.objid","dep.objsubid","dep.refclassid","dep.refobjid","dep.refobjsubid","dep.deptype"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Startup Cost</td><td>0.29</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.687</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Outer</td></tr>
+
+<tr><td>Plan Width</td><td>12</td></tr>
+
+<tr><td>Rows Removed by Index Recheck</td><td>0</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>4</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Rows Removed by Filter</td><td>4</td></tr>
+
+<tr><td>Scan Direction</td><td>Forward</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.686</td></tr>
+
+<tr><td>Filter</td><td>((dep.classid = '1259'::oid) AND (dep.deptype = 'i'::"char"))</td></tr>
+
+<tr><td>Alias</td><td>dep</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Index Scan</td></tr>
+
+<tr><td>Index Cond</td><td>((dep.refclassid = '1259'::oid) AND (dep.refobjid = c.oid))</td></tr>
+
+<tr><td>Actual Rows</td><td>1</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>INDEX SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,69<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class='stats-r'>33,63<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>1</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_depend
+			(dep)
+    </div>
+    <div><span class='text-muted'>using </span>
+    pg_depend_reference_index
+    </div>
+    <div><span class='text-muted'>with </span>
+			((dep.refclassid = '1259'::
+			<span class='text-muted'>...</span>
+	</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="tooltip-content">
+<tr><td>Relation Name</td><td>pg_sequence</td></tr>
+
+<tr><td>Schema</td><td>pg_catalog</td></tr>
+
+<tr><td>Index Name</td><td>pg_sequence_seqrelid_index</td></tr>
+
+<tr><td>Temp Written Blocks</td><td>0</td></tr>
+
+<tr><td>Local Read Blocks</td><td>0</td></tr>
+
+<tr><td>Plan Rows</td><td>1</td></tr>
+
+<tr><td>Total Cost</td><td>4.74</td></tr>
+
+<tr><td>Local Written Blocks</td><td>0</td></tr>
+
+<tr><td>Output</td><td>["seq.seqrelid","seq.seqtypid","seq.seqstart","seq.seqincrement","seq.seqmax","seq.seqmin","seq.seqcache","seq.seqcycle"]</td></tr>
+
+<tr><td>Shared Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Startup Cost</td><td>0.15</td></tr>
+
+<tr><td>Actual Total Time</td><td>0.011</td></tr>
+
+<tr><td>Local Hit Blocks</td><td>0</td></tr>
+
+<tr><td>Parent Relationship</td><td>Inner</td></tr>
+
+<tr><td>Plan Width</td><td>37</td></tr>
+
+<tr><td>Rows Removed by Index Recheck</td><td>0</td></tr>
+
+<tr><td>Local Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Temp Read Blocks</td><td>0</td></tr>
+
+<tr><td>Shared Read Blocks</td><td>1</td></tr>
+
+<tr><td>Shared Dirtied Blocks</td><td>0</td></tr>
+
+<tr><td>Scan Direction</td><td>Forward</td></tr>
+
+<tr><td>Parallel Aware</td><td>false</td></tr>
+
+<tr><td>Actual Startup Time</td><td>0.011</td></tr>
+
+<tr><td>Alias</td><td>seq</td></tr>
+
+<tr><td>Actual Loops</td><td>1</td></tr>
+
+<tr><td>Node Type</td><td>Index Scan</td></tr>
+
+<tr><td>Index Cond</td><td>(seq.seqrelid = dep.objid)</td></tr>
+
+<tr><td>Actual Rows</td><td>0</td></tr>
+
+<tr><td>Shared Written Blocks</td><td>0</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>INDEX SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,01<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>0,54<span class='text-muted'>%</span></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><span class='text-muted'>on </span>
+pg_catalog.pg_sequence
+			(seq)
+    </div>
+    <div><span class='text-muted'>using </span>
+    pg_sequence_seqrelid_index
+    </div>
+    <div><span class='text-muted'>with </span>
+			(seq.seqrelid = dep.objid)
+	</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul></div>
+
+</body>
+</html>
