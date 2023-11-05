@@ -1,0 +1,132 @@
+th {
+    font-size: 13px;
+    margin-left: 5;
+    margin-right: 5;
+}
+
+td {
+    color: #999ea7;
+    margin-left: 5;
+    margin-right: 5;
+}
+
+.text-muted {
+    color: #999ea7;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #FB4418;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    padding: 3px;
+    border-radius: 3px;
+    line-height: 1.1;
+}
+
+.yellow {
+    background-color: yellow;
+    color: #000;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    padding: 3px;
+    border-radius: 3px;
+    line-height: 1.1;
+}
+
+.node-duration {
+    text-align: right
+}
+
+.node-duration-time {
+    float: right;
+    font-size: 13px;
+}
+
+.stats-y {
+    float: right;
+    font-size: 10px;
+    background-color: yellow;
+    color: #000;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    padding: 3px;
+    border-radius: 3px;
+    line-height: 1.1;
+}
+
+.stats-r {
+    float: right;
+    font-size: 10px;
+    background-color: #FB4418;
+    color: #fff;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    line-height: 1.1;
+}
+
+.stats {
+    float: right;
+    font-size: 10px;
+}
+
+.node {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.node-table {
+    width: 100%;
+}
+
+.node-title {
+    font-size: 13px;
+    font-weight: normal;
+    margin: 0
+}
+
+.node-content {
+    background: white;
+    order-width: 2px;
+    border-style: solid;
+    border-color: #999ea7;
+    border-radius: 5px;
+    padding: 5px
+}
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+ /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    top: 100%;
+    left: -20%;
+    WIDTH: max-content;
+    visibility: hidden;
+  /*color: #fff;*/
+    background-color: white;
+    text-align: center;
+    padding: 5px 0;
+  /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltiptext tr:nth-child(even) {
+    background-color: #D6EEEE;
+}
