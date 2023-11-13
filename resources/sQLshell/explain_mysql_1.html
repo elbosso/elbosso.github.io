@@ -1,0 +1,388 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
+<link rel="stylesheet" href="https://elbosso.github.io/css/explain.css">
+</head>
+<body>
+<div style="text-align: center">
+<div style="display: inline-block;margin:auto">
+
+<table>
+    <tr>
+        <th>0,04</th>
+        <th>0</th>
+        <th>0,03</th>
+        <th>0</th>
+        <th>1,03</th>
+    </tr>
+    <tr>
+        <td>execution time (ms)</td>
+        <td>planning time (ms)</td>
+        <td>slowest node (ms)</td>
+        <td>largest node (rows)</td>
+        <td>costliest node</td>
+    </tr>
+</table>
+<hr/>
+
+</div>
+</div>
+
+<div class="tf-tree">
+<ul>
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="node-content">
+<tr><td>a</td><td>{}</td></tr>
+
+<tr><td>b</td><td>{"actual time":"0.043..0.043","loops":"1","Actual Total Time":"0.043","rows":"0"}</td></tr>
+
+<tr><td>Indent Depth</td><td>0</td></tr>
+
+<tr><td>Node Type</td><td>Limit/Offset</td></tr>
+
+<tr><td>Limit</td><td>10</td></tr>
+
+<tr><td>Offset</td><td>5</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>LIMIT/OFFSET</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>NaN</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		<span class='text-muted'>Limit </span>
+		10
+		</div>
+		<div>
+		<span class='text-muted'>Offset </span>
+		5
+		</div>
+
+    <div>
+    <span class='tag'>largest</span>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="node-content">
+<tr><td>Order</td><td>ASC</td></tr>
+
+<tr><td>b</td><td>{"actual time":"0.041..0.041","loops":"1","Actual Total Time":"0.041","rows":"0"}</td></tr>
+
+<tr><td>Indent Depth</td><td>4</td></tr>
+
+<tr><td>Column</td><td>EXAMPLE1.EXPERIENCE</td></tr>
+
+<tr><td>Node Type</td><td>Sort</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>SORT</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,01<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>NaN</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		<span class='text-muted'>Column </span>
+		EXAMPLE1.EXPERIENCE
+		</div>
+		<div>
+		<span class='text-muted'>Order </span>
+		ASC
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="node-content">
+<tr><td>a</td><td>{"cost":"1.45","rows":"0.3"}</td></tr>
+
+<tr><td>b</td><td>{"actual time":"0.032..0.032","loops":"1","Actual Total Time":"0.032","rows":"0"}</td></tr>
+
+<tr><td>Indent Depth</td><td>8</td></tr>
+
+<tr><td>Node Type</td><td>-> Stream results  </td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>-> STREAM RESULTS  </H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>NaN</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="node-content">
+<tr><td>a</td><td>{"cost":"1.45","rows":"0.3"}</td></tr>
+
+<tr><td>b</td><td>{"actual time":"0.029..0.029","loops":"1","Actual Total Time":"0.029","rows":"0"}</td></tr>
+
+<tr><td>Indent Depth</td><td>12</td></tr>
+
+<tr><td>Node Type</td><td>Nested loop</td></tr>
+
+<tr><td>Join Type</td><td>inner</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>NESTED LOOP</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class='stats-r'>∞</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		inner
+		<span class='text-muted'> Join
+		</span>
+		</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="node-content">
+<tr><td>Table Name</td><td>ADDRESS2</td></tr>
+
+<tr><td>a</td><td>{"cost":"0.35","rows":"1"}</td></tr>
+
+<tr><td>b</td><td>{"actual time":"0.028..0.028","loops":"1","Actual Total Time":"0.028","rows":"0"}</td></tr>
+
+<tr><td>Indent Depth</td><td>16</td></tr>
+
+<tr><td>Node Type</td><td>Table scan</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>TABLE SCAN</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0,03<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class='stats-r'>∞</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+		<div>
+		<span class='text-muted'>Table </span>
+		ADDRESS2
+		</div>
+
+    <div>
+    <span class='tag'>slowest</span>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="node-content">
+<tr><td>a</td><td>{"cost":"1.03","rows":"0.3"}</td></tr>
+
+<tr><td>b</td><td>{}</td></tr>
+
+<tr><td>Indent Depth</td><td>16</td></tr>
+
+<tr><td>Node Type</td><td>Filter</td></tr>
+
+<tr><td>Filter Expression</td><td>["EXAMPLE1.EXPERIENCE > 20"]</td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>FILTER</H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class=' stats'>NaN</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+			<div>
+			<span class='text-muted'>by
+			</span>
+			EXAMPLE1.EXPERIENCE > 20
+			</div>
+
+    <div>
+    </div>
+	</div>
+</div>
+
+</span>
+<ul>
+
+<li><span class="tf-nc tooltip">
+
+<div class="tooltiptext"><table class="node-content">
+<tr><td>a</td><td>{"cost":"1.03","rows":"1"}</td></tr>
+
+<tr><td>b</td><td>{}</td></tr>
+
+<tr><td>Indent Depth</td><td>20</td></tr>
+
+<tr><td>Node Type</td><td>-> Single-row index lookup on EXAMPLE1 using PRIMARY (ID=ADDRESS2.PERSON_ID)  </td></tr>
+
+</table></div>
+<div class='node'>
+	<div class='node-content'>
+    <div class='node-heading'>
+        <table class='node-table'>
+            <tr>
+                <td><H4 class='node-title'>-> SINGLE-ROW INDEX LOOKUP ON EXAMPLE1 USING PRIMARY (ID=ADDRESS2.PERSON_ID)  </H4></td>
+                <td class='node-duration'>
+                <span class='node-duration-time'>0<span class='text-muted'>ms</span></span>
+                <span>|</span>
+                <span class='stats-r'>∞</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class='node-duration'>
+                <span class='stats'><span class='text-muted'>Rows: </span>0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+    <span class='tag'>costliest</span>
+    </div>
+	</div>
+</div>
+
+</span>
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul></div>
+
+</body>
+</html>
