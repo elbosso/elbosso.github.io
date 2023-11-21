@@ -38,11 +38,14 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_dynamicmbean_wrapper_javabeans [label="DynamicMBean Wrapper für JavaBeans" href="https://elbosso.github.io/dynamicmbean_wrapper_javabeans.html"]
+node_postgres_explain_visualisierung_plugin___update [label="Postgres Explain Visualisierung Plugin - Update" href="https://elbosso.github.io/postgres_explain_visualisierung_plugin___update.html"]
+            node_postgres_explain_visualisierung_plugin___update -> node_visualisierung_explain_mysql
+node_postgres_explain_visualisierung_plugin [label="Postgres Explain Visualisierung als Plugin" href="https://elbosso.github.io/postgres_explain_visualisierung_plugin.html"]
+            node_postgres_explain_visualisierung_plugin -> node_postgres_explain_visualisierung_plugin___update
 node_beaninfo_runtime_annotations_feature_complete_baelde_open_source [label="BeanInfo durch Runtime-Annotations feature-complete und in Bälde Open Source" href="https://elbosso.github.io/beaninfo_runtime_annotations_feature_complete_baelde_open_source.html"]
             node_beaninfo_runtime_annotations_feature_complete_baelde_open_source -> node_dynamicmbean_wrapper_javabeans
 node_draw_io_docker_zoo [label="Draw.IO im Docker-Zoo" href="https://elbosso.github.io/draw_io_docker_zoo.html"]
-node_postgres_explain_visualisierung_plugin___update [label="Postgres Explain Visualisierung Plugin - Update" href="https://elbosso.github.io/postgres_explain_visualisierung_plugin___update.html"]
-            node_postgres_explain_visualisierung_plugin___update -> node_visualisierung_explain_mysql
 node_sqlshell_version_7_7pre3_build_10263 [label="sQLshell Version 7.7pre3 build 10263" href="https://elbosso.github.io/sqlshell_version_7_7pre3_build_10263.html"]
 node_desktop_widgets_java [label="Desktop Widgets in Java" href="https://elbosso.github.io/desktop_widgets_java.html"]
 node_freepad_docker_zoo [label="FreePad im Docker-Zoo" href="https://elbosso.github.io/freepad_docker_zoo.html"]
@@ -213,8 +216,6 @@ node_tail__f_ist_eine_schlechte_idee [label="Tail -f ist eine schlechte Idee" hr
             node_tail__f_ist_eine_schlechte_idee -> node_opensource___lieben__hassen___beides_
 node_neues_interface_plugins [label="Neues Interface für Plugins" href="https://elbosso.github.io/neues_interface_plugins.html"]
             node_neues_interface_plugins -> node_neues_interface_plugins
-node_postgres_explain_visualisierung_plugin [label="Postgres Explain Visualisierung als Plugin" href="https://elbosso.github.io/postgres_explain_visualisierung_plugin.html"]
-            node_postgres_explain_visualisierung_plugin -> node_postgres_explain_visualisierung_plugin___update
 node_bpmn_modeler_docker [label="BPMN-Modeler in Docker" href="https://elbosso.github.io/bpmn_modeler_docker.html"]
             node_bpmn_modeler_docker -> node_postgres_explain_visualisierung_plugin
 node_sqlshell_version_7_6_bringt_unterstuetzung_den_datentyp_json [label="sQLshell Version 7.6 bringt Unterstützung für den Datentyp JSON" href="https://elbosso.github.io/sqlshell_version_7_6_bringt_unterstuetzung_den_datentyp_json.html"]
@@ -1299,8 +1300,8 @@ node_garten_fruehjahr_2018 [label="Garten im Frühjahr 2018" href="https://elbos
 node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" href="https://elbosso.github.io/linux_wifi_accesspoint_aus_raspi.html"]
             node_linux_wifi_accesspoint_aus_raspi -> node_raspberry_pi_ads_b_receiver
 node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
-            node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
+            node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_visualisierung_strange_attractors_java3d
             node_implizites_eulerverfahren -> node_mathematik_beliebiger_praezision_java
@@ -1345,8 +1346,8 @@ node_batik_java9_modulsystem_____9760_ [label="Batik und Java9 Modulsystem = &#9
             node_batik_java9_modulsystem_____9760_ -> node_faehrnisse_des_buildprozesses_unter_windows
 node_java_bug_modulsystem_nutzung_jaas [label="Java-Bug in Modulsystem bei Nutzung von JAAS" href="https://elbosso.github.io/java_bug_modulsystem_nutzung_jaas.html"]
             node_java_bug_modulsystem_nutzung_jaas -> node_java9_umstellung
-            node_java_bug_modulsystem_nutzung_jaas -> node_aenderungen_datumsformat_java___schon_wieder_
             node_java_bug_modulsystem_nutzung_jaas -> node_batik_java9_modulsystem_____9760_
+            node_java_bug_modulsystem_nutzung_jaas -> node_aenderungen_datumsformat_java___schon_wieder_
             node_java_bug_modulsystem_nutzung_jaas -> node_rechtevergabe_java
 node_beaninfo_runtime_annotations [label="BeanInfo durch Runtime-Annotations" href="https://elbosso.github.io/beaninfo_runtime_annotations.html"]
             node_beaninfo_runtime_annotations -> node_beaninfo_runtime_annotations__gist_
@@ -1982,6 +1983,7 @@ node_odata_metadatenextraktion [label="OData Metadatenextraktion" href="https://
             node_odata_metadatenextraktion -> node_odata_content_browser
 node_odata_jdbc_sqlshell [label="OData per JDBC in der sQLshell" href="https://elbosso.github.io/odata_jdbc_sqlshell.html"]
             node_odata_jdbc_sqlshell -> node_odata_metadatenextraktion
+            node_odata_jdbc_sqlshell -> node_odata_content_browser
 node_java_linksammlung_i [label="Java-Linksammlung I" href="https://elbosso.github.io/java_linksammlung_i.html"]
 node_netzwerk_linksammlung_i [label="Netzwerk-Linksammlung I" href="https://elbosso.github.io/netzwerk_linksammlung_i.html"]
 node_ebmap4d___geojson [label="EBMap4D & GeoJSON" href="https://elbosso.github.io/ebmap4d___geojson.html"]
@@ -2164,8 +2166,8 @@ node_tpedit [label="TPEdit" href="https://elbosso.github.io/tpedit.html"]
             node_tpedit -> node_fop_pdf_formulare
             node_tpedit -> node_fop_pdf_formulare_mittels_itext
             node_tpedit -> node_tpedit_erstellt_interaktive_formulare
-            node_tpedit -> node_tpedit_unterstuetzt_tags
             node_tpedit -> node_tpedit_referenzen
+            node_tpedit -> node_tpedit_unterstuetzt_tags
 node_threedialwatch [label="ThreeDialWatch" href="https://elbosso.github.io/threedialwatch.html"]
             node_threedialwatch -> node_daylight
 node_java_api_aenderung_fuehrt_bug [label="Java-API-Änderung führt zu Bug" href="https://elbosso.github.io/java_api_aenderung_fuehrt_bug.html"]
