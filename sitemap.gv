@@ -40,11 +40,17 @@ rankdir=LR
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
 node_migration_weg_repsy [label="Migration weg von Repsy" href="https://elbosso.github.io/migration_weg_repsy.html"]
             node_migration_weg_repsy -> node_eigener_sache_blick_auf_2024
+node_validierung_elektronischer_client_zertifikate [label="Validierung elektronischer Client-Zertifikate" href="https://elbosso.github.io/validierung_elektronischer_client_zertifikate.html"]
+            node_validierung_elektronischer_client_zertifikate -> node_bad_certificates_version_1_0_0
+node_wie_man__nicht__thema_auf_defcon_wird___ [label="Wie man *nicht* zum Thema auf der DefCon wird..." href="https://elbosso.github.io/wie_man__nicht__thema_auf_defcon_wird___.html"]
+            node_wie_man__nicht__thema_auf_defcon_wird___ -> node_validierung_elektronischer_client_zertifikate
+            node_wie_man__nicht__thema_auf_defcon_wird___ -> node_minimierung_angriffsoberflaechen_java
 node_visualisierung_explain_mysql [label="Visualisierung von EXPLAIN für MySQL" href="https://elbosso.github.io/visualisierung_explain_mysql.html"]
 node_autocomplete_lsp_vim [label="Autocomplete mit LSP und Vim" href="https://elbosso.github.io/autocomplete_lsp_vim.html"]
             node_autocomplete_lsp_vim -> node_neovim___reise_geht_weiter
 node_validierung_elektronischer_zertifikate [label="Validierung elektronischer Zertifikate" href="https://elbosso.github.io/validierung_elektronischer_zertifikate.html"]
             node_validierung_elektronischer_zertifikate -> node_wie_man__nicht__thema_auf_defcon_wird___
+            node_validierung_elektronischer_zertifikate -> node_minimierung_angriffsoberflaechen_java
 node_linkcollections_2023_ix [label="LinkCollections 2023 IX" href="https://elbosso.github.io/linkcollections_2023_ix.html"]
 node_opendata_kartenmaterial_aus_autorisierten_quellen [label="OpenData Kartenmaterial aus autorisierten Quellen" href="https://elbosso.github.io/opendata_kartenmaterial_aus_autorisierten_quellen.html"]
 node_desillusionierung_avms_fritz_produkten [label="Desillusionierung bei AVMs Fritz-Produkten" href="https://elbosso.github.io/desillusionierung_avms_fritz_produkten.html"]
@@ -185,8 +191,10 @@ node_closing_time___tom_waits [label="Closing Time - Tom Waits" href="https://el
 node_wie_man_eindruck_schindet [label="Wie man Eindruck schindet" href="https://elbosso.github.io/wie_man_eindruck_schindet.html"]
 node_neue_graphik_primitiven_java_awt_graphics2d [label="Neue Graphik-Primitiven für java.awt.Graphics2D" href="https://elbosso.github.io/neue_graphik_primitiven_java_awt_graphics2d.html"]
 node_schraffuren_java_awt_graphics2d [label="Schraffuren für java.awt.Graphics2D" href="https://elbosso.github.io/schraffuren_java_awt_graphics2d.html"]
+            node_schraffuren_java_awt_graphics2d -> node_gleichseitige_dreiecke_abgerundeten_ecken_java
 node_elektronik_backen__aehh___reparieren [label="Elektronik backen, ähh - reparieren" href="https://elbosso.github.io/elektronik_backen__aehh___reparieren.html"]
 node_entwurfsmodus_java_awt_graphics2d [label="Entwurfsmodus für java.awt.Graphics2D" href="https://elbosso.github.io/entwurfsmodus_java_awt_graphics2d.html"]
+            node_entwurfsmodus_java_awt_graphics2d -> node_gleichseitige_dreiecke_abgerundeten_ecken_java
             node_entwurfsmodus_java_awt_graphics2d -> node_neue_graphik_primitiven_java_awt_graphics2d
             node_entwurfsmodus_java_awt_graphics2d -> node_schraffuren_java_awt_graphics2d
 node_raspi___automatisch_booten [label="Raspi - automatisch booten" href="https://elbosso.github.io/raspi___automatisch_booten.html"]
@@ -990,8 +998,8 @@ node_ci_cd_grafana [label="CI/CD mit Grafana" href="https://elbosso.github.io/ci
             node_ci_cd_grafana -> node_raspberry_schnellem_massenspeicher
 node_vaadin_swing_ersatz [label="Vaadin als Swing-Ersatz" href="https://elbosso.github.io/vaadin_swing_ersatz.html"]
 node_sqlshell_echtzeitdatenbanken [label="sQLshell und Echtzeitdatenbanken" href="https://elbosso.github.io/sqlshell_echtzeitdatenbanken.html"]
-            node_sqlshell_echtzeitdatenbanken -> node_viewpanel_sqlshell_zeitreihendatenbanken
             node_sqlshell_echtzeitdatenbanken -> node_syntax_highlighting_influxdb_java_anwendungen
+            node_sqlshell_echtzeitdatenbanken -> node_viewpanel_sqlshell_zeitreihendatenbanken
 node_testdatengeneratoren_microservices_docker [label="Testdatengeneratoren als Microservices mit Docker" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker.html"]
             node_testdatengeneratoren_microservices_docker -> node_generator_microservices_mastodon_bot
             node_testdatengeneratoren_microservices_docker -> node_vaadin_swing_ersatz
@@ -1337,9 +1345,8 @@ node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" 
             node_linux_wifi_accesspoint_aus_raspi -> node_raspberry_pi_ads_b_receiver
 node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
             node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
-            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
-            node_implizites_eulerverfahren -> node_visualisierung_strange_attractors_java3d
+            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_mathematik_beliebiger_praezision_java
 node_eine_ganz_alte_bibliothek_bildverarbeitung [label="Eine ganz alte Bibliothek für Bildverarbeitung" href="https://elbosso.github.io/eine_ganz_alte_bibliothek_bildverarbeitung.html"]
             node_eine_ganz_alte_bibliothek_bildverarbeitung -> node_gpu_programmierung_java_revisited
@@ -2183,19 +2190,19 @@ node_fbmlandscapes___java3d [label="FbmLandscapes + Java3D" href="https://elboss
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
             node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-            node_ebmap4d -> node_ebmap4d___geojson
+            node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
             node_ebmap4d -> node_ortsbezuege_dwb_
             node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
+            node_ebmap4d -> node_ebmap4d___geojson
+            node_ebmap4d -> node_neue_version_ebmap4d
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
-            node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
-            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap
             node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_geojson_ebmap4d
-            node_ebmap4d -> node_neue_version_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_hillshading_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_satelliten_layer
@@ -2203,8 +2210,8 @@ node_tpedit [label="TPEdit" href="https://elbosso.github.io/tpedit.html"]
             node_tpedit -> node_fop_pdf_formulare
             node_tpedit -> node_fop_pdf_formulare_mittels_itext
             node_tpedit -> node_tpedit_erstellt_interaktive_formulare
-            node_tpedit -> node_tpedit_referenzen
             node_tpedit -> node_tpedit_unterstuetzt_tags
+            node_tpedit -> node_tpedit_referenzen
 node_threedialwatch [label="ThreeDialWatch" href="https://elbosso.github.io/threedialwatch.html"]
             node_threedialwatch -> node_daylight
 node_java_api_aenderung_fuehrt_bug [label="Java-API-Änderung führt zu Bug" href="https://elbosso.github.io/java_api_aenderung_fuehrt_bug.html"]
