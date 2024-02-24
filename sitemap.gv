@@ -38,9 +38,13 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_neue_version_ebmap4d [label="Neue Version von EBMap4D" href="https://elbosso.github.io/neue_version_ebmap4d.html"]
+node_lamport_clocks_java [label="Lamport Clocks für Java" href="https://elbosso.github.io/lamport_clocks_java.html"]
 node_linkcollections_2024_i [label="LinkCollections 2024 I" href="https://elbosso.github.io/linkcollections_2024_i.html"]
+            node_linkcollections_2024_i -> node_linkcollections_2024_ii
 node_neovim___reise_geht_weiter [label="Neovim - die Reise geht weiter" href="https://elbosso.github.io/neovim___reise_geht_weiter.html"]
 node_influxshell_plugin_sqlshell [label="InfluxShell als Plugin für die sQLshell" href="https://elbosso.github.io/influxshell_plugin_sqlshell.html"]
+            node_influxshell_plugin_sqlshell -> node_sqlshell_ist_nun_cloudnative_
 node_macropad___gescheiterte_experiment [label="Macropad - das gescheiterte Experiment" href="https://elbosso.github.io/macropad___gescheiterte_experiment.html"]
 node_probleme_beim_parsen_zeitstempeln_java [label="Probleme beim Parsen von Zeitstempeln in Java" href="https://elbosso.github.io/probleme_beim_parsen_zeitstempeln_java.html"]
             node_probleme_beim_parsen_zeitstempeln_java -> node_influxshell_plugin_sqlshell
@@ -199,9 +203,11 @@ node_wie_man_eindruck_schindet [label="Wie man Eindruck schindet" href="https://
 node_neue_graphik_primitiven_java_awt_graphics2d [label="Neue Graphik-Primitiven für java.awt.Graphics2D" href="https://elbosso.github.io/neue_graphik_primitiven_java_awt_graphics2d.html"]
 node_schraffuren_java_awt_graphics2d [label="Schraffuren für java.awt.Graphics2D" href="https://elbosso.github.io/schraffuren_java_awt_graphics2d.html"]
             node_schraffuren_java_awt_graphics2d -> node_gleichseitige_dreiecke_abgerundeten_ecken_java
+            node_schraffuren_java_awt_graphics2d -> node_konstruktive_geometrie_dem_computer
 node_elektronik_backen__aehh___reparieren [label="Elektronik backen, ähh - reparieren" href="https://elbosso.github.io/elektronik_backen__aehh___reparieren.html"]
 node_entwurfsmodus_java_awt_graphics2d [label="Entwurfsmodus für java.awt.Graphics2D" href="https://elbosso.github.io/entwurfsmodus_java_awt_graphics2d.html"]
             node_entwurfsmodus_java_awt_graphics2d -> node_gleichseitige_dreiecke_abgerundeten_ecken_java
+            node_entwurfsmodus_java_awt_graphics2d -> node_konstruktive_geometrie_dem_computer
             node_entwurfsmodus_java_awt_graphics2d -> node_neue_graphik_primitiven_java_awt_graphics2d
             node_entwurfsmodus_java_awt_graphics2d -> node_schraffuren_java_awt_graphics2d
 node_raspi___automatisch_booten [label="Raspi - automatisch booten" href="https://elbosso.github.io/raspi___automatisch_booten.html"]
@@ -1009,8 +1015,8 @@ node_ci_cd_grafana [label="CI/CD mit Grafana" href="https://elbosso.github.io/ci
             node_ci_cd_grafana -> node_raspberry_schnellem_massenspeicher
 node_vaadin_swing_ersatz [label="Vaadin als Swing-Ersatz" href="https://elbosso.github.io/vaadin_swing_ersatz.html"]
 node_sqlshell_echtzeitdatenbanken [label="sQLshell und Echtzeitdatenbanken" href="https://elbosso.github.io/sqlshell_echtzeitdatenbanken.html"]
-            node_sqlshell_echtzeitdatenbanken -> node_viewpanel_sqlshell_zeitreihendatenbanken
             node_sqlshell_echtzeitdatenbanken -> node_syntax_highlighting_influxdb_java_anwendungen
+            node_sqlshell_echtzeitdatenbanken -> node_viewpanel_sqlshell_zeitreihendatenbanken
 node_testdatengeneratoren_microservices_docker [label="Testdatengeneratoren als Microservices mit Docker" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker.html"]
             node_testdatengeneratoren_microservices_docker -> node_generator_microservices_mastodon_bot
             node_testdatengeneratoren_microservices_docker -> node_vaadin_swing_ersatz
@@ -1102,7 +1108,6 @@ node_certstream___ressourcenverbrauch [label="Certstream - Ressourcenverbrauch" 
 node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian May, Kerry Ellis & Vittorio Grigolo: Bohemian Rhapsody" href="https://elbosso.github.io/brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody.html"]
 node_mandelbrot_sets_mittels_shadern_berechnen [label="Mandelbrot-Sets mittels Shadern berechnen" href="https://elbosso.github.io/mandelbrot_sets_mittels_shadern_berechnen.html"]
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_java
-            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_julia_mengen_shadern_umgesetzt
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_faehrnisse_des_buildprozesses_unter_windows
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_gpu_programmierung_java_revisited
@@ -1355,9 +1360,9 @@ node_garten_fruehjahr_2018 [label="Garten im Frühjahr 2018" href="https://elbos
 node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" href="https://elbosso.github.io/linux_wifi_accesspoint_aus_raspi.html"]
             node_linux_wifi_accesspoint_aus_raspi -> node_raspberry_pi_ads_b_receiver
 node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
-            node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
-            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
+            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
+            node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
             node_implizites_eulerverfahren -> node_mathematik_beliebiger_praezision_java
 node_eine_ganz_alte_bibliothek_bildverarbeitung [label="Eine ganz alte Bibliothek für Bildverarbeitung" href="https://elbosso.github.io/eine_ganz_alte_bibliothek_bildverarbeitung.html"]
             node_eine_ganz_alte_bibliothek_bildverarbeitung -> node_gpu_programmierung_java_revisited
@@ -1400,8 +1405,8 @@ node_batik_java9_modulsystem_____9760_ [label="Batik und Java9 Modulsystem = &#9
             node_batik_java9_modulsystem_____9760_ -> node_faehrnisse_des_buildprozesses_unter_windows
 node_java_bug_modulsystem_nutzung_jaas [label="Java-Bug in Modulsystem bei Nutzung von JAAS" href="https://elbosso.github.io/java_bug_modulsystem_nutzung_jaas.html"]
             node_java_bug_modulsystem_nutzung_jaas -> node_java9_umstellung
-            node_java_bug_modulsystem_nutzung_jaas -> node_batik_java9_modulsystem_____9760_
             node_java_bug_modulsystem_nutzung_jaas -> node_aenderungen_datumsformat_java___schon_wieder_
+            node_java_bug_modulsystem_nutzung_jaas -> node_batik_java9_modulsystem_____9760_
             node_java_bug_modulsystem_nutzung_jaas -> node_rechtevergabe_java
 node_beaninfo_runtime_annotations [label="BeanInfo durch Runtime-Annotations" href="https://elbosso.github.io/beaninfo_runtime_annotations.html"]
             node_beaninfo_runtime_annotations -> node_beaninfo_runtime_annotations__gist_
@@ -1417,8 +1422,8 @@ node_kochbuch_beispiele_auf_github [label="Kochbuch-Beispiele auf GitHub" href="
 node_sqlshell_integriert_ldap_jdbc_bridge [label="sQLshell integriert LDAP-JDBC-Bridge" href="https://elbosso.github.io/sqlshell_integriert_ldap_jdbc_bridge.html"]
 node_beaninfo_generierung_via_annotations [label="BeanInfo-Generierung via Annotations" href="https://elbosso.github.io/beaninfo_generierung_via_annotations.html"]
             node_beaninfo_generierung_via_annotations -> node_maven_archetype_dwb__module
-            node_beaninfo_generierung_via_annotations -> node_beaninfo_runtime_annotations
             node_beaninfo_generierung_via_annotations -> node_github_repository_beaninfo_generator
+            node_beaninfo_generierung_via_annotations -> node_beaninfo_runtime_annotations
             node_beaninfo_generierung_via_annotations -> node_beaninfo_runtime_annotations_feature_complete_baelde_open_source
 node_34c3___meine_favoriten [label="34c3 - Meine Favoriten" href="https://elbosso.github.io/34c3___meine_favoriten.html"]
             node_34c3___meine_favoriten -> node_log4j_plugin_jconsole_visualvm
@@ -1563,8 +1568,8 @@ node_multi_agenten_systeme_dwb___ii_ [label="Multi-Agenten-Systeme in dWb+ (II)"
 node_virtuelles_netzwerklabor [label="Virtuelles Netzwerklabor" href="https://elbosso.github.io/virtuelles_netzwerklabor.html"]
             node_virtuelles_netzwerklabor -> node_umzug_netzwerklabor_abgeschlossen
             node_virtuelles_netzwerklabor -> node_cluster_dateisystem_getestet
-            node_virtuelles_netzwerklabor -> node_layer_0_management_virtuellen_netzwerklabor
             node_virtuelles_netzwerklabor -> node_dokumentation_netzwerklabor_dwb_
+            node_virtuelles_netzwerklabor -> node_layer_0_management_virtuellen_netzwerklabor
             node_virtuelles_netzwerklabor -> node_automatisches_setup_eines_netzwerklabors
 node_oracle_jdbc_treiber_eigenarten [label="Oracle-JDBC-Treiber Eigenarten" href="https://elbosso.github.io/oracle_jdbc_treiber_eigenarten.html"]
 node_lose_kopplung_modulkommunikation_dwb_ [label="Lose Kopplung bei der Modulkommunikation in dWb+" href="https://elbosso.github.io/lose_kopplung_modulkommunikation_dwb_.html"]
@@ -2155,7 +2160,6 @@ node_virtual_router_manager_ap [label="Virtual Router Manager als AP" href="http
 node_groupedjtable [label="GroupedJTable" href="https://elbosso.github.io/groupedjtable.html"]
 node_java_bibliotheken_android [label="Java-Bibliotheken für Android" href="https://elbosso.github.io/java_bibliotheken_android.html"]
             node_java_bibliotheken_android -> node_jtidy_android_portiert
-            node_java_bibliotheken_android -> node_ganymed_ssh2_android
 node_tile_identifizierung_tracks [label="Tile-Identifizierung für Tracks" href="https://elbosso.github.io/tile_identifizierung_tracks.html"]
             node_tile_identifizierung_tracks -> node_drehen_scheren
 node_screen_for_x [label="screen for X" href="https://elbosso.github.io/screen_for_x.html"]
@@ -2201,28 +2205,28 @@ node_fbmlandscapes___java3d [label="FbmLandscapes + Java3D" href="https://elboss
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
             node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-            node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
             node_ebmap4d -> node_ortsbezuege_dwb_
+            node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
-            node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
             node_ebmap4d -> node_neue_version_ebmap4d
+            node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
             node_ebmap4d -> node_tile_server_openstreetmap
             node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
             node_ebmap4d -> node_geojson_ebmap4d
-            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_hillshading_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_satelliten_layer
 node_tpedit [label="TPEdit" href="https://elbosso.github.io/tpedit.html"]
             node_tpedit -> node_fop_pdf_formulare
-            node_tpedit -> node_tpedit_erstellt_interaktive_formulare
             node_tpedit -> node_fop_pdf_formulare_mittels_itext
-            node_tpedit -> node_tpedit_referenzen
+            node_tpedit -> node_tpedit_erstellt_interaktive_formulare
             node_tpedit -> node_tpedit_unterstuetzt_tags
+            node_tpedit -> node_tpedit_referenzen
 node_threedialwatch [label="ThreeDialWatch" href="https://elbosso.github.io/threedialwatch.html"]
             node_threedialwatch -> node_daylight
 node_java_api_aenderung_fuehrt_bug [label="Java-API-Änderung führt zu Bug" href="https://elbosso.github.io/java_api_aenderung_fuehrt_bug.html"]
