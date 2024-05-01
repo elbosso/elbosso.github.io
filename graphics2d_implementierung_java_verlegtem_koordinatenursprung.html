@@ -1,0 +1,749 @@
+<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>Graphics2D Implementierung für Java mit verlegtem Koordinatenursprung</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="Graphics2D Implementierung für Java mit verlegtem Koordinatenursprung"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/graphics2d_implementierung_java_verlegtem_koordinatenursprung"/> <meta property="og:image" content="https://elbosso.github.io/images/ypointupgfx2d.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Es gibt seit vielen Jahren immer mal wieder Leute, die im Internet fragen, ob man in Javas diversen Methoden zum Zeichnen von Graphiken das Koordinatensystem so ändern könnte, dass sich der Koordinatenursprung links unten befindet und die positive y-Achse nach oben weist. Meist sind die Antworten dann, dass eine Affine Transformation eingeschaltet werden solle, die das Bild spiegelt. "/> <meta property="article:published_time" content="2024-05-01"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="unerwartete_probleme_software_raid5_erweiterung.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> &nbsp; </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>Graphics2D Implementierung für Java mit verlegtem Koordinatenursprung</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="sqlshell_ist_nun_cloudnative_.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Java</span> </a> <a href="sqlshell_ist_nun_cloudnative_.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Komponenten</span> </a> <a href="sqlshell_ist_nun_cloudnative_.html#content"> <span class="w3-tag w3-black w3-margin-bottom">GUI</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">01.05.2024</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/ypointupgfx2d_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Es gibt seit vielen Jahren immer mal wieder Leute, die im Internet fragen, ob man in Javas diversen Methoden zum Zeichnen von Graphiken das Koordinatensystem so ändern könnte, dass sich der Koordinatenursprung links <span class="mdbold">unten</span> befindet und die positive y-Achse nach <span class="mdbold">oben</span> weist. Meist sind die Antworten dann, dass eine Affine Transformation eingeschaltet werden solle, die das Bild spiegelt. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Das könnte man zwar tun, aber dann tauchen alle Bildinhalte, bei denen es auf die Orientierung ankommt, auf dem Kopf stehend im Resultat auf. Besonders störend ist das bei Text, aber auch Bitmap-Graphiken und Farbverläufe werden dann genau anders herum dargestellt, als es eigentlich beabsichtigt war. </p><p> Man könnte das natürlich dadurch umgehen, dass man vor dem Hinzufügen solcher oder ähnlicher Graphikelemente die Transformation wiederum umkehrt. Aber das ist kompliziert und fehleranfällig. Es müsste doch auch eine einfachere Methode geben, das Koordinatensystem zu verlagern. </p><p> Nachdem ich mit Gedanken so weit gekommen war, wollte ich es ausprobieren - und siehe da - es funktioniert. Die folgende Abbildung zeichnet dieselben Elemente zweimal - einmal direkt in den <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html">Graphics-Context</a> der <a href="https://docs.oracle.com/javase/8/docs/api/javax/swing/JComponent.html">JComponent</a> und einmal in meinen speziellen <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html">Graphics-Context,</a> der den Koordinatenursprung nach links unten verlegt und die y-Achse nach oben kippt. Man erkennt, dass nicht nur Text und Bitmap-Graphiken korrekt orientiert sind, sondern dass auch alle Graphik-Primitiven korrekt dargestellt werden - sogar <a href="gleichseitige_dreiecke_abgerundeten_ecken_java.html">zwei</a> meiner <a href="schraffuren_java_awt_graphics2d.html">eigenen</a> funktionieren problemlos, wie man hier sehen kann. Der Inhalt eines solchen <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html">Graphics-Context</a> kann natürlich wieder in verschiedenen Bitmap- und Vektor-Formaten gespeichert werden (das Beispiel liegt als SVG-Graphik vor) und es ist ebenfalls möglich, die Darstellung mit dem <a href="entwurfsmodus_java_awt_graphics2d.html">Skizzenmodus</a> zu kombinieren. </p><p> <img src="images/ypointupgfx2d.png" style="max-width:800px;" alt="Screenshot" class="center"> <span class="imgdesc"> Mehrere Graphik-Primitiven im Standard-Koordinatensystem von Java und in meiner Implementierung gegenübergestellt </p><p> Der dazu verwendete <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html">Graphics-Context</a> sieht wie folgt aus: </p><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2024.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Juergen Key. Alle Rechte vorbehalten.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Weiterverbreitung und Verwendung in nichtkompilierter oder kompilierter Form,</span>
+<span class="cm"> * mit oder ohne Veraenderung, sind unter den folgenden Bedingungen zulaessig:</span>
+<span class="cm"> *</span>
+<span class="cm"> *    1. Weiterverbreitete nichtkompilierte Exemplare muessen das obige Copyright,</span>
+<span class="cm"> * die Liste der Bedingungen und den folgenden Haftungsausschluss im Quelltext</span>
+<span class="cm"> * enthalten.</span>
+<span class="cm"> *    2. Weiterverbreitete kompilierte Exemplare muessen das obige Copyright,</span>
+<span class="cm"> * die Liste der Bedingungen und den folgenden Haftungsausschluss in der</span>
+<span class="cm"> * Dokumentation und/oder anderen Materialien, die mit dem Exemplar verbreitet</span>
+<span class="cm"> * werden, enthalten.</span>
+<span class="cm"> *    3. Weder der Name des Autors noch die Namen der Beitragsleistenden</span>
+<span class="cm"> * duerfen zum Kennzeichnen oder Bewerben von Produkten, die von dieser Software</span>
+<span class="cm"> * abgeleitet wurden, ohne spezielle vorherige schriftliche Genehmigung verwendet</span>
+<span class="cm"> * werden.</span>
+<span class="cm"> *</span>
+<span class="cm"> * DIESE SOFTWARE WIRD VOM AUTOR UND DEN BEITRAGSLEISTENDEN OHNE</span>
+<span class="cm"> * JEGLICHE SPEZIELLE ODER IMPLIZIERTE GARANTIEN ZUR VERFUEGUNG GESTELLT, DIE</span>
+<span class="cm"> * UNTER ANDEREM EINSCHLIESSEN: DIE IMPLIZIERTE GARANTIE DER VERWENDBARKEIT DER</span>
+<span class="cm"> * SOFTWARE FUER EINEN BESTIMMTEN ZWECK. AUF KEINEN FALL IST DER AUTOR</span>
+<span class="cm"> * ODER DIE BEITRAGSLEISTENDEN FUER IRGENDWELCHE DIREKTEN, INDIREKTEN,</span>
+<span class="cm"> * ZUFAELLIGEN, SPEZIELLEN, BEISPIELHAFTEN ODER FOLGENDEN SCHAEDEN (UNTER ANDEREM</span>
+<span class="cm"> * VERSCHAFFEN VON ERSATZGUETERN ODER -DIENSTLEISTUNGEN; EINSCHRAENKUNG DER</span>
+<span class="cm"> * NUTZUNGSFAEHIGKEIT; VERLUST VON NUTZUNGSFAEHIGKEIT; DATEN; PROFIT ODER</span>
+<span class="cm"> * GESCHAEFTSUNTERBRECHUNG), WIE AUCH IMMER VERURSACHT UND UNTER WELCHER</span>
+<span class="cm"> * VERPFLICHTUNG AUCH IMMER, OB IN VERTRAG, STRIKTER VERPFLICHTUNG ODER</span>
+<span class="cm"> * UNERLAUBTE HANDLUNG (INKLUSIVE FAHRLAESSIGKEIT) VERANTWORTLICH, AUF WELCHEM</span>
+<span class="cm"> * WEG SIE AUCH IMMER DURCH DIE BENUTZUNG DIESER SOFTWARE ENTSTANDEN SIND, SOGAR,</span>
+<span class="cm"> * WENN SIE AUF DIE MOEGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN WORDEN SIND.</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+</p><p>
+<span class="kn">package</span> <span class="nn">de.elbosso.ui.awt</span><span class="p">;</span>
+</p><p>
+<span class="kn">import</span> <span class="nn">java.awt.*</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.font.FontRenderContext</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.font.GlyphVector</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.geom.*</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.image.BufferedImage</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.image.BufferedImageOp</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.image.ImageObserver</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.image.RenderedImage</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.image.renderable.RenderableImage</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.text.AttributedCharacterIterator</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="p">;</span>
+</p><p>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">YPointUpGraphics</span> <span class="kd">extends</span> <span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">Graphics2D</span>
+<span class="p">{</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">Graphics2D</span> <span class="n">client</span><span class="p">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">AffineTransform</span> <span class="n">transform</span><span class="p">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">verticalXAxisOffset</span><span class="p">;</span>
+</p><p>
+	<span class="kd">public</span> <span class="nf">YPointUpGraphics</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">Graphics2D</span> <span class="n">g1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">verticalXAxisOffset</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="kd">super</span><span class="p">();</span>
+		<span class="n">client</span><span class="o">=</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">Graphics2D</span><span class="p">)</span><span class="n">g1</span><span class="p">.</span><span class="na">create</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="na">verticalXAxisOffset</span><span class="o">=</span><span class="n">verticalXAxisOffset</span><span class="p">;</span>
+		<span class="n">transform</span><span class="o">=</span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">AffineTransform</span><span class="p">.</span><span class="na">getTranslateInstance</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+		<span class="n">transform</span><span class="p">.</span><span class="na">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+		<span class="n">transform</span><span class="p">.</span><span class="na">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">verticalXAxisOffset</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Graphics</span> <span class="nf">create</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">YPointUpGraphics</span><span class="p">((</span><span class="n">Graphics2D</span><span class="p">)</span> <span class="n">client</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span><span class="n">verticalXAxisOffset</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">FontMetrics</span> <span class="nf">getFontMetrics</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getFontMetrics</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawRect</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">Shape</span> <span class="n">shp</span><span class="o">=</span><span class="k">new</span> <span class="n">Rectangle2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">draw</span><span class="p">(</span><span class="n">shp</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw3DRect</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">,</span> <span class="kt">boolean</span> <span class="n">raised</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">draw3DRect</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span> <span class="n">raised</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">fill3DRect</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">,</span> <span class="kt">boolean</span> <span class="n">raised</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">fill3DRect</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span> <span class="n">raised</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="n">Shape</span> <span class="n">s</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">Shape</span> <span class="n">shp</span><span class="o">=</span><span class="n">createShape</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">draw</span><span class="p">(</span><span class="n">shp</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">drawImage</span><span class="p">(</span><span class="n">Image</span> <span class="n">img</span><span class="p">,</span> <span class="n">AffineTransform</span> <span class="n">xform</span><span class="p">,</span> <span class="n">ImageObserver</span> <span class="n">obs</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">drawImage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">xform</span><span class="p">,</span><span class="n">obs</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawImage</span><span class="p">(</span><span class="n">BufferedImage</span> <span class="n">img</span><span class="p">,</span> <span class="n">BufferedImageOp</span> <span class="n">op</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">img</span><span class="p">.</span><span class="na">getHeight</span><span class="p">());</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawImage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">op</span><span class="p">,(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawRenderedImage</span><span class="p">(</span><span class="n">RenderedImage</span> <span class="n">img</span><span class="p">,</span> <span class="n">AffineTransform</span> <span class="n">xform</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawRenderedImage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">xform</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawRenderableImage</span><span class="p">(</span><span class="n">RenderableImage</span> <span class="n">img</span><span class="p">,</span> <span class="n">AffineTransform</span> <span class="n">xform</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawRenderableImage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">xform</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawPolygon</span><span class="p">(</span><span class="n">Polygon</span> <span class="n">p</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">draw</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillPolygon</span><span class="p">(</span><span class="n">Polygon</span> <span class="n">p</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">fill</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawChars</span><span class="p">(</span><span class="kt">char</span><span class="o">[]</span> <span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">offset</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">());</span><span class="c1">//-img.getHeight());</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawChars</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawBytes</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">offset</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">());</span><span class="c1">//-img.getHeight());</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawBytes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">finalize</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">finalize</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Rectangle</span> <span class="nf">getClipRect</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getClipRect</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hitClip</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">hitClip</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Rectangle</span> <span class="nf">getClipBounds</span><span class="p">(</span><span class="n">Rectangle</span> <span class="n">r</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="na">x</span><span class="p">,</span><span class="n">r</span><span class="p">.</span><span class="na">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">r</span><span class="p">.</span><span class="na">height</span><span class="p">);</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getClipBounds</span><span class="p">(</span><span class="k">new</span> <span class="n">Rectangle</span><span class="p">((</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">()),</span><span class="n">ty</span><span class="p">,</span><span class="n">r</span><span class="p">.</span><span class="na">width</span><span class="p">,</span><span class="n">r</span><span class="p">.</span><span class="na">height</span><span class="p">));</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Graphics</span> <span class="nf">create</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">YPointUpGraphics</span><span class="p">((</span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">Graphics2D</span><span class="p">)</span> <span class="n">client</span><span class="p">.</span><span class="na">create</span><span class="p">(),</span><span class="n">verticalXAxisOffset</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">translate</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">translate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="o">-</span><span class="n">y</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">translate</span><span class="p">(</span><span class="kt">double</span> <span class="n">tx</span><span class="p">,</span> <span class="kt">double</span> <span class="n">ty</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">translate</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span><span class="o">-</span><span class="n">ty</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">rotate</span><span class="p">(</span><span class="kt">double</span> <span class="n">theta</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">rotate</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">rotate</span><span class="p">(</span><span class="kt">double</span> <span class="n">theta</span><span class="p">,</span> <span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">rotate</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="p">,</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">());</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">scale</span><span class="p">(</span><span class="kt">double</span> <span class="n">sx</span><span class="p">,</span> <span class="kt">double</span> <span class="n">sy</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">scale</span><span class="p">(</span><span class="n">sx</span><span class="p">,</span><span class="n">sy</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">shear</span><span class="p">(</span><span class="kt">double</span> <span class="n">shx</span><span class="p">,</span> <span class="kt">double</span> <span class="n">shy</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">shear</span><span class="p">(</span><span class="n">shx</span><span class="p">,</span><span class="n">shy</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">transform</span><span class="p">(</span><span class="n">AffineTransform</span> <span class="n">Tx</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">Tx</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTransform</span><span class="p">(</span><span class="n">AffineTransform</span> <span class="n">Tx</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setTransform</span><span class="p">(</span><span class="n">Tx</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">AffineTransform</span> <span class="nf">getTransform</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getTransform</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Paint</span> <span class="nf">getPaint</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getPaint</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Composite</span> <span class="nf">getComposite</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getComposite</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBackground</span><span class="p">(</span><span class="n">Color</span> <span class="n">color</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setBackground</span><span class="p">(</span><span class="n">color</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Color</span> <span class="nf">getBackground</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getBackground</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Stroke</span> <span class="nf">getStroke</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getStroke</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">clip</span><span class="p">(</span><span class="n">Shape</span> <span class="n">s</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">Shape</span> <span class="n">shp</span><span class="o">=</span><span class="n">createShape</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">clip</span><span class="p">(</span><span class="n">shp</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">FontRenderContext</span> <span class="nf">getFontRenderContext</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getFontRenderContext</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Color</span> <span class="nf">getColor</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getColor</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setColor</span><span class="p">(</span><span class="n">Color</span> <span class="n">c</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setColor</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPaintMode</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setPaintMode</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setXORMode</span><span class="p">(</span><span class="n">Color</span> <span class="n">c1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setXORMode</span><span class="p">(</span><span class="n">c1</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Font</span> <span class="nf">getFont</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getFont</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFont</span><span class="p">(</span><span class="n">Font</span> <span class="n">font</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">FontMetrics</span> <span class="nf">getFontMetrics</span><span class="p">(</span><span class="n">Font</span> <span class="n">f</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getFontMetrics</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Rectangle</span> <span class="nf">getClipBounds</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getClipBounds</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">clipRect</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">clipRect</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setClip</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setClip</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Shape</span> <span class="nf">getClip</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getClip</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setClip</span><span class="p">(</span><span class="n">Shape</span> <span class="n">clip</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">Shape</span> <span class="n">shp</span><span class="o">=</span><span class="n">createShape</span><span class="p">(</span><span class="n">clip</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setClip</span><span class="p">(</span><span class="n">shp</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">copyArea</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dy</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">copyArea</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span><span class="o">-</span><span class="n">dy</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawLine</span><span class="p">(</span><span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src2</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst2</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src2</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawLine</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">(),(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst2</span><span class="p">.</span><span class="na">getX</span><span class="p">(),(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst2</span><span class="p">.</span><span class="na">getY</span><span class="p">());</span>
+	<span class="p">}</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillRect</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">Shape</span> <span class="n">shp</span><span class="o">=</span><span class="k">new</span> <span class="n">Rectangle2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">fill</span><span class="p">(</span><span class="n">shp</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">clearRect</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">clearRect</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawRoundRect</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">,</span> <span class="kt">int</span> <span class="n">arcWidth</span><span class="p">,</span> <span class="kt">int</span> <span class="n">arcHeight</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawRoundRect</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">arcWidth</span><span class="p">,</span><span class="n">arcHeight</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillRoundRect</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">,</span> <span class="kt">int</span> <span class="n">arcWidth</span><span class="p">,</span> <span class="kt">int</span> <span class="n">arcHeight</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">fillRoundRect</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">arcWidth</span><span class="p">,</span><span class="n">arcHeight</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawOval</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawOval</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillOval</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">height</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">fillOval</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawArc</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">,</span> <span class="kt">int</span> <span class="n">startAngle</span><span class="p">,</span> <span class="kt">int</span> <span class="n">arcAngle</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">Arc2D</span> <span class="n">shp</span><span class="o">=</span><span class="k">new</span> <span class="n">Arc2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">startAngle</span><span class="p">,</span><span class="n">arcAngle</span><span class="p">,</span> <span class="n">Arc2D</span><span class="p">.</span><span class="na">OPEN</span><span class="p">);</span>
+		<span class="n">draw</span><span class="p">(</span><span class="n">shp</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillArc</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">,</span> <span class="kt">int</span> <span class="n">startAngle</span><span class="p">,</span> <span class="kt">int</span> <span class="n">arcAngle</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">Arc2D</span> <span class="n">shp</span><span class="o">=</span><span class="k">new</span> <span class="n">Arc2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">startAngle</span><span class="p">,</span><span class="n">arcAngle</span><span class="p">,</span> <span class="n">Arc2D</span><span class="p">.</span><span class="na">PIE</span><span class="p">);</span>
+		<span class="n">fill</span><span class="p">(</span><span class="n">shp</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawPolyline</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">xPoints</span><span class="p">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">yPoints</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nPoints</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">GeneralPath</span> <span class="n">newshape</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GeneralPath</span><span class="p">();</span>
+		<span class="n">newshape</span><span class="p">.</span><span class="na">moveTo</span><span class="p">(</span><span class="n">xPoints</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="n">yPoints</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">nPoints</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+			<span class="n">newshape</span><span class="p">.</span><span class="na">lineTo</span><span class="p">(</span><span class="n">xPoints</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">,</span><span class="n">yPoints</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
+		<span class="n">draw</span><span class="p">(</span><span class="n">newshape</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawPolygon</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">xPoints</span><span class="p">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">yPoints</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nPoints</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">Polygon</span> <span class="n">shp</span><span class="o">=</span><span class="k">new</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">xPoints</span><span class="p">,</span><span class="n">yPoints</span><span class="p">,</span><span class="n">nPoints</span><span class="p">);</span>
+		<span class="n">draw</span><span class="p">(</span><span class="n">shp</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillPolygon</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">xPoints</span><span class="p">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">yPoints</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nPoints</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">Polygon</span> <span class="n">shp</span><span class="o">=</span><span class="k">new</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">xPoints</span><span class="p">,</span><span class="n">yPoints</span><span class="p">,</span><span class="n">nPoints</span><span class="p">);</span>
+		<span class="n">fill</span><span class="p">(</span><span class="n">shp</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawString</span><span class="p">(</span><span class="n">String</span> <span class="n">str</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawString</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">());</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawString</span><span class="p">(</span><span class="n">String</span> <span class="n">str</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="kt">float</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawString</span><span class="p">(</span><span class="n">str</span><span class="p">,(</span><span class="kt">float</span><span class="p">)</span> <span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),(</span><span class="kt">float</span><span class="p">)</span> <span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">());</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawString</span><span class="p">(</span><span class="n">AttributedCharacterIterator</span> <span class="n">iterator</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawString</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">());</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawString</span><span class="p">(</span><span class="n">AttributedCharacterIterator</span> <span class="n">iterator</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="kt">float</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawString</span><span class="p">(</span><span class="n">iterator</span><span class="p">,(</span><span class="kt">float</span><span class="p">)</span> <span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),(</span><span class="kt">float</span><span class="p">)</span> <span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">());</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawGlyphVector</span><span class="p">(</span><span class="n">GlyphVector</span> <span class="n">g</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="kt">float</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">drawGlyphVector</span><span class="p">(</span><span class="n">g</span><span class="p">,(</span><span class="kt">float</span><span class="p">)</span> <span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),(</span><span class="kt">float</span><span class="p">)</span> <span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">());</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">fill</span><span class="p">(</span><span class="n">Shape</span> <span class="n">s</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">Shape</span> <span class="n">shp</span><span class="o">=</span><span class="n">createShape</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">fill</span><span class="p">(</span><span class="n">shp</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hit</span><span class="p">(</span><span class="n">Rectangle</span> <span class="n">rect</span><span class="p">,</span> <span class="n">Shape</span> <span class="n">s</span><span class="p">,</span> <span class="kt">boolean</span> <span class="n">onStroke</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">Shape</span> <span class="n">shp</span><span class="o">=</span><span class="n">createShape</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">hit</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span><span class="n">shp</span><span class="p">,</span><span class="n">onStroke</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">GraphicsConfiguration</span> <span class="nf">getDeviceConfiguration</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getDeviceConfiguration</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setComposite</span><span class="p">(</span><span class="n">Composite</span> <span class="n">comp</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setComposite</span><span class="p">(</span><span class="n">comp</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPaint</span><span class="p">(</span><span class="n">Paint</span> <span class="n">paint</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setPaint</span><span class="p">(</span><span class="n">paint</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setStroke</span><span class="p">(</span><span class="n">Stroke</span> <span class="n">s</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setStroke</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRenderingHint</span><span class="p">(</span><span class="n">RenderingHints</span><span class="p">.</span><span class="na">Key</span> <span class="n">hintKey</span><span class="p">,</span> <span class="n">Object</span> <span class="n">hintValue</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setRenderingHint</span><span class="p">(</span><span class="n">hintKey</span><span class="p">,</span><span class="n">hintValue</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Object</span> <span class="nf">getRenderingHint</span><span class="p">(</span><span class="n">RenderingHints</span><span class="p">.</span><span class="na">Key</span> <span class="n">hintKey</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getRenderingHint</span><span class="p">(</span><span class="n">hintKey</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRenderingHints</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;?</span><span class="p">,</span> <span class="o">?&gt;</span> <span class="n">hints</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">setRenderingHints</span><span class="p">(</span><span class="n">hints</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addRenderingHints</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;?</span><span class="p">,</span> <span class="o">?&gt;</span> <span class="n">hints</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">addRenderingHints</span><span class="p">(</span><span class="n">hints</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">RenderingHints</span> <span class="nf">getRenderingHints</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">getRenderingHints</span><span class="p">();</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">drawImage</span><span class="p">(</span><span class="n">Image</span> <span class="n">img</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="n">ImageObserver</span> <span class="n">observer</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">img</span><span class="p">.</span><span class="na">getHeight</span><span class="p">(</span><span class="n">observer</span><span class="p">));</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">drawImage</span><span class="p">(</span><span class="n">img</span><span class="p">,(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">observer</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">drawImage</span><span class="p">(</span><span class="n">Image</span> <span class="n">img</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">,</span> <span class="n">ImageObserver</span> <span class="n">observer</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">img</span><span class="p">.</span><span class="na">getHeight</span><span class="p">(</span><span class="n">observer</span><span class="p">));</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">drawImage</span><span class="p">(</span><span class="n">img</span><span class="p">,(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">observer</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">drawImage</span><span class="p">(</span><span class="n">Image</span> <span class="n">img</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="n">Color</span> <span class="n">bgcolor</span><span class="p">,</span> <span class="n">ImageObserver</span> <span class="n">observer</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">img</span><span class="p">.</span><span class="na">getHeight</span><span class="p">(</span><span class="n">observer</span><span class="p">));</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">drawImage</span><span class="p">(</span><span class="n">img</span><span class="p">,(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">bgcolor</span><span class="p">,</span><span class="n">observer</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">drawImage</span><span class="p">(</span><span class="n">Image</span> <span class="n">img</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">,</span> <span class="n">Color</span> <span class="n">bgcolor</span><span class="p">,</span> <span class="n">ImageObserver</span> <span class="n">observer</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">ty</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="o">-</span><span class="n">img</span><span class="p">.</span><span class="na">getHeight</span><span class="p">(</span><span class="n">observer</span><span class="p">));</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">drawImage</span><span class="p">(</span><span class="n">img</span><span class="p">,(</span><span class="kt">int</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="n">ty</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">bgcolor</span><span class="p">,</span><span class="n">observer</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">drawImage</span><span class="p">(</span><span class="n">Image</span> <span class="n">img</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dx1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dy1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dx2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dy2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sx1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sy1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sx2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sy2</span><span class="p">,</span> <span class="n">ImageObserver</span> <span class="n">observer</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="c1">//TODO:</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">drawImage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dx1</span><span class="p">,</span> <span class="n">dy1</span><span class="p">,</span> <span class="n">dx2</span><span class="p">,</span> <span class="n">dy2</span><span class="p">,</span> <span class="n">sx1</span><span class="p">,</span> <span class="n">sy1</span><span class="p">,</span> <span class="n">sx2</span><span class="p">,</span> <span class="n">sy2</span><span class="p">,</span> <span class="n">observer</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">drawImage</span><span class="p">(</span><span class="n">Image</span> <span class="n">img</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dx1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dy1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dx2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dy2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sx1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sy1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sx2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sy2</span><span class="p">,</span> <span class="n">Color</span> <span class="n">bgcolor</span><span class="p">,</span> <span class="n">ImageObserver</span> <span class="n">observer</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="c1">//TODO:</span>
+		<span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="na">drawImage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dx1</span><span class="p">,</span> <span class="n">dy1</span><span class="p">,</span> <span class="n">dx2</span><span class="p">,</span> <span class="n">dy2</span><span class="p">,</span> <span class="n">sx1</span><span class="p">,</span> <span class="n">sy1</span><span class="p">,</span> <span class="n">sx2</span><span class="p">,</span> <span class="n">sy2</span><span class="p">,</span> <span class="n">bgcolor</span><span class="p">,</span> <span class="n">observer</span><span class="p">);</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">dispose</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">client</span><span class="p">.</span><span class="na">dispose</span><span class="p">();</span>
+	<span class="p">}</span>
+	<span class="kd">public</span> <span class="n">Shape</span> <span class="nf">createShape</span><span class="p">(</span><span class="n">Shape</span> <span class="n">shape</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">GeneralPath</span> <span class="n">newshape</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GeneralPath</span><span class="p">();</span> <span class="c1">// Start with an empty shape</span>
+</p><p>
+		<span class="c1">// Iterate through the specified shape, perturb its coordinates, and</span>
+		<span class="c1">// use them to build up the new shape.</span>
+		<span class="kt">float</span><span class="o">[]</span> <span class="n">coords</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">float</span><span class="o">[</span><span class="mi">6</span><span class="o">]</span><span class="p">;</span>
+		<span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="kt">float</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="k">for</span> <span class="p">(</span><span class="n">PathIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">shape</span><span class="p">.</span><span class="na">getPathIterator</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span> <span class="o">!</span><span class="n">i</span><span class="p">.</span><span class="na">isDone</span><span class="p">();</span> <span class="n">i</span>
+					<span class="p">.</span><span class="na">next</span><span class="p">())</span>
+			<span class="p">{</span>
+				<span class="kt">int</span> <span class="n">type</span> <span class="o">=</span> <span class="n">i</span><span class="p">.</span><span class="na">currentSegment</span><span class="p">(</span><span class="n">coords</span><span class="p">);</span>
+				<span class="k">switch</span> <span class="p">(</span><span class="n">type</span><span class="p">)</span>
+				<span class="p">{</span>
+					<span class="k">case</span> <span class="n">PathIterator</span><span class="p">.</span><span class="na">SEG_MOVETO</span><span class="p">:</span>
+						<span class="n">transform</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+						<span class="n">newshape</span><span class="p">.</span><span class="na">moveTo</span><span class="p">(</span><span class="n">coords</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">coords</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">);</span>
+						<span class="k">break</span><span class="p">;</span>
+					<span class="k">case</span> <span class="n">PathIterator</span><span class="p">.</span><span class="na">SEG_LINETO</span><span class="p">:</span>
+						<span class="n">transform</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+						<span class="n">newshape</span><span class="p">.</span><span class="na">lineTo</span><span class="p">(</span><span class="n">coords</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">coords</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">);</span>
+						<span class="k">break</span><span class="p">;</span>
+					<span class="k">case</span> <span class="n">PathIterator</span><span class="p">.</span><span class="na">SEG_QUADTO</span><span class="p">:</span>
+						<span class="n">transform</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+						<span class="n">newshape</span><span class="p">.</span><span class="na">quadTo</span><span class="p">(</span><span class="n">coords</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">coords</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="n">coords</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">,</span> <span class="n">coords</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">);</span>
+						<span class="k">break</span><span class="p">;</span>
+					<span class="k">case</span> <span class="n">PathIterator</span><span class="p">.</span><span class="na">SEG_CUBICTO</span><span class="p">:</span>
+						<span class="n">transform</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+						<span class="n">newshape</span><span class="p">.</span><span class="na">curveTo</span><span class="p">(</span><span class="n">coords</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">coords</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="n">coords</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">,</span> <span class="n">coords</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">,</span> <span class="n">coords</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span><span class="p">,</span> <span class="n">coords</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span><span class="p">);</span>
+						<span class="k">break</span><span class="p">;</span>
+					<span class="k">case</span> <span class="n">PathIterator</span><span class="p">.</span><span class="na">SEG_CLOSE</span><span class="p">:</span>
+						<span class="n">newshape</span><span class="p">.</span><span class="na">closePath</span><span class="p">();</span>
+						<span class="k">break</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="n">newshape</span><span class="p">;</span>
+	<span class="p">}</span>
+</p><p>
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">transform</span><span class="p">(</span><span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="kt">float</span> <span class="n">y</span><span class="p">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">coords</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">loop</span><span class="o">&lt;</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span><span class="o">++</span><span class="n">loop</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">src</span><span class="o">=</span><span class="k">new</span> <span class="n">Point2D</span><span class="p">.</span><span class="na">Double</span><span class="p">(</span><span class="n">coords</span><span class="o">[</span><span class="n">loop</span><span class="o">*</span><span class="mi">2</span><span class="o">]</span><span class="p">,</span><span class="n">coords</span><span class="o">[</span><span class="n">loop</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">);</span>
+			<span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">geom</span><span class="p">.</span><span class="na">Point2D</span> <span class="n">dst1</span><span class="o">=</span><span class="n">transform</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="kc">null</span><span class="p">);</span>
+			<span class="n">coords</span><span class="o">[</span><span class="n">loop</span><span class="o">*</span><span class="mi">2</span><span class="o">]=</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getX</span><span class="p">();</span>
+			<span class="n">coords</span><span class="o">[</span><span class="n">loop</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="o">]=</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">dst1</span><span class="p">.</span><span class="na">getY</span><span class="p">();</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></div> <p> </span> </p> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20Graphics2D Implementierung für Java mit verlegtem Koordinatenursprung&body=[Graphics2D Implementierung für Java mit verlegtem Koordinatenursprung](https://elbosso.github.io/graphics2d_implementierung_java_verlegtem_koordinatenursprung)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=Graphics2D Implementierung für Java mit verlegtem Koordinatenursprung"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20Graphics2D Implementierung für Java mit verlegtem Koordinatenursprung&issue[description]=[Graphics2D Implementierung für Java mit verlegtem Koordinatenursprung](https://elbosso.github.io/graphics2d_implementierung_java_verlegtem_koordinatenursprung)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=Graphics2D Implementierung für Java mit verlegtem Koordinatenursprung"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Alte Rechner zukunftsfähig (?)</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">01.05.2019</span> </p> <span class="smallabstract"><p>Ich mache immer wieder gerne Experimente mit Terminalsessions - meistens wegen der zentral möglichen Administration. Nunhabe ich das Thema von neuem angepackt: wegen einem alten(sehr alten) Laptop, der bei mir schon so lange im Schrank lag, dass sogar die BIOS-Batterie inzwischen leer war... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="alte_rechner_zukunftsfaehig____.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-black w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-black w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-black w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> Unerwartete Probleme bei der Software Raid5 Erweiterung</span><br> <span class="smallabstract"><p>Ich bin an die Grenzen meiner Storagelösung gestoßen - es musste mehr Platz her... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="unerwartete_probleme_software_raid5_erweiterung.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> Die sQLshell ist nun cloudnative!</span><br> <span class="smallabstract"><p>Die sQLshell hat eine weitere Integration erfahren - obwohl ich eigentlich selber nicht viel dazu tun musste: Es existiert ein Projekt/Produkt namens steampipe, dessen Slogan ist <span class="mdbold">select * from cloud;</span> - Im Prinzip eine Wrapperschicht um diverse (laut Eigenwerbung mehr als 140) (cloud) data sources. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="sqlshell_ist_nun_cloudnative_.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2024 III</span><br> <span class="smallabstract"><p>Nach der letzten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet von 2024 folgt hier gleich die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2024_iii.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script> <noscript>Der Verfasser</noscript></h4> <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p> <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p> <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p> <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man <a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a> finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p> </div> </div><hr> </div> </div><br> </div> <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top"> <a href="me.html"> <script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script> <noscript>Der Verfasser</noscript> , Damaschke 11, Rudolstadt, <script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script> <noscript>jkey&#64;arcor&#46;de</noscript> , PEN: 1.3.6.1.4.1.59452 </a> <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p> </footer> </body> </html>
