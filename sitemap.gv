@@ -38,6 +38,9 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_sqlshell__sqlite_redis___oh_my_ [label="sQLshell, SQLite und Redis - oh my!" href="https://elbosso.github.io/sqlshell__sqlite_redis___oh_my_.html"]
+            node_sqlshell__sqlite_redis___oh_my_ -> node_sqlshell_version_7_7pre4_build_10491
+node_bad_certificates_version_3_0_0 [label="bad-certificates Version 3.0.0" href="https://elbosso.github.io/bad_certificates_version_3_0_0.html"]
 node_erste_vor_version_eines_gis_plugin_sqlshell [label="Erste Vor-Version eines Gis-Plugin für die sQLshell" href="https://elbosso.github.io/erste_vor_version_eines_gis_plugin_sqlshell.html"]
 node_bad_certificates_version_2_1_0 [label="bad-certificates Version 2.1.0" href="https://elbosso.github.io/bad_certificates_version_2_1_0.html"]
             node_bad_certificates_version_2_1_0 -> node_bad_certificates_version_3_0_0
@@ -580,8 +583,8 @@ node_styles_geojson_ebmap4d [label="Styles für GeoJSON in EBMap4D" href="https:
             node_styles_geojson_ebmap4d -> node_eigener_sache_blick_auf_2024
             node_styles_geojson_ebmap4d -> node_neue_version_ebmap4d
             node_styles_geojson_ebmap4d -> node_sqlite_geodatenbank
-            node_styles_geojson_ebmap4d -> node_mehrere_datenbanken_postgis_erweiterung_docker
             node_styles_geojson_ebmap4d -> node_sqlshell_datenlieferant_ebmap4d
+            node_styles_geojson_ebmap4d -> node_mehrere_datenbanken_postgis_erweiterung_docker
 node_lufi_docker_zoo [label="LuFi im Docker-Zoo" href="https://elbosso.github.io/lufi_docker_zoo.html"]
             node_lufi_docker_zoo -> node_fraktale_auf_kommandozeile
             node_lufi_docker_zoo -> node_writefreely_docker_zoo_angekommen
@@ -953,8 +956,8 @@ node_max7119_ntp_uhr [label="Max7119 NTP Uhr" href="https://elbosso.github.io/ma
 node_lxc_netzwerk_router [label="LXC Netzwerk Router" href="https://elbosso.github.io/lxc_netzwerk_router.html"]
             node_lxc_netzwerk_router -> node_docker_ci_cd
             node_lxc_netzwerk_router -> node_umzug_netzwerklabor_abgeschlossen
-            node_lxc_netzwerk_router -> node_lxc_netzwerk_degrader
             node_lxc_netzwerk_router -> node_ci_cd_shellcheck
+            node_lxc_netzwerk_router -> node_lxc_netzwerk_degrader
             node_lxc_netzwerk_router -> node_automatisches_setup_eines_netzwerklabors
             node_lxc_netzwerk_router -> node_performanceprobleme_kvm_windows
 node_van_der_pol__chua_systeme [label="Van-der-Pol- und Chua-Systeme" href="https://elbosso.github.io/van_der_pol__chua_systeme.html"]
@@ -1157,7 +1160,6 @@ node_certstream___ressourcenverbrauch [label="Certstream - Ressourcenverbrauch" 
 node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian May, Kerry Ellis & Vittorio Grigolo: Bohemian Rhapsody" href="https://elbosso.github.io/brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody.html"]
 node_mandelbrot_sets_mittels_shadern_berechnen [label="Mandelbrot-Sets mittels Shadern berechnen" href="https://elbosso.github.io/mandelbrot_sets_mittels_shadern_berechnen.html"]
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
-            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_java
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_julia_mengen_shadern_umgesetzt
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_faehrnisse_des_buildprozesses_unter_windows
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_gpu_programmierung_java_revisited
@@ -1410,9 +1412,10 @@ node_garten_fruehjahr_2018 [label="Garten im Frühjahr 2018" href="https://elbos
 node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" href="https://elbosso.github.io/linux_wifi_accesspoint_aus_raspi.html"]
             node_linux_wifi_accesspoint_aus_raspi -> node_raspberry_pi_ads_b_receiver
 node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
-            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
+            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
+            node_implizites_eulerverfahren -> node_visualisierung_strange_attractors_java3d
             node_implizites_eulerverfahren -> node_mathematik_beliebiger_praezision_java
 node_eine_ganz_alte_bibliothek_bildverarbeitung [label="Eine ganz alte Bibliothek für Bildverarbeitung" href="https://elbosso.github.io/eine_ganz_alte_bibliothek_bildverarbeitung.html"]
             node_eine_ganz_alte_bibliothek_bildverarbeitung -> node_gpu_programmierung_java_revisited
@@ -1454,8 +1457,8 @@ node_batik_java9_modulsystem_____9760_ [label="Batik und Java9 Modulsystem = &#9
             node_batik_java9_modulsystem_____9760_ -> node_java9_umstellung
             node_batik_java9_modulsystem_____9760_ -> node_faehrnisse_des_buildprozesses_unter_windows
 node_java_bug_modulsystem_nutzung_jaas [label="Java-Bug in Modulsystem bei Nutzung von JAAS" href="https://elbosso.github.io/java_bug_modulsystem_nutzung_jaas.html"]
-            node_java_bug_modulsystem_nutzung_jaas -> node_java9_umstellung
             node_java_bug_modulsystem_nutzung_jaas -> node_aenderungen_datumsformat_java___schon_wieder_
+            node_java_bug_modulsystem_nutzung_jaas -> node_java9_umstellung
             node_java_bug_modulsystem_nutzung_jaas -> node_batik_java9_modulsystem_____9760_
             node_java_bug_modulsystem_nutzung_jaas -> node_rechtevergabe_java
 node_beaninfo_runtime_annotations [label="BeanInfo durch Runtime-Annotations" href="https://elbosso.github.io/beaninfo_runtime_annotations.html"]
@@ -1472,7 +1475,6 @@ node_kochbuch_beispiele_auf_github [label="Kochbuch-Beispiele auf GitHub" href="
 node_sqlshell_integriert_ldap_jdbc_bridge [label="sQLshell integriert LDAP-JDBC-Bridge" href="https://elbosso.github.io/sqlshell_integriert_ldap_jdbc_bridge.html"]
 node_beaninfo_generierung_via_annotations [label="BeanInfo-Generierung via Annotations" href="https://elbosso.github.io/beaninfo_generierung_via_annotations.html"]
             node_beaninfo_generierung_via_annotations -> node_maven_archetype_dwb__module
-            node_beaninfo_generierung_via_annotations -> node_beaninfo_runtime_annotations
             node_beaninfo_generierung_via_annotations -> node_github_repository_beaninfo_generator
             node_beaninfo_generierung_via_annotations -> node_beaninfo_runtime_annotations_feature_complete_baelde_open_source
 node_34c3___meine_favoriten [label="34c3 - Meine Favoriten" href="https://elbosso.github.io/34c3___meine_favoriten.html"]
@@ -2210,8 +2212,8 @@ node_beanshell_module_dwb_ [label="BeanShell-Module in dWb+" href="https://elbos
 node_virtual_router_manager_ap [label="Virtual Router Manager als AP" href="https://elbosso.github.io/virtual_router_manager_ap.html"]
 node_groupedjtable [label="GroupedJTable" href="https://elbosso.github.io/groupedjtable.html"]
 node_java_bibliotheken_android [label="Java-Bibliotheken für Android" href="https://elbosso.github.io/java_bibliotheken_android.html"]
-            node_java_bibliotheken_android -> node_jtidy_android_portiert
             node_java_bibliotheken_android -> node_ganymed_ssh2_android
+            node_java_bibliotheken_android -> node_jtidy_android_portiert
 node_tile_identifizierung_tracks [label="Tile-Identifizierung für Tracks" href="https://elbosso.github.io/tile_identifizierung_tracks.html"]
             node_tile_identifizierung_tracks -> node_drehen_scheren
 node_screen_for_x [label="screen for X" href="https://elbosso.github.io/screen_for_x.html"]
@@ -2257,17 +2259,17 @@ node_fbmlandscapes___java3d [label="FbmLandscapes + Java3D" href="https://elboss
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
             node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-            node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
-            node_ebmap4d -> node_ortsbezuege_dwb_
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
+            node_ebmap4d -> node_ortsbezuege_dwb_
             node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
+            node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
             node_ebmap4d -> node_tile_server_openstreetmap
-            node_ebmap4d -> node_neue_version_ebmap4d
-            node_ebmap4d -> node_ebmap4d_bitmap_layer
-            node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
             node_ebmap4d -> node_styles_geojson_ebmap4d
+            node_ebmap4d -> node_ebmap4d_bitmap_layer
+            node_ebmap4d -> node_neue_version_ebmap4d
+            node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
             node_ebmap4d -> node_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
@@ -2275,10 +2277,10 @@ node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
             node_ebmap4d -> node_sqlite_geodatenbank
             node_ebmap4d -> node_satelliten_layer
 node_tpedit [label="TPEdit" href="https://elbosso.github.io/tpedit.html"]
-            node_tpedit -> node_tpedit_unterstuetzt_tags
             node_tpedit -> node_fop_pdf_formulare
             node_tpedit -> node_fop_pdf_formulare_mittels_itext
             node_tpedit -> node_tpedit_erstellt_interaktive_formulare
+            node_tpedit -> node_tpedit_unterstuetzt_tags
             node_tpedit -> node_tpedit_referenzen
 node_threedialwatch [label="ThreeDialWatch" href="https://elbosso.github.io/threedialwatch.html"]
             node_threedialwatch -> node_daylight
