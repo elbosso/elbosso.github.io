@@ -38,8 +38,12 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_sql_aggregatfunktionen_sqlite_beanshell_scripts [label="SQL-Aggregatfunktionen in SQLite als BeanShell-Scripts" href="https://elbosso.github.io/sql_aggregatfunktionen_sqlite_beanshell_scripts.html"]
+            node_sql_aggregatfunktionen_sqlite_beanshell_scripts -> node_collations_sqlite_mittels_beanshell
+node_linkcollections_2024_v [label="LinkCollections 2024 V" href="https://elbosso.github.io/linkcollections_2024_v.html"]
+            node_linkcollections_2024_v -> node_linkcollections_2024_vi
 node_sql_funktionen_sqlite_beanshell_scripts [label="SQL Funktionen in SQLite als BeanShell-Scripts" href="https://elbosso.github.io/sql_funktionen_sqlite_beanshell_scripts.html"]
-            node_sql_funktionen_sqlite_beanshell_scripts -> node_aggregatfunktionen_sqlite_beanshell_scripts
+            node_sql_funktionen_sqlite_beanshell_scripts -> node_sql_aggregatfunktionen_sqlite_beanshell_scripts
 node_spieleengine_ix [label="Spieleengine IX" href="https://elbosso.github.io/spieleengine_ix.html"]
 node_neue_version_plantumlinterfaceproxy_napkin_look [label="Neue Version plantumlinterfaceproxy napkin look" href="https://elbosso.github.io/neue_version_plantumlinterfaceproxy_napkin_look.html"]
 node_apache_httpcore5_funktioniert_nicht_docker [label="Apache HTTPCore5 funktioniert nicht mit Docker" href="https://elbosso.github.io/apache_httpcore5_funktioniert_nicht_docker.html"]
@@ -78,8 +82,9 @@ node_mehrere_datenbanken_postgis_erweiterung_docker [label="Mehrere Datenbanken 
             node_mehrere_datenbanken_postgis_erweiterung_docker -> node_sqlshell_datenlieferant_ebmap4d
 node_sqlshell_datenlieferant_ebmap4d [label="sQLshell als Datenlieferant für EBMap4D" href="https://elbosso.github.io/sqlshell_datenlieferant_ebmap4d.html"]
             node_sqlshell_datenlieferant_ebmap4d -> node_sqlshell_ist_nun_cloudnative_
-            node_sqlshell_datenlieferant_ebmap4d -> node_sqlite_geodatenbank
+            node_sqlshell_datenlieferant_ebmap4d -> node_eventim_scrapen_ai_ersatz
             node_sqlshell_datenlieferant_ebmap4d -> node_erste_vor_version_eines_gis_plugin_sqlshell
+            node_sqlshell_datenlieferant_ebmap4d -> node_sqlite_geodatenbank
             node_sqlshell_datenlieferant_ebmap4d -> node_isochrone_karten_mittels_graphhopper
             node_sqlshell_datenlieferant_ebmap4d -> node_isochroner_layer_ebmap4d
 node_minimierung_angriffsoberflaechen_java [label="Minimierung von Angriffsoberflächen in Java" href="https://elbosso.github.io/minimierung_angriffsoberflaechen_java.html"]
@@ -90,6 +95,7 @@ node_victor_borge [label="Victor Borge" href="https://elbosso.github.io/victor_b
 node_bad_certificates_version_1_0_0 [label="bad-certificates Version 1.0.0" href="https://elbosso.github.io/bad_certificates_version_1_0_0.html"]
             node_bad_certificates_version_1_0_0 -> node_bad_certificates_version_2_1_0
 node_neue_version_ebmap4d [label="Neue Version von EBMap4D" href="https://elbosso.github.io/neue_version_ebmap4d.html"]
+            node_neue_version_ebmap4d -> node_eventim_scrapen_ai_ersatz
 node_lamport_clocks_java [label="Lamport Clocks für Java" href="https://elbosso.github.io/lamport_clocks_java.html"]
 node_linkcollections_2024_i [label="LinkCollections 2024 I" href="https://elbosso.github.io/linkcollections_2024_i.html"]
             node_linkcollections_2024_i -> node_linkcollections_2024_ii
@@ -605,9 +611,9 @@ node_fraktale_auf_kommandozeile [label="Fraktale auf der Kommandozeile" href="ht
 node_schachtel_deckel_2 [label="Schachtel und Deckel 2" href="https://elbosso.github.io/schachtel_deckel_2.html"]
 node_styles_geojson_ebmap4d [label="Styles für GeoJSON in EBMap4D" href="https://elbosso.github.io/styles_geojson_ebmap4d.html"]
             node_styles_geojson_ebmap4d -> node_eigener_sache_blick_auf_2024
+            node_styles_geojson_ebmap4d -> node_mehrere_datenbanken_postgis_erweiterung_docker
             node_styles_geojson_ebmap4d -> node_neue_version_ebmap4d
             node_styles_geojson_ebmap4d -> node_sqlite_geodatenbank
-            node_styles_geojson_ebmap4d -> node_mehrere_datenbanken_postgis_erweiterung_docker
             node_styles_geojson_ebmap4d -> node_sqlshell_datenlieferant_ebmap4d
             node_styles_geojson_ebmap4d -> node_isochrone_karten_mittels_graphhopper
 node_lufi_docker_zoo [label="LuFi im Docker-Zoo" href="https://elbosso.github.io/lufi_docker_zoo.html"]
@@ -1003,7 +1009,6 @@ node_roessler_attractor_implizites_eulerverfahren [label="Roessler Attractor und
             node_roessler_attractor_implizites_eulerverfahren -> node_bifurkationen_lorenz_system
             node_roessler_attractor_implizites_eulerverfahren -> node_synchronisierung_roessler_systemen
 node_visualisierung_strange_attractors_java3d [label="Visualisierung von Strange Attractors mit Java3D" href="https://elbosso.github.io/visualisierung_strange_attractors_java3d.html"]
-            node_visualisierung_strange_attractors_java3d -> node_chaotische_systeme_implizites_eulerverfahren
             node_visualisierung_strange_attractors_java3d -> node_kontinuierliche_visualisierung_strange_attractors
 node_strange_attractors_bigdecimal [label="Strange Attractors mit BigDecimal" href="https://elbosso.github.io/strange_attractors_bigdecimal.html"]
             node_strange_attractors_bigdecimal -> node_gc_beliebige_praezision_java
@@ -1093,8 +1098,8 @@ node_ci_cd_grafana [label="CI/CD mit Grafana" href="https://elbosso.github.io/ci
             node_ci_cd_grafana -> node_raspberry_schnellem_massenspeicher
 node_vaadin_swing_ersatz [label="Vaadin als Swing-Ersatz" href="https://elbosso.github.io/vaadin_swing_ersatz.html"]
 node_sqlshell_echtzeitdatenbanken [label="sQLshell und Echtzeitdatenbanken" href="https://elbosso.github.io/sqlshell_echtzeitdatenbanken.html"]
-            node_sqlshell_echtzeitdatenbanken -> node_syntax_highlighting_influxdb_java_anwendungen
             node_sqlshell_echtzeitdatenbanken -> node_viewpanel_sqlshell_zeitreihendatenbanken
+            node_sqlshell_echtzeitdatenbanken -> node_syntax_highlighting_influxdb_java_anwendungen
 node_testdatengeneratoren_microservices_docker [label="Testdatengeneratoren als Microservices mit Docker" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker.html"]
             node_testdatengeneratoren_microservices_docker -> node_generator_microservices_mastodon_bot
             node_testdatengeneratoren_microservices_docker -> node_vaadin_swing_ersatz
@@ -1185,8 +1190,8 @@ node_certstream___ressourcenverbrauch [label="Certstream - Ressourcenverbrauch" 
             node_certstream___ressourcenverbrauch -> node_grafana__alarmierung_xmpp
 node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian May, Kerry Ellis & Vittorio Grigolo: Bohemian Rhapsody" href="https://elbosso.github.io/brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody.html"]
 node_mandelbrot_sets_mittels_shadern_berechnen [label="Mandelbrot-Sets mittels Shadern berechnen" href="https://elbosso.github.io/mandelbrot_sets_mittels_shadern_berechnen.html"]
-            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_java
+            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_julia_mengen_shadern_umgesetzt
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_faehrnisse_des_buildprozesses_unter_windows
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_gpu_programmierung_java_revisited
@@ -1485,8 +1490,8 @@ node_batik_java9_modulsystem_____9760_ [label="Batik und Java9 Modulsystem = &#9
             node_batik_java9_modulsystem_____9760_ -> node_faehrnisse_des_buildprozesses_unter_windows
 node_java_bug_modulsystem_nutzung_jaas [label="Java-Bug in Modulsystem bei Nutzung von JAAS" href="https://elbosso.github.io/java_bug_modulsystem_nutzung_jaas.html"]
             node_java_bug_modulsystem_nutzung_jaas -> node_java9_umstellung
-            node_java_bug_modulsystem_nutzung_jaas -> node_aenderungen_datumsformat_java___schon_wieder_
             node_java_bug_modulsystem_nutzung_jaas -> node_batik_java9_modulsystem_____9760_
+            node_java_bug_modulsystem_nutzung_jaas -> node_aenderungen_datumsformat_java___schon_wieder_
             node_java_bug_modulsystem_nutzung_jaas -> node_rechtevergabe_java
 node_beaninfo_runtime_annotations [label="BeanInfo durch Runtime-Annotations" href="https://elbosso.github.io/beaninfo_runtime_annotations.html"]
             node_beaninfo_runtime_annotations -> node_beaninfo_runtime_annotations__gist_
@@ -2241,6 +2246,7 @@ node_virtual_router_manager_ap [label="Virtual Router Manager als AP" href="http
 node_groupedjtable [label="GroupedJTable" href="https://elbosso.github.io/groupedjtable.html"]
 node_java_bibliotheken_android [label="Java-Bibliotheken für Android" href="https://elbosso.github.io/java_bibliotheken_android.html"]
             node_java_bibliotheken_android -> node_ganymed_ssh2_android
+            node_java_bibliotheken_android -> node_jtidy_android_portiert
 node_tile_identifizierung_tracks [label="Tile-Identifizierung für Tracks" href="https://elbosso.github.io/tile_identifizierung_tracks.html"]
             node_tile_identifizierung_tracks -> node_drehen_scheren
 node_screen_for_x [label="screen for X" href="https://elbosso.github.io/screen_for_x.html"]
@@ -2286,19 +2292,19 @@ node_fbmlandscapes___java3d [label="FbmLandscapes + Java3D" href="https://elboss
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
             node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-            node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
             node_ebmap4d -> node_ortsbezuege_dwb_
             node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
+            node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
-            node_ebmap4d -> node_neue_version_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap
+            node_ebmap4d -> node_neue_version_ebmap4d
             node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
-            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
             node_ebmap4d -> node_geojson_ebmap4d
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_hillshading_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_sqlite_geodatenbank
