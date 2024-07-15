@@ -1,0 +1,321 @@
+<!DOCTYPE html> <html prefix="og: https://ogp.me/ns#"> <head> <title>OpenStreetMap Navi als Docker-Container</title> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta property="og:title" content="OpenStreetMap Navi als Docker-Container"/> <meta property="og:type" content="article"/> <meta property="og:url" content="https://elbosso.github.io/openstreetmap_navi_docker_container"/> <meta property="og:image" content="https://elbosso.github.io/images/graphhopper.png"/> <meta property="og:locale" content="de_DE"/> <meta property="og:site_name" content="elbosso.github.io"/> <meta property="og:description" content="Ich habe die auf OpenStreetMap basierende OpenSource Navigationslösung Graphhopper in einen Docker-Container gepackt und als neuestes Mitglied in meinem Docker-Zoo willkommen geheißen. "/> <meta property="article:published_time" content="2024-07-15"> <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> <link rel="stylesheet" type="text/css" href="css/stylew3.css"/> <link rel="stylesheet" type="text/css" href="css/syntax_highlighting.css"/> <link href="rss.xml" title="Aktuelle Neuigkeiten" type="application/rss+xml" rel="alternate"/> <script type="text/javascript" language="javascript">
+<!--
+function abc(coded,key)
+{
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write(link)
+}
+//-->
+</script> </head> <body class="w3-light-grey"> <div class="w3-content" style="max-width:1400px"> <div class="w3-row"> <div class="w3-col l8"> <a name="content"></a> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <div class="w3-row"> <div class="w3-col m6 s12"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="sql_aggregatfunktionen_sqlite_beanshell_scripts.html#content">vorhergehender Artikel</a> </div> <div class="w3-col m6" style="text-align: right"> <a class="w3-button w3-padding-small w3-white w3-border smallabstract tooltip" href="datenvalidierung_utf8_bidi_steuerzeichen__trojansource_2_0_.html#content">nächster Artikel </a> </div> </div> <div class="w3-row"> <div class="w3-col m9 s12"> <h4>OpenStreetMap Navi als Docker-Container</h4> <div class="w3-container"> <div class="w3-row"> <div class="w3-col m8 s12"> vorhergehende Artikel in: <a href="mehrere_datenbanken_postgis_erweiterung_docker.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Geo</span> </a> <a href="neue_version_plantumlinterfaceproxy_napkin_look.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Docker</span> </a> <a href="neue_version_plantumlinterfaceproxy_napkin_look.html#content"> <span class="w3-tag w3-black w3-margin-bottom">Virtualisierung</span> </a> </div> <div class="w3-col m4" style="text-align: right"> <span class="w3-opacity">15.07.2024</span> </div> </div> </div> </div> <div class="w3-col m3"><p style="text-align: right"> <img style="max-width:128px;" src="images/graphhopper_t.png"> </p> </div> </div> </div> </div> <div class="w3-card-4 w3-margin w3-white"> <div class="w3-container w3-padding" id="abstract"> <p>Ich habe die auf OpenStreetMap basierende OpenSource Navigationslösung <a href="https://github.com/graphhopper/graphhopper/tree/master">Graphhopper</a> in einen Docker-Container gepackt und als neuestes Mitglied in meinem <a href="anti_virus_docker_zoo.html">Docker-Zoo</a> willkommen geheißen. </p> </div> <div class="w3-container w3-padding" id="contentdiv"> <p>Da es leider keine offiziellen Images mehr dafür gibt (es scheint sie früher gegeben zu haben, da sich immer noch tote Links dafür finden lassen), habe ich selber Hand angelegt. Herausgekommen sind ein <span class="mditalics">Dockerfile</span> und eine <span class="mditalics">docker-compose.yml,</span> die für eigene Zwecke ein wenig angepasst werden können. Dieses Setup benötigt zwei Volumes - eines mit der zu benutzenden <span class="mditalics">.pbf</span> Datei, die man zum Beispiel von der <a href="https://download.geofabrik.de/">GeoFabrik</a> beziehen kann und eine Konfiguration, in der zum Beispiel die verschiedenen Profile gepflegt werden. Eines für zwei Profile (Auto und zu Fuß) habe ich ebenfalls unten angehängt. Zur Illustration bin ich hier einfach mal von Ilmenau nach Jena gefahren: </p><p> <img src="images/graphhopper.png" style="max-width:1639px;" alt="Screenshot" class="center"> <span class="imgdesc"> Routenplanung für eine Fahrt von Ilmenau nach Jena mit drei Alternativvorschlägen </span> </p><p> <span class="mditalics">Dockerfile</span> </p><div class="highlight"><pre><span></span><span class="err">#</span><span class="nx">Build</span><span class="w"> </span><span class="nx">stage</span>
+<span class="nx">FROM</span><span class="w"> </span><span class="nx">openjdk</span><span class="p">:</span><span class="mi">23</span><span class="o">-</span><span class="nx">bookworm</span>
+</p><p>
+<span class="nx">RUN</span><span class="w"> </span><span class="nx">apt</span><span class="o">-</span><span class="nx">get</span><span class="w"> </span><span class="nx">update</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">apt</span><span class="o">-</span><span class="nx">get</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">wget</span>
+</p><p>
+<span class="nx">ENV</span><span class="w"> </span><span class="nx">HOME</span><span class="p">=</span><span class="o">/</span><span class="nx">graphhopper</span>
+<span class="nx">RUN</span><span class="w"> </span><span class="nx">mkdir</span><span class="w"> </span><span class="o">-</span><span class="nx">p</span><span class="w"> </span><span class="err">$</span><span class="nx">HOME</span>
+</p><p>
+<span class="nx">WORKDIR</span><span class="w"> </span><span class="err">$</span><span class="nx">HOME</span>
+</p><p>
+<span class="nx">RUN</span><span class="w"> </span><span class="nx">wget</span><span class="w"> </span><span class="nx">https</span><span class="p">:</span><span class="c1">//repo1.maven.org/maven2/com/graphhopper/graphhopper-web/9.1/graphhopper-web-9.1.jar</span>
+</p><p>
+<span class="err">#</span><span class="nx">ADD</span><span class="w"> </span><span class="nx">pom</span><span class="p">.</span><span class="nx">xml</span><span class="w"> </span><span class="err">$</span><span class="nx">HOME</span>
+<span class="err">#</span><span class="nx">RUN</span><span class="w"> </span><span class="nx">mvn</span><span class="w"> </span><span class="o">-</span><span class="nx">U</span><span class="w"> </span><span class="nx">verify</span><span class="w"> </span><span class="o">--</span><span class="nx">fail</span><span class="o">-</span><span class="nx">never</span>
+</p><p>
+<span class="err">#</span><span class="nx">ADD</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="err">$</span><span class="nx">HOME</span>
+</p><p>
+<span class="err">#</span><span class="nx">RUN</span><span class="w"> </span><span class="nx">mvn</span><span class="w"> </span><span class="nx">compile</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="nx">assembly</span><span class="p">:</span><span class="nx">single</span>
+</p><p>
+<span class="err">#</span><span class="w"> </span><span class="nx">Run</span><span class="w"> </span><span class="nx">it</span>
+<span class="err">#</span><span class="nx">FROM</span><span class="w"> </span><span class="nx">openjdk</span><span class="p">:</span><span class="mi">17</span>
+</p><p>
+<span class="err">#</span><span class="nx">COPY</span><span class="w"> </span><span class="o">--</span><span class="nx">from</span><span class="p">=</span><span class="nx">build</span><span class="o">-</span><span class="nx">env</span><span class="w"> </span><span class="o">/</span><span class="nx">plantuml</span><span class="o">-</span><span class="nx">roughifier</span><span class="o">/</span><span class="nx">target</span><span class="o">/*-</span><span class="nx">jar</span><span class="o">-</span><span class="nx">with</span><span class="o">-</span><span class="nx">dependencies</span><span class="p">.</span><span class="nx">jar</span><span class="w"> </span><span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">plantuml</span><span class="o">-</span><span class="nx">roughifier</span><span class="p">.</span><span class="nx">jar</span>
+</p><p>
+<span class="nx">EXPOSE</span><span class="w"> </span><span class="mi">8989</span>
+</p><p>
+<span class="nx">CMD</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;java&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-jar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-Ddw.graphhopper.datareader.file=/graphhopper/data-latest.osm.pbf&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-jar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;graphhopper-web-9.1.jar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;server&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;config.yml&quot;</span><span class="p">]</span>
+</pre></div> <p> <span class="mditalics">docker-compose.yml</span> (mit Traefikv2 Vorbereitung) </p><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.1&#39;</span>
+</p><p>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">graphhopper</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./</span><span class="w"> </span><span class="c1"># Local</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">graphhopper</span>
+<span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">graphhopper</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8989:8989</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./config-example.yml:/graphhopper/config.yml</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./thueringen-latest.osm.pbf:/graphhopper/data-latest.osm.pbf</span>
+<span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.enable=true&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.graphhopper-http.entrypoints=http&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.graphhopper-http.rule=Host(`graphhopper.docker.lab`)&quot;</span>
+<span class="c1">#      - &quot;traefik.http.routers.graphhopper-http.middlewares=graphhopper-https&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.services.graphhopper-http.loadbalancer.server.port=8989&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.middlewares.graphhopper-https.redirectscheme.scheme=https&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.graphhopper.entrypoints=https&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.graphhopper.rule=Host(`graphhopper.docker.lab`)&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.graphhopper.tls=true&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.docker.network=traefik_proxy&quot;</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik_proxy</span>
+</p><p>
+<span class="nt">networks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">traefik_proxy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">external</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik_proxy</span>
+</pre></div> <p> <span class="mditalics">config.yml</span> </p><div class="highlight"><pre><span></span><span class="nt">graphhopper</span><span class="p">:</span>
+</p><p>
+<span class="w">  </span><span class="c1"># OpenStreetMap input file PBF or XML, can be changed via command line -Ddw.graphhopper.datareader.file=some.pbf</span>
+<span class="w">  </span><span class="nt">datareader.file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">  </span><span class="c1"># Local folder used by graphhopper to store its data</span>
+<span class="w">  </span><span class="nt">graph.location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">graph-cache</span>
+</p><p>
+<span class="w">  </span><span class="c1"></p><p>
+<span class="w">  </span><span class="c1"># Routing can be done only for profiles listed below. For more information about profiles and custom profiles have a</span>
+<span class="w">  </span><span class="c1"># look into the documentation at docs/core/profiles.md or the examples under web/src/test/java/com/graphhopper/application/resources/</span>
+<span class="w">  </span><span class="c1"># or the CustomWeighting class for the raw details.</span>
+<span class="w">  </span><span class="c1">#</span>
+<span class="w">  </span><span class="c1"># In general a profile consists of the following</span>
+<span class="w">  </span><span class="c1"># - name (required): a unique string identifier for the profile</span>
+<span class="w">  </span><span class="c1"># - weighting (optional): by default &#39;custom&#39;</span>
+<span class="w">  </span><span class="c1"># - turn_costs (optional):</span>
+<span class="w">  </span><span class="c1">#     vehicle_types: [motorcar, motor_vehicle] (vehicle types used for vehicle-specific turn restrictions)</span>
+<span class="w">  </span><span class="c1">#     u_turn_costs: 60 (time-penalty for doing a u-turn in seconds)</span>
+<span class="w">  </span><span class="c1">#</span>
+<span class="w">  </span><span class="c1"># Depending on the above fields there are other properties that can be used, e.g.</span>
+<span class="w">  </span><span class="c1"># - custom_model_files: when you specified &quot;weighting: custom&quot; you need to set one or more json files which are searched in</span>
+<span class="w">  </span><span class="c1">#   custom_models.directory or the working directory that defines the custom_model. If you want an empty model you can</span>
+<span class="w">  </span><span class="c1">#   set &quot;custom_model_files: []</span>
+<span class="w">  </span><span class="c1">#   You can also use the `custom_model` field instead and specify your custom model in the profile directly.</span>
+<span class="w">  </span><span class="c1">#</span>
+<span class="w">  </span><span class="c1"># To prevent long running routing queries you should usually enable either speed or hybrid mode for all the given</span>
+<span class="w">  </span><span class="c1"># profiles (see below). Or at least limit the number of `routing.max_visited_nodes`.</span>
+</p><p>
+<span class="w">  </span><span class="nt">profiles</span><span class="p">:</span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">car</span>
+<span class="c1">#     turn_costs:</span>
+<span class="c1">#       vehicle_types: [motorcar, motor_vehicle]</span>
+<span class="c1">#       u_turn_costs: 60</span>
+<span class="w">     </span><span class="nt">custom_model_files</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">car.json</span><span class="p p-Indicator">]</span>
+</p><p>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foot</span>
+<span class="w">     </span><span class="nt">custom_model_files</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">foot.json</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">foot_elevation.json</span><span class="p p-Indicator">]</span>
+</p><p>
+<span class="c1">#    - name: bike</span>
+<span class="c1">#      custom_model_files: [bike.json, bike_elevation.json]</span>
+<span class="c1">#</span>
+<span class="c1">#    - name: racingbike</span>
+<span class="c1">#      custom_model_files: [racingbike.json, bike_elevation.json]</span>
+<span class="c1">#</span>
+<span class="c1">#    - name: mtb</span>
+<span class="c1">#      custom_model_files: [mtb.json, bike_elevation.json]</span>
+</p><p>
+<span class="w">  </span><span class="c1"># instead of the inbuilt custom models (see ./core/src/main/resources/com/graphhopper/custom_models)</span>
+<span class="w">  </span><span class="c1"># you can specify a folder where to find your own custom model files</span>
+<span class="w">  </span><span class="c1"># custom_models.directory: custom_models</span>
+</p><p>
+<span class="w">  </span><span class="c1"># Speed mode:</span>
+<span class="w">  </span><span class="c1"># It&#39;s possible to speed up routing by doing a special graph preparation (Contraction Hierarchies, CH). This requires</span>
+<span class="w">  </span><span class="c1"># more RAM/disk space for holding the prepared graph but also means less memory usage per request. Using the following</span>
+<span class="w">  </span><span class="c1"># list you can define for which of the above routing profiles such preparation shall be performed. Note that to support</span>
+<span class="w">  </span><span class="c1"># profiles with `turn_costs: true` a more elaborate preparation is required (longer preparation time and more memory</span>
+<span class="w">  </span><span class="c1"># usage) and the routing will also be slower than with `turn_costs: false`.</span>
+<span class="w">  </span><span class="nt">profiles_ch</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">car</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foot</span>
+<span class="w">  </span><span class="c1"># Hybrid mode:</span>
+<span class="w">  </span><span class="c1"># Similar to speed mode, the hybrid mode (Landmarks, LM) also speeds up routing by doing calculating auxiliary data</span>
+<span class="w">  </span><span class="c1"># in advance. Its not as fast as speed mode, but more flexible.</span>
+<span class="w">  </span><span class="c1">#</span>
+<span class="w">  </span><span class="c1"># Advanced usage: It is possible to use the same preparation for multiple profiles which saves memory and preparation</span>
+<span class="w">  </span><span class="c1"># time. To do this use e.g. `preparation_profile: my_other_profile` where `my_other_profile` is the name of another</span>
+<span class="w">  </span><span class="c1"># profile for which an LM profile exists. Important: This only will give correct routing results if the weights</span>
+<span class="w">  </span><span class="c1"># calculated for the profile are equal or larger (for every edge) than those calculated for the profile that was used</span>
+<span class="w">  </span><span class="c1"># for the preparation (`my_other_profile`)</span>
+<span class="w">  </span><span class="nt">profiles_lm</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+</p><p>
+<span class="w">  </span><span class="c1"></p><p>
+<span class="w">  </span><span class="c1"># Add additional information to every edge. Used for path details (#1548) and custom models (docs/core/custom-models.md)</span>
+<span class="w">  </span><span class="c1"># Default values are: road_class,road_class_link,road_environment,max_speed,road_access</span>
+<span class="w">  </span><span class="c1"># More are: surface,smoothness,max_width,max_height,max_weight,max_weight_except,hgv,max_axle_load,max_length,</span>
+<span class="w">  </span><span class="c1">#           hazmat,hazmat_tunnel,hazmat_water,lanes,osm_way_id,toll,track_type,mtb_rating,hike_rating,horse_rating,</span>
+<span class="w">  </span><span class="c1">#           country,curvature,average_slope,max_slope,car_temporal_access,bike_temporal_access,foot_temporal_access</span>
+<span class="w">  </span><span class="nt">graph.encoded_values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">car_access, car_average_speed, foot_access, hike_rating, foot_priority, foot_average_speed, average_slope</span>
+</p><p>
+<span class="w">  </span><span class="c1"></p><p>
+<span class="w">  </span><span class="c1"># To make CH preparation faster for multiple profiles you can increase the default threads if you have enough RAM.</span>
+<span class="w">  </span><span class="c1"># Change this setting only if you know what you are doing and if the default worked for you.</span>
+<span class="w">  </span><span class="c1"># prepare.ch.threads: 1</span>
+</p><p>
+<span class="w">  </span><span class="c1"># To tune the performance vs. memory usage for the hybrid mode use</span>
+<span class="w">  </span><span class="c1"># prepare.lm.landmarks: 16</span>
+</p><p>
+<span class="w">  </span><span class="c1"># Make landmark preparation parallel if you have enough RAM. Change this only if you know what you are doing and if</span>
+<span class="w">  </span><span class="c1"># the default worked for you.</span>
+<span class="w">  </span><span class="c1"># prepare.lm.threads: 1</span>
+</p><p>
+<span class="w">  </span><span class="c1"></p><p>
+<span class="w">  </span><span class="c1"># To populate your graph with elevation data use SRTM, default is noop (no elevation). Read more about it in docs/core/elevation.md</span>
+<span class="w">  </span><span class="c1"># graph.elevation.provider: srtm</span>
+</p><p>
+<span class="w">  </span><span class="c1"># default location for cache is /tmp/srtm</span>
+<span class="w">  </span><span class="c1"># graph.elevation.cache_dir: ./srtmprovider/</span>
+</p><p>
+<span class="w">  </span><span class="c1"># If you have a slow disk or plenty of RAM change the default MMAP to:</span>
+<span class="w">  </span><span class="c1"># graph.elevation.dataaccess: RAM_STORE</span>
+</p><p>
+<span class="w">  </span><span class="c1"># To enable bilinear interpolation when sampling elevation at points (default uses nearest neighbor):</span>
+<span class="w">  </span><span class="c1"># graph.elevation.interpolate: bilinear</span>
+</p><p>
+<span class="w">  </span><span class="c1"># Reduce ascend/descend per edge without changing the maximum slope:</span>
+<span class="w">  </span><span class="c1"># graph.elevation.edge_smoothing: ramer</span>
+<span class="w">  </span><span class="c1"># removes elevation fluctuations up to max_elevation (in meter) and replaces the elevation with a value based on the average slope</span>
+<span class="w">  </span><span class="c1"># graph.elevation.edge_smoothing.ramer.max_elevation: 5</span>
+<span class="w">  </span><span class="c1"># Using an averaging approach for smoothing will reveal values not affected by outliers and realistic slopes and total altitude values (up and down)</span>
+<span class="w">  </span><span class="c1"># graph.elevation.edge_smoothing: moving_average</span>
+<span class="w">  </span><span class="c1"># window size in meter along a way used for averaging a node&#39;s elevation</span>
+<span class="w">  </span><span class="c1"># graph.elevation.edge_smoothing.moving_average.window_size: 150</span>
+</p><p>
+<span class="w">  </span><span class="c1"># To increase elevation profile resolution, use the following two parameters to tune the extra resolution you need</span>
+<span class="w">  </span><span class="c1"># against the additional storage space used for edge geometries. You should enable bilinear interpolation when using</span>
+<span class="w">  </span><span class="c1"># these features (see #1953 for details).</span>
+<span class="w">  </span><span class="c1"># - first, set the distance (in meters) at which elevation samples should be taken on long edges</span>
+<span class="w">  </span><span class="c1"># graph.elevation.long_edge_sampling_distance: 60</span>
+<span class="w">  </span><span class="c1"># - second, set the elevation tolerance (in meters) to use when simplifying polylines since the default ignores</span>
+<span class="w">  </span><span class="c1">#   elevation and will remove the extra points that long edge sampling added</span>
+<span class="w">  </span><span class="c1"># graph.elevation.way_point_max_distance: 10</span>
+</p><p>
+<span class="w">  </span><span class="c1"></p><p>
+<span class="w">  </span><span class="c1"># This features sets a maximum speed in &#39;max_speed&#39; encoded value if no maxspeed tag was found. It is country-dependent</span>
+<span class="w">  </span><span class="c1"># and based on several rules. See https://github.com/westnordost/osm-legal-default-speeds</span>
+<span class="w">  </span><span class="c1"># To use it uncomment the following, then enable urban density below and add &#39;country&#39; to graph.encoded_values</span>
+<span class="w">  </span><span class="c1"># max_speed_calculator.enabled: true</span>
+</p><p>
+<span class="w">  </span><span class="c1"></p><p>
+<span class="w">  </span><span class="c1"># This feature allows classifying roads into &#39;rural&#39;, &#39;residential&#39; and &#39;city&#39; areas (encoded value &#39;urban_density&#39;)</span>
+<span class="w">  </span><span class="c1"># Use 1 or more threads to enable the feature</span>
+<span class="w">  </span><span class="c1"># graph.urban_density.threads: 8</span>
+<span class="w">  </span><span class="c1"># Use higher/lower sensitivities if too little/many roads fall into the according categories.</span>
+<span class="w">  </span><span class="c1"># Using smaller radii will speed up the classification, but only change these values if you know what you are doing.</span>
+<span class="w">  </span><span class="c1"># If you do not need the (rather slow) city classification set city_radius to zero.</span>
+<span class="w">  </span><span class="c1"># graph.urban_density.residential_radius: 400</span>
+<span class="w">  </span><span class="c1"># graph.urban_density.residential_sensitivity: 6000</span>
+<span class="w">  </span><span class="c1"># graph.urban_density.city_radius: 1500</span>
+<span class="w">  </span><span class="c1"># graph.urban_density.city_sensitivity: 1000</span>
+</p><p>
+<span class="w">  </span><span class="c1"></p><p>
+<span class="w">  </span><span class="c1"># In many cases the road network consists of independent components without any routes going in between. In</span>
+<span class="w">  </span><span class="c1"># the most simple case you can imagine an island without a bridge or ferry connection. The following parameter</span>
+<span class="w">  </span><span class="c1"># allows setting a minimum size (number of edges) for such detached components. This can be used to reduce the number</span>
+<span class="w">  </span><span class="c1"># of cases where a connection between locations might not be found.</span>
+<span class="w">  </span><span class="nt">prepare.min_network_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+<span class="w">  </span><span class="nt">prepare.subnetworks.threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</p><p>
+<span class="w">  </span><span class="c1"></p><p>
+<span class="w">  </span><span class="c1"># You can define the maximum visited nodes when routing. This may result in not found connections if there is no</span>
+<span class="w">  </span><span class="c1"># connection between two points within the given visited nodes. The default is Integer.MAX_VALUE. Useful for flexibility mode</span>
+<span class="w">  </span><span class="c1"># routing.max_visited_nodes: 1000000</span>
+</p><p>
+<span class="w">  </span><span class="c1"># The maximum time in milliseconds after which a routing request will be aborted. This has some routing algorithm</span>
+<span class="w">  </span><span class="c1"># specific caveats, but generally it should allow the prevention of long-running requests. The default is Long.MAX_VALUE</span>
+<span class="w">  </span><span class="c1"># routing.timeout_ms: 300000</span>
+</p><p>
+<span class="w">  </span><span class="c1"># Control how many active landmarks are picked per default, this can improve query performance</span>
+<span class="w">  </span><span class="c1"># routing.lm.active_landmarks: 4</span>
+</p><p>
+<span class="w">  </span><span class="c1"># You can limit the max distance between two consecutive waypoints of flexible routing requests to be less or equal</span>
+<span class="w">  </span><span class="c1"># the given distance in meter. Default is set to 1000km.</span>
+<span class="w">  </span><span class="nt">routing.non_ch.max_waypoint_distance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000000</span>
+</p><p>
+<span class="w">  </span><span class="c1"></p><p>
+<span class="w">  </span><span class="c1"># Excludes certain types of highways during the OSM import to speed up the process and reduce the size of the graph.</span>
+<span class="w">  </span><span class="c1"># A typical application is excluding &#39;footway&#39;,&#39;cycleway&#39;,&#39;path&#39; and maybe &#39;pedestrian&#39; and &#39;track&#39; highways for</span>
+<span class="w">  </span><span class="c1"># motorized vehicles. This leads to a smaller and less dense graph, because there are fewer ways (obviously),</span>
+<span class="w">  </span><span class="c1"># but also because there are fewer crossings between highways (=junctions).</span>
+<span class="w">  </span><span class="c1"># Another typical example is excluding &#39;motorway&#39;, &#39;trunk&#39; and maybe &#39;primary&#39; highways for bicycle or pedestrian routing.</span>
+<span class="w">  </span><span class="nt">import.osm.ignored_highways</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cycleway</span><span class="w"> </span><span class="c1"># typically useful for motorized-only routing</span>
+<span class="w">  </span><span class="c1">#import.osm.ignored_highways: footway,cycleway,path,pedestrian,steps # typically useful for motorized-only routing</span>
+<span class="w">  </span><span class="c1"># import.osm.ignored_highways: motorway,trunk # typically useful for non-motorized routing</span>
+</p><p>
+<span class="w">  </span><span class="c1"># configure the memory access, use RAM_STORE for well equipped servers (default and recommended)</span>
+<span class="w">  </span><span class="nt">graph.dataaccess.default_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RAM_STORE</span>
+</p><p>
+<span class="w">  </span><span class="c1"># will write way names in the preferred language (language code as defined in ISO 639-1 or ISO 639-2):</span>
+<span class="w">  </span><span class="c1"># datareader.preferred_language: en</span>
+</p><p>
+<span class="w">  </span><span class="c1"></p><p>
+<span class="w">  </span><span class="c1"># GraphHopper reads GeoJSON polygon files including their properties from this directory and makes them available</span>
+<span class="w">  </span><span class="c1"># to all tag parsers and custom models. All GeoJSON Features require to have the &quot;id&quot; property.</span>
+<span class="w">  </span><span class="c1"># Country borders are included automatically (see countries.geojson).</span>
+<span class="w">  </span><span class="c1"># custom_areas.directory: path/to/custom_areas</span>
+</p><p>
+<span class="w">  </span><span class="c1"></p><p>
+<span class="w">  </span><span class="c1"># GraphHopper applies country-specific routing rules during import (not enabled by default).</span>
+<span class="w">  </span><span class="c1"># You need to redo the import for changes to take effect.</span>
+<span class="w">  </span><span class="c1"># country_rules.enabled: true</span>
+</p><p>
+<span class="c1"># Dropwizard server configuration</span>
+<span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">application_connectors</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8989</span>
+<span class="w">    </span><span class="c1"># for security reasons bind to localhost</span>
+<span class="w">    </span><span class="nt">bind_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span>
+<span class="w">    </span><span class="c1"># increase GET request limit - not necessary if /maps UI is not used or used without custom models</span>
+<span class="w">    </span><span class="nt">max_request_header_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50k</span>
+<span class="w">  </span><span class="nt">request_log</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">appenders</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">  </span><span class="nt">admin_connectors</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8990</span>
+<span class="w">    </span><span class="nt">bind_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="c1"># See https://www.dropwizard.io/en/latest/manual/core.html#logging</span>
+<span class="nt">logging</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">appenders</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span>
+<span class="w">      </span><span class="nt">time_zone</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UTC</span>
+<span class="w">      </span><span class="nt">current_log_filename</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logs/graphhopper.log</span>
+<span class="w">      </span><span class="nt">log_format</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;%d{yyyy-MM-dd</span><span class="nv"> </span><span class="s">HH:mm:ss.SSS}</span><span class="nv"> </span><span class="s">[%thread]</span><span class="nv"> </span><span class="s">%-5level</span><span class="nv"> </span><span class="s">%logger{36}</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">%msg%n&quot;</span>
+<span class="w">      </span><span class="nt">archive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">archived_log_filename_pattern</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./logs/graphhopper-%d.log.gz</span>
+<span class="w">      </span><span class="nt">archived_file_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">      </span><span class="nt">never_block</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">console</span>
+<span class="w">      </span><span class="nt">time_zone</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UTC</span>
+<span class="w">      </span><span class="nt">log_format</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;%d{yyyy-MM-dd</span><span class="nv"> </span><span class="s">HH:mm:ss.SSS}</span><span class="nv"> </span><span class="s">[%thread]</span><span class="nv"> </span><span class="s">%-5level</span><span class="nv"> </span><span class="s">%logger{36}</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">%msg%n&quot;</span>
+<span class="w">  </span><span class="nt">loggers</span><span class="p">:</span>
+<span class="w">    </span><span class="s">&quot;com.graphhopper.osm_warnings&quot;</span><span class="p p-Indicator">:</span>
+<span class="w">      </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
+<span class="w">      </span><span class="nt">additive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="nt">appenders</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span>
+<span class="w">          </span><span class="nt">currentLogFilename</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logs/osm_warnings.log</span>
+<span class="w">          </span><span class="nt">archive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">          </span><span class="nt">logFormat</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;[%level]</span><span class="nv"> </span><span class="s">%msg%n&#39;</span>
+</pre></div> </div> <div class="w3-container w3-padding" id="commentsgithub"> <p> <a target="_blank" class="imgleft" href="https://github.com/elbosso/elbosso.github.io/issues/new?title=Feedback%20zu%20OpenStreetMap Navi als Docker-Container&body=[OpenStreetMap Navi als Docker-Container](https://elbosso.github.io/openstreetmap_navi_docker_container)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> <a target="_blank" class="imgright" href="https://github.com/elbosso/elbosso.github.io/issues?q=OpenStreetMap Navi als Docker-Container"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/GitHub-Mark-32px.png" alt="Github" title="Github">)</a> </p> </div> <div class="w3-container w3-padding" id="commentsgitlab"> <p> <a target="_blank" class="imgleft" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues/new?issue[title]=Feedback%20zu%20OpenStreetMap Navi als Docker-Container&issue[description]=[OpenStreetMap Navi als Docker-Container](https://elbosso.github.io/openstreetmap_navi_docker_container)%0A%0A"><img src="images/icons/add_comment_48.png" alt="Kommentar hinzufügen" title="Kommentar hinzufügen">Kommentar hinzufügen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> <a target="_blank" class="imgright" href="https://gitlab.com/elbosso/elbosso.github.io/-/issues?scope=all&utf8=✓&state=opened&search=OpenStreetMap Navi als Docker-Container"><img src="images/icons/view_comments_48.png" alt="Kommentare ansehen" title="Kommentare ansehen">Kommentare ansehen (via <img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab" title="Gitlab">)</a> </p> </div> </div> </div> <div class="w3-col l4"> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <p style="text-align: center"> <a href="indexAll.html"><img src="images/indexAll.png" alt="Alle Artikel" title="Alle Artikel"></a> <a rel="alternate" type="application/rss+xml" href="rss.xml"><img src="images/rss.png" alt="rss" title="rss"></a> <a href="weeks.html"><img src="images/calendar_view_week_32.png" alt="Wochenübersicht" title="Wochenübersicht"></a> <a href="months.html"><img src="images/calendar_view_month_32.png" alt="Monatsübersicht" title="Monatsübersicht"></a> <a href="https://github.com/elbosso" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="Github Repositories" title="Github Repositories"></a> <a href="https://gitlab.com/elbosso" target="_blank"><img src="images/icons/gitlab-icon-rgb.png" width="32" height="32" alt="Gitlab Repositories" title="Gitlab Repositories"></a> <a rel="me" href="https://mastodon.social/@elbosso" target="_blank"><img src="images/icons/iconfinder_207_Mastodon_4518932.png" alt="Mastodon" title="Mastodon"></a> <a href="me.html"><img src="images/Information_32.png" alt="Über mich" title="Über mich"></a> <a href="index.html"><img src="images/hilfe_home_32.png" alt="home" title="home"></a> <a href="xmpp:elbosso@jabber.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/XMPP_logo.svg/200px-XMPP_logo.svg.png" alt="xmpp" title="elbosso@jabber.de" width="32" height="32"></a> </p> </div> </div><hr> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Vor 5 Jahren hier im Blog</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <p class="w3-large"> Fährnisse des Buildprozesses unter Windows</p> <p class="w3-small" style="text-align: right"> <span class="w3-opacity">17.07.2019</span> </p> <span class="smallabstract"><p>Nachdem ich begonnen hatte, mich mit der Beschleunigung der Berechnung des Mandelbrot-Fraktals unter Zuhilfenahme der Shadereinheiten in Graphikkarten zu beschäftigen und erste Erfolge feiern konnte, wollte ich das mal auf einer richtigen Graphikkarte ausprobieren... </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="faehrnisse_des_buildprozesses_unter_windows.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Tags</h4> </div> <div class="w3-container w3-white"> <p> <a href="tag_Android.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Android</span></a> <a href="tag_Basteln.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Basteln</span></a> <a href="c_c__.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">C und C++</span></a> <a href="tag_Chaos.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Chaos</span></a> <a href="tag_Datenbanken.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Datenbanken</span></a> <a href="tag_Docker.html"><span class="w3-tag w3-black w3-margin-bottom">Docker</span></a> <a href="tag_dWb+.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">dWb+</span></a> <a href="esp_wifi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">ESP Wifi</span></a> <a href="tag_Garten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Garten</span></a> <a href="tag_Geo.html"><span class="w3-tag w3-black w3-margin-bottom">Geo</span></a> <a href="tag_Git_lab_hub_.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Git(lab|hub)</span></a> <a href="tag_Go.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Go</span></a> <a href="tag_GUI.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">GUI</span></a> <a href="gui.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Gui</span></a> <a href="tag_Hardware.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hardware</span></a> <a href="tag_Java.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Java</span></a> <a href="tag_Jupyter.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jupyter</span></a> <a href="tag_Komponenten.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Komponenten</span></a> <a href="tag_Links.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Links</span></a> <a href="tag_Linux.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Linux</span></a> <a href="markdown.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markdown</span></a> <a href="tag_Markup.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Markup</span></a> <a href="tag_Music.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Music</span></a> <a href="tag_Numerik.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Numerik</span></a> <a href="tag_PKI-X.509-CA.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">PKI-X.509-CA</span></a> <a href="tag_Python.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Python</span></a> <a href="tag_QBrowser.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">QBrowser</span></a> <a href="tag_Rants.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Rants</span></a> <a href="tag_Raspi.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Raspi</span></a> <a href="tag_Revisited.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Revisited</span></a> <a href="tag_Security.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Security</span></a> <a href="tag_Software-Test.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Software-Test</span></a> <a href="tag_sQLshell.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">sQLshell</span></a> <a href="tag_TeleGrafana.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">TeleGrafana</span></a> <a href="tag_Verschiedenes.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Verschiedenes</span></a> <a href="tag_Video.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Video</span></a> <a href="tag_Virtualisierung.html"><span class="w3-tag w3-black w3-margin-bottom">Virtualisierung</span></a> <a href="tag_Windows.html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Windows</span></a> <a href="tag_Upcoming....html"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Upcoming...</span></a> </p> </div> </div> <div class="w3-card w3-margin"> <div class="w3-container w3-padding"> <h4>Neueste Artikel</h4> </div> <ul class="w3-ul w3-white"> <li class="w3-padding-16"> <span class="w3-large"> Datenvalidierung UTF8 mit BiDi-Steuerzeichen (TrojanSource 2.0)</span><br> <span class="smallabstract"><p>Ich bin heute nochmal inspiriert worden, weiter über die Trojan Source Vulnerability nachzudenken. Meiner Meinung nach bestehen hier noch Probleme - speziell bei Nutzereingaben oder Daten, die über externe Schnittstellen ampfangen werden. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="datenvalidierung_utf8_bidi_steuerzeichen__trojansource_2_0_.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> SQL-Aggregatfunktionen in SQLite als BeanShell-Scripts</span><br> <span class="smallabstract"><p>Ich habe neulich über eine Möglichkeit berichtet, SQLite mittels der sQLshell und Beanshell-Skripten um SQL-Funktionen zu erweitern. In diesem Artikel versprach ich auch, über eine solche Möglichkeit für Aggregatfunktionen zu berichten. </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="sql_aggregatfunktionen_sqlite_beanshell_scripts.html#content"> Weiterlesen... </a> </li> <li class="w3-padding-16"> <span class="w3-large"> LinkCollections 2024 V</span><br> <span class="smallabstract"><p>Nach der letzten losen Zusammenstellung (für mich) interessanter Links aus den Tiefen des Internet von 2024 folgt hier gleich die nächste: </p></span> <a class="w3-button w3-padding-small w3-white w3-border smallabstract" href="linkcollections_2024_v.html#content"> Weiterlesen... </a> </li> </ul> </div> <div class="w3-card w3-margin w3-margin-top"> <div class="w3-container w3-white"> <h4><script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script> <noscript>Der Verfasser</noscript></h4> <p>Manche nennen es Blog, manche Web-Seite - ich schreibe hier hin und wieder über meine Erlebnisse, Rückschläge und Erleuchtungen bei meinen Hobbies.</p> <p>Wer daran teilhaben und eventuell sogar davon profitieren möchte, muß damit leben, daß ich hin und wieder kleine Ausflüge in Bereiche mache, die nichts mit IT, Administration oder Softwareentwicklung zu tun haben.</p> <p>Ich wünsche allen Lesern viel Spaß und hin und wieder einen kleinen AHA!-Effekt...</p> <p>PS: Meine öffentlichen <a href="https://github.com/">GitHub-Repositories</a> findet man <a href="https://github.com/elbosso">hier</a> - meine öffentlichen <a href="https://about.gitlab.com/">GitLab-Repositories</a> finden sich dagegen <a href="https://gitlab.com/users/elbosso/projects">hier</a>.</p> </div> </div><hr> </div> </div><br> </div> <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top"> <a href="me.html"> <script>
+		<!--
+abc("DüNMVz CVe","rg5IF17LJjNMbkW3tEcD0dBCXAKmfYiwSnUTOqyv6Qsz8aoZe2G9uRp4hlVHxP");
+-->
+		</script> <noscript>Der Verfasser</noscript> , Damaschke 11, Rudolstadt, <script>
+		<!--
+abc("ZGl0<!-- >@. -->@<!-- >@. -->CXUEX<!-- >@. -->.<!-- >@. -->Vl","9XrhJ6upvAZjsxzSI2O7L1iHleN8MqR5P4KCabgFBVdYm0ywnDfWQGk3tTUcEo");
+-->
+		</script> <noscript>jkey&#64;arcor&#46;de</noscript> , PEN: 1.3.6.1.4.1.59452 </a> <p>Idee fürs Design:<a href="https://www.w3schools.com/w3css/tryw3css_templates_blog.htm" target="_blank">w3.css</a></p> </footer> </body> </html>
