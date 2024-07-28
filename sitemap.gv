@@ -38,6 +38,9 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_isochrone_karten_mittels_graphhopper [label="Isochrone Karten mittels Graphhopper" href="https://elbosso.github.io/isochrone_karten_mittels_graphhopper.html"]
+            node_isochrone_karten_mittels_graphhopper -> node_isochroner_layer_ebmap4d
+node_annotation_processing_zur_leichteren_erstellung_modulen_dwb_ [label="Annotation Processing zur leichteren Erstellung von Modulen für dWb+" href="https://elbosso.github.io/annotation_processing_zur_leichteren_erstellung_modulen_dwb_.html"]
 node_datenvalidierung_utf8_bidi_steuerzeichen__trojansource_2_0_ [label="Datenvalidierung UTF8 mit BiDi-Steuerzeichen (TrojanSource 2.0)" href="https://elbosso.github.io/datenvalidierung_utf8_bidi_steuerzeichen__trojansource_2_0_.html"]
 node_openstreetmap_navi_docker_container [label="OpenStreetMap Navi als Docker-Container" href="https://elbosso.github.io/openstreetmap_navi_docker_container.html"]
             node_openstreetmap_navi_docker_container -> node_self_hosted_geo_coding_nominatim
@@ -202,6 +205,7 @@ node_linkcollections_2023_vii [label="LinkCollections 2023 VII" href="https://el
 node_tls_einfach_so_klartext_lesen [label="TLS einfach so im Klartext lesen" href="https://elbosso.github.io/tls_einfach_so_klartext_lesen.html"]
 node_sqlshell_version_7_7pre2_build_10162 [label="sQLshell Version 7.7pre2 build 10162" href="https://elbosso.github.io/sqlshell_version_7_7pre2_build_10162.html"]
             node_sqlshell_version_7_7pre2_build_10162 -> node_sqlshell_version_7_7pre3_build_10263
+            node_sqlshell_version_7_7pre2_build_10162 -> node_sqlshell_endlich_wieder_webstart_verfuegbar_
 node_sqlshell_version_7_7pre1_build_10103 [label="sQLshell Version 7.7pre1 build 10103" href="https://elbosso.github.io/sqlshell_version_7_7pre1_build_10103.html"]
             node_sqlshell_version_7_7pre1_build_10103 -> node_neue_version_plantumlinterfaceproxy
             node_sqlshell_version_7_7pre1_build_10103 -> node_sqlshell_version_7_7pre2_build_10162
@@ -586,6 +590,7 @@ node_dokumentation_wird_open_source [label="Dokumentation wird Open Source" href
             node_dokumentation_wird_open_source -> node_ci_cd_pipelines_docbook_dokumentationen
             node_dokumentation_wird_open_source -> node_annotation_processing_zur_leichteren_erstellung_modulen_dwb_
 node_pam_nfc_ubuntu_20_04 [label="pam_nfc und Ubuntu 20.04" href="https://elbosso.github.io/pam_nfc_ubuntu_20_04.html"]
+            node_pam_nfc_ubuntu_20_04 -> node_ubuntu_upgrade_auf_22_04___lessons_learned
 node_gps__nmea__tracks_gnuplot_animationen_verarbeiten [label="GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten" href="https://elbosso.github.io/gps__nmea__tracks_gnuplot_animationen_verarbeiten.html"]
             node_gps__nmea__tracks_gnuplot_animationen_verarbeiten -> node_gnuplot_snippets_projekt
 node_awk_linksammlung [label="AWK Linksammlung" href="https://elbosso.github.io/awk_linksammlung.html"]
@@ -617,8 +622,8 @@ node_styles_geojson_ebmap4d [label="Styles für GeoJSON in EBMap4D" href="https:
             node_styles_geojson_ebmap4d -> node_eigener_sache_blick_auf_2024
             node_styles_geojson_ebmap4d -> node_neue_version_ebmap4d
             node_styles_geojson_ebmap4d -> node_sqlite_geodatenbank
-            node_styles_geojson_ebmap4d -> node_mehrere_datenbanken_postgis_erweiterung_docker
             node_styles_geojson_ebmap4d -> node_sqlshell_datenlieferant_ebmap4d
+            node_styles_geojson_ebmap4d -> node_mehrere_datenbanken_postgis_erweiterung_docker
             node_styles_geojson_ebmap4d -> node_isochrone_karten_mittels_graphhopper
 node_lufi_docker_zoo [label="LuFi im Docker-Zoo" href="https://elbosso.github.io/lufi_docker_zoo.html"]
             node_lufi_docker_zoo -> node_fraktale_auf_kommandozeile
@@ -784,6 +789,7 @@ node_hardware_netzwerk_degrader [label="Hardware für Netzwerk Degrader" href="h
             node_hardware_netzwerk_degrader -> node_debian_11_auf_rock64
 node_sqlshell_version_7_1pre6_build_8896 [label="sQLshell Version 7.1pre6 build 8896" href="https://elbosso.github.io/sqlshell_version_7_1pre6_build_8896.html"]
 node_gemischte_gefuehle_re__openwebstart [label="Gemischte Gefühle re: OpenWebStart" href="https://elbosso.github.io/gemischte_gefuehle_re__openwebstart.html"]
+            node_gemischte_gefuehle_re__openwebstart -> node_sqlshell_endlich_wieder_webstart_verfuegbar_
 node_rc3___meine_favoriten_zweiter_teil [label="rc3 - Meine Favoriten zweiter Teil" href="https://elbosso.github.io/rc3___meine_favoriten_zweiter_teil.html"]
             node_rc3___meine_favoriten_zweiter_teil -> node_wang_tiling_implementiert_optimiert
             node_rc3___meine_favoriten_zweiter_teil -> node_jahresendveranstaltung_des_ccc___mir_
@@ -1104,6 +1110,7 @@ node_ci_cd_grafana [label="CI/CD mit Grafana" href="https://elbosso.github.io/ci
 node_vaadin_swing_ersatz [label="Vaadin als Swing-Ersatz" href="https://elbosso.github.io/vaadin_swing_ersatz.html"]
 node_sqlshell_echtzeitdatenbanken [label="sQLshell und Echtzeitdatenbanken" href="https://elbosso.github.io/sqlshell_echtzeitdatenbanken.html"]
             node_sqlshell_echtzeitdatenbanken -> node_viewpanel_sqlshell_zeitreihendatenbanken
+            node_sqlshell_echtzeitdatenbanken -> node_syntax_highlighting_influxdb_java_anwendungen
 node_testdatengeneratoren_microservices_docker [label="Testdatengeneratoren als Microservices mit Docker" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker.html"]
             node_testdatengeneratoren_microservices_docker -> node_generator_microservices_mastodon_bot
             node_testdatengeneratoren_microservices_docker -> node_vaadin_swing_ersatz
@@ -1194,8 +1201,8 @@ node_certstream___ressourcenverbrauch [label="Certstream - Ressourcenverbrauch" 
             node_certstream___ressourcenverbrauch -> node_grafana__alarmierung_xmpp
 node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian May, Kerry Ellis & Vittorio Grigolo: Bohemian Rhapsody" href="https://elbosso.github.io/brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody.html"]
 node_mandelbrot_sets_mittels_shadern_berechnen [label="Mandelbrot-Sets mittels Shadern berechnen" href="https://elbosso.github.io/mandelbrot_sets_mittels_shadern_berechnen.html"]
-            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_java
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
+            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_java
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_julia_mengen_shadern_umgesetzt
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_faehrnisse_des_buildprozesses_unter_windows
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_gpu_programmierung_java_revisited
@@ -1448,10 +1455,9 @@ node_garten_fruehjahr_2018 [label="Garten im Frühjahr 2018" href="https://elbos
 node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" href="https://elbosso.github.io/linux_wifi_accesspoint_aus_raspi.html"]
             node_linux_wifi_accesspoint_aus_raspi -> node_raspberry_pi_ads_b_receiver
 node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
+            node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
             node_implizites_eulerverfahren -> node_visualisierung_strange_attractors_java3d
-            node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
-            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_mathematik_beliebiger_praezision_java
 node_eine_ganz_alte_bibliothek_bildverarbeitung [label="Eine ganz alte Bibliothek für Bildverarbeitung" href="https://elbosso.github.io/eine_ganz_alte_bibliothek_bildverarbeitung.html"]
             node_eine_ganz_alte_bibliothek_bildverarbeitung -> node_gpu_programmierung_java_revisited
@@ -1494,8 +1500,8 @@ node_batik_java9_modulsystem_____9760_ [label="Batik und Java9 Modulsystem = &#9
             node_batik_java9_modulsystem_____9760_ -> node_faehrnisse_des_buildprozesses_unter_windows
 node_java_bug_modulsystem_nutzung_jaas [label="Java-Bug in Modulsystem bei Nutzung von JAAS" href="https://elbosso.github.io/java_bug_modulsystem_nutzung_jaas.html"]
             node_java_bug_modulsystem_nutzung_jaas -> node_java9_umstellung
-            node_java_bug_modulsystem_nutzung_jaas -> node_batik_java9_modulsystem_____9760_
             node_java_bug_modulsystem_nutzung_jaas -> node_aenderungen_datumsformat_java___schon_wieder_
+            node_java_bug_modulsystem_nutzung_jaas -> node_batik_java9_modulsystem_____9760_
             node_java_bug_modulsystem_nutzung_jaas -> node_rechtevergabe_java
 node_beaninfo_runtime_annotations [label="BeanInfo durch Runtime-Annotations" href="https://elbosso.github.io/beaninfo_runtime_annotations.html"]
             node_beaninfo_runtime_annotations -> node_beaninfo_runtime_annotations__gist_
@@ -1511,8 +1517,8 @@ node_kochbuch_beispiele_auf_github [label="Kochbuch-Beispiele auf GitHub" href="
 node_sqlshell_integriert_ldap_jdbc_bridge [label="sQLshell integriert LDAP-JDBC-Bridge" href="https://elbosso.github.io/sqlshell_integriert_ldap_jdbc_bridge.html"]
 node_beaninfo_generierung_via_annotations [label="BeanInfo-Generierung via Annotations" href="https://elbosso.github.io/beaninfo_generierung_via_annotations.html"]
             node_beaninfo_generierung_via_annotations -> node_maven_archetype_dwb__module
-            node_beaninfo_generierung_via_annotations -> node_beaninfo_runtime_annotations
             node_beaninfo_generierung_via_annotations -> node_github_repository_beaninfo_generator
+            node_beaninfo_generierung_via_annotations -> node_beaninfo_runtime_annotations
             node_beaninfo_generierung_via_annotations -> node_beaninfo_runtime_annotations_feature_complete_baelde_open_source
 node_34c3___meine_favoriten [label="34c3 - Meine Favoriten" href="https://elbosso.github.io/34c3___meine_favoriten.html"]
             node_34c3___meine_favoriten -> node_log4j_plugin_jconsole_visualvm
@@ -2296,19 +2302,19 @@ node_fbmlandscapes___java3d [label="FbmLandscapes + Java3D" href="https://elboss
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
             node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-            node_ebmap4d -> node_ortsbezuege_dwb_
+            node_ebmap4d -> node_tile_server_openstreetmap
             node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
+            node_ebmap4d -> node_ortsbezuege_dwb_
             node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_ebmap4d___geojson
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
-            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
-            node_ebmap4d -> node_tile_server_openstreetmap
             node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
+            node_ebmap4d -> node_neue_version_ebmap4d
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
             node_ebmap4d -> node_geojson_ebmap4d
-            node_ebmap4d -> node_neue_version_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_hillshading_server_openstreetmap_lxc_ii
             node_ebmap4d -> node_sqlite_geodatenbank
@@ -2317,8 +2323,8 @@ node_tpedit [label="TPEdit" href="https://elbosso.github.io/tpedit.html"]
             node_tpedit -> node_fop_pdf_formulare
             node_tpedit -> node_fop_pdf_formulare_mittels_itext
             node_tpedit -> node_tpedit_erstellt_interaktive_formulare
-            node_tpedit -> node_tpedit_referenzen
             node_tpedit -> node_tpedit_unterstuetzt_tags
+            node_tpedit -> node_tpedit_referenzen
 node_threedialwatch [label="ThreeDialWatch" href="https://elbosso.github.io/threedialwatch.html"]
             node_threedialwatch -> node_daylight
 node_java_api_aenderung_fuehrt_bug [label="Java-API-Änderung führt zu Bug" href="https://elbosso.github.io/java_api_aenderung_fuehrt_bug.html"]
