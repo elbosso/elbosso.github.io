@@ -12,7 +12,7 @@ import de.elbosso.util.lang.annotations.Method;
 import de.elbosso.util.lang.annotations.Property;
 
 /**
- *
+ * Helper base class for implementing JavaBeans sending {@link java.beans.PropertyChangeEvent}
  * @author elbosso
  */
 @BeanInfo(
@@ -226,6 +226,12 @@ public class EventHandlingSupport extends java.lang.Object implements de.netsysi
 			send(new java.beans.PropertyChangeEvent(getEventSource(), name, oldvalue, newvalue));
 	}
 
+	/**
+	 *  This method can be used whenever listeners shall be informed about a change of a property
+	 *  of any class type.
+	 *
+	 * @param  evt the event to be sent
+	 */
 	public void send(java.beans.PropertyChangeEvent evt)
 	{
 		pcs.firePropertyChange(evt);

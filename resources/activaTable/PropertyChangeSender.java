@@ -37,6 +37,9 @@ package de.netsysit.util.beans;
 
 import de.elbosso.util.lang.annotations.Event;
 
+/**
+ * An interface signifying a JavaBean (or any other class) willing to send {@link java.beans.PropertyChangeEvent}
+ */
 public interface PropertyChangeSender
 {
 	/**
