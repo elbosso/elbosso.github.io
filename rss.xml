@@ -5,8 +5,38 @@
 		<title>Jürgen Key</title>
 		<!--description></description-->
 		<link>http://elbosso.github.io</link>
-		<lastBuildDate>Sat, 31 Aug 2024 09:57:32</lastBuildDate>
+		<lastBuildDate>Tue, 10 Sep 2024 16:53:40</lastBuildDate>
 		<language>de-de</language>
+		<item>
+			<title>Meine Umsetzung des Konzepts CircuitBreaker</title>
+			<link>http://elbosso.github.io/meine_umsetzung_des_konzepts_circuitbreaker.html#content</link>
+			<guid>http://elbosso.github.io/meine_umsetzung_des_konzepts_circuitbreaker.html</guid>
+<description><![CDATA[
+			<p><img style="max-width:128px;" src="https://upload.wikimedia.org/wikipedia/de/thumb/e/e1/Java-Logo.svg/243px-Java-Logo.svg.png"/></p>
+<p>Das Konzept eines
+CircuitBreaker
+ist schon lange bekannt. Ich habe mir zu Studienzwecken einen selber gebaut - eigentlich zwei:
+Einer ist dafür da, das Logging von gleichartigen Exceptions zu drosseln, der andere für das Entzerren von
+Versuchen, Ressourcen von URLs nachzuladen. Diese spezielle Variante benötigte ich für
+EBMap4D:
+Falls einer der Tile-Server ausfällt, wird ansonsten ständig versucht, die Kacheln neu herunterzuladen. Das
+frisst nicht
+nur Rechenzeit, sondern ist auch unnütz.
+</p>			]]></description>			<author>Jürgen Key</author>
+			<category>[Java, Komponenten, September 2024, KW 37 2024]</category>
+			<pubDate>Tue, 10 Sep 2024 16:48:24</pubDate>
+		</item>
+		<item>
+			<title>Mein erster Origami-Kranich</title>
+			<link>http://elbosso.github.io/mein_erster_origami_kranich.html#content</link>
+			<guid>http://elbosso.github.io/mein_erster_origami_kranich.html</guid>
+<description><![CDATA[
+			<p><img  src="http://elbosso.github.io/images/basteln/origamipaper_raw_t.png"/></p>
+<p>Nachdem ich mich nun schon so lange mit Origami beschäftige habe ich endlich einmal das älteste dokumentierte Ornament versucht - aus gutem Grund...
+</p>			]]></description>			<author>Jürgen Key</author>
+			<category>[Basteln, September 2024, KW 37 2024]</category>
+			<pubDate>Tue, 10 Sep 2024 16:48:22</pubDate>
+		</item>
 		<item>
 			<title>Will it go round in circles - Nashville Jam</title>
 			<link>http://elbosso.github.io/will_it_go_round_circles___nashville_jam.html#content</link>
@@ -63,8 +93,8 @@ Internet von 2024 folgt hier gleich die nächste:
 			<pubDate>Mon, 19 Aug 2024 17:57:04</pubDate>
 		</item>
 		<item>
-			<title> Update! Online Werkzeuge</title>
-			<link>http://elbosso.github.io/online_werkzeuge.html#131</link>
+			<title>Online Werkzeuge</title>
+			<link>http://elbosso.github.io/online_werkzeuge.html#content</link>
 			<guid>http://elbosso.github.io/online_werkzeuge.html</guid>
 <description><![CDATA[
 			<p><img  src="http://elbosso.github.io/images/small/muttizettel.png"/></p>
@@ -701,34 +731,6 @@ Implementierung noch poliert werden.
 </p>			]]></description>			<author>Jürgen Key</author>
 			<category>[sQLshell, Java, Komponenten, GUI, Datenbanken, Februar 2024, KW 6 2024]</category>
 			<pubDate>Thu, 8 Feb 2024 05:37:54</pubDate>
-		</item>
-		<item>
-			<title>Validierung elektronischer Client-Zertifikate</title>
-			<link>http://elbosso.github.io/validierung_elektronischer_client_zertifikate.html#content</link>
-			<guid>http://elbosso.github.io/validierung_elektronischer_client_zertifikate.html</guid>
-<description><![CDATA[
-			<p><img  src="http://elbosso.github.io/images/small/crypto.png"/></p>
-<p>Ich habe bereits über meinen nicht angenommenen
-Vortrag auf dem 37c3
-berichtet. Diese Einreichung geschah nicht, um meinem Ego zu schmeicheln, oder nur um mal in einem Internetvideo
-aufzutreten. Ich verfolge die daraus entstandene Idee weiter, Möglichkeiten zu schaffen und anzubieten, um Implementierungen,
-die auf X509 Zertifikaten beruhen, verlässlich zu testen.
-</p>			]]></description>			<author>Jürgen Key</author>
-			<category>[Security, PKI-X.509-CA, Februar 2024, KW 5 2024]</category>
-			<pubDate>Sat, 3 Feb 2024 18:11:23</pubDate>
-		</item>
-		<item>
-			<title>Wie man *nicht* zum Thema auf der DefCon wird...</title>
-			<link>http://elbosso.github.io/wie_man__nicht__thema_auf_defcon_wird___.html#content</link>
-			<guid>http://elbosso.github.io/wie_man__nicht__thema_auf_defcon_wird___.html</guid>
-<description><![CDATA[
-			<p><img  src="http://elbosso.github.io/images/small/crypto.png"/></p>
-<p>Ich habe auch vergangenes Jahr wieder einen Vortrag zum
-37c3
-eingereicht, der aber leider nicht angenommen wurde...
-</p>			]]></description>			<author>Jürgen Key</author>
-			<category>[Verschiedenes, Security, PKI-X.509-CA, Februar 2024, KW 5 2024]</category>
-			<pubDate>Sat, 3 Feb 2024 18:08:38</pubDate>
 		</item>
 	</channel>
 </rss>
