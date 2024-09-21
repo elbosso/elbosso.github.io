@@ -267,7 +267,7 @@ public class ResourceLoader extends java.lang.Object
 				java.io.File f=java.io.File.createTempFile("fallbackicon", "png");
 				f.deleteOnExit();
 				javax.imageio.ImageIO.write(bi, "png", f);
-				fallBack=f.toURI().toURL();
+				fallBack=f.toPath().toUri().toURL();
 			}catch(java.lang.Throwable exp)
 			{
 				EXCEPTION_LOGGER.warn(exp.getMessage(),exp);
@@ -276,7 +276,7 @@ public class ResourceLoader extends java.lang.Object
 					java.io.File f=java.io.File.createTempFile("fallbackicon", "png");
 					f.deleteOnExit();
 					javax.imageio.ImageIO.write(bi, "png", f);
-					fallBack=f.toURI().toURL();
+					fallBack=f.toPath().toUri().toURL();
 				}catch(java.lang.Throwable ex)
 				{
 					EXCEPTION_LOGGER.warn(ex.getMessage(), ex);
@@ -413,7 +413,7 @@ public class ResourceLoader extends java.lang.Object
 			{
 				try
 				{
-					rv = f.toURI().toURL();
+					rv = f.toPath().toUri().toURL();
 				}
 				catch (java.net.MalformedURLException exp)
 				{
