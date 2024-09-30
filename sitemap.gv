@@ -38,6 +38,8 @@ rankdir=LR
     Video [label="Video" href="https://elbosso.github.io/tag_Video.html" shape="doublecircle"]
     Virtualisierung [label="Virtualisierung" href="https://elbosso.github.io/tag_Virtualisierung.html" shape="doublecircle"]
     Windows [label="Windows" href="https://elbosso.github.io/tag_Windows.html" shape="doublecircle"]
+node_sqlshell_endlich_wieder_webstart_verfuegbar_ [label="sQLshell endlich wieder per WebStart verfügbar!" href="https://elbosso.github.io/sqlshell_endlich_wieder_webstart_verfuegbar_.html"]
+node_ubuntu_upgrade_auf_24_04___lessons_learned [label="Ubuntu Upgrade auf 24.04 - Lessons learned" href="https://elbosso.github.io/ubuntu_upgrade_auf_24_04___lessons_learned.html"]
 node_self_hosted_geo_coding_nominatim [label="Self-hosted Geo-Coding mit nominatim" href="https://elbosso.github.io/self_hosted_geo_coding_nominatim.html"]
             node_self_hosted_geo_coding_nominatim -> node_eventim_scrapen_ai_ersatz
 node_eventim_scrapen_ai_ersatz [label="Eventim scrapen als AI-Ersatz" href="https://elbosso.github.io/eventim_scrapen_ai_ersatz.html"]
@@ -81,6 +83,7 @@ node_sqlshell__sqlite_redis___oh_my_ [label="sQLshell, SQLite und Redis - oh my!
             node_sqlshell__sqlite_redis___oh_my_ -> node_sqlshell_version_7_7pre4_build_10491
 node_bad_certificates_version_3_0_0 [label="bad-certificates Version 3.0.0" href="https://elbosso.github.io/bad_certificates_version_3_0_0.html"]
 node_erste_vor_version_eines_gis_plugin_sqlshell [label="Erste Vor-Version eines Gis-Plugin für die sQLshell" href="https://elbosso.github.io/erste_vor_version_eines_gis_plugin_sqlshell.html"]
+            node_erste_vor_version_eines_gis_plugin_sqlshell -> node_integration_ebmap4d_sqlshell
 node_bad_certificates_version_2_1_0 [label="bad-certificates Version 2.1.0" href="https://elbosso.github.io/bad_certificates_version_2_1_0.html"]
             node_bad_certificates_version_2_1_0 -> node_bad_certificates_version_3_0_0
 node_sqlite_geodatenbank [label="SQLite als Geodatenbank" href="https://elbosso.github.io/sqlite_geodatenbank.html"]
@@ -606,7 +609,7 @@ node_dokumentation_wird_open_source [label="Dokumentation wird Open Source" href
             node_dokumentation_wird_open_source -> node_ci_cd_pipelines_docbook_dokumentationen
             node_dokumentation_wird_open_source -> node_annotation_processing_zur_leichteren_erstellung_modulen_dwb_
 node_pam_nfc_ubuntu_20_04 [label="pam_nfc und Ubuntu 20.04" href="https://elbosso.github.io/pam_nfc_ubuntu_20_04.html"]
-            node_pam_nfc_ubuntu_20_04 -> node_ubuntu_upgrade_auf_22_04___lessons_learned
+            node_pam_nfc_ubuntu_20_04 -> node_ubuntu_upgrade_auf_24_04___lessons_learned
 node_gps__nmea__tracks_gnuplot_animationen_verarbeiten [label="GPS-(NMEA-)Tracks mit Gnuplot zu Animationen verarbeiten" href="https://elbosso.github.io/gps__nmea__tracks_gnuplot_animationen_verarbeiten.html"]
             node_gps__nmea__tracks_gnuplot_animationen_verarbeiten -> node_gnuplot_snippets_projekt
 node_awk_linksammlung [label="AWK Linksammlung" href="https://elbosso.github.io/awk_linksammlung.html"]
@@ -640,6 +643,7 @@ node_styles_geojson_ebmap4d [label="Styles für GeoJSON in EBMap4D" href="https:
             node_styles_geojson_ebmap4d -> node_sqlite_geodatenbank
             node_styles_geojson_ebmap4d -> node_mehrere_datenbanken_postgis_erweiterung_docker
             node_styles_geojson_ebmap4d -> node_sqlshell_datenlieferant_ebmap4d
+            node_styles_geojson_ebmap4d -> node_integration_ebmap4d_sqlshell
             node_styles_geojson_ebmap4d -> node_isochrone_karten_mittels_graphhopper
 node_lufi_docker_zoo [label="LuFi im Docker-Zoo" href="https://elbosso.github.io/lufi_docker_zoo.html"]
             node_lufi_docker_zoo -> node_fraktale_auf_kommandozeile
@@ -1036,6 +1040,7 @@ node_roessler_attractor_implizites_eulerverfahren [label="Roessler Attractor und
             node_roessler_attractor_implizites_eulerverfahren -> node_synchronisierung_roessler_systemen
 node_visualisierung_strange_attractors_java3d [label="Visualisierung von Strange Attractors mit Java3D" href="https://elbosso.github.io/visualisierung_strange_attractors_java3d.html"]
             node_visualisierung_strange_attractors_java3d -> node_chaotische_systeme_implizites_eulerverfahren
+            node_visualisierung_strange_attractors_java3d -> node_kontinuierliche_visualisierung_strange_attractors
 node_strange_attractors_bigdecimal [label="Strange Attractors mit BigDecimal" href="https://elbosso.github.io/strange_attractors_bigdecimal.html"]
             node_strange_attractors_bigdecimal -> node_gc_beliebige_praezision_java
             node_strange_attractors_bigdecimal -> node_doppelte_genauigkeit_java
@@ -1126,6 +1131,7 @@ node_ci_cd_grafana [label="CI/CD mit Grafana" href="https://elbosso.github.io/ci
 node_vaadin_swing_ersatz [label="Vaadin als Swing-Ersatz" href="https://elbosso.github.io/vaadin_swing_ersatz.html"]
 node_sqlshell_echtzeitdatenbanken [label="sQLshell und Echtzeitdatenbanken" href="https://elbosso.github.io/sqlshell_echtzeitdatenbanken.html"]
             node_sqlshell_echtzeitdatenbanken -> node_viewpanel_sqlshell_zeitreihendatenbanken
+            node_sqlshell_echtzeitdatenbanken -> node_syntax_highlighting_influxdb_java_anwendungen
 node_testdatengeneratoren_microservices_docker [label="Testdatengeneratoren als Microservices mit Docker" href="https://elbosso.github.io/testdatengeneratoren_microservices_docker.html"]
             node_testdatengeneratoren_microservices_docker -> node_generator_microservices_mastodon_bot
             node_testdatengeneratoren_microservices_docker -> node_vaadin_swing_ersatz
@@ -1216,8 +1222,8 @@ node_certstream___ressourcenverbrauch [label="Certstream - Ressourcenverbrauch" 
             node_certstream___ressourcenverbrauch -> node_grafana__alarmierung_xmpp
 node_brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody [label="Brian May, Kerry Ellis & Vittorio Grigolo: Bohemian Rhapsody" href="https://elbosso.github.io/brian_may__kerry_ellis___vittorio_grigolo__bohemian_rhapsody.html"]
 node_mandelbrot_sets_mittels_shadern_berechnen [label="Mandelbrot-Sets mittels Shadern berechnen" href="https://elbosso.github.io/mandelbrot_sets_mittels_shadern_berechnen.html"]
-            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_java
+            node_mandelbrot_sets_mittels_shadern_berechnen -> node_doppelte_genauigkeit_beim_rechnen_shadern
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_julia_mengen_shadern_umgesetzt
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_faehrnisse_des_buildprozesses_unter_windows
             node_mandelbrot_sets_mittels_shadern_berechnen -> node_gpu_programmierung_java_revisited
@@ -1471,8 +1477,8 @@ node_linux_wifi_accesspoint_aus_raspi [label="Linux WiFi Accesspoint aus Raspi" 
             node_linux_wifi_accesspoint_aus_raspi -> node_raspberry_pi_ads_b_receiver
 node_implizites_eulerverfahren [label="Implizites Eulerverfahren" href="https://elbosso.github.io/implizites_eulerverfahren.html"]
             node_implizites_eulerverfahren -> node_strange_attractors_bigdecimal
-            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_chaotische_systeme_implizites_eulerverfahren
+            node_implizites_eulerverfahren -> node_roessler_attractor_implizites_eulerverfahren
             node_implizites_eulerverfahren -> node_visualisierung_strange_attractors_java3d
             node_implizites_eulerverfahren -> node_mathematik_beliebiger_praezision_java
 node_eine_ganz_alte_bibliothek_bildverarbeitung [label="Eine ganz alte Bibliothek für Bildverarbeitung" href="https://elbosso.github.io/eine_ganz_alte_bibliothek_bildverarbeitung.html"]
@@ -1679,6 +1685,7 @@ node_multi_agenten_systeme_dwb___ii_ [label="Multi-Agenten-Systeme in dWb+ (II)"
 node_virtuelles_netzwerklabor [label="Virtuelles Netzwerklabor" href="https://elbosso.github.io/virtuelles_netzwerklabor.html"]
             node_virtuelles_netzwerklabor -> node_umzug_netzwerklabor_abgeschlossen
             node_virtuelles_netzwerklabor -> node_cluster_dateisystem_getestet
+            node_virtuelles_netzwerklabor -> node_layer_0_management_virtuellen_netzwerklabor
             node_virtuelles_netzwerklabor -> node_dokumentation_netzwerklabor_dwb_
             node_virtuelles_netzwerklabor -> node_automatisches_setup_eines_netzwerklabors
 node_oracle_jdbc_treiber_eigenarten [label="Oracle-JDBC-Treiber Eigenarten" href="https://elbosso.github.io/oracle_jdbc_treiber_eigenarten.html"]
@@ -1944,8 +1951,8 @@ node_komplexe_visualisierungen_dem_aviator_an_beispielen [label="Komplexe Visual
 node_big_data_links [label="Big Data Links" href="https://elbosso.github.io/big_data_links.html"]
 node_mandantenfaehigkeit__context__dwb_ [label="Mandantenfähigkeit (Context) für dWb+" href="https://elbosso.github.io/mandantenfaehigkeit__context__dwb_.html"]
             node_mandantenfaehigkeit__context__dwb_ -> node_verschiedene_interaktionsmetaphern_dwb_
-            node_mandantenfaehigkeit__context__dwb_ -> node_websocket_server_dwb_
             node_mandantenfaehigkeit__context__dwb_ -> node_lasttests_mandantenfaehigkeit_dwb_
+            node_mandantenfaehigkeit__context__dwb_ -> node_websocket_server_dwb_
 node_jmeter_links [label="JMeter Links" href="https://elbosso.github.io/jmeter_links.html"]
 node_todo_txt [label="Todo.txt" href="https://elbosso.github.io/todo_txt.html"]
 node_parallelisierung_definierter_resultatsreihenfolge [label="Parallelisierung mit definierter Resultatsreihenfolge" href="https://elbosso.github.io/parallelisierung_definierter_resultatsreihenfolge.html"]
@@ -2317,17 +2324,17 @@ node_fbmlandscapes___java3d [label="FbmLandscapes + Java3D" href="https://elboss
 node_kleines_stueck_mui_java [label="Ein kleines Stück MUI in Java" href="https://elbosso.github.io/kleines_stueck_mui_java.html"]
             node_kleines_stueck_mui_java -> node_groupedjtable
 node_ebmap4d [label="EBMap4D" href="https://elbosso.github.io/ebmap4d.html"]
-            node_ebmap4d -> node_tile_server_openstreetmap
-            node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
-            node_ebmap4d -> node_styles_geojson_ebmap4d
-            node_ebmap4d -> node_ortsbezuege_dwb_
             node_ebmap4d -> node_elektronisches_fahrtenbuch_ebmap4d
+            node_ebmap4d -> node_gps_tracks_dwb__ebmap4d
+            node_ebmap4d -> node_ortsbezuege_dwb_
             node_ebmap4d -> node_ebmap4d___geojson
+            node_ebmap4d -> node_neue_version_ebmap4d
             node_ebmap4d -> node_beliebig_grosze_karten_exportiert_png
             node_ebmap4d -> node_layers_ueber_java_service_provider_infrastructure
+            node_ebmap4d -> node_tile_server_openstreetmap
             node_ebmap4d -> node_ebmap4d_bitmap_layer
             node_ebmap4d -> node_ueberblickskarte_ebgeo4d_dwb_
-            node_ebmap4d -> node_neue_version_ebmap4d
+            node_ebmap4d -> node_styles_geojson_ebmap4d
             node_ebmap4d -> node_ebmap4d___satellitenpositionen
             node_ebmap4d -> node_geojson_ebmap4d
             node_ebmap4d -> node_tile_server_openstreetmap_lxc_ii
